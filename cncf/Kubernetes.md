@@ -1752,6 +1752,7 @@ source ~/.bash_profile
         + Service 端口转发
         + 多集群切换
     - [gotok8s / k8s-docker-desktop-for-mac](https://github.com/gotok8s/k8s-docker-desktop-for-mac):Docker Desktop for Mac 开启并使用 Kubernetes https://github.com/gotok8s/gotok8s
+    - [lazykube](https://github.com/TNK-Studio/lazykube) ⎈ The lazier way to manage kubernetes.
 * Chaos
     -  [ChaosBlade](https://github.com/chaosblade-io/chaosblade)
 * 监控

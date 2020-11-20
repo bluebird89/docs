@@ -834,6 +834,10 @@ print dec_message   // Hello World!
     + 发送请求时将签名值一起发送给服务器验证
     + 即使Token被劫持，对方不知道AppKey和签名算法，就无法伪造请求和篡改参数。再结合上述的重发攻击解决方案，即使请求参数被劫持也无法伪造二次重复请求
 
+## [APIJSON](https://github.com/APIJSON/APIJSON)
+
+* 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！ 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. http://apijson.org
+
 ## 接口
 
 * [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. https://ultimatecourses.com
@@ -939,7 +943,6 @@ print dec_message   // Hello World!
   - Pact
   - Rest-Assured
 * HoServer
-* [APIJSON / APIJSON](https://github.com/APIJSON/APIJSON):🏆码云最有价值开源项目 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！🏆Gitee Most Valuable Project 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. http://apijson.org
 
 ## 参考
 

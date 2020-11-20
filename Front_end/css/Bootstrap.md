@@ -71,15 +71,13 @@ npm install bootstrap@3
 
 ## 扩展
 
-* [FezVrasta/bootstrap-material-design](https://github.com/FezVrasta/bootstrap-material-design)
 
 ## 工具
 
 * [bootstrapstudi](https://bootstrapstudio.io/)
+* [bootstrap-material-design](https://github.com/FezVrasta/bootstrap-material-design)
 
 ## 参考
 
 * [文档](http://getbootstrap.com/)
 * [Bootstrap 4: Everything You Need to Know](https://medium.freecodecamp.org/bootstrap-4-everything-you-need-to-know-c750991f6784)
-* [Understanding Flexbox: Everything you need to know](https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af)
-* [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)

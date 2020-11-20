@@ -790,6 +790,9 @@ Let's rename *our-new-project* to \*our-old-project\*.
   - [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 * Apostrophe:An elegant, distraction-free markdown editor
 * [Zettlr](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
+* [wechat-format](https://github.com/lyricat/wechat-format) 微信公众号排版编辑器，转换 Markdown 到微信特制的 HTML https://lab.lyric.im/wxformat
+  - [](https://github.com/doocs/md) ✍ 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 所有基础语法、色盘取色、一键复制并粘贴到公众号后台、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性 https://doocs.github.io/md
+* [markdown-wasm](https://github.com/rsms/markdown-wasm) Markdown parser and HTML generator implemented in WebAssembly, based on md4c https://rsms.me/markdown-wasm/
 
 ## 工具
 

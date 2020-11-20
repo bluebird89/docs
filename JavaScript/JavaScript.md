@@ -1389,6 +1389,44 @@ rome init
 rome check
 ```
 
+## [prettier](link)
+
+* IDE->file watchers
+
+```sh
+yarn add --dev prettier
+
+{
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "printWidth": 80,
+  "arrowParens": "always"
+}
+```
+
+## sentry
+
+```js
+import { init } from '@sentry/node'
+function startSentry() {
+  init({
+    environment: config.app.env,
+    dsn: config.sentry.dsn,
+    enabled: config.app.env === 'production',
+  })
+  logger.info(`Sentry configured: ${config.sentry.dsn}`)
+}
+// For known errors:
+import { captureException } from '@sentry/node'
+try {
+  knownError();
+} catch (err) {
+  captureException(err);
+}
+```
+
 ## 教程
 
 * [complete-javascript-course](https://github.com/jonasschmedtmann/complete-javascript-course):Starter files, final projects and FAQ for my Complete JavaScript course https://www.udemy.com/the-complete-javascript-course/?couponCode=C3GITHUB10
@@ -1439,7 +1477,6 @@ rome check
   - [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
   - [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
   - [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
-  - [pnpm/pnpm](https://github.com/pnpm/pnpm):📦🚀 Fast, disk space efficient package manager https://pnpm.js.org
   - [zloirock/core-js](https://github.com/zloirock/core-js):Standard Library
   - [npm/tink](https://github.com/npm/tink):a dependency unwinder for javascript
 * lightbox
@@ -1472,7 +1509,7 @@ rome check
   - [dangrossman/daterangepicker](https://github.com/dangrossman/daterangepicker):JavaScript Date Range, Date and Time Picker Component http://www.daterangepicker.com
   - [DateJS](https://github.com/datejs/Datejs)
   - [iamkun/dayjs](https://github.com/iamkun/dayjs):⏰ Day.js 2KB immutable date library alternative to Moment.js with the same modern API https://github.com/iamkun/dayjs
-  - [moment/moment](https://github.com/moment/moment):Parse, validate, manipulate, and display dates in javascript. http://momentjs.com
+  - [moment](https://github.com/moment/moment):Parse, validate, manipulate, and display dates in javascript. http://momentjs.com
   - [moment/moment-timezone](https://github.com/moment/moment-timezone):Timezone support for moment.js http://momentjs.com/timezone
 * 图表 Data Visualization
   - [plotly/plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
@@ -1487,8 +1524,8 @@ rome check
   - [jashkenas/underscore](https://github.com/jashkenas/underscore):JavaScript's utility _ belt http://underscorejs.org
   - [handsontable/handsontable](https://github.com/handsontable/handsontable):handsontable/handsontable
   - [NorthwoodsSoftware/GoJS](https://github.com/NorthwoodsSoftware/GoJS):JavaScript diagramming library for interactive flowcharts, org charts, design tools, planning tools, visual languages. http://gojs.net
-  - [ jwilber / roughViz ](https://github.com/jwilber/roughViz#Scatter):Reusable JavaScript library for creating sketchy/hand-drawn styled charts in the browser.
-  - [ alyssaxuu / flowy ](https://github.com/alyssaxuu/flowy):The minimal javascript library to create flowcharts sparkles
+  - [roughViz](https://github.com/jwilber/roughViz#Scatter):Reusable JavaScript library for creating sketchy/hand-drawn styled charts in the browser.
+  - [flowy](https://github.com/alyssaxuu/flowy):The minimal javascript library to create flowcharts sparkles
 * fingerprinting
   - [Valve/fingerprintjs2](https://github.com/Valve/fingerprintjs2):Modern & flexible browser fingerprinting library http://valve.github.io/fingerprintjs2/
 * Animations
@@ -1537,8 +1574,6 @@ rome check
   - [browserstate/history.js](https://github.com/browserstate/history.js):History.js gracefully supports the HTML5 History/State APIs (pushState, replaceState, onPopState) in all browsers. Including continued support for data, titles, replaceState. Supports jQuery, MooTools and Prototype. For HTML5 browsers this means that you can modify the URL directly, without needing to use hashes anymore
 * keyboard input
   - [jaywcjlove/hotkeys](https://github.com/jaywcjlove/hotkeys):➷ A robust Javascript library for capturing keyboard input. It has no dependencies. https://git.io/hotkeys.js
-* 服务
-  - [nodemon](http://nodemon.io/):a utility that will monitor for any changes in your source and automatically restart your server.
 * 验证
   - [jaywcjlove/validator.js](https://github.com/jaywcjlove/validator.js):⁉️轻量级的JavaScript表单验证，字符串验证。没有依赖，支持UMD，~3kb。 https://git.io/validatorjs
   - [yiminghe/async-validator](https://github.com/yiminghe/async-validator):validate form asynchronous
@@ -1722,8 +1757,6 @@ rome check
 
 * [MathJS](https://github.com/josdejong/mathjs):JavaScript 和 Node.js 的数学扩展库，与 JavaScript 内置的 Math 库兼容。该库包含一个灵活的表达式解析器，能够运行符号计算，并提供了一系列内置函数和常量。
 
-* [Moment](https://github.com/moment/moment): JavaScript 日期和时间操作库，用于解析、验证、操作和格式化日期。
-
 * [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs#string--date-format):List of date-fns or native functions which you can use to replace moment.js + ESLint Plugin
 
 * [Sugar](https://github.com/andrewplummer/Sugar):主要用于处理本地对象。这个库支持自定义构建，还提供了模块化的 npm 包，因此可以只使用其中必要的部分模块（也可以与 Bit 结合使用），用户还可以通过自定义方法或使用插件来应对特定的使用场景。
@@ -1777,19 +1810,10 @@ rome check
 * [cheeriojs / cheerio](https://github.com/cheeriojs/cheerio):Fast, flexible, and lean implementation of core jQuery designed specifically for the server. https://cheerio.js.org/
 
 * [Leaflet](https://leafletjs.com)
-
 * [fullPage.js]()
-
 * [anime.js]()
-
-* [Screenfull.js]
-
-* [Moment.js]
-
 * [Hammer.js]
-
 * [Masonry]
-
 * [slick]
 
 ## 教程

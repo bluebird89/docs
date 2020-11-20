@@ -30,6 +30,10 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 * 启动gzip压缩、安装wp super cache、使用公共cdn服务器
 
+## [calypso](https://github.com/Automattic/wp-calypso)
+
+The JavaScript and API powered WordPress.com https://developer.wordpress.com/calypso/
+
 ## 参考
 
 * [kinsta](https://kinsta.com/):https://kinsta.com/resources/

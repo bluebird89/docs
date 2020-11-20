@@ -1,7 +1,6 @@
 # 前端工程师
 
-* 涉及交互，有产品的感念
-* 后端不提供页面，只是纯粹的通过 Web API 来提供数据和业务交互能力之后，Web 前端就成了纯粹的客户端角色，与 WinForm、移动终端应用属于同样的角色，可以把它们合在一起，统称为前端
+* 后端不提供页面，纯粹通过 Web API 来提供数据和业务交互能力之后，Web 前端就成了纯粹客户端角色，与 WinForm、移动终端应用属于同样的角色，可以把它们合在一起，统称为前端
 * CSS主要用来控制各个元素(标记)的外观的。
 * HTML控制内容的结构。
 * JS给各个元素添加行为(动作)的。
@@ -10,16 +9,15 @@
 
 用来描述元素应该如何在网站上布局，并向浏览器提供网站所需的其他所有文件列表
 
-* 语义元素： 语义元素明确地对浏览器和开发者描述其含义；元素包括文章和部分， 而不是到处使用 div
+* 语义元素： 语义元素明确地对浏览器和开发者描述其含义；元素包括文章和部分，而不是到处使用 div
 * 块级元素： 块级元素占据了父元素的整个空间
 * 内嵌元素： 内嵌元素仅占据由内嵌元素定义标记界定的空间
 * 表格：表格表示文档部分， 其中包含向网络服务器提交信息的交互式控件
 * 输入类型： 输入元素用于为网络表格创建交互式控件， 以便接受用户输入的数据
 
-## CSS
+## CSS 层叠样式表
 
-层叠样式表（简称 CSS）负责控制网站的外观。颜色、字体，甚至一些动画
-
+* 负责控制网站的外观。颜色、字体，甚至一些动画
 * 显示值类型：显示属性使你能够控制图表或容器元素的渲染效果
 * 盒模型：盒模型负责定义矩形框（表示文档中的元素）的尺寸
 * 基本定位：定位属性会为定位元素选择替代规则
@@ -32,23 +30,12 @@
 * 背景：背景使我们能够定义用作容器背景的颜色或图片
 * 伪选择器器：伪选择器使我们能够选择出现在HTML中定义的元素周围的假定元素
 * 动画和过渡：动画和过渡使我们能够对元素设定动画效果或在元素的两个状态之间定义过渡
-* Flexbox & Grid
-* CSS变量
 * SASS预处理器
   - 结构化CSS
   - 变量
   - 嵌套样式表
   - Minxins & 函数
   - 继承
-
-### CSS框架
-
-框架使我们能够轻松地设计网站结构和构 建网站。 它们会提供自定义 CSS 类， 简化了内容布局操作， 确保无论是何种设备， 你的内容都能看起来很美观。 框架可以帮助你遵循行业最佳做法和现代设计原则
-
-- Bootstrap
-- Foundation
-- Materialize
-- Bulma
 
 ## JavaScript
 
@@ -73,14 +60,6 @@
 * 设计模式：设计模式是可以重复利用的常见问题解决方案
 * AJAX： AJAX 使我们能够异步地从网络服务器上请求数据，不需要重新加载网页
 * jQuery： jQuery 是一种非常热门的库，使我们能够更轻松地进行跨浏览器 DOM 遍历和操作、处理事件和执行AJAX 操作
-
-### JavaScript框架
-
-会强制要求各种最佳做法，并且通常会强制要求我们在处理各种文件时遵守组织性格式，使我们能够轻松地编写网络应用
-
-* AngularJS： 支持双向数据绑定，使你能够扩展 HTML 词汇以创建前端网络应用
-* EmberJS： 通过使用严格的文件和对象命名规范，不用再使用样板代码
-* KnockoutJS： 通过声明性绑定系统，使我们能更轻松地创建由数据驱动的应用
 
 ## 响应式网站设计
 
@@ -126,36 +105,11 @@
 * 当应用变得越来越复杂时，就很容易出现 bug，或者完全破坏现有的功能。单元、集成和行为测试是很棒的测试方法，可以确保你在添加新功能时不会破坏代码
 * Mocha： Mocha 是一个 JavaScript 测试框架，在 Node.js 和浏览器中运行，使异步测试变得简单起来
 
-## 软技能
-
-培养自己的沟通交流能力、指导和激励他人的能力，并能够从宏观层面看待工作，将使你成为潜在雇主青睐的候选人士。
-
-* 善于沟通： 能够向庞大的团队（包括管理层、同事和客户）传达目标、进度和问题
-* 灵活地处理问题： 了解问题背后的问题，并将问题分解成更小、更易解决的小问题
-* 积极上进： 及时掌握这一领域的发展动态，并了解最新的技术发展状况
-* 自我激励： 愿意实验和探索；勇于冒险，但是在面临挫折时能够坚持不懈
-* 个人通用能力
-* 技能知识点
-* 工程业务经验
-* 架构思想
-* 先进方法与流程
-
-## Javascript
-
 ### 自动化测试：单元测试 集成测试 浏览器测试
 
 * mocha + should + node
 * karma
 * 链表，通过CI集成测试
-
-### 知识点
-
-* 奇怪的this
-* 时间模型
-* 生命提升
-* 继承
-* 跨域
-* AJAX模型
 
 ### 异步流程控制
 
@@ -178,12 +132,6 @@
 * Template & DOM Template
 * 模板引擎优化
 * 字符串模板输出React Comonent、VueComonent
-
-## Webpack
-
-* 用Webpack搭建一个项目
-* 浏览器兼容性
-* 搭建构建系统，通过测试用例
 
 ## 性能测试对比
 
@@ -221,75 +169,23 @@
 
 ## 安全
 
-* CSRF
 * CSRF防范技术
-* XSS
 * 富文本XSS防范
 * CSP
 * Same-origin policy
 * ADsafe/Caja/Sandbox
 
-## 浏览器
-
-* IE6/7/8/9/10/11 (Trident)
-* Firefox (Gecko)
-* Chrome/Chromium (Blink)
-* Safari (WebKit)
-* Opera (Blink)
-
-## 编程语言
-
-* JavaScript/Node.js
-* CoffeeScript
-* TypeScript
-
 ## 切页面
 
-* HTML/HTML5
-* CSS/CSS3
-* Sass/LESS/Stylus
 * PhotoShop/Paint.net/Fireworks/GIMP/Sketch
-
-## 开发工具
-
-### 编辑器和IDE
-
-* VIM/Sublime Text2
-* Notepad++/EditPlus
-* WebStorm
-* Emacs EmacsWiki
-* Brackets
-* Atom
-* Lime Text
-* Light Table
-* Codebox
-* TextMate
-* Neovim
-* Komodo IDE / Edit
-* Eclipse
-* Visual Studio/Visual Studio Code
-* NetBeans
-* Cloud9 IDE
-* HBuilder
-* Nuclide
 
 ### 调试工具
 
-* Firebug/Firecookie
 * YSlow
 * IEDeveloperToolbar/IETester
-* Fiddler/Charles
-* Chrome Dev Tools
 * Dragonfly
 * DebugBar
 * Venkman
-
-### 版本管理
-
-* Git/SVN/Mercurial
-* Github/GitLab/Bitbucket/Gitorious/GNU Savannah/Launchpad/SourceForge/TeamForge
-
-## 代码质量
 
 ### Coding style
 
@@ -314,28 +210,18 @@
 
 * jQuery/Underscore/Mootools/Prototype.js
 * YUI3/Dojo/ExtJS/KISSY
-* Backbone/KnockoutJS/Emberjs
-* AngularJS
 * Batarang
-* Bootstrap
 * Semantic UI
 * Juice UI
 * Web Atoms
 * Polymer
 * Dhtmlx
-* qooxdoo
-* React
-* Brick
-* Vue.js
+* qooxdoo-
+* Brick-
 
 ## 前端标准/规范
 
-* HTTP/1.1: RFCs 7230-7235
-* HTTP/2
-* ECMAScript 5/6/7
-* W3C: DOM/BOM/XHTML/XML/JSON/JSONP/...
 * CommonJS Modules/AMD
-* HTML5/CSS3
 * Semantic Web
   - MicroData
   - RDFa
@@ -353,24 +239,14 @@
 * DynaTrace's Ajax
 * 高性能JavaScript
 
-## SEO
-
 ## 编程知识储备
 
-* 数据结构
 * OOP/AOP
 * 原型链/作用域链
 * 闭包
 * 编程范型
 * 设计模式
 * Javascript Tips
-
-## 基础的部署工作
-
-* 注册一个域名(NameCheap, Google Domains)
-* 管理共享主机或虚拟机(Inmotion, Hostgator, Bluehost)
-* FTP, SFTP 文件上传(Filezilla, Cyberduck)
-* 静态页面托管(Netlify, Github Pages)
 
 ### 压缩合并
 
@@ -379,10 +255,6 @@
 * UglifyJS
 * CleanCSS
 
-### 文档输出
-
-* JSDoc
-* Dox/Doxmate/Grunt-Doxmate
 
 ### 项目构建工具
 
@@ -408,18 +280,11 @@
 
 * Mod
 
-* Webpack 用于模块化打包
-
-## 代码组织
 
 ### 类库模块化
 
 * CommonJS/AMD/ES6 Module
 * YUI3模块
-
-### 业务逻辑模块化
-
-* bower/component
 
 ### 文件加载
 
@@ -430,46 +295,13 @@
 
 - Browserify
 
-## 安全
-
 ## 移动Web
 
-* HTML5/CSS3
-* 响应式网页设计
 * Zeptojs/iScroll
 * V5/Sencha Touch
-* PhoneGap (Cordova)
-* Ionic
-* jQuery Mobile
 * W3C Mobile Web Initiative
 * W3C mobileOK Checker
 * Open Mobile Alliance
-* React Native/Weex
-
-## 前沿技术社区/会议
-
-* D2/WebRebuild
-* NodeParty/W3CTech/HTML5梦工厂
-* JSConf/沪JS(JSConf.cn)
-* QCon/Velocity/SDCC
-* JSConf/NodeConf
-* CSSConf
-* YDN/YUIConf
-* HybridApp
-* WHATWG
-* MDN
-* codepen
-* w3cplus
-* CNode
-
-## 计算机知识储备
-
-* 编译原理
-* 计算机网络
-* 操作系统
-* 算法原理
-* 软件工程/软件测试原理
-* Unicode
 
 ## 软技能
 
@@ -484,8 +316,6 @@
 * SVG: D3/Raphaël/Snap.svg/DataV
 * Canvas: CreateJS/KineticJS
 * WebGL/Three.JS
-
-## 前端工程化
 
 ### 开发需求
 
@@ -509,10 +339,6 @@
 * 图片压缩
 * CSS 图片精灵或雪碧图
 
-### 部署需求
-
-会用代码管理工具来管理源码，然后将开发流程和部署流程与git结合起来。多人分支协作流程：用git flow来管理代码分支。
-
 ## 技术基本功
 
 * 打字速度:练出一个打字坐姿良好、打字速度标准的习惯,可以选用更高效的 DVORAK 布局 [强化打字速度](http://www.jianshu.com/p/8aac186868ce)
@@ -533,9 +359,9 @@
 * 熟知常见的数据结构、算法思想、设计模式:数据结构的良好选择可以提高算法效率。从数据结构角度来说，需要我们熟知数组、堆栈、队列、链表、树、图、堆和散列表的相关知识点，并能够根据具体问题通过高级编程语言具体实现；从算法角度来说，还需要我们熟知时间复杂度、空间复杂度、深度优先、广度优先、图论和动态规划等算法思想。前端开发因为 JavaScript 语言封装了很多操作数据的具体过程且更编程目标是开发应用逻辑，在算法层面要求并不是很高，但熟知算法思想可以提升每个前端开发者的计算机科学素养。在看重基础的开发者面试中也能提高自己的竞争力。算法用来解决计算上的问题，设计模式用来解决"设计层次"的问题。在软件工程中，设计模式是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案。JavaScript 就有很多的设计模式值得学习并掌握，如下所例，这里就不一一介绍。通过使用设计模式，可以使我们的代码更加的可复用，可扩展以及可测试。单例模式、简单工厂模式、观察者模式、适配器模式、代理模式、桥接模式、外观模式、访问者模式、策略模式、模板方法模式、中介者模式、迭代器模式、组合模式、备忘录模式、职责链模式、享元模式、状态模式
 * Windows、Linux 和 Mac 三大操作系统所各自形成的生态链。我们至少需要能够在其中一个操作系统下进行高效开发，并了解该环境下的应用软件使用技巧和常用配置管理。熟练使用三大操作系统之一及其开发者环境:无论哪种，都应该多理解 Linux 操作系统及其使用方式。前端使用的 Bower 管理器、Node 环境以及自动化测试、版本控制等都离不开 Linux 命令行的设计思想。深入操作系统的内核，我们可以了解计算机如何进行进程管理、内存管理、文件管理以及网络管理，从而在开发中遇到电脑卡顿、网络不通畅等情景时能及时找到问题所在，对症下药。![](../_static/system-archetect.png)
 * 拥有良好的代码审查、代码重构能力:适当的和团队成员举办一场 Code Review(代码审查)，有助于保证软件质量、促进团队成长和避免团队成员因缺席而导致软件进度的"单点故障"。尤其在团队没有测试开发人员的情况下，我们很难达到令人满意的测试覆盖率。来一场"说走就走"的代码审查将对软件质量做出巨大贡献。五个层次完成代码审查与重构：
-  - "业务架构"的代码审查与代码重构。
-  - "代码架构"的代码审查与代码重构。
-  - "设计模式"的代码审查与代码重构。
+  - "业务架构"的代码审查与代码重构
+  - "代码架构"的代码审查与代码重构
+  - "设计模式"的代码审查与代码重构
   - "最优算法"的代码审查与代码重构。
   - "语言与代码规范"的代码审查与代码重构。
 * 拥有良好的版本控制、项目管理意识:需要拥有良好的版本控制意识，使项目代码、配置文件的改动历史随时可被人工追踪、被自动化追踪，以便进行 Bug 追溯、代码审查、自动化测试。
@@ -546,7 +372,9 @@
   - 白箱测试测试应用程序的内部结构或运作，而不是应用程序的功能，可应用于单元测试、集成测试中
   - 单元测试的目的是检验基本组成单位（函数）的正确性。
   - 熟练绘制概念图、思维导图、流程图、网络拓扑图、UML 图:概念图与思维导图这两大概念绘制工具。概念图的广泛应用发扬了其发明者约瑟夫-D-诺瓦克(Novak)的那句总结------"有意义的学习涉及到新概念和命题纳入现有的认知结构的同化"。![HTTP](../_static/concept-chart.png)
-* 掌握持续集成、持续交付、持续部署相关编程能力:持续交付可以看作持续集成的下一步，指的是频繁地将软件的新版本，交付给质量团队或者用户，以供评审；持续部署是持续交付的下一步，指的是代码通过评审以后，自动部署到生产环境。如下图所示，最终通过 DevOps 将软件工程、技术运营和质量保障（QA）三者做交集，使整个软件项目在开发过程中的变更范围更少，发布协调更强，自动化过程更稳健。同时相比服务端开发，前端开发因需求的变更其改动量更大，因此在前端开发的过程中使用"精益思想"完成对持续集成、持续交付、持续部署的实战工作意义非凡。![工作流](../_static/develop-flow.png)
+* 掌握持续集成、持续交付、持续部署相关编程能力:持续交付可以看作持续集成的下一步，指的是频繁地将软件的新版本，交付给质量团队或者用户，以供评审；持续部署是持续交付的下一步，指的是代码通过评审以后，自动部署到生产环境。如下图所示，最终通过 DevOps 将软件工程、技术运营和质量保障（QA）三者做交集，使整个软件项目在开发过程中的变更范围更少，发布协调更强，自动化过程更稳健。同时相比服务端开发，前端开发因需求的变更其改动量更大，因此在前端开发的过程中使用"精益思想"完成对持续集成、持续交付、持续部署的实战工作意义非凡。
+
+![工作流](../_static/develop-flow.png)
 
 ```
 /**
@@ -579,7 +407,7 @@ factorial(0,1).
 factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 ```
 
-## 前端设计能力
+## 设计能力
 
 前端分为前端设计和前端开发。要求拥有一定的制图、切图能力。纵然现在 JavaScript 在 Web 领域已从前端拓展到后端 Node.js，一个合格的大前端工程师还是应该多多注重拓展前端设计方面的知识点，
 
@@ -587,7 +415,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 * 熟练至少一个主流平面设计工具：选择一个主流平面设计工具来强化我们的设计能力。常见的平面设计软件有 PS、CDR、AI、InDesign 等。前端开发中的一些绘图技术也常与平面设计工具设计出的图片有共性。举例来说：HTML 5 中的 Canvas 是像素级别的，可以对应 PS 处理出的图片； SVG 又是矢量级的，无论如何放大也不会看到像素块，可以对应 AI 处理出的图片。熟练一个主流平面设计工具将是前端开发者和设计工程师之间重要的沟通桥梁。
 * 熟练至少一个主流原型设计工具：主流原型设计工具常常可以分别制作 Web 端、PC 端和 APP 端的原型，也有很多原型设计工具专为一个平台打造。原型设计工具往往不像平面设计工具一样面面俱到，但能清晰的展现出各页面内的主体组件和各页面间的逻辑关系。在开发中小型前端项目时往往不需要专业的原型设计师(常被产品经理一职所包揽)，熟练使用至少一个主流原型设计工具能使我们在正式编写前端代码前快速开发出一个直观的原型参考系。
 
-## 前端开发能力
+## 开发能力
 
 * 熟练使用 HTML、CSS 和 JavaScript 三大前端语言
   - HTML 是标签语言，可以构建前端页面的骨架；
@@ -625,12 +453,8 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
   - 熟悉了响应式布局的开发，我们就可以尝试步入移动 Web 领域。顾名思义，移动 Web 就是运行在移动端上，而移动端的设备配置不尽相同，这常常需要我们去了解移动端的知识，如 pixel 像素基础、Viewport 视图、和 Tap 触摸事件等，移动 Web 常用的 meta 标签如下
   - 到了混合应用开发，其常以 App 的形式出现在移动端上，相比原生移动端应用，混合 Web 应用可移植性强、开发成本低，还可以通过一定的接口来直接使用手机硬件能力。当然，由于混合应用对硬件的使用效率相比原生应用还有不足之处，再加上有些手机平台不鼓励使用过多的混合应用开发技术(可以搜索"苹果 热更新")。前端开发者可以视具体业务来进行技术选型。
 * 熟练前端包管理、构建工具、SEO、Web 性能优化：使用到的前端库越来越多，需要一个前端包管理器来统一管理：Bower 便能做到这一点，通过给项目中引入 Bower 包管理器，我们仅仅需要修改配置文件就能进行高效化的前端库管理。熟练使用成型的包管理器，我们也可以很方便的解决前端依赖等问题。前端构建工具可以减少我们很多的编程"机械运动"。通过使用成型的前端构建工具，简单的几行命令就能编译并转换 JavaScript 的不同版本、自动化压缩代码、自动化执行测试文件。构建工具可以自动化压缩代码文件，就涉及到了 Web 性能优化的一个环节。辅之以浏览器开发者工具的熟练使用，我们可以实地测试用户加载首页、加载各个图片时的等待时间，来通过优化 Web 性能增进用户体验。![](../_static/construct-tool.png)
-  + Bower 做 JavaScript 的包依赖管理
-  + JQuery 封装 DOM 操作并进行跨域请求
-  + NPM 做 Node.js 的包依赖管理
-  + ESLint 做代码风格规范检测
   + Grunt 启动 Karma 统一项目管理
-  + [gotwarlost/istanbul](https://github.com/gotwarlost/istanbul): 检查单元测试代码覆盖率 Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale.
+  + [istanbul](https://github.com/gotwarlost/istanbul): 检查单元测试代码覆盖率 Yet another JS code coverage tool that computes statement, line, function and branch coverage with module loader hooks to transparently add coverage when running tests. Supports all JS coverage use cases including unit tests, server side functional tests and browser tests. Built for scale.
   + JSDoc 规范代码注释风格
   + Karma 自动化完成单元测试
   + Webpack 最终打包整个项目文件
@@ -649,212 +473,6 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
     + controller
       * formatter：储存一些格式化数据的方法，这些方法接收数据，返回新的数据，不应该再涉及到其他的逻辑，这样有利于单元测试
       * service：统一管理所有请求路径，并且将页面中涉及到的网络请求封装为class
-
-## 计算机网络知识
-
-* 熟知常用计算机网络协议
-  - TCP/IP 协议即传输控制协议/因特网互联协议，是计算机网络中使用最广泛的体系结构之一。TCP/IP 的四层结构从上到下分别为：应用层、传输层、网络层、链接层。
-  - 应用层直接与用户打交道，负责传送各种最终形态的数据，常见的有 SMTP (简单邮件传输协议)、NNTP (网络新闻传输协议)和 HTTP (超文本传输协议)。
-  - 传输层负责传送文本数据，主要协议是 TCP 协议 ------ 一个面向连接的、保证可靠传输的数据流服务的协议。
-  - 网络层负责分配地址和传送二进制数据，主要协议是 IP 协议，通过 IP 来找到网络中的位移主机。
-  - 连接层负责建立电路连接，是整个网络的物理基础，典型的协议包括以太网、ASDL等。
-  - WebSocket，一种在单个 TCP 连接上进行全双工通讯的协议。WebSocket 允许服务端主动向客户端推送数据，在 WebSocket API 中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建持久性的连接，并进行双向数据传输。WebSocket 避免了 Ajax 无意义的轮询，在很多应用级 Web 项目中经常有所涉及。
-* 了解网络体系结构、网络拓扑模型
-* TCP/IP 协议的四层与 OSI 概念模型(开放式系统互联通信参考模型)的七层有一定的对应关系，后者并没有提供一个可以实现的方法，而是描述了一些概念，用来协调进程间通信标准的制定，是概念性框架。我们需要从宏观角度来了解整个网络体系结构。![](../_static/TCPIP.png)计算机网络的拓扑结构可分为星型网、网型网、环型网、树型网、总线网和混合拓扑，描述的是网络中的各节点设备的连接情况。深入其中会更多的引出硬件、网络工程等知识点，这里作为选修了解即可。
-
-HTML5初级开发工程师
-
-HTML基础
-
-- HTML简介与历史版本
-- 常用开发软件
-- 常见标签与属性
-- 表格与表单
-- 标签规范与标签语义化
-- 实战：网页结构布局
-  CSS基础
-- css简介与基本语法
-- 常见的各种样式属性
-- CSS选择器与标签类型
-- 理解盒子模型与CSS重置
-- 浮动与定位
-- 利用photoshop工具测量样式
-- HTML+CSS开发网页
-- 实战：高仿电商首页效果
-  CSS3基础
-- css3常见样式
-- css3选择器
-- 变形与动画
-- 3D效果与关键帧
-- 弹性盒模型
-  移动端布局
-- 移动端基本概念
-- viewport窗口设置
-- 移动端布局方案
-- rem、vh、vw等单位
-- 响应式布局
-- bootstrap框架
-  JavaScript基础
-- JS简介
-- JS变量
-- 数据类型与类型转换
-- 运算符与优先级
-- 流程控制-if..else
-- 流程控制-switch…case
-- 流程控制-while、do..while、for循环
-- break、continue语法
-- 函数定义与调用
-- 全局变量与局部变量
-- 函数传参与返回值
-- 函数作用域与变量作用域
-- DOM的基本操作
-- 定时器使用
-- this指向与修改指向
-- 数组、字符串等方法操作
-- 时间对象与正则对象
-- 掌握常见BOM操作
-- 常见事件与事件细节
-- JSON与AJAX
-- JSONP跨域操作
-- 前端cookie的使用
-- 实战：JS配合HTML与CSS完成电商项目
-  jquery框架
-- jquery框架介绍及优势介绍
-- jquery核心思想
-- jquery常见方法
-- jquery动画操作
-- jqueryAJAX操作
-- jquery工具方法
-- 利用jquery快速开发网页
-  PHP基础
-- PHP简介与基本语法
-- mysql数据库及sql语法
-- apache服务器与集成开发工具
-- PHP链接数据库
-- PHP与AJAX交互
-- 实战：留言板、登录、注册等
-
-HTML5中高级开发工程师
-
-面向对象基础
-
-- 面向对象概述
-- 对象和构造函数（类）之间的关系
-- 对象的属性和方法
-- 原型与原型链
-- 包装对象与内部实现
-- 对象中实现继承方式
-- 设计模式及实际运用
-  JavaScript高级
-- JS算法与排序算法
-- promise异步处理
-- 运动与tween算法
-- 闭包与模块化
-- JS组件开发
-- 打造小型jquery框架
-- JS性能优化
-- ES6新增功能
-  前端工程化
-- gulp基本使用
-- less、sass、babel等预编译框架
-- 理解模块概念，AMD与CMD规范
-- 前端模块框架seaJS、requireJS
-- webpack基本使用
-  多人协作
-- svn基本用法与可视化工具
-- 多人开发流程
-- git基本用法
-- 命令行操作
-- 分区及分支等概念
-- 远程github操作
-- 实战：多人协作开发项目
-  HTML5新功能
-- canvas绘图
-- svg绘图
-- 音频与视频
-- 本地存储与离线存储
-- 地理信息
-- web Worker
-- web Socket
-  NodeJS基础
-- node与npm概念及使用
-- node模块方式
-- node常用内置模块
-- node爬虫与文件自动化处理
-- node搭建服务器与简单路由
-- mongodb非关系数据库
-- mongodb安装与db操作
-- mongodb增删改查
-- mongodb与node结合开发
-- mongoose数据建模
-- mongoose与node结合开发
-- express框架
-- 中间件与ejs模板引擎
-- Robomongo与postman工具
-- express+mongoose搭建后端框架
-- 设计Restful API
-- 实战：前后端分离式开发
-  微信端开发
-- 移动端交互与移动端事件
-- 微信场景与swiper框架
-- 微信公众号介绍
-- 网页授权与JSSDK
-- 微信web开发者工具使用
-- 微信小程序开发
-- 实战：公众号与小程序项目同步开发
-
-## 高级
-
-VueJS框架
-
-- Vue框架简介
-- 渐进式与响应式
-- 模板语法与计算属性
-- 指令与数据处理器
-- 生命周期
-- 组件与组件通信
-- Vuex状态管理
-- Vue动画与路由
-- 单文件组件与脚手架
-- 基于Vue的组件框架
-- 实战：Vue与Node全栈开发
-  ReactJS框架
-- React框架简介
-- JSX语法
-- 组件与组件通信
-- 属性与状态设置
-- 虚拟DOM
-- 生命周期
-- redux架构
-- react-redux使用
-- react-router使用
-- Mem脚手架使用
-- 实战：React与Node全栈开发
-  AngularJS框架
-- Angular框架简介
-- TypeScript基础与进阶
-- 开发环境配置
-- 架构、模块与组件
-- 模板、元数据与数据显示
-- 服务于指令
-- 依赖注入
-- 路由
-- 实战：Angular与Node全栈开发
-  Hybrid App开发
-- App介绍与分类
-- Android/ios与H5通信
-- Cordova/Phonegap框架
-- HTML5+基于HB工具
-- React Native
-  前端架构
-- 单元测试与编写测试用例
-- 自动化测试方案
-- 前端安全与HTTP协议
-- 项目上线与一键部署
-- 数据统计与SEO优化
-- 搭建组件库与按需载入
-- 浏览器渲染与浏览器引擎
-- 深入理解后端开发模式
 
 ## 服务端应用开发能力
 
@@ -1107,7 +725,7 @@ app.listen(80, function () {
 
 ## 缺点
 
-* 业务处理的设计谁来主导
+* 业务处理设计谁来主导
 * Cookie/Session 的方式虽然可用，但并不是特别合适，相对来说，基于 Token 的认证则更适合一些。采用基于 Token 的认证就意味着后端的认证部分需要重写
 
 Macro Task 和 Micro Task
@@ -1153,12 +771,7 @@ Content-Security-Policy：default-src 'self'; img-src https://*; child-src 'none
 * 前后端不同端口
 * 后端允许跨域
 
-## micro frontends
-
-* [微前端“容器”——microcosmos实现](https://juejin.im/post/6864381092061773831)
-* [qiankun](https://github.com/umijs/qiankun)package rocket Blazing fast, simple and completed solution for micro frontends. https://qiankun.umijs.org/
-
-## 服务端渲染 SSR(Server Side Render)
+## 服务端渲染 Server Side Render SSR
 
 * 不同于客户端渲染，服务端渲染会在后端把页面 DOM 的结构树转成 String 吐出来，然后到前端（如浏览器）解析渲染。
 * 优势
@@ -1199,10 +812,6 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
 * [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
 
-## [localForage/localForage](https://github.com/localForage/localForage)
-
-💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.
-
 ## 实例
 
 * [cyanharlow/purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
@@ -1211,20 +820,17 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 
 * [FE-star](https://github.com/FE-star)
 * [Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) Get Started as a Web Developer
-* [HTML Dog](https://htmldog.com/)Everything HTML, CSS, and JavaScript,
-the most common languages used in making web pages.
+* [HTML Dog](https://htmldog.com/)Everything HTML, CSS, and JavaScript,the most common languages used in making web pages.
 * [Frontend Masters](https://frontendmasters.com/)Advance Your Skills with In-Depth, Modern Front-End Engineering Courses
 
 ## 面试
 
 * [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
 * [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
-* [nanhupatar/FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 https://github.com/nanhupatar/FEGuide
+* [FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 https://github.com/nanhupatar/FEGuide
 * [ScriptOJ](http://scriptoj.mangojuice.top/):Web 前端开发评测系统,从大量实战代码、面试题目中总结出精华题库和相应的测试
-* [五年面试，三年模拟](https://juejin.im/post/5ca0425e51882567ce181037)
-* [校招社招必备核心前端面试问题与详细解答](https://segmentfault.com/a/1190000019758067)
 * [haizlin/fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
-* [ponkans / F2E](https://github.com/ponkans/F2E):【互联网一线大厂面试+学习指南】大前端进阶知识扫盲
+* [F2E](https://github.com/ponkans/F2E):【互联网一线大厂面试+学习指南】大前端进阶知识扫盲
 
 ## 图书
 
@@ -1245,8 +851,6 @@ the most common languages used in making web pages.
 * 框架
   - [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
   - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
-* [ElemeFE/cooking](https://github.com/ElemeFE/cooking):更易上手的前端构建工具 http://elemefe.github.io/cooking/
-* [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac https://imageoptim.com/mac
 * [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground https://webmakerapp.com/
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
 * [alibaba/ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% https://alibaba.github.io/ice/
@@ -1261,24 +865,25 @@ the most common languages used in making web pages.
   - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. https://ckeditor.comv
 * [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. https://godspen.ymm56.com
 * [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. https://polymer-library.polymer-project.org/
-* [Polymer / lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components https://lit-element.polymer-project.org
-* [ romefrontend / rome ](https://github.com/romefrontend/rome):The Rome Frontend Toolchain. A linter, compiler, bundler, and more for JavaScript, TypeScript, HTML, Markdown, and CSS.
+* [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components https://lit-element.polymer-project.org
 
 ## 参考
 
-* [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
-* [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 * [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
-* [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
-* [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
 * [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
 * [dwqs/blog](https://github.com/dwqs/blog)
 * [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
 * [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers https://frontendchecklist.io
 * [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
 * [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
+* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development https://developers.google.com/web/fundamentals
+
+* [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
+* [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+* [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
+* [前端跨域整理](https://juejin.im/post/5815f4abbf22ec006893b431)
+* [木易杨前端进阶](https://muyiy.cn/blog/)
 * [司徒正美](link)
 * [张鑫旭](https://www.zhangxinxu.com/)
-* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
-* [木易杨前端进阶](https://muyiy.cn/blog/)
-* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development https://developers.google.com/web/fundamentals
+* [五年面试，三年模拟](https://juejin.im/post/5ca0425e51882567ce181037)
+* [校招社招必备核心前端面试问题与详细解答](https://segmentfault.com/a/1190000019758067)

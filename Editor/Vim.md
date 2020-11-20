@@ -41,6 +41,8 @@ brew install vim
 * [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
 * [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
+* [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+* [b4winckler/macvim](https://github.com/b4winckler/macvim) Vim - the text editor - for Mac OS X
 * [ericzhang-cn/maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
     - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
     - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
@@ -511,24 +513,21 @@ r 对单词字符进行替换
 * [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
 * [rupa/z](https://github.com/rupa/z):z - jump around
 * [rupa/v](https://github.com/rupa/v):z for vim
-* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim.
+* [nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim. Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
 * [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
-* [powerline/powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
+* powerline](https://github.com/powerline/powerline):Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. https://powerline.readthedocs.io/en/latest/
 * taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
 * vim-colors-solarized：vim的solarized配色插件
-* Auto Pairs
 * [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
-* [airblade / vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
+* [vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
 * VIM Fugitive
-* [junegunn / vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager Vim的插件管理器，支持并发安装和更新
-* Ack 全文搜索插件，可以在当前打开的项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件，十分方便。
-* NERDTree Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
+* [vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager Vim的插件管理器，支持并发安装和更新
+* Ack 全文搜索插件，可以在当前打开的项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件，十分方便
 * NERDTreeCommenter 方便的用来注释代码的插件
 * TagBar 查看当前代码文件中的变量和函数列表的插件，可以切换和跳转到代码中对应的变量和函数的位置
 * CtrlP 不可缺少的快速跳转插件，它可以快速的帮助我们找到项目中的文件。在normal模式下，按下ctrl+p，然后输入你要寻找的文件就行了
 * AutoPairs 自动补全括号的插件，包括小括号，中括号，以及花括号，可以提升编码效率
-* Surround 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
-* [ vim-airline / vim-airline ](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+* [vim-airline](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
 * EasyMotion 在当前文件中快速移动光标到指定查找位置的插件，十分方便和高效
 * deoplete 自动补全插件，写代码必备，有了这个插件，就有了IDE的感觉
 * Vim-Startify Vim启动首屏自定义插件，让你的Vim启动后显示别具一格的首屏样式
@@ -536,8 +535,7 @@ r 对单词字符进行替换
 * Accelerated-Smooth-Scroll 顾名思义，让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
 * YouDao-Translater Vim中的有道翻译插件
 * Matrix-ScreenSaver Vim中的黑客帝国屏幕保护插件，很酷很炫
-* vim-go 搞Go开发必备的插件，集成了很多Go的相关功能
-* [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple
+* [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
     - d s <existing char>   删除两边的指定字符
     - c s <existing char> <desired char>  修改两边的指定字符
     - y s <motion> <desired char> 修改两边字符
