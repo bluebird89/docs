@@ -2,6 +2,8 @@
 
 TypeScript is a superset of JavaScript that compiles to clean JavaScript output. http://www.typescriptlang.org
 
+*
+
 ## 安装
 
 ```sh
@@ -10,8 +12,7 @@ npm install -g typescript
 
 ## 使用
 
-使用 TypeScript 编译器，名称叫 tsc，可将编译结果生成 js 文件 `tsc filename.ts`
-
+* TypeScript 编译器 tsc，编译生成 js 文件 `tsc filename.ts`
 * 类型批注：提供静态类型以在编译时启动类型检查。可选的，而且可以被忽略而使用 JavaScript 常规的动态类型
   - 基本类型的批注是number, bool和string。而弱或动态类型的结构则是any类型
   - 可以被导出到一个单独的声明文件以让使用类型的已被编译为JavaScript的TypeScript脚本的类型信息可用。批注可以为一个现有的JavaScript库声明，就像已经为Node.js和jQuery所做的那样

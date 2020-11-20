@@ -2030,6 +2030,7 @@ sudo umount /mnt
 * 从二进制软件包安装：需要做的只是将从网络上下载的二进制包解压后放到/opt，建立软连接/usr/local/bin/
 * [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
+* [winapps](https://github.com/Fmstrat/winapps)Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration.
 * [Bleachbit](https://www.bleachbit.org/download/linux)
   - `sudo apt install bleachbit`
 

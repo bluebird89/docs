@@ -438,7 +438,6 @@
 * [腾讯AI开发平台](https://ai.qq.com)
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
 * [makelove/True_Artificial_Intelligence](https://github.com/makelove/True_Artificial_Intelligence):真AI人工智能
-* [microsoft/ai-edu](https://github.com/microsoft/ai-edu):AI education materials for Chinese students, teachers and IT professionals.
 * [autodraw](https://www.autodraw.com/)
 
 ## 工具
@@ -446,11 +445,12 @@
 * [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
 * [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
 * [bytedance/byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
-* [mindspore-ai / mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. https://www.mindspore.cn
+* [mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. https://www.mindspore.cn
 
 ## 参考
 
-* [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)
-* [OpenAI](https://openai.com)
+* [OpenAI](https://openai.com) Discovering and enacting the path to safe artificial general intelligence.
 * [wx-chevalier/AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
+
 * [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+* [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)

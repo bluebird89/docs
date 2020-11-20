@@ -31,6 +31,12 @@ npm install --save @babel/polyfill
 babel --presets @babel/preset-typescript script.ts
 ```
 
+## babel-preset-env
+
+* 通过提供提供兼容环境，而决定要编译那些 ES 特性
+* 通过 ES 的特性和 特性的兼容列表 计算出每个特性的兼容性信息
+* 通过给定兼容性要求，计算出要使用的 babel 插件
+
 ## 组件
 
 * babel-core is the main babel package — We need this for babel to do any transformations on our code.
