@@ -1,4 +1,4 @@
-# [tensorflow/tensorflow](https://github.com/tensorflow/tensorflow)
+# [tensorflow](https://github.com/tensorflow/tensorflow)
 
 An Open Source Machine Learning Framework for Everyone https://tensorflow.org
 

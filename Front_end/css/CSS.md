@@ -793,12 +793,14 @@ caption-side:bottom
   }
 ```
 
-## CSS 预编译语言
+## CSS 预处理器
 
 * CSS 作为一门样式语言，语法简单，易于上手.由于不具备常规编程语言提供的变量、函数、继承等机制，因此很容易写出大量没有逻辑、难以复用和扩展的代码，在日常开发使用中，如果没有完善的编码规范，编写的 CSS 代码会非常冗余且难以维护
 * 基于 CSS 语言的语法扩展，除了能解决上述缺乏语言特性带来的问题之外，还支持嵌套书写，减少重复输入父级选择器（可理解为 CSS 中的继承机制），提高了代码的可读性和编写效率
+* [PostCSS](./postcss.md)
 * [Sass](./sass.nd) 功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言
 * [Less](./less.md) 更接近于 CSS 语法
+* Stylus
 
 ## 问题
 
@@ -823,30 +825,22 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 * BootMetro
 * Bootswatch
-* [Dogfalo/materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
+* [materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
 * EZ-CSS
 * Flat UI
 * iView
 * laiketui
 * Metro UI CSS
-* [milligram/milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
-* [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://kbrsh.github.io/moon
+* [milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
+* [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://moonjs.org/
 * [NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
 * [office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
 * [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
-* [PostCSS](./postcss.md)
 * [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
 * Semantic UI
 * [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
-  - [moon](http://moonjs.ga/docs/getting-started.html)
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
   for developing fast and powerful web interfaces.
-
-## 实例
-
-* [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！https://chokcoco.github.io/CSS-Inspiration/#/./init
-* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS http://tobiasahlin.com/spinkit/
-* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects https://cssanimation.rocks
 
 ## 工具
 
@@ -866,9 +860,14 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/)
-* [30-seconds/30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css):A curated collection of useful CSS snippets you can understand in 30 seconds or less.
+* [30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css)Short CSS code snippets for all your development needs https://www.30secondsofcode.org/css/p/1
 * [Jxnblk](https://jxnblk.com/)
 * [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ https://lhammer.cn/You-need-to-know-css/
+* [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
+
+* [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！https://chokcoco.github.io/CSS-Inspiration/#/./init
+* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS http://tobiasahlin.com/spinkit/
+* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects https://cssanimation.rocks
 
 * [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
