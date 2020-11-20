@@ -404,8 +404,12 @@
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
 * [Machine Learning 10-701/15-781, Spring 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml)
-* [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):这是一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
+* [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
 * [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
+* [徐亦达](https://github.com/roboticcam/machine-learning-notes)
+  - YouTube： https://www.youtube.com/channel/UConITmGn5PFr0hxTI2tWD4Q
+  - 哔哩哔哩： https://space.bilibili.com/327617676
+  - 优酷： http://i.youku.com/i/UMzIzNDgxNTg5Ng
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
 * [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 * [A Course in Machine Learning](http://ciml.info/)

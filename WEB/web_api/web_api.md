@@ -2,6 +2,10 @@
 
 ## Web storage
 
+## [localForage/localForage](https://github.com/localForage/localForage)
+
+💾 Offline storage, improved. Wraps IndexedDB, WebSQL, or localStorage using a simple but powerful API.
+
 ## [IndexedDB](http://www.ruanyifeng.com/blog/2018/07/indexeddb.html)
 
 * 将大量数据储存在客户端，这样可以减少从服务器获取数据，直接从本地获取数据

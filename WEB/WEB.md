@@ -1,4 +1,4 @@
-# [Web](https://developer.mozilla.org/zh-CN/docs/Learn/Getting_started_with_the_web)
+# [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
 
 系统的健壮性、可用性：原则是要保护系统，不能让所有用户都失败。直接抛弃一半请求
 
@@ -127,15 +127,8 @@
 * 使用单独的图片服务器，降低服务器压力，使其不会因为图片加载造成崩溃
 * 使用镜像解决不同网络接入商和不同地域用户访问差异
 * 数据库集群图表散列
-* 加强网络层硬件配置，硬的不行来软的。
+* 加强网络层硬件配置，硬的不行来软的
 * 终极办法：负载均衡
-
-servlet其实并不底层，http报文本质上就是一个字符串，容器承担了解析这个字符串的功能，解的快不快，解的好不好你也不知道，而struts，spring等都是基于这个字符串解析之上的外围打杂框架。
-
-要想达到要非常少的机器扛住大规模的并发，可能需要抛弃servlet，直接用netty或者nio参考v8，nodejs，tornado等直接构建非阻塞的异步协程socket服务器
-
-## 大访问量
-
 * 负载均衡 把众多的访问量分担到其他的服务器上，让每个服务器的压力减少
   - Cisco 以太网通道 （网络层面的负载均衡设备和技术）
   - windows NLB技术 （服务器领域）
@@ -152,6 +145,10 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - 网络构架
   - 服务器构架
   - 应用程序开发
+
+servlet其实并不底层，http报文本质上就是一个字符串，容器承担了解析这个字符串的功能，解的快不快，解的好不好你也不知道，而struts，spring等都是基于这个字符串解析之上的外围打杂框架。
+
+要想达到要非常少的机器扛住大规模的并发，可能需要抛弃servlet，直接用netty或者nio参考v8，nodejs，tornado等直接构建非阻塞的异步协程socket服务器
 
 ## 大数据存储
 
@@ -175,7 +172,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - 分区技术:将一个表拆成多个表，比较常用的方式是将表中的记录按照某种Hash算法进行拆分，简单的拆分方法如取模方式。在一定的层面表名不变，在真正的磁盘存储时存储在不同的分区
   - 集群：单点故障时，冗余备份
 
-## 加速技术
+## 加速
 
 * Squid 代理缓存技术（Squid：乌鱼）反向缓存-动静分离:Squid是一款用来做代理服务器的软件。作用是动静分离，将数据保存在缓存池中Squid cache，能够代理服务器执行。代理服务器就如同买火车票，去火车票代理售票点，买票，而不是去火车站，这样就减少了火车站的压力，提高了速度。
 * 页面静态化缓存
@@ -204,7 +201,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - 对口令使用salt的意思是，user 在设定密码时，system 产生另外一个random string(salt)。在datbase 存的​​是与salt + passwd 产的md5sum 及salt
   - 当要验证密码时就把user 输入的string 加上使用者的salt，产生md5s​​um 来比对。 理论上用salt 可以大幅度让密码更难破解，相同的密码除非刚好salt 相同，最后​​存在database 上的内容是不一样的。google一下md5+salt你可以看到很多文章
   - 关于Rainbow 攻击，其意思是很像密码字典表，但不同的是，Rainbow Table存的是已经被Hash过的密码了，而且其查找密码的速度更快，这样可以让攻击非常快）。使用慢一点的Hash算法来保存口令，如 bcrypt (被时间检证过了) 或是 scrypt (更强，但是也更新一些) (1, 2)。你可以阅读一下 How To Safely Store A Password（陈皓注：酷壳以前曾介绍过bcrypt这个算法，这里，我更建议我们应该让用户输入比较强的口令，比如Apple ID注册的过程需要用户输入超过8位，需要有大小写和数字的口令，或是做出类似于这样的用户体验的东西）。
-* 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，你可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
+* 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
 * 了解 [处理信用卡的一些规则](https://www.pcisecuritystandards.org/) . ([这里也有一个问题你可以查看一下](https://stackoverflow.com/questions/51094/payment-processors-what-do-i-need-to-know-if-i-want-to-accept-credit-cards-on)) （有两上vendor可以帮助你，一个是 Authorize.Net 另一个是 PayFlow Pro）
 * 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等
 * [Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)
@@ -327,9 +324,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
       * 关闭服务器最大连接数等，合理配置中间件，缓解 DDoS 攻击。
       * 请求中添加验证码，比如请求中有数据库操作的时候。
       * 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作。
-
 * 流量劫持
-
   - DNS 劫持:如果当用户通过某一个域名访问一个站点的时候，被篡改的 DNS 服务器返回的是一个恶意的钓鱼站点的 IP，用户就被劫持到了恶意钓鱼站点
     + 要不就是网络运营商搞的鬼，一般小的网络运营商与黑产勾结会劫持 DNS，要不就是电脑中毒，被恶意篡改了路由器的 DNS 配置
     + 应对
@@ -338,16 +333,12 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
       * 如果投诉反馈无效，直接去工信部投诉，一般来说会加白你的域名。
   - HTTP 劫持：当用户访问某个站点的时候会经过运营商网络，而不法运营商和黑产勾结能够截获 HTTP 请求返回内容，并且能够篡改内容，然后再返回给用户，从而实现劫持页面，轻则插入小广告，重则直接篡改成钓鱼网站页面骗用户隐私。
     + 根本原因，是 HTTP 协议没有办法对通信对方的身份进行校验以及对数据完整性进行校验
-
 * 服务器漏洞
-
   - 越权操作：涉及到数据库的操作都需要先进行严格的验证
   - 目录遍历漏洞：通过在 URL 或参数中构造 ../，./ 和类似的跨父目录字符串的 ASCII 编码、unicode 编码等，完成目录跳转，读取操作系统各个目录下的敏感文件
     + 需要对 URL 或者参数进行 ../，./ 等字符的转义过滤
   - 源码暴露漏洞：
-
 * 设计缺陷
-
   - 返回信息过多：不要返回 用户已被禁用，统一返回 用户名或密码错误
   - 短信接口
     + 设置同一手机号短信发送间隔
@@ -497,6 +488,8 @@ if(password_verify($password, $hash)) {
   - 使用某种版本控制系统储存你的文件，比如Subversion或Git。
   - 不要忘记做单元测试（Unit Testing），Selenium之类的框架会对你有用。
 
+## 性能优化
+
 ## 趋势
 
 * PWA
@@ -508,16 +501,16 @@ if(password_verify($password, $hash)) {
 
 ## 工具
 
-* [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
 * [pod4g/hiper](https://github.com/pod4g/hiper):🚀 A statistical analysis tool for performance testing
 * [raviqqe/muffet](https://github.com/raviqqe/muffet):Fast website link checker in Go
 * [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
+* [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
 * [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
 * record and replay
   - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
   - [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
-* [缩短网址](http://suo.im/)
+* [短网址](http://suo.im/)
 * [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
 * [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
 * 分析
@@ -537,15 +530,15 @@ if(password_verify($password, $hash)) {
 
 ## 参考
 
-* [wx-chevalier/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
+* [/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 * [Web](https://developers.google.com/web/)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
   - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [W3C](https://www.w3.org/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
-* [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
 
+* [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)
 * [5 Tips on Concurrency](https://dzone.com/articles/7-tips-about-concurrency)
 * [A Beginner’s Guide to Website Speed Optimization](https://kinsta.com/learn/page-speed/)

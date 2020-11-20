@@ -164,7 +164,7 @@
   - (https://github.com/mautic/mautic)[Mautic]: 邮件营销自动化
   - [PHPMailer/PHPMailer](https://github.com/PHPMailer/PHPMailer): The classic email sending library for PHP
   - (https://github.com/henrikbjorn/Stampie)[Stampie]: 一个邮件服务库，类似于[SendGrid](http://sendgrid.com)[PostMark](https://postmarkapp.com),[MailGun](http://www.mailgun.com)[Mandrill](http://www.mandrill.com)
-  - (http://swiftmailer.org/)[SwiftMailer]: 一个邮件解决方案
+  - [SwiftMailer](http://swiftmailer.org/): 一个邮件解决方案
   - [egulias/EmailValidator](https://github.com/egulias/EmailValidator):PHP Email validator library inspired in @dominicsayers isemail function https://github.com/dominicsayers/isemail
 * 文件 Files 文件处理和MIME类型检测的库
   - (https://github.com/dflydev/dflydev-apache-mime-types)[Apache MIME Types]: 一个解析Apache MIME类型的库
