@@ -106,6 +106,10 @@
 
 ![](../static/project_ablity.png)
 
+## 任务分解
+
+*
+
 ## 公司管理
 
 * 投资

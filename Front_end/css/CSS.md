@@ -846,6 +846,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 * [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
 * [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! https://minicss.org/
+* [stylelint](https://github.com/stylelint/stylelint) https://stylelint.io/
 * [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. https://spiderpig86.github.io/Cirrus
 * [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
 * [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. https://nzbin.github.io/three-dots/
