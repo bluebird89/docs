@@ -70,11 +70,7 @@ react-native run-ios
 sudo xcode-select -s /Applications/Xcode8.1.app/Contents/Developer/    # （红色部分是你实际的xcode app的名称）
 
 lsof -i tcp:8081
-```
 
-### Mac
-
-```shell
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install node yarn
@@ -118,8 +114,28 @@ react-native run-ios
   },
   "proxy": "http://localhost:4000"
 }
-
 ```
+
+## 架构
+
+* 3个线程
+  - JS thread。JS代码执行线程，负责逻辑层面的处理。Metro（打包工具）将React源码打包成一个单一JS文件(就是图中JSBundle)。然后传给JS引擎执行，现在ios和android统一用的是JSC。
+  - UI Thread(Main Thread/Native thread)。这个线程主要负责原生渲染（Native UI）和调用原生能力(Native Modules)比如蓝牙等。
+  - Shadow Thread。这个线程主要是创建Shadow Tree来模拟React结构树。Shadow Tree可以类似虚拟dom。RN使用Flexbox布局，但是原生是不支持，所以Yoga就是用来将Flexbox布局转换为原生平台的布局方式。
+* JSI Javascript Interface
+  - 一个用C++写成的轻量级框架，它作用就是通过JSI，JS对象可以直接获得C++对象(Host Objects)引用，并调用对应方法
+  - JS和Native就可以直接通信了,调用过程如下：JS->JSI->C++->ObjectC/Java.三个线程通信再也不需要通过Bridge，可以直接知道对方的存在，让同步通信成为现实
+  - JS引擎不再局限于JSC，可以自由的替换为V8,Hermes，进一步提高JS解析执行的速度
+* Fabric
+  - 整个架构中的新UI层，包括了新架构图中的renderer和shadow thread
+  - 现在支持渲染优先级比如React的Concurrent和Suspense模式
+* TurboModules
+  - 通过JSI，可以让JS直接调用Native模块，实现一些同步操作。比如调用摄像头能力。
+  - Native模块懒加载。之前RN框架启动的时候会加载所有Native模块，导致启动慢，时间久。现在有了TurboModules后，可以实现按需加载，减少启动时间，提高性能。
+* CodeGen
+  - 自动将Flow或者Ts等有静态类型的JS代码翻译成Fabric和TurboModules使用的原生代码。
+* LeanCode
+  - 是包的瘦身，以前所有的包都放在RN核心工程里面。现在RN核心只保留必要的包，其他都移到react-native-community 或者拆出单独的组件，比如Webview和AsyncStore
 
 ### JSX
 

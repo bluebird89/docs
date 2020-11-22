@@ -459,6 +459,14 @@ npm run build | yarn build
 npm run eject #  导出配置文件
 ```
 
+## Hooks
+
+* 从 React Hooks 发布以来，基于函数的组件已升格为 React 的一等公民。它使函数组件能够以新的方式编写、重用和共享 React 代码
+* 规则
+  - 仅在顶级调用 Hooks:不要在循环、条件和嵌套函数内调用 Hooks。当想有条件地使用某些 Hooks 时，请在这些 Hooks 中写入条件
+  -  仅从函数组件调用 Hooks
+    +
+
 ## 测试
 
 * 组件
