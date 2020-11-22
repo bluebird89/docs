@@ -1,4 +1,4 @@
-# [node](https://github.com/nodejs/node)
+# [Node.js](https://github.com/nodejs/node)
 
 Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
@@ -106,6 +106,13 @@ a package manager for javascript <http://www.npmjs.com/>
     - 在主目录下新建配置文件.npmrc，在该文件中将prefix变量定义到一个你的个人目录下面（假定该目录是~/my-npm-modules） `prefix = /home/yourUsername/my-npm-modules`
     - 全局安装的模块都会安装在这个子目录中，npm也会到~/my-npm-modules/bin目录去寻找命令
     - 将这个路径在.bash_profile文件（或.bashrc文件）中加入PATH变量
+* npm config
+    - proxy, https-proxy: 指定 npm 使用的代理
+    - registry 指定 npm 下载安装包时的源，默认为 https://registry.npmjs.org/ 可以指定为私有 Registry 源
+    - package-lock 指定是否默认生成 package-lock 文件，建议保持默认 true
+    - save true/false 指定是否在 npm install 后保存包为 dependencies, npm 5 起默认为 true
+    - 通过 npmrc 文件直接修改配置
+* npm init:调用脚本，输出一个初始化的 package.json 文件,在 Home 目录创建一个 .npm-init.js 即可，该文件的 module.exports 即为 package.json 配置内容，需要获取用户输入时候，使用 prompt() 方法即可
 * 配置文件 `package.json`
     - files字段是一个数组，里面指定了一组文件。当模块发布到 NPM 网站时，这组文件会被包括。这个字段是可选的，如果没有指定内容，那么发布时所有文件都会被包括在内。如果files字段包含目录名，该目录里面的所有文件都会被计入
         + 不会发布.gitignore里面列出的文件和目录。项目的根目录或子目录里面，还可以放置一个.npmignore文件，该文件会覆盖.gitignore，里面指定的文件和目录不会被发布
@@ -123,28 +130,67 @@ a package manager for javascript <http://www.npmjs.com/>
         + 可以借用Linux系统的管道命令，将两个操作连在一起,更方便的写法是引用其他npm run命令,用&&连接
         + 也可以在node_modules/.bin目录中直接写成bash脚本
         + 添加参数:参数之前要加上两个连词线
-* npm install不会修改package.json
-    - --save或-S参数，将模块写入package.json的dependencies字段
-    - --save-dev或-D，将模块加入package.json的devDependencies字段
-    - 没有指定版本，会在安装的版本号前面添加^,^4.17.4，表示兼容 4.17.4 以后的 4.x 版
-    - --save-exact指定只将当前确定的版本号
-    - 全局安装:--global|-g,加上--save、--save-exact、--save-dev都是无效的
+    - bin 字段的配置格式为: <command>: <file>, 即 命令名: 可执行文件. npm 执行 install 时，会分析每个依赖包的 package.json 中的 bin 字段，并将其包含的条目安装到 ./node_modules/.bin 目录中，文件名为 <command>
+    - engines 属性声明应用运行所需的版本运行时要求
+* npm install <package>
+    - <package> 默认配置下 npm 会从默认的源 (Registry) 中查找该包名对应的包地址，并下载安装
+        + a 一个包含了程序和描述该程序的 package.json 文件 的 文件夹  ./local-module/
+            * 新增 config 文件夹; 重命名 config.js 为 config/index.js 文件; 创建 package.json 定义 config 包
+            * 在应用层 package.json 文件中新增依赖项 `"config": "file:./config"`，然后执行 npm install
+            * 或者 `npm install file:./config`
+        + b 一个包含了 (a) 的 gzip 压缩文件  ./module.tar.gz
+        + c 一个可以下载得到 (b) 资源的 url (通常是 http(s) url)  https://registry.npmjs.org/webpack/-/webpack-4.1.0.tgz
+        + d 一个格式为 <name>@<version> 的字符串，可指向 npm 源(通常是官方源 npmjs.org)上已发布的可访问 url，且该 url 满足条件 (c) webpack@4.1.0
+        + e 一个格式为 <name>@<tag> 的字符串，在 npm 源上该<tag>指向某 <version> 得到 <name>@<version>，后者满足条件 (d)  webpack@latest
+            * 开源 package 问题修复: fork 原作者的 git 库，在自己所属的 repo 下修复问题后，将 dependencies 中相应的依赖项更改为自己修复后版本的 git url 即可解决问题
+        + f 一个格式为 <name> 的字符串，默认添加 latest 标签所得到的 <name>@latest 满足条件 (e) webpack
+        + g 一个 git url, 该 url 所指向的代码库满足条件 (a)   git@github.com:webpack/webpack.git
+    - 参数
+        + --save|-S参数，将模块写入package.json的dependencies字段
+        + --save-dev|-D，将模块加入package.json的devDependencies字段
+        + 没有指定版本，会在安装的版本号前面添加^,^4.17.4，表示兼容 4.17.4 以后的 4.x 版
+        + --save-exact指定只将当前确定的版本号
+        + 全局安装:--global|-g,加上--save、--save-exact、--save-dev都是无效的
+    - semver
+        + ^2.2.1  指定 MAJOR 版本号下, 所有更新的版本 匹配 2.2.3, 2.3.0; 不匹配 1.0.3, 3.0.1
+        + ~2.2.1  指定 MAJOR.MINOR 版本号下，所有更新的版本 匹配 2.2.3, 2.2.9 ; 不匹配 2.3.0, 2.4.5
+        + >=2.1   版本号大于或等于 2.1.0  匹配 2.1.2, 3.1
+        + <=2.2   版本号小于或等于 2.2    匹配 1.0.0, 2.2.1, 2.2.11
+        + 1.0.0 - 2.0.0   版本号从 1.0.0 (含) 到 2.0.0 (含)  匹配 1.0.0, 1.3.4, 2.0.0
+        + 任意两条规则，用空格连接起来，表示“与”逻辑，即两条规则的交集
+        + 任意两条规则，通过 || 连接起来，表示“或”逻辑，即两条规则的并集
+    - 如果本地 node_modules 已安装，再次执行 install 不会更新包版本, 执行 update 才会更新; 而如果本地 node_modules 为空时，执行 install/update 都会直接安装更新包
 * update命令可以更新本地安装的模块到最新版本（符合 semver 的设置），如果该模块没有安装，则会安装该模块
     - 会先到远程仓库查询最新版本，然后查询本地版本。如果本地版本不存在，或者远程版本较新，就会安装最新版本
     - npm up和npm upgrade是该命令的缩写
     - 不使用任何参数时，将更新当前项目的所有dependencies字段里面的模块
     - --dev参数会连带安装和更新devDependencies字段里面的模块
     - 使用-S或--save参数，可以在安装的同时，更新package.json里面模块的版本号
-* uninstall 用来卸载已安装的模块
+    - 总是会把包更新到符合 package.json 中指定的 semver 的最新版本号——本例中符合 ^1.8.0 的最新版本为 1.15.0
+* 实践
+    - 保持 package-lock.json 文件默认开启配置
+    - 初始化：第一作者初始化项目时使用 npm install <package> 安装依赖包, 默认保存 ^X.Y.Z 依赖 range 到 package.json中; 提交 package.json, package-lock.json, 不要提交 node_modules 目录
+    - 初始化：项目成员首次 checkout/clone 项目代码后，执行一次 npm install 安装依赖包
+    - 不要手动修改 package-lock.json
+    - 升级依赖包:
+        + 升级小版本: 本地执行 npm update 升级到新的小版本
+        + 升级大版本: 本地执行 npm install <package-name>@<version> 升级到新的大版本
+        + 也可手动修改 package.json 中版本号为要升级的版本(大于现有版本号)并指定所需的 semver, 然后执行 npm install
+        + 本地验证升级后新版本无问题后，提交新的 package.json, package-lock.json 文件
+    - 降级依赖包:
+        + 正确: npm install <package-name>@<old-version> 验证无问题后，提交 package.json 和 package-lock.json 文件
+        + 错误: 手动修改 package.json 中的版本号为更低版本的 semver, 这样修改并不会生效，因为再次执行 npm install 依然会安装 package-lock.json 中的锁定版本
+    - 删除依赖包:
+        + Plan A: npm uninstall <package> 并提交 package.json 和 package-lock.json
+        + Plan B: 把要卸载的包从 package.json 中 dependencies 字段删除, 然后执行 npm install 并提交 package.json 和 package-lock.json
 
 ```sh
 npm -v|--version
-npm config list -l
+npm config ls -l
 
 # 镜像加速设置
 npm config set registry https://registry.npm.taobao.org --global
 npm config set registry "http://registry.npmjs.org/"
-
 npm config set registry http://registry.cnpmjs.org # Unexpected end of JSON input while parsing near '...p":false,"directories'
 npm root -g
 
@@ -185,6 +231,23 @@ npm search express
 npm outdated --depth=0             ##For locally installed packages
 npm outdated -g --depth=0   ##For  globally installed packages
 npm prune
+
+# ~/.npm-init.js
+const desc = prompt('description?', 'A new package...')
+const bar = prompt('bar?', '')
+const count = prompt('count?', '42')
+
+module.exports = {
+  key: 'value',
+  foo: {
+    bar: bar,
+    count: count
+  },
+  name: prompt('name?', process.cwd().split('/').pop()),
+  version: prompt('version?', '0.1.0'),
+  description: desc,
+  main: 'index.js',
+}
 
 npm init -y|f # 创建一个npm项目,配置项目信息，在package.json文件
 # 为npm init设置了默认值,自动写入预设的值。这些信息会存放在用户主目录的 ~/.npmrc文件
@@ -243,9 +306,13 @@ src/myProject$ npm link myModule
 
 ## scripts脚本命令最佳实践
 
+* npm run 命令执行时，会把 ./node_modules/.bin/ 目录添加到执行环境的 PATH 变量中，因此如果某个命令行包未全局安装，而只安装在了当前项目的 node_modules 中，通过 npm run 一样可以调用该命令
+* 要传入参数，需要在命令后加 -- 标明
+* 提供了 pre 和 post 两种钩子机制，可以定义某个脚本前后的执行脚本
 * 环境
     - 内置export命令用来在当前进程中创建环境变量（自然也会被子进程继承）
     - 在命令行中调用其他程序时，在前面添加类似上面的变量赋值，则会将该变量添加到子进程的环境变量中
+    - 运行时变量：在 npm run 的脚本执行环境内，可以通过环境变量的方式获取许多运行时相关信息，以下都可以通过 process.env 对象访问获得
 * 安装npm-run-all模块:运行多个scripts脚本命令
 * start脚本命令，用于启动应用程序
     - 如果start脚本没有配置，npm start命令默认执行下面的脚本，前提是模块的根目录存在一个server.js文件 `node server.js`
@@ -603,7 +670,7 @@ npm publish
 * 比较 返回一个数字，表示 buf 在 otherBuffer 之前，之后或相同
 * 拷贝 将一个缓冲区拷贝到另一个指定位置
 
-### 模块系统
+## 模块系统
 
 * 模块是Node.js 应用程序的基本组成部分，文件和模块是一一对应的。一个 Node.js 文件就是一个模块，这个文件可能是JavaScript 代码、JSON 或者编译过的C/C++ 扩展
 * 优点
@@ -676,6 +743,17 @@ npm install mongodb --save
     - giveup事件是比uncaughtException更严重的异常事件，giveup事件表示集群中没有任何进程服务了，十分危险。为了健壮性考虑，我们应在giveup事件中添加重要日志，并让监控系统监视到这个严重错误，进而报警等
     - gisconnect事件表示父子进程用于通信的channel关闭了，此时父子进程之间失去了联系，自然是无法传递客户端接收到的连接了
     - 失去联系不表示会退出，worker进程有可能仍然在运行，但此时已经无力接收请求了。所以当master进程收到某个worker disconnect的事件时，先需要kill掉worker，然后再fork一个worker
+
+## 场景
+
+* 中间层
+    - 后端就包含了网关，静态资源，接口，缓存，数据库等
+    - 中间层就是在后端这里再抽离一层出来，在业务上处理和客户端衔接更紧密的部分，比如页面渲染（SSR），数据聚合，接口转发等等
+* 业务驱动：前端对于页面所需要的数据有更好的理解，每个页面要用到哪些接口，每个接口要用到哪些字段前端是最清楚的。再加上实际业务开发中，前端页面需求经常会发生变化，需要修改字段或者数据结构，所以对接页面的这部分接口由前端直接开发非常合适，可以显著的减少沟通成本
+* 架构需要：面向用户的接口由Node中间层负责以后，真正的服务端可以专注于提供基于领域模型的对内接口，做微服务
+* 性能满足
+    - Node天生异步：借助libuv来实现异步
+    - 只需要学习简单的api，前端开发者就可以无障碍使用，学习成本很低
 
 ## 问题
 

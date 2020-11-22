@@ -275,24 +275,23 @@ exit
   - config_post_check = "on"        --是否开启POST检测
   - config_waf_output = "html"      --对于违反规则的请求则跳转到一个自定义html页面还是指定页面，值为 html 和 redirect
   - config_waf_redirect_url = "https://www.unixhot.com"     --指定违反请求后跳转的指定html页面
+* 设定一个包含这些字符的的过滤规则
+*
 
 ```sh
 git clone https://github.com/unixhot/waf.git
 cp -a ./waf/waf /usr/local/openresty/nginx/conf/
 
 # /usr/local/openresty/nginx/conf/nginx.conf
-...
 http {
 lua_shared_dict limit 10m;
 lua_package_path "/usr/local/openresty/nginx/conf/waf/?.lua";
 init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
 access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
-...
 }
 
 # failed to load the 'resty.core' module
 git clone https://github.com/openresty/lua-resty-core.git
-
 
 lua_shared_dict limit 10m;
 lua_package_path "/usr/local/openresty/nginx/conf/waf/?.lua;/usr/local/openresty/lua-resty-core/lib/?.lua;;";

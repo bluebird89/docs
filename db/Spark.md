@@ -1,4 +1,4 @@
-# [apache/spark](https://github.com/apache/spark)
+# [spark](https://github.com/apache/spark)
 
 Mirror of Apache Spark
 
@@ -26,7 +26,7 @@ pyspark
 pip install toree
 jupyter toree install --spark_home=$SPARK_HOME
 
-# pyspark的配置 
+# pyspark的配置
 export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS=notebook
 # 只需要在终端输入pyspark就会自动为我们开启一个新的jupyter网页。我们选择Python3的内核新建job就可以使用pyspark
