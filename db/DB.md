@@ -210,7 +210,6 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
 * [alibaba/otter](https://github.com/alibaba/otter)：阿里巴巴分布式数据库同步系统(解决中美异地机房)
 * [Nozbe/WatermelonDB](https://github.com/Nozbe/WatermelonDB):🍉 Next-gen database for powerful React and React Native apps that scales to 10,000s of records and remains fast ⚡️
-* [getredash/redash](https://github.com/getredash/redash) Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 * [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
 * [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
 * [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
@@ -228,9 +227,9 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [gruns/ImmortalDB](https://github.com/gruns/ImmortalDB):🔩 A relentless key-value store for the browser.
 * [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
 * [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB https://dgraph.io
-* [](https://github.com/pouchdb/pouchdb):🐨 - PouchDB is a pocket-sized database. https://pouchdb.com/
+* [pouchdb](https://github.com/pouchdb/pouchdb):🐨 - PouchDB is a pocket-sized database. https://pouchdb.com/
 * [apache/hive](https://github.com/apache/hive) Mirror of Apache Hive
-* [google/leveldb](https://github.com/google/leveldb) LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.
+* [leveldb](https://github.com/google/leveldb) LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.
 * [DCache](https://github.com/tencent/dcache):分布式 NoSQL 存储系统,基于 TARS 微服务治理方案，支持 k-v、k-k-row、list、set 与 zset 多种数据结构，数据基于内存存储，同时支持后接 DB 实现数据持久化。DCache 具备快速水平扩展能力，同时配套有 Web 运维平台实现高效的运维操作。
   - 对外提供服务的粒度是 group，一个 group 负责一部分的数据分片，至于每个 group 服务哪些数据，是根据数据的 key 做 hash 映射后所处的范围来确定的。
   - 自身会处理缓存与DB之间的数据一致性问题
@@ -239,7 +238,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 课程
 
-* 《数据库系统概念》：https://www.bilibili.com/video/av52007695
+* [《数据库系统概念》](https://www.bilibili.com/video/av52007695)
 
 ## 图书
 
@@ -258,7 +257,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 ## 工具
 
 * [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files http://harelba.github.io/q/
-* [ClickHouse / ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.tech
+* [ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.tech
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
   - [Docs](https://osquery.readthedocs.io)
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
