@@ -173,12 +173,20 @@ sudo visudo
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 ```
 
+## 菜单栏
+
+* 去掉蓝牙等无需经常使用的图标
+* 将电池显示设置为百分比
+
 ## [Multi-Touch](https://support.apple.com/zh-cn/HT204895)
 
-*　轻拍来点按
-*　辅助点按
-*　查找
-*　三指拖移
+* 光标与点击
+  - 轻拍来点按
+  - 辅助点按
+  - 查找
+  - 三指拖移
+* 滚动缩放
+  - 默认全选
 * 查询单词释义：鼠标放在单词上，不用选中，直接长按，再抬起
 * 双手轻按屏幕：唤醒右键
 * 双指旋转：改变照片的显示方向
@@ -255,7 +263,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - Luna Display:Turn your iPad into a second display
   - 实用工具：/System/Library/CoreServices/Applications
   - [Ityscal](https://www.mowglii.com/itsycal/)  日历
-  - [Lunar](https://github.com/alin23/Lunar)
+  - [Lunar](https://github.com/alin23/Lunar) 智能调节外接显示器亮度 https://lunar.fyi/
   - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
   - [smcfunControl](link)
   - TotalFinder - macOS 上最强的 Finder 增强软件
@@ -412,6 +420,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + 当该标签有新输出的时候，标签会变成洋红色
     + 新的输出长时间没有查看，标签会变成红色。可在设置中关掉该功能。
   - 双击选中，三击选中整行，四击智能选中（智能规则可配置），可以识别网址，引号引起的字符串，邮箱地址等
+  - [启用 rz 与 sz 功能](https://wsgzao.github.io/post/lrzsz/)
 
 ```sh
 # mac专有的pbcopy/pbpaste 把命令行输出拷贝到系统粘贴板：
@@ -712,6 +721,11 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * iphone keynote进入远程控制，开始控制
 * AirPlay功能投影到Apple TV
 
+## Spotlight
+
+* 去掉字体和书签与历史记录等不需要的内容
+* 设置合适的快捷键
+
 ## airdrop
 
 * 苹果设备局域网共享链接，开启后，进行shares
@@ -894,8 +908,10 @@ brew switch icu4c 62.1
 * macOS Server拥有众多强大工具可以让整个团队更高效地分享信息，分工合理第一合作
 * [Docker-OSX](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 * [quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+* [sshpass](https://wsgzao.github.io/post/sshpass/)
 
 ## 参考
 
 * [黑果小兵的部落阁](https://blog.daliansky.ne)
 * [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
+* [macOS 从小白到入门](https://wsgzao.github.io/post/macbook/)
