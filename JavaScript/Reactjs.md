@@ -465,7 +465,21 @@ npm run eject #  导出配置文件
 * 规则
   - 仅在顶级调用 Hooks:不要在循环、条件和嵌套函数内调用 Hooks。当想有条件地使用某些 Hooks 时，请在这些 Hooks 中写入条件
   -  仅从函数组件调用 Hooks
-    +
+  - 以正确的顺序创建函数组件:首先调用构造器并启动状态。然后编写生命周期函数，接着编写与组件作业相关的所有函数。最后编写 render 方法
+* useState【维护状态】
+  - useState 的用法可以和类组件的状态完全一致，不只用于单个值
+* useEffect【完成副作用操作】
+  - 以理解成它替换了componentDidMount, componentDidUpdate, componentWillUnmount 这三个生命周期
+* useContext【使用共享状态】
+  - Context 提供了一种在组件之间共享此类值的方式，而不必显式地通过组件树 的逐层传递 props
+* useReducer【类似redux】
+* useCallback【缓存函数】
+* useMemo【缓存值】
+* useRef【访问DOM】
+* useImperativeHandle【使用子组件暴露的值/方法】
+* useLayoutEffect【完成副作用操作，会阻塞浏览器绘制】
+* 参考
+  - [用好这9个钩子](https://juejin.cn/post/6895966927500345351)
 
 ## 测试
 

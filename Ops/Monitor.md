@@ -57,13 +57,27 @@ Grafana求，配合 Prometheus 以及 Prometheus 相关的 Exporter
 
 APM, Application Performance Monitoring System https://skywalking.apache.org/
 
+## 服务监控
+
+* apache web 服务监控
+* mysql 数据库监控
+* 磁盘空间监控
+
+## 流量监控:网站流量监控（网卡进入的数据量和网卡流出的数据量成比例）
+
+* 监控的好处：只有监控才知道问题，有了问题才能改进
+* 要监管，先要建立网络管理协议，被监控的服务器全部开放smp，161端口
+* 监控者监控被监控者，mrtg监控图
+* cacti监控原理
+* Cacti 监测系统的工作原理
+
 ## 工具
 
-* [nicolargo / glances](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
-* [plausible-insights / plausible](https://github.com/plausible-insights/plausible):Simple, lightweight analytics for your website https://plausible.io
+* [glances](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
+* [plausible](https://github.com/plausible-insights/plausible):Simple, lightweight analytics for your website https://plausible.io
 * [usefathom/fathom](https://github.com/usefathom/fathom):Fathom. Simple, trustworthy website analytics. Built with Golang & Preact. https://usefathom.com/
 * [Countly/countly-server](https://github.com/Countly/countly-server):Countly helps you get insights from your application. Available self-hosted or on private cloud. https://count.ly
-* [ openspug / spug ](https://github.com/openspug/spug):开源运维平台：面向中小型企业设计的轻量级无Agent的自动化运维平台，整合了主机管理、主机批量执行、主机在线终端、应用发布部署、在线任务计划、配置中心、监控、报警等一系列功能。 https://spug.dev
+* [spug](https://github.com/openspug/spug):开源运维平台：面向中小型企业设计的轻量级无Agent的自动化运维平台，整合了主机管理、主机批量执行、主机在线终端、应用发布部署、在线任务计划、配置中心、监控、报警等一系列功能。 https://spug.dev
 * [simpleops](https://simpleops.io/):Performance monitoring simplified
 * htop:运行于 Linux 系统监控与进程管理软件，用于取代 Unix 下传统的 top。与 top 只提供最消耗资源的进程列表不同，htop 提供所有进程的列表，并且使用彩色标识出处理器、swap 和内存状态
 * [psutil](https://github.com/giampaolo/psutil):Cross-platform lib for process and system monitoring in Python

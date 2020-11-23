@@ -1049,11 +1049,11 @@ $un_data = unserialize_php($data);
 ## [HTTP/2](https://http2.github.io/)
 
 * 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
-* 头部压缩（Header Compression）:由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重。HTTP 2.0 使用 HPACK 算法进行压缩
+* 头部压缩 Header Compression:由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重
   - 头信息（键值对）在两端建立一个索引表，对相同的头只发送索引表中的索引
-  - 在客户端和服务器端使用“首部表”来跟踪和存储之前发送的键-值对，对于相同的数据，不再通过每次请求和响应发送
+  - 客户端和服务器端使用“首部表”来跟踪和存储之前发送的键-值对，对于相同的数据，不再通过每次请求和响应发送
   - 通信期间几乎不会改变的通用键-值对(用户代理、可接受的媒体类型,等等)只需发送一次
-  - 如果请求中不包含首部(例如对同一资源的轮询请求),那么 首部开销就是零字节。此时所有首部都自动使用之前请求发送的首部。
+  - 如果请求中不包含首部(例如对同一资源的轮询请求),那么首部开销就是零字节。此时所有首部都自动使用之前请求发送的首部
   - 如果首部发生变化了，那么只需要发送变化了数据在Headers帧里面，新增或修改的首部帧会被追加到“首部表”。首部表在 HTTP 2.0 的连接存续期内始终存在,由客户端和服务器共同渐进地更新 。数据被称为帧（Frames）
   - 新的报头压缩算法,称之为 HPACK,不仅使整个过程更加安全，而且在某些情况下速度更快。gzip做header压缩有安全性隐患
     + HPACK粗略来说就是一张动态表（dynamic table），由request-response共同维护它，后续header中不会完整重复之前的条目，而是引用之前的条目，TCP的有序性保证了它一定是先修改再读取，也就是先编码再解码。
@@ -1062,22 +1062,24 @@ $un_data = unserialize_php($data);
   - HTTP1.x的头部信息会被封装到HEADER frame，而相应的RequestBody则封装到DATAframe里面
   - 在 应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层
     + 会将所有传输的信息分割为更小的消息和帧，然后采用二进制的格式进行编码
+  - 解析速度快:服务器解析 HTTP1.1 的请求时，必须不断地读入字节，直到遇到分隔符 CRLF 为止。而解析 HTTP2 的请求就不用这么麻烦，因为 HTTP2 是基于帧的协议，每个帧都有表示帧长度的字段
+  - 将所有的传输信息分割为更小的消息和帧，并对它们采用二进制格式编码，常见的帧有 Header 帧，用于传输 HTTP 头信息，并且会开启一个新的流；再就是 Data 帧，用来传输 HTTP 报文实体，多个 Data 帧属于同一个流
 * 强化安全，由于安全已经成为重中之重，所以 HTTP2.0 一般都跑在 HTTPS 上
-* 多路复用 (Multiplexing):即每一个请求都是是用作连接共享。一个请求对应一个id，这样一个连接上可以有多个请求
+* 多路复用 Multiplexing:即每一个请求都是是用作连接共享。一个请求对应一个id，这样一个连接上可以有多个请求
   - 同时通过单一的 HTTP/2 连接发起多重的请求-响应消息
   - HTTP/1.x 虽然通过 pipeline 也能并发请求，但是多个请求之间的响应会被阻塞的，所以 pipeline 至今也没有被普及应用，而 HTTP/2 做到了真正的并发请求
   - 把数据流分解为多个帧，多个数据流的帧混合之后以同一个TCP连接来发送
   - 流还支持优先级和流量控制。当流并发时，就会涉及到流的优先级和依赖。即：HTTP2.0对于同一域名下所有请求都是基于流的，不管对于同一域名访问多少文件，优先级高的流会被优先发送。图片请求的优先级要低于 CSS 和 SCRIPT，这个设计可以确保重要的东西可以被优先加载完
 * 全双工通信
-* 必须https：HTTP+ 加密 + 认证 + 完整性保护
-* 将一个 TCP 连接切分成多个流，每个流都有自己的 ID，而且流可以是客户端发往服务端，也可以是服务端发往客户端，为了解决并发请求导致响应慢的问题，还可以为流设置优先级
-* 将所有的传输信息分割为更小的消息和帧，并对它们采用二进制格式编码，常见的帧有 Header 帧，用于传输 HTTP 头信息，并且会开启一个新的流；再就是 Data 帧，用来传输 HTTP 报文实体，多个 Data 帧属于同一个流
-* 通过这两种机制，HTTP/2.0 的客户端可以将多个请求分到不同的流中，以实现在一个 TCP 连接上处理所有请求，然后将请求内容拆分成帧，进行二进制传输，这些帧可以打散乱序发送，然后根据每个帧首部的流标识符重新组装，并且可以根据优先级，决定优先处理哪个流的数据。成功消除了 HTTP/1.1 的性能瓶颈和限制，减少了 TCP 连接数对服务器性能的影响，同时可以将页面的多个 css、js、 图片等资源通过一个数据链接进行传输，能够加快页面组件的传输速度
+* 优先级
+  - 可以对比较紧急的请求设置一个较高的优先级，服务器在收到这样的请求后，可以优先处理。
+  - 将一个 TCP 连接切分成多个流，每个流都有自己的 ID，而且流可以是客户端发往服务端，也可以是服务端发往客户端，为了解决并发请求导致响应慢的问题，还可以为流设置优先级
+* 通过这两种机制，HTTP/2.0 的客户端可以将多个请求分到不同的流中，以实现在一个 TCP 连接上处理所有请求，然后将请求内容拆分成帧，进行二进制传输，这些帧可以打散乱序发送，然后根据每个帧首部的流标识符重新组装，并且可以根据优先级，决定优先处理哪个流的数据。成功消除了 HTTP/1.1 的性能瓶颈和限制，减少了 TCP 连接数对服务器性能的影响，同时可以将页面的多个 css、js、图片等资源通过一个数据链接进行传输，能够加快页面组件的传输速度
 * 流量控制算法优化
   - TCP协议通过sliding window的算法来做流量控制。发送方有个sending window，接收方有receive window
   - http2.0的flow control是类似receive window的做法，数据的接收方通过告知对方自己的flow window大小表明自己还能接收多少数据。只有Data类型的frame才有flow control的功能
   - 对于flow control，如果接收方在flow window为零的情况下依然更多的frame，则会返回block类型的frame，这张场景一般表明http2.0的部署出了问题。
-* 服务器端推送（Server Push）
+* 服务器端推送 Server Push
   - 服务器可以对一个客户端请求发送多个响应。除了对最初请求的响应外，服务器还可以额外向客户端推送资源，而无需客户端明确地请求
 * [HTTP2 vs HTTP1.1](https://http2.akamai.com/demo)
   - 性能优化的关键并不在于高带宽，而是低延迟.TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动
@@ -1142,6 +1144,19 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
     + 设计一个专门的发号表，每插入一条记录，为短链 id 预留（主键 id * 1000 - 999） 到  (主键 id  * 1000) 的号段
     + 当长链转短链的请求打到某台机器时，先看这台机器是否分配了短链号段，未分配就往发号表插入一条记录，则这台机器将为短链分配范围在 tmp_start_num 到 tmp_end_num 之间的 id。从 tmp_start_num 开始分配，一直分配到 tmp_end_num，如果发号 id 达到了 tmp_end_num，说明这个区间段的 id 已经分配完了，则再往发号表插入一条记录就又获取了一个发号 id 区间
 
+## 渲染流程
+
+* Queueing: 在请求队列中的时间。
+* Stalled: 从TCP 连接建立完成，到真正可以传输数据之间的时间差，此时间包括代理协商时间。
+* Proxy negotiation: 与代理服务器连接进行协商所花费的时间。
+* DNS Lookup: 执行DNS查找所花费的时间，页面上的每个不同的域都需要进行DNS查找。
+* Initial Connection / Connecting: 建立连接所花费的时间，包括TCP握手/重试和协商SSL。
+* SSL: 完成SSL握手所花费的时间。
+* Request sent: 发出网络请求所花费的时间，通常为一毫秒的时间。
+* Waiting(TFFB): TFFB 是发出页面请求到接收到应答数据第一个字节的时间总和，它包含了 DNS 解析时间、 TCP 连接时间、发送 HTTP 请求时间和获得响应消息第一个字节的时间。
+* Content Download: 接收响应数据所花费的时间。
+* 真正下载数据的时间占比：文件越小比例越小，文件越大，比例就越高
+
 ## 端到端加密
 
 ## URL Schemes
@@ -1159,7 +1174,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, https://httpie.org
 
-* [eliangcs /http-prompt ](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
+* [eliangcs /http-prompt](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
 
 ```sh
 # installed on any operating system.

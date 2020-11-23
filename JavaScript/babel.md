@@ -17,6 +17,13 @@
 
 ## [配置](https://babeljs.io/setup#installation)
 
+* babel-preset-env 可以通过提供提供兼容环境，而决定要编译那些 ES 特性
+  - 解决了语法新特性的兼容问题，如果想使用 api 新特性，在 babel 中一般通过 babel-polyfill 来解决，babel-polyfill 通过引入一个 polyfill 文件来解决问题，这对于普通项目很实用，但对于库来说就不太友好了
+* babel-transform-runtime 提供类似程序运行时，可以将全局的 polyfill 沙盒化
+* targets 中配置需要兼容的环境，关于浏览器配置对应的浏览器列表，可以从 browserl.ist 上查看。
+* modules 表示编出输出的模块类型，支持"amd","umd","systemjs","commonjs",false 这些选项，false 表示不输出任何模块类型。
+* loose 代表松散模式，将 loose 设置为 true，能够更好地兼容 ie8 以下环境
+
 ```sh
 npm install --save-dev @babel/core @babel/cli @babel/preset-env
 npm install --save @babel/polyfill
