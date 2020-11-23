@@ -764,7 +764,7 @@ Let's rename *our-new-project* to \*our-old-project\*.
   - `sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE` `wget -qO - https://typora.io/linux/public-key.asc | sudo apt-key add -`
   - `sudo add-apt-repository 'deb https://typora.io/linux ./'`
   - `sudo apt-get install typora`
-  - PicGo 一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。可以用它快捷地将图片上传到图床并获得网络链接
+  - [PicGo](https://github.com/Molunerfinn/PicGo) 一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。可以用它快捷地将图片上传到图床并获得网络链接
 * [marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
 * [trilium](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents

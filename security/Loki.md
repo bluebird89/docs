@@ -12,3 +12,14 @@
   - Querier:负责给定一个时间范围和标签选择器，Querier查看索引以确定哪些块匹配，并通过greps将结果显示出来。还从Ingester获取尚未刷新的最新数据
     + 对于每个查询，一个查询器将为您显示所有相关日志。实现了查询并行化，提供分布式grep，使即使是大型查询也是足够的
 * 索引存储可以是cassandra/bigtable/dynamodb，而chuncks可以是各种对象存储，Querier和Distributor都是无状态的组件。对于ingester他虽然是有状态的但是，当新的节点加入或者减少，整节点间的chunk会重新分配，已适应新的散列环。而Loki底层存储的实现Cortex已经 在实际的生产中投入使用多年了
+
+## 架构
+
+* 组成：
+    - Loki 是主服务器，负责存储日志和处理查询
+    - Promtail 是代理，负责收集日志并将其发送给 Loki
+    - Grafana 用于 UI 展示
+
+## 参考
+
+* [Grafana Loki 开源日志聚合系统代替 ELK 或 EFK](https://wsgzao.github.io/post/loki/)

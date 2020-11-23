@@ -1,4 +1,4 @@
-# [erraform](https://github.com/hashicorp/terraform)
+# [Terraform](https://github.com/hashicorp/terraform)
 
 Terraform is a tool for building, changing, and combining infrastructure safely and efficiently. https://www.terraform.io/
 
@@ -70,9 +70,21 @@ resource "aws_network_interface_sg_attachment" "sg_attachment" {
 }
 ```
 
+## 概念
+
+* 管理的是云资源
+* 基础设施和服务统称为资源，如私有网络、子网、物理机、虚拟机、镜像、专线、NAT 网关等等都可以称之为资源
+* resource:这类资源一般是抽象的真正的云服务资源，支持增删改，如私有网络、NAT 网关、虚拟机实例,大部分情况下，resource 资源也会封装一个 data source 方法，用于资源查询
+* data:这类资源一般是固定的一些可读资源，如可用区列表、镜像列表
+
 ## 工具
 
 * [gruntwork-io/terragrunt](https://github.com/gruntwork-io/terragrunt):Terragrunt is a thin wrapper for Terraform that provides extra tools for working with multiple Terraform modules. https://www.gruntwork.io
 * [terraform-aws-modules/terraform-aws-eks](https://github.com/terraform-aws-modules/terraform-aws-eks):A Terraform module to create an Elastic Kubernetes (EKS) cluster and associated worker instances on AWS.
 * [dtan4/terraforming](https://github.com/dtan4/terraforming):Export existing AWS resources to Terraform style (tf, tfstate) http://terraforming.dtan4.net/
 * [terraform-providers/terraform-provider-aws](https://github.com/terraform-providers/terraform-provider-aws):Terraform AWS provider https://www.terraform.io/docs/providers/aws/
+
+## 参考
+
+* [Terraform 学习路径](https://wsgzao.github.io/post/terraform/)
+* [Terraform tencentcloud 部署实践](https://wsgzao.github.io/post/terraform-tencentcloud/)

@@ -800,7 +800,28 @@ caption-side:bottom
 * [PostCSS](./postcss.md)
 * [Sass](./sass.nd) 功能更加强大或者说 Sass 的语言层面更接近于一门完整的编程语言
 * [Less](./less.md) 更接近于 CSS 语法
+* 变量：就像其他编程语言一样，免于多处修改。
+  - Sass：使用「$」对变量进行声明，变量名和变量值使用冒号进行分割
+  - Less：使用「@」对变量进行声明
+  - Stylus：中声明变量没有任何限定，结尾的分号可有可无，但变量名和变量值之间必须要有『等号』。但需要注意的是，如果用“@”符号来声明变量，Stylus会进行编译，但不会赋值给变量。就是说，Stylus 不要使用『@』声明变量。Stylus 调用变量的方法和Less、Sass完全相同。
+* 作用域：有了变量，就必须得有作用域进行管理。就想js一样，它会从局部作用域开始往上查找变量。
+  - Sass：它的方式是三者中最差的，不存在全局变量的概念
+  - Less：它的方式和js比较相似，逐级往上查找变量
+  - Stylus：它的方式和Less比较相似，但是它和Sass一样更倾向于指令式查找
+* 嵌套：对于css来说，有嵌套的写法无疑是完美的，更像是父子层级之间明确关系
+  者在这处的处理都是一样的，使用「&」表示父元素
+
+作者：FE_莫问
+链接：https://juejin.cn/post/6844903504293658632
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 * Stylus
+
+## CSS-in-JS
+
+* CSS Modules 模块化CSS 将CSS文件以模块的形式引入到JavaScript里，基本上解决了全局污染、命名混乱、样式重用和冗余的问题，但CSS有嵌套结构的限制（只能一层），也无法方便的在CSS和JavaScript之间共享变量
+* CSS-in-JS就是在组件内部使用JavaScript对CSS进行了抽象，可以对其声明和加以维护。这样不仅降低了编写CSS样式带来的风险，也让开发变得更加轻松。它和CSS Modules的区别是不再需要CSS样式文件
+* [styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 
 ## 问题
 
@@ -853,7 +874,6 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. https://connoratherton.com/loaders
 * [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
 * [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
-* [styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
 * [yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
 
 ## 参考
