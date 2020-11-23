@@ -25,3 +25,32 @@
 * Perform UAT on completed stories
 * Maintain a constant line of communication with the PO and IM: when stories needed to be prioritised, or when defects are found, to raise potential risks that may affect a story
 * Constantly help the PO to re-prioritise the backlog along with the IM as and when there are changes in requirements or bugs arise or any issues surface
+
+## [汉堡法拆分用户故事](https://mp.weixin.qq.com/s/lim4x3ClVuqkKg0lUPu-9w)
+
+* 确定汉堡包的层次:对该用户故事进行实现过程抽象
+    - 查询数据库
+    - 输入界面
+    - 数据处理
+    - 邮件通知
+    - 推送通知
+* 为步骤1定义的层次确定替代方案
+    - 查询数据库：可以批量或实时查询数据库。
+    - 输入界面：可以单独输入或批量输入。
+    - 数据处理：直接发送DB保存或优化处理保存。
+    - 邮件通知：手工或者自动通知、个性化配置通知。
+    - 推送通知：简单推送、用户行为推送
+* 删除重复的不必要的任务，并根据需要组合任务
+    - 不需要导入操作，因为导入功能将通过批量上传来覆盖。另外，在此阶段，无需从其他格式导入食谱
+* 根据最终用户的业务价值对任务进行排序
+    - 查询数据库：批量查询是由实时查询功能组成的，因此优先实现实时查询。
+    - 输入画面：批量输入是由单独输入功能组合而成，因此优先实现单独输入。
+    - 数据处理：直接将数据保存数据库是优化保存的基础，因此先实现直接保存数据库。
+    - 邮件通知：自动发送 > 个性化发送 > 手工发送（基于社群需要单独实现界面）。
+    - 推送通知：简单推送是基于食谱上传触发的，而用户行为推送则是基于社群的，因此优先实现简单推送。
+* 第一口: 从上往下选择一些任务成为你的“第一口”。有时，可以在同一个层中选取多个任务，也可以在一层中不选择任何任务
+    - 第一口将是第一个将被实现的用户故事
+* 一次只咬一口:根据实际情况来确定下一口（用户故事），直至全部吃完
+* 优势
+    - 每次选择或者思考都聚焦于最有价值的内容
+- 这种方法十分灵活，根据实际条件的变化可以对实现内容进行灵活组合

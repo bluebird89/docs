@@ -179,196 +179,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * Memcache,Redis:Memcache 是一个高性能的分布式的内存对象缓存系统，目前全世界不少人使用这个缓存项目来构建自己大负载的网站，来分担数据库的压力，通过在内存里维护一个统一的巨大的hash表，它能够用来存储各种格式的数据，包括图像、视频、文件以及数据库检索的结果等。简单的说就是将数据调用到内存中，然后从内存中读取，从而大大提高读取速度。(注: 摘自百度全科)
 * Sphinx 搜索加速:phinx全文索引,Sphinx 是一个基于SQL的全文检索引擎，可以结合MySQL，PostgreSQL作全文搜索，它可以提供比数据库本身更专业的搜索功能，使得应用程序更容易实现专业化的全文检索。
 
-## 监控
-
-* 服务监控
-  - apache web 服务监控
-  - mysql 数据库监控
-  - 磁盘空间监控
-* 流量监控:网站流量监控（网卡进入的数据量和网卡流出的数据量成比例）
-  - 监控的好处：只有监控才知道问题，有了问题才能改进
-  - 要监管，先要建立网络管理协议，被监控的服务器全部开放smp，161端口，
-  - 监控者监控被监控者，mrtg监控图。
-  - cacti监控原理
-  - Cacti 监测系统的工作原理
-
-## 安全
-
-* 常见的比如数据库安全，主要是 SQL 注入，前端 XSS 注入攻击，以及提交请求时 CSRF 攻击  DDoS 攻击、恶意爬取页面如何防护（限制 IP 等）、用户认证/授权安全如何保证（密码、令牌安全等）
-* 永远不要相信用户的输入（包括Cookies，因为那也是用户的输入）
-* 对用户的口令进行Hash，并使用salt，以防止Rainbow 攻击
-  - Hash算法可用MD5或SHA1等
-  - 对口令使用salt的意思是，user 在设定密码时，system 产生另外一个random string(salt)。在datbase 存的​​是与salt + passwd 产的md5sum 及salt
-  - 当要验证密码时就把user 输入的string 加上使用者的salt，产生md5s​​um 来比对。 理论上用salt 可以大幅度让密码更难破解，相同的密码除非刚好salt 相同，最后​​存在database 上的内容是不一样的。google一下md5+salt你可以看到很多文章
-  - 关于Rainbow 攻击，其意思是很像密码字典表，但不同的是，Rainbow Table存的是已经被Hash过的密码了，而且其查找密码的速度更快，这样可以让攻击非常快）。使用慢一点的Hash算法来保存口令，如 bcrypt (被时间检证过了) 或是 scrypt (更强，但是也更新一些) (1, 2)。你可以阅读一下 How To Safely Store A Password（陈皓注：酷壳以前曾介绍过bcrypt这个算法，这里，我更建议我们应该让用户输入比较强的口令，比如Apple ID注册的过程需要用户输入超过8位，需要有大小写和数字的口令，或是做出类似于这样的用户体验的东西）。
-* 不要试图自己去发明或创造一个自己的[fancy的认证系统](https://stackoverflow.com/questions/1581610/how-can-i-store-my-users-passwords-safely/1581919#1581919)，可能会忽略到一些不容易让你查觉的东西而导致你的站点被hack了。（陈皓注：我在腾讯那坑爹的申诉系统中说过这个事了，我说过这句话——“真正的安全系统是协同整个社会的安全系统做出来的一道安全长城，而不是什么都要自己搞”，当然，很遗憾不是所有的人都能看懂这个事，包括一些资深的人）
-* 了解 [处理信用卡的一些规则](https://www.pcisecuritystandards.org/) . ([这里也有一个问题你可以查看一下](https://stackoverflow.com/questions/51094/payment-processors-what-do-i-need-to-know-if-i-want-to-accept-credit-cards-on)) （有两上vendor可以帮助你，一个是 Authorize.Net 另一个是 PayFlow Pro）
-* 使用 SSL/HTTPS 来加密传输登录页面或是任可有敏感信息的页面，比如信用卡号等
-* [Session Hijacking](https://en.wikipedia.org/wiki/Session_hijacking)
-* 保持系统里所有软件更新到最新的patch
-* 确保数据库连接是安全的
-* 确保了解最新的攻击技术，以及系统的脆弱处
-* XSS 跨站脚本攻击（Cross-Site Scripting）：浏览器错误的将攻击者提供的用户输入数据（表单提交或URL参数）当做JavaScript脚本给执行了
-  - 看见输入框就输入：` /><script>alert("xss")</script> ` 进行提交
-  - JS 代码被执行后果
-    + 偷走用户浏览器里的 Cookie；
-    + 通过浏览器的记住密码功能获取到你的站点登录账号和密码；
-    + 盗取用户的机密信息；
-    + 你的用户在站点上能做到的事情，有了 JS 权限执行权限就都能做，也就是说 A 用户可以模拟成为任何用户；
-    + 在网页中嵌入恶意代码；
-  - 解决
-    + 对数据进行严格的输出编码，使得攻击者提供的数据不再被浏览器认为是脚本而被误执行
-    + 编码需要根据输出数据所在的上下文来进行相应的编码，HTML编码 URL编码 JavaScript编码、CSS编码、HTML属性编码、JSON编码
-    + 对style、script、image、src、a等等不安全的因素进行过滤或转义(htmlentities htmlspecialchars  strip_tags() 函数来去除 HTML 标签或者使用 htmlentities() 或是 htmlspecialchars())，smarty twig 都会默认为输出加上 htmlentities 防范
-    + 将cookie设置成HTTP-only:禁止客户端操作cookie
-    + [BeEF](https://beefproject.com/)
-* SQL 注入 Injection：通过把SQL命令插入到Web表单提交或输入域名或页面请求的查询字符串，最终达到欺骗服务器执行恶意的SQL命令。 `SELECT * FROM users WHERE username = 'peter' OR '1' = '1'`
-  - 解决
-    + 转义用户输入的数据 addslashes 和 mysql_real_escape_string 这种转义是不安全的
-    + 使用封装好的语句,使用PDO 或 MySQLi 的数据库扩展
-    + 工具 [SQLmap](http://sqlmap.org/)
-* iframe带来的风险：需要用到第三方提供的页面组件，通常会以iframe的方式引入：添加第三方提供的广告、天气预报、社交分享插件等等。可以在iframe中运行JavaScirpt脚本、Flash插件、弹出对话框等等，这可能会破坏前端用户体验
-  - 如果iframe中的域名因为过期而被恶意攻击者抢注，或者第三方被黑客攻破，iframe中的内容被替换掉了，从而利用用户浏览器中的安全漏洞下载安装木马、恶意勒索软件等等
-  - 解决
-    + 在HTML5中，iframe有了一个叫做sandbox的安全属性，通过它可以对iframe的行为进行各种限制，充分实现“最小权限“原则。使用sandbox的最简单的方式就是只在iframe元素中添加上这个关键词就好 `<iframe sandbox src="..."> ... </iframe>`
-    + sandbox还忠实的实现了“Secure By Default”原则，也就是说，如果你只是添加上这个属性而保持属性值为空，那么浏览器将会对iframe实施史上最严厉的调控限制，基本上来讲就是除了允许显示静态资源以外，其他什么都做不了。比如不准提交表单、不准弹窗、不准执行脚本等等，连Origin都会被强制重新分配一个唯一的值，换句话讲就是iframe中的页面访问它自己的服务器都会被算作跨域请求。
-    + sandbox也提供了丰富的配置参数，我们可以进行较为细粒度的控制。一些典型的参数如下：
-      * allow-forms：允许iframe中提交form表单
-      * allow-popups：允许iframe中弹出新的窗口或者标签页（例如，window.open()，showModalDialog()，target=”_blank”等等）
-      * allow-scripts：允许iframe中执行JavaScript
-      * allow-same-origin：允许iframe中的网页开启同源策略
-* ClickJacking（点击劫持）：在通过iframe使用别人提供的内容时，自己的页面也可能正在被不法分子放到他们精心构造的iframe或者frame当中，进行点击劫持攻击，攻击利用了受害者的用户身份，在其不知情的情况下进行一些操作，删除某个重要文件记录，或者窃取敏感信息
-  - 步骤
-    + 攻击者精心构造一个诱导用户点击的内容，比如Web页面小游戏
-    + 将我们的页面放入到iframe当中
-    + 利用z-index等CSS样式将这个iframe叠加到小游戏的垂直方向的正上方
-    + 把iframe设置为100%透明度
-    + 受害者访问到这个页面后，肉眼看到的是一个小游戏，如果受到诱导进行了点击的话，实际上点击到的却是iframe中的我们的页面
-  - 解决
-    + Frame Breaking方案
-    + 使用X-Frame-Options：DENY这个HTTP Header来明确的告知浏览器，不要把当前HTTP响应中的内容在HTML Frame中显示出来
-* 错误的内容推断
-  - 攻击者在上传图片的时候，看似提交的是个图片文件，实则是个含有JavaScript的脚本文件
-  - 后端服务器在返回的响应中设置的Content-Type Header仅仅只是给浏览器提供当前响应内容类型的建议，而浏览器有可能会自作主张的根据响应中的实际内容去推断内容的类型。
-  - 解决
-    + 通过设置X-Content-Type-Options参数值为nosniff 这个HTTP Header明确禁止浏览器去推断响应类
-* SSRF（Server-Side Request Forgery：服务器端请求伪造）：通过注入恶意代码从服务端发起，通过服务端就再访问内网的系统，然后获取不该获取的数据
-  - 产生在包含这些方法的代码中，比如 curl、file_get_contents、fsockopen
-    + curl 中 `http://www.xxx.com/demo.php?url=file:///etc/passwd`
-  - 解决
-    + LFI （本地文件包含） 是一个用户未经验证从磁盘读取文件的漏洞 include
-    + 对 curl、file_get_contents、fsockopen、这些方法中的参数进行严格验证！
-    + 限制协议只能为HTTP或HTTPS，禁止进行跳转。
-    + 如果有白名单，解析参数中的URL，判断是否在白名单内。
-    + 如果没有白名单，解析参数中的URL，判断是否为内网IP。
-* CSRF（Cross-site request forgery：跨站请求伪造）：攻击者通过伪装成受信任的用户，盗用受信任用户的身份，用受信任用户的身份发送恶意请求
-  - 解决
-    + 服务端生成一个 CSRF 令牌加密安全字符串Token传递给用户，并将 Token 存储于 Cookie 或者 Session 中,在网页构造表单时，将 Token 令牌放在表单中的隐藏字段，表单请求服务器以后会根据用户的 Cookie 或者 Session 里的 Token 令牌比对，校验成功才给予通过
-    + 对于不确定是否有csrf风险的请求，可以使用验证码（尽管体验会变差）
-    + 对于一些重要的操作（修改密码、修改邮箱），必须使用二次验证
-    + 利用HTTP头中的Referer判断请求来源是否合法
-* 文件上传：上传了一个可执行的文件到服务器上执行
-  - 解决
-    + 文件扩展名检测
-    + 文件 MIME 验证
-    + 文件重命名
-    + 文件目录设置不可执行权限
-    + 设置单独域名的文件服务器
-* HTTPS也可能掉坑里：浏览器发出去第一次请求就被攻击者拦截了下来并做了修改，根本不给浏览器和服务器进行HTTPS通信的机会
-  - 用户在浏览器里输入URL的时候往往不是从https://开始的，而是直接从域名开始输入，随后浏览器向服务器发起HTTP通信，然而由于攻击者的存在，它把服务器端返回的跳转到HTTPS页面的响应拦截了，并且代替客户端和服务器端进行后续的通信
-  - 解决
-    + 使用HSTS（HTTP Strict Transport Security），它通过HTTP Header以及一个预加载的清单，来告知浏览器在和网站进行通信的时候强制性的使用HTTPS，而不是通过明文的HTTP进行通信 `Strict-Transport-Security: max-age=<seconds>; includeSubDomains; preload`
-* 信息泄露：敏感数据泄露
-  - 本地存储数据泄露:前端存储敏感、机密信息始终都是一件危险的事情，推荐的做法是尽可能不在前端存这些数据
-  - 解决
-    + 敏感数据脱敏（比如手机号、身份证、邮箱、地址）
-    + 服务器上不允许提交包含打印 phpinfo 、$_SERVER 和 调试信息等代码。
-    + 定期从开源平台扫描关于企业相关的源码项目
-    + 密码加密
-      * 哈希（Hash）是将目标文本转换成具有相同长度的、不可逆的杂凑字符串（或叫做消息摘要)
-      * 加密（Encrypt）是将目标文本转换成具有不同长度的、可逆的密文
-      * 加盐处理避免了两个同样的密码会产生同样哈希的问题， bcrypt
-* 中间人攻击：MITM （中间人） 攻击不是针对服务器直接攻击，而是针对用户进行，攻击者作为中间人欺骗服务器他是用户，欺骗用户他是服务器，从而来拦截用户与网站的流量，并从中注入恶意内容或者读取私密信息，通常发生在公共 WiFi 网络中，也有可能发生在其他流量通过的地方，例如ISP运营商。
-  - 解决
-    + 使用 HTTPS，使用 HTTPS 可以将你的连接加密，并且无法读取或者篡改流量。
-    + WEB 服务器配置加上 Strict-Transport-Security 标示头，此头部信息告诉浏览器，你的网站始终通过 HTTPS 访问，如果未通过 HTTPS 将返回错误报告提示浏览器不应显示该页面。 需要到 https://hstspreload.org 注册网站，
-* 不安全的第三方依赖包
-  - 自动化的工具可以使用，比如NSP(Node Security Platform)，Snyk等等
-  - 静态资源完整性校验
-    + 每个资源文件都可以有一个SRI值。它由两部分组成，减号（-）左侧是生成SRI值用到的哈希算法名，右侧是经过Base64编码后的该资源文件的Hash值。 <script src=“https://example.js” integrity=“sha384-eivAQsRgJIi2KsTdSnfoEGIRTo25NCAqjNJNZalV63WKX3Y51adIzLT4So1pk5tX”></script>
-* DDoS 分布式拒绝服务，Distributed Denial of Service，其原理就是利用大量的请求造成资源过载，导致服务不可用
-  - 网络层 DDoS
-    + SYN Flood：当攻击方随意构造源 IP 去发送 SYN 包时，服务器返回的 SYN + ACK 就不能得到应答（因为 IP 是随意构造的），此时服务器就会尝试重新发送，并且会有至少 30s 的等待时间，导致资源饱和服务不可用，此攻击属于慢型 DDoS 攻击
-    + ACK Flood：在 TCP 连接建立之后，所有的数据传输 TCP 报文都是带有 ACK 标志位的，主机在接收到一个带有 ACK 标志位的数据包的时候，需要检查该数据包所表示的连接四元组是否存在，如果存在则检查该数据包所表示的状态是否合法，然后再向应用层传递该数据包
-    + UDP Flood：攻击者可以伪造大量的源 IP 地址去发送 UDP 包，UDP 包双向流量会基本相等，因此发起这种攻击的攻击者在消耗对方资源的时候也在消耗自己的资源。 此种攻击属于大流量攻击
-    + ICMP Flood：不断发送不正常的 ICMP 包（所谓不正常就是 ICMP 包内容很大），导致目标带宽被占用，但其本身资源也会被消耗
-    + 防御
-      * 网络架构上做好优化，采用负载均衡分流。
-      * 确保服务器的系统文件是最新的版本，并及时更新系统补丁。
-      * 添加抗 DDos 设备，进行流量清洗。
-      * 限制同时打开的 SYN 半连接数目，缩短 SYN 半连接的 Timeout 时间。
-      * 限制单 IP 请求频率。
-      * 防火墙等防护设置禁止 ICMP 包等。
-      * 严格限制对外开放的服务器的向外访问。
-      * 运行端口映射程序或端口扫描程序，要认真检查特权端口和非特权端口。
-      * 关闭不必要的服务。
-      * 认真检查网络设备和主机/服务器系统的日志。只要日志出现漏洞或是时间变更,那这台机器就可能遭到了攻击。
-      * 限制在防火墙外与网络文件共享。这样会给黑客截取系统文件的机会，主机的信息暴露给黑客，无疑是给了对方入侵的机会。
-  - 应用层 DDoS:在网络应用层耗尽你的带宽
-    + CC 攻击(Challenge Collapasar):针对消耗资源比较大的页面不断发起不正常的请求，导致资源耗尽
-    + DNS Flood 攻击采用的方法是向被攻击的服务器发送大量的域名解析请求，通常请求解析的域名是随机生成或者是网络世界上根本不存在的域名，被攻击的DNS 服务器在接收到域名解析请求的时候首先会在服务器上查找是否有对应的缓存，如果查找不到并且该域名无法直接由服务器解析的时候，DNS 服务器会向其上层 DNS 服务器递归查询域名信息。域名解析的过程给服务器带来了很大的负载，每秒钟域名解析请求超过一定的数量就会造成 DNS 服务器解析域名超时。一台 DNS 服务器所能承受的动态域名查询的上限是每秒钟 9000 个请求
-    + HTTP 慢速连接攻击:建立起 HTTP 连接，设置一个较大的 Conetnt-Length，每次只发送很少的字节，让服务器一直以为 HTTP 头部没有传输完成，这样连接一多就很快会出现连接耗尽。
-    + 防御
-      * 判断 User-Agent 字段（不可靠，因为可以随意构造）
-      * 针对 IP + cookie，限制访问频率（由于 cookie 可以更改，IP 可以使用代理，或者肉鸡，也不可靠)
-      * 关闭服务器最大连接数等，合理配置中间件，缓解 DDoS 攻击。
-      * 请求中添加验证码，比如请求中有数据库操作的时候。
-      * 编写代码时，尽量实现优化，并合理使用缓存技术，减少数据库的读取操作。
-* 流量劫持
-  - DNS 劫持:如果当用户通过某一个域名访问一个站点的时候，被篡改的 DNS 服务器返回的是一个恶意的钓鱼站点的 IP，用户就被劫持到了恶意钓鱼站点
-    + 要不就是网络运营商搞的鬼，一般小的网络运营商与黑产勾结会劫持 DNS，要不就是电脑中毒，被恶意篡改了路由器的 DNS 配置
-    + 应对
-      * 取证很重要，时间、地点、IP、拨号账户、截屏、URL 地址等一定要有。
-      * 可以跟劫持区域的电信运营商进行投诉反馈。
-      * 如果投诉反馈无效，直接去工信部投诉，一般来说会加白你的域名。
-  - HTTP 劫持：当用户访问某个站点的时候会经过运营商网络，而不法运营商和黑产勾结能够截获 HTTP 请求返回内容，并且能够篡改内容，然后再返回给用户，从而实现劫持页面，轻则插入小广告，重则直接篡改成钓鱼网站页面骗用户隐私。
-    + 根本原因，是 HTTP 协议没有办法对通信对方的身份进行校验以及对数据完整性进行校验
-* 服务器漏洞
-  - 越权操作：涉及到数据库的操作都需要先进行严格的验证
-  - 目录遍历漏洞：通过在 URL 或参数中构造 ../，./ 和类似的跨父目录字符串的 ASCII 编码、unicode 编码等，完成目录跳转，读取操作系统各个目录下的敏感文件
-    + 需要对 URL 或者参数进行 ../，./ 等字符的转义过滤
-  - 源码暴露漏洞：
-* 设计缺陷
-  - 返回信息过多：不要返回 用户已被禁用，统一返回 用户名或密码错误
-  - 短信接口
-    + 设置同一手机号短信发送间隔
-    + 设置每个IP地址每日最大发送量
-    + 设置每个手机号每日最大发送量
-    + 升级验证码，采用滑动拼图、文字点选、图表点选...
-    + 升级短信接口的验证方法
-
-```php
-$username = $_GET['username'];
-$query = $pdo->prepare('SELECT * FROM users WHERE username = :username');
-$query->execute(['username' => $username]);
-$data = $query->fetch();
-
-//user signup
-$password = $_POST['password'];
-$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-//login
-$password = $_POST['password'];
-$hash = '1234'; //load this value from your db
-
-if(password_verify($password, $hash)) {
-  echo 'Password is valid!';
-} else {
-  echo 'Invalid password.';
-}
-```
-
-## SSO Single Sign On，单点登录
+## SSO Single Sign On 单点登录
 
 * 能够做到一次登录多次使用
   - 依赖项目为前后端分离项目
@@ -488,16 +299,65 @@ if(password_verify($password, $hash)) {
   - 使用某种版本控制系统储存你的文件，比如Subversion或Git。
   - 不要忘记做单元测试（Unit Testing），Selenium之类的框架会对你有用。
 
-## 性能优化
+## [性能优化](https://juejin.cn/post/6892994632968306702)
 
-## 趋势
-
-* PWA
-* 客服聊天机器人
-* 静态网页的再流行原因有很多，他们更快、更安全，也更便宜
-* 单页应用。这项技术可以将所有内容放入一个长长的滚动页中，移除不需要的冗余内容
-* 网页消息推送
-* Flash的一个致命弱点是他无法在移动设备中使用，HTML播放器Chimee
+* 减少 HTTP 请求:将多个小文件合并为一个大文件，从而减少 HTTP 请求次数
+* 使用 HTTP2
+* 使用服务端渲染
+  - 客户端渲染: 获取 HTML 文件，根据需要下载 JavaScript 文件，运行文件，生成 DOM，再渲染。
+  - 服务端渲染：服务端返回 HTML 文件，客户端只需解析 HTML。
+    + 优点：首屏渲染快，SEO 好。
+    + 缺点：配置麻烦，增加了服务器的计算压力。
+* 静态资源使用 CDN
+* 将 CSS 放在文件头部，JavaScript 文件放在底部
+  - 所有放在 head 标签里的 CSS 和 JS 文件都会堵塞渲染。如果这些 CSS 和 JS 需要加载和解析很久的话，那么页面就空白了。所以 JS 文件要放在底部，等 HTML 解析完了再加载 JS 文件
+  - 先加载 HTML 再加载 CSS，会让用户第一时间看到的页面是没有样式的、“丑陋”的，为了避免这种情况发生，就要将 CSS 文件放在头部了
+* 使用字体图标 iconfont 代替图片图标
+* 善用缓存，不重复加载相同的资源：Expires 设置了一个时间，只要在这个时间之前，浏览器都不会请求文件，而是直接使用缓存。而 max-age 是一个相对时间，建议使用 max-age 代替 Expires
+* 压缩文件
+  - JavaScript：UglifyPlugin
+  - CSS ：MiniCssExtractPlugin
+  - HTML：HtmlWebpackPlugin
+* 图片优化
+  - 延迟加载：先不给图片设置路径，只有当图片出现在浏览器的可视区域时，才去加载真正的图片
+  - 响应式图片：浏览器能够根据屏幕大小自动加载合适的图片
+  - 调整图片大小
+    + 用两张图片来实行优化。一开始，只加载缩略图，当用户悬停在图片上时，才加载大图
+    + 对大图进行延迟加载，在所有元素都加载完成后手动更改大图的 src 进行下载
+  - 降低图片质量
+    + 通过 webpack 插件 image-webpack-loader
+    + 通过在线网站进行压缩
+  - 尽可能利用 CSS3 效果代替图片
+  - 使用 webp 格式的图片：优势体现在它具有更优的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量；同时具备了无损和有损的压缩模式、Alpha 透明以及动画的特性，在 JPEG 和 PNG 上的转化效果都相当优秀、稳定和统一
+* 通过 webpack 按需加载代码，提取第三库代码，减少 ES6 转为 ES5 的冗余代码
+  - 根据文件内容生成文件名，结合 import 动态引入组件实现按需加载
+  - 提取第三方库： splitChunk 插件 cacheGroups 选项
+  - 减少 ES6 转为 ES5 的冗余代码
+* 减少重绘重排
+* 使用事件委托:事件委托利用了事件冒泡，只指定一个事件处理程序，就可以管理某一类型的所有事件。所有用到按钮的事件（多数鼠标事件和键盘事件）都适合采用事件委托技术， 使用事件委托可以节省内存
+* 注意程序局部性
+  - 重复引用相同变量的程序具有良好的时间局部性
+  - 对于具有步长为 k 的引用模式的程序，步长越小，空间局部性越好；而在内存中以大步长跳来跳去的程序空间局部性会很差
+* if-else 对比 switch:判断条件数量越来越多时，越倾向于使用 switch 而不是 if-else
+  - 条件语句特别多时,试一下查找表。查找表可以使用数组和对象来构建
+* 避免页面卡顿
+  - 目前大多数设备的屏幕刷新率为 60 次/秒。因此，如果在页面中有一个动画或渐变效果，或者用户正在滚动页面，那么浏览器渲染动画或页面的每一帧的速率也需要跟设备屏幕的刷新率保持一致。
+  - 每个帧的预算时间仅比 16 毫秒多一点 (1 秒/ 60 = 16.66 毫秒)。但实际上，浏览器有整理工作要做，因此您的所有工作需要在 10 毫秒内完成。如果无法符合此预算，帧率将下降，并且内容会在屏幕上抖动。 此现象通常称为卡顿，会对用户体验产生负面影响
+* 使用 requestAnimationFrame 来实现视觉变化
+* 使用 Web Workers
+  - 使用其他工作线程从而独立于主线程之外，它可以执行任务而不干扰用户界面。一个 worker 可以将消息发送到创建它的 JavaScript 代码, 通过将消息发送到该代码指定的事件处理程序（反之亦然）
+  - 适用于那些处理纯数据，或者与浏览器 UI 无关的长时间运行脚本
+* 使用位操作
+* 不要覆盖原生方法
+* 降低 CSS 选择器的复杂性
+  - 浏览器读取选择器，遵循的原则是从选择器的右边到左边读取
+  - CSS 选择器优先级
+    + 选择器越短越好。
+    + 尽量使用高优先级的选择器，例如 ID 和类选择器。
+    + 避免使用通配符 *
+* 使用 flexbox 而不是较早的布局模型
+* 使用 transform 和 opacity 属性更改来实现动画
+* 合理使用规则，避免过度优化
 
 ## 工具
 
@@ -530,7 +390,7 @@ if(password_verify($password, $hash)) {
 
 ## 参考
 
-* [/Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
+* [Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
 * [Web](https://developers.google.com/web/)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
   - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
