@@ -1,4 +1,4 @@
-## [eslint/eslint](https://github.com/eslint/eslint)
+## [eslint](https://github.com/eslint/eslint)
 
 A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
 
@@ -27,8 +27,8 @@ npm i -g eslint
     + jsx - 启用 JSX
     + experimentalObjectRestSpread - 启用实验性的 object rest/spread properties 支持。(重要：这是一个实验性的功能,在未来可能会有明显改变。 建议写的规则 不要 依赖该功能，除非当它发生改变时你愿意承担维护成本。)
   - Specifying Parser:默认使用Espree作为其解析器，你可以在配置文件中指定一个不同的解析器，只要该解析器符合下列要求：
-    + 它必须是一个 Node 模块，可以从它出现的配置文件中加载。通常，这意味着应该使用 npm 单独安装解析器包
-    + 它必须符合 parser interface
+    + 必须是一个 Node 模块，可以从它出现的配置文件中加载。通常，这意味着应该使用 npm 单独安装解析器包
+    + 必须符合 parser interface
     + Esprima
     + Babel-ESLint - 一个对Babel解析器的包装，使其能够与 ESLint 兼容。
     + @typescript-eslint/parser - 将 TypeScript 转换成与 estree 兼容的形式，以便在ESLint中使用
