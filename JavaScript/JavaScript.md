@@ -192,14 +192,15 @@ if (sum() !== 0) {
 
 * 所有事物都为对象,JavaScript 本地对象和内置对象
 * 类型:all non-primitive types are “objects”
-  - 值类型(基本类型 不可变类型)：固定值称为字面量
+  - 原始数据类型 Primitive data types (基本类型 不可变类型)：固定值称为字面量
     + 字符串（String）
     + 数字(Number)
     + 布尔(Boolean)
     + 空（Null）
     + 未定义（Undefined）
     + Symbol
-  - 引用数据类型（可变类型），都是引用
+    + BigInt
+  - 对象类型 Object types 引用数据类型（可变类型），都是引用
     + 对象(Object)
     + 数组(Array)
     + 函数(Function)

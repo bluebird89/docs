@@ -26,7 +26,15 @@
   * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System http://gridlex.devlint.fr
   * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass http://unicorn-ui.com/buttons/builder/
   * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass http://include-media.com
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set https://www.bourbon.io/
+  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set https://www.bourbon.io/ https://github.com/thoughtbot/bourbon
 * 参考
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon):https://github.com/thoughtbot/bourbon
   * https://www.jianshu.com/p/e2c23a74636d
+
+## 问题
+
+```sh
+# install node-sass “ERROR:root:code for hash md5 was not found” when using any hg mercurial commands
+wget https://raw.githubusercontent.com/Homebrew/homebrew-core/86a44a0a552c673a05f11018459c9f5faae3becc/Formula/python@2.rb
+brew install python@2.rb
+rm python@2.rb
+```

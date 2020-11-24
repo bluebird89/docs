@@ -1365,6 +1365,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [read](https://github.com/talkgo/read) About
 Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频）
 * [](https://github.com/talkgo/night) Weekly Go Online Meetup via Bilibili｜Go 夜读｜由 SIG 成员维护｜通过 bilibili 在线直播的方式分享 Go 相关的技术话题，每天大家在微信/telegram/Slack 上及时沟通交流编程技术话题 https://talkgo.org/
+* [gopherchina](https://github.com/gopherchina/conference)
 * [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
   - [awesome-go-cn](https://github.com/jobbole/awesome-go-cn):Go 资源大全中文版
   - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)

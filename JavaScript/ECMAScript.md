@@ -44,7 +44,7 @@ Status, process, and documents for ECMA262 https://tc39.github.io/ecma262/
   - 不再需要对象作为命名空间（比如Math对象），不会污染全局变量
   - ES6 模块在编译时就能确定模块的依赖关系，以及输入和输出的变量，从而可以进行静态优化
 
-#### 基本用法
+## 基本用法
 
 * export用于规定输出模块的对外接口
   - default用于指定模块输出的默认接口
@@ -181,11 +181,12 @@ myOptions.style.color = "red";
 ## 箭头函数
 
 * 注意点
-  - 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。
+  - 函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象
   - 不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。
   - 不可以使用arguments对象，该对象在函数体内不存在。如果要用，可以用 rest 参数代替。
   - 不可以使用yield命令，因此箭头函数不能用作 Generator 函数
 * this指向的固定化，并不是因为箭头函数内部有绑定this的机制，实际原因是箭头函数根本没有自己的this，导致内部的this就是外层代码块的this。正是因为它没有this，所以也就不能用作构造函数
+* the this keyword always represents the object that defined the arrow function
 * 不应该使用箭头函数
   - 定义对象的方法，且该方法内部包括this
   - 需要动态this的时候，也不应使用箭头函数

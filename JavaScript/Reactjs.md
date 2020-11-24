@@ -81,6 +81,12 @@ ReactDOM.render(
 * Mounting：已插入真实 DOM
   - componentWillMount():在第一次渲染之前调用。它只会执行一次，在浏览器和服务器都会执行。一般用来对props和state进行初始化处理
   - componentDidMount():可以读取组件生成的 DOM。如果要与 DOM 互动，应该就在这个方法里面，而不是在render方法里面
+  - getDefaultProps
+  - getInitialState
+  - componentWillMount
+  - render
+  - componentDidMount
+  - getDefaultProps 和 getInitialState方法，都是只执行一次
 * Updating：重新渲染
   - componentWillUpdate(object nextProps, object nextState)
     + 一旦shouldComponentUpdate返回true，componentWillUpdate就会执行，主要用于为即将到来的更新做准备工作
@@ -101,14 +107,6 @@ ReactDOM.render(
   - 会在每次重新渲染（render方法）之前，自动调用。它返回一个布尔值，决定是否应该进行此次渲染
     + 默认为true，表示进行渲染
     + false，就表示中止渲染
-
-* 首次挂载组件
-  - getDefaultProps
-  - getInitialState
-  - componentWillMount
-  - render
-  - componentDidMount
-  - getDefaultProps 和 getInitialState方法，都是只执行一次
 * 重新挂载组件
   - getInitialState
   - componentWillMount
@@ -154,13 +152,16 @@ ReactDOM.render(
     + 设为一个字符串
     + 可以用来绑定到 render() 输出的任何组件上.允许引用 render() 返回的相应的支撑实例（ backing instance ）。这样就可以确保在任何时间总是拿到正确的实例
   - this.props 向组件传递数据，React组件从props拿到数据，然后返回视图。表示那些一旦定义，就不再改变的特性
+    + like function arguments
+    + component has a constructor function, the props should always be passed to the constructor and also to the React.Component via the super() method
     + Readonly
-    + PropType Check
+    + PropType Check 验证使用，可以保证应用组件被正确使用，React.PropTypes 提供很多验证器 (validator) 来验证传入数据是否有效
     + Have to be passed from parent
     + 使用
       * 向一个组件传递数据的方法是将数据写在组件的标签中 `<Content value = {this.state.value}/>`
       * 获取props `{props.value}`
   - this.state 内部状态 local state 或者局部状态，会随着用户互动而产生变化的特性,组件私有内部参数，不应暴露到外部
+    + store property values that belongs to the component
     + Changeable
     + Local value have to be self managed
     + Do Not Modify State Directly,use setState()
@@ -181,7 +182,7 @@ ReactDOM.render(
     + 内部状态的操作配合React事件系统，可以实现用户交互的功能
 * 组合使用 state 和 props
   - 通过Counter组件更新state.value,然后将更新的state.value通过props传递给Content组件
-  - 在 render 函数中, 设置 name 和 site 来获取父组件传递过来的数据
+  - 在父组件中设置 state， 并通过在子组件上使用 props 将其传递到子组件上
 * The Data Flows Down
   - A component may choose to pass its state down as props to its child components
   - top-down" or "unidirectional" data flow:Any state is always owned by some specific component, and any data or UI derived from that state can only affect components "below" them in the tree.
@@ -300,44 +301,6 @@ export default Counter extends Component{
   }
 }
 
-# 组合组件
-var WebSite = React.createClass({
-  getInitialState: function() {
-    return {
-      name: "菜鸟教程",
-      site: "http://www.runoob.com"
-    };
-  },
-  render: function() {
-    return (
-      <div>
-        <Name name={this.props.name} />
-        <Link site={this.props.site} />
-      </div>
-    );
-  }
-});
-var Name = React.createClass({
-  render: function() {
-    return (
-      <h1>{this.props.name}</h1>
-    );
-  }
-});
-var Link = React.createClass({
-  render: function() {
-    return (
-      <a href={this.props.site}>
-        {this.props.site}
-      </a>
-    );
-  }
-});
-ReactDOM.render(
-  <WebSite name="菜鸟教程" site=" http://www.runoob.com" />,
-  document.getElementById('example')
-);
-
 var LikeButton = React.createClass({
   getInitialState: function() {
     return {liked: false};
@@ -354,6 +317,7 @@ var LikeButton = React.createClass({
     );
   }
 });
+
 ReactDOM.render(
   <LikeButton />,
   document.getElementById('example')
@@ -438,7 +402,7 @@ const Select = ({options, ...others}) => (
 * ReactDOMServer.renderToString():将一个React组件转成HTML字符串，一般用于服务器渲染
   - 如果ReactDOM.render()在一个已经完成服务器渲染的DOM节点上面挂载React组件，那么该组件不会挂载，只会添加事件监听到这个DOM节点
 
-## [facebookincubator/create-react-app](https://github.com/facebookincubator/create-react-app)
+## [create-react-app](https://github.com/facebookincubator/create-react-app)
 
 Create React apps with no build configuration. https://create-react-app.dev/
 

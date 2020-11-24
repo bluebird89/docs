@@ -1,4 +1,4 @@
-# [mongodb/mongo](https://github.com/mongodb/mongo)
+# [mongo](https://github.com/mongodb/mongo)
 
 The MongoDB Database https://www.mongodb.com/
 
@@ -21,7 +21,7 @@ The MongoDB Database https://www.mongodb.com/
 ```sh
 ### ubnutu
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
-echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list  # MongoDB尚未发布Bionic Beaver软件包，但Xenial软件包在Ubuntu 18.04 LTS上运行良好,。 如果您在该网页上看到一个目录“bionic”，则将上述命令中的单词“xenial”替换为“bionic”一词。
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.6 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.6.list  # MongoDB尚未发布Bionic Beaver软件包，但Xenial软件包在Ubuntu 18.04 LTS上运行良好,。 如果您在该网页上看到一个目录“b ionic”，则将上述命令中的单词“xenial”替换为“bionic”一词。
 sudo apt-get  update
 sudo apt-get install -y mongodb-org
 
