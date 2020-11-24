@@ -398,7 +398,6 @@ state Configuring {
 ## 工具
 
 * [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. https://bpmn.io/toolkit/bpmn-js/
-* [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
 * Visio
 * LucidChart
 * Draw.io
@@ -411,6 +410,7 @@ state Configuring {
 * [edraw-max](https://www.edrawsoft.com/edraw-max/):All-in-One
   Diagram Software
 * [Dia](http://dia-installer.de/) `sudo apt install dia`
+* [mermaid](https://github.com/mermaid-js/mermaid)Generation of diagram and flowchart from text in a similar manner as markdown http://mermaid-js.github.io/mermaid/
 
 ## 参考
 

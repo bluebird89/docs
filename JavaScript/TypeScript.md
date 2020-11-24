@@ -2,17 +2,29 @@
 
 TypeScript is a superset of JavaScript that compiles to clean JavaScript output. http://www.typescriptlang.org
 
-*
-
 ## 安装
+
+* 编译器 tsc，编译生成 js 文件 `tsc filename.ts`
 
 ```sh
 npm install -g typescript
+
+tsc hello.ts
+tsc --build tsconfig.json
 ```
+
+## 配置
+
+```js
+// tsconfig.json
+```
+
+## 原理
+
+* 只会在编译时对类型进行静态检查，如果发现有错误，编译的时候就会报错
 
 ## 使用
 
-* TypeScript 编译器 tsc，编译生成 js 文件 `tsc filename.ts`
 * 类型批注：提供静态类型以在编译时启动类型检查。可选的，而且可以被忽略而使用 JavaScript 常规的动态类型
   - 基本类型的批注是number, bool和string。而弱或动态类型的结构则是any类型
   - 可以被导出到一个单独的声明文件以让使用类型的已被编译为JavaScript的TypeScript脚本的类型信息可用。批注可以为一个现有的JavaScript库声明，就像已经为Node.js和jQuery所做的那样
@@ -25,13 +37,7 @@ npm install -g typescript
   - 在重写父类的方法实现
   - 复用方法需要声明
 
-```typescript
-superShout() {
-  return super.shoutout();
-}
-```
-
-## 数据类型
+## 原始数据类型
 
 * Boolean
 * Number
@@ -43,6 +49,16 @@ superShout() {
 * Void 只能接受undefined和null作为值，主要用来标记不返回任何值的函数返回值的类型
 * Function
 
+## 任意值
+## 类型推论
+## 联合类型
+## 对象的类型——接口
+## 数组的类型
+## 函数的类型
+## 类型断言
+## 声明文件
+## 内置对象
+
 ## class
 
 * 当通过this为实例分配属性时，必须添加属性定义
@@ -53,12 +69,15 @@ superShout() {
 
 ## 教程
 
+* [typescript-tutorial](https://github.com/xcatliu/typescript-tutorial) TypeScript 入门教程 https://ts.xcatliu.com/
 * [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter):A starter template for TypeScript and Node with a detailed README describing how to use the two together.
-* [xcatliu/typescript-tutorial](https://github.com/xcatliu/typescript-tutorial):TypeScript 入门教程 https://ts.xcatliu.com/
 * [alexjoverm/typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter):Starter kit with zero-config for building a library in TypeScript, featuring RollupJS, Jest, Prettier, TSLint, Semantic Release, and more!
 * [Microsoft/TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter):A starter template for TypeScript and React Native with a detailed README describing how to use the two together.
-* [](https://tutorialzine.com/2016/07/learn-typescript-in-30-minutes)
-* [typescript-tutorial](https://github.com/xcatliu/typescript-tutorial) [TypeScript 入门教程](https://ts.xcatliu.com/)
+
+## 图书
+
+* [TypeScript Deep Dive 深入理解 TypeScript](https://basarat.gitbook.io/typescript/getting-started)
+  - [jkchao/typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版 https://jkchao.github.io/typescript-book-chinese/
 
 ## 工具
 
@@ -80,9 +99,7 @@ superShout() {
 
 * [TypeScript 中文手册](https://typescript.bootcss.com/)
 * [The TypeScript Handbook](https://www.staging-typescript.org/docs/handbook/intro.html)
-* [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/getting-started)
 * [basarat/typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
 * [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
 * [gcanti/fp-ts](https://github.com/gcanti/fp-ts):Functional programming in TypeScript https://gcanti.github.io/fp-ts/
-* [jkchao/typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版
 * [why is so important?](https://www.warambil.com/typescript-why-is-so-important)
