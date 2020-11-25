@@ -23,6 +23,7 @@
 * B&O PLAY by BANG & OLUFSEN - BeoPlay H6 Over-Ear Headphones, Natural (1642003)
 * Libratone小鸟音响
 * Computer（大尺寸屏幕,甚至两块屏幕）
+* Marshall 音箱
 
 ## 显示器
 
