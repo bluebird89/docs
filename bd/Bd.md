@@ -107,16 +107,6 @@
 * 数据应用：包括数据的可视化展现、业务决策、或者AI等各种数据应用场景
 * 数据可视化，将数据以直观的可视化方式展示给用户
 
-## 大数据下的数仓体系架构
-
-* 数据仓库是从业务角度出发的一种数据组织形式，它是大数据应用和数据中台的基础
-* 数仓系统分成了4层：源数据层、数据仓库层、数据集市层、数据应用层。采用这样的分层结构，和软件设计的分层思想类似，都是为了将复杂问题简单化，每一层职责单一，提高了维护性和复用性。每一层的具体作用如下
-  - ODS：源数据层，源表
-  - DW：数据仓库层，包含维度表和事实表，通过对源表进行清洗后形成的数据宽表，比如：城市表、商品类目表、后端埋点明细表、前端埋点明细表、用户宽表、商品宽表
-  - DM：数据集市层，对数据进行了轻粒度的汇总，由各业务方共建，比如：用户群分析表、交易全链路表
-  - ADS：数据应用层，根据实际应用需求生成的各种数据表
-* 各层的数据表都会采用统一的命名规则进行规范化管理，表名中会携带分层、主题域、业务过程以及分区信息
-
 ### 联机事务处理 OLTP
 
 * OLAP也称决策支持系统(Decision Support System，DSS)，是数据仓库系统的主要应用形式，使分析人员、管理人员或执行人员能够从多种角度对从原始数据中转化出来的、能够真正为用户所理解的、并真实反映企业维特性的信息进行快速、一致、交互地存取，从而获得对数据的更深入了解的一类软件技术。
@@ -140,13 +130,6 @@
   - 直观的数据操纵 　　
   - 灵活的报表生成 　　
   - 不受限的维与聚集层次
-* ETL(Extraction-Transformation-Loading)
-  - 负责将分布的、异构数据源中的数据如关系数据、平面数据(去除了所有特定应用格式，可以迁移到其他应用上进行处理的一类数据，比如逗号分隔数据)文件等抽取到临时中间层后进行清洗、转换、集成，最后加载到数据仓库或数据集市中，成为联机分析处理、数据挖掘的基础，是BI(Business Intelligence)/DW的核心和灵魂，是数据仓库中的非常重要的一环
-  - 在技术上，ETL主要涉及到关联、转换、增量、调度和监控等几个方面
-  - 数据仓库系统中数据不要求与联机事务处理系统中数据实时同步，所以ETL可以定时进行
-  - 在数据仓库建设中最难部分是用户需求分析和模型设计，而ETL规则设计和实施则是工作量最大的，约占整个项目的60%～80%
-
-![数仓建设](../_static/db.png "数仓建设")
 
 ## [Wolfram](https://www.wolfram.com/)
 
@@ -252,63 +235,36 @@
 ## 工具
 
 * [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
-
 * [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
-
 * [OpenRefine/OpenRefine](https://github.com/OpenRefine/OpenRefine):OpenRefine is a free, open source power tool for working with messy data and improving it http://openrefine.org/
-
 * [airbnb/knowledge-repo](https://github.com/airbnb/knowledge-repo):A next-generation curated knowledge sharing platform for data scientists and other technical professions.
-
 * [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
-
 * [protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf):Protocol Buffers - Google's data interchange format https://developers.google.com/protocol-buffers/
-
 * [ha/doozerd](https://github.com/ha/doozerd):A consistent distributed data store.
-
 * [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/
-
 * [ag-grid/ag-grid](https://github.com/ag-grid/ag-grid):Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components http://www.ag-grid.com
-
 * [brendangregg / FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
-
 * HDFS，分布式文件系统
-
 * HBase，分布式数据库
-
-* MapReduce，由用户编写的运行在hadoop集群上的并行程序
-
+* MapReduce，由用户编写的运行在hadoop集群上的并行程
 * zookeeper，作为分布式程序的协调中心
-
 * hive，基于hadoop的数据仓库管理工具
-
 * pig，大数据分析工具
-
 * yarn，hadoop集群资源管理系统
-
 * sqoop，hadoop与传统数据库之间进行数据交换的工具
-
 * chukawa，分布式数据收集分析系统
-
 * hcatalog，管理hadoop产生的数据表存储管理系统
-
 * redis，分布式缓存系统
-
 * kafka，分布式消息系统
-
 * Cassandra，分布式结构和数据存储
-
 * neo4j，nosql图数据库
-
 * spark，分布式计算引擎
-
 * storm，分布式实时计算系统
-
 * elasticsearch，分布式全文搜索
-
 * flume，分布式日志采集系统
-
 * flink，分布式流处理引擎
+* [darktable ](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer https://www.darktable.org
 
-* [ darktable-org / darktable ](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer https://www.darktable.org
+## 参考
 
 * [bigdata_practice](https://github.com/TurboWay/bigdata_practice):大数据分析可视化实践  nginx 日志分析可视化 http://analyze.turboway.top/line
