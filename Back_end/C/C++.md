@@ -225,7 +225,7 @@ char* const p = myName;       // const pointer, non-const data
 const char* const p = myName; // const pointer, const data 表示指针所指物和指针自身都是常量
 ```
 
-## C++11新标准
+## C++11
 
 * 新标准提供了解决现有问题更优雅、更 C++ 的实现。现行的大部分 C++ 软件还是 C++98 的标准，C++98 是 C++ 的第一个标准，经历这么多年的发展，从前你需要从Boost库（一个在 C++98 年代的准 C++ 标准）获得的对 C++ 的扩充支持的大部分功能已经纳入了 C++11 和甚至 C++2X 更新的标准当中，与时俱进拿起更先进的生产工具，工具就是效率
 
