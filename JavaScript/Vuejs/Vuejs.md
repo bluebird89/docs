@@ -316,6 +316,10 @@ vue init webpack my-project
 vue init Plortinus/vue-multiple-pages new-project
 ```
 
+## 课程
+
+* [Vue - The Complete Guide (w/ Router, Vuex, Composition API)](https://www.udemy.com/course/vuejs-2-the-complete-guide/)
+
 ## 项目
 
 * [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
