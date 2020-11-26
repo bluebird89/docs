@@ -392,6 +392,8 @@ public class OrderCreatedEvent extends OrderEvent {
 * 《领域驱动设计精粹》
 * 《复杂软件设计之道：领域驱动设计全面解析与实战》
 * 《实现领域驱动设计 implementing domain-driven design》
+* 解构领域驱动设计
+  - GitChat 课程《领域驱动设计实践》
 
 ## 参考
 

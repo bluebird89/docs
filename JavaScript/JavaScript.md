@@ -1368,17 +1368,34 @@ console.log() 写入到浏览器的控制台：能看到结构化的东西；不
 * ES6 模块，简称 ESM
   - 使用import和export
   - import命令则是异步加载，或者更准确地说，ES6 模块有一个独立的静态解析阶段，依赖关系的分析是在那个阶段完成的，最底层的模块第一个执行
-  - import命令可以加载 CommonJS 模块，但是只能整体加载，不能只加载单一的输出项：因为 ES6 模块需要支持静态代码分析，而 CommonJS 模块的输出接口是module.exports，是一个对象，无法被静态分析，所以只能整体加载
+  - ES6 模块加载 CommonJS 模块:import命令可以加载 CommonJS 模块，但是只能整体加载，不能只加载单一的输出项：因为 ES6 模块需要支持静态代码分析
 * Node.js 专用的 CommonJS 模块，简称 CJS
   - 使用require()加载和module.exports输出
   - require()是同步加载，后面的代码必须等待这个命令执行完，才会执行
+  - CommonJS 模块的输出接口是module.exports，是一个对象，无法被静态分析，所以只能整体加载
   - 要求 ES6 模块采用.mjs后缀文件名。只要脚本文件里面使用import或者export命令，那么就必须采用.mjs后缀名
   - Node.js 遇到.mjs文件，就认为它是 ES6 模块，默认启用严格模式，不必在每个模块文件顶部指定"use strict"
   - 如果不希望将后缀名改成.mjs，可以在项目的package.json文件中，指定type字段为module。一旦设置了以后，该目录里面的 JS 脚本，就被解释用 ES6 模块。
     + 如果这时还要使用 CommonJS 模块，那么需要将 CommonJS 脚本的后缀名都改成.cjs。如果没有type字段，或者type字段为commonjs，则.js脚本会被解释成 CommonJS 模块
-  - require()命令不能加载 ES6 模块，会报错，只能使用import()这个方法加载
-    + require()不支持 ES6 模块的一个原因是，它是同步加载，而 ES6 模块内部可以使用顶层await命令，导致无法被同步加载
+  - CommonJS 模块加载 ES6 模块:require()命令不能加载 ES6 模块，会报错，只能使用import()这个方法加载
+    + require()不支持 ES6 模块的一个原因:它是同步加载，而 ES6 模块内部可以使用顶层await命令，导致无法被同步加载
+* 同时支持两种格式的模块
+  - 如果原始模块是 ES6 格式，那么需要给出一个整体输出接口，比如export default obj，使得 CommonJS 可以用import()进行加载
+  - 如果原始模块是 CommonJS 格式，那么可以加一个包装层
 * AMD
+
+```js
+// CommonJS 模块加载 ES6 模块
+(async () => {
+  await import('./my-app.mjs');
+})();
+// ES6 模块加载 CommonJS 模块
+import packageMain from 'commonjs-package';
+
+// 原始模块是 CommonJS 格式,支持两种格式的模块
+import cjsModule from '../index.js';
+export const foo = cjsModule.foo;
+```
 
 ## [rome](https://github.com/facebookexperimental/rome)
 
