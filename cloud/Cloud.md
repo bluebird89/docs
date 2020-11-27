@@ -41,7 +41,7 @@
     + 我们的一个博客就是让人难以置信的旅程，记录了创业产品在收购后被关闭的情况
 * 默认的安全和隐私
   - Google 云端服务条款：“我们的自动系统会分析您的内容，为您提供个人相关的产品功能，如自定义搜索结果、垃圾邮件和恶意软件检测。”
-  - 本地优先的应用在内核中具有更好的隐私和安全性。本地设备只存储自己的数据，避免了集中的云数据库来保存每个人的数据。本地优先应用可以使用 * 端到端加密，* 这样存储文件副本的任何服务器都只能保存而无法读取的加密数据。
+  - 本地优先的应用在内核中具有更好的隐私和安全性。本地设备只存储自己的数据，避免了集中的云数据库来保存每个人的数据。本地优先应用可以使用 *端到端加密，* 这样存储文件副本的任何服务器都只能保存而无法读取的加密数据。
     + iMessage，WhatsApp和Signal等现代消息传递应用已经使用端到端加密，Keybase提供加密文件共享和消息传递，Tarsnap采用这种方法进行备份。我们希望看到这种趋势也扩展到其他类型的软件。
 * 保留最终控制权
   - 通过云应用程序，服务提供商（而非个人）对个人可以做的事情有最终发言权。
@@ -66,14 +66,14 @@
   - 如果在意 “功能均衡” 可选择加速乐。
 * [Azure](https://www.azure.cn/en-us/)
   - [feiskyer/azure-auth-go](https://github.com/feiskyer/azure-auth-go):Go library for authorizing with Azure
-  - [MicrosoftDocs/azure-docs](https://github.com/MicrosoftDocs/azure-docs):Open source documentation of Microsoft Azure https://docs.microsoft.com/azure
+  - [MicrosoftDocs/azure-docs](https://github.com/MicrosoftDocs/azure-docs):Open source documentation of Microsoft Azure <https://docs.microsoft.com/azure>
 * Google Cloud Platform
-  - [googleapis/google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python https://googleapis.github.io/google-cloud-python/
+  - [googleapis/google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python <https://googleapis.github.io/google-cloud-python/>
 * [腾讯云](https://cloud.tencent.com/) `ssh -q -l ubuntu -p 22 IP`
 * [搬瓦工](https://bandwagonhost.cn/)
 * [Vultr](https://www.vultr.com/)
 * [CloudCone](https://app.cloudcone.com/)
-* [Oracle cloud](https://www.oraclecloud.com):免费资源 https://51.ruyo.net/14138.html
+* [Oracle cloud](https://www.oraclecloud.com):免费资源 <https://51.ruyo.net/14138.html>
   - 登录有传统 与 [cloud]() 用户
   - centos  默认登录账户是 opc
   - ubuntu 默认登录账户是 ubuntu

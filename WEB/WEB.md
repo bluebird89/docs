@@ -365,38 +365,38 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [raviqqe/muffet](https://github.com/raviqqe/muffet):Fast website link checker in Go
 * [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
-* [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
-* [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game https://logstalgia.io
+* [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
+* [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game <https://logstalgia.io>
 * record and replay
-  - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web https://www.rrweb.io/
+  - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web <https://www.rrweb.io/>
   - [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
 * [短网址](http://suo.im/)
 * [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
 * [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
 * 分析
-  - [matomo-org/matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! https://matomo.org/
+  - [matomo-org/matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! <https://matomo.org/>
   - [YSlow](http://yslow.org):analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
 * 监控
-  - [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. https://xstate.js.org/docs
+  - [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. <https://xstate.js.org/docs>
   - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
-  - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
+  - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer <http://www.brendangregg.com/flamegraphs.html>
   - [Raileo](https://raileo.com/):makes it easy to monitor your website downtime, SSL expiry, website performance, SEO and a lot more
 * [the-benchmarker/web-frameworks](https://github.com/the-benchmarker/web-frameworks):Which is the fastest web framework?
-* [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 https://xray.cool
+* [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 <https://xray.cool>
 * [zeit](https://zeit.co/)
 * [insights](https://developers.google.com/speed/pagespeed/insights/) Analyze with PageSpeed Insights
-* [lighthouse](https://github.com/GoogleChrome/lighthouse) Automated auditing, performance metrics, and best practices for the web.https://developers.google.com/web/tools/lighthouse/
+* [lighthouse](https://github.com/GoogleChrome/lighthouse) Automated auditing, performance metrics, and best practices for the web.<https://developers.google.com/web/tools/lighthouse/>
 * [vite](https://github.com/vitejs/vite) Native-ESM powered web dev build tool. It's fast.
 
 ## 参考
 
-* [Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 https://parg.co/bMe
+* [Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 <https://parg.co/bMe>
 * [Web](https://developers.google.com/web/)
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
   - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [W3C](https://www.w3.org/)
-* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) https://solid.mit.edu/
+* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) <https://solid.mit.edu/>
 
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)

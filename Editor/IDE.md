@@ -6,9 +6,9 @@
 * [Komodo IDE](https://www.activestate.com/)
 * [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
 * [CodeSandbox](https://codesandbox.io/)
-  - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ https://codesandbox.io
-* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ https://stackblitz.com
-* [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. http://theia-ide.org
+  - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
+* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
+* [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. <http://theia-ide.org>
 
 ## 配置
 
@@ -53,14 +53,16 @@
 * Diagrams
 * theme
   - Dark Purple Theme
-  -  Cyan Light Theme
+  - Cyan Light Theme
 * ctrl + `
   - 5 switch theme
   - 1 Editor Color Scheme
   - 3 keymap
-*  ⌘N (macOS) or Alt+Insert (Windows/Linux):generate
-  -  build.gradle add a new dependency
-*  ⇧⌘I, or Ctrl+Shift+O on Windows and Linux: load the changes
+* ⌘N (macOS) or Alt+Insert (Windows/Linux):generate
+
+- build.gradle add a new dependency
+
+* ⇧⌘I, or Ctrl+Shift+O on Windows and Linux: load the changes
 * test
   - ⌃R or Shift+F10
   - ⌃⇧R or Ctrl+Shift+F10 (Windows/Linux)
@@ -73,18 +75,22 @@
   - Save Actions
 * Diagrams
   - Project tool window->right-click ->Diagrams | Show Diagram
-*  Navigate shift+shift
-  -  Class 代表类
-  -  File 代表文件
-  -  Symbol 代表符号/标记（可用于导航到指定变量、方法）
-  -  Line ctrl + G
-  -  自定义搜索作用域
-*  File and Code Templates 文件代码模版 :Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
-*  代码片段模版:Live Templates
-*  Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
-*  debug
-  -  F7:step into 单步执行
-  -  在 variable  添加 Watch
+* Navigate shift+shift
+
+- Class 代表类
+- File 代表文件
+- Symbol 代表符号/标记（可用于导航到指定变量、方法）
+- Line ctrl + G
+- 自定义搜索作用域
+
+* File and Code Templates 文件代码模版 :Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
+* 代码片段模版:Live Templates
+* Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
+* debug
+
+- F7:step into 单步执行
+- 在 variable  添加 Watch
+
 * Xdebug 进行断点调试
   - 配置:以便可以接收到服务端的远程调试连接，首先在 Preferences | Languages & Frameworks | PHP | Debug 中配置 Debug 端口与 Xdebug 扩展配置保持一致
   - 在 Preferences | Languages & Frameworks | PHP | Servers 中新增服务器配置（域名和端口与对应的 PHP Web 应用保持一致即可）
@@ -231,7 +237,7 @@
 * 去掉右上角浏览器:IDE settings->tools ->WebBrowsers  去掉选中即可。
 * PHPStorm + CodeSniffer设置:IDE settings->Languages & Frameworks->PHP->CodeSniffer-> 配置即可。
 * 选择编码规范:IDE settings->Editor->Inspections->PHP->PHP Code Sniffer validation(打钩) ->Coding Standard 选择规范（PEAR）。
-* 下载地址:http://pear.php.net/package/PHP_CodeSniffer/
+* 下载地址:<http://pear.php.net/package/PHP_CodeSniffer/>
 
 * double shift：搜索文件
 * alt + 1:项目试图切换
@@ -308,19 +314,19 @@
 ## 功能
 
 * REST Client：Tools | Test RESTful Web Service
-    - Generate Authorization Header
-    - Alt+Insert (CMD+N on Mac OS X) will add a new cookie
+  - Generate Authorization Header
+  - Alt+Insert (CMD+N on Mac OS X) will add a new cookie
 * command-line tool
-    - Project Settings | Command Line Tool Support
-    - Tools | Run Command... menu or with Ctrl+Shift+X
+  - Project Settings | Command Line Tool Support
+  - Tools | Run Command... menu or with Ctrl+Shift+X
 * MAMP
 * DataBase:MySQL
-    - SQL Editor
-    - ?, :variable, @variable, #variable# or $variable$：设置语句参数
-    - control+j:查看单条数据
+  - SQL Editor
+  - ?, :variable, @variable, #variable# or $variable$：设置语句参数
+  - control+j:查看单条数据
 * vagrant
-    - Init in Project Root
-    - Start SSH session
+  - Init in Project Root
+  - Start SSH session
 
 数据是统一的，能够实现批量处理
 
@@ -369,8 +375,8 @@ fs.inotify.max_user_watches = 524288
 
 ## 工具
 
-* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor https://microsoft.github.io/monaco-editor/
-* [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ http://www.lighttable.com
+* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor <https://microsoft.github.io/monaco-editor/>
+* [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ <http://www.lighttable.com>
 * [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL)
 * [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
 

@@ -1,6 +1,6 @@
 # [kong](https://github.com/Kong/kong)
 
-gorilla The Cloud-Native API Gateway & Service Mesh https://konghq.com
+gorilla The Cloud-Native API Gateway & Service Mesh <https://konghq.com>
 
 * 由 Mashape 开发的并于2015年开源的一款API 网关，它是基于OpenResty（Nginx + Lua模块）和 Apache Cassandra/PostgreSQL 构建的，能提供易于使用的RESTful API来操作和配置API管理系统
 * 可以水平扩展多个 Kong Server，通过前置的负载均衡配置把请求均匀地分发到各个Server，来应对大批量的网络请求
@@ -74,7 +74,7 @@ curl -i -X PATCH http://localhost:8001/services/hello-service --data url='http:/
 * key-auth
   - 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
   - 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
-* [Kong Hub](https://docs.konghq.com/hub/）
+* [Kong Hub](<https://docs.konghq.com/hub/>）
 * 身份认证插件：Kong提供了Basic Authentication、Key authentication、OAuth2.0 authentication、HMAC authentication、JWT、LDAP authentication认证实现。
 * 安全控制插件：ACL（访问控制）、CORS（跨域资源共享）、动态SSL、IP限制、爬虫检测实现。
 * 流量控制插件：请求限流（基于请求计数限流）、上游响应限流（根据upstream响应计数限流）、请求大小限制。限流支持本地、Redis和集群限流模式。

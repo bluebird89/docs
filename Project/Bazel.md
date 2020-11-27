@@ -1,6 +1,6 @@
 # [bazelbuild/bazel](https://github.com/bazelbuild/bazel)
 
-a fast, scalable, multi-language and extensible build system https://bazel.build
+a fast, scalable, multi-language and extensible build system <https://bazel.build>
 
 ## 工具
 

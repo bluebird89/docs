@@ -84,13 +84,14 @@ tsc --build tsconfig.json
 * orm
     - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. http://typeorm.io
     - [prisma/prisma](https://github.com/prisma/prisma):Modern DB toolkit to query, migrate and model your database https://www.prisma.io/
-* [quicktype/quicktype](https://github.com/quicktype/quicktype):Generate types and converters from JSON, Schema, and GraphQL https://quicktype.io
+* [quicktype](https://github.com/quicktype/quicktype):Generate types and converters from JSON, Schema, and GraphQL https://quicktype.io
 * [TypeStrong/ts-loader](https://github.com/TypeStrong/ts-loader):TypeScript loader for webpack
 * [palantir/tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language http://palantir.github.io/tslint/
 * [AssemblyScript/assemblyscript](https://github.com/AssemblyScript/assemblyscript):A TypeScript to WebAssembly compiler 🚀 https://assemblyscript.org
 * [typestack/routing-controllers](https://github.com/typestack/routing-controllers):Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.
 * [rpgeeganage/async-ray](https://github.com/rpgeeganage/async-ray):Provide async/await callbacks for every, find, findIndex, filter, forEach, map, reduce, reduceRight and some methods in Array. https://rpgeeganage.github.io/async-ray
 * [TypeStrong/typedoc](https://github.com/TypeStrong/typedoc):Documentation generator for TypeScript projects. https://typedoc.org
+* [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) ✨ Monorepo for all the tooling which enables ESLint to support TypeScript
 * [palmerhq/tsdx](https://github.com/palmerhq/tsdx):Zero-config CLI for TypeScript package development https://npm.im/tsdx
 * 测试
     - [kulshekhar/ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest https://kulshekhar.github.io/ts-jest

@@ -1,6 +1,6 @@
 # [Hack](https://github.com/facebook/hhvm/tree/master/hphp/hack)
 
-Programming Productivity Without Breaking Things.https://hacklang.org
+Programming Productivity Without Breaking Things.<https://hacklang.org>
 
 ## 参考
 

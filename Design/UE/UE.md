@@ -3,13 +3,13 @@
 * UE
 * IxD(Interaction design):它定义了两个或多个互动的个体之间交流的结构和行为
 * UID(User Interface Design)
-    - 输入控件：按钮、文本框、选取框、单选按钮、下拉列表、列表框、开关按钮、
-    - 导航控件：面包削导航、滑块、搜索栏、分页、标签、
-    - 图标信息控件：文本提示框、图标、进度条、提示、消息框、模式窗口
-    - 行业工具：Photoshop, Sketch, Illustrator, Fireworks, InVision
+  - 输入控件：按钮、文本框、选取框、单选按钮、下拉列表、列表框、开关按钮、
+  - 导航控件：面包削导航、滑块、搜索栏、分页、标签、
+  - 图标信息控件：文本提示框、图标、进度条、提示、消息框、模式窗口
+  - 行业工具：Photoshop, Sketch, Illustrator, Fireworks, InVision
 * UED(User Expericence Design):用户体验设计（也可叫做UXD、UED、XD)，是指通过提高产品的可用性、易用性、以及人与产品交互过程中的愉悦程度，从而来提高用户满意度的过程。用户体验设计包括传统的人机交互（HCI），并且延伸到解决所有与用户感受相关的问题。
-    - 交付物：线框图、原型图、网站地图、说明文档
-    - 行业工具: Sketch、 Mockplus、Axure、Fireworks、UXPin
+  - 交付物：线框图、原型图、网站地图、说明文档
+  - 行业工具: Sketch、 Mockplus、Axure、Fireworks、UXPin
 * UCD(User Centered Design):Business Technique User
 * IA(Infomation Architect):网站、App的结构安排以及内容是如何组织的，目的是帮助用户快速找到信息并且完成操作。包括设计网站地图、层次结构、分类、导航和元数据
 

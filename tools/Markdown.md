@@ -58,8 +58,10 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 
 这是一个一级标题
 ============================
+
 这是一个二级标题
 --------------------------------------------------
+
 ### 这是一个三级标题
 
 ---
@@ -195,6 +197,7 @@ _________________
 
   - Item 2a unordered list `TAB + * + SPACE`
   - Item 2b
+
 - Dashes work just as well
 
 - And if you have sub points, put two spaces before the dash or star:
@@ -308,7 +311,7 @@ You can link directly to a section in a rendered file by hovering over the secti
 [markdown][1]
 [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles")
 
-^1:<https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles">
+^1:<<https://en.wikipedia.org/wiki/Hobbit#Lifestyle> "Hobbit lifestyles">
 
 ---
 
@@ -352,14 +355,11 @@ As Kanye West said:
 > We're living the future so
 >
 > the present is our past.
-
 > * 整理知识，学习笔记
 > * 发布日记，杂文，所见所想
 > * 撰写发布技术文稿（代码支持）
 > * 撰写发布学术论文（LaTeX 公式支持）
-
 > 一盏灯， 一片昏黄； 一简书， 一杯淡茶。 守着那一份淡定， 品读属于自己的寂寞。 保持淡定， 才能欣赏到最美丽的风景！ 保持淡定， 人生从此不再寂寞。
-
 > > 一寸山河一寸血，十万青年十万军 ......蒋介石；
 
 ---
@@ -412,32 +412,32 @@ function fancyAlert(arg) {
 **Example:**
 
 ```markdown
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      | $12   |
-| zebra stripes | are neat      | $1    |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
-| 项目  | 价格     | 数量  |
-| --- | ------:|:---:|
-| 计算机 | \$1600 | 5   |
-| 手机  | \$12   | 12  |
-| 管线  | \$1    | 234 |
+| 项目   |   价格 | 数量  |
+| ------ | -----: | :---: |
+| 计算机 | \$1600 |   5   |
+| 手机   |   \$12 |  12   |
+| 管线   |    \$1 |  234  |
 ```
 
 **Result:**
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
+| Tables        |      Are      |  Cool |
+| ------------- | :-----------: | ----: |
 | col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      | $12   |
-| zebra stripes | are neat      | $1    |
+| col 2 is      |   centered    |   $12 |
+| zebra stripes |   are neat    |    $1 |
 
-| 项目  | 价格     | 数量  |
-| --- | ------:|:---:|
-| 计算机 | \$1600 | 5   |
-| 手机  | \$12   | 12  |
-| 管线  | \$1    | 234 |
+| 项目   |   价格 | 数量  |
+| ------ | -----: | :---: |
+| 计算机 | \$1600 |   5   |
+| 手机   |   \$12 |  12   |
+| 管线   |    \$1 |  234  |
 
 ---
 
@@ -548,8 +548,7 @@ Here's a simple footnote,[^1] and here's a longer one.[^bignote]
 
     Add as many paragraphs as you like.
 
-
-## 注释和阅读更多 Comment And Read More..
+## 注释和阅读更多 Comment And Read More
 
 <!-- comment -->
 
@@ -765,18 +764,18 @@ Let's rename *our-new-project* to \*our-old-project\*.
   - `sudo add-apt-repository 'deb https://typora.io/linux ./'`
   - `sudo apt-get install typora`
   - [PicGo](https://github.com/Molunerfinn/PicGo) 一款免费的图床管理应用，支持拖拽上传，剪切板上传等方式。可以用它快捷地将图片上传到图床并获得网络链接
-* [marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. https://marktext.app
+* [marktext](https://github.com/marktext/marktext):📝A simple and elegant markdown editor, available for Linux, macOS and Windows. <https://marktext.app>
 * [trilium](https://github.com/zadam/trilium):Build your personal knowledge base with Trilium Notes
 * [Haroopad](http://pad.haroopress.com/user.html):a markdown enabled document processor for creating web-friendly documents
-* [notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. https://notable.app/
+* [notable](https://github.com/notable/notable):The Markdown-based note-taking app that doesn't suck. <https://notable.app/>
 * [Cmd Markdown](https://www.zybuluo.com/cmd/) 开启卓越写作之旅
-* [Dillinger ](https://dillinger.io/) 在线
+* [Dillinger](https://dillinger.io/) 在线
 * Mac
   - [Mou](http://25.io/mou/):Markdown editor for developers.
   - [Bear](https://bear.app/):Write beautifully on iPhone, iPad, and Mac
   - [Ulysses for Mac](https://ulysses.app/):The Ultimate Writing App for Mac, iPad and iPhone
-  - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor https://lukakerr.github.io/Pine
-  - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. https://macdown.uranusjr.com/
+  - [Twig](https://github.com/lukakerr/Pine):A modern, native macOS markdown editor <https://lukakerr.github.io/Pine>
+  - [MacDown](https://github.com/MacDownApp/macdown):Open source Markdown editor for macOS. <https://macdown.uranusjr.com/>
   - [Quiver](http://happenapps.com/):a notebook built for programmers. It lets you easily mix text, code, Markdown and LaTeX within one note, edit code with an awesome code editor, live preview Markdown and LaTeX, and find any note instantly via the full-text search.收费
   - [幕布](https://mubu.com/):极简大纲笔记 | 一键生成思维导图
   - [MWeb](https://zh.mweb.im/):专业付费 Markdown 写作、记笔记、静态博客生成软件。
@@ -785,38 +784,38 @@ Let's rename *our-new-project* to \*our-old-project\*.
   - MarkPad
 * [GitNote](https://www.gitnoteapp.com)
 * [MedleyText](https://medleytext.net/):reate stylish and meaningful programming notes, blogs with ease
-* [Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. https://boostnote.io
+* [Boostnote](https://github.com/BoostIO/Boostnote):A markdown editor for developers on Mac, Windows and Linux. <https://boostnote.io>
 * 开源
   - [CherryTree](http://www.giuspen.com/cherrytree/):A hierarchical note taking application, featuring rich text and syntax highlighting, storing data in a single XML or SQLite file
 * Apostrophe:An elegant, distraction-free markdown editor
 * [Zettlr](https://github.com/Zettlr/Zettlr): A Markdown Editor for the 21st century. www.zettlr.com/
-* [wechat-format](https://github.com/lyricat/wechat-format) 微信公众号排版编辑器，转换 Markdown 到微信特制的 HTML https://lab.lyric.im/wxformat
-  - [](https://github.com/doocs/md) ✍ 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 所有基础语法、色盘取色、一键复制并粘贴到公众号后台、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性 https://doocs.github.io/md
-* [markdown-wasm](https://github.com/rsms/markdown-wasm) Markdown parser and HTML generator implemented in WebAssembly, based on md4c https://rsms.me/markdown-wasm/
+* [wechat-format](https://github.com/lyricat/wechat-format) 微信公众号排版编辑器，转换 Markdown 到微信特制的 HTML <https://lab.lyric.im/wxformat>
+  - [](https://github.com/doocs/md) ✍ 一款高度简洁的微信 Markdown 编辑器：支持 Markdown 所有基础语法、色盘取色、一键复制并粘贴到公众号后台、多图上传、一键下载文档、自定义 CSS 样式、一键重置等特性 <https://doocs.github.io/md>
+* [markdown-wasm](https://github.com/rsms/markdown-wasm) Markdown parser and HTML generator implemented in WebAssembly, based on md4c <https://rsms.me/markdown-wasm/>
 
 ## 工具
 
 * [ikatyang/emoji-cheat-sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md):A markdown version emoji cheat sheet
-* [zhangjikai/online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 http://markdown.zhangjikai.com/
-* [tamlok/vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. https://tamlok.github.io/vnote
-* [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. http://ui.toast.com/tui-editor
+* [zhangjikai/online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 <http://markdown.zhangjikai.com/>
+* [tamlok/vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. <https://tamlok.github.io/vnote>
+* [nhnent/tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. <http://ui.toast.com/tui-editor>
 * [gsuitedevs/md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
-* [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). https://pandao.github.io/editor.md/
-* [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. http://remarkjs.com
-* [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown http://knsv.github.io/mermaid/
-* [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. http://www.aaronsw.com/2002/html2text/
-* [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
-* [showdownjs/showdown](https://github.com/showdownjs/showdown):A bidirectional Markdown to HTML to Markdown converter written in Javascript http://www.showdownjs.com/
-* [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
-* [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor https://stackedit.io/
-* [markedjs/marked](https://github.com/markedjs/marked):A markdown parser and compiler. Built for speed. https://marked.js.org/
-* [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects https://mdxjs.com
+* [pandao/editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). <https://pandao.github.io/editor.md/>
+* [gnab/remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. <http://remarkjs.com>
+* [knsv/mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown <http://knsv.github.io/mermaid/>
+* [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. <http://www.aaronsw.com/2002/html2text/>
+* [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor <https://stackedit.io/>
+* [showdownjs/showdown](https://github.com/showdownjs/showdown):A bidirectional Markdown to HTML to Markdown converter written in Javascript <http://www.showdownjs.com/>
+* [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. <http://markdown-here.com>
+* [benweet/stackedit](https://github.com/benweet/stackedit):In-browser Markdown editor <https://stackedit.io/>
+* [markedjs/marked](https://github.com/markedjs/marked):A markdown parser and compiler. Built for speed. <https://marked.js.org/>
+* [mdx-js/mdx](https://github.com/mdx-js/mdx):JSX in Markdown for ambitious projects <https://mdxjs.com>
 * [evilstreak/markdown-js](https://github.com/evilstreak/markdown-js):A Markdown parser for javascript
 * [Marp](https://yhatt.github.io/marp/):Markdown Presentation Writer
 * [Paste to Markdown](https://euangoddard.github.io/clipboard2markdown/)
-* [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed https://markdown-it.github.io
-* [xi-editor/xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. https://xi-editor.io
-* [taniarascia/takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. https://takenote.dev
+* [markdown-it/markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed <https://markdown-it.github.io>
+* [xi-editor/xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. <https://xi-editor.io>
+* [taniarascia/takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. <https://takenote.dev>
 * markoff:A lightweight Markdown (CommonMark) previewer for macOS
 
 ## 参考
@@ -824,4 +823,4 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [mastering-markdown](https://guides.github.com/features/mastering-markdown/)
 * [js-sequence-diagrams](https://bramp.github.io/js-sequence-diagrams/):Turns text into UML sequence diagrams
 * [flowchart.js](http://adrai.github.io/flowchart.js/):Draws simple SVG flow chart diagrams from textual representation of the diagram
-* [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. http://markdown-here.com
+* [adam-p/markdown-here](https://github.com/adam-p/markdown-here):Google Chrome, Firefox, and Thunderbird extension that lets you write email in Markdown and render it before sending. <http://markdown-here.com>

@@ -23,7 +23,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 * 节点可以给自己发送消息，方法是发送方和接收方使用同一个主体即可
 * ->表示消息传递，-->表示异步消息传递，note [left | right]对消息进行说明
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
   a --> b: how are you;
   note right: greeting;
   a -> a: i am thinking;
@@ -39,7 +39,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 * 使用括号 (xxx) 来表示用例，用例用椭圆形表达
 * 使用不同的线条表达不同的关系。包括参与者与用例的关系，用例与用例的关系
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
   left to right direction;
   skinparam packageStyle rect;
   actor customer;
@@ -62,7 +62,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   - 数据流动的时间轴遵守先从左到右，再从上到下的顺序
   - 每一对输入输出（输入在上，输出在下）加一个方块，表达了一次函数调用
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
   (*) --> "buy 10 apples"; if "is there watermelon " then; -->[true] "buy a apple"; -right-> (_); else; ->[false] "Something else"; -->(_); endif; )
 
 ## 组件图
@@ -75,7 +75,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 * 可以在包内部直接表达到另外一个包内部的组件的交互关系
 * 可以在流程图外部直接表达包之间或包的组件之间的交互关系
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
   HTTP - [web server];
   [web server] - [app server];
   database "mysql" {;
@@ -92,7 +92,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 * 状态图可以嵌套
 * 使用 scale 命令来指定生成的图片的尺寸
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
   [*] -> ready : start;
   ready -> running : get cpu;
   running -> ready : lost cpu;
@@ -110,7 +110,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   - 带三角箭头的实线，空三角箭头指向父类
 * 依赖（Dependency）:带普通箭头的虚线，普通箭头指向被使用者
   - 一种使用的关系，即一个类的实现需要另一个类的协助
-  - 一个类A使用到了另一个类B，而这种使用关系是具有偶然性的、临时性的、非常弱的，表现在代码层面，_/ _*为类B作为参数被类A在某个method中使用__ 例如人和烟草的关系
+  - 一个类A使用到了另一个类B，而这种使用关系是具有偶然性的、临时性的、非常弱的，表现在代码层面，_/_*为类B作为参数被类A在某个method中使用__ 例如人和烟草的关系
 * 关联（Association）:一种拥有关系，使得一个类知道另一个类的属性和方法
   - 实线+实线箭头,带普通箭头的实线，指向被拥有者
   - 成员变量
@@ -135,31 +135,31 @@ class Dummy {
 }
 ```
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     Father <|-- Son)
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     abstract class AbstractList
     interface List
     List <|.. AbstractList)
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     Human ..> Cigarette)
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     class Water
     class Human
     Human --> Water)
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     Company o-- Human)
 
-![Alt text](http://g.gravizo.com/g?
+![Alt text](<http://g.gravizo.com/g>?
     Human *-- Brain)
 
 ## [Graphviz - Graph Visualization Software](http://www.graphviz.org/gallery/)
 
-https://graphviz.gitlab.io/
+<https://graphviz.gitlab.io/>
 
 * install and add  graphviz/bin to environment
 * dot --help
@@ -397,7 +397,7 @@ state Configuring {
 
 ## 工具
 
-* [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. https://bpmn.io/toolkit/bpmn-js/
+* [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. <https://bpmn.io/toolkit/bpmn-js/>
 * Visio
 * LucidChart
 * Draw.io
@@ -410,7 +410,7 @@ state Configuring {
 * [edraw-max](https://www.edrawsoft.com/edraw-max/):All-in-One
   Diagram Software
 * [Dia](http://dia-installer.de/) `sudo apt install dia`
-* [mermaid](https://github.com/mermaid-js/mermaid)Generation of diagram and flowchart from text in a similar manner as markdown http://mermaid-js.github.io/mermaid/
+* [mermaid](https://github.com/mermaid-js/mermaid)Generation of diagram and flowchart from text in a similar manner as markdown <http://mermaid-js.github.io/mermaid/>
 
 ## 参考
 

@@ -1,11 +1,11 @@
 # [jupyter](https://github.com/jupyter/jupyter)
 
-* Jupyter metapackage for installation, docs and chat https://jupyter.readthedocs.io/ http://jupyter.org/
+* Jupyter metapackage for installation, docs and chat <https://jupyter.readthedocs.io/> <http://jupyter.org/>
 * 以网页的形式打开，可以在网页页面中直接编写代码和运行代码，代码的运行结果也会直接在代码块下显示。如在编程过程中需要编写说明文档，可在同一个页面中直接编写，便于作及时的说明和解释
 
 ## [notebook](https://github.com/jupyter/notebook)
 
-* Jupyter Interactive Notebook https://jupyter-notebook.readthedocs.io/
+* Jupyter Interactive Notebook <https://jupyter-notebook.readthedocs.io/>
 * 保存为后缀名为.ipynb的JSON格式文件，便于版本控制，方便与他人共享
 * 可以导出为：HTML、LaTeX、PDF等格式
 * 编程时具有语法高亮、缩进、tab补全的功能。
@@ -39,7 +39,7 @@ jupyter notebook --no-browser
 ## config
 
 * windows: `C:\Users\<user_name>\.jupyter\jupyter_notebook_config.py`
-* Linux/macOS：`/Users/<user_name>/.jupyter/jupyter_notebook_config.py` 或 ` ~/.jupyter/jupyter_notebook_config.py`
+* Linux/macOS：`/Users/<user_name>/.jupyter/jupyter_notebook_config.py` 或 `~/.jupyter/jupyter_notebook_config.py`
 * `/home/henry/.ipython/profile_default`
 * 把变量名称或没有定义输出结果的语句放在cell的最后一行，无需print语句，Jupyter也会显示变量值。当使用Pandas DataFrames时这一点尤其有用，因为输出结果为整齐的表格
 * `~/.jupyter/nbconfig/notebook.json`
@@ -219,7 +219,7 @@ names[:5]
 
 ## LaTex
 
-* 一个Markdown单元格里写LaTex时，它将用MathJax呈现公式：如` $$ P(A \mid B) = \frac{P(B \mid A) , P(A)}{P(B)} $$`
+* 一个Markdown单元格里写LaTex时，它将用MathJax呈现公式：如`$$ P(A \mid B) = \frac{P(B \mid A) , P(A)}{P(B)} $$`
 
 ## kernal
 
@@ -294,7 +294,7 @@ jupyter-nbextension enable rise --py --sys-prefix
 
 ## [JupyterLab](https://github.com/jupyterlab/jupyterlab)
 
-JupyterLab computational environment. https://jupyterlab.readthedocs.io/
+JupyterLab computational environment. <https://jupyterlab.readthedocs.io/>
 
 ```sh
 conda install -c conda-forge jupyterlab
@@ -324,4 +324,3 @@ conda install xeus-python -c conda-forge #  kernel 需要实现 Jupyter Debug Pr
 
 * [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
 * [The IPython notebook](http://ipython.org/ipython-doc/dev/notebook/index.html)
-

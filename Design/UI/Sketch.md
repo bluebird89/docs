@@ -9,7 +9,7 @@
 * [Sketch Runner](<http://sketchrunner.comSketch> Runner is the Spotlight or Alfred for Sketch，它很好的解放了你的大脑，所有功能只用你输入名字即可调用，不用再为记不住快捷发愁，感觉就是 Sketch 里的 Alfred 。功能齐全，你值得拥有。
 * [Sketch Plugin Manager](https://mludowise.github.io/Sketch-Plugin-Manager/)
 * [Sketch Toolbox](http://sketchtoolbox.com/)helps you manage, install, and update all of your Sketch plugins.
-* [airbnb/react-sketchapp](https://github.com/airbnb/react-sketchapp):render React components to Sketch ⚛️💎 http://airbnb.io/react-sketchapp/
+* [airbnb/react-sketchapp](https://github.com/airbnb/react-sketchapp):render React components to Sketch ⚛️💎 <http://airbnb.io/react-sketchapp/>
 * FusionCool
 
 ## Collaboration Sketch Plugins
@@ -34,7 +34,7 @@
 
 ## 工具
 
-* [lllyasviel/style2paints](https://github.com/lllyasviel/style2paints):sketch + style = paints 🎨 https://s2p.moe/
+* [lllyasviel/style2paints](https://github.com/lllyasviel/style2paints):sketch + style = paints 🎨 <https://s2p.moe/>
 
 ## 参考
 

@@ -6,13 +6,13 @@
 * 性能优化：文件合并与压缩
 * 单元测试、代码分析
 * 大多数JavaScript和CSS都会在多个web页面中共享。因此，你很可能会将这些内容放到单独的.js和.css文件中，然后在web页面中引用这些文件。这种方式的结果是，用户的浏览器为了完全显示你的web引用，需要分别发送一个HTTP请求，以获取这些文件（或者至少需要验证一下这些文件是否已经改变了）。HTTP请求的代价是很高的。除了请求本身的大小之外，你还将因为网络延迟、HTTP头和Cookie等内容买单。合并与压缩工具的设计目的就是减少、乃至完全消除这些请求所带来的影响。
-    - 合并：多个JavaScript或CSS文件将被并入一个单一的JavaScript或CSS文件中。能够消除很大一部分HTTP请求的开销
-    - 压缩：够将JavaScript和CSS代码以尽可能最小的形式进行压缩，同时保证功能不变。 压缩能够极大的改进网络性能，因为它减少了每个HTTP响应的字节数
-      + JavaScript：意味着将变量重命名为无意义的单字符形式，并且去除所有空白和格式符
-      + CSS：由于页面风格依赖于变量的名称，因此通常来说只会去除格式符与空白
+  - 合并：多个JavaScript或CSS文件将被并入一个单一的JavaScript或CSS文件中。能够消除很大一部分HTTP请求的开销
+  - 压缩：够将JavaScript和CSS代码以尽可能最小的形式进行压缩，同时保证功能不变。 压缩能够极大的改进网络性能，因为它减少了每个HTTP响应的字节数
+    + JavaScript：意味着将变量重命名为无意义的单字符形式，并且去除所有空白和格式符
+    + CSS：由于页面风格依赖于变量的名称，因此通常来说只会去除格式符与空白
 * 区别
-    - Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。
-    - Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。
+  - Gulp/Grunt是一种能够优化前端的开发流程的工具，而WebPack是一种模块化的解决方案，不过Webpack的优点使得Webpack在很多场景下可以替代Gulp/Grunt类的工具。
+  - Grunt和Gulp的工作方式是：在一个配置文件中，指明对某些文件进行类似编译，组合，压缩等任务的具体步骤，工具之后可以自动替你完成这些任务。
 * Gulp/Grunt+Webpack/Browserify:在构建前端项目资源，使用自动化工具协助进行自动化程序码打包、转译等重复性工作，可以大幅提升开发效率。
   - Gulp:Gulp和Grunt一样是一种基于任务的构建工具，能够优化前端工作流程。
   - Webpack:webpack傻瓜式的项目构建方式解决了模块化开发和静态文件处理两大问题。但随着项目越来越大，特定需求的出现就使得webpack越来越难配置了。因此webpack在没太多特定需求的项目使用是没有问题的，当然，webpack的未来肯定是围绕ES的支持度、构建速度与产出代码的性能和用户体验来建设的。其未来的重要关注点：
@@ -153,7 +153,7 @@ npm install grunt  # 项目中安装
 
 ## [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel)
 
-📦🚀 Blazing fast, zero configuration web application bundler https://parceljs.org
+📦🚀 Blazing fast, zero configuration web application bundler <https://parceljs.org>
 
 ```sh
 npm install -g parcel-bundler
@@ -189,6 +189,6 @@ parcel watch index.html
 
 ## [rollup](https://rollupjs.org/)
 
-## [ pikapkg / snowpack ](https://github.com/pikapkg/snowpack)
+## [pikapkg / snowpack](https://github.com/pikapkg/snowpack)
 
-☶ A faster build system for the modern web. https://www.snowpack.dev
+☶ A faster build system for the modern web. <https://www.snowpack.dev>

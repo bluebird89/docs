@@ -4,7 +4,7 @@
 * 由芬兰大学生linus在1991年开发，基于Intel80386微处理器，开发完后就在因特网发布了源码。它借鉴了unix的很多设计思想，但它的实现完全不同，算是一个不同的操作系统。开源协议非常自由，可以自由修改，但需要将改过的源码继续发布出来
 * Linux操作系统实际上是90年代初期的两个成果的组合
   - Richard Stallman希望创建一个作为替代私有Unix系统的真正免费的和开源的系统。正在以GNU的名义开发实用工具和程序，这是一种递归算法，意思是“GNU不是Unix！”虽然它有一个内核项目正在进行，但结果证实开展起来很困难，这样没有内核，免费并开源操作系统的梦想就无法实现
-  - GNU:是由Richard Stallman（理查德·斯托曼）在1983年9月27日公开发起的自由软件集体协作计划。目标是创建一套完全自由的操作系统。GNU也称为自由软件工程项目
+  - [GNU](http://ftp.gnu.org/gnu/) 由Richard Stallman（理查德·斯托曼）在1983年9月27日公开发起的自由软件集体协作计划。目标是创建一套完全自由的操作系统。GNU也称为自由软件工程项目
 * Linus Torvald的工作:编写出一种可工作的和可行的内核，被他称为Linux--整个操作系统因此而诞生。鉴于Linus使用的是多种GNU工具（例如GNU编译器集合或GCC），GNU工具和Linux内核的结合是天生的绝配
 * GNU系统与Linux内核结合构成一个完整的操作系统：一个基于Linux的GNU系统，该操作系统在通常情况下称为“GNU/Linux”，或简称Linux
 * Linux发行版使用GNU提供的组件、Linux内核，MIT的X-Windows GUI以及其他可以在开源BSD许可下使用的BSD组件来实现。像Slackware和Red Hat这样的发行版的早期流行给了上世纪90年代的“普通PC用户”使用Linux操作系统的机会，以及他们在工作或学术生活中使用的许多专有的Unix系统功能和实用工具
@@ -130,6 +130,8 @@ sudo update-grub
   - LXDE
 
 ## 配置
+
+* [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 
 ```sh
 ## ~/.bashrc:
@@ -2031,6 +2033,7 @@ sudo umount /mnt
 * [Pkgs](https://pkgs.org/):Packages Search for Linux and Unix
 * AppImage
 * [winapps](https://github.com/Fmstrat/winapps)Run Windows apps such as Microsoft Office/Adobe in Linux (Ubuntu/Fedora) and GNOME/KDE as if they were a part of the native OS, including Nautilus integration.
+* [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [Bleachbit](https://www.bleachbit.org/download/linux)
   - `sudo apt install bleachbit`
 
@@ -2293,7 +2296,7 @@ command > /dev/null 2>&1
   - `sar -n DEV 1 `即可每秒刷新一次网络流量
   - `watch cat /proc/net/dev`
   - iftop
-* [google / bbr](https://github.com/google/bbr) TCP BBR（Bottleneck Bandwidth and Round-trip propagation time）由Google设计，于2016年发布的拥塞算法
+* [bbr](https://github.com/google/bbr) TCP BBR（Bottleneck Bandwidth and Round-trip propagation time）由Google设计，于2016年发布的拥塞算法
   - 传统 TCP 拥塞控制算法，基于丢包反馈的协议（基于丢包来作为降低传输速率的信号），而BBR则基于模型主动探测
     + 基于「丢包反馈」的协议是一种 被动式 的拥塞控制机制，其依据网络中的丢包事件来做网络拥塞判断。即便网络中的负载很高时，只要没有产生拥塞丢包，协议就不会主动降低自己的发送速度。
     + 这种协议可以最大程度的利用网络剩余带宽，提高吞吐量。然而，由于基于丢包反馈协议在网络近饱和状态下所表现出来的侵略性，一方面大大提高了网络的带宽利用率；但另一方面，对于基于丢包反馈的拥塞控制协议来说，大大提高网络利用率同时意味着下一次拥塞丢包事件为期不远了，所以这些协议在提高网络带宽利用率的同时也间接加大了网络的丢包率，造成整个网络的抖动性加剧
@@ -3561,23 +3564,18 @@ cat a b b | sort | uniq -u > c
 
 ## 工具
 
-* [GNU](http://ftp.gnu.org/gnu/)
 * [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
-* [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
-* [gopasspw/gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 * [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 * [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
-* [iovisor/bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
+* [bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
 * Monitor
   - [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
   - [bashtop](https://github.com/aristocratos/bashtop):Linux resource monitor
   - [Cockpit](https://cockpit-project.org/):The easy-to-use, integrated, glanceable, and open web-based interface for your servers
-* [Linuxbrew/brew](https://github.com/Linuxbrew/brew):🍺🐧 The Homebrew package manager for Linux https://linuxbrew.sh
 * [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
-* [AlternativeTo](https://alternativeto.net/)
 * bench.sh `wget -qO- bench.sh | bash` `curl -Lso- bench.sh | bash` 查看 Linux 系统信息，测试网络带宽及硬盘读写速率
-* [843723683 / LTF](https://github.com/843723683/LTF):Linux test framework
+* [LTF](https://github.com/843723683/LTF):Linux test framework
 
 ## 参考
 
@@ -3598,7 +3596,7 @@ cat a b b | sort | uniq -u > c
 * [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)
 * [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
 * [nevermosby / linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
-
+* [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
 
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 * [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)

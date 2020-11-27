@@ -1,32 +1,32 @@
 # [magento2](https://github.com/magento/magento2)
 
-All Submissions you make to Magento Inc. (“Magento") through GitHub are subject to the following terms and conditions: (1) You grant Magento a perpetual, worldwide, non-exclusive, no charge, royalty free, irrevocable license under your applicable copyrights and patents to reproduce, prepare derivative works of, display, publically perform, subli… http://www.magento.com
+All Submissions you make to Magento Inc. (“Magento") through GitHub are subject to the following terms and conditions: (1) You grant Magento a perpetual, worldwide, non-exclusive, no charge, royalty free, irrevocable license under your applicable copyrights and patents to reproduce, prepare derivative works of, display, publically perform, subli… <http://www.magento.com>
 
 * 默认开启了 N 多个模块，靠禁用相应模块这个方法来给产品加速
 * A module is a type of component. A component can be
-    - A module (code that extends Magento behavior)
-    - A theme (changes the look and feel of your Magento Admin or storefront)
-    - Language package (used to translate text and messages in the Magento application)
+  - A module (code that extends Magento behavior)
+  - A theme (changes the look and feel of your Magento Admin or storefront)
+  - Language package (used to translate text and messages in the Magento application)
 * 文件是基于功能进行分组的，分组后的代码块叫做模块,结构如下
-    - registration.php
-    - etc/module.xml:specifies the setup version and loading sequence
-    - service contract
-    - block：view Model
-    - Console
-    - Controller
+  - registration.php
+  - etc/module.xml:specifies the setup version and loading sequence
+  - service contract
+  - block：view Model
+  - Console
+  - Controller
 
 ## install
 
 * 文件有写权限
-    - vendor
-    - app/etc
-    - var
-    - pub/media
-    - pub/static
-    - generated
+  - vendor
+  - app/etc
+  - var
+  - pub/media
+  - pub/static
+  - generated
 * upgrade
-    - Generating non-existent classes such as factories and interceptors for plug-ins
-    - generating the dependency injection configuration for the object manager.
+  - Generating non-existent classes such as factories and interceptors for plug-ins
+  - generating the dependency injection configuration for the object manager.
 
 ```sh
 # php.ini cgi.fix_pathinfo line and change the value to 0
@@ -75,21 +75,21 @@ GRANT ALL PRIVILEGES ON magento.* TO 'magento'@'localhost';
 SHOW GRANTS FOR 'magento'@'localhost';
 flush privileges;
 
-php bin/magento setup:install \ 
---base-url=http://www.magento-dev.com/ \ 
---db-host=localhost \ 
---db-name=magento \ 
---db-user=magento \ 
---db-password=magento \ 
---backend-frontname=admin \ 
---admin-firstname=admin \ 
---admin-lastname=admin \ 
---admin-email=admin@admin.com \ 
---admin-user=admin \ 
---admin-password=admin123 \ 
---language=en_US \ 
---currency=USD \ 
---timezone=America/Chicago \ 
+php bin/magento setup:install \
+--base-url=http://www.magento-dev.com/ \
+--db-host=localhost \
+--db-name=magento \
+--db-user=magento \
+--db-password=magento \
+--backend-frontname=admin \
+--admin-firstname=admin \
+--admin-lastname=admin \
+--admin-email=admin@admin.com \
+--admin-user=admin \
+--admin-password=admin123 \
+--language=en_US \
+--currency=USD \
+--timezone=America/Chicago \
 --use-rewrites=1
 
 php bin/magento deploy:mode:set developer
@@ -115,10 +115,10 @@ chmod -R 777 var/ generated/
 
 <VirtualHost *:80>
         ServerName packagist.domain.com
- 
+
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
- 
+
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
@@ -201,15 +201,14 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 * Determine the payment method
 * Place the order so that the merchant can fulfill it.
 * cart quote-》checkout quote
-    - 添加item到cart前验证：agento\CatalogInventory\Model\Quote\Item\QuantityValidator
+  - 添加item到cart前验证：agento\CatalogInventory\Model\Quote\Item\QuantityValidator
 * re-order
-    - out of stock
-    - disable
+  - out of stock
+  - disable
 
 ## Product
 
 * Configuration > Catalog > Inventory > Product Stock Options: Product Stock Options, find 2 sections: Maximum Qty Allowed in Shopping Cart and Minimum Qty Allowed in Shopping Cart.
-
 
 ## module
 
@@ -220,21 +219,21 @@ bin/magento admin:user:create --admin-user=henry --admin-password=111111 --admin
 
 * `http://<:host:>/rest/<:store_code:>/<:api_path:>`
 * 结构
-    - module.xml
-    - registeration.php
-    - Api
-    - Api/Data
-    - etc\webapi.xml
-      + Route:This is the URL which will be used to call our API https://{{MagentoBaseURL}}/index.php/rest/V1/custom/{{categoryId}}/products
-      + Service Class – This is the interface class of our API and the main method “getAssignedProducts” will be called with {{categoryId}} as the parameter
-      + Resources- This defines who has the permission to call this API. It could be anonymous (everyone) or self (customer) or specific admin user with specific permission for example Scommerce_Custom::custom which can be added in acl.xml
-        + the ‘self’ permission allows a customer to access the /V1/customers/me route and retrieve information about itself only. In the handling code the PHP session cookie is used to verify that the customer is legitimate and matches the supplied customer_id parameter. Session authentication is discussed further below.
-        + the ‘anonymous’ permission, as its name suggests, allows access to the /V1/customers route – even for a user who’s not logged-in. The route is used to create a customer when data is posted to it, so it makes sense that access needs to be open. This might seem like a security risk, but the POST data also requires a valid form key to process the request.
-    - Scommerce\Custom\Api\CategoryLinkManagementInterface.php:the main interface file
+  - module.xml
+  - registeration.php
+  - Api
+  - Api/Data
+  - etc\webapi.xml
+    + Route:This is the URL which will be used to call our API <https://{{MagentoBaseURL}}/index.php/rest/V1/custom/{{categoryId}}/products>
+    + Service Class – This is the interface class of our API and the main method “getAssignedProducts” will be called with {{categoryId}} as the parameter
+    + Resources- This defines who has the permission to call this API. It could be anonymous (everyone) or self (customer) or specific admin user with specific permission for example Scommerce_Custom::custom which can be added in acl.xml
+      + the ‘self’ permission allows a customer to access the /V1/customers/me route and retrieve information about itself only. In the handling code the PHP session cookie is used to verify that the customer is legitimate and matches the supplied customer_id parameter. Session authentication is discussed further below.
+      + the ‘anonymous’ permission, as its name suggests, allows access to the /V1/customers route – even for a user who’s not logged-in. The route is used to create a customer when data is posted to it, so it makes sense that access needs to be open. This might seem like a security risk, but the POST data also requires a valid form key to process the request.
+  - Scommerce\Custom\Api\CategoryLinkManagementInterface.php:the main interface file
 * Authentication
-    - Token  Mobile application  Yes     Yes 可以通过token解析出来，比如用户信息
-    - OAuth  Third-party application (integration)   No  Yes
-    - Session Javascript application on the frontend site or admin site   Yes     Yes
+  - Token  Mobile application  Yes     Yes 可以通过token解析出来，比如用户信息
+  - OAuth  Third-party application (integration)   No  Yes
+  - Session Javascript application on the frontend site or admin site   Yes     Yes
 * Intergered[Swagger](http://website-base-url/swagger)
 * 参数：接口定义接受参数，与返回值类型
 
@@ -524,33 +523,33 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
     + showInWebsite: means this section will be shown when a website is selected in current configuration scope.
     + showInStore: means this section will be shown store is selected in current configuration scope.
     + fields type
-        + checkbox,
-        + checkboxes,
-        + column,
-        + date,
-        + editablemultiselect,
-        + editor,
-        + fieldset,
-        + file,
-        + gallery,
-        + hidden,
-        + image,
-        + imagefile,
-        + label,
-        + link,
-        + multiline,
-        + multiselect,
-        + note,
-        + obscure,
-        + password,
-        + radio,
-        + radios,
-        + reset,
-        + select,
-        + submit,
-        + text,
-        + textarea,
-        + time
+      + checkbox,
+      + checkboxes,
+      + column,
+      + date,
+      + editablemultiselect,
+      + editor,
+      + fieldset,
+      + file,
+      + gallery,
+      + hidden,
+      + image,
+      + imagefile,
+      + label,
+      + link,
+      + multiline,
+      + multiselect,
+      + note,
+      + obscure,
+      + password,
+      + radio,
+      + radios,
+      + reset,
+      + select,
+      + submit,
+      + text,
+      + textarea,
+      + time
   - configuration option values are store in `core_config_data` table.
 
 ```XML
@@ -599,14 +598,14 @@ curl -XPOST -H 'Content-Type: application/json' http://magento-url/rest/V1/integ
   - static: 升级数据库
   - int: 字段添加到到customer_entity_int中,eav_attribute:字段映射表,升级数据就行
 * script
-    - installSchema：for the first time when installing the module,只在第一次安装模块时执行
-        + remove the information that let Magento know your module has installed in the system. Please open the table ‘setup_module’, find and remove a row has module equals to vendor_module `DELETE FROM setup_module WHERE module='<Vendor>_<Module>'`
-        + install by composer:`php bin/magento module:uninstall -r <Vendor>_<Module>`
-    - UpgradeSchema：If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
-    - InstallSchema:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
-    - InstallData: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
-    - UpgradeSchema: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).change attribute setup_version greater than current setup version in module.xml
-    - UpgradeData: runs after UpgradeSchema.php . It is having the same concept as InstallData: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
+  - installSchema：for the first time when installing the module,只在第一次安装模块时执行
+    + remove the information that let Magento know your module has installed in the system. Please open the table ‘setup_module’, find and remove a row has module equals to vendor_module `DELETE FROM setup_module WHERE module='<Vendor>_<Module>'`
+    + install by composer:`php bin/magento module:uninstall -r <Vendor>_<Module>`
+  - UpgradeSchema：If you installed the module before, you will need to upgrade module and write the table create code to the UpgradeSchema.php. change attribute setup_version greater than current setup version in module.xml
+  - InstallSchema:This file is executed first just after your modules registration (Means just after your module & its version entries are done in to the table -> setup_module ). This file is used to create tables with their columns attribute into your database that are later used by the new installed module.
+  - InstallData: This file is executed after InstallSchema.php: . It is used to add data to the newly created table or any existing table.
+  - UpgradeSchema: This file comes with the module & runs only then, if you are already having that modules previous version installed in your magento(Means it has entry of its previous version into the table -> setup_module ). It is used to manipulate the table related to the module(Means it is used to alter the table schema means columns attribute & to add new column into that table).change attribute setup_version greater than current setup version in module.xml
+  - UpgradeData: runs after UpgradeSchema.php . It is having the same concept as InstallData: has but using this file you can change/alter the database contents without the use of model files. You can also use this file to add new content to the database same us But same like UpgradeSchema.php it will also runs only then if you are having that modules previous version installed in your magento.
 
 ```php
 bin/magento setup:db:status
@@ -692,10 +691,10 @@ foreach($product_ids as $id){
 
 * module/etc/schema.graphqls
 * type
-    - Query:search object
-    - Mutation:performing CRUD operations
+  - Query:search object
+  - Mutation:performing CRUD operations
 * filters
-    - input:query conditons
+  - input:query conditons
 * result obejct fileds
 * 聲明module
 * 添加graphQL
@@ -739,6 +738,7 @@ foreach($product_ids as $id){
     </type>
 </config>
 ```
+
 ```php
 namespace \Vendor\Module\Plugin\ModelName;
 
@@ -770,9 +770,9 @@ class ProductPlugin
 ## Order
 
 * Order Status
-    - Processing Pending->Payment Suspected Fraud->Payment Review->Pending On Hold Complete Closed Canceled Pending PayPal
+  - Processing Pending->Payment Suspected Fraud->Payment Review->Pending On Hold Complete Closed Canceled Pending PayPal
 * Order State
-    - ->submit->Pending Payment->Processing->Order shipped->Order shipped->Complete->in_transit->Closed Canceled On Hold Payment Review
+  - ->submit->Pending Payment->Processing->Order shipped->Order shipped->Complete->in_transit->Closed Canceled On Hold Payment Review
 
 CHECKOUT, PAYMENT, & SHIPPING
 One-Page Online Checkout
@@ -792,14 +792,14 @@ Destination Country Management
 Per Order and Per Item Flat Rate Shipping Option
 Free Shipping Functionality
 Manage Shipping by Weight and Destination
- 
+
 SEARCH ENGINE OPTIMIZATION (SEO)
 Light Footprint Design for Fast Load Time and Search Engine Optimization
 Google Site Map Creation and Site Map Auto Generation
 Search Engine Friendly URL’s Including URL ReWrite Controls
 META Information Management at Product and Category Levels
 Auto-Generated Popular Search Terms Page
- 
+
 ANALYTICS AND REPORTING
 Integration with Google Analytics
 Admin Report Dashboard with Business Overview
@@ -813,7 +813,7 @@ Onsite Search Terms Report
 Product Reviews Report with RSS Support
 Tags Report with RSS Support
 Coupon Usage Report
- 
+
 MARKETING PROMOTIONS AND TOOS
 Online Poll Creation and Management
 Newsletter Management
@@ -828,20 +828,21 @@ Recently Viewed Products
 New Items Promotional Tool
 On Page and In Shopping Cart Upsells and Cross Sells
 Send to a Friend and Wishlist Management
- 
+
 ORDER MANAGEMENT
 View, edit, create and fulfill orders from admin panel
 Create one or multiple invoices, shipments and credit memos per order to allow for split fulfillment
 Print invoices and packing slips
 -
- Call Center (phone) order creation − Includes ability to create new
+
+Call Center (phone) order creation − Includes ability to create new
 customer, or select existing customer and view - shopping cart,
 wishlist, last ordered items, and compared products list, as well as
 select addresses, give discounts and assign custom prices
 Create re-orders for customers from administration panel
 Email Notifications of Orders
 RSS feed of New Orders
- 
+
 CUSTOMER SERVICE
 Contact Us form
 Feature-rich Customer Accounts
@@ -851,7 +852,7 @@ Password Reset email from front-end and admin panel
 Order and Account Update Emails
 Customizable Order Emails
 Create and Edit Orders from the Admin Panel
- 
+
 CUSTOMER ACCOUNTS
 Order status and history
 Re-orders from account
@@ -863,7 +864,7 @@ Email or Send RSS feed of Wishlist
 Newsletter Subscription management
 Product Reviews submitted
 Product Tags submitted
- 
+
 CATALOG MANAGEMENT
 Inventory Management with Backordered items, Minimum and Maximum quantities
 Batch Import and Export of catalog
@@ -882,6 +883,7 @@ Search Results rewrites and redirects
 Approve, Edit and Delete Product Tags
 Approve, Edit and Delete Product Reviews
 -
+
  RSS feed for Low Inventory Alerts Customer Personalized Products –
 Upload text for embroidery, monogramming, etc. (this one is
 already there, but want to have the following shown after it)
@@ -889,7 +891,7 @@ Customer Personalized Products – Upload Image
 Customer Personalized Products – Select Date/Time options for products
 Customer Sorting – Define Attributes for Customer
 Sorting on category (price, brand, etc.)
- 
+
 PRODUCT BROWSING
 Multiple Images Per Product
 Product Image Zoom-in Capability
@@ -901,7 +903,7 @@ Product Option Selection
 Grouped Products View
 Add to Wishlist
 Send to a Friend with Email
- 
+
 CATALOG BROWSING
 Layered / Faceted Navigation for filtering of products in categories
 Layered / Faceted Navigation for filtering of products in search results
@@ -922,8 +924,8 @@ Breadcrumbs
 ## varnish
 
 * 两级缓存：框架->varnish
-* https://varnish-cache.org/docs/6.3/
-* https://www.linode.com/docs/websites/varnish/getting-started-with-varnish-cache/
+* <https://varnish-cache.org/docs/6.3/>
+* <https://www.linode.com/docs/websites/varnish/getting-started-with-varnish-cache/>
 
 ```
 varnishncsa -F '%U%q %{Varnish:hitmiss}x'
@@ -932,7 +934,7 @@ varnishncsa -F '%U%q %{Varnish:hitmiss}x'
 ## Exception
 
 * magento 定義各種exception
-    - \Magento\Framework\Exception\LocalizedException
+  - \Magento\Framework\Exception\LocalizedException
 * 方便前端错误封装以及不同语言的对应
 
 ```php
@@ -979,8 +981,8 @@ varnishncsa -F '%U%q %{Varnish:hitmiss}x'
 ## 用户
 
 * 类型
-    - Associate
-    - Preferred
+  - Associate
+  - Preferred
 
 ## 后台
 
@@ -1002,21 +1004,21 @@ varnishncsa -F '%U%q %{Varnish:hitmiss}x'
 * tax rules
 * tax zones and Rates
 * tax class
-    - kind
-        + Customer — You can create as many customer tax classes as you need, and assign them to customer groups. For example, in some jurisdictions, wholesale transactions are not taxed, but retail transactions are. You can associate members of the Wholesale Customer group with the Wholesale tax class.
-        + Product — Product classes are used in calculations to determine the correct tax rate is applied in the shopping cart. When you create product, it is assigned to a specific tax class. For example, food might not be taxed, or be taxed at a different rate.
-        + Shipping — If your store charges an additional tax on shipping, you should designate a specific product tax class for shipping. Then in the configuration, specify it as the tax class that is used for shipping.
-    - setting:Stores > Settings > Configuration->sales->tax->tax class
+  - kind
+    + Customer — You can create as many customer tax classes as you need, and assign them to customer groups. For example, in some jurisdictions, wholesale transactions are not taxed, but retail transactions are. You can associate members of the Wholesale Customer group with the Wholesale tax class.
+    + Product — Product classes are used in calculations to determine the correct tax rate is applied in the shopping cart. When you create product, it is assigned to a specific tax class. For example, food might not be taxed, or be taxed at a different rate.
+    + Shipping — If your store charges an additional tax on shipping, you should designate a specific product tax class for shipping. Then in the configuration, specify it as the tax class that is used for shipping.
+  - setting:Stores > Settings > Configuration->sales->tax->tax class
 
 ## 框架
 
 * class interface not found: 在code 中生成
 * EVA
-    - eav_entity_type  根据type 获取类型id
-    - eav_attribute:获取类型属性id
-* product 
-    - image detail role:`SELECT * FROM catalog_product_entity_varchar where entity_id=59 and attribute_id in (87,88,89,128) order by store_id asc;`
-    - `SELECT * FROM magento.catalog_product_entity_int where attribute_id =97;`
+  - eav_entity_type  根据type 获取类型id
+  - eav_attribute:获取类型属性id
+* product
+  - image detail role:`SELECT * FROM catalog_product_entity_varchar where entity_id=59 and attribute_id in (87,88,89,128) order by store_id asc;`
+  - `SELECT * FROM magento.catalog_product_entity_int where attribute_id =97;`
 
 ```sql
 # 获取商品的enable 状态
@@ -1147,17 +1149,17 @@ function fatalErrorHandler()
 ## 工具
 
 * ERP
-    - SAP Business One 拥有小型的在线商务，这款Magento的ERP解决方案非常适合满足你所有当前和未来的商业需求。合理的价格也是选择这个系统的一大优点。SAP的功能包括销售流程管理，仓库详细信息跟踪，人力资源和潜在客户数据维护等。Magento平台加入SAP可以处理以下任务：将客户数据从SAP导入到Magento；将订单信息从Magento平台导出到SAP；同步库存，定价和目录清单。
-    - NetSuite这个基于云的ERP系统在全球范围内非常流行，服务于100多个国家的20000多家企业。它提供实时可见性和报告功能，使你的决策过程非常快速和及时。 你可以轻松地配置、定制和升级任何已排序的模块或任何各种业务操作。与Magento平台一起，它可以提供以下内容：从NetSuite进口货物到Magento;使用Magento Side Queuing函数处理NetSuite中的数据;管理NetSuite中的产品信息，以便在Magento中进一步更新;将订单和客户数据从Magento导出到NetSuite;将数据直接提取或加载到NetSuite中以集成碎片数据
-    - Microsoft Dynamics AXMS Dynamics是一个成熟的数字解决方案，通过智能客户账户管理和订单创建工具简化工作流程。 它有助于快速简单的订购流程，从而增强客户体验。 作为最好的Magento ERP系统之一，它为你提供了许多非常有用的电子商务功能，如多种语言和货币支持，以及强大的交付，营销和SEO优化工具集等等。通过与Magento电子商务平台集成，你可以执行以下操作：将客户更新功能导入Magento;从Magento到MS Dynamics AX的订单结果导出;从Magento向Dynamics出口客户创建功能;将目录数据导入Magento;在Magento和MS Dynamics AX之间同步编辑/更新的订单数据。
-    - Sage ERP.该ERP软件包适用于任何类型和规模的在线业务。 正如公司网站上报道的那样，Sage主要用于处理财务和企业管理。 此Magento ERP使你可以借助移动，云和内部部署管理工具来控制你的网上商店。 它非常适合制造，批发和服务流程。使用Sage ERP的Magento平台将能够：可跟踪库存细节;可跨部门、跨语言、跨立法合作；可使用总分类帐，预算，成本会计等管理财务流程;可控制采购，现金流;可更新客户信息。
-    - Epicor这种价格低廉到中等价位的ERP完善了我们针对Magento平台的最佳ERP解决方案列表。 Epicor是一款端到端的ERP软件，可以帮助你有效地管理后台办公流程，如计划和调度，人力资本，生产，绩效和客户关系管理。 该数字解决方案在140个国家/地区拥有20,000多个客户，其本地化版本约有30种语言。 此外，Epicor在促进客户需求、项目执行、减少浪费和服务协调等方面具有很大的便利性和灵活性。与Magento平台Epicor保持一致可以让你：保存有信誉的产品的历史记录；提供可行的VAR（增值经销商）渠道;支持MS / SQL / SOA技术解决方案;在各部门之间获得更大的数据连通性;可采用强大的财务分析
+  - SAP Business One 拥有小型的在线商务，这款Magento的ERP解决方案非常适合满足你所有当前和未来的商业需求。合理的价格也是选择这个系统的一大优点。SAP的功能包括销售流程管理，仓库详细信息跟踪，人力资源和潜在客户数据维护等。Magento平台加入SAP可以处理以下任务：将客户数据从SAP导入到Magento；将订单信息从Magento平台导出到SAP；同步库存，定价和目录清单。
+  - NetSuite这个基于云的ERP系统在全球范围内非常流行，服务于100多个国家的20000多家企业。它提供实时可见性和报告功能，使你的决策过程非常快速和及时。 你可以轻松地配置、定制和升级任何已排序的模块或任何各种业务操作。与Magento平台一起，它可以提供以下内容：从NetSuite进口货物到Magento;使用Magento Side Queuing函数处理NetSuite中的数据;管理NetSuite中的产品信息，以便在Magento中进一步更新;将订单和客户数据从Magento导出到NetSuite;将数据直接提取或加载到NetSuite中以集成碎片数据
+  - Microsoft Dynamics AXMS Dynamics是一个成熟的数字解决方案，通过智能客户账户管理和订单创建工具简化工作流程。 它有助于快速简单的订购流程，从而增强客户体验。 作为最好的Magento ERP系统之一，它为你提供了许多非常有用的电子商务功能，如多种语言和货币支持，以及强大的交付，营销和SEO优化工具集等等。通过与Magento电子商务平台集成，你可以执行以下操作：将客户更新功能导入Magento;从Magento到MS Dynamics AX的订单结果导出;从Magento向Dynamics出口客户创建功能;将目录数据导入Magento;在Magento和MS Dynamics AX之间同步编辑/更新的订单数据。
+  - Sage ERP.该ERP软件包适用于任何类型和规模的在线业务。 正如公司网站上报道的那样，Sage主要用于处理财务和企业管理。 此Magento ERP使你可以借助移动，云和内部部署管理工具来控制你的网上商店。 它非常适合制造，批发和服务流程。使用Sage ERP的Magento平台将能够：可跟踪库存细节;可跨部门、跨语言、跨立法合作；可使用总分类帐，预算，成本会计等管理财务流程;可控制采购，现金流;可更新客户信息。
+  - Epicor这种价格低廉到中等价位的ERP完善了我们针对Magento平台的最佳ERP解决方案列表。 Epicor是一款端到端的ERP软件，可以帮助你有效地管理后台办公流程，如计划和调度，人力资本，生产，绩效和客户关系管理。 该数字解决方案在140个国家/地区拥有20,000多个客户，其本地化版本约有30种语言。 此外，Epicor在促进客户需求、项目执行、减少浪费和服务协调等方面具有很大的便利性和灵活性。与Magento平台Epicor保持一致可以让你：保存有信誉的产品的历史记录；提供可行的VAR（增值经销商）渠道;支持MS / SQL / SOA技术解决方案;在各部门之间获得更大的数据连通性;可采用强大的财务分析
 * docker
-    - https://github.com/markshust/docker-magento
-    - https://github.com/magento-notes/magento2-exam-notes
-    - https://github.com/clean-docker/Magento2
-    - https://github.com/webkul/magento2-varnish-redis-ssl-docker-compose
-    - https://github.com/fballiano/docker-magento2
+  - <https://github.com/markshust/docker-magento>
+  - <https://github.com/magento-notes/magento2-exam-notes>
+  - <https://github.com/clean-docker/Magento2>
+  - <https://github.com/webkul/magento2-varnish-redis-ssl-docker-compose>
+  - <https://github.com/fballiano/docker-magento2>
 
 ## 参考
 
@@ -1165,8 +1167,8 @@ function fatalErrorHandler()
 * [marketplace](https://marketplace.magento.com)
 * [Docs](https://devdocs.magento.com/)
 * [samples](https://github.com/magento/magento2-samples)
-* https://magento.com/technical-resources
-* https://devdocs.magento.com/#/individual-contributors
-* https://devdocs.magento.com/guides/v2.3/config-guide/
+* <https://magento.com/technical-resources>
+* <https://devdocs.magento.com/#/individual-contributors>
+* <https://devdocs.magento.com/guides/v2.3/config-guide/>
 * [awesome-magento2](https://github.com/DavidLambauer/awesome-magento2)
 * [](https://bbs.mallol.cn)

@@ -275,7 +275,6 @@
 * UglifyJS
 * CleanCSS
 
-
 ### 项目构建工具
 
 包括JS转码（使用 Babel转 ES6或 TypeScript自转等）、CSS转码（ Less或 Sass转 Css）、代码或资源的合并与压缩，基础检查和各类测试等等
@@ -299,7 +298,6 @@
 * FIS
 
 * Mod
-
 
 ### 类库模块化
 
@@ -513,14 +511,14 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 * 了解网络安全、反向代理、HTTP 缓存优化
 * 了解网站监测、运维、集群、负载均衡:为了及时跟踪服务器运行状态，可以选择性的掌握网站监测的一些手段------或使用命令行或使用相关服务平台。同时通过一定的运维能力，能及时将不正常的服务器运行状态拉入正规之中------DevOps 是运维开发的一种大趋势。当系统面临大量用户访问，负载过高的时候，通常会使用增加服务器数量来进行横向扩展，使用集群和负载均衡提高整个系统的处理能力。初学者的项目一般并不是很大，我们将集群和负载均衡列入选修
 
-| 字段        | 类型          | 空   | 键值  | 注释       |
-| --------- | ----------- | --- | --- | -------- |
-| sId       | int(10)     | 否   | 主键  | 唯一标识     |
-| sBarcode  | varchar(20) | 否   |     | 学生账号(学号) |
-| sPassword | varchar(20) | 否   |     | 学生密码     |
-| sName     | varchar(15) | 是   |     | 学生姓名     |
-| cId       | varchar(15) | 否   | 外键  | 班级号      |
-| sRegTime  | date        | 否   |     | 学生注册时间   |
+| 字段      | 类型        | 空  | 键值 | 注释           |
+| --------- | ----------- | --- | ---- | -------------- |
+| sId       | int(10)     | 否  | 主键 | 唯一标识       |
+| sBarcode  | varchar(20) | 否  |      | 学生账号(学号) |
+| sPassword | varchar(20) | 否  |      | 学生密码       |
+| sName     | varchar(15) | 是  |      | 学生姓名       |
+| cId       | varchar(15) | 否  | 外键 | 班级号         |
+| sRegTime  | date        | 否  |      | 学生注册时间   |
 
 ```
 ### 单个学生登录
@@ -532,10 +530,10 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 **请求方式：**
 - POST
 **参数：**
-|参数名|必选|类型|说明|
-|:----    |:---|:----- |-----   |
-|barcode |是  |string | 身份证号码    |
-|password   |是  |string | 密码    |
+| 参数名   | 必选 | 类型   | 说明       |
+| :------- | :--- | :----- | ---------- |
+| barcode  | 是   | string | 身份证号码 |
+| password | 是   | string | 密码       |
 **返回示例**
 ``
 {
@@ -543,9 +541,9 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 }
 ``
 **返回参数说明**
-|参数名|类型|说明|
-|:-----|:-----|-----|
-|res |int   |1 为成功 0为失败  |
+| 参数名 | 类型 | 说明             |
+| :----- | :--- | ---------------- |
+| res    | int  | 1 为成功 0为失败 |
 **备注**
 此接口同时会返回 Cookie
 ```
@@ -634,7 +632,7 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
     + 前端：可以基于 Mock 接口的方式，搭建模拟后端环境，分成三个阶段
       * 按页面划分，快速出所有的页面 只考虑量，不考虑质，以基本跑通所有的 Mock 接口为标准。 这里更多的考虑在于，前端接触新的框架，会积累很多问题，包括 CSS 之类的，包括接口调用之类的，这些问题都有共通性，可以在下一次迭代的时候，总结出问题，分不同的人去解决。
       * 基于所有的页面进行迭代 划分不同的人去解决团队积累下来的问题，并统一修复。可以尝试抽出一些共性的组件
-      * 通过了mock来提供一些假数据，我们先规定好了API接口，设计出了一套API文档，然后我们就可以通过API文档，利用mock(http://mockjs.com)来返回一些假数据，这样就可以模拟发送API到接受响应的整一个过程，
+      * 通过了mock来提供一些假数据，我们先规定好了API接口，设计出了一套API文档，然后我们就可以通过API文档，利用mock(<http://mockjs.com)来返回一些假数据，这样就可以模拟发送API>到接受响应的整一个过程，
       * 分批接入后端的模块接口 到这个阶段的时候，后端的接口理论上 QA 根据模块，已经验收了一部分了，可以开始分批接入，并最终提交给 QA 进行功能上的测试
     + 后端
       * 按模块切分开发，接口分批提交验收。
@@ -652,7 +650,9 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 
 * 有了 Node.js 之后，前端可以在 Node.js 中去代理这 5 个异步请求，还能很容易的做 Bigpipe，这块的优化能让整个渲染效率提升很多。在无线端，在客户手机上建立一个 HTTP 请求开销很大，有了这个优化，性能一下提升好几倍。
 * 前端能够在本地运行服务程序、开发、调试
+
 - 跨域的问题，无法发出ajax请求的(浏览器跨域的限制)，需要本地服务器。http-proxy-middleware插件
+
 * nodejs本身有着独特的异步、非阻塞I/O的特点，这也就意味着他特别适合I/O密集型操作，在处理并发量比较大的请求上能力比较强，因此，利用它来充当前端服务器，向客户端提供静态文件以及响应客户端的请求
   - 前端资源部署到Node Server中
   + 根据请求类型从后端服务器上通过RPC服务请求页面的模板数据，然后进行页面的组装和渲染；
@@ -846,8 +846,8 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 ## 面试
 
 * [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
-* [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
-* [FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 https://github.com/nanhupatar/FEGuide
+* [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
+* [FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 <https://github.com/nanhupatar/FEGuide>
 * [ScriptOJ](http://scriptoj.mangojuice.top/):Web 前端开发评测系统,从大量实战代码、面试题目中总结出精华题库和相应的测试
 * [haizlin/fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
 * [F2E](https://github.com/ponkans/F2E):【互联网一线大厂面试+学习指南】大前端进阶知识扫盲
@@ -869,23 +869,23 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 ## 工具
 
 * 框架
-  - [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. http://goratchet.com
-  - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. http://foundation.zurb.com
-* [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground https://webmakerapp.com/
+  - [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. <http://goratchet.com>
+  - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. <http://foundation.zurb.com>
+* [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
-* [alibaba/ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% https://alibaba.github.io/ice/
-* [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS https://getmdl.io
+* [alibaba/ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% <https://alibaba.github.io/ice/>
+* [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS <https://getmdl.io>
 * [Munter/subfont](https://github.com/Munter/subfont):Command line tool to optimize your webfont loading. Aggressive subsetting based on your font use, self-hosting of Google fonts and preloading
 * [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
 * [Tencent/vConsole](https://github.com/Tencent/vConsole):A lightweight, extendable front-end developer tool for mobile web page.
 * Scroll
-  - [ustbhuangyi/better-scroll](https://github.com/ustbhuangyi/better-scroll):scroll inspired by iscroll, and it supports more features and has a better scroll perfermancehttps://ustbhuangyi.github.io/better-scroll/#/
-  - [cubiq/iscroll](https://github.com/cubiq/iscroll):Smooth scrolling for the web http://iscrolljs.com
+  - [ustbhuangyi/better-scroll](https://github.com/ustbhuangyi/better-scroll):scroll inspired by iscroll, and it supports more features and has a better scroll perfermance<https://ustbhuangyi.github.io/better-scroll/#/>
+  - [cubiq/iscroll](https://github.com/cubiq/iscroll):Smooth scrolling for the web <http://iscrolljs.com>
 * 富文本
-  - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. https://ckeditor.comv
-* [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. https://godspen.ymm56.com
-* [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. https://polymer-library.polymer-project.org/
-* [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components https://lit-element.polymer-project.org
+  - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. <https://ckeditor.comv>
+* [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. <https://godspen.ymm56.com>
+* [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. <https://polymer-library.polymer-project.org/>
+* [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components <https://lit-element.polymer-project.org>
 
 ## 参考
 
@@ -893,10 +893,10 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
 * [dwqs/blog](https://github.com/dwqs/blog)
 * [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
-* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers https://frontendchecklist.io
+* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers <https://frontendchecklist.io>
 * [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
 * [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
-* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development https://developers.google.com/web/fundamentals
+* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 
 * [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 * [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)

@@ -1,11 +1,13 @@
 # [mongo](https://github.com/mongodb/mongo)
 
-The MongoDB Database https://www.mongodb.com/
+The MongoDB Database <https://www.mongodb.com/>
 
 * 由C＋＋写就，其名字来自humongous这个单词的中间部分。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
 * 数据结构：db->collection->document（BSON（binary json）存放于硬盘）,BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
+
 * BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点
   -
+
 * 跟一般的key-value数据库不一样的是，它的value中存储了结构信息,以单文档为单位存储的，可以任意给一个或一批文档新增或删除字段，而不会对其它文档造成影响，这就是所谓的schema-free，这也是文档型数据库最主要的优点。
 * 最大的特点是支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。Mongo还可以解决海量数据的查询效率，根据官方文档，当数据量达到50GB以上数据时，Mongo数据库访问速度是MySQL10 倍以上。
 
@@ -55,7 +57,7 @@ mongo -version
 * 配置文件:/etc/mongod.conf
 * 开启mongo服务端的命令，参数写入配置文档，以参数-f启动 `mongod -f C:datadbmongodb_config.config`
 
-* --dbpath ：存储MongoDB数据文件的目录` mongod * --dbpath=C:datadb`
+* --dbpath ：存储MongoDB数据文件的目录`mongod * --dbpath=C:datadb`
 * --directoryperdb：指定每个数据库单独存储在一个目录中（directory），该目录位于–dbpath指定的目录下，每一个子目录都对应一个数据库名字。
 * --logpath ：指定mongod记录日志的文件
 * --fork：以后台deamon形式运行服务mongod -fork
@@ -109,15 +111,15 @@ mongo -u admin -p admin123 --authenticationDatabase admin
 * 添加的数据其结构是松散的，只要是bson格式均可，列属性均不固定，根据添加的数据为准。先定义数据再插入，就可以一次性插入多条数据
 * 不需要预先定义 collection ，在第一次插入数据后，collection 会自动的创建
 * 条件操作符
-    - $gt : >
-    - $lt : <
-    - $gte: >=
-    - $lte: <=
-    - $ne : !=、<>
-    - $in : in
-    - $nin: not in
-    - $all: all
-    - $not:
+  - $gt : >
+  - $lt : <
+  - $gte: >=
+  - $lte: <=
+  - $ne : !=、<>
+  - $in : in
+  - $nin: not in
+  - $all: all
+  - $not:
 
 ```sql
 mongo --help
@@ -469,13 +471,13 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 
 ## 工具
 
-* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. https://www.npmjs.org/package/shortid
+* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. <https://www.npmjs.org/package/shortid>
 * 客户端
   - [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
-  - [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool http://robomongo.org
+  - [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool <http://robomongo.org>
   - [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
   - [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
-  - [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. http://mongoosejs.com
+  - [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. <http://mongoosejs.com>
   - [mongo-express/mongo-express](https://github.com/mongo-express/mongo-express):Web-based MongoDB admin interface, written with Node.js and express
 * 云服务
   - [mlab](https://mlab.com/):Database-as-a-Service for MongoDB

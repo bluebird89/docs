@@ -31,7 +31,7 @@
 * [](https://github.com/ToyoDAdoubiBackup/doubi)
 * [](https://github.com/shadowsocks/go-shadowsocks2)
 * [iMeiji/shadowsocks_install](https://github.com/iMeiji/shadowsocks_install)
-* [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu https://shadowsocks.be
+* [teddysun/shadowsocks_install](https://github.com/teddysun/shadowsocks_install):Auto Install Shadowsocks Server for CentOS/Debian/Ubuntu <https://shadowsocks.be>
 
 ```shell
 apt-get install python-pip
@@ -191,7 +191,7 @@ pip install shadowsocks
 
 ## [trojan](https://github.com/trojan-gfw/trojan)
 
-An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
+An unidentifiable mechanism that helps you bypass GFW. <https://trojan-gfw.github.io/trojan/>
 
 * 模仿了互联网上最常见的HTTPS协议，以诱骗GFW认为它就是HTTPS，从而不被识别
 * 需要一个域名用来做伪装 [freenom](linhttps://www.freenom.comk)
@@ -315,11 +315,11 @@ iptables-save > /etc/iptables-rules
 iptables-restore < /etc/iptables-rules # 手动加载
 ```
 
-## [clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go.
+## [clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go
 
 * `go get -u -v github.com/Dreamacro/clash`
 * 配置:｀/home/当前用户ID/.config/clash/config.yml`
-* 访问：http://clash.razord.top/#/settings` 端口和口令按yml文件中的external-controller内容输入即可
+* 访问：<http://clash.razord.top/#/settings>` 端口和口令按yml文件中的external-controller内容输入即可
 
 ```sh
 mv clash-linux-amd64-vx.xx.x clash
@@ -394,7 +394,7 @@ Socks 主机 127.0.0.1 7891
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
 * [XX-net/XX-Net](https://github.com/XX-net/XX-Net):A proxy tool to bypass GFW.
   - [中文文档](https://github.com/XX-net/XX-Net/wiki/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3)
-* [googlehosts/hosts](https://github.com/googlehosts/hosts) https://scaffrey.coding.net/p/hosts/git / https://git.qvq.network/googlehosts/hosts
+* [googlehosts/hosts](https://github.com/googlehosts/hosts) <https://scaffrey.coding.net/p/hosts/git> / <https://git.qvq.network/googlehosts/hosts>
 * [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
 * [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
@@ -403,12 +403,12 @@ Socks 主机 127.0.0.1 7891
 ## 客户端
 
 * [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
-* [Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 https://qv2ray.github.io
+* [Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 <https://qv2ray.github.io>
   - `snap install qv2ray`
 * [mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
-* [Surge](https://www.nssurge.com/) https://www.newlearner.site/2018/08/29/surge-for-mac.html
+* [Surge](https://www.nssurge.com/) <https://www.newlearner.site/2018/08/29/surge-for-mac.html>
 * V2rayNG
-* [V2rayU](https://github.com/yanue/V2rayU) 基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅,支持二维码,剪贴板导入,手动配置,二维码分享等 https://github.com/yanue/V2rayU
+* [V2rayU](https://github.com/yanue/V2rayU) 基于v2ray核心的mac版客户端,用于科学上网,使用swift编写,支持vmess,shadowsocks,socks5等服务协议,支持订阅,支持二维码,剪贴板导入,手动配置,二维码分享等 <https://github.com/yanue/V2rayU>
 * [Trojan-Qt5](https://github.com/TheWanderingCoel/Trojan-Qt5)
 * app
   - shadowrocket
@@ -441,9 +441,9 @@ curl -v "https://www.google.com" --proxy "https://arsenal.bluebird89.online:1900
 
 ## 参考
 
-* [love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 https://fuckcloudnative.io/posts/linux-circumvent/
+* [love-gfw](https://github.com/yangchuansheng/love-gfw):🔥以社会主义核心价值观为指导思想，实现 Linux 和 MacOS 设备的全局智能分流 <https://fuckcloudnative.io/posts/linux-circumvent/>
 * [gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
-* [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. https://trojan-gfw.github.io/trojan/
+* [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. <https://trojan-gfw.github.io/trojan/>
 * [](https://github.com/freefq/free)
 * [max2max/freess](https://github.com/max2max/freess)
 * [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生

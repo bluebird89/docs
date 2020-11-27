@@ -710,5 +710,5 @@
 
 ## 参考
 
-* [我们与少年jump的50年 ](https://www.bilibili.com/video/av27375727)
+* [我们与少年jump的50年](https://www.bilibili.com/video/av27375727)
 * [izneo](https://www.izneo.com/en/)

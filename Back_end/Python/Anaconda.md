@@ -53,7 +53,6 @@ conda update --all
 conda update conda
 ```
 
-
 ## 环境管理 env
 
 * 建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突

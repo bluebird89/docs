@@ -1,6 +1,5 @@
 # [Lisp](https://common-lisp.net/)
 
-
 ```sh
 brew install clisp
 ```

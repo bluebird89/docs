@@ -1,6 +1,6 @@
 # [gogs](https://github.com/gogs/gogs)
 
-Gogs is a painless self-hosted Git service. https://gogs.io
+Gogs is a painless self-hosted Git service. <https://gogs.io>
 
 ## 流程
 

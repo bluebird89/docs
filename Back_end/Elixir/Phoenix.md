@@ -1,6 +1,6 @@
 # [phoenix](https://github.com/phoenixframework/phoenix)
 
-Peace of mind from prototype to production http://www.phoenixframework.org
+Peace of mind from prototype to production <http://www.phoenixframework.org>
 
 ## 安装
 
