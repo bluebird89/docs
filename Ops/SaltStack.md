@@ -1,6 +1,6 @@
 # [saltstack/salt](https://github.com/saltstack/salt)
 
-Software to automate the management and configuration of any infrastructure or application at scale. Get access to the Salt software package repository here: https://repo.saltstack.com/
+Software to automate the management and configuration of any infrastructure or application at scale. Get access to the Salt software package repository here: <https://repo.saltstack.com/>
 
 ## 工作原理
 

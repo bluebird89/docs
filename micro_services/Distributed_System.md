@@ -247,11 +247,11 @@
 * 启动一个后台任务，扫描这张表中事务的状态，如果一个分布式事务一直（设置一个事务周期阈值）未到状态 3，说明这条事务没有成功执行，于是可以重新调用 repo-service 扣减库存、调用 order-service 生成订单。直至所有的调用成功，事务状态到 3
 * 如果多次重试仍未使得状态到 3，可以将事务状态置为 error，通过人工介入进行干预
 
-| 分布式事务 ID       | 事务内容     | Column 3     |
-| :------------- | :----------: | -----------: |
-| global_trx_id_1 | 操作 1：调用 repo-service 扣减库存  | 状态 1：初始    |
-| global_trx_id_1 | 操作 2：调用 order-service 生成订单 | 状态 2：操作 1 成功 |
-| global_trx_id_1 | Put Pipes In | 状态 3：操作 1、2 成功 |
+| 分布式事务 ID   |              事务内容               |               Column 3 |
+| :-------------- | :---------------------------------: | ---------------------: |
+| global_trx_id_1 | 操作 1：调用 repo-service 扣减库存  |           状态 1：初始 |
+| global_trx_id_1 | 操作 2：调用 order-service 生成订单 |    状态 2：操作 1 成功 |
+| global_trx_id_1 |            Put Pipes In             | 状态 3：操作 1、2 成功 |
 
 ## 基于消息中间件的最终一致性事务方案
 
@@ -290,7 +290,7 @@
     + snowflake 是 Twitter 开源的分布式 ID 生成算法，被广泛应用于各种生成 ID 的场景。Leaf 中也支持这种方式去生成 ID
     + 依赖 Zookeeper:因为 snowflake 的 ID 组成中有 10bit 的 workerId,用了 Zookeeper 来生成 wokerID。就是用了 Zookeeper 持久顺序节点的特性自动对 snowflake 节点配置 wokerID
   - segment 模式:基于数据库实现的 ID 生成方案，如果调用量不大，完全可以用 Mysql 的自增 ID 来实现 ID 的递增
-      +` biz_tag` 用于区分业务类型，比如下单，支付等。如果以后有性能需求需要对数据库扩容，只需要对 biz_tag 分库分表就行,`biz_tag` 之间是相互隔离的，互不影响
+      +`biz_tag` 用于区分业务类型，比如下单，支付等。如果以后有性能需求需要对数据库扩容，只需要对 biz_tag 分库分表就行,`biz_tag` 之间是相互隔离的，互不影响
     * `max_id` 表示该 biz_tag 目前所被分配的 ID 号段的最大值
     - step 表示每次分配的号段长度
     - 会在还没用完之前就去申请下一个范围段。并发量大的问题可以直接将 step 调大即可
@@ -407,19 +407,19 @@ CREATE TABLE `leaf_alloc` (
 
 ## 工具
 
-* [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow https://xgboost.ai/
-* [firehol/netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! https://my-netdata.io/
-* [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data https://logdevice.io
-* [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking http://meshbird.com
-* [dragonflyoss/Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. https://d7y.io
+* [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
+* [firehol/netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! <https://my-netdata.io/>
+* [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data <https://logdevice.io>
+* [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking <http://meshbird.com>
+* [dragonflyoss/Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. <https://d7y.io>
 * [PhxPaxos](https://github.com/Tencent/phxpaxos)腾讯公司微信后台团队自主研发的一套基于Paxos协议的多机状态拷贝类库。它以库函数的方式嵌入到开发者的代码当中，使得一些单机状态服务可以扩展到多机器，从而获得强一致性的多副本以及自动容灾的特性。文章：<http://www.infoq.com/cn/articles/weinxin-open-source-paxos-phxpaxos>
-* [busgo/forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler http://122.51.106.217:6579
-* [xxl-job](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） http://www.xuxueli.com/xxl-job/
+* [busgo/forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler <http://122.51.106.217:6579>
+* [xxl-job](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） <http://www.xuxueli.com/xxl-job/>
 
 ## 参考
 
 * [](https://github.com/theanalyst/awesome-distributed-systems):A curated list to learn about distributed systems
-* [rShetty/awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources http://rajeevnb.com
+* [rShetty/awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources <http://rajeevnb.com>
 * [gdamdam/awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
 * [wx-chevalier/Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇
 * [分布式系统架构经典资料](https://www.infoq.cn/article/2018/05/distributed-system-architecture/)

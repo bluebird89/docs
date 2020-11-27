@@ -1,6 +1,6 @@
 ## [eslint](https://github.com/eslint/eslint)
 
-A fully pluggable tool for identifying and reporting on patterns in JavaScript https://eslint.org
+A fully pluggable tool for identifying and reporting on patterns in JavaScript <https://eslint.org>
 
 ## install
 
@@ -81,5 +81,5 @@ npm i -g babel-eslint eslint-config-airbnb
 
 ## 工具
 
-* [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style https://standardjs.com
+* [standard/eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style <https://standardjs.com>
 * [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react) React specific linting rules for ESLint

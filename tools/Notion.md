@@ -70,7 +70,7 @@ Work offline, collaborate in real-time, write without distractions.
     + Shift 键：多选 Block
     + 选中 Block 时，↑ ↓ ← → 方向键：上下选取 Block
     + 选中 Block 时，Ctrl + A：全选所有的 Bloc
-    + - 选中 Block 时，Ctrl + D：复制一份 Block
+      + - 选中 Block 时，Ctrl + D：复制一份 Block
     + 选中 Block 时，Ctrl + Enter：激活，可以用于按钮、选中、切换待办事项、或者进入全屏图片
     + 选中 Page Block 时，Ctrl + Shift + R：重命名这个 Page
     + 选中 Image Block 时，空格键：进入图片全屏浏览
@@ -99,6 +99,7 @@ Work offline, collaborate in real-time, write without distractions.
   - Gallery：画廊形式，便于查看多张卡片中的开头部分，可以在卡片开头添加一些概要内容。
   - List：列表形式，便于查看一部分关键性的信息，比如只显示名称和进度，来明确任务的进度。
   - Calendar：日历形式，便于查看时间相关的信息，可以在日历上按时间顺序查看任务。
+
 - 表现
   + Full Page Databse：整页数据库。就像 Excel 一样，整个页面就是一个数据库。
   - Inline Database：段落内数据库。则像是在 Word 中插入的表格一样，可以在文章中间放一个表格或是日历。
@@ -110,9 +111,9 @@ Work offline, collaborate in real-time, write without distractions.
 
 ## 模板
 
-*　自定义末班，相当于代码snieppt
+*自定义末班，相当于代码snieppt
 *　建一个通用模板：右上角 New 旁边的「v」，再点击 「+ New Template」
-*　使用建好的模板
+*使用建好的模板
     -点击 Database 右上角 New 旁边的「v」，在点击模板即可开始创建，适合新建软件。
     - 直接点进 Page 进行点击 Page 中的模板名即可，适合已经创建好的 Page。
 *　类型

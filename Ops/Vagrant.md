@@ -1,6 +1,6 @@
 # [vagrant](https://github.com/hashicorp/vagrant)
 
-Vagrant is a tool for building and distributing development environments. https://www.vagrantup.com
+Vagrant is a tool for building and distributing development environments. <https://www.vagrantup.com>
 
 * 统一开发环境：一次配置打包，统一分发给团队成员，统一团队开发环境
 * 多个相互隔离开发环境：可以在不用box里跑不同的语言，或者编译安装同一语言不同版本，搭建多个相互隔离的开发环境，卸载清除时也很快捷轻松
@@ -347,5 +347,5 @@ vagrant up
 
 * [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
-* [Vagrant cloud](https://app.vagrantup.com/boxes/search) 比如：https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes
+* [Vagrant cloud](https://app.vagrantup.com/boxes/search) 比如：<https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes>
 * [资源](http://www.vagrantbox.es/)

@@ -112,7 +112,7 @@
 （放置你代表公司在一些技术会议上做过的演讲，以及你在公司分享时制作的讲义）
 
 - 2014架构师大会演讲：[如何通过Docker优化内部开发](http://jobdeer.com)
-  
+
   - 9月公司内部分享：[云计算的前生今世](http://jobdeer.com)
 
 # 技能清单
@@ -218,4 +218,4 @@
 
 ## 参考
 
-* [resume/resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations https://resume.github.com
+* [resume/resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations <https://resume.github.com>

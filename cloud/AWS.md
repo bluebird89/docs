@@ -1,4 +1,4 @@
-# [AWS Amazon Web Services ](https://aws.amazon.com)
+# [AWS Amazon Web Services](https://aws.amazon.com)
 
 ## lambda
 
@@ -20,13 +20,13 @@
   - create a S3 bucket `aws s3 mb s3://<bucket-name>`
   - upload the code and generate the stack configuration:`sam package  --output-template-file .stack.yaml \ --s3-bucket <bucket-name>`
   - deploy the generated stack:`sam deploy  --template-file .stack.yaml  --capabilities CAPABILITY_IAM  --stack-name <stack-name>`
-* [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
+* [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs <https://minio.io/downloads.html#download-server>
 * [aws/opsworks-cookbooks](https://github.com/aws/opsworks-cookbooks):Chef Cookbooks for the AWS OpsWorks Service
-* [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs https://minio.io/downloads.html#download-server
+* [minio/minio](https://github.com/minio/minio):Minio is an open source object storage server compatible with Amazon S3 APIs <https://minio.io/downloads.html#download-server>
 * [awslabs/aws-devops-essential](https://github.com/awslabs/aws-devops-essential):In few hours, quickly learn how to effectively leverage various AWS services to improve developer productivity and reduce the overall time to market for new product capabilities.
 * [mthenw/awesome-layers](https://github.com/mthenw/awesome-layers):λ A curated list of awesome AWS Lambda Layers.
 * [lambci/lambci](https://github.com/lambci/lambci):A continuous integration system built on AWS Lambda
-* [localstack/localstack](https://github.com/localstack/localstack):💻 A fully functional local AWS cloud stack. Develop and test your cloud & Serverless apps offline! https://localstack.cloud
+* [localstack/localstack](https://github.com/localstack/localstack):💻 A fully functional local AWS cloud stack. Develop and test your cloud & Serverless apps offline! <https://localstack.cloud>
 
 ## 参考
 

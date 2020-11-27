@@ -102,7 +102,7 @@
 * 这样的一个少女，维持了百年的脆弱和平，我操纵着林克游山玩水爬树摸鱼的每一分每一秒，她都在用历代最强的三角力量与盖侬斗争，甚至没办法像林克一样获得失去记忆的这份仁慈，她一直、一直在战斗，也一直、一直注视着林克，并且无法忘记任何事情。
 
 * 习惯
-  
+
   - 一开始就找克克洛
   - 开启怪物商店
 
@@ -119,179 +119,179 @@
 * 克洛格的果实（Korok Seeds） = 0.08% x 900 = 72%
 
 * 神庙（Shrine）= 0.08% x 120 = 9.60%
-  
+
   - 神庙挑战Shrine Quests（42个） 以“序号. 任务名称：接任务地点 - 任务发布NPC，备注” 的方式按游戏内任务列表顺序一条条列出来
-    
+
     - The skull's eye - akkala ancient tech lab - Jerrin
-    
+
     - Into the vortex - rist peninsula – Stone Tablet，地图最东边漩涡形陆地
-    
+
     - Trial of the labyrinth - lomei labrinth island - ???， 大地图三大迷宫之一，最东北海岛
-    
+
     - The spring of power - east akkala stable - Nobo
-    
+
     - The gut check challenge - gut check rock - Bayge， 火山正北，很明显的地标
-    
+
     - A brothers roast - goron city - Bladon
-    
+
     - A landscape of a stable - foothill stable - Mayro
-    
+
     - The perfect drink - east barrens - Pokki， 沙漠东南，神庙门口接任务
-    
+
     - Test of will - mount nabooru - Bayge，Gerudo Highlands最东边，Gerudo峡谷北侧
-    
+
     - Sign of the shadow - gerudo tower - Kass
-    
+
     - The silent swordswoman - gerudo town - Laine
-    
+
     - The desert labyrinth - south lomei labyrinth - ???，大地图三大迷宫之一，沙漠东南
-    
+
     - The seven heroines - gerudo town – Rotana
-    
+
     - The eye of the sandstorm - kara kara bazaar - Nobiro，沙漠绿洲小镇
-    
+
     - Secret of the snowy peaks - mount granajh – Mountain Peak Log，Gerudo地区东南雪山顶，调查小屋废墟中笔记触发
-    
+
     - The undefeated champ - sand seal rally - Tali，沙漠主线完成后，Gerudo Town正南
-    
+
     - Watch out for the flowers - hylia river - Magda
-    
+
     - The three giant brothers - mount taran – Stone Tablet，East Necluda山地地区
-    
+
     - Secret of the cedars - hateno village - Clavia
-    
+
     - The cursed statue - fort hateno - Calip，Fort hateno城墙东边小屋内
-    
+
     - A fragmented monument - palmorae ruins - Garini，大陆东南角，Lurelin Village东边
-    
+
     - The stolen heirloom - kakariko village – Paya, 完成kakariko village所有支线任务触发
-    
+
     - Guardian slideshow - puffer beach - Loone，Faron地区南边海岸
-    
+
     - A song of storms - calora lake - Kass，Faron地区
-    
+
     - The serpent's jaws - pagos woods - Kass，Faron地区，Highland Stable沿路往东北走，在路边可以遇到Kass
-    
+
     - Stranded on eventide - eventide island - ???，地图东南的孤岛
-    
+
     - The bird in the mountains - rito village - Molli
-    
+
     - Recital at warbler's nest - rito village - Kheel，支线任务28中触发
-    
+
     - The ancient rito song - rito village - Bedoli
-    
+
     - Trial on the cliff - north lomei labyrinth - ???，大地图三大迷宫之一，Hebra东北
-    
+
     - The spring of wisdom - hateno village - Medda
-    
+
     - The ceremonial song - zor'as domain - Laruta
-    
+
     - The crowned beast - rabia plain - Kass，Lanayru Tower东南，河对岸
-    
+
     - Master of the wind - horon lagoon - Kass，Lanayru地区最东侧
-    
+
     - The lost pilgrimage - korok forest - Tasho
-    
+
     - The two rings - west hyrule plains – Kass，Ridgeland南部平原，Jeddo Bridge桥北
-    
+
     - Shrouded shrine - typhlo ruins - ???，Korok Forst北边森林，地图上很明显
-    
+
     - Under a red moon - hyrule ridge - Kass，Tabantha Bridge Stable南部山地上
-    
+
     - Cliffside etchings - tabantha bridge stable - Geggle
-    
+
     - Trial of second sight - korok forest - Zooki
-    
+
     - The test of wood - korok forest - Damia
-    
+
     - Trial of thunder - thundra plateau - ???，Ridgeland Tower西边一直下雨的地方
-    
+
     - 骷髅的左眼——阿卡莱古代研究所——洁琳
-    
+
     - 前往漩涡状中心——马秋兹半岛——古老的石版
-    
+
     - 孤岛的试炼——洛美岛——奇异的声音
-    
+
     - 力量之泉的传说——东阿卡莱驿站——诺波坦
-    
+
     - 鼓隆的毅力崖挑战——毅力崖——巴恺忒
-    
+
     - 弟弟在何方？——鼓隆城——布莱顿
-    
+
     - 驿站的风景画——山麓驿站——桑伏
-    
+
     - 寻求玉液琼浆......——东格鲁德——帕可忒
-    
+
     - 比耐力——娜波露山——巴恺忒
-    
+
     - 去影子指示的地方——格鲁徳之塔——卡西瓦
-    
+
     - 不会说话的剑士——格鲁徳小镇——拉亦娜
-    
+
     - 沙漠的试炼——南洛美城堡遗迹——奇异的声音
-    
+
     - 七位英雄——格鲁徳小镇——罗汀
-    
+
     - 消失的沙尘暴——卡拉卡拉集市——诺比尔
-    
+
     - 雪山的日志——摩尔迦娜山——雪山的日志
-    
+
     - 不败的女王——沙海象拉力赛报名处——帕弗宇
-    
+
     - 不要践踏花儿——海利亚河——奥可芭
-    
+
     - 巨人三兄弟的秘密——泰尔美山——古老的石板
-    
+
     - 三棵杉树的秘密——哈特诺村——可莱维亚
-    
+
     - 被诅咒的石像——哈特诺堡垒——卡里尤
-    
+
     - 寻找石碑碎块——雅西诺遗迹——利迦尼
-    
+
     - 被盗的宝珠——卡卡利科村——帕雅
-    
+
     - 想见见守护者！——帕发海岸——柳奈
-    
+
     - 闪电开启的试炼——克拉尔湖——卡西瓦
-    
+
     - 吞食巨蛇的龙——思古兰特树海——卡西瓦
-    
+
     - 野外的试炼——塞哈特诺岛——奇异的声音
-    
+
     - 高耸入云的山上有棵参天大树——利特村——桃虹
-    
+
     - 利特的兄弟岩——利特村——奇尔
-    
+
     - 利特的诗谜——利特村——蓓拉
-    
+
     - 断崖的试炼——北洛美城堡遗迹——奇异的声音
-    
+
     - 探索拉聂尔山的宝贝！——哈特诺村——西默茨凯
-    
+
     - 英杰祭祀诗——卓拉领地——鲁拉曲
-    
+
     - 两杆枪野兽——阿拉布平原——卡西瓦
-    
+
     - 御风拓路者——荷隆湾——卡西瓦
-    
+
     - 最初的试炼——克洛格森林——泰奇奥
-    
+
     - 两个环——西还拉鲁平原——卡西瓦
-    
+
     - 黑暗的试炼——德依布朗遗迹——奇异的声音
-    
+
     - 红月之夜——海拉鲁丘陵——卡西瓦
-    
+
     - 绝壁花纹——塔邦挞大桥驿站——果戈
-    
+
     - 操控力的试炼——克洛格森林——阿兹基
-    
+
     - 不燃烧的试炼——克洛格森林——达秘达米
-    
+
     - 雷鸣的试炼——雷之台地——奇异的声音
-  
+
   - 全支线任务
-    
+
     * Robbie’s Research：Hateno Ancient Tech Lab - Purah 主线自动触发
     * From the Ground Up：Hateno Village - Hudson 支线任务7接受后获得
     * A Parent’s Love：Tarrey Town - Ruli 支线任务2完成后解锁，夜晚触发
@@ -372,7 +372,7 @@
 * 地点探索 = 0.08% x 226 = 18.08%
 
 * 全服装
-  
+
   - Hylian套装：Kakariko Village/Hateno Village防具店购买
   - Stealth套装：Kakariko Village防具店购买，潜行加成
   - Soldier's 套装：Kakariko Village防具店购买
@@ -394,7 +394,7 @@
   - 另外Gerudo Town珠宝店完成相关支线之后可以买各种抗性的耳坠和头饰，夜晚在Fang and Bone可以买各种伪装的面具
 
 * 马匹
-  
+
   - White horse：Central Tower西南的Outskirt Stable任务The Royal White Stallion
   - Giant Horse：Lake Tower南部Mounted Archey Camp任务Hunt for the Giant Horse
   - Stalhorse：Hebra Tower东北Snowfield stable完成相关任务Stalhorse:pictured！
@@ -403,7 +403,7 @@
   - 获得个体值高的马匹：自己测试并没有抓到过个体值555的马匹（但无法证明是否存在满个体的马， 可能只是自己RP不好），但是13颗星个体值的马匹非常容易获得。具体就是在上述任务中Giant Horse的位置，那群马里至少有一匹13星的马，请挨个找纯色马试一下，体力5 的一定是13星的。你可以直接从那个位置右上的神庙反复传送来刷想要的颜色。
 
 * 马具收集：
-  
+
   - Royal Bridle and Saddle：完成上面提到的The Royal White Stallion任务后获得
   - Monster Bridle and Saddle：夜晚在Fang and Bone买到
   - Extravagant Bridle and Saddle：完成Lake Tower东南部Highland Stable障碍挑战
@@ -416,7 +416,7 @@
 * 全图鉴:收集全图鉴后会得到一个关键道具“绝密信封”，描述为“漂亮女子照片”！但是！但是并没有真正方法看这张照片.可以在Hateno Ancient Tech Lab找Symin买照片
 
 * 全小游戏
-  
+
   - 盾牌滑雪
   - 滑翔翼射箭
   - 雪球保龄
@@ -435,11 +435,11 @@
   - 滑翔翼（钻圈）
 
 * 刷Star Fragment
-  
+
   - 建议刷法是等满月时站在高处（比如双子峰顶）望向月亮，每晚9：00pm-3:00am会从月亮大致方向落下一颗流星，非常明亮，标记掉落位置过去收集即可。建议满月当晚存档，如果没看见的话重启游戏读档即可。另外每8天一个满月，想快速刷的话在山顶点个篝火连续睡八个晚上就行
 
 * 刷龙鳞、龙爪、龙角、龙牙
-  
+
   - 每天睡到早晨，在下列地点守株待兔，一是离传送点近，二是不用等太久，三是位置好。三条龙基本都是在早上6点左右到达下述位置。
   - Farosh：Faron地区，Lakeside Stable东北Floria Bridge上等候。
   - Dinraal：Hebra南部，Tabantha Bridge Stable西侧Tabantha Great Bridge上等候。
@@ -639,7 +639,7 @@
     + Pumpkin.png 南瓜
     + Spicy Eel.png 香辣鳗鱼
     + Quartz.png 石英
-    + - Emily.png 艾米丽 🎂 春季 27 🎂
+      + - Emily.png 艾米丽 🎂 春季 27 🎂
     + Amethyst.png 紫水晶
     + Aquamarine.png 海蓝宝石
     + Cloth.png 布料
@@ -874,5 +874,5 @@
 
 ## 工具
 
-* [yuzu-emu/yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator https://yuzu-emu.org/
+* [yuzu-emu/yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator <https://yuzu-emu.org/>
 * [价格比对](https://eshop-prices.com/)

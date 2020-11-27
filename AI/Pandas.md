@@ -1,6 +1,6 @@
 # [pandas](https://github.com/pandas-dev/pandas)
 
-Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures similar to R data.frame objects, statistical functions, and much more http://pandas.pydata.org
+Flexible and powerful data analysis / manipulation library for Python, providing labeled data structures similar to R data.frame objects, statistical functions, and much more <http://pandas.pydata.org>
 
 ## 数据结构
 
@@ -61,7 +61,7 @@ Flexible and powerful data analysis / manipulation library for Python, providing
 * df.sort_values([col1,col2], ascending=[True,False])：先按列col1升序排列，后按col2降序排列数据
 * df.groupby(col)：返回一个按列col进行分组的Groupby对象
 * df.groupby([col1,col2])：返回一个按多列进行分组的Groupby对象
-* df.groupby(col1)[col2]：返回按列col1进行分组后，列col2的均值
+* df.groupby[col1](col2)：返回按列col1进行分组后，列col2的均值
 * df.pivot_table(index=col1, values=[col2,col3], aggfunc=max)：创建一个按列col1进行分组，并计算col2和col3的最大值的数据透视表
 * df.groupby(col1).agg(np.mean)：返回按列col1分组的所有列的均值
 * data.apply(np.mean)：对DataFrame中的每一列应用函数np.mean
@@ -82,7 +82,7 @@ Flexible and powerful data analysis / manipulation library for Python, providing
 
 ## 工具
 
-* [dtale](https://github.com/man-group/dtale):Visualizer for pandas data structures http://alphatechadmin.pythonanywhere.com/
+* [dtale](https://github.com/man-group/dtale):Visualizer for pandas data structures <http://alphatechadmin.pythonanywhere.com/>
 
 ## 参考
 

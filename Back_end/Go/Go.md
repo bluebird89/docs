@@ -1,6 +1,6 @@
 # [golang/go](https://github.com/golang/go)
 
-The Go programming language https://golang.org [中国官网](https://golang.google.cn/)
+The Go programming language <https://golang.org> [中国官网](https://golang.google.cn/)
 
 * 第一个正式版本 2012 年3月28日正式发布，迎来了第一个引人瞩目的里程碑
 * 特性
@@ -265,7 +265,7 @@ go run hello.go
   - 字符
     + byte（实际上是 uint8 的别名）: UTF-8 字符串的单个字节的值
     + rune:单个 Unicode 字符
-  -  // 表示一个 Unicode 码点
+  - // 表示一个 Unicode 码点
   - float32 float64
   - 复数类型 complex64 complex128
   - 错误类型：error
@@ -410,7 +410,7 @@ go run hello.go
 * 对代码包的远程导入路径进行自定义方法
   - 在该代码包中的库源码文件的包声明语句的右边加入导入注释，像这样：`package semaphore // import "golang.org/x/sync/semaphore"`
   - `go get golang.org/x/sync/semaphore` 后，golang.org 下的路径 /x/sync/semaphore 并不是存放包的真实地址
-* golang 在 github 上建立了一个镜像库，如 https://github.com/golang/net 即是 https://golang.org/x/net 的镜像库
+* golang 在 github 上建立了一个镜像库，如 <https://github.com/golang/net> 即是 <https://golang.org/x/net> 的镜像库
 * [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
 
 ```go
@@ -718,12 +718,12 @@ func TestSomething(t *testing.T) {
 * 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
 * 构建或运行应用时，Go 将会通过 goproxy.cn 获取依赖
 * docker->performence->damon=>+
-* https://g.widora.cn/
+* <https://g.widora.cn/>
 * 类库
-  - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. https://goproxy.cn
-  - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy https://docs.gomods.io
-  - [goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. https://goproxy.io
-  - [snail007 / goproxy ](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 http://snail007.github.io/goproxy
+  - [goproxy/goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. <https://goproxy.cn>
+  - [gomods/athens](https://github.com/gomods/athens):A Go module datastore and proxy <https://docs.gomods.io>
+  - [goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. <https://goproxy.io>
+  - [snail007 / goproxy](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 <http://snail007.github.io/goproxy>
 
 ```sh
 go env -w GOPROXY=https://goproxy.cn,direct # windows
@@ -733,7 +733,7 @@ export GOPROXY=https://goproxy.cn
 # 阿里
 export GOPROXY=https://mirrors.aliyun.com/goproxy/
 # Go 官方提供的全球代理
-export GOPROXY=https://goproxy.io　
+export GOPROXY=https://goproxy.io
 export GOPROXY=https://athens.azurefd.net
 
 echo "export GO111MODULE=on" >> ~/.profile && source ~/.profile
@@ -772,10 +772,12 @@ go env -w GOSUMDB="sum.golang.google.cn"
   - 不允许在 GOPATH 下使用 gomod
   - 从GOPATH到go module的
   - 最终终止对基于GOPATH的开发的支持：使用标准库以外的依赖项的任何程序都将需要一个go.mod
+
 + gomod 和 gopath 两个包管理方案
   * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
   * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
 + `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
+
 * indirect
 
 ```sh
@@ -837,7 +839,7 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
   - 接口是隐式的 虽然有接口这一点很好，但是结构却是隐式地而非显式地实现接口。这点被称为是 Go 语言的优势之一，但我们发现，很难从结构中看出它是否实现了接口。你只能通过尝试编译程序才能真正了解。如果程序很小，这当然没有什么问题。但如果这个程序是中大型规模，麻烦就大了。
   - 库支持不佳 Go 语言的库支持参差不齐。我们的 API 与 Contentful 集成，但后者并没有官方支持的 Go SDK。这意味着我们必须编写（并维护！）大量代码来请求和解析 Contentful 中的数据。我们还必须依赖第三方的 Elasticsearch 库。由厂商提供的 Go SDK 并不像他们的 Java、Ruby 或 JavaScript 同类产品那样受欢迎。
   - 社区沟通很难
-    + Go 社区可能不会接受建议。在 golint 的 GitHub 存储库中考虑这个问题：https://github.com/golang/lint/issues/65 ，有用户请求 golint 在发现警告时，能够使构建失败（这就是我们在项目中所做的事情）。维护者立即否定了这一想法。但是，由于有太多的人就这个问题发表了评论，一年后，维护者最终不得不增加了所请求的特性。
+    + Go 社区可能不会接受建议。在 golint 的 GitHub 存储库中考虑这个问题：<https://github.com/golang/lint/issues/65> ，有用户请求 golint 在发现警告时，能够使构建失败（这就是我们在项目中所做的事情）。维护者立即否定了这一想法。但是，由于有太多的人就这个问题发表了评论，一年后，维护者最终不得不增加了所请求的特性。
     + Go 社区似乎也不喜欢 Web 框架。虽然 Go 语言的 HTTP 库涵盖了很多方面，但它并不支持路径参数、输入检查和验证，也不支持 Web 应用程序中常见的横切关注点。Ruby 开发人员有 Rails，Java 开发人员有 Spring MVC，Python 开发者有 Django。但许多 Go 开发人员选择了避免使用框架。然而现实是，并非没有框架，恰恰相反有很多。但是，一旦你开始将某个框架用于某个项目，要想避免被遗弃的命运几乎是不可能的。
   - 分裂的依赖关系管理：Go 语言没有一个稳定的、正式的包管理器。经过多年的社区乞求，Go 项目最近才发布 godep。在此之前，已经有许多工具填补了这个空白。我们在项目中使用了非常强大的 govendor，但这意味着社区是分裂的，对刚接触 Go 语言的开发人员来说，这可能是非常令人困惑的。此外，几乎所有的包管理器都由 Git 存储库提供支持，Git 存储库的历史可能随时会发生更改。将其与 Maven Central 相比，后者永远不会删除或更改项目所依赖的库。
 * 决定是否使用 Go 语言
@@ -913,7 +915,7 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
       * 对外暴露方法
     + 函数简单:简单不止是指功能上的简单、单一，还意味着函数容易理解并且命名能够自解释
       * 复杂度的限制都是为了保证函数的简单和容易理解。
-  - 组织方式:Go 语言中的单元测试文件和代码都是与源代码放在同一个目录下按照 package 进行组织的，server.go 文件对应的测试代码应该放在同一目录下的 server_test.go 文件中,如果文件不是以 _test.go 结尾，当我们运行 go test ./pkg 时就不会找到该文件中的测试用例，其中的代码也就不会被执行，这也是 Go 语言对于测试组织方法的一个约定。
+  - 组织方式:Go 语言中的单元测试文件和代码都是与源代码放在同一个目录下按照 package 进行组织的，server.go 文件对应的测试代码应该放在同一目录下的 server_test.go 文件中,如果文件不是以_test.go 结尾，当我们运行 go test ./pkg 时就不会找到该文件中的测试用例，其中的代码也就不会被执行，这也是 Go 语言对于测试组织方法的一个约定。
     + Test:单元测试的最常见以及默认组织方式就是写在以 _test.go 结尾的文件中，所有的测试方法也都是以 Test 开头并且只接受一个 testing.T 类型的参数
     + Suite:按照簇进行组织，其实就是对 Go 语言默认的测试方式进行简单的封装，可以使用 stretchr/testify 中的 suite 包对测试进行组织
     + BDD:ginkgo 就是 Go 语言社区最常见的 BDD 框架了，这里提到的行为驱动开发（BDD）和测试驱动开发（TDD）都是一种保证工程质量的方法论。想要在项目中实践这种思想还是需要一些思维上的转变和适应，也就是先通过写单元测试或者行为测试约定方法的 Spec，再实现方法让我们的测试通过，这是一种比较科学的方法，它能为我们带来比较强的信心。
@@ -1149,7 +1151,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [中文](https://github.com/golang-china/gopl-zh)
   - [Code](https://github.com/adonovan/gopl.io/):Example programs from "The Go Programming Language"
   - [qiniu/gobook](https://github.com/qiniu/gobook):The Go Programming Language
-* [《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book):https://chai2010.cn/advanced-go-programming-book/
+* [《Go语言高级编程》](https://github.com/chai2010/advanced-go-programming-book):<https://chai2010.cn/advanced-go-programming-book/>
 * [《Go 入门指南 The Way to Go》](https://github.com/Unknwon/the-way-to-go_ZH_CN)
   - [《Go入门指南》](https://fuckcloudnative.io/the-way-to-go/)
 * 《Go 并发编程实战》
@@ -1161,9 +1163,9 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 ## 项目
 
-* [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go https://hajimehoshi.github.io/ebiten/
+* [hajimehoshi/ebiten](https://github.com/hajimehoshi/ebiten):A dead simple 2D game library in Go <https://hajimehoshi.github.io/ebiten/>
 * [go-shiori/shiori](https://github.com/go-shiori/shiori):Simple bookmark manager built with Go
-* [maxence-charriere/go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. https://luck.murlok.io
+* [maxence-charriere/go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. <https://luck.murlok.io>
 * [](https://github.com/lexkong/apiserver_demos)
 * [](https://github.com/google/exposure-notifications-server) Exposure Notification Reference Server | Covid-19 Exposure Notifications
 
@@ -1173,10 +1175,10 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
-* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang https://github.com/pathbox/learning-go
+* [pathbox/learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang <https://github.com/pathbox/learning-go>
 * [learninggo](https://github.com/miekg/learninggo):Learning Go Book in mmark
-  - [Learning-Go-zh-cn](https://github.com/mikespook/Learning-Go-zh-cn) http://mikespook.com/learning-go/
-* [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. https://iris-go.com
+  - [Learning-Go-zh-cn](https://github.com/mikespook/Learning-Go-zh-cn) <http://mikespook.com/learning-go/>
+* [iris-contrib/examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. <https://iris-go.com>
 * [https://songjiayang.gitbooks.io](https://songjiayang.gitbooks.io)
 * [harlow/go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
 * [astaxie/gopkg](https://github.com/astaxie/gopkg):example for the go pkg's function
@@ -1185,47 +1187,47 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese.
 * [hoanhan101/ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
-* [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material https://www.ardanlabs.com/
+* [ardanlabs/gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material <https://www.ardanlabs.com/>
 * [alco/gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
-* [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 https://geektutu.com/post/gee.html
-* [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. https://go101.org
+* [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 <https://geektutu.com/post/gee.html>
+* [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. <https://go101.org>
 
 ## 扩展
 
 * 框架
   + [go-macaron/macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
-  - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang http://go-colly.org/
+  - [gocolly/colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang <http://go-colly.org/>
   - [Gourouting/singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
-  - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim https://goim.io/
-  - [fiber](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee https://gofiber.io
-  - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go http://martini.codegangsta.io
-  - [kataras / iris ](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | https://bit.ly/iriscandothat1
-  - [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. https://go-nitro.dev/
+  - [Terry-Mao / goim](https://github.com/Terry-Mao/goim):goim <https://goim.io/>
+  - [fiber](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee <https://gofiber.io>
+  - [go-martini/martini](https://github.com/go-martini/martini):Classy web framework for Go <http://martini.codegangsta.io>
+  - [kataras / iris](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | <https://bit.ly/iriscandothat1>
+  - [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. <https://go-nitro.dev/>
 * 包管理
   - [kardianos/govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
   - [Go Packages](https://godoc.org/)
-  - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager http://github.com/moovweb/gvm
-* [golang / tools](https://github.com/golang/tools):[mirror] Go Tools https://godoc.org/golang.org/x/tools
-* [ yuin / gopher-lua ](https://github.com/yuin/gopher-lua):GopherLua: VM and compiler for Lua in Go
+  - [moovweb/gvm](https://github.com/moovweb/gvm):Go Version Manager <http://github.com/moovweb/gvm>
+* [golang / tools](https://github.com/golang/tools):[mirror] Go Tools <https://godoc.org/golang.org/x/tools>
+* [yuin / gopher-lua](https://github.com/yuin/gopher-lua):GopherLua: VM and compiler for Lua in Go
 * TINYGO - A GO COMPILER FOR SMALL PLACES bring the Go programming language to microcontrollers and modern web browsers by creating a new compiler based on LLVM.
 * desktop apps
   - [zserge/lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
 * Cli
   - [spf13/cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
     + [](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247486779&idx=2&sn=31f80b575eb4d225cb59a77f78c043ec&chksm=fb0be7afcc7c6eb95ecdbd7d3434808356bc0ebcc3c232eb60c619d90b9d9cf43a0ad0184ef4)
-  - [magefile / mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go https://magefile.org
+  - [magefile / mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go <https://magefile.org>
   - [motemen / gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
-  - [ urfave / cli ](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
+  - [urfave / cli](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
 * 语法检测
-  - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. https://revive.run
-  - [ golangci / golangci-lint ](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
+  - [mgechev/revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. <https://revive.run>
+  - [golangci / golangci-lint](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
 * 路由
-  - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+  - [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. <http://www.gorillatoolkit.org/pkg/mux>
   - [go-chi/chi](https://github.com/go-chi/chi):lightweight, idiomatic and composable router for building Go HTTP services
 * error
-  - [pkg/errors](https://github.com/pkg/errors):Simple error handling primitives https://godoc.org/github.com/pkg/errors
+  - [pkg/errors](https://github.com/pkg/errors):Simple error handling primitives <https://godoc.org/github.com/pkg/errors>
 * 微服务
-  - [go-kit/kit](https://github.com/go-kit/kit):A standard library for microservices. https://gokit.io
+  - [go-kit/kit](https://github.com/go-kit/kit):A standard library for microservices. <https://gokit.io>
 * 测试
   - [stretchr/testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
   - [codegangsta/gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
@@ -1237,47 +1239,47 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [flosch/pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
 * logger
   - [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-  - [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. https://goaccess.io
+  - [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. <https://goaccess.io>
 * 缓存
-  - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. https://patrickmn.com/projects/go-cache/
+  - [patrickmn/go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. <https://patrickmn.com/projects/go-cache/>
 * DB
-  - [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. https://open.dgraph.io/post/badger/
+  - [dgraph-io/badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. <https://open.dgraph.io/post/badger/>
   - [DATA-DOG/go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
   - [mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
-  - [upper/db](https://github.com/upper/db):Productive data access layer for Go. https://upper.io/db.v3
-  - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql http://jmoiron.github.io/sqlx/
+  - [upper/db](https://github.com/upper/db):Productive data access layer for Go. <https://upper.io/db.v3>
+  - [jmoiron/sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql <http://jmoiron.github.io/sqlx/>
   - [globalsign/mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
   - `go get -u github.com/go-sql-driver/mysql`
-  - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle http://xorm.io
-  - [gorm](https://github.com/go-gorm/gorm):The fantastic ORM library for Golang, aims to be developer friendly https://gorm.io `go get -u github.com/jinzhu/gorm`
+  - [go-xorm/xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle <http://xorm.io>
+  - [gorm](https://github.com/go-gorm/gorm):The fantastic ORM library for Golang, aims to be developer friendly <https://gorm.io> `go get -u github.com/jinzhu/gorm`
 * Http
   - [panjf2000/gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
   - [xtaci/kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
   - [valyala/fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
-  - [gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) http://parnurzeal.github.io/gorequest/
+  - [gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) <http://parnurzeal.github.io/gorequest/>
   - [davyxu/cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
 * graphql
   - [graphql-go/graphql](https://github.com/graphql-go/graphql):An implementation of GraphQL for Go / Golang
 * QUIC
   - [quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
 * load
-  - [ tsenart / vegeta ](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
+  - [tsenart / vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
 * excel
   - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
 * event-loop
   - [tidwall/evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
 * mobile
-  - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile https://godoc.org/golang.org/x/mobile
+  - [golang/mobile](https://github.com/golang/mobile):[mirror] Go on Mobile <https://godoc.org/golang.org/x/mobile>
 * redis
   - [gomodule/redigo](https://github.com/gomodule/redigo):Go client for Redis
   - [go-redis/redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
 * UI
   - [andlabs/ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
   - [google/gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-  - [fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design https://fyne.io/
-  - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) https://www.vugu.org
+  - [fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design <https://fyne.io/>
+  - [vugu/vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) <https://www.vugu.org>
 * numeric
-  - [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more https://www.gonum.org/
+  - [gonum/gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more <https://www.gonum.org/>
 * compiler
   - [aykevl/tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM.
 * transfer
@@ -1290,11 +1292,11 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 配置
   - [kelseyhightower/envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
 * Admin
-  - [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes https://www.go-admin.com
-  - [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. http://getqor.com/
-  - [flipped-aurora / gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ http://qmplus.henrongyi.top
+  - [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes <https://www.go-admin.com>
+  - [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. <http://getqor.com/>
+  - [flipped-aurora / gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ <http://qmplus.henrongyi.top>
 * [zihuxinyu/youzan](https://github.com/zihuxinyu/youzan)有赞API的golang实现
-* [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization http://forum.syncthing.net/
+* [syncthing/syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization <http://forum.syncthing.net/>
 * [divan/gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
 * [segmentio/kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
 * [google/go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
@@ -1306,35 +1308,35 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
   - [chrislusf/seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
 * auth
   - [volatiletech/authboss](https://github.com/volatiletech/authboss):The boss of http auth.
-* [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. https://www.bettercap.org/
-* [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. http://bthub.io
+* [bettercap/bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. <https://www.bettercap.org/>
+* [shiyanhui/dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. <http://bthub.io>
 * [variadico/noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
 * [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 * [robfig/cron](https://github.com/robfig/cron):a cron library for go
-* [golang/dep](https://github.com/golang/dep):Go dependency management tool https://golang.github.io/dep/
-* [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. http://www.gorillatoolkit.org/pkg/mux
+* [golang/dep](https://github.com/golang/dep):Go dependency management tool <https://golang.github.io/dep/>
+* [gorilla/mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. <http://www.gorillatoolkit.org/pkg/mux>
 * [murlokswarm/app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
-* [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go https://godoc.org/github.com/justinas/alice
+* [justinas/alice](https://github.com/justinas/alice):Painless middleware chaining for Go <https://godoc.org/github.com/justinas/alice>
 * [spf13/viper](https://github.com/spf13/viper):Go configuration with fangs
 * Debug
   - [derekparker/delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
 * [sirupsen/logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-* [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible https://goreleaser.com
+* [goreleaser/goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible <https://goreleaser.com>
 * [hashicorp/go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
-* [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis https://staticcheck.iop
+* [dominikh/go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis <https://staticcheck.iop>
 * [dgrijalva/jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
 * [golang-standards/project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
 * [go-yaml/yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
-* [fsnotify/fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. https://fsnotify.org
+* [fsnotify/fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. <https://fsnotify.org>
 * [deckarep/golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
 * [fvbock/endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 * [bitly/go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
-* [golang/crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries https://godoc.org/golang.org/x/crypto
+* [golang/crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries <https://godoc.org/golang.org/x/crypto>
 * [takama/daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
 * [golang/protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
-* [TrueFurby/go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. https://truefurby.github.io/go-callvis
+* [TrueFurby/go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. <https://truefurby.github.io/go-callvis>
 * [dgryski/go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
-* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. https://shopify.github.io/sarama
+* [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. <https://shopify.github.io/sarama>
 * [alecthomas/participle](https://github.com/alecthomas/participle):A parser library for Go
 * [ginuerzh/gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
 * [rakyll/statik](https://github.com/rakyll/statik):Embed files into a Go executable
@@ -1343,16 +1345,16 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * Raft
   - [lni/dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 * API
-  - [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go https://goswagger.io
+  - [go-swagger/go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go <https://goswagger.io>
   - [swag](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
 * 编辑器
   - [visualfc/liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
   - VS Code Glide
   - [go2go Playground](https://go2goplay.golang.org/):The go2go Playground
-* [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D https://go-city.github.io
+* [rodrigo-brito/gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D <https://go-city.github.io>
 * [gopsutil](https://github.com/shirou/gopsutil):psutil for golang
 * [panjf2000 / ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
-* [claudiodangelis / qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. https://claudiodangelis.com/qrcp
+* [claudiodangelis / qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. <https://claudiodangelis.com/qrcp>
 * [Protocol Buffers](https://pkg.go.dev/google.golang.org/protobuf)
 
 ## 参考
@@ -1364,19 +1366,19 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Alikhll/golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
 * [read](https://github.com/talkgo/read) About
 Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（文档、书籍、视频）
-* [](https://github.com/talkgo/night) Weekly Go Online Meetup via Bilibili｜Go 夜读｜由 SIG 成员维护｜通过 bilibili 在线直播的方式分享 Go 相关的技术话题，每天大家在微信/telegram/Slack 上及时沟通交流编程技术话题 https://talkgo.org/
+* [](https://github.com/talkgo/night) Weekly Go Online Meetup via Bilibili｜Go 夜读｜由 SIG 成员维护｜通过 bilibili 在线直播的方式分享 Go 相关的技术话题，每天大家在微信/telegram/Slack 上及时沟通交流编程技术话题 <https://talkgo.org/>
 * [gopherchina](https://github.com/gopherchina/conference)
-* [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software https://awesome-go.com/
+* [avelino/awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software <https://awesome-go.com/>
   - [awesome-go-cn](https://github.com/jobbole/awesome-go-cn):Go 资源大全中文版
-  - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 https://awesome-go.cn(建设中)
+  - [yinggaozhen/awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 <https://awesome-go.cn>(建设中)
 * [mailru/easyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [gocn/knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [uber-go/guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [changkun/go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
 * [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客
-* [Go-zh/go](https://github.com/Go-zh/go):Go 语言文档中文翻译 https://go-zh.org
-* [gobuffalo/buffalo](https://github.com/gobuffalo/buffalo):Rapid Web Development w/ Go http://gobuffalo.io
+* [Go-zh/go](https://github.com/Go-zh/go):Go 语言文档中文翻译 <https://go-zh.org>
+* [gobuffalo/buffalo](https://github.com/gobuffalo/buffalo):Rapid Web Development w/ Go <http://gobuffalo.io>
 * 离线文档
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
@@ -1384,7 +1386,7 @@ Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（�
 * [golang-open-source-projects](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
 * [effective_go](https://go-zh.org/doc/effective_go.html)
 
-* https://learn.go.dev/
+* <https://learn.go.dev/>
 <https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
 * [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)

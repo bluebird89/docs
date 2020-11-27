@@ -76,9 +76,9 @@
   - <meta>：设置网页的元数据（metadata），一个<meta>标签就是一项元数据，网页可以有多个<meta>，<meta>标签约定放在<head>内容的最前面
     + charset属性，用来指定网页的编码方式
     + name属性表示元数据的名字，content属性表示元数据的值。合在一起使用，就可以为网页指定一项元数据
-      * description是网页内容的描述
+      *description是网页内容的描述
       * keywords是网页内容的关键字
-      * author是网页作者
+      *author是网页作者
       * viewport
         - width    设置viewport宽度，为一个正整数，或字符串‘device-width’
         - device-width  设备宽度
@@ -442,7 +442,7 @@ document.write("Hello World!")
     + stylesheet：加载一张样式表
   - 资源的预加载
     + <link rel="preload">告诉浏览器尽快下载并缓存资源（如脚本或样式表），该指令优先级较高，浏览器肯定会执行。当加载页面几秒钟后需要该资源时，它会很有用。下载后，浏览器不会对资源执行任何操作，脚本未执行，样式表未应用。它只是缓存，当其他东西需要它时，它立即可用
-      * 优点：一是允许指定预加载资源的类型，二是允许onload事件的回调函数
+      *优点：一是允许指定预加载资源的类型，二是允许onload事件的回调函数
       * 配合as属性，告诉浏览器预处理资源的类型
         - "script"
         - "style"
@@ -561,13 +561,14 @@ document.write("Hello World!")
     + lazy：<iframe>的懒加载，即将滚动进入视口时开始加载。
     + eager：立即加载资源，无论在页面上的位置如何
     + 如果<iframe>是隐藏的，则loading属性无效，将会立即加载。只要满足以下任一个条件，Chrome 浏览器就会认为<iframe>是隐藏的
-      * <iframe>的宽度和高度为4像素或更小。
+      *<iframe>的宽度和高度为4像素或更小。
       * 样式设为display: none或visibility: hidden。
       * 使用定位坐标为负X或负Y，将<iframe>放置在屏幕外
 * rows/columns 的值规定了每行或每列占据屏幕的面积
   - 如果有可见边框，用户可以拖动边框来改变它的大小。为了避免这种情况发生，可以在 <frame> 标签中加入：noresize="noresize"。不可拖动
 * Frame:定义了放置在每个框架中的 HTML 文档
   - 为不支持框架的浏览器添加 `<noframes>` 标签:你添加包含一段文本的 `<noframes>` 标签，就必须将这段文字嵌套于 `<body></body>` 标签内
+
 - 导航框架:主页中name的值和target的值对应时，链接网站就显示在对应框体内，从而实现了局部刷新，就是导航
 - 跳转至框架内的一个指定的节
   + `<frame src="../example/html/link.html#C10">`
@@ -832,12 +833,12 @@ user-select: none;
 ## 工具
 
 * [lazysizes](https://github.com/aFarkas/lazysizes):High performance and SEO friendly lazy loader for images (responsive and normal), iframes and more, that detects any visibility changes triggered through user interaction, CSS or JavaScript without configuration
-* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework http://lab.hakim.se/reveal-js/
+* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework <http://lab.hakim.se/reveal-js/>
 * [html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. html5boilerplate.com/
 
 ## 参考
 
-* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
+* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
 * [HTML](https://html.spec.whatwg.org/)
   - [HTML中文](https://whatwg-cn.github.io/html/)
 * [dennwc/dom](https://github.com/dennwc/dom):DOM library for Go and WASM

@@ -11,39 +11,25 @@ A set of best practices for JavaScript projects
 JavaScript工程项目的一系列最佳实践策略
 
 > 当您在青葱的田野里翻滚一般欢乐（而不受约束）地开发一个新项目，对其他人而言维护这样一个项目简直就是一个潜在的可怕的噩梦。以下列出的指南是我们在[hive](http://wearehive.co.uk)的大多数JavaScript项目中发现，撰写和收集的最佳实践（至少我们是这样认为的）。如果您想分享其他最佳实践，或者认为其中一些指南应该删除。[欢迎随时与我们分享](http://makeapullrequest.com)。
-
 > - [Git](#git)
-
->   - [一些git规则](#some-git-rules)
->   - [Git工作流](#git-workflow)
->   - [编写良好的提交备注信息](#writing-good-commit-messages)
-
+> - [一些git规则](#some-git-rules)
+> - [Git工作流](#git-workflow)
+> - [编写良好的提交备注信息](#writing-good-commit-messages)
 > - [文档](#documentation)
-
 > - [环境](#environments)
-
->   - [一致的开发环境](#consistent-dev-environments)
->   - [一致性的依赖配置](#consistent-dependencies)
-
+> - [一致的开发环境](#consistent-dev-environments)
+> - [一致性的依赖配置](#consistent-dependencies)
 > - [依赖](#dependencies)
-
 > - [测试](#testing)
-
 > - [结构与命名规则](#structure-and-naming)
-
 > - [代码风格](#code-style)
-
->   - [一些代码风格指南](#code-style-check)
->   - [强制性的代码风格规范](#enforcing-code-style-standards)
-
+> - [一些代码风格指南](#code-style-check)
+> - [强制性的代码风格规范](#enforcing-code-style-standards)
 > - [日志](#logging)
-
 > - [API](#api)
-
->   - [API 设计](#api-design)
->   - [API 安全](#api-security)
->   - [API 文档](#api-documentation)
-
+> - [API 设计](#api-design)
+> - [API 安全](#api-security)
+> - [API 文档](#api-documentation)
 > - [许可](#licensing)
 
 ## 1\. Git
@@ -250,7 +236,7 @@ JavaScript工程项目的一系列最佳实践策略
 
   > 它可能会将其他人从上小时的故障排查中解救。
 
-### 3.1 一致的开发环境:
+### 3.1 一致的开发环境
 
 - 在 `package.json` 里的 `engines` 中设置您的node版本。
 
@@ -282,7 +268,7 @@ JavaScript工程项目的一系列最佳实践策略
 
   > 您不能指望您的同事在自己的全局环境都安装了相应的模块，本地模块可以方便您分享您的工具。
 
-### 3.2 依赖一致性:
+### 3.2 依赖一致性
 
 - 确保您的团队成员获得与您完全相同的依赖。
 
@@ -362,7 +348,6 @@ JavaScript工程项目的一系列最佳实践策略
   _为什么：_
 
   > 您想要将业务逻辑拆分为单独的测试单元。您必须"尽量减少不可预测性和非确定性过程对代码可靠性的影响"。 [更多请阅读...](https://medium.com/javascript-scene/tdd-the-rite-way-53c9b46f45e3)
-
   > 纯函数是一种总是为相同的输入返回相同输出的函数。相反地，不纯的函数是一种可能会有副作用，或者取决于来自外部的条件来决定产生对应的输出值的函数。这使得它不那么可预测。[更多请阅读...](https://hackernoon.com/structure-your-javascript-code-for-testability-9bc93d9c72dc)
 
 - 使用静态类型检查器
@@ -658,13 +643,9 @@ _为什么：_
   _怎么做：_
 
   > `GET`: 查询资源的表示法
-
   > `POST`: 创建一些新的资源或者子资源
-
   > `PUT`: 更新一个存在的资源
-
   > `PATCH`: 更新现有资源。它只更新所提供的字段，不管其他字段
-
   > `DELETE`: 删除一个存在的资源
 
 - 对于嵌套资源，请在URL中把他们的关系表现出来。例如，使用`id`将员工与公司联系起来。
@@ -676,13 +657,9 @@ _为什么：_
   _怎么做：_
 
   > `GET /schools/2/students` , 应该从学校2得到所有学生的名单
-
   > `GET /schools/2/students/31` , 应该得到学生31的详细信息，且此学生属于学校2
-
   > `DELETE /schools/2/students/31` , 应删除属于学校2的学生31
-
   > `PUT /schools/2/students/31` , 应该更新学生31的信息，仅在资源URL上使用PUT方式，而不要用收集
-
   > `POST /schools` , 应该创建一所新学校，并返回创建的新学校的细节。在集合URL上使用POST
 
 - 对于具有`v`前缀（v1，v2）的版本，使用简单的序数。并将其移到URL的左侧，使其具有最高的范围表述：
@@ -739,19 +716,12 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
   _选谁呢：_
 
   > `200 OK` `GET`, `PUT` 或 `POST` 请求响应成功.
-
   > `201 Created` 标识一个新实例创建成功。当创建一个新的实例，请使用`POST`方法并返回`201`状态码。
-
   > `304 Not Modified` 发现资源已经缓存在本地，浏览器会自动减少请求次数。
-
   > `400 Bad Request` 请求未被处理，因为服务器不能理解客户端是要什么。
-
   > `401 Unauthorized` 因为请求缺少有效的凭据，应该使用所需的凭据重新发起请求。
-
   > `403 Forbidden` 意味着服务器理解本次请求，但拒绝授权。
-
   > `404 Not Found` 表示未找到请求的资源。
-
   > `500 Internal Server Error` 表示请求本身是有效，但由于某些意外情况，服务器无法实现，服务器发生了故障。
 
   _为什么：_
@@ -860,5 +830,5 @@ _注意：尽可能保持安全异常消息的通用性。例如，别说`不正
 
 ## 参考
 
-* [ google / styleguide ](https://github.com/google/styleguide)  Style guides for Google-originated open-source projects https://google.github.io/styleguide/
-  - [ zh-google-styleguide / zh-google-styleguide ](https://github.com/zh-google-styleguide/zh-google-styleguide):Google 开源项目风格指南 (中文版)
+* [google / styleguide](https://github.com/google/styleguide)  Style guides for Google-originated open-source projects <https://google.github.io/styleguide/>
+  - [zh-google-styleguide / zh-google-styleguide](https://github.com/zh-google-styleguide/zh-google-styleguide):Google 开源项目风格指南 (中文版)

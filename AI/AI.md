@@ -139,14 +139,14 @@
 * 机器学习
   - 公开课
     + [吴恩达《Machine Learning》](https://www.coursera.org/learn/machine-learning)
-      * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 https://deeplearning-ai.github.io/machine-learning-yearning-cn/
+      * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 <https://deeplearning-ai.github.io/machine-learning-yearning-cn/>
       * [中文笔记及作业代码](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
     + [吴恩达 CS229](http://cs229.stanford.edu/)
       * [中文视频](http://open.163.com/special/opencourse/machinelearning.html)
       * [中文笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/)
       * [速查表](https://zhuanlan.zhihu.com/p/56534902)
       * [作业代码](https://github.com/Sierkinhane/CS229-ML-Implements)
-      * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning https://stanford.edu/~shervine/teaching/cs-229
+      * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning <https://stanford.edu/~shervine/teaching/cs-229>
     + 林轩田《机器学习基石》
       * [中文视频](https://www.bilibili.com/video/av36731342)
       * [中文笔记](https://redstonewill.com/category/ai-notes/lin-ml-foundations/)
@@ -251,7 +251,7 @@
     + [Orange](http://orange.biolab.si/features/)
     + [Pineapple](https://github.com/proycon/pynlpl)
   - 论文
-    + [100 Must-Read NLP Papers ](https://github.com/mhagiwara/100-nlp-papers)
+    + [100 Must-Read NLP Papers](https://github.com/mhagiwara/100-nlp-papers)
 * 计算机视觉
   - 课程
     + [李飞飞：CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu)
@@ -307,7 +307,7 @@
 * 知识图谱：一种结构化数据的处理方法，它涉及知识的提取、表示、存储、检索等一系列技术。从渊源上讲，它是知识表示与推理、数据库、信息检索、自然语言处理等多种技术发展的融合。
   - 资料
     + [为什么需要知识图谱？什么是知识图谱？——KG的前世今生](https://zhuanlan.zhihu.com/p/31726910)
-    + [什么是知识图谱？](https://zhuanlan.zhihu.com/p/34393554
+    + [什么是知识图谱？](<https://zhuanlan.zhihu.com/p/34393554>
     + [智能搜索时代：知识图谱有何价值？](https://zhuanlan.zhihu.com/p/35982177?)
     + [百度王海峰：知识图谱是 AI 的基石](http://www.infoq.com/cn/news/2017/11/Knowledge-map-cornerstone-AI#0-tsina-1-5001-397232819ff9a47a7b7e80a40613cfe1)
     + [译文|从知识抽取到RDF知识图谱可视化](http://rdc.hundsun.com/portal/article/907.html)
@@ -315,7 +315,7 @@
     + 知识提取：构建kg首先需要解决的是数据，知识提取是要解决结构化数据生成的问题。
       * 利用规则
         - 正则表达式（Regular Expression， regex）是字符串处 理的基本功。数据爬取、数据清洗、实体提取、关系提取，都离不开regex。
-          + [pythex 在线测试正则表达式](http://pythex.org/）
+          + [pythex 在线测试正则表达式](<http://pythex.org/>）
           + [Python wrapper for Google's RE2 using Cython](https://pypi.python.org/pypi/re2/)
           + [Parsley ：更人性化的正则表达语法](http://parsley.readthedocs.io/en/latest/tutorial.html)
         - 中文分词和词性标注:分词也是后续所有处理的基础，词性（Part of Speech, POS）就是中学大家学过的动词、名词、形容词等等的词的分类。一般的分词工具都会有词性标注的选项
@@ -329,7 +329,7 @@
         - 序列标注:使用序列生出模型，主要是标记出三元组中subject及object的起始位置，从而抽取信息。
           + [序列标注问题](https://www.cnblogs.com/jiangxinyang/p/9368482.html)
         - seq2seq:使用seq2seq端到端的模型，主要借鉴文本摘要的思想，将三元组看成是非结构化文本的摘要，从而进行抽取，其中还涉及Attention机制
-          + [seq2seq详解](https://blog.csdn.net/irving_zhang/article/details/78889364
+          + [seq2seq详解](<https://blog.csdn.net/irving_zhang/article/details/78889364>
           + [详解从Seq2Seq模型到Attention模型](https://caicai.science/2018/10/06/attention%E6%80%BB%E8%A7%88/)
     + 知识表示（Knowledge Representation，KR，也译为知识表现）是研究如何将结构化数据组织，以便于机器处理和人的理解的方法
       * [json库](https://docs.python.org/2/library/json.html)
@@ -340,8 +340,8 @@
       * 知识链接的方式：字符串、外键、URI
       * PostgreSQL及其JSON扩展:[Psycopg包操作PostgreSQL](http://initd.org/psycopg/docs/)
       * 图数据库 Neo4j和OrientDB
-        - Neo4j的Python接口 https://neo4j.com/developer/python/
-        - OrientDB：http://orientdb.com/orientdb/
+        - Neo4j的Python接口 <https://neo4j.com/developer/python/>
+        - OrientDB：<http://orientdb.com/orientdb/>
         - RDF数据库Stardog [官网](http://stardog.com/)
     + 知识检索
       * [ElasticSearch教程](http://joelabrahamsson.com/elasticsearch-101/)
@@ -355,14 +355,14 @@
         - [protege](https://protege.stanford.edu/)
         - [protege使用](https://zhuanlan.zhihu.com/p/32389370)
       * 图数据库技术
-        - Neo4j：https://neo4j.com/
-        - AllegroGraph：https://franz.com/agraph/allegrograph/
+        - Neo4j：<https://neo4j.com/>
+        - AllegroGraph：<https://franz.com/agraph/allegrograph/>
       * 可视化技术
-        - d3.js：https://d3js.org/
-        - Cytoscape.js：http://js.cytoscape.org/
+        - d3.js：<https://d3js.org/>
+        - Cytoscape.js：<http://js.cytoscape.org/>
       * 分词技术
-        - jieba：https://github.com/fxsjy/jieba
-        - hanlp：https://github.com/hankcs/HanLP
+        - jieba：<https://github.com/fxsjy/jieba>
+        - hanlp：<https://github.com/hankcs/HanLP>
     + 项目
       * [基于知识图谱的问答](https://github.com/kangzhun/KnowledgeGraph-QA-Service)
       * [Agriculture_KnowledgeGraph](https://github.com/qq547276542/Agriculture_KnowledgeGraph)
@@ -431,7 +431,7 @@
 
 * [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
 * [microsoft/ai-edu](https://github.com/microsoft/ai-edu):AI education materials for Chinese students, teachers and IT professionals.
-* [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP http://ailearning.apachecn.org/
+* [apachecn/AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP <http://ailearning.apachecn.org/>
 * [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks#deep-learning):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
 * [daviddao/awful-ai](https://github.com/daviddao/awful-ai):😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness
 * [apachecn/statsmodels_doc_zh](https://github.com/apachecn/statsmodels_doc_zh):Statsmodels: Python中的统计建模与计量统计学类库
@@ -445,7 +445,7 @@
 * [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
 * [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
 * [bytedance/byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
-* [mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. https://www.mindspore.cn
+* [mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. <https://www.mindspore.cn>
 
 ## 参考
 

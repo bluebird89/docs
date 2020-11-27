@@ -36,7 +36,7 @@
   * <https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html>
   * [SICP 解题集](https://sicp.readthedocs.io/en/latest/#)
   * SICP视频 b站上发现 MIT 关于 SICP 的公开课
-  * [huangz1990/SICP-answers](https://github.com/huangz1990/SICP-answers):我的 SICP 解题集 http://sicp.readthedocs.org/
+  * [huangz1990/SICP-answers](https://github.com/huangz1990/SICP-answers):我的 SICP 解题集 <http://sicp.readthedocs.org/>
 * 《[编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[性能之颠：洞悉系统、企业与云计算](https://www.amazon.cn/gp/product/B0140I5WPK)》
 * 《[Windows核心编程(第5版)](https://www.amazon.cn/gp/product/B001GS7918)》
@@ -91,7 +91,7 @@
 * 《Vue.js 权威指南》
 * 《Angular 权威教程》
 * 《深入浅出 Node.js》
-* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 https://item.jd.com/12365091.html
+* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 <https://item.jd.com/12365091.html>
 
 ## C语言
 
@@ -513,13 +513,13 @@
 
 ## 工具
 
-* [javiereguiluz/easybook](https://github.com/javiereguiluz/easybook):Book publishing as easy as it should be (built with Symfony components) https://easycorp.io/EasyBook
-* 支付宝-》浙江图书馆-〉阅读证（无押金，无外借功能……）->(http://www.zjlib.cn)->数据库文献
+* [javiereguiluz/easybook](https://github.com/javiereguiluz/easybook):Book publishing as easy as it should be (built with Symfony components) <https://easycorp.io/EasyBook>
+* 支付宝-》浙江图书馆-〉阅读证（无押金，无外借功能……）->(<http://www.zjlib.cn>)->数据库文献
 * Klib 高级版:支持Kindle、Apple Books、多看标注都可以轻松管理
 
 ## 参考
 
 * [threerocks/studyFiles](https://github.com/threerocks/studyFiles):一些经典且高质量的电子书分享
-* [it-ebooks/kindle114-rsrc-gathering](https://github.com/it-ebooks/kindle114-rsrc-gathering):📚 Kindle114 资源集结计划 http://kindle115.com
+* [it-ebooks/kindle114-rsrc-gathering](https://github.com/it-ebooks/kindle114-rsrc-gathering):📚 Kindle114 资源集结计划 <http://kindle115.com>
 * [itbook.store](https://itbook.store/)
 * [free books from Springer](https://hnarayanan.github.io/springer-books/): support everyone during Covid-19, Springer has released a ton of free textbooks

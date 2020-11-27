@@ -49,7 +49,7 @@ SAS网站的Eight levels of analytics
 * 《ggplot2：数据分析与图形艺术》
 * 《数据科学实战》
 * 《决战大数据》
-* [andkret/Cookbook](https://github.com/andkret/Cookbook):The Data Engineering Cookbook https://andreaskretz.com/
+* [andkret/Cookbook](https://github.com/andkret/Cookbook):The Data Engineering Cookbook <https://andreaskretz.com/>
 * [The Little Handbook of Statistical Practice](http://www.jerrydallal.com/LHSP/LHSP.htm)
 
 ## 公司
@@ -58,7 +58,7 @@ SAS网站的Eight levels of analytics
 
 ## [apache/incubator-superset](https://github.com/apache/incubator-superset)
 
-Apache Superset is a Data Visualization and Data Exploration Platform  https://superset.incubator.apache.org/
+Apache Superset is a Data Visualization and Data Exploration Platform  <https://superset.incubator.apache.org/>
 
 ## 教程
 
@@ -79,47 +79,47 @@ Apache Superset is a Data Visualization and Data Exploration Platform  https://s
 ## 资源
 
 * [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
-* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
-* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 http://shici.store
-* [google-research](https://github.com/google-research/google-research) Google Research  https://research.google/
+* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
+* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 <http://shici.store>
+* [google-research](https://github.com/google-research/google-research) Google Research  <https://research.google/>
 
 ## 实例
 
 * [](https://www.kaggle.com/startupsci/titanic-data-science-solutions)
 * 线性回归
-  - 例 1：https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py
-  - 例 2：https://bigdata-madesimple.com/how-to-run-linear-regression-in-python-scikit-learn/
-  - 例 3：https://www.geeksforgeeks.org/linear-regression-python-implementation/
+  - 例 1：<https://scikit-learn.org/stable/auto_examples/linear_model/plot_ols.html#sphx-glr-auto-examples-linear-model-plot-ols-py>
+  - 例 2：<https://bigdata-madesimple.com/how-to-run-linear-regression-in-python-scikit-learn/>
+  - 例 3：<https://www.geeksforgeeks.org/linear-regression-python-implementation/>
 * 分类:当想要从不同的可能性中预测结果时，分类是最重要的机器学习任务之一。
-  - 二分类：https://machinelearningmastery.com/make-predictions-scikit-learn/
-  - logistic 回归：https://towardsdatascience.com/building-a-logistic-regression-in-python-301d27367c24
-  - 分类器度量标准：https://medium.com/thalus-ai/performance-metrics-for-classification-problems-in-machine-learning-part-i-b085d432082b
+  - 二分类：<https://machinelearningmastery.com/make-predictions-scikit-learn/>
+  - logistic 回归：<https://towardsdatascience.com/building-a-logistic-regression-in-python-301d27367c24>
+  - 分类器度量标准：<https://medium.com/thalus-ai/performance-metrics-for-classification-problems-in-machine-learning-part-i-b085d432082b>
 * 支持向量机（SVM）:一种非常经典的 ML 模型，它的目的是寻找一个超平面来对样本进行分割，分割的原则是类别间隔最大化，最终转化为一个凸二次规划问题来求解。
-  - 理论解释：https://www.bilibili.com/video/av28186618
-  - 实战指南：https://www.bilibili.com/video/av38543231
-  - 实战指南：http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/
+  - 理论解释：<https://www.bilibili.com/video/av28186618>
+  - 实战指南：<https://www.bilibili.com/video/av38543231>
+  - 实战指南：<http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/>
 * 决策树:决策树预测结果背后最简单但最有效的方法之一，它们被用于很多方面（如随机森林）。
-  - 理论解释：https://www.bilibili.com/video/av26086646
-  - 实战指南：https://www.bilibili.com/video/av35523476
-  - 实战指南：http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/
+  - 理论解释：<https://www.bilibili.com/video/av26086646>
+  - 实战指南：<https://www.bilibili.com/video/av35523476>
+  - 实战指南：<http://dataaspirant.com/2017/02/01/decision-tree-algorithm-python-with-scikit-learn/>
 * 集成学习和随机森林:集成学习是利用所有不同特征、一些机器学习模型的优缺点来获得一组「投票者」，这些投票者在每次预测时都会给你最有可能的结果，这些投票由不同的分类器给出（SVM、ID3 算法、logistic 回归）。
 * 无监督学习
-  - explains Unsupervised Learning really well：https://towardsdatascience.com/unsupervised-learning-with-python-173c51dc7f03
-  - 无监督学习、有监督学习和强化学习的区别：https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/
+  - explains Unsupervised Learning really well：<https://towardsdatascience.com/unsupervised-learning-with-python-173c51dc7f03>
+  - 无监督学习、有监督学习和强化学习的区别：<https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/>
 * [Mining Social Media](http://socialdata.site/introduction/)
 
 ## 工具
 
-* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
-* [golemfactory/golem](https://github.com/golemfactory/golem):Golem is creating a global market for computing power. https://golem.network
+* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
+* [golemfactory/golem](https://github.com/golemfactory/golem):Golem is creating a global market for computing power. <https://golem.network>
 * [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
-* [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. https://tuiqiao.github.io/CBoardDoc/#/
-* [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… https://arrow.apache.org
-* [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line https://datascienceatthecommandline.com
-* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
+* [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. <https://tuiqiao.github.io/CBoardDoc/#/>
+* [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… <https://arrow.apache.org>
+* [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line <https://datascienceatthecommandline.com>
+* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com>
 * [EasyExcel](https://github.com/alibaba/easyexcel):一个用来对 Java 进行解析、生成 Excel 的框架
-* [bokeh/bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python https://bokeh.org
-* [ alibaba / DataX ](https://github.com/alibaba/DataX):阿里巴巴集团内被广泛使用的离线数据同步工具/平台
+* [bokeh/bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python <https://bokeh.org>
+* [alibaba / DataX](https://github.com/alibaba/DataX):阿里巴巴集团内被广泛使用的离线数据同步工具/平台
 
 ## 参考
 
@@ -140,5 +140,5 @@ Apache Superset is a Data Visualization and Data Exploration Platform  https://s
 * [DS100](http://www.ds100.org):Principles and Techniques of Data Science
 * [BrambleXu/pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记
 * [data-visualization-from-non-coder-to-coder](https://www.kaggle.com/learn/data-visualization-from-non-coder-to-coder)
-* [ fengdu78 / Data-Science-Notes ](https://github.com/fengdu78/Data-Science-Notes):数据科学的笔记以及资料搜集
+* [fengdu78 / Data-Science-Notes](https://github.com/fengdu78/Data-Science-Notes):数据科学的笔记以及资料搜集
 * [Awesome Data Engineering](https://awesomedataengineering.com/)

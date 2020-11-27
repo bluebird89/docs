@@ -1,6 +1,6 @@
 # [gatsby](https://github.com/gatsbyjs/gatsby)
 
-⚛️📄🚀 Blazing fast site generator for React https://www.gatsbyjs.org
+⚛️📄🚀 Blazing fast site generator for React <https://www.gatsbyjs.org>
 
 ## 安装
 

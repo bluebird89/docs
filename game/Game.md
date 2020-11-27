@@ -78,6 +78,7 @@
 ## 手柄
 
 * Switch pro
+
 - 索尼按键：B Button T Trigger S Stick
   - LB
   - LT
@@ -89,6 +90,7 @@
   - □  (STOP)象征一张纸，代表菜单或者文档，是粉色 Y
   - O (select)代表决策里的是，红色 A
   - X (cancel)代表决策里的否，蓝色 B
+
 * 八位堂SN30 pro+
 * 盖世小鸡T4
 
@@ -111,7 +113,7 @@
   - 第三幕库拉斯特海港，开场遇到的黑暗流浪者，就是上一代率领着弓箭手和法师杀死Diablo的那个战士,为了彻底消灭Diablo，战士将Diablo的灵魂注入到自己的头颅当中，希望用自己的精神力量将Diablo击败。 可是，战士的努力失败了，他的思想逐步受到Diablo的腐蚀，开始了无法挽回的堕落之旅，这个曾经杀死成Diablo的勇士，成为了新一代英雄们最后要对抗的Diablo
 * 魔兽世界
 * 守望先锋
-* [群星stellaris]（https://stellaris.paradoxwikis.com/Economy）
+* [群星stellaris]（<https://stellaris.paradoxwikis.com/Economy>）
 * Minecraft
   + [Mojang/brigadier](https://github.com/Mojang/brigadier):Brigadier is a command parser & dispatcher, designed and developed for Minecraft: Java Edition.
 * WeGame
@@ -138,9 +140,11 @@
 * PES2020
   - PS4 CONTROLLER NOT WORKING
     - Steam > Library > Right Click PES > Properties>;steam input per-game settings  and use bpm overlay when steam input is active both off
+
 + Gris:类似纪念碑谷那样作画唯美，难度不高的独立游
 
 + Dark Soul 系列
+
 * Total War 系列
 
 ## [Epic Games](https://www.epicgames.com/store/zh-CN/)
@@ -235,7 +239,7 @@
 
 ## 测试
 
-* [AirtestProject/Airtest](https://github.com/AirtestProject/Airtest):UI Test Automation Framework for Games and Apps http://airtest.netease.com/
+* [AirtestProject/Airtest](https://github.com/AirtestProject/Airtest):UI Test Automation Framework for Games and Apps <http://airtest.netease.com/>
 
 ## 参考
 
@@ -244,10 +248,10 @@
 
 ## 工具
 
-* [photonstorm/phaser](https://github.com/photonstorm/phaser):Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering. http://phaser.io
-* [OpenEmu/OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS http://openemu.org
-* [EpicGames/UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code http://www.unrealengine.com/
-* [godotengine/godot](https://github.com/godotengine/godot):Godot Engine – Multi-platform 2D and 3D game engine https://godotengine.org
-* [EsotericSoftware/spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes):2D skeletal animation runtimes for Spine. http://esotericsoftware.com/
-* [Humpheh/goboy](https://github.com/Humpheh/goboy):Multi-platform Nintendo Game Boy Color emulator written in Go https://humpheh.github.io/goboy/
+* [photonstorm/phaser](https://github.com/photonstorm/phaser):Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering. <http://phaser.io>
+* [OpenEmu/OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS <http://openemu.org>
+* [EpicGames/UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code <http://www.unrealengine.com/>
+* [godotengine/godot](https://github.com/godotengine/godot):Godot Engine – Multi-platform 2D and 3D game engine <https://godotengine.org>
+* [EsotericSoftware/spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes):2D skeletal animation runtimes for Spine. <http://esotericsoftware.com/>
+* [Humpheh/goboy](https://github.com/Humpheh/goboy):Multi-platform Nintendo Game Boy Color emulator written in Go <https://humpheh.github.io/goboy/>
 * 二柄

@@ -25,16 +25,16 @@ export PATH=/usr/local/bin:/Users/overtrue/.composer/vendor/bin:$PATH
 ## 使用
 
 * 服务器准备
-    - PHP 扩展
-    - git
-    - composer
-    - npm
+  - PHP 扩展
+  - git
+  - composer
+  - npm
 * 在 Linux 服务器添加账户与配置权限
 * 项目 git 仓库允许服务器访问（clone 代码）
 * 部署结构
-    - current - 指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
-    - releases - 部署的历史版本文件夹，里面可能有很多个最近部署的版本，可以根据你的配置来设置保留多少个版本，建议 5 个。保留版本可以让我们在上线出问题时使用 dep rollback 快速回滚项目到上一个版本。
-    - shared - 共享文件夹，它的作用就是存储我们项目中版本间共享的文件
+  - current - 指向一个具体的版本的软链接，你的 nginx 配置中 root 应该指向它，比如 laravel 项目的话 root 就指向：/var/www/demo-app/current/public
+  - releases - 部署的历史版本文件夹，里面可能有很多个最近部署的版本，可以根据你的配置来设置保留多少个版本，建议 5 个。保留版本可以让我们在上线出问题时使用 dep rollback 快速回滚项目到上一个版本。
+  - shared - 共享文件夹，它的作用就是存储我们项目中版本间共享的文件
 
 ```sh
 # 目标机器
@@ -158,4 +158,4 @@ Unable to prepare route [/] for serialization. Uses Closure.
 
 ## 工具
 
-* [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. http://www.spinnaker.io/
+* [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. <http://www.spinnaker.io/>

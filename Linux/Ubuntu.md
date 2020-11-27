@@ -418,7 +418,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + stacer `sudo apt install stacer` the most beautiful free and open-source application for Linux system optimizing and monitoring
     + Déjà Dup — A Backup Tool `sudo snap install deja-dup --classic`
   - appimage
-    + [ TheAssassin / AppImageLauncher ](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
+    + [TheAssassin / AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
   - 空格键预览 `sudo apt install gnome-sushi`
 * 下载
   - `sudo apt-get install ktorrent`
@@ -590,18 +590,18 @@ sudo fuser -v /var/cache/debconf/config.dat
     + 需要选择 GTK3 分类下的主题
     + file download(~/.themes) or isntall
   - [nana-4 / materia-theme](https://github.com/nana-4/materia-theme):A Material Design theme for GNOME/GTK based desktop environments
-  - [adapta-project / adapta-gtk-theme ](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
+  - [adapta-project / adapta-gtk-theme](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
     + `git clone git@github.com:adapta-project/adapta-gtk-theme.git`
     + `sudo apt install autoconf automake inkscape libgdk-pixbuf2.0-dev libglib2.0-dev libxml2-utils pkg-config  sassc`
     + `./autogen.sh --prefix=/usr`
     + `make && sudo make install`
   - [pop-os / gtk-theme](https://github.com/pop-os/gtk-theme):System76 Pop GTK+ Theme
   - Communitheme `sudo snapinstall communitheme –edge`
-  - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. https://vinceliuice.github.io/
+  - [vinceliuice / vimix-gtk-themes](https://github.com/vinceliuice/vimix-gtk-themes):Vimix is a flat Material Design theme for GTK 3, GTK 2 and Gnome-Shell etc. <https://vinceliuice.github.io/>
   - sudo apt install sierra-gtk-theme
 * icons: `/usr/share/icons` > `~/.icons`
   - [paper-icon-theme](https://snwh.org/)
-* [Grub-theme-stylish ](https://www.pling.com/s/Gnome/p/1009237/)
+* [Grub-theme-stylish](https://www.pling.com/s/Gnome/p/1009237/)
 * 重启： `Alt + F2`, r
 
 ```sh
@@ -1133,9 +1133,9 @@ top [-] [d] [p] [q] [c] [C] [S] [s]  [n]，参数
     + 1 user  当前登录用户数
     + load average: 0.00, 0.02, 0.05  系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。
   - Tasks: 104 total  进程总数
-    _ 1 running 正在运行的进程数
+    _1 running 正在运行的进程数
     _ 103 sleeping  睡眠的进程数
-    _ 0 stopped 停止的进程数
+    _0 stopped 停止的进程数
     _ 0 zombie  僵尸进程数
   - Cpu(s):  0.1%us 用户空间占用CPU百分比
     + 0.0%us: 用户态

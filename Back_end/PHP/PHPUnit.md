@@ -1,6 +1,6 @@
 # [phpunit](https://github.com/sebastianbergmann/phpunit)
 
-The PHP Unit Testing framework. https://phpunit.de/
+The PHP Unit Testing framework. <https://phpunit.de/>
 
 * 单元测试主要是作为一种良好实践来编写的，能帮助开发人员识别并修复 bug、重构代码，还可以看作被测软件单元的文档
 * 理想的单元测试应当覆盖程序中所有可能的路径
@@ -75,7 +75,7 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
     - 要么它继承自 PHPUnit\Framework\TestCase
     - 要么它提供 public static suite() 方法，这个方法返回一个 PHPUnit_Framework_Test 对象
 
-## 基境(fixture):
+## 基境(fixture)
 
 将整个场景设置成某个已知的状态，并在测试结束后将其复原到初始状态。这个已知的状态称为测试的 基境(fixture)
 

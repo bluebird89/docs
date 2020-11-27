@@ -1,6 +1,6 @@
 # [pulsar](https://github.com/apache/pulsar)
 
-Apache Pulsar is an open-source distributed pub-sub messaging system originally created at Yahoo and now part of the Apache Software Foundation https://pulsar.apache.org/
+Apache Pulsar is an open-source distributed pub-sub messaging system originally created at Yahoo and now part of the Apache Software Foundation <https://pulsar.apache.org/>
 
 ## Pulsar vs Kafka
 

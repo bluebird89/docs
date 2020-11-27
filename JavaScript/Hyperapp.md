@@ -1,6 +1,6 @@
 # [hyperapp](https://github.com/hyperapp/hyperapp)
 
-1 KB JavaScript library for building web applications. https://hyperapp.js.org
+1 KB JavaScript library for building web applications. <https://hyperapp.js.org>
 
 ## 使用
 

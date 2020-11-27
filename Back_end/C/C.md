@@ -69,7 +69,7 @@ gcc name.o adder.o hello.c
 * The C Programming Language C 程序设计语言
 * C语言程序设计现代方法
 * 《C Primer Plus》
-    - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
+  - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
 * 《C和指针》
 * 《C专家编程》
 * 《debuging with gdb》（中文版）
@@ -78,7 +78,7 @@ gcc name.o adder.o hello.c
 
 ## 工具
 
-* [tboox/tbox](https://github.com/tboox/tbox):📦 A glib-like multi-platform c library http://tboox.org
+* [tboox/tbox](https://github.com/tboox/tbox):📦 A glib-like multi-platform c library <http://tboox.org>
 * [nodejs/http-parser](nodejs/http-parser):http request/response parser for c
 * [hellogcc/100-gdb-tips](https://github.com/hellogcc/100-gdb-tips):A collection of gdb tips. 100 maybe just mean many here.
 * [Source Insight](https://www.sourceinsight.com/)

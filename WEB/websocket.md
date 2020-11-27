@@ -5,7 +5,7 @@
 * Websocket其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充
 
 * Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response，在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
-  
+
   - 基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
 
 * Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。
@@ -23,7 +23,7 @@
 * 原理： 在TCP连接第一次握手的时候，升级为ws协议。后面的数据交互都复用这个TCP通道
 
 * 报文格式
-  
+
   - 客户端：将消息切割成多个帧，并发送给服务端。
   - 服务端：接收消息帧，并将关联的帧重新组装成完整的消息。
     websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
@@ -38,7 +38,7 @@
     被动性
 
 * HTML5的新规范
-  
+
   * Websocket是一个持久化网络通信的协议
   * 一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中.有更加轻量级的头，减少数据传送量
   * 可以用于绕过大多数防火墙的限制
@@ -308,7 +308,7 @@ curl -H "Content-Type: application/json" \
 
 ### [joewalnes/websocketd](https://github.com/joewalnes/websocketd)
 
-Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets. http://websocketd.com/
+Turn any program that uses STDIN/STDOUT into a WebSocket server. Like inetd, but for WebSockets. <http://websocketd.com/>
 
 ```sh
 #!/bin/bash

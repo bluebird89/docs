@@ -1,6 +1,6 @@
 # [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum)
 
-Official Go implementation of the Ethereum protocol https://geth.ethereum.org
+Official Go implementation of the Ethereum protocol <https://geth.ethereum.org>
 
 ## 工具
 
@@ -8,4 +8,4 @@ Official Go implementation of the Ethereum protocol https://geth.ethereum.org
 
 ## 参考
 
-* [trufflesuite/truffle](https://github.com/trufflesuite/truffle):The most popular Ethereum development framework http://truffleframework.com
+* [trufflesuite/truffle](https://github.com/trufflesuite/truffle):The most popular Ethereum development framework <http://truffleframework.com>

@@ -158,7 +158,7 @@
   - 需要工作者能够克服孤独感，并且由于没有同事在身边，需要比较强大的自律精神克服倦怠感
     + 个人时间管理工具，例如番茄钟，日历等工具
     + 切忌贪多，选择一个用透最好
-  - 在生活中也保持一个规律的作息习惯也会很有帮助，这点引用的 [siddontang 那篇博客](https://github.com/siddontang/blog/blob/master/2016/my-remote-work.md）
+  - 在生活中也保持一个规律的作息习惯也会很有帮助，这点引用的 [siddontang 那篇博客](<https://github.com/siddontang/blog/blob/master/2016/my-remote-work.md>）
   - 工程师可能是一个比较内向的性格，遇到困难的时候，尤其是在远程的环境下，容易钻牛角尖。这种情况下，一定切记要主动的求助和沟通，甚至可能需要比面对面的环境下更加频繁的沟通
   - 对于管理者来说，要做到这点，需要将任务拆解得足够细，在前期沟通需要反复确认是否和远程工作的同学达成一致，这个环节需要非常的重视
 
@@ -223,11 +223,11 @@
   - 根据模版生成出来的个人周报
   - 提醒大家准备周报的企业微信机器人
   - SRE 机器人自动 Merge PR 并 Cherry-pick 到 Release 分支
-* [Chaos 测试](https://github.com/pingcap/chaos-mesh）
+* [Chaos 测试](<https://github.com/pingcap/chaos-mesh>）
 * CI/CD
 * 社交网络上简单的动态舆情监测
-* 使用 App Script 自动生成自己的周报(http://disksing.com/review-recorder/)
-* github-cli(https://github.com/siddontang/github-cli) 高效的追踪关注的 Github 项目的动态
+* 使用 App Script 自动生成自己的周报(<http://disksing.com/review-recorder/>)
+* github-cli(<https://github.com/siddontang/github-cli>) 高效的追踪关注的 Github 项目的动态
 * Python 写了一个小脚本，每日收集 Trello 上指定 Board 内的卡片的更新，并汇总发邮件
 * IFTTT 机器人在收集提及 TiDB、PingCAP 的推文
 * 选择开发相关的效率工具，有几个建议：
@@ -341,7 +341,7 @@
 * Asana
 * [trello](https://trello.com/)
 * [backlog](https://backlog.com/):Online project management tool for developers
-* [wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. http://wtfutil.com
+* [wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. <http://wtfutil.com>
 * [Taskwarrior](https://taskwarrior.org/) Free and Open Source Software that manages your TODO list from the command line
 * 时间统计
   - [Rescuetime](https://www.rescuetime.com/):统计到用户使用每个电脑或手机应用的时长，访问每个网站的时长，会自动给这些行为分类，并且标记为不同等级的 Productive 或 Distracting 的属性
@@ -352,4 +352,4 @@
 
 * [tron1991/open-product-management](https://github.com/tron1991/open-product-management):A curated list of product management advice for technical people.
 * [basecamp/sub](https://github.com/basecamp/sub):a delicious way to organize programs
-* [managers-playbook ](https://github.com/ksindi/managers-playbook#principles):book Heuristics for effective management
+* [managers-playbook](https://github.com/ksindi/managers-playbook#principles):book Heuristics for effective management
