@@ -1,6 +1,6 @@
 # [vuejs/vue](https://github.com/vuejs/vueb)
 
-A progressive, incrementally-adoptable JavaScript framework for building UI on the web. http://vuejs.org
+A progressive, incrementally-adoptable JavaScript framework for building UI on the web. <http://vuejs.org>
 
 * 工程化
 * 模块化
@@ -16,7 +16,7 @@ A progressive, incrementally-adoptable JavaScript framework for building UI on t
 
 * vue2
   - 通过两Object.prototype
-* [Vue3](https://github.com/vuejs/vue-next) https://v3.vuejs.org/
+* [Vue3](https://github.com/vuejs/vue-next) <https://v3.vuejs.org/>
   - 通过proxy实现
 
 ## 安装
@@ -78,6 +78,7 @@ vue upgrade --next
 - kebab-case (短横线隔开式)
 - 声明式渲染:用简洁模板语法来声明式地将数据渲染进 DOM 系统
   - 数据和 DOM 已经被建立了关联，所有东西都是响应式的
+
 * 模板语法:允许开发者声明式地将 DOM 绑定至底层 Vue 实例的数据
   - 底层的实现上，Vue 将模板编译成虚拟 DOM 渲染函数。
   - 结合响应系统，Vue 能够智能地计算出最少需要重新渲染多少组件，并把 DOM 操作次数减到最少
@@ -97,6 +98,7 @@ vue upgrade --next
       - checkbox 和 radio 使用 checked property 和 change 事件
       - select 字段将 value 作为 prop 并将 change 作为事件
     * 如果 v-model 表达式的初始值未能匹配任何选项，<select> 元素将被渲染为“未选中”状态,
+
 - 指令 (Directives) 是带有 v- 前缀的特殊 attribute,职责是当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM
   - 值预期是单个 JavaScript 表达式 (v-for 是例外情况)
   - 能够接收一个“参数”，在指令名称之后以冒号表示
@@ -125,6 +127,7 @@ vue upgrade --next
   - update：所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新
   - componentUpdated：指令所在组件的 VNode 及其子 VNode 全部更新后调用
   - unbind：只调用一次，指令与元素解绑时调用
+
 * v-text：文本填充
 * v-pre：模版中跳过vue编译，直接输出原始值
 * v-cloak：刷新活着加载出现闪缩
@@ -133,6 +136,7 @@ vue upgrade --next
 
 - .preventDefault()
 - .stopPropagation()
+
 * 方法只有纯粹的数据逻辑，而不是去处理 DOM 事件细节
 * 事件修饰符 (modifier) 是以半角句号 . 指明的特殊后缀，用于指出一个指令应该以特殊方式绑定
   - .stop
@@ -156,6 +160,7 @@ vue upgrade --next
   - .alt
   - .shift
   - .meta: Windows 徽标键 (⊞)|command 键 (⌘)
+
 - .exact 允许控制由精确的系统修饰符组合触发的事件
 - .middle:鼠标按钮修饰符
 
@@ -207,6 +212,7 @@ vue upgrade --next
   - contact() 返回一个新数组
   - splice() 返回一个新数组
   - reverse()
+
 * created()
 * 组件上的 v-model 默认会利用名为 value 的 prop 和名为 input 的事件,但是像单选框、复选框等类型的输入控件可能会将 value attribute 用于不同的目的。model 选项可以用来避免这样的冲突
 
@@ -232,6 +238,7 @@ vue upgrade --next
 - 字符串 (例如：template: '...') 或者　单文件组件 (.vue)，不存在限制
 - 在一个组件的根元素上直接监听一个原生事件,使用 v-on 的 .native 修饰符
 - \$attrs
+
 * slot:承载分发内容的出口
   - 插槽内可以包含任何模板代码，包括 HTML,甚至其它组件
   - 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的
@@ -239,8 +246,10 @@ vue upgrade --next
   - 有一个特殊的 attribute：name,可以用来定义额外的插槽,不带 name 的 <slot> 出口会带有隐含的名字“default”
   - v-slot|#
   - <keep-alive> 元素将其动态组件包裹起来,第一次被创建的时候缓存下来
+
 - 可以在自己的模板中调用自身的。只能通过 name 选项来做这件事
 - 异步组件
+
 * props：可以在组件上注册一些自定义 attribute。当一个值传递给一个 prop attribute 的时候，它就变成了那个组件实例的一个 property
   - 父子 prop 之间形成了一个 单向下行绑定：父级 prop 的更新会向下流动到子组件中，但是反过来则不行。这样会防止从子组件意外改变父级组件的状态，从而导致你的应用的数据流向难以理解
   - 不应该在一个子组件内部改变 prop
@@ -303,7 +312,7 @@ npm run serve
 
 ## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
 
-🛠️ Standard Tooling for Vue.js Development https://cli.vuejs.org/
+🛠️ Standard Tooling for Vue.js Development <https://cli.vuejs.org/>
 
 * 3.0:图形化界面
 
@@ -327,71 +336,71 @@ vue init Plortinus/vue-multiple-pages new-project
 * [bailicangdu/node-elm](https://github.com/bailicangdu/vue2-elm)：基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用，服务端
 * [bailicangdu/vue2-manage](https://github.com/bailicangdu/vue2-manage):基于 vue + element-ui 的后台管理系统
 * [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
-* [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：http://yangyi1024.com/elem 还有我最新的实战项目,点它=》 http://yangyi1024.com/meizi
-* [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 http://coding.imooc.com/class/74.html
+* [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：<http://yangyi1024.com/elem> 还有我最新的实战项目,点它=》 <http://yangyi1024.com/meizi>
+* [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 <http://coding.imooc.com/class/74.html>
 * [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
-* [codekerala/spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x https://codekerala.com
+* [codekerala/spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x <https://codekerala.com>
 * [codecasts/spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
 * [Plortinus/vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
 * [KieSun/Vue-StudyMaps](https://github.com/KieSun/Vue-StudyMaps):使用 Vue.js 开发的聚合应用。通过爬虫抓取平时浏览的网站，省去逐个点开网页的时间。
 * [vue-storefront](https://github.com/DivanteLtd/vue-storefront)
 * [Eagle.js](https://github.com/Zulko/eagle.js)
-* [Coffcer/vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack http://coffcer.github.io/vue-chat/
-* [lin-xin/vue-manage-system](https://github.com/lin-xin/vue-manage-system):The web management system solution based on Vue2 and Element UI. http://blog.gdfengshuo.com/example/work/
+* [Coffcer/vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack <http://coffcer.github.io/vue-chat/>
+* [lin-xin/vue-manage-system](https://github.com/lin-xin/vue-manage-system):The web management system solution based on Vue2 and Element UI. <http://blog.gdfengshuo.com/example/work/>
 
 ## 工具
 
 * better-scroll
 * [vuejs/vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
-* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 https://elemefe.github.io/vue-amap/
+* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 <https://elemefe.github.io/vue-amap/>
 * [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
 * [vuejs/vue-loader](https://github.com/vuejs/vue-loader):Webpack loader for Vue.js components
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
-* [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.https://router.vuejs.org/zh-cn/
+* [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.<https://router.vuejs.org/zh-cn/>
 * [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
 * [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI https://vux.li/
+* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI <https://vux.li/>
 * [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
-* [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js https://vue-multiselect.js.org/
-* [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js https://kazupon.github.io/vue-i18n/
+* [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js <https://vue-multiselect.js.org/>
+* [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js <https://kazupon.github.io/vue-i18n/>
 * [SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable):Vue component allowing drag-and-drop sorting in sync with View-Model. Based on Sortable.js
 * [Akryum/vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller):⚡️ Blazing fast scrolling for any amount of data
 * [kaorun343/vue-property-decorator](https://github.com/kaorun343/vue-property-decorator):Vue.js and Property Decorator
 * chart
-    - [ElemeFE/v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 https://v-charts.js.org
+  - [ElemeFE/v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 <https://v-charts.js.org>
 * 模板
-  - [ SimulatedGREG / electron-vue ](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
-    - [ epicmaxco / vuestic-admin ](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template http://vuestic.epicmax.co
+  - [SimulatedGREG / electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
+    - [epicmaxco / vuestic-admin](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template <http://vuestic.epicmax.co>
 * [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
 * [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
 * [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
 * [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
 * [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
-* [gridsome/gridsome](https://github.com/gridsome/gridsome):⚡️ Build super fast, modern websites with Vue.js https://gridsome.org
+* [gridsome/gridsome](https://github.com/gridsome/gridsome):⚡️ Build super fast, modern websites with Vue.js <https://gridsome.org>
 * test
-  - [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):🔬 Utilities for testing Vue components https://vue-test-utils.vuejs.org
+  - [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):🔬 Utilities for testing Vue components <https://vue-test-utils.vuejs.org>
 * Editor
-  - [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js https://tiptap.scrumpy.io
-  - [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features https://md.zhystar.com/
+  - [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js <https://tiptap.scrumpy.io>
+  - [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features <https://md.zhystar.com/>
 * 框架
   - [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-  - [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 http://uniapp.dcloud.io
+  - [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 <http://uniapp.dcloud.io>
 * Admin
-  - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin https://panjiachen.github.io/vue-element-admin
-  - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. https://taylorchen709.github.io/vue-admin/
+  - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin <https://panjiachen.github.io/vue-element-admin>
+  - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. <https://taylorchen709.github.io/vue-admin/>
 
 ## 参考
 
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
-* [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址https://nlrx-wjc.github.io/Learn-Vue-Source-Code/
+* [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址<https://nlrx-wjc.github.io/Learn-Vue-Source-Code/>
 * [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
 * [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
-* [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 http://hcysun.me/vue-design/
+* [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 <http://hcysun.me/vue-design/>
 
 * [Vue 2.0 的建议学习顺序](https://zhuanlan.zhihu.com/p/23134551)
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)
 * [开发技巧](https://segmentfault.com/a/1190000020620972)
-* http://www.cnblogs.com/keepfool/
+* <http://www.cnblogs.com/keepfool/>
 * [Vue.js——60分钟快速入门](http://www.cnblogs.com/keepfool/p/5619070.html)
 * [Vue2+VueRouter2+webpack 构建项目实战](http://blog.csdn.net/fungleo/article/details/53171052)
 * [Vue 脱坑记 - 查漏补缺](https://juejin.im/post/59fa9257f265da43062a1b0e)

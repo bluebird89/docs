@@ -1,6 +1,6 @@
 # [gin](https://github.com/gin-gonic/gin)
 
-Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. https://gin-gonic.github.io/gin/
+Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. <https://gin-gonic.github.io/gin/>
 
 * 快速
   - 基于 Radix 树（一种更节省空间的 Trie 树结构）的路由，占用内存更少；

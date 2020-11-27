@@ -194,13 +194,13 @@ Your browser does not support the audio tag.
 
 ### 工具
 
-* [fabricjs/fabric.js](https://github.com/fabricjs/fabric.js):Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser http://fabricjs.com
-* [Mikhus/canvas-gauges](https://github.com/Mikhus/canvas-gauges):HTML5 Canvas Gauge. Tiny implementation of highly configurable gauge using pure JavaScript and HTML5 canvas. No dependencies. Suitable for IoT devices because of minimum code base. http://canvas-gauges.com/
-* [paperjs/paper.js](https://github.com/paperjs/paper.js):The Swiss Army Knife of Vector Graphics Scripting – Scriptographer ported to JavaScript and the browser, using HTML5 Canvas. Created by @lehni & @puckey http://paperjs.org
+* [fabricjs/fabric.js](https://github.com/fabricjs/fabric.js):Javascript Canvas Library, SVG-to-Canvas (& canvas-to-SVG) Parser <http://fabricjs.com>
+* [Mikhus/canvas-gauges](https://github.com/Mikhus/canvas-gauges):HTML5 Canvas Gauge. Tiny implementation of highly configurable gauge using pure JavaScript and HTML5 canvas. No dependencies. Suitable for IoT devices because of minimum code base. <http://canvas-gauges.com/>
+* [paperjs/paper.js](https://github.com/paperjs/paper.js):The Swiss Army Knife of Vector Graphics Scripting – Scriptographer ported to JavaScript and the browser, using HTML5 Canvas. Created by @lehni & @puckey <http://paperjs.org>
 
 ### 项目
 
-* [dli/paint](https://github.com/dli/paint):Fluid Paint - http://david.li/paint
+* [dli/paint](https://github.com/dli/paint):Fluid Paint - <http://david.li/paint>
 * [canvas粒子时钟](https://www.cnblogs.com/xiaohuochai/p/6368039.html)
 
 ## SVG(Scalable Vector Graphics)
@@ -218,7 +218,7 @@ Your browser does not support the audio tag.
 
 ### 工具
 
-* [duopixel/Method-Draw](https://github.com/duopixel/Method-Draw):Method Draw, the SVG Editor for Method of Action http://editor.method.ac
+* [duopixel/Method-Draw](https://github.com/duopixel/Method-Draw):Method Draw, the SVG Editor for Method of Action <http://editor.method.ac>
 
 ### Canvas vs SVG
 
@@ -489,12 +489,12 @@ Webpage: <input type="url" list="url_list" name="link" />
     + 优化加载顺序（css头、js尾(异步))
     + 降低请求「数」
     + 将可合并的 CSS、JS 文件合并
-    + CSS sprites 合并图片资源（http://zerosprites.com/）
+    + CSS sprites 合并图片资源（<http://zerosprites.com/>）
 * 降低请求「量」
-  + 合理的使用图片资源（对大图进行处理，使用矢量图片） 
-  + JS混淆（通过简化函数名称， 变量名称， 去空格等达到减小 JS 文件的大小） 
-  + 规划好使用的第三方工具库，减少不必要的引用 
-  + 启用 GZIP 压缩 
+  + 合理的使用图片资源（对大图进行处理，使用矢量图片）
+  + JS混淆（通过简化函数名称， 变量名称， 去空格等达到减小 JS 文件的大小）
+  + 规划好使用的第三方工具库，减少不必要的引用
+  + 启用 GZIP 压缩
   + Zepto 替换 JQuery
 * 缓存一切可缓存的
   + 页面缓存（manifest，减轻服务器压力、加快页面加载速度）
@@ -538,18 +538,18 @@ Webpage: <input type="url" list="url_list" name="link" />
     + 释放定时器
     + view 切换过程中，在 destroy 中释放 view 相关资源
 * 区域滚动使用 Iscroll
-  - webapp 区域滚动 
+  - webapp 区域滚动
   - 解决动画过程带来的长短页问题
 * Touch 事件替换 Click
   - Click 点击响应比 Touch 慢 300ms（手机需要知道你是不是想双击放大网页内容）
   - 解决动画过程带来的长短页问题
   - 总而言之，IScroll 方案的提出，是让 webapp 媲美 native app 靠近了一大步，真正的平起平坐还需要浏览器的支援
 * 合理使用 CSS 特性
-  - 不要使用 CSS 字体 
-  - 避免使用 CSS 表达式 
+  - 不要使用 CSS 字体
+  - 避免使用 CSS 表达式
   - 高频渲染触发 GPU 加速（CSS3 transitions  CSS3 3D transforms）
 * 尽量不要使用 DataURI
-  - 解析是由成本 
+  - 解析是由成本
   - 手机端 DataURI 要比简单的外链资源要慢 6 倍
 * 合理使用 Canvas 动画
   - Canvas是状态机，减少状态切换能提高效率
@@ -572,11 +572,11 @@ Webpage: <input type="url" list="url_list" name="link" />
 * 当进行遍历操作时避免使用DOM操作。通过像getElementsByTagName()这 种方法得到的DOM元素队列都是动态的；有可能在你还没有对它遍历完成时，它已经被改变。这有可能导致死循环。
 * 当你对对象的成员（属性或方法）进行反复操作时，先存储对它们的引用。例如var getTags = document.getElementsByTagName; getTags(‘div’);
 * 在任何的代码段里，在局部变量范围外存放一个这个局部变量的引用。* 在HTTP头信息里加入缓存控制过期和最大存活时间标记。
-* 优化CSS。要使用<link>方式，而不要使用@import方式。请参考这个优秀的文档http://www.slideshare.net/stubbornella/object-oriented-css
+* 优化CSS。要使用<link>方式，而不要使用@import方式。请参考这个优秀的文档<http://www.slideshare.net/stubbornella/object-oriented-css>
 * 使用CSS技术来优化图片资源
 * 用GZip方式压缩 .js 和 .css 文件。如果你使用的是Apache，在 .htaccess 里设置压缩方式，你的HTML, XML 和 JSON 也同时会被压缩。 AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/x-javascript application/json
-* 使用JavaScript压缩工具。除了使用YUI和JSMin外，你还可以试一试Google Closure http://closure-compiler.appspot.com/home (感谢: James Westgate, 一位读者)
-* 优化每个页面上的各种资源，把它们拆分到各个子域上，这么它们就能够并行下载。请参考http://yuiblog.com/blog/2007/04/11/performance-research-part-4/
+* 使用JavaScript压缩工具。除了使用YUI和JSMin外，你还可以试一试Google Closure <http://closure-compiler.appspot.com/home> (感谢: James Westgate, 一位读者)
+* 优化每个页面上的各种资源，把它们拆分到各个子域上，这么它们就能够并行下载。请参考<http://yuiblog.com/blog/2007/04/11/performance-research-part-4/>
 * 将CSS样式表放在页面的最顶端，这样能方便包括IE在内的浏览器进行解析。
 * 尽量将DOM结构保持的越简单越好。DOM的体积会影响相关的操作效率，像查找， 遍历，DOM改动都有影响。document.getElementsByTagName(‘*’).length这 个值越小越好。
 * 注意你使用的选择器。例如，如果你想获取一个ul下的直接子元素，使用jQuery(“ul > li”)而不要使用jQuery(“ul li”)
@@ -599,13 +599,13 @@ function foo(arr) {
 
 ## 工具
 
-* [pa7/heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps https://www.patrick-wied.at/static/heatmapjs/
-* [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. http://pixijs.com
-* [mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest):A HTML5/JavaScript multiplayer game experiment http://browserquest.mozilla.org/
+* [pa7/heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps <https://www.patrick-wied.at/static/heatmapjs/>
+* [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. <http://pixijs.com>
+* [mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest):A HTML5/JavaScript multiplayer game experiment <http://browserquest.mozilla.org/>
 * [flowjs/flow.js](https://github.com/flowjs/flow.js):A JavaScript library providing multiple simultaneous, stable, fault-tolerant and resumable/restartable file uploads via the HTML5 File API.
-* [eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js):An HTML5 saveAs() FileSaver implementation https://eligrey.com/blog/saving-generated-files-on-the-client-side/
-* [nbedos/termtosvg](https://github.com/nbedos/termtosvg):Record terminal sessions as SVG animations https://nbedos.github.io/termtosvg/
-* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. https://html5boilerplate.com/
+* [eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js):An HTML5 saveAs() FileSaver implementation <https://eligrey.com/blog/saving-generated-files-on-the-client-side/>
+* [nbedos/termtosvg](https://github.com/nbedos/termtosvg):Record terminal sessions as SVG animations <https://nbedos.github.io/termtosvg/>
+* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
 * [turbolinks](https://github.com/turbolinks/turbolinks):Turbolinks makes navigating your web application faster
 
 ## 参考

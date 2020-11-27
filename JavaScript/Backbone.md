@@ -1,6 +1,6 @@
 # [backbone](https://github.com/jashkenas/backbone)
 
-Give your JS App some Backbone with Models, Views, Collections, and Events http://backbonejs.org
+Give your JS App some Backbone with Models, Views, Collections, and Events <http://backbonejs.org>
 
 ## 参考
 

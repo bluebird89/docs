@@ -504,7 +504,7 @@ Python实现的数据库。
 
 处理事件以及任务队列的库。
 
-* [celery](http://www.celeryproject.org/)：一个异步任务队列/作业队列，基于分布式消息传递。
+* [celery](http://www.celeryproject.org/)：Distributed Task Queue 一个异步任务队列/作业队列，基于分布式消息传递 https://docs.celeryproject.org/en/stable/index.html
 * [huey](https://github.com/coleifer/huey)：小型多线程任务队列。
 * [mrq](https://github.com/pricingassistant/mrq)：Mr. Queue -一个 Python 的分布式 worker 任务队列， 使用 Redis 和 gevent。
 * [rq](http://python-rq.org/)：简单的 Python 作业队列。

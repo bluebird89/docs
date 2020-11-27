@@ -42,7 +42,6 @@ sudo update-initramfs -u
 reboot
 ```
 
-
 ## 参考
 
 * [deepinwiki/wiki](https://github.com/deepinwiki/wiki)

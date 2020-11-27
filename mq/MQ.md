@@ -142,6 +142,7 @@
   - 如果是bug则处理 bug
   - 优化下消费逻辑
   - 水平扩容:增加Topic的队列数和消费者数量，注意队列数一定要增加，不然新增加的消费者是没东西消费的。一个Topic中，一个队列只会分配给一个消费者
+
 + 基于一个prefetch count来控制这个unack message的数量，通过 “channel.basicQos(10)” 这个方法来设置当前channel的prefetch count
   * 正在投递到channel过程 + 服务在处理中 + 异步ack之后还没完
   * 超过了prefetch count指定的数量，此时RabbitMQ就会停止给这个channel投递消息了，必须要等待已经投递过去的消息被ack了，此时才能继续投递下一个消息
@@ -263,4 +264,4 @@
 * [nsqio/nsq](https://github.com/nsqio/nsq)[文档](http://nsq.io/overview/quick_start.html)
 * [Apache ActiveMQ](link)
 * [Celery](http://www.celeryproject.org):Distributed Task Queue
-* [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. http://kr.github.io/beanstalkd/
+* [kr/beanstalkd](https://github.com/kr/beanstalkd):Beanstalk is a simple, fast work queue. <http://kr.github.io/beanstalkd/>

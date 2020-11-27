@@ -11,4 +11,4 @@
 ## 参考
 
 * [Documentation]( https://docs.puppetlabs.com/)
-* 额外特性： https://puppet.com/products/why-puppet/puppet-enterprise-and-open-source-puppet
+* 额外特性： <https://puppet.com/products/why-puppet/puppet-enterprise-and-open-source-puppet>

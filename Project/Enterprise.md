@@ -2,10 +2,10 @@
 
 * 改革的一个主要变化，就是市场的因素越来越多，市场这只无形的手分配稀缺资源，似乎变化多端，神秘莫测，它给人带来压力，被淘汰的危机感永不消散，它就像进化一样，不会让你太舒服，总让你适应变化。在计划中呆久的人，即使只是贫穷的计划，也有稳定的幻觉，想退回去。
 * 所以，放弃这种幻觉，是成长的关键。正如大师德鲁克所说的，个人的工作时间，普遍比公司寿命更长了。这是什么意思呢？
-    - 大多数公司撑不过30年，即使曾经很辉煌，作为创业者，作为老板，失败的压力一直在；
-    - 大多数雇员，你一生中，总会尝到改变跑道的滋味，即使结局美妙，但重新开始的痛苦却免不了。这是一个公司、一个人的命运，由不得你。
+  - 大多数公司撑不过30年，即使曾经很辉煌，作为创业者，作为老板，失败的压力一直在；
+  - 大多数雇员，你一生中，总会尝到改变跑道的滋味，即使结局美妙，但重新开始的痛苦却免不了。这是一个公司、一个人的命运，由不得你。
 * 这命运对杰出的人也一样无情。英特尔公司的创始人都很牛，包括以摩尔定理著名的戈登·摩尔，以及杰出的CEO安迪·格鲁夫，公司兴旺了10多年后，主营的存储器业务遭到了日本公司的强大竞争，格鲁夫知道，无论如何挣扎，必然败给日本公司，但公司陷于争论，进入劣质勤奋，一天天失去市场，自我改革极其艰难，似乎不可能。
- * 1985年，公司消沉一年之后，英特尔公司史上最著名的灵魂出窍式谈话发生了，在办公室里，格鲁夫突然问摩尔：如果我们被赶出董事会，他们找来新的CEO，他会做什么？摩尔犹豫了一会，说，他会放弃存储器业务。格鲁夫盯着摩尔说，那我们为什么不自己动手呢？
+ *1985年，公司消沉一年之后，英特尔公司史上最著名的灵魂出窍式谈话发生了，在办公室里，格鲁夫突然问摩尔：如果我们被赶出董事会，他们找来新的CEO，他会做什么？摩尔犹豫了一会，说，他会放弃存储器业务。格鲁夫盯着摩尔说，那我们为什么不自己动手呢？
  * 英特尔公司避免灭亡的改革开始了，公司专注于微处理器业务，格鲁夫自己也从头开始学习软件知识，这个世界上最聪明的工程师之一，放下架子，承认无知，记录下软件专家们的谈话内容，看不懂的部分带回公司请教相关下属，一切从头开始。12年之后，带领英特尔成为伟大公司的格鲁夫，成为时代周刊年度封面人物。
  * 改革是什么？就是接受必须改变的现实，回到hungry和foolish，重新开始。人有惰性，有路径依赖，有宁愿失败也不想革新的局限，人会暗示自己，我是一只老狗，无法再学新技能。聪明如摩尔和格鲁夫，也有这个阶段，不同的是，他们走出了这个沉沦的死亡峡谷。
 * 这种走出死亡峡谷的能力，并不是天生的，是可以学习的，一定要坚信这点，正如坚信我们可以拥抱改革。所以，不要放弃自我革新，不要怕学习将我们抛回foolish状态，那是你往上走的标志。
@@ -33,20 +33,20 @@
 * [welink](https://www.huaweicloud.com/product/welink.html):
 * [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
-  - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost https://mattermost.com
+  - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost <https://mattermost.com>
   - [Slack](https://slack.com/)
     + [Across](https://blog.acrossapp.com/): Scale high touch customer success in Slack
-  - [zulip / zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat https://zulip.org/
-  - [RocketChat/Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. https://rocket.chat/
+  - [zulip / zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat <https://zulip.org/>
+  - [RocketChat/Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. <https://rocket.chat/>
   - [RocketChat/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!
 * [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
-* [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network http://trybootcamp.vitorfs.com
-* [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. https://www.reviewboard.org/
-* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
+* [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network <http://trybootcamp.vitorfs.com>
+* [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. <https://www.reviewboard.org/>
+* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. <https://www.odoo.com>
 * 邮件
-  - [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features https://mailpile.is
-  - [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. https://getmailspring.com/
-  - [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! https://nylas.com/nylas-mail/
+  - [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features <https://mailpile.is>
+  - [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. <https://getmailspring.com/>
+  - [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! <https://nylas.com/nylas-mail/>
   - [mailhog/MailHog](https://github.com/mailhog/MailHog):Web and API based SMTP testing
 * 看板
   - 功能
@@ -63,11 +63,11 @@
     + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)
     + Wekan
 * SSO
-  - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. https://apereo.github.io/cas/
+  - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. <https://apereo.github.io/cas/>
 * 会议
-  - [jitsi/jitsi-meet ](https://github.com/jitsi/jitsi-meet):Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application. https://jitsi.org/meet
+  - [jitsi/jitsi-meet](https://github.com/jitsi/jitsi-meet):Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application. <https://jitsi.org/meet>
 * 人事
-  - [ lenve / vhr ](https://github.com/lenve/vhr):微人事是一个前后端分离的人力资源管理系统，项目采用SpringBoot+Vue开发。
+  - [lenve / vhr](https://github.com/lenve/vhr):微人事是一个前后端分离的人力资源管理系统，项目采用SpringBoot+Vue开发。
 
 ## 工具
 

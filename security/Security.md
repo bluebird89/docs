@@ -611,6 +611,7 @@ small_integer = large_integer % 1,000,000
   - [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass https://keeweb.info
   - [Passbolt](https://www.passbolt.com/)
   - [Enpass](https://www.enpass.io)
+  - [gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams https://www.gopass.pw/
 
 ## 参考
 

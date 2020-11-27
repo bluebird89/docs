@@ -570,7 +570,7 @@ service UserService {
 * [alexpate/awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
 * [0voice/from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
 * [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
-* [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system  for modern web experiences. https://www.fast.design/
+* [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system for modern web experiences. https://www.fast.design/
 
 * [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
 * [最小可用架构](https://mp.weixin.qq.com/s/rZWxtVyJjgiUBPeY5gPqOA)

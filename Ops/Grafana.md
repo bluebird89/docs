@@ -1,6 +1,6 @@
 ## [grafana](https://github.com/grafana/grafana)
 
-The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More https://grafana.com
+The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More <https://grafana.com>
 
 * `http://monitor_host:3000` 默认帐号/密码为admin/admin
 * Configuration->Data Resources

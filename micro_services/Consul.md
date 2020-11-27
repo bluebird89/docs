@@ -1,6 +1,6 @@
 # [consul](https://github.com/hashicorp/consul)
 
-Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io
+Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. <https://www.consul.io>
 
 * 用于实现分布式系统的服务发现与配置
 * service discovery：consul通过DNS或者HTTP接口使服务注册和服务发现变的很容易，一些外部服务，例如saas提供的也可以一样注册

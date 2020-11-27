@@ -1,15 +1,15 @@
 # Ecshop
 
 * Update
-    - appserver: use api to communicate with client
-    - PC
+  - appserver: use api to communicate with client
+  - PC
 
 ## Install
 
 * check_file.php: check and update
 * domain
-    - api.domain.com
-    - www.domain.com
+  - api.domain.com
+  - www.domain.com
 
 ```sh
 # nginx

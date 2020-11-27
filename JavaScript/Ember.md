@@ -1,6 +1,6 @@
 # [emberjs/ember.js](https://github.com/emberjs/ember.js)
 
-Ember.js - A JavaScript framework for creating ambitious web applications http://www.emberjs.com
+Ember.js - A JavaScript framework for creating ambitious web applications <http://www.emberjs.com>
 
 ## 使用
 
@@ -15,7 +15,7 @@ ember install ember-cli-mirage
 
 ## 项目
 
-* [ember-learn/super-rentals](https://github.com/ember-learn/super-rentals):Codebase for the Super Rentals official tutorial https://ember-learn-super-rentals.herokuapp.com/rentals
+* [ember-learn/super-rentals](https://github.com/ember-learn/super-rentals):Codebase for the Super Rentals official tutorial <https://ember-learn-super-rentals.herokuapp.com/rentals>
 
 ## 工具
 

@@ -1,6 +1,6 @@
 # [webpack](https://github.com/webpack/webpack)
 
-A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. https://webpack.js.org
+A bundler for javascript and friends. Packs many modules into a few bundled assets. Code Splitting allows to load parts for the application on demand. Through "loaders," modules can be CommonJs, AMD, ES6 modules, CSS, Images, JSON, Coffeescript, LESS, ... and your custom stuff. <https://webpack.js.org>
 
 * module bundler(模块加载器兼打包工具)，将不同脚本打包成一个文件，浏览器可以运行这个文件
 * 一种前端模块化打包解决方案，可以融合运用各种前端新技术
@@ -19,10 +19,10 @@ A bundler for javascript and friends. Packs many modules into a few bundled asse
 * 模块打包机：分析项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。所有的文件都都当做模块处理
 * 工作方式：把项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件
 * Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。单独安装并且需要在webpack.config.js中的modules关键字下进行配置，不同的组件不同rules。Loaders的配置包括以下几方面：
-    - test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）
-    - loader：loader的名称（必须）
-    - include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
-    - query：为loaders提供额外的设置选项（可选）
+  - test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）
+  - loader：loader的名称（必须）
+  - include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
+  - query：为loaders提供额外的设置选项（可选）
 
 ## 安装与使用
 
@@ -81,19 +81,19 @@ npm install @babel/core --save
     + 第二个参数是一个回调函数，该函数将在0.bundle.js加载后执行。该函数的参数require函数，凡是在函数体内用require加载的模块都会被打包进入0.bundle.js
     + 第三个参数是一个字符串，表示当前require.ensure打包的这段代码的名字，用于使用多个require.ensure时，所有代码可以打包成一个文件，避免打包成多个文件
 * 开发环境
-    - NODE_ENV 为 development
-    - 启用模块热更新（hot module replacement）
-      + 为了让样式源文件的修改也同样能被热替换，不能使用 ExtractTextPlugin，而转为随 JS Bundle 一起输出
-    - 额外的 webpack-dev-server 配置项，API Proxy 配置项
-    - 输出 Sourcemap
+  - NODE_ENV 为 development
+  - 启用模块热更新（hot module replacement）
+    + 为了让样式源文件的修改也同样能被热替换，不能使用 ExtractTextPlugin，而转为随 JS Bundle 一起输出
+  - 额外的 webpack-dev-server 配置项，API Proxy 配置项
+  - 输出 Sourcemap
 * 生产环境
-    - NODE_ENV 为 production
-    - 将 React、jQuery 等常用库设置为 external，直接采用 CDN 线上的版本
-    - 样式源文件（如 css、less、scss 等）需要通过 ExtractTextPlugin 独立抽取成 css 文件
-    - 启用 post-css
-    - 启用 optimize-minimize（如 uglify 等）
-    - 绝对不能有 console.log() 的，所以要为 babel 配置 Remove console transform
-    + 生产环境不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
+  - NODE_ENV 为 production
+  - 将 React、jQuery 等常用库设置为 external，直接采用 CDN 线上的版本
+  - 样式源文件（如 css、less、scss 等）需要通过 ExtractTextPlugin 独立抽取成 css 文件
+  - 启用 post-css
+  - 启用 optimize-minimize（如 uglify 等）
+  - 绝对不能有 console.log() 的，所以要为 babel 配置 Remove console transform
+  + 生产环境不会直接使用 webpack-dev-server，而采用 express + webpack/webpack-dev-middleware
 * 参考
   - [为什么要做三份 Webpack 配置文件](https://zhuanlan.zhihu.com/p/29161762)
 
@@ -131,8 +131,8 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
       * contentBase属性指定HTTP服务器对外访问的主目录，即源文件应该在这个目录。
       * publicPath属性指定静态资源的目录，它是针对网站根目录的，而不是针对服务器根目录
 * [babel-loader](https://github.com/babel/babel-loader):📦 Webpack plugin for Babel
-    - 下一代JavaScript代码（ES6，ES7...），即使这些标准目前并未被当前的浏览器完全的支持
-    - 使用基于JavaScript进行了拓展的语言，比如React的JSX
+  - 下一代JavaScript代码（ES6，ES7...），即使这些标准目前并未被当前的浏览器完全的支持
+  - 使用基于JavaScript进行了拓展的语言，比如React的JSX
 * css-loader：能够使用类似@import 和 url(...)方法实现 require()的功能。`require('css-loader!./style.css');`:可以解析执行css文件
   - CSS Module官网，CSS Module只对类名和动画的名字起作用
   - CSS modules：通过CSS模块，所有类名，动画名默认都只作用于当前模块
@@ -240,14 +240,14 @@ proxyTable: {
 
 * [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
 * [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
-* [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process http://webpackmonitor.com
+* [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process <http://webpackmonitor.com>
 * [GoogleChromeLabs/webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
 
 ## 参考
 
 * [webpack-contrib/awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
-  - [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 https://webpack.docschina.org/
-* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 http://webpack.wuhaolin.cn
+  - [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 <https://webpack.docschina.org/>
+* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 <http://webpack.wuhaolin.cn>
 
 * [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)

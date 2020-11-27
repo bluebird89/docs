@@ -24,7 +24,7 @@
   - 声明块（declaration block）描述样式规则的具体内容。放在一对大括号里面
     + 大括号之中是一个或多个键值对，每个键值对给出一条样式描述，键值对之间用分号分割
     + 允许重复声明某个样式，声明的键值对会覆盖前面的键值对
-* 使用/* ... */表示注释，可以是单行，也可以是多行
+* 使用/*...*/表示注释，可以是单行，也可以是多行
 * 继承：不仅影响网页元素本身，还会影响该元素的后代元素
   - 典型的例子就是字体属性font-family，网页根元素html设置了字体以后，该网页的所有元素都会默认使用指定的字体
 * 优先级
@@ -239,10 +239,12 @@
   - swap 关闭阻塞期，直接进入替换期，即浏览器不会出现文字显示不出来的情况
   - fallback 设置阻塞期的长度是100毫秒，即文字有100毫秒显示不出来，然后立即进入替换期。等到字体下载结束，再使用下载的字体渲染
   - optional 设置阻塞期也是100毫秒。然后，等到100毫秒结束，浏览器发现字体已经下载完成，就使用下载的字体渲染，否则就不再下载，永久性使用替代字体渲染。它主要用于网速较慢的环境，不让用户长时间等到字体下载
+
 - `font-weight`：加粗效果
   + normal
   + bold
   + 关键字 100 ~ 900 为字体指定了 9 级加粗度。如果一个字体内置了这些加粗级别，那么这些数字就直接映射到预定义的级别，100 对应最细的字体变形，900 对应最粗的字体变形。数字 400 等价于 normal，而 700 等价于 bold
+
 * `font-style`：斜体效果
   - normal
   - italic
@@ -328,12 +330,16 @@
   - inherit：继承父元素的值
   - 对设为display: table-cell的元素也有效，可以控制元素在单元格之中的垂直对齐方式
   * justify 文本行的左右两端都放在父元素的内边界上。然后，调整单词和字母间的间隔，使各行的长度恰好相等
+
 + tab-size属性设置 Tab 键的宽度，可以设置为整数（表示多少个空格），也可以设置为具体的长度单位,常用于<pre>标签之中
+
 * `text-indent`：首行缩进，长度可以是负值，也可以用百分比值
   - 为所有块级元素应用 text-indent，但无法将该属性应用于行内元素，图像之类的替换元素上也无法应用 text-indent 属性
   - 设置负值时要注意：首行的某些文本可能会超出浏览器窗口的左边界。为了避免出现这种显示问题，建议针对负缩进再设置一个外边距或一些内边距
   - text-indent 属性可以继承
+
 + word-spacing 属性可以改变字（单词）之间的标准间隔 接受一个正长度值或负长度值。如果提供一个正长度值，那么字之间的间隔就会增加。为 word-spacing 设置一个负值，会把它拉近
+
 * `letter-spacing`：字母间隔修改的是字符或字母之间的间隔
 * word-wrap 正式名称是overflow-wrap，用于规定是否可以在一个词内部断行，避免溢出容器
   - normal：只在可以断行的地方断行。
@@ -658,6 +664,7 @@ caption-side:bottom
   * 指定大小：通过width  height  background-size中的一个或多个指定的
   * 默认对象大小：一个具有确定宽高的矩形。在既没有固有尺寸，也没有指定大小时生效
   * 具体对象大小：对象最终显示的大小，即有明确宽度和高度值的矩形
+
 + 显示效果:算它最终“具体对象大小”
   * 优先使用指定大小，得到要显示宽和高
   - 如果只指定了一个宽度，或只指定了一个高度
@@ -670,6 +677,7 @@ caption-side:bottom
   - 指定大小 > 固有尺寸 > 默认对象大小
   - 图像超出背景区域的部分，会被裁剪掉；覆盖不全的部分，会用背景色来填充
   - 调整图像大小的属性 background-size
+
 * width
 * height
 * object-fit  定义内容如何适应容器的高和宽
@@ -738,7 +746,7 @@ caption-side:bottom
   - animation-fill-mode：默认值为none。
   - animation-play-state：动画默认是否生效，默认值为running
   - animation属性是一个简写形式
-* [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. https://animate.style/
+* [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. <https://animate.style/>
 
 ## transform 元素的变形
 
@@ -782,7 +790,7 @@ caption-side:bottom
 * caniuse 检测正在使用的属性是否被广泛支持
 * Validate
 * 执行 CSS 重置;各浏览器默认行为还是存在很多分歧。解决这个问题最好的办法就是使用一个 CSS 重置文件为所有元素重新设置默认样式
-  - [necolas/normalize.css](https://github.com/necolas/normalize.css):A collection of HTML element and attribute style-normalizations http://necolas.github.io/normalize.css/
+  - [necolas/normalize.css](https://github.com/necolas/normalize.css):A collection of HTML element and attribute style-normalizations <http://necolas.github.io/normalize.css/>
   - [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 
 ```css
@@ -812,16 +820,17 @@ caption-side:bottom
   者在这处的处理都是一样的，使用「&」表示父元素
 
 作者：FE_莫问
-链接：https://juejin.cn/post/6844903504293658632
+链接：<https://juejin.cn/post/6844903504293658632>
 来源：掘金
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 * Stylus
 
 ## CSS-in-JS
 
 * CSS Modules 模块化CSS 将CSS文件以模块的形式引入到JavaScript里，基本上解决了全局污染、命名混乱、样式重用和冗余的问题，但CSS有嵌套结构的限制（只能一层），也无法方便的在CSS和JavaScript之间共享变量
 * CSS-in-JS就是在组件内部使用JavaScript对CSS进行了抽象，可以对其声明和加以维护。这样不仅降低了编写CSS样式带来的风险，也让开发变得更加轻松。它和CSS Modules的区别是不再需要CSS样式文件
-* [styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 https://styled-components.com
+* [styled-components](https://github.com/styled-components/styled-components) Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress 💅 <https://styled-components.com>
 
 ## 问题
 
@@ -846,52 +855,52 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 * BootMetro
 * Bootswatch
-* [materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design https://materializecss.com
+* [materialize](https://github.com/Dogfalo/materialize):Materialize, a CSS Framework based on Material Design <https://materializecss.com>
 * EZ-CSS
 * Flat UI
 * iView
 * laiketui
 * Metro UI CSS
-* [milligram](https://github.com/milligram/milligram) A minimalist CSS framework. https://milligram.io
-* [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library https://moonjs.org/
-* [NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク https://bcrikko.github.io/NES.css
+* [milligram](https://github.com/milligram/milligram) A minimalist CSS framework. <https://milligram.io>
+* [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library <https://moonjs.org/>
+* [NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク <https://bcrikko.github.io/NES.css>
 * [office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
-* [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework https://picturepan2.github.io/spectre/
-* [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. https://purecss.io/
+* [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework <https://picturepan2.github.io/spectre/>
+* [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. <https://purecss.io/>
 * Semantic UI
-* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. https://shoelace.style/
+* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. <https://shoelace.style/>
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
   for developing fast and powerful web interfaces.
 
 ## 工具
 
-* [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit http://basscss.com
-* [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! https://minicss.org/
-* [stylelint](https://github.com/stylelint/stylelint) https://stylelint.io/
-* [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. https://spiderpig86.github.io/Cirrus
+* [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit <http://basscss.com>
+* [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! <https://minicss.org/>
+* [stylelint](https://github.com/stylelint/stylelint) <https://stylelint.io/>
+* [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. <https://spiderpig86.github.io/Cirrus>
 * [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
-* [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. https://nzbin.github.io/three-dots/
-* [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. https://connoratherton.com/loaders
-* [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. https://www.minifier.org
-* [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. http://ianlunn.github.io/Hover/
-* [yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. http://yuilibrary.com/
+* [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. <https://nzbin.github.io/three-dots/>
+* [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. <https://connoratherton.com/loaders>
+* [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. <https://www.minifier.org>
+* [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. <http://ianlunn.github.io/Hover/>
+* [yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. <http://yuilibrary.com/>
 
 ## 参考
 
 * [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
 * [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/)
-* [30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css)Short CSS code snippets for all your development needs https://www.30secondsofcode.org/css/p/1
+* [30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css)Short CSS code snippets for all your development needs <https://www.30secondsofcode.org/css/p/1>
 * [Jxnblk](https://jxnblk.com/)
-* [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ https://lhammer.cn/You-need-to-know-css/
+* [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ <https://lhammer.cn/You-need-to-know-css/>
 * [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
 
-* [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！https://chokcoco.github.io/CSS-Inspiration/#/./init
-* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS http://tobiasahlin.com/spinkit/
-* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects https://cssanimation.rocks
+* [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！<https://chokcoco.github.io/CSS-Inspiration/#/./init>
+* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS <http://tobiasahlin.com/spinkit/>
+* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects <https://cssanimation.rocks>
 
 * [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
 * [danielcrisp/hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
 * [](https://generative-art-with-css.commons.host/)
-* [](https://github.com/jgthms/web-design-in-4-minutes):https://jgthms.com/web-design-in-4-minutes/
+* [](https://github.com/jgthms/web-design-in-4-minutes):<https://jgthms.com/web-design-in-4-minutes/>

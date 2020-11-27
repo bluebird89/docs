@@ -61,7 +61,7 @@ sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pydoc3.6
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6 /usr/bin/python
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/pythonw3.6 /usr/bin/pythonw
 sudo ln -s /System/Library/Frameworks/Python.framework/Versions/3.6/bin/python3.6m-config /usr/bin/python-config
-vim ~/.bash_profile # (只要能编辑就行) 插入新的Python路径
+vim ~/.bash_profile # (只要能编辑就行)插入新的Python路径
 
 pip3 install --upgrade pip setuptools wheel
 

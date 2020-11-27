@@ -154,9 +154,9 @@
 
 ## 工具
 
-* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. https://www.odoo.com
-* [monica](https://github.com/monicahq/monica):Personal CRM. Remember everything about your friends and family. https://www.monicahq.com
-* [metabase](https://github.com/metabase/metabase) The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com/
+* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. <https://www.odoo.com>
+* [monica](https://github.com/monicahq/monica):Personal CRM. Remember everything about your friends and family. <https://www.monicahq.com>
+* [metabase](https://github.com/metabase/metabase) The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com/>
 
 ## 参考
 

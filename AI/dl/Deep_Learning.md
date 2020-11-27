@@ -108,16 +108,16 @@ print(torch.cuda.is_available())
 * [apachecn/fastai-ml-dl-notes-zh](https://github.com/apachecn/fastai-ml-dl-notes-zh):📖 [译] fast.ai 机器学习和深度学习中文笔记
 * [fchollet/deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
 * [PaddlePaddle/book](https://github.com/PaddlePaddle/book):Deep Learning 101 with PaddlePaddle （深度学习框架入门教程）
-* [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 https://zh.d2l.ai
-* [aamini/introtodeeplearning_labs](https://github.com/aamini/introtodeeplearning_labs/):Lab Materials for MIT 6.S191: Introduction to Deep Learning  https://youtu.be/5v1JnYv_yWs?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI
+* [d2l-ai/d2l-zh](https://github.com/d2l-ai/d2l-zh):《动手学深度学习》，英文版即伯克利深度学习（STAT 157，2019春）教材。面向中文读者、能运行、可讨论。 <https://zh.d2l.ai>
+* [aamini/introtodeeplearning_labs](https://github.com/aamini/introtodeeplearning_labs/):Lab Materials for MIT 6.S191: Introduction to Deep Learning  <https://youtu.be/5v1JnYv_yWs?list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI>
 * [神经网络与深度学习](https://nndl.github.io/):复旦邱锡鹏 《神经网络与深度学习》
-  - 图书：https://nndl.github.io/nndl-book.pdf
-  - 示例代码：https://github.com/nndl/nndl-codes
-  - 课程练习：https://github.com/nndl/exercise
+  - 图书：<https://nndl.github.io/nndl-book.pdf>
+  - 示例代码：<https://github.com/nndl/nndl-codes>
+  - 课程练习：<https://github.com/nndl/exercise>
 * [Deep Learning from the Foundations](https://www.fast.ai/2019/06/28/course-p2v3/)
 * [Curt-Park/rainbow-is-all-you-need](https://github.com/Curt-Park/rainbow-is-all-you-need):Rainbow is all you need! Step-by-step tutorials from DQN to Rainbow
 * [](https://www.cs.toronto.edu/~hinton/)
-* [TensorFlow, Keras and deep learning, without a PhD access_time ](https://codelabs.developers.google.com/codelabs/cloud-tensorflow-mnist/#3)
+* [TensorFlow, Keras and deep learning, without a PhD access_time](https://codelabs.developers.google.com/codelabs/cloud-tensorflow-mnist/#3)
 * [Practical Deep Learning for Coders](https://course.fast.ai/)
   - [Deep Learning for Coders with Fastai and PyTorch: AI Applications Without a PhD](link)
   - [fastbook](https://github.com/fastai/fastbook):The fastai book, published as Jupyter Notebooks
@@ -137,13 +137,13 @@ print(torch.cuda.is_available())
 
 ## 工具
 
-* [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) https://www.floydhub.com
-* [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! https://www.reddit.com/r/deepfakes/
+* [floydhub/dl-docker](https://github.com/floydhub/dl-docker):An all-in-one Docker image for deep learning. Contains all the popular DL frameworks (TensorFlow, Theano, Torch, Caffe, etc.) <https://www.floydhub.com>
+* [deepfakes/faceswap](https://github.com/deepfakes/faceswap):Non official project based on original /r/Deepfakes thread. Many thanks to him! <https://www.reddit.com/r/deepfakes/>
 * [XiaoMi/mace](https://github.com/XiaoMi/mace):MACE is a deep learning inference framework optimized for mobile heterogeneous computing platforms
-* [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. http://autokeras.com/
-* [cmusatyalab/openface](https://github.com/cmusatyalab/openface):Face recognition with deep neural networks. http://cmusatyalab.github.io/openface/
-* [PaddlePaddle](https://github.com/PaddlePaddle):百度自主研发、集深度学习训练和预测框架、模型库、工具组件、服务平台等为一体的开源深度学习平台 http://paddlepaddle.org/
-* [ ufoym / deepo ](https://github.com/ufoym/deepo):Set up deep learning environment in a single command line. http://ufoym.com/deepo
+* [jhfjhfj1/autokeras](https://github.com/jhfjhfj1/autokeras):accessible AutoML for deep learning. <http://autokeras.com/>
+* [cmusatyalab/openface](https://github.com/cmusatyalab/openface):Face recognition with deep neural networks. <http://cmusatyalab.github.io/openface/>
+* [PaddlePaddle](https://github.com/PaddlePaddle):百度自主研发、集深度学习训练和预测框架、模型库、工具组件、服务平台等为一体的开源深度学习平台 <http://paddlepaddle.org/>
+* [ufoym / deepo](https://github.com/ufoym/deepo):Set up deep learning environment in a single command line. <http://ufoym.com/deepo>
 
 ## 参考
 
@@ -153,9 +153,9 @@ print(torch.cuda.is_available())
 * [karpathy/char-rnn](https://github.com/karpathy/char-rnn):Multi-layer Recurrent Neural Networks (LSTM, GRU, RNN) for character-level language models in Torch
 * [scutan90/DeepLearning-500-questions](https://github.com/scutan90/DeepLearning-500-questions):深度学习500问，以问答形式对常用的概率知识、线性代数、机器学习、深度学习、计算机视觉等热点问题进行阐述
 * [mbadry1/DeepLearning.ai-Summary](https://github.com/mbadry1/DeepLearning.ai-Summary):This repository contains my personal notes and summaries on DeepLearning.ai specialization courses. I've enjoyed every little bit of the course hope you enjoy my notes too.
-* [guillaume-chevalier/Awesome-Deep-Learning-Resources](https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources):Rough list of my favorite deep learning resources, useful for revisiting topics or for reference. I have got through all of the content listed there, carefully. - Guillaume Chevalier http://www.neuraxio.com/en/
+* [guillaume-chevalier/Awesome-Deep-Learning-Resources](https://github.com/guillaume-chevalier/Awesome-Deep-Learning-Resources):Rough list of my favorite deep learning resources, useful for revisiting topics or for reference. I have got through all of the content listed there, carefully. - Guillaume Chevalier <http://www.neuraxio.com/en/>
 * [Microsoft/MMdnn](https://github.com/Microsoft/MMdnn):MMdnn is a set of tools to help users inter-operate among different deep learning frameworks. E.g. model conversion and visualization. Convert models between Caffe, Keras, MXNet, Tensorflow, CNTK, PyTorch Onnx and CoreML.
-* [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning https://nndl.github.io
+* [nndl/nndl.github.io](https://github.com/nndl/nndl.github.io):《神经网络与深度学习》 Neural Network and Deep Learning <https://nndl.github.io>
 * [osforscience/deep-learning-ocean](https://github.com/osforscience/deep-learning-ocean):📡 All You Need to Know About Deep Learning - A kick-starter
 * [The Matrix Calculus You Need For Deep Learning](https://explained.ai/matrix-calculus/index.html)
-* [zeusees/HyperDL-Tutorial](https://github.com/zeusees/HyperDL-Tutorial):深度学习教程整理 | 干货 http://www.zeusee.com
+* [zeusees/HyperDL-Tutorial](https://github.com/zeusees/HyperDL-Tutorial):深度学习教程整理 | 干货 <http://www.zeusee.com>

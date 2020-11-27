@@ -14,8 +14,8 @@ cargo install deno
 * 异步操作不使用 libuv 这个库，而是使用 Rust 语言的 Tokio 库，来实现事件循环（event loop）
 
 * 模块通过 URL 加载
-	- import { bar } from "https://foo.com/bar.ts"（绝对 URL）
-	- import { bar } from './foo/bar.ts'（相对 URL）
+  - import { bar } from "https://foo.com/bar.ts"（绝对 URL）
+  - import { bar } from './foo/bar.ts'（相对 URL）
 
 ## 参考
 

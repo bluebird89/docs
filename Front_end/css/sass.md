@@ -1,6 +1,6 @@
 ## [sass/sass](https://github.com/sass/sass)
 
-* Sass makes CSS fun again. http://sass-lang.com
+* Sass makes CSS fun again. <http://sass-lang.com>
 * 两种不同的后缀名分别对应两套语法
   - 最早 Sass 使用的是缩进式语法，使用缩进来区分代码块，并通过分号将具体样式分开，这种语法以 .sass 作为后缀
   - 使用了和 CSS 一样的块语法，这种语法以 .scss 作为后缀。后者更加兼容原生 CSS 语法
@@ -23,12 +23,12 @@
 * 教程
   * [Sass 基础教程](http://www.sasschina.com/guide/)
 * 资源
-  * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System http://gridlex.devlint.fr
-  * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass http://unicorn-ui.com/buttons/builder/
-  * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass http://include-media.com
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set https://www.bourbon.io/ https://github.com/thoughtbot/bourbon
+  * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System <http://gridlex.devlint.fr>
+  * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass <http://unicorn-ui.com/buttons/builder/>
+  * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass <http://include-media.com>
+  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set <https://www.bourbon.io/> <https://github.com/thoughtbot/bourbon>
 * 参考
-  * https://www.jianshu.com/p/e2c23a74636d
+  * <https://www.jianshu.com/p/e2c23a74636d>
 
 ## 问题
 

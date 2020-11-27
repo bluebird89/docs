@@ -1,6 +1,6 @@
 # [Behat](https://github.com/Behat/Behat)
 
-BDD in PHP BDD in PHP http://behat.org/
+BDD in PHP BDD in PHP <http://behat.org/>
 
 ```sh
 composer require --dev behat/behat

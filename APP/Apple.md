@@ -80,4 +80,4 @@
 
 ## 参考
 
-* [从 Macintosh 到 Mac OS：Mac 操作系统视觉史 ](https://sspai.com/post/60484)
+* [从 Macintosh 到 Mac OS：Mac 操作系统视觉史](https://sspai.com/post/60484)

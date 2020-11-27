@@ -14,10 +14,10 @@
 
 * 作用就是输入一个文本文件输出一个二进制文件
 * 词法分析
-    - 把源代码中的每个“单词”提取出来，在编译技术中“单词”被称为token
-    - 不只是每个单词被称为一个token，除去单词之外的比如左括号、右括号、赋值操作符等都被称为token
+  - 把源代码中的每个“单词”提取出来，在编译技术中“单词”被称为token
+  - 不只是每个单词被称为一个token，除去单词之外的比如左括号、右括号、赋值操作符等都被称为token
 * 语法分析：根据语言定义的语法恢复其原本结构
-    - 在扫描出各个token后根据规则将其用树的形式表示出来，这颗树就被称为语法树
+  - 在扫描出各个token后根据规则将其用树的形式表示出来，这颗树就被称为语法树
 * 语义分析：检查这棵树是不是合法的，比如不能把一个整数和一个字符串相加、比较符左右两边的数据类型要相同
 * 代码生成：遍历语法树并用中间代码 intermediate representation code IR code来表示
 * 中间代码优化
@@ -27,7 +27,7 @@
 
 * Compilers: Principles,Techniques,and Tools 编译原理技术和工具 Alfred V.Aho,Ravi Sethi,Jeffrey D.Ullman
 * [Modern Compiler Implementation in C  现代编译原理-C语言描述](https://www.cs.princeton.edu/~appel/modern/c/)
-    - 《编译原理》：https://www.bilibili.com/video/av17649289
+  - 《编译原理》：<https://www.bilibili.com/video/av17649289>
 * Advanced Compiler Design and Implementation  Steven S.Muchnick  高级编译器设计与实现
 
 ## 工具
@@ -36,4 +36,4 @@
 
 ## 参考
 
-* [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler):snowman Possibly the smallest compiler ever https://git.io/compiler
+* [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler):snowman Possibly the smallest compiler ever <https://git.io/compiler>

@@ -1,6 +1,6 @@
 # [erlang/otp](https://github.com/erlang/otp)
 
-Erlang/OTP http://erlang.org
+Erlang/OTP <http://erlang.org>
 
 ```sh
 sudo apt-get install erlang

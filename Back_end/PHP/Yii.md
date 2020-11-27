@@ -2,7 +2,7 @@
 
 Yii 2: The Fast, Secure and Professional PHP Framework <http://www.yiiframework.com>
 
-* [yiisoft / yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template http://www.yiiframework.com
+* [yiisoft / yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template <http://www.yiiframework.com>
 * [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template
 
 ```sh
@@ -860,7 +860,7 @@ $config = [
   - OPTIONS /users/123: 显示有关末端 /users/123 支持的动词
 * Authentication:无状态的， 因此这意味着不能使用 sessions && cookies
   - HTTP Basic Auth:access token 作为一个用户名被传递。这种情况只适合“当access token可以安全的存储在API 接收端”的情况， 比如 调用 API 的是一个在服务器上运行的程序
-  - Query parameter:access token 在 API URL 中作为一个查询参数被传递，比如 https://example.com/users?access-token=123456789 因为多数的 Web 服务器会保存 query 参数在服务器日志中， 这个方法应该主要是用于响应无法使用 HTTP 头部信息来发送 access token 的 JSONP 请求的。
+  - Query parameter:access token 在 API URL 中作为一个查询参数被传递，比如 <https://example.com/users?access-token=123456789> 因为多数的 Web 服务器会保存 query 参数在服务器日志中， 这个方法应该主要是用于响应无法使用 HTTP 头部信息来发送 access token 的 JSONP 请求的。
   - OAuth 2:遵照 OAth2.0 协议， 调用者从一个 授权服务器 上获取 access token， 再通过 HTTP Bearer Tokens 发送给 Api 服务器
 
 ```php
@@ -1227,7 +1227,7 @@ $compontent->on($eventName, $handler);
 
 * [yiisoft / yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
 
-* [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 http://www.yiiframework.com
+* [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 <http://www.yiiframework.com>
 
 * [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
 
@@ -1251,7 +1251,7 @@ $compontent->on($eventName, $handler);
 
 * [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
 
-* [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. http://www.yiiframework.com
+* [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. <http://www.yiiframework.com>
 
 * [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
 
@@ -1259,7 +1259,7 @@ $compontent->on($eventName, $handler);
 
 * [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
 
-* [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 https://www.yiiframework.com/
+* [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 <https://www.yiiframework.com/>
 
 ```sh
 composer require --prefer-dist yiisoft/yii2-sphinx
@@ -1273,26 +1273,26 @@ composer require --prefer-dist yiisoft/yii2-sphinx
 
 ## Yii3
 
-* [yiisoft / yii-dev-tool](https://github.com/yiisoft/yii-dev-tool):Development environment for Yii 3 packages https://www.yiiframework.com/
-* [yiisoft / docs](https://github.com/yiisoft/docs):Various Yii 3.0 related documentation http://www.yiiframework.com
+* [yiisoft / yii-dev-tool](https://github.com/yiisoft/yii-dev-tool):Development environment for Yii 3 packages <https://www.yiiframework.com/>
+* [yiisoft / docs](https://github.com/yiisoft/docs):Various Yii 3.0 related documentation <http://www.yiiframework.com>
 
 ## 项目
 
 * [ jianyan74 /
   rageframe2 ](https://github.com/jianyan74/rageframe2):一个基于Yii2高级框架的快速开发应用引擎 www.rageframe.com
-* [yiisoft/yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template http://www.yiiframework.com
-* [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template http://www.yiiframework.com
-* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 http://www.fecshop.com
+* [yiisoft/yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template <http://www.yiiframework.com>
+* [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template <http://www.yiiframework.com>
+* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 <http://www.fecshop.com>
 * [EleTeam/Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
 * [changchang700/yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
-* [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit http://yii2-starter-kit.terentev.net
+* [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit <http://yii2-starter-kit.terentev.net>
 * [TIGERB/vue-in-yii2](https://github.com/TIGERB/vue-in-yii2):a whole framework which use vuejs in frontend and light-yii2 in backend
 
 ## 参考
 
 * [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 
-* [深入理解 Yii2.0](http://www.digpage.com/index.html) https://www.kancloud.cn/kancloud/yii-in-depth
+* [深入理解 Yii2.0](http://www.digpage.com/index.html) <https://www.kancloud.cn/kancloud/yii-in-depth>
 
 * [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
 

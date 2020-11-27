@@ -1,6 +1,6 @@
 # [jQuery](https://github.com/jquery/jquery)
 
-JavaScript Library https://jquery.com/
+JavaScript Library <https://jquery.com/>
 
 * 消除浏览器差异：不需要自己写冗长的代码来针对不同的浏览器来绑定事件，编写AJAX等代码
 * 简洁的操作DOM方法：写$('#test')肯定比document.getElementById('test')来得简洁
@@ -8,12 +8,12 @@ JavaScript Library https://jquery.com/
 * 把所有功能全部封装在一个全局变量jQuery中，而$也是一个合法的变量名，是变量jQuery的别名：`$`本质上就是一个函数，但是函数也是对象，于是`$`除了可以直接调用外，也可以有很多其他属性。`$`函数名可能不是`jQuery(selector, context)`，因为很多JavaScript压缩工具可以对函数名和参数改名，所以压缩过的jQuery源码$函数可能变成`a(b, c)`。
 * $_分离出来，如果_$这个变量不幸地被占用了，而且还不能改，那我们就只能让jQuery把$变量交出来，然后就只能使用jQuery这个变量
 * 特点
-    - 语法糖：链式调用、实用函数
-    - 选择元素：基于各种标准选择符和库自定义的选择符，以及通过回调进行筛选
-    - 操作DOM：创建和操作元素，乃至各种属性操作
-    - 处理事件：ready事件及各种注册和触发事件的方法，乃至委托
-    - 动画：基于animate的CSS属性动画，以及内置动画方法
-    - Ajax：封装原生的XMLHttpRequest API，简化请求方法及回调处理
+  - 语法糖：链式调用、实用函数
+  - 选择元素：基于各种标准选择符和库自定义的选择符，以及通过回调进行筛选
+  - 操作DOM：创建和操作元素，乃至各种属性操作
+  - 处理事件：ready事件及各种注册和触发事件的方法，乃至委托
+  - 动画：基于animate的CSS属性动画，以及内置动画方法
+  - Ajax：封装原生的XMLHttpRequest API，简化请求方法及回调处理
 
 ```html
 <script type="text/javascript" src="jquery.js"></script>
@@ -63,21 +63,21 @@ jQuery对象和DOM对象之间可以互相转化:拿到了一个DOM对象，那�
 * 按tag查找
 * 按class查找 $(".target")
 * 按属性查找：除了id和class外还可以有很多属性，很多时候按属性查找会非常方便
-    - 当属性的值包含空格等特殊字符时，需要用双引号括起来。
-    - 按属性查找还可以使用前缀查找或者后缀查找：
+  - 当属性的值包含空格等特殊字符时，需要用双引号括起来。
+  - 按属性查找还可以使用前缀查找或者后缀查找：
 * 组合查找：就是把上述简单选择器组合起来使用
 * 多项选择器:就是把多个选择器用,组合起来一块选：选出来的元素是按照它们在HTML中出现的顺序排列的，而且不会有重复元素。例如，`<p class="red green">`不会被上面的$('p.red,p.green')选择两次。
 * 层级选择器（Descendant Selector）: `$('ancestor descendant')`层级之间用空格隔开.层级选择器相比单个的选择器好处在于，它缩小了选择范围，因为首先要定位父节点，才能选择相应的子节点，这样避免了页面其他不相关的元素。多层选择也是允许
 * 子选择器（Child Selector）:$('parent>child')类似层级选择器，但是限定了层级关系必须是父子关系，就是<child>节点必须是<parent>节点的直属子节点
 * 过滤器一般不单独使用，它通常附加在选择器上，帮助我们更精确地定位元素.
 * 表单元素，jQuery还有一组特殊的选择器
-    - :input：可以选择<input>，<textarea>，<select>和<button>；
-    - :file：可以选择<input type="file">，和input[type=file]一样；
-    - :checkbox：可以选择复选框，和input[type=checkbox]一样；    - radio：可以选择单选框，和input[type=radio]一样；
-    - :focus：可以选择当前输入焦点的元素，例如把光标放到一个<input>上，用$('input:focus')就可以选出；
-    - :checked：选择当前勾上的单选框和复选框，用这个选择器可以立刻获得用户选择的项目，如$('input[type=radio]:checked')；
-    - :enabled：可以选择可以正常输入的<input>、<select>等，也就是没有灰掉的输入；
-    - disabled：和:enabled正好相反，选择那些不能输入的。
+  - :input：可以选择<input>，<textarea>，<select>和<button>；
+  - :file：可以选择<input type="file">，和input[type=file]一样；
+  - :checkbox：可以选择复选框，和input[type=checkbox]一样；    - radio：可以选择单选框，和input[type=radio]一样；
+  - :focus：可以选择当前输入焦点的元素，例如把光标放到一个<input>上，用$('input:focus')就可以选出；
+  - :checked：选择当前勾上的单选框和复选框，用这个选择器可以立刻获得用户选择的项目，如$('input[type=radio]:checked')；
+  - :enabled：可以选择可以正常输入的<input>、<select>等，也就是没有灰掉的输入；
+  - disabled：和:enabled正好相反，选择那些不能输入的。
 * 查找：拿到一个jQuery对象后，还可以以这个对象为基准，进行查找find(),从当前节点开始向上查找，使用parent()方法,对于位于同一层级的节点，可以通过next()和prev()方法
 * 过滤:filter()方法可以过滤掉不符合选择器条件的节点.map()方法把一个jQuery对象包含的若干DOM节点转化为其他对象.一个jQuery对象如果包含了不止一个DOM节点，first()、last()和slice()方法可以返回一个新的jQuery对象，把不需要的DOM节点去掉：
 
@@ -179,32 +179,32 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 ### 操作DOM
 
 * 修改Text和HTML：一个jQuery对象可以包含0个或任意个DOM对象，它的方法实际上会作用在对应的每个DOM节点上.可以执行一个操作，作用在对应的一组DOM节点上。即使选择器没有返回任何DOM节点，调用jQuery对象的方法仍然不会报错.免去了许多if语句
-    - 通过html方法添加内容，可以让你在元素中添加HTML标签和文字，而元素中之前的内容都会被方法中的内容所替换掉，示例：$("h3").html("<em>jQuery Playground</em>");
-    - jQuery 还有一个类似的方法叫.text()，它只能改变文本但不能添加标签。换句话说，这个方法只会把任何传进来的HTML标签当成你想替换现有内容的文本；
+  - 通过html方法添加内容，可以让你在元素中添加HTML标签和文字，而元素中之前的内容都会被方法中的内容所替换掉，示例：$("h3").html("<em>jQuery Playground</em>");
+  - jQuery 还有一个类似的方法叫.text()，它只能改变文本但不能添加标签。换句话说，这个方法只会把任何传进来的HTML标签当成你想替换现有内容的文本；
 * 修改CSS: $("#target1").css("color","red");
 * 显示和隐藏DOM
-    * 隐藏一个DOM，我们可以设置CSS的display属性为none，利用css()方法就可以实现.
-    * 恢复原有的display属性，这就得先记下来原有的display属性到底是block还是inline还是别的值。
+  * 隐藏一个DOM，我们可以设置CSS的display属性为none，利用css()方法就可以实现.
+  * 恢复原有的display属性，这就得先记下来原有的display属性到底是block还是inline还是别的值。
 * 获取DOM信息
-    * attr()和removeAttr()方法用于操作DOM节点的属性.
-    * prop()方法和attr()类似，但是HTML5规定有一种属性在DOM节点中可以没有值，只有出现与不出现两种.prop()返回值更合理一些。不过，用is()方法判断更好(checked selected) $("button").prop("disabled",true);
+  * attr()和removeAttr()方法用于操作DOM节点的属性.
+  * prop()方法和attr()类似，但是HTML5规定有一种属性在DOM节点中可以没有值，只有出现与不出现两种.prop()返回值更合理一些。不过，用is()方法判断更好(checked selected) $("button").prop("disabled",true);
 * 操作表单：对于表单元素，jQuery对象统一提供val()方法获取和设置对应的value属性
 * 修改DOM结构：
-    - append（）把DOM添加到最后。可以传入原始的DOM对象，jQuery对象和函数对象。传入函数时，要求返回一个字符串、DOM对象或者jQuery对象。因为jQuery的append()可能作用于一组DOM节点，只有传入函数才能针对每个DOM生成不同的子节点。
-    - prepend()则把DOM添加到最前
-    - appendTo()方法，可以让你把选中的HTML元素附加到其他元素中
-    - 如果要添加的DOM节点已经存在于HTML文档中，它会首先从文档移除，然后再添加，也就是说，用append()，你可以移动一个DOM节点。
-    - 要把新节点插入到指定位置，例如，JavaScript和Python之间，那么，可以先定位到JavaScript，然后用after()方法。同级节点可以用after()或者before()方法
-    - 要删除DOM节点，拿到jQuery对象后直接调用remove()方法就可以了。如果jQuery对象包含若干DOM节点，实际上可以一次删除多个DOM节点：remove()的方法，可以彻底删除一个HTML元素
+  - append（）把DOM添加到最后。可以传入原始的DOM对象，jQuery对象和函数对象。传入函数时，要求返回一个字符串、DOM对象或者jQuery对象。因为jQuery的append()可能作用于一组DOM节点，只有传入函数才能针对每个DOM生成不同的子节点。
+  - prepend()则把DOM添加到最前
+  - appendTo()方法，可以让你把选中的HTML元素附加到其他元素中
+  - 如果要添加的DOM节点已经存在于HTML文档中，它会首先从文档移除，然后再添加，也就是说，用append()，你可以移动一个DOM节点。
+  - 要把新节点插入到指定位置，例如，JavaScript和Python之间，那么，可以先定位到JavaScript，然后用after()方法。同级节点可以用after()或者before()方法
+  - 要删除DOM节点，拿到jQuery对象后直接调用remove()方法就可以了。如果jQuery对象包含若干DOM节点，实际上可以一次删除多个DOM节点：remove()的方法，可以彻底删除一个HTML元素
 * 类属性操作
-    - 通过addClass("myClass")方法给元素增加类
-    - 通过removeClass("myClass")方法移除相应的类
+  - 通过addClass("myClass")方法给元素增加类
+  - 通过removeClass("myClass")方法移除相应的类
 * 复制元素：clone()
 * 子元素、父元素、奇偶元素
-    - parent()方法，可以允许你访问选定元素的父元素；
-    - children()方法，可以让你访问选定元素的子元素；
-    - 用CSS选择器来获取元素，target:nth-child(n)CSS选择器允许你通过目标类或元素类型选择目标元素的所有子元素；
-    - jQuery里的索引是从0开始的，也就意味着会与直觉相反：:odd选择的是第2、4、6……个元素，因为索引是1、3、5……
+  - parent()方法，可以允许你访问选定元素的父元素；
+  - children()方法，可以让你访问选定元素的子元素；
+  - 用CSS选择器来获取元素，target:nth-child(n)CSS选择器允许你通过目标类或元素类型选择目标元素的所有子元素；
+  - jQuery里的索引是从0开始的，也就意味着会与直觉相反：:odd选择的是第2、4、6……个元素，因为索引是1、3、5……
 
 ```html
 <ul id="test-ul">
@@ -355,26 +355,26 @@ $('ul.lang li.lang-javascript'); // 每个 <ul> 的第一个 <li> 元素
 * 由于不同的浏览器绑定事件的代码都不太一样，所以用jQuery来写代码，就屏蔽了不同浏览器的差异，我们总是编写相同的代码
 * on方法用来绑定一个事件，我们需要传入事件名称和对应的处理函数.
 * 鼠标事件：
-    - click: 鼠标单击时触发；
-    - dblclick：鼠标双击时触发；
-    - mouseenter：鼠标进入时触发；
-    - mouseleave：鼠标移出时触发；
-    - mousemove：鼠标在DOM内部移动时触发；
-    - hover：鼠标进入和退出时触发两个函数，相当于mouseenter加上mouseleave。
+  - click: 鼠标单击时触发；
+  - dblclick：鼠标双击时触发；
+  - mouseenter：鼠标进入时触发；
+  - mouseleave：鼠标移出时触发；
+  - mousemove：鼠标在DOM内部移动时触发；
+  - hover：鼠标进入和退出时触发两个函数，相当于mouseenter加上mouseleave。
 * 键盘事件：
-    - keydown：键盘按下时触发；
-    - keyup：键盘松开时触发；
-    - keypress：按一次键后触发
+  - keydown：键盘按下时触发；
+  - keyup：键盘松开时触发；
+  - keypress：按一次键后触发
 * 其他事件
-    - focus：当DOM获得焦点时触发；
-    - blur：当DOM失去焦点时触发；
-    - change：当<input>、<select>或<textarea>的内容改变时触发；
-    - submit：当<form>提交时触发；
-    - ready：当页面被载入并且DOM树完成初始化后触发。*ready仅作用于document对象。由于ready事件在DOM完成初始化后触发，且只触发一次，所以非常适合用来写其他的初始化代码。* `$(function () {...})`的使用
+  - focus：当DOM获得焦点时触发；
+  - blur：当DOM失去焦点时触发；
+  - change：当<input>、<select>或<textarea>的内容改变时触发；
+  - submit：当<form>提交时触发；
+  - ready：当页面被载入并且DOM树完成初始化后触发。*ready仅作用于document对象。由于ready事件在DOM完成初始化后触发，且只触发一次，所以非常适合用来写其他的初始化代码。* `$(function () {...})`的使用
 * 有些事件，如mousemove和keypress，我们需要获取鼠标位置和按键的值，否则监听这些事件就没什么意义了。所有事件都会传入Event对象作为参数，可以从Event对象上获取到更多的信息
 * 取消绑定：一个已被绑定的事件可以解除绑定，通过off('click', function)实现。可以使用off('click')一次性移除已绑定的click事件的所有处理函数。无参数调用off()一次性移除已绑定的所有类型的事件处理函数。
 * 事件触发条件：事件的触发总是由用户操作引发的。比如：用户在文本框中输入时，就会触发change事件。但是，如果用JavaScript代码去改动文本框的值，将不会触发change事件
-    - 浏览器安全限制:浏览器中，有些JavaScript代码只有在用户触发下才能执行，例如，window.open()函数
+  - 浏览器安全限制:浏览器中，有些JavaScript代码只有在用户触发下才能执行，例如，window.open()函数
 
 ```html
 <a id="test-link" href="#0">点我试试</a>
@@ -520,16 +520,16 @@ div.slideDown(2000)
 
 * 在全局对象jQuery（也就是$）绑定了ajax()函数，可以处理AJAX请求。ajax(url, settings)函数需要接收一个URL和一个可选的settings对象
 * 常用选项：
-    - async：是否异步执行AJAX请求，默认为true，千万不要指定为false；
-    - method：发送的Method，缺省为'GET'，可指定为'POST'、'PUT'等；
-    - contentType：发送POST请求的格式，默认值为'application/x-www-form-urlencoded; charset=UTF-8'，也可以指定为text/plain、application/json；
-    - data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
-    - headers：发送的额外的HTTP头，必须是一个object；
-    - dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
-        - $.ajax()
-        - $.get()
-        - $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
-        - $.getJSON()
+  - async：是否异步执行AJAX请求，默认为true，千万不要指定为false；
+  - method：发送的Method，缺省为'GET'，可指定为'POST'、'PUT'等；
+  - contentType：发送POST请求的格式，默认值为'application/x-www-form-urlencoded; charset=UTF-8'，也可以指定为text/plain、application/json；
+  - data：发送的数据，可以是字符串、数组或object。如果是GET请求，data将被转换成query附加到URL上，如果是POST请求，根据contentType把data序列化成合适的格式；
+  - headers：发送的额外的HTTP头，必须是一个object；
+  - dataType：接收的数据格式，可以指定为'html'、'xml'、'json'、'text'等，缺省情况下根据响应的Content-Type猜测。
+    - $.ajax()
+    - $.get()
+    - $.post():传入的第二个参数默认被序列化为application/x-www-form-urlencoded
+    - $.getJSON()
 * 用promise实现链式写法
 * 使用JSONP，可以在ajax()中设置jsonp: 'callback'，让jQuery实现JSONP跨域加载数据
 
@@ -687,9 +687,9 @@ $(function () {
 
 # [ajax](https://github.com/defunkt/jquery-pjax)
 
-pushState + ajax = pjax https://pjax.herokuapp.com
+pushState + ajax = pjax <https://pjax.herokuapp.com>
 
-http://www.jianshu.com/p/557cad38e7dd
+<http://www.jianshu.com/p/557cad38e7dd>
 
 ### 插件
 
@@ -779,12 +779,13 @@ var jq=jQuery.noConflict();
 ## 扩展
 
 - [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
-- [Studio-42/elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI https://studio-42.github.io/elFinder/
-- [mumuy/widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 http://jquerywidget.com/
+- [Studio-42/elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI <https://studio-42.github.io/elFinder/>
+- [mumuy/widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 <http://jquerywidget.com/>
 - [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
-- [DataTables/DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery http://www.datatables.net/
+- [DataTables/DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery <http://www.datatables.net/>
 - [jquery-validation](https://github.com/jquery-validation/jquery-validation):clone本地，grunt安装，编译;test中的index.html会有测试断言
-* [flesler/jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery http://demos.flesler.com/jquery/scrollTo/
+
+* [flesler/jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery <http://demos.flesler.com/jquery/scrollTo/>
 * [plugin](http://www.jq22.com/)
 
 ## 参考

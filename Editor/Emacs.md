@@ -18,11 +18,11 @@ sudo apt install emacs26
 
 * [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
 * [hlissner / doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
-* 陈斌的 Emacs 配置 https://github.com/redguardtoo/emacs.d
+* 陈斌的 Emacs 配置 <https://github.com/redguardtoo/emacs.d>
 
 ### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
 
-A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! http://spacemacs.org
+A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! <http://spacemacs.org>
 
 ```
 brew tap d12frosted/emacs-plus
@@ -66,6 +66,7 @@ git clone https://github.com/purcell/emacs.d.git ~/.emacs.d
 C代表Ctrl键，M代表Alt键，RET表示Enter键
 [符号]
 --------------------------------------
+
 C-                    意思是按住 Ctrol 键
 M-                    意指 Meta 键 (键盘上若无Meta 键，则可以ALT 或 ESC 键来取而代之)
 DEL                   意指退格键 (不是 删除(Delete) key)
@@ -78,6 +79,7 @@ TAB                   意指Tab键
 
 [进入Emacs]
 ----------------------------------------
+
 emacs                 要进入GNU Emacs，只需键入它的名字
 C-z                   挂起Emacs：
 C-x C-c               永久离开Emacs
@@ -97,6 +99,7 @@ C-x C-c               永久离开Emacs
 
 [文件]
 ----------------------------------------
+
 C-x C-f                读取文件到Emacs
 C-x r                  只读的方式打开一个文件
 C-x C-q                清除一个窗口的只读属性
@@ -109,6 +112,7 @@ C-x C-q                Version control checkin/checkout
 
 [错误恢复]
 ---------------------------------------
+
 C-g                    取消当前要执行的命令
 M-x recover-file       恢复系统崩溃后丢失的文件
 C-x u或C-_             撤销更新
@@ -117,6 +121,7 @@ C-l                    Redraw garbaged screen
 
 [增量查找]
 ---------------------------------------
+
 C-s                    向前查找
 C-r                    向后查找
 C-M-s                  规则表达式查找
@@ -130,6 +135,7 @@ C-g                    退出当前查找模式
 
 [替换]
 ---------------------------------------
+
 M-%                    交互式地替换一个文本串
 M-x replace-regexp     交互式地替换一个规则表达式
 SPE                    替换当前的并移动到下一处
@@ -142,6 +148,7 @@ C-M-c                  退出递归的编辑模式
 
 [光标移动]
 ---------------------------------------
+
 C-f                    向前一个字符
 C-b                    向后一个字符
 M-f                    向前一个字
@@ -173,6 +180,7 @@ C-M-d                  向下移到父结构开始
 
 [复制、粘贴、剪切、删除]
 -----------------------------
+
 C-d                    向前delete字符
 DEL(Backspace)         向后delete字符
 M-d                    向前delete到字首
@@ -189,9 +197,9 @@ M-z              Kill到下一个给定字符出现的位置
 C-y                    拉回（yank）上次kill的内容
 M-y                    用更早kill的内容取代拉回的上次kill的内容
 
-
 [标记Marking]
 -----------------------------
+
 C-SPC或C-@             标记当前位置
 C-x C-x                以字符为单位使用移动命令动态标记区域
 M-@                    以字为单位使用移动命令动态标记区域
@@ -203,6 +211,7 @@ C-x h                  标记整个缓冲区
 
 [寄存器]
 -----------------------------
+
 C-x r s                存储区域到寄存器
 C-x r i                插入矩形内容到缓冲
 C-x r SPC         存储光标位置到寄存器
@@ -210,6 +219,7 @@ C-x r SPC         存储光标位置到寄存器
 
 [矩形]
 -----------------------------
+
 C-x r r                拷贝一个矩形到寄存器
 C-x r k                Kill矩形
 C-x r y                拉回矩形
@@ -220,6 +230,7 @@ C-x r i r              从r缓冲区内插入一个矩形
 
 [标记Tags]
 -----------------------------
+
 M-.                    查找标记
 C-u M-.                查找标记下一次出现的位置
 M-x visit-tags-table   指定一个新的标记文件
@@ -229,6 +240,7 @@ M-,                    继续进行上一次标记查找或查询-替换
 
 [窗口与缓冲]
 -----------------------------
+
 C-x 1                  删除所有其它窗口
 
 C-x 5 2
@@ -262,11 +274,9 @@ C-x ^                  增加窗口高度
 C-x {                  减小窗口宽度
 C-x }                  增加窗口宽度
 
-
 C-x b                  选择另一个缓冲
 C-x C-b                列出所有的缓冲
 C-x k                  Kill一个缓冲
-
 
 [分栏编辑]
 
@@ -277,6 +287,7 @@ C-x 6 2    2             C-two-columns
 
 [格式]
 -----------------------------
+
 TAB                    缩进当前行（与模式相关）
 C-M-\                  缩进区域（与模式相关）
 C-M-q                  缩进表达式（与模式相关）
@@ -298,11 +309,11 @@ M-g                    设置字体
 
 * org-mode:写作，任务管理，任务计时器，甚至可以用来做表格的计算
 * 文件管理的插件
-    - helm 比较重量级一些，如果一个项目的代码量比较大时，文件的切换和搜索就没那么快
-    - 轻量级的 ivy
+  - helm 比较重量级一些，如果一个项目的代码量比较大时，文件的切换和搜索就没那么快
+  - 轻量级的 ivy
 * evil 可以让 Emacs 变身成为一个 Vim，大多数的 Vim 操作都可以覆盖上
 * magit 是一个可以使 Emacs 变身成为 Git 的插件
-* [ for-GET / know-your-http-well ](https://github.com/for-GET/know-your-http-well):HTTP headers, media-types, methods, relations and status codes, all summarized and linking to their specification.
+* [for-GET / know-your-http-well](https://github.com/for-GET/know-your-http-well):HTTP headers, media-types, methods, relations and status codes, all summarized and linking to their specification.
 
 ## 框架
 
@@ -311,16 +322,16 @@ M-g                    设置字体
 ## 参考
 
 * [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
-* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs http://joaotavora.github.com/yasnippet/
+* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs <http://joaotavora.github.com/yasnippet/>
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
 * [Spacemacs Rocks](http://book.emacs-china.org/):用 21 天学习 Emacs 以及 Spacemacs 的使用
 
 * [redguardtoo / mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
 
-* reddit 的 Emacs 频道，最前沿的 Emacs 技巧：https://www.reddit.com/r/emacs/
-* Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：https://orgmode.org/
-* Emacs Wiki，上面有大量的 Emacs 插件的实践，虽然质量参差不齐，但是也有很多优秀的插件 https://www.emacswiki.org/emacs/EmacsWiki
+* reddit 的 Emacs 频道，最前沿的 Emacs 技巧：<https://www.reddit.com/r/emacs/>
+* Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：<https://orgmode.org/>
+* Emacs Wiki，上面有大量的 Emacs 插件的实践，虽然质量参差不齐，但是也有很多优秀的插件 <https://www.emacswiki.org/emacs/EmacsWiki>
 * <http://blog.csdn.net/redguardtoo/article/details/7222501/>
 * <https://wiki.archlinux.org/index.php/Emacs_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87>)
 * <http://yulongniu.bionutshell.org/blog/2011/08/13/emacs-tips/>

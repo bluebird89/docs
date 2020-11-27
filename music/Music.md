@@ -1,4 +1,4 @@
-## music
+# music
 
 * 流行音乐不流行，是这五年流行音乐的一个最大现象
 * 音乐出版不受关注，但音乐秀盛行。音乐秀实质上是音乐萧条的表征
@@ -33,17 +33,16 @@
 
 * The Royal Philharmonic：英国皇家爱乐乐团1946年创立，1966年英国女王为乐团冠上“皇家”头衔，奠定了其在英国乐坛无可替代的地位。乐团以丰富、流畅的音色和近乎完美的配合以及对经典曲目的驾驭能力征服了世界
 * [DJ Okawari](http://djokawari.com/)
-    - 个人
-        + 自于日本静冈县，曲风为各种chillout，例如jazz-hiphop和chill-hop，有一种十分空灵自然的唯美感
-        + 2012年参加韩国“FALL in ACOUSTIC FESTIVAL”后，碗叔就未曾在海外公开露面。没有官方MV，就连本人也不曾留下任何现场演出画面。有人笑称碗叔是个充满亲和力的活力小胖叔
-    - Compass
-    - Kaleidoscope(万花筒)
-    - Mirror
-    - Diorama(西洋镜)
-
-    - Bluebird Story with Jumelles
-    - Luv Letter
-    - Flower Dance
+  - 个人
+    + 自于日本静冈县，曲风为各种chillout，例如jazz-hiphop和chill-hop，有一种十分空灵自然的唯美感
+    + 2012年参加韩国“FALL in ACOUSTIC FESTIVAL”后，碗叔就未曾在海外公开露面。没有官方MV，就连本人也不曾留下任何现场演出画面。有人笑称碗叔是个充满亲和力的活力小胖叔
+  - Compass
+  - Kaleidoscope(万花筒)
+  - Mirror
+  - Diorama(西洋镜)
+  - Bluebird Story with Jumelles
+  - Luv Letter
+  - Flower Dance
 
 ## 嘻哈
 
@@ -269,9 +268,9 @@
 * 网易云音乐
   - [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):网易云音乐第三方
 * [last.fm](https://www.last.fm/)
-* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music http://nuclear.gumblert.tech/
+* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music <http://nuclear.gumblert.tech/>
 * [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.
-* [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. https://harishnarayanan.org/projects/
+* [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. <https://harishnarayanan.org/projects/>
 * [musicforprogramming](https://musicforprogramming.net/)
 * [MusicTools](http://tool.yijingying.com/musictools/)
 * [slsknet](http://www.slsknet.org/):1999年底由著名音乐分享平台Napster的程序员Nir Arbel所开发的P2P共享软件Soulseek(简称SLSK)正式出现，在历经13年多的时间内，这它成为音乐共享软件中口碑最好用户最多的软件之一
@@ -279,10 +278,10 @@
 * [lyswhut / lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 * [Listen 1](https://listen1.github.io/listen1/):One for all free music in China
 * [ScorSer](http://en.scorser.com/D/Sheet+music.html):Search system for musicians
-* [](https://github.com/ix64/unlock-music/):Unlock encrypted music file in browser. 在浏览器中解锁加密的音乐文件。https://ix64.github.io/unlock-music/
+* [](https://github.com/ix64/unlock-music/):Unlock encrypted music file in browser. 在浏览器中解锁加密的音乐文件。<https://ix64.github.io/unlock-music/>
 * [FeelUOwn](https://github.com/feeluown/FeelUOwn):trying to be a user-friendly and hackable music player feeluown.readthedocs.io
   - undefined symbol: cairo_tag_end
-* [koel](https://github.com/koel/koel):bird A personal music streaming server that works. https://koel.dev/
+* [koel](https://github.com/koel/koel):bird A personal music streaming server that works. <https://koel.dev/>
 * [TuxGuitar](https://sourceforge.net/projects/tuxguitar/):edit and play guitar tablatures like a pro
 * [MuseScore](https://musescore.org/en):an open-source and free professional music notation application that is used to create, play and print beautiful sheet music using easy to use, yet powerful interface
 

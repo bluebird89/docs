@@ -383,7 +383,7 @@ awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计�
 基本能够安装大部分非特殊的Linux程序（包括各种库、包、第三方依赖等等，比如MongoDB/Redis/Sphinx/Luncene/SVN之类的）；
 了解基本的Linux服务，知道如何查看Linux的性能指标数据，知道基本的Linux下面的问题跟踪等。
 
-### Nginx:
+### Nginx
 
 在第一阶段的基础上面，了解复杂一些的Nginx配置；
 包括 多核配置、events、proxy_pass，sendfile/tcp_*配置，知道超时等相关配置和性能影响；
@@ -392,7 +392,7 @@ awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计�
 知道如何配置权限、编译一个nginx扩展到nginx；
 知道基本的nginx运行原理（master/worker机制，epoll），知道为什么nginx性能比apache性能好等知识；
 
-### MySQL/MongoDB：
+### MySQL/MongoDB
 
 在第一阶段的基础上面，在MySQL开发方面，掌握很多小技巧，包括常规SQL优化（group by/order by/rand优化等）；
 除了能够搭建MySQL，还能够冷热备份MySQL数据，还知道影响innodb/myisam性能的配置选项（比如key_buffer/query_cache/sort_buffer/innodb_buffer_pool_size/innodb_flush_log_at_trx_commit等），也知道这些选项配置成为多少值合适；
@@ -403,14 +403,14 @@ awk/sed/perl 也操作的不错，能够完成很多文本处理和数据统计�
 了解大部分MySQL异常情况的处理方案（或者知道哪儿找到处理方案）；
 条件允许的情况，建议了解一下NoSQL的代表MongoDB数据库，顺便对比跟MySQL的差别，同时能够在合适的应用场景安全谨慎的使用MongoDB，知道基本的PHP与MongoDB的结合开发。
 
-### Redis/Memcached：
+### Redis/Memcached
 
 在大部分中型系统里面一定会涉及到缓存处理，所以一定要了解基本的缓存；
 知道Memcached和Redis的异同和应用场景，能够独立安装 Redis/Memcached，了解Memcahed的一些基本特性和限制，比如最大的value值，知道PHP跟他们的使用结合；
 Redis了解基本工作原理和使用，了解常规的数据类型，知道什么场景应用什么类型，了解Redis的事务等等;
 原理部分，能够大概了解Memcached的内存结构（slab机制），redis就了解常用数据类型底层实现存储结构（SDS/链表/SkipList/HashTable）等等，顺便了解一下Redis的事务、RDB、AOF等机制更好
 
-### PHP：
+### PHP
 
 除了第一阶段的能力，安装配置方面能够随意安装PHP和各种第三方扩展的编译安装配置；
 了解php-fpm的大部分配置选项和含义（如max_requests/max_children/request_terminate_timeout之类的影响性能的配置），知道mod_php/fastcgi的区别；
@@ -419,19 +419,19 @@ Redis了解基本工作原理和使用，了解常规的数据类型，知道什
 建议开发自己的PHP MVC框架来充分让开发自由化，让自己深入理解MVC模式，也让自己能够在业务项目开发里快速升级；
 熟悉PHP的各种代码优化方法，熟悉大部分PHP安全方面问题的解决处理；熟悉基本的PHP执行的机制原理（Zend引擎/扩展基本工作机制）；
 
-### C/C++：
+### C/C++
 
 开始涉猎一定的C/C++语言，能够写基本的C/C++代码，对基本的C/C++语法熟悉（指针、数组操作、字符串、常规标准API）和数据结构（链表、树、哈希、队列）有一定的熟悉下；
 对Linux下面的C语言开发有基本的了解概念，会简单的makefile文件编写，能够使用简单的GCC/GDB的程序编译简单调试工作；
 对基本的网络编程有大概了解。（本项是为了向更高层次打下基础）
 
-### 前端：
+### 前端
 
 在第一阶段的基础上面，熟悉基本的HTTP协议（协议代码200/300/400/500，基本的HTTP交互头）；
 条件允许，可以在深入写出稍微优雅的HTML+CSS+JavaScript，或者能够大致简单使用某些前端框架（jQuery/YUI/ExtJS/RequireJS/BootStrap之类）；
 如果条件允许，可以深入学习JavaScript编程，比如闭包机制、DOM处理；再深入些可以读读jQuery源码做深入学习。（本项不做重点学习，除非对前端有兴趣）
 
-### 系统设计：
+### 系统设计
 
 能够设计大部分中型系统的网站架构、数据库、基本PHP框架选型；性能测试排查处理等；
 能够完成类似：浏览器 -< CDN(Squid) -< Nginx+PHP -< 缓存 -< 数据库 结构网站的基本设计开发维护；
@@ -443,7 +443,7 @@ Redis了解基本工作原理和使用，了解常规的数据类型，知道什
 
 目标：除了能够完成基本的PHP业务开发，还能够解决大部分深入复杂的技术问题，并且可以独立设计完成中大型的系统设计和开发工作；自己能够独立hold深入某个技术方向，在这块比较专业。（比如在MySQL、Nginx、PHP、Redis等等任一方向深入研究）
 
-### Linux：
+### Linux
 
 除了第二阶段的能力，在Linux下面除了常规的操作和性能监控跟踪，还能够使用很多高级复杂的命令完成工作（watch/tcpdump/starce/ldd/ar等)；
 在shell脚本方面，已经能够编写比较复杂的shell脚本（超过500行）来协助完成很多包括备份、自动化处理、监控等工作的shell；
@@ -451,7 +451,7 @@ Redis了解基本工作原理和使用，了解常规的数据类型，知道什
 对Linux内部机制有一些了解，对内核模块加载，启动错误处理等等有个基本的处理；
 同时对一些其他相关的东西也了解，比如NFS、磁盘管理等等；
 
-## Nginx:
+## Nginx
 
 在第二阶段的基础上面，已经能够把Nginx操作的很熟练，能够对Nginx进行更深入的运维工作，比如监控、性能优化，复杂问题处理等等；
 看个人兴趣，更多方面可以考虑侧重在关于Nginx工作原理部分的深入学习，主要表现在阅读源码开始，比如具体的master/worker工作机制，Nginx内部的事件处理，内存管理等等；
@@ -459,7 +459,7 @@ Redis了解基本工作原理和使用，了解常规的数据类型，知道什
 同时可以对Nginx+Lua有一定程度的了解，看看是否可以结合应用出更好模式；
 这个阶段的要求是对Nginx原理的深入理解，可以考虑成为Nginx方向的深入专业者。
 
-### MySQL/MongoDB：
+### MySQL/MongoDB
 
 在第二阶段的基础上面，在MySQL应用方面，除了之前的基本SQL优化，还能够在完成一些复杂操作，比如大批量数据的导入导出，线上大批量数据的更改表结构或者增删索引字段等等高危操作；
 除了安装配置，已经能够处理更多复杂的MySQL的问题，比如各种问题的追查，主从同步延迟问题的解决、跨机房同步数据方案、MySQL高可用架构等都有涉及了解；
@@ -468,13 +468,13 @@ Redis了解基本工作原理和使用，了解常规的数据类型，知道什
 MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解，冷热备份，多IDC备份等；在MySQL原理方面，有更多了解，比如对MySQL的工作机制开始阅读部分源码，比如对主从同步（复制）技术的源码学习，或者对某个存储引擎（MyISAM/Innodb/TokuDB）等等的源码学习理解，如果条件允许，可以参考CSV引擎开发自己简单的存储引擎来保存一些数据，增强对MySQL的理解；
 在这个过程，如果自己有兴趣，也可以考虑往DBA方向发展。MongoDB层面，可以考虑比如说在写少读多的情况开始在线上应用MongoDB，或者是做一些线上的数据分析处理的操作，具体场景可以按照工作来，不过核心是要更好的深入理解RMDBS和NoSQL的不同场景下面的应用，如果条件或者兴趣允许，可以开始深入学习一下MongoDB的工作机制。
 
-### Redis/Memcached：
+### Redis/Memcached
 
 在第二阶段的基础上面，能够更深入的应用和学习。因为Memcached不是特别复杂，建议可以把源码进行阅读，特别是内存管理部分，方便深入理解；Redis部分，可以多做一些复杂的数据结构的应用（zset来做排行榜排序操作/事务处理用来保证原子性在秒杀类场景应用之类的使用操作）；
 多涉及aof等同步机制的学习应用，设计一个高可用的Redis应用架构和集群；
 建议可以深入的学习一下Redis的源码，把在第二阶段积累的知识都可以应用上，特别可以阅读一下包括核心事件管理、内存管理、内部核心数据结构等充分学习了解一下。如果兴趣允许，可以成为一个Redis方面非常专业的使用者。
 
-### PHP：
+### PHP
 
 作为基础核心技能，在第二阶段的基础上面，需要有更深入的学习和应用
 
@@ -485,7 +485,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 能够进行基本的PHP扩展开发，了解一些扩展开发的中高级知识（minit/rinit等），熟悉php跟apache/nginx不同的通信交互方式细节（mod_php/fastcgi）；
 除了开发PHP扩展，可以考虑学习开发Zend扩展，从更底层去了解PHP。
 
-### C/C++：
+### C/C++
 
 在第二阶段基础上面，能够在C/C++语言方面有更深入的学习了解，能够完成中小型C/C++系统的开发工作；
 除了基本第二阶段的基础C/C++语法和数据结构，也能够学习一些特殊数据结构（b-tree/rb-tree/skiplist/lsm-tree/trie-tree等）方便在特殊工作中需求；
@@ -496,12 +496,12 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 能够更熟络的使用GCC和GDB来开发编译调试程序，在线上程序core掉后能够迅速追查跟踪解决问题；
 通用模块开发方面，可以积累或者开发一些通用的工具或库（比如异步网络框架、日志库、内存池、线程池等），不过开发后是否应用要谨慎，省的埋坑去追bug；
 
-### 前端：
+### 前端
 
 深入了解HTTP协议（包括各个细致协议特殊协议代码和背后原因，比如302静态文件缓存了，502是nginx后面php挂了之类的）；
 除了之前的前端方面的各种框架应用整合能力，前端方面的学习如果有兴趣可以更深入，表现形式是，可以自己开发一些类似jQuery的前端框架，或者开发一个富文本编辑器之类的比较琐碎考验JavaScript功力；
 
-### 其他领域语言学习：
+### 其他领域语言学习
 
 在基础的PHP/C/C++语言方面有基本积累，建议在当前阶段可以尝试学习不同的编程语言，看个人兴趣爱好，脚本类语言可以学学 Python/Ruby 之类的，函数式编程语言可以试试 Lisp/Haskell/Scala/Erlang 之类的，静态语言可以试试 Java/Golang，数据统计分析可以了解了解R语言，如果想换个视角做后端业务，可以试试 Node.js还有前面提到的跟Nginx结合的Nginx_Lua等。学习不同的语言主要是提升自己的视野和解决问题手段的差异，比如会了解除了进程/线程，还有轻量级协程；
 比如在跨机器通信场景下面，Erlang的解决方案简单的惊人；比如在不想选择C/C++的情况下，还有类似高效的Erlang/Golang可用等等；
@@ -542,16 +542,16 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
     + 最终保证所有任务的配合完成可以完成这个目标
 * 输入类型
   - 参数
-  - 读取全局变量 
-  - 调用全局函数后得到的返回值 
-  - 读取局部作用域变量（比如this） 
-  - 调用局部函数后得到的返回值 
+  - 读取全局变量
+  - 调用全局函数后得到的返回值
+  - 读取局部作用域变量（比如this）
+  - 调用局部函数后得到的返回值
   - hard code的数据
 * 输出类型
-  - 返回值 
-  - 修改全局变量 
-  - 调用全局函数时传的参数 
-  - 修改局部作用域变量（比如this） 
+  - 返回值
+  - 修改全局变量
+  - 调用全局函数时传的参数
+  - 修改局部作用域变量（比如this）
   - 调用局部函数时传的参数
 * Evaluate task
   - 语文问题:用词精确，前后一致
@@ -692,12 +692,12 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 ## 课程
 
-* [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. https://www.freecodecamp.org/
+* [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. <https://www.freecodecamp.org/>
 * [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
 
 ## 项目
 
-* [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 https://realworld.io/
+* [gothinkster/realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 <https://realworld.io/>
 
 ## 图书
 
@@ -722,26 +722,26 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 ## 工具
 
-* [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev https://free-for.dev/
-* [dawnlabs/carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code https://dawnlabs.io/carbon
-* [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! http://learnxinyminutes.com/
+* [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev <https://free-for.dev/>
+* [dawnlabs/carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code <https://dawnlabs.io/carbon>
+* [adambard/learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! <http://learnxinyminutes.com/>
 * [justjavac/Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
-* [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names https://unbug.github.io/codelf/
-* [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. https://prettier.io
-* [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. http://geoff.greer.fm/ag/
+* [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names <https://unbug.github.io/codelf/>
+* [prettier/prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. <https://prettier.io>
+* [ggreer/the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. <http://geoff.greer.fm/ag/>
 * [hackmdio/codimd](https://github.com/hackmdio/codimd):CodiMD - Realtime collaborative markdown notes on all platforms.
-* [cheatsheets](https://github.com/rstacruz/cheatsheets) My cheatsheets https://devhints.io/
+* [cheatsheets](https://github.com/rstacruz/cheatsheets) My cheatsheets <https://devhints.io/>
 * [awesome-cheatsheet](https://github.com/detailyang/awesome-cheatsheet)🍻 awesome cheatsheet
 
 ## 参考
 
 * [DZone](http://www.dzone.com)
 * [Stackoverflow](http://stackoverflow.com/)
-* [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. https://30secondsofcode.org/
+* [30-seconds/30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. <https://30secondsofcode.org/>
 * [aosabook/500lines](https://github.com/aosabook/500lines):500 Lines or Less
 * [hellerve/programming-talks](https://github.com/hellerve/programming-talks):Awesome & interesting talks about programming
 * [charlax/professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
-* [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more http://todomvc.com/
+* [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more <http://todomvc.com/>
 * [What every computer science major should know](http://matt.might.net/articles/what-cs-majors-should-know/)
   - 个人来说，作品集（Portfolio）会比简历（Resume）更有参考意义
   - 计算机专业工作者也要学会与人交流的技巧，包括如何写演示文稿，以及面对质疑时如何与人辩论的能力
@@ -751,7 +751,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * [97 Things Every Programmer Should Know](https://97-things-every-x-should-know.gitbooks.io/97-things-every-programmer-should-know)
 
 * [技术雷达](https://www.thoughtworks.com/radar)
-* [learn-anything/learn-anything](https://github.com/learn-anything/learn-anything):Search Interactive Maps to Learn Anything https://learn-anything.xyz
+* [learn-anything/learn-anything](https://github.com/learn-anything/learn-anything):Search Interactive Maps to Learn Anything <https://learn-anything.xyz>
 * [ruanyf/weekly](https://github.com/ruanyf/weekly):技术分享周刊，每周五发布
 
 ## 编程：Google: github awesome talks

@@ -26,27 +26,33 @@ request.
 
 # Table of contents
 
-1. [Branches](#branches)
-2. [Commits](#commits)
-   1. [Messages](#messages)
-3. [Merging](#merging)
-4. [Misc.](#misc)
+- [Git Style Guide](#git-style-guide)
+- [Table of contents](#table-of-contents)
+  - [Branches](#branches)
+  - [Commits](#commits)
+    - [Messages](#messages)
+  - [Merging](#merging)
+  - [Misc](#misc)
+- [License](#license)
+- [Credits](#credits)
+  - [Github](#github)
+  - [参考](#参考)
 
 ## Branches
 
 * Choose *short* and *descriptive* names:
-  
+
   ```shell
   # good
   $ git checkout -b oauth-migration
-  
+
   # bad - too vague
   $ git checkout -b login_fix
   ```
 
 * Identifiers from corresponding tickets in an external service (eg. a GitHub
   issue) are also good candidates for use in branch names. For example:
-  
+
   ```shell
   # GitHub issue #15
   $ git checkout -b issue-15
@@ -57,24 +63,24 @@ request.
 * When several people are working on the *same* feature, it might be convenient
   to have *personal* feature branches and a *team-wide* feature branch.
   Use the following naming convention:
-  
+
   ```shell
-  $ git checkout -b feature-a/master # team-wide branch
-  $ git checkout -b feature-a/maria  # Maria's personal branch
-  $ git checkout -b feature-a/nick   # Nick's personal branch
+  git checkout -b feature-a/master # team-wide branch
+  git checkout -b feature-a/maria  # Maria's personal branch
+  git checkout -b feature-a/nick   # Nick's personal branch
   ```
-  
+
   Merge at will the personal branches to the team-wide branch (see ["Merging"](#merging)).
   Eventually, the team-wide branch will be merged to "master".
 
 * Delete your branch from the upstream repository after it's merged, unless
   there is a specific reason not to.
-  
+
   Tip: Use the following command while being on "master", to list merged
   branches:
-  
+
   ```shell
-  $ git branch --merged | grep -v "\*"
+  git branch --merged | grep -v "\*"
   ```
 
 ## Commits
@@ -82,7 +88,7 @@ request.
 * Each commit should be a single *logical change*. Don't make several
   *logical changes* in one commit. For example, if a patch fixes a bug and
   optimizes the performance of a feature, split it into two separate commits.
-  
+
   *Tip: Use `git add -p` to interactively stage specific portions of the
   modified files.*
 
@@ -103,15 +109,15 @@ holds true that you should apply all of the above *before* pushing it.
 ### Messages
 
 * Use the editor, not the terminal, when writing a commit message:
-  
+
   ```shell
   # good
   $ git commit
-  
+
   # bad
   $ git commit -m "Quick fix"
   ```
-  
+
   Committing from the terminal encourages a mindset of having to fit everything
   in a single line which usually results in non-informative, ambiguous commit
   messages.
@@ -121,11 +127,11 @@ holds true that you should apply all of the above *before* pushing it.
   *50 characters*. It should be capitalized and written in imperative present
   tense. It should not end with a period since it is effectively the commit
   *title*:
-  
+
   ```shell
   # good - imperative present tense, capitalized, fewer than 50 characters
   Mark huge records as obsolete when clearing hinting faults
-  
+
   # bad
   fixed ActiveModel::Errors deprecation messages failing when AR was used outside of Rails.
   ```
@@ -134,13 +140,13 @@ holds true that you should apply all of the above *before* pushing it.
   description. It should be wrapped to *72 characters* and explain *why*
   the change is needed, *how* it addresses the issue and what *side-effects*
   it might have.
-  
+
   It should also provide any pointers to related resources (eg. link to the
   corresponding issue in a bug tracker):
-  
+
   ```text
   Short (50 chars or fewer) summary of changes
-  
+
   More detailed explanatory text, if necessary. Wrap it to
   72 characters. In some contexts, the first
   line is treated as the subject of an email and the rest of
@@ -148,42 +154,42 @@ holds true that you should apply all of the above *before* pushing it.
   summary from the body is critical (unless you omit the body
   entirely); tools like rebase can get confused if you run
   the two together.
-  
+
   Further paragraphs come after blank lines.
-  
+
   - Bullet points are okay, too
-  
+
   - Use a hyphen or an asterisk for the bullet,
     followed by a single space, with blank lines in
     between
-  
+
   The pointers to your related resources can serve as a footer
   for your commit message. Here is an example that is referencing
   issues in a bug tracker:
-  
+
   Resolves: #56, #78
   See also: #12, #34
-  
+
   Source http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   ```
-  
+
   Ultimately, when writing a commit message, think about what you would need
   to know if you run across the commit in a year from now.
 
 * If a *commit A* depends on *commit B*, the dependency should be
   stated in the message of *commit A*. Use the SHA1 when referring to
   commits.
-  
+
   Similarly, if *commit A* solves a bug introduced by *commit B*, it should
   also be stated in the message of *commit A*.
 
 * If a commit is going to be squashed to another commit use the `--squash` and
   `--fixup` flags respectively, in order to make the intention clear:
-  
+
   ```shell
-  $ git commit --squash f387cab2
+  git commit --squash f387cab2
   ```
-  
+
   *(Tip: Use the `--autosquash` flag when rebasing. The marked commits will be
   squashed automatically.)*
 
@@ -196,52 +202,52 @@ holds true that you should apply all of the above *before* pushing it.
 
 * However, there are cases where rewriting history is legitimate. These are
   when:
-  
+
   * You are the only one working on the branch and it is not being reviewed.
-  
+
   * You want to tidy up your branch (eg. squash commits) and/or rebase it onto
     the "master" in order to merge it later.
-  
+
   That said, *never rewrite the history of the "master" branch* or any other
   special branches (ie. used by production or CI servers).
 
 * Keep the history *clean* and *simple*. *Just before you merge* your branch:
-  
+
   1. Make sure it conforms to the style guide and perform any needed actions
      if it doesn't (squash/reorder commits, reword messages etc.)
-  
+
   2. Rebase it onto the branch it's going to be merged to:
-     
+
      ```shell
      [my-branch] $ git fetch
      [my-branch] $ git rebase origin/master
      # then merge
      ```
-     
+
      This results in a branch that can be applied directly to the end of the
      "master" branch and results in a very simple history.
-     
+
      *(Note: This strategy is better suited for projects with short-running
      branches. Otherwise it might be better to occassionally merge the
      "master" branch instead of rebasing onto it.)*
 
 * If your branch includes more than one commit, do not merge with a
   fast-forward:
-  
+
   ```shell
   # good - ensures that a merge commit is created
   $ git merge --no-ff my-branch
-  
+
   # bad
   $ git merge my-branch
   ```
 
-## Misc.
+## Misc
 
 * There are various workflows and each one has its strengths and weaknesses.
   Whether a workflow fits your case, depends on the team, the project and your
   development procedures.
-  
+
   That said, it is important to actually *choose* a workflow and stick with it.
 
 * *Be consistent.* This is related to the workflow but also expands to things
@@ -258,7 +264,7 @@ holds true that you should apply all of the above *before* pushing it.
 
 * Keep your repositories at a good shape by performing maintenance tasks
   occasionally:
-  
+
   * [`git-gc(1)`](http://git-scm.com/docs/git-gc)
   * [`git-prune(1)`](http://git-scm.com/docs/git-prune)
   * [`git-fsck(1)`](http://git-scm.com/docs/git-fsck)
@@ -272,7 +278,7 @@ International license](https://creativecommons.org/licenses/by/4.0/).
 
 # Credits
 
-Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / http://agis.io
+Agis Anastasopoulos / [@agisanast](https://twitter.com/agisanast) / <http://agis.io>
 ... and [contributors](https://github.com/agis-/git-style-guide/graphs/contributors)!
 
 ## Github

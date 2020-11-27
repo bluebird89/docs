@@ -1,6 +1,6 @@
 # [istio](https://github.com/istio/istio)
 
-Connect, secure, control, and observe services. https://istio.io
+Connect, secure, control, and observe services. <https://istio.io>
 
 * Istio 实现的服务网格分为数据平面和控制平面。核心能力：
   - 流量控制（Traffic Management）
@@ -169,5 +169,5 @@ istioctl manifest apply --set profile=demo
 
 ## 参考
 
-* [servicemesher / awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - https://servicemesher.github.io/awesome-servicemesh/
+* [servicemesher / awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - <https://servicemesher.github.io/awesome-servicemesh/>
 * [实例](https://istiobyexample.dev/)

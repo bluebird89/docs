@@ -244,7 +244,7 @@ cd /usr/local/mysql #进入MySQL安装目录
 ln -s /usr/local/mysql/my.cnf  /etc/my.cnf # 添加到/etc目录的软连接
 cp ./support-files/mysql.server  /etc/rc.d/init.d/mysqld #把Mysql加入系统启动
 chmod 755 /etc/init.d/mysqld # 增加执行权限
-# /etc/init.d/mysqld /etc/rc.d/init.d/mysqld 找到“datadir=”改过 
+# /etc/init.d/mysqld /etc/rc.d/init.d/mysqld 找到“datadir=”改过
 datadir=/data/mysql
 basedir=/usr/local/mysql #MySQL程序安装路径
 datadir=/data/mysql #MySQl数据库存放目录
@@ -287,7 +287,7 @@ sudo apt-get update
 
 sudo apt-cache search php7.1*
 
-sudo apt-get install php7.2 
+sudo apt-get install php7.2
 php7.2-fpm  php7.2-mysql php7.2-common php7.2-curl php7.2-cli php7.2-mbstring php7.2-xml php7.2-bcmath php7.2-mcrypt php7.2-json php7.2-cgi php7.2-gd php-pear php7.2-intl php7.2-soap php7.2-xdebug php7.2-xsl php7.2-zip php7.2-xmlrpc php7.2-imagick php7.2-dev php7.2-imap php7.2-opcache -y
 
 ## 编译
@@ -361,7 +361,7 @@ useradd -s /sbin/nologin php-fpm
 cp /usr/local/src/php-5.3.27/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
 chmod 755 /etc/init.d/php-fpm
 /usr/local/bin/php-fpm
-chkconfig php-fpm on 
+chkconfig php-fpm on
 sudo service php7.1-fpm restart
 ```
 
@@ -643,27 +643,27 @@ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L
 
 ### 下载资源
 
-* 下载nginx：http://nginx.org/download/nginx-1.6.0.tar.gz
-* 下载MySQL：http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.19.tar.gz
-* 下载php：http://cn2.php.net/distributions/php-5.5.14.tar.gz
-* 下载pcre （支持nginx伪静态）：ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.35.tar.gz
-* 下载openssl（nginx扩展）：http://www.openssl.org/source/openssl-1.0.1h.tar.gz
-* 下载zlib（nginx扩展）：http://zlib.net/zlib-1.2.8.tar.gz
-* 下载cmake（MySQL编译工具）：http://www.cmake.org/files/v2.8/cmake-2.8.11.2.tar.gz
-* 下载libmcrypt（php扩展）：http://nchc.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz
-* 下载yasm（php扩展）：http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz：
-* t1lib（php扩展）：ftp://sunsite.unc.edu/pub/Linux/libs/graphics/t1lib-5.1.2.tar.gz：
-* 下载gd库安装包：https://bitbucket.org/libgd/gd-libgd/downloads/libgd-2.1.0.tar.gz：
-* libvpx（gd库需要）：https://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2：
-* tiff（gd库需要）：http://download.osgeo.org/libtiff/tiff-4.0.3.tar.gz：
-* libpng（gd库需要）：ftp://ftp.simplesystems.org/pub/png/src/libpng16/libpng-1.6.12.tar.gz：
-* freetype（gd库需要）：http://ring.u-toyama.ac.jp/archives/graphics/freetype/freetype2/freetype-2.5.3.tar.gz：
-* jpegsrc（gd库需要）：http://www.ijg.org/files/jpegsrc.v9a.tar.gz
+* 下载nginx：<http://nginx.org/download/nginx-1.6.0.tar.gz>
+* 下载MySQL：<http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.19.tar.gz>
+* 下载php：<http://cn2.php.net/distributions/php-5.5.14.tar.gz>
+* 下载pcre （支持nginx伪静态）：<ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.35.tar.gz>
+* 下载openssl（nginx扩展）：<http://www.openssl.org/source/openssl-1.0.1h.tar.gz>
+* 下载zlib（nginx扩展）：<http://zlib.net/zlib-1.2.8.tar.gz>
+* 下载cmake（MySQL编译工具）：<http://www.cmake.org/files/v2.8/cmake-2.8.11.2.tar.gz>
+* 下载libmcrypt（php扩展）：<http://nchc.dl.sourceforge.net/project/mcrypt/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.gz>
+* 下载yasm（php扩展）：<http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz>：
+* t1lib（php扩展）：<ftp://sunsite.unc.edu/pub/Linux/libs/graphics/t1lib-5.1.2.tar.gz>：
+* 下载gd库安装包：<https://bitbucket.org/libgd/gd-libgd/downloads/libgd-2.1.0.tar.gz>：
+* libvpx（gd库需要）：<https://webm.googlecode.com/files/libvpx-v1.3.0.tar.bz2>：
+* tiff（gd库需要）：<http://download.osgeo.org/libtiff/tiff-4.0.3.tar.gz>：
+* libpng（gd库需要）：<ftp://ftp.simplesystems.org/pub/png/src/libpng16/libpng-1.6.12.tar.gz>：
+* freetype（gd库需要）：<http://ring.u-toyama.ac.jp/archives/graphics/freetype/freetype2/freetype-2.5.3.tar.gz>：
+* jpegsrc（gd库需要）：<http://www.ijg.org/files/jpegsrc.v9a.tar.gz>
 
 ## 参考
 
 * [Mac OS X LEMP Configuration](https://gist.github.com/petemcw/9265670)
-* [lj2007331/oneinstack](https://github.com/lj2007331/oneinstack):OneinStack - A PHP/JAVA Deployment Tool https://oneinstack.com/
-* [cytopia/devilbox](https://github.com/cytopia/devilbox):A modern dockerized LAMP and MEAN stack alternative to XAMPP http://devilbox.org
-* [lj2007331/lnmp](https://github.com/lj2007331/lnmp):LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu https://blog.linuxeye.cn/31.html
-* [teddysun / lamp](https://github.com/teddysun/lamp):Install LAMP(Linux + Apache + MySQL/MariaDB/Percona Server + PHP ) for CentOS/Fedora/Debian/Ubuntu https://lamp.sh
+* [lj2007331/oneinstack](https://github.com/lj2007331/oneinstack):OneinStack - A PHP/JAVA Deployment Tool <https://oneinstack.com/>
+* [cytopia/devilbox](https://github.com/cytopia/devilbox):A modern dockerized LAMP and MEAN stack alternative to XAMPP <http://devilbox.org>
+* [lj2007331/lnmp](https://github.com/lj2007331/lnmp):LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu <https://blog.linuxeye.cn/31.html>
+* [teddysun / lamp](https://github.com/teddysun/lamp):Install LAMP(Linux + Apache + MySQL/MariaDB/Percona Server + PHP ) for CentOS/Fedora/Debian/Ubuntu <https://lamp.sh>

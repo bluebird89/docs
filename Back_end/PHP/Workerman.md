@@ -10,7 +10,7 @@ An asynchronous event driven PHP framework for easily building fast, scalable ne
 
 ## 项目
 
-* [walkor/workerman-todpole](https://github.com/walkor/workerman-todpole):HTLM5+WebSocket+PHP(Workerman) , rumpetroll server writen using php http://kedou.workerman.net
+* [walkor/workerman-todpole](https://github.com/walkor/workerman-todpole):HTLM5+WebSocket+PHP(Workerman) , rumpetroll server writen using php <http://kedou.workerman.net>
 
 ## 工具
 

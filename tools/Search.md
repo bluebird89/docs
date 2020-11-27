@@ -20,6 +20,7 @@
   + 抓取过程中会有多种遍历策略：深度优先遍历DFS、广度优先遍历BFS、部分PageRank策略、OPIC在线页面重要性计算策略、大站优先策略等。实践中需要根据自身情况和搜索引擎特点进行选择某种策略或者多种策略组合
   + 爬虫需要遵循Robots协议(网络爬虫排除标准)，这是网络爬虫和站点之间的君子协定，站点通过协议告诉网络爬虫哪些可以抓哪些不可以
   + 同时需要考虑抓取频率，防止给站点造成过重负担
+
 * 内容处理：爬虫下载的页面进行内容解析、内容清洗、主体抽取、建立索引、链接分析、反作弊等环节
   + 数据清洗：将无用数据、标签清洗掉，为后续的分词做准备，每个网页进行唯一编号docid
   + 网页内容分词：提取关键词，提取了网页的主干，并且会对标题、摘要、正文等不同部分的内容做不同权重处理
@@ -97,10 +98,10 @@
   - [startpage](https://www.startpage.com/)
   - [Bing](https://cn.bing.com/)
   - [大圣盘](https://www.dashengpan.com/)
-  - [Quickref ](https://quickref.dev/): Experimental search engine for developers. Searches a curated subset of the web: official docs and community-driven sources. No JS, cookies, tracking, external requests or data collecting
-* [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable https://sourcegraph.com
+  - [Quickref](https://quickref.dev/): Experimental search engine for developers. Searches a curated subset of the web: official docs and community-driven sources. No JS, cookies, tracking, external requests or data collecting
+* [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable <https://sourcegraph.com>
 * [facebookresearch/LASER](https://github.com/facebookresearch/LASER):Language-Agnostic SEntence Representations
-* [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine https://asciimoo.github.io/searx/
+* [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine <https://asciimoo.github.io/searx/>
 * [OKlog](https://github.com/oklog/oklog)
 * [searx.space](https://searx.space/)
 
@@ -108,6 +109,6 @@
 
 * [搜索引擎是如何工作的](https://mp.weixin.qq.com/s/BBGBnuYcoRAr8YNm-Yj_WQ)
 * example
-  - 网页分词在线工具：http://www.78901.net/fenci/
-  - 抓取网页：https://tech.huanqiu.com/article/3zMq4KbdTAA
+  - 网页分词在线工具：<http://www.78901.net/fenci/>
+  - 抓取网页：<https://tech.huanqiu.com/article/3zMq4KbdTAA>
 * [浅谈基于simhash的文本去重原理](https://mp.weixin.qq.com/s/hyXG1czry6_YOXFwqBTbdQ)

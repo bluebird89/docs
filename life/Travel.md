@@ -111,7 +111,9 @@
 
 * 纽约
   - 中央公园
+
   -
+
 ## 日本
 
 * 奈良
@@ -136,9 +138,11 @@
 * 16 岁之前不准参加考试
 
 ## 韩国
-  - 庆州
+
+- 庆州
 
 ## 梵蒂冈
+
 * 圣彼得大教堂
 
 ## 耶路撒冷
@@ -158,9 +162,9 @@
 
 ## 苏格兰
 
-  - Winton Castle
-  - Prestonfield House
-  - 爱丁堡参加Hogmanay庆典
+- Winton Castle
+- Prestonfield House
+- 爱丁堡参加Hogmanay庆典
 
 ## 意大利
 

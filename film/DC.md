@@ -82,30 +82,30 @@
 ## 资源
 
 * [蝙蝠侠音乐剧Holy Musical B@man!](https://www.bilibili.com/video/av622801/)
-* [平行宇宙:超人：红色之子 ](https://www.bilibili.com/video/av1721906/)
+* [平行宇宙:超人：红色之子](https://www.bilibili.com/video/av1721906/)
 * [平行宇宙:不义联盟游戏CG1,2合集]
-  - https://www.bilibili.com/video/av5382115/
-  - https://www.bilibili.com/video/av10685178/
+  - <https://www.bilibili.com/video/av5382115/>
+  - <https://www.bilibili.com/video/av10685178/>
 * [DC展台原创短篇动画合集](https://www.bilibili.com/video/av813303/)
 * [平行宇宙：罪犯辛迪加](https://www.bilibili.com/video/av288975/)
 * [机器鸡:DC特辑]
-  - https://www.bilibili.com/video/av401510/
-  - https://www.bilibili.com/video/av1079514/
-  - https://www.bilibili.com/video/av3103606/
+  - <https://www.bilibili.com/video/av401510/>
+  - <https://www.bilibili.com/video/av1079514/>
+  - <https://www.bilibili.com/video/av3103606/>
 * [DC super friends超级朋友第一季](https://www.bilibili.com/video/av3028066/)
 * [当心蝙蝠侠 第一季](https://www.bilibili.com/video/av2483348/)
 * 哥谭妹子S1-S3
-  - https://www.bilibili.com/video/av1863584/
-  - https://www.bilibili.com/video/av2811409/
-  - https://www.bilibili.com/video/av4971037/
+  - <https://www.bilibili.com/video/av1863584/>
+  - <https://www.bilibili.com/video/av2811409/>
+  - <https://www.bilibili.com/video/av4971037/>
 * 蝙蝠侠TAS 第一季-第五季
-  - https://www.bilibili.com/video/av2677796/
-  - https://www.bilibili.com/video/av3013408/
-  - https://www.bilibili.com/video/av3015731/
-  - https://www.bilibili.com/video/av2216893/
-  - https://www.bilibili.com/video/av607295/
+  - <https://www.bilibili.com/video/av2677796/>
+  - <https://www.bilibili.com/video/av3013408/>
+  - <https://www.bilibili.com/video/av3015731/>
+  - <https://www.bilibili.com/video/av2216893/>
+  - <https://www.bilibili.com/video/av607295/>
 * [剧场版蝙蝠侠与超人：世界最佳拍档World's Finest 1998](https://www.bilibili.com/video/av2323010/)
-* [超人1988.Superman1988 ](https://www.bilibili.com/video/av2878584/)
+* [超人1988.Superman1988](https://www.bilibili.com/video/av2878584/)
 * [超人TAS 第一季&第二季 [1996]](https://www.bilibili.com/video/av669030/)
 * [超人TAS第三季](https://www.bilibili.com/video/av9098314/)
 * [绿灯侠TAS 26【JBA】](https://www.bilibili.com/video/av513327/)

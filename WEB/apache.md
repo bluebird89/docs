@@ -423,7 +423,7 @@ CMD ["httpd-foreground"]
 ```
 
 - COPY httpd-foreground /usr/local/bin/ 是将当前目录下的httpd-foreground拷贝到镜像里，作为httpd服务的启动脚本,本地创建一个脚本文件httpd-foreground
-  
+
   ```
   #!/bin/bash
   set -e
@@ -486,7 +486,7 @@ LoadModule fastcgi_module /usr/local/opt/mod_fastcgi/libexec/mod_fastcgi.so
 * SAMP for Solaris
 * FAMP for FreeBSD
 * XAMPP (Cross, Apache, MySQL, PHP, Perl) 对于跨平台：它还包括一些其他组件，如FileZilla，OpenSSL，Webalizer，OpenSSL，Mercury Mail等。
-* [WAMPSERVER](http://www.wampserver.com/en/):https://sourceforge.net/projects/wampserver/files/WampServer%203/WampServer%203.0.0/
+* [WAMPSERVER](http://www.wampserver.com/en/):<https://sourceforge.net/projects/wampserver/files/WampServer%203/WampServer%203.0.0/>
 
 ## 参考
 

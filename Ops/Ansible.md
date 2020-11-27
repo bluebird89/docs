@@ -1,6 +1,6 @@
 # [ansible](https://github.com/ansible/ansible)
 
-https://www.ansible.com
+<https://www.ansible.com>
 
 * 一款开源的、功能强大的IT自动化工具，常用于软件部署、系统配置、运维管理等应用场景
 * 不需要一个唯一的中控节点。通过可编辑的Inventory文件形式来保存节点信息，任意一台可运行Ansible的主机均可以作为管理节点来进行策略的执行
@@ -570,7 +570,7 @@ ansible-galaxy init my-role  # 创建一个role
 
 ## 工具
 
-* [ansistrano / deploy](https://github.com/ansistrano/deploy#installation):Ansible role to deploy scripting applications like PHP, Python, Ruby, etc. in a capistrano style https://ansistrano.com
+* [ansistrano / deploy](https://github.com/ansistrano/deploy#installation):Ansible role to deploy scripting applications like PHP, Python, Ruby, etc. in a capistrano style <https://ansistrano.com>
 
 ## 参考
 
@@ -578,11 +578,11 @@ ansible-galaxy init my-role  # 创建一个role
 * [Ansible中文权威指南](http://www.ansible.com.cn/)
 * [leucos/ansible-tuto](https://github.com/leucos/ansible-tuto):Ansible tutorial
 * [geerlingguy/ansible-vagrant-examples](https://github.com/geerlingguy/ansible-vagrant-examples)
-* [ansible/ansible-examples](https://github.com/ansible/ansible-examples): A few starter examples of ansible playbooks, to show features and how they work together. See http://galaxy.ansible.com for example roles from the Ansible community for deploying many popular applications.
+* [ansible/ansible-examples](https://github.com/ansible/ansible-examples): A few starter examples of ansible playbooks, to show features and how they work together. See <http://galaxy.ansible.com> for example roles from the Ansible community for deploying many popular applications.
 * [ansible-for-devops](https://github.com/geerlingguy/ansible-for-devops)
 * [ansible/ansible-container](https://github.com/ansible/ansible-container)
 
-* https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process
-* https://linux.cn/article-4215-1.html
+* <https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process>
+* <https://linux.cn/article-4215-1.html>
 * [非常好的Ansible入门教程](https://blog.csdn.net/pushiqiang/article/details/78126063)
 * [An Ansible2 Tutoria](https://serversforhackers.com/c/an-ansible2-tutorial)

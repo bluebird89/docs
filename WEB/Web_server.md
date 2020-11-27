@@ -210,6 +210,7 @@ location ~ \.php {
   + 考虑进程优先级：进程调度器会动态调整运行队列中进程的优先级，通过top观察进程的PR值
   + 考虑系统负载： 可在任何时刻查看/proc/loadavg, top中的load average也可看出
   + 考虑CPU使用率： 除了用户空间和内核空间的CPU使用率以外，还要关注I/O wait,它是指CPU空闲并且等待I/O操作完成的时间比例（top中查看wa的值）。
+
 - 考虑减少内存分配和释放
   + Apache,在运行开始时一次申请大片的内存作为内存池，若随后需要时就在内存池中直接获取，不需要再次分配，避免了频繁的内存分配和释放引起的内存整理时间。
   + Nginx使用多线程来处理请求，使得多个线程之间可以共享内存资源，从而令它的内存总体使用量大大减少。分阶段的内存分配策略，按需分配，及时释放，使得内存使用量保持在很小的数量范围。
@@ -219,6 +220,7 @@ location ~ \.php {
   + 是否采用持久连接，完全取决于应用特点。 从性能角度看，建立TCP连接的操作本身是一项不小的开销，在允许的情况下，连接次数越少，越有利于性能的提升; 尤其对于密集型的图片或网页等小数据请求处理有明显的加速所用。
   + HTTP长连接需要浏览器和web服务器的共同协作，目前浏览器普遍支持长连接，表现在其发出的HTTP请求数据头中包含关于长连接的声明，如下：Connection: Keep-Alive
   + 关键一点在于长连接超时时间的设置:Apache的默认设置为5s, 若这个时间设置过长，则可能导致资源无效占有，维持大量空闲进程，影响服务器性能。
+
 * 改进I/O 模型
   + 对于网络I/O和磁盘I/O, 它们的速度要慢很多，尽管使用RAID磁盘阵列可通过并行磁盘磁盘来加快磁盘I/O速度，购买大连独享网络带宽以及使用高带宽网络适配器可以提高网络I/O的速度。
   + I/O操作需要内核系统调用来完成，这些需要CPU来调度，这使得CPU不得不浪费宝贵的时间来等待慢速I/O操作。
@@ -501,13 +503,13 @@ server {
 ## 工具
 
 * [sullo/nikto](https://github.com/sullo/nikto):Nikto web server scanner
-* [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
+* [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * [Webmin](http://www.webmin.com)
 * [Shorewall](http://shorewall.net):一种用于配置iptable的GUI
 * [cPanel](http://cpanel.com/products/)
 * [Cockpit](http://cockpit-project.org):由红帽公司开发，旨在让服务器管理起来更容易。借助这个基于Web的GUI，你就能处理众多任务，比如管理存储资源、检查日志、启动/终止服务以及监控多台服务器
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
-* [remoteinterview/zero](https://github.com/remoteinterview/zero):Zero is a web server to simplify web development. https://zeroserver.io/
+* [remoteinterview/zero](https://github.com/remoteinterview/zero):Zero is a web server to simplify web development. <https://zeroserver.io/>
 * [netlify](https://www.netlify.com/):The fastest way to build the fastest sites.
 
 ## 参考

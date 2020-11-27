@@ -1,6 +1,6 @@
 # Q1: Nginx several servers, but only localhost and 127.0.0.1 can use
 
-# A:the domain has bound with 127.0.0.1 in Anjuke's internat. So the host machine can access by servername without edit hosts file.
+# A:the domain has bound with 127.0.0.1 in Anjuke's internat. So the host machine can access by servername without edit hosts file
 
 --------------------------------------------------------------------------------
 

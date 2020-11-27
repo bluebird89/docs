@@ -1,6 +1,5 @@
 # Centos
 
-
 ## 自启服务
 
 * `/etc/rc.d/rc.local`
@@ -110,16 +109,18 @@ iptables -L
 
 ## RPM Red Hat Package Manager
 
-*  Facts
-  - RPM is free and released under GPL (General Public License).
-  - RPM keeps the information of all the installed packages under /var/lib/rpm database.
-  - RPM is the only way to install packages under Linux systems, if you’ve installed packages using source code, then rpm won’t manage it.
-  - RPM deals with .rpm files, which contains the actual information about the packages such as: what it is, from where it comes, dependencies info, version info etc
+* Facts
+
+- RPM is free and released under GPL (General Public License).
+- RPM keeps the information of all the installed packages under /var/lib/rpm database.
+- RPM is the only way to install packages under Linux systems, if you’ve installed packages using source code, then rpm won’t manage it.
+- RPM deals with .rpm files, which contains the actual information about the packages such as: what it is, from where it comes, dependencies info, version info etc
+
 * resource
-  - http://rpmfind.net
-  - http://www.redhat.com
-  - http://freshrpms.net/
-  - http://rpm.pbone.net/
+  - <http://rpmfind.net>
+  - <http://www.redhat.com>
+  - <http://freshrpms.net/>
+  - <http://rpm.pbone.net/>
 
 ```sh
 # 配置本地yum源

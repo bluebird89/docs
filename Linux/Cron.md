@@ -25,22 +25,22 @@ sudo /sbin/service crond start
 
 * 单个值的时间点为准，固定周期
 * parameter
-    - m:minute 0-59
-    - h:hour 0-23
-    - dom:day of month 1-31
-    - mon:month 1-12
-    - dow:day of work 0-6
+  - m:minute 0-59
+  - h:hour 0-23
+  - dom:day of month 1-31
+  - mon:month 1-12
+  - dow:day of work 0-6
 * action
-    - 星号:表示任意值，比如在小时部分填写 * 代表任意小时（每小时）
-    - 逗号:可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟 and
-    - 斜线:一般配合 * 使用，代表每隔多长时间，比如在小时部分填写 */2 代表每隔两分钟。所以 */1 和 * 没有区别 */2 可以看成是能被2整除的任意值。0-23/2 cycle
-    - 中杠（-):表示一个整数范围 8-11 for an "hours" entry specifies execution at hours 8, 9, 10 and 11.
+  - 星号:表示任意值，比如在小时部分填写 * 代表任意小时（每小时）
+  - 逗号:可以允许在一个部分中填写多个值，比如在分钟部分填写 1,3 表示一分钟或三分钟 and
+  - 斜线:一般配合 *使用，代表每隔多长时间，比如在小时部分填写*/2 代表每隔两分钟。所以 */1 和* 没有区别 */2 可以看成是能被2整除的任意值。0-23/2 cycle
+  - 中杠（-):表示一个整数范围 8-11 for an "hours" entry specifies execution at hours 8, 9, 10 and 11.
 * Cron jobs can be allowed or disallowed for individual users, as defined in the files /etc/cron.allow and /etc/cron.deny
 * cron invokes the command from the user’s HOME directory with the shell, (/usr/bin/sh).cron supplies a default environment for every shell, defining:
-    - HOME=user’s-home-directory
-    - LOGNAME=user’s-login-id
-    - PATH=/usr/bin:/usr/sbin:.
-    - SHELL=/usr/bin/sh
+  - HOME=user’s-home-directory
+  - LOGNAME=user’s-login-id
+  - PATH=/usr/bin:/usr/sbin:.
+  - SHELL=/usr/bin/sh
 * 执行脚本时最好要写全局路径
 * 如果引用了环境变量，需要在脚本中使用source加载环境变量
 * 手动执行脚本没问题，但是crontab不执行,这也有可能是环境变量的问题。可以直接在crontab命令总引入环境变量。
@@ -84,9 +84,9 @@ crontab文件对每个用户是独立分开
 * nohub:通过忽略 HUP 信号来使我们的进程避免中途被中断
 * setsid:进程不属于接受 HUP 信号的终端的子进程
 * 如果我们未加任何处理就已经提交了命令，该如何补救才能让它避免 HUP 信号的影响
-    - 用disown -h jobspec来使某个作业忽略HUP信号。
-    - 用disown -ah 来使所有的作业都忽略HUP信号。
-    - 用disown -rh 来使正在运行的作业忽略HUP信号
+  - 用disown -h jobspec来使某个作业忽略HUP信号。
+  - 用disown -ah 来使所有的作业都忽略HUP信号。
+  - 用disown -rh 来使正在运行的作业忽略HUP信号
 
 ```sh
 nohup ping www.ibm.com &

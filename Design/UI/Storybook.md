@@ -1,6 +1,6 @@
-# [storybooks/storybook](https://github.com/storybooks/storybook)
+# [storybook](https://github.com/storybooks/storybook)
 
-Interactive UI component dev & test: React, React Native, Vue, Angular, Ember https://storybook.js.org
+Interactive UI component dev & test: React, React Native, Vue, Angular, Ember <https://storybook.js.org>
 
 ```sh
 npm i -g @storybook/cli

@@ -50,7 +50,6 @@ choco install marven
   - default(或 build)：项目部署的处理
   - site：项目站点文档创建的处理
 
-
 ### 更新策略
 
 Maven根据项目的pom.xml文件，把它转化成项目对象模型(POM)，这时要解析依赖关系，然后去相对应的maven库中查找所依赖的jar包。在clean，compile，test，package等生命周期阶段都有相应的Plug-in来做这些事情，而这些Plug-in会产生一些中间产物。
@@ -130,6 +129,7 @@ public class DefaultRepositoryLayout
 Maven仓库分为两类：本地仓库和远程仓库。当Maven根据坐标寻找构件时，首先会查看本地仓库，若本地仓库存在此构件则直接使用；若本地仓库不存在此构件，Maven就会去远程仓库查找，查找到下载到本地仓库再使用。若本地仓库和远程仓库都没有需要的构件，Maven就会报错。
 
 * 中央仓库： Maven核心自带的远程仓库，包含了绝大部分开源构件，默认情况，当本地仓库没有Maven需要构件时，就从中央仓库下载。这个配置文件是所有Maven项目都会继承的超级POM.
+
 ```
 <repositories>
   <repository>
@@ -145,10 +145,13 @@ Maven仓库分为两类：本地仓库和远程仓库。当Maven根据坐标寻�
 ```
 
 * 私服：一种特殊的远程仓库，为节省带宽和时间，应在局域网内架设一个私有仓库服务器，用其代理所有外部的远程仓库。特殊的远程仓库，架设在局域网内的仓库服务，代理公网的远程仓库，当Maven需要下载构件时，从私服请求，若私服不存在该构件，则从公网远程仓库下载，缓存到私服之后，再为Maven的下载请求提供服务。另外无法从公网仓库下载的构件也能从本地上传到私服供项目使用。私服优点：节省外网带宽、提供Maven构件速度、部署第三方构件、提供Maven构件稳定性、降低中央仓库负荷。
+
 ```
 
 ```
+
 * 本地仓库：用户自定义本地仓库的地址，需编辑${user.home}/.m2/setting.xml文件，设置localRepository节点的值为仓库地址即可，默认情况下${user.home}/.m2/setting.xml是不存在的，需要用户从安装目录复制${M2_HOME}/conf/setting.xml文件在进行编辑。
+
 ```
 <settings>
 <localRepository>E:/maven/repository</localRepository>
@@ -194,7 +197,6 @@ maven 提供了开发人员的方式来管理：
 * 排除依赖：使用exclusions元素声明排除依赖，exclusions包含一个或者多个exclusion子元素，因此可以排除一个或者多个传递性依赖。注意声明exclusion时只需要groupId和artifactId，而不需要version元素，因为只需要groupId和artifactId就可以唯一定位依赖图中的某个依赖。
 * 归类依赖：pring的依赖包版本都是相同的，可以使用properties元素定义Maven属性spring.version=4.x,在定义依赖时可以使用美元符号加大括弧环绕的方式来引用Maven属性，例如${spring.version}。
 
-
 ## 聚合与继承
 
 * 聚合：多个项目或者模块聚合到一起，建立一个package方式为pom的项目parent专门负责聚合工作，并使用modules-module指定子模块，目的是快速构建项目。(组合)
@@ -221,7 +223,7 @@ Linux
 
 Mac
 
-* `vi ~/.bash_profile `
+* `vi ~/.bash_profile`
 * 添加 `export M2_HOME=/usr/local/apache-maven-3.3.9` `export PATH=$PATH:$M2_HOME/bin`
 * `source ~/.bash_profile`
 * `mvn --version`
@@ -266,7 +268,9 @@ mvn deploy部署，在构建环境中完成，复制最终的包到远程库。
 * 用户范围： ${user.home}/.m2/settings.xml，只有当前用户才会受到该配置影响，还便于Maven的升级，Maven升级新版本时不需要触动该文件，推荐配置用户范围。
 
 ### 代理
+
 公司网络需要通过安全认证的代理访问因特网，这种情况下需要为Maven配置HTTP代理，才能正常访问外部仓库下载所需要的资源。在settings.xml文件中添加代理配置。proxies下可以添加多个proxy节点，默认第一个active为true的会生效。nonProxyHost表示不需要代理访问的地址。中间的竖线分隔多个地址，此处可以使用星号作为通配符号。
+
 ```
 <proxies>
    <proxy>
@@ -282,9 +286,10 @@ mvn deploy部署，在构建环境中完成，复制最终的包到远程库。
 </proxies>
 ```
 
-###  远程仓库的认证
+### 远程仓库的认证
 
 一些远程仓库出于安全考虑需要提供用户名、密码进行认证才能访问，这时需要配置认证信息，认证信息必须配置到setting.xml文件中，只放在本机，其他成员不可见，在setting.xml文件中添加server配置，一个servers可以配置一个或者多个server，假设一个id为feiyue-repo的仓库配置认证如下：
+
 ```
 <servers>
   <server>
@@ -294,11 +299,13 @@ mvn deploy部署，在构建环境中完成，复制最终的包到远程库。
   </server>
 </servers>
 ```
+
 setting.xml文件中server元素的id必须与pom.xml文件中需要认证的repository元素的id完全一致。
 
 ### 镜像
 
 如果仓库X可以提供仓库Y存储的所有内容，则X可以被称为Y的一个镜像。镜像往往能够提供比中央仓库更快的服务，配置Maven使用镜像来代替中央仓库，编辑setting.xml文件。
+
 ```
 <mirrors>
  <mirror>
@@ -321,6 +328,7 @@ project根节点下配置parent节点指定继承的父项目坐标，groupId、
 Maven首先在当前构建项目的地方寻找父项目的pom，其次在本地文件系统的relativePath位置，然后在本地仓库，最后在远程仓库寻找父项目的pom.
 
 parent父项目配置
+
 ```
 <parent>
     <groupId>com.feiyue.parent</groupId>
@@ -331,6 +339,7 @@ parent父项目配置
 ```
 
 dependency依赖配置
+
 ```
 <dependency>
 <groupId>xx</groupId>
@@ -344,6 +353,7 @@ dependency依赖配置
 </exclusions>
 </dependency>
 ```
+
 groupId、artifactId、version必选，依赖的基本坐标，找到需要的依赖。
 
 * type：依赖的类型，对应于项目坐标中定义的packaging，该元素不必声明默认为jar.
@@ -353,6 +363,7 @@ groupId、artifactId、version必选，依赖的基本坐标，找到需要的�
 * pluginManagement默认插件配置
 
 配置到project-build节点中，配置供子项目引用的插件。
+
 ```
 <!--子项目可以引用的默认插件信息。该插件配置项直到被引用时才会被解析或绑定到生命周期。给定插件的任何本地配置都会覆盖这里的配置-->
 <pluginManagement>
@@ -402,6 +413,7 @@ groupId、artifactId、version必选，依赖的基本坐标，找到需要的�
 repositories远程仓库的配置
 
 很多情况默认的中央仓库无法满足项目需求，需要配置其他远程仓库，如JBoss Maven库，需要在Pom.xml文件中配置。
+
 ```
 <repositories>
  <repository>
@@ -438,6 +450,7 @@ repositories远程仓库的配置
 公司内部大部分人的电脑不能访问公网，不能从maven的中央仓库下载依赖，因此找一台有公网权限的机器搭建nexus私服，其他项目组人员连接到这个私服上即可.
 
 下载nexus包
+
 * console-nexus.bat：命令行方式启动nexus服务器，窗口关闭不会注册为windows服务
 * install-nexus.bat：将nexus安装成windows服务，开机时自动启动
 * start-nexus.bat：启动nexus服务，也可以直接在管理-服务中手动启动nexus服务
@@ -450,15 +463,17 @@ repositories远程仓库的配置
 NEXUS_HOME= D:\develop\nexus\nexus-2.12.0-01
 Path= ;%NEXUS_HOME%\bin\jsw\windows-x86-64
 ```
-访问http://localhost:8081/nexus/，用户名 adamin 密码 admin123
+
+访问<http://localhost:8081/nexus/>，用户名 adamin 密码 admin123
 
 * 用户管理
 * 角色管理
 * 配置代理服务器
 * 配置repository：
-    - proxy：远程仓库的代理，把Download Remote Indexes改为true，使用搜索功能
-    - hosted：宿主仓库，用户可以把自己的一些构件部署到hosted中，也可以手动上传到hosted中。配置hosted repository：一般会配置3个hosted repository，分别是3rd party、Snapshots、Releases，分别用来保存第三方jar（典型的比如ojdbc6.jar），项目组内部的快照、项目组内部的发布版。只是Deployment Policy这个选项，一般Snapshots会配置成允许，而Releases和3rd party会设置为禁止
-    - group：是nexus特有的。目的是通过对实体仓库（proxy、hosted）进行聚合多个仓库聚合，对用户暴露统一的地址，用户就不必在pom中配置多个地址了，只要统一配置group即可。
+  - proxy：远程仓库的代理，把Download Remote Indexes改为true，使用搜索功能
+  - hosted：宿主仓库，用户可以把自己的一些构件部署到hosted中，也可以手动上传到hosted中。配置hosted repository：一般会配置3个hosted repository，分别是3rd party、Snapshots、Releases，分别用来保存第三方jar（典型的比如ojdbc6.jar），项目组内部的快照、项目组内部的发布版。只是Deployment Policy这个选项，一般Snapshots会配置成允许，而Releases和3rd party会设置为禁止
+  - group：是nexus特有的。目的是通过对实体仓库（proxy、hosted）进行聚合多个仓库聚合，对用户暴露统一的地址，用户就不必在pom中配置多个地址了，只要统一配置group即可。
+
 ## 仓库搜索服务
 
 * [Sonatype Nexus](https://repository.sonatype.org/)Nexus是当前最流行的开源Maven仓库管理软件，提供了关键字搜索、类名搜索、坐标搜索、校验等功能。

@@ -1,6 +1,6 @@
 # [sveltejs / svelte](https://github.com/sveltejs/svelte)
 
-Cybernetically enhanced web apps https://svelte.dev/
+Cybernetically enhanced web apps <https://svelte.dev/>
 
 * 编译期生成JavaScript，无运行时依赖
 * 不担心框架抽象性能损耗

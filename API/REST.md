@@ -154,11 +154,11 @@
   - Filtering: 对所有字段使用唯一的查询参数或用于过滤的查询语言。Use a unique query parameter for all fields or a query language for filtering. `GET /cars?seats<=2`
   - Sorting: 允许在多个字段上进行升序和降序排序。`GET /cars?sort=-manufactorer,+model`
   - Field selection,客户端在列表中只显示一些属性。他们不需要资源的所有属性。让API消费者能够选择返回的字段。这也将减少网络流量并加快API的使用。`GET /cars?fields=manufacturer,model,id,color`
-  - paging 使用limit和offset来进行分页。它对于用户而言是灵活的，在领先的数据库中是常见的 ` GET /cars?offset=10&limit=5`
+  - paging 使用limit和offset来进行分页。它对于用户而言是灵活的，在领先的数据库中是常见的 `GET /cars?offset=10&limit=5`
     + 在playload中提供到下一页或上一页的链接。重要的是遵循此链接标题值而不是构建自己的URL `https://blog.mwaysolutions.com/sample/api/v1/cars?offset=50&limit=3 rel="last"`
 * API版本管理 (Optional)使API版本成为强制性的，不发布没有版本的API。使用简单的序数，并避免使用诸如2.5的点符号。如可以使用URL作为API版本，以字母“v”开头 应该设置默认值 `/blog/api/v1`
 * 使用HTTP状态代码处理错误:没有错误处理的API是很难被应用的。纯粹返回HTTP 500和堆栈跟踪信息也并不是很有帮助.使用统一 error payloads,应将所有异常映射到error payloads中
-*  允许重载 HTTP method (Optional):一些代理只支持POST和GET方法。为了支持具有这些限制的RESTful API，API需要一种方法来覆盖HTTP方法.使用自定义HTTP头 X-HTTP-Method-Override 来覆盖POST方法
+* 允许重载 HTTP method (Optional):一些代理只支持POST和GET方法。为了支持具有这些限制的RESTful API，API需要一种方法来覆盖HTTP方法.使用自定义HTTP头 X-HTTP-Method-Override 来覆盖POST方法
 * 域名部署： <https://api.example.com/v1/> 或者 <https://example.org/api/v1/> 或者将版本号放在HTTP头信息中
 * 路径endpoint：每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表格名对应。一般来说，数据库中的表都是同种记录的"集合"（collection），所以API中的名词也应该使用复数
 * 围绕「资源」展开，且这些资源通过 URL 进行标识，比如 /posts 用于表示所有文章，/posts/15 用于表示 ID 为 15 的文章，至于资源名称用单数还是复数，没有统一规定，但通常使用复数，另外 URL 要尽可能简单，不要拖泥带水；
@@ -196,14 +196,14 @@
 ## 实例
 
 * <https://api.github.com/>
-* https://developer.github.com/v3/
+* <https://developer.github.com/v3/>
 * [yahoo天气api](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 
 ## 工具
 
 * [thx/RAP](https://github.com/thx/RAP)Web API management, free and open sourced, mock data generator, auto test, made by Alibaba,
-* [brookshi/Hitchhiker](https://github.com/brookshi/Hitchhiker):a Restful Api test tool http://www.hitchhiker-api.comw
-* [typicode/jsonplaceholder](https://github.com/typicode/jsonplaceholder):A simple online fake REST API server https://jsonplaceholder.typicode.com
+* [brookshi/Hitchhiker](https://github.com/brookshi/Hitchhiker):a Restful Api test tool <http://www.hitchhiker-api.comw>
+* [typicode/jsonplaceholder](https://github.com/typicode/jsonplaceholder):A simple online fake REST API server <https://jsonplaceholder.typicode.com>
 * Python: django-rest-framework（django），eve（flask）。各有千秋。可惜python没有好的类似webmachine的实现。
 * Erlang/Elixir: webmachine/ewebmachine
 * Ruby: webmachine-ruby

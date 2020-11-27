@@ -1,6 +1,6 @@
 # [flutter](https://github.com/flutter/flutter)
 
-Flutter makes it easy and fast to build beautiful mobile apps. https://flutter.dev https://flutter.cn
+Flutter makes it easy and fast to build beautiful mobile apps. <https://flutter.dev> <https://flutter.cn>
 
 * 一个移动应用程序的软件开发工具包（SDK），用一个代码库构建高性能、高保真的iOS和Android应用程序。目标是使开发人员能够为Android和iOS提供自然的高质量的应用，在滚动行为、排版、图标等方面实现零差异。Flutter 是 Fuchsia 的开发框架，支持导出 Android iOS 和 Fuchsia 三个平台的安装包
 * 自建了一个绘制引擎，底层是由 C++ 编写的引擎，负责渲染，文本处理，Dart VM 等；上层的 Dart Framework 直接调用引擎。避免了以往 JS 解决方案的 JS Bridge、线程跳跃等问题。
@@ -88,7 +88,7 @@ pod setup
 ## 项目
 
 * [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
-* [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65
+* [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture <https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65>
 * [2d-inc/HistoryOfEverything](https://github.com/2d-inc/HistoryOfEverything):Flutter Launch Timeline Demo
 * [Mayandev/morec](https://github.com/Mayandev/morec):💥非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App(部分 UI 仿豆瓣电影🎥)。 A beautiful movie application build by flutter.
 * [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档
@@ -101,10 +101,10 @@ pod setup
 * [Drakirus/go-flutter-desktop-embedder](https://github.com/Drakirus/go-flutter-desktop-embedder):A Go (golang) Custom Flutter Engine Embedder for desktop
 * [fish-redux](https://github.com/alibaba/fish-redux):Fish Redux 是一个基于 Redux 数据管理的组装式 flutter 应用框架，特别适用于构建中大型的复杂应用，它最显著的特征是函数式的编程模型、可预测的状态管理、可插拔的组件体系、最佳的性能表现
 * UI
-    - [mitesh77/Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
-    - [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
+  - [mitesh77/Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
+  - [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
 * [cloudwebrtc / flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
-* [ zino-app / graphql-flutter ](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
+* [zino-app / graphql-flutter](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
 
 ## 参考
 

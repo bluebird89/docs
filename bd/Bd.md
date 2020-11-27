@@ -18,7 +18,7 @@
   - 关系分析
     + Gephi
   - 时空数据分析
-    + NanoCubes（http://www.nanocubes.net/）
+    + NanoCubes（<http://www.nanocubes.net/>）
   - 文本/非结构化分析
 * 编程语言
   - R语言：最适合统计研究背景的人员学习，具有丰富的统计分析功能库以及可视化绘图函数可以直接调用。通过Hadoop-R更可支持处理百亿级别的数据。 相比SAS，其计算能力更强，可解决更复杂更大数据规模的问题。
@@ -119,16 +119,16 @@
   - Hybrid OLAP(HOLAP）：本数据存放于RDBMS之中，聚合数据存放于多维数据库中
 * E.F.Codd提出12条准则来描述OLAP系统：
   - OLAP模型必须提供多维概念视图　　
-  - 透明性　
-  - 存取能力推测 　　
-  - 稳定的报表能力 　　
-  - 客户/服务器体系结构 　　
-  - 维的等同性　
+  - 透明性
+  - 存取能力推测
+  - 稳定的报表能力
+  - 客户/服务器体系结构
+  - 维的等同性
   - 动态的稀疏矩阵处理
-  - 多用户支持能力　
-  - 非受限的跨维操作 　　
-  - 直观的数据操纵 　　
-  - 灵活的报表生成 　　
+  - 多用户支持能力
+  - 非受限的跨维操作
+  - 直观的数据操纵
+  - 灵活的报表生成
   - 不受限的维与聚集层次
 
 ## [Wolfram](https://www.wolfram.com/)
@@ -157,7 +157,7 @@
 * 《事务处理：概念与技术》 Jim Gray, Andreas Reuter
 * 《Designing Data-Intensive Applications》 Martin Kleppmann
 * 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
-* [ Vonng / ddia ](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
+* [Vonng / ddia](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
 * 干净的数据：数据清洗入门与实践
 * 数据科学入门
 * Python网络数据采集
@@ -192,7 +192,7 @@
 * Modest Maps是一个很小的地图库，在一些扩展库的配合下，例如Wax、Modest Maps立刻会变成一个强大的地图工具。
 * Tangle是一个用来探索，Play和可以立即查看文档更新的交互工具。
 * Crossfilter既是图表，又是互动图形用户界面的小程序，当你调整一个图表中的输入范围时，其他关联图表的数据也会随之改变
-* Raphael是创建图表和图形的JavaScript库，与其他库最大的不同是输出格式仅限SVG和VML. http://raphaeljs.com/
+* Raphael是创建图表和图形的JavaScript库，与其他库最大的不同是输出格式仅限SVG和VML. <http://raphaeljs.com/>
 * jsDraw2DX是一个标准的JavaScript库，用来创建任意类型的SVG交互式图形，可生成包括线、矩形、多边形、椭圆、弧线等图形
 * Pizza Pie Charts是个响应式饼图图表，基于Adobe Snap SVG框架，通过HTML标记和CSS来替代JavaScript对象，更容易集成各种先进的技术。
 * Fusion Charts Suit XT是一款跨平台、跨浏览器的JavaScript图表组件，为你提供令人愉悦的JavaScript图表体验。
@@ -223,7 +223,7 @@
 * Rickshaw是一个基于D3.JS来创建序交互式的时间序列图表库。
 * Sigma.js是一个开源的轻量级库，用来显示交互式的静态和动态图表。
 * Timeline即时间轴，用户通过这个工具可以一目了然的知道自己在何时做了什么
-* [visx](https://github.com/airbnb/visx) 🐯 visx | visualization components https://airbnb.io/visx
+* [visx](https://github.com/airbnb/visx) 🐯 visx | visualization components <https://airbnb.io/visx>
 * BirdEye是Decearative Visual Analytics，它属于一个群体专案，为了要提升设计和广泛的开源资料视觉化发展，并且为了Adobe Flex建视觉分析图库，这个动作以叙述性的资料库为主，让使用者能够建立多元资料视觉化界面来分析以及呈现资讯。
 * Arbor.Js提供有效率、以力导向的版面配置演算法，抽象画图表组织以及筛选更新的处理。
 * Highchart.js是单纯由JavaScript所写的图表资料库，提供简单的方法来增加互动性图表来表达你的网站或网站应用程式。目前它能支援线图、样条函数图。
@@ -234,16 +234,16 @@
 
 ## 工具
 
-* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! http://pachyderm.io
-* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 https://metabase.com
-* [OpenRefine/OpenRefine](https://github.com/OpenRefine/OpenRefine):OpenRefine is a free, open source power tool for working with messy data and improving it http://openrefine.org/
+* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
+* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com>
+* [OpenRefine/OpenRefine](https://github.com/OpenRefine/OpenRefine):OpenRefine is a free, open source power tool for working with messy data and improving it <http://openrefine.org/>
 * [airbnb/knowledge-repo](https://github.com/airbnb/knowledge-repo):A next-generation curated knowledge sharing platform for data scientists and other technical professions.
-* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
-* [protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf):Protocol Buffers - Google's data interchange format https://developers.google.com/protocol-buffers/
+* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. <https://osquery.io>
+* [protocolbuffers/protobuf](https://github.com/protocolbuffers/protobuf):Protocol Buffers - Google's data interchange format <https://developers.google.com/protocol-buffers/>
 * [ha/doozerd](https://github.com/ha/doozerd):A consistent distributed data store.
-* [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. https://www.consul.io/
-* [ag-grid/ag-grid](https://github.com/ag-grid/ag-grid):Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components http://www.ag-grid.com
-* [brendangregg / FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer http://www.brendangregg.com/flamegraphs.html
+* [hashicorp/consul](https://github.com/hashicorp/consul):Consul is a distributed, highly available, and data center aware solution to connect and configure applications across dynamic, distributed infrastructure. <https://www.consul.io/>
+* [ag-grid/ag-grid](https://github.com/ag-grid/ag-grid):Advanced Data Grid / Data Table supporting Javascript / React / AngularJS / Web Components <http://www.ag-grid.com>
+* [brendangregg / FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer <http://www.brendangregg.com/flamegraphs.html>
 * HDFS，分布式文件系统
 * HBase，分布式数据库
 * MapReduce，由用户编写的运行在hadoop集群上的并行程
@@ -263,8 +263,8 @@
 * elasticsearch，分布式全文搜索
 * flume，分布式日志采集系统
 * flink，分布式流处理引擎
-* [darktable ](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer https://www.darktable.org
+* [darktable](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer <https://www.darktable.org>
 
 ## 参考
 
-* [bigdata_practice](https://github.com/TurboWay/bigdata_practice):大数据分析可视化实践  nginx 日志分析可视化 http://analyze.turboway.top/line
+* [bigdata_practice](https://github.com/TurboWay/bigdata_practice):大数据分析可视化实践  nginx 日志分析可视化 <http://analyze.turboway.top/line>

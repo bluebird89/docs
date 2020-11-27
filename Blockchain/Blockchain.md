@@ -6,9 +6,9 @@ A distributed database that is used to maintain a continuously growing list of r
 * 解决了是他们的身份的真实和唯一性，而不是机器人或者水军。身份唯一性，是社交的前提。但是在现有的社交网络中，虚假身份和僵尸层出不穷。你可以是匿名，但是你的身份是真实的，可溯源的。ONO创始人徐可的期望就是通过区块链改变现有社交产品和环境，“让社交变得更自由、更放松、更随心所欲”。
 * 比特币发明者中本聪，在2010 年 12 月，自己的笔记本上写到：只要对网络有好处，我们就必须要去做。这也许是对所有新技术最好的解释。
 * 特征
-    - 不可变性
-    - 溯源
-    - 分布式共识
+  - 不可变性
+  - 溯源
+  - 分布式共识
 * 数据库
 * 每个节点平等，保存整个数据库
 * 最终一致
@@ -24,9 +24,9 @@ p2p 网络，数字签名和共识算法
 
 * 区块头（Head）：记录当前区块的元信息，Hash = SHA256(区块头)
 * 区块体（Body）：实际数据
-    - 生成时间
-    - 实际数据（即区块体）的 Hash（计算机可以对任意内容，计算出一个长度相同的特征值。区块链的 Hash 长度是256位）
-    - 上一个区块的 Hash
+  - 生成时间
+  - 实际数据（即区块体）的 Hash（计算机可以对任意内容，计算出一个长度相同的特征值。区块链的 Hash 长度是256位）
+  - 上一个区块的 Hash
 * 如果当前区块的内容变了，或者上一个区块的 Hash 变了，一定会引起当前区块的 Hash 改变。如果有人修改了一个区块，该人必须同时修改后面所有的区块，否则被改掉的区块就脱离区块链了。保证了自身的可靠性，数据一旦写入，就无法被篡改。这就像历史一样，发生了就是发生了，从此再无法改变。
 * 只要你有服务器，就能加入这个网络，成为一个节点。每个节点都包含了整个区块链（目前大概 100多 GB），并且节点之间时刻不停地在同步信息。
 * 当你发生了一笔支付，你所在的节点就会把这笔交易告诉另一个节点，直至传遍整个网络。矿工从网上收集各种新发生的交易，将它们打包写入区块链。一旦写入成功， 矿工所在节点的区块链，就成为最新版本，其他节点都会来复制新增的区块，保证全网的区块链都是一致的。
@@ -69,12 +69,12 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 * 写入的数据不要求实时使用
 * 挖矿的收益能够弥补本身的成本
 * 商业逻辑的重构
-    - 供应链-票据融资
-    - 供应链-应收款融资
-    - 供应链-授信融资
-    - 资产数字化
-    - 商品生命周期跟踪
-    - 区块链合同存证
+  - 供应链-票据融资
+  - 供应链-应收款融资
+  - 供应链-授信融资
+  - 资产数字化
+  - 商品生命周期跟踪
+  - 区块链合同存证
 
 ### 比特币
 
@@ -88,17 +88,17 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 
 * 一笔交易就是一个地址的比特币，转移到另一个地址。由于比特币的交易记录全部都是公开的，哪个地址拥有多少比特币，都是可以查到的。因此，支付方是否拥有足够的比特币，完成这笔交易，这是可以轻易验证的。
 * 申报交易的时候，除了交易金额，转出比特币的一方还必须提供以下数据。
-    - 上一笔交易的 Hash（你从哪里得到这些比特币）
-    - 本次交易双方的地址
-    - 支付方的公钥
-    - 支付方的私钥生成的数字签名
+  - 上一笔交易的 Hash（你从哪里得到这些比特币）
+  - 本次交易双方的地址
+  - 支付方的公钥
+  - 支付方的私钥生成的数字签名
 * 交易数据必须写入数据库，才算成立，对方才能真正收到钱。
-    - 所有的交易数据都会传送到矿工那里。矿工负责把这些交易写入区块链。
-    - 根据比特币协议，一个区块的大小最大是 1MB，而一笔交易大概是500字节左右，因此一个区块最多可以包含2000多笔交易。矿工负责把这2000多笔交易打包在一起，组成一个区块，然后计算这个区块的 Hash。
-    - 一笔交易一旦写入了区块链，就无法反悔了。这里需要建立一个观念：比特币不存放在钱包或其他别的地方，而是只存在于区块链上面。区块链记载了你参与的每一笔交易，你得到过多少比特币，你又支付了多少比特币，因此可以算出来你拥有多少资产。
-    - 挖到新区块的矿工将获得奖励，一开始（2008年）是50个比特币，然后每4年减半，目前（2018年）是12.5个比特币。这也是比特币的供给增加机制，流通中新增的比特币都是这样诞生的。每4年奖励减半，那么到了2140年，矿工将得不到任何奖励，比特币的数量也将停止增加。
-    - 所谓交易手续费，就是矿工可以从每笔交易抽成，具体的金额由支付方自愿决定。你完全可以一毛不拔，一分钱也不给矿工，但是那样的话，你的交易就会没人处理，迟迟无法写入区块链，得到确认。矿工们总是优先处理手续费最高的交易。目前由于交易数量猛增，手续费已经水涨船高，一个区块2000多笔交易的手续费总额可以达到3～10个比特币。如果你的手续费给低了，很可能过了一个星期，交易还没确认。一个区块的奖励金12.5个比特币，再加上手续费，收益是相当可观的。按照目前的价格，可以达到100万～200万人民币。
-    - 比特币网络每10分钟，最多只能处理2000多笔交易（一个区块。区块的大小只有 1MB，最多只能包含2000多笔交易），换算一下，就是处理速度为3～5笔/秒。
+  - 所有的交易数据都会传送到矿工那里。矿工负责把这些交易写入区块链。
+  - 根据比特币协议，一个区块的大小最大是 1MB，而一笔交易大概是500字节左右，因此一个区块最多可以包含2000多笔交易。矿工负责把这2000多笔交易打包在一起，组成一个区块，然后计算这个区块的 Hash。
+  - 一笔交易一旦写入了区块链，就无法反悔了。这里需要建立一个观念：比特币不存放在钱包或其他别的地方，而是只存在于区块链上面。区块链记载了你参与的每一笔交易，你得到过多少比特币，你又支付了多少比特币，因此可以算出来你拥有多少资产。
+  - 挖到新区块的矿工将获得奖励，一开始（2008年）是50个比特币，然后每4年减半，目前（2018年）是12.5个比特币。这也是比特币的供给增加机制，流通中新增的比特币都是这样诞生的。每4年奖励减半，那么到了2140年，矿工将得不到任何奖励，比特币的数量也将停止增加。
+  - 所谓交易手续费，就是矿工可以从每笔交易抽成，具体的金额由支付方自愿决定。你完全可以一毛不拔，一分钱也不给矿工，但是那样的话，你的交易就会没人处理，迟迟无法写入区块链，得到确认。矿工们总是优先处理手续费最高的交易。目前由于交易数量猛增，手续费已经水涨船高，一个区块2000多笔交易的手续费总额可以达到3～10个比特币。如果你的手续费给低了，很可能过了一个星期，交易还没确认。一个区块的奖励金12.5个比特币，再加上手续费，收益是相当可观的。按照目前的价格，可以达到100万～200万人民币。
+  - 比特币网络每10分钟，最多只能处理2000多笔交易（一个区块。区块的大小只有 1MB，最多只能包含2000多笔交易），换算一下，就是处理速度为3～5笔/秒。
 * 2017年8月有了一点眉目，当时区块链发生了一次分叉，诞生了一个新协议，称为 Bitcoin Cash（简称 BCH）。这种新货币其他方面都与比特币一致，就是每个区块的大小从 1MB 增加到了 8MB，因此处理速度提升了8倍，手续费也低得多。该协议是对原有区块链的分叉，因此当时持有比特币的人，等于一人获赠了一份同样数量的 BCH。
 
 #### 实例
@@ -160,10 +160,10 @@ termianl1:bl + tab
 ## 框架
 
 * [Hyperledger](https://www.hyperledger.org/)
-    - Hyperledger Burrow（之前称为eris-db）是一种智能合约机，其中有一部分是根据以太坊虚拟机（EVM）规范构建的。
-    - Hyperledger Fabric是区块链技术的一种实现，旨在作为开发区块链应用程序或解决方案的基础。
-    - Hyperledger Iroha是一个分布式分类帐项目，旨在简化并易于整合到需要分布式分类帐技术的基础设施项目中。
-    - Hyperledger Sawtooth是一种模块化区块链套件，旨在实现多功能性和可扩展性。
+  - Hyperledger Burrow（之前称为eris-db）是一种智能合约机，其中有一部分是根据以太坊虚拟机（EVM）规范构建的。
+  - Hyperledger Fabric是区块链技术的一种实现，旨在作为开发区块链应用程序或解决方案的基础。
+  - Hyperledger Iroha是一个分布式分类帐项目，旨在简化并易于整合到需要分布式分类帐技术的基础设施项目中。
+  - Hyperledger Sawtooth是一种模块化区块链套件，旨在实现多功能性和可扩展性。
 * [以太坊](https://www.ethereum.org/):一个运行智能合约的去中心化平台：完全按照设定程序运行的应用程序，不涉及任何停机、审查、欺诈或第三方干扰。
 * [Chain](https://chain.com/):Core的基础设施使企业能够在许可网络上发布和转移金融资产，仅允许授权和识别的实体成为区块链网络的一部分。其业务模式处于中心化和去中心化频谱的中间地带，这意味着链上资产的创建、控制和转移是去中心化的，但网络由“联合”实体运营，允许所有资产转移是保密、安全的，且兼容KYC-AML。他们的基础设施还集成了金融服务应用程序和数据仓库解决方案。
 * [IOTA](https://www.iotatoken.com/)的分类帐非常适合需要小额支付和连接设备的场景。自治设备可以在区块链上注册，租用时无需人工参与，并使用IOTA的本地货币接收付款。现在，设备可以使用钱包来存储数字货币，从而实现自主权。这种模式适用于租户，因为他们按使用量付费，在安全和可信的情况下自动与设备进行交易而无需支付额外的交易费用。
@@ -173,12 +173,12 @@ termianl1:bl + tab
 
 ## database
 
-* [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. https://www.bigchaindb.com/
-* [EOSIO/eos](https://github.com/EOSIO/eos):An open source smart contract platform https://eosio.github.io/eos/
+* [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. <https://www.bigchaindb.com/>
+* [EOSIO/eos](https://github.com/EOSIO/eos):An open source smart contract platform <https://eosio.github.io/eos/>
 
 ## 图书
 
-* [yeasy/blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. https://www.gitbook.com/book/yeasy/blockchain_guide
+* [yeasy/blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. <https://www.gitbook.com/book/yeasy/blockchain_guide>
 
 ## 教程
 
@@ -188,18 +188,18 @@ termianl1:bl + tab
 
 ## 工具
 
-* [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. https://metamask.io/
+* [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. <https://metamask.io/>
 * [iov-one/weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
-* [embark-framework/embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms https://embark.status.im/
+* [embark-framework/embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms <https://embark.status.im/>
 
 ## 参考
 
 * [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
 * [yukimotopress/programming-blockchains-step-by-step](https://github.com/yukimotopress/programming-blockchains-step-by-step):Programming Blockchains Step-by-Step book / guide. Let's build blockchains from scratch (zero) step by step. Let's start with crypto hashes... (Book Edition) by Gerald Bauer, et al
 * [tyrchen/unchained](https://github.com/tyrchen/unchained):My personal study of blockchain related technology.
-* [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain https://bitcoinbook.info/
+* [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain <https://bitcoinbook.info/>
 * [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
-* [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese https://liuchengxu.gitbook.io/blockchain
+* [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese <https://liuchengxu.gitbook.io/blockchain>
 * [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
 * [myeoskit](https://www.myeoskit.com)
 * [区块链背后的密码学](https://learning.nervos.org/crypto-block)

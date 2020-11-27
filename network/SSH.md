@@ -171,7 +171,7 @@ git commit -S -m your commit message
 * ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
 * ~/.ssh/id_rsa : 生成的私钥文件
 * ~/.ssh/id_rsa.pub ： 生成的公钥文件
-* ~/.ssh/know_hosts : 已知的主机公钥清单　
+* ~/.ssh/know_hosts : 已知的主机公钥清单
 * 如果希望ssh公钥生效需满足至少下面两个条件：
   - .ssh目录的权限必须是700
   - .ssh/authorized_keys文件权限必须是600

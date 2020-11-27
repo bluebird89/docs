@@ -1,6 +1,6 @@
 # [percona-server](https://github.com/percona/percona-server)
 
-Percona Server https://www.percona.com/software/mysql-database/percona-server
+Percona Server <https://www.percona.com/software/mysql-database/percona-server>
 
 * 数据库审计功能:需要使用MySQL企业版，或者Percona/MariaDB分支版本，MySQL社区版本不支持该功能。
 * 启用thread pool特性，可使得在高并发的情况下，性能不会发生大幅下降
@@ -12,6 +12,7 @@ Percona Server https://www.percona.com/software/mysql-database/percona-server
 ## 安装
 
 * 安装不要制定版本,会有合适版本安装.下载
+
 *
 配置文件 /etc/mysql/my.cnf
 
@@ -91,17 +92,17 @@ kill pid  ##删除mysql现有进程
 * 可以备份来自MySQL5.1，5.5，5.6和5.7服务器上的InnoDB，XtraDB和MyISAM表的数据，以及带有XtraDB的Percona服务器
 * /usr/share/percona-xtrabackup-test-24
 * 功能：
-	- 在不暂停数据库的情况下创建热的InnoDB备份
-	- 进行MySQL的增量备份
-	- 将压缩的MySQL备份传输到另一台服务器
-	- 在MySQL服务器之间移动表格
-	- 轻松创建新的MySQL复制从站
-	- 在不增加服务器负载的情况下备份MySQL
+  - 在不暂停数据库的情况下创建热的InnoDB备份
+  - 进行MySQL的增量备份
+  - 将压缩的MySQL备份传输到另一台服务器
+  - 在MySQL服务器之间移动表格
+  - 轻松创建新的MySQL复制从站
+  - 在不增加服务器负载的情况下备份MySQL
 * 包含工具：
-	- xtrabackup：用于热备份innodb, xtradb表中数据的工具，不能备份其他类型的表(Myisam表)，也不能备份数据表结构。
-	- innobackupex：是将xtrabackup进行封装的perl脚本，可以备份和恢复MyISAM表以及数据表结构
+  - xtrabackup：用于热备份innodb, xtradb表中数据的工具，不能备份其他类型的表(Myisam表)，也不能备份数据表结构。
+  - innobackupex：是将xtrabackup进行封装的perl脚本，可以备份和恢复MyISAM表以及数据表结构
 * 参考
-    - [Xtrabackup 实现数据的备份与恢复](https://learnku.com/articles/27641)
+  - [Xtrabackup 实现数据的备份与恢复](https://learnku.com/articles/27641)
 
 ```sh
 sudo yum install http://www.percona.com/downloads/percona-release/redhat/0.1-4/percona-release-0.1-4.noarch.rpm
@@ -124,4 +125,4 @@ innobackupex --defaults-file=/etc/my.cnf  --copy-back /backup/20180423/2018-04-1
 
 ## 扩展
 
-* [xelabs/tokudb](https://github.com/XeLabs/tokudb):Next Generation DBMS TokuDB, based on Percona Server 5.7 with more features https://github.com/xelabs/tokudb/wiki
+* [xelabs/tokudb](https://github.com/XeLabs/tokudb):Next Generation DBMS TokuDB, based on Percona Server 5.7 with more features <https://github.com/xelabs/tokudb/wiki>

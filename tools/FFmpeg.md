@@ -1,6 +1,6 @@
 # [FFmpeg](https://github.com/FFmpeg/FFmpeg)
 
-Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Experts Group https://ffmpeg.org
+Mirror of git://source.ffmpeg.org/ffmpeg.git  Fast Forward Moving Pictures Experts Group <https://ffmpeg.org>
 
 * 实现了对标准流媒体传输是一个为流媒体提供解决方案的跨平台的C++开源项目，实现了对标准流媒体传输协议如RTP/RTCP、RTSP、SIP等的支持
 * Live555实现了对多种音视频编码格式的音视频数据的流化、接收和处理等支持，包括MPEG、H.263+、DV、JPEG视频和多种音频编码
@@ -259,7 +259,7 @@ rtmp {
 ## Tool
 
 * [PHP-FFMpeg/PHP-FFMpeg](https://github.com/PHP-FFmpeg/PHP-FFmpeg/): An object oriented PHP driver for FFMpeg binary
-* [ossrs / srs](https://github.com/ossrs/srs):SRS is a RTMP/HLS/WebRTC/SRT/GB28181 streaming cluster, high efficiency, stable and simple. https://ossrs.net
+* [ossrs / srs](https://github.com/ossrs/srs):SRS is a RTMP/HLS/WebRTC/SRT/GB28181 streaming cluster, high efficiency, stable and simple. <https://ossrs.net>
 
 ## reference
 

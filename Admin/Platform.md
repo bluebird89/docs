@@ -22,7 +22,7 @@
 
 ## [Fusion Design](https://fusion.design/)
 
-* 一个平台:每个人或者团队都可以通过 https://fusion.design/sites/new 可以创建自己的站点
+* 一个平台:每个人或者团队都可以通过 <https://fusion.design/sites/new> 可以创建自己的站点
   - 文档编辑:设计师文档和开发文档
   - 主题管理:可以管理、定制、发布组件的主题的能力
   - 物料托管:使用开发好的区块、模板

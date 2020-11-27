@@ -45,7 +45,7 @@ systeminfo | findstr Build
 ## 工具
 
 * 软件包管理
-  - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation https://chocolatey.org/
+  - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation <https://chocolatey.org/>
     + 程序安装位置：`~\AppData\Local\Packages\`
   - [Scoop](https://scoop.sh)
     + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
@@ -54,7 +54,7 @@ systeminfo | findstr Build
   - [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
 * 快速启动
   - launchy
-  - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. http://wox.one
+  - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. <http://wox.one>
   - Rolan 轻量级桌面启动器
 * 资源管理器
   - Clover
@@ -200,7 +200,7 @@ ipconfig /flushdns # 刷新域名
 
 ## [PowerShell](https://github.com/PowerShell/PowerShell)
 
-PowerShell for every system! https://microsoft.com/PowerShell
+PowerShell for every system! <https://microsoft.com/PowerShell>
 
 * 添加启动脚本
 

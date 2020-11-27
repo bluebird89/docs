@@ -82,15 +82,15 @@ function User_name(user) {
 * 请求格式是根据 GraphQL 标准构造
 * 一个 GraphQL 操作从前端应用到达后端应用，首先会在后端解释整个 GraphQL schema，然后再为前端解析相关的数据
 * 请求体：描述要从服务器上取什么数据
-    - 操作类型：指定本请求体要对数据做什么操作
-        + query 查询
-        + mutation 对数据进行操作，例如增删改操作
-        + subscription 订阅
-    - 操作名称：可选参数，对整个请求并不产生影响，只是赋予请求体一个名字，可以作为调试的依据
-    - 变量：声明一个变量使用$符号开头，冒号后面紧跟着变量的传入类型。如果要使用变量，直接引用即可
-    - 选择集：所需要字段合在一起
-    - 字段请求的是一个数据单元。标量字段是粒度最细的一个数据单元了，同时作为返回 JSON 响应数据中的最后一个字段。如果是一个 Object，还必须选择至少其中的一个字段。
-    - 请求体的结构确定了最终返回数据的结构
+  - 操作类型：指定本请求体要对数据做什么操作
+    + query 查询
+    + mutation 对数据进行操作，例如增删改操作
+    + subscription 订阅
+  - 操作名称：可选参数，对整个请求并不产生影响，只是赋予请求体一个名字，可以作为调试的依据
+  - 变量：声明一个变量使用$符号开头，冒号后面紧跟着变量的传入类型。如果要使用变量，直接引用即可
+  - 选择集：所需要字段合在一起
+  - 字段请求的是一个数据单元。标量字段是粒度最细的一个数据单元了，同时作为返回 JSON 响应数据中的最后一个字段。如果是一个 Object，还必须选择至少其中的一个字段。
+  - 请求体的结构确定了最终返回数据的结构
 
 ```
 query myQry ($name: String!) {
@@ -144,26 +144,26 @@ author(id: "7") {
 
 ## 工具
 
-* [apollographql/graphql-tools](https://github.com/apollographql/graphql-tools)  Build and mock your GraphQL.js schema using the schema language http://dev.apollodata.com/tools/graph…
-* [graphql/graphql-js](https://github.com/graphql/graphql-js):A reference implementation of GraphQL for JavaScript http://graphql.org/graphql-js/
-* [graphcool/framework](https://github.com/graphcool/framework):Framework to develop & deploy serverless GraphQL backends https://www.graph.cool
-* [hasura/graphql-engine](https://github.com/hasura/graphql-engine):Blazing fast, instant GraphQL APIs on Postgres with fine grained access control https://hasura.io
+* [apollographql/graphql-tools](https://github.com/apollographql/graphql-tools)  Build and mock your GraphQL.js schema using the schema language <http://dev.apollodata.com/tools/graph>…
+* [graphql/graphql-js](https://github.com/graphql/graphql-js):A reference implementation of GraphQL for JavaScript <http://graphql.org/graphql-js/>
+* [graphcool/framework](https://github.com/graphcool/framework):Framework to develop & deploy serverless GraphQL backends <https://www.graph.cool>
+* [hasura/graphql-engine](https://github.com/hasura/graphql-engine):Blazing fast, instant GraphQL APIs on Postgres with fine grained access control <https://hasura.io>
 * [prisma/graphcool-framework](https://github.com/prisma/graphcool-framework)
 * [slothking-online/graphql-editor](https://github.com/slothking-online/graphql-editor):GraphQL Visual Node Editor
 * [apollographql/apollo-server](https://github.com/apollographql/apollo-server)GraphQL server for Express, Connect, Hapi and Koa
-* [apollographql/apollo-ios](https://github.com/apollographql/apollo-ios):📱 A strongly-typed, caching GraphQL client for iOS, written in Swift https://www.apollographql.com/docs/ios/
-* [hasura/graphql-engine](https://github.com/hasura/graphql-engine):Blazing fast, instant realtime GraphQL APIs on Postgres with fine grained access control, also trigger webhooks on database events. https://hasura.io
+* [apollographql/apollo-ios](https://github.com/apollographql/apollo-ios):📱 A strongly-typed, caching GraphQL client for iOS, written in Swift <https://www.apollographql.com/docs/ios/>
+* [hasura/graphql-engine](https://github.com/hasura/graphql-engine):Blazing fast, instant realtime GraphQL APIs on Postgres with fine grained access control, also trigger webhooks on database events. <https://hasura.io>
 * client
-    - [apollographql/apollo-client](https://github.com/apollographql/apollo-client)A fully-featured, production ready caching GraphQL client for every server or UI framework
+  - [apollographql/apollo-client](https://github.com/apollographql/apollo-client)A fully-featured, production ready caching GraphQL client for every server or UI framework
   - [apollographql/react-apollo](https://github.com/apollographql/react-apollo)♻️ React integration for Apollo Client
 * IDE
-    - [prisma/graphql-playground](https://github.com/prisma/graphql-playground):🎮 GraphQL IDE for better development workflows (GraphQL Subscriptions, interactive docs & collaboration)
+  - [prisma/graphql-playground](https://github.com/prisma/graphql-playground):🎮 GraphQL IDE for better development workflows (GraphQL Subscriptions, interactive docs & collaboration)
 * 测试
-    - [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
+  - [intuit/karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
 * vue
-    - [Vue Apollo](https://vue-apollo.netlify.com)
+  - [Vue Apollo](https://vue-apollo.netlify.com)
 * 插件
-    - Apollo GraphQL VS Code
+  - Apollo GraphQL VS Code
 
 ## 参考
 
@@ -172,7 +172,7 @@ author(id: "7") {
 * [graphql/express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.
 
 * [教程](https://www.howtographql.com/)
-* [graphql-spec](https://github.com/graphql/graphql-spec)GraphQL is a query language and execution engine tied to any backend service. https://spec.graphql.org
+* [graphql-spec](https://github.com/graphql/graphql-spec)GraphQL is a query language and execution engine tied to any backend service. <https://spec.graphql.org>
 * [learnapollo/learnapollo](https://github.com/learnapollo/learnapollo)
 * [mugli/learning-graphql](https://github.com/mugli/learning-graphql):An attempt to learn GraphQL
 * [graphQL PHP 中文文档](https://laravel-china.org/docs/graphql-php)

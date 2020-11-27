@@ -390,7 +390,7 @@ function quickSort(array, left, right) {
                 array[j]="temp;"
                 }
                 quicksort(array,="" left,="" i="" -="" 1);="" +="" 1,="" right);="" console.timeend('1.快速排序耗时');="" return="" array;="" else="" 'array="" is="" not="" an="" array="" or="" left="" right="" a="" number!';="" 方法二="" var="" quicksort2="function(arr)" console.time('2.快速排序耗时');="" 　　if="" (arr.length="" arr;="" 　　var="" pivotindex="Math.floor(arr.length" 2);="" pivot="arr.splice(pivotIndex," 1)[0];="" 　　for="" (var="" arr.length;="" i++){="" 　　　　if="" (arr[i]="" pivot)="" 　　　　　　left.push(arr[i]);="" 　　　　}="" 　　　　　　right.push(arr[i]);="" 　　}=""
-                console.timeend('2.快速排序耗时'); 　　
+                console.timeend('2.快速排序耗时');
                 return quicksort2(left).concat([pivot], quicksort2(right));
                 }
              arr="[3,44,38,5,47,15,36,26,27,2,46,4,19,50,48];"

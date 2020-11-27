@@ -3,10 +3,10 @@
 看懂图片里的内容
 
 * 人的大脑皮层， 有差不多 70% 都是在处理视觉信息.人类的视觉原理如下
-    - 从原始信号摄入开始（瞳孔摄入像素 Pixels）
-    - 做初步处理（大脑皮层某些细胞发现边缘和方向）
-    - 抽象（大脑判定，眼前的物体的形状，是圆形的）
-    - 进一步抽象（大脑进一步判定该物体是只气球）
+  - 从原始信号摄入开始（瞳孔摄入像素 Pixels）
+  - 做初步处理（大脑皮层某些细胞发现边缘和方向）
+  - 抽象（大脑判定，眼前的物体的形状，是圆形的）
+  - 进一步抽象（大脑进一步判定该物体是只气球）
 * 机器的方法也是类似：构造多层的神经网络，较低层的识别初级的图像特征，若干底层特征组成更上一层特征，最终通过多个层级的组合，最终在顶层做出分类。
 
 ## 挑战
@@ -14,8 +14,8 @@
 * 特征难以提取:同一只猫在不同的角度，不同的光线，不同的动作下。像素差异是非常大的。就算是同一张照片，旋转90度后，其像素差异也非常大！ 所以图片里的内容相似甚至相同，但是在像素层面，其变化会非常大
 * 需要计算的数据量巨大: 手机上随便拍一张照片就是1000*2000像素的。每个像素 RGB 3个参数，一共有1000 X 2000 X 3=6,000,000。随便一张照片就要处理 600万 个参数，再算算现在越来越流行的 4K 视频
 * CNN 属于深度学习的范畴，它很好的解决了上面所说的2大难点：
-    - 可以有效的提取图像里的特征
-    - 可以将海量的数据（不影响特征提取的前提下）进行有效的降维，大大减少了对算力的要求
+  - 可以有效的提取图像里的特征
+  - 可以将海量的数据（不影响特征提取的前提下）进行有效的降维，大大减少了对算力的要求
 
 ## 任务
 
@@ -46,8 +46,8 @@
 
 ## 参考
 
-* [opencv/opencv](https://github.com/opencv/opencv):Open Source Computer Vision Library http://opencv.org
+* [opencv/opencv](https://github.com/opencv/opencv):Open Source Computer Vision Library <http://opencv.org>
 * [jbhuang0604/awesome-computer-vision](https://github.com/jbhuang0604/awesome-computer-vision):A curated list of awesome computer vision resources
 * [makelove/OpenCV-Python-Tutorial](https://github.com/makelove/OpenCV-Python-Tutorial)
 * [muhsinali/opencv-book](https://github.com/muhsinali/opencv-book):Exercises and solutions from the Practical Python and OpenCV book
-* [whydna/Deep-Learning-For-Computer-Vision](https://github.com/whydna/Deep-Learning-For-Computer-Vision):Exercises from https://www.pyimagesearch.com/deep-learning-computer-vision-python-book/
+* [whydna/Deep-Learning-For-Computer-Vision](https://github.com/whydna/Deep-Learning-For-Computer-Vision):Exercises from <https://www.pyimagesearch.com/deep-learning-computer-vision-python-book/>

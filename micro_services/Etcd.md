@@ -1,6 +1,6 @@
 ## [etcd](https://github.com/etcd-io/etcd)
 
-Distributed reliable key-value store for the most critical data of a distributed system https://coreos.com/etcd/docs/latest/
+Distributed reliable key-value store for the most critical data of a distributed system <https://coreos.com/etcd/docs/latest/>
 
 * 一个高可用的键值存储系统，分布式一致性k-v存储系统,主要用于共享配置和服务发现
 * 由CoreOS开发并维护的，灵感来自于 ZooKeeper 和 Doozer，使用Go语言编写，并通过Raft一致性算法处理日志复制以保证强一致性

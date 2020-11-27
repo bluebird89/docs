@@ -1,6 +1,6 @@
 # [redis](https://github.com/antirez/redis)
 
-Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. http://redis.io
+Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. <http://redis.io>
 
 * C 语言开发的一个开源的（遵从 BSD 协议）高性能键值对（key-value）的内存数据库，可以用作数据库、缓存、消息中间件等
 * 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
@@ -224,7 +224,7 @@ CLIENT KILL # 关闭客户端连接
   - used_memory Redis分配器分配的内存总量（单位是字节），包括使用的虚拟内存（即swap）
   - `used_memory_rss` Redis进程占据操作系统的内存（单位是字节），与top及ps命令看到的值是一致的；除了分配器分配的内存之外，还包括进程运行本身需要的内存、内存碎片等，但是不包括虚拟内存
   - 二者之所以有所不同，一方面是因为内存碎片和Redis进程运行需要占用内存，使得前者可能比后者小，另一方面虚拟内存的存在，使得前者可能比后者大
-  - 内存碎片比率` mem_fragmentation_ratio:used_memory_rss / used_memory`，衡量Redis内存碎片率的参数
+  - 内存碎片比率`mem_fragmentation_ratio:used_memory_rss / used_memory`，衡量Redis内存碎片率的参数
     + 一般大于1，且该值越大，内存碎片比例越大
     + 如果内存碎片率过高（jemalloc在1.03左右比较正常），说明内存碎片多，内存浪费严重；这时便可以考虑重启redis服务，在内存中对数据进行重排，减少内存碎片
     + 如果内存碎片率小于1，说明redis内存不足，部分数据使用了虚拟内存（即swap）；由于虚拟内存的存取速度比物理内存差很多（2-3个数量级），此时redis的访问速度可能会变得很慢。因此必须设法增大物理内存（可以增加服务器节点数量，或提高单机内存），或减少redis中的数据，如果内存不足应该及时处理，如增加Redis节点、增加Redis服务器的内存、优化应用等
@@ -1688,7 +1688,7 @@ bf.mexists codehole user4 user5 user6 user7
 * 没有直接提供 Geo 的删除指令，可以通过 zset 相关的指令来操作 Geo 数据，所以元素删除可以使用 zrem 指令即可
 * geodist 指令可以用来计算两个元素之间的距离，携带集合名称、2 个名称和距离单位。
 * geopos 指令可以获取集合中任意元素的经纬度坐标，可以一次获取多个
-* geohash 可以获取元素的经纬度编码字符串，上面已经提到，它是 base32 编码。你可以使用这个编码值去 http://geohash.org/${hash} 中进行直接定位，它是 Geohash 的标准编码值
+* geohash 可以获取元素的经纬度编码字符串，上面已经提到，它是 base32 编码。你可以使用这个编码值去 <http://geohash.org/${hash>} 中进行直接定位，它是 Geohash 的标准编码值
 * georadiusbymember 指令是最为关键的指令，它可以用来查询指定元素附近的其它元素
 * georadius 根据坐标值来查询附近的元素,可以根据用户的定位来计算「附近的车」，「附近的餐馆」
 * 注意
@@ -1768,6 +1768,7 @@ slowlog-max-len 128
   - rejected_connections  由于达到 maxclient 限制而被拒绝的连接数
   - keyspace_misses key 值查找失败 (没有命中) 次数
   - master_link_down_since_seconds  主从断开的持续时间（以秒为单位)
+
 - 监控方式
   - redis-benchmark
     + -h  指定服务器主机名    127.0.0.1
@@ -2068,13 +2069,13 @@ rdr keys FILE1 [FILE2] [FILE3]...
 ## 工具
 
 * 客户端
-  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis https://rdm.dev/
-  - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. http://getmedis.com
+  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis <https://rdm.dev/>
+  - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. <http://getmedis.com>
   - [mylxsw/redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
-  - [iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. https://iredis.io/show
+  - [iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. <https://iredis.io/show>
 * [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
-* [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. http://dubbelboer.com/phpRedisAdmin/
+* [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. <http://dubbelboer.com/phpRedisAdmin/>
 * [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
 * [redis-port](link):redis 间数据同步
 * [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)

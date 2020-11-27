@@ -24,7 +24,6 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 
 换句话说，应用内部应减少不必要契约接口（如同公司间才签约合同），减少不必要的依赖注入实现，减少不必要且代价过大的解耦。一切以简单实用为主，以应用价值输出、应用的目标（接口或界面）为导向。
 
-
 * 文件夹分层法：应用分层采用文件夹方式的优点是可大可小、简单易用、统一规范，可以包括 5 个项目，也可以包括 50 个项目，以满足所有业务应用的多种不同场景；
 * 调用规约：在开发过程中，需要遵循分层架构的约束，禁止跨层次的调用；
 * 下层为上层服务：以用户为中心，以目标为导向。上层（业务逻辑层）需要什么，下层（数据访问层）提供什么，而不是下层（数据访问层）有什么，就向上层（业务逻辑层）提供什么；
@@ -40,17 +39,17 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 * BO 项目命名规则：{产品线英文名全称}.{子系统英文名全称 + 应用名}.BO，如上图的 Trip.Order.BO;
 * DO 项目命名规则：{产品线英文名全称}.{子系统英文名全称 + 应用名}.Entity，如上图的 Trip.Seller.Entity；
 * 数据库连接配置规范
-    - 数据库连接的配置必须读写分离。
-    - 数据库连接字符串建议加密处理。
-    - 数据库连接配置名的命名规则：{以 DB 为结尾的数据库名称}_ 读写类型，如：TripOrderDB_SELECT、TripOrderDB_INSERT。
+  - 数据库连接的配置必须读写分离。
+  - 数据库连接字符串建议加密处理。
+  - 数据库连接配置名的命名规则：{以 DB 为结尾的数据库名称}_读写类型，如：TripOrderDB_SELECT、TripOrderDB_INSERT。
 * 配置文件方面的规范
-    - 所有配置文件（除 Web.config 文件外）都必须放到 Config 文件夹下。
-    - 所有配置文件（除 Web.config 文件外）按不同环境区分开，具体命名规则是：{功能模块英文名}.{环境英文简称名}.config，其中本地环境的英文简称名是 Dev，测试环境的英文简称名是 Test，正式环境的英文简称名是 Prod，如上图的 AppSetting.Dev.config。
-    - 保持 Web.config 配置文件的干净，只留环境设置节点。
+  - 所有配置文件（除 Web.config 文件外）都必须放到 Config 文件夹下。
+  - 所有配置文件（除 Web.config 文件外）按不同环境区分开，具体命名规则是：{功能模块英文名}.{环境英文简称名}.config，其中本地环境的英文简称名是 Dev，测试环境的英文简称名是 Test，正式环境的英文简称名是 Prod，如上图的 AppSetting.Dev.config。
+  - 保持 Web.config 配置文件的干净，只留环境设置节点。
 * 静态资源文件方面的规范
-    - 公共的静态资源文件（css、js、image 等）放在另外的静态站点中，统一由前端进行开发和维护。一般，css 文件放在 css 文件夹下，js 文件放在 js 文件夹下，image 图片文件放在 img 文件夹下。
-    - 与某项业务有关的 js 文件可以放到各自业务项目的表现层 PresentationLayer 下，以方便开发人员调试，js 文件可放在项目的 js 文件夹下。
-    - 静态资源文件必须使用版本号管理，以防更新后由于客户端浏览器缓存而导致站点使用的依然是旧版本的静态资源文件：`<script src="~/js/order.js?v=@AppSetting.StaticFileVersion"></script>`
+  - 公共的静态资源文件（css、js、image 等）放在另外的静态站点中，统一由前端进行开发和维护。一般，css 文件放在 css 文件夹下，js 文件放在 js 文件夹下，image 图片文件放在 img 文件夹下。
+  - 与某项业务有关的 js 文件可以放到各自业务项目的表现层 PresentationLayer 下，以方便开发人员调试，js 文件可放在项目的 js 文件夹下。
+  - 静态资源文件必须使用版本号管理，以防更新后由于客户端浏览器缓存而导致站点使用的依然是旧版本的静态资源文件：`<script src="~/js/order.js?v=@AppSetting.StaticFileVersion"></script>`
 
 ## 响应性能提升
 
@@ -62,7 +61,7 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 
 ## 工具
 
-* [ nicolargo / glances ](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. http://nicolargo.github.io/glances/
+* [nicolargo / glances](https://github.com/nicolargo/glances):Glances an Eye on your system. A top/htop alternative for GNU/Linux, BSD, Mac OS and Windows operating systems. <http://nicolargo.github.io/glances/>
 
 ## 参考
 

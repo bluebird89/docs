@@ -1,4 +1,4 @@
-# [micro/go-micro](https://github.com/micro/go-micro):A distributed systems development framework https://go-micro.dev
+# [micro/go-micro](https://github.com/micro/go-micro):A distributed systems development framework <https://go-micro.dev>
 
 ```sh
 go run main.go --registry=etcd
@@ -42,4 +42,4 @@ micro bot --inputs=slack --slack_token=SLACK_TOKEN
 
 ## 工具
 
-* [ micro / micro ](https://github.com/micro/micro):Micro is a cloud native development platform
+* [micro / micro](https://github.com/micro/micro):Micro is a cloud native development platform

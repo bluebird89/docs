@@ -1,6 +1,6 @@
 # [Traefik](https://github.com/containous/traefik)
 
-云原生的新型的 HTTP 反向代理、负载均衡软件。负责接收系统的请求，然后使用合适的组件来对这些请求进行处理。 兼容所有主流的集群技术，比如 Kubernetes，Docker，Docker Swarm，AWS，Mesos，Marathon，等等；并且可以同时处理多种方式  https://docs.traefik.io/
+云原生的新型的 HTTP 反向代理、负载均衡软件。负责接收系统的请求，然后使用合适的组件来对这些请求进行处理。 兼容所有主流的集群技术，比如 Kubernetes，Docker，Docker Swarm，AWS，Mesos，Marathon，等等；并且可以同时处理多种方式  <https://docs.traefik.io/>
 
 * 也称之为边缘路由器（Edge Router），是整个平台的大门，拦截并路由每个传入的请求
 * 知道所有的逻辑和规则，这些规则确定哪些服务处理哪些请求；传统的反向代理需要一个配置文件，其中包含路由到服务的所有可能路由，而 Traefik 会实时检测服务并自动更新路由规则，可以自动服务发现

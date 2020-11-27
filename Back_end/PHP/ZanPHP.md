@@ -36,7 +36,7 @@ ZanPHP 和 Golang 的边界是：ZanPHP做业务系统；Golang 做平台系统�
 ## 参考
 
 * [zan-doc](https://github.com/youzan/zanphp-doc) - Zan PHP 开发者文档
-* [在线查看文档 ](http://zanphpdoc.zanphp.io/)
+* [在线查看文档](http://zanphpdoc.zanphp.io/)
 * [zan-installer](https://github.com/youzan/zan-installer) - Zan PHP 脚手架工具
 * [zanhttp](https://github.com/youzan/zanhttpdemo) - Zan PHP HTTP demo
 * [zantcp](https://github.com/youzan/zantcpdemo) - Zan PHP TCP demo

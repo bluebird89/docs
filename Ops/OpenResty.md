@@ -1,6 +1,6 @@
 # [openresty](https://github.com/openresty/openresty)
 
-Turning Nginx into a Full-Fledged Scriptable Web Platform https://openresty.org
+Turning Nginx into a Full-Fledged Scriptable Web Platform <https://openresty.org>
 
 * 一个基于 Nginx 与 Lua 的高性能 Web 平台，内部集成了大量精良的 Lua 库、第三方模块以及大多数的依赖项。用于方便地搭建能够处理超高并发、扩展性极高的动态 Web 应用、Web 服务和动态网关
 * 包含技术
@@ -164,7 +164,7 @@ nginx -p `pwd`/ -c conf/nginx.conf
   - $remote_port     客户端端口号
   - $remote_user     客户端用户名，认证用
   - $request     用户请求
-  - `$request_body `    这个变量（0.7.58+）包含请求的主要信息。在使用proxy_pass或fastcgi_pass指令的location中比较有意义
+  - `$request_body`    这个变量（0.7.58+）包含请求的主要信息。在使用proxy_pass或fastcgi_pass指令的location中比较有意义
   - `$request_body_file`     客户端请求主体信息的临时文件名
   - $request_completion     如果请求成功，设为"OK"；如果请求未完成或者不是一系列请求中最后一部分则设为空
   - $request_filename     当前请求的文件路径名，比如/opt/nginx/www/test.php
@@ -217,7 +217,7 @@ end
 
 * [SkyLothar/lua-resty-jwt](https://github.com/SkyLothar/lua-resty-jwt):JWT For The Great Openresty
 * [bungle/lua-resty-validation](https://github.com/bungle/lua-resty-validation):Validation Library (Input Validation and Filtering) for Lua and OpenResty.
-* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers https://openresty.org/
+* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers <https://openresty.org/>
 * [loveshell / ngx_lua_waf](https://github.com/loveshell/ngx_lua_waf):一个基于lua-nginx-module(openresty)的web应用防火墙
 * [openresty/lua-resty-limit-traffic](https://github.com/openresty/lua-resty-limit-traffic):Lua library for limiting and controlling traffic in OpenResty/ngx_lua
 

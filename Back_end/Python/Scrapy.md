@@ -1,6 +1,6 @@
 # [scrapy](https://github.com/scrapy/scrapy)
 
-Scrapy, a fast high-level web crawling & scraping framework for Python. https://scrapy.org
+Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
 
 * Scrapy Engine 引擎负责控制数据流在系统中所有组件中流动，并在相应动作发生时触发事件。 详细内容查看下面的数据流 (Data Flow) 部分。此组件相当于爬虫的 “大脑”，是整个爬虫的调度中心。
 * 调度器 (Scheduler) 调度器从引擎接受 request 并将他们入队，以便之后引擎请求他们时提供给引擎。 初始的爬取 URL 和后续在页面中获取的待爬取的 URL 将放入调度器中，等待爬取。同时调度器会自动去除重复的 URL（如果特定的 URL 不需要去重也可以通过设置实现，如 post 请求的 URL）
@@ -72,8 +72,8 @@ xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 * module
   - crawler    <scrapy.crawler.Crawler object at 0x110f58a50>
   - item       {}
-  - request    <GET http://quotes.toscrape.com/page/1/>
-  - response   <200 http://quotes.toscrape.com/page/1/>
+  - request    <GET <http://quotes.toscrape.com/page/1/>>
+  - response   <200 <http://quotes.toscrape.com/page/1/>>
   - settings   <scrapy.settings.Settings object at 0x110f58ad0>
   - spider     <DefaultSpider 'default' at 0x1112eab50>
 * shortcuts
@@ -86,7 +86,7 @@ xpath('//div[contains(text(),"ma")]') # 选取节点文本包含ma的div节点
 
 * [scrapy/quotesbot](https://github.com/scrapy/quotesbot):This is a sample Scrapy project for educational purposes
 * admin UI
-  - [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub http://sk.7mdm.com:5000/
+  - [DormyMo/SpiderKeeper](https://github.com/DormyMo/SpiderKeeper)：admin ui for scrapy/open source scrapinghub <http://sk.7mdm.com:5000/>
 
 ## 参考
 

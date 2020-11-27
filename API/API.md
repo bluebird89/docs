@@ -301,14 +301,14 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 
 # 前端获取 code & state
 GET https://github.com/login/oauth/authorize?client_id=your_client_id&redirect_uri=your_callback_url&scope=user&state=random_string
-| name | type | description |
-| ------------ | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| client_id | string | 第一步中注册得到的ClientID |
-| redirect_uri | string | 第一步中设置的回调地址 |
-| loin | string | 推荐登录的 Github 账户，一般不填 |
-| scope | string | 这个参数指定了最后能获取到的信息，取值范围有 user 和 repo 等等,默认同时取 user 和 repo 的信息，详细取值范围见Github 文档 |
-| state | string | 你设定的一个随机值，用来防止 cross-sit 攻击 |
-| allow_signup | string | 这个参数指定是否允许用户在认证的时候注册 Github 账号，默认是 true |
+| name         | type   | description                                                                                                              |
+| ------------ | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| client_id    | string | 第一步中注册得到的ClientID                                                                                               |
+| redirect_uri | string | 第一步中设置的回调地址                                                                                                   |
+| loin         | string | 推荐登录的 Github 账户，一般不填                                                                                         |
+| scope        | string | 这个参数指定了最后能获取到的信息，取值范围有 user 和 repo 等等,默认同时取 user 和 repo 的信息，详细取值范围见Github 文档 |
+| state        | string | 你设定的一个随机值，用来防止 cross-sit 攻击                                                                              |
+| allow_signup | string | 这个参数指定是否允许用户在认证的时候注册 Github 账号，默认是 true                                                        |
 ## 要求用户登录，然后询问是否同意给予授权
 ## 跳转到redirect_uri指定的跳转网址，并且带上授权码
 http://localhost:8080/oauth/callback?code=859310e7cecc9196f4af
@@ -316,13 +316,13 @@ http://localhost:8080/oauth/callback?code=859310e7cecc9196f4af
 # 后端获取 access_token
 POST https://github.com/login/oauth/access_token
 
-| Name | Type | Description |
+| Name          | Type   | Description                   |
 | ------------- | ------ | ----------------------------- |
-| client_id | string | 第一步中获取到的 ClientID |
+| client_id     | string | 第一步中获取到的 ClientID     |
 | cleint_secret | string | 第一步中获取到的 ClientSecret |
-| code | string | 第二步中前端获取到的 code |
-| redirect_uri | string | 第一步中设置的回调地址 |
-| state | string | 第一步中设置的随机值 |
+| code          | string | 第二步中前端获取到的 code     |
+| redirect_uri  | string | 第一步中设置的回调地址        |
+| state         | string | 第一步中设置的随机值          |
 ## 根据头部的 Accept 的值返回
 application/x-www-form-urlencoded
 access_token=e72e16c7e42f292c6912e7710c838347ae178b4a&token_type=bearer
@@ -522,7 +522,7 @@ https://api.github.com/user
   - response normalization：和 request 阶段的 normalization 类似，在输出阶段，需要将结果转换成合适的格式返回给用户。response normalization 也有很多 strategy，比如：
     + output adapter：如果说 input adapter 是为有洁癖的程序员准备的，可有可无，那么 output adapter 则并非如此。它能保持输出格式的一致和统一。比如你的数据库里的字段是 camel case，你的程序也都是用 camel case，然而 API 的输出需要统一为 snake case，那么，在 output adapter 这个阶段统一处理会好过每个 API 自己处理。
     + aliasing：很多时候获得的数据的名称和定义好的 API 的接口的名称并不匹配，如果在每个 API 里面单独处理非常啰嗦。这种处理可以被抽取出来放在 normalization 的阶段完成。API 的撰写者只需要定义名称 A 需要被 alias 成 B 就好，剩下的由框架帮你完成。
-    + partial response：partial response 是 google API 的一个非常有用的特性（见：https://developers.google.com/+/web/api/rest/#partial-response ），他能让你不改变 API 实现的情况下，由客户端来决定服务器返回什么样的结果（当前结果的一个子集），这非常有利于节省网络带宽。
+    + partial response：partial response 是 google API 的一个非常有用的特性（见：<https://developers.google.com/+/web/api/rest/#partial-response> ），他能让你不改变 API 实现的情况下，由客户端来决定服务器返回什么样的结果（当前结果的一个子集），这非常有利于节省网络带宽。
   - serialization：如果 API 支持 content negotiation，那么服务器在有可能的情况下，优先返回客户端建议的输出类型。同一个 API，android 可以让它返回 application/msgpack；web 可以让它返回 application/json，而 xbox 可以获得 application/xml 的返回，各取所需。
   - postserialization：这也是个 hook，在数据最终被发送给客户端前，API 调用者可以最后一次 inject 自己想要的逻辑。一般而言，一些 API 系统内部的统计数据可以在此收集（所有的出错处理路径和正常路径都在这里交汇）。
 
@@ -638,11 +638,11 @@ https://api.github.com/user
 
 ### [encode/apistar](https://github.com/encode/apistar)
 
-A smart Web API framework, for Python 3. 🌟 https://docs.apistar.com
+A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
 
 * pip3 install apistar
 * Create a new project in app.py, python app.py
-* Open http://127.0.0.1:5000/docs/ in your browser
+* Open <http://127.0.0.1:5000/docs/> in your browser
 
 ```py
 from apistar import App, Route
@@ -760,7 +760,7 @@ print dec_message   // Hello World!
   - URI的格式定义如下：`URI = scheme "://" authority "/" path \[ "?" query \] \[ "#" fragment \]`
   - URL 是 URI 的一个子集(一种具体实现)，对于 REST API 来说一个资源一般对应一个唯一的 URI（URL
   - "/"分隔符一般用来对资源层级的划分。对于 RESTful API 来说，"/"只是一个分隔符，并无其他含义。为了避免混淆，"/"不应该出现在URL的末尾
-  - URL 中尽量使用连字符"-"代替下划线`"_"`的使用。 连字符"-"一般用来分割 URL 中出现的字符串(单词)，来提高 URL 的可读性，例如：http://api.example.restapi.org/blogs/mark-masse/entries/this-is-my-first-post。使用下划线"_"来分割字符串(单词)可能会和链接的样式冲突重叠，而影响阅读性。但实际上，"-"和"_"对URL 中字符串的分割语意上还是有些差异的："-"分割的字符串(单词)一般各自都具有独立的含义，可参见上面的例子。而"_"一般用于对一个整体含义的字符串做了层级的分割，方便阅读，例如你想在 URL 中体现一个 IP 地址的信息：210_110_25_88
+  - URL 中尽量使用连字符"-"代替下划线`"_"`的使用。 连字符"-"一般用来分割 URL 中出现的字符串(单词)，来提高 URL 的可读性，例如：<http://api.example.restapi.org/blogs/mark-masse/entries/this-is-my-first-post>。使用下划线"_"来分割字符串(单词)可能会和链接的样式冲突重叠，而影响阅读性。但实际上，"-"和"_"对URL 中字符串的分割语意上还是有些差异的："-"分割的字符串(单词)一般各自都具有独立的含义，可参见上面的例子。而"_"一般用于对一个整体含义的字符串做了层级的分割，方便阅读，例如你想在 URL 中体现一个 IP 地址的信息：210_110_25_88
   - URL应该统一使用小写字母
   - URL中不要包含文件(脚本)的扩展名。例如 .json 之内的就不要出现了，对于接口来说没有任何实际的意义。如果是想对返回的数据内容格式标示的话，通过 HTTP Header 中的 Content-Type 字段更好一些。
   - 对于响应返回的格式，JSON 因为它的可读性、紧凑性以及多种语言支持等优点，成为了 HTTP API 最常用的返回格式。因此，最好采用 JSON 作为返回内容的格式。如果用户需要其他格式，比如 xml，应该在请求头部 Accept 中指定。对于不支持的格式，服务端需要返回正确的 status code，并给出详细的说明。
@@ -821,7 +821,7 @@ print dec_message   // Hello World!
         - 按照请求参数名的字母升序排列非空请求参数（包含AccessKey)stringA="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random";
         - 拼接密钥SecretKeystringSignTemp="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random&SecretKey=secret";
         - MD5并转换为大写 sign=MD5(stringSignTemp).toUpperCase();
-        - 最终请求http://api.test.com/test?name=hello&home=world&work=java×tamp=now&nonce=nonce&sign=sign;
+        - 最终请求<http://api.test.com/test?name=hello&home=world&work=java×tamp=now&nonce=nonce&sign=sign>;
 * Token&AppKey（APP）:这些接口进行身份验证,涉及到用户状态时，每次请求都要带上身份验证信息
   - Token身份验证
     + 用户登录向服务器提供认证信息（如账号和密码），服务器验证成功后返回Token给客户端；
@@ -836,27 +836,27 @@ print dec_message   // Hello World!
 
 ## [APIJSON](https://github.com/APIJSON/APIJSON)
 
-* 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！ 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. http://apijson.org
+* 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！ 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. <http://apijson.org>
 
 ## 接口
 
-* [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. https://ultimatecourses.com
+* [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. <https://ultimatecourses.com>
 * [雅虎天气](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 * [价格](http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice)
 * [Vespa314/bilibili-api](https://github.com/Vespa314/bilibili-api):B站API收集整理及开发
 * [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
-* [toddmotto/public-apis](https://github.com/toddmotto/public-apis):A collective list of public JSON APIs for use in web development. https://toddmotto.com
+* [toddmotto/public-apis](https://github.com/toddmotto/public-apis):A collective list of public JSON APIs for use in web development. <https://toddmotto.com>
 * [pwxcoo/chinese-xinhua](https://github.com/pwxcoo/chinese-xinhua):📙 中华新华字典数据库。包括歇后语，成语，词语，汉字。提供新华字典API。
-* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐 Node.js API service https://binaryify.github.io/NeteaseCloudMusicApi/#/
+* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐 Node.js API service <https://binaryify.github.io/NeteaseCloudMusicApi/#/>
 * 豆瓣
   - [douban](https://developers.douban.com/wiki/?title=guide)
   - [获取正在热映的电影](https://api.douban.com/v2/movie/in_theaters?city=广州&start=0&count=10)
   - [获取电影Top250](https://api.douban.com/v2/movie/top250?start=0&count=10)
   - [电影搜索](https://api.douban.com/v2/movie/search?q=神秘巨星&start=0&count=10)
   - [电影详情](https://api.douban.com/v2/movie/subject/26942674)
-* [r/SpaceX ](https://docs.spacexdata.com/?version=latest)
+* [r/SpaceX](https://docs.spacexdata.com/?version=latest)
 * [RollToolsApi](https://www.mxnzp.com/):开放易用的接口服务
-* [ chubin / wttr.in ](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather https://wttr.in
+* [chubin / wttr.in](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather <https://wttr.in>
 
 ## 图书
 
@@ -873,22 +873,22 @@ print dec_message   // Hello World!
   - ava / rewire / supertest / nyc
 * Gateway
   - [TykTechnologies/tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
-* [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API https://try-puppeteer.appspot.com/
-* [thx/RAP](https://github.com/thx/RAP):Web接口管理工具，开源免费，接口自动化，MOCK数据自动生成，自动化测试，企业级管理。阿里妈妈MUX团队出品！阿里巴巴都在用！1000+公司的选择！RAP2已发布请移步至https://github.com/thx/rap2-delos http://rapapi.org
-* [thx/rap2-delos](https://github.com/thx/rap2-delos):阿里妈妈前端团队出品的开源接口管理工具RAP第二代 http://rap2.taobao.org
-* [encode/apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 https://docs.apistar.com
-* [ruby-grape/grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. http://www.ruby-grape.org
-* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ https://www.django-rest-framework.org
+* [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API <https://try-puppeteer.appspot.com/>
+* [thx/RAP](https://github.com/thx/RAP):Web接口管理工具，开源免费，接口自动化，MOCK数据自动生成，自动化测试，企业级管理。阿里妈妈MUX团队出品！阿里巴巴都在用！1000+公司的选择！RAP2已发布请移步至<https://github.com/thx/rap2-delos> <http://rapapi.org>
+* [thx/rap2-delos](https://github.com/thx/rap2-delos):阿里妈妈前端团队出品的开源接口管理工具RAP第二代 <http://rap2.taobao.org>
+* [encode/apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
+* [ruby-grape/grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. <http://www.ruby-grape.org>
+* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ <https://www.django-rest-framework.org>
 * [paularmstrong/normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
 * [dingo/api](https://github.com/dingo/api):A RESTful API package for the Laravel and Lumen frameworks.
-* [parse-community/parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express http://parseplatform.org
-* [interagent/http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API https://www.gitbook.com/read/book/gee…
+* [parse-community/parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express <http://parseplatform.org>
+* [interagent/http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API <https://www.gitbook.com/read/book/gee>…
 * [typicode/json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
-* [tobscure/json-api](https://github.com/tobscure/json-api):JSON-API (http://jsonapi.org) responses in PHP.
-* [hashicorp/vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management https://www.vaultproject.io/
-* [nsf/termbox-go](https://github.com/nsf/termbox-go):Pure Go termbox implementation http://code.google.com/p/termbox
-* [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool https://dredd.rtfd.io
-* [hellofresh/janus](https://github.com/hellofresh/janus):An API Gateway written in Go https://hellofresh.gitbooks.io/janus
+* [tobscure/json-api](https://github.com/tobscure/json-api):JSON-API (<http://jsonapi.org>) responses in PHP.
+* [hashicorp/vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management <https://www.vaultproject.io/>
+* [nsf/termbox-go](https://github.com/nsf/termbox-go):Pure Go termbox implementation <http://code.google.com/p/termbox>
+* [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.rtfd.io>
+* [hellofresh/janus](https://github.com/hellofresh/janus):An API Gateway written in Go <https://hellofresh.gitbooks.io/janus>
 * [SocketLog](https://github.com/luofei614/SocketLog)
 * 加密
   - [google/tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
@@ -896,8 +896,8 @@ print dec_message   // Hello World!
 * 测试
   - Poster 火狐浏览器的一个插件
     - postman
-    - [liyasthomas/postwoman](https://github.com/liyasthomas/postwoman):https://github.com/liyasthomas/postwoman
-    - [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool https://dredd.org
+    - [liyasthomas/postwoman](https://github.com/liyasthomas/postwoman):<https://github.com/liyasthomas/postwoman>
+    - [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.org>
     - [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
     - RESTClient是用java Swing编写的基于http协议的接口测试工具
     - Fiddler是一个http协议调试代理工具，它能够记录并检查所有你的电脑和互联网之间的http通讯，设置断点，查看所有的“进出”Fiddler的数据（指cookie,html,js,css等文件，这些都可以胡乱修改的意思）,测试的数据都可以保存,但测试记录不方便查询
@@ -906,26 +906,26 @@ print dec_message   // Hello World!
     - WireMock是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
     - 冒烟测试用poster，集成测试用Jmeter
 * 文档
-  - [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io
-  - [YMFE/yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 http://yapi.demo.qunar.com/
+  - [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
+  - [YMFE/yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 <http://yapi.demo.qunar.com/>
   * [gongwalker/ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
-  - [jsdoc3/jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. http://usejsdoc.org
-  - [swagger](https://app.swaggerhub.com/home)Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. http://swagger.io
-  - [freeCodeCamp/devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser https://devdocs.io
-  - [lord/slate](https://github.com/lord/slate):Beautiful static documentation for your API https://spectrum.chat/slate
+  - [jsdoc3/jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. <http://usejsdoc.org>
+  - [swagger](https://app.swaggerhub.com/home)Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
+  - [freeCodeCamp/devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser <https://devdocs.io>
+  - [lord/slate](https://github.com/lord/slate):Beautiful static documentation for your API <https://spectrum.chat/slate>
   - YUI doc
   - eolinker
   - Apizza
-  - [Redocly/redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation https://redocly.github.io/redoc/
+  - [Redocly/redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation <https://redocly.github.io/redoc/>
   - [RAP2](http://rap2.taobao.org)
   - DOClever
   - [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
-  - [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 https://www.showdoc.cc
+  - [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 <https://www.showdoc.cc>
 * 抓包
   - Charles
   - fiddler
   - [Wireshark](https://www.wireshark.org)
-  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy https://wproxy.org/
+  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy <https://wproxy.org/>
 * API 文档/契约生成工具
   - blue sprint
   - RAML
@@ -934,7 +934,7 @@ print dec_message   // Hello World!
   - json-server
   - node-mock-server
   - node-mocks-http
-  - [nuysoft/Mock](https://github.com/nuysoft/Mock):A simulation data generator http://mockjs.com
+  - [nuysoft/Mock](https://github.com/nuysoft/Mock):A simulation data generator <http://mockjs.com>
 * HTTP 请求拦截器
   - axios-mock-adapter
   - jquery-mockjax
@@ -946,7 +946,7 @@ print dec_message   // Hello World!
 
 ## 参考
 
-* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository https://openapis.org 针对 RESTful API 设计在细节层面给出了非常具体的规定，已经成为 RESTful API 设计领域的事实标准
+* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository <https://openapis.org> 针对 RESTful API 设计在细节层面给出了非常具体的规定，已经成为 RESTful API 设计领域的事实标准
 * [Google API Design Guide](https://cloud.google.com/apis/design)从云厂商的角度提出许多最佳实践性质的规范与建议，这些原则不仅仅适用于 RESTful API，也适合其他类型API设计。
 * [jsonapi](https://jsonapi.org/format/)
 * [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API

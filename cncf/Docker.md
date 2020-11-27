@@ -1,6 +1,6 @@
 # [moby](https://github.com/moby/moby)
 
-Moby Project - a collaborative project for the container ecosystem to assemble container-based systems https://mobyproject.org/
+Moby Project - a collaborative project for the container ecosystem to assemble container-based systems <https://mobyproject.org/>
 
 * 基于 Go 语言并遵从Apache2.0协议开源的应用容器引擎
 * 基于LXC技术之上构建的container容器引擎，通过内核虚拟化技术（namespace及cgroups）来提供容器的资源隔离与安全保障，KVM是通过硬件实现的虚拟化技术，它是通过系统来实现资源隔离与安全保障，占用系统资源比较小
@@ -175,7 +175,7 @@ docker cp # 从容器里向外拷贝文件或目录
 ## 配置
 
 * `/etc/docker/daemon.json`
-* centos:`/usr/lib/systemd/system/docker.service `
+* centos:`/usr/lib/systemd/system/docker.service`
 
 ```sh
 docker build  --no-cache --build-arg HTTP_PROXY=http://xx.xx.xx.xx:xx --build-arg HTTPS_PROXY=http://xx.xx.xx.xx:xx -t elasticsearch-curator:5.4 .
@@ -355,6 +355,7 @@ sudo systemctl restart docker
   - AUFX（Another UnionFS），做到了支持将不同目录挂在到同一个虚拟文件系统下，AUFX支持为每一个成员目录设定权限readonly，readwrite等，同时引入分层概念，对于readonly的权限branch可以逻辑进行增量修改
     + 典型：aufs/overlayfs，分层镜像实现的基础
   - Docker的初始化是将rootfs以readonly加载，之后利用union mount将一个readwrite文件系统挂载在readonly的rootfs之上，并向上叠加，这一系列的结构构成了container运行时。
+
 - 安全性
   - 借助linux的kernel namspace和cgroups实现
   - deamon的安全接口
@@ -1124,7 +1125,7 @@ docker push 192.168.1.2/csphere/nginx:1.7
 
 ## [docker/compose](https://github.com/docker/compose)
 
-Define and run multi-container applications with Docker https://docs.docker.com/compose/
+Define and run multi-container applications with Docker <https://docs.docker.com/compose/>
 
 * Docker 官方编排（Orchestration）项目之一，负责快速在集群中部署分布式应用
 * 来源于之前的Fig项目，使用python代码编写
@@ -1655,7 +1656,7 @@ services:
 
 ## [portainer/portainer](https://github.com/portainer/portainer)
 
-Simple management UI for Docker http://portainer.io
+Simple management UI for Docker <http://portainer.io>
 
 ```sh
 docker volume create portainer_data
@@ -1770,17 +1771,17 @@ kubectl-debug <POD_NAME>
 
 ## 资源
 
-* [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host https://vmware.github.io/photon
-* [docker-library/official-images](https://github.com/docker-library/official-images):https://github.com/docker-library/official-images
+* [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host <https://vmware.github.io/photon>
+* [docker-library/official-images](https://github.com/docker-library/official-images):<https://github.com/docker-library/official-images>
 * [vagrant-libvirt/vagrant-libvirt](https://github.com/vagrant-libvirt/vagrant-libvirt):Vagrant provider for libvirt.
 * [deviantony/docker-elk](https://github.com/deviantony/docker-elk):The ELK stack powered by Docker and Compose.
-* [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. https://blog.jessfraz.com/post/docker-containers-on-the-desktop/
-* [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
+* [jessfraz/dockerfiles](https://github.com/jessfraz/dockerfiles):Various Dockerfiles I use on the desktop and on servers. <https://blog.jessfraz.com/post/docker-containers-on-the-desktop/>
+* [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) <https://www.awaimai.com/2120.html>
 * GUI
-  - [shipyard/shipyard](https://github.com/shipyard/shipyard) Composable Docker Management http://shipyard-project.com
+  - [shipyard/shipyard](https://github.com/shipyard/shipyard) Composable Docker Management <http://shipyard-project.com>
     + [shipyard](https://shipyard-project.com/):Built on Docker Swarm, Shipyard gives you the ability to manage Docker resources including containers, images, private registries and more.
-  - https://www.portainer.io/
-  - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows https://kitematic.com/
+  - <https://www.portainer.io/>
+  - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows <https://kitematic.com/>
   - [DockStation](https://dockstation.io/)
   - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
   - [Portainer](link) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
@@ -1791,15 +1792,15 @@ kubectl-debug <POD_NAME>
 ## 工具
 
 * [docker/swarm](https://github.com/docker/swarm) Swarm: a Docker-native clustering system
-* [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go https://drone.io
-* [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes https://docs.openfaas.com/
+* [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go <https://drone.io>
+* [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes <https://docs.openfaas.com/>
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
 * [tobegit3hub/seagull](https://github.com/tobegit3hub/seagull):Friendly Web UI to manage and monitor docker
 * [v2tec/watchtower](https://github.com/v2tec/watchtower):Automatically update running Docker containers
 * [docker/cli](https://github.com/docker/cli):The Docker CLI
 * [wagoodman/dive](https://github.com/wagoodman/dive):A tool for exploring each layer in a docker image
 * [spotify/docker-gc](https://github.com/spotify/docker-gc):Docker garbage collection of containers and images
-* [google/gvisor](https://github.com/google/gvisor):Container Runtime Sandbox https://gvisor.dev
+* [google/gvisor](https://github.com/google/gvisor):Container Runtime Sandbox <https://gvisor.dev>
 * [doctrine/annotations](https://github.com/doctrine/annotations):Annotations Docblock Parser
 * [jwilder/dockerize](https://github.com/jwilder/dockerize):Utility to simplify running applications in docker containers
 * [GoogleContainerTools/distroless](https://github.com/GoogleContainerTools/distroless):🥑 Language focused docker images, minus the operating system.
@@ -1816,5 +1817,5 @@ kubectl-debug <POD_NAME>
 
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 * [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)
-* https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html
+* <https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html>
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)

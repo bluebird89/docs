@@ -1,6 +1,6 @@
 # [ruby](https://github.com/ruby/ruby)
 
-The Ruby Programming Language https://www.ruby-lang.org/
+The Ruby Programming Language <https://www.ruby-lang.org/>
 
 * Convention over configuration;
 * DRY - Don't Repeat You;
@@ -162,22 +162,22 @@ rails server
 
 * [Ruby on Rails Tutorial](https://www.railstutorial.org/book)
 
-##  项目
+## 项目
 
-* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
+* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. <https://www.discourse.org>
 * [mame/quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages
 
 ## 工具
 
-* [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. https://activeadmin.info
-* [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables http://visionmedia.github.com/commander
-* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. https://www.discourse.org
-* [thoughtbot/factory_bot](https://github.com/thoughtbot/factory_bot):A library for setting up Ruby objects as test data. https://thoughtbot.com/open-source
+* [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. <https://activeadmin.info>
+* [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables <http://visionmedia.github.com/commander>
+* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. <https://www.discourse.org>
+* [thoughtbot/factory_bot](https://github.com/thoughtbot/factory_bot):A library for setting up Ruby objects as test data. <https://thoughtbot.com/open-source>
 * [thoughtbot/administrate](https://github.com/thoughtbot/administrate):A Rails engine that helps you put together a super-flexible admin dashboard.
-* [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord https://thoughtbot.com/open-source
-* [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. http://blog.plataformatec.com.br/tag/devise/
+* [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord <https://thoughtbot.com/open-source>
+* [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. <http://blog.plataformatec.com.br/tag/devise/>
 * [sferik/rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
-* [capistrano/capistrano](https://github.com/capistrano/capistrano):Remote multi-server automation tool http://www.capistranorb.com
+* [capistrano/capistrano](https://github.com/capistrano/capistrano):Remote multi-server automation tool <http://www.capistranorb.com>
 * [Ruby regular expression editor](https://rubular.com):a Ruby regular expression editor
 
 ## 参考

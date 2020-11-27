@@ -206,28 +206,28 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 数据库
 
-* [dbeaver/dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client http://dbeaver.jkiss.org
-* [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. http://knexjs.org
+* [dbeaver/dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client <http://dbeaver.jkiss.org>
+* [tgriesser/knex](https://github.com/tgriesser/knex):A query builder for PostgreSQL, MySQL and SQLite3, designed to be flexible, portable, and fun to use. <http://knexjs.org>
 * [alibaba/otter](https://github.com/alibaba/otter)：阿里巴巴分布式数据库同步系统(解决中美异地机房)
 * [Nozbe/WatermelonDB](https://github.com/Nozbe/WatermelonDB):🍉 Next-gen database for powerful React and React Native apps that scales to 10,000s of records and remains fast ⚡️
 * [pingcap/tidb](https://github.com/pingcap/tidb)TiDB is a distributed NewSQL database compatible with MySQL protocol
 * [apache/incubator-superset](https://github.com/apache/incubator-superset): a modern, enterprise-ready business intelligence web application. a data exploration and visualization web application.
 * [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor)输入SQL，输出索引优化建议
-* [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database http://greenplum.org
-* [realm/realm-js](https://github.com/realm/realm-js):Realm is a mobile database: an alternative to SQLite & key-value stores https://realm.io
+* [greenplum-db/gpdb](https://github.com/greenplum-db/gpdb):Greenplum Database <http://greenplum.org>
+* [realm/realm-js](https://github.com/realm/realm-js):Realm is a mobile database: an alternative to SQLite & key-value stores <https://realm.io>
 * [orbitdb/orbit-db](https://github.com/orbitdb/orbit-db):Peer-to-Peer Databases for the Decentralized Web
-* [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. https://prometheus.io/
-* [arangodb/arangodb](https://github.com/arangodb/arangodb):🥑 ArangoDB is a native multi-model database with flexible data models for documents, graphs, and key-values. Build high performance applications using a convenient SQL-like query language or JavaScript extensions. https://www.arangodb.com
-* [amark/gun](https://github.com/amark/gun):A realtime, decentralized, offline-first, graph database engine. https://gun.eco/docs
-* [vasilakisfil/Introspected-REST](https://github.com/vasilakisfil/Introspected-REST):An alternative to REST and GraphQL https://introspected.rest
+* [prometheus/prometheus](https://github.com/prometheus/prometheus)：The Prometheus monitoring system and time series database. <https://prometheus.io/>
+* [arangodb/arangodb](https://github.com/arangodb/arangodb):🥑 ArangoDB is a native multi-model database with flexible data models for documents, graphs, and key-values. Build high performance applications using a convenient SQL-like query language or JavaScript extensions. <https://www.arangodb.com>
+* [amark/gun](https://github.com/amark/gun):A realtime, decentralized, offline-first, graph database engine. <https://gun.eco/docs>
+* [vasilakisfil/Introspected-REST](https://github.com/vasilakisfil/Introspected-REST):An alternative to REST and GraphQL <https://introspected.rest>
 * [alibaba/tair](https://github.com/alibaba/tair):A distributed key-value storage system developed by Alibaba Group
-* [taosdata/TDengine](https://github.com/taosdata/TDengine):An open-source big data platform designed and optimized for the Internet of Things (IoT). https://www.taosdata.com
-* [apple/foundationdb](https://github.com/apple/foundationdb):FoundationDB - the open source, distributed, transactional key-value store https://www.foundationdb.org
-* [msiemens/tinydb](https://github.com/msiemens/tinydb):TinyDB is a lightweight document oriented database optimized for your happiness :) https://tinydb.readthedocs.org
+* [taosdata/TDengine](https://github.com/taosdata/TDengine):An open-source big data platform designed and optimized for the Internet of Things (IoT). <https://www.taosdata.com>
+* [apple/foundationdb](https://github.com/apple/foundationdb):FoundationDB - the open source, distributed, transactional key-value store <https://www.foundationdb.org>
+* [msiemens/tinydb](https://github.com/msiemens/tinydb):TinyDB is a lightweight document oriented database optimized for your happiness :) <https://tinydb.readthedocs.org>
 * [gruns/ImmortalDB](https://github.com/gruns/ImmortalDB):🔩 A relentless key-value store for the browser.
-* [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. https://www.cockroachlabs.com
-* [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB https://dgraph.io
-* [pouchdb](https://github.com/pouchdb/pouchdb):🐨 - PouchDB is a pocket-sized database. https://pouchdb.com/
+* [cockroachdb/cockroach](https://github.com/cockroachdb/cockroach):CockroachDB - the open source, cloud-native SQL database. <https://www.cockroachlabs.com>
+* [dgraph-io/dgraph](https://github.com/dgraph-io/dgraph):Fast, Distributed Graph DB <https://dgraph.io>
+* [pouchdb](https://github.com/pouchdb/pouchdb):🐨 - PouchDB is a pocket-sized database. <https://pouchdb.com/>
 * [apache/hive](https://github.com/apache/hive) Mirror of Apache Hive
 * [leveldb](https://github.com/google/leveldb) LevelDB is a fast key-value storage library written at Google that provides an ordered mapping from string keys to string values.
 * [DCache](https://github.com/tencent/dcache):分布式 NoSQL 存储系统,基于 TARS 微服务治理方案，支持 k-v、k-k-row、list、set 与 zset 多种数据结构，数据基于内存存储，同时支持后接 DB 实现数据持久化。DCache 具备快速水平扩展能力，同时配套有 Web 运维平台实现高效的运维操作。
@@ -256,20 +256,20 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 工具
 
-* [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files http://harelba.github.io/q/
-* [ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. https://clickhouse.tech
-* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. https://osquery.io
+* [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files <http://harelba.github.io/q/>
+* [ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. <https://clickhouse.tech>
+* [facebook/osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. <https://osquery.io>
   - [Docs](https://osquery.readthedocs.io)
-* [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file https://www.adminer.org/
-* [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. http://vitess.io
-* [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. http://redash.io/
+* [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file <https://www.adminer.org/>
+* [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. <http://vitess.io>
+* [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 * [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
-* [prisma/prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy https://www.prisma.io
+* [prisma/prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy <https://www.prisma.io>
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
-* [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(https://www.aliyun.com/product/datalakeanalytics )、DRDS、TDDL 连接池powered by Druid https://github.com/alibaba/druid/wiki
-* [cloudera/hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. http://gethue.com
+* [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(<https://www.aliyun.com/product/datalakeanalytics> )、DRDS、TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>
+* [cloudera/hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. <http://gethue.com>
 * [xo/usql](https://github.com/xo/usql):Universal command-line interface for SQL databases
-* [franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. https://franchise.cloud
+* [franchise](https://github.com/HVF/franchise)：🍟 a notebook sql client. what you get when have a lot of sequels. <https://franchise.cloud>
 * [Debezium](link)
   - 一个变更数据捕获（Change Data Capture, CDC） 平台，可以将数据库变更流式传输到Kafka 的 topics
   - 对数据库日志文件中的变更做出反应，并具有多个CDC连接器，适用于多种数据库，其中包括Postgres、MySQL、Oracle 和 MongoDB

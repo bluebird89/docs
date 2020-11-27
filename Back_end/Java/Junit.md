@@ -1,6 +1,6 @@
 # [Junit](https://github.com/junit-team/junit5)
 
-* The next generation of JUnit. https://junit.org
+* The next generation of JUnit. <https://junit.org>
 * 测试方法使用@Test修饰
 * 使用public void修饰，不带任何参数
 * 新建源代码目录存放测试代码
@@ -44,5 +44,5 @@ Error:代码异常引起
 ## 参考
 
 * [docs](https://junit.org/junit5/docs/current/user-guide/)
-* [Writing Tests with JUnit 5 ](https://blog.jetbrains.com/idea/2020/09/writing-tests-with-junit-5/)
+* [Writing Tests with JUnit 5](https://blog.jetbrains.com/idea/2020/09/writing-tests-with-junit-5/)
 * [unit test](https://mkyong.com/unittest/)

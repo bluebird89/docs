@@ -156,10 +156,12 @@ http.cors.allow-origin: "*"
 * Elastic 数据管理的顶层单位就叫做 Index（索引）,它是单个数据库的同义词
 * 索引有一个名称，名字必须是小写
 * 相似结构文档的集合，每个文档都有一个对应的文档 ID，文档内容被表示为一系列关键词的集合。例如，文档 1 经过分词，提取了 20 个关键词，每个关键词都会记录它在文档中出现的次数和出现位置
+
 + type:相当于表结构描述
   - 在 7.0 开始，一个索引只能创建一个 Type，也就是 _doc
   - 每个索引里都可以有一个或多个 Type，Type 是索引中的一个逻辑数据分类，一个 Type 下的文档，都有相同的字段（Field），比如博客系统，有一个索引，可以定义用户数据 Type，博客数据 Type，评论数据 Type 等
   - 文档必须属于一个类型。在 ElasticSearch 中，一个索引对象可以存储多个不同用途的对象，通过索引类型可以区分单个索引中的不同对象，可以理解为关系型数据库中的表。每个索引类型可以有不同的结构，但是不同的索引类型不能为相同的属性设置不同的类型
+
 * 映射 mapping
   - 非常类似于静态语言中的数据类型：声明一个变量为 int 类型的变量，以后这个变量都只能存储 int 类型的数据。同样的，一个 number 类型的 mapping 字段只能存储 number 类型的数据。
   - 同语言的数据类型相比，Mapping 还有一些其他的含义，Mapping 不仅告诉 ElasticSearch 一个 Field 中是什么类型的值，还告诉 ElasticSearch 如何索引数据以及数据是否能被搜索到。
@@ -498,7 +500,7 @@ index.translog.interval
     + analyzer：当分析查询字符串的时候使用的分词器
     + analyze_wildcard：通配符或者前缀查询是否被分析，默认为 false
     + explain：在每个返回结果中，将包含评分机制的解释
-    + _source：是否包含元数据，同时支持 _source_includes 和 _source_excludes
+    + _source：是否包含元数据，同时支持_source_includes 和_source_excludes
     + lenient：若设置为 true，字段类型转换失败的时候将被忽略，默认为 false
     + default_operator：默认多个条件的关系，AND 或者 OR，默认为 OR
     + search_type：搜索的类型，可以为 dfs_query_then_fetch 或 query_then_fetch，默认为 query_then_fetch
@@ -811,7 +813,7 @@ open http://localhost:9200/_plugin/head/
   - 消息队列:Redis、Rabbitmq、Kafka、Hadoop、webhdfs
 * 流程
   - 运行好elasticsearch curl一下localhost:9200
-  - 运行 kibana  http://127.0.0.1:5601
+  - 运行 kibana  <http://127.0.0.1:5601>
 
 ```sh
 elasticsearch-plugin list
@@ -863,7 +865,7 @@ cd /usr/local/logstash-2.1.1/bin
 
 ## [beats](https://github.com/elastic/beats)
 
-🐠 Beats - Lightweight shippers for Elasticsearch & Logstash https://www.elastic.co/products/beats
+🐠 Beats - Lightweight shippers for Elasticsearch & Logstash <https://www.elastic.co/products/beats>
 
 * Filebeat to send log lines to Logstash
   - collects logs from files on the server and forwards these logs to your Logstash instance for processing
@@ -872,7 +874,7 @@ cd /usr/local/logstash-2.1.1/bin
 * 设置Kibana dashboards `filebeat setup --dashboards`
 * 启动Filebeat:`filebeat -e -c filebeat.yml -d "publish"`
 * 在每个节点部署filbeat，将监控日志推送
-  -  redis或kafka做数据缓冲层来使用
+  - redis或kafka做数据缓冲层来使用
   - logstash集群内
 
 ```
@@ -908,7 +910,7 @@ setup.kibana:
 
 ## [kibana](https://github.com/elastic/kibana)
 
-📊 Kibana analytics and search dashboard for Elasticsearch https://www.elastic.co/products/kibana
+📊 Kibana analytics and search dashboard for Elasticsearch <https://www.elastic.co/products/kibana>
 
 * 默认 5601 端口
 * 汉化
@@ -1034,12 +1036,12 @@ setup.ilm.overwrite: true
   - [elastic/elasticsearch-js](https://github.com/elastic/elasticsearch-js):Official Elasticsearch client library for Node.js and the browser
 * sync
   - [siddontang/go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
-* [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch https://elastalert.readthedocs.org
+* [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch <https://elastalert.readthedocs.org>
 * UI
-  - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. https://opensource.appbase.io/dejavu/
-  - [elasticsearch-HQ](https://github.com/ElasticHQ/elasticsearch-HQ):Monitoring and Management Web Application for ElasticSearch instances and clusters. http://www.elastichq.org
+  - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. <https://opensource.appbase.io/dejavu/>
+  - [elasticsearch-HQ](https://github.com/ElasticHQ/elasticsearch-HQ):Monitoring and Management Web Application for ElasticSearch instances and clusters. <http://www.elastichq.org>
 
 ## 参考
 
-* [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html
+* [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html>
 * [SpringBoot 操作 ElasticSearch 详解](https://mp.weixin.qq.com/s/qDbaDDDIJ81u8JY8CQJCTQ)
