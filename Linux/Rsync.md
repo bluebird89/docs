@@ -76,24 +76,24 @@ sudo pacman -S rsync
 * -z, --compress  对备份的文件在传输时进行压缩处理
 * --exclude=PATTERN 指定排除不需要传输的文件模式;--include=PATTERN 指定不排除而需要传输的文件模式.都不能使用间隔符
 * --exclude-from=FILE 排除FILE中指定模式的文件;--include-from=FILE 不排除FILE指定模式匹配的文件
-    - 若文件/目录在剔除列表中，则忽略传输
-    - 若文件/目录在包含列表中，则传输之
-    - 若文件/目录未被提及，也传输之
-    - 规则文件 FILE 的书写约定
-        + 每行书写一条规则 RULE
-        + 以 # 或 ; 开始的行为注释行
-    - 包含（include）和排除（exclude）规则的语法如下：
-        + include PATTERN 或简写为 + PATTERN
-        + exclude PATTERN 或简写为 - PATTERN
-    - PATTERN 的书写规则如下：
-        + 以 / 开头：匹配被传输的跟路径上的文件或目录
-        + 以 / 结尾：匹配目录而非普通文件、链接文件或设备文件
-        + 使用通配符
-        + *：匹配非空目录或文件（遇到 / 截止）
-        + **：匹配任何路径（包含 / ）
-        + ?：匹配除了 / 的任意单个字符
-        + [：匹配字符集中的任意一个字符，如 [a-z] 或 [[:alpha:]]
-        + 可以使用转义字符 \ 将上述通配符还原为字符本身含义
+  - 若文件/目录在剔除列表中，则忽略传输
+  - 若文件/目录在包含列表中，则传输之
+  - 若文件/目录未被提及，也传输之
+  - 规则文件 FILE 的书写约定
+    + 每行书写一条规则 RULE
+    + 以 # 或 ; 开始的行为注释行
+  - 包含（include）和排除（exclude）规则的语法如下：
+    + include PATTERN 或简写为 + PATTERN
+    + exclude PATTERN 或简写为 - PATTERN
+  - PATTERN 的书写规则如下：
+    + 以 / 开头：匹配被传输的跟路径上的文件或目录
+    + 以 / 结尾：匹配目录而非普通文件、链接文件或设备文件
+    + 使用通配符
+    + *：匹配非空目录或文件（遇到 / 截止）
+    + **：匹配任何路径（包含 / ）
+    + ?：匹配除了 / 的任意单个字符
+    + [：匹配字符集中的任意一个字符，如 [a-z] 或 [[:alpha:]]
+    + 可以使用转义字符 \ 将上述通配符还原为字符本身含义
 * --version  打印版本信息
 * --address  绑定到特定的地址
 * --config=FILE  指定其他的配置文件，不使用默认的rsyncd.conf文件
@@ -339,5 +339,5 @@ done
 
 ## 参考
 
-* [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files https://rclone.org
+* [ncw/rclone](https://github.com/ncw/rclone):"rsync for cloud storage" - Google Drive, Amazon Drive, S3, Dropbox, Backblaze B2, One Drive, Swift, Hubic, Cloudfiles, Google Cloud Storage, Yandex Files <https://rclone.org>
 * [rsync 用法教程](http://www.ruanyifeng.com/blog/2020/08/rsync.html)

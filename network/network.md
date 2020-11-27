@@ -169,7 +169,7 @@ arp -a
     + 远程主机用自己的私钥，解密登录密码，如果密码正确，就同意用户登录
   - 威胁：中间人攻击：攻击者插在用户与远程主机之间，用伪造的公钥，获取用户的登录密码，再用这个密码登录远程主机
     + 在通过 SSH 首次进行远程登录的时候，系统会要求你比对返回的公钥是否与目标服务器上的公钥信息一致，查看公钥 `ssh-keyscan -t ECDSA -p 22 laravelacademy.org`
-  - 每个用户都有自己的 `known_hosts` 文件，此外还有一个系统级的 `/etc/ssh/ssh_known_hosts `文件，用于保存对所有用户都可信赖的远程主机的公钥
+  - 每个用户都有自己的 `known_hosts` 文件，此外还有一个系统级的 `/etc/ssh/ssh_known_hosts`文件，用于保存对所有用户都可信赖的远程主机的公钥
   - 免密码登录远程服务器:`cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
 * FTP File Transfer Protocol 文件传输协议:在两个相连的计算机（通常是本地主机与服务器）之间进行文件传输的协议
   - 使用两个 TCP 连接实现文件传输：一个 TCP 连接用于控制，另一个 TCP 连接用于数据传输
@@ -1005,7 +1005,7 @@ Introspected tunnels to localhost
 * lsof 列出当前系统打开的文件描述符工具
 * netstat:一个网络信息统计工具。可以得到网卡接口上全部了解，路由表信息，网卡接口信息
 * dpkt定义包packet类，网络报文类型的基础类
-  - IP，ICMP等继承于dpkt class，每一个子类有一个_ hdr_ 结构，此结构定义了不同报文的头部，方便取出相应的控制字段
+  - IP，ICMP等继承于dpkt class，每一个子类有一个_hdr_ 结构，此结构定义了不同报文的头部，方便取出相应的控制字段
 * scapy:这个是嗅探包不是爬虫框架scrapy
 
 ```sh
@@ -1071,18 +1071,18 @@ lsof -d 2-3
 
 ## 工具
 
-* [localtunnel/localtunnel](https://github.com/localtunnel/localtunnel):expose yourself https://localtunnel.me
+* [localtunnel/localtunnel](https://github.com/localtunnel/localtunnel):expose yourself <https://localtunnel.me>
 * [cisco/joy](https://github.com/cisco/joy):A package for capturing and analyzing network flow data and intraflow data, for network research, forensics, and security monitoring.
 * [SolarWinds](http://www.solarwinds.com):管理大小企业网络上的网络流量。网络设备监控器可监控你网络上的任何一个设备，查找各种提示或错误
-* [maxmcd/webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC https://maxmcd.github.io/webtty/
-* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. https://www.v2ray.com/
-* [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system http://www.librenms.org/
+* [maxmcd/webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC <https://maxmcd.github.io/webtty/>
+* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/>
+* [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system <http://www.librenms.org/>
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
 * [IPv6 连接测试](https://test-ipv6.com/)
-* [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. https://github.com/henrylee2cn/tpdoc
-* [tailscale / tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.https://tailscale.com/
+* [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. <https://github.com/henrylee2cn/tpdoc>
+* [tailscale / tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.<https://tailscale.com/>
 * [chiakge / Linux-NetSpeed](https://github.com/chiakge/Linux-NetSpeed):将Linux现常用的网络加速集成在一起
-* [ehang-io / nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.https://ehang.io/nps/documents
+* [ehang-io / nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.<https://ehang.io/nps/documents>
 
 ## 参考
 
@@ -1090,8 +1090,8 @@ lsof -d 2-3
 * [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/)
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [submarine cable map](https://www.submarinecablemap.com/)
-* http://libevent.org/
-* [家庭网络知识整理](https://github.com/blanboom/awesome-home-networking-cn)https://blanboom.org/2020/awesome-home-networking-cn/
+* <http://libevent.org/>
+* [家庭网络知识整理](https://github.com/blanboom/awesome-home-networking-cn)<https://blanboom.org/2020/awesome-home-networking-cn/>
 
 <http://blog.csdn.net/hguisu/article/details/7445768/>
 <http://blog.csdn.net/hguisu/article/details/7444092>
@@ -1099,4 +1099,4 @@ lsof -d 2-3
 <http://blog.csdn.net/tongdoudpj/article/details/1750045>
 <https://www.zhihu.com/question/20215561>
 <http://www.cnblogs.com/JohnTsai/p/5197646.html>
-http://blog.csdn.net/dragonyangang/article/details/77937042
+<http://blog.csdn.net/dragonyangang/article/details/77937042>

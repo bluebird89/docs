@@ -1,11 +1,10 @@
 # [underscore](https://github.com/jashkenas/underscore)
 
-JavaScript's utility _ belt http://underscorejs.org
+JavaScript's utility _ belt <http://underscorejs.org>
 
 JavaScript是函数式编程语言，支持高阶函数和闭包.可是Object实现map()和filter()方法，underscore则提供了一套完善的函数式编程的接口，让我们更方便地在JavaScript中实现函数式编程。
 
 在加载时，会把自身绑定到唯一的全局变量_上，这也是为啥它的名字叫underscore的原因。
-
 
 ## 使用
 
@@ -17,6 +16,7 @@ _.map({ a: 1, b: 2, c: 3 }, (v, k) => k + '=' + v); // ['a=1', 'b=2', 'c=3']
 ### Collections
 
 underscore为集合类对象提供了一致的接口。集合类是指Array和Object，暂不支持Map和Set。
+
 * map()操作的返回结果是Array
 * mapObject()返回对象
 * 当集合的所有元素都满足条件时，_.every()函数返回true，

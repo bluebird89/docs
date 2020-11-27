@@ -95,9 +95,11 @@ but you can never leave!
 ```
 
 ## Edelweiss
+
     Jeanette Olsson
 
 ## The End of World
+
    原唱 Skeeter Davis 作词：Sylvia Dee 作曲：Arthur Kent
 
 ```
@@ -327,6 +329,7 @@ music
 ```
 
 ## 《朋友》
+
     谭咏麟
 
 ```
@@ -926,6 +929,7 @@ Waiting for you
 ```
 
 ## The Sound Of Silence
+
  Simon And Garfunkel 1964年发行的这张专辑 《Wednesday Morning, 3 A.M.》由于这张专辑销量实在太差，解散了——Simon回了英国，Garfunkel回了哥大
 
 ```
@@ -1097,7 +1101,7 @@ Let it burn
 我的余生 都用来寻找北方
 ```
 
-## ？
+##
 
             陈粒
 
@@ -1248,18 +1252,18 @@ Let it burn
 ```
     暗淡了刀光剑影
     远去了鼓角铮鸣
-    眼前飞扬着一个个鲜活的面容 　　
+    眼前飞扬着一个个鲜活的面容
     湮没了黄尘古道
     荒芜了烽火边城
-    岁月啊你带不走那一串串熟悉的姓名 　　
+    岁月啊你带不走那一串串熟悉的姓名
     兴亡谁人定啊
     盛衰岂无凭啊
     一夜风云散啊
-    变幻了时空 　　
+    变幻了时空
     聚散皆是缘啊
     离合总关情啊
     担当生前事啊
-    何计身后评 　　
+    何计身后评
     长江有意化作泪
     长江有情起歌声
     历史的天空闪烁几颗星
@@ -1768,8 +1772,6 @@ Let it burn
 　　自始至终只愿被你心痛，和你耳鬃斯磨不管以后。
 　　一切本无由爱恨莫强求，缘起缘灭花开花谢，相聚离别一生只一回。
 ```
-
-　　　
 
 ## 温柔
 
@@ -3116,10 +3118,10 @@ AH 因你今晚共我唱
 ## 白鸽
 
 * 《What are words》-Chris Medina﻿﻿
-* 《Communication》-The Cardigans﻿﻿﻿﻿﻿﻿
-* 《不露声色》-Jam﻿﻿﻿﻿﻿﻿﻿
-* 《理想三旬》-陈鸿宇﻿﻿﻿﻿﻿﻿
-* 《消愁》-毛不易﻿﻿﻿
+* 《Communication》-The Cardigans
+* 《不露声色》-Jam
+* 《理想三旬》-陈鸿宇
+* 《消愁》-毛不易
 * 《上心》-郑欣宜﻿﻿
 * 《最佳损友》-陈奕迅
 * 《Hey Jude》-The Beatles

@@ -795,7 +795,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 解决方案
     + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx) <https://certbot.eff.org/>
     + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
-    + [acmesh-official / acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
+    + [acmesh-official / acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * 验证域名的所有权
   - http方式是将随机生成的验证文件放入网站的根目录,由机构扫描验证
   - DNS方式则是将随机生成的验证码创建域名的TXT记录由机构扫描验证.验证通过即可颁发证书
@@ -1110,7 +1110,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * 每个连接都有一组连接ID。连接各端可以设定自己的连接ID，同时认可对方的连接ID。连接ID的作用在于从逻辑上标识当前连接。所以，如果用户的IP发生变化而连接ID没有变化，因为packet包含了网络ID标识符，所以只需要继续发送数据包就可以重新建立连接
 * QPACK：所有的header必须通过同一数据流来传输，而且必须严格有序。但是这样一来，从HTTP 1.1开始就困扰HTTP已久的队头阻塞又出现了
 * [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
-* [cloudflare / quiche](https://github.com/cloudflare/quiche):pie Savoury implementation of the QUIC transport protocol and HTTP/3 https://docs.quic.tech/quiche/
+* [cloudflare / quiche](https://github.com/cloudflare/quiche):pie Savoury implementation of the QUIC transport protocol and HTTP/3 <https://docs.quic.tech/quiche/>
 * [HTTP/3：从 SPDY 到 QUIC](https://blog.skk.moe/post/http3-from-spdy-to-quic/)
 
 ## 长连接
@@ -1129,7 +1129,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 ## 短链
 
 * 哈希
-  - Google 出品的 MurmurHash 算法:一种非加密型哈希函数，适用于一般的哈希检索操作。与其它流行的哈希函数相比，对于规律性较强的 key，MurmurHash 的随机分布特征表现更良好。非加密意味着着相比 MD5，SHA 这些函数它的性能肯定更高（实际上性能是 MD5 等加密算法的十倍以上）, 提供了两种长度的哈希值，32 bit，128 bit，为了让网址尽可通地短，选择 32 bit 的哈希值，32 bit 能表示的最大值近 43 亿，对于中小型公司的业务而言绰绰有余。对上文提到的极客长链做 MurmurHash 计算，得到的哈希值为 3002604296，于是现在得到的短链为 固定短链域名+哈希值 = http://gk.link/a/3002604296.3002604296 转为 62 进制可缩短它的长度
+  - Google 出品的 MurmurHash 算法:一种非加密型哈希函数，适用于一般的哈希检索操作。与其它流行的哈希函数相比，对于规律性较强的 key，MurmurHash 的随机分布特征表现更良好。非加密意味着着相比 MD5，SHA 这些函数它的性能肯定更高（实际上性能是 MD5 等加密算法的十倍以上）, 提供了两种长度的哈希值，32 bit，128 bit，为了让网址尽可通地短，选择 32 bit 的哈希值，32 bit 能表示的最大值近 43 亿，对于中小型公司的业务而言绰绰有余。对上文提到的极客长链做 MurmurHash 计算，得到的哈希值为 3002604296，于是现在得到的短链为 固定短链域名+哈希值 = <http://gk.link/a/3002604296.3002604296> 转为 62 进制可缩短它的长度
   - 哈希冲突
     + 将长链（lurl）经过 MurmurHash 后得到短链。
     + 再根据短链去 short_url_map 表中查找看是否存在相关记录，如果不存在，将长链与短链对应关系插入数据库中，存储。
@@ -1141,7 +1141,7 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
   - Redis:布置 10 台机器，每台机器分别只生成尾号0，1，2，... 9 的 ID, 每次加 10 即可，只要设置一个 ID 生成器代理随机分配给发号器生成  ID 就行了。考虑持久化（短链 ID 总不能一样吧），灾备，成本有点高
   - Snowflake:不错的选择，不过 Snowflake 依赖于系统时钟的一致性。如果某台机器的系统时钟回拨，有可能造成 ID 冲突，或者 ID 乱序
   - Mysql 自增主键
-    + 设计一个专门的发号表，每插入一条记录，为短链 id 预留（主键 id * 1000 - 999） 到  (主键 id  * 1000) 的号段
+    + 设计一个专门的发号表，每插入一条记录，为短链 id 预留（主键 id *1000 - 999） 到  (主键 id* 1000) 的号段
     + 当长链转短链的请求打到某台机器时，先看这台机器是否分配了短链号段，未分配就往发号表插入一条记录，则这台机器将为短链分配范围在 tmp_start_num 到 tmp_end_num 之间的 id。从 tmp_start_num 开始分配，一直分配到 tmp_end_num，如果发号 id 达到了 tmp_end_num，说明这个区间段的 id 已经分配完了，则再往发号表插入一条记录就又获取了一个发号 id 区间
 
 ## 渲染流程
@@ -1172,9 +1172,9 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 ## [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)
 
-As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, https://httpie.org
+As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, <https://httpie.org>
 
-* [eliangcs /http-prompt](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting http://http-prompt.com
+* [eliangcs /http-prompt](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting <http://http-prompt.com>
 
 ```sh
 # installed on any operating system.
@@ -1196,30 +1196,30 @@ http localhost:8000 Host:example.com
 ## 工具
 
 * [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
-* [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. https://netflix.github.io/pollyjs
+* [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. <https://netflix.github.io/pollyjs>
 * [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
-* [fukamachi/woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev http://ultra.wikia.com/wiki/Woo_(kaiju)
-* [mitmproxy/mitmproxy](https://github.com/mitmproxy/mitmproxy):An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. https://mitmproxy.org/
-* [mholt/caddy](hhttps://github.com/caddyserver/caddy):Fast, cross-platform HTTP/2 web server with automatic HTTPS https://caddyserver.com
-  - [phpple/caddy-cn-doc](https://github.com/phpple/caddy-cn-doc):Caddy中文文档 https://dengxiaolong.com/caddy/zh/
+* [fukamachi/woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev <http://ultra.wikia.com/wiki/Woo_(kaiju>)
+* [mitmproxy/mitmproxy](https://github.com/mitmproxy/mitmproxy):An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. <https://mitmproxy.org/>
+* [mholt/caddy](hhttps://github.com/caddyserver/caddy):Fast, cross-platform HTTP/2 web server with automatic HTTPS <https://caddyserver.com>
+  - [phpple/caddy-cn-doc](https://github.com/phpple/caddy-cn-doc):Caddy中文文档 <https://dengxiaolong.com/caddy/zh/>
 * [asciimoo/wuzz](https://github.com/asciimoo/wuzz):Interactive cli tool for HTTP inspection
-* [square/okhttp](https://github.com/squpare/okhttp):An HTTP+HTTP/2 client for Android and Java applications. http://square.github.io/okhttp/
+* [square/okhttp](https://github.com/squpare/okhttp):An HTTP+HTTP/2 client for Android and Java applications. <http://square.github.io/okhttp/>
 * [sindresorhus/ky](https://github.com/sindresorhus/ky):Tiny and elegant HTTP client based on the browser Fetch API
-* [oldj/SwitchHosts](https://github.com/oldj/SwitchHosts):Switch hosts quickly! https://oldj.github.io/SwitchHosts/
+* [oldj/SwitchHosts](https://github.com/oldj/SwitchHosts):Switch hosts quickly! <https://oldj.github.io/SwitchHosts/>
 * [coyove/goflyway](https://github.com/coyove/goflyway):An encrypted HTTP server
 * [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter):A high performance HTTP request router that scales well
-* [buger/goreplay](https://github.com/buger/goreplay):GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. https://goreplay.org
-* [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL https://packetsender.com/
+* [buger/goreplay](https://github.com/buger/goreplay):GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. <https://goreplay.org>
+* [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL <https://packetsender.com/>
 * flow-control
   - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
 * Performance Measurement
   * [Microsoft/Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
 * proxy
-  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy https://wproxy.org/
-  - [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ https://proxyman.io
+  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy <https://wproxy.org/>
+  - [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ <https://proxyman.io>
 * certificates
   - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
-  - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol https://acme.sh
+  - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * 抓包
   - [httpwatch](https://www.httpwatch.com/)
 

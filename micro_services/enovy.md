@@ -110,5 +110,5 @@ curl -s -o /dev/null -vvv -H 'Host: bing.com' localhost:15001
 
 ## 参考
 
-* [Envoy 中文指南 ](https://fuckcloudnative.io/envoy-handbook/)
+* [Envoy 中文指南](https://fuckcloudnative.io/envoy-handbook/)
 * [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/)

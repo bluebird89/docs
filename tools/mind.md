@@ -9,7 +9,7 @@
 * [百度脑图](https://naotu.baidu.com)
 * 一起写 yiqixie.com
 * [MindNode 2](https://mindnode.com/)（收费）
-    - MindNode Pro
+  - MindNode Pro
 * Mindly
 * iMindMap
 

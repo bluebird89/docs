@@ -4,7 +4,7 @@ curl is used in command lines or scripts to transfer data.发出网络请求，�
 
 ## 使用
 
-* ` curl  -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
+* `curl  -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
 * -A 指定客户端的用户代理标头，即User-Agent
 * -X：指定请求方式
 * <PROTOCOL>：协议，一般为HTTP协议
@@ -95,9 +95,9 @@ curl localhost:3000/api/json -X POST -d @data.json --header "Content-Type: appli
 
 ## wget
 
-*　参数
+*参数
     * -b :后台下载
-    * -o:
+    *-o:
     * -c:恢复下载
 
 ```sh

@@ -1,6 +1,6 @@
 # [containers/libpod](https://github.com/containers/libpod)
 
-libpod is a library used to create container pods. Home of Podman. https://podman.io/
+libpod is a library used to create container pods. Home of Podman. <https://podman.io/>
 
 * 可以管理和运行任何符合 OCI（Open Container Initiative）规范的容器和容器镜像
 * 原来是 CRI-O 项目的一部分，后来被分离成一个单独的项目叫 libpod

@@ -154,7 +154,7 @@
 * HTTP 客户端，PHP 只提供了 cURL 扩展，基本无敌，能搞定很多跨平台数据调用，进阶可以感受下 Socket 实现，不局限与应用层（HTTP），还可以直接走传输层（TCP/UDP），这方面重点考察 REST 的应用，进阶可以考察 RPC 之类。
 * 如果没有各种 SaaS 平台的使用和开发经验那是非常吃亏的，这方面的经验积累是长期的也是进阶的关键。
 
-## 数据库部分：
+## 数据库部分
 
 * MySQL索引优化、查询优化和存储优化
 * MySQL数据库设计、管理和优化，具备数据库规划能力
@@ -627,6 +627,7 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 ## 工具
 
 * [salomonelli/best-resume-ever](https://github.com/salomonelli/best-resume-ever):Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
+
 - [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)
 
 ## 资源
@@ -635,17 +636,17 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 * [jwasham/coding-interview-university](https://github.com/jwasham/coding-interview-university):A complete computer science study plan to become a software engineer.
 * [jdsutton/Technical-Interview-Megarepo](https://github.com/jdsutton/Technical-Interview-Megarepo):Study materials for SE/CS technical interviews
 * [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
-* [MaximAbramchuck/awesome-interview-questions](https://github.com/MaximAbramchuck/awesome-interview-questions)::octocat: A curated awesome list of lists of interview questions. Feel free to contribute! 🎓 https://github.com/BotCube/awesome-bots
+* [MaximAbramchuck/awesome-interview-questions](https://github.com/MaximAbramchuck/awesome-interview-questions)::octocat: A curated awesome list of lists of interview questions. Feel free to contribute! 🎓 <https://github.com/BotCube/awesome-bots>
 * [kdn251/interviews](https://github.com/kdn251/interviews):Everything you need to know to get the job.
 * [ElemeFE/node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.
 * [alex/what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
 * [kamranahmedse/developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2018
-* [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
-* [30-seconds/30-seconds-of-interviews](https://github.com/30-seconds/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. https://30secondsofinterviews.org
+* [fejes713/30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. <https://30secondsofinterviews.org>
+* [30-seconds/30-seconds-of-interviews](https://github.com/30-seconds/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. <https://30secondsofinterviews.org>
 * [imhuay/Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese):2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
 * [frank-lam/2019_campus_apply](https://github.com/frank-lam/2019_campus_apply):🚀 Full Stack Developer Tutorial，后台技术栈/全栈开发/架构师之路，秋招/春招/校招/面试。 from zero to hero.
-* [basecamp/handbook](https://github.com/basecamp/handbook):Basecamp Employee Handbook https://basecamp.com/about
+* [basecamp/handbook](https://github.com/basecamp/handbook):Basecamp Employee Handbook <https://basecamp.com/about>
 * [WsmDyj/Interview](https://github.com/WsmDyj/Interview):Some interview experience
-* [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):😋 技术面试必备基础知识 https://cyc2018.github.io/CS-Notes
+* [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):😋 技术面试必备基础知识 <https://cyc2018.github.io/CS-Notes>
 * [0voice/interview_internal_reference](https://github.com/0voice/interview_internal_reference):2019年最新总结，阿里，腾讯，百度，美团，头条等技术面试题目，以及答案，专家出题人分析汇总。
 * [qinxuewu/interview-docs](https://github.com/qinxuewu/interview-docs):Java知识学习总结+源码阅读笔记。

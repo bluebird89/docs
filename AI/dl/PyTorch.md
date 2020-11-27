@@ -1,6 +1,6 @@
 # [pytorch/pytorch](https://github.com/pytorch/pytorch)
 
-Tensors and Dynamic neural networks in Python with strong GPU acceleration http://pytorch.org
+Tensors and Dynamic neural networks in Python with strong GPU acceleration <http://pytorch.org>
 
 ## 应用
 
@@ -15,12 +15,12 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration http:
 ## 工具
 
 * [zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
-* [pytorch-lightning](https://github.com/PyTorchLightning/pytorch-lightning):The lightweight PyTorch wrapper for high-performance AI research. Scale your models, not the boilerplate. https://pytorch-lightning.readthedocs.io/en/stable/
+* [pytorch-lightning](https://github.com/PyTorchLightning/pytorch-lightning):The lightweight PyTorch wrapper for high-performance AI research. Scale your models, not the boilerplate. <https://pytorch-lightning.readthedocs.io/en/stable/>
 
 ## 参考
 
 * [pytorch/tutorials](https://github.com/pytorch/tutorials) <https://pytorch.org/tutorials/>
-* [apachecn/pytorch-doc-zh](https://github.com/apachecn/pytorch-doc-zh) PyTorch 中文文档 http://pytorch.apachecn.org
+* [apachecn/pytorch-doc-zh](https://github.com/apachecn/pytorch-doc-zh) PyTorch 中文文档 <http://pytorch.apachecn.org>
 * [chenyuntc/pytorch-book](https://github.com/chenyuntc/pytorch-book):PyTorch tutorials and fun projects including neural talk, neural style, poem writing, anime generation
 * [spro/practical-pytorch](https://github.com/spro/practical-pytorch):PyTorch tutorials demonstrating modern techniques with readable code
 * [yunjey/pytorch-tutorial](https://github.com/yunjey/pytorch-tutorial):PyTorch Tutorial for Deep Learning Researchers

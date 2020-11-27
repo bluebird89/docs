@@ -125,31 +125,31 @@
 * 支持向量机（Support Vector Machine，SVM）。可以用于基于图像的性别检测，图像分类等。
 * 集成方法（Ensemble methods）。通过构建一组分类器，然后根据它们的预测结果进行加权投票来对新的数据点进行分类。原始的集成方法是贝叶斯平均，但是最近的算法包括纠错输出编码、Bagging 和 Boosting
 * 方法
-    - 模型
-        + 正则化
-        + 交叉验证
-        + 生成方法
-            * 朴素贝叶斯
-            * 隐马尔可夫
-        + 判别方法
-            * k近邻法
-            * 感知机
-            * 决策树
-            * 逻辑斯蒂回归模型
-            * 最大熵模型
-            * 支持向量机
-            * 提升方法
-            * 条件随机场
-    - 策略
-    - 算法
+  - 模型
+    + 正则化
+    + 交叉验证
+    + 生成方法
+      * 朴素贝叶斯
+      * 隐马尔可夫
+    + 判别方法
+      * k近邻法
+      * 感知机
+      * 决策树
+      * 逻辑斯蒂回归模型
+      * 最大熵模型
+      * 支持向量机
+      * 提升方法
+      * 条件随机场
+  - 策略
+  - 算法
 * 泛化能力：根据上界定义
 * 标注分类
-    - 分类器
-        + 精确率
-        + 召回率
+  - 分类器
+    + 精确率
+    + 召回率
 * 回归
-    - 单变量回归
-    - 多变量线性回归
+  - 单变量回归
+  - 多变量线性回归
 * 线性回归，比较简单且直观的回归算法，线性回归可以有n个属性值，然后每个属性的线性组合组成一个预测函数，通过定义误差函数然后最小化样本整体的误差来确定预测函数的参数。
 * 逻辑斯蒂回归，可以说它是广义线性模型，原来的线性回归无法用于分类任务，那么通过一个sigmoid函数可以将其用于分类任务，这便是逻辑斯蒂回归。线性函数被映射到了S函数中，以0.5为分割点可作为二分类。逻辑斯蒂回归往多分类推广则变为softmax回归，可用于多分类任务。
 * 朴素贝叶斯，它是概率论中非常经典的方法，核心就是贝叶斯定理，通过条件独立假设来简化模型，通过样本来学习联合概率分布，其中涉及到先验概率分布和条件概率分布。
@@ -221,7 +221,7 @@
       - 信息熵（Information Entropy）
       - ID3
 * 预测树（CART）
-      * Gini指标（Gini Index）
+      *Gini指标（Gini Index）
       * 决策树与规则（DT and Rule Learning）
 * 作业/实践：决策树分类实验
 * 集成学习（Ensemble learning）
@@ -229,10 +229,12 @@
   - AdaBoost
   - 误差分解（Bias-Variance Decomposition）
   - 随机森林（Boosting and Random Forest）
+
 - 模型评估（Model Evaluation）
   - 交叉验证（Cross-Validation）
   - ROC (Receiver Operating Characteristics)
   - Cost-Sensitive Learning
+
 * 作业/实践：随机森林与决策树分类实验的比较
 
 ## 线性模型（Linear Models）
@@ -348,7 +350,7 @@
   - 工具：将machine learning知识应用于实际业务的工具
   - 逻辑：举一反三的能力，解决问题的条理性，你发散思维的能力，你的聪明程度
   - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
-* [机器学习 西瓜书 ](https://github.com/datawhalechina/pumpkin-book)基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等
+* [机器学习 西瓜书](https://github.com/datawhalechina/pumpkin-book)基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等
   - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
 * 《推荐系统实战》：项亮，很适合对于想了解推荐系统
 * 《概率论与数理统计》
@@ -360,7 +362,7 @@
 * [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
 * [Model-Based Machine Learning](http://mbmlbook.com/index.html)
 * [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
-* [machine-learning-systems-design ](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
+* [machine-learning-systems-design](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
 * 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
 * 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
 * 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
@@ -389,43 +391,43 @@
 * [机器学习（Machine Learning）吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
   - [斯坦福大学2014（吴恩达）机器学习教程中文笔记](https://www.coursera.org/course/ml)
   - [斯坦福大学机器学习课程](http://open.163.com/special/opencourse/machinelearning.html)
-  - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) http://coursegraph.com/coursera_ml
+  - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) <http://coursegraph.com/coursera_ml>
   - [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
-  - http://open.163.com/special/opencourse/machinelearning.html
-  - https://www.coursera.org/learn/machine-learning
+  - <http://open.163.com/special/opencourse/machinelearning.html>
+  - <https://www.coursera.org/learn/machine-learning>
   - [fengdu78/Coursera-ML-AndrewNg-Notes](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes):吴恩达老师的机器学习课程个人笔记
 * [李宏毅Machine Learning](https://www.bilibili.com/video/av15889450)
-  - 资料：http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html
-  - 课程视频：https://www.bilibili.com/video/av46561029/
-  - https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4
+  - 资料：<http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML19.html>
+  - 课程视频：<https://www.bilibili.com/video/av46561029/>
+  - <https://www.youtube.com/playlist?list=PLJV_el3uVTsOK_ZK5L0Iv_EQoL1JefRL4>
   - [李宏毅机器学习(2017)](https://www.bilibili.com/video/av10590361/)
-  - https://blog.csdn.net/soulmeetliang/article/details/77461607
+  - <https://blog.csdn.net/soulmeetliang/article/details/77461607>
   - [Doraemonzzz/ML-Foundation-and-ML-Techniques](https://github.com/Doraemonzzz/ML-Foundation-and-ML-Techniques):台大机器学习课程作业详解
 * [机器学习中的数学基础](https://www.bilibili.com/video/av15673238/)
 * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning
 * [Machine Learning 10-701/15-781, Spring 2011](http://www.cs.cmu.edu/~tom/10701_sp11/lectures.shtml)
 * [DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python](https://github.com/DeqianBai/Your-first-machine-learning-Project---End-to-End-in-Python):一个完整的，端到端的机器学习项目，非常适合有一定基础后拿来练习，以提高对完整机器学习项目的认识
-* [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 http://amlbook.com/
+* [Doraemonzzz/Learning-from-data](https://github.com/Doraemonzzz/Learning-from-data):记录Learning from data一书中的习题解答 <http://amlbook.com/>
 * [徐亦达](https://github.com/roboticcam/machine-learning-notes)
-  - YouTube： https://www.youtube.com/channel/UConITmGn5PFr0hxTI2tWD4Q
-  - 哔哩哔哩： https://space.bilibili.com/327617676
-  - 优酷： http://i.youku.com/i/UMzIzNDgxNTg5Ng
+  - YouTube： <https://www.youtube.com/channel/UConITmGn5PFr0hxTI2tWD4Q>
+  - 哔哩哔哩： <https://space.bilibili.com/327617676>
+  - 优酷： <http://i.youku.com/i/UMzIzNDgxNTg5Ng>
 * [Built on the AWS Cloud. Developed for Amazon developers and engineers.](https://aws.amazon.com/training/learning-paths/machine-learning/)
 * [fengdu78/machine_learning_beginner](https://github.com/fengdu78/machine_learning_beginner)
 * [A Course in Machine Learning](http://ciml.info/)
 * [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
-* [Yorko/mlcourse.ai](https://github.com/Yorko/mlcourse.ai):Open Machine Learning Course https://mlcourse.ai
+* [Yorko/mlcourse.ai](https://github.com/Yorko/mlcourse.ai):Open Machine Learning Course <https://mlcourse.ai>
 * [sjwhitworth/golearn](https://github.com/sjwhitworth/golearn):Machine Learning for Go
 
 ## 比赛
 
-* 天池大数据： https://tianchi.aliyun.com/home/
-* datacastle： http://www.pkbigdata.com/
-* datafountain： https://www.datafountain.cn/
-* biendata： https://biendata.com/
-* kesci： https://www.kesci.com/
-* Jdata: https://jdata.jd.com/
-* kaggle： https://www.kaggle.com/
+* 天池大数据： <https://tianchi.aliyun.com/home/>
+* datacastle： <http://www.pkbigdata.com/>
+* datafountain： <https://www.datafountain.cn/>
+* biendata： <https://biendata.com/>
+* kesci： <https://www.kesci.com/>
+* Jdata: <https://jdata.jd.com/>
+* kaggle： <https://www.kaggle.com/>
 
 ## 面试
 
@@ -445,18 +447,18 @@
 
 * [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web
 * [gorgonia/gorgonia](https://github.com/gorgonia/gorgonia):Gorgonia is a library that helps facilitate machine learning in Go.
-* [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. https://ray.readthedocs.io/en/latest/
+* [ray-project/ray](https://github.com/ray-project/ray):A system for parallel and distributed Python that unifies the ML ecosystem. <https://ray.readthedocs.io/en/latest/>
 * [google/jax](https://github.com/google/jax):GPU- and TPU-backed NumPy with differentiation and JIT compilation.
 * [Core ML](link)
 * [tirthajyoti/UCI-ML-API](https://github.com/tirthajyoti/UCI-ML-API):UCI ML网站引入一个简单直观的API，用户可以轻松查找数据集描述，搜索他们感兴趣的特定数据集，甚至可以按大小或机器学习任务分类下载数据集。
-* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web https://guess-js.github.io/
-* [streamlit/streamlit](https://github.com/streamlit/streamlit):Streamlit — The fastest way to build custom ML tools https://streamlit.io
+* [guess-js/guess](https://github.com/guess-js/guess):Libraries & tools for enabling Machine Learning driven user-experiences on the web <https://guess-js.github.io/>
+* [streamlit/streamlit](https://github.com/streamlit/streamlit):Streamlit — The fastest way to build custom ML tools <https://streamlit.io>
 * [apple/turicreate](https://github.com/apple/turicreate):Turi Create simplifies the development of custom machine learning models.
 * [ouyanghuiyu / chineseocr_lite](https://github.com/ouyanghuiyu/chineseocr_lite):超轻量级中文ocr，支持竖排文字识别, 支持ncnn推理 , psenet(8.5M) + crnn(6.3M) + anglenet(1.5M) 总模型仅17M
 * [apple / turicreate](https://github.com/apple/turicreate):Turi Create simplifies the development of custom machine learning models.
 * [Microsoft/onnxjs](https://github.com/Microsoft/onnxjs)：ONNX.js: run ONNX models using JavaScript
 * [Kubeflow](https://www.kubeflow.org/):The Machine Learning Toolkit for Kubernetes
-* [ deezer / spleeter ](https://github.com/deezer/spleeter):Deezer source separation library including pretrained models. https://research.deezer.com/projects/spleeter.html
+* [deezer / spleeter](https://github.com/deezer/spleeter):Deezer source separation library including pretrained models. <https://research.deezer.com/projects/spleeter.html>
 
 ## 参考
 
@@ -465,11 +467,11 @@
 * [jobbole/awesome-machine-learning-cn](https://github.com/jobbole/awesome-machine-learning-cn):机器学习资源大全中文版，包括机器学习领域的框架、库以及软件
 * [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)A curated list of awesome Machine Learning frameworks, libraries and software.
 * [ZuzooVn/machine-learning-for-software-engineers](https://github.com/ZuzooVn/machine-learning-for-software-engineers):A complete daily plan for studying to become a machine learning engineer.
-* [airbnb/aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. http://airbnb.github.io/aerosolve/
+* [airbnb/aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. <http://airbnb.github.io/aerosolve/>
 * [ageron/handson-ml](https://github.com/ageron/handson-ml):A series of Jupyter notebooks that walk you through the fundamentals of Machine Learning and Deep Learning in python using Scikit-Learn and TensorFlow.
-* [hangtwenty/dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! http://hangtwenty.github.io/dive-into-machine-learning/
+* [hangtwenty/dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! <http://hangtwenty.github.io/dive-into-machine-learning/>
 * [wizardforcel/nyu-mlif-notes](https://github.com/wizardforcel/nyu-mlif-notes):📖 NYU 金融机器学习 中文笔记
-* [mlflow/mlflow](https://github.com/mlflow/mlflow):Open source platform for the machine learning lifecycle https://mlflow.org
+* [mlflow/mlflow](https://github.com/mlflow/mlflow):Open source platform for the machine learning lifecycle <https://mlflow.org>
 * [zhaozhengcoder/Machine-Learning](https://github.com/zhaozhengcoder/Machine-Learning)：关于机器学习的内容
 * [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):A practical approach to learning machine learning.
 * [sea-boat/MachineLearning_Lab](https://github.com/sea-boat/MachineLearning_Lab):Code lab for machine learning. Including Least Square Method,Gradient Descent,Newton's Method,Hierarchy Cluster,KNN,Markov,Adaboost,Random Number Generation(all kinds of distributions),N Sigma outlier detection,outlier detection based on median,FFT outlier detection,DBSCAN,Kmeans,Naive Bayes,perceptron,reinforcement learning.
@@ -478,13 +480,13 @@
 * [MIT Deep Learning](http://www.deeplearningbook.org/)：Bengio写的MIT Press《Deep learning》
 * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著
 * [yhangf/ML-NOTE](https://github.com/yhangf/ML-NOTE):📙慢慢整理所学的机器学习算法，并根据自己所理解的样子叙述出来。(注重数学推导)
-* [hankcs / HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 http://hanlp.com/
+* [hankcs / HanLP](https://github.com/hankcs/HanLP):中文分词 词性标注 命名实体识别 依存句法分析 语义依存分析 新词发现 关键词短语提取 自动摘要 文本分类聚类 拼音简繁转换 自然语言处理 <http://hanlp.com/>
 * [](https://github.com/apache/predictionio)
 * [Bilibili-机器学习白板系列](https://www.yuque.com/bystander-wg876/yc5f72)
 * [Support Vector Machine](https://mp.weixin.qq.com/s/SackOqskC88pB0582bDg8A)
 
-* 火光摇曳：腾讯技术大牛们的博客 http://www.flickering.cn/
-* 美团技术团队的博客：https://tech.meituan.com/
-* 苏剑林的博客里面也全是干货 https://spaces.ac.cn/
-* Netflix：Netflix技术博客，很多干货。 https://medium.com/netflix-techblog
-* Towards Data Science：主要分享些概念、idea和代码。 https://towardsdatascience.com/
+* 火光摇曳：腾讯技术大牛们的博客 <http://www.flickering.cn/>
+* 美团技术团队的博客：<https://tech.meituan.com/>
+* 苏剑林的博客里面也全是干货 <https://spaces.ac.cn/>
+* Netflix：Netflix技术博客，很多干货。 <https://medium.com/netflix-techblog>
+* Towards Data Science：主要分享些概念、idea和代码。 <https://towardsdatascience.com/>

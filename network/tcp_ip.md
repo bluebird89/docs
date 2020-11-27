@@ -28,6 +28,7 @@
 ### TCP Transmission Control Protocol 传输控制协议
 
 * 基于连接的协议、端到端和可靠的数据包发送。应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送前分割为 IP 包，然后在到达时重组
+
 + 建立在不可靠的网络层 IP 协议之上，IP协议并不能提供任何可靠性机制，TCP的可靠性完全由自己实现，提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用
 + 特点
   * 能够确保连接的建立和数据包的发送
@@ -37,21 +38,21 @@
   * TCP头部：20个字节的固定首部
 + 编程步骤
   * 服务器端
-    - 创建一个socket，用函数socket()； 
+    - 创建一个socket，用函数socket()；
     - 设置socket属性，用函数setsockopt(); *可选*
-    - 绑定IP地址、端口等信息到socket上，用函数bind(); 
-    - 开启监听，用函数listen()； 
-    - 接收客户端上来的连接，用函数accept()； 
-    - 收发数据，用函数send()和recv()，或者read()和write(); 
-    - 通过函数断开连接； 
-    - 关闭监听； 
-  - 客户端： 
-    - 创建一个socket，用函数socket()； 
-    - 设置socket属性，用函数setsockopt();* 可选 
-    - 绑定IP地址、端口等信息到socket上，用函数bind();* 可选 
-    - 设置要连接的对方的IP地址和端口等属性； 
-    - 连接服务器，用函数connect()； 
-    - 收发数据，用函数send()和recv()，或者read()和write(); 
+    - 绑定IP地址、端口等信息到socket上，用函数bind();
+    - 开启监听，用函数listen()；
+    - 接收客户端上来的连接，用函数accept()；
+    - 收发数据，用函数send()和recv()，或者read()和write();
+    - 通过函数断开连接；
+    - 关闭监听；
+  - 客户端：
+    - 创建一个socket，用函数socket()；
+    - 设置socket属性，用函数setsockopt();* 可选
+    - 绑定IP地址、端口等信息到socket上，用函数bind();* 可选
+    - 设置要连接的对方的IP地址和端口等属性；
+    - 连接服务器，用函数connect()；
+    - 收发数据，用函数send()和recv()，或者read()和write();
     - 关闭网络连接；
 + 四元组可以确定唯一一个连接:源端口和目的端口字段 socket（IP+端口号）。TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口
   * 本地端口由16位组成,因此本地端口的最多数量为 2^16 = 65535个,本地的最大HTTP连接数为： 本地最大端口数65535 * 本地ip数1 = 65535 个
@@ -81,6 +82,7 @@
   * 检验和 —— 占 2 字节。检验和字段检验的范围包括首部和数据这两部分。在计算检验和时，要在TCP 报文段的前面加上 12 字节的伪部(协议字段为6，表示TCP)
   * 紧急指针字段 —— 占 16 位，指出在本报文段中紧急数据共有多少个字节(紧急数据放在本报文段数据的最前面)
   * 选项字段 —— 长度可变。① 最大报文段长度 MSS：MSS是指在TCP连接建立时，收发双发协商的通信时每一个报文段所能承载的数据字段的最大长度（并不是TCP报文段的最大长度，而是：MSS=TCP报文段长度-TCP首部长度），单位为字节（双方提供的MSS中的最小值，为本次连接的最大MSS值）；② 窗口扩大选项；③ 时间戳选项； ④ 选择确认选项
+
 * TCP报文首部
   - 源端口和目的端口，各占2个字节，分别写入源端口和目的端口
   - 序列号:占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题
@@ -137,9 +139,11 @@
   * 确认：传输过程中都有一个ACK，接收方通过ack告诉发送方收到那些包了。这样发送方能知道有没有丢包，进而确定重传.一旦发生丢包，TCP会将后续包缓存起来，等前面的包重传并接收到后再继续发送，延迟会越来越大
   * 超时重传：TCP协议保证数据可靠性的一个重要机制，其原理是在发送某一个数据以后就开启一个计时器，在一定时间内如果没有得到发送的数据报的ACK报文，那么就重新发送数据，直到发送成功为止。
   * 流量控制：让发送速率不要过快，让接收方来得及接收。利用滑动窗口机制就可以实施流量控制。
+
 + 为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销
 + 面向字节流：应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送
 + TCP的协议栈中维护着两个队列。一个是半连接队列(服务端收到请求未收到客户收到响应)，一个是全链接队列(服务端收到请求且收到客户收到响应)
+
 * 不管是半连接队列还是全连接队列，都有最大长度限制，超过限制时，内核会直接丢弃，或返回 RST 包 `cat /proc/sys/net/ipv4/tcp_abort_on_overflow`
   - 0 ：表示如果全连接队列满了，那么 server 扔掉 client  发过来的 ack,更有利于应对突发流量
     + 只要服务器没有为请求回复 ACK，请求就会被多次重发。如果服务器上的进程只是短暂的繁忙造成 accept 队列满，那么当 TCP 全连接队列有空位时，再次接收到的请求报文由于含有 ACK，仍然会触发服务器端成功建立连接.提高连接建立的成功率
@@ -277,7 +281,7 @@ netstat -napt
   - 保持 2 个 MSL 时间，即，4 分钟；（MSL 为 2 分钟）
 * 解决
   - 客户端，HTTP 请求的头部，connection 设置为 keep-alive，保持存活一段时间：现在的浏览器，一般都这么进行了
-  - 服务器端L允许 time_wait 状态的 socket 被重用 ` net.ipv4.tcp_timestamps=1 net.ipv4.tcp_tw_reuse = 1`
+  - 服务器端L允许 time_wait 状态的 socket 被重用 `net.ipv4.tcp_timestamps=1 net.ipv4.tcp_tw_reuse = 1`
   - 缩减 time_wait 时间，设置为 1 MSL（即，2 mins）
 
 ```sh
@@ -444,16 +448,16 @@ lsmod | grep bbr
 ## UDP User Data Protocol 用户数据报协议
 
 + 编程步骤
-  * 服务器端： 
-    - 创建一个socket，用函数socket() 
-    - 设置socket属性，用函数setsockopt(),可选 
-    - 绑定IP地址、端口等信息到socket上，用函数bind() 
-    - 循环接收数据，用函数recvfrom() 
-    - 关闭网络连接 
-  * 客户端： 
-    - 创建一个socket，用函数socket() 
-    - 设置socket属性，用函数setsockopt() 可选 
-    - 绑定IP地址、端口等信息到socket上，用函数bind() 可选 
+  * 服务器端：
+    - 创建一个socket，用函数socket()
+    - 设置socket属性，用函数setsockopt(),可选
+    - 绑定IP地址、端口等信息到socket上，用函数bind()
+    - 循环接收数据，用函数recvfrom()
+    - 关闭网络连接
+  * 客户端：
+    - 创建一个socket，用函数socket()
+    - 设置socket属性，用函数setsockopt() 可选
+    - 绑定IP地址、端口等信息到socket上，用函数bind() 可选
     - 设置对方的IP地址和端口等属性
     - 发送数据，用函数sendto()
     - 关闭网络连接
@@ -476,6 +480,7 @@ lsmod | grep bbr
   + 拥有大量Client
   + 对数据安全性无特殊要求
   + 网络负担非常重，但对响应速度要求高
+
 - 优势
   + 能够对握手过程进行精简，减少网络通信往返次数；
   + 能够对TLS加解密过程进行优化；
@@ -504,15 +509,16 @@ lsmod | grep bbr
   - TCP 有拥塞控制和流量控制机制，保证数据传输的安全性。
   - UDP 则没有，即使网络非常拥堵了，也不会影响 UDP 的发送速率,网络出现拥塞不会使源主机的发送速率降低
 * TCP的逻辑通信信道是全双工的可靠信道，UDP则是不可靠信道
+
 - 场景
   + FTP 文件传输 HTTP / HTTPS
   + 包总量较少的通信，如 DNS 、SNMP 等 视频、音频等多媒体通信 广播通信
 - 编程区别
-  + socket()的参数不同 
-  + UDP Server不需要调用listen和accept 
-  + UDP收发数据用sendto/recvfrom函数 
-  + TCP：地址信息在connect/accept时确定 
-  + UDP：在sendto/recvfrom函数中每次均需指定地址信息 
+  + socket()的参数不同
+  + UDP Server不需要调用listen和accept
+  + UDP收发数据用sendto/recvfrom函数
+  + TCP：地址信息在connect/accept时确定
+  + UDP：在sendto/recvfrom函数中每次均需指定地址信息
   + UDP：shutdown函数无效
 - Keep-Alive:如果连接双方如果没有一方主动断开都不会断开TCP连接，减少了每次建立HTTP连接时进行TCP连接的消耗. 每隔一段时间就会发送心跳，就可以很快的知道服务端节点的情况
   + 检查死节点:主要是为了让连接快速失败被发现，可以进行重新连接
@@ -641,11 +647,11 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * 工具
   - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
   - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
-  - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. https://dnscrypt.info
-  - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：https://coding.net/u/scaffrey/p/hosts/git
-  - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS https://tenta.com/test
+  - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. <https://dnscrypt.info>
+  - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：<https://coding.net/u/scaffrey/p/hosts/git>
+  - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS <https://tenta.com/test>
   - [Cloudflare](https://www.cloudflare.com):域名注册服务
-  - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins https://coredns.io
+  - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins <https://coredns.io>
 * 域名的NS记录（Name Server）是指处理域名解析的服务器
   - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
   - [DNSpod](https://console.dnspod.cn/)

@@ -1,6 +1,6 @@
 # [rocketmq](https://github.com/apache/rocketmq)
 
- a unified messaging engine, lightweight data processing platform. https://rocketmq.apache.org/
+ a unified messaging engine, lightweight data processing platform. <https://rocketmq.apache.org/>
 
 * 用了顺序写盘、mmap。并没有用到 sendfile ，还有一步页缓存到 SocketBuffer 的拷贝
 * 顺序写盘，整体来看是顺序读盘，并且使用了 mmap，不是真正的零拷贝。又因为页缓存的不确定性和 mmap 惰性加载(访问时缺页中断才会真正加载数据)，用了文件预先分配和文件预热即每页写入一个0字节，然后再调用mlock 和 madvise(MADV_WILLNEED)

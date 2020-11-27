@@ -143,10 +143,10 @@ XXX：添加一些新功能（简短的说明）
 
 ## 工具
 
-* [Phabricator](https://github.com/phacility/phabricator):Open software engineering platform and fun adventure game http://phacility.com/phabricator/
+* [Phabricator](https://github.com/phacility/phabricator):Open software engineering platform and fun adventure game <http://phacility.com/phabricator/>
   - Discuss. Plan. Code. Review. Test. Every application your project needs, all in one tool.
 * ReviewNinja
 * Codacy
 * RhodeCode
 * Gerrit
-* [reviewdog](https://github.com/reviewdog/reviewdog):dog Automated code review tool integrated with any code analysis tools regardless of programming language https://medium.com/@haya14busa/reviewdog-a-code-review-dog-who-keeps-your-codebase-healthy-d957c471938b#.8xctbaw5u
+* [reviewdog](https://github.com/reviewdog/reviewdog):dog Automated code review tool integrated with any code analysis tools regardless of programming language <https://medium.com/@haya14busa/reviewdog-a-code-review-dog-who-keeps-your-codebase-healthy-d957c471938b#.8xctbaw5u>

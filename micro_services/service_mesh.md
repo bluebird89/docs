@@ -157,7 +157,7 @@
 
 ## 工具
 
-* [kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. https://jimmysong.io
+* [kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. <https://jimmysong.io>
 * linkerd
 * [envoy](./envoy.md):数据平面
 * [lstio](./lstio.md)：增加控制平面，收购enovy
@@ -165,6 +165,6 @@
 
 ## 参考
 
-* [ServicemeshCN/awesome-servicemesh](https://github.com/ServicemeshCN/awesome-servicemesh):A curated list for awesome service mesh architectures https://servicemesh.gitbooks.io/aweso…
-* [ geektime-geekbang / geektime-servicemesh ](https://github.com/geektime-geekbang/geektime-servicemesh)
+* [ServicemeshCN/awesome-servicemesh](https://github.com/ServicemeshCN/awesome-servicemesh):A curated list for awesome service mesh architectures <https://servicemesh.gitbooks.io/aweso>…
+* [geektime-geekbang / geektime-servicemesh](https://github.com/geektime-geekbang/geektime-servicemesh)
 * Pattern:service Mesh

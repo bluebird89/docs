@@ -70,7 +70,7 @@
 
 ## 工具
 
-* [goldendict](https://github.com/goldendict/goldendict):A feature-rich dictionary lookup program, supporting multiple dictionary formats (StarDict/Babylon/Lingvo/Dictd) and online dictionaries, featuring perfect article rendering with the complete markup, illustrations and other content retained, and allowing you to type in words without any accents or correct case. http://goldendict.org/
+* [goldendict](https://github.com/goldendict/goldendict):A feature-rich dictionary lookup program, supporting multiple dictionary formats (StarDict/Babylon/Lingvo/Dictd) and online dictionaries, featuring perfect article rendering with the complete markup, illustrations and other content retained, and allowing you to type in words without any accents or correct case. <http://goldendict.org/>
 * 不背单词(推荐)
 * 扇贝
 * 墨墨

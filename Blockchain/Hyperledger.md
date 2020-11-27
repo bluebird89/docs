@@ -1,6 +1,6 @@
 # [hyperledger](https://github.com/hyperledger/hyperledger)
 
-Hyperledger Project is a new Collaborative Project at The Linux Foundation. The technical community is just getting started and will be adding code to the repository in the coming weeks. Check hyperledger.org for more information about joining the mailing lists and participating in the conversations. http://www.hyperledger.org
+Hyperledger Project is a new Collaborative Project at The Linux Foundation. The technical community is just getting started and will be adding code to the repository in the coming weeks. Check hyperledger.org for more information about joining the mailing lists and participating in the conversations. <http://www.hyperledger.org>
 
 ## 资源
 
@@ -9,4 +9,4 @@ Hyperledger Project is a new Collaborative Project at The Linux Foundation. The 
 
 ## 工具
 
-* [hyperledger/fabric](https://github.com/hyperledger/fabric):Read-only mirror of https://gerrit.hyperledger.org/r/#/admin/projects/fabric https://hyperledger.org
+* [hyperledger/fabric](https://github.com/hyperledger/fabric):Read-only mirror of <https://gerrit.hyperledger.org/r/#/admin/projects/fabric> <https://hyperledger.org>

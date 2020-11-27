@@ -48,6 +48,7 @@
 
 * 获取查询语句的执行计划，索引使用、扫描范围
 * id：该语句的唯一标识。如果explain的结果包括多个id值，则数字越大越先执行；而对于相同id的行，则表示从上往下依次执行
+
 - select_type:查询类型
   + SIMPLE： 简单查询，不包含 UNION 查询或子查询
   + PRIMARY： 主查询，或者最外层的查询
@@ -98,6 +99,7 @@
   + using tmporary：创建一个临时表来保存结果。如果查询包含不同列的GROUP BY和 ORDER BY子句，通常会发生这种情况
   + using filesort：对数据使用一个外部的索引排序，而不是按照表内的索引顺序进行读取. (当使用order by v1,而没用到索引时,就会使用额外的排序)
     * 当Query 中包含 ORDER BY 操作，而且无法利用索引完成排序操作的时候，MySQL Query Optimizer 不得不选择相应的排序算法来实现。数据较少时从内存排序，否则从磁盘排序。Explain不会显示的告诉客户端用哪种排序。官方解释：“MySQL需要额外的一次传递，以找出如何按排序顺序检索行。通过根据联接类型浏览所有行并为所有匹配WHERE子句的行保存排序关键字和行的指针来完成排序。然后关键字被排序，并按排序顺序检索行”
+
 * EXPLAIN可产生额外的扩展信息，可通过在EXPLAIN语句后紧跟一条SHOW WARNING语句查看扩展信息
   - 在MySQL 8.0.12及更高版本，扩展信息可用于SELECT、DELETE、INSERT、REPLACE、UPDATE语句；在MySQL 8.0.12之前，扩展信息仅适用于SELECT语句；
   - 在MySQL 5.6及更低版本，需使用EXPLAIN EXTENDED xxx语句；而从MySQL 5.7开始，无需添加EXTENDED关键词。
@@ -862,7 +864,7 @@ select colname from A Left join B on where a.id = b.id where b.id is null
   - 事务占用的 undo 数据块。
   - 事务在 redo log 中记录的数据块。
   - 释放事务施加的，减少锁争用影响性能。特别是在需要使用 delete 删除大量数据的时候，必须分解删除量并定期 commit
-* 避免重复查询更新的数据 `Update t1 set time=now() where col1=1 and @now: = now (); Select @now; `
+* 避免重复查询更新的数据 `Update t1 set time=now() where col1=1 and @now: = now (); Select @now;`
 * 查询优先还是更新（insert、update、delete）优先
   - MySQL 还允许改变语句调度的优先级，它可以使来自多个客户端的查询更好地协作，这样单个客户端就不会由于锁定而等待很长时间。改变优先级还可以确保特定类型的查询被处理得更快。
   - 首先应该确定应用的类型，判断应用是以查询为主还是以更新为主的，是确保查询效率还是确保更新的效率，决定是查询优先还是更新优先
@@ -908,6 +910,7 @@ select colname from A Left join B on where a.id = b.id where b.id is null
 * 选择正确存储引擎
   * MyISAM适用于读取繁重的应用程序，但是当有很多写入时它不能很好地扩展。即使正在更新一行的一个字段，整个表也被锁定，并且在语句执行完成之前，其他进程甚至无法读取该字段。 MyISAM在计算SELECT COUNT（*）的查询时非常快
   * InnoDB是一个更复杂的存储引擎，对于大多数小的应用程序，它比MyISAM慢。但它支持基于行的锁定，使其更好地扩展。还支持一些更高级的功能，比如事务
+
 + 使用一个对象关系映射器（Object Relational Mapper）
   - 使用 ORM (Object Relational Mapper)，你能够获得可靠的性能增涨。一个ORM可以做的所有事情，也能被手动的编写出来。但是，这需要一个高级专家。ORM 的最重要的是“Lazy Loading”，也就是说，只有在需要的去取值的时候才会去真正的去做。但你也需要小心这种机制的副作用，因为这很有可能会因为要去创建很多很多小的查询反而会降低性能。ORM 还可以把你的SQL语句打包成一个事务，这会比单独执行他们快得多得多。
   - Doctrine
@@ -1020,7 +1023,7 @@ optimize table tbl_name;
 
 ## PHP 优化
 
-* 无缓冲的查询：`mysql_unbuffered_query() `发送一个SQL语句到MySQL而并不像mysql_query()一样去自动fethch和缓存结果。这会相当节约很多可观的内存，尤其是那些会产生大量结果的查询语句，并且，不需要等到所有的结果都返回，只需要第一行数据返回的时候，就可以开始马上开始工作于查询结果了。然而，这会有一些限制。因为要么把所有行都读走，或是要在进行下一次的查询前调用 mysql_free_result() 清除结果。而且， mysql_num_rows() 或 mysql_data_seek() 将无法使用。所以，是否使用无缓冲的查询你需要仔细考虑。
+* 无缓冲的查询：`mysql_unbuffered_query()`发送一个SQL语句到MySQL而并不像mysql_query()一样去自动fethch和缓存结果。这会相当节约很多可观的内存，尤其是那些会产生大量结果的查询语句，并且，不需要等到所有的结果都返回，只需要第一行数据返回的时候，就可以开始马上开始工作于查询结果了。然而，这会有一些限制。因为要么把所有行都读走，或是要在进行下一次的查询前调用 mysql_free_result() 清除结果。而且， mysql_num_rows() 或 mysql_data_seek() 将无法使用。所以，是否使用无缓冲的查询你需要仔细考虑。
 * “永久链接”的目的是用来减少重新创建MySQL链接的次数。当一个链接被创建了，它会永远处在连接的状态，就算是数据库操作已经结束了。而且，自从我们的Apache开始重用它的子进程后——也就是说，下一次的HTTP请求会重用Apache的子进程，并重用相同的 MySQL 链接。 mysql_pconnect()
   - 这个功能制造出来的麻烦事更多。因为，你只有有限的链接数，内存问题，文件句柄数，等等。
   - Apache 运行在极端并行的环境中，会创建很多很多的了进程。这就是为什么这种“永久链接”的机制工作地不好的原因。在你决定要使用“永久链接”之前，你需要好好地考虑一下你的整个系统的架构。

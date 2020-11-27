@@ -24,7 +24,7 @@
 
 * Lua:静态编译的程序在执行前全部被翻译为机器码
 * 动态直译执行的则是一句一句边运行边翻译
-* [LuaRocks](https://github.com/luarocks/luarocks):LuaRocks is the package manager for the Lua programming language. http://www.luarocks.org
+* [LuaRocks](https://github.com/luarocks/luarocks):LuaRocks is the package manager for the Lua programming language. <http://www.luarocks.org>
 
 ```sh
 sudo apt install build-essential libreadline-dev
@@ -68,7 +68,7 @@ sudo make install
     + 已经创建好的 Lua 字符串之间进行相等性比较时是 O(1) 时间度的开销，而不是通常见到的 O(n)
 * table    实现了一种抽象的“关联数组”。“关联数组”是一种具有特殊索引方式的数组，索引通常是字符串（string）或者 number 类型，但也可以是除 nil 以外的任意类型的值
   - 内部实现上，table 通常实现为一个哈希表、一个数组、或者两者的混合.具体的实现动态依赖于具体的 table 的键分布特点
-  - table.getn(t) 等价于 #t 但计算的是数组元素，不包括 hash 键值。而且数组是以第一个 nil 元素来判断数组结束。# 只计算 array 的元素个数，它实际上调用了对象的 metatable 的 __len 函数。对于有 __len 方法的函数返回函数返回值，不然就返回数组成员数目
+  - table.getn(t) 等价于 #t 但计算的是数组元素，不包括 hash 键值。而且数组是以第一个 nil 元素来判断数组结束。# 只计算 array 的元素个数，它实际上调用了对象的 metatable 的 __len 函数。对于有__len 方法的函数返回函数返回值，不然就返回数组成员数目
   - 内部实际采用哈希表和数组分别保存键值对、普通值，所以不推荐混合使用这两种赋值方式
   - 允许 nil 值的存在，但是数组默认结束标志却是 nil
   - 一定不要使用 # 操作符或 table.getn 来计算包含 nil 的数组长度，这是一个未定义的操作，不一定报错，但不能保证结果如你所想
@@ -95,8 +95,8 @@ sudo make install
 * 优先级
   - ^
   - not   # -
-  - *   /   %
-  - +   -
+    - *   /   %
+    - +   -
   - ..
   - < > <=  >=  ==  ~=
   - and
@@ -208,9 +208,9 @@ sudo make install
 * Lua 正则
   - 使用 '%' 来进行转义，而其他语言的正则表达式使用 '\' 符号来进行转义
   - 并不使用 '?' 来表示非贪婪匹配，而是定义了不同的字符来表示是否是贪婪匹配
-    + + 匹配前一字符 1 次或多次     非贪婪
-    + * 匹配前一字符 0 次或多次     贪婪
-    + - 匹配前一字符 0 次或多次     非贪婪
+      + + 匹配前一字符 1 次或多次     非贪婪
+      + * 匹配前一字符 0 次或多次     贪婪
+      + - 匹配前一字符 0 次或多次     非贪婪
     + ?     匹配前一字符 0 次或1次     仅用于此，不用于标识是否贪婪
     + .     任意字符
     + %a     字母
@@ -261,19 +261,19 @@ local ffi = require "ffi"
 
 ## 工具
 
-* [LuaRocks ](https://luarocks.org/):the package manager for Lua modules
+* [LuaRocks](https://luarocks.org/):the package manager for Lua modules
 * 编辑器
   - hammerspoon
   - idea　插件　emmylua
 * 框架
-  - [torch/torch7](https://github.com/torch/torch7):Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an easy and fast scripting language, LuaJIT, and an underlying C/CUDA implementation. http://torch.ch/
+  - [torch/torch7](https://github.com/torch/torch7):Torch is a scientific computing framework with wide support for machine learning algorithms that puts GPUs first. It is easy to use and efficient, thanks to an easy and fast scripting language, LuaJIT, and an underlying C/CUDA implementation. <http://torch.ch/>
 * [Azure/golua](https://github.com/Azure/golua):A Lua 5.3 engine implemented in Go
-* [tboox/ltui](https://github.com/tboox/ltui):🍯A cross-platform terminal ui library based on Lua https://tboox.org
-* [tboox/xmake](https://github.com/tboox/xmake):🔥 A cross-platform build utility based on Lua https://xmake.io
+* [tboox/ltui](https://github.com/tboox/ltui):🍯A cross-platform terminal ui library based on Lua <https://tboox.org>
+* [tboox/xmake](https://github.com/tboox/xmake):🔥 A cross-platform build utility based on Lua <https://xmake.io>
 * [yuin/gopher-lua](https://github.com/yuin/gopher-lua):GopherLua: VM and compiler for Lua in Go
 
 ## 参考
 
 * [cloudwu/lua53doc](https://github.com/cloudwu/lua53doc):The Chinese Translation of Lua 5.3 document
 * [torch/nn](https://github.com/torch/nn)
-* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers https://openresty.org/
+* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers <https://openresty.org/>

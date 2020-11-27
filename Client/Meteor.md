@@ -1,13 +1,13 @@
 # [meteor](https://github.com/meteor/meteor)
 
-Meteor, the JavaScript App Platform https://www.meteor.com
+Meteor, the JavaScript App Platform <https://www.meteor.com>
 
 * 优势
-    - 全栈通用、统一的单一语言 JavaScript
-    - 内置响应式支持
-    - 代码高度重用，提供一大堆基础Packages
-    - 提供强大构建工具，帮助快速构建JavaScript Apps
-    - 拥有丰富的软件包生态系统
+  - 全栈通用、统一的单一语言 JavaScript
+  - 内置响应式支持
+  - 代码高度重用，提供一大堆基础Packages
+  - 提供强大构建工具，帮助快速构建JavaScript Apps
+  - 拥有丰富的软件包生态系统
 
 ## 安装
 

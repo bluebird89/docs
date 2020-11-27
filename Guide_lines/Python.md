@@ -60,4 +60,5 @@
 * 版本注记：定义一个变量__version__ = "$Revision: 1.4 $"
 
 ## 参考
+
 * 《Python Coding Rule》

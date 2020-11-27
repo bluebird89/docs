@@ -31,4 +31,4 @@ worker.postMessage(payload, transferableObjects)
 
 ## 工具
 
-* [developit/stockroom](https://github.com/developit/stockroom):🗃 Offload your store management to a worker easily. https://stockroom.surge.sh
+* [developit/stockroom](https://github.com/developit/stockroom):🗃 Offload your store management to a worker easily. <https://stockroom.surge.sh>

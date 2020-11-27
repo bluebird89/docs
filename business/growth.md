@@ -2,4 +2,4 @@
 
 ## 工具
 
-* [mautic/mautic](https://github.com/mautic/mautic):Mautic: Open Source Marketing Automation Software. https://www.mautic.org/
+* [mautic/mautic](https://github.com/mautic/mautic):Mautic: Open Source Marketing Automation Software. <https://www.mautic.org/>

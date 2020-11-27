@@ -10,7 +10,6 @@
 来我的怀里 或者 让我住进你的心里 默然 相爱 寂静 欢喜
 ```
 
-
 ```
 拟挽歌词 陶渊明
 
@@ -78,9 +77,8 @@ Henry David Thoreau:Walden,or Life in the Woods
 
 ## 聂鲁达
 
-* 智利诗人，写情诗写到获得诺贝尔奖，二十岁凭借着一本《二十首情诗和一支绝望的歌》一举成名。诗集中情诗，大多热切奔放，有一种来自拉丁美洲的速度与激情，读来让人耳赤，让人大汗。
-* 纵然眼前的沧海曾是无际的桑田，只要播下季节的种子，何必等到芳菲春淡。只要付出了生命的真实，哪管情到深处情转薄。聂鲁达的情诗，忠于自我，却有一种伟大的感染力，它比太阳更明亮，在胸中满溢，能让人暖得笑痛得哭。
-
+-   智利诗人，写情诗写到获得诺贝尔奖，二十岁凭借着一本《二十首情诗和一支绝望的歌》一举成名。诗集中情诗，大多热切奔放，有一种来自拉丁美洲的速度与激情，读来让人耳赤，让人大汗。
+-   纵然眼前的沧海曾是无际的桑田，只要播下季节的种子，何必等到芳菲春淡。只要付出了生命的真实，哪管情到深处情转薄。聂鲁达的情诗，忠于自我，却有一种伟大的感染力，它比太阳更明亮，在胸中满溢，能让人暖得笑痛得哭。
 
 ```
 我喜欢你是寂静的
@@ -366,7 +364,6 @@ A heart whose love is innocent!
 人生自古谁无死，留取丹青照汗青！
 ```
 
-
 ```
 生命如同走夜路
 灵魂/觉知就是光照
@@ -387,4 +384,4 @@ A heart whose love is innocent!
 
 ## 参考
 
-* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
+-   [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry

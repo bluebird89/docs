@@ -22,7 +22,7 @@
   - 允许form的嵌套
 * 变量
   - 定义 `(define 变量名 值)`
-  - `(set! 变量名 值) `
+  - `(set! 变量名 值)`
 * 变量和过程绑定
   - 全局变量都用define来定义，并放在过程代码的外部
   - 局部变量则用let等绑定到过程内部使用 `(let ((…)…) …)`
@@ -121,7 +121,7 @@
 
 * 输入输出中用到了端口的概念，相当于C中的文件指针，也就是Linux中的设备文件
 * 查看：`(current-input-port)` `(current-output-port)`
-* 判断是否为：`input-port? ` `output-port?`
+* 判断是否为：`input-port?` `output-port?`
 * 打开：`open-input-file`，`open-output-file`  参数是文件名字符串
 * 关闭：`close-input-port`，`close-output-port` 参数是打开的端口
 * 输入
@@ -134,7 +134,7 @@
 
 * IDE
   * Guile
-  * [ cisco / ChezScheme ](https://github.com/cisco/ChezScheme)
+  * [cisco / ChezScheme](https://github.com/cisco/ChezScheme)
     - `sudo apt install uuid-dev ncurses-dev`
   * [racket](https://racket-lang.org/)
 

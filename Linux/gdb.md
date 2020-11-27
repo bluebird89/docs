@@ -1,21 +1,21 @@
 # gdb
 
 * 功能
-	- Start your program, specifying anything that might affect its behavior.
-	- Make your program stop on specified conditions.
-	- Examine what has happened, when your program has stopped.
-	- Change things in your program, so you can experiment with correcting the effects of one bug and go on to learn about another.
+  - Start your program, specifying anything that might affect its behavior.
+  - Make your program stop on specified conditions.
+  - Examine what has happened, when your program has stopped.
+  - Change things in your program, so you can experiment with correcting the effects of one bug and go on to learn about another.
 * 参数
-	- info threads：查看全部线程
-	- thread n：指定某个线程
-	- b：在某处打断点
-	- c：继续往下走
-	- s：执行一行代码，如果代码函数调用，则进入函数
-	- n：执行一行代码，函数调用不进入
-	- p：打印某个变量值
-	- list：打印代码的文本信息
-	- bt：查看某个线程的栈帧
-	- info b：查看当前所有断点信
+  - info threads：查看全部线程
+  - thread n：指定某个线程
+  - b：在某处打断点
+  - c：继续往下走
+  - s：执行一行代码，如果代码函数调用，则进入函数
+  - n：执行一行代码，函数调用不进入
+  - p：打印某个变量值
+  - list：打印代码的文本信息
+  - bt：查看某个线程的栈帧
+  - info b：查看当前所有断点信
 
 ```sh
 yum install -y cmake make gcc gcc-c++ ncurses-devel bison gdb

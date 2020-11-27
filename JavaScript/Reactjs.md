@@ -37,7 +37,7 @@ A declarative, efficient, and flexible JavaScript library for building user inte
   - 添加 Script 标签
   - 创建一个 React 组件
 * 工具链
-  - 学习 React 或创建一个新单页应用，使用 Create React App
+  - 学习 React 或创建一个新单页应用，使用 [create-react-app](https://github.com/facebookincubator/create-react-app) Create React apps with no build configuration. https://create-react-app.dev/
   - 用 Node.js 构建服务端渲染的网站: Next.js
   - 面向内容的静态网站:Gatsby
   - 组件库或将 React 集成到现有代码仓库，尝试更灵活的[工具链](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658)
@@ -47,6 +47,21 @@ npm install --save-dev @babel/core @babel/cli @babel/preset-env @babel/preset-re
 npm install --save-dev webpack webpack-cli webpack-dev-server style-loader css-loader babel-loader
 
 npm run --save react react-dom react-hot-loader
+
+npm install -g create-react-app
+
+npx create-react-app my-app
+npm init react-app my-app
+yarn create react-app my-app
+
+create-react-app my-app
+cd my-app
+
+npm|yarn start
+npm|yarn test
+npm run build | yarn build
+
+npm run eject #  导出配置文件
 ```
 
 ## 生态
@@ -384,7 +399,6 @@ const Select = ({options, ...others}) => (
 ![Redux 工作流程](../_static/redux_flow.jpg "Optional title")
 
 * Predictable state container for JavaScript apps http://redux.js.org
-* [reduxjs/react-redux](https://github.com/reduxjs/react-redux) Official React bindings for Redux https://redux.js.org/basics/usagewithreact
 * 设计思路
   - Web 应用是一个状态机，视图与状态是一一对应的
   - 所有状态保存在一个对象里面
@@ -438,6 +452,23 @@ const Select = ({options, ...others}) => (
   - store.subscribe()
 * 异步:Action 发出以后，过一段时间再执行 Reducer,用到新的工具：中间件（middleware）
   - 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能
+  - 三种 Action
+    + 操作发起时的 Action
+    + 操作成功时的 Action
+    + 操作失败时的 Action
+  - State 也要进行改造，反映不同的操作状态
+  - 流程
+    + 操作开始时，送出一个 Action，触发 State 更新为"正在操作"状态，View 重新渲染
+    + 操作结束后，再送出一个 Action，触发 State 更新为"操作结束"状态，View 再一次重新渲染
+  - 在操作结束时，系统自动送出第二个 Action
+    + 在 Action Creator 之中
+* createStore方法可以接受整个应用的初始状态作为参数，那样的话，applyMiddleware就是第三个参数了
+  - 中间件次序有讲究
+  - applyMiddlewares:将所有中间件组成一个数组，依次执行
+* 中间件
+  - [redux-logger](https://github.com/evgenyrodionov/redux-logger)
+  - [redux-thunk](https://github.com/gaearon/redux-thunk):改造store.dispatch，使得可以接受函数作为参数
+  - [redux-promise](link)让 Action Creator 返回一个 Promise 对象
 * Redux + React develop steps
   - 按任务分工来分步讲解：按照开发的内容，可以把前端团队分为两个小组： “布局组” 和 “逻辑组”
     + 布局组 - 负责 contianer、component 部分，要求对 HTML + CSS 布局比较熟悉，只需要会简单的 js 即可， 不需要完整地理解redux流程
@@ -489,26 +520,37 @@ const combineReducers = reducers => {
 };
 ```
 
-## [create-react-app](https://github.com/facebookincubator/create-react-app)
+## [reduxjs/react-redux](https://github.com/reduxjs/react-redux)
 
-Create React apps with no build configuration. https://create-react-app.dev/
-
-```sh
-npm install -g create-react-app
-
-npx create-react-app my-app
-npm init react-app my-app
-yarn create react-app my-app
-
-create-react-app my-app
-cd my-app
-
-npm|yarn start
-npm|yarn test
-npm run build | yarn build
-
-npm run eject #  导出配置文件
-```
+* Official React bindings for Redux https://redux.js.org/basics/usagewithreact
+* 可以选用的。实际项目中应该权衡一下，是直接使用 Redux，还是使用 React-Redux。后者虽然提供了便利，但是需要掌握额外的 API，并且要遵守它的组件拆分规范
+* 组件分类
+  - UI 组件（presentational component）
+    + 只负责 UI 的呈现，不带有任何业务逻辑
+    + 没有状态（即不使用this.state这个变量）
+    + 所有数据都由参数（this.props）提供
+    + 不使用任何 Redux 的 API
+  - 容器组件（container component）接入转换层
+    + 负责管理数据和业务逻辑，不负责 UI 的呈现
+    + 带有内部状态
+    + 使用 Redux 的 API
+* 外面是一个容器组件，里面包了一个UI 组件。前者负责与外部的通信，将数据传给后者，由后者渲染出视图
+* React-Redux 规定，所有的 UI 组件都由用户提供，容器组件则是由 React-Redux 自动生成。也就是说，用户负责视觉层，状态管理则是全部交给它
+* connect方法，用于从 UI 组件生成容器组件
+  - mapStateToProps 负责输入逻辑，即将state映射到 UI 组件的参数（props），UI组件props转化state
+    + 一个函数。作用就是像它的名字那样，建立一个从（外部的）state对象到（UI 组件的）props对象的映射关系
+    + 执行后应该返回一个对象，里面的每一个键值对就是一个映射
+    + 会订阅 Store，每当state更新的时候，就会自动执行，重新计算 UI 组件的参数，从而触发 UI 组件的重新渲染
+    + 第一个参数总是state对象，还可以使用第二个参数，代表容器组件的props对象
+    + connect方法可以省略mapStateToProps参数，那样的话，UI 组件就不会订阅Store，就是说 Store 的更新不会引起 UI 组件的更新
+  - mapDispatchToProps 负责输出逻辑，即将用户对 UI 组件的操作映射成 Action,建立 UI 组件的参数到store.dispatch方法的映射
+    + 是一个函数，使用dispatch和ownProps（容器组件的props对象）两个参数
+    + 返回一个对象，该对象的每个键值对都是一个映射，定义了 UI 组件的参数怎样发出 Action
+  - connect方法生成容器组件以后，需要让容器组件拿到state对象，才能生成 UI 组件的参数
+    + 将state对象作为参数，传入容器组件。但是，这样做比较麻烦，尤其是容器组件可能在很深的层级，一级级将state传下去就很麻烦
+    + React-Redux 提供Provider组件，可以让容器组件拿到state
+      * 原理是React组件的context属性
+      * store放在了上下文对象context上面。然后，子组件就可以从context拿到store
 
 ## 测试
 
@@ -546,6 +588,7 @@ npm run eject #  导出配置文件
 * [react-query](https://github.com/tannerlinsley/react-query):atom_symbol Hooks for fetching, caching and updating asynchronous data in React
 * Hooks
   - [alibaba/hooks](https://github.com/alibaba/hooks):React Hooks Library https://ahooks.js.org/
+* [react-starter-kit](https://github.com/kriasoft/react-starter-kit) React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com/
 
 ## 参考
 

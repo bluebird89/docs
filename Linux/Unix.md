@@ -3,9 +3,9 @@
 ## 起源
 
 * MULTICS（Multiplexed Information and Computing Service）的项目
-    - 上世纪六十年代时，大部份计算机都是采用批处理（Batch Processing）的方式（也就是说，当作业积累一定数量的时候，计算机才会进行处理）
-    - 美国电话及电报公司（American Telephone and Telegraph Inc.；AT&T）、通用电器公司（General Electrics；G.E.）及麻省理工学院（Massachusetts Institute of Technology；MIT）计划合作开发一个多用途（General-Purpose）、分时（Time-Sharing）及多用户（Multi-User）的操作系统，也就是这个MULTICS，其被设计运行在GE-645大型主机上
-    - 这个项目由于太过复杂，整个目标过于庞大，糅合了太多的特性，进展太慢，几年下来都没有任何成果，而且性能都很低。于是到了1969年2月，贝尔实验室（Bell Labs）决定退出这个项目
+  - 上世纪六十年代时，大部份计算机都是采用批处理（Batch Processing）的方式（也就是说，当作业积累一定数量的时候，计算机才会进行处理）
+  - 美国电话及电报公司（American Telephone and Telegraph Inc.；AT&T）、通用电器公司（General Electrics；G.E.）及麻省理工学院（Massachusetts Institute of Technology；MIT）计划合作开发一个多用途（General-Purpose）、分时（Time-Sharing）及多用户（Multi-User）的操作系统，也就是这个MULTICS，其被设计运行在GE-645大型主机上
+  - 这个项目由于太过复杂，整个目标过于庞大，糅合了太多的特性，进展太慢，几年下来都没有任何成果，而且性能都很低。于是到了1969年2月，贝尔实验室（Bell Labs）决定退出这个项目
 * 贝尔实验室中的有个叫Ken Thompson的人，他为MULTICS这个操作系统写游戏了个叫“Space Travel”的游戏，在MULTICS上经过实际运行后，他发现游戏速度很慢而且耗费昂贵 —— 每次运行会花费75美元
 * 退出这个项目以后。他为了让这个游戏能玩，所以他找来Dennis Ritchie为这个游戏开发一个极其简单的操作系统。这就是后来的Unix（值得一提的是，当时他们本想在DEC-10上写，后来没有申请到，只好在实验室的墙角边找了一台被人遗弃的Digital PDP-7的迷你计算机进行他们的计划，这台计算机上连个操作系统都没有，于是他们用汇编语言仅一个月的时间就开发了一个操作系统的原型）
 * 他们的同事Brian Kernighan非常不喜欢这个系统，嘲笑Ken Thompson说：“你写的系统好真差劲，干脆叫Unics算了。”Unics的名字就是相对于MULTICS的一种戏称，后业改成了Unix。于是，Unix就在这样被游戏和玩笑创造了，当时是1969年8月。也就是这一年，Linux之父Linus Torvalds在芬兰出生了
@@ -35,7 +35,7 @@
 
 ## 法律纠纷
 
-*  Berkeley Software Design, Inc（BSDI）很快就与AT&T的UNIX Systems Laboratories（USL）附属公司产生了法律纠纷，USL是AT&T注册的公司。AT&T为了拥有System V版权，以及Unix商标，为了垄断Unix，1992年，USL正式对BSDI提起诉讼，说BSD剽窃他的源码。而最终了结了好评如潮的BSD系统
+* Berkeley Software Design, Inc（BSDI）很快就与AT&T的UNIX Systems Laboratories（USL）附属公司产生了法律纠纷，USL是AT&T注册的公司。AT&T为了拥有System V版权，以及Unix商标，为了垄断Unix，1992年，USL正式对BSDI提起诉讼，说BSD剽窃他的源码。而最终了结了好评如潮的BSD系统
 * 由于最后判决悬而未决，这桩法律诉讼将BSD后裔的开发，特别是自由软件，延迟了两年，这导致没有法律问题的Linux内核获得了极大的支持。Linux跟386BSD的开发几乎同时起步，Linus说，当时如果有自由的基于386的Unix-like操作系统，他就可能不会创造Linux。尽管无法预料这给以后的软件业究竟造成了什么样的影响（如果没有这个法律纠纷，很有可能没有今天的革命性的Linux），但有一点可以肯定，Linux更加丰富了这块土壤
 * 这场官司一直打到 AT&T将自己的Unix系统实验室卖掉，新接手的Novell公司采取了一种比较开明的做法，允许BSDI自由发布自己的BSD，但是前提是必须将来自于AT&T的代码完全删除，于是诞生了4.4 BSD Lite版，由于这个版本不存在法律问题，4.4BSD Lite成为了现代BSD系统的基础版本
 * 这桩诉讼最终在1994年1月了结，更多地满足了BSDI的利益。伯克利套件的18,000个文件中，只有3个文件要求删除，另有70个文件要求修改，并显示USL的版权说明。这项调解另外要求，USL不得对4.4BSD提起诉讼，不管是用户还是BSDI代码的分发者。于是，BSD Unix走上了复兴的道路。BSD的开发也走向了几个不同的方向，并最终导致了FreeBSD、OpenBSD和NetBSD的出现
@@ -139,9 +139,9 @@
 ## HOC High Order Calculator
 
 * 组件
-    - 词法分析器lex
-    - 语法分析器yacc
-    - 标准数学库stdlib
+  - 词法分析器lex
+  - 语法分析器yacc
+  - 标准数学库stdlib
 
 ## 系统
 
@@ -166,7 +166,7 @@
 * 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
 * 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
 * 《[Unix 环境高级编程](https://www.amazon.cn/gp/product/B00KMR129E)》
-    - [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
+  - [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
 * 《UNIX操作系统设计》
 * 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
 * [《The Unix-Haters Handbook》](http://research.microsoft.com/~daniel/uhh-download.html)
@@ -175,6 +175,6 @@
 ## 参考
 
 * [6.S081 Operating System Engineering](https://pdos.csail.mit.edu/6.828/2019/xv6.html)
-  - [mit-pdos / xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS http://pdos.csail.mit.edu/6.828/
-  - [ranxian / xv6-chinese ](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
+  - [mit-pdos / xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS <http://pdos.csail.mit.edu/6.828/>
+  - [ranxian / xv6-chinese](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
 * [UNIX传奇(上篇)](https://coolshell.cn/articles/2322.html)

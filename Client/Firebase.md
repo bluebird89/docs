@@ -6,20 +6,20 @@ Firebase 是一个移动平台，可以帮助您快速开发高品质应用，�
 
 * 分析：Firebase Analytics，这是一项免费且无限制的分析解决方案。从单一信息中心查看用户行为和衡量行为特性。
 * 开发：专心构建更好的应用，将具体操作留给我们来完成。
-    - Cloud Messaging 云消息传递
-    - Authentication 身份验证
-    - Realtime Database 实时数据库
-    - Storage 存储
-    - Hosting 托管
-    - Remote Config 远程配置
-    - Test Lab 测试实验室
-    - Crash Reporting 崩溃报告
+  - Cloud Messaging 云消息传递
+  - Authentication 身份验证
+  - Realtime Database 实时数据库
+  - Storage 存储
+  - Hosting 托管
+  - Remote Config 远程配置
+  - Test Lab 测试实验室
+  - Crash Reporting 崩溃报告
 * 增长：在合适的时间赢得和吸引合适的用户
-    - Notifications 通知
-    - App Indexing 搜索
-    - Dynamic Links 动态链接
-    - Invites 邀请，分享
-    - AdWords 广告
+  - Notifications 通知
+  - App Indexing 搜索
+  - Dynamic Links 动态链接
+  - Invites 邀请，分享
+  - AdWords 广告
 * 获利AdMob by Google
 
 ## Android使用
@@ -30,9 +30,9 @@ Firebase 是一个移动平台，可以帮助您快速开发高品质应用，�
 
 ## 教程
 
-* [irebase/quickstart-android](https://github.com/firebase/quickstart-android):Firebase Quickstart Samples for Android https://firebase.google.com
+* [irebase/quickstart-android](https://github.com/firebase/quickstart-android):Firebase Quickstart Samples for Android <https://firebase.google.com>
 
 ## 资源
 
 * [firebase/functions-samples](https://github.com/firebase/functions-samples):Collection of sample apps showcasing popular use cases using Cloud Functions for Firebase
-* [angular/angularfire2](https://github.com/angular/angularfire2):The official Angular library for Firebase. https://github.com/angular/angularfire2
+* [angular/angularfire2](https://github.com/angular/angularfire2):The official Angular library for Firebase. <https://github.com/angular/angularfire2>

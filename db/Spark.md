@@ -2,7 +2,6 @@
 
 Mirror of Apache Spark
 
-
 ## 安装
 
 * 通过Python 用pyspark命令进行唤醒

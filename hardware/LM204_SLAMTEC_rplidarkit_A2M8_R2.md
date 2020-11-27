@@ -27,4 +27,4 @@ ultra_simple tty.SLAB_USBtoUART
 simple_grabber tty.SLAB_USBtoUART
 ```
 
-[串口工具：收费](https://itunes.apple.com/cn/app/ ... /id1181734730?mt=12)
+[串口工具：收费](<https://itunes.apple.com/cn/app/> ... /id1181734730?mt=12)

@@ -61,7 +61,7 @@ The Open Organization
 
 * [USTC Mirror](http://mirrors.ustc.edu.cn/help/index.html#)
 * [阿里巴巴开源软件站](https://opsx.alibaba.com/)
-* [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. https://facebook.github.io/watchman/
+* [facebook/watchman](https://github.com/facebook/watchman):Watches files and records, or triggers actions, when they change. <https://facebook.github.io/watchman/>
 * [腾讯软件源](https://mirrors.cloud.tencent.com)
 * [](https://bitnami.com)
 * 国内
@@ -69,6 +69,7 @@ The Open Organization
   + 中国科学技术大学    mirrors.ustc.edu.cn
   + 上海交通大学  ftp.sjtu.edu.cn
   + 上海大学    mirrors.shu.edu.cn
+
 - 企业开源镜像站：
   + 阿里云 mirrors.aliyun.com
   + 腾讯云 mirrors.cloud.tencent.com
@@ -76,7 +77,7 @@ The Open Organization
   + 网易  mirrors.cn99.com
   + 首都在线    mirrors.yun-idc.com
 - 国外高校开源镜像站：
-  + [The Chinese University of Hong Kong ](ftp.cuhk.edu.hk)
+  + [The Chinese University of Hong Kong](ftp.cuhk.edu.hk)
   + [元智大學](ftp.yzu.edu.tw)
   + [Massachusetts Institute of Technology](mirrors.mit.edu)
 - 国外云服务商开源镜像站：
@@ -113,24 +114,25 @@ The Open Organization
 ## 工具
 
 * [freedesktop.org](https://www.freedesktop.org/wiki/):hosts the development of free and open source software, focused on interoperability and shared technology for open-source graphical and desktop systems.
-* https://github.com/uber/makisu
-* https://github.com/uber/prototool#quick-start
-* https://github.com/uber/RIBs
-* https://github.com/zhangdaiscott/jeecg-boot
-* https://github.com/didi/DoraemonKit
-* https://github.com/didi/chameleon
-* https://github.com/uber/deck.gl
-* https://github.com/uber/react-vis
-* https://github.com/uber/kraken
-* https://github.com/uber/ludwig
+* <https://github.com/uber/makisu>
+* <https://github.com/uber/prototool#quick-start>
+* <https://github.com/uber/RIBs>
+* <https://github.com/zhangdaiscott/jeecg-boot>
+* <https://github.com/didi/DoraemonKit>
+* <https://github.com/didi/chameleon>
+* <https://github.com/uber/deck.gl>
+* <https://github.com/uber/react-vis>
+* <https://github.com/uber/kraken>
+* <https://github.com/uber/ludwig>
 
 ## 参考
 
 * [阿里开源](http://1024.yuque.com/)
 * [Huawei](https://code.opensource.huaweicloud.com/home)
 * [opensource](https://opensource.com/)
-* https://opensource.guide/
+* <https://opensource.guide/>
 * [Open-source alternatives](https://opensource.builders/):Find open-source alternatives for your favorite apps
 * [Open source](https://www.ibm.com/developerworks/cn/opensource)
 * [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
 * [The Open Group](https://www.opengroup.org/)
+* [pingcap / talent-plan](https://github.com/pingcap/talent-plan):open source training courses about distributed database and distributed systemes <https://university.pingcap.com/talent-plan/>

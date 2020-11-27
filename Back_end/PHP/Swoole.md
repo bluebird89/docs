@@ -323,14 +323,14 @@ dtruss|strace -f -p masterPid
   - 项目中如果有扩展 hook 了 zend_execute_ex 或者 zend_execute_internal 这两个函数，需要特别注意一下 C 栈，可以使用 co::set 重新设置 C 栈大小
 * Swoole 会在 TCP Server 和 HTTP Server 回调函数中会自动开启协程，所以不需要显式通过 go 关键字启动协程，可以在回调函数中使用 MySQL 和 Redis 客户端协程组件发起请求
 
-| 多进程  | 多线程      | 协程             |
-| ---- | -------- | -------------- |
-| 创建   | fork     | pthread_create |
-| 回收   | wait     | pthread_join   |
-| 通信方式 | IPC 进程间通 | 数据同步/锁         |
-| 资源消耗 | 进程切换开销   | 进程切换开销         |
-| 并发能力 | 数百       | 数千             |
-| 编程难度 | 困难       | 非常困难           |
+| 多进程   | 多线程       | 协程           |
+| -------- | ------------ | -------------- |
+| 创建     | fork         | pthread_create |
+| 回收     | wait         | pthread_join   |
+| 通信方式 | IPC 进程间通 | 数据同步/锁    |
+| 资源消耗 | 进程切换开销 | 进程切换开销   |
+| 并发能力 | 数百         | 数千           |
+| 编程难度 | 困难         | 非常困难       |
 
 ```php
 // 没有开启协程runtime,需要协程版 API
@@ -591,7 +591,7 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 
 ## 注意事项
 
-* 全局变量:超全局变量, 如：`$_GET/$_POST/$_GLOBAL `等等; 类的静态的数组，如`static $array=array`,在fpm下，全局变量带来了很多便利，可以随时随地可以存取相关的信息，但在协程模式下，这样就会出现很大的数据错误乱的
+* 全局变量:超全局变量, 如：`$_GET/$_POST/$_GLOBAL`等等; 类的静态的数组，如`static $array=array`,在fpm下，全局变量带来了很多便利，可以随时随地可以存取相关的信息，但在协程模式下，这样就会出现很大的数据错误乱的
   - fpm下，由于每个进程同时只处理一个请求，所以全局变量怎么读取都没有问题，但在协程下，同一进程可以运行很多的协程，只要当某一个协程修改了全局变量，那所有依赖这个全局变量的协程都数据都变化了
   - 用全局变量的情况
     + 有跨请求的需要
@@ -602,25 +602,25 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 ## 项目
 
 * [wh469012917/swoole-vue-webim](https://github.com/wh469012917/swoole-vue-webim):一个Web聊天应用，基于Vue和Swoole构建
-* [brewlin/swoft-im](https://github.com/brewlin/swoft-im):基于swoft-cloud的微服务架构，最小化拆分粒度，PHP7、多进程、协程、异步任务、mysql连接池、redi连接池、rpc连接池、服务治理、服务注册与发现、Aop切面、全注解 http://chat.huido.site
+* [brewlin/swoft-im](https://github.com/brewlin/swoft-im):基于swoft-cloud的微服务架构，最小化拆分粒度，PHP7、多进程、协程、异步任务、mysql连接池、redi连接池、rpc连接池、服务治理、服务注册与发现、Aop切面、全注解 <http://chat.huido.site>
 * [matyhtf/webim](https://github.com/matyhtf/webim):使用PHP+Swoole实现的网页即时聊天工具
 
 ## 工具
 
 * 框架
   - [Tencent/tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
-  - [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/
+  - [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. <https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/>
   - [SwooleDistributed/SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
-  - [EasySwoole](https://github.com/easy-swoole/easyswoole):High performance Coroutine PHP Framework, base on Swoole http://easyswoole.com/
+  - [EasySwoole](https://github.com/easy-swoole/easyswoole):High performance Coroutine PHP Framework, base on Swoole <http://easyswoole.com/>
   - [Swoft](https://doc.swoft.org/)
   - [One](https://www.kancloud.cn/vic-one/php-one/826876)
-  - [mix-php/mix](https://github.com/mix-php/mix):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) http://mixphp.cn
+  - [mix-php/mix](https://github.com/mix-php/mix):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) <http://mixphp.cn>
   - [matyhtf/framework](https://github.com/matyhtf/framework)PHP advanced Web development framework. The built-in application server based on the development of swoole extension
   - [shenzhe/zphp](https://github.com/shenzhe/zphp)ZPHP是一个极轻的的，定位于后置SOA服务的框架，可开发独立高效的长驻服务，并能适应多端的变化。
   - [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
   - [bingcool/swoolefy](https://github.com/bingcool/swoolefy):swoolefy是一个基于swoole扩展实现的轻量级高性能的API和MVC应用服务框架
-  - [hyperf-cloud/hyperf](https://github.com/hyperf-cloud/hyperf):🚀 A coroutine framework that focuses on hyperspeed and flexibility, specifically used for build microservices or middlewares. https://www.hyperf.io
-  - [matyhtf / framework ](https://github.com/matyhtf/framework):SPF （Swoole PHP Framework），世界第一款基于Swoole扩展的PHP框架，开发者是Swoole创始人
+  - [hyperf-cloud/hyperf](https://github.com/hyperf-cloud/hyperf):🚀 A coroutine framework that focuses on hyperspeed and flexibility, specifically used for build microservices or middlewares. <https://www.hyperf.io>
+  - [matyhtf / framework](https://github.com/matyhtf/framework):SPF （Swoole PHP Framework），世界第一款基于Swoole扩展的PHP框架，开发者是Swoole创始人
 * [eaglewu/swoole-ide-helper](Auto completion, trigger suggest and view docs for Swoole in editor):Put the source code path into Include Path in IDE.
 * [swlib/saber](https://github.com/swlib/saber):Saber, 高性能高可用HTTP客户端 - Swoole人性化组件库 | High performance and high availability HTTP client - Swoole Humanization Component Library
 * [LinkedDestiny/swoole-yaf](https://github.com/LinkedDestiny/swoole-yaf)

@@ -1,6 +1,6 @@
 # [prometheus](https://github.com/prometheus/prometheus)
 
-The Prometheus monitoring system and time series database. https://prometheus.io/
+The Prometheus monitoring system and time series database. <https://prometheus.io/>
 
 * SoundCloud开源的监控告警系统，使用Golang开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员
 * 一套开源的监控&报警&时间序列数据库的组合
@@ -22,11 +22,12 @@ The Prometheus monitoring system and time series database. https://prometheus.io
   - Prometheus 不一定保证数据准确
     + rate、histogram_quantile 等函数会做统计和推断，产生一些反直觉的结果
     + 查询范围过长要做降采样，势必会造成数据精度丢失，不过这是时序数据的特点，也是不同于日志系统的地方
-*  对比其它方案
-  - Prometheus属于一站式监控告警平台，依赖少，功能齐全
-  - Prometheus支持对云或容器的监控，其他系统主要对传统物理机监控
-  - Prometheus数据查询语句表现力更强大，内置更强大的统计函数
-  - Prometheus在数据存储扩展性以及持久性上没有InfluxDB，OpenTSDB，Sensu好
+* 对比其它方案
+
+- Prometheus属于一站式监控告警平台，依赖少，功能齐全
+- Prometheus支持对云或容器的监控，其他系统主要对传统物理机监控
+- Prometheus数据查询语句表现力更强大，内置更强大的统计函数
+- Prometheus在数据存储扩展性以及持久性上没有InfluxDB，OpenTSDB，Sensu好
 
 ## 安装
 
@@ -83,9 +84,9 @@ curl -X POST http://localhost:9090/-/reload
 ## 架构
 
 * Prometheus Server:负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理。
-    - Retrieval: 负责定时去暴露的目标服务上去拉取监控Metrics指标数据
-    - TSDB: Prometheus 2.0版本起使用的底层存储, 它的数据块编码使用了facebook的gorilla，具备了完整的持久化方案
-    - HTTP Server: 提供HTTP API接口查询监控Metrics数据
+  - Retrieval: 负责定时去暴露的目标服务上去拉取监控Metrics指标数据
+  - TSDB: Prometheus 2.0版本起使用的底层存储, 它的数据块编码使用了facebook的gorilla，具备了完整的持久化方案
+  - HTTP Server: 提供HTTP API接口查询监控Metrics数据
 * Service discovery: Prometheus支持多种服务发现机制，文件、DNS、Consul、Kubernetes、OpenStack、EC2等等。前提是这些服务需要开放/metrics接口提供数据查询。
 * Prometheus targets: Prometheus监控目标服务，Prometheus通过轮询这些目标服务拉取监控Metrics数据。
 * Push gateway: 某些场景Prometheus无法直接拉取监控数据，Pushgateway的作用在于提供了中间代理。我们可以在应用程序中定时将监控Metrics数据提交到Pushgateway，Prometheus Server定时从Pushgateway的/metrics接口采集数据。
@@ -96,39 +97,39 @@ curl -X POST http://localhost:9090/-/reload
 
 * 配置文件是YAML格式，启动的时候可以加载运行参数-config.file指定配置文件，默认为prometheus.yml
 * 不同占位符含义
-    - <boolean>: 布尔值，值为true或false
-    - <duration>: 时间字段，必须匹配正则表达式[0-9]+(ms|[smhdwy])
-    - <labelname>: 标签名称，值为字符串必须匹配正则表达式[a-zA-Z_][a-zA-Z0-9_]*
-    - <labelvalue>: 标签值，值为Unicode字符串
-    - <filename>: 文件路径
-    - <host>: 主机名
-    - <path>: URL路径
-    - <scheme>: HTTP或HTTPS
-    - <string>: 常规字符串值
-    - <secret>: 密码字符串
-    - <tmpl_string>: template扩展的字符串
+  - <boolean>: 布尔值，值为true或false
+  - <duration>: 时间字段，必须匹配正则表达式[0-9]+(ms|[smhdwy])
+  - <labelname>: 标签名称，值为字符串必须匹配正则表达式[a-zA-Z_][a-zA-Z0-9_]*
+  - <labelvalue>: 标签值，值为Unicode字符串
+  - <filename>: 文件路径
+  - <host>: 主机名
+  - <path>: URL路径
+  - <scheme>: HTTP或HTTPS
+  - <string>: 常规字符串值
+  - <secret>: 密码字符串
+  - <tmpl_string>: template扩展的字符串
 * 属性
-    - global用于Prometheus全局默认配置，它主要包含以下4个配置项
-        + scrape_interval: 拉取目标服务Metrics监控数据时间间隔
-        + scrape_timeout: 拉取目标服务Metrics监控数据超时时间
-        + evaluation_interval: 执行rules时间间隔。
-        + external_labels: 额外的labels，会被添加到每条时序数据上
-    - rule_files用于配置Alert Rules文件列表，支持配置多个文件以及文件目录
-    - scrape_configs用于配置拉取目标服务Metrics监控数据，每一个拉取配置包含以下配置项
-       + job_name: 拉取任务名称
-       + scrape_interval: 拉取时间间隔，没有配置使用global scrape_interval配置
-       + scrape_timeout: 拉取超时时间，没有配置使用global scrape_timeout配置
-       + metrics_path: 拉取目标服务Metrics数据的path，默认为/metrics
-       + honor_labels: 是否要解决labels冲突问题，设置为true以拉取数据为准，否则以配置为准
-       + scheme: 请求协议，默认为HTTP
-       + params: 拉取Metrics数据请求参数
-       + basic_auth: 请求鉴权配置
-       + kubernetes_sd_configs: K8s服务发现配置
-       + static_configs: 静态配置目标服务
-       + metric_relabel_configs: 重置Metrics标签
-   - alerting用于告警配置，主要有以下2个配置项
-       + alert_relabel_configs: 动态修改alert的配置规则
-       + alertmanagers: 动态发现Alertmanager的配置
+  - global用于Prometheus全局默认配置，它主要包含以下4个配置项
+    + scrape_interval: 拉取目标服务Metrics监控数据时间间隔
+    + scrape_timeout: 拉取目标服务Metrics监控数据超时时间
+    + evaluation_interval: 执行rules时间间隔。
+    + external_labels: 额外的labels，会被添加到每条时序数据上
+  - rule_files用于配置Alert Rules文件列表，支持配置多个文件以及文件目录
+  - scrape_configs用于配置拉取目标服务Metrics监控数据，每一个拉取配置包含以下配置项
+    + job_name: 拉取任务名称
+    + scrape_interval: 拉取时间间隔，没有配置使用global scrape_interval配置
+    + scrape_timeout: 拉取超时时间，没有配置使用global scrape_timeout配置
+    + metrics_path: 拉取目标服务Metrics数据的path，默认为/metrics
+    + honor_labels: 是否要解决labels冲突问题，设置为true以拉取数据为准，否则以配置为准
+    + scheme: 请求协议，默认为HTTP
+    + params: 拉取Metrics数据请求参数
+    + basic_auth: 请求鉴权配置
+    + kubernetes_sd_configs: K8s服务发现配置
+    + static_configs: 静态配置目标服务
+    + metric_relabel_configs: 重置Metrics标签
+  - alerting用于告警配置，主要有以下2个配置项
+    + alert_relabel_configs: 动态修改alert的配置规则
+    + alertmanagers: 动态发现Alertmanager的配置
 
 ```yaml
 global:
@@ -314,6 +315,7 @@ alerting:
     + Prometheus的底层实现中指标名称实际上是以__name__=<metric name>的形式保存在数据库中的
   - 时间戳：一个精确到毫秒级别的时间戳
   - 值：一个float64位的值
+
 + Metric name: 统计指标名称，名称应该具有语义化
   * 必须满足正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
   * 使用前缀表示特定服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
@@ -322,86 +324,87 @@ alerting:
   * 最好使用单个单位，不要使用多个单位，例如不要混淆seconds 和 bytes
   * 不应该把label名称放在metrics名称上
 + Metrics类型
-    * Counter 一个计数器指标，一个只能递增的数值（服务重启的时候会被reset为0）。主要用于统计服务的请求数、任务完成数、错误出现的次数等
-    * Gauge 一个仪表盘指标，表示一个既可以递增, 又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
-    * histogram 柱状图，Prometheus系统会自动生成三个对应指标
-        - 对每个采样点进行统计，打到各个分类桶中(bucket)
-        - 对每个采样点值累计和(sum)
-        - 对采样点的次数累计和(count)
-    * summary是采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，Prometheus系统会自动生成三个对应的指标
-        - 对于每个采样点进行统计，并形成分位图
-        - 统计所有采样点的和
-        - 统计所有采样点总数
-    - Labels: 标签是一组Key-Value，labels让Prometheus数据具有多个维度。例如可以用{hostname=”…”,type=”…“}这个标签来区分不同的时序数据
-      + 标签的命名应该具有语义化
-      + 满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*
-      + 所有_开头的标签名被Prometheus内部保留使用。
-    - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
+  * Counter 一个计数器指标，一个只能递增的数值（服务重启的时候会被reset为0）。主要用于统计服务的请求数、任务完成数、错误出现的次数等
+  * Gauge 一个仪表盘指标，表示一个既可以递增, 又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
+  * histogram 柱状图，Prometheus系统会自动生成三个对应指标
+    - 对每个采样点进行统计，打到各个分类桶中(bucket)
+    - 对每个采样点值累计和(sum)
+    - 对采样点的次数累计和(count)
+  * summary是采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，Prometheus系统会自动生成三个对应的指标
+    - 对于每个采样点进行统计，并形成分位图
+    - 统计所有采样点的和
+    - 统计所有采样点总数
+  - Labels: 标签是一组Key-Value，labels让Prometheus数据具有多个维度。例如可以用{hostname=”…”,type=”…“}这个标签来区分不同的时序数据
+    + 标签的命名应该具有语义化
+    + 满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*
+    + 所有_开头的标签名被Prometheus内部保留使用。
+  - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
+
 * 拉取每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签
-    - job: 值为prometheus.yml配置的job名称
-    - instance: 值为服务实例的host:port
-    - 自动生成以下4个Metrics数据
-        + `up{job="{job-name}", instance="{host:port}"}`: 用来反馈目标服务监控状态，值为1表示服务健康，否则表示服务不通。
-        + `scrape_duration_seconds{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据时间开销。
-        + `scrape_samples_post_metric_relabeling{job="{job-name}", instance="{host:port}"}`:labels变化后，仍然剩余的监控数据条数
-        + `scrape_samples_scraped{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据的条数。
+  - job: 值为prometheus.yml配置的job名称
+  - instance: 值为服务实例的host:port
+  - 自动生成以下4个Metrics数据
+    + `up{job="{job-name}", instance="{host:port}"}`: 用来反馈目标服务监控状态，值为1表示服务健康，否则表示服务不通。
+    + `scrape_duration_seconds{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据时间开销。
+    + `scrape_samples_post_metric_relabeling{job="{job-name}", instance="{host:port}"}`:labels变化后，仍然剩余的监控数据条数
+    + `scrape_samples_scraped{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据的条数。
 * 内置PromQL，用户可以实时的查询和聚合时序数据，计算结果可以通过Expression Browser、Grafana展示，也可以通过HTTP API请求获取
 * 结果类型
-    - Instant vector: 即时向量，一时间点的一组时序数据
-    - Range vector: 范围向量，一个时间段内的一组时序数据
-    - Scalar: 标量，一个浮点数值
-    - String: 一个字符串，目前未使用
+  - Instant vector: 即时向量，一时间点的一组时序数据
+  - Range vector: 范围向量，一个时间段内的一组时序数据
+  - Scalar: 标量，一个浮点数值
+  - String: 一个字符串，目前未使用
 * 查询
-    - 查询http_requests_total所有数据: http_requests_total
-    - 条件查询
-        + =: 等于条件，例如 http_requests_total{environment="test",method="Get"}
-        + !=: 不等于条件，例如 http_requests_total{environment!=”test”}
-    - 模糊查询
-        + 查询http_requests_total environment label值匹配`t.*`正则的时序数据  http_requests_total{environment=~"t.*"}
-        + 查询http_requests_total environment label值不匹配`t.*`正则的时序数据 http_requests_total{environment!~"t.*"}
-    - 区间查询
-        + http_requests_total{environment="test", method="Get"}[10s]
-        + s: 秒 m: 分 h: 时 d: 天 w: 周 y: 年
-        + 时间位移：选择一个参考点，上面的范围查询都是使用的是当前的时间值，位移操作的关键字为offset http_request_total{}[1d] offset 1d
-    * 瞬时数据:返回最近的一条http_request_total{}
-    - 运算符 + - * / % ^
-      +  如果是瞬时向量与瞬时向量之间进行数学运算时，左边向量元素匹配（标签完全一致）右边向量元素，如果没找到匹配元素，则直接抛弃
-      +  `{device="sda",instance="localhost:9100",job="node_exporter"}=>1634967552@1518146427.807 + 864551424@1518146427.807`
-      +  `{device="sdb",instance="localhost:9100",job="node_exporter"}=>0@1518146427.807 + 1744384@1518146427.807`
-    - 瞬时向量与标量进行布尔运算时，PromQL依次比较向量中的所有时间序列样本的值，如果比较结果为true则保留，反之丢弃
-    - 集合运行
-      + vector1 and vector2 会产生一个由vector1的元素组成的新的向量。该向量包含vector1中完全匹配vector2中的元素组成
-      + vector1 or vector2 会产生一个新的向量，该向量包含vector1中所有的样本数据，以及vector2中没有与vector1匹配到的样本数据
-      + vector1 unless vector2 会产生一个新的向量，新向量中的元素由vector1中没有与vector2匹配的元素组成
-    - 聚合查询：用于即时向量聚合操作 <aggr-op>([parameter,] <vector expression>) [without|by (<label list>)]
-        + sum: 求和 sum(http_requests_total){environment="test"}
-        + min: 求最小值
-        + max: 求最大值
-        + avg: 求平均值
-        + stddev: 求标准差
-        + stdvar: 求标准差异
-        + count: 计数 count(http_requests_total{environment="test"})
-        + count_values: 相同数据值计数 count_values("total_request",http_requests_total{environment="test"})
-        + bottomk: 最小k个数
-        + topk: 最大k个数 topk(3, http_requests_total)
-        + quantile: 分布统计
-    * 向量匹配模式
-      - 向量与向量之间运算时会基于默认的匹配规则，依次找到右边边向量元素和左边向量元素匹配(标签完全一致)的进行运算，不匹配则丢弃
-      - 一对一（one to one） 会从操作符两边获取瞬时向量依次比较并找到唯一匹配的样本值 `vector1 <operator> vector2`,作符两边表达式标签不一致的情况下
-        + on(label list) 将匹配行为限定在某些便签之内 method_code:http_errors:rate5m{code="500"} / ignoring(code) method:http_requests:rate5m
-        + ignoring(label list）在匹配时忽略某些便签
-      - 多对一和一对多:“一”侧的每一个向量元素可以与”多”侧的多个元素匹配的情况,必须使用group修饰符：group_left或者group_right来确定哪一个向量具有更高的基数（充当“多”的角色）
-        + method_code:http_errors:rate5m / ignoring(code) group_left method:http_requests:rate5m
-        + <vector expr> <bin-op> ignoring(<label list>) group_right(<label list>) <vector expr>
-        + <vector expr> <bin-op> on(<label list>) group_left(<label list>) <vector expr>
-        + <vector expr> <bin-op> on(<label list>) group_right(<label list>) <vector expr>
-    - 函数计算
-      + 计算Counter类型的指标增长率
-        * rate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内所有数据点，算出一组速率，然后取平均值作为结果。仅适用于counter类型数据，适合缓慢变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m]))`
-        * increase(v range-vector)函数：获取区间向量的增长量
-        * irate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内最近两个数据点来算速率，然后作为结果。仅适用于counter类型数据，适合快速变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m])) by (method)`
-      + 预测Gauge指标变化趋势
-        * predict_linear(v range-vector, t scalar)函数：基于简单的线性回归的方式进行t秒后的v值的预测
+  - 查询http_requests_total所有数据: http_requests_total
+  - 条件查询
+    + =: 等于条件，例如 http_requests_total{environment="test",method="Get"}
+    + !=: 不等于条件，例如 http_requests_total{environment!=”test”}
+  - 模糊查询
+    + 查询http_requests_total environment label值匹配`t.*`正则的时序数据  http_requests_total{environment=~"t.*"}
+    + 查询http_requests_total environment label值不匹配`t.*`正则的时序数据 http_requests_total{environment!~"t.*"}
+  - 区间查询
+    + http_requests_total{environment="test", method="Get"}[10s]
+    + s: 秒 m: 分 h: 时 d: 天 w: 周 y: 年
+    + 时间位移：选择一个参考点，上面的范围查询都是使用的是当前的时间值，位移操作的关键字为offset http_request_total{}[1d] offset 1d
+  * 瞬时数据:返回最近的一条http_request_total{}
+  - 运算符 + - * / % ^
+    + 如果是瞬时向量与瞬时向量之间进行数学运算时，左边向量元素匹配（标签完全一致）右边向量元素，如果没找到匹配元素，则直接抛弃
+    + `{device="sda",instance="localhost:9100",job="node_exporter"}=>1634967552@1518146427.807 + 864551424@1518146427.807`
+    + `{device="sdb",instance="localhost:9100",job="node_exporter"}=>0@1518146427.807 + 1744384@1518146427.807`
+  - 瞬时向量与标量进行布尔运算时，PromQL依次比较向量中的所有时间序列样本的值，如果比较结果为true则保留，反之丢弃
+  - 集合运行
+    + vector1 and vector2 会产生一个由vector1的元素组成的新的向量。该向量包含vector1中完全匹配vector2中的元素组成
+    + vector1 or vector2 会产生一个新的向量，该向量包含vector1中所有的样本数据，以及vector2中没有与vector1匹配到的样本数据
+    + vector1 unless vector2 会产生一个新的向量，新向量中的元素由vector1中没有与vector2匹配的元素组成
+  - 聚合查询：用于即时向量聚合操作 <aggr-op>([parameter,] <vector expression>) [without|by (<label list>)]
+    + sum: 求和 sum(http_requests_total){environment="test"}
+    + min: 求最小值
+    + max: 求最大值
+    + avg: 求平均值
+    + stddev: 求标准差
+    + stdvar: 求标准差异
+    + count: 计数 count(http_requests_total{environment="test"})
+    + count_values: 相同数据值计数 count_values("total_request",http_requests_total{environment="test"})
+    + bottomk: 最小k个数
+    + topk: 最大k个数 topk(3, http_requests_total)
+    + quantile: 分布统计
+  * 向量匹配模式
+    - 向量与向量之间运算时会基于默认的匹配规则，依次找到右边边向量元素和左边向量元素匹配(标签完全一致)的进行运算，不匹配则丢弃
+    - 一对一（one to one） 会从操作符两边获取瞬时向量依次比较并找到唯一匹配的样本值 `vector1 <operator> vector2`,作符两边表达式标签不一致的情况下
+      + on(label list) 将匹配行为限定在某些便签之内 method_code:http_errors:rate5m{code="500"} / ignoring(code) method:http_requests:rate5m
+      + ignoring(label list）在匹配时忽略某些便签
+    - 多对一和一对多:“一”侧的每一个向量元素可以与”多”侧的多个元素匹配的情况,必须使用group修饰符：group_left或者group_right来确定哪一个向量具有更高的基数（充当“多”的角色）
+      + method_code:http_errors:rate5m / ignoring(code) group_left method:http_requests:rate5m
+      + <vector expr> <bin-op> ignoring(<label list>) group_right(<label list>) <vector expr>
+      + <vector expr> <bin-op> on(<label list>) group_left(<label list>) <vector expr>
+      + <vector expr> <bin-op> on(<label list>) group_right(<label list>) <vector expr>
+  - 函数计算
+    + 计算Counter类型的指标增长率
+      * rate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内所有数据点，算出一组速率，然后取平均值作为结果。仅适用于counter类型数据，适合缓慢变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m]))`
+      * increase(v range-vector)函数：获取区间向量的增长量
+      * irate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内最近两个数据点来算速率，然后作为结果。仅适用于counter类型数据，适合快速变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m])) by (method)`
+    + 预测Gauge指标变化趋势
+      * predict_linear(v range-vector, t scalar)函数：基于简单的线性回归的方式进行t秒后的v值的预测
 
 ```
 <--------------- metric="" ---------------------=""><-timestamp -=""><-value->
@@ -448,39 +451,39 @@ job: api-server
 * Prometheus和Kubernets都属于CNCF成员项目，推荐使用Prometheus来监控Kubernets集群。传统的监控系统需要集群所有服务器将监控数据发往监控系统，Prometheus则可以通过服务发现来发现K8s集群内部已经暴露的监控点，然后主动拉取数据。
 * 只需要在K8s集群中部署一份Prometheus实例，它就可以通过向Apiserver查询集群状态，然后向所有已经支持Prometheus metrics的kubelet 获取所有Pod的运行数据。这种动态发现的架构，非常适合服务器和程序都不固定的K8s集群环境。
 * Prometheus和K8s集成目前支持5种服务发现的模式
-    - Node 从K8s集群各节点kubelet组件，获取节点kubelet的基本运行状态的监控指标 从K8s集群各节点kubelet内置的cAdvisor，获取节点中运行的容器的监控指标 从K8s集群各节点Node Exporter，获取节点运行资源相关的监控指标
-    - Pod 从Pod实例中采集业务应用自定义监控指标
-    - Endpoints 从K8s集群API Server组件，获取K8s集群相关的运行监控指标
-    - Service 从K8s集群Service的访问地址，通过Blackbox Exporter获取网络探测指标
-    - Ingress 从K8s集群Ingress的访问信息，通过Blackbox Exporter获取网络探测指标
+  - Node 从K8s集群各节点kubelet组件，获取节点kubelet的基本运行状态的监控指标 从K8s集群各节点kubelet内置的cAdvisor，获取节点中运行的容器的监控指标 从K8s集群各节点Node Exporter，获取节点运行资源相关的监控指标
+  - Pod 从Pod实例中采集业务应用自定义监控指标
+  - Endpoints 从K8s集群API Server组件，获取K8s集群相关的运行监控指标
+  - Service 从K8s集群Service的访问地址，通过Blackbox Exporter获取网络探测指标
+  - Ingress 从K8s集群Ingress的访问信息，通过Blackbox Exporter获取网络探测指标
 * 配置
-    - __address__ label将会被设置为instance
-    - __meta__开头的label是由Prometheus服务发现设置的，在relabel过程都可以使用
-    - relabel结束后__开头的所有label都会被删除
-    - role: 服务发现的模式
-    - ca_file: CA证书路径
-    - tls_config: SSL/TLS配置
-    - bearer_token_file: token文件路径
-    - kubernetes_sd_configs: 服务发现配置
-    - relabel_configs: labels重写配置，比较重要的配置
+  - __address__ label将会被设置为instance
+  - __meta__开头的label是由Prometheus服务发现设置的，在relabel过程都可以使用
+  - relabel结束后__开头的所有label都会被删除
+  - role: 服务发现的模式
+  - ca_file: CA证书路径
+  - tls_config: SSL/TLS配置
+  - bearer_token_file: token文件路径
+  - kubernetes_sd_configs: 服务发现配置
+  - relabel_configs: labels重写配置，比较重要的配置
 * 部署K8s prometheus configmap
-    - 创建kube-prometheus ns:`kubectl create namespace kube-prometheus`
-    - 创建configmap:`kubectl apply -f prometheus-configmap-v1.0.0.yml`
-    - 查看configmap:`kubectl get cm -n kube-prometheus`
+  - 创建kube-prometheus ns:`kubectl create namespace kube-prometheus`
+  - 创建configmap:`kubectl apply -f prometheus-configmap-v1.0.0.yml`
+  - 查看configmap:`kubectl get cm -n kube-prometheus`
 * 把Prometheus Deployment相关的Pod抽象成Service，方便其它Pod访问，同时为了外网也能够访问Prometheus服务我们在Service之上加一层Ingress。
-    - Service配置文件详解
-        + metadata.name: service名称为prometheus-service
-        + spec.selector: 选择label为app=prometheus-deployment相关的Pod
-        + spec.ports.port: 开放9090端口，默认和targetPort一样
-        + spec.ports.targetPort: 后端Prometheus Pod对应的端口为9090
-    - Ingress配置文件详解
-        + metadata.name: ingress名称为prometheus-ingress
-        + spec.rules.host: k8s.prometheus.com 配置访问域名 (需要本地配置hosts绑定到nginx-ingress-controller任一节点上)
-        + spec.rules.http.paths.backend.serviceName: 后端对应的service名称
-        + spec.rules.http.paths.backend.servicePort: 后端对应的service端口
-    - 部署Service和Ingress
-        + kubectl apply -f prometheus-service-v1.0.0.yml
-    - 直接访问http://k8s.prometheus.com/graph即可访问Prometheus web UI界面
+  - Service配置文件详解
+    + metadata.name: service名称为prometheus-service
+    + spec.selector: 选择label为app=prometheus-deployment相关的Pod
+    + spec.ports.port: 开放9090端口，默认和targetPort一样
+    + spec.ports.targetPort: 后端Prometheus Pod对应的端口为9090
+  - Ingress配置文件详解
+    + metadata.name: ingress名称为prometheus-ingress
+    + spec.rules.host: k8s.prometheus.com 配置访问域名 (需要本地配置hosts绑定到nginx-ingress-controller任一节点上)
+    + spec.rules.http.paths.backend.serviceName: 后端对应的service名称
+    + spec.rules.http.paths.backend.servicePort: 后端对应的service端口
+  - 部署Service和Ingress
+    + kubectl apply -f prometheus-service-v1.0.0.yml
+  - 直接访问<http://k8s.prometheus.com/graph即可访问Prometheus> web UI界面
 
 ```yaml
 # prometheus-kubernetes.yml
@@ -769,17 +772,18 @@ spec:
   - controller-manager：10252 端口。
   - etcd：如 etcd 写入读取延迟、存储容量等。
   - Docker：需要开启 experimental 实验特性，配置 metrics-addr，如容器创建耗时等指标。
+
   -
 kube-proxy：默认 127 暴露，10249 端口。外部采集时可以修改为 0.0.0.0 监听，会暴露：写入 iptables
-  - 规则的耗时等指标。
-  - kube-state-metrics：Kubernetes 官方项目，采集 Pod、Deployment 等资源的元信息。
-  - node-exporter：Prometheus 官方项目，采集机器指标如 CPU、内存、磁盘。
-  - blackbox_exporter：Prometheus 官方项目，网络探测，DNS、ping、http 监控。
-  - process-exporter：采集进程指标。
-  - NVIDIA Exporter：我们有 GPU 任务，需要 GPU 数据监控。
-  - node-problem-detector：即 NPD，准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
-  - 应用层 Exporter：MySQL、Nginx、MQ 等，看业务需求。
 
+- 规则的耗时等指标。
+- kube-state-metrics：Kubernetes 官方项目，采集 Pod、Deployment 等资源的元信息。
+- node-exporter：Prometheus 官方项目，采集机器指标如 CPU、内存、磁盘。
+- blackbox_exporter：Prometheus 官方项目，网络探测，DNS、ping、http 监控。
+- process-exporter：采集进程指标。
+- NVIDIA Exporter：我们有 GPU 任务，需要 GPU 数据监控。
+- node-problem-detector：即 NPD，准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
+- 应用层 Exporter：MySQL、Nginx、MQ 等，看业务需求。
 
 * 服务状态：Status->Targets
 
@@ -848,7 +852,7 @@ WantedBy=multi-user.target
 
 * [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
-* [ cortexproject / cortex ](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. https://cortexmetrics.io/
+* [cortexproject / cortex](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. <https://cortexmetrics.io/>
 * [doraemon](link)
 
 ## 参考

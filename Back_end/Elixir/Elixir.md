@@ -1,6 +1,6 @@
 # [elixir](https://github.com/elixir-lang/elixir)
 
-Elixir is a dynamic, functional language designed for building scalable and maintainable applications http://elixir-lang.org/
+Elixir is a dynamic, functional language designed for building scalable and maintainable applications <http://elixir-lang.org/>
 
 ## 特点
 
@@ -104,4 +104,4 @@ iex
 
 ## 类库
 
-* [absinthe-graphql/absinthe](https://github.com/absinthe-graphql/absinthe):The GraphQL toolkit for Elixir http://absinthe-graphql.org
+* [absinthe-graphql/absinthe](https://github.com/absinthe-graphql/absinthe):The GraphQL toolkit for Elixir <http://absinthe-graphql.org>

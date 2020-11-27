@@ -6,6 +6,6 @@
 
 ## 参考
 
-* [commercialhaskell/stack](https://github.com/commercialhaskell/stack):The Haskell Tool Stack http://haskellstack.org
+* [commercialhaskell/stack](https://github.com/commercialhaskell/stack):The Haskell Tool Stack <http://haskellstack.org>
 * [bitemyapp/learnhaskell](https://github.com/bitemyapp/learnhaskell):Learn Haskell
 * [WHAT I WISH I KNEW WHEN LEARNING HASKELL](http://dev.stephendiehl.com/hask/)
