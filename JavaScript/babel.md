@@ -3,17 +3,10 @@
 🐠 Babel is a compiler for writing next generation JavaScript.  https://babel.dev/
 
 * 一个工具链，主要用于在旧浏览器或环境中,将 ECMAScript 2015+ 代码转换为向后兼容版本的 JavaScript 代码
-* 功能
-    - 转换语法
-    - Polyfill 实现目标环境中缺少的功能 (通过 @babel/polyfill)
-    - 源代码转换 (codemods)
-* 步骤
-  - 解析（parse）:解析代码并输出抽象语法树（AST）含词法分析和语法分析
-  - 转换（transform）:转换接收AST并对其进行遍历，对节点进行添加、更新及移除等操作，这是最复杂的过程，同时也是插件将要介入工作的部分
-  - 生成（generate）:把AST转换成字符串形式的代码
+* 抽象语法树 AST:处理过程中的每一步都涉及到创建或操作抽象语法树
 * 版本
   - 7.0
-    + 引入了 babel.config.js
+    + 引入 babel.config.js
 
 ## [配置](https://babeljs.io/setup#installation)
 
@@ -43,9 +36,19 @@ npm install --save @babel/polyfill
 babel --presets @babel/preset-typescript script.ts
 ```
 
+## 步骤
+
+* 解析（parse）:解析代码并输出抽象语法树（AST）
+  - **词法分析（Lexical Analysis）**:把字符串形式的代码转换为 令牌（tokens）流,令牌看作是一个扁平的语法片段数组
+    + 每一个 type 有一组属性来描述该令牌
+  - 语法分析（Syntactic Analysis）:把一个令牌流转换成 AST 的形式。 这个阶段会使用令牌中的信息把它们转换成一个 AST 的表述结构，这样更易于后续的操作
+* 转换（transform）:转换接收AST并对其进行遍历，对节点进行添加、更新及移除等操作，这是最复杂的过程，同时也是插件将要介入工作的部分
+  - 需要进行递归的树形遍历
+* 生成（generate）:把AST转换成字符串形式代码,同时还会创建源码映射（source maps）
+
 ## 组件
 
-* babel-core is the main babel package — We need this for babel to do any transformations on our code.
+* @babel/core is the main babel package — We need this for babel to do any transformations on our code.
   - 字符串形式的 JavaScript 代码可以直接使用 babel.transform 来编译
   - 文件使用异步 api transformFile 或者 同步 api transformFileSync
   - 有一个 Babel AST（抽象语法树）了就可以直接从 AST 进行转换 transformFromAst
@@ -87,10 +90,10 @@ babel-node es6.js
 * 用了优秀的 core-js 用作 polyfill，并且还有定制化的 regenerator 来让 generators（生成器）和 async functions（异步函数）正常工作
 * 默认不会对Iterator、Generator、Promise、Map、Set等全局对象，以及一些全局对象的方法（比如Object.assign）转码。如果想要对这些对象转码，就要安装babel-polyfill
 
-## 抽象语法树 AST
-
-*
-
 ## 工具
 
 * [swc-project/swc](https://github.com/swc-project/swc):Super-fast alternative for babel https://swc-project.github.io/rustdoc/swc/
+
+## 参考
+
+* [Babel 插件手册](https://github.com/jamiebuilds/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md)
