@@ -133,10 +133,27 @@ The PHP Interpreter <http://www.php.net>
   - 抛弃 array_merge ：在数组表达式中引入了扩展运算符
   - 箭头函数
   - 协变量返回和协变量参数
-* 8
-  - 新增对联合类型的支持，允许一个变量拥有多个类型的值
-  - 新增 WeakMap 特性：创建对象到任意值的映射，同时也不会阻止作为键的对象被垃圾回收，如果某个对象键被垃圾回收，对应键值对将从集合中移除
-  - 新增 ValueError 异常类，继承自 Exception 基类。每次当传递值到函数时，如果是一个无效类型，则会抛出该异常
+* 8 美国时间11月26日，PHP团队宣布PHP 8.0正式GA
+  - 命名参数（named arguments）
+    + 仅指定必需参数，跳过可选参数
+    + 参数与顺序无关，且是自描述的
+  - 联合类型（union types）
+    + Type或null，使用特殊?Type语法
+    + array或Traversable，使用特殊iterable类型
+  - 属性（attributes）:使用基于 PHP 原生语法的结构化元数据来代替 PHPDoc 注解
+    + 允许添加元数据到 PHP 函数、参数、类等，这些元数据随后可以通过可编程方式获取，通过注解可以直接访问深度集成到 PHP 自身的这些信息
+  - 构造器属性提升（constructor property promotion）:将属性声明和构造函数属性初始化合并到一起
+  - Match表达式
+    + Match是一个表达式，表示其结果可以存储在变量中或返回。
+    + Match分支仅支持单行表达式，不需要break; 语句。
+    + Match执行严格比较
+  - nullsafe运算符:当对链中一个元素的求值失败时，整个链的执行将中止，并且整个链的求值为 null
+  - 字符串与数字的判断更合理:仅在字符串实际为数字时才使用数字比较，否则将数字转换为字符串，并执行字符串比较
+  - 新的类、接口和函数
+    + WeakMap 特性：创建对象到任意值的映射，同时也不会阻止作为键的对象被垃圾回收，如果某个对象键被垃圾回收，对应键值对将从集合中移除
+  - 内部函数的类型错误一致
+    + 新增 ValueError 异常类，继承自 Exception 基类
+    + 如果参数验证失败，大多数内部函数将抛出 Error 异常
   - 重写方法时允许可变参数
   - 使用 static 关键字标识某个方法返回该方法当前所属的类，即使它是继承的（后期静态绑定）
   - $object::class 获取对象的类名，其返回结果和 get_class($object) 一样
@@ -146,10 +163,12 @@ The PHP Interpreter <http://www.php.net>
   - throw 语句可以用在只允许表达式出现的地方，例如箭头函数、合并运算符和三元运算符等
   - 参数列表中允许出现可选的尾部逗号
   - 捕获异常而不存储到变量
-  - 新增对 mixed 类型的支持
-  - 对注解的支持：允许添加元数据到 PHP 函数、参数、类等，这些元数据随后可以通过可编程方式获取，通过注解可以直接访问深度集成到 PHP 自身的这些信息
-  - 新增构造函数属性提示支持：将属性声明和构造函数属性初始化合并到一起
-  - JIT:主要针对 CPU 密集型操作优化效果明显, IO 密集型操作的 Web 应用中，启用 JIT 与不启用相比，性能不但没有提升，反而有 10% 左右的损耗，至少在 Laravel 应用中是如此
+  - JIT
+    + Tracing JIT 的表现最出色
+      * 在综合基准测试中的性能提高到大约 3 倍
+      * 在某些特定的传统应用程序中提高到 1.5–2 倍
+      * 典型的应用程序性能与 PHP 7.4 相当
+    + 主要针对 CPU 密集型操作优化效果明显, IO 密集型操作的 Web 应用中，启用 JIT 与不启用相比，性能不但没有提升，反而有 10% 左右的损耗，至少在 Laravel 应用中是如此
     + 在 Opcache 之中提供,结合 Runtime 信息将字节码编译为机器码缓存起来
     + 在原来Opcache优化的优化基础之上进行优化
     + 只支持x86架构的CPU
@@ -163,6 +182,18 @@ The PHP Interpreter <http://www.php.net>
     + 尽量使用12X5型的配置，此时应该是效果最优的
     + 对于上面的X，如果是脚本级别的，推荐使用0，如果是Web服务型的，可以根据测试结果选择3或5
     + @jit的形式，在有了attributes以后，可能变为<<jit>>
+  - 类型系统和错误处理方面的改进
+    + 对算术/按位运算符进行更严格的类型检查（https://wiki.php.net/rfc/arithmetic_operator_type_checks）
+    + 抽象特征方法验证（https://wiki.php.net/rfc/abstract_trait_method_validation）
+    + 魔术方法的正确签名（https://wiki.php.net/rfc/magic-methods-signature）
+    + 重分类引擎警告（https://wiki.php.net/rfc/engine_warnings）
+    + 不兼容方法签名的致命错误（https://wiki.php.net/rfc/lsp_errors）
+    + @运算符不再使致命错误静默。
+    + 用私有方法继承（https://wiki.php.net/rfc/inheritance_private_methods）
+    + 混合类型（https://wiki.php.net/rfc/mixed_type_v2）
+    + 静态返回类型（https://wiki.php.net/rfc/static_return_type）
+    + 内部函数类型（https://externals.io/message/106522）
+    + 不透明的对象代替Curl、Gd、Sockets、OpenSSL、XMLWriter和XML扩展的资源
 
 ```sh
 php -d opcache.jit_buffer_size=0 Zend/bench.php

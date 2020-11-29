@@ -1231,7 +1231,7 @@ JavaEE/JDBC/Weblogic
 * [Thinking In Java Java 编程思想](https://www.codeguru.com/java/tij/tij_c.shtml)
 * Java核心技术·卷 I（原书第10版）
 * Java核心技术·卷 II（原书第10版）
-* Effective java
+* Effective Java
 * Head First Java
 * [Introduction to Programming Using Java](http://math.hws.edu/javanotes/)
 * 《[Java8 实战](https://www.amazon.cn/gp/product/B01ER75QC8)》

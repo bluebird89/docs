@@ -1,4 +1,4 @@
-## TCP/IP 传输控制协议/网际协议 Transmission Control Protocol/Internet Protocol
+ ## TCP/IP 传输控制协议/网际协议 Transmission Control Protocol/Internet Protocol
 
 * OSI七层协议体系结构，在五层协议中应用层下面加了表示层和会话层
   - 应用层：打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
@@ -594,7 +594,7 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 
 * 目标MAC地址(6个字节)：源MAC地址(6个字节)：类型(2个字节)：数据：FCS帧检验序列（4个字节）
 
-## DNS Domain Name System 域名解析系统
+## DNS Domain Name System 域名系统
 
 因特网上作为域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）
 
@@ -619,7 +619,6 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * 同网段有那啥网站
 * 利用DNS实现DNS的负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
   - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询
-
 * 由分层的 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
 * 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同的类型（type） `Domain_name Time_to_live Class Type Value`
@@ -636,14 +635,25 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
   - Value：记录的值，如果是A记录，则value是一个IPv4地址
 * 层次
   - 根域名服务器（Root DNS Server）：保存了所有顶级区域的权威域名服务器记录。现在通过根域名服务器，我们可以找到所有的顶级区域的权威域名服务器，然后就可以往下一级一级找下去了
-  - 顶级域名服务器（Top-level DNS Server）：由ICANN（互联网名称与数字地址分配机构）负责管理。目前已经有超过250个顶级域名，每个顶级域名可以进一步划为一些子域（二级域名），这些子域可被再次划分（三级域名）
+  - 顶级域名服务器 Top-level DNS Server TLDs：由ICANN（互联网名称与数字地址分配机构）负责管理。目前已经有超过250个顶级域名，每个顶级域名可以进一步划为一些子域（二级域名），这些子域可被再次划分（三级域名）
   - 权威 DNS 服务器（Authoritative DNS Server
   - 本地 DNS 服务器(local DNS server)：每个 ISP(Internet Service Provider) 都有一台本地 DNS 服务器，起着代理的作用，并将该请求转发到 DNS 服务器层次系统中
 * 域名空间划分为A, B, C, D, E, F, G七个DNS区域，每个DNS区域都有多个权威域名服务器，这些域名服务器里面保存了许多域名解析记录
 * 查询方式
-  - 递归查询(Recursive query)：如果根域名服务器无法告知本地 DNS 服务器下一步需要访问哪个顶级域名服务器
-  - 迭代查询(Iteration query)：如果根域名服务器能够告知 DNS 服务器下一步需要访问的顶级域名服务器
+  - 递归查询(Recursive query)：如果主机所询问的本地域名服务器不知道被查询域名的 IP 地址，那么本地域名服务器就以 DNS 客户的身份，向其他根域名服务器继续发出查询请求报文，而不是让该主机自己进行下一步的查询。
+  - 迭代查询(Iteration query)：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的 IP 地址，要么告诉本地域名服务器：你下一步应当向哪一个域名服务器进行查询。然后让本地域名服务器进行后续的查询，而不是替本地域名服务器进行后续的查询。
+* 客户端到 Local DNS 服务器，Local DNS 与上级 DNS 服务器之间属于递归查询；DNS 服务器与根 DNS 服务器之前属于迭代查询
+* HTTPDNS
+  - 利用 HTTP 协议与 DNS 服务器交互，代替了传统的基于 UDP 协议的 DNS 交互，绕开了运营商的 Local DNS，有效防止了域名劫持，提高域名解析效率
+  - 由于 DNS 服务器端获取的是真实客户端 IP 而非 Local DNS 的 IP，能够精确定位客户端地理位置、运营商信息，从而有效改进调度精确性。
+  - 解决问题
+    + Local DNS 劫持：由于 HttpDns 是通过 IP 直接请求 HTTP 获取服务器 A 记录地址，不存在向本地运营商询问 domain 解析过程，所以从根本避免了劫持问题。
+    + 平均访问延迟下降：由于是 IP 直接访问省掉了一次 domain 解析过程，通过智能算法排序后找到最快节点进行访问。
+    + 用户连接失败率下降：通过算法降低以往失败率过高的服务器排序，通过时间近期访问过的数据提高服务器排序，通过历史访问成功记录提高服务器排序。
+  - 如何进行改造支持 HttpDns
+    + 阿里云的 HttpDNS 服务 `http://203.107.1.1/d?host=www.linkedkeeper.com`
 * DNS 请求是可以被抢答 `dig www.bennythink.com +short`
+* 传统的基于 UDP 协议的公共 DNS 服务极易发生 DNS 劫持，从而造成安全问题
 * 工具
   - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
   - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
