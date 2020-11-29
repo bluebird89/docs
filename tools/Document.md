@@ -44,6 +44,11 @@
   - dunk
 * [vnote](https://github.com/tamlok/vnote)A note-taking application that knows programmers and Markdown better.
 
+## VS code + foam
+
+* Show Graph
+* [Recipes](https://foambubble.github.io/foam/recipes)
+
 ## PPT
 
 * [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more

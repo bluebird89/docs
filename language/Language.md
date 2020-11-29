@@ -88,6 +88,12 @@
 
 * 变量的值始终保持在内存中
 
+## 词汇
+
+* Expression
+* Statement
+* Lexical
+
 ## 工具
 
 * [bazelbuild/bazel](https://github.com/bazelbuild/bazel):a fast, scalable, multi-language and extensible build system <https://bazel.build>
