@@ -25,6 +25,17 @@ A declarative, efficient, and flexible JavaScript library for building user inte
   - 组件模块化 − 通过 React 构建组件，使得代码更加容易得到复用，能够很好的应用在大项目的开发中。——提高可维护性和复用性以及开发效率
   - 单向响应数据流 − React 实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。提高可维护性
 
+## 哲学
+
+* React 最棒的部分之一是引导思考如何构建一个应用
+* 将设计好 UI 划分为组件层级
+  - 可以将组件当作一种函数或者是对象来考虑，根据单一功能原则来判定组件的范围
+  - UI（或者说组件结构）便会与数据模型一一对应，这是因为 UI 和数据模型都会倾向于遵守相同的信息结构
+* 用 React 创建一个静态版本
+* 确定 UI state 的最小（且完整）表示
+* 确定 state 放置的位置
+* 添加反向数据流
+
 ## 安装
 
 * 在线体验
@@ -83,6 +94,8 @@ npm run eject #  导出配置文件
 * 要渲染 HTML 标签，只需在 JSX 里使用小写字母的标签名
 * 要渲染 React 组件，只需创建一个大写字母开头的本地变量
 * 使用 className 和 htmlFor 来做对应的属性
+* Babel 会把 JSX 转译成一个名为 React.createElement() 函数调用
+* 通过花括号包裹代码，可以在 JSX 中嵌入表达式。这也包括 JavaScript 中的逻辑与 (&&) 运算符。它可以很方便地进行元素的条件渲染
 
 ## Components API
 
@@ -117,27 +130,38 @@ npm run eject #  导出配置文件
   - 从DOM 中读取值的时候，该方法很有用，如：获取表单字段的值和做一些 DOM 操作
 * isMounted 判断组件挂载状态
   - 用于判断组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错
-
-## The Data Flows Down
-
-  - A component may choose to pass its state down as props to its child components
-  - top-down" or "unidirectional" data flow:Any state is always owned by some specific component, and any data or UI derived from that state can only affect components "below" them in the tree.
+* 阻止组件渲染: 让 render 方法直接返回 null
 
 ## 生命周期
 
 * 每个状态都提供两种处理函数，will 函数在进入状态之前调用，did 函数在进入状态之后调用
+* The constructor() method is called before anything else
+  - called with the props, as arguments, and you should always start by calling the super(props) before anything else
 * Mounting：已插入真实 DOM
   - componentWillMount():渲染前调用,只会执行一次，在浏览器和服务器都会执行。一般用来对props和state进行初始化处理
   - componentDidMount():可以读取组件生成的 DOM。如果要与 DOM 互动，应该就在这个方法里面，而不是在render方法里面
-    + 在第一次渲染后调用，只在客户端。
-    + 之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
+    + 在第一次渲染后调用，只在客户端
+    + 之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问
     + 如果想和其他JavaScript框架一起使用，可以在这个方法中调用setTimeout, setInterval或者发送AJAX请求等操作(防止异部操作阻塞UI)
+    + run statements that requires that the component is already placed in the DOM.
   - getDefaultProps
   - getInitialState
   - render 将模板转为 HTML 语言，并插入指定的 DOM 节点
   - getDefaultProps 和 getInitialState 方法，都是只执行一次
+  - getDerivedStateFromProps:called right before rendering the element(s) in the DOM
+    + the natural place to set the state object based on the initial props
+    + takes state as an argument, and returns an object with changes to the state
 * Updating：重新渲染
+  - getDerivedStateFromProps
+    + the first method that is called when a component gets updated
+  - shouldComponentUpdate
+    + return a Boolean value that specifies whether React should continue with the rendering or not
+    + default value is true
+  - getSnapshotBeforeUpdate
+    + you have access to the props and state before the update, meaning that even after the update, you can check what the values were before the update
+    + If the getSnapshotBeforeUpdate() method is present, you should also include the componentDidUpdate() method, otherwise you will get an error
   - componentWillUpdate(object nextProps, object nextState)
+    + called after the component is updated in the DOM.
     + 一旦shouldComponentUpdate返回true，componentWillUpdate就会执行，主要用于为即将到来的更新做准备工作
   - componentDidUpdate(object prevProps, object prevState) 每次组件重新渲染（render方法）后执行
     + 可以操作组件所在的 DOM，用于操作数据已经更新之后的组件
@@ -177,6 +201,12 @@ npm run eject #  导出配置文件
   - componentWillUpdate
   - render
   - componentDidUpdate
+* 调用顺序
+  - 当 <Clock /> 被传给 ReactDOM.render()的时候，React 会调用 Clock 组件的构造函数。因为 Clock 需要显示当前的时间，所以它会用一个包含当前时间的对象来初始化 this.state。会在之后更新 state。
+  - 之后 React 会调用组件的 render() 方法。这就是 React 确定该在页面上展示什么的方式。然后 React 更新 DOM 来匹配 Clock 渲染的输出。
+  - 当 Clock 的输出被插入到 DOM 中后，React 就会调用 ComponentDidMount() 生命周期方法。在这个方法中，Clock 组件向浏览器请求设置一个计时器来每秒调用一次组件的 tick() 方法。
+  - 浏览器每秒都会调用一次 tick() 方法。 在这方法之中，Clock 组件会通过调用 setState() 来计划进行一次 UI 更新。得益于 setState() 的调用，React 能够知道 state 已经改变了，然后会重新调用 render() 方法来确定页面上该显示什么。这一次，render() 方法中的 this.state.date 就不一样了，如此以来就会渲染输出更新过的时间。React 也会相应的更新 DOM。
+  - 一旦 Clock 组件从 DOM 中被移除，React 就会调用 componentWillUnmount() 生命周期方法，这样计时器就停止了
 
 ![生命周期](../../_static/react_lifecircle.png "生命周期")
 
@@ -194,6 +224,32 @@ const data = { name: 'foo', value: 'bar' };
 const component = <Component {...data} />;
 ```
 
+## props 组件参数
+
+* 用法与原生的 HTML 标签完全一致，可以任意加入属性
+  - 可以在组件类的 this.props 对象上获取
+* 向组件传递参数，可以使用 this.props 对象
+* props是父子组件交互的唯一方式。要修改一个子组件，需要通过的新的props来重新渲染
+* props相当于组件的数据流，总是会从父组件向下传递至所有的子组件中
+* getDefaultProps() 方法为 props 设置默认值
+* 所有 React 组件都必须像纯函数一样保护它们的 props 不被更改
+* defaultProps 指定props默认值
+* 验证使用 propTypes
+* `setProps(object nextProps[, function callback])` 当和一个外部JavaScript应用集成时，可能会需要向组件传递数据或通知React.render()组件需要重新渲染，可以使用setProps()
+* `replaceProps(object nextProps[, function callback])` 删除原有 props
+* forceUpdate([function callback])
+  - 会使组件调用自身的render()方法重新渲染组件，组件的子组件也会调用自己的render()
+  - 组件重新渲染时，依然会读取this.props和this.state，如果状态没有改变，那么React只会更新DOM
+* 向组件传递数据，React组件从props拿到数据，然后返回视图。表示那些一旦定义，就不再改变的特性
+    + like function arguments
+    + component has a constructor function, the props should always be passed to the constructor and also to the React.Component via the super() method
+    + Readonly
+    + PropType Check 验证使用，可以保证应用组件被正确使用，React.PropTypes 提供很多验证器 (validator) 来验证传入数据是否有效
+    + Have to be passed from parent
+    + 使用
+      * 向一个组件传递数据的方法是将数据写在组件的标签中 `<Content value = {this.state.value}/>`
+      * 获取props `{props.value}`
+
 ## state 对象 内部变量
 
 * 把组件看成是一个状态机（State Machines）。通过与用户的交互，实现不同状态，然后渲染 UI，让用户界面和数据保持一致
@@ -204,8 +260,8 @@ const component = <Component {...data} />;
   - 不能在组件内部通过this.state修改状态，因为该状态会在调用setState()后被替换。
   - setState()并不会立即改变this.state，而是创建一个即将处理的state。setState()并不一定是同步的，为了提升性能React会批量执行state和DOM渲染
   - setState()总是会触发一次组件重绘，除非在shouldComponentUpdate()中实现了一些条件渲染逻辑
+  - state 包含几个独立的变量,用 setState() 来单独地更新它们
 * replaceState(object nextState[, function callback]) 只会保留nextState中状态，原state不在nextState中的状态都会被删除
-
 * 内部状态 local state 或者局部状态，会随着用户互动而产生变化的特性,组件私有内部参数，不应暴露到外部
     + store property values that belongs to the component
     + Changeable
@@ -230,35 +286,45 @@ const component = <Component {...data} />;
       * 获取内部状态：this.state
     + 内部状态的操作配合React事件系统，可以实现用户交互的功能
 
-## props 组件参数
-
-* 用法与原生的 HTML 标签完全一致，可以任意加入属性
-  - 可以在组件类的 this.props 对象上获取
-* 向组件传递参数，可以使用 this.props 对象
-* props是父子组件交互的唯一方式。要修改一个子组件，需要通过的新的props来重新渲染
-* props相当于组件的数据流，总是会从父组件向下传递至所有的子组件中
-* getDefaultProps() 方法为 props 设置默认值
-* defaultProps 指定props默认值
-* 验证使用 propTypes
-* `setProps(object nextProps[, function callback])` 当和一个外部JavaScript应用集成时，可能会需要向组件传递数据或通知React.render()组件需要重新渲染，可以使用setProps()
-* `replaceProps(object nextProps[, function callback])` 删除原有 props
-* forceUpdate([function callback])
-  - 会使组件调用自身的render()方法重新渲染组件，组件的子组件也会调用自己的render()
-  - 组件重新渲染时，依然会读取this.props和this.state，如果状态没有改变，那么React只会更新DOM
-* 向组件传递数据，React组件从props拿到数据，然后返回视图。表示那些一旦定义，就不再改变的特性
-    + like function arguments
-    + component has a constructor function, the props should always be passed to the constructor and also to the React.Component via the super() method
-    + Readonly
-    + PropType Check 验证使用，可以保证应用组件被正确使用，React.PropTypes 提供很多验证器 (validator) 来验证传入数据是否有效
-    + Have to be passed from parent
-    + 使用
-      * 向一个组件传递数据的方法是将数据写在组件的标签中 `<Content value = {this.state.value}/>`
-      * 获取props `{props.value}`
-
 ## state vs props
 
 * props 是不可变的，而 state 可以根据与用户交互来改变
 * 父组件中设置｜更新 state， 并通过在子组件上使用 props 将其传递到子组件上
+* 尽管 this.props 和 this.state 是 React 本身设置的，且都拥有特殊的含义，但是其实你可以向 class 中随意添加不参与数据流的额外字段
+* this.props 和 this.state 可能会异步更新，所以你不要依赖他们的值来更新下一个状态
+  - 可以让 setState() 接收一个函数而不是一个对象。这个函数用上一个 state 作为第一个参数，将此次更新被应用时的 props 做为第二个参数
+* 称 state 为局部或是封装:除了拥有并设置了它的组件，其他组件都无法访问
+* 自上而下”或是“单向”的数据流:组件可以选择把它的 state 作为 props 向下传递到它的子组件中
+
+## The Data Flows Down 数据是向下流动的
+
+* A component may choose to pass its state down as props to its child components
+* top-down" or "unidirectional" data flow:Any state is always owned by some specific component, and any data or UI derived from that state can only affect components "below" them in the tree.
+
+## 状态提升
+
+* 多个组件需要反映相同的变化数据，这时建议将共享状态提升到最近的共同父组件中去
+* 任何可变数据应当只有一个相对应的唯一“数据源”
+  - state 都是首先添加到需要渲染数据的组件中去
+  - 如果其他组件也需要这个 state，那么可以将它提升至这些组件的最近共同父组件中
+  - 如果某些数据可以由 props 或 state 推导得出，那么它就不应该存在于 state 中
+
+## 列表
+
+* key 帮助 React 识别哪些元素改变了，比如被添加或删除。因此你应当给数组中的每一个元素赋予一个确定的标识
+* 一个元素的 key 最好是这个元素在列表中拥有的一个独一无二的字符串。通常，我们使用数据中的 id 来作为元素的 key，万不得已可以使用元素索引 index 作为 key
+  - 如果列表项目的顺序可能会变化，我们不建议使用索引来用作 key 值，因为这样做会导致性能变差，还可能引起组件状态的问题
+* key 只是在兄弟节点之间必须唯一,不需要是全局唯一的。当生成两个不同的数组时，我们可以使用相同的 key 值
+
+## 组合 vs 继承
+
+* 包含关系
+  - 组件无法提前知晓它们子组件的具体内容，组件使用一个特殊的 children prop 来将子组件传递到渲染结果中
+  - 自行约定：将所需内容传入 props，并使用相应的 prop
+* 特例关系:一些组件看作是其他组件的特殊实例,可以通过 props 定制并渲染“一般”组件
+* Props 和组合 提供了清晰而安全地定制组件外观和行为的灵活方式。注意：组件可以接受任意 props，包括基本数据类型，React 元素以及函数
+* 在组件间复用非 UI 的功能，建议将其提取为一个单独的 JavaScript 模块，如函数、对象或者类
+  - 组件可以直接引入（import）而无需通过 extend 继承它们
 
 ## Refs
 
@@ -297,7 +363,23 @@ const component = <Component {...data} />;
 * React.createElement方法用来生成一个React组件实例
   - 参数
     + React组件类
-    + 一个对象，表示生成实例的参数
+    + 一个对象:生成实例参数
+
+## Events
+
+* 事件的命名采用小驼峰式（camelCase），而不是纯小写
+* 使用 JSX 语法时需要传入一个函数作为事件处理函数，而不是一个字符串
+* 不能通过返回 false 的方式阻止默认行为,必须显式的使用 preventDefault
+  - e 是一个合成事件。React 根据 W3C 规范来定义这些合成事件，所以你不需要担心跨浏览器的兼容性问题。React 事件与原生事件不完全相同
+* In class components, the this keyword is not defined by default, so with regular functions the this keyword represents the object that called the method, which can be the global window object,binding this in the constructor function
+* 一般不需要使用 addEventListener 为已创建的 DOM 元素添加监听器。事实上只需要在该元素初始渲染的时候添加监听器即可
+  - 必须谨慎对待 JSX 回调函数中的 this，在 JavaScript 中，class 的方法默认不会绑定 this。如果你忘记绑定 this.handleClick 并把它传入了 onClick，当你调用这个函数的时候 this 的值为 undefined
+  - 没有在方法后面添加 ()，例如 onClick={this.handleClick}，应该为这个方法绑定 this
+  - 使用实验性的 public class fields 语法,
+  - 在回调中使用箭头函数
+* 向事件处理程序传递参数
+  - `<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>`
+  - `<button onClick={this.deleteRow.bind(this, id)}>Delete Row</button>`
 
 ## Context
 
@@ -321,18 +403,10 @@ const component = <Component {...data} />;
 
 ## Form
 
-```
-const Text = props => <input type="text" {...props}/>
-const Select = ({options, ...others}) => (
-  <select {...others}>
-    {Object.keys(options)
-      .map((optionKey, index) => (
-        <option value={optionKey} key={index}>{options[optionKey]}</option>
-      ))
-    }
-  </select>
-)
-```
+* 在大多数情况下，推荐使用受控组件 来处理表单数据。在一个受控组件中，表单数据是由 React 组件来管理的
+  - 受控组件:使 React 的 state 成为“唯一数据源”。渲染表单的 React 组件还控制着用户输入过程中表单发生的操作。被 React 以这种方式控制取值的表单输入元素就叫做“受控组件”
+  - 指定 value 的 prop 会阻止用户更改输入。如果指定了 value，但输入仍可编辑，则可能是意外地将value 设置为 undefined 或 null
+* 另一种替代方案是使用非受控组件，这时表单数据将交由 DOM 节点来处理
 
 ## [React-Router](https://github.com/reactjs/react-router)
 
@@ -581,6 +655,7 @@ const combineReducers = reducers => {
 
 ## 工具
 
+* [flux](https://github.com/facebook/flux) Application Architecture for Building User Interfaces https://facebook.github.io/flux/
 * admin
   - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design http://marmelab.com/react-admin
 * table

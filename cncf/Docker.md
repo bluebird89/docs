@@ -50,6 +50,7 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
 ## 版本
 
 * Docker Community Edition（CE）社区版
+  - 可以使用WSL 2
 * Enterprise Edition(EE) 商业版
 
 ## Install
@@ -355,8 +356,7 @@ sudo systemctl restart docker
   - AUFX（Another UnionFS），做到了支持将不同目录挂在到同一个虚拟文件系统下，AUFX支持为每一个成员目录设定权限readonly，readwrite等，同时引入分层概念，对于readonly的权限branch可以逻辑进行增量修改
     + 典型：aufs/overlayfs，分层镜像实现的基础
   - Docker的初始化是将rootfs以readonly加载，之后利用union mount将一个readwrite文件系统挂载在readonly的rootfs之上，并向上叠加，这一系列的结构构成了container运行时。
-
-- 安全性
+* 安全性
   - 借助linux的kernel namspace和cgroups实现
   - deamon的安全接口
   - linux本身提供的安全方案，apparmor，selinux
@@ -535,15 +535,16 @@ docker push registry-host:5000/username/repository
   - 执行完毕后容器被终止
 * 启动：基于镜像新建一个容器并启动或者将在终止状态（stopped）的容器重新启动
   - --name标识来命名容器
-  - -P:容器内部端口随机映射到主机端口
+  - -p 8000:3000:容器的 3000 端口映射到本机的 8000 端口
   - -p:容器内部端口绑定到指定主机端口
   - –name:给容器定义一个名称，名称是唯一的。如果已经命名了一个叫 web 的容器，当要再次使用 web 这个名称的时候，需要先用docker rm 来删除之前创建的同名容器
-  - -i:允许对容器内的标准输入 (STDIN) 进行交互
+  - -i:允许对容器内标准输入 (STDIN) 进行交互
   - -t:让Docker分配一个伪终端并绑定到容器的标准输入上
+  - -it参数：容器的 Shell 映射到当前的 Shell，在本机窗口输入的命令，就会传入容器
   - -d 后台运行container 参数启动后会返回一个唯一的 id，也可以通过 docker ps 命令来查看容器信息
   - /bin/bash:在容器里执行/bin/bash命令
   - exit 退出这个 ubuntu 容器。退出之后这个容器依然存在，可以用 docker ps -l来看
-  - --rm 容器在终止后会立刻删除
+  - --rm 容器终止后会立刻删除
 * docker stop 来终止一个运行中的容器
   - 通过 exit 命令或 Ctrl+d 来退出终端时，所创建的容器立刻终止
 * 交互
@@ -605,13 +606,17 @@ docker inspect -f "{{ .Name }}" aed84ee21bde # 查看容器的名字
 docker inspect <container id> | grep "IPAddress"
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
 docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
+
 docker logs -f $CONTAINER_ID  # 查看日志
+docker container logs [containerID]
 
 docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
 docker exec -i 69d1 bash
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 docker exec container_id env # 获取环境变量
 docker exec -it 260d7645dac3 /bin/sh # Mac /bin/zsh 报错 OCI runtime exec failed: exec failed: container_linux.go:344: starting container process caused "exec: \"/bin/zsh\": stat /bin/zsh: no such file or directory": unknow
+
+docker container cp [containID]:[/path/to/file] . # 从正在运行的 Docker 容器里面，将文件拷贝到本机
 
 # login
 docker login # 登录到Docker Hub
@@ -820,8 +825,6 @@ docker run --network ov_net2 busybox # 之后创建容器的时候只需要指�
 brctl addbr xxxxx
 # 在新增网桥的基础上增加网口，在linux中，一个网口其实就是一个物理网卡。将物理网卡和网桥连接起来
 brctl addif xxxx ethx
-
-
 ```
 
 ## 持久化
@@ -832,6 +835,7 @@ brctl addif xxxx ethx
   - 如果container中的目录不存在，docker会自动创建该目录
   - 如果container中的目录已经有内容，那么docker会使用host上的目录将其覆盖掉
 * 存储卷:绕过container的文件系统，直接将数据写到host机器上，只是volume是被docker管理的，docker下所有的volume都在host机器上的指定目录下/var/lib/docker/volumes
+  - -v "$PWD/workspace":/var/www/hello.world 将本地的$PWD/workspace文件夹映射到镜像实例里的/var/www/hello.world文件夹
   - 数据卷是一个可供一个或多个容器使用的特殊目录，绕过 UFS，可以提供很多有用的特性：
     + 数据卷可以在容器之间共享和重用
     + 对数据卷的修改会立马生效
@@ -906,7 +910,7 @@ VOLUME /foo
   - RUN 在构建image的时候运行的命令
     + `RUN ["可执行文件", "参数1", "参数2"]`
   - `ADD <src> <dest>`: 将本地目录中的文件添加到docker镜像中 `ADD unicorn.rb /app/config/unicorn.rb`  <src> 可以是Dockerfile所在目录的一个相对路径；也可以是一个 URL
-  - `COPY <src> <dest>` 只能拷贝宿主机上的文件复制进镜像中
+  - `COPY <src> <dest>` 拷贝宿主机上文件复制进镜像中
   - ENV: 添加环境变量  `ENV RAILS_ENV staging`
   - USER daemon：指定运行容器时的用户名或 UID，后续的 RUN 也会使用指定用户
   - VOLUME ["/data"]：创建一个可以从本地主机或其他容器挂载的挂载点，一般用来存放数据库和需要保持的数据等
@@ -1297,9 +1301,7 @@ sudo pip uninstall docker-compose
 
 # docker-compose.yml
 version: '2'
-
 services:
-
   web:
     image: dockercloud/hello-world
     ports:
@@ -1781,8 +1783,8 @@ kubectl-debug <POD_NAME>
   - [shipyard/shipyard](https://github.com/shipyard/shipyard) Composable Docker Management <http://shipyard-project.com>
     + [shipyard](https://shipyard-project.com/):Built on Docker Swarm, Shipyard gives you the ability to manage Docker resources including containers, images, private registries and more.
   - <https://www.portainer.io/>
-  - [docker / kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows <https://kitematic.com/>
-  - [DockStation](https://dockstation.io/)
+  - [kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows <https://kitematic.com/>
+  - [Dockstation](https://dockstation.io/)
   - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
   - [Portainer](link) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
   - [lazydocker](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
