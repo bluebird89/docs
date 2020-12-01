@@ -1,4 +1,4 @@
- ## TCP/IP 传输控制协议/网际协议 Transmission Control Protocol/Internet Protocol
+ # Transmission Control Protocol/Internet Protocol TCP/IP 传输控制协议/网际协议
 
 * OSI七层协议体系结构，在五层协议中应用层下面加了表示层和会话层
   - 应用层：打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
@@ -231,7 +231,7 @@ hping3 -S -p 80 --flood 192.168.33.10
 netstat -s | grep "SYNs to LISTEN" # 查看累计
 ```
 
-## 三次握手连接建立
+## 三次握手
 
 * 开始的时候客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器
 * TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程的连接请求，此时服务器就进入了LISTEN（监听）状态；
@@ -247,7 +247,7 @@ netstat -s | grep "SYNs to LISTEN" # 查看累计
 netstat -napt
 ```
 
-## 四次挥手释放连接
+## 四次挥手
 
 * 数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，然后客户端主动关闭，服务器被动关闭。
 * 客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。
@@ -292,7 +292,7 @@ netstat -nat | grep -E "TIME_WAIT|Local Address"
 netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 ```
 
-## TCP 可靠性传输
+## TCP
 
 * 重传机制
   - 超时重传:在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据.会在数据包丢失或者确认应答丢失发生超时重传
@@ -390,27 +390,6 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
       * 重传丢失的数据包
       * 如果再收到重复的 ACK，那么 cwnd 增加 1
       * 如果收到新数据的 ACK 后，设置 cwnd 为 ssthresh，接着就进入了拥塞避免算法
-* [TCP BBR(Bottleneck Bandwidth and Round-trip propagation time)](https://queue.acm.org/detail.cfm?id=3022184)是旨在恢复期间提高发送数据的准确性，该算法确保恢复后的拥塞窗口大小尽可能接近慢启动阈值。在Google进行的测试中，能将平均延迟降低3~10%恢复超时减少5%，PRR算法后作为Linux内核3.2版本默认拥塞算法
-  - 由Google设计于2016年发布的拥塞算法，该算法认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法。
-  - Google在YouTube上应用该算法，将全球平均的YouTube网络吞吐量提高了4%，BBR之后移植入Linux内核4.9版本
-  - 主动的闭环反馈系统，通俗来说就是根据带宽和RTT延时来不断动态探索寻找合适的发送速率和发送量
-  - 使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
-  - 认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法例如CUBIC
-  - BBR算法不再基于丢包判断并且也不再使用AIMD线性增乘性减策略来维护拥塞窗口，而是分别采样估计极大带宽和极小延时，并用二者乘积作为发送窗口，并且BBR引入了Pacing Rate限制数据发送速率，配合cwnd使用来降低冲击
-  - 概念
-    + BDP带宽延时积： BDP是Bandwidth-Delay Product的缩写，可以翻译为带宽延时积，我们知道带宽的单位是bps(bit per second)，延时的单位是s，这样BDP的量纲单位就是bit，从而我们知道BDP就是衡量一段时间内链路的数据量的指标。这个可以形象理解为水管灌水问题，带宽就是水管的水流速度立方米/s，延时就是灌水时间单位s，二者乘积我们就可以知道当前水管内存储的水量了，这是BBR算法的一个关键指标，来看一张陶辉大神文章中的图以及一些网络场景中的BDP计算
-    + 长肥网络：把具有长RTT往返时间和高带宽的网络成为长肥网络或者长肥管道，它的带宽延时积BDP很大大，这种网络理论上吞吐量很大也是研究的重点
-    + TCP Pacing机制：可以简单地理解TCP Pacing机制就是将拥塞控制中数据包的做平滑发送处理，避免数据的突发降低网络抖动
-  - TCP带宽和延时的测量：采用交替采样测量带宽和延时乘积指标，取一段时间内的带宽极大值和延时极小值作为估计值
-  - 发送速率和RTT曲线
-    + app limit应用限制阶段：在这个阶段是应用程序开始发送数据，目前网络通畅RTT基本保持固定且很小，发送速率与RTT成反比，因此发送速率也是线性增加的，可以简单认为这个阶段有效带宽并没有达到上限，RTT是几乎固定的没有明显增长。
-    + band limit带宽限制阶段： 随着发送速率提高，网络中的数据包越来越多开始占用链路Buffer，此时RTT开始增加发送速率不再上升，有效带宽开始出现瓶颈，但是此时链路中的缓存区并没有占满，因此数据还在增加，RTT也开始增加。
-    + buffer limit缓冲区限制阶段：随着链路中的Buffer被占满，开始出现丢包，这也是探测到的最大带宽，这个节点BDP+BufferSize也是基于丢包的控制策略的作用点。
-  - 过程
-    + StartUp慢启动阶段： BBR的慢启动阶段类似于CUBIC的慢启动，同样是进行探测式加速区别在于BBR的慢启动使用2ln2的增益加速，过程中即使发生丢包也不会引起速率的降低，而是依据返回的确认数据包来判断带宽增长，直到带宽不再增长时就停止慢启动而进入下一个阶段，需要注意的是在寻找最大带宽的过程中产生了多余的2BDP的数据量，关于这块可以看下英文原文的解释： To handle Internet link bandwidths spanning 12 orders of magnitude, Startup implements a binary search for BtlBw by using a gain of 2/ln2 to double the sending rate while delivery rate is increasing. This discovers BtlBw in log2BDP RTTs but creates up to 2BDP excess queue in the process.
-    + Drain排空阶段 排空阶段是为了把慢启动结束时多余的2BDP的数据量清空，此阶段发送速率开始下降，也就是单位时间发送的数据包数量在下降，直到未确认的数据包数量<BDP时认为已经排空，也可以认为是RTT不再下降为止，排空阶段结束。
-    + ProbeBW带宽探测阶段 经过慢启动和排空之后，目前发送方进入稳定状态进行数据的发送，由于网络带宽的变化要比RTT更为频繁，因此ProbeBW阶段也是BBR的主要阶段，在探测期中增加发包速率如果数据包ACK并没有受影响那么就继续增加，探测到带宽降低时也进行发包速率下降。
-    + ProbeRTT延时探测阶段 前面三个过程在运行时都可能进入ProbeRTT阶段，当某个设定时间内都没有更新最小延时状态下开始降低数据包发送量，试图探测到更小的MinRTT，探测完成之后再根据最新数据来确定进入慢启动还是ProbeBW阶段
 * 深度包检测 DPI (Deep Packet Inspection)就是识别TCP/IP网络协议中各种各样的报文，来进行流量管控和分析，在网络安全领域应用很多，属于通信&互联网领域的交叉业务
 * AIMD:线性增加乘性减少算法是一个反馈控制算法，因其在TCP拥塞控制中的使用而广为人知，AIMD将线性增加拥塞窗口和拥塞时乘性减少窗口相结合，基于AIMD的多个连接理想状态下会达到最终收敛，共享相同数量的网络带宽，与其相关的乘性增乘性减MIMD策略和增性加增性减少AIAD都无法保证稳定性
 * 弱网环境下，尤其是移动互联网中之前的基于AIMD的拥塞控制策略可能会由于丢包的出现而大幅降低网络吞吐量，从而对网络带宽的利用率也大大下降，这时我们采用更加激进的控制策略，或许可以获得更好的效果和用户体验
@@ -423,12 +402,43 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
   - 低负载高延时丢包：在某些弱网环境下RTT会增加甚至出现非拥塞引起丢包，此时基于丢包反馈的拥塞算法的窗口会比较小，对带宽的利用率很低，吞吐量下降很明显，但是实际上网络负载并不高，所以在弱网环境下效果并不是非常理想
 
 ![Alt text](__/_static/tcp_block_control.png "Optional title")
+![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 
-## TCP BBR Bottleneck Bandwidth and Round-trip propagation time
+## [TCP BBR（Bottleneck Bandwidth and Round-trip propagation time](https://github.com/google/bbr)
 
-* 由Google设计，于2016年发布的拥塞算法
+* 旨在恢复期间提高发送数据的准确性，该算法确保恢复后的拥塞窗口大小尽可能接近慢启动阈值。在Google进行的测试中，能将平均延迟降低3~10%恢复超时减少5%，PRR算法后作为Linux内核3.2版本默认拥塞算法
+* 由Google设计于2016年发布的拥塞算法，该算法认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法。
+* Google在YouTube上应用该算法，将全球平均的YouTube网络吞吐量提高了4%，BBR之后移植入Linux内核4.9版本
+* 主动的闭环反馈系统，通俗来说就是根据带宽和RTT延时来不断动态探索寻找合适的发送速率和发送量
+* 使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
+* 认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法例如CUBIC
+* BBR算法不再基于丢包判断并且也不再使用AIMD线性增乘性减策略来维护拥塞窗口，而是分别采样估计极大带宽和极小延时，并用二者乘积作为发送窗口，并且BBR引入了Pacing Rate限制数据发送速率，配合cwnd使用来降低冲击
+* 概念
+  - BDP带宽延时积： BDP是Bandwidth-Delay Product的缩写，可以翻译为带宽延时积，我们知道带宽的单位是bps(bit per second)，延时的单位是s，这样BDP的量纲单位就是bit，从而我们知道BDP就是衡量一段时间内链路的数据量的指标。这个可以形象理解为水管灌水问题，带宽就是水管的水流速度立方米/s，延时就是灌水时间单位s，二者乘积我们就可以知道当前水管内存储的水量了，这是BBR算法的一个关键指标，来看一张陶辉大神文章中的图以及一些网络场景中的BDP计算
+  - 长肥网络：把具有长RTT往返时间和高带宽的网络成为长肥网络或者长肥管道，它的带宽延时积BDP很大大，这种网络理论上吞吐量很大也是研究的重点
+  - TCP Pacing机制：可以简单地理解TCP Pacing机制就是将拥塞控制中数据包的做平滑发送处理，避免数据的突发降低网络抖动
+* TCP带宽和延时的测量：采用交替采样测量带宽和延时乘积指标，取一段时间内的带宽极大值和延时极小值作为估计值
+* 发送速率和RTT曲线
+  - app limit应用限制阶段：在这个阶段是应用程序开始发送数据，目前网络通畅RTT基本保持固定且很小，发送速率与RTT成反比，因此发送速率也是线性增加的，可以简单认为这个阶段有效带宽并没有达到上限，RTT是几乎固定的没有明显增长。
+  - band limit带宽限制阶段： 随着发送速率提高，网络中的数据包越来越多开始占用链路Buffer，此时RTT开始增加发送速率不再上升，有效带宽开始出现瓶颈，但是此时链路中的缓存区并没有占满，因此数据还在增加，RTT也开始增加。
+  - buffer limit缓冲区限制阶段：随着链路中的Buffer被占满，开始出现丢包，这也是探测到的最大带宽，这个节点BDP+BufferSize也是基于丢包的控制策略的作用点。
+* 过程
+  - StartUp慢启动阶段： BBR的慢启动阶段类似于CUBIC的慢启动，同样是进行探测式加速区别在于BBR的慢启动使用2ln2的增益加速，过程中即使发生丢包也不会引起速率的降低，而是依据返回的确认数据包来判断带宽增长，直到带宽不再增长时就停止慢启动而进入下一个阶段，需要注意的是在寻找最大带宽的过程中产生了多余的2BDP的数据量，关于这块可以看下英文原文的解释： To handle Internet link bandwidths spanning 12 orders of magnitude, Startup implements a binary search for BtlBw by using a gain of 2/ln2 to double the sending rate while delivery rate is increasing. This discovers BtlBw in log2BDP RTTs but creates up to 2BDP excess queue in the process.
+  - Drain排空阶段:为了把慢启动结束时多余的2BDP的数据量清空，此阶段发送速率开始下降，也就是单位时间发送的数据包数量在下降，直到未确认的数据包数量<BDP时认为已经排空，也可以认为是RTT不再下降为止，排空阶段结束。
+  - ProbeBW带宽探测阶段 经过慢启动和排空之后，目前发送方进入稳定状态进行数据的发送，由于网络带宽的变化要比RTT更为频繁，因此ProbeBW阶段也是BBR的主要阶段，在探测期中增加发包速率如果数据包ACK并没有受影响那么就继续增加，探测到带宽降低时也进行发包速率下降。
+  - ProbeRTT延时探测阶段 前面三个过程在运行时都可能进入ProbeRTT阶段，当某个设定时间内都没有更新最小延时状态下开始降低数据包发送量，试图探测到更小的MinRTT，探测完成之后再根据最新数据来确定进入慢启动还是ProbeBW阶段
 * 以往大部分拥塞算法是基于丢包来作为降低传输速率的信号，而BBR则基于模型主动探测。该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型,数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
 * 该算法认为随着网络接口控制器逐渐进入千兆速度时，分组丢失不应该被认为是识别拥塞的主要决定因素，所以基于模型的拥塞控制算法能有更高的吞吐量和更低的延迟，可以用BBR来替代其他流行的拥塞算法
+* 传统 TCP 拥塞控制算法，基于丢包反馈的协议（基于丢包来作为降低传输速率的信号），而BBR则基于模型主动探测
+  - 基于「丢包反馈」的协议是一种 被动式 的拥塞控制机制，其依据网络中的丢包事件来做网络拥塞判断。即便网络中的负载很高时，只要没有产生拥塞丢包，协议就不会主动降低自己的发送速度。
+  - 这种协议可以最大程度的利用网络剩余带宽，提高吞吐量。然而，由于基于丢包反馈协议在网络近饱和状态下所表现出来的侵略性，一方面大大提高了网络的带宽利用率；但另一方面，对于基于丢包反馈的拥塞控制协议来说，大大提高网络利用率同时意味着下一次拥塞丢包事件为期不远了，所以这些协议在提高网络带宽利用率的同时也间接加大了网络的丢包率，造成整个网络的抖动性加剧
+  - 丢包并不总是拥塞导致，丢包可能原因是多方面，比如：
+    + 全球最牛的防火墙 GWF 的随机丢包策略
+    + 网路中由于多路径衰落（multi-path fading）所造成的信号衰减（signal degradation）
+    + 通道阻塞造成的丢包（packet drop），再者损坏的封包（corrupted packets）被拒绝通过
+    + 有缺陷的网路硬件、网路驱动软件发生故障
+    + 信号的信噪比（SNR）的影响
+* 该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
 * 移植入Linux内核4.9版本，并且对于QUIC可用
 
 ```sh
@@ -480,7 +490,6 @@ lsmod | grep bbr
   + 拥有大量Client
   + 对数据安全性无特殊要求
   + 网络负担非常重，但对响应速度要求高
-
 - 优势
   + 能够对握手过程进行精简，减少网络通信往返次数；
   + 能够对TLS加解密过程进行优化；
@@ -523,6 +532,8 @@ lsmod | grep bbr
 - Keep-Alive:如果连接双方如果没有一方主动断开都不会断开TCP连接，减少了每次建立HTTP连接时进行TCP连接的消耗. 每隔一段时间就会发送心跳，就可以很快的知道服务端节点的情况
   + 检查死节点:主要是为了让连接快速失败被发现，可以进行重新连接
   + 防止连接由于不活跃而断开
+
+![TCP与UDP对比](../_static/TCPvsUDP.png)
 
 ## 网络层
 
@@ -569,8 +580,15 @@ lsmod | grep bbr
   + 广播主机拿到ARP包后会更新自己的ARP缓存（就是存放IP-MAC对应表的地方）。发送广播的主机就会用新的ARP缓存数据准备好数据链路层的的数据包发送工作。
 - RARP协议 与 ARP 相反
 
-## 链接层
+## 链接层 data link
 
+* 网桥 Bridge
+  - 根据Mac地址的信息转发到网桥的不同端口上
+  - 二层虚拟网络设备，把若干个网络接口“连接”起来，使得网口之间报文可以转发
+  - 能够解析收发的报文，读取目标Mac地址信息，和自己Mac地址表结合，来决策报文转发的目标网口
+  - 会学习源Mac地址。在转发报文时，网桥只需要向特定的端口转发，从而避免不必要的网络交互
+  - 如果遇到了一个从未学过的地址，就无法知道这个报文应该向哪个网口转发，就将报文广播给除了报文来源之外的所有网口
+  - 对学习到的Mac地址表加上超时时间，默认5min。如果网桥收到了对应端口MAC地址回发的包。则重置超时时间，否则过了超时时间后，就认为哪个设备不在那个端口上了，他就会广播重发
 - 定义数据包(帧Frame)
   + 标头(Head):数据包的一些说明项, 如发送者、接收者、数据类型
   + 数据(Data):数据包的具体内容
@@ -586,9 +604,6 @@ lsmod | grep bbr
 ```sh
 curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" -so /dev/null https://www.gemini.com
 ```
-
-![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
-![TCP与UDP对比](../_static/TCPvsUDP.png)
 
 ## 以太网 Ethernet
 
@@ -828,53 +843,6 @@ sudo dpkg-reconfigure wireshark-common
 # 允许非超级用户捕获数据包，因此你必须将该用户添加到 wireshark 组
 sudo usermod -aG wireshark $(whoami)
 sudo wireshark
-```
-
-## tcpdump
-
-```sh
-tcpdump -i any tcp and host 192.168.33.10 and port 80 -w http.pcap
-tcpdump -i eth0 tcp and host 192.168.33.10 and port 80 -w tcp.sys_timeout.pcap
-# 捕获特定网口数据包
-tcpdump -i eth0
-# 捕获特定个数(1000)的包
-tcpdump -c 1000 -i eth0
-# 将捕获的包保存到文件
-tcpdump -w a.pcap -i eth0
-# 读取pcap格式的包
-tcpdump -r a.pcap
-# 增加捕获包的时间戳
-tcpdump -n -ttt -i eth0
-# 指定捕获包的协议类型
-tcpdump -i eth0 arp
-# 捕获指定端口
-tcpdump -i eth0 post 22
-# 捕获特定目标ip+port的包
-tcpdump -i eth0 dst address and port 22
-# 捕获DNS请求和响应
-tcpdump -i eth0 -s0 port 53
-# 匹配Http请求头
-tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
-# 捕获特定网口数据包
-tcpdump -i eth0
-# 捕获特定个数(1000)的包
-tcpdump -c 1000 -i eth0
-# 将捕获的包保存到文件
-tcpdump -w a.pcap -i eth0
-# 读取pcap格式的包
-tcpdump -r a.pcap
-# 增加捕获包的时间戳
-tcpdump -n -ttt -i eth0
-# 指定捕获包的协议类型
-tcpdump -i eth0 arp
-# 捕获指定端口
-tcpdump -i eth0 post 22
-# 捕获特定目标ip+port的包
-tcpdump -i eth0 dst address and port 22
-# 捕获DNS请求和响应
-tcpdump -i eth0 -s0 port 53
-# 匹配Http请求头
-tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```
 
 ### [cleanbrowsing/dnsperftest](https://github.com/cleanbrowsing/dnsperftest)

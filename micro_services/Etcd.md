@@ -21,6 +21,16 @@ Distributed reliable key-value store for the most critical data of a distributed
 
 ## Install
 
+* etcd 默认将数据存放到当前路径的 default.etcd/ 目录下
+* 在 http://localhost:2380 和集群中其他节点通信
+* 在 http://localhost:2379 提供 HTTP API 服务，供客户端交互
+* 该节点的名称默认为 default
+* heartbeat 为 100ms，后面会说明这个配置的作用
+* election 为 1000ms，后面会说明这个配置的作用
+* snapshot count 为 10000，后面会说明这个配置的作用
+* 集群和每个节点都会生成一个 uuid
+* 启动的时候，会运行 raft，选举出 leader
+
 ```sh
 brew install etcd
 
@@ -30,15 +40,22 @@ go get github . com / coreos / etcd / clientv3
 go get -v go.etcd.io/etcd/etcdctl
 
 ./etcd --version
+
+hostnamectl set-hostname etcd-1
+wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+rpm -ivh epel-release-latest-7.noarch.rpm
+ yum 仓库中的etcd版本为3.3.11，如果需要最新版本的etcd可以进行二进制安装
+yum -y install etcd
+systemctl enable etcd
 ```
 
 ## 概念
 
 * Raft：etcd所采用的保证分布式系统强一致性的算法。
-* Node：一个Raft状态机实例。
-* Member：一个etcd实例。它管理着一个Node，并且可以为客户端请求提供服务。
+* Node：一个Raft状态机实例
 * Cluster：由多个Member构成可以协同工作的etcd集群。
-* Peer：对同一个etcd集群中另外一个Member的称呼。
+  - Member：一个etcd实例。它管理着一个Node，并且可以为客户端请求提供服务。
+  - Peer：对同一个etcd集群中另外一个Member的称呼。
 * Client：向etcd集群发送HTTP请求的客户端。
 * WAL：预写式日志，etcd用于持久化存储的日志格式。
 * snapshot：etcd防止WAL文件过多而设置的快照，存储etcd数据状态。
@@ -48,7 +65,7 @@ go get -v go.etcd.io/etcd/etcdctl
 * Candidate：当Follower超过一定时间接收不到Leader的心跳时转变为Candidate开始竞选。
 * Term：某个节点成为Leader到下一次竞选时间，称为一个Term。
 * Index：数据项编号。Raft中通过Term和Index来定位数据
-* Lease提供以下功能：
+* Lease提 功能：
   - Grant：分配一个租约。
   - Revoke：释放一个租约。
   - TimeToLive：获取剩余TTL时间。
@@ -62,16 +79,23 @@ go get -v go.etcd.io/etcd/etcdctl
 * HTTP Server：用于处理用户发送的 API 请求以及其它 etcd 节点的同步与心跳信息请求
 * Store：用于处理 etcd 支持的各类功能的事务，包括数据索引、节点状态变更、监控与反馈、事件处理与执行等等，是 etcd 对用户提供的大多数 API 功能的具体实现
 * Raft：Raft 强一致性算法的具体实现，是 etcd 的核心
-* WAL：Write Ahead Log（预写式日志），是 etcd 的数据存储方式。除了在内存中存有所有数据的状态以及节点的索引以外，etcd 就通过 WAL 进行持久化存储。WAL 中，所有的数据提交前都会事先记录日志。Snapshot 是为了防止数据过多而进行的状态快照；Entry 表示存储的具体日志内容。
+* WAL：Write Ahead Log（预写式日志），是 etcd 的数据存储方式。除了在内存中存有所有数据的状态以及节点的索引以外，etcd 就通过 WAL 进行持久化存储。WAL 中，所有的数据提交前都会事先记录日志
+  - Snapshot 是为了防止数据过多而进行的状态快照
+  - Entry 表示存储的具体日志内容
 
 ## 原理
 
 * 读写数据
   - 为了保证数据的强一致性，集群中所有的数据流向都是一个方向，从 Leader （主节点）流向 Follower，也就是所有 Follower 的数据必须与 Leader 保持一致，如果不一致会被覆盖
-  - 写入来说，etcd集群中的节点会选举出Leader节点，如果写入请求来自Leader节点即可直接写入然后Leader节点会把写入分发给所有Follower，如果写入请求来自其他Follower节点那么写入请求会给转发给Leader节点，由Leader节点写入之后再分发给集群上的所有其他节点
-* 选举Leader节点
+  - 读取：由于集群所有节点数据是强一致性的，读取可以从集群中随便哪个节点进行读取数据
+  - 写入:etcd集群中的节点会选举出Leader节点
+    + 如果写入请求来自Leader节点即可直接写入然后Leader节点会把写入分发给所有Follower
+    + 如果写入请求来自其他Follower节点那么写入请求会给转发给Leader节点，由Leader节点写入之后再分发给集群上的所有其他节点
+* Leader 选举
   - 集群启动之初节点中并没有被选举出的Leader
-  - Raft算法使用随机Timer来初始化Leader选举流程。比如说在三个节点上都运行了Timer（每个Timer的持续时间是随机的），第一个节点率先完成了Timer，随后它就会向其他两个节点发送成为Leader的请求，其他节点接收到请求后会以投票回应然后第一个节点被选举为Leader
+  - Raft算法使用随机Timer来初始化Leader选举流程。比如说在三个节点上都运行了Timer（每个Timer的持续时间是随机的）
+    + 第一个节点率先完成了Timer，随后它就会向其他两个节点发送成为Leader的请求
+    + 其他节点接收到请求后会以投票回应然后第一个节点被选举为Leader
   - 成为Leader后，该节点会以固定时间间隔向其他节点发送通知，确保自己仍是Leader。有些情况下当Follower们收不到Leader的通知后，比如说Leader节点宕机或者失去了连接，其他节点会重复之前选举过程选举出新的Leader
 * 写入是否成功
   - 成功写入：写入请求被Leader节点处理并分发给了多数节点
@@ -90,9 +114,9 @@ go get -v go.etcd.io/etcd/etcdctl
   - -peer-bind-addr 集群服务通讯的监听地址，默认为-peer-addr配置
 * 配置文件：`/etc/etcd/etcd.conf`
 * set
-  - -- ttl '0'该键值的超时时间（单位为秒），不配置（默认为 0 ）则永不超时
-  - -- swap - with - value value 若该键现在的值是 value ，则进行设置操作
-  - -- swap - with - index '0'若该键现在的索引值是指定索引，则进行设置操作
+  - --ttl '0'该键值的超时时间（单位为秒），不配置（默认为 0 ）则永不超时
+  - --swap-with-value value 若该键现在的值是 value ，则进行设置操作
+  - --swap-with-index '0'若该键现在的索引值是指定索引，则进行设置操作
 * get
   - --sort 对结果进行排序
   - --consistent 将请求发给主节点，保证获取内容的一致性
@@ -101,7 +125,10 @@ go get -v go.etcd.io/etcd/etcdctl
   - -- recursive 删除目录和所有子键
   - -- with - value 检查现有的值是否匹配
   - -- with - index '0'检查现有的 index 是否匹配
-* exec-watch 监测一个键值的变化，一旦键值发生更新，就执行给定命令。
+* mkdir
+  - 给定的键目录不存在，则创建一个新的键目录
+  - 目录存在的时候，执行该命令会报错
+* watch 监测一个键值的变化，一旦键值发生更新，就执行给定命令
 
 ```sh
 etcd # 启动服务
@@ -109,6 +136,8 @@ etcd # 启动服务
 ETCDCTL_API=3 etcdctl version
 ./etcdctl ls
 ./etcdctl put /root/test/keyOne "Hello etcd"
+etcdctl set /testdir/testkey "Hello world"
+etcdctl mk /testdir/testkey "Hello world"
 ./etcdctl update /root/test/keyOne "Hello etcd"
 ./etcdctl get /root/test/keyOne --print-value-only
 ./etcdctl del /root/test/keyOne
@@ -117,6 +146,9 @@ ETCDCTL_API=3 etcdctl version
 
 ./etcdctl exec -watch testkey --sh -c 'ls'
 ./etcdctl member list
+./etcdctl member list remove 8e9e05c52164694d
+
+etcdctl mkdir testdir2
 ```
 
 ## 权限
@@ -243,20 +275,33 @@ HOST_3=10.240.0.19
 ENDPOINTS=$HOST_1:2379,$HOST_2:2379,$HOST_3:2379
 
 etcdctl --endpoints=$ENDPOINTS member list
+
+etcdctl member list
+etcdctl cluster-health
 ```
 
-## 服务发现（Service Discovery）
+## 应用场景
 
-* 同一个分布式集群中的进程或服务，要如何才能找到对方并建立连接
-  - 一个强一致性、高可用的服务存储目录。基于 Raft 算法的 etcd 就是一个强一致性高可用的服务存储目录。
-  - 一种注册服务和监控服务健康状态的机制。用户可以在 etcd 中注册服务，并且对注册的服务设置 key TTL，定时保持服务的心跳以达到监控健康状态的效果。
-  - 一种查找和连接服务的机制。通过在 etcd 指定的主题（由服务名称构成的服务目录）下注册的服务也能在对应的主题下查找到
-* 基本功能
-  - 服务注册：同一service的所有节点注册到相同目录下，节点启动后将自己的信息注册到所属服务的目录中。
-  - 健康检查：服务节点定时发送心跳，注册到服务目录中的信息设置一个较短的TTL，运行正常的服务节点每隔一段时间会去更新信息的TTL。
-  - 服务发现：通过名称能查询到服务提供外部访问的 IP 和端口号。比如网关代理服务时能够及时的发现服务中新增节点、丢弃不可用的服务节点，同时各个服务间也能感知对方的存在。
-* 客户端从 etcd查询服务目录中的节点信息代理服务的请求，并且会在协程中实时监控服务目录中的变化，维护到自己的服务节点信息列表中
-* 网关通过 etcd获取到服务目录下的所有节点的信息，将他们初始化到自身维护的可访问服务节点列表中。然后使用Watch机制监听etcd上服务对应的目录的更新，根据通道发送过来的PUT和DELETE事件来增加和删除服务的可用节点列表
+* 服务发现 Service Discovery
+  - 同一个分布式集群中的进程或服务，要如何才能找到对方并建立连接
+    + 一个强一致性、高可用的服务存储目录。基于 Raft 算法的 etcd 就是一个强一致性高可用的服务存储目录。
+    + 一种注册服务和监控服务健康状态的机制。用户可以在 etcd 中注册服务，并且对注册的服务设置 key TTL，定时保持服务的心跳以达到监控健康状态的效果。
+    + 一种查找和连接服务的机制。通过在 etcd 指定的主题（由服务名称构成的服务目录）下注册的服务也能在对应的主题下查找到
+  - 基本功能
+    + 服务注册：同一service的所有节点注册到相同目录下，节点启动后将自己的信息注册到所属服务的目录中。
+    + 健康检查：服务节点定时发送心跳，注册到服务目录中的信息设置一个较短的TTL，运行正常的服务节点每隔一段时间会去更新信息的TTL。
+    + 服务发现：通过名称能查询到服务提供外部访问的 IP 和端口号。比如网关代理服务时能够及时的发现服务中新增节点、丢弃不可用的服务节点，同时各个服务间也能感知对方的存在。
+  - 客户端从 etcd查询服务目录中的节点信息代理服务的请求，并且会在协程中实时监控服务目录中的变化，维护到自己的服务节点信息列表中
+  - 网关通过 etcd获取到服务目录下的所有节点的信息，将他们初始化到自身维护的可访问服务节点列表中。然后使用Watch机制监听etcd上服务对应的目录的更新，根据通道发送过来的PUT和DELETE事件来增加和删除服务的可用节点列表
+* 消息发布与订阅:生产者可以往etcd中注册topic并发送消息，消费者从etcd中订阅topic，来获取生产者发送至etcd中的消息
+* 负载均衡:后端多组相同的服务提供者可以经自己服务注册到etcd中，etcd并且会与注册的服务进行监控检查，服务请求首先从etcd中获取到可用的服务提供者真正的ip:port，然后对此多组服务发送请求，etcd在其中充当了负载均衡的功能
+* 分部署通知与协调
+  - 当etcd watch服务发现丢失，会通知服务检查
+  - 控制器向etcd发送启动服务，etcd通知服务进行相应操作
+  - 当服务完成workr后状态更新至etcd，etcd对应会通知用户
+* 分布式锁
+* 分布式队列
+* 集群与监控与Leader选举
 
 ## 参考
 

@@ -250,5 +250,6 @@
 ## 参考
 
 * [](https://www.mountaingoatsoftware.com/)
+* [The Scrum Guide](https://www.scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-US.pdf)
 * [Scrum 中文网](https://www.scrumcn.com/)
 * [Scrum in 3 Minutes](https://www.visual-paradigm.com/scrum/scrum-in-3-minutes/)
