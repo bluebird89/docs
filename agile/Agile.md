@@ -77,6 +77,11 @@
 
 * 个体和互动 高于流程和工具 Individuals and interactions over processes and tools
 * 工作软件 高于详尽的文档 Working software over comprehensive documentation
+  - 需求管理：正确需求拆解方法，一定是“纵切蛋糕”，每一个需求单元拆得再小，也是能够独立发布、独立创造价值的。
+  - 项目管理：要管的就一定是如何把小块的需求流动起来，尽快、尽可能频繁地把小块需求交付给用户去使用，因为这才是每周、每天的工作真正体现为“可工作的软件”
+  - 配置管理：功能是一点一点加上去的，代码是不断反复修改的，并且任何人都有可能修改任何一块代码
+    + 单一代码库
+  - 质量保障：不可能靠人肉回归测试来保障质量，必须依赖全面、可靠、快速的自动化测试来构建软件质量的安全网
 * 客户合作 高于合同谈判 Customer collaboration over contract negotiation
 * 响应变化 高于遵循计划 Responding to change over following a plan
 
