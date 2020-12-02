@@ -415,7 +415,7 @@ sudo systemctl restart docker
   - docker client发送容器管理请求后，由docker daemon接受并处理请求，当docker client 接收到返回的请求相应并简单处理后，docker client 一次完整的生命周期就结束了
   - 通过rest api进行通信
 * Docker daemon
-  - 常驻后台系统进程
+  - 常驻后台系统进程,create a server that can be interacted with via a REST API.
   - 功能：接收处理docker client发送的请求。该守护进程在后台启动一个server，server负载接受docker client发送的请求；接受请求后，server通过路由与分发调度，找到相应的handler来执行请求
   - 启动所使用的可执行文件也为docker，与docker client启动所使用的可执行文件docker相同，在docker命令执行时，通过传入的参数来判别docker daemon与docker client
   - 架构
@@ -515,6 +515,7 @@ docker image ls -f dangling=true
 docker image ls -f since=mongo:3.2
 docker image ls -q # 列出 ID
 docker image ls --digests # 列出 摘要
+docker images
 
 docker search httpd  # 搜索镜像
 
@@ -525,6 +526,8 @@ docker pull username/repository:tag # 从Docker Hub中获取某个用户下的im
 docker pull registry-host:5000/respository:tag # 私有registry中获取image
 docker pull gcr.azk8s.cn/google_containers/hyperkube-amd64:v1.9.2
 
+docker push <hub-user>/<repo-name>:<tag>
+
 docker rmi [IMAGE ID]|[Image name]  # 镜像的image ID或者REPOSITORY名
 docker [image] rm image_id｜image_name # 新方式 镜像短 ID、镜像长 ID、镜像名 或者 镜像摘要
 docker rmi $(docker images -q) # 删除所有镜像，小心
@@ -533,12 +536,12 @@ docker image rm $(docker image ls -q redis)
 
 docker inspect zookeeper # 获取镜像基本信息
 
-docker save centos > /data/iso/centos.tar.gz # 导出
-docker save -o wdx-local-whale.tar wdxtub/wdx-whale
+docker save centos > /data/iso/centos.tar.gz
+docker save --output|-o my-app.tar my-app:1.0
 docker export 7691a814370e > ubuntu.tar
 
 cat ubuntu.tar | docker import - test/ubuntu:v1.0
-docker load < /data/iso/centos.tar.gz # 导入
+docker load < /data/iso/centos.tar.gz
 docker load --input wdx-local-whale.tar
 
 # 删除 因为更新镜像而没有标签的镜像
@@ -554,6 +557,12 @@ docker tag f2a91732366c myregistry:5000/username/repository:tag # 私有Registry
 
 docker push username/repository:tag
 docker push registry-host:5000/username/repository
+
+docker build --tag my-app:1.0 .
+docker tag my-app:1.0 robertcooper/my-app:1.0
+
+docker rmi $(docker images -a -q)  # remove all images
+docker rmi $(docker images -a -q) -f  # same as above, but forces the images associated with running containers to also be removed
 ```
 
 ## 容器 Container
@@ -656,7 +665,7 @@ docker run -d --volumes-from dbstore --name db1 training/postgres
 docker run -d --add-host=SERVER_NAME:127.0.0.1 bat/spark
 docker run -v /path-on-host:/path-in-container alpine # 文件夹映射
 docker run -e MY_ENV=some_value alpine # 指定环境变量
-docker run -it -w /home alpine sh # 设置container的工作路径
+docker run -it -w /home alpine sh # 设置container工作路径
 docker run -it --link source-container:alias alpine sh # link两个container
 
 docker attach $CONTAINER_ID # 退出容器会终止容器
@@ -671,8 +680,9 @@ docker inspect <container id> | grep "IPAddress"
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
 docker inspect [CONTAINER ID] | grep -wm1 IPAddress | cut -d '"' -f 4 # Get IP address of running container
 
-docker logs -f $CONTAINER_ID  # 查看日志
-docker container logs [containerID]
+docker stats my-app
+
+docker [container] logs -f [containerID]
 
 docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
 docker exec -i 69d1 bash
@@ -681,11 +691,6 @@ docker exec container_id env # 获取环境变量
 docker exec -it 260d7645dac3 /bin/sh # Mac /bin/zsh 报错 OCI runtime exec failed: exec failed: container_linux.go:344: starting container process caused "exec: \"/bin/zsh\": stat /bin/zsh: no such file or directory": unknow
 
 docker container cp [containID]:[/path/to/file] . # 从正在运行的 Docker 容器里面，将文件拷贝到本机
-
-# login
-docker login # 登录到Docker Hub
-docker login docker.io
-docker login host:port # 登录到私有Docker Registry
 
 docker container start|stop|restart $CONTAINER_ID
 
@@ -698,10 +703,14 @@ docker ps -a | grep 'weeks ago' | awk '{print $1}' | xargs docker rm
 
 docker kill $(docker ps -q) #Kill all running containers
 
-docker system prune -a # 清理整个docker的无用数据
+docker system prune  # cleans images, containers, volumes, and networks that are not associated with a container
+docker system prune -a  # same as above, but includes stopped containers and unused images
 docker container prune --force
 docker system prune --volumes # 会清除volume，如果要同时清除无用的volume
 docker container prune  # 删除所有停止掉的container
+
+docker rm $(docker ps -a -q)  # removes all containers
+docker rm $(docker ps -a -q) -f  # same as above, but forces running containers to also be removed
 ```
 
 ## 网络 Network
@@ -714,7 +723,7 @@ docker container prune  # 删除所有停止掉的container
     + hostPort:containerPort
   - 查看容器端口映射本地端口 `docker port`
 * 利用了Network Namespace特性，实现不同容器间网络隔离
-  - 为了支持网络协议栈多个实例，Linux在网络栈引入了Network Namespace，这些独立的协议栈被隔离到不同的Namespace中，处于不同Namespace中的网络栈是完全隔离的，彼此无法通信
+  - 为了支持网络协议栈多个实gpg例，Linux在网络栈引入了Network Namespace，这些独立的协议栈被隔离到不同的Namespace中，处于不同Namespace中的网络栈是完全隔离的，彼此无法通信
   - 相关全局变量修改为协议栈私有。Linux实现Network Namespace的核心就是让这些全局变量称为Network Namespace变量的成员，然后为协议栈的函数调用加入一个Namespace参数
   - 为了保证已开发程序及内核代码的兼容性，内核代码隐式地使用了Namespace空间内的变量。应用程序如果没有对Namespace有特殊需求，那么不需要额外的代码，Network Namespace对应用程序而言是透明的
   - 建立新Network Namespace，将某个进程关联到这个网络命名空间后.所有网络栈变量放入了Network Namespace的数据结构中，这个Network Namespace是属于进程组私有的，与其他进程组不冲突
@@ -791,10 +800,13 @@ docker container prune  # 删除所有停止掉的container
       * 在收到ARP请求之后，docker0就会扮演二层交换机的角色，把ARP广播发给其它插在docker0网桥的虚拟网卡上，这样，172.17.0.3就会收到这个广播，并把其MAC地址返回给容器1。有了这个MAC地址，容器1的eth0的网卡就可以把数据包发送出去。这个数据包会经过Veth Pair在宿主机的另一端veth26cf2cc，直接交给docker0。
       * docker0转发过程，就是继续扮演二层交换机，docker0根据数据包的目标MAC地址，在CAM表查到对应的端口为veth8762ad2，然后把数据包发往这个端口。而这个端口，就是容器2的Veth Pair在宿主机的另一端，这样，数据包就进入了容器2的Network Namespace，最终容器2将响应（Ping）返回给容器1
   - none:挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
+    + Containers that don't need to be connected to a network can use no network. This means that input and output would be done through STDIN and STDOUT or through files mirrored in a Docker volume
   - host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
     + 直接使用Docker host的网络最大的好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络
     + 不便之处就是牺牲一些灵活性,端口冲突
-  - container
+    + The host driver is the network that the Docker host uses. It may be desirable to have a container using the Docker's host network if the number of available ports while using bridge networks are too limited.
+  - overlay: Used to connect Docker containers that are on different Docker hosts. This is most often used when running Docker in swarm mode.
+  - maclan: Used to assign a MAC address to a container.
 * 跨主机网络方案：节点与节点通信通过NAT方式
   - 自定义容器网络
     + bridge
@@ -862,10 +874,9 @@ docker run -t -i --rm --link db:db training/webapp /bin/bash
 cat /etc/hosts # 父容器 web 的 hosts 文件
 
 docker network create --driver bridge my-network # 创建bridge网络
+docker network create -d bridge --subnet 172.10.0.0/24 --gateway 172.10.0.1 my_net # 创建
 docker network ls
 docker network inspect bridge # 查看网络详情
-
-docker network create -d bridge --subnet 172.10.0.0/24 --gateway 172.10.0.1 my_net # 创建
 docker run -it --network my_net --ip 172.10.0.3 busybox # 使用
 
 docker run -dit --name alpine1 --network my-network alpine # 启动两个container，同时加入my-network:
@@ -932,7 +943,7 @@ ip netns exec netns1 ethtool -S veth1
 ip netns exec netns2 ip link | grep 6
 ```
 
-## 持久化
+## 持久化 Volume
 
 * bind mount:将host机器的目录mount到container中
   - host机器的目录路径必须为全路径(准确的说需要以/或~/开始的路径)，不然docker会将其当做volume而不是volume处理
@@ -1002,6 +1013,8 @@ docker volume rm my-vol # 删除已建立的volume
 # 创建一个匿名的volume，并将此volume绑定到container的/foo目录中
 # Dockerfile
 VOLUME /foo
+
+docker volume prune  # removes volumes that are not connected to containers (aka "dangling" volumes)
 ```
 
 ## Dockerfile
@@ -1211,7 +1224,11 @@ sudo service docker restart
 
 sudo systemctl restart docker
 
-docker login -u {你的七牛账号} -p {密码} reg.qiniu.com
+# login
+docker login # 登录到Docker Hub
+docker login docker.io
+docker login host:port # 登录到私有Docker Registry
+docker login --username|-u robertcooper -p {密码} reg.qiniu.com
 docker login --username=liboming88@yeah.net registry.cn-hangzhou.aliyuncs.com # # aliyun 子账户名为subaccount，企业别名为misaka-network 个人帐户 或者 AIM Username: subaccount@misaka-network
 
 docker pull reg.qiniu.com/{命名空间}/{镜像名}:{标签}
@@ -1664,22 +1681,23 @@ deploy:
           cpus: '0.25'
           memory: 150M
 
-//启动所有容器，必须使用--compatibility参数，否则CPU内存限制无效
+# 启动所有容器，必须使用--compatibility参数，否则CPU内存限制无效
 docker-compose --compatibility up
 
 docker build -t my-image .
 docker run my-image
 
 docker-compose ps # 查看当前项目容器
-docker-compose build
+docker-compose build api
 docker-compose up -d --force-recreate
-docker-compose up 启动所有容器
-docker-compose up -d  后台启动并运行所有容器
-docker-compose up --no-recreate -d  不重新创建已经停止的容器
-docker-compose up -d test2  只启动test2这个容器
-docker-compose stop 停止容器
-docker-compose start  启动容器
-docker-compose down 停止并销毁容器
+docker-compose up  # 启动所有容器
+docker-compose up -d   # 后台启动并运行所有容器
+docker-compose up --no-recreate -d   # 不重新创建已经停止的容器
+docker-compose up -d test2   # 只启动test2这个容器
+docker-compose stop  # 停止容器
+docker-compose start   # 启动容器
+docker-compose down  # 停止并销毁容器
+docker-compose --env-file .env.dev up
 
 docker-compose exec {container-name} bash
 docker-compose kill -s SIGINT
@@ -1873,13 +1891,17 @@ kubectl-debug <POD_NAME>
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
 * 不要分两部分传送应用程序:有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝
 
+## [swarm](https://github.com/docker/swarm)
+
+Swarm: a Docker-native clustering system
+
 ## 图书
 
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)
   - [docker_practice](https://github.com/yeasy/docker_practice) Learn and understand Docker technologies, with real DevOps practice!
 * [Docker——容器与容器云（第2版）](https://book.douban.com/subject/26894736/)
 
-## 资源
+## 工具
 
 * [vmware/photon](https://github.com/vmware/photon):Minimal Linux container host <https://vmware.github.io/photon>
 * [docker-library/official-images](https://github.com/docker-library/official-images):<https://github.com/docker-library/official-images>
@@ -1898,10 +1920,6 @@ kubectl-debug <POD_NAME>
   - [lazydocker](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
 * [Docker-OSX](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 * [Derrick](https://mp.weixin.qq.com/s/Wq-wxnLBHdOtV9S4rj62xg):帮助开发者快速完成应用容器化的工具
-
-## 工具
-
-* [docker/swarm](https://github.com/docker/swarm) Swarm: a Docker-native clustering system
 * [drone/drone](https://github.com/drone/drone):Drone is a Continuous Delivery platform built on Docker, written in Go <https://drone.io>
 * [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple for Docker & Kubernetes <https://docs.openfaas.com/>
 * [coreos/clair](https://github.com/coreos/clair):Vulnerability Static Analysis for Containers
@@ -1924,6 +1942,7 @@ kubectl-debug <POD_NAME>
 * [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
+* [docker-guide](https://www.robertcooper.me/docker-guide)
 
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 * [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)

@@ -1169,9 +1169,10 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [](https://github.com/lexkong/apiserver_demos)
 * [](https://github.com/google/exposure-notifications-server) Exposure Notification Reference Server | Covid-19 Exposure Notifications
 
-## 教程
+## 教程 course
 
-* [Go 指南](https://tour.go-zh.org/basics/2)
+* [tour](https://tour.go-zh.org)
+* [Play with Go](https://play-with-go.dev/guides.html)
 * [roth1002/go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
 * [astaxie/build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
