@@ -2891,6 +2891,8 @@
   - 崇文门：税务部门
   - 南锣鼓巷的文煜宅第：横跨后的四合院再配合园林建造
 * 内城又按八旗划分居住区 正黄旗、镶黄旗、正白旗、镶白旗 正红旗、镶红旗、正蓝旗、镶蓝旗 “分列八旗，拱卫皇居” 外城则是汉人的居处 “三教九流，五行八作”
+* 参考
+  - 看理想 京师回忆录
 
 ![Alt text](../_static/forbidden_city.jpg "Optional title")
 ![Alt text](../_static/forbidden_city.jpeg "Optional title")
