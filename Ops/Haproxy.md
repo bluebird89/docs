@@ -1,4 +1,4 @@
-# [haproxy/haproxy](https://github.com/haproxy/haproxy)
+# [haproxy](https://github.com/haproxy/haproxy)
 
 HAProxy Load Balancer's development branch <http://www.haproxy.org>
 
@@ -11,6 +11,16 @@ HAProxy Load Balancer's development branch <http://www.haproxy.org>
   - 借助于Linux 2.6 (>= 2.6.27.19). 上的splice()系统调用，HAProxy可以实现零复制转发(Zero-copy forwarding),在Linux 3.5及以上的OS中还可以实现心零复制启动(zero-starting)
   - 内存分配器在固定大小的内存池中可实现即时内存分配，这能够显著减少创建一个会话的时长
   - 树型存储:侧重于使用作者多年前开发的弹性二叉树，实现了以O(log(N))的低开销来保持计时器命令、保持运行队列命令及管理轮询及最少连接队列
+  * HAProxy 是工作在网络 7 层之上
+  * 支持 Session 的保持，Cookie 的引导等
+  * 支持 url 检测后端的服务器出问题的检测会有很好的帮助
+  * 支持的负载均衡算法：动态加权轮循(Dynamic Round Robin)，加权源地址哈希(Weighted Source Hash)，加权 URL 哈希和加权参数哈希(Weighted Parameter Hash)
+  * 单纯从效率上来讲 HAProxy 更会比 Nginx 有更出色的负载均衡速度
++ HAProxy 可以对 Mysql 进行负载均衡，对后端的 DB 节点进行检测和负载均衡
+  - 优点能够补充 Nginx 的一些缺点，比如支持 Session 的保持，Cookie 的引导；同时支持通过获取指定的 url 来检测后端服务器的状态
+  - 本身就只是一款负载均衡软件；单纯从效率上来讲 HAProxy 会比 Nginx 有更出色的负载均衡速度，在并发处理上也是优于 Nginx 的
+  - 支持 TCP 协议的负载均衡转发，可以对 MySQL 读进行负载均衡，对后端的 MySQL 节点进行检测和负载均衡，大家可以用 LVS+Keepalived 对 MySQL 主从做负载均衡
+  - 均衡策略非常多：Round-robin（轮循）、Weight-round-robin（带权轮循）、source（原地址保持）、RI（请求URL）、rdp-cookie（根据cookie）
 
 ## docker
 

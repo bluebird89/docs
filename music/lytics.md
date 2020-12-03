@@ -180,9 +180,10 @@ It ended when you said goodbye
 
 ```
 How many roads must a man walk down 一个男人要走多少路
-Beforethey call him a man? 才能称得上男子汉？
+Before they call him a man? 才能称得上男子汉？
 How many seas must a white dove sail 一只白鸽要飞越多少片海
 Before she sleeps in the sand? 才能安歇在沙滩上？
+
 How many times must the cannon balls fly 炮弹要飞多少次
 Before they\'re forever banned? 才能将其永远禁止？
 The answer, my friend, is blowin\' in the wind, 朋友，答案在风中飘荡

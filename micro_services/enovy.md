@@ -2,6 +2,7 @@
 
 ENVOY IS AN OPEN SOURCE EDGE AND SERVICE PROXY, DESIGNED FOR CLOUD-NATIVE APPLICATIONS
 
+* 一个由 C++ 实现的高性能代理，与其等价的，还有 Nginx、Traefik
 * 任务：
   - 服务发现：探测所有可用的上游或后端服务实例
   - 健康检测：探测上游或后端服务实例是否健康，是否准备好接收网络流量

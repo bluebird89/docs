@@ -13,6 +13,7 @@ Connect, secure, control, and observe services. <https://istio.io>
   - 一个由 C++ 实现的高性能代理，与其等价的，还有 Nginx、Traefik
   - Envoy 是 Istio Service Mesh 中默认的 Sidecar 方案
   - Istio 在 Enovy 的基础上按照 Envoy 的 xDS 协议扩展了其控制平面
+* Envoy 是 Istio Service Mesh 中默认的 Sidecar 方案,在 Enovy 的基础上按照 Envoy 的 xDS 协议扩展了其控制平面
 
 ## 版本
 
@@ -101,36 +102,43 @@ curl -L https://istio.io/downloadIstio | sh -
     + 自动注入: 利用 Kubernetes Dynamic Admission Webhooks 对 新建的 pod 进行注入: initContainer + sidecar
     + 手动注入: 使用命令istioctl kube-inject
 
-## 流量控制
+## 流量管理
 
 * 功能
   - 路由、流量转移
   - 流量进出
   - 网络弹性能力
   - 测试相关
-* 虚拟服务(Virtual将流量路由到给定目标地址
-  请求地址与真实的工作负载解耦
-  包含一组路由规则
-  通常和目标规则(Destination Rule)成对出现
-  丰富的路由匹配规则
+* 虚拟服务:将流量路由到给定目标地址
+  - 请求地址与真实的工作负载解耦
+  - 包含一组路由规则
+  - 通常和目标规则(Destination Rule)成对出现
+  - 丰富的路由匹配规则
 * 目标规则(Destination Rule)
-  定义虚拟服务路由目标地址的真实地址,即子集(subset)
-  设置负载均衡的方式
-  - 随机
-  - 权重
-  - 最少请求数
+  - 定义虚拟服务路由目标地址的真实地址,即子集(subset)
+  - 设置负载均衡的方式
+    + 随机
+    + 权重
+    + 最少请求数
 * 网关
-  - 管理进出网格的流量
+  - 管理进出网格流量
   - 处在网格边界
+* 服务发现
+* 负载均衡
+* 路由
+* 限流
+* 熔断
+* 容错
 
 ## 可观测性
 
-* 指标(Metrics)：以聚合的方式监控和理解系统行为
+* 计量
+* 监控指标(Metrics)：以聚合的方式监控和理解系统行为
   - Istio 中的指标分类:
     + 代理级别的指标(Proxy-level)
     + 服务级别的指标(Service-level)
     + 控制平面指标(Control plane)
-* 访问日志(Access logs)： 通过应用产生的事件来了解系统 包括了完整的元数据信息(目标、源) 生成位置可选(本地、远端,如 filebeat)
+* 日志聚合 访问日志(Access logs)： 通过应用产生的事件来了解系统 包括了完整的元数据信息(目标、源) 生成位置可选(本地、远端,如 filebeat)
   - 日志内容
     + 应用日志
     + Envoy 日志 $ kubectl logs -l app=demo -c istio-proxy
@@ -150,6 +158,12 @@ curl -L https://istio.io/downloadIstio | sh -
 ```sh
 istioctl manifest apply --set profile=demo
 ```
+
+## 动态配置
+
+## 故障注入
+
+## 镜像流量
 
 ## [Istio 中的授权策略详解](https://mp.weixin.qq.com/s/xbGG9ZWc63Zce24dBYhvrQ)
 
@@ -171,3 +185,5 @@ istioctl manifest apply --set profile=demo
 
 * [servicemesher / awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - <https://servicemesher.github.io/awesome-servicemesh/>
 * [实例](https://istiobyexample.dev/)
+
+[深入实践 Istio](https://mp.weixin.qq.com/s/QIG71Z24__X-LJLRM-RRJA)
