@@ -797,6 +797,7 @@ yarn install node-sass
   - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
   - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js <https://sailsjs.com>
   - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>
+* [node-inspector](https://github.com/node-inspector/node-inspector) Node.js debugger based on Blink Developer Tools
 * Compiler
   - [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
 * 缓存
