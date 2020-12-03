@@ -630,6 +630,7 @@ open http://127.0.0.1:8000
   - (<https://github.com/adamnicholson/Chief)[Chief>]: 一个命令总线库
   - (<https://github.com/ClassPreloader/ClassPreloader)[ClassPreloader>]: 一个优化自动加载的库
   - (<https://github.com/umpirsky/country-list)[Country> List]: 所有带有名称和ISO 3166-1编码的国家列表
+  - [countries](https://github.com/rinvex/countries)Rinvex Country is a simple and lightweight package for retrieving country details with flexibility. A whole bunch of data including name, demonym, capital, iso codes, dialling codes, geo data, currencies, flags, emoji, and other attributes for all 250 countries worldwide at your fingertips. https://rinvex.com/
   - (<https://github.com/mpratt/Embera)[Embera>]: 一个Oembed消费库
   - (<https://github.com/essence/essence)[Essence>]: 一个用于提取网络媒体的库
   - (<https://github.com/selvinortiz/flux)[Flux>]: 一个正则表达式构建库

@@ -12,7 +12,7 @@ json_rpc 提交formdata json字符串
 
 ## 工具
 
-* [stedolan / jq](https://github.com/stedolan/jq):Command-line JSON processor <http://stedolan.github.io/jq/>
+* [jq](https://github.com/stedolan/jq):Command-line JSON processor <http://stedolan.github.io/jq/>
   - `cat demo.json | jq '.id,.name,.status,.attachments'`
 * [antonmedv/fx](https://github.com/antonmedv/fx):Command-line JSON processing tool 🔥
 * [json-path/JsonPath](https://github.com/json-path/JsonPath):Java JsonPath implementation
@@ -23,6 +23,7 @@ json_rpc 提交formdata json字符串
 * [baidu/amis](https://github.com/baidu/amis):一种基于特定 JSON 格式生成 MIS 页面的工具 <https://baidu.github.io/amis/>
 * [andreazorzetto / yh](https://github.com/andreazorzetto/yh):YAML syntax highlighter to bring colours where only jq could
 * [paularmstrong / normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
+* [automerge](https://github.com/automerge/automerge)A JSON-like data structure (a CRDT) that can be modified concurrently by different users, and merged again automatically.
 
 ## 参考
 

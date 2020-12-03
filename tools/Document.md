@@ -40,6 +40,7 @@
 * [Simple note](https://standardnotes.org):收费
 * [Grace Note](https://grace-note.app/#/)
 * [Obsidian](https://obsidian.md/):A second brain, for you, forever.
+* [Craft](https://www.craft.do/)
 * evernote
   - dunk
 * [vnote](https://github.com/tamlok/vnote)A note-taking application that knows programmers and Markdown better.

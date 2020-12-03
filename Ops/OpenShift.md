@@ -12,6 +12,10 @@
   - 适应性和异构支持 ——未来几个月将在主要的公共云供应商中提供，包括阿里云、AWS、谷歌云、IBM 云、微软 Azure、私有云技术，比如 OpenStack、虚拟化平台和裸机服务器。
   - 使用 Kubernetes Operators 简化应用程序部署和生命周期管理——自动执行应用程序维护、扩展和故障转移。
 
+## 安装
+
+
+
 ## 工具
 
 * [openshift/installer](https://github.com/openshift/installer):Install an OpenShift cluster

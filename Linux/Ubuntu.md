@@ -576,11 +576,12 @@ sudo fuser -v /var/cache/debconf/config.dat
 * GNOME Tweaks Tool `sudo apt install gnome-tweaks`
 * 插件
   - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
-  - `sudo aptitude install gnome-shell-extension-system-monitor`
   * [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
   - gnome-screenshot:`sudo apt-get install gnome-screenshot`
   - Open Weather
   - [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
+    + `sudo aptitude install gnome-shell-extension-system-monitor`
+    + [gnome-shell-system-monitor-applet](https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet)
   - dash to dock
   - [home-sweet-gnome/dash-to-panel](https://github.com/home-sweet-gnome/dash-to-panel):An icon taskbar for the Gnome Shell. This extension moves the dash into the gnome main panel so that the application launchers and system tray are combined into a single panel, similar to that found in KDE Plasma and Windows 7+. A separate dock is no longer needed for easy access to running and favorited applications.
 * Theme `/usr/share/themes`
