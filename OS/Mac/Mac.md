@@ -239,8 +239,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - 通过appcleaner彻底清除
 * 系统
   - [airmail](http://airmailapp.com/):mail client
+  - [nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome!
   - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.
   - [Gemini](https://macpaw.com/gemini):The intelligent duplicate file finder
+  - TotalFinder - macOS 上最强的 Finder 增强软件
   - BTT(BetterTouchTool) 触控板手势增强
   - CleanMyMac
   - [Little Snitch 4](https://www.obdev.at/products/littlesnitch/index.html):makes these Internet connections visible and puts you back in control!
@@ -250,23 +252,19 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
   - SwitchHosts
   - manico:Dock app 映射为数字键
-  - [](https://github.com/gao-sun/eul):desktop_computer macOS status monitoring app written in SwiftUI.
   - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
   - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
   - [GPG Suite](https://gpgtools.org/)
   - [dashlane](https://www.dashlane.com/zh):密码管理工具
   - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
   - [LICEcap](link):gif录制
-  - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
   - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
   - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. https://sveinbjorn.org/sloth
   - Luna Display:Turn your iPad into a second display
   - 实用工具：/System/Library/CoreServices/Applications
   - [Ityscal](https://www.mowglii.com/itsycal/)  日历
-  - [Lunar](https://github.com/alin23/Lunar) 智能调节外接显示器亮度 https://lunar.fyi/
-  - [sindresorhus/quick-look-plugins ](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+  - [sindresorhus/quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
   - [smcfunControl](link)
-  - TotalFinder - macOS 上最强的 Finder 增强软件
   - uTools - 比 Alfred 更简洁的工作流
 * 设计
   - UI:sketch sketch box
@@ -288,11 +286,14 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 工具
   - [CheatSheet]() 长按⌘键可以显示当前程序快捷键
   - [flux](https://justgetflux.com/) 屏幕颜色控制
+  - [Lunar](https://github.com/alin23/Lunar) 智能调节外接显示器亮度 https://lunar.fyi/
   - [](https://github.com/pqrs-org/Karabiner-Elements):Karabiner-Elements is a powerful utility for keyboard customization on macOS Sierra (10.12) or later. https://pqrs.org/osx/karabiner/
   - [stats](https://github.com/exelban/stats):macOS system monitor in your menu bar
+  - [eul](https://github.com/gao-sun/eul):desktop_computer macOS status monitoring app written in SwiftUI.
 * 窗口管理
   - [spectacl](https://www.spectacleapp.com/):Move and resize windows with ease
   - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
+  - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
   - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
   - [sizeup](link) 窗口管理软件
     + control+option+command + M ： 使当前窗口全屏

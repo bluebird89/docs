@@ -535,6 +535,7 @@ r 对单词字符进行替换
 * Accelerated-Smooth-Scroll 顾名思义，让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
 * YouDao-Translater Vim中的有道翻译插件
 * Matrix-ScreenSaver Vim中的黑客帝国屏幕保护插件，很酷很炫
+* [fzf](https://github.com/junegunn/fzf.vim) fzf ❤️ vim
 * [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
   - d s <existing char>   删除两边的指定字符
   - c s <existing char> <desired char>  修改两边的指定字符
@@ -616,7 +617,7 @@ r 对单词字符进行替换
 
 > .git/rebase-merge/git-rebase-todo" E509: Cannot create backup file (add ! to override)
 
-## [neovim/neovim](https://github.com/neovim/neovim)
+## [neovim](https://github.com/neovim/neovim)
 
 Vim-fork focused on extensibility and usability <https://neovim.io/>
 

@@ -263,7 +263,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [vrana/adminer](https://github.com/vrana/adminer):Database management in a single PHP file <https://www.adminer.org/>
 * [youtube/vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. <http://vitess.io>
 * [getredash/redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
-* [XiaoMi/soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
+* [soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 * [prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy <https://www.prisma.io>
 * [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [alibaba/druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(<https://www.aliyun.com/product/datalakeanalytics> )、DRDS、TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>

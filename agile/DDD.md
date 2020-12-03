@@ -381,6 +381,7 @@ public class OrderCreatedEvent extends OrderEvent {
 
 * [jivejdon](https://github.com/banq/jivejdon):Jivejdon is a Domain Driven Design appication with CQRS/ES/Clean/Hexagonal architecture
 * [freedom](https://github.com/8treenet/freedom):Freedom是一个基于六边形架构的框架，可以支撑充血的领域模型范式
+* [php-ddd-example](https://github.com/CodelyTV/php-ddd-example):🐘🎯 Hexagonal Architecture + DDD + CQRS in PHP using Symfony 5 https://pro.codely.tv/library/ddd-en-php
 
 ## 图书
 

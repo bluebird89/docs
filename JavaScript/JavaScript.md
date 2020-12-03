@@ -1987,7 +1987,7 @@ try {
   - [JedWatson/classnames](https://github.com/JedWatson/classnames):A simple javascript utility for conditionally joining classNames together
   - [facebook/prepack](https://github.com/facebook/prepack):A JavaScript bundle optimizer. http://prepack.io
   - [lerna/lerna](https://github.com/lerna/lerna):🐉 A tool for managing JavaScript projects with multiple packages. https://lernajs.io
-  - [zloirock/core-js](https://github.com/zloirock/core-js):Standard Library
+  - [core-js](https://github.com/zloirock/core-js):Standard Library
   - [npm/tink](https://github.com/npm/tink):a dependency unwinder for javascript
 * lightbox
   - [feimosi/baguetteBox.js](https://github.com/feimosi/baguetteBox.js):⚡️ Simple and easy to use lightbox script written in pure JavaScript
