@@ -274,3 +274,5 @@
 * [wolverinn / Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
 * [Introduction: A Guide To The Tech Tree](https://github.com/github/archive-program/blob/master/TheTechTree.md)
 * [CPU 缓存](https://coolshell.cn/articles/20793.html)
+
+[程序员不得不了解的硬核知识大全](https://gitbook.cn/books/5e40f2c79b420438e62ec2de/index.html)

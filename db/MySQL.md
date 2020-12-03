@@ -3722,6 +3722,72 @@ CREATE TABLE employees (
 * 不停机切换
 * HA & FailOVer
 
+## [列压缩](https://mp.weixin.qq.com/s/4WLJK0XtxJ_MWXAw22iCnw)
+
+* 支持压缩列属性的数据类型包括BLOB，TEXT，VARCHAR，VARBINARY和JSON。(BLOB包含TINYBLOB, MEDIUMBLOB和LONGBLOB, TEXT包含TINYTEXT, MEDIUMTEXT和LONGTEXT)
+* innodb_min_column_compress_length参数控制压缩阈值 ，默认为256。如果列的原长度超过此参数，则进行压缩；否则只添加压缩header，不对数据进行实际压缩
+* 算法
+  - ZLIB(默认)
+    + 参数innodb_zlib_column_compression_level控制级别，值为0-9。其中0表示不压缩，1表示最快的压缩，9表示压缩程度最大的压缩，默认为6；
+  - LZ4
+    + 与MySQL的Page压缩保持一致，不支持LZ4的多程度压缩，使用LZ4压缩算法时需要注意，LZ4压缩的最大原始长度为2^31-1，而LONGBLOB的最大长度为2^32-1，意味着不能适用于所有长度数据的压缩。TenDB4的解决方案是当压缩的原始数据长度大于等于2^31时，将会隐式地使用ZLIB进行压缩
+  - ZSTD
+    + 支持的是不含字典，非streaming的普通压缩；提供了多压缩级别，参数为 innodb_zstd_column_compression_level，值为1-22，1表示最快的压缩，22表示压缩程度最大的压缩，默认为3
+* 压缩属性可以通过show create table感知，其中用hint 99104表示压缩属性，99401表示压缩算法
+* 限制
+  - 涉及到压缩属性改变，或者压缩算法改变的ALTER TABLE操作需要重构表
+  - 支持使用INSTANT算法增加压缩列,如果压缩列是一个VARCHAR或者VARBINARY，它们的DEFAULT值不会被压缩
+  - 使用LZ4压缩算法时需要注意，LZ4压缩算法的最大原始长度为2^31-1 ，而LONGBLOB的最大长度为2^32-1，超过了限制。TenDB4的解决方案是当压缩的原始数据长度大于等于2^31时，将会隐式地使用ZLIB进行压缩
+  - 具有压缩属性的列不能被直接索引，但是可以被虚列后索引
+* 内核中的实现
+  - 在Server层中的词法分析和语法分析中，增加压缩与压缩算法列属性的词法表达与语法检查；
+    + 词法分析阶段
+      * 利用到MySQL原生的column format实现：column format原本有default，fixed和dynamic三种格式.新增格式compressed，当词法解析到某一列创建时关键词有COLUMN_FORMAT COMPRESSED或COMRPESSED，则将这一列的属性设置为压缩列,该属性会暂时保存到Create_field类中成员flags的第24-25位，并进一步通过类Field的成员flags进行传递
+      * 按照MySQL中Create_field::flags和Field::flags的设计思路，新增Create_field::flags2和Field::flags2的成员变量，用来从词法分析得到压缩列的3种压缩算法，并传递压缩算法信息。在未来，flags2还可以在更多内核改造中被利用。
+    + 语法分析阶段
+      * 具有压缩属性的列不能被直接索引；
+      * 除了BLOB, TEXT, JSON, VARCHAR, VARBINARY列，其他列不能具有压缩属性；
+      * 具有压缩列的表一定要是InnoDB存储引擎
+  - 在Server层中获取并存储压缩信息；
+    + 在Server层的数据字典中，列格式和列压缩算法被用(key, value)的map形式记录在表mysql.columns的options列里，以mediumtext列的形式落地
+    + 列格式的key为column_format，value为0-3(分别表示default,fixed,dynamic和compressed)；列压缩算法的key为compressed_algo，value为0-2(分别表示zlib(default),lz4,zstd)
+  - 在InnoDB引擎层中读取压缩信息并且对数据进行压缩/解压缩
+    + 压缩属性读取
+      * MySQL-8.0在调用InnoDB接口时会生成临时内存表，这时会从Create_field中读出各种属性与options填充到内存表中。此时，压缩列和压缩算法被取出存到flags和comp_col_algo中
+      * InnoDB会构造template表来完成MySQL表到InnoDB的转换。TenDB4在InnoDB的template列表中增加了is_compressed属性，来表示是否压缩，这个属性从flags中读取；还增加了 col_comp_algorithm属性，来表示压缩算法，从comp_col_algo中获得
+    + 压缩/解压缩逻辑
+      * row_prebuilt_t这一数据类型在InnoDB中被用来加速处理MySQL到InnoDB表的转换，TenDB4在其中增加了compress_heap内存片，用来处理压缩与解压缩
+    + 压缩数据存储格式
+      * 压缩格式由先后顺序分为Header, Prefix和压缩后的数据
+      * 第0位compressed用于存放是否压缩，由于存在数据原长度达不到阈值和 压缩后长度超过原长的可能，在这两种情况下不会对数据进行压缩存储
+      * 第1到2位algorithm用于表示压缩使用的算法
+      * 第5到7位len_len用于表示存储原长度所需的字节数-1，由于解压时需要重新分配一个足够大的内存，保存原长度可以保证这个内存正好可以存放解压数据。len_len=0，表示需要1 Bytes来存储原长，由于LONGBLOB的长度上限为2^32-1，用4个字节的无符号整数已经可以存放，所以len_len的上限为3，这样的设计使得压缩格式更加紧凑
+      * 压缩Prefix用于存放原压缩长度，它的size由len_len决定
+    + 压缩/解压缩算法
+      * 在一些公共的MySQL和InnoDB的数据转换接口实现：row_mysql_store_col_in_innobase_format和row_mysql_read_blob_ref，具体利用到compress_heap内存片来实行压缩/解压缩
+      * 调用了MySQL内置的ZLIB，LZ4和ZSTD库，其中 ZLIB调用了compress2和uncompress接口；LZ4调用了LZ4_compress_default和LZ4_decompress_safe接口；ZSTD采用了普通压缩方式，调用了ZSTD_compress和ZSTD_decompress接口来支持多level的压缩
+
+```sql
+CREATE TABLE t1 (
+  b  BLOB [COLUMN_FORMAT] COMPRESSED ALGORITHM = LZ4,
+  bcol BLOB COMPRESSED,
+  scol VARCHAR(20) GENERATED ALWAYS AS (left(bcol, 10)),
+  jcol JSON COMPRESSED,
+  vcol VARCHAR(20) GENERATED ALWAYS AS (jcol->"$.name"),
+  index idx(vcol)
+  index idx(scol)
+)engine=InnoDB;
+
+ALTER TABLE t ADD b BLOB COMPRESSED, ALGORITHM=INSTANT
+
+
+CREATE TABLE t1(
+);
+--或对JSON的某一个元素虚列后再索引
+CREATE TABLE t1 (
+);
+```
+
 ## [10万连接](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652150991&idx=1&sn=d6df2a44544d61b5255d0cb5e4c97d12&chksm=80e35295b794db833fd4408a3d34096c66efdca5c4054a8e741b2ce3a759bde2b4875e164a10)
 
 * Percona Server的线程池
