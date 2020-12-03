@@ -84,7 +84,7 @@
   - Thor
   - Hawkeye
 * Avengers: Age of Ultron (2015)
-* Avengers: Infinity War (2018)
+* 复仇者联盟3：无限战争 Avengers: Infinity War (2018)
   - The idea was to bring together a group of remarkable people to see if they could beome something more. So when they needed us, we could fight the battles that they never could.
   - 灭霸对倒在地上的钢铁侠说“我希望人们能记得你”。
     + Thanos：泰坦族人
@@ -92,14 +92,22 @@
   - 战争机器罗迪
   - 猎鹰山姆
   - 宝石
-  - 空间宝石（宇宙魔方）
+    + 心灵宝石（洛基权杖）
+    + 现实宝石（以太粒子）
+    + 力量宝石（宇宙灵球）
+    + 时间宝石（阿戈摩托之眼）
+    + 空间宝石（宇宙魔方）
+    + 灵魂宝石
   - 红骷髅在滕斯贝格抢走宇宙魔方
   - 《惊奇队长》中，科学家用宇宙魔方研究光速引擎，马维尔将它藏到了飞船上，后来被咕咕吞下
-  - 心灵宝石（洛基权杖）
-  - 现实宝石（以太粒子）
-  - 力量宝石（宇宙灵球）
-  - 时间宝石（阿戈摩托之眼）
-  - 灵魂宝石
+  - I have a dream。三条线灭霸 收集宝石一条，斯塔克一条，雷神炼锤合到美国队长一条，无意的一个响指，就随机了。最后的一笑收尾
+  - 技术男
+    + 泰坦星球是他的经历
+    + 随机一般的消失是我对他们的仁慈
+    + 最后一笑  退隐
+  - 与卡米拉 相亲相杀
+  - 没有爱  流泪
+  - 漫画  无限手套
 * 复仇者联盟4：终局之战 Avengers: Endgame
   - 这一切仿佛已经过去了一千年。 我一路拼杀，从山洞夺路而出， 成为了钢铁侠， 并爱上了你。
   - 黑寡妇为了全宇宙牺牲自己，黑寡妇没有家人，因为复仇者就是她 的家人
