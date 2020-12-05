@@ -83,6 +83,8 @@ brew deps name * # 显示包依赖
 brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
 
 brew update
+# homebrew-cask is a shallow clone. To `brew update` first run:
+git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
 brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
 
 brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)

@@ -152,6 +152,9 @@ public int factorial(int n) {
 * 如何查找第一个/最后一个等值：用flag来纠正每次比较的最终结果。例如：比较相等(相等用0表示，大于为1，小于为-1)，但是flag = 1，则返回纠正后的比较结果为1，需要移动二分查找的high到mid，继续二分(反之，若flag = 0，则返回纠正后的结果为-1，需要移动二分查找的low到mid，继续二分)。如此一来，等值仍旧可以进行二分查找，最终的对比只需要9次，远远小于200次。
   - InnoDB针对不同的SQL语句，总结出四种不同的Search Mode
   - 然后根据这四种不同的Search Mode，在二分查找碰到相同键值时进行调整。例如：若Search Mode为PAGE_CUR_G或者是PAGE_CUR_LE，则移动low至mid，继续进行二分查找；若Search Mode为PAGE_CUR_GE或者是PAGE_CUR_L，则移动high至mid，继续进行二分查找。
+* 参考
+  - [套框架刷通二叉树](https://mp.weixin.qq.com/s/izZ5uiWzTagagJec6Y7RvQ)
+  - [线段树](https://mp.weixin.qq.com/s/rjXqcYDaeA8_Ppj48Dg-Nw)
 
 ```sql
 # b字段有一个B+树索引
@@ -170,8 +173,6 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 ```
 
 ## LRU Least Recently Used
-
-##
 
 ## 字符串操作
 
@@ -198,34 +199,26 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
 ## 回溯
 
 * 在一棵决策树上做遍历的过程
-
 - 决策树形状主要取决于每个结点处可能的分支，就是在每次做决策时，“可以选什么”、 “有什么可选的”
-    -
-
 * 核心就是 for 循环里面的递归，在递归调用**之前做选择**，在递归调用**之后撤销选择**
-
 * backtrack函数其实就像一个指针，在这棵树上游走，同时要正确维护每个节点的属性，每当走到树的底层，其「路径」就是一个全排列
-
 * 路径：已经做出的选择
-
 * 选择列表：当前可以做的选择
-
   - 分析问题的候选集合
   - 候选集合的变化规律
   - 已选集合与候选集合关系
   - 一般情况下，候选集合使用数组表示即可。 候选集合上需要做的操作并不是很多，使用数组简单又高效
-
 * 结束条件：到达决策树底层，无法再做选择的条件
-
-* [回溯算法](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484709&idx=1&sn=1c24a5c41a5a255000532e83f38f2ce4)
-
+* 参考
+  - [回溯算法](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484709&idx=1&sn=1c24a5c41a5a255000532e83f38f2ce4)
+  - [回溯法的候选集合](https://mp.weixin.qq.com/s?__biz=MzA5ODk3ODA4OQ==&mid=2648167091&idx=1&sn=82ed3bfa68f92b2826247a0bba40d8ff&chksm=88aa22f5bfddabe322bf5dafeef4f7cd56897d2d7e5b91d55e2baa2b21056694cae7da10c2b5&token=1295540189)
 * 贪心算法
-
 * 启发式搜索算法：A*寻路算法
-
-* 地图着色算法、N 皇后问题、最优加工顺序
-
-* 旅行商问题
+* 题目
+  - 地图着色算法
+  - N 皇后问题
+  - 最优加工顺序
+  - 旅行商问题
 
 ```
 void traverse(TreeNode root) {
@@ -273,6 +266,8 @@ def backtrack(路径, 选择列表):
 * BFS（广度优先搜索）
   - 使用队列数据结构
   - 层序遍历
+  - 参考
+    + [BFS 的使用场景：层序遍历、最短路径问题](https://mp.weixin.qq.com/s?__biz=MzA5ODk3ODA4OQ==&mid=2648167212&idx=1&sn=6af5ffe5b69075b21bb4743ddcee4e7c&chksm=88aa236abfddaa7cae70b42edb299d0a52d9f1cc4fc1fdba1116972fc0ca0275b8bfdf10851b)
 
 ## 最短路径算法
 
@@ -284,11 +279,15 @@ def backtrack(路径, 选择列表):
 
 * 最小生成树算法：Prim，Kruskal
 
-* 实际常用算法：关键路径、拓扑排序
+* 实际常用算法：关键路径、
 
 * 二分图匹配：配对、匈牙利算法
 
 * 拓展：中心性算法、社区发现算法
+
+## [拓扑排序](https://mp.weixin.qq.com/s/MhbBwkMqsfAe3ep8cdMO4w)
+
+
 
 ## [动态规划](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484731&idx=1&sn=f1db6dee2c8e70c42240aead9fd224e6)
 
@@ -314,13 +313,9 @@ def backtrack(路径, 选择列表):
 ## 流算法
 
 * 最大流：最短增广路、Dinic 算法
-
 * 最大流最小割：最大收益问题、方格取数问题
-
 * 最小费用最大流：最小费用路、消遣
-
 * 在一个像素矩阵中有一条封闭曲线，给出一个点的坐标，怎么判断该点在曲线内
-
 * 在一棵二叉树中找三个数的最小公共祖先，尽量只用一次遍历实现。
 
 ## KMP 算法

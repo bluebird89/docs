@@ -48,6 +48,7 @@
 * Deep Down Things: The Breathtaking Beauty of Particle Physics by Bruce Schumm: the very best popular book about particle physics. I had the honor of working with Bruce Schumm on a search for supersymmetry at the ATLAS detector, and he has one of those brilliant minds that understands physics so deeply that he can explain it to anyone without resorting to speculation.
 * The Particle Odyssey by Frank Close: another brilliant popular introduction to particle physics and its history, beautifully illustrated with amazing figures and photographs.
 * Weinberg's The First Three Minutes: an account of the Big Bang by one of the most brilliant physicists of all time.
+* 费曼物理学讲义
 
 ## 参考
 
