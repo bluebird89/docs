@@ -337,8 +337,8 @@ cat ~/.ssh/id_rsa.pub | ssh bill@128.199.209.242 'mkdir -p .ssh && cat - >> ~/.s
 # 或者在服务器端，运行下面命令
 echo "ssh-rsa [your public key]" > ~/.ssh/authorized_keys
 
-sudo cp /etc/ssh/sshd_config ~
-sudo nano /etc/ssh/sshd_config
+# /etc/ssh/sshd_config
+
 Port 25000
 Protocol 2
 

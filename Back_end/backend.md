@@ -491,6 +491,10 @@ def hash_choose(request_info, server_lst):
      return server_lst[hashed_request_info % len(server_lst)]
 ```
 
+## 健壮系统
+
+
+
 ## 资源
 
 * [Hprose](https://hprose.com):高性能远程对象服务引擎

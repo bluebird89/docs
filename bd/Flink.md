@@ -1,5 +1,8 @@
 # [flink](https://github.com/apache/flink)
 
+* 分布式、高性能、高可用、高精确的为数据流应用而生的开源流式处理框架
+* 核心是在数据流上提供数据分发、通信、具备容错的分布式计算。同时，Flink在流处理引擎上提供了批流融合计算能力，以及SQL表达能力
+
 ## 参考
 
 * [apachecn/flink-doc-zh](https://github.com/apachecn/flink-doc-zh):Apache FLink 中文文档 <http://flink.apachecn.org>

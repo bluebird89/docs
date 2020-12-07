@@ -1690,9 +1690,9 @@ npm install && npm run dev
 php artisan migrate
 ```
 
-## [Laravel Mix](https://laravel-mix.com/)
+## [Laravel Mix](https://github.com/JeffreyWay/laravel-mix )
 
-* An elegant wrapper around Webpack for the 80% use case.
+* An elegant wrapper around Webpack for the 80% use case. The power of webpack, distilled for the rest of us. https://laravel-mix.com/
 * Laravel Elixir的精神继承者，完全基于Webpack而不是Gulp。
 * 使用通用CSS和JavaScript预处理器定义Laravel应用的Webpack构建步骤提供了流式API。通过简单的方法链定义流式资源管道
 * css
