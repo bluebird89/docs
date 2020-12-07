@@ -153,133 +153,105 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 ## 认证、授权和凭证
 
 * API 是无状态的，不推荐使用 Cookie
-  - cookie:凭证（Credentials）,服务器与浏览器为了进行会话跟踪（知道是谁在访问我），就必须主动的去维护一个状态，这个状态用于告知服务端前后两个请求是否来自同一浏览器。而这个状态需要通过 cookie 或者 session 去实现
-    - 存储在客户端:cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上
-    - cookie 是不可跨域的： 每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）
-  - session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的 cookie 中
-    + 用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的 Session
-    + 请求返回时将此 Session 的唯一标识信息 SessionID 返回给浏览器
-    + 浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到 Cookie 中，同时 Cookie 记录此 SessionID 属于哪个域名
-    + 当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 Cookie 信息，如果存在自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作
-    + SessionID 是连接 Cookie 和 Session 的一道桥梁,session ID 或 hash 作为 token，但将 token 放入 header 中传递
-  - 区别
-    + 安全性： Session 比 Cookie 安全，Session 是存储在服务器端的，Cookie 是存储在客户端的。
-    + 存取值的类型不同：Cookie 只支持存字符串数据，想要设置其他类型的数据，需要将其转换成字符串，Session 可以存任意数据类型。
-    + 有效期不同： Cookie 可设置为长时间保持，比如经常使用的默认登录功能，Session 一般失效时间较短，客户端关闭（默认情况下）或者 Session 超时都会失效。
-    + 存储大小不同： 单个 Cookie 保存的数据不能超过 4K，Session 可存储数据远高于 Cookie，但是当访问量过多，会占用过多的服务器资源
-  - Token（令牌）:将生成的 token （可能是JWT）放入 cookie 传递，利用 HTTPonly 和 Secure 标签保护 token
-    + Acesss Token
-      * 访问资源接口（API）时所需要的资源凭证
-      * 简单 token 的组成： uid (用户唯一的身份标识)、time (当前时间的时间戳)、sign（签名，token 的前几位以哈希算法压缩成的一定长度的十六进制字符串）
-      * 特点：
-        - 服务端无状态化、可扩展性好
-        - 支持移动端设备
-        - 安全
-        - 支持跨程序调用
-    + token 的身份验证流程
-      * 客户端使用用户名跟密码请求登录
-      * 服务端收到请求，去验证用户名与密码
-      * 验证成功后，服务端会签发一个 token 并把这个 token 发送给客户端
-      * 客户端收到 token 以后，会把它存储起来，比如放在 cookie 里或者 localStorage 里
-      * 客户端每次向服务端请求资源的时候需要带着服务端签发的 token
-      * 服务端收到请求，然后去验证客户端请求里面带着的 token ，如果验证成功，就向客户端返回请求的数据
-      * 每一次请求都需要携带 token，需要把 token 放到 HTTP 的 Header 里
-      * 基于 token 的用户认证是一种服务端无状态的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库
-      * token 完全由应用管理，所以它可以避开同源策略
-    + refresh token 是专用于刷新 access token 的 token。如果没有 refresh token，也可以刷新 access token，但每次刷新都要用户输入登录用户名与密码，会很麻烦。有了 refresh token，可以减少这个麻烦，客户端直接用 refresh token 去更新 access token，无需用户进行额外的操作
-      * Access Token 的有效期比较短，当 Acesss Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
-      * Refresh Token 及过期时间是存储在服务器的数据库中，只有在申请新的 Acesss Token 时才会验证，不会对业务接口响应时间造成影响，也不需要向 Session 一样一直保持在内存中以应对大量的请求。
-  - Token 和 Session 的区别
-    + Session 是一种记录服务器和客户端会话状态的机制，使服务端有状态化，可以记录会话信息。而 Token 是令牌，访问资源接口（API）时所需要的资源凭证。Token 使服务端无状态化，不会存储会话信息。
-    + Session 和 Token 并不矛盾，作为身份认证 Token 安全性比 Session 好，因为每一个请求都有签名还能防止监听以及重放攻击，而 Session 就必须依赖链路层来保障通讯安全了。如果你需要实现有状态的会话，仍然可以增加 Session 来在服务器端保存一些状态。
-    + 所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SessionID 的不可预测性，暂且认为是安全的。而 Token ，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App 。其目的是让某 App 有权利访问某用户的信息。这里的 Token 是唯一的。不可以转移到其它 App 上，也不可以转到其它用户上。Session 只提供一种简单的认证，即只要有此 SessionID ，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说：如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。如果永远只是自己的网站，自己的 App，用什么就无所谓了。
-  - JSON Web Token（简称 JWT）是目前最流行的跨域认证解决方案。
-    + 是一种认证授权机制。
-    + JWT 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（RFC 7519）。JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源。比如用在用户登录上。
-    + 可以使用 HMAC 算法或者是 RSA 的公 / 私秘钥对 JWT 进行签名。因为数字签名的存在，这些传递的信息是可信的
-    + 认证流程：
-      * 用户输入用户名 / 密码登录，服务端认证成功后，会返回给客户端一个 JWT
-      * 客户端将 token 保存到本地（通常使用 localstorage，也可以使用 cookie）
-      * 当用户希望访问一个受保护的路由或者资源的时候，需要请求头的 Authorization 字段中使用 Bearer 模式添加 JWT
-      * 服务端的保护路由将会检查请求头 Authorization 中的 JWT 信息，如果合法，则允许用户的行为
-      * 因为 JWT 是自包含的（内部包含了一些会话信息），因此减少了需要查询数据库的需要
-      * 因为 JWT 并不使用 Cookie 的，所以你可以使用任何域名提供你的 API 服务而不需要担心跨域资源共享问题（CORS）
-      * 因为用户的状态不再存储在服务端的内存中，所以这是一种无状态的认证机制
-    + 使用方式
-      - 放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求头信息的 Authorization 字段里，使用 Bearer 模式添加 JWT
-      - 跨域的时候，可以把 JWT 放在 POST 请求的数据体里
-      - 通过 URL 传输
-  - Token 和 JWT 的区别
-    + 相同：
-      - 都是访问资源的令牌
-      - 都可以记录用户的信息
-      - 都是使服务端无状态化
-      - 都是只有验证成功后，客户端才能访问服务端上受保护的资源
-    + 区别：
-      - Token：服务端验证客户端发送过来的 Token 时，还需要查询数据库获取用户信息，然后验证 Token 是否有效。
-      - JWT：将 Token 和 Payload 加密后存储于客户端，服务端只需要使用密钥解密进行校验（校验也是 JWT 自己实现的）即可，不需要查询或者减少查询数据库，因为 JWT 自包含了用户信息和加密的数据。
+* cookie:凭证（Credentials）,服务器与浏览器为了进行会话跟踪（知道是谁在访问我），就必须主动的去维护一个状态，这个状态用于告知服务端前后两个请求是否来自同一浏览器。而这个状态需要通过 cookie 或者 session 去实现
+  * 存储在客户端:cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上
+  * cookie 是不可跨域的： 每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）
+* session 是基于 cookie 实现的，session 存储在服务器端，sessionId 会被存储到客户端的 cookie 中
+  - 用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的 Session
+  - 请求返回时将此 Session 的唯一标识信息 SessionID 返回给浏览器
+  - 浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到 Cookie 中，同时 Cookie 记录此 SessionID 属于哪个域名
+  - 当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 Cookie 信息，如果存在自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作
+  - SessionID 是连接 Cookie 和 Session 的一道桥梁,session ID 或 hash 作为 token，但将 token 放入 header 中传递
+* 区别
+  - 安全性： Session 比 Cookie 安全，Session 是存储在服务器端的，Cookie 是存储在客户端的。
+  - 存取值的类型不同：Cookie 只支持存字符串数据，想要设置其他类型的数据，需要将其转换成字符串，Session 可以存任意数据类型。
+  - 有效期不同： Cookie 可设置为长时间保持，比如经常使用的默认登录功能，Session 一般失效时间较短，客户端关闭（默认情况下）或者 Session 超时都会失效。
+  - 存储大小不同： 单个 Cookie 保存的数据不能超过 4K，Session 可存储数据远高于 Cookie，但是当访问量过多，会占用过多的服务器资源
+* Token（令牌）:将生成的 token （可能是JWT）放入 cookie 传递，利用 HTTPonly 和 Secure 标签保护 token
+  - Acesss Token
+    + 访问资源接口（API）时所需要的资源凭证
+    + 简单 token 的组成： uid (用户唯一的身份标识)、time (当前时间的时间戳)、sign（签名，token 的前几位以哈希算法压缩成的一定长度的十六进制字符串）
+    + 特点：
+      * 服务端无状态化、可扩展性好
+      * 支持移动端设备
+      * 安全
+      * 支持跨程序调用
+  - token 的身份验证流程
+    + 客户端使用用户名跟密码请求登录
+    + 服务端收到请求，去验证用户名与密码
+    + 验证成功后，服务端会签发一个 token 并把这个 token 发送给客户端
+    + 客户端收到 token 以后，会把它存储起来，比如放在 cookie 里或者 localStorage 里
+    + 客户端每次向服务端请求资源的时候需要带着服务端签发的 token
+    + 服务端收到请求，然后去验证客户端请求里面带着的 token ，如果验证成功，就向客户端返回请求的数据
+    + 每一次请求都需要携带 token，需要把 token 放到 HTTP 的 Header 里
+    + 基于 token 的用户认证是一种服务端无状态的认证方式，服务端不用存放 token 数据。用解析 token 的计算时间换取 session 的存储空间，从而减轻服务器的压力，减少频繁的查询数据库
+    + token 完全由应用管理，所以它可以避开同源策略
+  - refresh token 是专用于刷新 access token 的 token。如果没有 refresh token，也可以刷新 access token，但每次刷新都要用户输入登录用户名与密码，会很麻烦。有了 refresh token，可以减少这个麻烦，客户端直接用 refresh token 去更新 access token，无需用户进行额外的操作
+    + Access Token 的有效期比较短，当 Acesss Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Token，如果 Refresh Token 也失效了，用户就只能重新登录了。
+    + Refresh Token 及过期时间是存储在服务器的数据库中，只有在申请新的 Acesss Token 时才会验证，不会对业务接口响应时间造成影响，也不需要向 Session 一样一直保持在内存中以应对大量的请求。
+* Token vs Session
+  - Session 是一种记录服务器和客户端会话状态的机制，使服务端有状态化，可以记录会话信息。而 Token 是令牌，访问资源接口（API）时所需要的资源凭证。Token 使服务端无状态化，不会存储会话信息
+  - Session 和 Token 并不矛盾，作为身份认证 Token 安全性比 Session 好，因为每一个请求都有签名还能防止监听以及重放攻击，而 Session 就必须依赖链路层来保障通讯安全了。如果你需要实现有状态的会话，仍然可以增加 Session 来在服务器端保存一些状态
+  - 所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SessionID 的不可预测性，暂且认为是安全的。而 Token ，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App 。其目的是让某 App 有权利访问某用户的信息。这里的 Token 是唯一的。不可以转移到其它 App 上，也不可以转到其它用户上。Session 只提供一种简单的认证，即只要有此 SessionID ，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说：如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。如果永远只是自己的网站，自己的 App，用什么就无所谓了
+
 * 凭证（Credentials）:实现认证和授权的基础是需要一种媒介（credentials）来标记访问者的身份或权利
-* 认证（authentication）：验证当前用户的身份，当用户登陆过后系统便能追踪到他身份做出符合相应业务逻辑的操作
-  - 方法
-      +　用户名密码登录
-      +　邮箱发送登录链接
-      +　手机号接收验证码
-      +　只要你能收到邮箱 / 验证码
-  - 即使用户没有登录，大多数系统也会追踪他的身份，只是当做来宾或者匿名用户来处理
-  - 认证技术解决的是 “我是谁？”的问题
-  - HTTP Basic Authentication
-    + 客户端
-      * 将用户名和密码使用冒号连接，例如 username:abc123456
-      * 为了防止用户名或者密码中存在超出 ASCII 码范围的字符，推荐使用UTF-8编码
-      * 将上面的字符串使用 Base 64 编码，例如 dXNlcm5hbWU6YWJjMTIzNDU2
-      * 在 HTTP 请求头中加入 “Basic + 编码后的字符串”，即：Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
-      * 设置名称为 Authorization 的 header 头部
-    + Base64 只能称为编码，而不是加密 (实际上无需配置密匙的客户端并没有任何可靠地加密方式，我们都依赖 TSL 协议)。这种方式的致命弱点是编码后的密码如果明文传输则容易在网络传输中泄露，在密码不会过期的情况下，密码一旦泄露，只能通过修改密码的方式
-  - HMAC（AK/SK）认证：对接一些 PASS 平台和支付平台时，会要求我们预先生成一个 access key（AK） 和 secure key（SK），然后通过签名的方式完成认证请求，这种方式可以避免传输 secure key，且大多数情况下签名只允许使用一次，避免了重放攻击。
-    + 利用散列的消息认证码 (Hash-based MessageAuthentication Code) 来实现的，因此有很多地方叫 HMAC 认证，实际上不是非常准确
-    + HMAC 只是利用带有 key 值的哈希算法生成消息摘要，在设计 API 时有具体不同的实现
-      * 客户端需要在认证服务器中预先设置 access key（AK 或叫 app ID） 和 secure key（SK）
-      * 在调用 API 时，客户端需要对参数和 access key 进行自然排序后并使用 secure key 进行签名生成一个额外的参数 digest
-      * 服务器根据预先设置的 secure key 进行同样的摘要计算，并要求结果完全一致
-      * **注意 secure key 不能在网络中传输，以及在不受信任的位置存放（浏览器等）**
-      * 每一次请求的签名变得独一无二，从而实现重放攻击，需要在签名时放入一些干扰信息
-        - 质疑/应答算法（OCRA: OATH Challenge-Response Algorithm）
-          + 客户端先请求一次服务器，获得一个 401 未认证的返回，并得到一个随机字符串（nonce）
-          + 将 nonce 附加到按照上面说到的方法进行 HMAC 签名，服务器使用预先分配的 nonce 同样进行签名校验，这个 nonce 在服务器只会被使用一次，因此可以提供唯一的摘要。
-        - 基于时间的一次性密码算法（TOTP：Time-based One-time Password Algorithm）：通过同步时间的方式协商到一致，在一定的时间窗口内有效（1分钟左右）
-          + 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
-* 授权（authorization）：用户授予第三方应用访问该用户某些资源的权限
-  - 实现授权的方式有：cookie、session、token、OAuth
-  - 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
-  - OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容
-    + OAuth 是一个授权标准，而不是认证标准。提供资源的服务器不需要知道确切的用户身份（session），只需要验证授权服务器授予的权限（token）即可
-    + access token 被设计用来客户端和资源服务器之间交互,过期时间（TTL）应该尽量短，从而避免用户的 access token 被嗅探攻击
-    + refresh token 是被设计用来客户端和授权服务器之间交互。帮助用户维护一个较长时间的状态，避免频繁重新授权.客户端拿着 refresh token 去获取 access token 时同时需要预先配置的 secure key，客户端和授权服务器之前始终存在安全的认证。
-    + OAuth 负责解决分布式系统之间的授权问题，即使有时候客户端和资源服务器或者认证服务器存在同一台机器上。OAuth 没有解决认证的问题，但提供了良好的设计利于和现有的认证系统对接。
-    + Open ID 解决的问题是分布式系统之间身份认证问题，使用Open ID token 能在多个系统之间验证用户，以及返回用户信息，可以独立使用，与 OAuth 没有关联
-    + OpenID Connect 解决的是在 OAuth 这套体系下的用户认证问题，实现的基本原理是将用户的认证信息（ID token）当做资源处理。在 OAuth 框架下完成授权后，再通过 access token 获取用户的身份
-    + 如果系统中需要一套独立的认证系统，并不需要多系统之间的授权可以直接采用 Open ID。如果使用了 OAuth 作为授权标准，可以再通过 OpenID Connect 来完成用户的认证。
-  - 类型：grant_type：authorization_code password client_credentials
-    + 授权码（authorization code）方式：向第三方应用先申请一个授权码，然后再用该码获取令
-      * 流程:前端跳转到第三方应用登录链接->用户点击链接跳转到第三方应用登录并进行授权->前端跳转到所指定应用回调资源地址并伴随用于交互 AccessToken 的 Code->后端根据请求第三方应用并使用 Code 获取该用户的 AccessToken->获取 AccessToken 之后的应用即可自主的从第三方应用中获取用户的资源信息
-      * 应用登记：注册一个 Application,添加回调url,得到 ClientId 和 Client Secret
-      * 验证 access token
-        - 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
-        - 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
-    + 隐藏式（implicit）：直接向前端颁发令牌，跳回redirect_uri，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring）。因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在"中间人攻击"的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。
-      * 用于一些安全要求不高的场景，并且令牌的有效期必须非常短，通常就是会话期间（session）有效，浏览器关掉，令牌就失效了
-    + 密码式（password）：使用用户名和密码，申请令牌
-      * 验证身份通过后，直接给出令牌。注意，这时不需要跳转，而是把令牌放在 JSON 数据里面，作为 HTTP 回应，客户端因此拿到令牌
-    + 凭证式（client credentials）：适用于没有前端的命令行应用，即在命令行下请求令牌
-      * 给出的令牌，是针对第三方应用的，而不是针对用户的，即有可能多个用户共享同一个令牌
-  - JWT （JSON Web Token）:一种自包含令牌，令牌签发后无需从服务器存储中检查是否合法，通过解析令牌就能获取令牌的过期、有效等信息
-    + 令牌为一段点分3段式结构
-      * header json 的 base64 编码为令牌第一部分
-      * payload json 的 base64 编码为令牌第二部分
-      * 拼装第一、第二部分编码后的 json 以及 secret 进行签名的令牌的第三部分
-    + 只需要签名的 secret key 就能校验 JWT 令牌，如果在消息体中加入用户 ID、过期信息就可以实现验证令牌是否有效、过期了，无需从数据库/缓存中读取信息
-    + 第一、二部分只是 base64 编码，肉眼不可读，不应当存放敏感信息
-    + 自包含特性，导致了无法被撤回
+
+## 认证（authentication）：验证当前用户的身份，当用户登陆过后系统便能追踪到他身份做出符合相应业务逻辑的操作
+
+* 方法
+    -　用户名密码登录
+    -　邮箱发送登录链接
+    -　手机号接收验证码
+    -　只要你能收到邮箱 / 验证码
+* 即使用户没有登录，大多数系统也会追踪他的身份，只是当做来宾或者匿名用户来处理
+* 认证技术解决的是 “我是谁？”的问题
+* HTTP Basic Authentication
+  - 客户端
+    + 将用户名和密码使用冒号连接，例如 username:abc123456
+    + 为了防止用户名或者密码中存在超出 ASCII 码范围的字符，推荐使用UTF-8编码
+    + 将上面的字符串使用 Base 64 编码，例如 dXNlcm5hbWU6YWJjMTIzNDU2
+    + 在 HTTP 请求头中加入 “Basic + 编码后的字符串”，即：Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW1l
+    + 设置名称为 Authorization 的 header 头部
+  - Base64 只能称为编码，而不是加密 (实际上无需配置密匙的客户端并没有任何可靠地加密方式，我们都依赖 TSL 协议)。这种方式的致命弱点是编码后的密码如果明文传输则容易在网络传输中泄露，在密码不会过期的情况下，密码一旦泄露，只能通过修改密码的方式
+* HMAC（AK/SK）认证：对接一些 PASS 平台和支付平台时，会要求我们预先生成一个 access key（AK） 和 secure key（SK），然后通过签名的方式完成认证请求，这种方式可以避免传输 secure key，且大多数情况下签名只允许使用一次，避免了重放攻击。
+  - 利用散列的消息认证码 (Hash-based MessageAuthentication Code) 来实现的，因此有很多地方叫 HMAC 认证，实际上不是非常准确
+  - HMAC 只是利用带有 key 值的哈希算法生成消息摘要，在设计 API 时有具体不同的实现
+    + 客户端需要在认证服务器中预先设置 access key（AK 或叫 app ID） 和 secure key（SK）
+    + 在调用 API 时，客户端需要对参数和 access key 进行自然排序后并使用 secure key 进行签名生成一个额外的参数 digest
+    + 服务器根据预先设置的 secure key 进行同样的摘要计算，并要求结果完全一致
+    + **注意 secure key 不能在网络中传输，以及在不受信任的位置存放（浏览器等）**
+    + 每一次请求的签名变得独一无二，从而实现重放攻击，需要在签名时放入一些干扰信息
+      * 质疑/应答算法（OCRA: OATH Challenge-Response Algorithm）
+        - 客户端先请求一次服务器，获得一个 401 未认证的返回，并得到一个随机字符串（nonce）
+        - 将 nonce 附加到按照上面说到的方法进行 HMAC 签名，服务器使用预先分配的 nonce 同样进行签名校验，这个 nonce 在服务器只会被使用一次，因此可以提供唯一的摘要。
+      * 基于时间的一次性密码算法（TOTP：Time-based One-time Password Algorithm）：通过同步时间的方式协商到一致，在一定的时间窗口内有效（1分钟左右）
+        - 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
+
+## 授权（authorization）：用户授予第三方应用访问该用户某些资源的权限
+
+* 实现授权的方式有：cookie、session、token、OAuth
+* 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
+* OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容
+  - OAuth 是一个授权标准，而不是认证标准。提供资源的服务器不需要知道确切的用户身份（session），只需要验证授权服务器授予的权限（token）即可
+  - access token 被设计用来客户端和资源服务器之间交互,过期时间（TTL）应该尽量短，从而避免用户的 access token 被嗅探攻击
+  - refresh token 是被设计用来客户端和授权服务器之间交互。帮助用户维护一个较长时间的状态，避免频繁重新授权.客户端拿着 refresh token 去获取 access token 时同时需要预先配置的 secure key，客户端和授权服务器之前始终存在安全的认证。
+  - OAuth 负责解决分布式系统之间的授权问题，即使有时候客户端和资源服务器或者认证服务器存在同一台机器上。OAuth 没有解决认证的问题，但提供了良好的设计利于和现有的认证系统对接。
+  - Open ID 解决的问题是分布式系统之间身份认证问题，使用Open ID token 能在多个系统之间验证用户，以及返回用户信息，可以独立使用，与 OAuth 没有关联
+  - OpenID Connect 解决的是在 OAuth 这套体系下的用户认证问题，实现的基本原理是将用户的认证信息（ID token）当做资源处理。在 OAuth 框架下完成授权后，再通过 access token 获取用户的身份
+  - 如果系统中需要一套独立的认证系统，并不需要多系统之间的授权可以直接采用 Open ID。如果使用了 OAuth 作为授权标准，可以再通过 OpenID Connect 来完成用户的认证。
+* 类型：grant_type：authorization_code password client_credentials
+  - 授权码（authorization code）方式：向第三方应用先申请一个授权码，然后再用该码获取令
+    + 流程:前端跳转到第三方应用登录链接->用户点击链接跳转到第三方应用登录并进行授权->前端跳转到所指定应用回调资源地址并伴随用于交互 AccessToken 的 Code->后端根据请求第三方应用并使用 Code 获取该用户的 AccessToken->获取 AccessToken 之后的应用即可自主的从第三方应用中获取用户的资源信息
+    + 应用登记：注册一个 Application,添加回调url,得到 ClientId 和 Client Secret
+    + 验证 access token
+      * 在完成授权流程后，资源服务器可以使用 OAuth 服务器提供的 Introspection 接口来验证access token，OAuth服务器会返回 access token 的状态以及过期时间。在OAuth标准中验证 token 的术语是 Introspection。同时也需要注意 access token 是用户和资源服务器之间的凭证，不是资源服务器和授权服务器之间的凭证。资源服务器和授权服务器之间应该使用额外的认证（例如 Basic 认证）。
+      * 使用 JWT 验证。授权服务器使用私钥签发 JWT 形式的 access token，资源服务器需要使用预先配置的公钥校验 JWT token，并得到 token 状态和一些被包含在 access token 中信息。因此在 JWT 的方案下，资源服务器和授权服务器不再需要通信，在一些场景下带来巨大的优势。同时 JWT 也有一些弱点，我会在JWT 的部分解释。
+  - 隐藏式（implicit）：直接向前端颁发令牌，跳回redirect_uri，令牌的位置是 URL 锚点（fragment），而不是查询字符串（querystring）。因为 OAuth 2.0 允许跳转网址是 HTTP 协议，因此存在"中间人攻击"的风险，而浏览器跳转时，锚点不会发到服务器，就减少了泄漏令牌的风险。
+    + 用于一些安全要求不高的场景，并且令牌的有效期必须非常短，通常就是会话期间（session）有效，浏览器关掉，令牌就失效了
+  - 密码式（password）：使用用户名和密码，申请令牌
+    + 验证身份通过后，直接给出令牌。注意，这时不需要跳转，而是把令牌放在 JSON 数据里面，作为 HTTP 回应，客户端因此拿到令牌
+  - 凭证式（client credentials）：适用于没有前端的命令行应用，即在命令行下请求令牌
+    + 给出的令牌，是针对第三方应用的，而不是针对用户的，即有可能多个用户共享同一个令牌
 * 策略
   - 基于访问控制列表（ACL）
   - 基于用户角色的访问控制（RBAC）

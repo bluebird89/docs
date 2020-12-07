@@ -714,11 +714,15 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 
 ## HTTPS HyperText Transfer Protocol over Secure Socket Layer
 
-* HTTP缺点
-  - 通信使用明文，内容可能会被窃听：HTTP 协议本身不具备加密功能，所以无法对通信整体（请求和响应的内容）进行加密，即 HTTP 报文使用明文方式发送。按照 TCP/IP 协议族的工作机制，通信内容在所有线路上都有可能被窃听。
-  - 不验证通信方的身份，因此有可能遭遇伪装：HTTP 协议中的请求和响应不会对通信方进行确认，所以任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个响应，即使是伪装的客户端。另外，即使是无意义的请求也会处理，无法阻止海量请求下的 DoS 攻击。
-  - 无法证明报文的完整性，所以有可能已遭篡改：没有任何办法确认发出的请求/响应和接收到的请求/响应是前后相同的，请求或响应在传输途中，遭攻击者拦截并篡改内容的攻击称为中间人攻击（Main-in-the-Middle attack，MITM）
-* HTTPS在HTTP的基础上加入了SSL(Secure Sockets Layer 安全套接层)协议，将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL依靠证书来验证服务器的身份，会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
+* HTTP 缺点
+  - 窃听:通信使用明文，内容可能会被窃听：HTTP 协议本身不具备加密功能，所以无法对通信整体（请求和响应的内容）进行加密，即 HTTP 报文使用明文方式发送。按照 TCP/IP 协议族的工作机制，通信内容在所有线路上都有可能被窃听。
+  - 冒充不验证通信方的身份，因此有可能遭遇伪装：HTTP 协议中的请求和响应不会对通信方进行确认，所以任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个响应，即使是伪装的客户端。另外，即使是无意义的请求也会处理，无法阻止海量请求下的 DoS 攻击。
+  - 篡改:无法证明报文的完整性，所以有可能已遭篡改：没有任何办法确认发出的请求/响应和接收到的请求/响应是前后相同的，请求或响应在传输途中，遭攻击者拦截并篡改内容的攻击称为中间人攻击（Main-in-the-Middle attack，MITM）
+* HTTPS 在 HTTP 基础上加入了 SSL(Secure Sockets Layer 安全套接层) 协议，将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL依靠证书来验证服务器的身份，会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
+  - 机密性：即对数据加密，解决了窃听风险，因为即使被中间人窃听，由于数据是加密的，也拿不到明文
+  - 完整性：指数据在传输过程中没有被篡改，不多不少，保持原样，中途如果哪怕改了一个标点符号，接收方也能识别出来，从来判定接收报文不合法
+  - 身份认证：确认对方的真实身份，即证明「你妈是你妈」的问题，这样就解决了冒充风险，用户不用担心访问的是某宝结果却在和钓鱼网站通信的问题
+  - 不可否认: 即不可否认已发生的行为
 * HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
   - SSL（Secure Sockets Layer 安全套接字层）:一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
   - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
@@ -727,31 +731,33 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + Integrity - verifying that data have not been forged using Message Authentication Code (MAC)
   - 采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护等功能
   - 其它运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用
+  - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
 * 数字证书
   - 通过 OpenSSL 提供的命令就可以生成私钥和公钥，但是需要权威机构颁发证书（Certificate）才能被承认，否则无法判断通信中传递的公钥是否是目标服务器返回的
   - 生成证书需要发起一个证书请求，然后将这个请求发给一个权威机构（客户端和服务端都信任的第三方结构）去认证，这个权威机构称之为 CA（Certificate Authority）。权威机构会给证书敲一个章，也就是所谓的签名算法
   - 签名算法大概是这样工作的：一般是对信息做一个 Hash 计算，得到一个 Hash 值，这个过程是不可逆的，也就是说无法通过 Hash 值得出原来的信息内容。在把信息发送出去时，把这个 Hash 值通过 CA 的私钥加密后，作为一个签名和信息一起发出去
   - CA 用自己的私钥给网站的公钥签名，就相当于给网站背书，形成了网站的证书
-  - CA 的公钥需要更牛的 CA 给它签名，形成 CA 的证书，要想看 CA 的证书是否可靠，要看 CA 的上级证书的公钥，能不能解开这个 CA 的签名。这样层层上去，直到全球皆知的几个著名大 CA，称为 root CA，做最后的背书。通过这种层层授信背书的方式，从而保证了非对称加密模式的正常运转
+  - CA 公钥需要更牛的 CA 给它签名，形成 CA 的证书，要想看 CA 的证书是否可靠，要看 CA 的上级证书的公钥，能不能解开这个 CA 的签名。这样层层上去，直到全球皆知的几个著名大 CA，称为 root CA，做最后的背书。通过这种层层授信背书的方式，从而保证了非对称加密模式的正常运转
   - 服务器会将这份 CA 颁发的公钥证书（也可以叫做数字证书）发送给客户端，以进行非对称加密方式通信
   - 接到证书的客户端可使用 CA 提供的公钥，对那张证书上的数字签名进行验证，一旦验证通过，客户端便可明确两件事：
     + 认证服务器公钥的是真实有效的数字证书认证机构
     + 服务器的公钥是值得信赖的
+* Symmetric Encryption
+  - There is only one key: the client and server use the same key to encrypt and decrypt.
+  - Fast and cheap (nanoseconds per operation).
+  - A common algorithm is AES.
+* Asymmetric Encryption (also known as Public-key Encryption)
+  - There is a pair of two keys: the public key encrypts the message, and only the corresponding private key can decrypt it.
+  - Slow and expensive (microseconds to milliseconds per operation).
+  - Some common algorithms are RSA and Diffie-Hellman (DH)
 * HTTPS 综合运用了这两种加密方式的优势:使用非对称加密传输对称加密需要用到的密钥，而真正的双方大数据量的通信都是通过对称加密进行的，结合数字证书（包含公钥信息）验证服务端公钥的真实性
-  - Symmetric Encryption
-    + There is only one key: the client and server use the same key to encrypt and decrypt.
-    + Fast and cheap (nanoseconds per operation).
-    + A common algorithm is AES.
-  - Asymmetric Encryption (also known as Public-key Encryption)
-    + There is a pair of two keys: the public key encrypts the message, and only the corresponding private key can decrypt it.
-    + Slow and expensive (microseconds to milliseconds per operation).
-    + Some common algorithms are RSA and Diffie-Hellman (DH)
-  - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
-  - 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥,会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
-  - ClientHello：客户端通过向服务器发送 hello 消息开始建立与服务器的 SSL 通信。报文中包含了 客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、加密组件、压缩算法等信息，另外，还有一个随机数，用于后续对称加密密钥的协商
-  - ServerHello：服务器可以进行 SSL 通信时，会以 Server Hello 报文作为应答，含 SSL 协议版本、加密组件、压缩算法等信息，同时还有一个随机数，用于后续对称加密密钥的协商
-  - 服务器会以 Certificate 报文的形式给客户端发送服务端的数字证书，其中包含了非对称加密用到的公钥信息。最后，服务器还会发送 Server Hello Done 报文告知客户端，最初阶段的 SSL 握手协商部分结束
-  - 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应。第一部分握手阶段结束
+  - 第一部分握手阶段结束
+    + 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥,会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
+    + ClientHello：客户端通过向服务器发送 hello 消息开始建立与服务器的 SSL 通信。报文中包含客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、加密组件、压缩算法等信息，另外，还有一个随机数，用于后续对称加密密钥的协商
+    + ServerHello：服务器可以进行 SSL 通信时，会以 Server Hello 报文作为应答，含 SSL 协议版本、加密组件、压缩算法等信息，同时还有一个随机数，用于后续对称加密密钥的协商
+    + 服务器会以 Certificate 报文的形式给客户端发送服务端数字证书，包含了非对称加密用到的公钥信息
+    + 服务器还会发送 Server Hello Done 报文告知客户端，最初阶段的 SSL 握手协商部分结束
+    + 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应
   - 客户端从自己信任的 CA 仓库中，拿 CA 证书里面的公钥去解密 HTTPS 网站的数字证书（证书是通过 CA 私钥加密的，所以要用公钥解密），如果能够成功，则说明 HTTPS 网站是可信的
   - 证书验证完毕之后，觉得这个 HTTPS 网站可信，于是客户端计算产生随机数字 Pre-master，用服务器返回的数字证书中的公钥加密该随机数字，再通过 Client Key Exchange 报文发送给服务器，服务器可以通过对应的私钥解密出 Pre-master。到目前为止，无论是客户端还是服务器，都有了三个随机数，分别是：自己的、对端的，以及刚生成的 Pre-Master 随机数。通过这三个随机数，可以在客户端和服务器生成相同的对称加密密钥
   - 有了对称加密密钥，客户端就可以通过 Change Cipher Spec 报文告知服务器以后都采用该密钥和协商的加密算法进行加密通信了
@@ -759,7 +765,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 服务器也可以发送 Change Cipher Spec 报文，告知客户端以后都采用协商的对称加密密钥和加密算法进行加密通信了，并且也发送 Encrypted Handshake Message 报文进行测试。当双方握手结束之后，就可以通过对称加密密钥进行加密传输了
   - 加密阶段：在第一个阶段握手完成后，客户端会发送 ClientKeyExchange 作为响应，响应中包含了一种称为 The premaster secret 的密钥字符串，这个字符串就是使用上面公开密钥证书进行加密的字符串。随后客户端会发送 ChangeCipherSpec，告诉服务端使用私钥解密这个 premaster secret 的字符串，然后客户端发送 Finished 告诉服务端自己发送完成了
   - Session key 其实就是用公钥证书加密的公钥
-  - 实现了安全的非对称加密：然后，服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密
+  - 实现安全非对称加密：服务器再发送 ChangeCipherSpec 和 Finished 告诉客户端解密完成，至此实现了 RSA 的非对称加密
 * 作用
   - 身份认证：确认网站的真实性
   - 内容加密：建立一个信息安全通道，来保证数据传输的安全
