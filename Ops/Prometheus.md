@@ -83,15 +83,22 @@ curl -X POST http://localhost:9090/-/reload
 
 ## 架构
 
-* Prometheus Server:负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理。
+* Prometheus Server:负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理
   - Retrieval: 负责定时去暴露的目标服务上去拉取监控Metrics指标数据
-  - TSDB: Prometheus 2.0版本起使用的底层存储, 它的数据块编码使用了facebook的gorilla，具备了完整的持久化方案
+  - TSDB: Prometheus 2.0版本起使用的底层存储, 数据块编码使用了facebook的gorilla，具备了完整的持久化方案
   - HTTP Server: 提供HTTP API接口查询监控Metrics数据
-* Service discovery: Prometheus支持多种服务发现机制，文件、DNS、Consul、Kubernetes、OpenStack、EC2等等。前提是这些服务需要开放/metrics接口提供数据查询。
-* Prometheus targets: Prometheus监控目标服务，Prometheus通过轮询这些目标服务拉取监控Metrics数据。
-* Push gateway: 某些场景Prometheus无法直接拉取监控数据，Pushgateway的作用在于提供了中间代理。我们可以在应用程序中定时将监控Metrics数据提交到Pushgateway，Prometheus Server定时从Pushgateway的/metrics接口采集数据。
-* Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知。
-* Data visualization: 数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算。除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
+* Service discovery: Prometheus支持多种服务发现机制，文件、DNS、Consul、Kubernetes、OpenStack、EC2等等。前提是这些服务需要开放/metrics接口提供数据查询
+* Prometheus targets: Prometheus监控目标服务，Prometheus通过轮询这些目标服务拉取监控Metrics数据
+  - Job/Exporter属于Prometheus target，是Prometheus监控的对象,分为长时间执行和短时间执行两种。对于长时间执行的Job，可以使用Prometheus Client集成进行监控；对于短时间执行的Job，可以将监控数据推送到Pushgateway中缓存
+  - Exporter的机制是将第三方系统的监控数据按照Prometheus的格式暴露出来，没有Exporter的第三方系统可以自己定制Exporter
+* Push gateway: 某些场景Prometheus无法直接拉取监控数据，Pushgateway的作用在于提供了中间代理
+  - Prometheus是拉模式为主的监控系统，它的推模式就是通过Pushgateway组件实现的
+  - 可以在应用程序中定时将监控Metrics数据提交到Pushgateway，Prometheus Server定时从Pushgateway的/metrics接口采集数据
+  - Pushgateway是支持临时性Job主动推送指标的中间网关，它本质上是一种用于监控Prometheus服务器无法抓取的资源的解决方案
+  - Pushgateway作为一个独立的服务，位于被采集监控指标的应用程序和Prometheus服务器之间。应用程序主动推送指标到Pushgateway，Pushgateway接收指标，然后Pushgateway也作为target被Prometheus服务器抓取
+* Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知
+* Data visualization:数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算
+  - 除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
 
 ## 配置
 
@@ -762,7 +769,7 @@ spec:
           servicePort: 9090
 ```
 
-## 常用Exporter
+## Exporter
 
 * Kubernetes 生态的组件都会提供 /metric 接口以提供自监控，这里列下：
   - cAdvisor：集成在 Kubelet 中。
@@ -772,19 +779,14 @@ spec:
   - controller-manager：10252 端口。
   - etcd：如 etcd 写入读取延迟、存储容量等。
   - Docker：需要开启 experimental 实验特性，配置 metrics-addr，如容器创建耗时等指标。
-
-  -
-kube-proxy：默认 127 暴露，10249 端口。外部采集时可以修改为 0.0.0.0 监听，会暴露：写入 iptables
-
-- 规则的耗时等指标。
+  - kube-proxy：默认 127 暴露，10249 端口。外部采集时可以修改为 0.0.0.0 监听，会暴露：写入 iptables规则的耗时等指标
 - kube-state-metrics：Kubernetes 官方项目，采集 Pod、Deployment 等资源的元信息。
 - node-exporter：Prometheus 官方项目，采集机器指标如 CPU、内存、磁盘。
 - blackbox_exporter：Prometheus 官方项目，网络探测，DNS、ping、http 监控。
 - process-exporter：采集进程指标。
 - NVIDIA Exporter：我们有 GPU 任务，需要 GPU 数据监控。
 - node-problem-detector：即 NPD，准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
-- 应用层 Exporter：MySQL、Nginx、MQ 等，看业务需求。
-
+- [mysqld_exporter](https://mp.weixin.qq.com/s?__biz=MzA4MzIwNTc4NQ==&mid=2247484416&idx=1&sn=d50181385ea816fe660af861e15674f6&chksm=9ffb4ff6a88cc6e0ecddcd1ee0108b283ee06ff376ba5d0acd11010232832e62fc8902024787)
 * 服务状态：Status->Targets
 
 ```sh

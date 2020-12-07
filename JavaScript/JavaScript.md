@@ -1,10 +1,10 @@
-# JavaScript｜[ecma262](https://github.com/tc39/ecma262)
+# [JavaScript｜ecma262](https://github.com/tc39/ecma262)
 
 Status, process, and documents for ECMA262 <https://tc39.github.io/ecma262/>
 
-* JavaScript是世界上最流行的脚本语言。运行在浏览器中的解释型的编程语言
+* JavaScript是世界上最流行脚本语言。运行在浏览器中的解释型的编程语言
 * 1995年，网景公司正凭借其Navigator浏览器成为Web时代开启时最著名的第一代互联网公司
-* 网景公司希望能在静态HTML页面上添加一些动态效果，于是叫Brendan Eich这哥们在两周之内设计出了JavaScript语言。只用了10天时间，语法有多个来源
+* 网景公司希望能在静态HTML页面上添加一些动态效果，Brendan Eich 两周之内设计出了JavaScript语言，语法有多个来源
   - 基本语法：借鉴 C 语言和 Java 语言
   - 数据结构：借鉴 Java 语言，包括将值分成原始值和对象两大类
   - 函数的用法：借鉴 Scheme 语言和 Awk 语言，将函数当作第一等公民，并引入闭包
@@ -23,14 +23,14 @@ Status, process, and documents for ECMA262 <https://tc39.github.io/ecma262/>
   - TypeScript 对战 ES6
     + 深入理解 ES6 中的基础语法非常重要
     + 了解 JavaScript 的解释方式以及各种浏览器的局限性也很重要
-    + PWA 和服务工作者的崛起也值得关注。
+    + PWA 和服务工作者的崛起也值得关注
   - React 对战 Angular Vue
   - Jest 对战 Mocha
   - GraphQL,Apollo（GraphQL 的客户端）REST API 将会下降
   - Parcel 和 Webpack
   - TypeScript 可能超过 ECMAScript
-  - GraphQL + TypeScript 占据了 2020 年所需技能的列表。
-  - 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具。
+  - GraphQL + TypeScript 占据了 2020 年所需技能的列表
+  - 预测像 Next.js、Nuxt.js 和 Gatsby.js 这样的混合框架将占据很大一部分项目，因此 JavaScript 开发人员必须了解这些工具
   - Agile（敏捷）这个术语，但它比 Git 或 Redux 被提及的频率更高，这说明 JS 开发者们除了要获得开发岗位必须的硬技能，软技能同样不可忽视。UX 也是如此
   - 作为一个前端开发者，需要知道如何在技术层面为用户提供更流畅的体验，而不是在设计层面
 * 强大性能
@@ -148,7 +148,7 @@ document.write("<p>This is a paragraph</p>");
 
 ## 基础语法
 
-* 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上;
+* 每个语句以`;`结束，浏览器中负责执行JavaScript代码的引擎会自动在每个语句的结尾补上
 * 语句块用 `{...}`
 * 以`//`开头直到行末的字符被视为行注释
 * 块注释是用`/*...*/`把多行字符包裹起来
@@ -177,8 +177,8 @@ PI; // 3.14
   - 静态语言在定义变量时必须指定变量类型，如果赋值的时候类型不匹配，就会报错。例如Java是静态语言
 * ECMA在后续规范中推出了strict模式
   - 强制通过var申明变量，未使用var申明变量就使用的，将导致运行错误。在JavaScript代码的第一行写上：`'use strict';`
-  - 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果。
-  - 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突。
+  - 同一个页面的不同的JavaScript文件中，如果都不用var申明，恰好都使用了变量i，将造成变量i互相影响，产生难以调试的错误结果
+  - 使用var申明的变量则不是全局变量，它的范围被限制在该变量被申明的函数体内（函数的概念将稍后讲解），同名变量在不同的函数体内互不冲突
 * 如果重新声明 JavaScript 变量，该变量的值不会丢失
 * 生命周期：在声明时初始化，局部变量在函数执行完毕后销毁，全局变量在页面关闭后销毁
 * 变量作用域
@@ -323,14 +323,14 @@ if (sum() !== 0) {
       - toFixed() 用于指定小数点位数
       - toExponential() 用于指定使用指数计数法
       - toPrecision() 用于指定有效位数（有效位数小于整数位数则转换为指数形式）
-* Null表示一个“空”的值，它和0以及空字符串`''`不同
+* Null 表示一个“空”的值，它和0以及空字符串`''`不同
   - 0是一个数值
   - `''`表示长度为0的字符串
   - null表示“空”
   - 可以通过将变量的值设置为 null 来清空变量
   - 执行 typeof 计算返回「object」
   - 可以表示数字、字符串、对象是「无值」的
-* Undefined表示值未定义,仅仅在判断函数参数是否传递的情况下有用
+* Undefined 表示值未定义,仅仅在判断函数参数是否传递的情况下有用
 * 类型转化
   - 值转化为另一个值并不意味着两个值是等价
   - 自动类型转换
