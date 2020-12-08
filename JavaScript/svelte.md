@@ -1,4 +1,4 @@
-# [sveltejs / svelte](https://github.com/sveltejs/svelte)
+# [sveltejs](https://github.com/sveltejs/svelte)
 
 Cybernetically enhanced web apps <https://svelte.dev/>
 

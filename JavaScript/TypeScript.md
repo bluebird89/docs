@@ -101,6 +101,6 @@ tsc --build tsconfig.json
 * [TypeScript 中文手册](https://typescript.bootcss.com/)
 * [The TypeScript Handbook](https://www.staging-typescript.org/docs/handbook/intro.html)
 * [basarat/typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
-* [DefinitelyTyped/DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
+* [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. http://definitelytyped.org/
 * [gcanti/fp-ts](https://github.com/gcanti/fp-ts):Functional programming in TypeScript https://gcanti.github.io/fp-ts/
 * [why is so important?](https://www.warambil.com/typescript-why-is-so-important)
