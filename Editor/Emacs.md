@@ -321,7 +321,7 @@ M-g                    设置字体
 
 ## 参考
 
-* [emacs-tw/awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
+* [awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
 * [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs <http://joaotavora.github.com/yasnippet/>
 * [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
 * [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around

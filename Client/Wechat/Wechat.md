@@ -142,3 +142,4 @@ echo $access_token_data->access_token;
 ## 参考
 
 * [官方文档](https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list)
+* [awesome-wechat-weapp](https://github.com/justjavac/awesome-wechat-weapp)

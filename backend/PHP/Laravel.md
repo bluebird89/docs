@@ -2413,10 +2413,8 @@ password: password
 
 ## 参考
 
-* [chiraggude/awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
-* [nonfu/awesome-laravel](https://github.com/nonfu/awesome-laravel)来自Laravel生态系统的精选资源大全，包括书签、包、教程、视频以及其它诸多很酷的资源。 <http://laravelacademy.org>
-* [fukuball/Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
-* [laravel-china/laravel-docs](https://github.com/laravel-china/laravel-docs):Laravel 中文文档 <https://d.laravel-china.org>
+* [awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
+* [Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 * [laravel/spark-docs](https://github.com/laravel/spark-docs)
 * [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
 * [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习

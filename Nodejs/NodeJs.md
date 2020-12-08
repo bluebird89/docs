@@ -854,6 +854,11 @@ yarn install node-sass
 * [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. <http://robotjs.io>
 * [InversifyJS](https://github.com/inversify/InversifyJS):A powerful and lightweight inversion of control container for JavaScript & Node.js apps powered by TypeScript. <http://inversify.io/>
 
+* [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
+* [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications [http://hackathonstarter-sahat.rhcloud...](http://hackathonstarter-sahat.rhcloud…)
+* [nodejitsu/node-http-proxy](https://github.com/nodejitsu/node-http-proxy):A full-featured http proxy for node.js http://github.com/nodejitsu/node-http…
+* [auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken):JsonWebToken implementation for node.js http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
+
 ## reference
 
 * [Guides](https://nodejs.org/en/docs/guides/)
@@ -861,3 +866,4 @@ yarn install node-sass
 * [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) <https://twitter.com/nodepractices/>
 * [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
 * [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
+* [awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)⚡ Delightful Node.js packages and resources https://node.cool/

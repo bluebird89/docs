@@ -398,8 +398,9 @@ vue init Plortinus/vue-multiple-pages new-project
 * [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
 * [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址<https://nlrx-wjc.github.io/Learn-Vue-Source-Code/>
 * [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
-* [vuejs/awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
+* [awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
 * [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 <http://hcysun.me/vue-design/>
+* [mvvm](https://github.com/DMQ/mvvm):剖析vue实现原理，自己动手实现mvvm
 
 * [Vue 2.0 的建议学习顺序](https://zhuanlan.zhihu.com/p/23134551)
 * [Vue.js 技术揭秘](https://ustbhuangyi.github.io/vue-analysis/)

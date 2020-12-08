@@ -4,7 +4,7 @@
 
 ## 安装
 
-```
+```sh
 # install the Gatsby CLI globally
 npm install -g gatsby-cli
 

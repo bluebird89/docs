@@ -854,5 +854,6 @@ HP大中华区总裁孙振耀的退休感言
 
 ## 参考
 
-* [geekcompany/ResumeSample](https://github.com/geekcompany/ResumeSample):Resume template for Chinese programmers
-* [yifeikong/reverse-interview-zh](https://github.com/yifeikong/reverse-interview-zh):技术面试最后反问面试官的话
+* [ResumeSample](https://github.com/geekcompany/ResumeSample):Resume template for Chinese programmers
+* [reverse-interview-zh](https://github.com/yifeikong/reverse-interview-zh):技术面试最后反问面试官的话
+- [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)

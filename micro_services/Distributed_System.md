@@ -418,10 +418,11 @@ CREATE TABLE `leaf_alloc` (
 
 ## 参考
 
-* [](https://github.com/theanalyst/awesome-distributed-systems):A curated list to learn about distributed systems
-* [rShetty/awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources <http://rajeevnb.com>
-* [gdamdam/awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
-* [wx-chevalier/Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇
+* [awesome-distributed-systems](https://github.com/theanalyst/awesome-distributed-systems):A curated list to learn about distributed systems
+* [awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources <http://rajeevnb.com>
+* [awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
+* [Parallel & Distributed Operating Systems Group](https://pdos.csail.mit.edu/)
+* [Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇
 * [分布式系统架构经典资料](https://www.infoq.cn/article/2018/05/distributed-system-architecture/)
 * [MIT parallel and distributed Group](https://pdos.csail.mit.edu/)
 * [数据布局服务与局部性管理 with Akkio](https://draveness.me//papers-akkio)

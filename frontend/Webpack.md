@@ -236,6 +236,10 @@ proxyTable: {
 
 ## 模块联合 module federation
 
+## 图书
+
+* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 <http://webpack.wuhaolin.cn>
+
 ## 工具
 
 * [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
@@ -245,14 +249,15 @@ proxyTable: {
 
 ## 参考
 
-* [webpack-contrib/awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
+* [webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
+* [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
   - [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 <https://webpack.docschina.org/>
-* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 <http://webpack.wuhaolin.cn>
 
 * [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
+
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
 * [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
-* [webpack/react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
+* [react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!
 * [入门Webpack](http://www.jianshu.com/p/42e11515c10f)
 * [Webpack for React](http://www.pro-react.com/materials/appendixA/)
 * [vue-cli document](https://vuejs-templates.github.io/webpack/)
@@ -260,5 +265,5 @@ proxyTable: {
 * [webpack：从入门到真实项目配置](https://juejin.im/post/59bb37fa6fb9a00a554f89d2)
 * [petehunt/webpack-howto](https://github.com/petehunt/webpack-howto)
 * [KieSun/webpack-demo](https://github.com/KieSun/webpack-demo):从入门到真实项目配置，每个 commit 基本都对应一小节
-* [wallstreetcn/webpack-and-spa-guide](https://github.com/wallstreetcn/webpack-and-spa-guide):Webpack 4 和单页应用入门
+* [webpack-and-spa-guide](https://github.com/wallstreetcn/webpack-and-spa-guide):Webpack 4 和单页应用入门
 * [ruanyf/webpack-demos](https://github.com/ruanyf/webpack-demos):a collection of simple demos of Webpack

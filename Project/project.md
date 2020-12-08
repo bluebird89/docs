@@ -44,3 +44,7 @@
     + 与客户协作
     + 发散收敛
     + 用户、技术、商业的权衡与达成一致
+
+## 参考
+
+* [project-based-learning](https://github.com/tuvtran/project-based-learning)

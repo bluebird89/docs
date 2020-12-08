@@ -37,4 +37,4 @@ Build cross-platform desktop apps with JavaScript, HTML, and CSS <https://electr
 
 ## 参考
 
-* [sindresorhus/awesome-electron](https://github.com/sindresorhus/awesome-electron):Useful resources for creating apps with Electron
+* [awesome-electron](https://github.com/sindresorhus/awesome-electron):Useful resources for creating apps with Electron

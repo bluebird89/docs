@@ -11,7 +11,10 @@ sudo apt install python-opencv
 
 ## 项目
 
-* [vipstone / faceai](https://github.com/vipstone/faceai):一款入门级的人脸、视频、文字检测以及识别的项目.
+* [faceai](https://github.com/vipstone/faceai):一款入门级的人脸、视频、文字检测以及识别的项目.
+
+* [OpenCV-Python-Tutorial](https://github.com/makelove/OpenCV-Python-Tutorial)
+* [muhsinali/opencv-book](https://github.com/muhsinali/opencv-book):Exercises and solutions from the Practical Python and OpenCV book
 
 ## 工具
 

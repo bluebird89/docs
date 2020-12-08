@@ -1937,14 +1937,14 @@ Swarm: a Docker-native clustering system
 ## 参考
 
 * [官网](https://www.docker.com/) <http://www.docker.org.cn>
-* [manuals](https://docs.docker.com/manuals/)
-* [Docker 架构原理及简单使用](https://www.cnblogs.com/zhangxingeng/p/11236968.html)
-* [veggiemonk/awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [中文文档](https://docker-doc.readthedocs.io/zh_CN/latest/index.html)
 * [中文文档](http://www.dockerinfo.net)
+* [manuals](https://docs.docker.com/manuals/)
+* [awesome-docker](https://github.com/veggiemonk/awesome-docker):A curated list of Docker resources and projects
 * [docker-guide](https://www.robertcooper.me/docker-guide)
 
 * [LXC](https://stgraber.org/2013/12/20/lxc-1-0-blog-post-series/)
 * [每天5分钟玩转Docker容器技术](https://mp.weixin.qq.com/s/7o8QxGydMTUe4Q7Tz46Diw)
 * <https://confluence.atlassian.com/bamboo/getting-started-with-docker-and-bamboo-687213473.html>
 * [Docker](http://blog.csdn.net/erixhao/article/details/72762851)
+* [Docker 架构原理及简单使用](https://www.cnblogs.com/zhangxingeng/p/11236968.html)

@@ -1,12 +1,12 @@
 # Courses
 
-* [prakhar1989/awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
+* [awesome-courses](https://github.com/prakhar1989/awesome-courses):List of awesome university courses for learning Computer Science!
 * [课程图谱](http://coursegraph.com/navigation/)
 
 ## 综合
 
 * [Coursera](https://www.coursera.org/)
-  - [coursera-dl/coursera-dl](https://github.com/coursera-dl/coursera-dl):Script for downloading Coursera.org videos and naming them.
+  - [coursera-dl](https://github.com/coursera-dl/coursera-dl):Script for downloading Coursera.org videos and naming them.
 * [网易公开课](https://study.163.com)
 * [Creativelive](https://www.creativelive.com/)
 * [Masterclass](https://www.masterclass.com/):可以向凯文·史派西学表演，向安妮·莱博维茨学摄影
@@ -57,7 +57,6 @@
 * Udemy
   - [](SaleWebDesign.Com)
 * [Basecamp](https://basecamp.com)
-
 * [Udacity](https://www.udacity.com/)
 * [edX](https://www.edx.org/)
 * [Codecademy](https://www.codecademy.com/)
@@ -82,9 +81,6 @@
 ## 课程
 
 * [微服务架构实战160讲]()
-* [mbinary/USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(<https://mbinary.xyz/ustc-cs/>) <https://mbinary.xyz/ustc-cs/>
-  - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
-  - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
 * [CS106A - Programming Methodology](http://web.stanford.edu/class/cs106a/index.html)
 
 ## Data Scientist

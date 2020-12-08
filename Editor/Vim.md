@@ -680,6 +680,7 @@ To install from command line: vim +PluginInstall +qall
 ## 参考
 
 * [Vim教程](https://vimjc.com/)
+* [awesome-vim](https://github.com/akrawchyk/awesome-vim)The Vim plugin shortlist https://vim.zeef.com/andrew.krawchyk
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
 * [无插件VIM编程技巧](https://coolshell.cn/articles/11312.html)
 * [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim <http://vimwiki.github.io/>

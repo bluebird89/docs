@@ -304,17 +304,17 @@ let languages = [
 ];
 console.table(languages);
 
-console.dir(document)
+console.dir(document);
 ```
 
 ## 工具
 
-* [andrewdavey/immutable-devtools](https://github.com/andrewdavey/immutable-devtools):Chrome Dev Tools custom formatter for Immutable-js values
+* [immutable-devtools](https://github.com/andrewdavey/immutable-devtools):Chrome Dev Tools custom formatter for Immutable-js values
 * [extfans](https://extfans.com/)三方扩展商店
-* [chromedp/chromedp](https://github.com/chromedp/chromedp):A faster, simpler way to drive browsers supporting the Chrome DevTools Protocol.
+* [chromedp](https://github.com/chromedp/chromedp):A faster, simpler way to drive browsers supporting the Chrome DevTools Protocol.
 
 ## 参考
 
-* [ChromeDevTools/awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
 * [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)
-* [ChromeDevTools/devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol
+* [awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
+* [devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol

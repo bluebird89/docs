@@ -199,7 +199,7 @@ match VALUE {
 * [文档](https://kaisery.gitbooks.io/rust-book-chinese/content/)
 * [rust-gentle-intro](https://stevedonovan.github.io/rust-gentle-intro/)
 * [rust-unofficial/patterns](https://github.com/rust-unofficial/patterns):A catalogue of Rust design patterns
-* [rust-unofficial/awesome-rust](https://github.com/rust-unofficial/awesome-rust):A curated list of Rust code and resources.
+* [awesome-rust](https://github.com/rust-unofficial/awesome-rust):A curated list of Rust code and resources.
 * [rust-lang-nursery/futures-rs](https://github.com/rust-lang-nursery/futures-rs):Zero-cost asynchronous programming in Rust <http://rust-lang-nursery.github.io/futures-rs>
 * [flosse/rust-web-framework-comparison](https://github.com/flosse/rust-web-framework-comparison):A comparison of some web frameworks and libs written in Rust
 * [RUST语言的编程范式](https://coolshell.cn/articles/20845.html)

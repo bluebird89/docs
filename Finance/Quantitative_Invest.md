@@ -144,3 +144,8 @@ pip install websocket-client
 ## 人物
 
 * 陈慧隽
+
+## 参考
+
+* [creative-portfolios](https://github.com/iRaul/creative-portfolios)🌀 A curated list of Creative Portfolios https://www.creative-portfolios.com/
+* [awesome-quant](https://github.com/thuquant/awesome-quant):中国的Quant相关资源索引
