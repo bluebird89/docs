@@ -1,4 +1,4 @@
-# [HTTP HyperText Transfer Protocol 超文本传输协议](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
+# [超文本传输协议 HyperText Transfer Protocol HTTP](https://developer.mozilla.org/zh-CN/docs/Web/HTTP)
 
 因特网上应用最为广泛的一种基于 TCP/IP 通信协议来传递数据的网络传输应用层协议。以 ASCII 码传输，建立在 TCP/IP 协议之上的应用层规范
 

@@ -1,7 +1,6 @@
 # UE
 
-* UE
-* IxD(Interaction design):它定义了两个或多个互动的个体之间交流的结构和行为
+* IxD(Interaction design):定义了两个或多个互动的个体之间交流的结构和行为
 * UID(User Interface Design)
   - 输入控件：按钮、文本框、选取框、单选按钮、下拉列表、列表框、开关按钮、
   - 导航控件：面包削导航、滑块、搜索栏、分页、标签、

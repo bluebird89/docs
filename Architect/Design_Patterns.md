@@ -221,7 +221,7 @@
 
 ## 图书
 
-* 《[Head First 设计模式](https://book.douban.com/subject/2243615/)》
+* [Head First Design Patterns](http://www.headfirstlabs.com/books/hfdp/): 解说软件设计模式的一本书
 * [设计模式:可复用面向对象软件的基础 Design Patterns:Elements of Reusable Object-Oriented Software](https://book.douban.com/subject/1052241/)
 * 《大话设计模式》
 * 《设计模式之禅》

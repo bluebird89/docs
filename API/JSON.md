@@ -21,8 +21,8 @@ json_rpc 提交formdata json字符串
 * [google/gson](https://github.com/google/gson):A Java serialization/deserialization library to convert Java Objects into JSON and back
 * [simdjson](https://github.com/lemire/simdjson):Parsing gigabytes of JSON per second <https://arxiv.org/abs/1902.08318>
 * [baidu/amis](https://github.com/baidu/amis):一种基于特定 JSON 格式生成 MIS 页面的工具 <https://baidu.github.io/amis/>
-* [andreazorzetto / yh](https://github.com/andreazorzetto/yh):YAML syntax highlighter to bring colours where only jq could
-* [paularmstrong / normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
+* [yh](https://github.com/andreazorzetto/yh):YAML syntax highlighter to bring colours where only jq could
+* [normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
 * [automerge](https://github.com/automerge/automerge)A JSON-like data structure (a CRDT) that can be modified concurrently by different users, and merged again automatically.
 
 ## 参考

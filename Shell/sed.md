@@ -13,6 +13,11 @@
 sed -n '1,4 p' file.text
 ```
 
+## 版本
+
+* 不同的版本间的sed会有些不同之处，可以想象它们之间在语法上会有差异。具体而言，大部分不支持在编辑命令中间使用标签（:name）或分支命令（b,t），除非是放在那些的末尾
+* GNU sed能让命令更紧凑
+
 ## 语法
 
 * 括号语法
@@ -25,17 +30,10 @@ sed -n '1,4 p' file.text
   - 为了使本文保持行文简洁，在脚本中使用’\t’来表示一个制表符。但是现在大部分版本的sed还不能识别’\t’的简写方式，因此当在命令行中为脚本输入制表符时，应该直接按TAB键来输入制表符而不是输入’\t’
   - 下列的工具软件都支持’\t’做为一个正则表达式的字元来表示制表符：awk、perl、HHsed、sedmod以及GNU sed v3.02.80。
 * 许多版本接受象“/one/ s/RE1/RE2/”这种在’s’前带有空格的命令，但这些版本中有些却不接受这样的命令:“/one/! s/RE1/RE2/”。这时只需要把中间的空格去掉就行
-
-## 版本
-
-* 不同的版本间的sed会有些不同之处，可以想象它们之间在语法上会有差异。具体而言，大部分不支持在编辑命令中间使用标签（:name）或分支命令（b,t），除非是放在那些的末尾
-* GNU sed能让命令更紧凑
-
-## 参数
-
-* -n 是--quiet或者--silent的意思。表明忽略执行过程的输出，只输出结果即可
-* -i:所有改动将在原文件上执行。输出将覆盖原文件
-* -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件
+* 参数
+  - -n 是--quiet或者--silent的意思。表明忽略执行过程的输出，只输出结果即可
+  - -i:所有改动将在原文件上执行。输出将覆盖原文件
+  - -f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件
 
 ## 范围：处理哪些行
 
@@ -529,4 +527,3 @@ sed -n &#39;1!G;h;$p&#39; FILE
 * 《sed & awk》第二版 Dale Dougherty Arnold Robbins （O’Reilly，1997；http://www.ora.com）
 * 《UNIX Text Processing》 Dale Dougherty Tim O’Reilly（Hayden Books，1987）
 * Mike Arst写的教程——压缩包的名称是“U-SEDIT2.ZIP”（在许多站点上都找得到）
-* 正则表达式资料：《Mastering Regular Expressions》作者Jeffrey Friedl（O’reilly 1997） “man regexp”

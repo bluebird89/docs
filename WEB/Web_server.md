@@ -1,4 +1,4 @@
-# Web/Application Servers
+# Web|Application Servers
 
 * WebServers服务器：Web服务器，使用 http协议向Web提供内容
 * ApplicationServers：应用程序服务器，托管并公开业务逻辑和进程

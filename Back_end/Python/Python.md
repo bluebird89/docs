@@ -1,6 +1,6 @@
-# [python/cpython](https://github.com/python/cpython)
+# [cpython](https://github.com/python/cpython)
 
-The Python programming language,Guido van Rossum 在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言
+The Python programming language, Guido van Rossum 在1989年圣诞节期间，为了打发无聊的圣诞节而编写的一个编程语言
 
 * 优点
   - 网络应用，包括网站、后台服务等等
