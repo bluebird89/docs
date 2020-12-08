@@ -1970,6 +1970,7 @@ try {
 * 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
 * 《JavaScript设计模式》
 * 《JavaScript设计模式与开发实践》
+* [Eloquent JavaScript](<http://eloquentjavascript.net/): Marijin Haverbeke关于JavaScript编程的一本书
 
 ## 资源
 

@@ -1,4 +1,4 @@
-# Admin]
+# Admin
 
 ## 概念
 
@@ -103,35 +103,19 @@ npm run serve
 
 ## 扩展
 
-* [apache/mesos](https://github.com/apache/mesos):a cluster manager that provides efficient resource isolation and sharing across distributed applications, or frameworks. It can run Hadoop, Jenkins, Spark, Aurora, and other frameworks on a dynamically shared pool of nodes.
-* [Airflow](https://github.com/apache/incubator-airflow) is a platform to programmatically author, schedule, and monitor workflows.
 * [open-falcon/falcon-plus](https://github.com/open-falcon/falcon-plus)An open-source and enterprise-level monitoring system
 
 ## 框架
 
-* [kahun/awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)：A curated list of amazingly awesome open source sysadmin resources inspired by Awesome PHP.
-* [zuiidea/antd-admin](https://github.com/zuiidea/antd-admin):A admin dashboard application demo built upon Ant Design and Dva.js <http://antd-admin.zuiidea.com>
-* [akveo/blur-admin](https://github.com/akveo/blur-admin):Angular Bootstrap Admin Panel Framework <http://akveo.github.io/blur-admin/>
-* [akveo/ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) <http://akveo.com/ngx-admin/>
-* [PanJiaChen/vue-element-admin](https://github.com/PanJiaChen/vue-element-admin): 🎉 A magical vue admin <http://panjiachen.github.io/vue-element-admin>
-* [withspectrum/spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. <https://spectrum.chat>
-* [vue-bulma/vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 <https://admin.vuebulma.com>
-* [mgbq/nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin，
-* [misterGF/CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js <https://copilot.misterGF.io>
-* [coreui/coreui-free-bootstrap-admin-template](https://github.com/coreui/coreui-free-bootstrap-admin-template):CoreUI is free bootstrap admin template <http://coreui.io>
-* [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
-* [BlackrockDigital/startbootstrap-sb-admin-2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2):A free, open source, Bootstrap admin theme created by Start Bootstrap <https://startbootstrap.com/themes/sb-admin-2/>
-* [elunez/eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 <https://auauz.net>
-* [bopoda/ace](https://github.com/bopoda/ace):Twitter bootstrap 3 admin template <http://ace.jeka.by>
-* [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x <https://adminlte.io>
-* [ColorlibHQ/AdminLTE](https://github.com/ColorlibHQ/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x <https://adminlte.io>
-* [pi-hole / AdminLTE](https://github.com/pi-hole/AdminLTE)
-* [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design <http://marmelab.com/react-admin>
+* [awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)：A curated list of amazingly awesome open source sysadmin resources inspired by Awesome PHP.
+* [blur-admin](https://github.com/akveo/blur-admin):Angular Bootstrap Admin Panel Framework <http://akveo.github.io/blur-admin/>
+* [spectrum](https://github.com/withspectrum/spectrum):Simple, powerful online communities. <https://spectrum.chat>
+* [coreui-free-bootstrap-admin-template](https://github.com/coreui/coreui-free-bootstrap-admin-template):CoreUI is free bootstrap admin template <http://coreui.io>
+* [eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 <https://auauz.net>
 * [](https://github.com/puikinsh/gentelella)
 * [d2-projects/d2-admin](https://github.com/d2-projects/d2-admin):🌈 An elegant dashboard <https://d2admin.fairyever.com>
-* [jqhph/dcat-admin](https://github.com/jqhph/dcat-admin) <http://www.dcatadmin.com/>
-* [iview/iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView <https://iview.github.io/iview-admin>
+* [dcat-admin](https://github.com/jqhph/dcat-admin) <http://www.dcatadmin.com/>
 
-* [yaronn/blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
-* [keen/dashboards](https://github.com/keen/dashboards):Responsive dashboard templates 📊✨ <http://keen.github.io/dashboards/>
-* [creativetimofficial/material-dashboard](https://github.com/creativetimofficial/material-dashboard):Material Dashboard - Open Source Bootstrap 4 Material Design Admin <https://demos.creative-tim.com/material-dashboard/examples/dashboard.html>
+* [blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript
+* [dashboards](https://github.com/keen/dashboards):Responsive dashboard templates 📊✨ <http://keen.github.io/dashboards/>
+* [material-dashboard](https://github.com/creativetimofficial/material-dashboard):Material Dashboard - Open Source Bootstrap 4 Material Design Admin <https://demos.creative-tim.com/material-dashboard/examples/dashboard.html>

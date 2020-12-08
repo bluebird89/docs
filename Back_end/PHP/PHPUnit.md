@@ -1,4 +1,4 @@
-# [phpunit](https://github.com/sebastianbergmann/phpunit)
+# [PHPUnit](https://github.com/sebastianbergmann/phpunit)
 
 The PHP Unit Testing framework. <https://phpunit.de/>
 
@@ -80,40 +80,26 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
 将整个场景设置成某个已知的状态，并在测试结束后将其复原到初始状态。这个已知的状态称为测试的 基境(fixture)
 
 * 基境(fixture)是对开始执行某个测试时应用程序和数据库所处初始状态的描述
-
 * 运行某个测试方法前，会调用一个名叫 setUp() 的模板方法。setUp() 是创建测试所用对象的地方。
-
 * 当测试方法运行结束后，不管是成功还是失败，都会调用另外一个名叫 tearDown() 的模板方法。tearDown() 是清理测试所用对象的地方。
-
 * setUpBeforeClass() 与 tearDownAfterClass() 模板方法将分别在测试用例类的第一个测试运行之前和测试用例类的最后一个测试运行之后调用
-
 * 只有在 setUp() 中分配了诸如文件或套接字之类的外部资源时才需要实现 tearDown()
-
 * 如果 setUp() 中只创建纯 PHP 对象，通常可以略过 tearDown()。不过，如果在 setUp() 中创建了大量对象，可能想要在 tearDown() 中 unset() 指向这些对象的变量，这样它们就可以被垃圾回收机制回收掉。对测试用例对象的垃圾回收动作则是不可预知的。
-
 * 基境共享:在测试之间共享基境的需求都源于某个未解决的设计问题。一个有实际意义的例子是数据库连接：只登录数据库一次，然后重用此连接，而不是每个测试都建立一个新的数据库连接。这样能加快测试的运行。
-
 * 会降低测试的价值。潜在的设计问题是对象之间并非松散耦合。如果解决掉潜在的设计问题并使用桩件(stub)来编写测试，就能达成更好的结果，而不是在测试之间产生运行时依赖并错过改进设计的机会。
-
 * 全局状态:使用单件(singleton)的代码很难测试,使用全局变量的代码也一样。通常情况下，欲测代码和全局变量之间会强烈耦合，并且其创建无法控制。另外一个问题是，一个测试对全局变量的改变可能会破坏另外一个测试。
-
   - 全局变量 $foo = 'bar'; 实际上是存储为 $GLOBALS['foo'] = 'bar'; 的。
   - ``$GLOBALS``这个变量是一种被称为*超全局*变量的变量。
   - 超全局变量是一种在任何变量作用域中都总是可用的内建变量。
   - 在函数或者方法的变量作用域中，要访问全局变量 $foo，可以直接访问 $GLOBALS['foo']，或者用 global $foo; 来创建一个引用全局变量的局部变量。
   - 类的静态属性也是一种全局状态
-
 * 组织测试
-
   - 文件系统来编排测试套件:所有测试用例源文件放在一个测试目录中
     - 通过对测试目录进行递归遍历，PHPUnit 能自动发现并运行测试 `phpunit --bootstrap src/autoload.php tests`,
     - `phpunit --bootstrap src/autoload.php tests/CurrencyTest` 单个文件
   - 用 XML 配置来编排测试套件
-
 * 未完成的测试与跳过的测试
-
 * 数据库测试:DbUnit 扩展大大简化了为测试设置数据库的操作，并且可以在对数据执行了一系列操作之后验证数据库的内容,支持 MySQL、PostgreSQL、Oracle 和 SQLite。通过集成 Zend Framework 或 Doctrine 2，也可以访问其他数据库系统，比如 IBM DB2 或者 Microsoft SQL Server。
-
   - 数据库交互建立和维护都很复杂。对数据库进行测试时，需要考虑以下这些变数：
     + 数据库和表
     + 向表中插入测试所需要的行
@@ -121,7 +107,6 @@ phpunit -c phpunit.xml --testsuite=Unit  # 指定套件
     + 每个新测试都要清理数据库
       -　保持每个测试所使用的数据量较小并且尽可能用非数据库测试来对代码进行测试，即使很大的测试套件也能轻松在一分钟内跑完。
   - todo
-
 * 测试替身
 
 ## 工具

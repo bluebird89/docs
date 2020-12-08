@@ -1,4 +1,4 @@
-# CNN(Convolutional Neural Networks)
+# Convolutional Neural Networks CNN
 
 ## 工具
 

@@ -1,4 +1,4 @@
-# [cayleygraph/cayley](https://github.com/cayleygraph/cayley)
+# [cayley](https://github.com/cayleygraph/cayley)
 
 An open-source graph database
 

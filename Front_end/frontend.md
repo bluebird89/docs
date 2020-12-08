@@ -898,6 +898,10 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 
+* [前端开发规范手册](http://zhibimo.com/read/Ashu/front-end-style-guide/index.html)
+* [doyoe/html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
+- [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
+
 * [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 * [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 * [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
