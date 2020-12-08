@@ -183,11 +183,11 @@ server {
         // 匿名函数
         function () {
             return new appcomponentsProfiler();
-        }，
-
-        function () {
-            return Yii::$app->getModule('user');
         },
+
+        // function () {
+        //     return Yii::$app->getModule('user');
+        // },
         #  log 组件一直被加载
         'components' => [
             'log' => [
@@ -264,7 +264,6 @@ server {
 
     'timeZone' => 'America/Los_Angeles',
     'extensions' => [
-    [
         'name' => 'extension name',
         'version' => 'version number',
         'bootstrap' => 'BootstrapClassName',  // 可选配，可为配置数组
@@ -1217,49 +1216,29 @@ $compontent->on($eventName, $handler);
 ## Extension
 
 * 随时可拿来使用的， 并可重发布的软件包
-
 * 创建
-
   - 按照 Composer package 的条款创建扩展
   - 包名 myname/yii2-mywidget
   - 包类型  yii2-extension
   - 依赖: 肯定有 yiisoft/yii2
-
-* [yiisoft / yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
-
-* [yiisoft/yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 <http://www.yiiframework.com>
-
+* [yii2-gii](https://github.com/yiisoft/yii2-gii):Yii 2 Gii Extension
+* [yii2-debug](https://github.com/yiisoft/yii2-debug):Debug Extension for Yii 2 <http://www.yiiframework.com>
 * [yii2-httpclient](https://github.com/yiisoft/yii2-httpclient)
-
 * [yii2-authclient](https://github.com/yiisoft/yii2-authclient)
-
 * [yii2-queue](https://github.com/yiisoft/yii2-queue)
-
 * [yii2-coding-standards](https://github.com/yiisoft/yii2-coding-standards)
-
 * [yii2-collection](https://github.com/yiisoft/yii2-collection)
-
 * [yii2-redis](https://github.com/yiisoft/yii2-redis)
-
 * [yii2-bootstrap](https://github.com/yiisoft/yii2-bootstrap)
-
 * [yii2-shell](https://github.com/yiisoft/yii2-shell)
-
 * [yii2-bootstrap4](https://github.com/yiisoft/yii2-bootstrap4)
-
-* [yiisoft/log](https://github.com/yiisoft/log)
-
+* [log](https://github.com/yiisoft/log)
 * [yii2-elasticsearch](https://github.com/yiisoft/yii2-elasticsearch)
-
-* [yiisoft / yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. <http://www.yiiframework.com>
-
-* [yiisoft/yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
-
-* [2amigos/yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
-
+* [yii2-sphinx](https://github.com/yiisoft/yii2-sphinx):Yii 2 Sphinx extension. <http://www.yiiframework.com>
+* [yii2-jui](https://github.com/yiisoft/yii2-jui):Yii 2 JQuery UI extension.
+* [yii2-file-upload-widget](https://github.com/2amigos/yii2-file-upload-widget):BlueImp File Upload Widget for Yii2
 * [yii2-ace-admin](https://github.com/myloveGy/yii2-ace-admin) `composer require dmstr/yii2-adminlte-asset`
-
-* [yiisoft / yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 <https://www.yiiframework.com/>
+* [yii2-docker](https://github.com/yiisoft/yii2-docker):Official Docker images suitable for Yii 2.0 <https://www.yiiframework.com/>
 
 ```sh
 composer require --prefer-dist yiisoft/yii2-sphinx
@@ -1273,39 +1252,31 @@ composer require --prefer-dist yiisoft/yii2-sphinx
 
 ## Yii3
 
-* [yiisoft / yii-dev-tool](https://github.com/yiisoft/yii-dev-tool):Development environment for Yii 3 packages <https://www.yiiframework.com/>
-* [yiisoft / docs](https://github.com/yiisoft/docs):Various Yii 3.0 related documentation <http://www.yiiframework.com>
+* [yii-dev-tool](https://github.com/yiisoft/yii-dev-tool):Development environment for Yii 3 packages <https://www.yiiframework.com/>
+* [docs](https://github.com/yiisoft/docs):Various Yii 3.0 related documentation <http://www.yiiframework.com>
 
 ## 项目
 
-* [ jianyan74 /
-  rageframe2 ](https://github.com/jianyan74/rageframe2):一个基于Yii2高级框架的快速开发应用引擎 www.rageframe.com
-* [yiisoft/yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template <http://www.yiiframework.com>
-* [yiisoft/yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template <http://www.yiiframework.com>
-* [fecshop/yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 <http://www.fecshop.com>
-* [EleTeam/Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
-* [changchang700/yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
-* [yii2-starter-kit/yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit <http://yii2-starter-kit.terentev.net>
-* [TIGERB/vue-in-yii2](https://github.com/TIGERB/vue-in-yii2):a whole framework which use vuejs in frontend and light-yii2 in backend
+* [rageframe2](https://github.com/jianyan74/rageframe2):一个基于Yii2高级框架的快速开发应用引擎 www.rageframe.com
+* [yii2-app-basic](https://github.com/yiisoft/yii2-app-basic):Yii 2.0 Basic Application Template <http://www.yiiframework.com>
+* [yii2-app-advanced](https://github.com/yiisoft/yii2-app-advanced):Yii 2.0 Advanced Application Template <http://www.yiiframework.com>
+* [yii2_fecshop](https://github.com/fecshop/yii2_fecshop):yii2 ( PHP ) fecshop core code used for ecommerce shop 多语言多货币多入口的开源电商 B2C 商城，支持移动端vue, app, html5 <http://www.fecshop.com>
+* [Shop-PHP-Yii2](https://github.com/EleTeam/Shop-PHP-Yii2):EleTeam开源项目-电商全套解决方案之PHP版-Shop-for-PHP-Yii2。一个类似京东/天猫/淘宝的商城，有对应的APP支持，由EleTeam团队维护！
+* [yii2cms](https://github.com/changchang700/yii2cms):一款和layui搭配的后台管理cms，集成了权限、用户、配置等常用功能，你可以在这些基础上修改。
+* [yii2-starter-kit](https://github.com/yii2-starter-kit/yii2-starter-kit):Yii2 Starter Kit <http://yii2-starter-kit.terentev.net>
+* [vue-in-yii2](https://github.com/TIGERB/vue-in-yii2):a whole framework which use vuejs in frontend and light-yii2 in backend
 
 ## 参考
 
-* [yiisoft/yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
-
+* [yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 * [深入理解 Yii2.0](http://www.digpage.com/index.html) <https://www.kancloud.cn/kancloud/yii-in-depth>
-
-* [CraryPrimitiveMan/yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
-
-* [CraryPrimitiveMan/OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+* [yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。
+* [OnlineCourses](https://github.com/CraryPrimitiveMan/OnlineCourses):An online courses website based on yii2
+* [awesome-yii2](https://github.com/forecho/awesome-yii2)
 
 * [多语言版本切换](https://blog.csdn.net/u012979009/article/details/51697969)
-
 * [RESTful API 快速搭建教程](https://www.yiichina.com/tutorial/1606)
-
 * [RESTful API 认证教程](https://www.yiichina.com/tutorial/1770)
-
 * [csrf 验证原理分析及 token 缓存解决方案](https://www.yiichina.com/code/1695)
-
 * [Yii Tutorial](https://www.tutorialspoint.com/yii/index.htm)
-
 * [Yii框架](https://blog.csdn.net/u012979009/article/category/6202463/2)

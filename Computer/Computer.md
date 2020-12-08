@@ -214,20 +214,24 @@
 
 * [哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
+* [computer-science](https://github.com/ossu/computer-science) 🎓 Path to a free self-taught education in Computer Science!
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
-* [CyC2018/CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
+* [CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
 * [SJTU-Courses](https://github.com/CoolPhilChen/SJTU-Courses/):上海交通大学课程资料分享
 * [sjtu-se-courseware/sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
 * [REKCARC-TSC-UHT](https://github.com/PKUanonym/REKCARC-TSC-UHT):清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University <https://rekcarc-tsc-uht.readthedocs.io/>
-* [USTC-Resource/USTC-CS-Courses-Resource](https://github.com/USTC-Resource/USTC-Course):❤️中国科学技术大学计算机学院课程资源 <https://mbinary.coding.me/ustc-cs/>
-* [tongtzeho / PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
-* [wxwmd/HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
-* [InterviewMap/CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. <https://yuchengkai.cn/docs/zh/frontend/>
+* [USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(<https://mbinary.xyz/ustc-cs/>) <https://mbinary.xyz/ustc-cs/>
+  - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
+  - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
+* [PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
+* [HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
+* [CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. <https://yuchengkai.cn/docs/zh/frontend/>
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
-* [1c7/crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)<https://www.bilibili.com/video/av21376839/>
+* [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)<https://www.bilibili.com/video/av21376839/>
 * [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
+* [cs-video-courses](https://github.com/Developer-Y/cs-video-courses):List of Computer Science courses with video lectures.
 
 * 专业课代号 408 的计算机基础综合。这门专业课包含：数据结构、计算机组成原理、计算机网路、操作系统
   - 理论知识不一定马上能用于项目上，但当与人讨论起某个技术问题时能够知道它深层次的原因，看问题的角度会更加全面和系统
@@ -266,12 +270,13 @@
 * Mozilla Developer Network
 * CodeHS
 * Aquent Gymnasium
-* [Parallel & Distributed Operating Systems Group](https://pdos.csail.mit.edu/)
+* [computer-science-in-javascript](https://github.com/humanwhocodes/computer-science-in-javascript)Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript. http://www.nczonline.net/
 * [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad 上学习 swift 的游戏
 * [scratch](https://scratch.mit.edu/)
-* [ianw / bottomupcs](https://github.com/ianw/bottomupcs):Bottom Up Computer Science <http://www.bottomupcs.com>
-* [wolverinn / Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
+* [bottomupcs](https://github.com/ianw/bottomupcs):Bottom Up Computer Science <http://www.bottomupcs.com>
+* [Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
+* [coding-interview-university](https://github.com/jwasham/coding-interview-university)A complete computer science study plan to become a software engineer.
 * [Introduction: A Guide To The Tech Tree](https://github.com/github/archive-program/blob/master/TheTechTree.md)
 * [CPU 缓存](https://coolshell.cn/articles/20793.html)
 

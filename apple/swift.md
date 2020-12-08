@@ -24,3 +24,4 @@ The Swift Programming Language <https://swift.org/>
 * [jaywcjlove/swift-tutorial](https://github.com/jaywcjlove/swift-tutorial):Swift入门教程、读书笔记
 * [matteocrippa/awesome-swift](https://github.com/matteocrippa/awesome-swift):A collaborative list of awesome Swift libraries and resources. Feel free to contribute!
 * [SwiftGGTeam/the-swift-programming-language-in-chinese](https://github.com/SwiftGGTeam/the-swift-programming-language-in-chinese):中文版 Apple 官方 Swift 教程《The Swift Programming Language》 <http://gg.swiftguide.cn>
+* [swift-algorithm-club](https://github.com/raywenderlich/swift-algorithm-club)Algorithms and data structures in Swift, with explanations!

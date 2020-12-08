@@ -173,8 +173,8 @@ Warning: "continue" targeting switch is equivalent to
 
 ## 参考
 
-* [Documentation](https://symfony.com/doc/current/index.html)
-* [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation <https://symfony.com/doc>
+* [symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation <https://symfony.com/doc>
+* [awesome-symfony](https://github.com/sitepoint-editors/awesome-symfony):A list of awesome Symfony bundles, utilities and resources.
 * [symfonycasts](https://symfonycasts.com/)
 * [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
 * [教程](http://www.newlifeclan.com/)

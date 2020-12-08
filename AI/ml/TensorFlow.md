@@ -86,7 +86,7 @@ deactivate
 ## 参考
 
 * [TensorFlow 官方文档中文版](http://wiki.jikexueyuan.com/project/tensorflow-zh/)
-* [vahidk/EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
+* [EffectiveTensorflow](https://github.com/vahidk/EffectiveTensorflow):TensorFlow tutorials and best practices. https://twitter.com/VahidK
 * [xitu/tensorflow-docs](https://github.com/xitu/tensorflow-docs):TensorFlow 最新官方文档中文版 V1.10 https://tensorflow.juejin.im
 * [apachecn/learning-tf-zh](https://github.com/apachecn/learning-tf-zh):📖 [译] TensorFlow 学习指南 https://legacy.gitbook.com/book/wizardforcel/learning-tf/details
 * [tensorflow/tensor2tensor](https://github.com/tensorflow/tensor2tensor)：Library of deep learning models and datasets designed to make deep learning more accessible and accelerate ML research.

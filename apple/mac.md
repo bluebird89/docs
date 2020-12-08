@@ -32,7 +32,7 @@
 * 设置未收录开发者应用`sudo spctl --master-disable`
 * 参考
   - [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-  - [jaywcjlove/awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+  - [awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
   - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
   - [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
   - [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
@@ -910,6 +910,9 @@ brew switch icu4c 62.1
 * [Docker-OSX](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 * [quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
 * [sshpass](https://wsgzao.github.io/post/sshpass/)
+* [darwin-xnu](https://github.com/apple/darwin-xnu)The Darwin Kernel (mirror) <https://opensource.apple.com/>
+  - XNU，实际上是“XNU is Not Unix（是XNU，不是Unix）”的缩写，属于macOS（包括以往全部版本）以及iOS所使用的类Unix内核。通过公开内核代码，苹果公司将帮助开发人员更轻松地理解其设备与更高软件层同内核之间的协作原理。
+  - 其源代码基于苹果公共源许可（ Apple Public Source License ）2.0，这其实是一项相当严格的许可; 开发人员可能需要查看其详细信息，而后再有根据地将此次发布的内核代码引入自有项目
 
 ## 参考
 

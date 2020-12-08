@@ -90,10 +90,10 @@
 
 ## 参考
 
-* [Tencent/VasSonic](https://github.com/Tencent/VasSonic)a lightweight and high-performance Hybrid framework developed by tencent VAS team, which is intended to speed up the first screen of websites working on Android and iOS platform.
-* [Bilibili/ijkplayer](https://github.com/Bilibili/ijkplayer)Android/iOS video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.
-* [airbnb/lottie-android](https://github.com/airbnb/lottie-android):Render After Effects animations natively on Android and iOS, Web, and React Native <http://airbnb.io/lottie/>
-* [airbnb/lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations <http://airbnb.io/lottie/>
+* [VasSonic](https://github.com/Tencent/VasSonic)a lightweight and high-performance Hybrid framework developed by tencent VAS team, which is intended to speed up the first screen of websites working on Android and iOS platform.
+* [ijkplayer](https://github.com/Bilibili/ijkplayer)Android/iOS video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.
+* [lottie-android](https://github.com/airbnb/lottie-android):Render After Effects animations natively on Android and iOS, Web, and React Native <http://airbnb.io/lottie/>
+* [lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations <http://airbnb.io/lottie/>
 * [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
 * [RubyLouvre/mobileHack](https://github.com/RubyLouvre/mobileHack):移动端上遇到的各种坑
 * [](https://github.com/tauri-apps/tauri):Build smaller, faster, and more secure desktop applications with a web frontend.<https://tauri.studio/>

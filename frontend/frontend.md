@@ -873,7 +873,6 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
   - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. <http://foundation.zurb.com>
 * [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
-* [alibaba/ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% <https://alibaba.github.io/ice/>
 * [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS <https://getmdl.io>
 * [Munter/subfont](https://github.com/Munter/subfont):Command line tool to optimize your webfont loading. Aggressive subsetting based on your font use, self-hosting of Google fonts and preloading
 * [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
@@ -884,24 +883,26 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * 富文本
   - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. <https://ckeditor.comv>
 * [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. <https://godspen.ymm56.com>
-* [Polymer/polymer](https://github.com/Polymer/polymer) Our original Web Component library. <https://polymer-library.polymer-project.org/>
+* [polymer](https://github.com/Polymer/polymer) Our original Web Component library. <https://polymer-library.polymer-project.org/>
 * [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components <https://lit-element.polymer-project.org>
 
 ## 参考
 
 * [前端工程师技能图谱](https://github.com/TeamStuQ/skill-map/blob/master/data/map-FrontEndEngineer.md)
-* [KieSun/Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
-* [dwqs/blog](https://github.com/dwqs/blog)
-* [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
-* [thedaviddias/Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers <https://frontendchecklist.io>
+* [Front-end-knowledge](https://github.com/KieSun/Front-end-knowledge):前端知识集锦
+* [fks](https://github.com/JacksonTian/fks) 前端技能汇总 Frontend Knowledge Structure http://html5ify.com/fks/
+* [front-end-guide](https://github.com/grab/front-end-guide)📚 Study guide and introduction to the modern front end stack.
+* [Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers <https://frontendchecklist.io>
 * [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
-* [dypsilon/frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
+* [frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 
 * [前端开发规范手册](http://zhibimo.com/read/Ashu/front-end-style-guide/index.html)
 * [doyoe/html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
 - [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
 
+* [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
+* [dwqs/blog](https://github.com/dwqs/blog)
 * [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 * [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 * [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
