@@ -6,7 +6,7 @@
 * 在模型上找到综合的设计
 * 不断与领域专家合作，改进应用程序模型并解决与领域相关的问题
 
-## 为什么需要域驱动设计（DDD）
+## 为什么需要域驱动设计
 
 * 映射领域
 * 降低复杂性
@@ -17,7 +17,7 @@
 * 上下文集中
 * 通用语言
 
-## 通用语言（UL）
+## 通用语言 UL
 
 * 特定域的开发人员和用户使用的通用语言，通过该语言可以轻松解释领域。
 * 通用语言必须非常清晰，以便将所有团队成员处于同一水平线上，并以机器可以理解的方式进行翻译
@@ -361,7 +361,7 @@ public class OrderCreatedEvent extends OrderEvent {
   - 物联网以及软件定义世界的趋势，改变了商业软件的规则。后台进程必须能够响应边缘事件，还必须能够向边缘进程和设备实时发送新指令。自动化工作始于捕获任务。
   - 希望你现在可以理解这一点——代理是许多领域的一等公民，是领域对象发展的极致。
 
-## CQRS 命令查询的责任分离 Command Query Responsibility Segregation
+## 命令查询的责任分离 Command Query Responsibility Segregation CQRS
 
 ## 和微服务什么关系
 
@@ -382,6 +382,7 @@ public class OrderCreatedEvent extends OrderEvent {
 * [jivejdon](https://github.com/banq/jivejdon):Jivejdon is a Domain Driven Design appication with CQRS/ES/Clean/Hexagonal architecture
 * [freedom](https://github.com/8treenet/freedom):Freedom是一个基于六边形架构的框架，可以支撑充血的领域模型范式
 * [php-ddd-example](https://github.com/CodelyTV/php-ddd-example):🐘🎯 Hexagonal Architecture + DDD + CQRS in PHP using Symfony 5 https://pro.codely.tv/library/ddd-en-php
+* [ddd-starter-modelling-process](https://github.com/ddd-crew/ddd-starter-modelling-process):If you're new to DDD and not sure where to start, this process will guide you step-by-step
 
 ## 图书
 
@@ -398,9 +399,8 @@ public class OrderCreatedEvent extends OrderEvent {
 
 ## 参考
 
-* [citerus/dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)
-* [heynickc/awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
-* [ddd-starter-modelling-process](https://github.com/ddd-crew/ddd-starter-modelling-process):If you're new to DDD and not sure where to start, this process will guide you step-by-step
+* [dddsample-core](https://github.com/citerus/dddsample-core):This is the new home of the original DDD Sample app (previously hosted at sf.net)
+* [awesome-ddd](https://github.com/heynickc/awesome-ddd):A curated list of Domain-Driven Design (DDD), Command Query Responsibility Segregation (CQRS), Event Sourcing, and Event Storming resources
 * [free-ddd-learning-resources](https://github.com/ddd-crew/free-ddd-learning-resources):A collection of resources for learning DDD. All are free to access.
 * [](https://github.com/valignatev/ddd-dynamic):Domain Driven Design in Python, Ruby and other dynamic languages resources
 

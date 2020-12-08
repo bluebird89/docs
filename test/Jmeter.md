@@ -1,4 +1,4 @@
-# [apache/jmeter](https://github.com/apache/jmeter)
+# [jmeter](https://github.com/apache/jmeter)
 
 a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator. Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，最初被设计用于Web应用测试，但后来扩展到其他测试领域。
 

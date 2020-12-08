@@ -1,4 +1,4 @@
-# [symfony](https://github.com/symfony/symfony)
+# [Symfony](https://github.com/symfony/symfony)
 
 The Symfony PHP framework <http://symfony.com>. Fabien Potencier
 
@@ -139,47 +139,42 @@ Warning: "continue" targeting switch is equivalent to
   "break". Did you mean to use "continue 2"
 ```
 
+## [bundles](http://knpbundles.com/)
+
+* [XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
+* [maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle <https://symfony.com/>
+* [security-bundle](<https://github.com/symfony/security-bundle):The> security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. <https://symfony.com/security-bundle>
+* [framework-bundle](https://github.com/symfony/framework-bundle):The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more. <https://symfony.com/framework-bundle>
+* [EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
+
+## Compontent
+
+* [http-kernel](https://github.com/symfony/http-kernel):The HttpKernel component provides a structured process for converting a Request into a Response. <https://symfony.com/http-kernel>
+* [routing](https://github.com/symfony/routing):The Routing component maps an HTTP request to a set of configuration variables. <https://symfony.com/routing>
+* [contracts](https://github.com/symfony/contracts):A set of abstractions extracted out of the Symfony components <https://symfony.com>
+* [dom-crawler](https://github.com/symfony/dom-crawler):The DomCrawler component eases DOM navigation for HTML and XML documents. <https://symfony.com/dom-crawler>
+* [config](https://github.com/symfony/config):The Config component helps you find, load, combine, autofill and validate configuration values of any kind, whatever their source may be (YAML, XML, INI files, or for instance a database). <https://symfony.com/config>
+* [dependency-injection](https://github.com/symfony/dependency-injection):The DependencyInjection component allows you to standardize and centralize the way objects are constructed in your application. <https://symfony.com/dependency-injection>
+* [console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. <https://symfony.com/console>
+* [http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. <https://symfony.com/http-foundation>
+* [dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), `$_ENV`, or `$_SERVER`. <https://symfony.com/dotenv>
+* [security](https://github.com/symfony/security):The Security component provides a complete security system for your web application. <https://symfony.com/components/Security>
+* [var-dumper](https://github.com/symfony/var-dumper): The VarDumper component provides mechanisms for walking through any arbitrary PHP variable. It provides a better dump() function that you can use instead of var_dump(). <https://symfony.com/var-dumper>
+
 ## 图书
 
 * [The Definitive Guide to symfony](https://github.com/Apress/def-guide-to-symfony) <http://www.apress.com/9781590597866>
 
 ## 工具
 
-* Debug
-  - Debug bar
-* [bundles 仓库](http://knpbundles.com/)
-  - [jonaswouters/XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
-  - [symfony/maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle <https://symfony.com/>
-  - [symfony/security-bundle(<https://github.com/symfony/security-bundle):The> security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. <https://symfony.com/security-bundle>
-  - [symfony/framework-bundle](https://github.com/symfony/framework-bundle):The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more. <https://symfony.com/framework-bundle>
-* Compontent
-  - [symfony/http-kernel](https://github.com/symfony/http-kernel):The HttpKernel component provides a structured process for converting a Request into a Response. <https://symfony.com/http-kernel>
-  - [symfony/routing](https://github.com/symfony/routing):The Routing component maps an HTTP request to a set of configuration variables. <https://symfony.com/routing>
-  - [symfony/contracts](https://github.com/symfony/contracts):A set of abstractions extracted out of the Symfony components <https://symfony.com>
-  - [symfony/dom-crawler](https://github.com/symfony/dom-crawler):The DomCrawler component eases DOM navigation for HTML and XML documents. <https://symfony.com/dom-crawler>
-  - [symfony/config](https://github.com/symfony/config):The Config component helps you find, load, combine, autofill and validate configuration values of any kind, whatever their source may be (YAML, XML, INI files, or for instance a database). <https://symfony.com/config>
-  - [symfony/dependency-injection](https://github.com/symfony/dependency-injection):The DependencyInjection component allows you to standardize and centralize the way objects are constructed in your application. <https://symfony.com/dependency-injection>
-* 扩展
-  - [symfony/console](https://github.com/symfony/console):The Console component eases the creation of beautiful and testable command line interfaces. <https://symfony.com/console>
-  - [symfony/http-foundation](https://github.com/symfony/http-foundation):The HttpFoundation component defines an object-oriented layer for the HTTP specification. <https://symfony.com/http-foundation>
-  - [symfony/dotenv](https://github.com/symfony/dotenv):Symfony Dotenv parses .env files to make environment variables stored in them accessible via getenv(), `$_ENV`, or `$_SERVER`. <https://symfony.com/dotenv>
-* Admin
-  - [EasyCorp/EasyAdminBundle](https://github.com/EasyCorp/EasyAdminBundle):The new (and simple) admin generator for Symfony applications.
-* Framework
-  - [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution <http://symfony.com>
-* security
-  - [symfony/security](https://github.com/symfony/security):The Security component provides a complete security system for your web application. <https://symfony.com/components/Security>
-* DEMO
-  - [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application <https://symfony.com/>
-* Frontend
-  - [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
+* [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution <http://symfony.com>
+* [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application <https://symfony.com/>
+* [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
 
 ## 参考
 
 * [Documentation](https://symfony.com/doc/current/index.html)
 * [symfony/symfony-docs](https://github.com/symfony/symfony-docs):The Symfony documentation <https://symfony.com/doc>
-* [中文文档](http://symfonychina.com/doc/current/index.html)
 * [symfonycasts](https://symfonycasts.com/)
 * [洪大师带你解读Symfony 2框架](https://www.imooc.com/learn/244)
-* Blog
-  - [教程](http://www.newlifeclan.com/)
+* [教程](http://www.newlifeclan.com/)

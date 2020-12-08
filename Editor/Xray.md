@@ -1,1 +1,3 @@
-# [Xray](https://github.com/atom/xray):An experimental next-generation Electron-based text editor
+# [Xray](https://github.com/atom/xray)
+
+An experimental next-generation Electron-based text editor

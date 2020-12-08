@@ -69,5 +69,5 @@
 ## Tool
 
 * [justjavac/ReplaceGoogleCDN](https://github.com/justjavac/ReplaceGoogleCDN):♋️ 一个 Chrome 插件：将 Google CDN 替换为国内的
-* [cdnjs / cdnjs](https://github.com/cdnjs/cdnjs):The #1 free and open source CDN built to make life easier for developers. <https://cdnjs.com>
+* [cdnjs](https://github.com/cdnjs/cdnjs):The #1 free and open source CDN built to make life easier for developers. <https://cdnjs.com>
 * [staticdn](https://cdn.con.sh/)

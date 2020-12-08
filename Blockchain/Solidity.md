@@ -1,4 +1,4 @@
-# [ethereum/solidity](https://github.com/ethereum/solidity)
+# [solidity](https://github.com/ethereum/solidity)
 
 Solidity, the Contract-Oriented Programming Language <https://solidity.readthedocs.io>
 

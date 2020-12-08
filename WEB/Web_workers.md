@@ -22,7 +22,7 @@ A web worker is a JavaScript program running on a different thread, in parallel 
   - 引用传递
 
 ```js
-worker.postMessage(payload, transferableObjects)
+worker.postMessage(payload, transferableObjects);
 ```
 
 ## 参考

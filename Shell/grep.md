@@ -14,6 +14,7 @@
 
 ```sh
 grep “string” filename
+grep root /etc/passwd
 grep “string” filenameKeyword*
 grep 'Ubuntu' *.txt
 grep “startingKeyword.*endingKeyword” filename

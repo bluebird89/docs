@@ -14,8 +14,6 @@
 
 ## 安装
 
-
-
 ## 工具
 
 * [openshift/installer](https://github.com/openshift/installer):Install an OpenShift cluster

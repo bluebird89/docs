@@ -1,4 +1,4 @@
-# [apple/darwin-xnu](https://github.com/apple/darwin-xnu)
+# [darwin-xnu](https://github.com/apple/darwin-xnu)
 
 The Darwin Kernel (mirror) <https://opensource.apple.com/>
 

@@ -15,6 +15,10 @@
   - Scrum非常突出Self-Orgnization,XP注重强有力的工程实践约束。举个通俗理解Scrum的例子，Scrum:指的是英式橄榄球中一股脑争球这一战术或行为。scrum 即为这样一种方式，大家一拥而上，团队是球员，球是产品目标，人员环环相扣，围绕着产品目标进行工作。这里面多少有点“统筹法”的影子，人员深入协作以达到最优化效果
 * 本质是义无反顾的思考产品的价值，以价值为驱动去思考、设计、开发、协作，让结果能给客户、用户产生价值
 
+## 名词
+
+* Work in Process WIP
+
 ## [开发模型演化](https://mp.weixin.qq.com/s/FtJFtGYu_jA2aBCD2aCUhA)
 
 * 瀑布开发
@@ -881,10 +885,6 @@
 ![Alt text](../_static/gantt_chart.png "Optional title")
 ![Alt text](../_static/daily_update.png "Optional title")
 ![Alt text](../_static/RAG_Report.png "Optional title")
-
-## 名词
-
-* Work in Process WIP
 
 ## 图书
 

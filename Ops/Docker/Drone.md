@@ -1,4 +1,4 @@
-# [drone/drone](https://github.com/drone/drone)
+# [drone](https://github.com/drone/drone)
 
 Drone is a Container-Native, Continuous Delivery Platform https://drone.io
 

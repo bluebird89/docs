@@ -1,4 +1,4 @@
-# [angular/angular.js](https://github.com/angular/angular.js)
+# [angular.js](https://github.com/angular/angular.js)
 
 AngularJS - HTML enhanced for web apps! <https://angularjs.org>
 
@@ -150,3 +150,5 @@ tsconfig.app.json:
 * 升级
   - [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。
   - [ngMigration Forum](https://github.com/angular/ngMigration-Forum/wiki): 是一个社区，聚集了网络上最佳的迁移经验和信息。
+
+* [ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) <http://akveo.com/ngx-admin/>

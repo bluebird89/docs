@@ -1027,8 +1027,8 @@ setup.ilm.overwrite: true
 
 ## 图书
 
-* [ELK Stack权威指南](http://product.china-pub.com/64005)
-* [Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/)
+* [ELK Stack 权威指南](http://product.china-pub.com/64005)
+* [Elasticsearch: The Definitive Guide Elasticsearch 权威指南](https://fuxiaopang.gitbooks.io/learnelasticsearch/) <https://www.elastic.co/guide/index.html> Clinton Cormley和Zachary Tong编写的与Elasticsearch工作的一本指南
 
 ## 工具
 

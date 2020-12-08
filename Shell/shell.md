@@ -1137,6 +1137,7 @@ ccache gcc foo.c
 
 * 《Linux Shell脚本攻略》
 * 《Shell脚本学习指南》
+* [The Linux Command Line](http://linuxcommand.org/tlcl.php): William Shotts关于Linux命令行的一本书
 * Linux命令行与shell脚本编程大全（第3版）
     - [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
 

@@ -24,10 +24,6 @@
 * 娱乐
   - 命令行的MP3播放器:mpg321
 
-## 工具
-
-* [junegunn/fzf](https://github.com/junegunn/fzf):🌸 A command-line fuzzy finder
-
 ## 参考
 
 * [donnemartin/haxor-news](https://github.com/donnemartin/haxor-news):Browse Hacker News like a haxor: A Hacker News command line interface (CLI).

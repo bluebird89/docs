@@ -1797,7 +1797,7 @@ External commands:
 
 ## 图书
 
-* [Progit2](https://github.com/progit/progit2):Pro Git 2nd Edition
+* [Pro Git2](https://github.com/progit/progit2):Pro Git 2nd Edition Scott Chacon和Ben Straub <https://git-scm.com/book/en/v2>
 
 ## 工具
 

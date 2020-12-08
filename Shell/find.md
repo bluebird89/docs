@@ -69,7 +69,7 @@ find / -name *.conf -type f -print | xargs file
 find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
 ```
 
-### [fzf](https://github.com/junegunn/fzf)
+## [fzf](https://github.com/junegunn/fzf)
 
 * 🌸 A command-line fuzzy finder
 * `git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install`
@@ -158,10 +158,4 @@ export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
 # 置fzf内的fd的颜色输出:
 export FZF_DEFAULT_COMMAND="fd --type file --color=always"
 export FZF_DEFAULT_OPTS="--ansi"
-```
-
-## grep
-
-```sh
-grep root /etc/passwd
 ```

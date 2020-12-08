@@ -60,6 +60,14 @@ SAS网站的Eight levels of analytics
 
 Apache Superset is a Data Visualization and Data Exploration Platform  <https://superset.incubator.apache.org/>
 
+## [dash](https://github.com/plotly/dash)
+
+Analytical Web Apps for Python, R, Julia, and Jupyter. No JavaScript Required. <https://plotly.com/dash>
+
+```sh
+pip install dash==1.17.0
+```
+
 ## 教程
 
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)
@@ -107,6 +115,10 @@ Apache Superset is a Data Visualization and Data Exploration Platform  <https://
   - explains Unsupervised Learning really well：<https://towardsdatascience.com/unsupervised-learning-with-python-173c51dc7f03>
   - 无监督学习、有监督学习和强化学习的区别：<https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/>
 * [Mining Social Media](http://socialdata.site/introduction/)
+
+## 图书
+
+* [利用Python进行数据分析](link)
 
 ## 工具
 

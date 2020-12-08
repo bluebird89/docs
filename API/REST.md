@@ -1,4 +1,4 @@
-# REST Representational State Transfer
+# Representational State Transfer REST
 
 * 由 Roy Fielding 在他2000年的博士论文中提出。是HTTP协议（1.0版和1.1版）的主要设计者、Apache服务器软件的作者之一、Apache基金会的第一任主席
 * REST一组架构约束条件和原则。满足这些约束条件和原则的应用程序或设计就是 RESTful

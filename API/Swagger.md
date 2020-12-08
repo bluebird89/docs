@@ -1,4 +1,4 @@
-# [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui)
+# [swagger-ui](https://github.com/swagger-api/swagger-ui)
 
 Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
 

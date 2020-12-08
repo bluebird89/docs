@@ -1,4 +1,4 @@
-# [nuysoft/Mock](https://github.com/nuysoft/Mock)
+# [Mock](https://github.com/nuysoft/Mock)
 
 A simulation data generator http://mockjs.com
 

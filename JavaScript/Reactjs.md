@@ -664,6 +664,7 @@ const combineReducers = reducers => {
 * Hooks
   - [alibaba/hooks](https://github.com/alibaba/hooks):React Hooks Library https://ahooks.js.org/
 * [react-starter-kit](https://github.com/kriasoft/react-starter-kit) React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) https://reactstarter.com/
+* [react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design <http://marmelab.com/react-admin>
 
 ## 参考
 

@@ -76,6 +76,12 @@ npm install bootstrap@3
 * [bootstrapstudi](https://bootstrapstudio.io/)
 * [bootstrap-material-design](https://github.com/FezVrasta/bootstrap-material-design)
 
+* [startbootstrap-sb-admin-2](https://github.com/BlackrockDigital/startbootstrap-sb-admin-2):A free, open source, Bootstrap admin theme created by Start Bootstrap <https://startbootstrap.com/themes/sb-admin-2/>
+* [ace](https://github.com/bopoda/ace):Twitter bootstrap 3 admin template <http://ace.jeka.by>
+* [almasaeed2010/AdminLTE](https://github.com/almasaeed2010/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x <https://adminlte.io>
+* [ColorlibHQ/AdminLTE](https://github.com/ColorlibHQ/AdminLTE):AdminLTE - Free Premium Admin control Panel Theme Based On Bootstrap 3.x <https://adminlte.io>
+* [pi-hole/AdminLTE](https://github.com/pi-hole/AdminLTE)
+
 ## 参考
 
 * [文档](http://getbootstrap.com/)

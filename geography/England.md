@@ -1,4 +1,4 @@
-## 大不列颠及北爱尔兰联合王国 United Kingdom of Great Britain and Northern Ireland
+## 大不列颠及北爱尔兰联合王国 United Kingdom of Great Britain and Northern Ireland UK
 
 * 简称联合王国（United Kingdom）,英格兰、威尔士和苏格兰以及爱尔兰岛东北部的北爱尔兰
 * 从不列颠岛的地形来看，北方多山地而南方多平原，这样的地理结构也是造成后来南北人民性格迥异的原因之一

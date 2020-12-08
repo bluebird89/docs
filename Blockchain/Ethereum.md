@@ -1,4 +1,4 @@
-# [ethereum/go-ethereum](https://github.com/ethereum/go-ethereum)
+# [go-ethereum](https://github.com/ethereum/go-ethereum)
 
 Official Go implementation of the Ethereum protocol <https://geth.ethereum.org>
 
