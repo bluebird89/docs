@@ -1,4 +1,4 @@
-# [airbnb/enzyme](https://github.com/airbnb/enzyme)
+# [enzyme](https://github.com/airbnb/enzyme)
 
 JavaScript Testing utilities for React http://airbnb.io/enzyme/
 

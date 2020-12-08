@@ -1,4 +1,6 @@
-# Perl
+# [Perl](http://www.perl.org/)
+
+Perl 5 is a highly capable, feature-rich programming language with over 30 years of development.
 
 ## Course
 
@@ -10,5 +12,4 @@
 
 ## 参考
 
-* [offical site](http://www.perl.org/):Perl 5 is a highly capable, feature-rich programming language with over 30 years of development.
 * [CPAN](https://www.cpan.org/):Comprehensive Perl Archive Network

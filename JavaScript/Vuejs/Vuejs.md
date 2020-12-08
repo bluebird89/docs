@@ -388,6 +388,10 @@ vue init Plortinus/vue-multiple-pages new-project
 * Admin
   - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin <https://panjiachen.github.io/vue-element-admin>
   - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. <https://taylorchen709.github.io/vue-admin/>
+  - [vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 <https://admin.vuebulma.com>
+  - [CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js <https://copilot.misterGF.io>
+  - [nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin
+  - [iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView <https://iview.github.io/iview-admin>
 
 ## 参考
 

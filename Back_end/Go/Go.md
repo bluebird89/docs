@@ -1,4 +1,4 @@
-# [golang/go](https://github.com/golang/go)
+# [go](https://github.com/golang/go)
 
 The Go programming language <https://golang.org> [中国官网](https://golang.google.cn/)
 

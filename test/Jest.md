@@ -1,4 +1,4 @@
-# [facebook/jest](https://github.com/facebook/jest)
+# [jest](https://github.com/facebook/jest)
 
 Delightful JavaScript Testing. https://jestjs.io/
 

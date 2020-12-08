@@ -1,6 +1,6 @@
-# [rust]
+# [rust](https://www.rust-lang.org)
 
-Empowering everyone to build reliable and efficient software. <https://www.rust-lang.org>
+Empowering everyone to build reliable and efficient software.
 
 * 由 Mozilla 主导开发的通用、编译型编程语言。设计准则为“安全、并发、实用”，支持函数式、并发式、过程式以及面向对象的编程风格。帮助开发者创造高速与安全的应用，同时能享受到现代多核处理器的强大特性
 * Rust 语言原本是 Mozilla 员工 Graydon Hoare 的私人项目，而 Mozilla 于 2009 年开始赞助这个项目，并且在 2010 年首次揭露了它的存在.全新的开源系统编程语言

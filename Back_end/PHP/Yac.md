@@ -1,4 +1,6 @@
-# [Yac](https://github.com/laruence/yac):A fast shared memory user data cache for PHP
+# [Yac](https://github.com/laruence/yac)
+
+A fast shared memory user data cache for PHP
 
 ## 工具
 

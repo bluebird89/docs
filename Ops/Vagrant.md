@@ -337,10 +337,14 @@ sh ./VBoxLinuxAdditions.run
 vagrant up
 ```
 
+## 图书
+
+* [Vagrant Cookbook](https://leanpub.com/vagrantcookbook): Erika Heidi关于创建 Vagrant环境的一本书
+
 ## 工具
 
-* [dotless-de/vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
-* [scourgen/Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
+* [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest):A Vagrant plugin to keep your VirtualBox Guest Additions up to date
+* [Vagrant-PHP-Stack](https://github.com/scourgen/Vagrant-PHP-Stack):A kick-ass Vagrant Stack for PHP developer
 * [puphpet](https://github.com/puphpet/puphpet): Vagrant/Puppet GUI
 
 ## 参考
