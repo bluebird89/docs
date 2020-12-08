@@ -130,9 +130,12 @@ The Open Organization
 * [阿里开源](http://1024.yuque.com/)
 * [Huawei](https://code.opensource.huaweicloud.com/home)
 * [opensource](https://opensource.com/)
+* [Eclipse](https://www.eclipse.org/):The Community for Open
+Innovation and Collaboration
 * <https://opensource.guide/>
 * [Open-source alternatives](https://opensource.builders/):Find open-source alternatives for your favorite apps
 * [Open source](https://www.ibm.com/developerworks/cn/opensource)
 * [Awesome Open Source](https://awesomeopensource.com/):Find Open Source By Searching, Browsing and Combining 7,000 Topics Across 59 Categories And 310,836 Projects
 * [The Open Group](https://www.opengroup.org/)
-* [pingcap / talent-plan](https://github.com/pingcap/talent-plan):open source training courses about distributed database and distributed systemes <https://university.pingcap.com/talent-plan/>
+* [awesomo](https://github.com/lk-geimfari/awesomo) A list of cool open source projects written in C, C++, Clojure, Lisp, Elixir, Erlang, Elm, Golang, Haskell, JavaScript, Lua, OCaml, Python, R, Ruby, Rust, Scala, etc. https://t.me/the_art_of_development
+* [talent-plan](https://github.com/pingcap/talent-plan):open source training courses about distributed database and distributed systemes <https://university.pingcap.com/talent-plan/>

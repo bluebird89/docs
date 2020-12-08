@@ -448,38 +448,38 @@ css3 里面引入的布局模型－弹性盒子模型，旨在通过弹性的方
 
 ## 项目
 
-* [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
-* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api <https://binaryify.github.io/NeteaseCl>…
-* [JonJam/yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
-* [JonJam/react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
-* [taikongfeizhu/webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
-* [duxianwei520/react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
-* [fbsamples/f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. <http://makeitopen.com>
-* [EleTeam/Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
-* [tyroprogrammer/learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
-* [microsoft/TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together.
-* [CarGuo/GSYGithubAPP](https://github.com/CarGuo/GSYGithubApp)
+* [ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
+* [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api <https://binaryify.github.io/NeteaseCl>…
+* [yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
+* [react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
+* [react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
+* [f8app](https://github.com/fbsamples/f8app):Source code of the official F8 app of 2017, powered by React Native and other Facebook open source projects. <http://makeitopen.com>
+* [Shop-React-Native](https://github.com/EleTeam/Shop-React-Native):EleTeam开源项目 - 电商全套解决方案之 React Native 版 - Shop-React-Native。一个类似京东/天猫/淘宝的商城，有对应的服务端支持，由EleTeam团队维护！
+* [learn-react-app](https://github.com/tyroprogrammer/learn-react-app):Application that will help you learn React fundamentals. Install this application locally - there's tutorial, code snippets and exercises. The main objective of this project is to help you get off the ground with React!
+* [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together.
+* [GSYGithubAPP](https://github.com/CarGuo/GSYGithubApp)
+
+## 教程
+
+* [react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 <http://huziketang.com/books/react>
 
 ## 参考
 
 * [React Native的极简手册](http://www.jianshu.com/p/318342e139c7)
-* [reactnativecn/react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
-* [styleguidist/react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide <https://react-styleguidist.js.org/>
-* [wojtekmaj/react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. <http://projects.wojtekmaj.pl/react-li>…
+* [react-native-guide](https://github.com/reactnativecn/react-native-guide):React Native指南汇集了各类react-native学习资源、开源App和组件
+* [react-styleguidist](https://github.com/styleguidist/react-styleguidist):Isolated React component development environment with a living style guide <https://react-styleguidist.js.org/>
+* [react-lifecycle-methods-diagram](https://github.com/wojtekmaj/react-lifecycle-methods-diagram):Interactive React lifecycle methods diagram. <http://projects.wojtekmaj.pl/react-li>…
 * [react-native-elements](https://github.com/react-native-training/react-native-elements):Cross Platform React Native UI Toolkit <https://react-native-training.github>.…
-* [jondot/awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! <http://www.awesome-react-native.com>
-* [enaqx/awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.
+* [awesome-react-native](https://github.com/jondot/awesome-react-native):Awesome React Native components, news, tools, and learning material! <http://www.awesome-react-native.com>
 
-* [fangwei716/30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
-* [reactjs/react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
+* [30-days-of-react-native](https://github.com/fangwei716/30-days-of-react-native)30 days of React Native demos
 * [React 生态系统：从小白到大神](http://blog.csdn.net/gitchat/article/details/77978708)
 
 * [streamich/react-use](https://github.com/streamich/react-use):React Hooks — future of React 👍 react-use <http://streamich.github.io/react-use>
-* [davezuko/react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
-* [kriasoft/react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) <https://reactstarter.com>
-* [adam-golab/react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
-* [kentcdodds/advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
-* [huzidaha/react-naive-book](https://github.com/huzidaha/react-naive-book):开源、免费、专业、简单的 React.js 在线教程 <http://huziketang.com/books/react>
+* [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
+* [react-starter-kit](https://github.com/kriasoft/react-starter-kit):React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) <https://reactstarter.com>
+* [react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
+* [advanced-react-patterns](https://github.com/kentcdodds/advanced-react-patterns):The course material for my advanced react patterns course on Egghead.io
 * [ruanyf/react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
 * [30-seconds/30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less.
 * [React 开发必须知道的 34 个技巧](https://juejin.im/post/5dcb5a80e51d4520db19b906)

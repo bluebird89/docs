@@ -401,6 +401,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [W3C](https://www.w3.org/)
 * [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) <https://solid.mit.edu/>
+* [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2020 https://roadmap.sh/
 
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
 * [What technical details should a programmer of a web application consider before making the site public?](https://softwareengineering.stackexchange.com/questions/46716/what-technical-details-should-a-programmer-of-a-web-application-consider-before/46738#46738)

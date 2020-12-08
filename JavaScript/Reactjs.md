@@ -648,6 +648,7 @@ const combineReducers = reducers => {
 * [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 https://www.gitbook.com/book/kdchang/…
 * [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript https://piotrwitek.github.io/react-redux-typescript-guide/
 * [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
+* [react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
 
 ## UI
 
@@ -670,3 +671,5 @@ const combineReducers = reducers => {
 
 * [Reactjs docs](https://reactjs.org/docs/hello-world.html)
 * [awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks):Awesome React Hooks
+* [react-bits](https://github.com/vasanthk/react-bits)✨ React patterns, techniques, tips and tricks ✨https://vasanthk.gitbooks.io/react-bits
+* [awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.

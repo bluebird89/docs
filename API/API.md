@@ -918,9 +918,10 @@ print dec_message   // Hello World!
 
 ## 参考
 
-* [OAI/OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository <https://openapis.org> 针对 RESTful API 设计在细节层面给出了非常具体的规定，已经成为 RESTful API 设计领域的事实标准
+* [OpenAPI-Specification](https://github.com/OAI/OpenAPI-Specification):The OpenAPI Specification Repository <https://openapis.org> 针对 RESTful API 设计在细节层面给出了非常具体的规定，已经成为 RESTful API 设计领域的事实标准
 * [Google API Design Guide](https://cloud.google.com/apis/design)从云厂商的角度提出许多最佳实践性质的规范与建议，这些原则不仅仅适用于 RESTful API，也适合其他类型API设计。
 * [jsonapi](https://jsonapi.org/format/)
-* [shieldfy/API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
-* [microsoft/api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines
+* [Awesome_APIs](https://github.com/TonnyL/Awesome_APIs)::octocat: A collection of APIs
+* [API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
+* [api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines
 * [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)

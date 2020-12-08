@@ -1304,6 +1304,7 @@ JavaEE/JDBC/Weblogic
 ## 参考
 
 * [Java World](http://www.javaworld.com/)
+* [awesome-java](https://github.com/akullpp/awesome-java) A curated list of awesome frameworks, libraries and software for the Java programming language.
 * [Java SE 技术文档](http://docs.oracle.com/javase/)
 * [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
 * [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 <https://doocs.github.io/advanced-java>

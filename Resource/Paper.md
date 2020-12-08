@@ -1,6 +1,7 @@
 # 论文
 
-* MapReduce: Simplified Data Processing on Large Clusters
+
+## MapReduce: Simplified Data Processing on Large Clusters
 
 ## Google BigTable
 
@@ -12,16 +13,16 @@
 * 方案
   - 同一个key（主键），不同属性，不同时间，会存储一个value。
 
-## 资源
-
-* [zziz/pwc](https://github.com/zziz/pwc):Papers with code. Sorted by stars. Updated weekly.
-* [tpn/pdfs](https://github.com/tpn/pdfs):Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)
-* GFS系统架构
-* MapReduce系统架构
-* BigTable系统架构
-* [USENIX](：https://www.usenix.org/conference/nsdi18/presentation/dalton)
-* [applied-ml](https://github.com/eugeneyan/applied-ml)books Papers & articles of companies sharing their work on applied data science & machine learning.
-
 ## 工具
 
 * [Research Tools](http://tools.kausalflow.com/tools/)
+
+## 资源
+
+* [pwc](https://github.com/zziz/pwc):Papers with code. Sorted by stars. Updated weekly.
+* [pdfs](https://github.com/tpn/pdfs):Technically-oriented PDF Collection (Papers, Specs, Decks, Manuals, etc)
+* GFS系统架构
+* [USENIX](：https://www.usenix.org/conference/nsdi18/presentation/dalton)
+* [applied-ml](https://github.com/eugeneyan/applied-ml)books Papers & articles of companies sharing their work on applied data science & machine learning.
+* [papers-we-love](https://github.com/papers-we-love/papers-we-love)Papers from the computer science community to read and discuss. http://paperswelove.org/
+
