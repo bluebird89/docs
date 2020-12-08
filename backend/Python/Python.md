@@ -1414,7 +1414,6 @@ Namespaces are one honking great idea -- let's do more of those!
 * [jackfrued/Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师
 * [Python 中文学习大本营](http://www.pythondoc.com/)
 * [Yixiaohan/codeparkshare](https://github.com/Yixiaohan/codeparkshare):Python初学者（零基础学习Python、Python入门）书籍、视频、资料、社区推荐
-* [python-guide](https://github.com/kennethreitz/python-guide):Python best practices guidebook, written for Humans. http://docs.python-guide.org
 * [michaelliao/learn-python3](https://github.com/michaelliao/learn-python3): Learn Python 3 Sample Code
 * [Python教程 廖雪峰](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000)
 * [TwoWater/Python](https://github.com/TwoWater/Python):Python 入门教程：【草根学 Python （基于Python3.6）】 https://www.readwithu.com/
@@ -1427,12 +1426,11 @@ Namespaces are one honking great idea -- let's do more of those!
 
 ## 工具
 
-* [faif/python-patterns](https://github.com/faif/python-patterns)A collection of design patterns/idioms in Python
 * [requests/requests](https://github.com/requests/requests)Python HTTP Requests for Humans™ ✨🍰✨ <http://python-requests.org>
 * [scrapy/scrapy](https://github.com/scrapy/scrapy)Scrapy, a fast high-level web crawling & scraping framework for Python. <https://scrapy.org>
-* [fchollet/keras](https://github.com/fchollet/keras)
-* [binux/pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
-* [fabric/fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
+* [keras](https://github.com/fchollet/keras)
+* [pyspider](https://github.com/binux/pyspider)A Powerful Spider(Web Crawler) System in Python. <http://docs.pyspider.org/>
+* [fabric](https://github.com/fabric/fabric)Simple, Pythonic remote execution and deployment. <http://fabfile.org>
 * 插件
   - [xadmin](https://github.com/sshwsfc/xadmin) [文档](https://xadmin.readthedocs.io/en/latest/index.html)
   - [django-bootstrap-toolkit](https://github.com/dyve/django-bootstrap-toolkit)
@@ -1441,7 +1439,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * [agronholm/apscheduler](https://github.com/agronholm/apscheduler):Task scheduling library for Python
 * [benfred/py-spy](https://github.com/benfred/py-spy):Sampling profiler for Python programs
 * [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges)Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-* [ipython/ipython](https://github.com/ipython/ipython) https://ipython.org/  `pip3 install ipython`
+* [ipython](https://github.com/ipython/ipython) https://ipython.org/  `pip3 install ipython`
 * [pypy](http://pypy.org/)
 * [pypa/pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. https://pipenv.kennethreitz.org
 * Server
@@ -1453,15 +1451,15 @@ Namespaces are one honking great idea -- let's do more of those!
 
 ## 参考
 
-* [vinta/awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
-* [jobbole/awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
-* [mahmoud/awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
+* [awesome-python](https://github.com/vinta/awesome-python):A curated list of awesome Python frameworks, libraries, software and resources https://awesome-python.com/
+  - [awesome-python-cn](https://github.com/jobbole/awesome-python-cn):Python资源大全中文版，包括：Web框架、网络爬虫、模板引擎、数据库、数据可视化、图片处理等，由伯乐在线持续更新。
+* [awesome-python-applications](https://github.com/mahmoud/awesome-python-applications):cd Free software that works great, and also happens to be open-source Python. ftp://you:relookin@it.example.com#readme
 * [wtfpython](https://github.com/satwikkansal/wtfpython):What the f*ck Python?
-* [ gto76 / python-cheatsheet ](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
+* [python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet https://gto76.github.io/python-cheatsheet/
 * [中文文档](https://docs.python.org/zh-cn/3/)
-* [kennethreitz/python-guide](https://github.com/kennethreitz/python-guide)
-* [faif/python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
+* [python-guide](https://github.com/kennethreitz/python-guide) Python best practices guidebook, written for humans. https://docs.python-guide.org/
+* [python-patterns](https://github.com/faif/python-patterns):A collection of design patterns/idioms in Python
 * [Python 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/python.wiki)
 * [kriadmin/30-seconds-of-python-code](https://github.com/kriadmin/30-seconds-of-python-code)
 * [coodict/python3-in-one-pic](https://github.com/coodict/python3-in-one-pic):Learn python3 in one picture. https://git.io/Coo-py3
-* [lijin-THU/notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记
+* [notes-python](https://github.com/lijin-THU/notes-python):中文 Python 笔记

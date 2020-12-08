@@ -218,4 +218,6 @@
 
 ## 参考
 
-* [resume/resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations <https://resume.github.com>
+* [resume.github.com](https://github.com/resume/resume.github.com):Resumes generated using the GitHub informations <https://resume.github.com>
+* [best-resume-ever](https://github.com/salomonelli/best-resume-ever):Build fast 🚀 and easy multiple beautiful resumes and create your best CV ever! Made with Vue and LESS.
+* [中英文简历撰写排版指南](http://ppresume.com/notes/guide-zh.html)

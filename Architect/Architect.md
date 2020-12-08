@@ -562,15 +562,15 @@ service UserService {
 
 ## 参考
 
-* [xingshaocheng/architect-awesome](https://github.com/xingshaocheng/architect-awesome)
-* [toutiaoio/awesome-architecture](https://github.com/toutiaoio/awesome-architecture):架构师技术图谱
+* [architect-awesome](https://github.com/xingshaocheng/architect-awesome)
+* [awesome-architecture](https://github.com/toutiaoio/awesome-architecture):架构师技术图谱
 * [system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
-* [davideuler/architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product):互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构
+* [architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product):互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构
 * [aosabook/500lines](https://github.com/aosabook/500lines):source for the book 500 Lines or Less
-* [alexpate/awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
-* [0voice/from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
-* [binhnguyennus/awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
-* [microsoft/fast](https://github.com/microsoft/fast):The adaptive interface system for modern web experiences. https://www.fast.design/
+* [awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
+* [from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
+* [awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
+* [fast](https://github.com/microsoft/fast):The adaptive interface system for modern web experiences. https://www.fast.design/
 
 * [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
 * [最小可用架构](https://mp.weixin.qq.com/s/rZWxtVyJjgiUBPeY5gPqOA)

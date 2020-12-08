@@ -226,3 +226,4 @@ TRUNCATE TABLE performance_schema.events_statements_summary_global_by_event_name
 
 * 《利用 USE 与 RED 方法实现监控与观察》：USE 方法主要着眼于资源内部，RED 方法则关注请求、实际工作以及外部视角（即来自服务消费方的视角）。各种方法既彼此相关，亦相辅相成，共同面向每一项服务实现自身效果所消耗的具体资源。
 * 《利用异常检测进行监控》
+* [awesome-sre](https://github.com/dastergon/awesome-sre)A curated list of Site Reliability and Production Engineering resources. https://sre.xyz/

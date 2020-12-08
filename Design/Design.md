@@ -42,14 +42,16 @@
 
 ## 工具
 
-* [wiredjs/wired-elements](https://github.com/wiredjs/wired-elements):Collection of custom elements that appear hand drawn. Great for wireframes or a fun look. <https://wiredjs.com>
+* [wired-elements](https://github.com/wiredjs/wired-elements):Collection of custom elements that appear hand drawn. Great for wireframes or a fun look. <https://wiredjs.com>
 * [flinto](https://www.flinto.com/):The App Design App
 * Drama的便捷三合一功能将设计，动画和原型设计独特地集成到一个熟悉的工具中。不再需要在应用程序之间切换或学习新东西。 通过提供Magic Move，Time Travel，3D图层，驱动程序和Magic Drag等高级功能，Drama真正成为满足您设计需求的一站式解决方案
 * [Figma](https://www.figma.com/)
 * [excalidraw](https://github.com/excalidraw/excalidraw) Virtual whiteboard for sketching hand-drawn like diagrams
+* [ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% <https://alibaba.github.io/ice/>
 
 ## 参考
 
-* [gztchan/awesome-design](https://github.com/gztchan/awesome-design):Curated design resources
+* [awesome-design](https://github.com/gztchan/awesome-design):Curated design resources
 * [awesome-product-design](https://github.com/teoga/awesome-product-design):A collection of bookmarks, resources, articles for product designers.
+* [design-blocks](https://github.com/froala/design-blocks) A set of 170+ Bootstrap based design blocks ready to be used to create clean modern websites. https://www.froala.com/design-blocks
 * [空谷札记](https://www.yuque.com/arvinxx/note)

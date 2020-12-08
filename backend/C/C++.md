@@ -473,12 +473,10 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 * [C/C++ 开源库及示例代码](https://github.com/programthink/opensource/blob/master/libs/cpp.wiki)
 * [cppreference](https://en.cppreference.com/)
-* Guidelines
-  - [isocpp/CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++<http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines>
-  - [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
-* [fffaraz/awesome-cpp](https://github.com/fffaraz/awesome-cpp):A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff. <http://fffaraz.github.io/awesome-cpp/>
-* [Awesome C/C++](https://fffaraz.github.io/awesome-cpp/)：一系列优秀的`C/C++`框架、库和资源
-* [huihut/interview](https://github.com/huihut/interview):📚 C/C++面试知识总结
+* [CppCoreGuidelines](https://github.com/isocpp/CppCoreGuidelines):The C++ Core Guidelines are a set of tried-and-true guidelines, rules, and best practices about coding in C++<http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines>
+* [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
+* [awesome-cpp](https://github.com/fffaraz/awesome-cpp):A curated list of awesome C++ (or C) frameworks, libraries, resources, and shiny things. Inspired by awesome-... stuff. <http://fffaraz.github.io/awesome-cpp/>
+* [interview](https://github.com/huihut/interview):📚 C/C++面试知识总结
 * Qt
   - [Awesome Qt](https://github.com/fffaraz/awesome-qt)：一系列优秀的`Qt`库和资源
   - [3rd-party-applications](https://github.com/Razor-qt/razor-qt/wiki/3rd-party-applications)：一系列优秀的`Qt`第三方程序
