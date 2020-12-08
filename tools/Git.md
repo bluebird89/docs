@@ -1826,6 +1826,7 @@ External commands:
 * [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git) `git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.profile`
 * [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
 * [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
+* [onefetch](https://github.com/o2sh/onefetch) Git repository summary on your terminal
 * 客户端
   - [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
   - [sourcetree](https://www.sourcetreeapp.com/)

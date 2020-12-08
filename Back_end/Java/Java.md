@@ -1229,6 +1229,7 @@ JavaEE/JDBC/Weblogic
 ## 图书
 
 * [Thinking In Java Java 编程思想](https://www.codeguru.com/java/tij/tij_c.shtml)
+  - [on Java8](https://lingcoder.github.io/OnJava8/#/)
 * Java核心技术·卷 I（原书第10版）
 * Java核心技术·卷 II（原书第10版）
 * Effective Java
@@ -1315,5 +1316,4 @@ JavaEE/JDBC/Weblogic
 * [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 <https://docs.halo.run>
 * [精简之道](https://mp.weixin.qq.com/s/Icn5_RZzFHB9WsKip2ZZ6g)
-* [on Java8](https://lingcoder.github.io/OnJava8/#/)
 * [阿里巴巴Java开发手册](link)
