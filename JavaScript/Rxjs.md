@@ -1,4 +1,4 @@
-# [ReactiveX/rxjs](https://github.com/ReactiveX/rxjs)
+# [rxjs](https://github.com/ReactiveX/rxjs)
 
 A reactive programming library for JavaScript <http://reactivex.io/rxjs>
 

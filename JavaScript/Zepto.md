@@ -1,4 +1,4 @@
-# [madrobby/zepto](https://github.com/madrobby/zepto)
+# [zepto](https://github.com/madrobby/zepto)
 
 Zepto.js is a minimalist JavaScript library for modern browsers, with a jQuery-compatible API <http://zeptojs.com>
 
