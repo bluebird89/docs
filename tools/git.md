@@ -142,9 +142,7 @@ Host gitlab.smgtech.net
     #User 01810661
 
 # GPG
-sudo apt-get install gnupg # Debian / Ubuntu 环境
-yum install gnupg # Fedora 环境
-brew install gpg
+apt-get|yum|brew install gpg
 
 gpg --help|version
 
@@ -161,7 +159,6 @@ ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
 git config --global user.signingkey 3AA5C34371567BD2 # git配置,commit生效
 git config --global commit.gpgsign true
-git config --global user.email "kend56@qq.com"
 
 gpg --armor --export 3AA5C34371567BD2 | Hubot  # get the public key,add to github
 
