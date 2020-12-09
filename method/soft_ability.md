@@ -1,0 +1,308 @@
+# 软能力
+
+有意义的学习涉及到新概念和命题纳入现有的认知结构的同化
+
+* 团队合作能力
+* 善于沟通:停下来跟产品或者客户明确每个功能点
+* 工作自主驱动
+* 基础扎实的最终意义
+* 逻辑清楚，具备良好的问题定位分析能力
+  - 了解问题
+  - 解决方案：有侧重点，思路连续
+* 喜欢尝试新鲜技术，同时有刨根问底的精神
+* 有基础  才知道  顶层讲什么
+* 真正的高级工程师可以带来一种清醒和广阔的视野
+* 项目经历
+* 编程的关键根本就不是编程语言，而在于背后的思想
+  - 分层，抽象，分而治之
+  - 把变化的部分和不变的部分给隔离开
+  - 让各个功能独立地变化和扩展， 汝等需认真学习，积极思考，多加实践
+* 实践能力
+* 主动、皮实、聪明、担当，有良好的沟通和团队协作能力，持续推动拿结果
+* 喜欢钻研技术，能够快速掌握和应用新技术，有开源项目贡献经验优先考虑
+
+## 基本功
+
+* 擅长抽象思维、动手能力强、追求效率、喜欢自动化、愿意持续学习、对代码质量有很高的追求
+* 内功扎实
+* 快捷键是否熟悉
+* 测试习惯好不好
+* 代码干不干净
+* 打字速度至少达到 40WPM+
+  - [](https://typing.io/)
+* 需要具备良好的沟通能力。沟通不仅仅是说话或者写文档，程序员还应该能用自动化的测试作为媒介，准确地框定需求范围
+* 应该能有效地拆解任务。要把任务拆解成可以落地、可以逐步实施的小块。这是需要练习的事情
+* 应该能在保证质量的情况下，把拆解好的任务快速实现出来，让每一行代码都是有测试覆盖、有质量保证的
+* 代码质量要好。写完一段代码之后，应该回头看一看，有没有坏味道？用适当的重构方法把坏味道消除掉，让代码质量保持在良好状态
+第五，做前面几件事情的速度要快。只是头脑里知道怎么做，没有用，因为一旦有压力的时候，就很难施展出来，所以需要反复的练习，在压力下也能快速完成这一系列动作。
+* 熟练掌握至少一种主流代码编辑器或 IDE
+* 拥有良好的代码规范、代码质量、代码注释能力
+  - ESLint 来进行可定制化的代码风格检查
+  - 使用持续集成(CI)理念并通过相匹配的 CI 服务器进行软件交付
+  - JSDoc 来规范注释代码
+* 理解主流编程范式及其思想
+  - 命令式编程是行动导向（ Action-Oriented ）的，因而算法是显性而目标是隐性的；
+  - 声明式编程是目标驱动（ Goal-Driven ）的，因而目标是显性而算法是隐性的。
+* 拥有撰写良好软件工程文档的能力
+  - 概要设计说明书包括程序系统的基本处理流程、程序系统的组织结构、模块划分、功能分配、接口设计、运行设计、安全设计、数据结构设计和出错处理设计等，为程序的详细设计提供基础。
+  - 软件需求说明是软件系统需求的规格化说明，是对将要开发系统的行为的说明。它包括功能性需求及非功能性需求，非功能性需求对设计和实现提出了限制，比如性能要求，质量标准，或者设计限制。
+  - 测试说明书包括测试目标、测试范围、性能要求、测试资源、测试环境、测试策略。
+* 熟知常见的数据结构、算法思想、设计模式
+  - 熟知数组、堆栈、队列、链表、树、图、堆和散列表的相关知识点，并能够根据具体问题通过高级编程语言具体实现
+  - 熟知时间复杂度、空间复杂度、深度优先、广度优先、图论和动态规划等算法思想
+  - 设计模式是对软件设计中普遍存在（反复出现）的各种问题，所提出的解决方案
+* 熟练使用三大操作系统之一及其开发者环境：深入操作系统的内核，我们可以了解计算机如何进行进程管理、内存管理、文件管理以及网络管理
+* 拥有良好的代码审查、代码重构能力
+  - 第一个层次：“业务架构”的代码审查与代码重构。
+  - 第二个层次：“代码架构”的代码审查与代码重构。
+  - 第三个层次：“设计模式”的代码审查与代码重构。
+  - 第四个层次：“最优算法”的代码审查与代码重构。
+  - 第五个层次：“语言与代码规范”的代码审查与代码重构
+* 拥有良好的版本控制、项目管理意识：Trello、Teambition
+* 掌握软件测试相关能力：白盒测试、黑盒测试、单元测试、集成测试、测试驱动开发
+  - 黑箱测试测试应用程序的功能，而不是其内部结构或运作，适合集成测试以及系统测试等；
+  - 白箱测试测试应用程序的内部结构或运作，而不是应用程序的功能，可应用于单元测试、集成测试中。单元测试的目的是检验基本组成单位（函数）的正确性。
+* 熟练绘制概念图、思维导图、流程图、网络拓扑图等
+* 掌握持续集成、持续交付、持续部署相关编程能力
+* 计算机网络
+* Lambda 演算，编译原理，形式语言，自动机
+* 数据结构，你就能理解数据库，搜索引擎中的细节原理
+* 不让用 IDE，用Notepad++：养成一种严谨的习惯
+* 遇到问题解决问题
+* 根据文档学习一门知识
+* 善于解释自己的代码。代码的提交信息，对我来说，几乎跟代码本身一样重要。有时，代码的意图非常明显，不需要解释，但是这种情况极其少。对开发者的一个希望就是，能够更好地解释他们的代码是干嘛的，为什么需要变更以前的代码
+
+## 素养
+
+* 良好的程序设计能力：
+  - 掌握常用的数据结构和算法（例如链表，栈，堆，队列，排序和散列）；
+  - 理解计算机科学的核心概念（例如计算机系统结构、操作系统、编译原理和计算机网络）；
+  - 熟悉至少两门以上编程语言（例如 C++，Java，C#，和 Python）；
+  - 编程能力，就是用代码解决问题的能力，你编程能力越强，就能解决越复杂的问题，细分又有调试、算法、数据结构、OS 原理等这些的支撑，你才能解决各种麻烦的问题。
+  - 架构能力，则是解决代码规模的问题，当一个系统足够复杂，你会写每一块，能解决每一个问题，不等于你能搞定整个系统，这就需要架构能力，架构能力包含了一些意识，比如解耦、接口隔离，也包含认识业务建立抽象模型，也有一些常见的模式，比如经典的 MVC，还有设计层面，面向对象、设计模式等等。
+  - 最后工程能力，则是解决协作的问题，当系统规模更大，光靠一个人，是没办法完成的，如何保证几个高手互相能够配合好？如何保证项目里面水平最差的人不拖后腿？这个工程化建设，往往会跨越多个业务，以汇报关系上的团队为单位来做。包括前后端解耦，模块化，质量保证，代码风格，等等。
+* 专业的 软件开发 素养：
+  - 具备良好的编程实践，能够编写可测试（Testable），可扩展（Extensible），可维护（Maintainable）的代码；
+  - 把握客户需求，按时交付客户所需要的软件产品；
+  - 理解现代软件开发过程中的核心概念（例如面向对象程序设计，测试驱动开发，持续集成，和持续交付等等）。
+* 产品功能的优化、重构
+  - 数据库优化
+* 需求评审、系统设计
+* 设计模式
+* 使用技术的时候一定要用最合适的，而不是最好的
+* 敏捷：快速实现
+* 问题往深看一步 想一步，就可能有结果
+
+* 文档的处理能力，财务的基础知识，这些是职场的基本技能，和是否是行政岗位或是财务岗位无关。订立计划并监督实行，且中间节点修改，并最终达成和考评的能力。这都是生活里基础的能力和技能。
+* 现代网络世界，信息的获取容易，摘取难。那些真的有信息寻找能力、方法，并能最快速度判别信息价值的技能，将会是未来人与人之间差异的根本点之一。
+* 技能是“术”，术能傍身。但你人生的目标一定是“道”，所谓的“道”，除了诉所谓的三观和生存能力，更多的是获取新技能的能力和学习的效率，知道自己缺失什么，可以举一反三的获得，且快速而有效。
+* 沟通的能力，并在沟通里最快速的获取你需要的信息，且能建立属于双方的中立持平的新的角度和立场，这是每个人最重要的能力之一。倾听的能力也一样，倾听并梳理信息，利用倾听达到影响别人的目的，这都值得学习。
+
+## 需求管理
+
+## 项目管理
+
+* 管控进度和质量。进度怎么管？项目经理应该给出一个有效的团队协作、进度把控方式
+
+## 配置管理
+
+## 质量保障
+
+## 知识学习
+
+对知识学习的目标，理解为亮点，一曰准确，二曰全面
+
+* 寻找线索：找一些比较准确的，你可以确定它真的足够全面的资料当作线索
+* 建立联系：其实大部分的 API，可以依据面向对象的数据和操作的观点进行划分。
+* 依据知识之间的联系，进行分类，就可以得到一张图谱.全面
+* 占了全面两个字，接下来需要确认它的准确性。就是追本溯源，去找它最初的讨论和定义。
+* 不断接受新知识，挑战、质疑原有的体系，推翻再重建，每一次循环，你的知识体系都变得更加坚固，更加强大。
+* 现代网络世界，信息的获取容易，摘取难。那些真的有信息寻找能力、方法，并能最快速度判别信息价值的技能，将会是未来人与人之间差异的根本点之一。
+* 所谓拓宽自己熟悉的领域，是指得知道这个领域都在发生什么，最顶尖的是什么情况，这不代表你一定要采用和最顶尖一样的方案，或者要超过最顶尖的，但至少应该知道最好的是怎么样的，以便更好的根据自己所面对的场景，以及目标，来做适当的决定
+
+## 能力培养
+
+能力的体系，恰恰是难以自己建立的，需要教材去指导。教材一定得花几个月的时间，一边读一边做习题。训练应该是系统的（需要教材）、主动的
+
+* 选择一份对自己来说具有挑战性的工作，正面解决问题
+* 永远不重复劳动，当你觉得现在的工作，越来越舒适，越来越缺少风险的时候，就应该引起警惕了
+
+## 方法
+
+* 记录错误日志
+  - 依赖关系调用记录、错误记录
+* 性能测试方法
+* 超时处理
+* 任务大多是一次性的，使用脚本语言操作就会比较合适。这些任务需要快速地编程，而代码用过一次一般就舍弃了
+
+## 反思
+
+- [ ] 基本功熟练
+- [ ] 函数:功能、参数、返回值
+- [ ] 理解的模模糊糊：去验证。
+- [ ] 经验：自己亲自趟过一条河  ，看到的是别人总结出来的
+- [ ] 问题的解决实现
+- [ ] 自我认知：对自我有比较合理的认知，知道自己有什么样的水平，知道牛人能有多牛，知道自己相对别人的优势和劣势。行业很大，变化很快，必须有行业视野，才能有更好的自我认知。
+- [ ] 成长性：
+
+## 演讲
+
+* 事先策划好扣人心弦的故事内容，配合简短而引人注目的标题，方便听众跟随他的思路步入下一步陈述的内容，同时不忘引入一个共同的对手，提供戏剧所需的情节冲突，引起听众的共鸣。 《乔布斯的魔力演讲》
+* Why 有时候比How 更重要
+  - 怎么才能通俗易懂地把这个知识点讲解出来呢？该怎么去类比呢？该从哪个角度切入呢
+  - 技术本来是很简单的，只是上面笼罩着层层迷雾，让初学者难以看清
+* 方法
+  - 需求，问题，演进
+  - 原理
+  - 使用
+  - 易理解，趣味
+* 准备
+
+Mentor and motivate developers
+Suggest and enforce best code practices
+Perform code reviews
+Aid developers in problem-solving
+Work closely to Project Managers and Business Analysts
+Work closely with the client. Task prioritization.
+Requirements gathering. Create tasks and assign them to a developer
+Identify risks and impediments and give a proper response
+Gather everything needed to start writing code (technical documentation, business documentation, images, task description, acceptance criteria, etc.)
+Delegate activities when needed
+Conduct daily SCRUM stand-up meetings
+Backlog grooming
+Work with other stakeholders of the project, particularly technical ones
+Design solution diagrams when needed
+Data analysis when needed
+Review technical documentation
+API testing and documentation
+Present finished sprint work to the project stakeholders
+Perform tests, work closely with the QA team
+Manage technical debt and iceboxes
+Suggest tools that will improve coding speed and quality
+Determine technical constraints
+Conduct UAT tests
+SPOC (single point of contact) for technical problem solving
+
+## 培训
+
+* 设计课程
+* 开始演讲概略与时间
+* 分段总结
+* 课件材料准备
+
+## 管理
+
+* 熟悉自己的业务，知道问题在哪里，怎样可以解决。领导者是给大家指方向的，你必须先知道要走哪个方向，才能带领别人，这是领导力的基础。
+* 培养说服能力，能说服他人，问题可以按照你说的方式解决。领导力的表现是，他人愿意服从你。这不能都靠制度压服，而要让他人真心觉得你是对的。如果你可以让他人相信你，你就可以领导。
+* 激发他人的热情，让他们产生解决问题的热情。说服他人的更高境界，是让他们真正投身进来，自觉发挥自己的潜力，全力以赴解决需要解决的问题。好的领导和差的领导，区别就在于能否激励下级，让每个人都知道自己的职责，努力工作。
+* 培养其他人的领导能力。如果你离开，团队也能正常运作下去，说明一切已经制度化了，你的领导已经成功了。这时，你可以让其他人接管团队，自己去实现下一个目标。
+
+## What habits make a programmer great?
+
+* What habits make a programmer great?Meta-habit: learn to adopt different habits for different situations. With that in mind, some techniques I've found useful for various situations:
+* "Researchey" green-field development for data-science-like problems:
+  1. If it can be done manually first, do it manually. You'll gain an intuition for how you might approach it.
+  2. Collect examples. Start with a spreadsheet of data that highlights the data you have available.
+  3. Make it work for one case before you make it work for all cases.
+  4. Build debugging output into your algorithm itself. You should be able to dump the intermediate results of each step and inspect them manually with a text editor or web browser.
+  5. Don't bother with unit tests - they're useless until you can define what correct behavior is, and when you're doing this sort of programming, by definition you can't.
+* Maintenance programming for a large, unfamiliar codebase:
+  1. Take a look at filesizes. The biggest files usually contain the meat of the program, or at least a dispatcher that points to the meat of the program. main.cc is usually tiny and useless for finding your way around.
+  2. Single-step through the program with a debugger, starting at the main dispatch loop. You'll learn a lot about control flow.
+  3. Look for data structures, particularly ones that are passed into many functions as parameters. Most programs have a small set of key data structures; find them and orienting yourself to the rest becomes much easier.
+  4. Write unit tests. They're the best way to confirm that your understanding of the code is actually how the code works.
+  5. Remove code and see what breaks. (Don't check it in though!)
+* Performance work:
+  0. Don't, unless you've built it and it's too slow for users. Have performance targets for how much you need to improve, and stop when you hit them.
+  1. Before all else (even profiling!), build a set of benchmarks representing typical real-world use. Don't let your performance regress unless you're very certain you're stuck at a local maxima and there's a better global solution just around the corner. (And if that's the case, tag your branch in the VCS so you can back out your changes if you're wrong.)
+  2. Many performance bottlenecks are at the intersection between systems. Collect timing stats in any RPC framework, and have some way of propagating & visualizing the time spent for a request to make its way through each server, as well as which parts of the request happen in parallel and where the critical path is.
+  3. Profile.
+  4. Oftentimes you can get big initial wins by avoiding unnecessary work. Cache your biggest computations, and lazily evaluate things that are usually not needed.
+  5. Don't ignore constant factors. Sometimes an algorithm with asymptotically worse performance will perform better in practice because it has much better cache locality. You can identify opportunities for this in the functions that are called a lot.
+  6. When you've got a flat profile, there are often still very significant gains that can be obtained through changing your data structures. Pay attention to memory use; often shrinking memory requirements speeds up the system significantly through less cache pressure. Pay attention to locality, and put commonly-used data together. If your language allows it (shame on you, Java), eliminate pointer-chasing in favor of value containment.
+* General code hygiene:
+  1. Don't build speculatively. Make sure there's a customer for every feature you put in.
+  2. Control your dependencies carefully. That library you pulled in for one utility function may have helped you save an hour implementing the utility function, but it adds many more places where things can break - deployment, versioning, security, logging, unexpected process deaths.
+  3. When developing for yourself or a small team, let problems accumulate and fix them all at once (or throw out the codebase and start anew). When developing for a large team, never let problems accumulate; the codebase should always be in a state where a new developer could look at it and say "I know what this does and how to change it." This is a consequence of the reader:writer ratio - startup code is written a lot more than it is read and so readability matters little, but mature code is read much more than it is written. (Switching to the latter culture when you need to develop like the former to get users & funding & stay alive is left as an exercise for the reader.)
+
+## 表达
+
+> 程序员修炼之道
+
+* Care About Your Craft关心你的技艺:我其实一直没有想明白这句话是什么意思. 我的理解是, 我们现在所学所掌握的技艺最后可能是要过时的, 要时刻关心最新的技术并尝试去学习. 不过虽然这么说, 但是如何做就是见仁见智了, 我在最近可能看了看 shell 编程, 学了学 Node.js, 还看了两眼 Golang, 最终我真正吸收的还是 Node.js, 对于 shell 和 Golang 看的我实在提不起兴趣. 不过我也没有强求, 毕竟不是靠这个吃饭的, 而且自己也没有什么兴趣, 索性就放弃了. 不过对于 Node 我还是巨有兴趣的. 这个月我都在为 SportJoin 编写 Node API.
+* Think! About Your Work 思考! 你的工作
+* Provide Options, Don’t Make Lame Excuses 提供这种选择, 不要找蹩脚的借口
+* Don’t Live with Brokwn Windows  不要容忍破窗户
+* Be a Catalyst for Change 做变化的催化剂
+* Remember the Big Picture 记住大图景
+* Make Quality a Requirements Issue 使质量成为需求问题
+* Invert Regularly inYour Knowledge Portfolio 定期为你的知识资产投资
+* Critically Analyze What You Read and Hear批判地分析你读到的和听到的
+* It’s Both What You Say and the Way You Say it你说什么和你怎么说同样重要
+* DRY — Don’t Repeat Yourself不要重复你自己
+* Make It Easy to Reuse让复用变得更容易
+* Eliminate Effects Between Unrelated Things消除无关事物之间的影响
+* There Are No Final Decisions不存在最终决策
+* Use Tracer Bullets to Find the Target用曳光弹找到目标
+* Prototyle to Learn为了学习而制作模型
+* Program Close to the Problem domain靠近问题领域编程
+* Estimate to Avoid Surprises估算, 以避免发生意外
+* Iterate the Schedule with the Code通过代码对进度表进行迭代
+* Keep Knowledge in Plain Text用纯文本来保存知识
+* Use the Power of Command Shells利用命令 shell 的力量
+* Use a Single Editor Well用好一种编辑器
+* Always Use Source Code Control总是使用源码控制
+* Fix the Problem, Not the Blame要修正问题, 而不是发出指责
+* Don’t Panic不要恐慌
+* “Select” Isn’t Broken“Select” 没有问题
+* Don’t Assume it — Prove It不要假定, 要证明
+* Learn a Text Manipulation Language学习一种文本操纵语言
+* Write Code That Writes Code编写能编写代码的代码
+* You Can’t Write Perfect Software你不可能写出完美的软件
+* Design with Contracts通过合约进行设计
+* Crash Early早崩溃
+* If It Can’t Happen, Use Assertions to Ensure That It Won’t如果它不可能发生, 用断言确保它不会发生
+* Use Exceptions for Exceptional Problems将异常用于异常的问题
+* Finish What You Start要有始有终
+* Minimize Coupling Between Modules使模块的之间的耦合减少
+* Configure, Don’t Integrate要配置, 不要集成
+* Put Abstractions in Code, Details in Metadata将抽象放进代码, 细节放进元数据
+* Analyze Workflow to Improve Concurrency分析工作流, 以改善并发性
+* Design Using Services用服务进行设计
+* Always Design for Concurrency总是为并发设计
+* Separate Views from Models使视图与模型分离
+* Use Blackboards to Coordinate Workflow用黑板协调工作流
+* Don’t Program by Coincidence不要靠巧合编程
+* Estimate the Order of Your Algorithms估算你算法的阶
+* Test Your Estimates测试你的估算
+* Refactor Early, Refactor Often早重构, 常重构
+* Design to Test为测试而设计
+* Test Your Software, or Your Users Will测试你的软件, 否则你的用户就得测试
+* Don’t Use Wizard Code You Don’t Understand不要使用你不理解的向导代码
+* Don’t Gather Requirements — Dig for Them不要搜集需求 — 挖掘它们
+* Work with a User to Think Like a User与用户一同工作, 以像用户一样思考
+* Abstractions Live Longer than Details抽象比细节活得更长久
+* Use a Project Glossary使用一个项目词汇表
+* Don’t Think Outside the Box — Find the Box不要在盒子外面思考 — 要找到盒子
+* Listen to Nagging Doubts — Start When You’re Ready倾听反复出现的疑虑 — 等你准备好再开始
+* Some Things Are Better Done than Described对有些事情”做”胜于”描述”
+* Don’t Be a Slave to Formal Methods不要做形式的奴隶
+* Expensive Tools Do Not Produce Better Designs昂贵的工具不一定能制作出更好的设计
+* Organize Around Functionality, Not Job Functions围绕功能, 而不是工作职务进行组织
+* Don’t Use Manual Procedures不要使用手工流程
+* Test Early. Test Often. Test Automatically.早测试, 常测试, 自动测试.
+* Coding Ain’t Done ‘Til All the Tests Run要到通过全部的测试, 编码才算完成
+* Use Saboteurs to Test Your Testing通过”蓄意破坏”测试你的测试
+* Test State Coverage, Not Code Coverage测试状态覆盖, 而不是代码覆盖
+* Find Bugs Once一个 bug 只抓一次
+* Treat English as Just Another Programming Language把英语当作又一种编程语言
+* Build Documentation In, Don’t Bolt It On把文档建在里面, 不要栓在外面
+* Gently Exceed Your User’s Expectations温和地超过用户的期望
+* Sign Your Work在你的作品上签名
+
+## Taste
+
+怎样去培养好的 taste
+
+* 不要局限于代码，去看那些好的文章，去看那些让你流泪的电影，去听那些让你心潮澎湃的音乐，去学 LaTeX 细究下各种字体的排版细节，去学学 Mathematica 看看什么叫做令人惊艳的交互，去买一个顶尖的降噪耳机体验下什么叫做瞬间安静的世界……
+* 跳出你固有的思维舒适区，多体验多尝试多思考，当你的手、眼、脑、耳变得挑剔，当你听到 work around/trade off 这类字眼就本能得反感恶心和不舒服，你就明白，什么叫做“由俭入奢易，由奢入俭难”，你就懂得什么是好，什么是差，什么叫做 taste。

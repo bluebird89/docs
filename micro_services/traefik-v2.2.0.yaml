@@ -1,0 +1,15 @@
+version: '3'
+services:
+  reverse-proxy:
+    image: traefik:2.2.0
+    # Enables the web UI and tells Traefik to listen to docker
+    # 启用 webUI 并告诉 Traefik 去监听docker的容器实例
+    command: --api.insecure=true --providers.docker
+    ports:
+      # Traefik暴露的http端口
+      - "80:80"
+      # webUI暴露的端口(必须指定--api.insecure=true才可以访问)
+      - "8080:8080"
+    volumes:
+      # 指定docker的sock文件来让traefik获取docker的事件，从而实现动态负载均衡
+      - /var/run/docker.sock:/var/run/docker.sock

@@ -1,0 +1,46 @@
+
+box: laravel/homestead
+ip: "192.168.20.20"
+memory: 2048
+cpus: 4
+provider: virtualbox
+mariadb: true
+# 共享目录
+folders:
+    * map: D:\Code    <!-- 项目地址 -->
+      to: /home/vagrant/Code   <!-- 虚拟机的项目地址 -->
+      type: "rsync"
+      options:
+          rsync__args: ["--verbose", "--archive", "--delete", "-zz"]
+          rsync__exclude: ["node_modules"]
+# 站点
+sites:
+    * map: laravel.app  <!-- 添加的站点名称 -->
+      to: /home/vagrant/Code/Laravel/public <<!-- 站点对应的虚拟机文件 -->
+    - map: another.app
+      to: /home/vagrant/Code/another/public
+      type: symfony2
+
+      # 向站点添加其他 Nginx fastcgi_param 值
+      params:
+          - key: FOO
+            value: BAR
+      schedule: true
+      php: "5.6"
+ports:
+    - send: 50000
+      to: 5000
+    - send: 7777
+      to: 777
+      protocol: udp
+networks:
+    - type: "private_network"
+      ip: "192.168.10.20"
+    - type: "public_network"
+      ip: "192.168.10.20"
+      bridge: "en1: Wi-Fi (AirPort)"
+
+## 配置脚本 homestead up
+function homestead() {
+    ( cd ~/Homestead && vagrant $* )
+}
