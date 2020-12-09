@@ -4,4 +4,4 @@ a fast, scalable, multi-language and extensible build system <https://bazel.buil
 
 ## 工具
 
-* [bazelbuild/rules_nodejs](https://github.com/bazelbuild/rules_nodejs):NodeJS rules for Bazel
+* [rules_nodejs](https://github.com/bazelbuild/rules_nodejs):NodeJS rules for Bazel

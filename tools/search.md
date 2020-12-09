@@ -99,9 +99,9 @@
   - [Bing](https://cn.bing.com/)
   - [大圣盘](https://www.dashengpan.com/)
   - [Quickref](https://quickref.dev/): Experimental search engine for developers. Searches a curated subset of the web: official docs and community-driven sources. No JS, cookies, tracking, external requests or data collecting
-* [sourcegraph/sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable <https://sourcegraph.com>
-* [facebookresearch/LASER](https://github.com/facebookresearch/LASER):Language-Agnostic SEntence Representations
-* [asciimoo/searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine <https://asciimoo.github.io/searx/>
+* [sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable <https://sourcegraph.com>
+* [LASER](https://github.com/facebookresearch/LASER):Language-Agnostic Sentence Representations
+* [=searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine <https://asciimoo.github.io/searx/>
 * [OKlog](https://github.com/oklog/oklog)
 * [searx.space](https://searx.space/)
 

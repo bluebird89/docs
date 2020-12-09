@@ -504,12 +504,11 @@ $cat = new \Animal\Cat();
 composer init
 ```
 
-## 参考
-
-* [Packagist](https://packagist.org):The PHP Package Repository
-* [PSR(PHP Standards Recommendations)](http://www.php-fig.org/):组织制定的PHP语言开发规范，约定了很多方面的规则，如命名空间、类名规范、编码风格标准、Autoload、公共接口等
-
 ## 工具
 
-* [Ocramius/PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
+* [PackageVersions](https://github.com/Ocramius/PackageVersions):📦 Composer addon to efficiently get installed packages' version numbers
 * [satis](https://github.com/composer/satis):Simple static Composer repository generator - For a full private Composer repo use Private Packagist
+
+## 参考
+
+* [Packagist](https://packagist.org):The PHP Package Repository言开发规范，约定了很多方面的规则，如命名空间、类名规范、编码风格标准、Autoload、公共接口等

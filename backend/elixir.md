@@ -104,4 +104,4 @@ iex
 
 ## 类库
 
-* [absinthe-graphql/absinthe](https://github.com/absinthe-graphql/absinthe):The GraphQL toolkit for Elixir <http://absinthe-graphql.org>
+* [absinthe](https://github.com/absinthe-graphql/absinthe):The GraphQL toolkit for Elixir <http://absinthe-graphql.org>

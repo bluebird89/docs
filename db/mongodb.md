@@ -463,7 +463,7 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 * 将数据库表中的数据按照一定的边界分成若干组，每一组放到一台 MongoDB 服务器上。以用户年龄age为进行Sharding（切分）的Shard Key。每一个 Shard 服务器存储数据的一个子集，
 * 查询时通过mongos，它可以被称为 Shard 集群中的路由器。处理来自应用服务器的请求，它是在应用服务器和Shard 集群之间的一个接口。
 * config server，它存储 Shard 集群中所有其他成员的配置信息，mongos会到这台config server查看集群中其他服务器的地址，这是一台不需要太高性能的服务器，因为它不会用来做复杂的查询计算，值得注意的是，在 MongoDB3.4 以后，config server必须是一个replica set。存储 shard 集群的配置信息，通常部署在一个 replica set 上。
-* mtools。是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
+* [mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.是用来创建各种 MongoDB 环境的命令行工具，代码使用python写的，可以通过pip install安装到你的环境上
 
 ## 图书
 
@@ -471,21 +471,19 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 
 ## 工具
 
-* [dylang/shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. <https://www.npmjs.org/package/shortid>
+* [shortid](https://github.com/dylang/shortid):Short id generator. Url-friendly. Non-predictable. Cluster-compatible. <https://www.npmjs.org/package/shortid>
 * 客户端
   - [Robo 3T](https://robomongo.org/):Robo 3T (formerly Robomongo) is the free lightweight GUI for MongoDB enthusiasts.
-  - [Studio3T/robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool <http://robomongo.org>
+  - [robomongo](https://github.com/Studio3T/robomongo):Native cross-platform MongoDB management tool <http://robomongo.org>
   - [Studio 3T](https://studio3t.com/):Studio 3T is the GUI that makes working with MongoDB easy.Available for Windows, Mac, and Linux.
   - [NoSQLBooster](https://nosqlbooster.com/):NoSQLBooster for MongoDB (formerly MongoBooster) is a shell-centric cross-platform GUI tool for MongoDB v2.6-3.6, which provides fluent query builder, SQL query SQL Query, update-in-place, ES2017 syntax support and true intellisense experience.
-  - [Automattic/mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. <http://mongoosejs.com>
-  - [mongo-express/mongo-express](https://github.com/mongo-express/mongo-express):Web-based MongoDB admin interface, written with Node.js and express
+  - [mongoose](https://github.com/Automattic/mongoose):MongoDB object modeling designed to work in an asynchronous environment. <http://mongoosejs.com>
 * 云服务
   - [mlab](https://mlab.com/):Database-as-a-Service for MongoDB
 
 ## 参考
 
 * [MongoDB Docs](https://docs.mongodb.com/)
-* [senssei/mongo-cluster-docker](https://github.com/senssei/mongo-cluster-docker):Docker compose config for mongodb cluster
+* [mongo-cluster-docker](https://github.com/senssei/mongo-cluster-docker):Docker compose config for mongodb cluster
 * [MongoDB的水平扩展，你做对了吗？](https://juejin.im/entry/5a0266a76fb9a0450908ec76)
-* [rueckstiess/mtools](https://github.com/rueckstiess/mtools):A collection of scripts to set up MongoDB test environments and parse and visualize MongoDB log files.
 * [MongoDB集群优化](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650785533&idx=1&sn=ceeb7833d721ab5c5a9ae76397405f93&chksm=f3f97368c48efa7ef6cb96ec4cbc2b1bc50f4510bcba7bb48dffd76be509d36b8fb099574446)

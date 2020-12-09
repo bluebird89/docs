@@ -18,7 +18,7 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * FeHelper - WEB 前端助手，All In One 的一个工具，包含多个独立小应用，比如：Json 工具、代码美化、代码压缩、二维码、Postman、markdown、网页油猴、便签笔记、信息加密与解密、随机密码生成、Crontab 等等
 * Fika:排版更专注于阅读内容
 * Firebug Lite 程序调试工具
-* [gongjunhao/seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击 * Infinity New Tab：基于Chrome的云应用服务
+* [seckill](https://github.com/gongjunhao/seckill):Chrome浏览器 抢购、秒杀插件，秒杀助手，定时自动点击 * Infinity New Tab：基于Chrome的云应用服务
 * JSONView|JSON Viewer
 * Lighthouse:automated tool for improving the performance, quality, and correctness of your web apps
 * [markdown-here](https://github.com/adam-p/markdown-here) Markdown一键转换到"富文本格式"
@@ -36,7 +36,7 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * 简悦 - SimpRead - 沉浸式阅读模式，还支持丰富的导出功能比如 Markdown/PDF
 * 彩云小译 - 网页翻译插件 - 号称超越 Google 翻译和 DeepL
 * 为什么你们就是不能加个空格呢
-* [deanoemcke/thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
+* [thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
 * 批量打开多个链接 LinkClump
 * Unblock Youku
 * User-Agent Switcher for Chrome
@@ -48,7 +48,6 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * XML Tree
 * 眼不见心不烦：屏蔽微博
 * 网页截图:注释&批注：捕获整个页面或任何部分
-
 * Dream Afar New Tab
 * Momentum：一款清新的新标签页插件，具有待办、天气、搜索功能，最最重要的是，插件的大背景，非常具有创意和艺术气息
 

@@ -812,23 +812,27 @@ print dec_message   // Hello World!
 
 ## 接口
 
-* [public-apis/public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. <https://ultimatecourses.com>
+* [public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. <https://ultimatecourses.com>
 * [雅虎天气](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 * [价格](http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice)
-* [Vespa314/bilibili-api](https://github.com/Vespa314/bilibili-api):B站API收集整理及开发
+* [bilibili-api](https://github.com/Vespa314/bilibili-api):B站API收集整理及开发
 * [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
-* [toddmotto/public-apis](https://github.com/toddmotto/public-apis):A collective list of public JSON APIs for use in web development. <https://toddmotto.com>
-* [pwxcoo/chinese-xinhua](https://github.com/pwxcoo/chinese-xinhua):📙 中华新华字典数据库。包括歇后语，成语，词语，汉字。提供新华字典API。
-* [Binaryify/NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐 Node.js API service <https://binaryify.github.io/NeteaseCloudMusicApi/#/>
+* [chinese-xinhua](https://github.com/pwxcoo/chinese-xinhua):📙 中华新华字典数据库。包括歇后语，成语，词语，汉字。提供新华字典API。
+* [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐 Node.js API service <https://binaryify.github.io/NeteaseCloudMusicApi/#/>
 * 豆瓣
-  - [douban](https://developers.douban.com/wiki/?title=guide)
+  - [douban](https://developers.douban.com/wiki/)
   - [获取正在热映的电影](https://api.douban.com/v2/movie/in_theaters?city=广州&start=0&count=10)
   - [获取电影Top250](https://api.douban.com/v2/movie/top250?start=0&count=10)
   - [电影搜索](https://api.douban.com/v2/movie/search?q=神秘巨星&start=0&count=10)
   - [电影详情](https://api.douban.com/v2/movie/subject/26942674)
-* [r/SpaceX](https://docs.spacexdata.com/?version=latest)
+* [SpaceX](https://docs.spacexdata.com/?version=latest)
 * [RollToolsApi](https://www.mxnzp.com/):开放易用的接口服务
-* [chubin / wttr.in](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather <https://wttr.in>
+* [wttr.in](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather <https://wttr.in>
+
+## Gateway
+
+* [tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
+* [janus](https://github.com/hellofresh/janus):An API Gateway written in Go <https://hellofresh.gitbooks.io/janus>
 
 ## 图书
 
@@ -838,75 +842,26 @@ print dec_message   // Hello World!
 
 * [Branca](https://branca.io/):Authenticated and encrypted API tokens using modern crypto.
 * [restify](link)
-  - validator  joi
+  - validator joi
   - swagger
   - waterline
   - log:bunyan
   - ava / rewire / supertest / nyc
-* Gateway
-  - [TykTechnologies/tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
-* [GoogleChrome/puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API <https://try-puppeteer.appspot.com/>
-* [thx/RAP](https://github.com/thx/RAP):Web接口管理工具，开源免费，接口自动化，MOCK数据自动生成，自动化测试，企业级管理。阿里妈妈MUX团队出品！阿里巴巴都在用！1000+公司的选择！RAP2已发布请移步至<https://github.com/thx/rap2-delos> <http://rapapi.org>
-* [thx/rap2-delos](https://github.com/thx/rap2-delos):阿里妈妈前端团队出品的开源接口管理工具RAP第二代 <http://rap2.taobao.org>
-* [encode/apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
-* [ruby-grape/grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. <http://www.ruby-grape.org>
-* [encode/django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ <https://www.django-rest-framework.org>
-* [paularmstrong/normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
-* [dingo/api](https://github.com/dingo/api):A RESTful API package for the Laravel and Lumen frameworks.
-* [parse-community/parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express <http://parseplatform.org>
-* [interagent/http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API <https://www.gitbook.com/read/book/gee>…
-* [typicode/json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
-* [tobscure/json-api](https://github.com/tobscure/json-api):JSON-API (<http://jsonapi.org>) responses in PHP.
-* [hashicorp/vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management <https://www.vaultproject.io/>
-* [nsf/termbox-go](https://github.com/nsf/termbox-go):Pure Go termbox implementation <http://code.google.com/p/termbox>
-* [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.rtfd.io>
-* [hellofresh/janus](https://github.com/hellofresh/janus):An API Gateway written in Go <https://hellofresh.gitbooks.io/janus>
-* [SocketLog](https://github.com/luofei614/SocketLog)
-* 加密
-  - [google/tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
-  - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
-* 测试
-  - Poster 火狐浏览器的一个插件
-    - postman
-    - [liyasthomas/postwoman](https://github.com/liyasthomas/postwoman):<https://github.com/liyasthomas/postwoman>
-    - [apiaryio/dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.org>
-    - [airbnb/hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
-    - RESTClient是用java Swing编写的基于http协议的接口测试工具
-    - Fiddler是一个http协议调试代理工具，它能够记录并检查所有你的电脑和互联网之间的http通讯，设置断点，查看所有的“进出”Fiddler的数据（指cookie,html,js,css等文件，这些都可以胡乱修改的意思）,测试的数据都可以保存,但测试记录不方便查询
-    - SoapUI是一个免费、开源、跨平台的功能测试解决方案。一个易于使用的图形界面，和企业级功能，让你轻松和soapUI迅速创建和执行自动化的功能，回归测试和负载测试
-    - Apache JMeter是Apache组织开发的基于Java的开源的测试工具， JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能,对应用程序做功能/回归测试/接口测试，同时Jmeter+Ant+Jenkins也可以搭建接口和性能的持续集成测试平台
-    - WireMock是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
-    - 冒烟测试用poster，集成测试用Jmeter
-* 文档
-  - [swagger-api/swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
-  - [YMFE/yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 <http://yapi.demo.qunar.com/>
-  * [gongwalker/ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
-  - [jsdoc3/jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. <http://usejsdoc.org>
-  - [swagger](https://app.swaggerhub.com/home)Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
-  - [freeCodeCamp/devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser <https://devdocs.io>
-  - [lord/slate](https://github.com/lord/slate):Beautiful static documentation for your API <https://spectrum.chat/slate>
-  - YUI doc
-  - eolinker
-  - Apizza
-  - [Redocly/redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation <https://redocly.github.io/redoc/>
-  - [RAP2](http://rap2.taobao.org)
-  - DOClever
-  - [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
-  - [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 <https://www.showdoc.cc>
-* 抓包
-  - Charles
-  - fiddler
-  - [Wireshark](https://www.wireshark.org)
-  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy <https://wproxy.org/>
-* API 文档/契约生成工具
-  - blue sprint
-  - RAML
-* mock
-  - wiremock
-  - json-server
-  - node-mock-server
-  - node-mocks-http
-  - [nuysoft/Mock](https://github.com/nuysoft/Mock):A simulation data generator <http://mockjs.com>
+* [puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API <https://try-puppeteer.appspot.com/>
+* [RAP](https://github.com/thx/RAP):Web接口管理工具，开源免费，接口自动化，MOCK数据自动生成，自动化测试，企业级管理。阿里妈妈MUX团队出品！阿里巴巴都在用！1000+公司的选择！RAP2已发布请移步至<https://github.com/thx/rap2-delos> <http://rapapi.org>
+* [rap2-delos](https://github.com/thx/rap2-delos):阿里妈妈前端团队出品的开源接口管理工具RAP第二代 <http://rap2.taobao.org>
+* [apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
+* [grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. <http://www.ruby-grape.org>
+* [django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ <https://www.django-rest-framework.org>
+* [api](https://github.com/dingo/api):A RESTful API package for the Laravel and Lumen frameworks.
+* [parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express <http://parseplatform.org>
+* [http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API <https://www.gitbook.com/read/book/gee>…
+* [json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
+* [json-api](https://github.com/tobscure/json-api):JSON-API (<http://jsonapi.org>) responses in PHP.
+* [vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management <https://www.vaultproject.io/>
+* [termbox-go](https://github.com/nsf/termbox-go):Pure Go termbox implementation <http://code.google.com/p/termbox>
+* [dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.rtfd.io>
+
 * HTTP 请求拦截器
   - axios-mock-adapter
   - jquery-mockjax
@@ -915,6 +870,62 @@ print dec_message   // Hello World!
   - Pact
   - Rest-Assured
 * HoServer
+* [SocketLog](https://github.com/luofei614/SocketLog)
+* 加密
+  - [tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
+  - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
+
+## 测试
+
+* Poster 火狐浏览器插件
+* postman
+* [postwoman](https://github.com/liyasthomas/postwoman):<https://github.com/liyasthomas/postwoman>
+* [dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.org>
+* [hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+* RESTClient 是用java Swing编写的基于http协议的接口测试工具
+* SoapUI 是一个免费、开源、跨平台的功能测试解决方案。一个易于使用的图形界面，和企业级功能，让你轻松和soapUI迅速创建和执行自动化的功能，回归测试和负载测试
+* Apache JMeter 是Apache组织开发的基于Java的开源的测试工具， JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能,对应用程序做功能/回归测试/接口测试，同时Jmeter+Ant+Jenkins也可以搭建接口和性能的持续集成测试平台
+* WireMock 是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
+* 冒烟测试用poster，集成测试用Jmeter
+
+## 抓包
+
+* Fiddler 一个http协议调试代理工具，它能够记录并检查所有你的电脑和互联网之间的http通讯，设置断点，查看所有的“进出”Fiddler的数据（指cookie,html,js,css等文件，这些都可以胡乱修改的意思）,测试的数据都可以保存,但测试记录不方便查询
+* Charles
+* [Wireshark](https://www.wireshark.org)
+* [whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy <https://wproxy.org/>
+
+## 文档
+
+* [swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
+    + [swaggerhub](https://app.swaggerhub.com/search)
+* [yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 <http://yapi.demo.qunar.com/>
++ [ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
+* [jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. <http://usejsdoc.org>
+* [devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser <https://devdocs.io>
+* [slate](https://github.com/lord/slate):Beautiful static documentation for your API <https://spectrum.chat/slate>
+* YUI doc
+* eolinker
+* Apizza
+* [redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation <https://redocly.github.io/redoc/>
+* DOClever
+* [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
+* [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 <https://www.showdoc.cc>
+* API 文档/契约生成工具
+  - blue sprint
+  - RAML
+
+## mock
+
+* wiremock
+* json-server
+* node-mock-server
+* node-mocks-http
+* [Mock](https://github.com/nuysoft/Mock):A simulation data generator <http://mockjs.com>
+
+## admin
+
+* [projectManageApi](https://github.com/a54552239/projectManageApi):项目管理系统接口
 
 ## 参考
 

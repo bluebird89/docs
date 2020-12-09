@@ -30,28 +30,26 @@
 * dock 停在左边
 * iphone,只能同步一台设备itunes配置
 * 设置未收录开发者应用`sudo spctl --master-disable`
+* 配置
+  - [dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
+  - [dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
+  - [dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
+  - [dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
+* 脚本
+  - [dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
+  - [mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
+  - [mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
+  - [mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
+  - [setup.guide](https://github.com/phodal/setup.guide)
+  - [pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X <http://pow.cx/v>
 * 参考
-  - [iCHAIT/awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
-  - [awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
-  - [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles).files, including ~/.macos -- sensible hacker defaults for macOS
-  - [skwp/dotfiles](https://github.com/skwp/dotfiles) YADR - The best vim,git,zsh plugins and the cleanest vimrc you've ever seen
-  - [holman/dotfiles](https://github.com/holman/dotfiles)@holman does dotfiles
-  - [thoughtbot/dotfiles](https://github.com/thoughtbot/dotfiles):A set of vim, zsh, git, and tmux configuration files.
-  - [donnemartin/dev-setup](https://github.com/donnemartin/dev-setup)Mac OS X development environment setup: Easy-to-understand instructions with automated setup scripts for developer tools like Vim, Sublime Text, Bash, iTerm, Python data analysis, Spark, Hadoop MapReduce, AWS, Heroku, JavaScript web development, Android development, common data stores, and dev-based OS X defaults.
-  - [nicolashery/mac-dev-setup](https://github.com/nicolashery/mac-dev-setup)A beginner's guide to setting up a development environment on Mac OS X
-  - [geerlingguy/mac-dev-playbook](https://github.com/geerlingguy/mac-dev-playbook)Mac setup and configuration via Ansible.
-  - [thoughtbot/laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
-  - [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
-  - [2ndalpha/gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
-  - [sb2nov/mac-setup](https://github.com/sb2nov/mac-setup) Installing Development environment on Mac OS X(<http://sourabhbajaj.com/mac-setup/>) 推荐
-  - [smyhvae/Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
+  - [laptop](https://github.com/thoughtbot/laptop)A shell script to set up a macOS laptop for web and mobile development.
+  - [Mac](https://github.com/smyhvae/Mac) Mac软件、使用技巧整理
   - [高效MacBook工作环境配置](http://goahead2010.iteye.com/blog/2232869)
   - [MAC全栈开发环境搭建指南](https://mac.aotu.io/index.html)
-  - [macdao/ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
+  - [ocds-guide-to-setting-up-mac](https://github.com/macdao/ocds-guide-to-setting-up-mac):OCD's Guide to Setting up Mac
   - [Mac OS X 配置指南](https://wild-flame.github.io/guides/)
-  - [phodal/setup.guide](https://github.com/phodal/setup.guide)
-  - [basecamp/pow](https://github.com/basecamp/pow):Zero-configuration Rack server for Mac OS X <http://pow.cx/v>
-  - [nikitavoloboev/my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
+  - [Mac 开发配置手册](https://aaaaaashu.gitbooks.io/mac-dev-setup/content/)
 
 ```sh
 # 开启 SSD 的 Trim 模式
@@ -250,20 +248,19 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [Time](https://timingapp.com/):automatically tracking how you spend your time.
   - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
   - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
-  - SwitchHosts
   - manico:Dock app 映射为数字键
-  - [dylanaraps/neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
-  - [MrRio/vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
+  - [neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
+  - [vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
   - [GPG Suite](https://gpgtools.org/)
   - [dashlane](https://www.dashlane.com/zh):密码管理工具
-  - [wulkano/kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
+  - [kap](https://github.com/wulkano/kap):An open-source screen recorder built with web technology <https://getkap.co>
   - [LICEcap](link):gif录制
-  - [onmyway133/FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
-  - [sveinbjornt/Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. <https://sveinbjorn.org/sloth>
+  - [FinderGo](https://github.com/onmyway133/FinderGo):🐢 Open terminal quickly from Finder
+  - [Sloth](https://github.com/sveinbjornt/Sloth):Mac app that shows all open files and sockets in use by all running processes. Nice GUI for lsof. <https://sveinbjorn.org/sloth>
   - Luna Display:Turn your iPad into a second display
   - 实用工具：/System/Library/CoreServices/Applications
-  - [Ityscal](https://www.mowglii.com/itsycal/)  日历
-  - [sindresorhus/quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
+  - [Ityscal](https://www.mowglii.com/itsycal/) 日历
+  - [quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
   - [smcfunControl](link)
   - uTools - 比 Alfred 更简洁的工作流
 * 设计
@@ -282,7 +279,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 下载
   - bitlord
   - Folx
-  - [CodeTips/BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
+  - [BaiduNetdiskPlugin-macOS](https://github.com/CodeTips/BaiduNetdiskPlugin-macOS):For macOS.百度网盘 破解SVIP、下载速度限制~
 * 工具
   - [CheatSheet]() 长按⌘键可以显示当前程序快捷键
   - [flux](https://justgetflux.com/) 屏幕颜色控制
@@ -303,14 +300,13 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
     + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
     + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
-  - [sharkdp/fd](https://github.com/sharkdp/fd):A simple, fast and user-friendly alternative to find.
   - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
   - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
   - [Helium](http://heliumfloats.com/):A floating browser window for OS X
   - Android file transfer
   - SensibleSideButtons - 在 macOS 上使用鼠标上的前进后退按键
 * Pod
-  - [insidegui/PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
+  - [PodcastMenu](https://github.com/insidegui/PodcastMenu):Put Overcast on your Mac's menu bar
 * Web开发
   - [Paw](https://paw.cloud/):The most advanced API tool for Mac
   - MAMP:基础版不支持自定义
@@ -337,7 +333,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - TickTick
   - Lucidchart
   - Kanban
-  - [glushchenko/fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
+  - [fsnotes](https://github.com/glushchenko/fsnotes):Notes manager for macOS/iOS
 * 文档
   - [dash](https://kapeli.com/dash):语言文档
   - [TRANSMIT 5](https://www.panic.com/transmit/):Upload, download, and manage files on tons of servers with an easy, familiar, and powerful UI. It’s quite good.
@@ -346,19 +342,19 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   * Clearview - 支持 PDF, EPUB, CHM, MOBI 的免费阅读器
 * 音乐
   - 播放器：MPlayerX
-  - [beardedspice/beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
+  - [beardedspice](https://github.com/beardedspice/beardedspice):Mac Media Keys for the Masses <http://beardedspice.github.io>
   - [Noizio](http://noiz.io/):turn on the sound and allow yourself to become engulfed in the tranquil sounds of nature.
 * 图片
   - 修图 Snapseed
   - iShot
   - [Pixave](http://www.littlehj.com/mac/) - Image/GIF/Video organizer
-  - [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac <https://imageoptim.com/mac>
+  - [ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac <https://imageoptim.com/mac>
 * 阅读
   - ibooks：阅读支持pdf与epub，可以通过icloud同步
   - iTunes Movie Trailers
   - mounty:win的移动硬盘
   - [irreader](http://irreader.fatecore.com)
-  - [luin/medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
+  - [medis](https://github.com/luin/medis)Medis is a beautiful, easy-to-use Mac database management application for Redis.
 * 代码
   - [SnippetsLab](https://www.renfei.org/snippets-lab/):SnippetsLab is an easy-to-use code snippets manager
 * 虚拟机
@@ -370,7 +366,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * [LyricsX](https://github.com/MichaelRow/Lyrics)
 * 说明
   - strace在linux下用来跟踪某个进程的系统调用，dtruss
-* [JadenGeller/Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
+* [Helium](https://github.com/JadenGeller/Helium):A floating browser window for OS X <http://heliumfloats.com>
 * elpass
 * 迷你天气：macOS 天气应用，在 Dock 栏知实时天气
 * Things 3
@@ -393,10 +389,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 资源
   - [fliqlo](https://fliqlo.com/):A flip Clock screensavers
   - Apple TV Aerial
-  - [agarrharr/awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
-  - [JohnCoates/Aerial](https://github.com/JohnCoates/Aerial):Apple TV Aerial Screensaver for Mac
-    + 航拍横跨了中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象。因为每一个航拍体积都很大
-    + brew cask install aerial
+  - [awesome-macos-screensavers](https://github.com/agarrharr/awesome-macos-screensavers)A curated list of screensavers for Mac OS X
+  - [Aerial](https://github.com/JohnCoates/Aerial):Apple TV Aerial Screensaver for Mac
+    + 航拍横跨中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象
+    + `brew cask install aerial`
     + 下载点击安装，重新进入系统偏好设置
 
 ## iPhone铃声制作
@@ -412,10 +408,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 ## terminal
 
-* [guarinogabriel/Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
-* [0nn0/terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
-* [rgcr/m-cli](https://github.com/rgcr/m-cli): Swiss Army Knife for macOS
-* [herrbischoff/awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
+* [Mac-CLI](https://github.com/guarinogabriel/Mac-CLI)  OS X command line tools for developers – The ultimate tool to manage your Mac. It provides a huge set of command line commands that automatize the usage of your OS X system.
+* [terminal-mac-cheatsheet](https://github.com/0nn0/terminal-mac-cheatsheet)List of my most used commands and shortcuts in the terminal for Mac
+* [m-cli](https://github.com/rgcr/m-cli): Swiss Army Knife for macOS
+* [awesome-macos-command-line](https://github.com/herrbischoff/awesome-macos-command-line):Use your macOS terminal shell to do awesome things.
 * iTerm2
   - 标签颜色会变化，以指示该 tab 当前的状态
     + 当该标签有新输出的时候，标签会变成洋红色
@@ -740,10 +736,10 @@ a very powerful launcher that you can program to show you anything you want
 
 * 购买 Powerpack. 快捷键：option + space
 * [workflow](http://www.alfredworkflow.com/)
-  - [learn-anything / alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
-  - [gharlan / alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
-  - [hzlzh / AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. <http://www.alfredworkflow.com/>
-  - [zenorocha / alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
+  - [alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
+  - [alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
+  - [AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. <http://www.alfredworkflow.com/>
+  - [alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
 
 ### features
 
@@ -879,7 +875,7 @@ mackup
 dash
 ```
 
-# [MacPORTS](https://guide.macports.org/)
+## [MacPORTS](https://guide.macports.org/)
 
 an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
 
@@ -889,9 +885,7 @@ an open-source community initiative to design an easy-to-use system for compilin
 * 好处是不怎么依赖系统，也就是说，更新Mac OS不会破坏你现有的 package。另外，macports安装所有的package到/opt/local下面。这样不会和系统现有的/usr/local有什么冲突。
 * 通过rsync维持数据索引一致
 
-## 使用
-
-```shell
+```sh
 wget http://distfiles.macports.org/MacPorts/MacPorts-1.9.2.tar.gz
 tar zxvf MacPorts-1.9.2.tar.gz
 cd MacPorts-1.9.2
@@ -971,11 +965,15 @@ brew switch icu4c 62.1
 * [quick-look-plugins](https://github.com/sindresorhus/quick-look-plugins):List of useful Quick Look plugins for developers
 * [sshpass](https://wsgzao.github.io/post/sshpass/)
 * [darwin-xnu](https://github.com/apple/darwin-xnu)The Darwin Kernel (mirror) <https://opensource.apple.com/>
-  - XNU，实际上是“XNU is Not Unix（是XNU，不是Unix）”的缩写，属于macOS（包括以往全部版本）以及iOS所使用的类Unix内核。通过公开内核代码，苹果公司将帮助开发人员更轻松地理解其设备与更高软件层同内核之间的协作原理。
-  - 其源代码基于苹果公共源许可（ Apple Public Source License ）2.0，这其实是一项相当严格的许可; 开发人员可能需要查看其详细信息，而后再有根据地将此次发布的内核代码引入自有项目
+  - XNU，实际上是“XNU is Not Unix（是XNU，不是Unix）”的缩写，属于macOS（包括以往全部版本）以及iOS所使用的类Unix内核。通过公开内核代码，苹果公司将帮助开发人员更轻松地理解其设备与更高软件层同内核之间的协作原理
+  - 其源代码基于苹果公共源许可（ Apple Public Source License ）2.0，这其实是一项相当严格的许可;开发人员可能需要查看其详细信息，而后再有根据地将此次发布的内核代码引入自有项目
 
 ## 参考
 
-* [黑果小兵的部落阁](https://blog.daliansky.ne)
-* [hzlzh/Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
+* [awesome-macOS](https://github.com/iCHAIT/awesome-macOS) A curated list of awesome applications, softwares, tools and shiny things for macOS.
+* [awesome-mac](https://github.com/jaywcjlove/awesome-mac)a collection of awesome Mac applications and tools for developers and designers.
+* [my-mac-os](https://github.com/nikitavoloboev/my-mac-os):💻 List of applications, alfred workflows and various tools that make my macOS experience even more amazing
 * [macOS 从小白到入门](https://wsgzao.github.io/post/macbook/)
+* [黑果小兵的部落阁](https://blog.daliansky.ne)
+* [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
+* [gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X

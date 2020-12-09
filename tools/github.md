@@ -130,6 +130,7 @@ jobs:
   - help:
 * auth
 * condi
+* [hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. <https://hub.github.com/>
 * [文档](https://cli.github.com/manual/)
 
 ```sh
@@ -179,17 +180,7 @@ sudo killall -HUP mDNSResponder
 
 * [profile-summary-for-github](https://github.com/tipsy/profile-summary-for-github):Tool for visualizing GitHub profiles
 
-## Trending
-
-* [Trending](https://github.com/trending):See what the GitHub community is most excited about today.
-* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub):octocat: Find pearls on open-source seashore 分享 GitHub 上有趣、入门级的开源项目 <https://hellogithub.com/>
-* [sindresorhus/awesome](https://github.com/sindresorhus/awesome) Curated list of awesome lists
-* [Aggregated Awesome](https://aggregatedawesome.com/):There are several awesome lists on GitHub that collect and curate the best resources for a specific programming language, framework, platform, etc.
-* [wx-chevalier/Awesome-Lists](https://github.com/wx-chevalier/Awesome-Lists):📚 Guide to Galaxy, curated, worthy and up-to-date links/reading list for ITCS-Coding/Algorithm/SoftwareArchitecture/AI. 💫 ITCS-编程/算法/软件架构/人工智能等领域的文章/书籍/资料/项目链接精选，岁月沉淀的美好
-* [jnv/lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
-* [kon9chunkit / GitHub-Chinese-Top-Charts](https://github.com/kon9chunkit/GitHub-Chinese-Top-Charts):GitHub中文排行榜
-
-## [anuraghazra/github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
+## [github-readme-stats](https://github.com/anuraghazra/github-readme-stats)
 
 zap Dynamically generated stats for your github readmes
 
@@ -253,19 +244,14 @@ Agile project management integrated with GitHub
 
 ## 工具
 
-* [Octotree](https://www.octotree.io/)
+* [Octotree](https://www.octotree.io/):浏览器插件，方法代码跳转
 
 ## 参考
 
-* [521xueweihan/HelloGitHub](https://github.com/521xueweihan/HelloGitHub)
-* [donnemartin/gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: <https://github.com/works-with/category/desktop-tools>
-* [gitalk/gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. <https://gitalk.github.io>
-* [desktop/desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop <https://desktop.github.com>
-* [OctoLinker/OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera <https://octolinker.github.iow>
-* [devhubapp/devhub](https://github.com/devhubapp/devhub):DevHub: TweetDeck for GitHub - Android, iOS and Web 👉 <https://devhubapp.com/>
-* [unbug/codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names <https://unbug.github.io/codelf/>
-* [pomber/git-history](https://github.com/pomber/git-history):Quickly browse the history of a file from any git repository <https://githistory.xyz/>
-* [Tutorial](https://lab.github.com/courses)
+* [gitsome](https://github.com/donnemartin/gitsome):A supercharged Git/GitHub command line interface (CLI). An official integration for GitHub and GitHub Enterprise: <https://github.com/works-with/category/desktop-tools>
+* [gitalk](https://github.com/gitalk/gitalk):Gitalk is a modern comment component based on Github Issue and Preact. <https://gitalk.github.io>
+* [desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop <https://desktop.github.com>
+* [OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera <https://octolinker.github.iow>
+* [devhub](https://github.com/devhubapp/devhub):DevHub: TweetDeck for GitHub - Android, iOS and Web 👉 <https://devhubapp.com/>
 * [GitHub Helps](https://help.github.com/)
 * [GitHub规范](https://guides.github.com/)
-* [github/hub](https://github.com/github/hub):A command-line tool that makes git easier to use with GitHub. <https://hub.github.com/>

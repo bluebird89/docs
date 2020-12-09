@@ -4,4 +4,4 @@ Apollo（阿波罗）是携程框架部门研发的分布式配置中心，能�
 
 ## 工具
 
-* [sikanhe/apollo-tracing-elixir](https://github.com/sikanhe/apollo-tracing-elixir):Apollo Tracing middleware for Absinthe
+* [apollo-tracing-elixir](https://github.com/sikanhe/apollo-tracing-elixir):Apollo Tracing middleware for Absinthe

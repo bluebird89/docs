@@ -863,7 +863,7 @@ man 2 execve
 
 ## 参考
 
-* [cfenollosa/os-tutorial](https://github.com/cfenollosa/os-tutorial):How to create an OS from scratch
+* [os-tutorial](https://github.com/cfenollosa/os-tutorial):How to create an OS from scratch
 * [30dayMakeOS](git@github.com:yourtion/30dayMakeOS.git)
 * [How-to-Make-a-Computer-Operating-System](https://github.com/SamyPesse/How-to-Make-a-Computer-Operating-System):How to Make a Computer Operating System in C++ samypesse.gitbook.io/how-to-create-an-operating-system
 

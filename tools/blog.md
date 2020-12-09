@@ -1,14 +1,13 @@
-# [hexojs/hexo](https://github.com/hexojs/hexo)
+# [hexo](https://github.com/hexojs/hexo)
 
 A fast, simple & powerful blog framework, powered by Node.js. <https://hexo.io>
 
 * 配置：站点目录下的_config.yml为站点配置文件，主题目录下的_config.yml为主题配置文件
-* [jaredly/hexo-admin](https://github.com/jaredly/hexo-admin):An Admin Interface for Hexo <http://jaredly.github.io/hexo-admin/>
-* [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin):小胡子优化版本
+* [hexo-admin](https://github.com/jaredly/hexo-admin):An Admin Interface for Hexo <http://jaredly.github.io/hexo-admin/>
+* [hexo-admin](https://github.com/barretlee/hexo-admin):小胡子优化版本
   - 按照官方的方式安装 hexo-admin
   - 下载修改的代码到一个文件夹，执行 `npm link`
   - 在 hexo 根目录下执行 `npm link hexo-admin`
-* [barretlee/hexo-admin](https://github.com/barretlee/hexo-admin)
 
 ```sh
 brew install git
@@ -39,12 +38,12 @@ alias hgs="hexo g&&hexo s"
 alias hgd="hexo g&&hexo d"
 ```
 
-## [gohugoio/hugo](https://github.com/gohugoio/hugo)
+## [hugo](https://github.com/gohugoio/hugo)
 
 The world’s fastest framework for building websites. <https://gohugo.io>
 
 * deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
-* [gcushen/hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! <https://sourcethemes.com/academic/>
+* [hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! <https://sourcethemes.com/academic/>
 * Theme
   - [Hugo Themes](https://themes.gohugo.io)
 * <https://jimmysong.io/hugo-handbook>
@@ -77,7 +76,7 @@ hugo -t themename // 测试主题效果
 hugo server -t themename
 ```
 
-## [jekyll/jekyll](https://github.com/jekyll/jekyll)
+## [jekyll](https://github.com/jekyll/jekyll)
 
 🌐 Jekyll is a blog-aware static site generator in Ruby <https://jekyllrb.com> static website generator，搭建静态博客，通过markdown文件自动生成html文件。Github Pages即靠Jekyll实现的。[官网](https://jekyllrb.com)
 
@@ -91,8 +90,8 @@ hugo server -t themename
   - 将代码推送到仓库
   - [访问页面](https://bluebird89.github.io/)
 * 主题
-  - [mmistakes/so-simple-theme](https://github.com/mmistakes/so-simple-theme):A simple Jekyll theme for words and pictures.
-  - [plusjade/jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap):The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages. <http://jekyllbootstrap.com>
+  - [so-simple-theme](https://github.com/mmistakes/so-simple-theme):A simple Jekyll theme for words and pictures.
+  - [jekyll-bootstrap](https://github.com/plusjade/jekyll-bootstrap):The quickest way to start and publish your Jekyll powered blog. 100% compatible with GitHub pages. <http://jekyllbootstrap.com>
 
 ```sh
 gem install jekyll bundler
@@ -101,7 +100,9 @@ bundle exec
 jekyll serve
 ```
 
-## [docsify](https://docsify.js.org/#/)
+## [docsify](https://github.com/docsifyjs/docsify)
+
+🃏 A magical documentation site generator. <https://docsify.js.org>
 
 ## [Halo](https://github.com/halo-dev/halo)
 
@@ -133,9 +134,6 @@ A simple, Git-powered wiki with a sweet API and local frontend.
 
 ## 文章
 
+* [ProtoTeam](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库
 * [没有了老师，该如何学习？](http://www.cnblogs.com/qianqian-li/p/6028745.html)
 * [How To Ask Questions The Smart Way](http://www.catb.org/esr/faqs/smart-questions.html)
-* [oldratlee/translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources <https://github.com/oldratlee/translations/blob/master/README.md>
-* [ProtoTeam/blog](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库
-* [zenany/weekly](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
-* [thepracticaldev/dev.to](https://github.com/thepracticaldev/dev.to):Where programmers share ideas and help each other grow <https://dev.to>

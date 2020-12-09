@@ -263,7 +263,7 @@
 
 ## 参考
 
-* [ossu/computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
+* [computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
 * Apple Developer Site — 学习开发 IOS、Mac OS、Safari 环境下的 app
 * Google Code — 学习开发安卓 app
 * Code.org — 编程一小时活动的大本营

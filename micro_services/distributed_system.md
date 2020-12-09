@@ -403,17 +403,17 @@ CREATE TABLE `leaf_alloc` (
 ## 课程
 
 * [6.824: Distributed Systems](http://nil.csail.mit.edu/6.824/2018/)
-* [brendandburns/designing-distributed-systems](https://github.com/brendandburns/designing-distributed-systems):Sample code and configuration files from the Designing Distributed Systems book.
+* [designing-distributed-systems](https://github.com/brendandburns/designing-distributed-systems):Sample code and configuration files from the Designing Distributed Systems book.
 
 ## 工具
 
-* [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
-* [firehol/netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! <https://my-netdata.io/>
-* [facebookincubator/LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data <https://logdevice.io>
-* [meshbird/meshbird](https://github.com/meshbird/meshbird):Distributed private networking <http://meshbird.com>
-* [dragonflyoss/Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. <https://d7y.io>
+* [xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
+* [netdata](https://github.com/firehol/netdata):Get control of your servers. Simple. Effective. Awesome! <https://my-netdata.io/>
+* [LogDevice](https://github.com/facebookincubator/LogDevice):Distributed storage for sequential data <https://logdevice.io>
+* [meshbird](https://github.com/meshbird/meshbird):Distributed private networking <http://meshbird.com>
+* [Dragonfly](https://github.com/dragonflyoss/Dragonfly):Dragonfly is an intelligent P2P based image and file distribution system. <https://d7y.io>
 * [PhxPaxos](https://github.com/Tencent/phxpaxos)腾讯公司微信后台团队自主研发的一套基于Paxos协议的多机状态拷贝类库。它以库函数的方式嵌入到开发者的代码当中，使得一些单机状态服务可以扩展到多机器，从而获得强一致性的多副本以及自动容灾的特性。文章：<http://www.infoq.com/cn/articles/weinxin-open-source-paxos-phxpaxos>
-* [busgo/forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler <http://122.51.106.217:6579>
+* [forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler <http://122.51.106.217:6579>
 * [xxl-job](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） <http://www.xuxueli.com/xxl-job/>
 
 ## 参考

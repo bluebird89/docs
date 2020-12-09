@@ -874,5 +874,5 @@
 
 ## 工具
 
-* [yuzu-emu/yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator <https://yuzu-emu.org/>
+* [yuzu](https://github.com/yuzu-emu/yuzu):Nintendo Switch Emulator <https://yuzu-emu.org/>
 * [价格比对](https://eshop-prices.com/)

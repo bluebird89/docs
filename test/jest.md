@@ -4,4 +4,4 @@ Delightful JavaScript Testing. <https://jestjs.io/>
 
 ## 工具
 
-* [Raathigesh/majestic](https://github.com/Raathigesh/majestic):⚡ Zero config UI for Jest <https://majestic.debuggable.io/>
+* [majestic](https://github.com/Raathigesh/majestic):⚡ Zero config UI for Jest <https://majestic.debuggable.io/>

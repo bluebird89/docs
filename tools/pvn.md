@@ -67,7 +67,7 @@ chmod +x shadowsocks.sh
 }
 ```
 
-## [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core)
+## [v2ray-core](https://github.com/v2ray/v2ray-core)
 
 A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/> 通过nginx的负载均衡功能，来自web访问的流量就直接访问到网站，而通过v2ray来的流量就通过v2ray的服务端转发，实现KX代理的功能
 
@@ -89,7 +89,7 @@ service v2ray start # 启动
 vim /etc/v2ray/config.json # 修改配置文件
 ```
 
-## [txthinking/brook](https://github.com/txthinking/brook)
+## [brook](https://github.com/txthinking/brook)
 
 Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
 
@@ -378,11 +378,11 @@ HTTPS 代理 127.0.0.1 7890
 Socks 主机 127.0.0.1 7891
 ```
 
-## [WireGuard](../../network/WireGuard.md)
+## [WireGuard](../network/WireGuard.md)
 
 ## 服务
 
-* [StreisandEffect/streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
+* [streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
 * [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
 * 三方
   - blinkload
@@ -392,17 +392,17 @@ Socks 主机 127.0.0.1 7891
 
 * [Lantern](https://github.com/getlantern/lantern)
 * [firefly-proxy](https://github.com/yinghuocho/firefly-proxy):A proxy software to help circumventing the Great Firewall.
-* [XX-net/XX-Net](https://github.com/XX-net/XX-Net):A proxy tool to bypass GFW.
+* [XX-Net](https://github.com/XX-net/XX-Net):A proxy tool to bypass GFW.
   - [中文文档](https://github.com/XX-net/XX-Net/wiki/%E4%B8%AD%E6%96%87%E6%96%87%E6%A1%A3)
-* [googlehosts/hosts](https://github.com/googlehosts/hosts) <https://scaffrey.coding.net/p/hosts/git> / <https://git.qvq.network/googlehosts/hosts>
-* [Alvin9999/new-pac](https://github.com/Alvin9999/new-pac)
+* [googlehosts](https://github.com/googlehosts/hosts) <https://scaffrey.coding.net/p/hosts/git> / <https://git.qvq.network/googlehosts/hosts>
+* [new-pac](https://github.com/Alvin9999/new-pac)
 * BT sync
-* [ShadowsocksR-Live/shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
+* [shadowsocksr-native](https://github.com/ShadowsocksR-Live/shadowsocksr-native):从容翻越党国敏感日 ShadowsocksR (SSR) native implementation for all platforms powered by libuv, GFW terminator
 * [Diode](https://support.diode.io/article/ss32engxlq)以将本机（localhost）的网站公开到互联网上，提供一个二级域名，使得外部用户可以访问
 
 ## 客户端
 
-* [erguotou520/electron-ssr](https://github.com/erguotou520/electron-ssr)
+* [electron-ssr](https://github.com/erguotou520/electron-ssr)
 * [Qv2ray](https://github.com/Qv2ray/Qv2ray):🌟 V2Ray/Trojan-GFW/SSR Linux/Windows/macOS 跨平台 GUI 🔨 使用 C++17/Qt5 ，支持订阅，扫描二维码，自定义路由编辑 🌟 <https://qv2ray.github.io>
   - `snap install qv2ray`
 * [mellow](https://github.com/mellow-io/mellow):Mellow is a rule-based global transparent proxy client for Windows, macOS and Linux.
@@ -445,8 +445,8 @@ curl -v "https://www.google.com" --proxy "https://arsenal.bluebird89.online:1900
 * [gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
 * [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. <https://trojan-gfw.github.io/trojan/>
 * [](https://github.com/freefq/free)
-* [max2max/freess](https://github.com/max2max/freess)
-* [JadaGates/ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
+* [freess](https://github.com/max2max/freess)
+* [ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
 * [w3-goto-world](https://github.com/hoochanlon/w3-goto-world):tomatoGit/AWS/Google 镜像 ,SS/SSR/VMESS节点,WireGuard,IPFS,DeepWeb,Capitalism 知识储备库
 * [Linux全局智能分流方案](https://fuckcloudnative.io/posts/linux-circumvent/)
 * [](https://git.zx2c4.com/)

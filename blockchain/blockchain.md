@@ -173,34 +173,32 @@ termianl1:bl + tab
 
 ## database
 
-* [bigchaindb/bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. <https://www.bigchaindb.com/>
-* [EOSIO/eos](https://github.com/EOSIO/eos):An open source smart contract platform <https://eosio.github.io/eos/>
+* [bigchaindb](https://github.com/bigchaindb/bigchaindb):Meet BigchainDB. The blockchain database. <https://www.bigchaindb.com/>
+* [=eos](https://github.com/EOSIO/eos):An open source smart contract platform <https://eosio.github.io/eos/>
 
 ## 图书
 
-* [yeasy/blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. <https://www.gitbook.com/book/yeasy/blockchain_guide>
+* [blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. <https://www.gitbook.com/book/yeasy/blockchain_guide>
 
 ## 教程
 
-* [itheima1/BlockChain](https://github.com/itheima1/BlockChain):黑马程序员 120天全栈区块链开发 开源教程
+* [BlockChain](https://github.com/itheima1/BlockChain):黑马程序员 120天全栈区块链开发 开源教程
 * [比特币和数字货币技术](https://www.coursera.org/learn/cryptocurrency)
 * [demo](https://andersbrownworth.com/blockchain/)
+* [blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese <https://liuchengxu.gitbook.io/blockchain>
 
 ## 工具
 
-* [MetaMask/metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. <https://metamask.io/>
-* [iov-one/weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
-* [embark-framework/embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms <https://embark.status.im/>
+* [=metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. <https://metamask.io/>
+* [weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
+* [embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms <https://embark.status.im/>
 
 ## 参考
 
-* [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
-* [yukimotopress/programming-blockchains-step-by-step](https://github.com/yukimotopress/programming-blockchains-step-by-step):Programming Blockchains Step-by-Step book / guide. Let's build blockchains from scratch (zero) step by step. Let's start with crypto hashes... (Book Edition) by Gerald Bauer, et al
-* [tyrchen/unchained](https://github.com/tyrchen/unchained):My personal study of blockchain related technology.
-* [bitcoinbook/bitcoinbook](https://github.com/bitcoinbook/bitcoinbook):Mastering Bitcoin 2nd Edition - Programming the Open Blockchain <https://bitcoinbook.info/>
-* [Jeiwan/blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
-* [liuchengxu/blockchain-tutorial](https://github.com/liuchengxu/blockchain-tutorial):🌾 A step-by-step blockchain tutorial in simplified Chinese <https://liuchengxu.gitbook.io/blockchain>
-* [chaozh/awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
+* [awesome-blockchain-cn](https://github.com/chaozh/awesome-blockchain-cn):收集所有区块链(BlockChain)技术开发相关资料，包括Fabric和Ethereum开发资料
+* [programming-blockchains-step-by-step](https://github.com/yukimotopress/programming-blockchains-step-by-step):Programming Blockchains Step-by-Step book / guide. Let's build blockchains from scratch (zero) step by step. Let's start with crypto hashes... (Book Edition) by Gerald Bauer, et al
+* [unchained](https://github.com/tyrchen/unchained):My personal study of blockchain related technology.
+* [blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
 * [myeoskit](https://www.myeoskit.com)
 * [区块链背后的密码学](https://learning.nervos.org/crypto-block)
 

@@ -570,17 +570,16 @@ ansible-galaxy init my-role  # 创建一个role
 
 ## 工具
 
-* [ansistrano / deploy](https://github.com/ansistrano/deploy#installation):Ansible role to deploy scripting applications like PHP, Python, Ruby, etc. in a capistrano style <https://ansistrano.com>
+* [deploy](https://github.com/ansistrano/deploy#installation):Ansible role to deploy scripting applications like PHP, Python, Ruby, etc. in a capistrano style <https://ansistrano.com>
 
 ## 参考
 
 * [文档](http://docs.ansible.com/ansible/latest/)
 * [Ansible中文权威指南](http://www.ansible.com.cn/)
-* [leucos/ansible-tuto](https://github.com/leucos/ansible-tuto):Ansible tutorial
-* [geerlingguy/ansible-vagrant-examples](https://github.com/geerlingguy/ansible-vagrant-examples)
-* [ansible/ansible-examples](https://github.com/ansible/ansible-examples): A few starter examples of ansible playbooks, to show features and how they work together. See <http://galaxy.ansible.com> for example roles from the Ansible community for deploying many popular applications.
+* [ansible-tuto](https://github.com/leucos/ansible-tuto):Ansible tutorial
+* [ansible-examples](https://github.com/ansible/ansible-examples): A few starter examples of ansible playbooks, to show features and how they work together. See <http://galaxy.ansible.com> for example roles from the Ansible community for deploying many popular applications.
 * [ansible-for-devops](https://github.com/geerlingguy/ansible-for-devops)
-* [ansible/ansible-container](https://github.com/ansible/ansible-container)
+* [ansible-container](https://github.com/ansible/ansible-container)
 
 * <https://www.redhat.com/en/blog/integrating-ansible-jenkins-cicd-process>
 * <https://linux.cn/article-4215-1.html>

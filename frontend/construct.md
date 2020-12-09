@@ -189,6 +189,6 @@ parcel watch index.html
 
 ## [rollup](https://rollupjs.org/)
 
-## [pikapkg / snowpack](https://github.com/pikapkg/snowpack)
+## [snowpack](https://github.com/pikapkg/snowpack)
 
 ☶ A faster build system for the modern web. <https://www.snowpack.dev>

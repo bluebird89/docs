@@ -675,16 +675,16 @@ ls -l my_script # 过滤输出列表
     + [](https://github.com/getantibody/antibody) The fastest shell plugin manager.
   - [Overview](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview)
   - custom
-    + [zsh-users/zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
-    + [zsh-users/zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
-    + [sindresorhus/pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt `npm install --global pure-prompt`
+    + [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
+    + [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
+    + [pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt `npm install --global pure-prompt`
 * [Theme](~/.oh-my-zsh/themes)
   - agnoster
   - cloud
   - wedisagree
   - ambda-mod
   - [powerlevel10k](https://github.com/romkatv/powerlevel10k) `git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k`
-  - [denysdovhan/spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts <https://denysdovhan.com/spaceship-prompt/>
+  - [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt):🚀⭐️ A Zsh prompt for Astronauts <https://denysdovhan.com/spaceship-prompt/>
 * use
   - `j src` autojump 访问 ~/workspace/src
   - `st README.md` Sublime Text 打开当前目录 README.md 文件
@@ -700,7 +700,7 @@ ls -l my_script # 过滤输出列表
     + wd add web
     + wb web
 * 参考
-  - [unixorn/awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
+  - [awesome-zsh-plugins](https://github.com/unixorn/awesome-zsh-plugins):A collection of ZSH frameworks, plugins & themes inspired by the various awesome list collections out there.
 * 优化
   - 禁用多余插件
   - 避免产生子进程:常见的会产生子进程的语法有是 eval 和 Command substitution，在编写 .zshrc 时应该尽量避免使用它们
@@ -1056,7 +1056,7 @@ sudo apt install terminator
     background_image = None
 ```
 
-## [sharkdp/bat](https://github.com/sharkdp/bat)
+## [bat](https://github.com/sharkdp/bat)
 
 A cat(1) clone with wings
 
@@ -1068,12 +1068,8 @@ brew install bat
 
 ## Termial
 
-* ios
-  + [ish-app / ish](https://github.com/ish-app/ish):Linux shell for iOS <https://ish.app>
-
-- Mac
-  + Iterm2
-    * [mbadolato / iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio <http://www.iterm2colorschemes.com>
+* [ish](https://github.com/ish-app/ish):Linux shell for iOS <https://ish.app>
+- [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes):Over 200 terminal color schemes/themes for iTerm/iTerm2. Includes ports to Terminal, Konsole, PuTTY, Xresources, XRDB, Remmina, Termite, XFCE, Tilda, FreeBSD VT, Terminator, Kitty, MobaXterm, LXTerminal, Microsoft's Windows Terminal, Visual Studio <http://www.iterm2colorschemes.com>
 - Linux
   + 原生命令行
   + [Konsole](https://konsole.kde.org/)
@@ -1095,7 +1091,6 @@ brew install bat
   + [Babun](http://babun.github.io/)
   + [nushell](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
     * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
-
 * [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards <https://hyper.is>
 * mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
 * [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! <https://microsoft.com/PowerShell>
@@ -1103,32 +1098,33 @@ brew install bat
 * [msys2](http://www.msys2.org/)
 * powercmd
 * [alacritty](https://github.com/alacritty/alacritty):A cross-platform, GPU-accelerated terminal emulator
-* [lukesampson/scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. <https://scoop.sh>
-* [railsware/upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
+* [scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. <https://scoop.sh>
+* [upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 
 ## [bash](http://ftp.gnu.org/gnu/bash/) <https://www.gnu.org/software/bash/manua>
 
-* [Bash-it/bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
-* [dylanaraps/pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
+* [bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
+* [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
 * [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 * [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
 * [Bash scripting cheat sheet](https://devhints.io/bash)
 * [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
 * [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
 * [bash-completion](https://github.com/scop/bash-completion) Programmable completion functions for bash
+* [bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 
 ## 教程
 
 * [command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
-* [learnbyexample/Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
-* [learnbyexample/scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting <https://learnbyexample.github.io/scripting_course/>
+* [Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
+* [scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting <https://learnbyexample.github.io/scripting_course/>
 * [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
 * [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 * [linuxcommand](http://linuxcommand.org)
 * [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
-* [denysdovhan/bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash <https://git.io/bash-handbook>
-* [dylanaraps / pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
-* [Idnan / bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
+* [bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash <https://git.io/bash-handbook>
+* [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
+* [bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
 
 ```sh
 axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
@@ -1141,22 +1137,21 @@ ccache gcc foo.c
 * 《Shell脚本学习指南》
 * [The Linux Command Line](http://linuxcommand.org/tlcl.php): William Shotts关于Linux命令行的一本书
 * Linux命令行与shell脚本编程大全（第3版）
-  - [fengyuhetao/shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
+  - [shell](https://github.com/fengyuhetao/shell):Linux命令行与shell脚本编程大全案例
 
 ## 工具
 
 * [edex-ui](https://github.com/GitSquared/edex-ui):A cross-platform, customizable science fiction terminal emulator with advanced monitoring & touchscreen support.
 * help
-  - [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
-  - [tldr-pages/tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages <http://tldr-pages.github.io/> `npm install -g tldr`
-  - [jaywcjlove / linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。<https://git.io/linux> <https://git.io/linux>
+  - [explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text
+  - [tldr](https://github.com/tldr-pages/tldr): books Simplified and community-driven man pages <http://tldr-pages.github.io/> `npm install -g tldr`
+  - [linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。<https://git.io/linux> <https://git.io/linux>
   - cheat
 * [lynx](link):终端构建的Web浏览应用程序
 * cd
   - [fasd](https://github.com/clvv/fasd) 增强cd命令
   - [ranger](https://github.com/ranger/ranger) 在多目录上浏览各种文件 比 cd 和 cat 更有效率，甚至可以在终端预览图片
-* ls
-  - [ogham/exa](https://github.com/ogham/exa):A modern version of ‘ls’. <https://the.exa.website/>
+* [exa](https://github.com/ogham/exa):A modern version of ‘ls’. <https://the.exa.website/>
 * [prettyping](https://github.com/denilsonsa/prettyping) 图示化的ping
 * du
   - [ncdu](https;//dev.yorhel.nl/ncdu)
@@ -1166,7 +1161,7 @@ ccache gcc foo.c
 * [sshrc](https://github.com/Russell91/sshrc ) 在登录远程服务器的时候也能使用本机的 shell 的 rc 文件中的配置
 * monitor
   - top:查看在系统中运行的进程或线程,默认是以 CPU 进行排序
-  - [sqshq / sampler](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. <https://sampler.dev>
+  - [sampler](https://github.com/sqshq/sampler):Tool for shell commands execution, visualization and alerting. Configured with a simple YAML file. <https://sampler.dev>
   - nslookup:指定查询的类型，可以查到DNS记录的生存时间还可以指定使用哪个DNS服务器进行解释
   - [htop](http://hisham.hm/htop/): 提供更美观、更方便的进程监控工具
   - [atop](http://www.atoptool.nl/):按日记录进程的日志供以后分析。也能显示所有进程的资源消耗。还会高亮显示已经达到临界负载的资源。
@@ -1195,8 +1190,7 @@ ccache gcc foo.c
   - [Nmap](http://nmap.org/) 可以扫描你服务器开放的端口并且可以检测正在使用哪个操作系统。但你也可以将其用于 SQL 注入漏洞、网络发现和渗透测试相关的其他用途。
   - [MTR](http://www.bitwizard.nl/mtr/) 将 traceroute 和 ping 的功能结合到了一个网络诊断工具上。当使用该工具时，它会限制单个数据包的跳数，然后监视它们的到期时到达的位置。然后每秒进行重复。
   - [Justniffer](http://justniffer.sourceforge.net/) 是 tcp 数据包嗅探器。使用此嗅探器你可以选择收集低级别的数据还是高级别的数据。它也可以让你以自定义方式生成日志。比如模仿 Apache 的访问日志。
-* hex
-  - [sharkdp/hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
+* [hexyl](https://github.com/sharkdp/hexyl):A command-line hex viewer
 * prompt
   - [powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
     + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
@@ -1207,37 +1201,34 @@ ccache gcc foo.c
   - jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool
 * 代码统计
   - cloc：代码统计工具，能够统计代码的空行数、注释行、编程语言
-* benchmark
-  - [sharkdp/hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
-* [svenstaro/genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator <https://svenstaro.github.io/genact/>
-* [kentcdodds/cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts <https://www.npmjs.com/package/cross-env>
-* [Swordfish90/cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
-* [nvbn/thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
-* [mixn/carbon-now-cli](https://github.com/mixn/carbon-now-cli):🎨 Beautiful images of your code — from right inside your terminal.
-* [faressoft/terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
-* [niieani/bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
-* [ericfreese/rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
-* [kovidgoyal/kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
-* [idank/explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text [explainshell](https://explainshell.com)
-* [sindresorhus/fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
-* [tartley/colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
-* [dylanaraps/fff](https://github.com/dylanaraps/fff):🚀 fucking fast file-manager
-* [jmacdonald/amp](https://github.com/jmacdonald/amp):A complete text editor for your terminal. <https://amp.rs>
-* [liamg/aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
-* [amanusk/s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility <https://amanusk.github.io/s-tui/>
-* [rupa/z](https://github.com/rupa/z):z - jump around
-* [jwilm/alacritty](https://github.com/jwilm/alacritty):A cross-platform, GPU-accelerated terminal emulator
-* [koalaman / shellcheck](https://github.com/koalaman/shellcheck)：ShellCheck, a static analysis tool for shell scripts <https://www.shellcheck.net>
+* [hyperfine](https://github.com/sharkdp/hyperfine):A command-line benchmarking tool
+* [genact](https://github.com/svenstaro/genact):🌀 A nonsense activity generator <https://svenstaro.github.io/genact/>
+* [cross-env](https://github.com/kentcdodds/cross-env):🔀 Cross platform setting of environment scripts <https://www.npmjs.com/package/cross-env>
+* [cool-retro-term](https://github.com/Swordfish90/cool-retro-term):A good looking terminal emulator which mimics the old cathode display...
+* [thefuck](https://github.com/nvbn/thefuck):Magnificent app which corrects your previous console command.
+* [carbon-now-cli](https://github.com/mixn/carbon-now-cli):🎨 Beautiful images of your code — from right inside your terminal.
+* [terminalizer](https://github.com/faressoft/terminalizer):🦄 Record your terminal and generate animated gif images
+* [rat](https://github.com/ericfreese/rat):Compose shell commands to build interactive terminal applications
+* [kitty](https://github.com/kovidgoyal/kitty):A cross-platform, fast, feature full, GPU based terminal emulator
+* [explainshell](https://github.com/idank/explainshell):match command-line arguments to their help text [explainshell](https://explainshell.com)
+* [fkill-cli](https://github.com/sindresorhus/fkill-cli):Fabulously kill processes. Cross-platform.
+* [colorama](https://github.com/tartley/colorama):Simple cross-platform colored terminal text in Python
+* [fff](https://github.com/dylanaraps/fff):🚀 fucking fast file-manager
+* [amp](https://github.com/jmacdonald/amp):A complete text editor for your terminal. <https://amp.rs>
+* [aminal](https://github.com/liamg/aminal):Golang terminal emulator from scratch
+* [s-tui](https://github.com/amanusk/s-tui):Terminal based CPU stress and monitoring utility <https://amanusk.github.io/s-tui/>
+* [z](https://github.com/rupa/z):z - jump around
+* [shellcheck](https://github.com/koalaman/shellcheck)：ShellCheck, a static analysis tool for shell scripts <https://www.shellcheck.net>
 * yapf：Google开发的python代码格式规范化工具，支持pep8以及Google代码风格
 * PathPicker(fpp):在命令行输出中自动识别目录和文件，支持交互式，配合git非常有用
 * sz/rz：交互式文件传输，在多重跳板机下传输文件非常好用，不用一级一级传输
 * script/scriptreplay: 终端会话录制
 * 配置
-  - [direnv/direnv](https://github.com/direnv/direnv):Unclutter your .profile <http://direnv.net>
+  - [direnv](https://github.com/direnv/direnv):Unclutter your .profile <http://direnv.net>
 
 ## snippets
 
-* [alexanderepstein/Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
+* [Bash-Snippets](https://github.com/alexanderepstein/Bash-Snippets):A collection of small bash scripts for heavy terminal users
 
 ## 参考
 
@@ -1245,7 +1236,7 @@ ccache gcc foo.c
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 
-* [teddysun / across](https://github.com/teddysun/across)
+* [across](https://github.com/teddysun/across)
 * 脚本参考
   - <http://www.bashoneliners.com/>
   - <http://www.shell-fu.org/>

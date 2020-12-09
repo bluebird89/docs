@@ -1,3 +1,3 @@
 # rift
 
-[facebookarchive/RiftDK2](https://github.com/facebookarchive/RiftDK2)
+* [RiftDK2](https://github.com/facebookarchive/RiftDK2)

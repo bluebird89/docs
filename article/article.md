@@ -717,5 +717,5 @@ The night before the Youth Day
 
 ## 图书
 
-- 《世说新语》
-- 《聊斋志异》
+* 《世说新语》
+* 《聊斋志异》

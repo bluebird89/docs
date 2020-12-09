@@ -312,9 +312,9 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
 
 ## 参考
 
-* [GoogleChrome/lighthouse](https://github.com/GoogleChrome/lighthouse):Auditing, performance metrics, and best practices for Progressive Web Apps
-* [paularmstrong/normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
-* [thedaviddias/Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist):🎮 The only Front-End Performance Checklist that runs faster than the others <https://frontendchecklist.io(soon> on)
+* [lighthouse](https://github.com/GoogleChrome/lighthouse):Auditing, performance metrics, and best practices for Progressive Web Apps
+* [normalizr](https://github.com/paularmstrong/normalizr):Normalizes nested JSON according to a schema
+* [Front-End-Performance-Checklist](https://github.com/thedaviddias/Front-End-Performance-Checklist):🎮 The only Front-End Performance Checklist that runs faster than the others <https://frontendchecklist.io(soon> on)
 * [高性能网页开发概要](http://www.jianshu.com/p/2818f6dcbf23)
 * [性能调优攻略](https://coolshell.cn/articles/7490.html)
 * [使用异步 I/O 大大提高应用程序的性能](https://www.ibm.com/developerworks/cn/linux/l-async/)

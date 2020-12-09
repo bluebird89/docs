@@ -260,7 +260,7 @@
 
 ## 工具
 
-* [waditu/tushare](https://github.com/waditu/tushare):TuShare is a utility for crawling historical data of China stocks
+* [tushare](https://github.com/waditu/tushare):TuShare is a utility for crawling historical data of China stocks
 
 ## 参考
 

@@ -568,6 +568,9 @@ larger than available brokers 0
 ./kafka-producer-perf-test.sh --topic test001 --num- records 1000000 --record-size 1024 --throughput -1 --producer.config ../config/producer.properties
 ```
 
+
+* [Apache Kafka Foundation Course](https://www.learningjournal.guru/courses/kafka/kafka-foundation-training)
+
 ## 图书
 
 * 《Kafka源码解析与实战》 王亮
@@ -575,26 +578,24 @@ larger than available brokers 0
 
 ## 工具
 
-* 监控管理工具
-  - [yahoo/kafka-manager](https://github.com/yahoo/kafka-manager):A tool for managing Apache Kafka. 雅虎出品，可管理多个Kafka集群，是目前功能最全的管理工具。但是注意，当你的Topic太多，监控数据会占用你大量的带宽，造成你的机器负载增高。其监控功能偏弱，不满足需求。
+* GUI
+  - [kafka-manager](https://github.com/yahoo/kafka-manager):A tool for managing Apache Kafka. 雅虎出品，可管理多个Kafka集群，是目前功能最全的管理工具。但是注意，当你的Topic太多，监控数据会占用大量的带宽，造成你的机器负载增高。其监控功能偏弱，不满足需求
   - KafkaOffsetMonitor 程序一个jar包的形式运行，部署较为方便。只有监控功能，使用起来也较为安全。
   - Kafka Web Console 监控功能较为全面，可以预览消息，监控Offset、Lag等信息，不建议在生产环境中使用
   - Burrow 是LinkedIn开源的一款专门监控consumer lag的框架。支持报警，只提供HTTP接口，没有webui
-* GUI
-  - [tchiotludo/kafkahq](https://github.com/tchiotludo/kafkahq):Kafka GUI for topics, topics data, consumers group, schema registry, connect and more... <https://tchiotludo.github.io/kafkahq/>
-* library
-  - [weiboad/kafka-php](https://github.com/weiboad/kafka-php):kafka php client
-  - [dpkp/kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka <http://kafka-python.readthedocs.io/>
-  - [Shopify/sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. <https://shopify.github.io/sarama>
+  - [kafkahq](https://github.com/tchiotludo/kafkahq):Kafka GUI for topics, topics data, consumers group, schema registry, connect and more... <https://tchiotludo.github.io/kafkahq/>
+* client
+  - [kafka-php](https://github.com/weiboad/kafka-php):kafka php client
+  - [kafka-python](https://github.com/dpkp/kafka-python):Python client for Apache Kafka <http://kafka-python.readthedocs.io/>
+  - [arama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. <https://shopify.github.io/sarama>
 * [Cruise Control](http://www.infoq.com/cn/news/2017/09/LinkedIn-open-Cruise-Control-Kaf):一个Kafka集群自动化运维新利器
-* [wurstmeister/kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka <http://wurstmeister.github.io/kafka-d>…
-* [xaecbd / KafkaCenter](https://github.com/xaecbd/KafkaCenter):KafkaCenter is a unified one-stop platform for Kafka cluster management and maintenance, producer / consumer monitoring, and use of ecological components. <https://xaecbd.github.io/KafkaCenter/>
+* [kafka-docker](https://github.com/wurstmeister/kafka-docker):Dockerfile for Apache Kafka <http://wurstmeister.github.io/kafka-d>…
+* [KafkaCenter](https://github.com/xaecbd/KafkaCenter):KafkaCenter is a unified one-stop platform for Kafka cluster management and maintenance, producer / consumer monitoring, and use of ecological components. <https://xaecbd.github.io/KafkaCenter/>
 
 ## 参考
 
 * [Documentation](http://kafka.apache.org/documentation.html)
-* [apachecn/kafka-doc-zh](https://github.com/apachecn/kafka-doc-zh):Kafka 中文文档 <http://kafka.apachecn.org>
-* [Apache Kafka Foundation Course](https://www.learningjournal.guru/courses/kafka/kafka-foundation-training)
+  - [kafka-doc-zh](https://github.com/apachecn/kafka-doc-zh):Kafka 中文文档 <http://kafka.apachecn.org>
 
 * [Kafka知识点大全](https://mp.weixin.qq.com/s?__biz=MzAwNzA5MzA0NQ==&mid=2652151715&idx=2&sn=2f9124f7162e68a441def68af832becd)
 <https://juejin.im/post/5ba792f5e51d450e9e44184d>

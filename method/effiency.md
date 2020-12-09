@@ -152,5 +152,4 @@
 
 ## 工具
 
-* [anki](https://apps.ankiweb.net/):Powerful, intelligent flash cards.
-Remembering things just became much easier.
+* [anki](https://apps.ankiweb.net/):Powerful, intelligent flash cards.Remembering things just became much easier.

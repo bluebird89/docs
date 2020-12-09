@@ -1214,22 +1214,24 @@ JavaEE/JDBC/Weblogic
 
 ## project
 
-* [b3log/symphony](https://github.com/b3log/symphony):🎶 一款用 Java 实现的现代化社区（论坛/BBS/社交网络/博客）平台。<https://hacpai.com> <https://sym.b3log.org>
-* [zhanglei-workspace/shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
-* [shuzheng/zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 <http://47.93.195.63/zheng-upms-server>
+* [symphony](https://github.com/b3log/symphony):🎶 一款用 Java 实现的现代化社区（论坛/BBS/社交网络/博客）平台。<https://hacpai.com> <https://sym.b3log.org>
+* [shopping-management-system](https://github.com/zhanglei-workspace/shopping-management-system)
+* [zheng](https://github.com/shuzheng/zheng):基于Spring+SpringMVC+Mybatis分布式敏捷开发系统架构，提供整套公共微服务服务模块：集中权限管理（单点登录）、内容管理、支付中心、用户管理（支持第三方登录）、微信平台、存储系统、配置中心、日志分析、任务和通知等，支持服务治理、监控和追踪，努力为中小型企业打造全方位J2EE企业级开发解决方案。 <http://47.93.195.63/zheng-upms-server>
+* [halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 <https://docs.halo.run>
 
 ## 面试
 
-* [JavaGuide](https://github.com/Snailclimb/JavaGuide):「Java学习+面试指南」一份涵盖大部分Java程序员所需要掌握的核心知识。准备 Java 面试，首选 JavaGuide！
-* [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。 <https://github.com/Snailclimb/JavaGuide>
+* [JavaGuide](https://github.com/Snailclimb/JavaGuide):【Java学习+面试指南】 一份涵盖大部分Java程序员所需要掌握的核心知识。 <https://github.com/Snailclimb/JavaGuide>
 * [可能是一份最适合你的后端面试指南](https://juejin.im/post/5ba591386fb9a05cd31eb85f)
-* [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务等领域知识
-* [h2pl/Java-Tutorial](https://github.com/h2pl/Java-Tutorial):【Java工程师面试复习指南】本仓库涵盖大部分Java程序员所需要掌握的核心知识，整合了互联网上的很多优质Java技术文章，力求打造为最完整最实用的Java开发者学习指南，如果对你有帮助，给个star告诉我吧，谢谢！
+* [advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲：涵盖高并发、分布式、高可用、微服务等领域知识
+* [Java-Tutorial](https://github.com/h2pl/Java-Tutorial):【Java工程师面试复习指南】本仓库涵盖大部分Java程序员所需要掌握的核心知识，整合了互联网上的很多优质Java技术文章，力求打造为最完整最实用的Java开发者学习指南，如果对你有帮助，给个star告诉我吧，谢谢！
+* [toBeTopJavaer](https://github.com/hollischuang/toBeTopJavaer):To Be Top Javaer - Java 工程师成神之路 www.hollischuang.com
 
 ## 图书
 
 * [Thinking In Java Java 编程思想](https://www.codeguru.com/java/tij/tij_c.shtml)
   - [on Java8](https://lingcoder.github.io/OnJava8/#/)
+  - [thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
 * Java核心技术·卷 I（原书第10版）
 * Java核心技术·卷 II（原书第10版）
 * Effective Java
@@ -1255,13 +1257,12 @@ JavaEE/JDBC/Weblogic
   - [插件库](https://plugins.jetbrains.com/idea)
   - [Cloud Toolkit](https://www.aliyun.com/product/cloudtoolkit): 一款 IDE 插件，可以帮助开发者更高效地开发、测试、诊断并部署应用
 * 测试
-  - [alibaba/arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器 Arthas <https://alibaba.github.io/arthas/>
-    +
-  - [mockito/mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java <http://mockito.org>
+  - [arthas](https://github.com/alibaba/arthas):Alibaba Java Diagnostic Tool Arthas/Alibaba Java诊断利器 Arthas <https://alibaba.github.io/arthas/>
+  - [mockito](https://github.com/mockito/mockito):Most popular Mocking framework for unit tests written in Java <http://mockito.org>
 * datetime
-  - [JodaOrg/joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. <http://www.joda.org/joda-time/>
+  - [joda-time](https://github.com/JodaOrg/joda-time):Joda-Time is the widely used replacement for the Java date and time classes prior to Java SE 8. <http://www.joda.org/joda-time/>
 * 框架
-  - [lets-blade/blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 <https://lets-blade.com>
+  - [blade](https://github.com/lets-blade/blade):🚀 Lightning fast and elegant mvc framework for Java8 <https://lets-blade.com>
   - Spring：IOC、AOP、事务处理
   - SpringMVC：DispatcherServlet、HandlerMapping、HandlerAdapter、Controller、Intercepter、View
   - SpringBoot：集成web、hibernate、mybatis、redis、docker下使用
@@ -1269,36 +1270,33 @@ JavaEE/JDBC/Weblogic
   - Hibernate：Configuration、SessionFactory、乐观锁、二级缓存、高并发、多数据源
   - Mybatis：Configuration、SqlSession、Executor 、TypeHandler、动态sql、二级缓存
   - Netty：nio、拆念包、future、pipeline
-  - [google/guava](https://github.com/google/guava):Google core libraries for Java 限流算法、布隆过滤器、JVM缓存
-  - [akka](https://akka.io/):Build powerful reactive, concurrent, and distributed applications more easily
+  - [guava](https://github.com/google/guava):Google core libraries for Java 限流算法、布隆过滤器、JVM缓存
   - Hystrix：隔离、熔断、降级
   - RPC框架：dubbo、motan、thrift、grpc
-    + [grpc/grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC <https://grpc.io>
+    + [grpc-java](https://github.com/grpc/grpc-java)The Java gRPC implementation. HTTP/2 based RPC <https://grpc.io>
   - 搜索引擎：Lucene、Elasticsearch、Solr
 * 规范
-  - Alibaba Java Code Guidelines
-  - [alibaba/p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin <https://github.com/alibaba/p3c/wiki>
+  - Alibaba Java Code Guidelines 阿里巴巴Java开发手册
+  - [p3c](https://github.com/alibaba/p3c):Alibaba Java Coding Guidelines pmd implements and IDE plugin <https://github.com/alibaba/p3c/wiki>
 * Admin
-  - [elunez/eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 <https://auauz.net>
+  - [eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 <https://auauz.net>
 * 优化
-  - [looly / hutool](https://github.com/looly/hutool):A set of tools that keep Java sweet. <http://www.hutool.cn>
-* [apache/httpcomponents-core](https://github.com/apache/httpcomponents-core)
-* [alibaba/fastjson](https://github.com/alibaba/fastjson)A fast JSON parser/generator for Java
+  - [hutool](https://github.com/looly/hutool):A set of tools that keep Java sweet. <http://www.hutool.cn>
+* [httpcomponents-core](https://github.com/apache/httpcomponents-core)
 * [Apache Camel](https://github.com/apache/camel) is a powerful open source integration framework based on known Enterprise Integration Patterns with powerful Bean Integration.
-* [vipshop/vjtools](https://github.com/vipshop/vjtools):The vip.com's java coding standard, libraries and tools
-* [oracle/opengrok](https://github.com/oracle/opengrok):OpenGrok is a fast and usable source code search and cross reference engine, written in Java <http://oracle.github.io/opengrok/>
-* [kevinsawicki/http-request](https://github.com/kevinsawicki/http-request):Java HTTP Request Library
-* [ReactiveX/RxJava](https://github.com/ReactiveX/RxJava):RxJava – Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.
-* [qiujiayu/AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
-* [eclipse-vertx/vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM <http://vertx.io>
-* [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight powerful flow control component enabling reliability and monitoring for microservices. (轻量级的流量控制、熔断降级 Java 库)
+* [vjtools](https://github.com/vipshop/vjtools):The vip.com's java coding standard, libraries and tools
+* [opengrok](https://github.com/oracle/opengrok):OpenGrok is a fast and usable source code search and cross reference engine, written in Java <http://oracle.github.io/opengrok/>
+* [http-request](https://github.com/kevinsawicki/http-request):Java HTTP Request Library
+* [AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
+* [vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM <http://vertx.io>
+* [Sentinel](https://github.com/alibaba/Sentinel):A lightweight powerful flow control component enabling reliability and monitoring for microservices. (轻量级的流量控制、熔断降级 Java 库)
 * [SDKMAN](https://sdkman.io):The Software Development Kit Manager
   - `curl -s "https://get.sdkman.io" | bash`
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * Log
   - [主流日志工具库](https://mp.weixin.qq.com/s/iuWJxBghqhF09JqYfejBWw)
-* [liuanxin/api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
-* [jenv/jenv](https://github.com/jenv/jenv):Manage your Java environment <http://www.jenv.be>
+* [api-document](https://github.com/liuanxin/api-document):java spring-mvc document collect
+* [jenv](https://github.com/jenv/jenv):Manage your Java environment <http://www.jenv.be>
 * [akka](https://github.com/akka/akka):Build highly concurrent, distributed, and resilient message-driven applications on the JVM <https://akka.io/>
 
 ## 参考
@@ -1306,15 +1304,8 @@ JavaEE/JDBC/Weblogic
 * [Java World](http://www.javaworld.com/)
 * [awesome-java](https://github.com/akullpp/awesome-java) A curated list of awesome frameworks, libraries and software for the Java programming language.
 * [Java SE 技术文档](http://docs.oracle.com/javase/)
-* [apachecn/thinking-in-java-zh](https://github.com/apachecn/thinking-in-java-zh):📖 Java 编程思想
-* [doocs/advanced-java](https://github.com/doocs/advanced-java):😮 互联网 Java 工程师进阶知识完全扫盲 <https://doocs.github.io/advanced-java>
-* [hollischuang / toBeTopJavaer](https://github.com/hollischuang/toBeTopJavaer):To Be Top Javaer - Java 工程师成神之路 www.hollischuang.com
-* [aalansehaiyang/technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
-* [java-design-patterns](https://java-design-patterns.com/patterns/)
-* [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java <http://java-design-patterns.com>
+* [technology-talk](https://github.com/aalansehaiyang/technology-talk)：汇总java生态圈常用技术框架、开源中间件，系统架构、项目管理、经典架构案例、数据库、常用三方库、线上运维等知识
+* [java-design-patterns](https://github.com/iluwatar/java-design-patterns):Design patterns implemented in Java <http://java-design-patterns.com>
 * [Java Algorithm And Data Structure Interview Questions and Programs](http://www.codespaghetti.com/java-algorithms-questions/)
-* [Snailclimb/JavaGuide](https://github.com/Snailclimb/JavaGuide):A core knowledge that most Java programmers need to master <https://github.com/Snailclimb/JavaGuide>
-* [crossoverJie/JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
-* [ruibaby/halo](https://github.com/ruibaby/halo):Halo可能是最好的Java博客系统😉 <https://docs.halo.run>
+* [JCSprout](https://github.com/crossoverJie/JCSprout):👨‍🎓 Java Core Sprout : basic, concurrent, algorithm
 * [精简之道](https://mp.weixin.qq.com/s/Icn5_RZzFHB9WsKip2ZZ6g)
-* [阿里巴巴Java开发手册](link)

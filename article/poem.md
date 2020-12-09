@@ -384,4 +384,4 @@ A heart whose love is innocent!
 
 ## 参考
 
-- [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry
+* [chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):The most comprehensive database of Chinese poetry

@@ -5,14 +5,13 @@
 * [JetBrains Mono](https://www.jetbrains.com/lp/mono/)
 * [Source Code Pro](https://github.com/adobe-fonts/source-code-pro/):Monospaced font family for user interface and coding environments
 * [Space Mono](https://fonts.google.com/specimen/Space+Mono)
-
-* [rsms/inter](https://github.com/rsms/inter):The Inter UI font family <http://rsms.me/inter/>
-* [ryanoasis/nerd-fonts](https://github.com/ryanoasis/nerd-fonts#option-3-install-script):Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more <https://NerdFonts.com>
-* [FortAwesome/Font-Awesome](https://github.com/FortAwesome/Font-Awesome):The iconic font and CSS toolkit <https://fontawesome.com/>
-* [powerline/fonts](https://github.com/powerline/fonts):Patched fonts for Powerline users.
-* [kiliman/operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
-* [google/fonts](https://github.com/google/fonts):Font files available from Google Fonts <https://fonts.google.com>
-* [powerline/fonts](https://github.com/powerline/fonts):Patched fonts for Powerline users.
+* [inter](https://github.com/rsms/inter):The Inter UI font family <http://rsms.me/inter/>
+* [nerd-fonts](https://github.com/ryanoasis/nerd-fonts#option-3-install-script):Iconic font aggregator, collection, & patcher. 3,600+ icons, 50+ patched fonts: Hack, Source Code Pro, more. Glyph collections: Font Awesome, Material Design Icons, Octicons, & more <https://NerdFonts.com>
+* [Font-Awesome](https://github.com/FortAwesome/Font-Awesome):The iconic font and CSS toolkit <https://fontawesome.com/>
+* [powerline](https://github.com/powerline/fonts):Patched fonts for Powerline users.
+* [operator-mono-lig](https://github.com/kiliman/operator-mono-lig):Add ligatures to Operator Mono similar to Fira Code
+* [google](https://github.com/google/fonts):Font files available from Google Fonts <https://fonts.google.com>
+* [powerline](https://github.com/powerline/fonts):Patched fonts for Powerline users.
 * [iconfont](https://www.iconfont.cn/)
 * [visualhunt](https://visualhunt.com/)
 * font-hack-nerd-font
@@ -34,8 +33,8 @@ mv 10-powerline-symbols.conf ~/.config/fontconfig/conf.d/
 
 ## 工具
 
-* [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
+* [fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
 
 ## theme
 
-* [dracula/dracula-theme](https://github.com/dracula/dracula-theme):😱 A dark theme for all the things! <https://draculatheme.com>
+* [dracula-theme](https://github.com/dracula/dracula-theme):😱 A dark theme for all the things! <https://draculatheme.com>

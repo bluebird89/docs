@@ -215,11 +215,11 @@ end
 
 ## 工具
 
-* [SkyLothar/lua-resty-jwt](https://github.com/SkyLothar/lua-resty-jwt):JWT For The Great Openresty
-* [bungle/lua-resty-validation](https://github.com/bungle/lua-resty-validation):Validation Library (Input Validation and Filtering) for Lua and OpenResty.
-* [openresty/lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers <https://openresty.org/>
-* [loveshell / ngx_lua_waf](https://github.com/loveshell/ngx_lua_waf):一个基于lua-nginx-module(openresty)的web应用防火墙
-* [openresty/lua-resty-limit-traffic](https://github.com/openresty/lua-resty-limit-traffic):Lua library for limiting and controlling traffic in OpenResty/ngx_lua
+* [lua-resty-jwt](https://github.com/SkyLothar/lua-resty-jwt):JWT For The Great Openresty
+* [lua-resty-validation](https://github.com/bungle/lua-resty-validation):Validation Library (Input Validation and Filtering) for Lua and OpenResty.
+* [lua-nginx-module](https://github.com/openresty/lua-nginx-module):Embed the Power of Lua into NGINX HTTP servers <https://openresty.org/>
+* [ngx_lua_waf](https://github.com/loveshell/ngx_lua_waf):一个基于lua-nginx-module(openresty)的web应用防火墙
+* [lua-resty-limit-traffic](https://github.com/openresty/lua-resty-limit-traffic):Lua library for limiting and controlling traffic in OpenResty/ngx_lua
 
 ## 参考
 

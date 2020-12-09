@@ -778,18 +778,18 @@ var jq=jQuery.noConflict();
 
 ## 扩展
 
-- [blueimp/jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
-- [Studio-42/elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI <https://studio-42.github.io/elFinder/>
-- [mumuy/widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 <http://jquerywidget.com/>
-- [js-cookie/js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
-- [DataTables/DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery <http://www.datatables.net/>
-- [jquery-validation](https://github.com/jquery-validation/jquery-validation):clone本地，grunt安装，编译;test中的index.html会有测试断言
+* [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload)
+* [elFinder](https://github.com/Studio-42/elFinder):Open-source file manager for web, written in JavaScript using jQuery and jQuery UI <https://studio-42.github.io/elFinder/>
+* [widget](https://github.com/mumuy/widget):A set of widgets based on jQuery&&javascript. 一套基于jquery或javascript的插件库 ：轮播、标签页、滚动条、下拉框、对话框、搜索提示、城市选择(城市三级联动)、日历等 <http://jquerywidget.com/>
+* [js-cookie](https://github.com/js-cookie/js-cookie):A simple, lightweight JavaScript API for handling browser cookies
+* [DataTables](https://github.com/DataTables/DataTables):Tables plug-in for jQuery <http://www.datatables.net/>
+* [jquery-validation](https://github.com/jquery-validation/jquery-validation):clone本地，grunt安装，编译;test中的index.html会有测试断言
 
-* [flesler/jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery <http://demos.flesler.com/jquery/scrollTo/>
+* [jquery.scrollTo](https://github.com/flesler/jquery.scrollTo):Lightweight, cross-browser and highly customizable animated scrolling with jQuery <http://demos.flesler.com/jquery/scrollTo/>
 * [plugin](http://www.jq22.com/)
 
 ## 参考
 
-* [oneuijs/You-Dont-Need-jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery):Examples of how to do query, style, dom, ajax, event etc like jQuery with plain javascript.
+* [You-Dont-Need-jQuery](https://github.com/oneuijs/You-Dont-Need-jQuery):Examples of how to do query, style, dom, ajax, event etc like jQuery with plain javascript.
 * <https://juejin.im/post/58c883ecb123db005311861a>
 * [Ajax 知识体系大梳理](https://juejin.im/post/58c883ecb123db005311861a)

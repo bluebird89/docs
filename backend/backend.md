@@ -498,12 +498,12 @@ def hash_choose(request_info, server_lst):
 ## 资源
 
 * [Hprose](https://hprose.com):高性能远程对象服务引擎
-* [Kickball/awesome-selfhosted](https://github.com/Kickball/awesome-selfhosted):This is a list of Free Software network services and web applications which can be hosted locally. Selfhosting is the process of locally hosting and managing applications instead of renting from SaaS providers. <https://reddit.com/r/selfhosted>
-* [arialdomartini/Back-End-Developer-Interview-Questions](https://github.com/arialdomartini/Back-End-Developer-Interview-Questions):A list of back-end related questions you can be inspired from to interview potential candidates, test yourself or completely ignore
-* [wx-chevalier/Backend-Series](https://github.com/wx-chevalier/Backend-Series):📚 服务端应用程序开发与系统架构/微服务架构与实践，服务端基础篇 | 微服务与云原生篇 | Spring 篇 | Node.js 篇 | DevOps 篇 | 信息安全与渗透测试篇
-* [lemonchann/TechClass](https://github.com/lemonchann/TechClass):项目涵盖成为一个后端开发程序员必备的技能，包括Linux、网络、架构、微服务、数据库、数据结构和算法、编程语言学习等内容 <https://lemonchann.github.io/TechClass>
+* [awesome-selfhosted](https://github.com/Kickball/awesome-selfhosted):This is a list of Free Software network services and web applications which can be hosted locally. Selfhosting is the process of locally hosting and managing applications instead of renting from SaaS providers. <https://reddit.com/r/selfhosted>
+* [Back-End-Developer-Interview-Questions](https://github.com/arialdomartini/Back-End-Developer-Interview-Questions):A list of back-end related questions you can be inspired from to interview potential candidates, test yourself or completely ignore
+* [Backend-Series](https://github.com/wx-chevalier/Backend-Series):📚 服务端应用程序开发与系统架构/微服务架构与实践，服务端基础篇 | 微服务与云原生篇 | Spring 篇 | Node.js 篇 | DevOps 篇 | 信息安全与渗透测试篇
+* [TechClass](https://github.com/lemonchann/TechClass):项目涵盖成为一个后端开发程序员必备的技能，包括Linux、网络、架构、微服务、数据库、数据结构和算法、编程语言学习等内容 <https://lemonchann.github.io/TechClass>
 
 ## 参考
 
-* [dianping/camel](https://github.com/dianping/camel):软负载一体解决方案，承担了F5硬负载层后的软负载工作
+* [camel](https://github.com/dianping/camel):软负载一体解决方案，承担了F5硬负载层后的软负载工作
 * [cilium](https://github.com/cilium/cilium):API Aware Networking and Security using BPF and XDP

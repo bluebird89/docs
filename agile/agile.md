@@ -915,7 +915,7 @@
 * Taiga
 * Tuleap
 * Jira Software from Atlassian
-* conflurence : document
+* conflurence
 * VivifyScrum
 * Binfire
 * VersionOne
@@ -927,13 +927,14 @@
 * Axosoft
 * [TAPD](https://www.tapd.cn/official/index):腾讯敏捷研发体系十余年的发展成果，为产品研发全生命周期提供解决方案，支持敏捷需求规划、迭代计划跟踪、测试与质量保证、持续构建交付等全过程研发实践
 * [snipper](https://snipper.io):you collaborate with your friends on the same code in real time and keep track of versions.
-
-* ![Likelihood Matrix](../_static/likelihood Matrix.jpg "Optional title")
-* ![Important & Difficult Plan Matrix](../_static/important_difficult_plan_matrix.jpg "Optional title")  get this priority data as part of your backlog
-* ![Ishikawa Diagram(Cause/Effect)](../_static/ishikawa_diagram.jpg "Optional title")
+* Ishikawa Diagram
   - 1943 Created by chemical engineer Kaoru Ishikawa
   - Every problem has a specific cause, thereby eliminating the root cause
   - From generic to specific problem
+
+![Likelihood Matrix](../_static/likelihood Matrix.jpg "Optional title")
+![Important & Difficult Plan Matrix](../_static/important_difficult_plan_matrix.jpg "Optional title")  get this priority data as part of your backlog
+![Ishikawa Diagram(Cause/Effect)](../_static/ishikawa_diagram.jpg "Optional title")
 
 ## 参考
 

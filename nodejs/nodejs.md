@@ -17,8 +17,8 @@ Node.js JavaScript runtime ✨🐢🚀✨ <https://nodejs.org>
 
 ## [安装](https://github.com/nodesource/distributions)
 
-* [tj/n](https://github.com/tj/n):Node version management
-* [creationix/nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
+* [n](https://github.com/tj/n):Node version management
+* [nvm](https://github.com/creationix/nvm):Node Version Manager - Simple bash script to manage multiple active node.js versions
 * [nodemon](https://nodemon.io/):nodemon reload, automatically.
 
 ```sh
@@ -774,96 +774,85 @@ yarn install node-sass
 
 ## 面试
 
-* [jimuyouyou/node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
+* [node-interview-questions](https://github.com/jimuyouyou/node-interview-questions)
 * [node-interview](https://github.com/ElemeFE/node-interview) How to pass the Node.js interview of ElemeFE. <https://elemefe.github.io/node-interview/>
 
 ## 教程
 
 * [Node.js 教程](https://github.com/wangdoc/node-tutorial)
 * [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
-* [ElemeFE/node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
-* [Chiara-yen/startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs)
-* [scotch-io/node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app <https://scotch.io/tutorials/creating>-…
-* [alsotang/node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
+* [node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
+* [startLearningNodejs](https://github.com/Chiara-yen/startLearningNodejs)
+* [node-todo](https://github.com/scotch-io/node-todo):A simple Node/MongoDB/Angular todo app <https://scotch.io/tutorials/creating>-…
+* [node-lessons](https://github.com/alsotang/node-lessons):📕《Node.js 包教不包会》 by alsotang
 * [node-in-debugging](https://github.com/nswbmw/node-in-debugging):《Node.js 调试指南》
 
 ## 工具
 
 * main
   - [Dist](http://nodejs.org/dist/)
-  - [motdotla/dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
+  - [dotenv](https://github.com/motdotla/dotenv):Loads environment variables from .env for nodejs projects.
 * 框架
-  - [fastify/fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js <https://www.fastify.io/>
-  - [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications
-  - [balderdashy/sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js <https://sailsjs.com>
-  - [NodeBB/NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>
+  - [fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js <https://www.fastify.io/>
+  - [sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js <https://sailsjs.com>
+  - [NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>
+* [node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 * [node-inspector](https://github.com/node-inspector/node-inspector) Node.js debugger based on Blink Developer Tools
-* Compiler
-  - [zeit/ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
-* 缓存
-  - [isaacs/node-lru-cache](https://github.com/isaacs/node-lru-cache)
-* Error
-  - [AriaMinaei/pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
-* Proxy
-  - [OptimalBits/redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
+* [ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
+* [node-lru-cache](https://github.com/isaacs/node-lru-cache)
+* [pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
+* [zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
+* [NodeOS](https://github.com/NodeOS/NodeOS)
+* [redbird](https://github.com/OptimalBits/redbird):A modern reverse proxy for node
   - [alibaba/anyproxy](https://github.com/alibaba/anyproxy):A fully configurable http/https proxy in NodeJS <http://anyproxy.io>
     - [chimurai/http-proxy-middleware](https://github.com/chimurai/http-proxy-middleware):⚡️ The one-liner node.js http-proxy middleware for connect, express and browser-sync
 * db
-  - [NodeRedis/node_redis](https://github.com/NodeRedis/node_redis):redis client for node <http://redis.js.org/>
-  - [luin/ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
+  - [node_redis](https://github.com/NodeRedis/node_redis):redis client for node <http://redis.js.org/>
+  - [ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
   - [typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. <http://typeorm.io>
   - [sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js <https://sequelize.org>
 * HTTP
   - [got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
-  - [tj/co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
-* Logger
-  - [winstonjs/winston](https://github.com/winstonjs/winston):A logger for just about everything. <http://github.com/winstonjs/winston>
-  - [expressjs/morgan](https://github.com/expressjs/morgan):HTTP request logger middleware for node.js
-* authenticate
-  - [jaredhanson/passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. <http://www.passportjs.org>
+  - [co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)
+* [winston](https://github.com/winstonjs/winston):A logger for just about everything. <http://github.com/winstonjs/winston>
+* [passport](https://github.com/jaredhanson/passport)：Simple, unobtrusive authentication for Node.js. <http://www.passportjs.org>
 * 监控
-  - [lloyd/node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
-  - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
+  - [node-memwatch](https://github.com/lloyd/node-memwatch):A NodeJS library to keep an eye on your memory usage, and discover and isolate leaks.
+  - [statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
 * cli
   - [yargs](https://github.com/yargs/yargs):yargs the modern, pirate-themed successor to optimist. <http://yargs.js.org/>
-  - [tj/commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
-* render
-  - [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
-* Kafka
-  - [SOHU-Co/kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
-* compression
-  - [expressjs/compression](https://github.com/expressjs/compression):Node.js compression middleware
-* i18n
-  - [i18next/i18next](https://github.com/i18next/i18next):i18next: learn once - translate everywhere <http://i18next.com/>
-* REST
-  - [restify/node-restify](https://github.com/restify/node-restify):The future of Node.js REST development <http://restify.com>
-* package
-  - [zeit/pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable <https://npmjs.com/pkg>
+  - [commander.js](https://github.com/tj/commander.js):node.js command-line interfaces made easy
+* [carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
+* [kafka-node](https://github.com/SOHU-Co/kafka-node):Node.js client for Apache Kafka 0.8 and later.
+* [i18next](https://github.com/i18next/i18next):i18next: learn once - translate everywhere <http://i18next.com/>
+* [node-restify](https://github.com/restify/node-restify):The future of Node.js REST development <http://restify.com>
+  - [node-fs-extra](https://github.com/jprichardson/node-fs-extra):Node.js: extra methods for the fs object like copy(), remove(), mkdirs()
+* [pkg](https://github.com/zeit/pkg):Package your Node.js project into an executable <https://npmjs.com/pkg>
 * test
-  - [GoogleChromeLabs/ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
-  - [DevExpress/testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. <https://devexpress.github.io/testcafe/>
-  - [visionmedia/supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
-  - [getgauge / taiko](https://github.com/getgauge/taiko):A node.js library for testing modern web applications <https://taiko.dev>
-  - [mcollina / autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
-  - [Marak/faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
-* date
-  - [](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
-* [GoogleChromeLabs/carlo](https://github.com/GoogleChromeLabs/carlo):Web rendering surface for Node applications
-* [kamranahmedse/pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
-* [noble/bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
-* [octalmage/robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. <http://robotjs.io>
-* [InversifyJS](https://github.com/inversify/InversifyJS):A powerful and lightweight inversion of control container for JavaScript & Node.js apps powered by TypeScript. <http://inversify.io/>
+  - [ndb](https://github.com/GoogleChromeLabs/ndb):ndb is an improved debugging experience for Node.js, enabled by Chrome DevTools
+  - [testcafe](https://github.com/DevExpress/testcafe):A Node.js tool to automate end-to-end web testing. <https://devexpress.github.io/testcafe/>
+  - [supertest](https://github.com/visionmedia/supertest):🕷Super-agent driven library for testing node.js HTTP servers using a fluent API
+  - [taiko](https://github.com/getgauge/taiko):A node.js library for testing modern web applications <https://taiko.dev>
+  - [autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
+  - [faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
+* [date-fns](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
+* [pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
 
-* [expressjs/multer](https://github.com/expressjs/multer):Node.js middleware for handling `multipart/form-data`.
-* [sahat/hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications [http://hackathonstarter-sahat.rhcloud...](http://hackathonstarter-sahat.rhcloud…)
-* [nodejitsu/node-http-proxy](https://github.com/nodejitsu/node-http-proxy):A full-featured http proxy for node.js http://github.com/nodejitsu/node-http…
-* [auth0/node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken):JsonWebToken implementation for node.js http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
+* [docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
+* [bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals
+* [robotjs](https://github.com/octalmage/robotjs):Node.js Desktop Automation. <http://robotjs.io>
+* [InversifyJS](https://github.com/inversify/InversifyJS):A powerful and lightweight inversion of control container for JavaScript & Node.js apps powered by TypeScript. <http://inversify.io/>
+* [machine_learning](https://github.com/junku901/machine_learning):Machine learning library for Node.js http://joonku.com/project/machine_learning
+* [hapi](https://github.com/hapijs/hapi):Server Framework for Node.js http://hapijs.com
+
+* [hackathon-starter](https://github.com/sahat/hackathon-starter):A boilerplate for Node.js web applications [http://hackathonstarter-sahat.rhcloud...](http://hackathonstarter-sahat.rhcloud…)
+* [node-http-proxy](https://github.com/nodejitsu/node-http-proxy):A full-featured http proxy for node.js http://github.com/nodejitsu/node-http…
+* [node-jsonwebtoken](https://github.com/auth0/node-jsonwebtoken):JsonWebToken implementation for node.js http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
 
 ## reference
 
 * [Guides](https://nodejs.org/en/docs/guides/)
-* [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
-* [goldbergyoni/nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list (September 2019) <https://twitter.com/nodepractices/>
-* [i0natan/nodebestpractices](https://github.com/i0natan/nodebestpractices):The largest Node.JS best practices list. Curated from the top ranked articles and always updated
-* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)
 * [awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)⚡ Delightful Node.js packages and resources https://node.cool/
+* [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
+* [nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list <https://twitter.com/nodepractices/>
+* [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)

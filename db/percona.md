@@ -125,4 +125,4 @@ innobackupex --defaults-file=/etc/my.cnf  --copy-back /backup/20180423/2018-04-1
 
 ## 扩展
 
-* [xelabs/tokudb](https://github.com/XeLabs/tokudb):Next Generation DBMS TokuDB, based on Percona Server 5.7 with more features <https://github.com/xelabs/tokudb/wiki>
+* [tokudb](https://github.com/XeLabs/tokudb):Next Generation DBMS TokuDB, based on Percona Server 5.7 with more features <https://github.com/xelabs/tokudb/wiki>

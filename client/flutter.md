@@ -83,35 +83,32 @@ pod setup
 
 ## 教程
 
-* [FilledStacks / flutter-tutorials](https://github.com/FilledStacks/flutter-tutorials):The repo contains the source code for all the tutorials on the FilledStacks Youtube channel.
+* [flutter-tutorials](https://github.com/FilledStacks/flutter-tutorials):The repo contains the source code for all the tutorials on the FilledStacks Youtube channel.
+* [Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
+* [flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 130+ 组件的中文文档与 demo 演示
 
 ## 项目
 
-* [yubo725/flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
-* [pszklarska/FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture <https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65>
-* [2d-inc/HistoryOfEverything](https://github.com/2d-inc/HistoryOfEverything):Flutter Launch Timeline Demo
-* [Mayandev/morec](https://github.com/Mayandev/morec):💥非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App(部分 UI 仿豆瓣电影🎥)。 A beautiful movie application build by flutter.
-* [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 140+ 组件的demo 演示与中文文档
-* [OpenFlutter/Flutter-Notebook](https://github.com/OpenFlutter/Flutter-Notebook):日更的FlutterDemo合集
-* [CarGuo/gsy_github_app_flutter](https://github.com/CarGuo/gsy_github_app_flutter):超完整的Flutter项目，功能丰富，适合学习和日常使用。
+* [flutter-osc](https://github.com/yubo725/flutter-osc):基于Google Flutter的开源中国客户端，支持Android和iOS。
+* [FlutterShoppingCart](https://github.com/pszklarska/FlutterShoppingCart):Flutter example of shopping app using Redux architecture <https://hackernoon.com/flutter-redux-how-to-make-shopping-list-app-1cd315e79b65>
+* [HistoryOfEverything](https://github.com/2d-inc/HistoryOfEverything):Flutter Launch Timeline Demo
+* [morec](https://github.com/Mayandev/morec):💥非常精美的 Flutter 版电影客户端，利用豆瓣现有的 Api，打造了一个完整的电影展示 App(部分 UI 仿豆瓣电影🎥)。 A beautiful movie application build by flutter.
+* [Flutter-Notebook](https://github.com/OpenFlutter/Flutter-Notebook):日更的FlutterDemo合集
+* [gsy_github_app_flutter](https://github.com/CarGuo/gsy_github_app_flutter):超完整的Flutter项目，功能丰富，适合学习和日常使用。
 
 ## 工具
 
-* [google/flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API
-* [Drakirus/go-flutter-desktop-embedder](https://github.com/Drakirus/go-flutter-desktop-embedder):A Go (golang) Custom Flutter Engine Embedder for desktop
+* [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API
+* [go-flutter-desktop-embedder](https://github.com/Drakirus/go-flutter-desktop-embedder):A Go (golang) Custom Flutter Engine Embedder for desktop
 * [fish-redux](https://github.com/alibaba/fish-redux):Fish Redux 是一个基于 Redux 数据管理的组装式 flutter 应用框架，特别适用于构建中大型的复杂应用，它最显著的特征是函数式的编程模型、可预测的状态管理、可插拔的组件体系、最佳的性能表现
-* UI
-  - [mitesh77/Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
-  - [mitesh77 / Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
-* [cloudwebrtc / flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
-* [zino-app / graphql-flutter](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
+* [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates):completely free for everyone. Its build-in Flutter Dart.
+* [flutter-webrtc](https://github.com/cloudwebrtc/flutter-webrtc):WebRTC plugin for Flutter Mobile/Desktop/Web
+* [graphql-flutter](https://github.com/zino-app/graphql-flutter):A GraphQL client for Flutter, bringing all the features from a modern GraphQL client to one easy to use package.
 
 ## 参考
 
 * [](https://flutter.dev/docs/cookbook)
 * [](https://flutter.dev/docs/get-started/codelab)
-* [Solido/awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
+* [awesome-flutter](https://github.com/Solido/awesome-flutters):A curated list of awesome Flutter components, frameworks, libraries, and softwares
 * [flutter_gallery](https://github.com/flutter/flutter/tree/master/examples/flutter_gallery)
-* [AweiLoveAndroid/Flutter-learning](https://github.com/AweiLoveAndroid/Flutter-learning)::octocat:🔥 👍 🌟 ⭐️ ⭐️⭐️ Flutter从配置安装到填坑指南详解，Flutter相关Demo解读，项目实例，Dart语法详解
-* [alibaba/flutter-common-widgets-app](https://github.com/alibaba/flutter-common-widgets-app):flutter 菜鸟 APP，包含常用 flutter 组件的中文文档与 demo 演示
-* [alibaba/flutter-go](https://github.com/alibaba/flutter-go):flutter 开发者帮助 APP，包含 flutter 常用 130+ 组件的中文文档与 demo 演示
+* [flutter-common-widgets-app](https://github.com/alibaba/flutter-common-widgets-app):flutter 菜鸟 APP，包含常用 flutter 组件的中文文档与 demo 演示

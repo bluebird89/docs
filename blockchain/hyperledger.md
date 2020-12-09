@@ -4,9 +4,9 @@ Hyperledger Project is a new Collaborative Project at The Linux Foundation. The 
 
 ## 资源
 
-* [itheima1/hyperledger](https://github.com/itheima1/hyperledger):区块链3.0 -> 超级账本hyperledger fabirc教程 v1.1
-* [hyperledger/fabric-samples](https://github.com/hyperledger/fabric-samples)
+* [hyperledger](https://github.com/itheima1/hyperledger):区块链3.0 -> 超级账本hyperledger fabirc教程 v1.1
+* [fabric-samples](https://github.com/hyperledger/fabric-samples)
 
 ## 工具
 
-* [hyperledger/fabric](https://github.com/hyperledger/fabric):Read-only mirror of <https://gerrit.hyperledger.org/r/#/admin/projects/fabric> <https://hyperledger.org>
+* [fabric](https://github.com/hyperledger/fabric):Hyperledger Fabric is an enterprise-grade permissioned distributed ledger framework for developing solutions and applications. Its modular and versatile design satisfies a broad range of industry use cases. It offers a unique approach to consensus that enables performance at scale while preserving privacy. https://wiki.hyperledger.org/display/fabric

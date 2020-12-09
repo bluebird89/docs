@@ -566,7 +566,7 @@ service UserService {
 * [awesome-architecture](https://github.com/toutiaoio/awesome-architecture):架构师技术图谱
 * [system-design-primer](https://github.com/donnemartin/system-design-primer):Learn how to design large-scale systems. Prep for the system design interview. Includes Anki flashcards.
 * [architecture.of.internet-product](https://github.com/davideuler/architecture.of.internet-product):互联网公司技术架构，微信/淘宝/微博/腾讯/阿里/美团点评/百度/Google/Facebook/Amazon/eBay的架构
-* [aosabook/500lines](https://github.com/aosabook/500lines):source for the book 500 Lines or Less
+* [500lines](https://github.com/aosabook/500lines):source for the book 500 Lines or Less
 * [awesome-design-systems](https://github.com/alexpate/awesome-design-systems):💅🏻 ⚒ A collection of awesome design systems
 * [from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
 * [awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.

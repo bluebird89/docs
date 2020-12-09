@@ -83,5 +83,5 @@ server {
 
 ## 参考
 
-* [meolu/walle-web](https://github.com/meolu/walle-web):A Web Deployment Tool (web代码部署工具) <https://walle-web.io，通过yii框架搭建的GUI>框架
+* [walle-web](https://github.com/meolu/walle-web):A Web Deployment Tool (web代码部署工具) <https://walle-web.io，通过yii框架搭建的GUI>框架
 * [文档](https://www.walle-web.io/docs/installation.html)

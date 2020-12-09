@@ -175,6 +175,6 @@
 ## 参考
 
 * [6.S081 Operating System Engineering](https://pdos.csail.mit.edu/6.828/2019/xv6.html)
-  - [mit-pdos / xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS <http://pdos.csail.mit.edu/6.828/>
-  - [ranxian / xv6-chinese](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
+  - [xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS <http://pdos.csail.mit.edu/6.828/>
+  - [xv6-chinese](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
 * [UNIX传奇(上篇)](https://coolshell.cn/articles/2322.html)

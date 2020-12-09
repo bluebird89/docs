@@ -15,14 +15,13 @@
 * [station](https://getstation.com/):One app to rule them all
 * [atlassian](https://www.atlassian.com/)
   - stride
-  - [Jira](https://www.atlassian.com/software/jira)：敏捷开发，处理项目中的多个步骤,用于规划和跟踪工作，并确定优先级，处理产品发布，产品交付后监控性能
   - [Linear](https://linear.app/):Linear helps streamline software projects, sprints, tasks, and bug tracking. It's built for high-performance teams.
   - [confluence](https://www.atlassian.com/software/confluence)
   - [sourcetree](https://www.sourcetreeapp.com/)：Simplicity and power in a beautiful Git GUI
   - [asana](https://asana.com/)
   - [bamboo](https://www.atlassian.com/software/bamboo):the choice of professional teams for continuous integration, deployment, and delivery Atlassian的CI/CD服务器解决方案，很多特性和Jenkins类似。它们都是流行的DevOps工具，帮助用户自动化发布流水线，从build到部署。但是，Jenkins是开源的，Bamboo是收费的。
 * [Jfrog](https://jfrog.com)
-* [jgraph/drawio](https://github.com/jgraph/drawio):Source to www.draw.io
+* [drawio](https://github.com/jgraph/drawio):Source to www.draw.io
 * [ZenHub](https://www.zenhub.com):Easier than Jira. More powerful than Trello. Built for developers.
 * UDESK:集成客服接入平台
 * towe
@@ -31,28 +30,28 @@
 * Mogui是一个企业ERP/CRM的生态系统，一个类似地球：地核、地幔、地壳的的构造结构
 * [飞书](https://www.feishu.cn/): slack + google docs
 * [welink](https://www.huaweicloud.com/product/welink.html):
-* [tinode/chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
+* [chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
-  - [mattermost/mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost <https://mattermost.com>
+  - [mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost <https://mattermost.com>
   - [Slack](https://slack.com/)
     + [Across](https://blog.acrossapp.com/): Scale high touch customer success in Slack
-  - [zulip / zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat <https://zulip.org/>
-  - [RocketChat/Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. <https://rocket.chat/>
-  - [RocketChat/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!
-* [apache/incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
-* [vitorfs/bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network <http://trybootcamp.vitorfs.com>
-* [reviewboard/reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. <https://www.reviewboard.org/>
-* [odoo/odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. <https://www.odoo.com>
+  - [zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat <https://zulip.org/>
+  - [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. <https://rocket.chat/>
+    + [/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!
+* [incubator-superset](https://github.com/apache/incubator-superset):Apache Superset (incubating) is a modern, enterprise-ready business intelligence web application
+* [bootcamp](https://github.com/vitorfs/bootcamp):An enterprise social network <http://trybootcamp.vitorfs.com>
+* [reviewboard](https://github.com/reviewboard/reviewboard):An extensible and friendly code review tool for projects and companies of all sizes. <https://www.reviewboard.org/>
+* [odoo](https://github.com/odoo/odoo):Odoo. Open Source Apps To Grow Your Business. <https://www.odoo.com>
 * 邮件
-  - [mailpile/Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features <https://mailpile.is>
-  - [Foundry376/Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. <https://getmailspring.com/>
-  - [nylas/nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! <https://nylas.com/nylas-mail/>
-  - [mailhog/MailHog](https://github.com/mailhog/MailHog):Web and API based SMTP testing
+  - [Mailpile](https://github.com/mailpile/Mailpile):A free & open modern, fast email client with user-friendly encryption and privacy features <https://mailpile.is>
+  - [Mailspring](https://github.com/Foundry376/Mailspring):💌 A beautiful, fast and maintained fork of @nylas Mail by one of the original authors. <https://getmailspring.com/>
+  - [nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome! <https://nylas.com/nylas-mail/>
+  - [MailHog](https://github.com/mailhog/MailHog):Web and API based SMTP testing
 * 看板
   - 功能
     + 列表用来表示卡片在进度上所处的状态，与大多数看板类工具类似，例如可将创建的任务卡片分配到待开发、待测试、已发布等不同列表中；
     + 加入了泳道，子任务不再是卡片内的检查项，而是一张完整的卡片；
-    + 泳道，一个故事卡片在一条泳道上横向移动，每一列列表，就是卡片移动的步伐，这种方式能清晰的看到一个用户故事从故事卡片，到拆解成若干个任务卡片，到任务评估开发点数，到任务分配到具体的工程师，到任务陆续进入到「待开发」、「开发中」、「待测试」、「已完成」、「已发布」等状态的全过程，非常直观。尽管任务可能很多，每个开发者只需要过滤出自己的任务，就非常清爽了。
+    + 泳道，一个故事卡片在一条泳道上横向移动，每一列列表，就是卡片移动的步伐，这种方式能清晰的看到一个用户故事从故事卡片，到拆解成若干个任务卡片，到任务评估开发点数，到任务分配到具体的工程师，到任务陆续进入到「待开发」、「开发中」、「待测试」、「已完成」、「已发布」等状态的全过程，非常直观。尽管任务可能很多，每个开发者只需要过滤出自己的任务，就非常清爽了
   - 工具
     + [trello](https://trello.com/):Bring the power of a visual perspective to your team
     + [Leangoo](https://www.leangoo.com):最敏捷的项目协作工具
@@ -63,11 +62,11 @@
     + [Microsoft Teams](https://products.office.com/en-us/microsoft-teams/group-chat-software)
     + Wekan
 * SSO
-  - [apereo/cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. <https://apereo.github.io/cas/>
+  - [cas](apereo/cas):Apereo CAS - Enterprise Single Sign On for all earthlings and beyond. <https://apereo.github.io/cas/>
 * 会议
-  - [jitsi/jitsi-meet](https://github.com/jitsi/jitsi-meet):Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application. <https://jitsi.org/meet>
+  - [jitsi-meet](https://github.com/jitsi/jitsi-meet):Jitsi Meet - Secure, Simple and Scalable Video Conferences that you use as a standalone app or embed in your web application. <https://jitsi.org/meet>
 * 人事
-  - [lenve / vhr](https://github.com/lenve/vhr):微人事是一个前后端分离的人力资源管理系统，项目采用SpringBoot+Vue开发。
+  - [vhr](https://github.com/lenve/vhr):微人事是一个前后端分离的人力资源管理系统，项目采用SpringBoot+Vue开发。
 
 ## 工具
 
@@ -355,23 +354,6 @@
 * 早期天使投资人王刚曾透露，滴滴D轮融资拿到DST一亿美金后，DST联合创始人兼总裁尤里·米尔纳来到滴滴，说了三句话：“第一、Uber要灭了你们；第二、如果要活命，只有一个办法，和快的合并；第三、合并后我可以再给你们十亿美金。”
 * 选择国际资本，是TMD之类的新兴独角兽在融资时达成的共识。对于TMD而言，国际资本带来的不仅是资金，还有战略眼光和执行力。
 * 柳青在2014年7月加入滴滴任COO，后升任滴滴总裁。在加入滴滴前，她是高盛亚洲区董事总经理。多年的投行背景，让柳青成为国际资本运作的高手。她加入后主导了滴滴打车与快的打车合并、苹果10亿美元投资滴滴以及收购Uber中国。
-
-## 苹果
-
-* 2019:如果采用的是付费订阅的商业模式，确实不再需要通过免费的商业模式（背后的广告和追踪生意）赚钱了。这或许可以给其它科技公司敲响警钟：数据可能是未来，但是至少在当下，它很难提供一个干净的商业模式，给予用户绝对的安心。
-* 服务类产品的创作理念，和 iPhone、iPad 等硬件产品是一样的，遵循三大原则
-  - 易于使用 Easy to use
-  - 注重细节 Attention to detail
-  - 安全私密 Private and Secure
-* 产品
-  - 纸杂志订阅服务 News+
-  - Apple Card 虚拟&实体信用卡
-  - 无广告游戏付费畅玩平台 Apple Arcade
-  - Apple TV 升级为一站式智能电视应用
-  - 以及全新的自制剧计划 TV+
-* 产业
-  - 2009年，苹果基于成本和平衡供应商的考虑，开始扶持中国产业链，造就了一个个波澜壮阔的传奇。打工妹周群思带领蓝思科技打入苹果供应链，实现财富暴增。港股上市的舜宇光学10年涨了100倍，公司厨师和清洁工都变成了百万富翁。
-  - 但苹果产业链并非只是一个造富故事，它将中国消费电子零配件企业带到了一个全新的高度，后面华为、小米、OV等手机巨头充分受益了苹果的供应商资源和技术外溢效应，并在残酷的拼杀中淬炼出核心竞争力，最终拉近了跟苹果的距离。
 
 ## 网易
 

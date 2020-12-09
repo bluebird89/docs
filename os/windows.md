@@ -54,7 +54,7 @@ systeminfo | findstr Build
   - [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
 * 快速启动
   - launchy
-  - [Wox-launcher/Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. <http://wox.one>
+  - [Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. <http://wox.one>
   - Rolan 轻量级桌面启动器
 * 资源管理器
   - Clover
@@ -317,7 +317,7 @@ The new Windows Terminal and the original Windows console host, all in the same 
 
 ## 系统
 
-* [felixrieseberg/windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
+* [windows95](https://github.com/felixrieseberg/windows95):💩🚀 Windows 95 in Electron. Runs on macOS, Linux, and Windows.
 * [Windows10 LTSB](https://msdn.itellyou.cn)
 * [Microsoft/MS-DOS](https://github.com/Microsoft/MS-DOS):The original sources of MS-DOS 1.25 and 2.0, for reference purposes
 
@@ -333,6 +333,5 @@ The new Windows Terminal and the original Windows console host, all in the same 
 * [AlternativeTo](https://alternativeto.net/):Crowdsourced software recommendations
 * [Slant](https://www.slant.co/):Trustworthy product rankings for all your shopping needs
 * [itellyou](https://msdn.itellyou.cn)
-* [Awesome-Windows/Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
-* UI
-  - [duilib/duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库
+* [Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
+* [duilib/duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库

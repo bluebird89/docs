@@ -26,5 +26,5 @@
 
 ## 参考
 
-* [donnemartin/haxor-news](https://github.com/donnemartin/haxor-news):Browse Hacker News like a haxor: A Hacker News command line interface (CLI).
-* [jlevy/the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+* [haxor-news](https://github.com/donnemartin/haxor-news):Browse Hacker News like a haxor: A Hacker News command line interface (CLI).
+* [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page

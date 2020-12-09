@@ -1,4 +1,4 @@
-# [laravel](https://github.com/laravel/laravel)
+# [laravel](https://github.com/laravel/framework)
 
 A PHP Framework For Web Artisans <https://laravel.com>
 
@@ -21,7 +21,7 @@ A PHP Framework For Web Artisans <https://laravel.com>
 
 ## 安装
 
-* [laravel/homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
+* [homestead](https://github.com/laravel/homestead):an official, pre-packaged Vagrant box that provides you a wonderful development environment without requiring you to install PHP, a web server, and any other server software on your local machine
   - 安装 virtualbox vagrant
   - parallels `vagrant plugin install vagrant-parallels`
   - vagrant box add [--name] laravel\homestead [homestead.box]
@@ -39,13 +39,13 @@ A PHP Framework For Web Artisans <https://laravel.com>
     + Postgres: 54320 → 发送到 5432
     + Mailhog: 8025 → 发送到 8025
     + 共享环境：Homestead 机器中并运行 share homestead.app。这会从 Homestead.yaml 配置文件中共享 homestead.app
-* [laravel/valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
-  - [weprovide/valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment <https://medium.com/@timneutkens/intro>…
+* [valet](https://github.com/laravel/valet):Valet is a Laravel development environment for Mac minimalists.
+  - [valet-plus](https://github.com/weprovide/valet-plus):Blazing fast macOS PHP development environment <https://medium.com/@timneutkens/intro>…
   - 为 Mac 设置了启动后始终在后台运行 Nginx
   - Valet 使用 DnsMasq 将所有指向安装在本地计算机的站点的请求代理到 *.test 域上
 * 通过composer 安装:`composer create-project --prefer-dist laravel/laravel blog`
 * [Laragon](https://sourceforge.net/projects/laragon/):适用于 Windows 的轻量级开发环境
-* [laradock/laradock](https://github.com/laradock/laradock):Docker PHP development environment. <http://laradock.io>
+* [laradock](https://github.com/laradock/laradock):Docker PHP development environment. <http://laradock.io>
 
 ```sh
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
@@ -2154,7 +2154,7 @@ php artisan jwt:secret # 使用
 </Files>
 ```
 
-## [laravel/telescope](https://github.com/laravel/telescope)
+## [telescope](https://github.com/laravel/telescope)
 
 * provides insight into the requests coming into your application, exceptions, log entries, database queries, queued jobs, mail, notifications, cache operations, scheduled tasks, variable dumps and more
 * Telescope 可深入了解进入应用程序的请求、异常、日志条目、数据库查询、排队作业、邮件、通知、缓存操作、计划任务、变量转储等
@@ -2183,7 +2183,7 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 php artisan scout:import "App\Models\Post"
 ```
 
-### [andersao/l5-repository](https://github.com/andersao/l5-repository)
+### [l5-repository](https://github.com/andersao/l5-repository)
 
 Laravel 5 - Repositories to abstract the database layer <http://andersao.github.io/l5-repository>
 
@@ -2210,80 +2210,79 @@ Laravel 5 - Repositories to abstract the database layer <http://andersao.github.
 ## 扩展
 
 * 框架
-  - [bagisto/bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. <https://bagisto.com>
-  - [laravel/framework](https://github.com/laravel/framework)
-  - [jcc/blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
-  - [bosnadev/repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. <https://bosnadev.com>
-* [laravel/lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
-  - [laravel/lumen-framework](https://github.com/laravel/lumen-framework)
+  - [laravel](https://github.com/laravel/laravel) A PHP framework for web artisans
+  - [bagisto](https://github.com/bagisto/bagisto):A Free and Opensource laravel eCommerce framework built for all to build and scale your business. <https://bagisto.com>
+  - [blog](https://github.com/jcc/blog):PJ Blog is an open source blog built with Laravel and Vue.js.
+  - [repository](https://github.com/bosnadev/repository):Laravel Repositories is a package for Laravel 5 which is used to abstract the database layer. This makes applications much easier to maintain. <https://bosnadev.com>
+  - [lumen-framework](https://github.com/laravel/lumen-framework)
+    + [lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * API
-  - [dingo/api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
-  - [laravel/elixir](https://github.com/laravel/elixir)Fluent API for Gulp
-  - [mylxsw/wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 <https://mylxsw.github.io/wizard/>
-  - [barryvdh/laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
-* Swoole
-  - [swooletw/laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
+  - [api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
+  - [elixir](https://github.com/laravel/elixir)Fluent API for Gulp
+  - [wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 <https://mylxsw.github.io/wizard/>
+  - [laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application
+* [laravel-swoole](https://github.com/swooletw/laravel-swoole):High performance HTTP server based on Swoole. Speed up your Laravel or Lumen applications.
 * logger
-  - [overtrue/laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
-  - [andersao/laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
-  - [antonioribeiro/tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
-* [livewire / livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
+  - [laravel-query-logger](https://github.com/overtrue/laravel-query-logger):📝 A dev tool to log all queries for laravel application.
+  - [laravel-request-logger](https://github.com/andersao/laravel-request-logger):HTTP request logger middleware for Laravel
+  - [tracker](https://github.com/antonioribeiro/tracker):Laravel Stats Tracker
+* [livewire](https://github.com/livewire/livewire):A full-stack framework for Laravel that takes the pain out of building dynamic UIs.
 * Oauth
-  - [laravel/socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
-  - [overtrue/socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
-  - [laravel/passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
+  - [socialite](https://github.com/laravel/socialite):an expressive, fluent interface to OAuth authentication with Facebook, Twitter, Google, LinkedIn, GitHub, GitLab and Bitbucket
+  - [socialite](https://github.com/overtrue/socialite)::octocat: Socialite is an OAuth2 Authentication tool. It is inspired by laravel/socialite, you can easily use it without Laravel.
+  - [passport](https://github.com/laravel/passport):Laravel Passport is an OAuth2 server and API authentication package that is simple and enjoyable to use.
 * websocket
-  - [beyondcode/laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.<https://docs.beyondco.de/laravel-websockets/>
-  - [laravel/echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
+  - [laravel-websockets](https://github.com/beyondcode/laravel-websockets):Websockets for Laravel. Done right.<https://docs.beyondco.de/laravel-websockets/>
+  - [echo](https://github.com/laravel/echo):provides a more robust, efficient alternative to continually polling your application for websocket changes.
 * admin
-  - [z-song/laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes <http://laravel-admin.org>
-  - [the-control-group/voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin <https://laravelvoyager.com>
+  - [laravel-admin](https://github.com/z-song/laravel-admin):Build a full-featured administrative interface in ten minutes <http://laravel-admin.org>
+  - [voyager](https://github.com/the-control-group/voyager):Voyager - The Missing Laravel Admin <https://laravelvoyager.com>
   - [LaraAdmin](https://laraadmin.com/)
   - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
   - [dcat-admin](https://github.com/jqhph/dcat-admin):fire 使用很少的代码快速构建一个功能完善的高颜值后台系统，内置丰富的后台常用组件，开箱即用，让开发者告别冗杂的HTML代码。 <http://www.dcatadmin.com>
 * pay
-  - [laravel/cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
-* [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
-* [laravel/envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP. a clean, minimal syntax for defining common tasks you run on your remote servers
-* [barryvdh/laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
+  - [cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
+* [browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
+* [envoy](https://github.com/laravel/envoy):Elegant SSH tasks for PHP. a clean, minimal syntax for defining common tasks you run on your remote servers
+* [laravel-dompdf](https://github.com/barryvdh/laravel-dompdf):A DOMPDF Wrapper for Laravel
 * RBAC
-  - [Zizaco/entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
-  - [spatie/laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
-  - [Adldap2/Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
-  - [FrozenNode/Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel <http://administrator.frozennode.com/>
-* [LaravelCollective/html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
-* [launcher-host/mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel <http://mercurius.launcher.host/>
+  - [entrust](https://github.com/Zizaco/entrust):Role-based Permissions for Laravel 5
+  - [laravel-permission](https://github.com/spatie/laravel-permission):Associate users with roles and permissions
+  - [Adldap2-Laravel](https://github.com/Adldap2/Adldap2-Laravel):LDAP Authentication & Management for Laravel
+  - [Laravel-Administrator](https://github.com/FrozenNode/Laravel-Administrator):An administrative interface package for Laravel <http://administrator.frozennode.com/>
+* [html](https://github.com/LaravelCollective/html):HTML and Form Builders for the Laravel Framework
+* [mercurius](https://github.com/launcher-host/mercurius):Real-time Messenger for Laravel <http://mercurius.launcher.host/>
 * DB
-  - [Laravel-Backpack/CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 <http://backpackforlaravel.com>
-  - [illuminate/database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)
-  - [protoqol/prequel](https://github.com/Protoqol/Prequel)
-  - [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) <https://jenssegers.com>
-* [GrahamCampbell/Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 <https://gjcampbell.co.uk/>
+  - [CRUD](https://github.com/Laravel-Backpack/CRUD):Build a custom admin interface for your Eloquent models, using Laravel 5.2 to 5.7 <http://backpackforlaravel.com>
+  - [database](https://github.com/illuminate/database):[READ ONLY] Subtree split of the Illuminate Database component (see laravel/framework)
+  - [prequel](https://github.com/Protoqol/Prequel)
+  - [laravel-mongodb](https://github.com/jenssegers/laravel-mongodb#installation):A MongoDB based Eloquent model and Query builder for Laravel (Moloquent) <https://jenssegers.com>
+* [Laravel-Throttle](https://github.com/GrahamCampbell/Laravel-Throttle):A rate limiter for Laravel 5 <https://gjcampbell.co.uk/>
 * debug
-  - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
-  - [stefanzweifel/laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
-  - [wujunze/laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
-  - [beyondcode/laravel-dump-server](link)
+  - [laravel-debugbar](https://github.com/barryvdh/laravel-debugbar):Laravel Debugbar (Integrates PHP Debug Bar)
+  - [laravel-stats](https://github.com/stefanzweifel/laravel-stats):📈 Get insights about your Laravel or Lumen Project
+  - [laravel-debug-helper](https://github.com/wujunze/laravel-debug-helper):Laravel package to help debug
+  - [laravel-dump-server](link)
   - [laravel-ide-helper](https://github.com/barryvdh/laravel-ide-helper):Laravel IDE Helper
-* [codex-project/codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! <http://codex-project.ninja>
+* [codex](https://github.com/codex-project/codex):Extendable Documentation Platform written in Laravel 5. Generate easy and awesome documentation! <http://codex-project.ninja>
 * [laravelshift](https://laravelshift.com/):laravel upgrade
 * [Laravel Analyzer](link)
 * MQ
-  - [vyuldashev/laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
-  - [laravel/horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. <https://horizon.laravel.com>
-* [InfyOmLabs/laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator <http://labs.infyom.com/laravelgenerator/>
-* [spatie/laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
-* [barryvdh/laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
-* [antonioribeiro/health](https://github.com/antonioribeiro/health):Laravel Health Panel
-* [spatie/laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
-* [elasticquent/Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
-* [saleem-hadad/larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. <https://larecipe.binarytorch.com.my/>
-* [laravel-zero/laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans <https://laravel-zero.com>
-* [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules):Module Management In Laravel <https://nwidart.com/laravel-modules/>
+  - [laravel-queue-rabbitmq](https://github.com/vyuldashev/laravel-queue-rabbitmq):RabbitMQ driver for Laravel Queue
+  - [horizon](https://github.com/laravel/horizon):Horizon provides a beautiful dashboard and code-driven configuration for your Laravel powered Redis queues. <https://horizon.laravel.com>
+* [laravel-generator](https://github.com/InfyOmLabs/laravel-generator):InfyOm Laravel Generator - API, Scaffold, CRUD Laravel Generator <http://labs.infyom.com/laravelgenerator/>
+* [laravel-fractal](https://github.com/spatie/laravel-fractal):An easy to use Fractal wrapper built for Laravel and Lumen applications
+* [laravel-snappy](https://github.com/barryvdh/laravel-snappy):Laravel Snappy PDF
+* [health](https://github.com/antonioribeiro/health):Laravel Health Panel
+* [laravel-backup](https://github.com/spatie/laravel-backup):A package to backup your Laravel app
+* [Elasticquent](https://github.com/elasticquent/Elasticquent):Maps Laravel Eloquent models to Elasticsearch types
+* [larecipe](https://github.com/saleem-hadad/larecipe):🍪 Write gorgeous documentations for your products using Markdown inside your Laravel app. <https://larecipe.binarytorch.com.my/>
+* [laravel-zero](https://github.com/laravel-zero/laravel-zero):A PHP framework for console artisans <https://laravel-zero.com>
+* [laravel-modules](https://github.com/nWidart/laravel-modules):Module Management In Laravel <https://nwidart.com/laravel-modules/>
 * cron
   - [Forge](https://forge.laravel.com):Painless PHP Servers Provision and deploy unlimited PHP applications on DigitalOcean, Linode, AWS, and more.
-* [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application.
-* [overtrue/laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
+* [Laravel Spark](https://spark.laravel.com):provides the perfect starting point for your next big idea. Forget all the boilerplate and focus on what matters: your application. <https://github.com/laravel/spark-docs>
+* [laravel-wechat](https://github.com/overtrue/laravel-wechat):微信 SDK for Laravel, 基于 overtrue/wechat
 
 ```sh
 # laravel-admin
@@ -2415,17 +2414,16 @@ password: password
 
 * [awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
 * [Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
-* [laravel/spark-docs](https://github.com/laravel/spark-docs)
-* [samedreams/artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
-* [kevinyan815/Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
+* [artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
 
+* [Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)
-* [LeoYang90/laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
+* [laravel-source-analysis](https://github.com/LeoYang90/laravel-source-analysis):详解 laravel 源码
 * [深入 Laravel 核心](https://learnku.com/docs/laravel-core-concept/5.5)
 * [Laravel 之道](https://learnku.com/docs/the-laravel-way/5.6)
 * [xiaohuilam/laravel](https://github.com/xiaohuilam/laravel/wiki):Laravel 深入浅出指南 —— Laravel 5.7 源代码解析，新手进阶指南。
-* [johnlui/Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
-* [laravel/quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. <http://laravel.com/docs/quickstart>
+* [Learn-Laravel-5](https://github.com/johnlui/Learn-Laravel-5):Laravel 5 系列入门教程
+* [quickstart-basic](https://github.com/laravel/quickstart-basic):A sample task list application. <http://laravel.com/docs/quickstart>
 * [基于 Laravel 的 API 服务端架构代码](http://laravelacademy.org/post/5449.html)
 * [laravel入门教程](https://d.laravel-china.org/docs/5.5)
 * [基于 Laravel + Vue 构建 API 驱动的前后端分离应用系列](https://laravelacademy.org/category/api-app)

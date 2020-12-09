@@ -109,9 +109,9 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 ## 测试
 
-* [square/retrofit](https://github.com/square/retrofit):Type-safe HTTP client for Android and Java by Square, Inc. <http://square.github.io/retrofit/>
-* [JakeWharton/butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. <http://jakewharton.github.io/butterkn>…
-* [robolectric/robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework <http://robolectric.org>
+* [retrofit](https://github.com/square/retrofit):Type-safe HTTP client for Android and Java by Square, Inc. <http://square.github.io/retrofit/>
+* [butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. <http://jakewharton.github.io/butterkn>…
+* [robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework <http://robolectric.org>
 
 ## 图书
 
@@ -121,17 +121,17 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 ## 工具
 
-* [iBotPeaches/Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files <https://ibotpeaches.github.io/Apktool>
-* [tbruyelle/RxPermissions](https://github.com/tbruyelle/RxPermissions):Android runtime permissions powered by RxJava2
-* [mzlogin/awesome-adb](https://github.com/mzlogin/awesome-adb):🍭 ADB Usage Complete / ADB 用法大全 <https://mazhuang.org/awesome-adb/>
-* [bingoogolapple/BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android):QRCode 扫描二维码、扫描条形码、相册获取图片后识别、生成带 Logo 二维码、支持微博微信 QQ 二维码扫描样式
-* [scottyab/secure-preferences](https://github.com/scottyab/secure-preferences):Android Shared preference wrapper than encrypts the values of Shared Preferences. It's not bullet proof security but rather a quick win for incrementally making your android app more secure.
-* [hyb1996/Auto.js](https://github.com/hyb1996/Auto.js):A UiAutomator on android, does not need root access
-* [linkedin/qark](https://github.com/linkedin/qark):Tool to look for several security related Android application vulnerabilities
-* [android-hacker/VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. <https://vxp.app>
-* [stephentuso/welcome-android](https://github.com/stephentuso/welcome-android):A customizable welcome screen <https://stephentuso.com/welcome-android/>
-* [alibaba/UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager.
-* [Genymobile/scrcpy](https://github.com/Genymobile/scrcpy):Display and control your Android device
-* [alibaba/atlas](https://github.com/alibaba/atlas):A powerful Android Dynamic Component Framework.
-* [romannurik/AndroidAssetStudio](https://github.com/romannurik/AndroidAssetStudio):A set of web-based tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
+* [Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files <https://ibotpeaches.github.io/Apktool>
+* [RxPermissions](https://github.com/tbruyelle/RxPermissions):Android runtime permissions powered by RxJava2
+* [awesome-adb](https://github.com/mzlogin/awesome-adb):🍭 ADB Usage Complete / ADB 用法大全 <https://mazhuang.org/awesome-adb/>
+* [BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android):QRCode 扫描二维码、扫描条形码、相册获取图片后识别、生成带 Logo 二维码、支持微博微信 QQ 二维码扫描样式
+* [secure-preferences](https://github.com/scottyab/secure-preferences):Android Shared preference wrapper than encrypts the values of Shared Preferences. It's not bullet proof security but rather a quick win for incrementally making your android app more secure.
+* [Auto.js](https://github.com/hyb1996/Auto.js):A UiAutomator on android, does not need root access
+* [qark](https://github.com/linkedin/qark):Tool to look for several security related Android application vulnerabilities
+* [VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. <https://vxp.app>
+* [welcome-android](https://github.com/stephentuso/welcome-android):A customizable welcome screen <https://stephentuso.com/welcome-android/>
+* [UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager.
+* [scrcpy](https://github.com/Genymobile/scrcpy):Display and control your Android device
+* [atlas](https://github.com/alibaba/atlas):A powerful Android Dynamic Component Framework.
+* [AndroidAssetStudio](https://github.com/romannurik/AndroidAssetStudio):A set of web-based tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
 * [Android Developer](https://roadmap.sh/android)

@@ -397,7 +397,7 @@ state Configuring {
 
 ## 工具
 
-* [bpmn-io/bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. <https://bpmn.io/toolkit/bpmn-js/>
+* [bpmn-js](https://github.com/bpmn-io/bpmn-js):A BPMN 2.0 rendering toolkit and web modeler. <https://bpmn.io/toolkit/bpmn-js/>
 * Visio
 * LucidChart
 * Draw.io

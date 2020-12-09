@@ -160,4 +160,4 @@ MapReduce的执行流程
 - [Hadoop环境搭建](http://blog.csdn.net/gitchat/article/details/77849331)
 - [一步一步学习大数据：Hadoop 生态系统与场景](http://blog.csdn.net/gitchat/article/details/77931757)
 
-* [tomwhite/hadoop-book](https://github.com/tomwhite/hadoop-book):Example source code accompanying O'Reilly's "Hadoop: The Definitive Guide" by Tom White <http://www.hadoopbook.com/>
+* [hadoop-book](https://github.com/tomwhite/hadoop-book):Example source code accompanying O'Reilly's "Hadoop: The Definitive Guide" by Tom White <http://www.hadoopbook.com/>

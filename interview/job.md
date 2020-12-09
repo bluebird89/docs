@@ -850,11 +850,10 @@ HP大中华区总裁孙振耀的退休感言
 ## 调解
 
 * 全国法律援助服务热线12348
-* [shengxinjing/programmer-job-blacklist](https://github.com/shengxinjing/programmer-job-blacklist):🙈程序员找工作黑名单，换工作和当技术合伙人需谨慎啊 更新有赞 <http://coder.shengxinjing.cn/>
+* [programmer-job-blacklist](https://github.com/shengxinjing/programmer-job-blacklist):🙈程序员找工作黑名单，换工作和当技术合伙人需谨慎啊 更新有赞 <http://coder.shengxinjing.cn/>
 
 ## 参考
 
 * [ResumeSample](https://github.com/geekcompany/ResumeSample):Resume template for Chinese programmers
 * [reverse-interview-zh](https://github.com/yifeikong/reverse-interview-zh):技术面试最后反问面试官的话
-
-- [lukasz-madon/awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)
+* [awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job)

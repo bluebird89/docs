@@ -30,9 +30,9 @@ Firebase 是一个移动平台，可以帮助您快速开发高品质应用，�
 
 ## 教程
 
-* [irebase/quickstart-android](https://github.com/firebase/quickstart-android):Firebase Quickstart Samples for Android <https://firebase.google.com>
+* [quickstart-android](https://github.com/firebase/quickstart-android):Firebase Quickstart Samples for Android <https://firebase.google.com>
+* [functions-samples](https://github.com/firebase/functions-samples):Collection of sample apps showcasing popular use cases using Cloud Functions for Firebase
 
 ## 资源
 
-* [firebase/functions-samples](https://github.com/firebase/functions-samples):Collection of sample apps showcasing popular use cases using Cloud Functions for Firebase
-* [angular/angularfire2](https://github.com/angular/angularfire2):The official Angular library for Firebase. <https://github.com/angular/angularfire2>
+* [angularfire2](https://github.com/angular/angularfire2):The official Angular library for Firebase. <https://github.com/angular/angularfire2>

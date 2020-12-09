@@ -87,9 +87,9 @@ http://xyz.amazonaws.com/hello-world
 
 ## 工具
 
-* [openfaas/faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple <https://docs.openfaas.com/>
-* [firecracker-microvm/firecracker](https://github.com/firecracker-microvm/firecracker):Secure and fast microVMs for serverless computing. <http://firecracker-microvm.io>
-* [awslabs/serverless-application-model](https://github.com/awslabs/serverless-application-model):AWS Serverless Application Model (AWS SAM) prescribes rules for expressing Serverless applications on AWS.
+* [faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple <https://docs.openfaas.com/>
+* [firecracker](https://github.com/firecracker-microvm/firecracker):Secure and fast microVMs for serverless computing. <http://firecracker-microvm.io>
+* [serverless-application-model](https://github.com/awslabs/serverless-application-model):AWS Serverless Application Model (AWS SAM) prescribes rules for expressing Serverless applications on AWS.
 * [Knative](https://knative.dev/)：
   - Build：在实现时，是表现为 Kubernetes 的 CRD，通过 yaml 文件来定义构建过程。这里引入了很多概念如：Build，Builder，Step，Template，Source等。另外支持用 Service Account 做身份验证
   - Serving：运行应用以对外提供服务，即提供服务、函数的运行时支撑
@@ -99,11 +99,11 @@ http://xyz.amazonaws.com/hello-world
   - Eventing
   - [Knative](https://www.ibm.com/developerworks/cn/opensource/os-knative-what-is-it-why-you-should-care/index.html)
   - [构建基于 Kubernetes 的现代化Serverless应用](https://www.servicemesher.com/getting-started-with-knative/knative-overview.html)
-* [serverless/serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – <https://serverless.com>
+* [serverless](https://github.com/serverless/serverless):Serverless Framework – Build web, mobile and IoT applications with serverless architectures using AWS Lambda, Azure Functions, Google CloudFunctions & more! – <https://serverless.com>
 * [midway](https://github.com/midwayjs/midway):🍔 A Node.js Serverless Framework for front-end/full-stack developers. Build the application for next decade. Works on AWS, Alibaba Cloud, Tencent Cloud and traditional VM/Container. Super easy integrate with React and Vue. 🌈
 * [Cloudflare Workers](https://workers.cloudflare.com/)
 
 ## 参考
 
-* [phodal/serverless](https://github.com/phodal/serverless/):Serverless 架构应用开发指南 - Serverless Architecture Application Development Guide with Serverless Framework. <https://serverless.ink>
-* [mnapoli/bref](https://github.com/mnapoli/bref):Serverless PHP on AWS Lambda <https://bref.sh/>
+* [serverless](https://github.com/phodal/serverless/):Serverless 架构应用开发指南 - Serverless Architecture Application Development Guide with Serverless Framework. <https://serverless.ink>
+* [bref](https://github.com/mnapoli/bref):Serverless PHP on AWS Lambda <https://bref.sh/>

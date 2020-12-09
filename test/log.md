@@ -352,8 +352,8 @@ grep "04/May/2017" access.log | awk '{print $9}'|sort|uniq -c|sort -nr
 
 ## 工具
 
-* [Graylog2/graylog2-server](https://github.com/Graylog2/graylog2-server):Free and open source log management <https://www.graylog.org/>
-* [klaussinani/signale](https://github.com/klaussinani/signale):👋 Hackable console logger
+* [graylog2-server](https://github.com/Graylog2/graylog2-server):Free and open source log management <https://www.graylog.org/>
+* [signale](https://github.com/klaussinani/signale):👋 Hackable console logger
 * [Graylog](https://www.graylog.org/products/open-source)
 * [Nagios](https://www.nagios.org/downloads/)
 * [](https://github.com/grafana/loki):Like Prometheus, but for logs. <https://grafana.com/loki>

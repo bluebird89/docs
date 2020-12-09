@@ -238,14 +238,14 @@ proxyTable: {
 
 ## 图书
 
-* [gwuhaolin/dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 <http://webpack.wuhaolin.cn>
+* [dive-into-webpack](https://github.com/gwuhaolin/dive-into-webpack):全面的Webpack教程《深入浅出Webpack》电子书 <http://webpack.wuhaolin.cn>
 
 ## 工具
 
-* [survivejs/webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
-* [shama/webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
-* [webpackmonitor/webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process <http://webpackmonitor.com>
-* [GoogleChromeLabs/webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
+* [webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
+* [webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
+* [webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process <http://webpackmonitor.com>
+* [webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
 
 ## 参考
 

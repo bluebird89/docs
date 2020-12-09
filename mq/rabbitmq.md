@@ -282,7 +282,7 @@ systemctl restart haproxy.service
 ## 参考
 
 * [文档](http://www.rabbitmq.com/tutorials/tutorial-one-php.html)
-* [rabbitmq/rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server):Open source multi-protocol messaging broker <https://www.rabbitmq.com/>
-* [rabbitmq/rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-tutorials):Tutorials for using RabbitMQ in various ways <http://www.rabbitmq.com/getstarted.html>
+* [rabbitmq-server](https://github.com/rabbitmq/rabbitmq-server):Open source multi-protocol messaging broker <https://www.rabbitmq.com/>
+* [rabbitmq-tutorials](https://github.com/rabbitmq/rabbitmq-tutorials):Tutorials for using RabbitMQ in various ways <http://www.rabbitmq.com/getstarted.html>
 * [rabbitmq](http://blog.csdn.net/column/details/rabbitmq.html)
-* [sky-big/RabbitMQ](https://github.com/sky-big/RabbitMQ):RabbitMQ系统3.5.3版本中文完全注释(同时实现了RabbitMQ系统和插件源代码编译，根据配置文件创建RabbitMQ集群，创建连接RabbitMQ系统的客户端节点等相关功能，方便源代码的阅读) https
+* [RabbitMQ](https://github.com/sky-big/RabbitMQ):RabbitMQ系统3.5.3版本中文完全注释(同时实现了RabbitMQ系统和插件源代码编译，根据配置文件创建RabbitMQ集群，创建连接RabbitMQ系统的客户端节点等相关功能，方便源代码的阅读) https

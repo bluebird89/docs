@@ -20,11 +20,11 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 ## 插件
 
-* [WordPress/gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. <https://wordpress.org/plugins/gutenberg/>
+* [gutenberg](https://github.com/WordPress/gutenberg):Printing since 1440. Development hub for the editor focus in core. Plugin is available from the official WordPress repository. <https://wordpress.org/plugins/gutenberg/>
 
 ## 主题
 
-* [roots/sage](https://github.com/roots/sage):WordPress starter theme with a modern development workflow <https://roots.io/sage/>
+* [sage](https://github.com/roots/sage):WordPress starter theme with a modern development workflow <https://roots.io/sage/>
 
 ## 优化
 
@@ -40,8 +40,8 @@ The JavaScript and API powered WordPress.com <https://developer.wordpress.com/ca
 
 ## 工具
 
-* [Varying-Vagrant-Vagrants/VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress <https://varyingvagrantvagrants.org>
-* [postlight/headless-wp-starter](https://github.com/postlight/headless-wp-starter):🔪 WordPress + React Starter kit
+* [VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress <https://varyingvagrantvagrants.org>
+* [headless-wp-starter](https://github.com/postlight/headless-wp-starter):🔪 WordPress + React Starter kit
 * [Apps](https://apps.wordpress.com)
 * <https://sarah.dev/writing/>
 * <https://github.com/brickspert/blog>

@@ -110,7 +110,7 @@ Authorization: Bearer <token>
 
 ## 参考
 
-* [tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen <http://jwt-auth.com>
-* [lcobucci/jwt](https://github.com/lcobucci/jwt):A simple library to work with JSON Web Token and JSON Web Signature
-* [dwyl/learn-json-web-tokens](https://github.com/dwyl/learn-json-web-tokens):🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)
+* [jwt-auth](https://github.com/tymondesigns/jwt-auth):🔐 JSON Web Token Authentication for Laravel & Lumen <http://jwt-auth.com>
+* [jwt](https://github.com/lcobucci/jwt):A simple library to work with JSON Web Token and JSON Web Signature
+* [learn-json-web-tokens](https://github.com/dwyl/learn-json-web-tokens):🔐 Learn how to use JSON Web Token (JWT) to secure your next Web App! (Tutorial/Example with Tests!!)
 * [JSON Web Token 入门教程](http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)

@@ -16,7 +16,9 @@
 
 ## 工具
 
-* [openshift/installer](https://github.com/openshift/installer):Install an OpenShift cluster
-* [openshift/openshift-ansible](https://github.com/openshift/openshift-ansible)OpenShift Installation and Configuration Management <https://install.openshift.com>
+* [installer](https://github.com/openshift/installer):Install an OpenShift cluster
+* [openshift-ansible](https://github.com/openshift/openshift-ansible)OpenShift Installation and Configuration Management <https://install.openshift.com>
+
+## 参考
 
 - [Openshift4 安装](https://mp.weixin.qq.com/s/JjfW6oibG9TLNdWostuwsQ)

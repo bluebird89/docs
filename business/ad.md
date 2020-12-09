@@ -72,4 +72,4 @@
 ## 工具
 
 * [pi-hole](https://github.com/pi-hole/pi-hole):A black hole for Internet advertisements <https://pi-hole.net>
-* [AdguardTeam / AdGuardHome](https://github.com/AdguardTeam/AdGuardHome):Network-wide ads & trackers blocking DNS server <https://adguard.com/adguard-home.html>
+* [AdGuardHome](https://github.com/AdguardTeam/AdGuardHome):Network-wide ads & trackers blocking DNS server <https://adguard.com/adguard-home.html>

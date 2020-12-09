@@ -258,8 +258,7 @@ rtmp {
 
 ## Tool
 
-* [PHP-FFMpeg/PHP-FFMpeg](https://github.com/PHP-FFmpeg/PHP-FFmpeg/): An object oriented PHP driver for FFMpeg binary
-* [ossrs / srs](https://github.com/ossrs/srs):SRS is a RTMP/HLS/WebRTC/SRT/GB28181 streaming cluster, high efficiency, stable and simple. <https://ossrs.net>
+* [PHP-FFMpeg](https://github.com/PHP-FFmpeg/PHP-FFmpeg/): An object oriented PHP driver for FFMpeg binary
 
 ## reference
 

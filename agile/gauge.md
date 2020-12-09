@@ -1,6 +1,7 @@
 ## Gauge+Taiko
 
-* [Gauge](https://gauge.org/)是一款开源的轻量级跨平台自动化测试工具，它的愿景是用更少的代码、更少的维护工作实现更多的自动化测试
+* [gauge](https://github.com/getgauge/gauge):Light weight cross-platform test automation <https://gauge.org>
+  - 一款开源的轻量级跨平台自动化测试工具，它的愿景是用更少的代码、更少的维护工作实现更多的自动化测试
   - 采用Markdown格式，支持用自然语言编写Spec，语法自由，编写工作简单易上手，不管是对业务人员还是技术人员都很友好；写出来的文档格式清晰，很好维护。
   - Gauge本身可以实现对Web页面的访问和控制，支持多种语言，各种API封装的很好，代码实现部分比Selenium要简单很多，尤其对于编程技能不是那么强的QA来讲非常友好，易上手，代码的可读性也更强一些。
 * [Taiko](https://taiko.gauge.org/)：一款开源浏览器自动化测试工具

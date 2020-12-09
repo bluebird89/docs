@@ -1032,16 +1032,14 @@ setup.ilm.overwrite: true
 
 ## 工具
 
-* client
-  - [elastic/elasticsearch-js](https://github.com/elastic/elasticsearch-js):Official Elasticsearch client library for Node.js and the browser
-* sync
-  - [siddontang/go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
-* [Yelp/elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch <https://elastalert.readthedocs.org>
+* [elasticsearch-js](https://github.com/elastic/elasticsearch-js):Official Elasticsearch client library for Node.js and the browser
+* [go-mysql-elasticsearch](https://github.com/siddontang/go-mysql-elasticsearch):Sync MySQL data into elasticsearch
+* [elastalert](https://github.com/Yelp/elastalert):Easy & Flexible Alerting With ElasticSearch <https://elastalert.readthedocs.org>
 * UI
-  - [appbaseio/dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. <https://opensource.appbase.io/dejavu/>
+  - [dejavu](https://github.com/appbaseio/dejavu):The Missing Web UI for Elasticsearch: Import, browse and edit data with rich filters and query views, create search UIs visually. <https://opensource.appbase.io/dejavu/>
   - [elasticsearch-HQ](https://github.com/ElasticHQ/elasticsearch-HQ):Monitoring and Management Web Application for ElasticSearch instances and clusters. <http://www.elastichq.org>
 
 ## 参考
 
-* [elastic/elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html>
+* [elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html>
 * [SpringBoot 操作 ElasticSearch 详解](https://mp.weixin.qq.com/s/qDbaDDDIJ81u8JY8CQJCTQ)

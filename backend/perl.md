@@ -8,7 +8,7 @@ Perl 5 is a highly capable, feature-rich programming language with over 30 years
 
 ## Framework
 
-* [kraih/mojo](https://github.com/kraih/mojo): sparkles Mojolicious - Perl real-time web framework <https://mojolicious.org>
+* [mojo](https://github.com/kraih/mojo): sparkles Mojolicious - Perl real-time web framework <https://mojolicious.org>
 
 ## 参考
 

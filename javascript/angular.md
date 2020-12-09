@@ -15,9 +15,9 @@ AngularJS - HTML enhanced for web apps! <https://angularjs.org>
 * 动画:通过Angular中直观简便的API创建高性能复杂编排和动画时间线 —— 只要非常少的代码。
 * 可访问性:通过支持ARIA的组件、开发者指南和内置的一体化测试基础设施，创建具有完备可访问性的应用。
 
-## [angular/angular](https://github.com/angular/angular)
+## [angular](https://github.com/angular/angular)
 
-One framework. Mobile & desktop. <https://angular.io/>
+One framework. Mobile & desktop. <https://angular.io>
 
 ## 项目
 
@@ -115,14 +115,10 @@ tsconfig.app.json:
 
 ## 教程
 
-* [angular-ui/angular-google-maps](https://github.com/angular-ui/angular-google-maps):AngularJS directives for the Google Maps Javascript API <http://angular-ui.github.io/angular-g>…
-* [shyamseshadri/angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
-* [angular/quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
+* [angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
+* [quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
 * [官方教程](https://angular.io)：<https://angular.cn/guide/quickstart>
-* [gdi2290/angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO <https://tipe.io>
-* [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
-* [Angular2新的体验](http://blog.fens.me/angular2-init/)
-* [gdi2290/awesome-angular](https://github.com/gdi2290/awesome-angular):📄 A curated list of awesome Angular resources by @tipeio <https://tipe.io>
+* [angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO <https://tipe.io>
 
 ## 图书
 
@@ -130,25 +126,26 @@ tsconfig.app.json:
 
 ## 工具
 
-* [angular/angular](https://github.com/angular/angular) One framework. Mobile & desktop. <https://angular.io>
-* [rintoj/ngx-virtual-scroller](https://github.com/rintoj/ngx-virtual-scroller):Virtual Scroll displays a virtual, "infinite" list.
-* [angular/angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular <https://cli.angular.io/>
-* [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security <https://akveo.github.io/nebular>
-* [chieffancypants/angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps.
-* [akveo/nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security <https://akveo.github.io/nebular>
-* [ngrx/platform](https://github.com/ngrx/platform):Reactive libraries for Angular <https://ngrx.io>
-* 地图
-  - [SebastianM/angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components <https://angular-maps.com/>
-* styleguide
-  - [toddmotto/angularjs-styleguide](https://github.com/toddmotto/angularjs-styleguide):AngularJS styleguide for teams <https://ultimateangular.com>
+* [ngx-virtual-scroller](https://github.com/rintoj/ngx-virtual-scroller):Virtual Scroll displays a virtual, "infinite" list.
+* [angular-cli](https://github.com/angular/angular-cli):CLI tool for Angular <https://cli.angular.io/>
+* [nebular](https://github.com/akveo/nebular):Angular 7 Components, Auth and Security <https://akveo.github.io/nebular>
+* [angular-loading-bar](https://github.com/chieffancypants/angular-loading-bar):A fully automatic loading / progress bar for your angular apps.
+* [platform](https://github.com/ngrx/platform):Reactive libraries for Angular <https://ngrx.io>
+* [angular-google-maps](https://github.com/SebastianM/angular-google-maps):Angular 2+ Google Maps Components <https://angular-maps.com/>
+* [angularjs-styleguide](https://github.com/toddmotto/angularjs-styleguide):AngularJS styleguide for teams <https://ultimateangular.com>
 * UI
-  - [angular/material](https://github.com/angular/material):Material design for AngularJS <https://material.angularjs.org/>
-  - [angular/material2](https://github.com/angular/material2):Material Design components for Angular <https://material.angular.io>
-  - [angular/flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
-* 测试
-  - [rangle/augury](https://github.com/rangle/augury):Angular Debugging and Visualization Tools <https://augury.angular.io/>
+  - [material](https://github.com/angular/material):Material design for AngularJS <https://material.angularjs.org/>
+  - [material2](https://github.com/angular/material2):Material Design components for Angular <https://material.angular.io>
+  - [flex-layout](https://github.com/angular/flex-layout):Provides HTML UI layout for Angular applications; using Flexbox and a Responsive API
+* [augury](https://github.com/rangle/augury):Angular Debugging and Visualization Tools <https://augury.angular.io/>
 * 升级
   - [ngMigration Assistant](https://github.com/ellamaolson/ngMigration-Assistant):一个命令行工具，用于分析 AngularJS 应用程序，并在此基础上，提出迁移路径建议。同时，它还提供应用程序中代码复杂性、大小、构造等方面的统计信息，告诉你迁移之前必要的准备工作。
   - [ngMigration Forum](https://github.com/angular/ngMigration-Forum/wiki): 是一个社区，聚集了网络上最佳的迁移经验和信息。
 
 * [ngx-admin](https://github.com/akveo/ngx-admin):Admin dashboard template based on Angular 5+, Bootstrap 4 (previously known as ng2-admin) <http://akveo.com/ngx-admin/>
+
+## 参考
+
+* [awesome-angular](https://github.com/gdi2290/awesome-angular):📄 A curated list of awesome Angular resources by @tipeio <https://tipe.io>
+* [Top 12 Productivity Tips for WebStorm and Angular – Part 1](https://www.sitepoint.com/productivity-tips-for-webstorm-and-angular-part-1/)
+* [Angular2新的体验](http://blog.fens.me/angular2-init/)

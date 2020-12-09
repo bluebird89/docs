@@ -200,6 +200,6 @@ axios.interceptors.response.use(function (response) {
   });
 ```
 
-## [lodash/lodash](https://github.com/lodash/lodash)
+## [lodash](https://github.com/lodash/lodash)
 
 为数组、字符串、object 和 argument 对象提供更一致的跨环境迭代支持，并已成为 Underscore 的超集 A modern JavaScript utility library delivering modularity, performance, & extras. <https://lodash.com/>

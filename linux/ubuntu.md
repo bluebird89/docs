@@ -1258,7 +1258,5 @@ sudo cpan -i Gtk2:AppIndicator
 
 ## 参考
 
-* [LewisVo/Awesome-Linux-Software](https://github.com/LewisVo/Awesome-Linux-Software):🐧 A list of awesome applications, software, tools and other materials for Linux distros.
-* [kholia/OSX-KVM](https://github.com/kholia/OSX-KVM):Run El Capitan, macOS Sierra, High Sierra and Mojave on QEMU/KVM. No support is provided at the moment.
-* [shubhampathak/autosetup](https://github.com/shubhampathak/autosetup):Auto setup is a bash script compatible with Debian based distributions to install and setup necessary programs.
-* [Ubuntu完全教程](https://www.cnblogs.com/dutlei/archive/2012/11/20/2778327.html)
+* [OSX-KVM](https://github.com/kholia/OSX-KVM):Run El Capitan, macOS Sierra, High Sierra and Mojave on QEMU/KVM. No support is provided at the moment.
+* [autosetup](https://github.com/shubhampathak/autosetup):Auto setup is a bash script compatible with Debian based distributions to install and setup necessary programs.

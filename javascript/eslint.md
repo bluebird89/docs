@@ -155,7 +155,7 @@ npm i -g babel-eslint eslint-config-airbnb
 ## 参考
 
 * [eslint-config-standard](https://github.com/standard/eslint-config-standard):ESLint Config for JavaScript Standard Style <https://standardjs.com>
-* [airbnb/javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
-* [standard/standard](https://github.com/standard/standard):JavaScript Style Guide, with linter & automatic code fixer <https://standardjs.com>
+* [javascript](https://github.com/airbnb/javascript):JavaScript Style Guide
+* [standard](https://github.com/standard/standard):JavaScript Style Guide, with linter & automatic code fixer <https://standardjs.com>
 * [idiomatic.js](https://github.com/rwaldron/idiomatic.js):Principles of Writing Consistent, Idiomatic JavaScript
 * [clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript):🛁 Clean Code concepts adapted for JavaScript

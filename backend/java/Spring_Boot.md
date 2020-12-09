@@ -274,19 +274,15 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 
 ## 教程
 
-* [JeffLi1993/springboot-learning-example](https://github.com/JeffLi1993/springboot-learning-example):spring boot 实践学习案例，是 spring boot 初学者及核心技术巩固的最佳实践。
-* [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 技术栈示例代码，快速简单上手教程。 <http://www.ityouknow.com/>
-* [Spring Boot中文文档](http://cwiki.apachecn.org/display/SpringBoot)
-* [eugenp/tutorials](https://github.com/eugenp/tutorials):The "REST With Spring" Course: <http://bit.ly/restwithspring>
+* [springboot-learning-example](https://github.com/JeffLi1993/springboot-learning-example):spring boot 实践学习案例，是 spring boot 初学者及核心技术巩固的最佳实践。
+* [spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 技术栈示例代码，快速简单上手教程。 <http://www.ityouknow.com/>
+* [tutorials](https://github.com/eugenp/tutorials):The "REST With Spring" Course: <http://bit.ly/restwithspring>
 * [spring-boot-demo](https://github.com/xkcoding/spring-boot-demo)
 * [SpringBoot-Labs](https://github.com/YunaiV/SpringBoot-Labs)
 
 ## 项目
 
-* [ityouknow/spring-boot-examples](https://github.com/ityouknow/spring-boot-examples):about learning Spring Boot via examples. Spring Boot 教程、技术栈示例代码，快速简单上手教程。 <http://www.ityouknow.com/>
-* admin
-  - [codecentric/spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
-* [macrozheng/mall](https://github.com/macrozheng/mall):mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。 <http://39.98.69.210/index.html>
+* [mall](https://github.com/macrozheng/mall):mall项目是一套电商系统，包括前台商城系统及后台管理系统，基于SpringBoot+MyBatis实现。 前台商城系统包含首页门户、商品推荐、商品搜索、商品展示、购物车、订单流程、会员中心、客户服务、帮助中心等模块。 后台管理系统包含商品管理、订单管理、会员管理、促销管理、运营管理、内容管理、统计报表、财务管理、权限管理、设置等模块。 <http://39.98.69.210/index.html>
 * [vhr](https://github.com/lenve/vhr)
 
 ## 工具
@@ -295,11 +291,13 @@ url: jdbc:mysql://localhost:13306/ecommerce_order_mysql?allowMultiQueries=true&u
 * [JApiDocs](https://github.com/YeDaxia/JApiDocs):无需额外注解、开箱即用的SpringBoot接口文档生成工具 <https://japidocs.agilestudio.cn/#/zh-cn/>
 * admin
   - [eladmin](https://github.com/elunez/eladmin)
+  - [spring-boot-admin](https://github.com/codecentric/spring-boot-admin):Admin UI for administration of spring boot applications
 
 ## 参考
 
+* [Spring Boot中文文档](http://cwiki.apachecn.org/display/SpringBoot)
 * [葬爱家族丶冷少](https://jiangyongkang.gitee.io)
-* [qibaoguang / Spring-Boot-Reference-Guide](https://github.com/qibaoguang/Spring-Boot-Reference-Guide):Spring Boot Reference Guide 中文翻译 -《Spring Boot 参考指南》
+* [Spring-Boot-Reference-Guide](https://github.com/qibaoguang/Spring-Boot-Reference-Guide):Spring Boot Reference Guide 中文翻译 -《Spring Boot 参考指南》
 * [Spring Boot 系列教程](https://www.cnblogs.com/vipstone/p/9967649.html)
 * [最棒 Spring Boot 干货总结](https://mp.weixin.qq.com/s/tWV8lUznOIJwSUPPQlKJUg)
 * <https://blog.csdn.net/weixin_39800144/category_9271492.html>

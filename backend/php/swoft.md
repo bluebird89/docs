@@ -1,4 +1,4 @@
-# [swoft-cloud/framework](https://github.com/swoft-cloud/framework)
+# [swoft](https://github.com/swoft-cloud/framework)
 
 Modern High performance AOP and Coroutine PHP Framework, base on Swoole 2 <https://www.swoft.org>
 
@@ -224,4 +224,4 @@ php swoftcli.phar gen:http-ctrl user --prefix /users
 ## 参考
 
 * [docs](http://doc.swoft.org/)
-* [wujunze/awesome-swoft](https://github.com/wujunze/awesome-swoft):A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Swoft ecosystem
+* [awesome-swoft](https://github.com/wujunze/awesome-swoft):A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Swoft ecosystem

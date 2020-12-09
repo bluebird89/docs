@@ -6,4 +6,4 @@ Simple, fast & type safe code that leverages the JavaScript & OCaml ecosystems <
 
 ## 工具
 
-* [reasonml/reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS <https://reasonml.github.io/reason-react/>
+* [reason-react](https://github.com/reasonml/reason-react):Reason bindings for ReactJS <https://reasonml.github.io/reason-react/>

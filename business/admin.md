@@ -113,7 +113,7 @@ npm run serve
 * [coreui-free-bootstrap-admin-template](https://github.com/coreui/coreui-free-bootstrap-admin-template):CoreUI is free bootstrap admin template <http://coreui.io>
 * [eladmin](https://github.com/elunez/eladmin):项目基于 Spring Boot 2.1.0 、 Jpa、 Spring Security、redis、Vue的前后端分离的后台管理系统，项目采用分模块开发方式， 权限控制采用 RBAC，支持数据字典与数据权限管理，支持一键生成前后端代码，支持动态路由 <https://auauz.net>
 * [](https://github.com/puikinsh/gentelella)
-* [d2-projects/d2-admin](https://github.com/d2-projects/d2-admin):🌈 An elegant dashboard <https://d2admin.fairyever.com>
+* [d2-admin](https://github.com/d2-projects/d2-admin):🌈 An elegant dashboard <https://d2admin.fairyever.com>
 * [dcat-admin](https://github.com/jqhph/dcat-admin) <http://www.dcatadmin.com/>
 
 * [blessed-contrib](https://github.com/yaronn/blessed-contrib):Build terminal dashboards using ascii/ansi art and javascript

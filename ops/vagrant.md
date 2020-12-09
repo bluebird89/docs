@@ -349,7 +349,7 @@ vagrant up
 
 ## 参考
 
-* [Parallels/vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
+* [vagrant-parallels](https://github.com/Parallels/vagrant-parallels)Vagrant Parallels Provider
 * [Vagrant Documentation](https://www.vagrantup.com/docs/)
 * [Vagrant cloud](https://app.vagrantup.com/boxes/search) 比如：<https://atlas.hashicorp.com/laravel/boxes/homestead/versions/0.4.4/providers/virtualbox.boxes>
 * [资源](http://www.vagrantbox.es/)

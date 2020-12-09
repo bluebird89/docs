@@ -310,4 +310,4 @@
 
 ## 参考
 
-* [优惠卷实现](https://mp.weixin.qq.com/s/d1T3EiW_XaJOtWvZnYRtMw)
+* [优惠券实现](https://mp.weixin.qq.com/s/d1T3EiW_XaJOtWvZnYRtMw)

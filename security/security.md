@@ -601,15 +601,15 @@ small_integer = large_integer % 1,000,000
 
 ## 工具
 
-* [rapid7/metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework <https://www.metasploit.com/>
-* [sqlmapproject/sqlmap](https://github.com/sqlmapproject/sqlmap):Automatic SQL injection and database takeover tool <http://sqlmap.org>
-* [s0md3v/XSStrike](https://github.com/s0md3v/XSStrike):Most advanced XSS detection suite. <https://somdev.me/XSStrike/>
-* [netxfly/sec_check](https://github.com/netxfly/sec_check):Cross platform security detection tool
+* [metasploit-framework](https://github.com/rapid7/metasploit-framework):Metasploit Framework <https://www.metasploit.com/>
+* [sqlmap](https://github.com/sqlmapproject/sqlmap):Automatic SQL injection and database takeover tool <http://sqlmap.org>
+* [XSStrike](https://github.com/s0md3v/XSStrike):Most advanced XSS detection suite. <https://somdev.me/XSStrike/>
+* [sec_check](https://github.com/netxfly/sec_check):Cross platform security detection tool
 * [用户信息监控](https://monitor.firefox.com/ )
-* [minimaxir/big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
+* [big-list-of-naughty-strings](https://github.com/minimaxir/big-list-of-naughty-strings):The Big List of Naughty Strings is a list of strings which have a high probability of causing issues when used as user-input data.
 * 密码管理
   - [Bitwarden](https://bitwarden.com/):Solve your password management problems
-  - [keeweb/keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass <https://keeweb.info>
+  - [keeweb](https://github.com/keeweb/keeweb):Free cross-platform password manager compatible with KeePass <https://keeweb.info>
   - [Passbolt](https://www.passbolt.com/)
   - [Enpass](https://www.enpass.io)
   - [gopass](https://github.com/gopasspw/gopass):The slightly more awesome standard unix password manager for teams <https://www.gopass.pw/>
@@ -621,11 +621,11 @@ small_integer = large_integer % 1,000,000
   - OWASP被视为Web应用安全领域的权威参考。2009年下列发布的美国国家和国际立法、标准、准则、委员会和行业实务守则参考引用了OWASP。美国联邦贸易委员会(FTC)强烈建议所有企业需遵循OWASP十大WEB弱点防护守则）
   * [OWASP™ Foundation](https://www.owasp.org/index.php/Main_Page):the free and open software security community
   * [The Google Browser Security Handbook](https://code.google.com/p/browsersec/wiki/Main).
-* [Hacker0x01/hacker101](https://github.com/Hacker0x01/hacker101):Hacker101 <https://www.hacker101.com>
+* [Hhacker101](https://github.com/Hacker0x01/hacker101):Hacker101 <https://www.hacker101.com>
 * [Mozilla的安全编程规范](https://wiki.mozilla.org/WebAppSec/Secure_Coding_Guidelines)
-* [SecWiki/sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 <https://www.sec-wiki.com>
-* [phith0n/Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
-* [trimstray/the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
-* [Micropoor/Micro8](https://github.com/Micropoor/Micro8):Gitbook <https://micro8.gitbook.io/micro8/>
+* [sec-chart](https://github.com/SecWiki/sec-chart):安全思维导图集合 <https://www.sec-wiki.com>
+* [Mind-Map](https://github.com/phith0n/Mind-Map):各种安全相关思维导图整理收集
+* [the-book-of-secret-knowledge](https://github.com/trimstray/the-book-of-secret-knowledge):💫 A collection of awesome lists, manuals, blogs, hacks, one-liners, cli/web tools and more. Especially for System and Network Administrators, DevOps, Pentesters or Security Researchers.
+* [Micro8](https://github.com/Micropoor/Micro8):Gitbook <https://micro8.gitbook.io/micro8/>
 * [hacker-tools](https://hacker-tools.github.io/lectures/)
-* [danielmiessler/SecLists](https://github.com/danielmiessler/SecLists):SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, and many more.<https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project>
+* [SecLists](https://github.com/danielmiessler/SecLists):SecLists is the security tester's companion. It's a collection of multiple types of lists used during security assessments, collected in one place. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, and many more.<https://www.owasp.org/index.php/OWASP_Internet_of_Things_Project>

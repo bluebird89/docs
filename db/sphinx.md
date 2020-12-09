@@ -393,9 +393,9 @@ $info = $db->getInfoByIds($ids);
 
 ## 工具
 
-* [zwxhenu/coreseek](https://github.com/zwxhenu/coreseek):Coreseek开源中文检索引擎-Sphinx中文版 <http://www.coreseek.cn>
+* [coreseek](https://github.com/zwxhenu/coreseek):Coreseek开源中文检索引擎-Sphinx中文版 <http://www.coreseek.cn>
 
 ## 参考
 
 * [reference manual](http://sphinxsearch.com/docs/current.html)
-* [sphinx-doc/sphinx](https://github.com/sphinx-doc/sphinx):Main repository for the Sphinx documentation builder <http://sphinx-doc.org>
+* [sphinx](https://github.com/sphinx-doc/sphinx):Main repository for the Sphinx documentation builder <http://sphinx-doc.org>

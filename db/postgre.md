@@ -195,16 +195,15 @@ class Ext_Pgsql {
   - psql
   - [PgAdmin4](): `sudo apt install pdadmin4`
   - pgFouine
-  - [sosedoff/pgweb](https://github.com/sosedoff/pgweb):Cross-platform client for PostgreSQL databases <http://sosedoff.github.io/pgweb>
-* [PostgREST/postgrest](https://github.com/PostgREST/postgrest):REST API for any Postgres database <https://postgrest.org>
-* [brianc/node-postgres](https://github.com/brianc/node-postgres):PostgreSQL client for node.js. <https://node-postgres.com>
-* [dbcli/pgcli](https://github.com/dbcli/pgcli):Postgres CLI with autocompletion and syntax highlighting <http://pgcli.com>
-* [timescale/timescaledb](https://github.com/timescale/timescaledb):An open-source time-series database optimized for fast ingest and complex queries. Engineered up from PostgreSQL, packaged as an extension. <http://www.timescale.com/>
+  - [pgweb](https://github.com/sosedoff/pgweb):Cross-platform client for PostgreSQL databases <http://sosedoff.github.io/pgweb>
+* [postgrest](https://github.com/PostgREST/postgrest):REST API for any Postgres database <https://postgrest.org>
+* [node-postgres](https://github.com/brianc/node-postgres):PostgreSQL client for node.js. <https://node-postgres.com>
+* [pgcli](https://github.com/dbcli/pgcli):Postgres CLI with autocompletion and syntax highlighting <http://pgcli.com>
+* [timescaledb](https://github.com/timescale/timescaledb):An open-source time-series database optimized for fast ingest and complex queries. Engineered up from PostgreSQL, packaged as an extension. <http://www.timescale.com/>
 
 ## 参考
 
 * [digoal/blog](https://github.com/digoal/blog):Everything about database,bussiness. <http://blog.163.com/digoal@126>
-* [bitemyapp/learnhaskell](https://github.com/bitemyapp/learnhaskell):Learn Haskell
-* [dhamaniasad/awesome-postgres](https://github.com/dhamaniasad/awesome-postgres):A curated list of awesome PostgreSQL software, libraries, tools and resources, inspired by awesome-mysql
+* [awesome-postgres](https://github.com/dhamaniasad/awesome-postgres):A curated list of awesome PostgreSQL software, libraries, tools and resources, inspired by awesome-mysql
 * [PostgreSQL Tutorial](http://www.postgresqltutorial.com/)
 * [PostgreSQL 10.1 手册](http://www.postgres.cn/docs/10/)

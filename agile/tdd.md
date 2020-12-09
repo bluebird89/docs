@@ -371,9 +371,9 @@
 ## 工具
 
 * Dbunit
-* REst-Assusred
-* [SpectoLabs / hoverfly](https://github.com/SpectoLabs/hoverfly):Lightweight service virtualization/API simulation tool for developers and testers <https://hoverfly.io>
+* Rest-Assusred
+* [hoverfly](https://github.com/SpectoLabs/hoverfly):Lightweight service virtualization/API simulation tool for developers and testers <https://hoverfly.io>
 
 ## 参考
 
-* [gigix/dojo-scaffold](https://github.com/gigix/dojo-scaffold):A Java/Gradle scaffold for coding dojos
+* [dojo-scaffold](https://github.com/gigix/dojo-scaffold):A Java/Gradle scaffold for coding dojos

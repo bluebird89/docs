@@ -419,31 +419,26 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 * 写一下反转单链表
 
-## 教程
-
-* [changkun/modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial):📚 C++11/14/17 On the Fly <https://changkun.de/modern-cpp/>
-
 ## 图书
 
-* 《[C++程序设计语言(The C++ Programming Language)(原书第4版)](https://www.amazon.cn/gp/product/B01I9BNASA) 》
+* 《[C++程序设计语言 The C++ Programming Language](https://www.amazon.cn/gp/product/B01I9BNASA) 》
 * **《C++ Primer》**
   - 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
-* 《[Effective C++:改善程序与设计的55个具体做法(第3版)(中文版)](https://www.amazon.cn/gp/product/B004G72P24) 》 todo 写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
-* 《[More Effective C++:35个改善编程与设计的有效方法(中文版)](https://www.amazon.cn/gp/product/B004IP8BD6) 》
+* 《[Effective C++:改善程序与设计的55个具体做法](https://www.amazon.cn/gp/product/B004G72P24) 》 todo 写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
+* 《[More Effective C++:35个改善编程与设计的有效方法](https://www.amazon.cn/gp/product/B004IP8BD6) 》
 * 《C++ 标准程序库》
-* 《STL源码剖析》
-* inside c++model
-* 《深度探索C++对象模型》
-* Think in C++
-* Modern C++ Tutorial
-  - [changkun / modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)
-* 《深入理解C++11》
 * 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
-* 《[C++编程思想](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* 《STL源码剖析》
+* inside c++ model
+* 《深入理解C++11》
+* 《深度探索 C++ 对象模型》
+* 《[C++编程思想 Think in C++](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* Modern C++ Tutorial
+  - [modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)📚 C++11/14/17 On the Fly <https://changkun.de/modern-cpp/>
 * 《C++语言的设计与演化》
 * 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
 * [Optimizing software in C++](https://www.agner.org/optimize/optimizing_cpp.pdf)
-* C++沉思录
+* C++ 沉思录
 
 ## 工具
 
@@ -454,20 +449,16 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
     + `sudo apt-get install codeblocks codeblocks-contrib`
   - Qtcreator
 * 队列
-  - [cameron314/concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
-* [Tencent/phxpaxos](https://github.com/Tencent/phxpaxos)：The Paxos library implemented in C++ that has been used in the WeChat production environment.
-* JSON
-  - [nlohmann / json](https://github.com/nlohmann/json):JSON for Modern C++ <https://nlohmann.github.io/json/>
-  - [Tencent/rapidjson](https://github.com/Tencent/rapidjson):A fast JSON parser/generator for C++ with both SAX/DOM style API <http://rapidjson.org/>
-* [Tencent/libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.
-* [envoyproxy/envoy](https://github.com/envoyproxy/envoy):C++ front/service proxy <https://www.envoyproxy.io>
-* [lupoDharkael/flameshot](https://github.com/lupoDharkael/flameshot):Powerful yet simple to use screenshot software
-* [onqtam/doctest](https://github.com/onqtam/doctest):The fastest feature-rich C++11 single-header testing framework for unit tests and TDD <http://bit.ly/doctest-docs>
+  - [concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
+* [phxpaxos](https://github.com/Tencent/phxpaxos)：The Paxos library implemented in C++ that has been used in the WeChat production environment.
+* [libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.
+* [flameshot](https://github.com/lupoDharkael/flameshot):Powerful yet simple to use screenshot software
+* [doctest](https://github.com/onqtam/doctest):The fastest feature-rich C++11 single-header testing framework for unit tests and TDD <http://bit.ly/doctest-docs>
 * package manager
-  - [Microsoft/vcpkg](https://github.com/Microsoft/vcpkg):C++ Library Manager for Windows, Linux, and MacOS
-* [catchorg/Catch2](https://github.com/catchorg/Catch2):A modern, C++-native, header-only, test framework for unit-tests, TDD and BDD - using C++11, C++14, C++17 and later (or C++03 on the Catch1.x branch) <https://discord.gg/4CWS9zD>
+  - [vcpkg](https://github.com/Microsoft/vcpkg):C++ Library Manager for Windows, Linux, and MacOS
+* [Catch2](https://github.com/catchorg/Catch2):A modern, C++-native, header-only, test framework for unit-tests, TDD and BDD - using C++11, C++14, C++17 and later (or C++03 on the Catch1.x branch) <https://discord.gg/4CWS9zD>
 * [Boost.Hana](https://www.boost.org/doc/libs/1_61_0/libs/hana/doc/html/index.html):Hana is a header-only library for C++ metaprogramming suited for computations on both types and values
-* [google / benchmark](https://github.com/google/benchmark):A microbenchmark support library
+* [benchmark](https://github.com/google/benchmark):A microbenchmark support library
 
 ## 参考
 

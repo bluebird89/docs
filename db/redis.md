@@ -2071,15 +2071,15 @@ rdr keys FILE1 [FILE2] [FILE3]...
 * 客户端
   - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis <https://rdm.dev/>
   - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. <http://getmedis.com>
-  - [mylxsw/redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
+  - [redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
   - [iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. <https://iredis.io/show>
-* [sripathikrishnan/redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
-* [twitter/twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
-* [erikdubbelboer/phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. <http://dubbelboer.com/phpRedisAdmin/>
-* [phpredis/phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
+* [redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
+* [twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
+* [phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. <http://dubbelboer.com/phpRedisAdmin/>
+* [phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
 * [redis-port](link):redis 间数据同步
 * [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
-* [CodisLabs/codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
+* [codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
 * Jedis
   - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)
   - [JedisPool 资源池优化](https://yq.aliyun.com/articles/236383)

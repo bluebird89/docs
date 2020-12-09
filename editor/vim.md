@@ -675,9 +675,9 @@ To install from command line: vim +PluginInstall +qall
 
 ## 工具
 
-* [coolwanglu/vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim <http://coolwanglu.github.io/vim.js/emterpreter/vim.html>
-* [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing <https://www.vim.org/scripts/script.php?script_id=5671>
-* [neoclide/coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode <https://salt.bountysource.com/teams/coc-nvim>
+* [vim.js](https://github.com/coolwanglu/vim.js):JavaScript port of Vim <http://coolwanglu.github.io/vim.js/emterpreter/vim.html>
+* [vim-vinegar](https://github.com/tpope/vim-vinegar):vinegar.vim: Combine with netrw to create a delicious salad dressing <https://www.vim.org/scripts/script.php?script_id=5671>
+* [coc.nvim](https://github.com/neoclide/coc.nvim):Intellisense engine for vim8 & neovim, full language server protocol support as VSCode <https://salt.bountysource.com/teams/coc-nvim>
 
 ## 参考
 
@@ -685,5 +685,5 @@ To install from command line: vim +PluginInstall +qall
 * [awesome-vim](https://github.com/akrawchyk/awesome-vim)The Vim plugin shortlist <https://vim.zeef.com/andrew.krawchyk>
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
 * [无插件VIM编程技巧](https://coolshell.cn/articles/11312.html)
-* [vimwiki / vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim <http://vimwiki.github.io/>
+* [vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim <http://vimwiki.github.io/>
 * [](https://github.com/dofy/learn-vim)

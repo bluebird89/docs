@@ -4121,14 +4121,14 @@ GRANT ALL PRIVILEGES ON *.* TO 'padmin'@'localhost' WITH GRANT OPTION;
     * Navicat Premium for Mac
 * ER图
   - PowerDesigner
-* [dbcli/mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net `sudo apt install mycli`
-* [github/orchestrator](https://github.com/github/orchestrator):MySQL replication topology management and HA
-* [mysqljs/mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
-* [DBDiff/DBDiff](https://github.com/DBDiff/DBDiff):Compare MySQL databases & automatically create schema & data change scripts/migrations rapidly (up & down SQL supported) for database version control. Supports *some* migration tools. https://dbdiff.github.io/DBDiff/
-* [alibaba/AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
-* [alibaba/cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
-* [github/gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
-* [oracle/mysql-operator](https://github.com/oracle/mysql-operator):Create, operate and scale self-healing MySQL clusters in Kubernetes
+* [mycli](https://github.com/dbcli/mycli):A Terminal Client for MySQL with AutoCompletion and Syntax Highlighting. http://mycli.net `sudo apt install mycli`
+* [orchestrator](https://github.com/github/orchestrator):MySQL replication topology management and HA
+* [mysql](https://github.com/mysqljs/mysql):A pure node.js JavaScript Client implementing the MySql protocol.
+* [DBDiff](https://github.com/DBDiff/DBDiff):Compare MySQL databases & automatically create schema & data change scripts/migrations rapidly (up & down SQL supported) for database version control. Supports *some* migration tools. https://dbdiff.github.io/DBDiff/
+* [AliSQL](https://github.com/alibaba/AliSQL/wiki):AliSQL is a MySQL branch originated from Alibaba Group. Fetch document from Release Notes at bottom.
+* [cobar](https://github.com/alibaba/cobar):a proxy for sharding databases and tables
+* [gh-ost](https://github.com/github/gh-ost):GitHub's Online Schema Migrations for MySQL
+* [mysql-operator](https://github.com/oracle/mysql-operator):Create, operate and scale self-healing MySQL clusters in Kubernetes
 * [mysqltuner.pl](https://github.com/major/MySQLTuner-perl):主要检查参数设置的合理性包括日志文件、存储引擎、安全建议及性能分析
   - `wget https://raw.githubusercontent.com/major/MySQLTuner-perl/master/mysqltuner.pl`
   - `./mysqltuner.pl --socket /var/lib/mysql/mysql.sock`
@@ -4141,11 +4141,10 @@ GRANT ALL PRIVILEGES ON *.* TO 'padmin'@'localhost' WITH GRANT OPTION;
 * iibench-mysql：基于 Java 的 MySQL/Percona/MariaDB 索引进行插入性能测试工具
 * tpcc-mysql：Percona开发的TPC-C测试工具
 * Query Monitor:数据库查询特性使其成为定位慢SQL查询工具。该插件会报告所有页面请求过程中的数据库请求，并且可以通过调用这些查询代码或者原件
-* [Meituan-Dianping/SQLAdvisor](https://github.com/Meituan-Dianping/SQLAdvisor):输入SQL，输出索引优化建议
 
 ## 参考
 
-* [shlomi-noach/awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
+* [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql):A curated list of awesome MySQL software, libraries, tools and resources
 * [mysql-system-schema](https://github.com/xiaoboluo768/mysql-system-schema):基于MySQL 5.7的ps,is,sys,mysql库的明细文档
 * [HOW TO INSTALL MYSQL NDB CLUSTER ON LINUX](https://clusterengine.me/how-to-install-mysql-ndb-cluster-on-linux/)
 * [索引性能分析](http://draveness.me/sql-index-performance.html)

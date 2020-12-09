@@ -21,7 +21,7 @@ flush privileges;
 
 ## 工具
 
-* [kripken/sql.js](https://github.com/kripken/sql.js):SQLite compiled to JavaScript through Emscripten
+* [sql.js](https://github.com/kripken/sql.js):SQLite compiled to JavaScript through Emscripten
 
 ## 参考
 

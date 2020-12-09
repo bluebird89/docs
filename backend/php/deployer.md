@@ -155,7 +155,3 @@ dep deploy -vvv # 准备 hook 文件 -> 在项目上添加一个 Webhook 并设�
 
 Unable to prepare route [/] for serialization. Uses Closure.
 ```
-
-## 工具
-
-* [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. <http://www.spinnaker.io/>

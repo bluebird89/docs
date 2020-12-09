@@ -337,16 +337,13 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 
 ## Web UI自动化测试
 
-* [cypress-io / cypress](https://github.com/cypress-io/cypress):Fast, easy and reliable testing for anything that runs in a browser. <https://www.cypress.io>
+* [cypress](https://github.com/cypress-io/cypress):Fast, easy and reliable testing for anything that runs in a browser. <https://www.cypress.io>
 * TestCafe
   - 支持采纳JavaScript或TypeScript来编写测试，并在浏览器中运行测试
   - 提供了开箱即用的并行执行、HTTP请求模拟等有用的功能
   - 使用异步执行模型而无需指定等待时间，有效提升了测试套件的稳定性
 * Puppeteer:谷歌出品的一个通过Devtools 协议控制Chromium或Chrome的Node库。由于其只支持Chrome，无法进行跨浏览器的兼容性测试
-
 * CodeceptJS
-
-  -
 
 ## 总结
 
@@ -393,7 +390,7 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 ## 工具
 
 * redmine
-* [locustio/locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python <http://locust.io>
+* [locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python <http://locust.io>
 * JUnit
 * Mocha
 * Selenium
@@ -410,9 +407,8 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
   - [入门](https://fbsonar.com/docs/getting-started.html)
 * EasyMock
 * jmockit
-* [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
-* [getgauge/gauge](https://github.com/getgauge/gauge):Light weight cross-platform test automation <https://gauge.org>
-* [abseil/googletest](https://github.com/abseil/googletest):Google Test
+* [free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
+* [googletest](https://github.com/abseil/googletest):Google Test
 * QTA:面向多种平台（包括 Android、iOS、Windows、MacOS、Web、小程序、后台服务和云原生应用等）的自动化测试服务平台，致力于帮助业务研发团队开展和落地自动化测试，提供包括自动化测试用例管理和数据分析、分布式测试执行、线上测试报告和数据可视化、测试执行度量分析、测试资源管理等功能。
 
 - QT4A，UI 自动化测试 for Android： <https://github.com/Tencent/QT4A>
@@ -424,7 +420,7 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * Robot Framework
 * watir
 * [Airtest IDE](https://airtest.netease.com/):Cross platform UI automation IDE
-* [segmentio/nightmare](https://github.com/segmentio/nightmare) A high-level browser automation library. <https://open.segment.com>
+* [nightmare](https://github.com/segmentio/nightmare) A high-level browser automation library. <https://open.segment.com>
 * [Charles](https://www.charlesproxy.com/)
 
 ## 参考

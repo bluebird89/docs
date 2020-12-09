@@ -14,12 +14,12 @@ sudo apt install python-opencv
 * [faceai](https://github.com/vipstone/faceai):一款入门级的人脸、视频、文字检测以及识别的项目.
 
 * [OpenCV-Python-Tutorial](https://github.com/makelove/OpenCV-Python-Tutorial)
-* [muhsinali/opencv-book](https://github.com/muhsinali/opencv-book):Exercises and solutions from the Practical Python and OpenCV book
+* [opencv-book](https://github.com/muhsinali/opencv-book):Exercises and solutions from the Practical Python and OpenCV book
 
 ## 工具
 
-* [tesseract-ocr/tesseract](https://github.com/tesseract-ocr/tesseract):Tesseract Open Source OCR Engine (main repository)
-* [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
+* [tesseract](https://github.com/tesseract-ocr/tesseract):Tesseract Open Source OCR Engine (main repository)
+* [DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
 
 ## 参考
 

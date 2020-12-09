@@ -40,12 +40,25 @@
 
 ## 项目
 
-* [deeppomf/DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
-* [thunil/TecoGAN](https://github.com/thunil/TecoGAN):This repo will contain source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN
+* [DeepCreamPy](https://github.com/deeppomf/DeepCreamPy):Decensoring Hentai with Deep Neural Networks
+* [TecoGAN](https://github.com/thunil/TecoGAN):This repo will contain source code and materials for the TecoGAN project, i.e. code for a TEmporally COherent GAN
 * [vision](https://github.com/pytorch/vision) Datasets, Transforms and Models specific to Computer Vision
+
+## 课程
+
++ [李飞飞：CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu)
+  * [中文](https://study.163.com/course/introduction/1003223001.htm)
+  * <https://github.com/mbadry1/CS231n-2017-Summary>
+    - [cs231n.github.io](https://github.com/cs231n/cs231n.github.io):Public facing notes page
+
+## 图书
+
++ 入门学习：《Computer Vision：Models, Learning and Inference》
++ 经典权威的参考资料：《Computer Vision：Algorithms and Applications》
++ 理论实践：《OpenCV3编程入门》
 
 ## 参考
 
 * [awesome-computer-vision](https://github.com/jbhuang0604/awesome-computer-vision):A curated list of awesome computer vision resources
 * [awesome-deep-vision](https://github.com/kjw0612/awesome-deep-vision)A curated list of deep learning resources for computer vision
-* [whydna/Deep-Learning-For-Computer-Vision](https://github.com/whydna/Deep-Learning-For-Computer-Vision):Exercises from <https://www.pyimagesearch.com/deep-learning-computer-vision-python-book/>
+* [Deep-Learning-For-Computer-Vision](https://github.com/whydna/Deep-Learning-For-Computer-Vision):Exercises from <https://www.pyimagesearch.com/deep-learning-computer-vision-python-book/>

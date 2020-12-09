@@ -2,9 +2,9 @@
 
 ## 工具
 
-* [tensorflow/tfjs](https://github.com/tensorflow/tfjs)：A WebGL accelerated JavaScript library for training and deploying ML models. <https://js.tensorflow.org>
-* [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. <http://pixijs.com>
-* [Netflix/vizceral](https://github.com/Netflix/vizceral):WebGL visualization for displaying animated traffic graphs
+* [tfjs](https://github.com/tensorflow/tfjs)：A WebGL accelerated JavaScript library for training and deploying ML models. <https://js.tensorflow.org>
+* [pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. <http://pixijs.com>
+* [vizceral](https://github.com/Netflix/vizceral):WebGL visualization for displaying animated traffic graphs
 
 ## 参考
 

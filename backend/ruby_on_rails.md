@@ -43,3 +43,5 @@ rails db:migrate
 
 rails generate model Comment commenter:string body:text article:references
 ```
+
+* [Ruby on Rails Tutorial](https://www.railstutorial.org/book)

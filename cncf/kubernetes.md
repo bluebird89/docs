@@ -1735,21 +1735,21 @@ source ~/.bash_profile
 
 ## 实例
 
-* [rootsongjc/kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. <https://jimmysong.io>
-* [opsnull/follow-me-install-kubernetes-cluster](https://github.com/opsnull/follow-me-install-kubernetes-cluster)
+* [kubernetes-vagrant-centos-cluster](https://github.com/rootsongjc/kubernetes-vagrant-centos-cluster):Setting up a distributed Kubernetes cluster along with Istio service mesh locally with Vagrant and VirtualBox, only PoC or Demo use. <https://jimmysong.io>
+* [follow-me-install-kubernetes-cluster](https://github.com/opsnull/follow-me-install-kubernetes-cluster)
 
 ## 工具
 
 * 配置
-  - [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
-  - [AliyunContainerService / k8s-for-docker-desktop](https://github.com/AliyunContainerService/k8s-for-docker-desktop):为Docker Desktop for Mac/Windows开启Kubernetes和Istio - Enable Kubernetes/Istio on Docker Desktop in China <https://yq.aliyun.com/articles/672675>
+  - [kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
+  - [k8s-for-docker-desktop](https://github.com/AliyunContainerService/k8s-for-docker-desktop):为Docker Desktop for Mac/Windows开启Kubernetes和Istio - Enable Kubernetes/Istio on Docker Desktop in China <https://yq.aliyun.com/articles/672675>
 * 部署
-  - [kubernetes-incubator/kubespray](https://github.com/kubernetes-incubator/kubespray):Deploy a Production Ready Kubernetes Cluster
-  - [kubernetes-sigs / kind](https://github.com/kubernetes-sigs/kind/):Kubernetes IN Docker - local clusters for testing Kubernetes <https://kind.sigs.k8s.io/>
-  - [fanux / sealos](https://github.com/fanux/sealos):只能用丝滑一词形容的kubernetes高可用安装（kubernetes install）工具，一条命令，离线安装，包含所有依赖，内核负载不依赖haproxy keepalived,纯golang开发,99年证书,支持v1.16.8 v1.15.11 v1.17.4 v1.18.0! <https://sealyun.com>
+  - [kubespray](https://github.com/kubernetes-incubator/kubespray):Deploy a Production Ready Kubernetes Cluster
+  - [kind](https://github.com/kubernetes-sigs/kind/):Kubernetes IN Docker - local clusters for testing Kubernetes <https://kind.sigs.k8s.io/>
+  - [sealos](https://github.com/fanux/sealos):只能用丝滑一词形容的kubernetes高可用安装（kubernetes install）工具，一条命令，离线安装，包含所有依赖，内核负载不依赖haproxy keepalived,纯golang开发,99年证书,支持v1.16.8 v1.15.11 v1.17.4 v1.18.0! <https://sealyun.com>
   - [Apollo](https://github.com/logzio/apollo/wiki/Getting-Started-with-Apollo):提供自助UI，用于部署和创建Kubernetes服务，Apollo允许管理员单击一下即可查看日志并且可以将部署恢复到任何时间点
 * UI
-  - [Qihoo360/wayne](https://github.com/Qihoo360/wayne):Web UI for Kubernetes multi-clusters
+  - [wayne](https://github.com/Qihoo360/wayne):Web UI for Kubernetes multi-clusters
   - [K9s](https://github.com/derailed/k9s)
   - [Tubectl](https://github.com/reconquest/tubekit)
   - [Web Kubectl](https://github.com/KubeOperator/webkubectl) `docker run --name='webkubectl' -p 8080:8080 -d --privileged kubeoperator/webkubectl`
@@ -1759,7 +1759,7 @@ source ~/.bash_profile
     + 支持对象资源的创建修改和删除
     + Service 端口转发
     + 多集群切换
-  - [gotok8s / k8s-docker-desktop-for-mac](https://github.com/gotok8s/k8s-docker-desktop-for-mac):Docker Desktop for Mac 开启并使用 Kubernetes <https://github.com/gotok8s/gotok8s>
+  - [k8s-docker-desktop-for-mac](https://github.com/gotok8s/k8s-docker-desktop-for-mac):Docker Desktop for Mac 开启并使用 Kubernetes <https://github.com/gotok8s/gotok8s>
   - [lazykube](https://github.com/TNK-Studio/lazykube) ⎈ The lazier way to manage kubernetes.
 * Chaos
   - [ChaosBlade](https://github.com/chaosblade-io/chaosblade)
@@ -1778,38 +1778,36 @@ source ~/.bash_profile
   - [Kubeless](https://kubeless.io/):用于部署小型应用程序的本地Kubernetes工具。它使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
   - [IronFunction：](https://open.iron.io/):用Golang编写的开源Serverless工具。它支持任何编程语言。支持AWS Lambda函数
 * IDE
-  - [lensapp / lens](https://github.com/lensapp/lens):Lens - The Kubernetes IDE <https://k8slens.dev/>
+  - [lens](https://github.com/lensapp/lens):Lens - The Kubernetes IDE <https://k8slens.dev/>
     + `sudo snap install kontena-lens --classic`
   - [Kubernetic](https://kubernetic.com/)The Kubernetes Desktop Client
 * [](https://github.com/sighupio/permission-manager)
-* [kubesphere/kubesphere](https://github.com/kubesphere/kubesphere):Easy-to-use Production Ready Container Platform <https://kubesphere.io>  <https://fuckcloudnative.io/posts/kubesphere/>
-* [openshift/origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers <http://www.openshift.org>
-* [kubernetes/kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management
-* [datawire/telepresence](https://github.com/datawire/telepresence):Local development against a remote Kubernetes or OpenShift cluster <http://www.telepresence.io>
-* [runconduit/conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes <https://conduit.io>
-* [kubernetes-sigs/kustomize](https://github.com/kubernetes-sigs/kustomize):Customization of kubernetes YAML configurations
-* [weaveworks/flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
-* [kubernetes-client/javascript](https://github.com/kubernetes-client/javascript):Javascript client
-* [coreos/flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
-* [argoproj/argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. <https://argoproj.github.io>
-* [datawire/ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy <https://www.getambassador.ios>
-* [virtual-kubelet/virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
-* [operator-framework/operator-sdk](https://github.com/operator-framework/operator-sdk):SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding. <https://coreos.com/operators>
-* [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
-* [genuinetools/binctr](https://github.com/genuinetools/binctr):Fully static, unprivileged, self-contained, containers as executable binaries. <https://blog.jessfraz.com/post/getting-towards-real-sandbox-containers/>
-* [kubernetes/kompose](https://github.com/kubernetes/kompose):Go from Docker Compose to Kubernetes <http://kompose.io>
-* [kubeless/kubeless](https://github.com/kubeless/kubeless):Kubernetes Native Serverless Framework <https://kubeless.io>
-* [windmilleng/tilt](https://github.com/windmilleng/tilt):Local Kubernetes development with no stress <https://tilt.build/>
-* [jetstack/cert-manager](https://github.com/jetstack/cert-manager):Automatically provision and manage TLS certificates in Kubernetes <https://jetstack.io>
-* [appscode/voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes <https://appscode.com/products/voyager>
-* [openshift/origin](https://github.com/openshift/origin):The self-managing, auto-upgrading, Kubernetes distribution for everyone <http://www.openshift.org>
+* [kubesphere](https://github.com/kubesphere/kubesphere):Easy-to-use Production Ready Container Platform <https://kubesphere.io>  <https://fuckcloudnative.io/posts/kubesphere/>
+* [origin](https://github.com/openshift/origin):Enterprise Kubernetes for Developers <http://www.openshift.org>
+* [kops](https://github.com/kubernetes/kops):Kubernetes Operations (kops) - Production Grade K8s Installation, Upgrades, and Management
+* [telepresence](https://github.com/datawire/telepresence):Local development against a remote Kubernetes or OpenShift cluster <http://www.telepresence.io>
+* [conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes <https://conduit.io>
+* [flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
+* [kubernetes-client](https://github.com/kubernetes-client/javascript):Javascript client
+* [flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
+* [argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. <https://argoproj.github.io>
+* [ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy <https://www.getambassador.ios>
+* [virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
+* [operator-sdk](https://github.com/operator-framework/operator-sdk):SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding. <https://coreos.com/operators>
+* [kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
+* [binctr](https://github.com/genuinetools/binctr):Fully static, unprivileged, self-contained, containers as executable binaries. <https://blog.jessfraz.com/post/getting-towards-real-sandbox-containers/>
+* [kompose](https://github.com/kubernetes/kompose):Go from Docker Compose to Kubernetes <http://kompose.io>
+* [kubeless](https://github.com/kubeless/kubeless):Kubernetes Native Serverless Framework <https://kubeless.io>
+* [tilt](https://github.com/windmilleng/tilt):Local Kubernetes development with no stress <https://tilt.build/>
+* [cert-manager](https://github.com/jetstack/cert-manager):Automatically provision and manage TLS certificates in Kubernetes <https://jetstack.io>
+* [voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes <https://appscode.com/products/voyager>
 * [OpenKruise](https://github.com/openkruise/kruise):从不同维度解决 Kubernetes 之上应用的自动化问题，包括部署，升级，弹性扩缩容，Qos 调节，健康检查，迁移修复等
 * [Kube-ops-view](link)
 * [AHAS](https://www.aliyun.com/product/ahas): 为 K8s 等容器环境提供了架构可视化的功能，同时，具有故障注入式高可用能力评测和一键流控降级等功能，可以快速低成本的提升应用可用性
-* [eon01/kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics.
+* [kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics.
 * [okd](https://docs.okd.io/)
-* [ubuntu/microk8s](https://github.com/ubuntu/microk8s):MicroK8s is a small, fast, single-package Kubernetes for developers, IoT and edge. <https://microk8s.io>
-* [kubernetes/ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
+* [microk8s](https://github.com/ubuntu/microk8s):MicroK8s is a small, fast, single-package Kubernetes for developers, IoT and edge. <https://microk8s.io>
+* [ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
 * cabin:一个Kubernetes 的原生的手机App仪表盘
 * Kubectx:Kubectx与kubens捆绑在一起，当你使用kubectl的时候，允许你在Kubernetes集群和命名空间之间切换
 * Kube-shell:个和Kubernetes CLI集成的 Shell，它有一些非常漂亮的特性
@@ -1836,21 +1834,19 @@ source ~/.bash_profile
 * [Tutorials](https://kubernetes.io/docs/tutorials/)
 * [Kubernetes 中文社区](https://www.kubernetes.org.cn)
 * [Kubernetes中文文档](http://docs.kubernetes.org.cn/)
-* [kubernetes / examples](https://github.com/kubernetes/examples):Kubernetes application example tutorials
+* [examples](https://github.com/kubernetes/examples):Kubernetes application example tutorials
 * [容器编排和部署](https://developer.ibm.com/cn/solutions/container-orchestration-and-deployment/)
-* [hobby-kube/guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist
-* [kelseyhightower/kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts
-* [feiskyer/kubernetes-handbook](https://github.com/feiskyer/kubernetes-handbook):Kubernetes Handbook （Kubernetes指南） <https://kubernetes.feisky.xyzs>
-* [rootsongjc/kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/云原生应用架构实践手册 - <https://jimmysong.io/kubernetes-handbook>
-* [opsnull/follow-me-install-kubernetes-cluster](https://github.com/opsnull/follow-me-install-kubernetes-cluster):和我一步步部署 kubernetes 集群
-* [jamiehannaford/what-happens-when-k8s](https://github.com/jamiehannaford/what-happens-when-k8s):🤔 What happens when I type kubectl run?
+* [guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist
+* [kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts
+* [kubernetes-handbook](https://github.com/feiskyer/kubernetes-handbook):Kubernetes Handbook （Kubernetes指南） <https://kubernetes.feisky.xyzs>
+* [kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/云原生应用架构实践手册 - <https://jimmysong.io/kubernetes-handbook>
+* [what-happens-when-k8s](https://github.com/jamiehannaford/what-happens-when-k8s):🤔 What happens when I type kubectl run?
 * [awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 <https://ramitsurana.github.io/awesome-kubernetes/>
-* [gjmzj/kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 <https://github.com/gjmzj/kubeasz>
+* [kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 <https://github.com/gjmzj/kubeasz>
 * [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
 * [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes <https://k8s.af>
 * [ContainerSolutions/k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained <https://blog.container-solutions.com/kubernetes-deployment-strategies>
 * [Kuboard for K8S](https://kuboard.cn/learning/)
-* [opsnull / follow-me-install-kubernetes-cluster](https://github.com/opsnull/follow-me-install-kubernetes-cluster):和我一步步部署 kubernetes 集群
 
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)

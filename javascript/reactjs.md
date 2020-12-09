@@ -466,13 +466,15 @@ const component = <Component {...data} />;
 * useImperativeHandle【使用子组件暴露的值/方法】
 * useLayoutEffect【完成副作用操作，会阻塞浏览器绘制】
 * 参考
+  - [hooks](https://github.com/alibaba/hooks):React Hooks Library <https://ahooks.js.org/>
+  - [awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks):Awesome React Hooks
+  - [swr](https://github.com/zeit/swr):React Hooks library for remote data fetching <https://swr.now.sh>
   - [用好这9个钩子](https://juejin.cn/post/6895966927500345351)
 
 ## [redux](https://github.com/reduxjs/redux)
 
-![Redux 工作流程](../_static/redux_flow.jpg "Optional title")
+Predictable state container for JavaScript apps <http://redux.js.org>
 
-* Predictable state container for JavaScript apps <http://redux.js.org>
 * 设计思路
   - Web 应用是一个状态机，视图与状态是一一对应的
   - 所有状态保存在一个对象里面
@@ -553,9 +555,12 @@ const component = <Component {...data} />;
       * 任务2：reducer 开发 - 制作 redux 流程的 reducer：相应需要更新store的action,注意数据的不可修改性.这里需要考虑state是深拷贝还是浅拷贝：深拷贝性能低，浅拷贝高效 且能达到同样的效果
 * 参考
   - [Redux Basic](https://www.zybuluo.com/zhongjianxin/note/1218332)
-  - [xgrommx/awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
-  - [camsong/redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 <http://cn.redux.js.org/>
-  - [rt2zz/redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
+  - [awesome-redux](https://github.com/xgrommx/awesome-redux):Awesome list of Redux examples and middlewares
+  - [redux-in-chinese](https://github.com/camsong/redux-in-chinese):Redux 中文文档 <http://cn.redux.js.org/>
+  - [redux-persist](https://github.com/rt2zz/redux-persist):persist and rehydrate a redux store
+  - [react-redux-starter-kit](https://github.com/davezuko/react-redux-starter-kit):Get started with React, Redux, and React-Router.
+
+![Redux 工作流程](../_static/redux_flow.jpg "Optional title")
 
 ```js
 const createStore = (reducer) => {
@@ -594,7 +599,11 @@ const combineReducers = reducers => {
 };
 ```
 
-## [reduxjs/react-redux](https://github.com/reduxjs/react-redux)
+## [redux-saga](https://github.com/redux-saga/redux-saga)
+
+An alternative side effect model for Redux apps <https://redux-saga.js.org/>
+
+## [react-redux](https://github.com/reduxjs/react-redux)
 
 * Official React bindings for Redux <https://redux.js.org/basics/usagewithreact>
 * 可以选用的。实际项目中应该权衡一下，是直接使用 Redux，还是使用 React-Redux。后者虽然提供了便利，但是需要掌握额外的 API，并且要遵守它的组件拆分规范
@@ -648,32 +657,40 @@ Fast 3kb React alternative with the same ES6 API. Components & Virtual DOM. <htt
 
 ## 教程
 
-* [kay-is/react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
-* [kdchang/reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 <https://www.gitbook.com/book/kdchang/>…
-* [piotrwitek/react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript <https://piotrwitek.github.io/react-redux-typescript-guide/>
+* [react-from-zero](https://github.com/kay-is/react-from-zero):A simple (99% ES2015 less) tutorial for React
+* [reactjs101](https://github.com/kdchang/reactjs101):從零開始學 ReactJS（ReactJS 101）是一本希望讓初學者一看就懂的 ReactJS 中文入門教學書，由淺入深學習 ReactJS 生態系 (Flux, Redux, React Router, ImmutableJS, React Native, Relay/GraphQL etc.)。 <https://www.gitbook.com/book/kdchang/>
+* [TypeScript-React-Starter](https://github.com/Microsoft/TypeScript-React-Starter):A starter template for TypeScript and React with a detailed README describing how to use the two together.
+* [react-typescript-cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet)
+* [react-redux-typescript-guide](https://github.com/piotrwitek/react-redux-typescript-guide):The complete guide to static typing in "React & Redux" apps using TypeScript <https://piotrwitek.github.io/react-redux-typescript-guide/>
 * [React - The Complete Guide (incl Hooks, React Router, Redux)](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)
 * [react-basic](https://github.com/reactjs/react-basic):A description of the conceptual model of React without implementation burden.
+* [react-demos](https://github.com/ruanyf/react-demos):a collection of simple demos of React.js
+* [react-redux-universal-hot-example](https://github.com/erikras/react-redux-universal-hot-example)  A starter boilerplate for a universal webapp using express, react, redux, webpack, and react-transform
+* [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐nodejs api <https://binaryify.github.io/NeteaseCl>
+* [yorpw_ui_web](https://github.com/JonJam/yorpw_ui_web):Password manager SPA built using React and Redux
+* [react-redux-ts](https://github.com/JonJam/react-redux-ts):React/Redux TypeScript starter project
+* [react](https://github.com/duxianwei520/react):一个react+redux+webpack+ES6+antd的SPA的后台管理底层框架
 
 ## UI
 
 * [Chakra UI](https://chakra-ui.com/) :Build accessible React apps & websites with speed
 
+## 项目
+
+* [react-pxq](https://github.com/bailicangdu/react-pxq)一个 react + redux 的完整项目 和 个人总结
+
 ## 工具
 
 * [flux](https://github.com/facebook/flux) Application Architecture for Building User Interfaces <https://facebook.github.io/flux/>
-* admin
-  - [marmelab/react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design <http://marmelab.com/react-admin>
-* table
-  - [react-table](https://github.com/tannerlinsley/react-table):atom_symbol Hooks for building fast and extendable tables and datagrids for React <https://react-table-omega.vercel.app/>
-* [react-query](https://github.com/tannerlinsley/react-query):atom_symbol Hooks for fetching, caching and updating asynchronous data in React
-* Hooks
-  - [alibaba/hooks](https://github.com/alibaba/hooks):React Hooks Library <https://ahooks.js.org/>
-* [react-starter-kit](https://github.com/kriasoft/react-starter-kit) React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) <https://reactstarter.com/>
 * [react-admin](https://github.com/marmelab/react-admin):A frontend Framework for building admin applications running in the browser on top of REST/GraphQL APIs, using ES6, React and Material Design <http://marmelab.com/react-admin>
+* [react-table](https://github.com/tannerlinsley/react-table):atom_symbol Hooks for building fast and extendable tables and datagrids for React <https://react-table-omega.vercel.app/>
+* [react-query](https://github.com/tannerlinsley/react-query):atom_symbol Hooks for fetching, caching and updating asynchronous data in React
+* [react-starter-kit](https://github.com/kriasoft/react-starter-kit) React Starter Kit — isomorphic web app boilerplate (Node.js, Express, GraphQL, React.js, Babel, PostCSS, Webpack, Browsersync) <https://reactstarter.com/>
 
 ## 参考
 
+* [react-developer-roadmap](https://github.com/adam-golab/react-developer-roadmap):Roadmap to becoming a React developer in 2018s
+* [30-seconds-of-react](https://github.com/30-seconds/30-seconds-of-react):Curated collection of useful React snippets that you can understand in 30 seconds or less.
 * [Reactjs docs](https://reactjs.org/docs/hello-world.html)
-* [awesome-react-hooks](https://github.com/rehooks/awesome-react-hooks):Awesome React Hooks
 * [react-bits](https://github.com/vasanthk/react-bits)✨ React patterns, techniques, tips and tricks ✨<https://vasanthk.gitbooks.io/react-bits>
 * [awesome-react](https://github.com/enaqx/awesome-react)A collection of awesome things regarding React ecosystem.

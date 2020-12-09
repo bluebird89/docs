@@ -1,4 +1,4 @@
-# COntent manage Syctem CMS
+# Content Manage System CMS
 
 * 菜单
   - 添加栏目

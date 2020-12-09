@@ -16,11 +16,10 @@ sudo apt install emacs26
 
 ## 配置
 
-* [purcell/emacs.d](https://github.com/purcell/emacs.d):An Emacs configuration bundle with batteries included
-* [hlissner / doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
+* [doom-emacs](https://github.com/hlissner/doom-emacs):An Emacs configuration for the stubborn martian vimmer
 * 陈斌的 Emacs 配置 <https://github.com/redguardtoo/emacs.d>
 
-### [syl20bnr/spacemacs](https://github.com/syl20bnr/spacemacs)
+### [spacemacs](https://github.com/syl20bnr/spacemacs)
 
 A community-driven Emacs distribution - The best editor is neither Emacs nor Vim, it's Emacs *and* Vim! <http://spacemacs.org>
 
@@ -52,7 +51,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
         ("gnu-cn"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")))
 ```
 
-## [purcell/emacs.d](https://github.com/purcell/emacs.d)
+## [emacs.d](https://github.com/purcell/emacs.d)
 
 An Emacs configuration bundle with batteries included
 
@@ -317,17 +316,17 @@ M-g                    设置字体
 
 ## 框架
 
-* [manateelazycat/emacs-application-framework](https://github.com/manateelazycat/emacs-application-framework):Emacs application framework
+* [emacs-application-framework](https://github.com/manateelazycat/emacs-application-framework):Emacs application framework
 
 ## 参考
 
 * [awesome-emacs](https://github.com/emacs-tw/awesome-emacs):A community driven list of useful Emacs packages, libraries and others.
-* [joaotavora/yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs <http://joaotavora.github.com/yasnippet/>
-* [Wilfred/remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
-* [abo-abo/hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
+* [yasnippet](https://github.com/joaotavora/yasnippet):A template system for Emacs <http://joaotavora.github.com/yasnippet/>
+* [remacs](https://github.com/Wilfred/remacs):Rust ❤️ Emacs
+* [hydra](https://github.com/abo-abo/hydra):make Emacs bindings that stick around
 * [Spacemacs Rocks](http://book.emacs-china.org/):用 21 天学习 Emacs 以及 Spacemacs 的使用
 
-* [redguardtoo / mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
+* [mastering-emacs-in-one-year-guide](https://github.com/redguardtoo/mastering-emacs-in-one-year-guide)Be great at emacs in one year
 
 * reddit 的 Emacs 频道，最前沿的 Emacs 技巧：<https://www.reddit.com/r/emacs/>
 * Emacs org-mode 的文档，从这个文档中你可以发现纯文本的魔力：<https://orgmode.org/>

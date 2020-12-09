@@ -599,13 +599,11 @@ function foo(arr) {
 
 ## 工具
 
-* [pa7/heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps <https://www.patrick-wied.at/static/heatmapjs/>
-* [pixijs/pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. <http://pixijs.com>
-* [mozilla/BrowserQuest](https://github.com/mozilla/BrowserQuest):A HTML5/JavaScript multiplayer game experiment <http://browserquest.mozilla.org/>
-* [flowjs/flow.js](https://github.com/flowjs/flow.js):A JavaScript library providing multiple simultaneous, stable, fault-tolerant and resumable/restartable file uploads via the HTML5 File API.
-* [eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js):An HTML5 saveAs() FileSaver implementation <https://eligrey.com/blog/saving-generated-files-on-the-client-side/>
-* [nbedos/termtosvg](https://github.com/nbedos/termtosvg):Record terminal sessions as SVG animations <https://nbedos.github.io/termtosvg/>
-* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
+* [heatmap.js](https://github.com/pa7/heatmap.js):🔥 JavaScript Library for HTML5 canvas based heatmaps <https://www.patrick-wied.at/static/heatmapjs/>
+* [pixi.js](https://github.com/pixijs/pixi.js):The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer. <http://pixijs.com>
+* [BrowserQuest](https://github.com/mozilla/BrowserQuest):A HTML5/JavaScript multiplayer game experiment <http://browserquest.mozilla.org/>
+* [flow.js](https://github.com/flowjs/flow.js):A JavaScript library providing multiple simultaneous, stable, fault-tolerant and resumable/restartable file uploads via the HTML5 File API.
+* [FileSaver.js](https://github.com/eligrey/FileSaver.js):An HTML5 saveAs() FileSaver implementation <https://eligrey.com/blog/saving-generated-files-on-the-client-side/>
+* [termtosvg](https://github.com/nbedos/termtosvg):Record terminal sessions as SVG animations <https://nbedos.github.io/termtosvg/>
+* [html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
 * [turbolinks](https://github.com/turbolinks/turbolinks):Turbolinks makes navigating your web application faster
-
-## 参考

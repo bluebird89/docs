@@ -1942,8 +1942,8 @@ location / {
 
 ## Docker
 
-* [docker-library/php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
-* [yeszao/dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
+* [php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
+* [dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
 
 ```
 mkdir -p ~/php-fpm/logs ~/php-fpm/conf
@@ -2580,11 +2580,11 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
 
 ## 面试
 
-* [todayqq/PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
-* [sushengbuhuo/php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
-* [xianyunyh/PHP-Interview](https://github.com/xianyunyh/PHP-Interview)PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
+* [PHPerInterviewGuide](https://github.com/todayqq/PHPerInterviewGuide)
+* [php-interview-2018](https://github.com/sushengbuhuo/php-interview-2018)
+* [PHP-Interview](https://github.com/xianyunyh/PHP-Interview)PHP面试整理的资料。包括PHP、MySQL、Linux、计算机网络等资料
 * [金题](https://www.jintix.com/)
-* [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
+* [PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 * [](https://github.com/disxo/PHP-interview-myway)
 
 ## [yar](https://github.com/laruence/yar)
@@ -2633,6 +2633,7 @@ A fast shared memory user data cache for PHP
   - [Satis](https://github.com/composer/satis): 一个静态Composer存储库的生成器
   - [tooly](https://github.com/tommy-muehle/tooly-composer-script): 一个在项目中使用Composer管理PHAR文件的库
   - [Toran Proxy](https://toranproxy.com): 一个静态Composer存储库和代理
+  - [skeleton](https://github.com/thephpleague/skeleton):A skeleton repository for League Packages <http://thephpleague.com>
 * 配置
   - [phpdotenv](https://github.com/vlucas/phpdotenv):Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.
 
@@ -3254,8 +3255,8 @@ open http://127.0.0.1:8000
 ## RPC
 
 * [Hprose-PHP](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
-* [datto/php-json-rpc](https://github.com/datto/php-json-rpc):Fully unit-tested JSON-RPC 2.0 for PHP
-* [grpc/grpc-php](https://github.com/grpc/grpc-php):Repo for gRPC PHP
+* [php-json-rpc](https://github.com/datto/php-json-rpc):Fully unit-tested JSON-RPC 2.0 for PHP
+* [grpc-php](https://github.com/grpc/grpc-php):Repo for gRPC PHP
 
 ## 安装与环境
 
@@ -3354,7 +3355,7 @@ open http://127.0.0.1:8000
   - [Programming with Anthony](https://www.youtube.com/playlist?list=PLM-218uGSX3DQ3KsB5NJnuOqPqc5CW2kW): Anthony Ferrara的视频系列
   - [Taking PHP Seriously](https://www.infoq.com/presentations/php-history): 来自Facebook Keith Adams 讲述PHP优势
 * https
-  - [composer/ca-bundle](https://github.com/composer/ca-bundle):Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.
+  - [ca-bundle](https://github.com/composer/ca-bundle):Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.
 
 ## 播客 PHP Podcasts
 
@@ -3375,7 +3376,7 @@ open http://127.0.0.1:8000
 * [Preventing CSRF Attacks](http://blog.ircmaxell.com/2013/02/preventing-csrf-attacks.html): 一篇阻止CSRF攻击的文章
 * [Seven Ways to Screw Up BCrypt](http://blog.ircmaxell.com/2012/12/seven-ways-to-screw-up-bcrypt.html): 一篇关于纠正BCrypt实现的文章
 * [Use Env](https://seancoates.com/blogs/use-env/): 一篇关于使用unix环境帮助的文章
-* [PHP The Right Way](http://www.phptherightway.com/): 一个PHP最佳实践的快速指引手册 (https://github.com/codeguy/php-the-right-way)
+* [php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <https://www.phptherightway.com>
 * [tipi](https://github.com/reeze/tipi):Thinking In PHP Internals, An open book on PHP Internals <http://www.php-internals.com/>
 * [advanced-php](https://github.com/elarity/advanced-php):最近打算写一些php一些偏微妙的教程，比如关于多进程、socket等相关，都是自己的一些感悟心得
 * [php architect Magazine](https://www.phparch.com/magazine/)
@@ -3397,43 +3398,30 @@ open http://127.0.0.1:8000
 * [When Does Foreach Copy?](http://nikic.github.io/2011/11/11/PHP-Internals-When-does-foreach-copy.html): 一篇关于foreach原理的文章
 * [Why Objects (Usually) Use Less Memory Than Arrays](https://gist.github.com/nikic/5015323): 一篇关于对象和数组原理的文章
 * [You're Being Lied To](http://blog.golemon.com/2007/01/youre-being-lied-to.html): 一篇关于内核ZVALs的文章
-* [codeguy/php-the-right-way](https://github.com/codeguy/php-the-right-way):An easy-to-read, quick reference for PHP best practices, accepted coding standards, and links to authoritative tutorials around the Web <https://www.phptherightway.com>
 * [phpbook](https://github.com/walu/phpbook):PHP扩展开发及内核应用
 * [read-php-src](https://github.com/hoohack/read-php-src)
 * [php-langspec](https://github.com/php/php-langspec):PHP Language Specification <http://www.php.net>
-* [dstogov/php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
-* [laruence/php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
-* [pangudashu/php7-internal](https://github.com/pangudashu/php7-internal):PHP7内核剖析
-* [Awesome PHP](http://coffeephp.com/resources)
-* [ziadoz/awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
+* [php-ffi](https://github.com/dstogov/php-ffi):PHP Foreign Function Interface
+* [php7-internal](https://github.com/laruence/php7-internal):Understanding PHP7 Internal articles
+* [php7-internal](https://github.com/pangudashu/php7-internal):PHP7内核剖析
+* [awesome-php](https://github.com/ziadoz/awesome-php):A curated list of amazingly awesome PHP libraries, resources and shiny things.
 * [30-seconds-of-php-code](https://github.com/appzcoder/30-seconds-of-php-code):A curated collection of useful PHP snippets that you can understand in 30 seconds or less.
-
-## 扩展
-
-* [youzan/php-co-koa](https://github.com/youzan/php-co-koa)PHP异步编程: 手把手教你实现co与Koa
-* [youzan/zan](https://github.com/youzan/zan)高效稳定、安全易用、线上实时验证的全异步高性能网络库，通过PHP扩展方式使用。
-* [HanSon/youzan-sdk](https://github.com/HanSon/youzan-sdk)有赞 SDK
-* [swoole/php-cp](https://github.com/swoole/php-cp)
-
-* [thephpleague/oauth2-server](https://github.com/thephpleague/oauth2-server):A spec compliant, secure by default PHP OAuth 2.0 Server <https://oauth2.thephpleague.com>
-* [thephpleague/oauth2-client](https://github.com/thephpleague/oauth2-client):Easy integration with OAuth 2.0 service providers. <http://oauth2-client.thephpleague.com>
-* [thephpleague/skeleton](https://github.com/thephpleague/skeleton):A skeleton repository for League Packages <http://thephpleague.com>
 
 ## 课程
 
-* [fabwu/dddinaction](https://github.com/fabwu/dddinaction):PHP implementation of the DDD in Practice Pluralsight course <https://www.pluralsight.com/courses/domain-driven-design-in-practice>
+* [dddinaction](https://github.com/fabwu/dddinaction):PHP implementation of the DDD in Practice Pluralsight course <https://www.pluralsight.com/courses/domain-driven-design-in-practice>
 
 ## trace
 
-* [Qihoo360/phptrace](https://github.com/Qihoo360/phptrace):A tracing and troubleshooting tool for PHP scripts.
+* [phptrace](https://github.com/Qihoo360/phptrace):A tracing and troubleshooting tool for PHP scripts.
 
 ## SMS
 
-* [overtrue/easy-sms](https://github.com/overtrue/easy-sms):📲 一款满足你的多种发送需求的短信发送组件
+* [easy-sms](https://github.com/overtrue/easy-sms):📲 一款满足你的多种发送需求的短信发送组件
 
 ## network
 
-* [slince/spike](https://github.com/slince/spike):📣 A fast reverse proxy written in PHP that helps to expose local services to the internet
+* [spike](https://github.com/slince/spike):📣 A fast reverse proxy written in PHP that helps to expose local services to the internet
 
 ## graphql
 
@@ -3442,7 +3430,6 @@ open http://127.0.0.1:8000
 ## utilities
 
 * [nette/utils](https://github.com/nette/utils):🛠 Lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc. <https://doc.nette.org/utilspw>
-* [Gearman](http://gearman.org/)provides a generic application framework to farm out work to other machines or processes that are better suited to do the work
 
 ## coding standard
 
@@ -3509,26 +3496,22 @@ chmod +x .git/hooks/pre-commit
 ~/.composer/vendor/bin/phpmd dirOrFile text codesize,unusedcode,naming
 ```
 
-## 项目
-
-* [a54552239/projectManageApi](https://github.com/a54552239/projectManageApi):项目管理系统接口
-
 ## 工具
 
-* [https://phar.io](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
-* [sebastianfeldmann/phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
-* [rectorphp/rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
+* [PHAR](https://phar.io):The PHAR Installation and Verification Environment (PHIVE)
+* [phpbu](https://github.com/sebastianfeldmann/phpbu):PHP Backup Utility - Creates and encrypts database and file backups, syncs your backups to other servers or cloud services and assists you monitor your backup process https://phpbu.de
+* [rector](https://github.com/rectorphp/rector):Instant Upgrades for PHP Applications https://www.tomasvotruba.cz/blog/2018/02/19/rector-part-1-what-and-how/
 * [expose](https://github.com/beyondcode/expose): A beautiful, fully open-source, tunneling service - written in pure PHP https://beyondco.de  expose features, like sharing your local sites, out of the box - without any additional setup required
 
-* [cytopia/docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
+* [docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
 * [travis-ci-examples/php](https://github.com/travis-ci-examples/php):Example PHP project using Travis CI http://travis-ci.org
-* [shlinkio/shlink](https://github.com/shlinkio/shlink):A self-hosted and PHP-based URL shortener with CLI and REST interfaces https://shlink.io
+* [shlink](https://github.com/shlinkio/shlink):A self-hosted and PHP-based URL shortener with CLI and REST interfaces https://shlink.io
 
 ## 参考
 
 * [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
 * [clean-code-php](https://github.com/jupeter/clean-code-php):🛁 Clean Code concepts adapted for PHP
-* [tpunt/PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
+* [PHP7-Reference](tpunt/PHP7-Reference):An overview of the features, changes, and backward compatibility breakages in PHP 7
 * [PHP 25周年纪事](https://www.jetbrains.com/lp/php-25/)
 
 * [PHP 开发者如何做代码审查?](http://blog.csdn.net/gitchat/article/details/78050953)

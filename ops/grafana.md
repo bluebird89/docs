@@ -42,7 +42,3 @@ group by time_sec
 ```sh
 grafana-cli plugins install percona-percona-app
 ```
-
-## 工具
-
-* [grafana/loki](https://github.com/grafana/loki):Like Prometheus, but for logs

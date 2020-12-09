@@ -833,15 +833,15 @@ user-select: none;
 ## 工具
 
 * [lazysizes](https://github.com/aFarkas/lazysizes):High performance and SEO friendly lazy loader for images (responsive and normal), iframes and more, that detects any visibility changes triggered through user interaction, CSS or JavaScript without configuration
-* [hakimel/reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework <http://lab.hakim.se/reveal-js/>
+* [reveal.js](https://github.com/hakimel/reveal.js):The HTML Presentation Framework <http://lab.hakim.se/reveal-js/>
 * [html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. html5boilerplate.com/
 
 ## 参考
 
-* [h5bp/html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
+* [html5-boilerplate](https://github.com/h5bp/html5-boilerplate):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
 * [HTML](https://html.spec.whatwg.org/)
   - [HTML中文](https://whatwg-cn.github.io/html/)
-* [dennwc/dom](https://github.com/dennwc/dom):DOM library for Go and WASM
+* [dom](https://github.com/dennwc/dom):DOM library for Go and WASM
 * [Intersection Observer](https://www.w3.org/TR/2018/WD-intersection-observer-20181106/)
 
 * [使用canvas实现和HTML5 video交互的弹幕效果](https://www.zhangxinxu.com/wordpress/2017/09/html5-canvas-video-barrage/)

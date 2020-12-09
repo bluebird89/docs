@@ -15,7 +15,7 @@ ember install ember-cli-mirage
 
 ## 项目
 
-* [ember-learn/super-rentals](https://github.com/ember-learn/super-rentals):Codebase for the Super Rentals official tutorial <https://ember-learn-super-rentals.herokuapp.com/rentals>
+* [super-rentals](https://github.com/ember-learn/super-rentals):Codebase for the Super Rentals official tutorial <https://ember-learn-super-rentals.herokuapp.com/rentals>
 
 ## 工具
 

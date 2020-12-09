@@ -850,17 +850,17 @@ WantedBy=multi-user.target
 
 ## 插件
 
-* [knyar / nginx-lua-prometheus](https://github.com/knyar/nginx-lua-prometheus):Prometheus metric library for Nginx written in Lua
+* [nginx-lua-prometheus](https://github.com/knyar/nginx-lua-prometheus):Prometheus metric library for Nginx written in Lua
 
 ## 工具
 
-* [improbable-eng/thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
-* [coreos/prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
-* [cortexproject / cortex](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. <https://cortexmetrics.io/>
+* [thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
+* [prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
+* [cortex](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. <https://cortexmetrics.io/>
 * [doraemon](link)
 
 ## 参考
 
-* [yunlzheng/prometheus-book](https://github.com/yunlzheng/prometheus-book):Prometheus操作指南  <https://yunlzheng.gitbook.io/prometheus-book/>
+* [prometheus-book](https://github.com/yunlzheng/prometheus-book):Prometheus操作指南  <https://yunlzheng.gitbook.io/prometheus-book/>
 * [Prometheus 中文文档](https://fuckcloudnative.io/prometheus/)
 * [Prometheus 入门与实践](https://www.ibm.com/developerworks/cn/cloud/library/cl-lo-prometheus-getting-started-and-practice/index.html)

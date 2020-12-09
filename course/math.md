@@ -97,6 +97,6 @@
 
 ## 工具
 
-* [dmlc/xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
-* [penrose / penrose](https://github.com/penrose/penrose): Create beautiful diagrams just by typing mathematical notation in plain text. penrose.ink
+* [xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
+* [penrose](https://github.com/penrose/penrose): Create beautiful diagrams just by typing mathematical notation in plain text. penrose.ink
 * Mathpix Snipping Tool 截取数学公式图片，自动识别公式变成LaTeX

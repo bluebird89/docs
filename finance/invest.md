@@ -91,4 +91,4 @@
 ## 资源
 
 * [QuantEcon](https://quantecon.org):Open source code for economic modeling
-* [DeepWisdom / AutoDL](https://github.com/DeepWisdom/AutoDL):Automated Deep Learning without ANY human intervention. 1'st Solution for AutoDL challenge@NeurIPS. <http://fuzhi.ai>
+* [AutoDL](https://github.com/DeepWisdom/AutoDL):Automated Deep Learning without ANY human intervention. 1'st Solution for AutoDL challenge@NeurIPS. <http://fuzhi.ai>

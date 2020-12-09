@@ -279,7 +279,7 @@ Matt Stine提出的一个概念，它是一个思想的集合，包括DevOps、�
 
 ## 工具
 
-* [Netflix/SimianArmy](https://github.com/Netflix/SimianArmy):Tools for keeping your cloud operating in top form. Chaos Monkey is a resiliency tool that helps applications tolerate random instance failures.
+* [SimianArmy](https://github.com/Netflix/SimianArmy):Tools for keeping your cloud operating in top form. Chaos Monkey is a resiliency tool that helps applications tolerate random instance failures.
 
 ## Networks
 
@@ -287,22 +287,22 @@ Matt Stine提出的一个概念，它是一个思想的集合，包括DevOps、�
 
 ## 路由
 
-* [containous/traefik](https://github.com/containous/traefik):The Cloud Native Edge Router <https://traefik.io>
+* [traefik](https://github.com/containous/traefik):The Cloud Native Edge Router <https://traefik.io>
 
 ## 注册
 
-* [goharbor/harbor](https://github.com/goharbor/harbor):An open source trusted cloud native registry project that stores, signs, and scans content. <https://goharbor.io/>
+* [harbor](./harbor.md):An open source trusted cloud native registry project that stores, signs, and scans content. <https://goharbor.io/>
 
 ## Trace
 
-* [jaegertracing/jaeger](https://github.com/jaegertracing/jaeger):CNCF Jaeger, a Distributed Tracing System <https://jaegertracing.io/>
+* [jaeger](https://github.com/jaegertracing/jaeger):CNCF Jaeger, a Distributed Tracing System <https://jaegertracing.io/>
 
 ## Monitor
 
-* [netdata/netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! <https://my-netdata.io/>
+* [netdata](https://github.com/netdata/netdata):Real-time performance monitoring, done right! <https://my-netdata.io/>
 
 ## 参考
 
 * [Cloud Native Computing foundation](https://www.cncf.io/):Sustaining and Integrating Open Source Technologies
-* [cncf/landscape](https://github.com/cncf/landscape):Static Cloud Native Landscapes and Interactive Landscape that filters and sorts hundreds of cloud native projects and products, and shows details including GitHub stars, funding or market cap, first and last commits, contributor counts, headquarters location, and recent tweets. <https://l.cncf.io>
+* [landscape](https://github.com/cncf/landscape):Static Cloud Native Landscapes and Interactive Landscape that filters and sorts hundreds of cloud native projects and products, and shows details including GitHub stars, funding or market cap, first and last commits, contributor counts, headquarters location, and recent tweets. <https://l.cncf.io>
 * [云原生趋势思考](https://mp.weixin.qq.com/s/EzEEvVqiUGsPVWe0F5cYPw)

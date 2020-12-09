@@ -790,8 +790,8 @@ caption-side:bottom
 * caniuse 检测正在使用的属性是否被广泛支持
 * Validate
 * 执行 CSS 重置;各浏览器默认行为还是存在很多分歧。解决这个问题最好的办法就是使用一个 CSS 重置文件为所有元素重新设置默认样式
-  - [necolas/normalize.css](https://github.com/necolas/normalize.css):A collection of HTML element and attribute style-normalizations <http://necolas.github.io/normalize.css/>
-  - [sindresorhus/modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
+  - [normalize.css](https://github.com/necolas/normalize.css):A collection of HTML element and attribute style-normalizations <http://necolas.github.io/normalize.css/>
+  - [modern-normalize](https://github.com/sindresorhus/modern-normalize):Normalize browsers' default style
 
 ```css
 * {
@@ -818,12 +818,6 @@ caption-side:bottom
   - Stylus：它的方式和Less比较相似，但是它和Sass一样更倾向于指令式查找
 * 嵌套：对于css来说，有嵌套的写法无疑是完美的，更像是父子层级之间明确关系
   者在这处的处理都是一样的，使用「&」表示父元素
-
-作者：FE_莫问
-链接：<https://juejin.cn/post/6844903504293658632>
-来源：掘金
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
 * Stylus
 
 ## CSS-in-JS
@@ -838,6 +832,10 @@ caption-side:bottom
 https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,300italic
 ```
 
+## 课程
+
+* [css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects <https://cssanimation.rocks>
+
 ## 图书
 
 * 《[CSS 揭秘](https://www.amazon.cn/gp/product/B01ET3FO86)》
@@ -849,7 +847,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * 《众妙之门: 精通 CSS3》
 * 《[深入浅出 HTML 与 CSS](https://www.amazon.cn/gp/product/B01LXL42O5)》
 * 《[点石成金:访客至上的网页设计秘笈](https://www.amazon.cn/gp/product/B00QGA04RM)》
-* 超越css
+* 超越 css
 
 ## framework
 
@@ -865,7 +863,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [moon](https://github.com/kbrsh/moon) 🌙 The minimal & fast UI library <https://moonjs.org/>
 * [NES.css](https://github.com/BcRikko/NES.css):NES-style CSS Framework | ファミコン風CSSフレームワーク <https://bcrikko.github.io/NES.css>
 * [office-ui-fabric-core](https://github.com/OfficeDev/office-ui-fabric-core):The front-end CSS framework for building experiences for Office and Office 365.
-* [picturepan2/spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework <https://picturepan2.github.io/spectre/>
+* [spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework <https://picturepan2.github.io/spectre/>
 * [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. <https://purecss.io/>
 * Semantic UI
 * [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. <https://shoelace.style/>
@@ -874,33 +872,31 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 
 ## 工具
 
-* [basscss/basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit <http://basscss.com>
-* [Chalarangelo/mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! <https://minicss.org/>
+* [basscss](https://github.com/basscss/basscss):Low-level CSS Toolkit <http://basscss.com>
+* [mini.css](https://github.com/Chalarangelo/mini.css):A minimal, responsive, style-agnostic CSS framework! <https://minicss.org/>
 * [stylelint](https://github.com/stylelint/stylelint) <https://stylelint.io/>
-* [Spiderpig86/Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. <https://spiderpig86.github.io/Cirrus>
-* [szynszyliszys/repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
-* [nzbin/three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. <https://nzbin.github.io/three-dots/>
-* [ConnorAtherton/loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. <https://connoratherton.com/loaders>
-* [matthiasmullie/minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. <https://www.minifier.org>
-* [IanLunn/Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. <http://ianlunn.github.io/Hover/>
+* [Cirrus](https://github.com/Spiderpig86/Cirrus):☁️ The CSS framework for the modern web. <https://spiderpig86.github.io/Cirrus>
+* [repaintless](https://github.com/szynszyliszys/repaintless):Library for fast CSS Animations
+* [three-dots](https://github.com/nzbin/three-dots):🔮 CSS loading animations made by single element. <https://nzbin.github.io/three-dots/>
+* [loaders.css](https://github.com/ConnorAtherton/loaders.css):Delightful, performance-focused pure css loading animations. <https://connoratherton.com/loaders>
+* [minify](https://github.com/matthiasmullie/minify):CSS & JavaScript minifier, in PHP. Removes whitespace, strips comments, combines files (incl. @import statements and small assets in CSS files), and optimizes/shortens a few common programming patterns. <https://www.minifier.org>
+* [Hover](https://github.com/IanLunn/Hover):A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or just use for inspiration. Available in CSS, Sass, and LESS. <http://ianlunn.github.io/Hover/>
 * [yui3](https://github.com/yui/yui3) A library for building richly interactive web applications. <http://yuilibrary.com/>
+* [tachyons](https://github.com/tachyons-css/tachyons/):Functional css for humans <https://tachyons.io>
 
 ## 参考
 
-* [scottjehl/Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
-* [bjankord/Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
+* [Respond](https://github.com/scottjehl/Respond):A fast & lightweight polyfill for min/max-width CSS3 Media Queries (for IE 6-8, and more)
+* [Style-Guide-Boilerplate](https://github.com/bjankord/Style-Guide-Boilerplate):A starting point for crafting living style guides.
 * [30 Seconds of CSS](https://atomiks.github.io/30-seconds-of-css/)
 * [30-seconds-of-css](https://github.com/30-seconds/30-seconds-of-css)Short CSS code snippets for all your development needs <https://www.30secondsofcode.org/css/p/1>
 * [Jxnblk](https://jxnblk.com/)
-* [l-hammer/You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ <https://lhammer.cn/You-need-to-know-css/>
+* [You-need-to-know-css](https://github.com/l-hammer/You-need-to-know-css):🖖CSS tricks web developers need to know~ <https://lhammer.cn/You-need-to-know-css/>
 * [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
-
-* [chokcoco/CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！<https://chokcoco.github.io/CSS-Inspiration/#/./init>
-* [tobiasahlin/SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS <http://tobiasahlin.com/spinkit/>
-* [cssanimation/css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects <https://cssanimation.rocks>
-
-* [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)
+* [CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！<https://chokcoco.github.io/CSS-Inspiration/#/./init>
+* [SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS <http://tobiasahlin.com/spinkit/>
 * [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
-* [danielcrisp/hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
+* [hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
 * [](https://generative-art-with-css.commons.host/)
 * [](https://github.com/jgthms/web-design-in-4-minutes):<https://jgthms.com/web-design-in-4-minutes/>
+* [五个最新的CSS特性以及如何使用它们](https://zhuanlan.zhihu.com/p/40736286)

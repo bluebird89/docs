@@ -601,32 +601,31 @@ ps aux | grep swoole_process_server_master | awk '{print $2}'| xargs kill - USR1
 
 ## 项目
 
-* [wh469012917/swoole-vue-webim](https://github.com/wh469012917/swoole-vue-webim):一个Web聊天应用，基于Vue和Swoole构建
-* [brewlin/swoft-im](https://github.com/brewlin/swoft-im):基于swoft-cloud的微服务架构，最小化拆分粒度，PHP7、多进程、协程、异步任务、mysql连接池、redi连接池、rpc连接池、服务治理、服务注册与发现、Aop切面、全注解 <http://chat.huido.site>
-* [matyhtf/webim](https://github.com/matyhtf/webim):使用PHP+Swoole实现的网页即时聊天工具
+* [swoole-vue-webim](https://github.com/wh469012917/swoole-vue-webim):一个Web聊天应用，基于Vue和Swoole构建
+* [swoft-im](https://github.com/brewlin/swoft-im):基于swoft-cloud的微服务架构，最小化拆分粒度，PHP7、多进程、协程、异步任务、mysql连接池、redi连接池、rpc连接池、服务治理、服务注册与发现、Aop切面、全注解 <http://chat.huido.site>
+* [webim](https://github.com/matyhtf/webim):使用PHP+Swoole实现的网页即时聊天工具
 
 ## 工具
 
 * 框架
-  - [Tencent/tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
-  - [bixuehujin/blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. <https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/>
-  - [SwooleDistributed/SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
+  - [tsf](https://github.com/Tencent/tsf):coroutine and Swoole based php server framework in tencent
+  - [blink](https://github.com/bixuehujin/blink):A high performance web framework and application server in PHP. <https://docs.rethinkphp.com/blink-framework/v0.4/zh-CN/>
+  - [SwooleDistributed](https://github.com/SwooleDistributed/SwooleDistributed):swoole 分布式全栈框架
   - [EasySwoole](https://github.com/easy-swoole/easyswoole):High performance Coroutine PHP Framework, base on Swoole <http://easyswoole.com/>
-  - [Swoft](https://doc.swoft.org/)
   - [One](https://www.kancloud.cn/vic-one/php-one/826876)
-  - [mix-php/mix](https://github.com/mix-php/mix):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) <http://mixphp.cn>
-  - [matyhtf/framework](https://github.com/matyhtf/framework)PHP advanced Web development framework. The built-in application server based on the development of swoole extension
-  - [shenzhe/zphp](https://github.com/shenzhe/zphp)ZPHP是一个极轻的的，定位于后置SOA服务的框架，可开发独立高效的长驻服务，并能适应多端的变化。
-  - [xcl3721/Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
-  - [bingcool/swoolefy](https://github.com/bingcool/swoolefy):swoolefy是一个基于swoole扩展实现的轻量级高性能的API和MVC应用服务框架
-  - [hyperf-cloud/hyperf](https://github.com/hyperf-cloud/hyperf):🚀 A coroutine framework that focuses on hyperspeed and flexibility, specifically used for build microservices or middlewares. <https://www.hyperf.io>
-  - [matyhtf / framework](https://github.com/matyhtf/framework):SPF （Swoole PHP Framework），世界第一款基于Swoole扩展的PHP框架，开发者是Swoole创始人
-* [eaglewu/swoole-ide-helper](Auto completion, trigger suggest and view docs for Swoole in editor):Put the source code path into Include Path in IDE.
-* [swlib/saber](https://github.com/swlib/saber):Saber, 高性能高可用HTTP客户端 - Swoole人性化组件库 | High performance and high availability HTTP client - Swoole Humanization Component Library
-* [LinkedDestiny/swoole-yaf](https://github.com/LinkedDestiny/swoole-yaf)
-* [LinkedDestiny/swoole-thinkphp](https://github.com/LinkedDestiny/swoole-thinkphp)
-* [youzan/yz_swoole](https://github.com/youzan/yz_swoole)youzan swoole branch
+  - [mix](https://github.com/mix-php/mix):轻量 PHP 框架，基于 Swoole 的常驻内存型 PHP 高性能框架 (开发文档完善) <http://mixphp.cn>
+  - [framework](https://github.com/matyhtf/framework)PHP advanced Web development framework. The built-in application server based on the development of swoole extension SPF（Swoole PHP Framework），一款基于Swoole扩展的PHP框架，开发者是Swoole创始人
+  - [zphp](https://github.com/shenzhe/zphp)ZPHP是一个极轻的的，定位于后置SOA服务的框架，可开发独立高效的长驻服务，并能适应多端的变化。
+  - [Dora-RPC](https://github.com/xcl3721/Dora-RPC):DoraRPC is an RPC For the PHP MicroService by The Swoole
+  - [swoolefy](https://github.com/bingcool/swoolefy):swoolefy是一个基于swoole扩展实现的轻量级高性能的API和MVC应用服务框架
+  - [hyperf](./hyperf.md)
+* [swoole-ide-helper](Auto completion, trigger suggest and view docs for Swoole in editor):Put the source code path into Include Path in IDE.
+* [saber](https://github.com/swlib/saber):Saber, 高性能高可用HTTP客户端 - Swoole人性化组件库 | High performance and high availability HTTP client - Swoole Humanization Component Library
+* [swoole-yaf](https://github.com/LinkedDestiny/swoole-yaf)
+* [swoole-thinkphp](https://github.com/LinkedDestiny/swoole-thinkphp)
+* [yz_swoole](https://github.com/youzan/yz_swoole)youzan swoole branch
 * [Swoole Tracker](https://www.swoole-cloud.com/tracker/index)
+* [php-cp](https://github.com/swoole/php-cp)
 
 ## 参考
 

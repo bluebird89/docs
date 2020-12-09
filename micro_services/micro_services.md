@@ -731,7 +731,8 @@ APP要符合12因子（Twelve-Factor）的规范：
 
 ## 参考
 
-* [amio/awesome-micro](https://github.com/amio/awesome-micro) :A collection of awesome things regarding zeit's micro.
+* [awesome-micro](https://github.com/amio/awesome-micro) :A collection of awesome things regarding zeit's micro.
+
 * [微服务与API网关（上）: 为什么需要API网关？](http://blog.didispace.com/hzf-ms-apigateway-1/)
 * [罗辑思维Go语言微服务改造实践](http://www.techug.com/post/luo-ji-si-wei-go-service-upgrade.html)
 * [一篇文章带你了解Cloud Native](https://blog.csdn.net/u011537073/article/details/72360966)

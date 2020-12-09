@@ -845,11 +845,11 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 
 ## 面试
 
-* [DDFE/DDFE-blog](https://github.com/DDFE/DDFE-blog)
-* [h5bp/Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
+* [DDFE-blog](https://github.com/DDFE/DDFE-blog)
+* [Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A professional front-end template for building fast, robust, and adaptable web apps or sites. <https://html5boilerplate.com/>
 * [FEGuide](https://github.com/nanhupatar/FEGuide):【前端面试题+前端学习+面试指南】 一份涵盖大部分前端工程师所需要掌握的核心知识。这个项目就是为了帮助那些找工作的前端开发工程师去回顾前端的基础知识，如果你不想找工作，也可以通过查看这些面试问题去巩固你的前端技能。 <https://github.com/nanhupatar/FEGuide>
 * [ScriptOJ](http://scriptoj.mangojuice.top/):Web 前端开发评测系统,从大量实战代码、面试题目中总结出精华题库和相应的测试
-* [haizlin/fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
+* [fe-interview](https://github.com/haizlin/fe-interview):前端面试每日 3+1，以面试题来驱动学习，提倡每日学习与思考，每天进步一点
 * [F2E](https://github.com/ponkans/F2E):【互联网一线大厂面试+学习指南】大前端进阶知识扫盲
 
 ## 图书
@@ -869,20 +869,20 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 ## 工具
 
 * 框架
-  - [twbs/ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. <http://goratchet.com>
-  - [zurb/foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. <http://foundation.zurb.com>
-* [chinchang/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
+  - [ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. <http://goratchet.com>
+  - [foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. <http://foundation.zurb.com>
+* [/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
-* [google/material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS <https://getmdl.io>
-* [Munter/subfont](https://github.com/Munter/subfont):Command line tool to optimize your webfont loading. Aggressive subsetting based on your font use, self-hosting of Google fonts and preloading
-* [fex-team/webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
-* [Tencent/vConsole](https://github.com/Tencent/vConsole):A lightweight, extendable front-end developer tool for mobile web page.
+* [material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS <https://getmdl.io>
+* [subfont](https://github.com/Munter/subfont):Command line tool to optimize your webfont loading. Aggressive subsetting based on your font use, self-hosting of Google fonts and preloading
+* [webuploader](https://github.com/fex-team/webuploader)It's a new file uploader solution!
+* [vConsole](https://github.com/Tencent/vConsole):A lightweight, extendable front-end developer tool for mobile web page.
 * Scroll
-  - [ustbhuangyi/better-scroll](https://github.com/ustbhuangyi/better-scroll):scroll inspired by iscroll, and it supports more features and has a better scroll perfermance<https://ustbhuangyi.github.io/better-scroll/#/>
-  - [cubiq/iscroll](https://github.com/cubiq/iscroll):Smooth scrolling for the web <http://iscrolljs.com>
+  - [better-scroll](https://github.com/ustbhuangyi/better-scroll):scroll inspired by iscroll, and it supports more features and has a better scroll perfermance<https://ustbhuangyi.github.io/better-scroll/#/>
+  - [iscroll](https://github.com/cubiq/iscroll):Smooth scrolling for the web <http://iscrolljs.com>
 * 富文本
-  - [ckeditor/ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. <https://ckeditor.comv>
-* [ymm-tech/gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. <https://godspen.ymm56.com>
+  - [ckeditor5](https://github.com/ckeditor/ckeditor5):Development environment for CKEditor 5 – the best browser-based rich text editor. <https://ckeditor.comv>
+* [gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. <https://godspen.ymm56.com>
 * [polymer](https://github.com/Polymer/polymer) Our original Web Component library. <https://polymer-library.polymer-project.org/>
 * [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components <https://lit-element.polymer-project.org>
 
@@ -893,13 +893,12 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [fks](https://github.com/JacksonTian/fks) 前端技能汇总 Frontend Knowledge Structure <http://html5ify.com/fks/>
 * [front-end-guide](https://github.com/grab/front-end-guide)📚 Study guide and introduction to the modern front end stack.
 * [Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers <https://frontendchecklist.io>
-* [AlloyTeam/Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
+* [Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
 * [frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 
 * [前端开发规范手册](http://zhibimo.com/read/Ashu/front-end-style-guide/index.html)
-* [doyoe/html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
-
+* [html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
 - [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
 
 * [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌

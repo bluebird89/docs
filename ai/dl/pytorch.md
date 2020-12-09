@@ -11,19 +11,19 @@ Tensors and Dynamic neural networks in Python with strong GPU acceleration <http
 ## 教程
 
 * [DeepNLP-models-Pytorch](https://github.com/DSKSD/DeepNLP-models-Pytorch) Pytorch implementations of various Deep NLP models in cs-224n(Stanford Univ)
-* [pyorch/tutorials](https://github.com/pytorch/tutorials) <https://pytorch.org/tutorials/>
-* [spro/practical-pytorch](https://github.com/spro/practical-pytorch):PyTorch tutorials demonstrating modern techniques with readable code
-* [yunjey/pytorch-tutorial](https://github.com/yunjey/pytorch-tutorial):PyTorch Tutorial for Deep Learning Researchers
-* [tensor-yu/PyTorch_Tutorial](https://github.com/tensor-yu/PyTorch_Tutorial):《Pytorch模型训练实用教程》中配套代码
+* [tutorials](https://github.com/pytorch/tutorials) <https://pytorch.org/tutorials/>
+* [practical-pytorch](https://github.com/spro/practical-pytorch):PyTorch tutorials demonstrating modern techniques with readable code
+* [pytorch-tutorial](https://github.com/yunjey/pytorch-tutorial):PyTorch Tutorial for Deep Learning Researchers
+* [PyTorch_Tutorial](https://github.com/tensor-yu/PyTorch_Tutorial):《Pytorch模型训练实用教程》中配套代码
 
 ## 图书
 
 * [pytorch-book](https://github.com/chenyuntc/pytorch-book):PyTorch tutorials and fun projects including neural talk, neural style, poem writing, anime generation
-* [zergtant/pytorch-handbook](https://github.com/zergtant/pytorch-handbook):pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门
+* [pytorch-handbook](https://github.com/zergtant/pytorch-handbook):pytorch handbook是一本开源的书籍，目标是帮助那些希望和使用PyTorch进行深度学习开发和研究的朋友快速入门
 
 ## 工具
 
-* [zasdfgbnm/TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
+* [TorchSnooper](https://github.com/zasdfgbnm/TorchSnooper):Debug PyTorch code using PySnooper
 * [pytorch-lightning](https://github.com/PyTorchLightning/pytorch-lightning):The lightweight PyTorch wrapper for high-performance AI research. Scale your models, not the boilerplate. <https://pytorch-lightning.readthedocs.io/en/stable/>
 
 ## 参考

@@ -162,13 +162,12 @@ rtmp://localhost/vod/out.mp4
 * [iTunes Movie Trailers](http://trailers.apple.com/):苹果官网里的一个电影预告片页面
 * [Sandwichvideo](https://sandwichvideo.com/):演示短片
 * [Arc](http://thisisarc.com/):集合了超多优秀的短片制作公司，绝对是视频从业者的宝库
-* [phobal/ivideo](https://github.com/phobal/ivideo):一个可以观看国内主流视频平台所有视频的客户端（Mac、Windows、Linux），包括 VIP 资源
+* [ivideo](https://github.com/phobal/ivideo):一个可以观看国内主流视频平台所有视频的客户端（Mac、Windows、Linux），包括 VIP 资源
 * [Bilibili](https://www.bilibili.com/)
 * [BBC-Future](link)
 * [twitch](https://www.twitch.tv/)
 * [prageru](https://www.prageru.com)
-* 美剧
-  - [99美剧网](https://www.jjmeiju.com/)
+* [99美剧网](https://www.jjmeiju.com/)
 * [Roku](https://www.roku.com/)
 * IPTV
   - [iptv](https://github.com/iptv-org/iptv):Collection of 8000+ publicly available IPTV channels from all over the world
@@ -177,21 +176,21 @@ rtmp://localhost/vod/out.mp4
 
 ## 工具
 
-* [obsproject/obs-studio](https://github.com/obsproject/obs-studio):OBS Studio - Free and open source software for live streaming and screen recording <https://obsproject.com/>
-* [ossrs/srs](https://github.com/ossrs/srs):SRS's a simplest, conceptual integrated, industrial-strength live streaming origin cluster.
-* [video-dev/hls.js](https://github.com/video-dev/hls.js):JavaScript HLS client using Media Source Extension <http://video-dev.github.io/hls.js/stable/demo>
-* [Bilibili/flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
+* [obs-studio](https://github.com/obsproject/obs-studio):OBS Studio - Free and open source software for live streaming and screen recording <https://obsproject.com/>
+* [srs](https://github.com/ossrs/srs):SRS's a simplest, conceptual integrated, industrial-strength live streaming origin cluster.
+* [hls.js](https://github.com/video-dev/hls.js):JavaScript HLS client using Media Source Extension <http://video-dev.github.io/hls.js/stable/demo>
+* [flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
 * 播放器
   - [xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. <https://kodi.tv/>
   - [iina](https://github.com/iina/iina):The modern video player for macOS. <https://iina.io>
   - [annie](https://github.com/iawia002/annie):space_invader Fast, simple and clean video downloader
   - [mpv](https://github.com/mpv-player/mpv):🎥 Command line video player <https://mpv.io/>
   - [GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer):视频播放器（IJKplayer、ExoPlayer、MediaPlayer），HTTPS，支持弹幕，支持滤镜、水印、gif截图，片头广告、中间广告，多个同时播放，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，列表全屏动画，视频加载速度，列表小窗口支持拖动，动画效果，调整比例，多分辨率切换，支持切换播放器，进度条小窗口预览，列表切换详情页面无缝播放，rtsp、concat、mpeg。
-  - [MoePlayer/DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player <http://dplayer.js.org>
+  - [DPlayer](https://github.com/MoePlayer/DPlayer):🍭 Wow, such a lovely HTML5 danmaku video player <http://dplayer.js.org>
   - [ZY-Player](https://github.com/Hunlongyu/ZY-Player):arrow_forward 跨跨平台桌面端视频资源播放器.简洁无广告.免费高颜值. film_strip
-* [mifi/lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
-* [asdjgfr/operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
-* [daniulive/SmarterStreaming](https://github.com/daniulive/SmarterStreaming):国内外为数不多致力于极致体验的超强全自研跨平台(windows/android/iOS)流媒体内核，通过模块化自由组合，支持实时RTMP推流、RTSP推流、RTMP播放器、RTSP播放器、录像、多路流媒体转发、音视频导播、动态视频合成、音频混音、直播互动、内置轻量级RTSP服务等，比快更快，业界真正靠谱的超低延迟直播SDK(1秒内，低延迟模式下200~400ms)。 <https://www.daniulive.com>
+* [lossless-cut](https://github.com/mifi/lossless-cut):Save space by quickly and losslessly trimming video and audio files
+* [operationRecord](https://github.com/asdjgfr/operationRecord):记录产品，测试的沙雕操作，方便debugger
+* [SmarterStreaming](https://github.com/daniulive/SmarterStreaming):国内外为数不多致力于极致体验的超强全自研跨平台(windows/android/iOS)流媒体内核，通过模块化自由组合，支持实时RTMP推流、RTSP推流、RTMP播放器、RTSP播放器、录像、多路流媒体转发、音视频导播、动态视频合成、音频混音、直播互动、内置轻量级RTSP服务等，比快更快，业界真正靠谱的超低延迟直播SDK(1秒内，低延迟模式下200~400ms)。 <https://www.daniulive.com>
 
 * [parse 视频解析网 video](https://pv.vlogdownloader.com/?)
 * [WebTorrent Desktop](https://webtorrent.io/):Streaming torrent app

@@ -459,7 +459,7 @@ IO多路复用：管理更多的连接
 
 * 2019天猫双11交易峰值创下新纪录，达54.4万笔/秒
 
-# 秒杀
+## 秒杀
 
 * 过程
   - 秒杀开始前几分钟，大量用户开始进入秒杀商品详情页面，很多人开始频繁刷新秒杀商品详情页，这时秒杀商品详情页访问量会猛增
@@ -746,18 +746,11 @@ ab --help
 ab -n 1000 -c 100 http://127.0.0.1/
 ```
 
-## 参考
-
-* [小柒2012 / spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统 <https://blog.52itstyle.com/archives/2853/>
-* [](https://github.com/GuoZhaoran/spikeSystem):一个秒杀系统的例子分析
-* [分布式秒杀系统构建中的多种限流实现](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650768375&idx=1&sn=0b1de5c41ac15db0fc53f279fcfa58b6&chksm=f3f93662c48ebf7481bd7ce8ca74a3f2ad66fd80e7f50e313d8ebd1152a094045d75113a832d)
-* [秒杀系统的设计思考](https://mp.weixin.qq.com/s/CVFKTx016BqnOxdzxnW9dg)
-
 ## 工具
 
 * [Siege](https://www.joedog.org/siege-home/) <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
 * [locust](https://locust.io/)
-* [mcollina/autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
+* [autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
 
 ```sh
 #apache ab
@@ -772,4 +765,8 @@ make && make install
 
 ## 参考
 
-* [libevent/libevent](https://github.com/libevent/libevent) :Event notification library <https://libevent.org>
+* [spring-boot-seckill](https://gitee.com/52itstyle/spring-boot-seckill):从0到1构建分布式秒杀系统 <https://blog.52itstyle.com/archives/2853/>
+* [](https://github.com/GuoZhaoran/spikeSystem):一个秒杀系统的例子分析
+* [分布式秒杀系统构建中的多种限流实现](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650768375&idx=1&sn=0b1de5c41ac15db0fc53f279fcfa58b6&chksm=f3f93662c48ebf7481bd7ce8ca74a3f2ad66fd80e7f50e313d8ebd1152a094045d75113a832d)
+* [秒杀系统的设计思考](https://mp.weixin.qq.com/s/CVFKTx016BqnOxdzxnW9dg)
+* [libevent](https://github.com/libevent/libevent) :Event notification library <https://libevent.org>

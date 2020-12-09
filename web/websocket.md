@@ -1,44 +1,28 @@
 # WebSocket
 
 * HTML5出的东西（协议），也就是说HTTP协议没有变化，或者说没关系，但HTTP是不支持持久连接的（长连接，循环连接的不算）首先HTTP有1.1和1.0之说，也就是所谓的keep-alive，把多个HTTP请求合并为一个
-
 * Websocket其实是一个新协议，跟HTTP协议基本没有关系，只是为了兼容现有浏览器的握手规范而已，也就是说它是HTTP协议上的一种补充
-
 * Websocket是一个持久化的协议，相对于HTTP这种非持久的协议来说。简单的举个例子吧，用目前应用比较广泛的PHP生命周期来解释。1) HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，那么在HTTP1.0中，这次HTTP请求就结束了。在HTTP1.1中进行了改进，使得有一个keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response，在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
-
   - 基于HTTP协议的，或者说借用了HTTP的协议来完成一部分握手。
-
 * Websocket只需要一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中，也就避免了HTTP的非状态性，服务端会一直知道你的信息，直到你关闭请求，这样就解决了接线员要反复解析HTTP协议，还要查看identity info的信息。
-
 * keep-alive，也就是说，在一个HTTP连接中，可以发送多个Request，接收多个Response。但是请记住 Request = Response ， 在HTTP中永远是这样，也就是说一个request只能有一个response。而且这个response也是被动的，不能主动发起。
-
 * Sec-WebSocket-Key 是一个Base64 encode的值，这个是浏览器随机生成的，告诉服务器：泥煤，不要忽悠窝，我要验证尼是不是真的是Websocket助理。
-
 * Sec_WebSocket-Protocol 是一个用户定义的字符串，用来区分同URL下，不同的服务所需要的协议。
-
 * Sec-WebSocket-Version 是告诉服务器所使用的Websocket Draft（协议版本），在最初的时候，Websocket协议还在 Draft 阶段，各种奇奇怪怪的协议都有，而且还有很多期奇奇怪怪不同的东西，现在定为13
-
 * 在一个单独的持久连接上提供全双工、双向通信。在Javascript创建了Web Socket之后，会有一个HTTP请求发送到浏览器以发起连接。在取得服务器响应后，建立的连接会将HTTP升级从HTTP协议交换为WebSocket协议。
-
 * 原理： 在TCP连接第一次握手的时候，升级为ws协议。后面的数据交互都复用这个TCP通道
-
 * 报文格式
-
   - 客户端：将消息切割成多个帧，并发送给服务端。
   - 服务端：接收消息帧，并将关联的帧重新组装成完整的消息。
     websocket通信协议实现的是基于浏览器的原生socket，这样原先只有在c/s模式下的大量开发模式都可以搬到web上来了，基本就是通过浏览器的支持在web上实现了与服务器端的socket通信。
-
 * HTTP1.0：生命周期通过Request来界定
-
 * HTTP1.1：keep-alive，在一个HTTP连接中，可以发送多个Request，接收多个Response
     非持久性
     同步有延迟
     消耗资源
     无状态协议。
     被动性
-
 * HTML5的新规范
-
   * Websocket是一个持久化网络通信的协议
   * 一次HTTP握手，所以说整个通讯过程是建立在一次连接/状态中.有更加轻量级的头，减少数据传送量
   * 可以用于绕过大多数防火墙的限制
@@ -46,11 +30,7 @@
   * 实现实时信息传递
   * 双通道
   * multiplexing
-
-* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据
-
-一种连接模式，实现通信协议的通信过程而建立成来的通信管道，其真实的代表是客户端和服务器端的一个通信进程，双方进程通过socket进行通信，而通信的规则采用指定的协议。可以创建任何协议的连接，因为其它协议都是基于此的
-
+* polling :是指从客户端（一般就是浏览器）不断主动的向服务器发 HTTP 请求查询是否有新数据.一种连接模式，实现通信协议的通信过程而建立成来的通信管道，其真实的代表是客户端和服务器端的一个通信进程，双方进程通过socket进行通信，而通信的规则采用指定的协议。可以创建任何协议的连接，因为其它协议都是基于此的
 * 应用层与TCP/IP协议族通信的中间软件抽象层，它是一组接口。在设计模式中，Socket其实就是一个门面模式，对TCP/IP协议的封装，它把复杂的TCP/IP协议族隐藏在Socket接口后面，对用户来说，一组简单的接口就是全部，让Socket去组织数据，以符合指定的协议。
 * socket就是一个 五元组 [180.172.35.150:45678, tcp, 180.97.33.108:80] ，包括：
   - 源IP
@@ -348,9 +328,9 @@ websocketd --port=8080 ./count.sh // 建立server
 
 ## 工具
 
-* [uNetworking/uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
-* [gorilla/websocket](https://github.com/gorilla/websocket):A WebSocket implementation for Go.
-* [websockets/ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
+* [uWebSockets](https://github.com/uNetworking/uWebSockets):Tiny WebSockets
+* [websocket](https://github.com/gorilla/websocket):A WebSocket implementation for Go.
+* [ws](https://github.com/websockets/ws):Simple to use, blazing fast and thoroughly tested WebSocket client and server for Node.js
 * [NGINX as a WebSocket Proxy](https://www.nginx.com/blog/websocket-nginx/)
 
 ## 参考

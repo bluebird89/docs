@@ -265,17 +265,16 @@
 * [Musicbed](http://www.musicbed.com/):为视频寻找最优秀的配乐
 * [Lavaradio](http://www.lavaradio.com):环境音乐电台，按场景来选择音乐
 * [Garageband](https://www.apple.com/cn/ios/garageband/):非常强大的音乐软件，经常被忽视，可以自己摆弄着做音乐，做铃声等
-* 网易云音乐
-  - [trazyn/ieaseMusic](https://github.com/trazyn/ieaseMusic):网易云音乐第三方
 * [last.fm](https://www.last.fm/)
-* [nukeop/nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music <http://nuclear.gumblert.tech/>
+* [nuclear](https://github.com/nukeop/nuclear):Popcorn Time for music <http://nuclear.gumblert.tech/>
 * [YongHaoWu/NeteaseCloudMusicFlac](https://github.com/YongHaoWu/NeteaseCloudMusicFlac):根据网易云音乐的歌单, 下载flac无损音乐到本地. Download the FLAC music from Internet according to your NeteaseCloudMusic playlist.
-* [hnarayanan/shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. <https://harishnarayanan.org/projects/>
+* [shpotify](https://github.com/hnarayanan/shpotify):A command-line interface to Spotify. <https://harishnarayanan.org/projects/>
 * [musicforprogramming](https://musicforprogramming.net/)
+* [ieaseMusic](https://github.com/trazyn/ieaseMusic):这应该是最好的网易云音乐播放器了，没有之一，如果有请打醒 🤘
 * [MusicTools](http://tool.yijingying.com/musictools/)
 * [slsknet](http://www.slsknet.org/):1999年底由著名音乐分享平台Napster的程序员Nir Arbel所开发的P2P共享软件Soulseek(简称SLSK)正式出现，在历经13年多的时间内，这它成为音乐共享软件中口碑最好用户最多的软件之一
 * [Digital Concert Hall](https://www.digitalconcerthall.com/)
-* [lyswhut / lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
+* [lx-music-desktop](https://github.com/lyswhut/lx-music-desktop)
 * [Listen 1](https://listen1.github.io/listen1/):One for all free music in China
 * [ScorSer](http://en.scorser.com/D/Sheet+music.html):Search system for musicians
 * [](https://github.com/ix64/unlock-music/):Unlock encrypted music file in browser. 在浏览器中解锁加密的音乐文件。<https://ix64.github.io/unlock-music/>

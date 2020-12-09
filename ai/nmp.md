@@ -4,4 +4,4 @@
 
 ## 参考
 
-* [THUNLP-MT/MT-Reading-List](https://github.com/THUNLP-MT/MT-Reading-List):A machine translation reading list maintained by Tsinghua Natural Language Processing Group
+* [MT-Reading-List](https://github.com/THUNLP-MT/MT-Reading-List):A machine translation reading list maintained by Tsinghua Natural Language Processing Group

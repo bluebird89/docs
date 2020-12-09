@@ -1,4 +1,6 @@
-# Appium
+# [appium](https://github.com/appium/appium)
+
+📱 Automation for iOS, Android, and Windows Apps. <http://appium.io/>
 
 基于Node.js.Appium通过UI Automator与Android SDK的绑定来驱动Android的自动化。过程与IOS的测试很相似。Appium作为一个HTTP server接受来自JSON线协议的test脚本命令。Appium发送这些命令给UI Automator，以便于他们能在模拟器或者真实的设备上执行。在这之间，Appium把JSON命令翻译成Android SDK能识别的UI Automator的java命令。
 
@@ -49,5 +51,3 @@ appium
 appiumclient是对webdriver原生api的一些扩展和封装。它可以帮助我们更容易的写出用例，写出更好懂的用例。
 
 ## 参考
-
-* [appium/appium](https://github.com/appium/appium): 📱 Automation for iOS, Android, and Windows Apps. <http://appium.io/>

@@ -4,4 +4,4 @@ This repo is the official home of .NET on GitHub. It's a great starting point to
 
 ## 框架
 
-* [dotnet/core](https://github.com/dotnet/core):Home repository for .NET Core
+* [core](https://github.com/dotnet/core):Home repository for .NET Core

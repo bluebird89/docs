@@ -6,7 +6,7 @@ npm install -g cordova
 
 ## 工具
 
-* [pbakondy/cordova-plugin-speechrecognition](https://github.com/pbakondy/cordova-plugin-speechrecognition):🎤 Cordova Plugin for Speech Recognition
+* [cordova-plugin-speechrecognition](https://github.com/pbakondy/cordova-plugin-speechrecognition):🎤 Cordova Plugin for Speech Recognition
 
 ## 参考
 

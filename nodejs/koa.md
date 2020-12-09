@@ -72,6 +72,6 @@ serve
 
 ## 教程
 
-* [17koa/koa-generator-examples](https://github.com/17koa/koa-generator-examples):
-* [koajs/workshop](https://github.com/koajs/workshop):Koa Training Workshop
-* [koajs/examples](https://github.com/koajs/examples):Example Koa apps
+* [koa-generator-examples](https://github.com/17koa/koa-generator-examples):
+* [workshop](https://github.com/koajs/workshop):Koa Training Workshop
+* [examples](https://github.com/koajs/examples):Example Koa apps

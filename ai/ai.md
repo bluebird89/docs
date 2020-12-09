@@ -44,35 +44,23 @@
 据说计算机程序可以从经验E中学习某些类型的任务T和用来测量的P，如果它在T中的任务中的表现（由P测量）会随着经验E的提高而提高
 
 * 减少预测值和实际值之间的差异
-
 * 收集的数据点越多（经验），模型就越好。还可以通过添加更多变量（例如性别）并为它们创建不同的预测线来改进模型
-
 * 应用机器学习的所有领域。这些包括：
-
   - 计算机视觉：适用于车牌识别和面部识别等应用。
   - 信息检索：适用于搜索引擎，文本搜索和图像搜索等应用程序。
   - 营销：用于自动化的电子邮件营销，目标识别等应用
   - 医疗诊断：用于癌症鉴定，异常检测等应用
   - 自然语言处理：用于情感分析，照片标记等应用
   - 在线广告等
-
 * K-近邻分类算法（KNN）、朴素贝叶斯、决策树、支持向量机（SVM）、K-Means、TF-IDF
-
 * 神经元结构:有多个输入端用于接受其它神经元的信息，经过「激活函数」的「整合」之后，输出给其它神经元
-
 * 神经元的特征提取能力:选择阶跃函数作为激活函数，并加上合适的权值参数（，，），就可以实现上图的二分类
-
 * 前向传播与反向传播
-
   - 前向传播，即信号由输入层进入模型，再经隐含层逐层传播，最终达到输出层的过程
   - 反向传播，指神经网络的训练过程中，根据实际输出与期望输出间的误差，反向逐层修正网络参数的过程。
-
 * 模型的训练过程，就是确定模型参数的过程。反向传播为参数调整提供了科学的方法。通过计算模型参数如何对预测值产生影响，从而知道如何调整模型参数，来逼近真实值。可以把这个过程类比「带提示的暴力破解」
-
 * 特征与误差关系后,往减少误差的方向调整 ，让模型训练往期望方向进行,涉及到学习速率
-
 * 方法
-
   - 神经网络是特征提取的神器
   - 通常 CNN 的倒数第二层输出是图像的特征
   - 特征表示为张量，而张量理解为多维数组
@@ -94,14 +82,12 @@
 ## 算法分发
 
 * 算法分发已经是包括搜索引擎、浏览器、资讯客户端甚至音乐软件在内的互联网产品的标配
-
 * 电商销售根据销售数据，调整产品结构、规划购物录像
 * 流量优化
   - 网络流量
   - 车流量
   - 地铁流量
 * 控制论和人工智两者之间亲如手足。都是在1940年代后期的研讨会上构思出来的。两者的差异点在于，控制论学者倾向于使用微积分和矩阵代数作为工具，来解决适合这些工具的问题，比如由固定的连续变量集所描述的系统。而AI社群则没有这些限制，而是选择了逻辑推断与计算工具。这使他们能够处理语言、视觉和规划等问题。
-
 * 理性行动的思想催生了理性代理（agent，源自拉丁语agere，意为做事），也称智能代理，例如可工作的计算机程序。当然，所有程序都能工作，但代理应该做得更多——包括能自主运行、持续运行、适应环境、做出改变、创造和追求目标。理性代理是能为实现最佳结果而采取行动的代理（此定义出自Russel和Norvig）
 
 ## 路径
@@ -115,7 +101,7 @@
     + 《普林斯顿微积分读本》
     + 入门教材: 深入浅出统计学
     + 进阶教材：商务与经济统计
-    + 推荐视频：[可汗学院统计学](http://open.163.com/special/Khan/khstatistics.html)
+    + 视频：[可汗学院统计学](http://open.163.com/special/Khan/khstatistics.html)
   - [概率论与数理统计](https://zhuanlan.zhihu.com/p/36584335)
     + 陈希孺院士的《概率论与数理统计》
     + [斯坦福《概率与统计（Probability and Statistics）》](https://online.stanford.edu/courses/gse-yprobstat-probability-and-statistics)
@@ -137,77 +123,7 @@
   - [特征工程](https://blog.csdn.net/Datawhale/article/details/83033869)
   - [数据挖掘项目](https://blog.csdn.net/datawhale/article/details/80847662)
 * 机器学习
-  - 公开课
-    + [吴恩达《Machine Learning》](https://www.coursera.org/learn/machine-learning)
-      * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 <https://deeplearning-ai.github.io/machine-learning-yearning-cn/>
-      * [中文笔记及作业代码](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
-    + [吴恩达 CS229](http://cs229.stanford.edu/)
-      * [中文视频](http://open.163.com/special/opencourse/machinelearning.html)
-      * [中文笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/)
-      * [速查表](https://zhuanlan.zhihu.com/p/56534902)
-      * [作业代码](https://github.com/Sierkinhane/CS229-ML-Implements)
-      * [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning <https://stanford.edu/~shervine/teaching/cs-229>
-    + 林轩田《机器学习基石》
-      * [中文视频](https://www.bilibili.com/video/av36731342)
-      * [中文笔记](https://redstonewill.com/category/ai-notes/lin-ml-foundations/)
-      * [配套教材《Learning From Data》](http://amlbook.com/)
-    + 林轩田《机器学习技法》
-      * [中文视频](https://www.bilibili.com/video/av36760800)
-      * [中文笔记](https://redstonewill.com/category/ai-notes/lin-ml-techniques/)
-    + [机器学习-李宏毅(2019) Machine Learning](https://www.bilibili.com/video/av35932863)
-      * [李宏毅《机器学习》大纲](https://datawhalechina.github.io/Leeml-Book/#/)
-      * [site](http://speech.ee.ntu.edu.tw/~tlkagk/courses_ML17.html)
-  - 书籍
-    + 《机器学习》:周志华的《机器学习》被大家亲切地称为西瓜书
-      * [读书笔记](https://www.cnblogs.com/limitlessun/p/8505647.html#_label0)
-      * [公式推导](https://datawhalechina.github.io/pumpkin-book/#/)
-      * [南瓜书](https://github.com/datawhalechina/pumpkin-book)
-      * [课后习题](https://zhuanlan.zhihu.com/c_1013850291887845376)
-    + 《统计学习方法》
-      * [讲课 PPT](https://github.com/fengdu78/lihang-code/tree/master/ppt)
-      * [读书笔记](http://www.cnblogs.com/limitlessun/p/8611103.html): <https://github.com/SmirkCao/Lihang>
-      * [参考笔记](https://zhuanlan.zhihu.com/p/36378498)
-      * [代码实现](https://github.com/fengdu78/lihang-code)
-    + [《Scikit-Learn 与 TensorFlow 机器学习实用指南》](https://github.com/ageron/handson-ml)
-    + 机器学习：算法视角（原书第2版）
-  - 实战
-    + [Kaggle 主页](https://www.kaggle.com/)
-    + [apachecn/kaggle](https://github.com/apachecn/kaggle):Kaggle 项目实战（教程） = 文档 + 代码 + 视频
-    + [Kaggle 路线](https://github.com/apachecn/kaggle)
-    + [如何赢得数据科学竞赛：向顶尖 Kaggler 学习（How to Win a Data Science Competition: Learn from Top Kagglers）](https://www.coursera.org/learn/competitive-data-science)
-    + [image-net](http://www.image-net.org/)
-  - 工具
-    + [Scikit-Learn 官方文档](https://scikit-learn.org/stable/index.html): <http://sklearn.apachecn.org/#/>
 * 深度学习
-  - 公开课
-    + 吴恩达《Deep Learning》
-      * [网易云课堂](https://mooc.study.163.com/university/deeplearning_ai#/c)
-      * [Coursera](https://www.coursera.org/specializations/deep-learning)
-      * [课程笔记](https://github.com/fengdu78/deeplearning_ai_books/tree/master/%E5%8F%82%E8%80%83%E8%AE%BA%E6%96%87)
-      * [课程PPT及课后作业](https://github.com/stormstone/deeplearning.ai)
-    + Fast.ai《程序员深度学习实战》
-      * (视频地址B站地址(英文字幕))[https://www.bilibili.com/video/av18904696?from=search&seid=10813837536595120136]
-      * [CSDN地址(2017版中文字幕)](https://edu.csdn.net/course/detail/5192)
-      * [课程笔记](https://medium.com/@hiromi_suenaga/deep-learning-2-part-1-lesson-1-602f73869197): <https://github.com/apachecn/fastai-ml-dl-notes-zh>
-    + CS230 Deep Learning
-      * [秋季CS230视频列表](https://www.bilibili.com/video/av47055599)
-      * [春季CS230课程大纲](http://cs230.stanford.edu/syllabus/)
-      * [Cheetsheet](https://stanford.edu/~shervine/teaching/cs-230.html)
-    + [全栈深度学习训练营（Full Stack Deep Learning Bootcamp）](https://fullstackdeeplearning.com/march2019)
-    + [用于视觉识别的卷积神经网络（Convolutional Neural Networks for Visual Recognition）](https://www.youtube.com/playlist?list=PLzUTmXVwsnXod6WNdg57Yc3zFx_f-RYsq)
-    + [程序员深度学习实战（Practical Deep Learning for Coders）](https://course.fast.ai/)
-  - 书籍
-    + 神经网络与深度学习 - 复旦邱锡鹏
-      * [GitHub地址](https://nndl.github.io/)
-      * [全书 pdf](https://nndl.github.io/nndl-book.pdf)
-      * [示例代码](https://github.com/nndl/nndl-codes)
-      * [课程练习](https://github.com/nndl/exercise)
-    + [《深度学习》Deep Learning](https://github.com/exacity/deeplearningbook-chinese):花书
-    + [《深度学习 500 问》](https://github.com/scutan90/DeepLearning-500-questions)
-    + 《深度学习实战》 [美] 杜威·奥辛格（DouweOsinga）
-  - 工具
-    + [TensorFlow 官方文档](https://www.tensorflow.org/api_docs/python/tf): <https://github.com/jikexueyuanwiki/tensorflow-zh>
-    + [PyTorch官方文档](https://pytorch.org/docs/stable/index.html) <https://github.com/apachecn/pytorch-doc-zh>
 * 强化学习
   - 公开课
     + Reinforcement Learning-David Silver
@@ -219,76 +135,9 @@
       * [课程PPT](http://speech.ee.ntu.edu.tw/~tlkagk/courses_MLDS18.html)
       * [课程笔记](https://blog.csdn.net/cindy_1102/article/details/87905272)
     + [强化学习入门课程（Introduction to Reinforcement Learning）](：https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ)
-* 自然语言处理（NLP，Natural Language Processing）:研究计算机处理人类语言的一门技术，目的是弥补人类交流（自然语言）和计算机理解（机器语言）之间的差距。NLP包含句法语义分析、信息抽取、文本挖掘、机器翻译、信息检索、问答系统和对话系统等领域。
-  - 公开课
-    + CS224n 斯坦福深度自然语言处理课
-      * [17版中文字幕](https://www.bilibili.com/video/av41393758/?p=1)
-      * [课程笔记](http://www.hankcs.com/?s=CS224n%E7%AC%94%E8%AE%B0)
-      * [2019版课程主页](http://web.stanford.edu/class/cs224n/)
-    + 自然语言处理 - Dan Jurafsky 和 Chris Manning
-      - [B站英文字幕版](https://www.bilibili.com/video/av35805262/)
-      - [学术激流网](http://academictorrents.com/details/d2c8f8f1651740520b7dfab23438d89bc8c0c0ab)
-    * [深度学习自然语言处理（Natural Language Processing with Deep Learning）](https://www.youtube.com/playlist?list=PLU40WL8Ol94IJzQtileLTqGZuXtGlLMP_)
-  - 书籍
-    - Python自然语言处理
-    - 自然语言处理综论 Daniel Jurafsky和James H. Martin
-    - 统计自然语言处理基础 Chris Manning和HinrichSchütze
-  - 博客
-    - [我爱自然语言处理](http://www.52nlp.cn/)
-    - [语言日志博客（Mark Liberman）](http://languagelog.ldc.upenn.edu/nll/)
-    - [natural language processing blog](https://nlpers.blogspot.com/)
-  * 项目
-    + [基于LSTM的中文问答系统](https://github.com/S-H-Y-GitHub/QA)
-    + [基于RNN的文本生成器](https://github.com/karpathy/char-rnn)
-    + [基于char-rnn的汪峰歌词生成器](https://github.com/phunterlau/wangfeng-rnn)
-    + [用RNN生成手写数字](https://github.com/skaae/lasagne-draw)
-  - 工具
-    + [中文NLP相关](https://github.com/crownpku/Awesome-Chinese-NLP)
-    + [NLTK](http://www.nltk.org/)
-    + [TextBlob](http://textblob.readthedocs.org/en/dev/)
-    + [Gensim](http://radimrehurek.com/gensim/)
-    + [Pattern](http://www.clips.ua.ac.be/pattern)
-    + [Spacy](http://spacy.io)
-    + [Orange](http://orange.biolab.si/features/)
-    + [Pineapple](https://github.com/proycon/pynlpl)
-  - 论文
-    + [100 Must-Read NLP Papers](https://github.com/mhagiwara/100-nlp-papers)
+* 自然语言处理
 * 计算机视觉
-  - 课程
-    + [李飞飞：CS231n: Convolutional Neural Networks for Visual Recognition](http://cs231n.stanford.edu)
-      * [中文](https://study.163.com/course/introduction/1003223001.htm)
-      * <https://github.com/mbadry1/CS231n-2017-Summary>
-  - 书籍
-    + 入门学习：《Computer Vision：Models, Learning and Inference》
-    + 经典权威的参考资料：《Computer Vision：Algorithms and Applications》
-    + 理论实践：《OpenCV3编程入门》
-* 推荐系统：自动联系用户和物品的一种工具，它能够在信息过载的环境中帮助用户发现令他们感兴趣的信息，也能将信息推送给对它们感兴趣的用户。推荐系统属于资讯过滤的一种应用。
-  - 课程
-    + [《Recommender Systems Specialization》](https://www.coursera.org/specializations/recommender-systems)
-  - 书籍
-    + 《推荐系统实践》（项亮 著）
-    + 《推荐系统》（Dietmar Jannach等 著，蒋凡 译）
-    + 《用户网络行为画像》（牛温佳等 著）
-    + 《Recommender Systems Handbook》（Paul B·Kantor等 著）
-  - 算法库
-    + [LibRec](https://github.com/guoguibing/librec):Java版本的覆盖了70余个各类型推荐算法的推荐系统开源算法库 <https://www.librec.net/>
-    + [LibMF](http://www.csie.ntu.edu.tw/~cjlin/libmf/):C++版本开源推荐系统，主要实现了基于矩阵分解的推荐系统。针对SGD（随即梯度下降）优化方法在并行计算中存在的 locking problem 和 memory discontinuity问题，提出了一种 矩阵分解的高效算法FPSGD（Fast Parallel SGD），根据计算节点的个数来划分评分矩阵block，并分配计算节点。
-    + [SurPRISE](http://surpriselib.com/):一个Python版本的开源推荐系统
-    + [Neural Collaborative Filtering](https://github.com/hexiangnan/neural_collaborative_filtering):神经协同过滤推荐算法的Python实现
-    + [Crab](http://muricoca.github.io/crab/):基于Python开发的开源推荐软件，其中实现有item和user的协同过滤
-  - 数据集
-    + [MovieLen](https://grouplens.org/datasets/movielens/):用户对自己看过的电影进行评分，分值为1~5。MovieLens包括两个不同大小的库，适用于不同规模的算法。小规模的库是943个独立用户对1 682部电影作的10 000次评分的数据；大规模的库是6 040个独立用户对3 900部电影作的大约100万次评分。适用于传统的推荐任务
-    + [Douban](https://www.cse.cuhk.edu.hk/irwin.king.new/pub/data/douban):豆瓣的匿名数据集，它包含了12万用户和5万条电影数据，是用户对电影的评分信息和用户间的社交信息，适用于社会化推荐任务。
-    + [BookCrossing](http://www2.informatik.uni-freiburg.de/~cziegler/BX/):网上的Book-Crossing图书社区的278858个用户对271379本书进行的评分，包括显式和隐式的评分。这些用户的年龄等人口统计学属性(demographic feature)都以匿名的形式保存并供分析
-  - 论文
-    + <https://github.com/hongleizhang/RSPapers>
-  - 项目
-    + [今日头条推荐系统机制介绍，面向内容创作者](https://v.qq.com/x/page/f0800qavik7.html?)
-    + [3分钟了解今日头条推荐系统原理](https://v.qq.com/x/page/g05349lb80j.html)
-    + [facebook是如何为十亿人推荐好友的](https://code.facebook.com/posts/861999383875667/recommending-items-to-more-than-a-billion-people/)
-    + [Netflix的个性化和推荐系统架构](http://techblog.netflix.com/2013/03/system-architectures-for.html)
-  - 资源
-    + [deep-recommender-system](https://github.com/chocoluffy/deep-recommender-system)
+* 推荐系统
 * 风控模型（评分卡模型）:在银行、互金等公司与借贷相关业务中最常见也是最重要的模型之一。简而言之它的作用就是对客户进行打分，来对客户是否优质进行评判。
   - 评分卡模型主要分为三大类
     + A卡（Application score card）申请评分卡
@@ -430,28 +279,27 @@
 
 ## 资源
 
-* [Microsoft/ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
-* [microsoft/ai-edu](https://github.com/microsoft/ai-edu):AI education materials for Chinese students, teachers and IT professionals.
+* [ailab](https://github.com/Microsoft/ailab):Experience, Learn and Code the latest breakthrough innovations with Microsoft AI
+* [ai-edu](https://github.com/microsoft/ai-edu):AI education materials for Chinese students, teachers and IT professionals.
 * [AiLearning](https://github.com/apachecn/AiLearning):AiLearning: 机器学习 - MachineLearning - ML、深度学习 - DeepLearning - DL、自然语言处理 NLP <http://ailearning.apachecn.org/>
-* [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks#deep-learning):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
-* [daviddao/awful-ai](https://github.com/daviddao/awful-ai):😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness
-* [apachecn/statsmodels_doc_zh](https://github.com/apachecn/statsmodels_doc_zh):Statsmodels: Python中的统计建模与计量统计学类库
+* [awful-ai](https://github.com/daviddao/awful-ai):😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness
+* [statsmodels_doc_zh](https://github.com/apachecn/statsmodels_doc_zh):Statsmodels: Python中的统计建模与计量统计学类库
 * [腾讯AI开发平台](https://ai.qq.com)
-* [GokuMohandas/practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
-* [makelove/True_Artificial_Intelligence](https://github.com/makelove/True_Artificial_Intelligence):真AI人工智能
+* [practicalAI](https://github.com/GokuMohandas/practicalAI):📚A practical approach to learning machine learning.
+* [True_Artificial_Intelligence](https://github.com/makelove/True_Artificial_Intelligence):真AI人工智能
 * [autodraw](https://www.autodraw.com/)
 
 ## 工具
 
-* [rlabbe/Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
-* [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
-* [bytedance/byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
+* [Kalman-and-Bayesian-Filters-in-Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python):Kalman Filter book using Jupyter Notebook. Focuses on building intuition and experience, not formal proofs. Includes Kalman filters,extended Kalman filters, unscented Kalman filters, particle filters, and more. All exercises include solutions.
+* [fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
+* [byteps](https://github.com/bytedance/byteps):A high performance and general PS framework for distributed training
 * [mindspore](https://github.com/mindspore-ai/mindspore):MindSpore is a new open source deep learning training/inference framework that could be used for mobile, edge and cloud scenarios. <https://www.mindspore.cn>
 
 ## 参考
 
 * [OpenAI](https://openai.com) Discovering and enacting the path to safe artificial general intelligence.
-* [wx-chevalier/AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
+* [AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
 
 * [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)

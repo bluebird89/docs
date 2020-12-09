@@ -283,9 +283,9 @@ vue upgrade --next
 
 ## 跨域
 
-```json
+```js
 // config/index.js的dev中添加配置项
-proxyTable
+// proxyTable
 
 dev: {
   proxyTable: {
@@ -300,7 +300,9 @@ dev: {
 }
 ```
 
-## Vue Loader
+## [vue-loader](https://github.com/vuejs/vue-loader)
+
+Webpack loader for Vue.js components
 
 * 一个 Webpack loader,实现单文件 Vue 组件
 
@@ -310,7 +312,15 @@ vue create demo-project
 npm run serve
 ```
 
-## [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+##  [vue-router](https://github.com/vuejs/vue-router)
+
+The official router for Vue.js.<https://router.vuejs.org/zh-cn/>
+
+## [vuex](https://vuex.vuejs.org/zh-cn/)
+
+Centralized State Management for Vue.js
+
+## [vue-cli](https://github.com/vuejs/vue-cli)
 
 🛠️ Standard Tooling for Vue.js Development <https://cli.vuejs.org/>
 
@@ -332,74 +342,68 @@ vue init Plortinus/vue-multiple-pages new-project
 ## 项目
 
 * [pwa](https://github.com/vuejs-templates/pwa) progressive-web-apps
-* [bailicangdu/vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
-* [bailicangdu/node-elm](https://github.com/bailicangdu/vue2-elm)：基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用，服务端
-* [bailicangdu/vue2-manage](https://github.com/bailicangdu/vue2-manage):基于 vue + element-ui 的后台管理系统
-* [vuejs/vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
-* [liangxiaojuan/eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：<http://yangyi1024.com/elem> 还有我最新的实战项目,点它=》 <http://yangyi1024.com/meizi>
-* [ustbhuangyi/vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 <http://coding.imooc.com/class/74.html>
-* [tonyfree/youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
-* [codekerala/spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x <https://codekerala.com>
-* [codecasts/spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
-* [Plortinus/vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
-* [KieSun/Vue-StudyMaps](https://github.com/KieSun/Vue-StudyMaps):使用 Vue.js 开发的聚合应用。通过爬虫抓取平时浏览的网站，省去逐个点开网页的时间。
+* [vue2-happyfri](https://github.com/bailicangdu/vue2-happyfri)vue2 + vue-router + vuex 入门项目
+* [node-elm](https://github.com/bailicangdu/vue2-elm)：基于 vue2 + vuex 构建一个具有 45 个页面的大型单页面应用，服务端
+* [vue2-manage](https://github.com/bailicangdu/vue2-manage):基于 vue + element-ui 的后台管理系统
+* [vue-hackernews-2.0](https://github.com/vuejs/vue-hackernews-2.0):HackerNews clone built with Vue 2.0, vue-router & vuex, with server-side rendering
+* [eleme](https://github.com/liangxiaojuan/eleme):vue2 +vue-router2 + es6 +webpack 高仿饿了么app商家详情，demo：<http://yangyi1024.com/elem> 还有我最新的实战项目,点它=》 <http://yangyi1024.com/meizi>
+* [vue-sell](https://github.com/ustbhuangyi/vue-sell):Vue.js高仿饿了么外卖App课程源码 <http://coding.imooc.com/class/74.html>
+* [youzan](https://github.com/tonyfree/youzan):vue重构有赞商城
+* [spa-laravel-vuejs](https://github.com/codekerala/spa-laravel-vuejs):Single Page Application with Laravel 5.3 and Vue.js 2.1.x <https://codekerala.com>
+* [spa-starter-kit](https://github.com/codecasts/spa-starter-kit):A highly opinionated starter kit for building Single Page Applications with Laravel and Vue.js
+* [vue-multiple-pages](https://github.com/Plortinus/vue-multiple-pages):A modern Vue.js multiple pages cli which uses Vue 2, Webpack3, and Element UI （Thanks for your star）(Vue2、ElementUI多页应用脚手架)
+* [Vue-StudyMaps](https://github.com/KieSun/Vue-StudyMaps):使用 Vue.js 开发的聚合应用。通过爬虫抓取平时浏览的网站，省去逐个点开网页的时间。
 * [vue-storefront](https://github.com/DivanteLtd/vue-storefront)
 * [Eagle.js](https://github.com/Zulko/eagle.js)
-* [Coffcer/vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack <http://coffcer.github.io/vue-chat/>
-* [lin-xin/vue-manage-system](https://github.com/lin-xin/vue-manage-system):The web management system solution based on Vue2 and Element UI. <http://blog.gdfengshuo.com/example/work/>
+* [vue-chat](https://github.com/Coffcer/vue-chat):chat example by vue.js + vuex + webpack <http://coffcer.github.io/vue-chat/>
+* [vue-manage-system](https://github.com/lin-xin/vue-manage-system):The web management system solution based on Vue2 and Element UI. <http://blog.gdfengshuo.com/example/work/>
 
 ## 工具
 
 * better-scroll
-* [vuejs/vuex](https://vuex.vuejs.org/zh-cn/):Centralized State Management for Vue.js.
-* [ElemeFE/vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 <https://elemefe.github.io/vue-amap/>
-* [vuejs/vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
-* [vuejs/vue-loader](https://github.com/vuejs/vue-loader):Webpack loader for Vue.js components
-* [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
-* [vuejs/vue-router](https://github.com/vuejs/vue-router):The official router for Vue.js.<https://router.vuejs.org/zh-cn/>
-* [pagekit/vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
-* [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-* [airyland/vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI <https://vux.li/>
-* [vuejs/vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
-* [shentao/vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js <https://vue-multiselect.js.org/>
-* [kazupon/vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js <https://kazupon.github.io/vue-i18n/>
-* [SortableJS/Vue.Draggable](https://github.com/SortableJS/Vue.Draggable):Vue component allowing drag-and-drop sorting in sync with View-Model. Based on Sortable.js
-* [Akryum/vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller):⚡️ Blazing fast scrolling for any amount of data
-* [kaorun343/vue-property-decorator](https://github.com/kaorun343/vue-property-decorator):Vue.js and Property Decorator
-* chart
-  - [ElemeFE/v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 <https://v-charts.js.org>
-* 模板
-  - [SimulatedGREG / electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
-    - [epicmaxco / vuestic-admin](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template <http://vuestic.epicmax.co>
-* [mimecorg/vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
-* [halfrost/vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
-* [SimulatedGREG/electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack.
-* [vuejs/vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
-* [vuejs/vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
-* [gridsome/gridsome](https://github.com/gridsome/gridsome):⚡️ Build super fast, modern websites with Vue.js <https://gridsome.org>
-* test
-  - [vuejs/vue-test-utils](https://github.com/vuejs/vue-test-utils):🔬 Utilities for testing Vue components <https://vue-test-utils.vuejs.org>
+* [vetur](https://github.com/vuejs/vetur)：Vue tooling for VSCode.
+* [vue-devtools](https://github.com/vuejs/vue-devtools):Chrome devtools extension for debugging Vue.js applications.
+
+* [vue-class-component](https://github.com/vuejs/vue-class-component):ES / TypeScript decorator for class-style Vue components.
+* [vue-amap](https://github.com/ElemeFE/vue-amap):vue-amap - 基于 Vue 2.x 和高德地图的地图组件 <https://elemefe.github.io/vue-amap/>
+* [vue-resource](https://github.com/pagekit/vue-resource):The HTTP client for Vue.js
+
+* [vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI <https://vux.li/>
+* [vuex-router-sync](https://github.com/vuejs/vuex-router-sync):Effortlessly keep vue-router and vuex store in sync.
+* [vue-multiselect](https://github.com/shentao/vue-multiselect):Universal select/multiselect/tagging component for Vue.js <https://vue-multiselect.js.org/>
+* [vue-i18n](https://github.com/kazupon/vue-i18n):🌐 Internationalization plugin for Vue.js <https://kazupon.github.io/vue-i18n/>
+* [Vue.Draggable](https://github.com/SortableJS/Vue.Draggable):Vue component allowing drag-and-drop sorting in sync with View-Model. Based on Sortable.js
+* [vue-virtual-scroller](https://github.com/Akryum/vue-virtual-scroller):⚡️ Blazing fast scrolling for any amount of data
+* [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator):Vue.js and Property Decorator
+* [v-charts](https://github.com/ElemeFE/v-charts):基于 Vue2.0 和 ECharts 封装的图表组件📈📊 <https://v-charts.js.org>
+* [electron-vue](https://github.com/SimulatedGREG/electron-vue):An Electron & Vue.js quick start boilerplate with vue-cli scaffolding, common Vue plugins, electron-packager/electron-builder, unit/e2e testing, vue-devtools, and webpack. <https://simulatedgreg.gitbooks.io/electron-vue/content/>
+* [vuido](https://github.com/mimecorg/vuido):Native desktop applications using Vue.js.
+* [vue-objccn](https://github.com/halfrost/vue-objccn):🔥 用 Vue.js 开发的跨三端应用 / Use Vue.js to develop a cross-platform full stack application
+* [gridsome](https://github.com/gridsome/gridsome):⚡️ Build super fast, modern websites with Vue.js <https://gridsome.org>
+* [vue-test-utils](https://github.com/vuejs/vue-test-utils):🔬 Utilities for testing Vue components <https://vue-test-utils.vuejs.org>
 * Editor
-  - [heyscrumpy/tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js <https://tiptap.scrumpy.io>
-  - [hinesboy/mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features <https://md.zhystar.com/>
+  - [tiptap](https://github.com/heyscrumpy/tiptap):A rich-text editor for Vue.js <https://tiptap.scrumpy.io>
+  - [mavonEditor](https://github.com/hinesboy/mavonEditor):mavonEditor - A markdown editor based on Vue that supports a variety of personalized features <https://md.zhystar.com/>
 * 框架
-  - [vuejs-templates/webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
-  - [dcloudio/uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 <http://uniapp.dcloud.io>
-* Admin
-  - [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin <https://panjiachen.github.io/vue-element-admin>
-  - [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. <https://taylorchen709.github.io/vue-admin/>
-  - [vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 <https://admin.vuebulma.com>
-  - [CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js <https://copilot.misterGF.io>
-  - [nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin
-  - [iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView <https://iview.github.io/iview-admin>
+  - [webpack](https://github.com/vuejs-templates/webpack):A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.
+  - [uni-app](https://github.com/dcloudio/uni-app):使用 Vue.js 开发跨平台应用的前端框架 <http://uniapp.dcloud.io>
+
+## Admin
+
+* [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin):🎉 A magical vue admin <https://panjiachen.github.io/vue-element-admin>
+* [vue-admin](https://github.com/taylorchen709/vue-admin):admin template based on vuejs2 and element. <https://taylorchen709.github.io/vue-admin/>
+* [vue-admin](https://github.com/vue-bulma/vue-admin):Vue Admin Panel Framework, Powered by Vue 2.0 and Bulma 0.3 <https://admin.vuebulma.com>
+* [CoPilot](https://github.com/misterGF/CoPilot):Responsive Bootstrap 3 Admin Template based on AdminLTE with vue.js <https://copilot.misterGF.io>
+* [nx-admin](https://github.com/mgbq/nx-admin):👍 A magical 🐮 ⚔ vue admin
+* [iview-admin](https://github.com/iview/iview-admin):Vue 2.0 admin management system template based on iView <https://iview.github.io/iview-admin>
+* [vuestic-admin](https://github.com/epicmaxco/vuestic-admin):Free and Beautiful Vue.js Admin Template <http://vuestic.epicmax.co>
 
 ## 参考
 
-* [vuejs/vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
-* [NLRX-WJC/Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址<https://nlrx-wjc.github.io/Learn-Vue-Source-Code/>
-* [官方文档](https://cn.vuejs.org/v2/guide/) [文档](https://vuejs.org/v2/guide/)
+* [vue-docs-zh-cn](https://github.com/vuejs/vue-docs-zh-cn)
+* [Learn-Vue-Source-Code](https://github.com/NLRX-WJC/Learn-Vue-Source-Code):🔥 🔥逐行剖析Vue.js源码 在线阅读地址<https://nlrx-wjc.github.io/Learn-Vue-Source-Code/>
 * [awesome-vue](https://github.com/vuejs/awesome-vue):A curated list of awesome things related to Vue.js
-* [HcySunYang/vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 <http://hcysun.me/vue-design/>
+* [vue-design](https://github.com/HcySunYang/vue-design):📖逐行级别的源码分析 <http://hcysun.me/vue-design/>
 * [mvvm](https://github.com/DMQ/mvvm):剖析vue实现原理，自己动手实现mvvm
 
 * [Vue 2.0 的建议学习顺序](https://zhuanlan.zhihu.com/p/23134551)
@@ -414,4 +418,4 @@ vue init Plortinus/vue-multiple-pages new-project
 
 * [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
 * [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
-* [bluefox1688/vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
+* [vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架

@@ -88,13 +88,13 @@
 ## 插件
 
 * RESTClient
-* [mozilla / send](https://github.com/mozilla/send):Simple, private file sharing from the makers of Firefox <https://send.firefox.com>
+* [send](https://github.com/mozilla/send):Simple, private file sharing from the makers of Firefox <https://send.firefox.com>
 
 ## 功能
 
 * Firefox Test Pilot
   - 国际版Firefox [Firefox Private Network Beta](https://private-network.firefox.com/)
 
-## Engine
+## [servo](https://github.com/servo/servo)
 
-* [servo](https://github.com/servo/servo):The Servo Browser Engine <https://servo.org/>
+The Servo Browser Engine a modern, high-performance browser engine designed for both application and embedded use <https://servo.org/>

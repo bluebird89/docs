@@ -4,11 +4,10 @@
 * AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序
 * RubyMine:供了一个综合的Ruby编码编辑器
 * [Komodo IDE](https://www.activestate.com/)
-* [visualfc/liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
+* [liteide](https://github.com/visualfc/liteide):LiteIDE is a simple, open source, cross-platform Go IDE.
 * [CodeSandbox](https://codesandbox.io/)
   - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
-* [theia-ide/theia](https://github.com/theia-ide/theia):Theia is a cloud & desktop IDE framework implemented in TypeScript. <http://theia-ide.org>
 
 ## 配置
 
@@ -375,10 +374,9 @@ fs.inotify.max_user_watches = 524288
 
 ## 工具
 
-* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor <https://microsoft.github.io/monaco-editor/>
-* [LightTable/LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ <http://www.lighttable.com>
+* [LightTable](https://github.com/LightTable/LightTable):The Light Table IDE ⛺ <http://www.lighttable.com>
 * [申请免费使用](https://www.jetbrains.com/shop/eform/opensource?product=ALL)
-* [ChrisRM/material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
+* [material-theme-jetbrains](https://github.com/ChrisRM/material-theme-jetbrains#installation):JetBrains theme of Material Theme
 
 ## 参考
 

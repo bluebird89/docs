@@ -212,11 +212,12 @@ grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
 
 ## 实例
 
-* [7sDream/zhihu-oauth](https://github.com/7sDream/zhihu-oauth):尝试解析出知乎官方未开放的 OAuth2 接口，并提供优雅的使用方式，作为 zhihu-py3 项目的替代者，目前还在实验阶段
+* [zhihu-oauth](https://github.com/7sDream/zhihu-oauth):尝试解析出知乎官方未开放的 OAuth2 接口，并提供优雅的使用方式，作为 zhihu-py3 项目的替代者，目前还在实验阶段
 
 ## 工具
 
-* [thephpleague/oauth2-server](https://github.com/thephpleague/oauth2-server):A spec compliant, secure by default PHP OAuth 2.0 Server <https://oauth2.thephpleague.com>
+* [oauth2-server](https://github.com/thephpleague/oauth2-server):A spec compliant, secure by default PHP OAuth 2.0 Server <https://oauth2.thephpleague.com>
+* [oauth2-client](https://github.com/thephpleague/oauth2-client):Easy integration with OAuth 2.0 service providers. <http://oauth2-client.thephpleague.com>
 
 ## 参考
 

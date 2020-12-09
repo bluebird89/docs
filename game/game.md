@@ -239,19 +239,18 @@
 
 ## 测试
 
-* [AirtestProject/Airtest](https://github.com/AirtestProject/Airtest):UI Test Automation Framework for Games and Apps <http://airtest.netease.com/>
-
-## 参考
-
-* [miloyip/game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
-* [游击网](http://www.i7gg.com/game/detail?id=40827)
+* [Airtest](https://github.com/AirtestProject/Airtest):UI Test Automation Framework for Games and Apps <http://airtest.netease.com/>
 
 ## 工具
 
-* [photonstorm/phaser](https://github.com/photonstorm/phaser):Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering. <http://phaser.io>
-* [OpenEmu/OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS <http://openemu.org>
-* [EpicGames/UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code <http://www.unrealengine.com/>
-* [godotengine/godot](https://github.com/godotengine/godot):Godot Engine – Multi-platform 2D and 3D game engine <https://godotengine.org>
-* [EsotericSoftware/spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes):2D skeletal animation runtimes for Spine. <http://esotericsoftware.com/>
-* [Humpheh/goboy](https://github.com/Humpheh/goboy):Multi-platform Nintendo Game Boy Color emulator written in Go <https://humpheh.github.io/goboy/>
+* [phaser](https://github.com/photonstorm/phaser):Phaser is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering. <http://phaser.io>
+* [OpenEmu](https://github.com/OpenEmu/OpenEmu):🕹 Retro video game emulation for macOS <http://openemu.org>
+* [UnrealEngine](https://github.com/EpicGames/UnrealEngine):Unreal Engine source code <http://www.unrealengine.com/>
+* [spine-runtimes](https://github.com/EsotericSoftware/spine-runtimes):2D skeletal animation runtimes for Spine. <http://esotericsoftware.com/>
+* [goboy](https://github.com/Humpheh/goboy):Multi-platform Nintendo Game Boy Color emulator written in Go <https://humpheh.github.io/goboy/>
 * 二柄
+
+## 参考
+
+* [game-programmer](https://github.com/miloyip/game-programmer):A Study Path for Game Programmer
+* [游击网](http://www.i7gg.com/game/detail?id=40827)

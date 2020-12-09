@@ -65,10 +65,10 @@
   - 如果在意 “是否免费” 可选择 360 卫士。
   - 如果在意 “功能均衡” 可选择加速乐。
 * [Azure](https://www.azure.cn/en-us/)
-  - [feiskyer/azure-auth-go](https://github.com/feiskyer/azure-auth-go):Go library for authorizing with Azure
-  - [MicrosoftDocs/azure-docs](https://github.com/MicrosoftDocs/azure-docs):Open source documentation of Microsoft Azure <https://docs.microsoft.com/azure>
+  - [azure-auth-go](https://github.com/feiskyer/azure-auth-go):Go library for authorizing with Azure
+  - [azure-docs](https://github.com/MicrosoftDocs/azure-docs):Open source documentation of Microsoft Azure <https://docs.microsoft.com/azure>
 * Google Cloud Platform
-  - [googleapis/google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python <https://googleapis.github.io/google-cloud-python/>
+  - [google-cloud-python](https://github.com/googleapis/google-cloud-python):Google Cloud Client Library for Python <https://googleapis.github.io/google-cloud-python/>
 * [腾讯云](https://cloud.tencent.com/) `ssh -q -l ubuntu -p 22 IP`
 * [搬瓦工](https://bandwagonhost.cn/)
 * [Vultr](https://www.vultr.com/)
@@ -77,7 +77,7 @@
   - 登录有传统 与 [cloud]() 用户
   - centos  默认登录账户是 opc
   - ubuntu 默认登录账户是 ubuntu
-* [GetStream/awesome-saas-services](https://github.com/GetStream/awesome-saas-services):A curated list of the best in class SaaS services for developers and business owners.
+* [awesome-saas-services](https://github.com/GetStream/awesome-saas-services):A curated list of the best in class SaaS services for developers and business owners.
 * [LeanCLoud](https://leancloud.cn/)
   - [leancloud/ticket](https://github.com/leancloud/ticket)
 * [QiNiu](https://www.qiniu.com/)

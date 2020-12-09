@@ -54,7 +54,7 @@
   * 由于汉语语言知识的笼统、复杂性，难以将各种语言信息组织成机器可直接读取的形式
   * 因此目前基于知识的分词系统还处在试验阶段。
 
-## [fxsjy/jieba](https://github.com/fxsjy/jieba)
+## [jieba](https://github.com/fxsjy/jieba)
 
 结巴中文分词
 

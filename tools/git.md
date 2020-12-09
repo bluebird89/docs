@@ -7,25 +7,22 @@ fast, scalable, distributed revision control system. <https://git-scm.com/>
 * [GitHub](./github.md)
 * [Bitbucket](https://bitbucket.org/product)
 * [Gitlab](https://gitlab.com/)
-  - [gitlabhq/gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com <https://about.gitlab.com/getting-help/>
+  - [gitlabhq](https://github.com/gitlabhq/gitlabhq):GitLab CE Mirror | Please open new issues in our issue tracker on GitLab.com <https://about.gitlab.com/getting-help/>
 * [码云](https://gitee.com)
 * [Coding](https://coding.net)  <https://arsenal.coding.net/p/coding-demo>
   - 敏捷任务管理
   - Cloud Studio
 * [sourceforge](https://sourceforge.net/):The Complete Open-Source Software Platform
 * self-hosted
-  - [gogs](./Gogs.md)
-  - [go-gitea/gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea <http://gitea.io>
+  - [gogs](./gogs.md)
+  - [gitea](https://github.com/go-gitea/gitea):Gitea: Git with a cup of tea <http://gitea.io>
 * [工蜂](https://git.code.tencent.com)
 
 ## 安装
 
 ```sh
-sudo apt-get install git # Ubuntu 18.04 or Debian 9
-sudo yum install git # CentOS
-sudo dnf install git # Fedora
+sudo apt-get|yum|dnf|brew install git
 
-brew install git
 brew install git-flow
 brew install git && brew install bash-completion
 
@@ -56,7 +53,9 @@ fi
     + gpg-agent可以保存口令，让我们更方便。
   + Push
     + default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
-    + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的。
+    + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的
+* GPG
+  - [keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
 
 ```sh
 git --version
@@ -909,7 +908,7 @@ git cherry-pick -m 1 <commitHash> # 采用提交commitHash来自编号1的父分
 * 过滤指定文件 : `/gen/R.java`
 * 可以递归忽略.gitignore文件内容
 * 参考
-  - [github/gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
+  - [gitignore](https://github.com/github/gitignore):A collection of useful .gitignore templates
   - [gitignore.io](Create useful .gitignore files for your project)
 
 ```sh
@@ -1057,8 +1056,8 @@ Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合�
   - [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
   - [templates](https://github.com/git/git/tree/master/templates)
   - [Git hooks](https://githooks.com)
-  - [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
-  - [Arkweid/lefthook](https://github.com/Arkweid/lefthook):Fast and powerful Git hooks manager for any type of projects.
+  - [husky](https://github.com/typicode/husky):🐶 Git hooks made easy
+  - [lefthook](https://github.com/Arkweid/lefthook):Fast and powerful Git hooks manager for any type of projects.
 
 ```sh
 git init --bare /opt/html.git
@@ -1137,7 +1136,7 @@ git --work-tree=/home/www checkout -f
     + The official repository’s manager checks the changes and approves the changes to get merged into the official repository
   - 利用Git有提供各种勾子（hook），即仓库有事件发生时触发执行的脚本
     + 配置一个勾子，在push中央仓库的master分支时，自动构建好对外发布
-  - [nvie/gitflow](https://github.com/nvie/gitflow)：Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
+  - [gitflow](https://github.com/nvie/gitflow)：Git extensions to provide high-level repository operations for Vincent Driessen's branching model.
   - 缺点
     + 过于繁琐，无法要求所有团队成员按照这个流程严格执行。
     + 违反 git 提倡的 short-lived 分支原则。
@@ -1383,7 +1382,7 @@ git worktree remove [-f] <worktree>
 git worktree unlock <worktree>
 ```
 
-### [git-lfs/git-lfs](https://github.com/git-lfs/git-lfs)
+### [git-lfs](https://github.com/git-lfs/git-lfs)
 
 Git extension for versioning large files <https://git-lfs.github.com>
 
@@ -1397,23 +1396,24 @@ git lfs ls-files
 git push origin master
 ```
 
-### [kennethreitz/legit](https://github.com/kennethreitz/legit)
+### [legit](https://github.com/kennethreitz/legit)
 
 Git for Humans, Inspired by GitHub for Mac™. <http://www.git-legit.org/>
 
-```python
+```sh
 pip3 install legit
 
+# Switches to specified branch. Defaults to current branch. Automatically stashes and unstashes any changes. (alias: sw)
 switch <branch>
-Switches to specified branch. Defaults to current branch. Automatically stashes and unstashes any changes. (alias: sw)
+
+# Synchronizes the given branch. Defaults to current branch. Stash, Fetch, Auto-Merge/Rebase, Push, and Unstash. You can only sync published branches. (alias: sy)
 sync [<branch>]
-Synchronizes the given branch. Defaults to current branch. Stash, Fetch, Auto-Merge/Rebase, Push, and Unstash. You can only sync published branches. (alias: sy)
+# Publishes specified branch to the remote. (alias: pub)
 publish [<branch>]
-Publishes specified branch to the remote. (alias: pub)
+# Removes specified branch from the remote. (alias: unp)
 unpublish <branch>
-Removes specified branch from the remote. (alias: unp)
+# Un-does the last commit in git history. (alias: un)
 undo
-Un-does the last commit in git history. (alias: un)
 branches
 ```
 
@@ -1788,39 +1788,49 @@ External commands:
 
 * [Pro Git2](https://github.com/progit/progit2):Pro Git 2nd Edition Scott Chacon和Ben Straub <https://git-scm.com/book/en/v2>
 
+## 教程
+
+* [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
+* [git-tutorial](https://www.learnenough.com/git-tutorial)
+* [git exercises](https://gitexercises.fracz.com/)
+* [git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
+* [visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.<http://marklodato.github.io/visual-git-guide/index-en.html>
+* [git-guide](https://github.com/rogerdudler/git-guide):git - the simple guide <http://rogerdudler.github.com/git-guide>
+* [练习沙盒](https://try.github.io)
+* [learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! <https://learngitbranching.js.org/>
+* [learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
+
 ## 工具
 
 * [delta](https://github.com/dandavison/delta):A viewer for git and diff output
-* [tj/git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
-* [cloudson/gitql](https://github.com/cloudson/gitql):A git query language
-* [jayphelps/git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
-* [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
-* [typicode/husky](https://github.com/typicode/husky):🐶 Git hooks made easy
-* [conventional-changelog/conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
-* [pstadler/keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
-* [isomorphic-git/isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! <https://isomorphic-git.org/>
-* [Fakerr/git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
-* [rgburke/grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
-* [carloscuesta/gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 <https://gitmoji.carloscuesta.me>
-* [magit/magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. <https://magit.vc> Git 在 Emacs 上的打开方式
-* [commitizen/cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. <http://commitizen.github.io/cz-cli/>
-* [imsun/gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. <https://imsun.github.io/gitment/>
-* [rtyley/bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
-* [sdg-mit/gitless](https://github.com/sdg-mit/gitless):A version control system built on top of Git <http://gitless.com>
-* [sobolevn/git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. <http://git-secret.io>
+* [git-extras](https://github.com/tj/git-extras):GIT utilities -- repo summary, repl, changelog population, author commit percentages and more
+* [gitql](https://github.com/cloudson/gitql):A git query language
+* [git-blame-someone-else](https://github.com/jayphelps/git-blame-someone-else):Blame someone else for your bad code.
+* [git-standup](https://github.com/kamranahmedse/git-standup):Recall what you did on the last working day. Psst! or be nosy and find what someone else in your team did ;-)
+* [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog):Generate a changelog from git metadata.
+* [isomorphic-git](https://github.com/isomorphic-git/isomorphic-git):A pure JavaScript implementation of git for node and browsers! <https://isomorphic-git.org/>
+* [git-recall](https://github.com/Fakerr/git-recall):An interactive way to peruse your git history from the terminal
+* [grv](https://github.com/rgburke/grv):GRV is a terminal interface for viewing git repositories
+* [gitmoji](https://github.com/carloscuesta/gitmoji):An emoji guide for your commit messages. 😜 <https://gitmoji.carloscuesta.me>
+* [magit](https://github.com/magit/magit):It's Magit! A Git porcelain inside Emacs. <https://magit.vc> Git 在 Emacs 上的打开方式
+* [cz-cli](https://github.com/commitizen/cz-cli):The commitizen command line utility. <http://commitizen.github.io/cz-cli/>
+* [gitment](https://github.com/imsun/gitment):A comment system based on GitHub Issues. <https://imsun.github.io/gitment/>
+* [bfg-repo-cleaner](https://github.com/rtyley/bfg-repo-cleaner):Removes large or troublesome blobs like git-filter-branch does, but faster. And written in Scala
+* [gitless](https://github.com/sdg-mit/gitless):A version control system built on top of Git <http://gitless.com>
+* [git-secret](https://github.com/sobolevn/git-secret):👥 A bash-tool to store your private data inside a git repository. <http://git-secret.io>
 * [scmmanager](https://www.scm-manager.org/):The easiest way to share and manage your Git, Mercurial and Subversion repositories over http
-* [marionebl/commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages <https://marionebl.github.io/commitlint/>
-* [pomber/git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository <https://githistory.xyz/>
-* [okonet/lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
-* [arialdomartini/oh-my-git](https://github.com/arialdomartini/oh-my-git) `git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.profile`
-* [magicmonty/bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
-* [nosarthur/gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
+* [commitlint](https://github.com/marionebl/commitlint):📓 Lint commit messages <https://marionebl.github.io/commitlint/>
+* [lint-staged](https://github.com/okonet/lint-staged):🚫💩 — Run linters on git staged files
+* [git-history](https://github.com/pomber/git-history)：Quickly browse the history of a file from any git repository <https://githistory.xyz/>
+* [oh-my-git](https://github.com/arialdomartini/oh-my-git) `git clone https://github.com/arialdomartini/oh-my-git.git ~/.oh-my-git && echo source ~/.oh-my-git/prompt.sh >> ~/.profile`
+* [bash-git-prompt](https://github.com/magicmonty/bash-git-prompt):An informative and fancy bash prompt for Git users
+* [gita](https://github.com/nosarthur/gita):Manage many git repos with sanity 从容管理多个git库
 * [onefetch](https://github.com/o2sh/onefetch) Git repository summary on your terminal
-* 客户端
-  - [jesseduffield/lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
+* GUI
+  - [lazygit](https://github.com/jesseduffield/lazygit):simple terminal UI for git commands `sudo add-apt-repository ppa:lazygit-team/release` `sudo apt-get install lazygit`
   - [sourcetree](https://www.sourcetreeapp.com/)
   - [TortoiseGit](https://tortoisegit.org/) overlay icons showing the file status, a powerful context menu for Git and much more!
-  - [GitHawkApp/GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. <http://githawk.com>
+  - [GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. <http://githawk.com>
   - Linux
     + [SmartGit](https://www.syntevo.com/)
     + [GitKraken](https://www.gitkraken.com/)
@@ -1829,23 +1839,13 @@ External commands:
 ## 参考
 
 * [文档](https://git-scm.com/docs)
-* [tiimgreen/github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. <http://git.io/sheet>
-* [Atlassian Git Tutorial](https://www.atlassian.com/git/tutorials)
-* [git-tutorial](https://www.learnenough.com/git-tutorial)
-* [git exercises](https://gitexercises.fracz.com/)
-* [geeeeeeeeek/git-recipes](https://github.com/geeeeeeeeek/git-recipes):Git recipes in Chinese. 高质量的Git中文教程.
-* [MarkLodato/visual-git-guide](https://github.com/MarkLodato/visual-git-guide):A visual guide to git.<http://marklodato.github.io/visual-git-guide/index-en.html>
-* [rogerdudler/git-guide](https://github.com/rogerdudler/git-guide):git - the simple guide <http://rogerdudler.github.com/git-guide>
-* [练习沙盒](https://try.github.io)
-* [git-tips/tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. <http://git.io/git-tips>
+* [github-cheat-sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub. <http://git.io/sheet>
+* [tips](https://github.com/git-tips/tips):Most commonly used git tips and tricks. <http://git.io/git-tips>
 * [gitpr](https://github.com/susam/gitpr#with-merge-commit):A quick reference guide on fork and pull request workflow
 * [git-flight-rules](https://github.com/k88hudson/git-flight-rules):Flight rules for git
 * [Git Immersion](http://gitimmersion.com/):The surest path to mastering Git is to immerse oneself in its utilities and operations, to experience it first-hand
 
-* [pcottle/learnGitBranching](https://github.com/pcottle/learnGitBranching):An interactive git visualization to challenge and educate! <https://learngitbranching.js.org/>
-* [learn-git-with-bitbucket-cloud](https://www.atlassian.com/git/tutorials/learn-git-with-bitbucket-cloud)
 * [Vim-fugitive](https://github.com/tpope/vim-fugitive) : Git 在 Vim 上的打开方式
 * [Git 原理](https://git-scm.com/book/zh/v1/Git-内部原理-Git-对象)
-* [xirong/my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） <https://github.com/xirong/my-git>
-*
+* [my-git](https://github.com/xirong/my-git):Individual collecting material of learning git（有关 git 的学习资料） <https://github.com/xirong/my-git>
 * [A successful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)

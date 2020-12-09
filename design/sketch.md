@@ -34,7 +34,7 @@
 
 ## 工具
 
-* [lllyasviel/style2paints](https://github.com/lllyasviel/style2paints):sketch + style = paints 🎨 <https://s2p.moe/>
+* [style2paints](https://github.com/lllyasviel/style2paints):sketch + style = paints 🎨 <https://s2p.moe/>
 
 ## 参考
 

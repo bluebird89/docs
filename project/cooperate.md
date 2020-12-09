@@ -96,4 +96,4 @@
 
 ## 工具
 
-* [teambit/bit](https://github.com/teambit/bit):Easily share code between projects with your team. <https://bitsrc.io>
+* [bit](https://github.com/teambit/bit):Easily share code between projects with your team. <https://bitsrc.io>

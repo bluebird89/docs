@@ -353,9 +353,9 @@ def backtrack(路径, 选择列表):
     + C++ 代码对时间的限制苛刻
   - main 函数负责接收数据，加一个 solution 函数负责统一处理数据和输出答案，然后再用诸如 backtrack 这样一个函数处理具体的算法逻辑
 * reference
-  - [azl397985856/leetcode](https://github.com/azl397985856/leetcode):LeetCode Solutions: A Record of My Problem Solving Journey <https://leetcode-solution.cn/>
-  - [MisterBooo/LeetCodeAnimation](https://github.com/MisterBooo/LeetCodeAnimation):Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
-  - [labuladong / fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! <https://labuladong.gitbook.io/algo/>
+  - [leetcode](https://github.com/azl397985856/leetcode):LeetCode Solutions: A Record of My Problem Solving Journey <https://leetcode-solution.cn/>
+  - [LeetCodeAnimation](https://github.com/MisterBooo/LeetCodeAnimation):Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
+  - [fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! <https://labuladong.gitbook.io/algo/>
   - [little-algorithm](https://github.com/nettee/little-algorithm):LeetCode 题目参考代码与详细讲解，公众号《面向大象编程》文章整理
   - 《LeetCode刷题》
 
@@ -372,60 +372,59 @@ def backtrack(路径, 选择列表):
 * [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
 * [公开课](http://open.163.com/special/opencourse/algorithms.html)
 * [Erickson 算法](http://jeffe.cs.illinois.edu/teaching/algorithms/)
-  - [jeffgerickson/algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
+  - [algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
   - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
 
 ## 图书
 
-* 《数据结构与算法分析：C语言描述版》
 * 《大话数据结构》
 * 《剑指offer》
 * 编程珠玑
 * 算法导论 Introduction to Algorithms
-  - [huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
+  - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
   - [](https://www.bilibili.com/video/av48922404)
 * 数论
 * [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
 * [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
-* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
 * 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
+* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 《数据结构与算法 JavaScript 描述》
 * 算法图解
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
-* [ProblemSolvingwithAlgorithmsandDataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)
+* [Problem Solving with Algorithms and DataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)
 
 ## 工具
 
-* [Cyan4973/xxHash](https://github.com/Cyan4973/xxHash):Extremely fast non-cryptographic hash algorithm <http://www.xxhash.com/>
+* [xxHash](https://github.com/Cyan4973/xxHash):Extremely fast non-cryptographic hash algorithm <http://www.xxhash.com/>
 * [cheatsheet](https://www.bigocheatsheet.com/)
 * collabedit.com
 * coderpad.io
 
 ## 参考
 
-* [OpenGenus/cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
-* [donnemartin/interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
-* [keon/algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
-* [LeuisKen/algorithm](https://github.com/LeuisKen/algorithm)
+* [cosmos](https://github.com/OpenGenus/cosmos):[Show ❤️ love by 🌟] Your personal library of every algorithm and data structure code that you will ever encounter
+* [interactive-coding-challenges](https://github.com/donnemartin/interactive-coding-challenges):Huge update! Interactive Python coding interview challenges (algorithms and data structures). Includes Anki flashcards.
+* [algorithms](https://github.com/keon/algorithms)Minimal examples of data structures and algorithms in Python
+* [algorithm](https://github.com/LeuisKen/algorithm)
 * [Dictionary of Algorithms and Data Structures](https://xlinux.nist.gov/dads/)
-* [frowhy/Algorithm](https://github.com/frowhy/Algorithm)
+* [Algorithm](https://github.com/frowhy/Algorithm)
 * [python](https://github.com/ssjssh/algorithm)
-* [TheAlgorithms/Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
-* [TheAlgorithms/Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
-* [TheAlgorithms / Go](https://github.com/TheAlgorithms/Go):Algorithms Implemented in GoLang
-* [skybebe/Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
-* [TheAlgorithms / Javascript](https://github.com/TheAlgorithms/Javascript):A repository for All algorithms implemented in Javascript (for educational purposes only)
-* [trekhleb/javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
+* [Python](https://github.com/TheAlgorithms/Python):All Algorithms implemented in Python
+* [Java](https://github.com/TheAlgorithms/Java):All Algorithms implemented in Java
+* [Go](https://github.com/TheAlgorithms/Go):Algorithms Implemented in GoLang
+* [Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
+* [Javascript](https://github.com/TheAlgorithms/Javascript):A repository for All algorithms implemented in Javascript (for educational purposes only)
+* [javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
 * [awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
-* [ChrisKnott/Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
-* [algorithm-visualizer/algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code <https://algorithm-visualizer.org/>
+* [Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
+* [algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code <https://algorithm-visualizer.org/>
 * [VisuAlgo](https://visualgo.net/en):visualising data structures and algorithms through animation
-* [algorithm004-01/algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
+* [algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
 * [](https://github.com/overnote/over-algorithm)
 
 * <https://www.geekxh.com/>

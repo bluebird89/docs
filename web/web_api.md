@@ -69,7 +69,3 @@ function step(timestamp) {
 
 window.requestAnimationFrame(step);
 ```
-
-## 参考
-
-* [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)

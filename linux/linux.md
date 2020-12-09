@@ -3594,11 +3594,10 @@ cat a b b | sort | uniq -u > c
 * 《[深入理解Linux内核](https://www.amazon.cn/gp/product/B0011F5RYM)》
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
 * [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
-* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
-* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
-* Linux 内核揭秘
   - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html
-* LINUX操作系统(第2版)
+* 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
+* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍\
+* LINUX 操作系统(第2版)
 * [Advanced Linux Programming Linux环境高级编程](https://mentorembedded.github.io/advancedlinuxprogramming/)
   - 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
 * 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
@@ -3606,42 +3605,42 @@ cat a b b | sort | uniq -u > c
 * Linux运维之道
 * 嵌入式Linux基础教程(第2版)
 * 精通Linux设备驱动程序开发
-* 《只是为了好玩 : Linux 之父林纳斯自传》
+* 《只是为了好玩:Linux 之父林纳斯自传》
 
 ## 工具
 
-* [p-gen/smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
-* [trimstray/iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
-* [akavel/up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
+* [smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
+* [iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
+* [up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
 * Monitor
   - [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
   - [bashtop](https://github.com/aristocratos/bashtop):Linux resource monitor
   - [Cockpit](https://cockpit-project.org/):The easy-to-use, integrated, glanceable, and open web-based interface for your servers
-* [johnfactotum/foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
-* [systemd/systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
+* [foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
+* [systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
 * bench.sh `wget -qO- bench.sh | bash` `curl -Lso- bench.sh | bash` 查看 Linux 系统信息，测试网络带宽及硬盘读写速率
 * [LTF](https://github.com/843723683/LTF):Linux test framework
 
 ## 参考
 
-* [luong-komorebi/Awesome-Linux-Software](https://github.com/luong-komorebi/Awesome-Linux-Software):A list of awesome applications, software, tools and other materials for Linux distros. https://luong-komorebi.github.io/Awesome-Linux-Software/
-* [aleksandar-todorovic/awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
-* [learnbyexample/Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
+* [Awesome-Linux-Software](https://github.com/luong-komorebi/Awesome-Linux-Software):A list of awesome applications, software, tools and other materials for Linux distros. https://luong-komorebi.github.io/Awesome-Linux-Software/
+* [awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
+* [Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
 * [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
 * [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
 * [linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
-* [jaywcjlove/linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
-* [feiskyer/linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
+* [linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
+* [linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
 * [test-your-sysadmin-skills](https://github.com/trimstray/test-your-sysadmin-skills):A collection of *nix Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.
-* [0xAX/linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
-* [trimstray/the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
+* [linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
+* [the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
 * [VITUX](https://vitux.com) Linux Compendium
 * [Linux From Scratch](http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
 * [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)
 * [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
-* [nevermosby / linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
+* [linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
 * [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
 
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)

@@ -8,4 +8,4 @@
 
 ## 工具
 
-* [inkle/ink](https://github.com/inkle/ink):inkle's open source scripting language for writing interactive narrative. <http://www.inklestudios.com/ink>
+* [ink](https://github.com/inkle/ink):inkle's open source scripting language for writing interactive narrative. <http://www.inklestudios.com/ink>

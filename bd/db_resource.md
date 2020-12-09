@@ -94,7 +94,7 @@
   - [博世小交通灯数据集](https://hci.iwr.uni-heidelberg.de/node/6132)：用于深度学习的小型交通灯的数据集。
   - [LaRa交通灯识别](http://www.lara.prd.fr/benchmarks/trafficlightsrecognition)：巴黎的交通信号灯数据集。
   - [WPI数据集](http://computing.wpi.edu/dataset.html)：交通灯、行人和车道检测的数据集。
-  * [Seaony/china-city-subway](https://github.com/Seaony/china-city-subway):Chinese city subway database
+  * [china-city-subway](https://github.com/Seaony/china-city-subway):Chinese city subway database
 * 交通
   - [uber/kepler.gl](https://github.com/uber/kepler.gl):<https://uber.github.io/kepler.gl>  <http://kepler.gl/>
 * 临床
@@ -117,14 +117,14 @@
   - [Google Trends](http://www.google.com/trends?q=google&ctab=0&geo=all&date=all&sort=0)：世界各地的互联网搜索行为和热门新闻报道的数据。
   - [美国经济协会](https://www.aeaweb.org/resources/data/us-macro-regional)：美国宏观经济数据。
 * ip
-  - [lionsoul2014/ip2region](https://github.com/lionsoul2014/ip2region):准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ <http://gitee.com/lionsoul/ip2region>
+  - [ip2region](https://github.com/lionsoul2014/ip2region):准确率99.9%的ip地址定位库，0.0x毫秒级查询，数据库文件大小只有1.5M，提供了java,php,c,python,nodejs,golang,c#查询绑定和Binary,B树,内存三种查询算法，妈妈再也不用担心我的ip地址定位！ <http://gitee.com/lionsoul/ip2region>
 * 房产
   - [XuefengHuang/lianjia-scrawler](https://github.com/XuefengHuang/lianjia-scrawler):链家二手房租房在线数据，存量房交易服务平台数据，详细数据分析教程 <http://www.ershoufangdata.com>
 * 环境
   - [National Center for Environmental Informatio](https://www.ncdc.noaa.gov/data-access):涵盖地球物理学、大气和海洋数据。他们目前是世界上最大的气候和天气信息提供商。
 * 地理
   - [NASA 的 Earth Data](https://earthdata.nasa.gov/):包含了美国宇航局的地球观测数据，其中包含如 NC 地表温度和碳通量等信息。
-  - [uiwjs/province-city-china](https://github.com/uiwjs/province-city-china)🇨🇳最全最新中国【省、市、区县、乡镇街道】json,csv,sql数据 <https://npm.im/province-city-china>
+  - [province-city-china](https://github.com/uiwjs/province-city-china)🇨🇳最全最新中国【省、市、区县、乡镇街道】json,csv,sql数据 <https://npm.im/province-city-china>
 * 社会
   - [Pew Internet](https://www.pewinternet.org/datasets/)
   - [Bureau of Labor Statistics](https://www.bls.gov/data/):美国劳动力市场活跃度、工作条件和价格变化的数据
@@ -138,7 +138,7 @@
 
 ## 工具
 
-* [prestodb/presto](https://github.com/prestodb/presto):Distributed SQL query engine for big data <https://prestodb.io>
+* [presto](https://github.com/prestodb/presto):Distributed SQL query engine for big data <https://prestodb.io>
 * [Google Dataset Search](https://toolbox.google.com/datasetsearch)
 
 ## 参考

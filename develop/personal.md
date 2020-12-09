@@ -558,8 +558,8 @@ s# develop
 
 ## 资源
 
-* [it-ebooks/the-way-to-wealth-freedom-notes](https://github.com/it-ebooks/the-way-to-wealth-freedom-notes):📖 通往财富自由之路精细笔记
-* [easychen/howto-make-more-money](https://github.com/easychen/howto-make-more-money):程序员如何优雅的挣零花钱
+* [the-way-to-wealth-freedom-notes](https://github.com/it-ebooks/the-way-to-wealth-freedom-notes):📖 通往财富自由之路精细笔记
+* [howto-make-more-money](https://github.com/easychen/howto-make-more-money):程序员如何优雅的挣零花钱
 
 ## 保障
 

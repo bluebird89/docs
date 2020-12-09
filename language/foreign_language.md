@@ -70,6 +70,8 @@
 ## 工具
 
 * [goldendict](https://github.com/goldendict/goldendict):A feature-rich dictionary lookup program, supporting multiple dictionary formats (StarDict/Babylon/Lingvo/Dictd) and online dictionaries, featuring perfect article rendering with the complete markup, illustrations and other content retained, and allowing you to type in words without any accents or correct case. <http://goldendict.org/>
+* [Flowerowl/ici](https://github.com/Flowerowl/ici):💥A dictionary used by programmers in the command line <https://pypi.python.org/pypi/ici/>
+* [carlos-wong/cerebro-codelf](https://github.com/carlos-wong/cerebro-codelf):⭐️ 给变量起名的事情上，为你生命省 3s (Save 3 seconds of your life when naming things.)
 * 不背单词(推荐)
 * 扇贝
 * 墨墨
@@ -80,6 +82,6 @@
 
 * [日语语法指南](http://res.wokanxing.info/jpgramma/index.html)
 * [English-level-up-tips-for-Chinese](https://github.com/byoungd/English-level-up-tips-for-Chinese):可能是让你受益匪浅的英语进阶指南 <https://byoungd.gitbooks.io/english-level-up-tips-for-chinese/content/>
-* [yujiangshui/An-English-Guide-for-Programmers](https://github.com/yujiangshui/An-English-Guide-for-Programmers):专为程序员编写的英语学习指南。v1.0
+* [An-English-Guide-for-Programmers](https://github.com/yujiangshui/An-English-Guide-for-Programmers):专为程序员编写的英语学习指南。v1.0
 * [英语学习指南](https://mp.weixin.qq.com/s/Gy_L6v2iNUfdyVRUQis3Kg)
 * [OGDEN's BASIC ENGLISH](http://ogden.basic-english.org/)

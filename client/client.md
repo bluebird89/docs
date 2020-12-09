@@ -65,28 +65,24 @@
 
 ## 工具
 
-* [fastlane/fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps <https://fastlane.tools>
-* [NervJS/taro](https://github.com/NervJS/taro):多端统一开发框架，支持用 React 的开发方式编写一次代码，生成能运行在微信小程序、H5、React Native 等的应用。 <https://taro.aotu.io>
-* [expo/expo](https://github.com/expo/expo):Expo iOS/Android Client <https://docs.expo.io/>
-* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
-* [appium/appium](https://github.com/appium/appium):📱 Automation for iOS, Android, and Windows Apps. <http://appium.io/>
-* [visionmedia/page.js](https://github.com/visionmedia/page.js):Micro client-side router inspired by the Express router <http://visionmedia.github.com/page.js>
-* [boxwarehq/cli](https://github.com/boxwarehq/cli):Try and use desktop software in your browser without downloading/installing anything. <https://boxware.io>
-* [akxcv/vuera](https://github.com/akxcv/vuera):👀 Vue in React, React in Vue. Seamless integration of the two. 👯
-* [alibaba/rax](https://github.com/alibaba/rax):[ constructionWork In Progress v1.0] The fastest way to build cross-container application. <https://developers.taobao.com/>
-* [airbnb/lottie-web](https://github.com/airbnb/lottie-web):Render After Effects animations natively on Web, Android and iOS, and React Native. <http://airbnb.io/lottie/>
-* [patr0nus/DeskGap](https://github.com/patr0nus/DeskGap):A cross-platform desktop app framework based on Node.js and the system webview <https://deskgap.com/>
-* 测试
-  - [wix/detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
-* [jiahaog/nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
-* [revery-ui/revery](https://github.com/revery-ui/revery)：⚡️ Native, high-performance, cross-platform desktop apps - built with Reason! <https://www.outrunlabs.com/revery/>
-* [nolimits4web/swiper](https://github.com/nolimits4web/swiper):Most modern mobile touch slider with hardware accelerated transitions <http://idangero.us/swiper/>
-* [MobSF/Mobile-Security-Framework-MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF):Mobile Security Framework is an automated, all-in-one mobile application (Android/iOS/Windows) pen-testing framework capable of performing static analysis, dynamic analysis, malware analysis and web API testing. <https://opensecurity.in>
-* [be-fe/iSlider](https://github.com/be-fe/iSlider):Smooth mobile touch slider for Mobile WebApp, HTML5 App, Hybrid App <http://be-fe.github.io/iSlider/>
+* [fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps <https://fastlane.tools>
+* [expo](https://github.com/expo/expo):Expo iOS/Android Client <https://docs.expo.io/>
+* [nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+* [page.js](https://github.com/visionmedia/page.js):Micro client-side router inspired by the Express router <http://visionmedia.github.com/page.js>
+* [cli](https://github.com/boxwarehq/cli):Try and use desktop software in your browser without downloading/installing anything. <https://boxware.io>
+* [vuera](https://github.com/akxcv/vuera):👀 Vue in React, React in Vue. Seamless integration of the two. 👯
+* [rax](https://github.com/alibaba/rax):[ constructionWork In Progress v1.0] The fastest way to build cross-container application. <https://developers.taobao.com/>
+* [lottie-web](https://github.com/airbnb/lottie-web):Render After Effects animations natively on Web, Android and iOS, and React Native. <http://airbnb.io/lottie/>
+* [DeskGap](https://github.com/patr0nus/DeskGap):A cross-platform desktop app framework based on Node.js and the system webview <https://deskgap.com/>
+* [detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
+* [nativefier](https://github.com/jiahaog/nativefier):Make any web page a desktop application
+* [revery](https://github.com/revery-ui/revery)：⚡️ Native, high-performance, cross-platform desktop apps - built with Reason! <https://www.outrunlabs.com/revery/>
+* [swiper](https://github.com/nolimits4web/swiper):Most modern mobile touch slider with hardware accelerated transitions <http://idangero.us/swiper/>
+* [Mobile-Security-Framework-MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF):Mobile Security Framework is an automated, all-in-one mobile application (Android/iOS/Windows) pen-testing framework capable of performing static analysis, dynamic analysis, malware analysis and web API testing. <https://opensecurity.in>
+* [iSlider](https://github.com/be-fe/iSlider):Smooth mobile touch slider for Mobile WebApp, HTML5 App, Hybrid App <http://be-fe.github.io/iSlider/>
 * 调试
-  - [Tencent/vConsole](https://github.com/Tencent/vConsole):A lightweight, extendable front-end developer tool for mobile web page.
+  - [vConsole](https://github.com/Tencent/vConsole):A lightweight, extendable front-end developer tool for mobile web page.
   - [weinre](https://people.apache.org/~pmuellr/weinre/docs/latest/Home.html):weinre is a debugger for web pages, like FireBug (for FireFox) and Web Inspector (for WebKit-based browsers), except it's designed to work remotely, and in particular, to allow you debug web pages on a mobile device such as a phone.
-  - [wix/detox](https://github.com/wix/detox):Gray Box End-to-End Testing and Automation Framework for Mobile Apps
 
 ## 参考
 
@@ -94,6 +90,7 @@
 * [ijkplayer](https://github.com/Bilibili/ijkplayer)Android/iOS video player based on FFmpeg n3.3, with MediaCodec, VideoToolbox support.
 * [lottie-android](https://github.com/airbnb/lottie-android):Render After Effects animations natively on Android and iOS, Web, and React Native <http://airbnb.io/lottie/>
 * [lottie-ios](https://github.com/airbnb/lottie-ios):An iOS library to natively render After Effects vector animations <http://airbnb.io/lottie/>
+
 * [zwwill/blog](https://github.com/zwwill/blog):✏️ stay hungry stay foolish
-* [RubyLouvre/mobileHack](https://github.com/RubyLouvre/mobileHack):移动端上遇到的各种坑
+* [mobileHack](https://github.com/RubyLouvre/mobileHack):移动端上遇到的各种坑
 * [](https://github.com/tauri-apps/tauri):Build smaller, faster, and more secure desktop applications with a web frontend.<https://tauri.studio/>

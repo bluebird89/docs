@@ -1385,8 +1385,8 @@ Namespaces are one honking great idea -- let's do more of those!
 * Learning Python
 * Python编程 从入门到实践 Python Crash Course
 * 流畅的Python Fluent Python
-* Python性能分析与优化
-* Python高性能编程
+* Python 性能分析与优化
+* Python 高性能编程
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
 * [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
 * 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
@@ -1394,10 +1394,10 @@ Namespaces are one honking great idea -- let's do more of those!
 * 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
 * 《Python源码剖析》
 * 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
-* 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
 * 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
   - [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/):Python3教学手册
 * 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
+* 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
 * 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
 * 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
 * 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
@@ -1423,6 +1423,7 @@ Namespaces are one honking great idea -- let's do more of those!
 * [Python进阶](https://docs.pythontab.com/interpy/)
 * [CODE WITH REPL.IT](https://www.codewithrepl.it/)
 * A Byte of Python
+* [show-me-the-code](https://github.com/Yixiaohan/show-me-the-code):Python 练习册，每天一个小程序
 
 ## 工具
 
@@ -1860,8 +1861,6 @@ Python实现的数据库。
   - butterdb：Google Drive 电子表格的 Python ORM。[官网](https://github.com/Widdershin/butterdb)
 
 ## Web 框架
-
-全栈 Web 框架。
 
 * [Django](https://www.djangoproject.com/)：Python 界最流行的 web 框架
   - [awesome-django](https://github.com/rosarior/awesome-django)系列
@@ -2513,7 +2512,7 @@ MapReduce 框架和库。
 * schedule：人性化的 Python 任务调度库。[官网](https://github.com/dbader/schedule)
 * Spiff：使用纯 Python 实现的强大的工作流引擎。[官网](https://github.com/knipknap/SpiffWorkflow)
 * TaskFlow：一个可以让你方便执行任务的 Python 库，一致并且可靠。[官网](http://docs.openstack.org/developer/taskflow/)
-* [pyinvoke/invoke](https://github.com/pyinvoke/invoke):Pythonic task management & command execution. <http://pyinvoke.org>
+* [invoke](https://github.com/pyinvoke/invoke):Pythonic task management & command execution. <http://pyinvoke.org>
 
 ## 外来函数接口
 
@@ -2661,32 +2660,32 @@ Python 实现的算法和设计模式。
 * [Projects](http://hao.jobbole.com/python-projects/)：Python项目大集合。[官网](https://github.com/karan/Projects)
 * [The Hitchhiker's Guide to Python](http://hao.jobbole.com/the-hitchhikers-guide-to-python/)：旅行者的Python学习指南。[官网](http://docs.python-guide.org/en/latest/)
 * [Code Like a Pythonista: Idiomatic Python](http://top.jobbole.com/18767/)：如何像Python高手(Pythonista)一样编程。[官网](http://python.net/~goodger/projects/pycon/2007/idiomatic/handout.html)
-* [Prodesire/Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
-* [pgbovine/OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser <http://pythontutor.com/>
+* [Python-Guide-CN](https://github.com/Prodesire/Python-Guide-CN):Python最佳实践指南
+* [OnlinePythonTutor](https://github.com/pgbovine/OnlinePythonTutor):Visualize Python, Java, JavaScript, TypeScript, Ruby, C, and C++ code execution in your Web browser <http://pythontutor.com/>
 * [Python fundamentals](https://www.python-tutorial.net/)
-* [sfermigier/awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
-* [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
-* [gto76/python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet <https://gto76.github.io/python-cheatsheet/>
+* [awesome-functional-python](https://github.com/sfermigier/awesome-functional-python)
+* [python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
+* [python-cheatsheet](https://github.com/gto76/python-cheatsheet):Comprehensive Python Cheatsheet <https://gto76.github.io/python-cheatsheet/>
 * 面试
-  - [kenwoodjw/python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
+  - [python_interview_question](https://github.com/kenwoodjw/python_interview_question):关于python的面试题
 * 图书
   - [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
 * More Python for Beginners
 * Even More Python for Beginners： Data Tools
-* [microsoft / c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
+* [c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
 * [essential-python-resources/](https://x-team.com/blog/essential-python-resources/)
 
 ## Algorithmic Trading
 
-* [quantopian/zipline](https://github.com/quantopian/zipline):Zipline, a Pythonic Algorithmic Trading Library <http://www.zipline.io/>
+* [zipline](https://github.com/quantopian/zipline):Zipline, a Pythonic Algorithmic Trading Library <http://www.zipline.io/>
 
 ## Font
 
-* [fonttools/fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
+* [fonttools](https://github.com/fonttools/fonttools):A library to manipulate font files from Python.
 
 ## 源码
 
-* [flaggo/python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
+* [python3-source-code-analysis](https://github.com/flaggo/python3-source-code-analysis):《Python 3 源码剖析》
 
 ## 知识点
 

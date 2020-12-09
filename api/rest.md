@@ -201,9 +201,8 @@
 
 ## 工具
 
-* [thx/RAP](https://github.com/thx/RAP)Web API management, free and open sourced, mock data generator, auto test, made by Alibaba,
-* [brookshi/Hitchhiker](https://github.com/brookshi/Hitchhiker):a Restful Api test tool <http://www.hitchhiker-api.comw>
-* [typicode/jsonplaceholder](https://github.com/typicode/jsonplaceholder):A simple online fake REST API server <https://jsonplaceholder.typicode.com>
+* [Hitchhiker](https://github.com/brookshi/Hitchhiker):a Restful Api test tool <http://www.hitchhiker-api.comw>
+* [jsonplaceholder](https://github.com/typicode/jsonplaceholder):A simple online fake REST API server <https://jsonplaceholder.typicode.com>
 * Python: django-rest-framework（django），eve（flask）。各有千秋。可惜python没有好的类似webmachine的实现。
 * Erlang/Elixir: webmachine/ewebmachine
 * Ruby: webmachine-ruby

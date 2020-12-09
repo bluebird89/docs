@@ -119,7 +119,7 @@
 
 ## UI
 
-* [QMUI/QMUI_iOS](https://github.com/QMUI/QMUI_iOS)：QMUI iOS——致力于提高项目 UI 开发效率的解决方案 <http://qmuiteam.com/ios>
+* [QMUI_iOS](https://github.com/QMUI/QMUI_iOS)：QMUI iOS——致力于提高项目 UI 开发效率的解决方案 <http://qmuiteam.com/ios>
 
 ## app
 
@@ -128,8 +128,8 @@
 
 ## 课程
 
-* [eseedo/iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 <http://icode.fun/>
-* [斯坦福大学的 iOS 开发公开课](https://cs193p.sites.stanford.edu/):斯坦福大学的高质量免费课程，使用了最新的 SwiftUI，充分展示了 APP 开发的整个流程，适合新手进行 iOS 的开发入门
+* [iOSCourse](https://github.com/eseedo/iOSCourse):iOS开发初学者入门 <http://icode.fun/>
+* [斯坦福大学 iOS 开发公开课](https://cs193p.sites.stanford.edu/):斯坦福大学的高质量免费课程，使用了最新的 SwiftUI，充分展示了 APP 开发的整个流程，适合新手进行 iOS 的开发入门
 
 ## 图书
 
@@ -140,20 +140,18 @@
 
 ## 工具
 
-* [CocoaDebug/CocoaDebug](https://github.com/CocoaDebug/CocoaDebug):🚀 iOS Debugging Tool
-* [tumtumtum/StreamingKit](https://github.com/tumtumtum/StreamingKit):A fast and extensible gapless AudioPlayer/AudioStreamer for OSX and iOS (iPhone, iPad)
-* [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS <https://ish.app>
-* [xmartlabs/XLPagerTabStrip](https://github.com/xmartlabs/XLPagerTabStrip):Android PagerTabStrip for iOS.
-* [haxpor/Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
-* [forkingdog/FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
-* [tbodt/ish](https://github.com/tbodt/ish):Linux shell for iOS <https://ish.app>
+* [CocoaDebug](https://github.com/CocoaDebug/CocoaDebug):🚀 iOS Debugging Tool
+* [StreamingKit](https://github.com/tumtumtum/StreamingKit):A fast and extensible gapless AudioPlayer/AudioStreamer for OSX and iOS (iPhone, iPad)
+* [ish](https://github.com/tbodt/ish):Linux shell for iOS <https://ish.app>
+* [XLPagerTabStrip](https://github.com/xmartlabs/XLPagerTabStrip):Android PagerTabStrip for iOS.
+* [Potatso](https://github.com/haxpor/Potatso):Potatso is an iOS client that implements Shadowsocks proxy with the leverage of NetworkExtension framework.
+* [FDFullscreenPopGesture](https://github.com/forkingdog/FDFullscreenPopGesture):A UINavigationController's category to enable fullscreen pop gesture with iOS7+ system style.
 * [HandyJSON](https://github.com/alibaba/HandyJSON):一个用于 Swift 语言中的 JSON 序列化 / 反序列化库
 
 ## 参考
 
-* [phoboslab/Ejecta](https://github.com/phoboslab/Ejecta):A Fast, Open Source JavaScript, Canvas & Audio Implementation for iOS
+* [Ejecta](https://github.com/phoboslab/Ejecta):A Fast, Open Source JavaScript, Canvas & Audio Implementation for iOS
 * [Apple Developer Documentation](https://developer.apple.com/documentation)
-* [nikitavoloboev/my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
-* [SwiftOldDriver/iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
-* [微云IOS团队](https://iweiyun.github.io)
+* [my-ios](https://github.com/nikitavoloboev/my-ios):List of applications and tools that make my iOS experience even more amazing
+* [iOS-Weekly](https://github.com/SwiftOldDriver/iOS-Weekly):🇨🇳 老司机 iOS 周报
 * [Buyer's Guide](https://buyersguide.macrumors.com/)

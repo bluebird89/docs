@@ -823,12 +823,11 @@ AVL 是一种高度平衡的二叉树，所以通常的结果是，维护这种�
 
 ## 参考
 
-* [grantjenks/python-sortedcontainers](https://github.com/grantjenks/python-sortedcontainers):Python Sorted Container Types: Sorted List, Sorted Dict, and Sorted Set
+* [python-sortedcontainers](https://github.com/grantjenks/python-sortedcontainers):Python Sorted Container Types: Sorted List, Sorted Dict, and Sorted Set
 * [Data Structure Visualizations](https://www.cs.usfca.edu/~galles/visualization/Algorithms.html)
-* [elarity/data-structure-php](https://github.com/elarity/data-structure-php)
+* [data-structure-php](https://github.com/elarity/data-structure-php)
 
 * [学好这13种数据结构，应对各种编程语言（C++版）](https://mp.weixin.qq.com/s/JxQjKWBe-Dg9aCyq-USPwA)
-
 * [数据结构和算法学习指南](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484852&idx=1&sn=85b50b8b0470bb4897e517955f4e5002)
   <http://blog.csdn.net/mysteryhaohao/article/details/51719871>
   <https://guptavikas.wordpress.com/2012/12/17/b-tree-index-in-mysql/>

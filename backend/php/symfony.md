@@ -168,8 +168,8 @@ Warning: "continue" targeting switch is equivalent to
 ## 工具
 
 * [symfony-standard](https://github.com/symfony/symfony-standard):The "Symfony Standard Edition" distribution <http://symfony.com>
-* [symfony/demo](https://github.com/symfony/demo):Symfony Demo Application <https://symfony.com/>
-* [symfony/webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
+* [demo](https://github.com/symfony/demo):Symfony Demo Application <https://symfony.com/>
+* [webpack-encore](https://github.com/symfony/webpack-encore):A simple but powerful API for processing & compiling assets built around Webpack
 
 ## 参考
 

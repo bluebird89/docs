@@ -386,14 +386,14 @@ public class OrderCreatedEvent extends OrderEvent {
 
 ## 图书
 
-* 《领域特定语言》
+* 领域特定语言
 * 《领域驱动设计 Domain-driven Design》 Vaughn Vernon
   - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):中文翻译 <http://gdut_yy.gitee.io/doc-ddd/>
 * 《领域驱动设计》Eric Evans
-* 《Patterns, Principles and Practices of Domain-Driven Design》
-* 《领域驱动设计精粹》
-* 《复杂软件设计之道：领域驱动设计全面解析与实战》
-* 《实现领域驱动设计 implementing domain-driven design》
+* Patterns, Principles and Practices of Domain-Driven Design
+* 领域驱动设计精粹
+* 复杂软件设计之道：领域驱动设计全面解析与实战
+* 实现领域驱动设计 implementing domain-driven design
 * 解构领域驱动设计
   - GitChat 课程《领域驱动设计实践》
 

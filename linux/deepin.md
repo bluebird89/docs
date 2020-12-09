@@ -44,4 +44,4 @@ reboot
 
 ## 参考
 
-* [deepinwiki/wiki](https://github.com/deepinwiki/wiki)
+* [wiki](https://github.com/deepinwiki/wiki)

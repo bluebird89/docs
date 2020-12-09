@@ -6,8 +6,8 @@
   + [reabble](https://reabble.cn/app#/)
 * [Reeder 3](http://reederapp.com/mac/)
 * leaf
-* [DIYgod/RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS <https://docs.rsshub.app>
-* [FreshRSS/FreshRSS](https://github.com/FreshRSS/FreshRSS):A free, self-hostable aggregator… <http://freshrss.org>
+* [RSSHub](https://github.com/DIYgod/RSSHub):🍰 万物皆可 RSS <https://docs.rsshub.app>
+* [FreshRSS](https://github.com/FreshRSS/FreshRSS):A free, self-hostable aggregator… <http://freshrss.org>
 * [feeddemon](http://www.feeddemon.com/)
 * [brainpickings](brainpickings.org):阅读充电好去处
 * [NetNewsWire5](https://github.com/brentsimmons/NetNewsWire/releases/download/mac-5.0.2/NetNewsWire5.0.2.zip)

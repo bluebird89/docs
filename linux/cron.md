@@ -100,11 +100,11 @@ ps axu|grep "php artisan send:AsynSendEmail"|grep -v "grep"|wc -l;
 
 ## 工具
 
-* [ouqiang/gocron](https://github.com/ouqiang/gocron):定时任务管理系统
-* [bruceye777/cronmon](https://github.com/bruceye777/cronmon):定时任务执行状态监控
+* [gocron](https://github.com/ouqiang/gocron):定时任务管理系统
+* [cronmon](https://github.com/bruceye777/cronmon):定时任务执行状态监控
 * [Linux Crontab Generator](https://helloacm.com/crontab-generator/)
 * [crontab guru](https://crontab.guru):The quick and simple editor for cron schedule expressions by Cronitor
-* [osgochina/Donkey](https://github.com/osgochina/Donkey):基于swoole的定时器程序，支持秒级处理
+* [Donkey](https://github.com/osgochina/Donkey):基于swoole的定时器程序，支持秒级处理
 
 ## reference
 

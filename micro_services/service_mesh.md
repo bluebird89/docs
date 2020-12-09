@@ -163,6 +163,6 @@
 
 ## 参考
 
-* [ServicemeshCN/awesome-servicemesh](https://github.com/ServicemeshCN/awesome-servicemesh):A curated list for awesome service mesh architectures <https://servicemesh.gitbooks.io/aweso>…
-* [geektime-geekbang / geektime-servicemesh](https://github.com/geektime-geekbang/geektime-servicemesh)
+* [awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - <https://servicemesher.github.io/awesome-servicemesh/>
+* [geektime-servicemesh](https://github.com/geektime-geekbang/geektime-servicemesh)
 * Pattern:service Mesh

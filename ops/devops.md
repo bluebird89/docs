@@ -131,9 +131,9 @@
   - 持续改进
 * Webhooks
   - [GitHub Developer](https://developer.github.com/webhooks/)
-  - [adnanh/webhook](https://github.com/adnanh/webhook):webhook is a lightweight configurable tool written in Go, that allows you to easily create HTTP endpoints (hooks) on your server, which you can use to execute configured commands.
-  - [NetEaseGame/git-webhook](https://github.com/NetEaseGame/git-webhook):使用 Python Flask + SQLAchemy + Celery + Redis + React 开发的用于迅速搭建并使用 WebHook 进行自动化部署和运维，支持 Github / GitLab / Gogs / GitOsc。
-  - [sovereign/sovereign](https://github.com/sovereign/sovereign)
+  - [webhook](https://github.com/adnanh/webhook):webhook is a lightweight configurable tool written in Go, that allows you to easily create HTTP endpoints (hooks) on your server, which you can use to execute configured commands.
+  - [git-webhook](https://github.com/NetEaseGame/git-webhook):使用 Python Flask + SQLAchemy + Celery + Redis + React 开发的用于迅速搭建并使用 WebHook 进行自动化部署和运维，支持 Github / GitLab / Gogs / GitOsc。
+  - [sovereign](https://github.com/sovereign/sovereign)
 
 ## 持续测试
 
@@ -386,23 +386,21 @@ script: phpunit -v
 
 ## 项目
 
-* [1c7/chinese-independent-developer](1c7/chinese-independent-developer):👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么
-* [testerSunshine/12306](https://github.com/testerSunshine/12306):12306智能刷票，订票
+* [chinese-independent-developer](1c7/chinese-independent-developer):👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么
 
 ## 工具
 
-* [apex/up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. <https://apex.github.io/up/>
-* [apex/apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). <http://apex.run>
-* [spinnaker/spinnaker](https://github.com/spinnaker/spinnaker):Spinnaker is an open source, multi-cloud continuous delivery platform for releasing software changes with high velocity and confidence. <http://www.spinnaker.io/>
-* [gaia-pipeline/gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
-* [jumpserver/jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 <http://www.jumpserver.org>
+* [up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. <https://apex.github.io/up/>
+* [apex](https://github.com/apex/apex):Build, deploy, and manage AWS Lambda functions with ease (with Go support!). <http://apex.run>
+* [gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
+* [jumpserver](https://github.com/jumpserver/jumpserver):Jumpserver是全球首款完全开源的堡垒机，是符合 4A 的专业运维审计系统。 <http://www.jumpserver.org>
 * [PERIODIC TABLE OF DEVOPS TOOLS](https://xebialabs.com/periodic-table-of-devops-tools/)
-* [kelseyhightower/confd](https://github.com/kelseyhightower/confd):Manage local application configuration files using templates and data from etcd or consul
-* [waylybaye/HyperApp-Guide](https://github.com/waylybaye/HyperApp-Guide):HyperApp user's manual
+* [confd](https://github.com/kelseyhightower/confd):Manage local application configuration files using templates and data from etcd or consul
+* [HyperApp-Guide](https://github.com/waylybaye/HyperApp-Guide):HyperApp user's manual
 * [snipe/snipe-it](https://github.com/snipe/snipe-it):A free open source IT asset/license management system <https://snipeitapp.com>
 * [pinterest/teletraan](https://github.com/pinterest/teletraan):Teletraan is Pinterest's deploy system.
 * [NullArray/AutoSploit](https://github.com/NullArray/AutoSploit):Automated Mass Exploiter
-* [TeaWeb/build](https://github.com/TeaWeb/build):TeaWeb是集静态资源、缓存、代理、统计、监控于一体的可视化智能WebServer。
+* [build](https://github.com/TeaWeb/build):TeaWeb是集静态资源、缓存、代理、统计、监控于一体的可视化智能WebServer。
 * [Nethogs](http://sourceforge.net/projects/nethogs/files/nethogs/0.8/nethogs-0.8.0.tar.gz/download):终端下的网络流量监控工具可以直观的显示每个进程占用的带宽
 * [IOZone](http://www.iozone.org/src/current/): Linux 文件系统性能测试工具 可以测试不同的操作系统中文件系统的读写性能 `./iozone -a -n 512m -g 16g -i 0 -i 1 -i 5 -f /mnt/iozone -Rb ./iozone.xls`
 * [IOTop](link) 实时监控磁盘
@@ -416,14 +414,14 @@ script: phpunit -v
 * [Httperf](http://code.google.com/p/httperf/downloads/list) 比 ab 更强大，能测试出 web 服务能承载的最大服务量及发现潜在问题；比如：内存使用、稳定性。最大优势：可以指定规律进行压力测试，模拟真实环境。
 * [CODO](https://github.com/opendevops-cn):为用户提供企业多混合云、自动化运维、完全开源的云管理平台。前端基于Vue iview开发、为用户提供友好的操作界面，增强用户体验。 后端基于Python Tornado开发，其优势为轻量、简洁清晰、异步非阻塞 <http://www.opendevops.cn>
   - [demo](http://demo.opendevops.cn) 用户：demo 密码：2ZbFYNv9WibWcR7GB6kcEY
-* [Tencent/bk-ci](https://github.com/Tencent/bk-ci):蓝鲸CI平台(BlueKing CI) <https://bk.tencent.com>
+* [bk-ci](https://github.com/Tencent/bk-ci):蓝鲸CI平台(BlueKing CI) <https://bk.tencent.com>
 * [onedev](https://github.com/theonedev/onedev):Super Easy All-In-One DevOps Platform
 * [TeamCity](https://www.jetbrains.com/teamcity/)
-* [danger/danger-js](https://github.com/danger/danger-js):⚠️ Stop saying "you forgot to …" in code review <http://danger.systems/js/>
+* [danger-js](https://github.com/danger/danger-js):⚠️ Stop saying "you forgot to …" in code review <http://danger.systems/js/>
 
 ## 参考
 
-* [liquanzhou/ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
+* [ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
 * [digitalocean tutorials](https://www.digitalocean.com/community/tutorials)
-* [18F/development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team
+* [development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team
 * [Semantic Versioning](https://semver.org/)

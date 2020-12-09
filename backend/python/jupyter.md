@@ -322,5 +322,5 @@ conda install xeus-python -c conda-forge #  kernel 需要实现 Jupyter Debug Pr
 
 ## 参考
 
-* [markusschanta/awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
+* [awesome-jupyter](https://github.com/markusschanta/awesome-jupyter):A curated list of awesome Jupyter projects, libraries and resources
 * [The IPython notebook](http://ipython.org/ipython-doc/dev/notebook/index.html)

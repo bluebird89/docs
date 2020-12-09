@@ -95,6 +95,6 @@ Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了
 
 ## 工具
 
-* [uber/prototool](https://github.com/uber/prototool):Your Swiss Army Knife for Protocol Buffers
-* [Tencent/Tars](https://github.com/Tencent/Tars):Tars is a highly performance rpc framework based on naming service using tars protocol and provides a semi-automatic operation platform.
+* [prototool](https://github.com/uber/prototool):Your Swiss Army Knife for Protocol Buffers
+* [Tars](https://github.com/Tencent/Tars):Tars is a highly performance rpc framework based on naming service using tars protocol and provides a semi-automatic operation platform.
 * [rpcx](https://github.com/smallnest/rpcx):A zero cost, faster multi-language bidirectional microservices framework in Go, like alibaba Dubbo, but with more features, Scale easily. Try it. Test it. If you feel it's better, use it! 𝐉𝐚𝐯𝐚有𝐝𝐮𝐛𝐛𝐨, 𝐆𝐨𝐥𝐚𝐧𝐠有𝐫𝐩𝐜𝐱! <https://rpcx.io>

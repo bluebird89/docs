@@ -316,19 +316,19 @@ code --disable-extensions . # disable all extensions
 
 ## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
 
-* [cdr/code-server](https://github.com/cdr/code-server):VS Code in the browser <https://coder.com>
+* [code-server](https://github.com/cdr/code-server):VS Code in the browser <https://coder.com>
 
 ## 扩展
 
-* [viatsko/awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
+* [awesome-vscode](https://github.com/viatsko/awesome-vscode):A curated list of delightful VS Code packages and resources.
 * [vscode-element-helper](https://github.com/ElemeFE/vscode-element-helper)
 * [keyboard-shortcuts-macos](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
-* [octref/polacode](https://github.com/octref/polacode):📸 Polaroid for your code
+* [polacode](https://github.com/octref/polacode):📸 Polaroid for your code
 
 ## 工具
 
-* [Microsoft/monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor <https://microsoft.github.io/monaco-editor/>
-* [eclipse-theia/theia](https://github.com/eclipse-theia/theia):Eclipse Theia is a cloud & desktop IDE framework implemented in TypeScript. <http://theia-ide.org>
+* [monaco-editor](https://github.com/Microsoft/monaco-editor):A browser based code editor <https://microsoft.github.io/monaco-editor/>
+* [theia](https://github.com/eclipse-theia/theia):Eclipse Theia is a cloud & desktop IDE framework implemented in TypeScript. <http://theia-ide.org>
 
 ## 參考
 

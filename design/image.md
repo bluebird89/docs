@@ -264,30 +264,30 @@ md5sum out11.jpg
   - [IMageMagick](https://imagemagick.cn/)
     + convert:转换图像格式，调整图像大小、模糊、裁剪、去斑、抖动、绘图、翻转、加入、重新采样等等
     + mogrify:批量缩放大小
-  - [renzhezhilu / webp2jpg-online](https://github.com/renzhezhilu/webp2jpg-online):在线图片格式转化器,纯前端实现，无需上传文件,可将jpeg、jpg、png、gif、webp、svg、ico、bmp文件转化为jpeg、png、webp动画、ico、gif文件。本地即可完成转换。Online picture format converter, can convert jpeg, jpg, png, gif, webp, svg, ico, bmp files into jpeg, png, webp animation,gif, ico files. No need to upload files, conversion can be done locally。 <https://renzhezhilu.github.io/webp2jpg-online/>
-* [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
-* [photoprism/photoprism](https://github.com/photoprism/photoprism):Personal photo management powered by Go and Google TensorFlow <https://photoprism.org/>
-* [google/filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
+  - [webp2jpg-online](https://github.com/renzhezhilu/webp2jpg-online):在线图片格式转化器,纯前端实现，无需上传文件,可将jpeg、jpg、png、gif、webp、svg、ico、bmp文件转化为jpeg、png、webp动画、ico、gif文件。本地即可完成转换。Online picture format converter, can convert jpeg, jpg, png, gif, webp, svg, ico, bmp files into jpeg, png, webp animation,gif, ico files. No need to upload files, conversion can be done locally。 <https://renzhezhilu.github.io/webp2jpg-online/>
+* [waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
+* [photoprism](https://github.com/photoprism/photoprism):Personal photo management powered by Go and Google TensorFlow <https://photoprism.org/>
+* [filament](https://github.com/google/filament):Filament is a real-time physically based rendering engine for Android, Windows, Linux, macOS and WASM/WebGL
 * [Gimp](https://www.gimp.org)
-* [muukii/Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
+* [Pixel](https://github.com/muukii/Pixel):🎨🖼 An image editor and engine using CoreImage
 * 看图
   - FastStone Image Viewer
 * 截图
   - [snipaste](https://www.snipaste.com/):a simple but powerful snipping tool, and also allows you to pin the screenshot back onto the screen
   - Xnip
 * 压缩
-  - [GoogleChromeLabs/squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. <https://squoosh.app>
-  - [fengyuanchen/compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
-* [libvips/libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. <https://libvips.github.io/libvips/>
+  - [squoosh](https://github.com/GoogleChromeLabs/squoosh):Make images smaller using best-in-class codecs, right in the browser. <https://squoosh.app>
+  - [compressorjs](https://github.com/fengyuanchen/compressorjs):JavaScript image compressor.
+* [libvips](https://github.com/libvips/libvips):A fast image processing library with low memory needs. <https://libvips.github.io/libvips/>
 * [AlloyImage](https://github.com/AlloyTeam/AlloyImage)基于HTML5技术的专业图像处理库
-* [DmitryUlyanov/deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. <https://dmitryulyanov.github.io/deep_image_prior>
-* [esimov/caire](https://github.com/esimov/caire):Content aware image resize library
-* [jantic/DeOldify](https://github.com/jantic/DeOldify):A Deep Learning based project for colorizing and restoring old images
-* [hackerb9/lsix](https://github.com/hackerb9/lsix):Like "ls", but for images. Shows thumbnails in terminal using sixel graphics.
-* [nagadomi/waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
+* [deep-image-prior](https://github.com/DmitryUlyanov/deep-image-prior):Image restoration with neural networks but without learning. <https://dmitryulyanov.github.io/deep_image_prior>
+* [caire](https://github.com/esimov/caire):Content aware image resize library
+* [DeOldify](https://github.com/jantic/DeOldify):A Deep Learning based project for colorizing and restoring old images
+* [lsix](https://github.com/hackerb9/lsix):Like "ls", but for images. Shows thumbnails in terminal using sixel graphics.
+* [waifu2x](https://github.com/nagadomi/waifu2x):Image Super-Resolution for Anime-Style Art
 * [remove](http://remove.bg):Remove Image Background
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
-* [ImageOptim/ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac <https://imageoptim.com/mac>
+* [ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac <https://imageoptim.com/mac>
 * [illuminations](https://illuminations.nctm.org):在线画图网站
 * 图床
   - [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口

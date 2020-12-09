@@ -179,11 +179,10 @@ istioctl manifest apply --set profile=demo
 
 ## 工具
 
-* [jukylin/istio-ui](https://github.com/jukylin/istio-ui)：istio配置文件管理后台
+* [istio-ui](https://github.com/jukylin/istio-ui)：istio配置文件管理后台
 
 ## 参考
 
-* [servicemesher / awesome-servicemesh](https://github.com/servicemesher/awesome-servicemesh/):Awesome service mesh - <https://servicemesher.github.io/awesome-servicemesh/>
 * [实例](https://istiobyexample.dev/)
 
 [深入实践 Istio](https://mp.weixin.qq.com/s/QIG71Z24__X-LJLRM-RRJA)

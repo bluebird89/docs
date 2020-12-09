@@ -77,4 +77,4 @@
 ## 参考
 
 * [Understandable Distributed Consensus](http://thesecretlivesofdata.com/raft/)
-* [maemual / raft-zh_cn](https://github.com/maemual/raft-zh_cn):Raft一致性算法论文的中文翻译
+* [raft-zh_cn](https://github.com/maemual/raft-zh_cn):Raft一致性算法论文的中文翻译

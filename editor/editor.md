@@ -19,13 +19,13 @@
 
 ## 富文本编辑器
 
-* [ianstormtaylor/slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. <http://slatejs.org>
-* [fex-team/ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 <http://ueditor.baidu.com>
-* [wangfupeng1988/wangEditor](https://github.com/wangfupeng1988/wangEditor/):wangEditor —— 轻量级web富文本框 <http://wangEditor.github.io/>
-* [tinymce / tinymce](https://github.com/tinymce/tinymce) The world's #1 JavaScript library for rich text editing. Available for React, Vue and Angular <https://www.tiny.cloud>
+* [slate](https://github.com/ianstormtaylor/slate):A completely customizable framework for building rich text editors. <http://slatejs.org>
+* [ueditor](https://github.com/fex-team/ueditor):rich text 富文本编辑器 <http://ueditor.baidu.com>
+* [wangEditor](https://github.com/wangfupeng1988/wangEditor/):wangEditor —— 轻量级web富文本框 <http://wangEditor.github.io/>
+* [tinymce](https://github.com/tinymce/tinymce) The world's #1 JavaScript library for rich text editing. Available for React, Vue and Angular <https://www.tiny.cloud>
 * [CKEditor](http://ckeditor.com/)
-* [quilljs/quill](https://github.com/quilljs/quill):Quill is a modern WYSIWYG editor built for compatibility and extensibility. <https://quilljs.com>
-* [basecamp/trix](https://github.com/basecamp/trix):A rich text editor for everyday writing <https://trix-editor.org/>
+* [quill](https://github.com/quilljs/quill):Quill is a modern WYSIWYG editor built for compatibility and extensibility. <https://quilljs.com>
+* [trix](https://github.com/basecamp/trix):A rich text editor for everyday writing <https://trix-editor.org/>
 
 ## 在线
 

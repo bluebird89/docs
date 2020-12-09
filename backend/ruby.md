@@ -10,7 +10,7 @@ The Ruby Programming Language <https://www.ruby-lang.org/>
 
 ## [安装](https://gorails.com/setup/ubuntu/14.04)
 
-* [rbenv/rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
+* [rbenv](https://github.com/rbenv/rbenv):Groom your app’s Ruby environment
 * [rvm](http://rvm.io/) Ruby  版本管理工具，其作用是在系统中安装若干个不同版本的 Ruby，且不让它们之间发生冲突
 
 ```sh
@@ -158,30 +158,23 @@ rake db:create
 rails server
 ```
 
-## 教程
-
-* [Ruby on Rails Tutorial](https://www.railstutorial.org/book)
-
 ## 项目
 
-* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. <https://www.discourse.org>
-* [mame/quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages
+* [quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages
 
 ## 工具
 
-* [activeadmin/activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. <https://activeadmin.info>
-* [tj/commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables <http://visionmedia.github.com/commander>
-* [discourse/discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. <https://www.discourse.org>
-* [thoughtbot/factory_bot](https://github.com/thoughtbot/factory_bot):A library for setting up Ruby objects as test data. <https://thoughtbot.com/open-source>
-* [thoughtbot/administrate](https://github.com/thoughtbot/administrate):A Rails engine that helps you put together a super-flexible admin dashboard.
-* [thoughtbot/paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord <https://thoughtbot.com/open-source>
-* [plataformatec/devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. <http://blog.plataformatec.com.br/tag/devise/>
-* [sferik/rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
-* [capistrano/capistrano](https://github.com/capistrano/capistrano):Remote multi-server automation tool <http://www.capistranorb.com>
+* [activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. <https://activeadmin.info>
+* [commander](https://github.com/tj/commander):The complete solution for Ruby command-line executables <http://visionmedia.github.com/commander>
+* [factory_bot](https://github.com/thoughtbot/factory_bot):A library for setting up Ruby objects as test data. <https://thoughtbot.com/open-source>
+* [administrate](https://github.com/thoughtbot/administrate):A Rails engine that helps you put together a super-flexible admin dashboard.
+* [paperclip](https://github.com/thoughtbot/paperclip):Easy file attachment management for ActiveRecord <https://thoughtbot.com/open-source>
+* [devise](https://github.com/plataformatec/devise):Flexible authentication solution for Rails with Warden. <http://blog.plataformatec.com.br/tag/devise/>
+* [rails_admin](https://github.com/sferik/rails_admin):RailsAdmin is a Rails engine that provides an easy-to-use interface for managing your data
 * [Ruby regular expression editor](https://rubular.com):a Ruby regular expression editor
 
 ## 参考
 
-* [rubocop-hq/ruby-style-guide](https://github.com/rubocop-hq/ruby-style-guide):A community-driven Ruby coding style guide
-* [bbatsov/rails-style-guide](https://github.com/bbatsov/rails-style-guide):A community-driven Ruby on Rails 4 style guide
-* [bbatsov/ruby-style-guide](https://github.com/bbatsov/ruby-style-guide):A community-driven Ruby coding style guide
+* [discourse](https://github.com/discourse/discourse):A platform for community discussion. Free, open, simple. <https://www.discourse.org>
+* [ruby-style-guide](https://github.com/rubocop-hq/ruby-style-guide):A community-driven Ruby coding style guide
+* [rails-style-guide](https://github.com/bbatsov/rails-style-guide):A community-driven Ruby on Rails 4 style guide

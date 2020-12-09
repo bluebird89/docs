@@ -632,10 +632,8 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 * [Front-end-Developer-Interview-Questions](https://github.com/h5bp/Front-end-Developer-Interview-Questions):A list of helpful front-end related questions you can use to interview potential candidates, test yourself or completely ignore.
 * [awesome-interview-questions](https://github.com/MaximAbramchuck/awesome-interview-questions)::octocat: A curated awesome list of lists of interview questions. Feel free to contribute! 🎓 <https://github.com/BotCube/awesome-bots>
 * [interviews](https://github.com/kdn251/interviews):Everything you need to know to get the job.
-* [node-interview](https://github.com/ElemeFE/node-interview):How to pass the Node.js interview of ElemeFE.
 * [what-happens-when](https://github.com/alex/what-happens-when):An attempt to answer the age old interview question "What happens when you type google.com into your browser and press enter?"
 * [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2018
-* [30-seconds-of-interviews](https://github.com/fejes713/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. <https://30secondsofinterviews.org>
 * [30-seconds-of-interviews](https://github.com/30-seconds/30-seconds-of-interviews):A curated collection of common interview questions to help you prepare for your next interview. <https://30secondsofinterviews.org>
 * [Algorithm_Interview_Notes-Chinese](https://github.com/imhuay/Algorithm_Interview_Notes-Chinese):2018/2019/校招/春招/秋招/算法/机器学习(Machine Learning)/深度学习(Deep Learning)/自然语言处理(NLP)/C/C++/Python/面试笔记
 * [2019_campus_apply](https://github.com/frank-lam/2019_campus_apply):🚀 Full Stack Developer Tutorial，后台技术栈/全栈开发/架构师之路，秋招/春招/校招/面试。 from zero to hero.

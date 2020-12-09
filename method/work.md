@@ -196,5 +196,4 @@
 
 ## 参考
 
-* remote-job
-  - [awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job):A curated list of awesome remote jobs and resources
+* [awesome-remote-job](https://github.com/lukasz-madon/awesome-remote-job):A curated list of awesome remote jobs and resources

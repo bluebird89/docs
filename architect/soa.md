@@ -17,4 +17,4 @@ ESB是一种集中式服务治理的架构，看上去微服务中不需要ESB�
 
 ## 扩展
 
-* [airbnb/synapse](https://github.com/airbnb/synapse):A transparent service discovery framework for connecting an SOA
+* [synapse](https://github.com/airbnb/synapse):A transparent service discovery framework for connecting an SOA

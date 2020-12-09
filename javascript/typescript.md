@@ -78,37 +78,34 @@ tsc --build tsconfig.json
 ## 教程
 
 * [typescript-tutorial](https://github.com/xcatliu/typescript-tutorial) TypeScript 入门教程 <https://ts.xcatliu.com/>
-* [Microsoft/TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter):A starter template for TypeScript and Node with a detailed README describing how to use the two together.
-* [alexjoverm/typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter):Starter kit with zero-config for building a library in TypeScript, featuring RollupJS, Jest, Prettier, TSLint, Semantic Release, and more!
-* [Microsoft/TypeScript-React-Native-Starter](https://github.com/Microsoft/TypeScript-React-Native-Starter):A starter template for TypeScript and React Native with a detailed README describing how to use the two together.
+* [TypeScript-Node-Starter](https://github.com/Microsoft/TypeScript-Node-Starter):A starter template for TypeScript and Node with a detailed README describing how to use the two together.
+* [typescript-library-starter](https://github.com/alexjoverm/typescript-library-starter):Starter kit with zero-config for building a library in TypeScript, featuring RollupJS, Jest, Prettier, TSLint, Semantic Release, and more!
 
 ## 图书
 
 * [TypeScript Deep Dive 深入理解 TypeScript](https://basarat.gitbook.io/typescript/getting-started)
-  - [jkchao/typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版 <https://jkchao.github.io/typescript-book-chinese/>
+  - [typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版 <https://jkchao.github.io/typescript-book-chinese/>
 
 ## 工具
 
-* orm
-  - [typeorm/typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. <http://typeorm.io>
-  - [prisma/prisma](https://github.com/prisma/prisma):Modern DB toolkit to query, migrate and model your database <https://www.prisma.io/>
+* [typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. <http://typeorm.io>
+* [prisma/prisma](https://github.com/prisma/prisma):Modern DB toolkit to query, migrate and model your database <https://www.prisma.io/>
 * [quicktype](https://github.com/quicktype/quicktype):Generate types and converters from JSON, Schema, and GraphQL <https://quicktype.io>
-* [TypeStrong/ts-loader](https://github.com/TypeStrong/ts-loader):TypeScript loader for webpack
-* [palantir/tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language <http://palantir.github.io/tslint/>
-* [AssemblyScript/assemblyscript](https://github.com/AssemblyScript/assemblyscript):A TypeScript to WebAssembly compiler 🚀 <https://assemblyscript.org>
-* [typestack/routing-controllers](https://github.com/typestack/routing-controllers):Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.
-* [rpgeeganage/async-ray](https://github.com/rpgeeganage/async-ray):Provide async/await callbacks for every, find, findIndex, filter, forEach, map, reduce, reduceRight and some methods in Array. <https://rpgeeganage.github.io/async-ray>
-* [TypeStrong/typedoc](https://github.com/TypeStrong/typedoc):Documentation generator for TypeScript projects. <https://typedoc.org>
+* [ts-loader](https://github.com/TypeStrong/ts-loader):TypeScript loader for webpack
+* [tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language <http://palantir.github.io/tslint/>
+* [assemblyscript](https://github.com/AssemblyScript/assemblyscript):A TypeScript to WebAssembly compiler 🚀 <https://assemblyscript.org>
+* [routing-controllers](https://github.com/typestack/routing-controllers):Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage in Express / Koa using TypeScript and Routing Controllers Framework.
+* [async-ray](https://github.com/rpgeeganage/async-ray):Provide async/await callbacks for every, find, findIndex, filter, forEach, map, reduce, reduceRight and some methods in Array. <https://rpgeeganage.github.io/async-ray>
+* [typedoc](https://github.com/TypeStrong/typedoc):Documentation generator for TypeScript projects. <https://typedoc.org>
 * [typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) ✨ Monorepo for all the tooling which enables ESLint to support TypeScript
-* [palmerhq/tsdx](https://github.com/palmerhq/tsdx):Zero-config CLI for TypeScript package development <https://npm.im/tsdx>
-* 测试
-  - [kulshekhar/ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest <https://kulshekhar.github.io/ts-jest>
+* [tsdx](https://github.com/palmerhq/tsdx):Zero-config CLI for TypeScript package development <https://npm.im/tsdx>
+* [ts-jest](https://github.com/kulshekhar/ts-jest):TypeScript preprocessor with sourcemap support for Jest <https://kulshekhar.github.io/ts-jest>
 
 ## 参考
 
 * [TypeScript 中文手册](https://typescript.bootcss.com/)
 * [The TypeScript Handbook](https://www.staging-typescript.org/docs/handbook/intro.html)
-* [basarat/typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
+* [typescript-book](https://github.com/basarat/typescript-book):📚 The definitive guide to TypeScript and possibly the best TypeScript book 📖. Free and Open Source 🌹
 * [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped):The repository for high quality TypeScript type definitions. <http://definitelytyped.org/>
-* [gcanti/fp-ts](https://github.com/gcanti/fp-ts):Functional programming in TypeScript <https://gcanti.github.io/fp-ts/>
+* [fp-ts](https://github.com/gcanti/fp-ts):Functional programming in TypeScript <https://gcanti.github.io/fp-ts/>
 * [why is so important?](https://www.warambil.com/typescript-why-is-so-important)

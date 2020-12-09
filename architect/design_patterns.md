@@ -229,11 +229,11 @@
 
 ## 参考
 
-* [hoohack/DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
-* [iluwatar/java-design-patterns](https://github.com/iluwatar/java-design-patterns)
+* [DesignPattern](https://github.com/hoohack/DesignPattern):设计模式：PHP和Go语言实现
+* [java-design-patterns](https://github.com/iluwatar/java-design-patterns)
 * [DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 * [design-patterns-for-humans](https://github.com/kamranahmedse/design-patterns-for-humans):Design Patterns for Humans™ - An ultra-simplified explanation
-* [RefactoringGuru/design-patterns-php](https://github.com/RefactoringGuru/design-patterns-php) <https://refactoringguru.cn/design-patterns>
+* [design-patterns-php](https://github.com/RefactoringGuru/design-patterns-php) <https://refactoringguru.cn/design-patterns>
 * [从面向对象的设计模式看软件设计](https://coolshell.cn/articles/8961.html)
 
 * <https://hulin.gitbook.io/design-patterns-by-php/zu-he-mo-shi>

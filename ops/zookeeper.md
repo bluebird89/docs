@@ -217,7 +217,7 @@ create /parent/path/subnode/path /data # 创建子项/子节点
 
 ## 资源
 
-* [yaojingguo/geekbang-zk-course](https://github.com/yaojingguo/geekbang-zk-course):极客时间ZooKeeper实战与源代码剖析课程资源
+* [geekbang-zk-course](https://github.com/yaojingguo/geekbang-zk-course):极客时间ZooKeeper实战与源代码剖析课程资源
 * 客户端
   - [Curator](https://mp.weixin.qq.com/s/4WEJH5kALVtXKF6BtvaUhg)是netflix公司开源的一套zookeeper客户端，目前是Apache的顶级项目。与Zookeeper提供的原生客户端相比，Curator的抽象层次更高，简化了Zookeeper客户端的开发量。Curator解决了很多zookeeper客户端非常底层的细节开发工作，包括连接重连、反复注册wathcer和NodeExistsException 异常等
   - curator-framework

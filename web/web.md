@@ -354,7 +354,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - CSS 选择器优先级
     + 选择器越短越好。
     + 尽量使用高优先级的选择器，例如 ID 和类选择器。
-    + 避免使用通配符 *
+    + 避免使用通配符
 * 使用 flexbox 而不是较早的布局模型
 * 使用 transform 和 opacity 属性更改来实现动画
 * 合理使用规则，避免过度优化
@@ -365,28 +365,28 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 ## 工具
 
-* [pod4g/hiper](https://github.com/pod4g/hiper):🚀 A statistical analysis tool for performance testing
-* [raviqqe/muffet](https://github.com/raviqqe/muffet):Fast website link checker in Go
-* [coturn/coturn](https://github.com/coturn/coturn):coturn TURN server project
+* [hiper](https://github.com/pod4g/hiper):🚀 A statistical analysis tool for performance testing
+* [muffet](https://github.com/raviqqe/muffet):Fast website link checker in Go
+* [coturn](https://github.com/coturn/coturn):coturn TURN server project
 * [codesandbox](https://codesandbox.io):The online code editor for Preact
-* [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
-* [acaudwell/Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game <https://logstalgia.io>
+* [codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
+* [Logstalgia](https://github.com/acaudwell/Logstalgia):replay or stream website access logs as a retro arcade game <https://logstalgia.io>
 * record and replay
-  - [rrweb-io/rrweb](https://github.com/rrweb-io/rrweb):record and replay the web <https://www.rrweb.io/>
-  - [sindresorhus/pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
+  - [rrweb](https://github.com/rrweb-io/rrweb):record and replay the web <https://www.rrweb.io/>
+  - [pageres](https://github.com/sindresorhus/pageres):Capture website screenshots
 * [短网址](http://suo.im/)
-* [google/pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
-* [GoogleChromeLabs/quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
+* [pprof](https://github.com/google/pprof):pprof is a tool for visualization and analysis of profiling data
+* [quicklink](https://github.com/GoogleChromeLabs/quicklink):⚡️Faster subsequent page-loads by prefetching in-viewport links during idle time
 * 分析
-  - [matomo-org/matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! <https://matomo.org/>
+  - [matomo](https://github.com/matomo-org/matomo):Liberating Web Analytics. Star us on Github? +1. Matomo is the leading open alternative to Google Analytics that gives you full control over your data. Matomo lets you easily collect data from websites, apps & the IoT and visualise this data and extract insights. Privacy is built-in. We love Pull Requests! <https://matomo.org/>
   - [YSlow](http://yslow.org):analyzes web pages and why they're slow based on Yahoo!'s rules for high performance web sites
 * 监控
-  - [davidkpiano/xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. <https://xstate.js.org/docs>
-  - [etsy/statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
-  - [brendangregg/FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer <http://www.brendangregg.com/flamegraphs.html>
+  - [xstate](https://github.com/davidkpiano/xstate):State machines and statecharts for the modern web. <https://xstate.js.org/docs>
+  - [statsd](https://github.com/etsy/statsd):Daemon for easy but powerful stats aggregation
+  - [FlameGraph](https://github.com/brendangregg/FlameGraph):Stack trace visualizer <http://www.brendangregg.com/flamegraphs.html>
   - [Raileo](https://raileo.com/):makes it easy to monitor your website downtime, SSL expiry, website performance, SEO and a lot more
 * [the-benchmarker/web-frameworks](https://github.com/the-benchmarker/web-frameworks):Which is the fastest web framework?
-* [chaitin/xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 <https://xray.cool>
+* [xray](https://github.com/chaitin/xray):一款完善的安全评估工具，支持常见 web 安全问题扫描和自定义 poc | 使用之前务必先阅读文档 <https://xray.cool>
 * [zeit](https://zeit.co/)
 * [insights](https://developers.google.com/speed/pagespeed/insights/) Analyze with PageSpeed Insights
 * [lighthouse](https://github.com/GoogleChrome/lighthouse) Automated auditing, performance metrics, and best practices for the web.<https://developers.google.com/web/tools/lighthouse/>
@@ -400,7 +400,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
   - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)
 * [W3C](https://www.w3.org/)
-* [solid/solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) <https://solid.mit.edu/>
+* [solid](https://github.com/solid/solid):Solid - Re-decentralizing the web (project directory) <https://solid.mit.edu/>
 * [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap):Roadmap to becoming a web developer in 2020 <https://roadmap.sh/>
 
 * [WEB开发中需要了解的东西](https://coolshell.cn/articles/6043.html)
