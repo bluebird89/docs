@@ -2450,7 +2450,9 @@ O(log(n))，O(1).因为哈希表是散列的，在遇到`key`>'12'这种查找�
   - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
 * 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
 
-## [xdebug](https://xdebug.org/)
+## [xdebug](git://github.com/xdebug/xdebug.git)
+
+Xdebug — Step Debugger and Debugging Aid for PHP <https://xdebug.org>
 
 * 浏览器扩展：xdebug helper(非必须)
 * [原理](https://xdebug.org/docs/remote)
@@ -2463,6 +2465,20 @@ O(log(n))，O(1).因为哈希表是散列的，在遇到`key`>'12'这种查找�
     + 启动插件:会启动一个 9000 的端口监听远程服务器发过来的 debug 信息
   - servers:实际服务起的端口号，脚本运行需要的地址
     - 通信协议 DBGp:端口意义不大,加了一层代理
+* 配置php script：配置xdebug,指向测试文件
+* 设置断点，运行
+* 可以添加watches
+* 添加表达式
+
+```sh
+brew install php71-xdebug
+
+pecl install xdebug
+
+##  Cannot accept external Xdebug connection: Cannot evaluate expression 'isset($_SERVER['PHP_IDE_CONFIG'])
+```
+
+## remote debug
 
 ```
 brew install php71-xdebug
@@ -2570,7 +2586,28 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
 * [金题](https://www.jintix.com/)
 * [colinlet/PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 * [](https://github.com/disxo/PHP-interview-myway)
-# PHP RESOURCE
+
+## [yar](https://github.com/laruence/yar)
+
+Light, concurrent RPC framework for PHP & C
+
+## [yaf](https://github.com/laruence/yaf)
+
+A fast php framework written in c, built in php-ext <http://pecl.php.net/package/yaf>
+
+* [CZD_Yaf_Extension](https://github.com/sillydong/CZD_Yaf_Extension):建立在 yarf基础上，集成了Smarty引擎，加入了封装好的各种功能类
+* [Yaf用户手册](http://www.laruence.com/manual/)
+
+```sh
+sudo pecl install yaf
+```
+
+## [Yac](https://github.com/laruence/yac)
+
+A fast shared memory user data cache for PHP
+
+* [yaconf](https://github.com/laruence/yaconf):A PHP Persistent Configurations Container
+  - 主要目标是简化读取项目配置文件,使配置文件和项目代码分离，增强了配置文件的可读性和可维护性
 
 ## 包管理
 
@@ -2611,7 +2648,9 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
   - 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码
 * 通用
   - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
-  - [CakePHP](https://cakephp.org/): 一个快速应用程序开发框架 (CP)
+  - [CakePHP](https://github.com/cakephp/cakephp)CakePHP: The Rapid Development Framework for PHP - Official Repository <http://cakephp.org>
+    + [cakephp-setup](https://github.com/dereuromark/cakephp-setup):CakePHP Setup Plugin - containing useful management and debugging tools for CakePHP apps <http://www.dereuromark.de>
+    + [docs](https://github.com/cakephp/docs):CakePHP CookBook <http://book.cakephp.org>
   - [CakePHP CRUD](https://github.com/friendsofcake/crud): CakePHP的快速应用程序（RAD）插件
   - [PPI Framework 2](http://www.ppi.io): 一个互操作性框架
   - [Zend Framework 2](https://framework.zend.com): 另一个由独立组件组成的框架 (ZF2)
@@ -2639,6 +2678,8 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
 * 电商
   - [magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
   - [drupal](https://github.com/drupal/drupal):Verbatim mirror of the git.drupal.org repository for Drupal core. Changes will not be pulled, and merge requests will not be accepted, if you want to contribute, go to Drupal.org: <https://drupal.org/project/drupal>
+  - [Joolma](https://www.joomla.org/)
+    + [文档](https://docs.joomla.org/Main_Page/zh-cn)
   - [Sylius](https://github.com/Sylius/Sylius): Open Source eCommerce Framework on top of Symfony <https://sylius.com>
     + [Documentation](https://sylius.readthedocs.io/en/latest/)
     + [Sylius-Standard](https://github.com/Sylius/Sylius-Standard)
@@ -2917,7 +2958,7 @@ open http://127.0.0.1:8000
   - (<https://github.com/box-project/box2)[Box>]: 一个构建PHAR文件的工具
   - (<https://github.com/jonathantorres/construct)[Construct>]: 一个PHP项目的生成器
   - (<https://github.com/jaz303/phake)[Phake>]: 一个PHP克隆库
-  - [Phing](https://www.phing.info/): 一个灵感来自于Apache Ant的PHP项目构建系统
+  - [Phing](https://github.com/phingofficial/phing) PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant. <https://www.phing.info>
 * 任务运行器 Task Runners 自动运行任务的库
   - [Bldr](http://bldr.io/): 一个构建在Symfony组件上的PHP任务运行器
   - [Jobby](https://github.com/jobbyphp/jobby): 一个没有修改crontab的PHP定时任务管理器
@@ -3235,8 +3276,15 @@ open http://127.0.0.1:8000
   - (<https://www.vagrantup.com/)[Vagrant>]: 一个便携的开发环境工具
   - (<https://www.docker.com/)[Docker>]: 一个容器化的平台
 * 虚拟机 Virtual Machines 相关的PHP虚拟机
-  - (<http://hacklang.org/)[Hack>]: 一个PHP进行无缝操作的HHVM编程语言
-  - (<https://github.com/facebook/hhvm)[HHVM>]: Facebook出品的PHP虚拟机，Runtime和JIT
+  - [Hack](https://github.com/facebook/hhvm/tree/master/hphp/hack) Programming Productivity Without Breaking Things.<https://hacklang.org>
+    + [Getting Started](https://docs.hhvm.com/hack/getting-started/getting-started)
+    + [Tutorial](https://hacklang.org/tutorial.html)
+  - [HHVM](https://github.com/facebook/hhvm):A virtual machine designed for executing programs written in  and PHP. <http://hhvm.com>
+    + 用 Hack 开发 HHVM
+    + HHVM 通过将 PHP 代码动态翻译成原生机器码而大幅提高速度。
+    + HHVM 支持 PHP 和 PHP 方言 Hack 语言。
+    + 开发团队宣布 HHVM v3.30 将是最后一个支持 PHP 的版本
+    + [Docs](https://docs.hhvm.com/hhvm/getting-started/getting-started)
   - (<https://github.com/hippyvm/hippyvm)[HippyVM>]: 另一个PHP虚拟机
 * 集成开发环境(IDE) Integrated Development Environment 支持PHP的集成开发环境
   - (<https://www.eclipse.org/downloads/)[Eclipse> for PHP Developers]: 一个基于Eclipse平台的PHP IDE
@@ -3394,6 +3442,7 @@ open http://127.0.0.1:8000
 ## utilities
 
 * [nette/utils](https://github.com/nette/utils):🛠 Lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc. <https://doc.nette.org/utilspw>
+* [Gearman](http://gearman.org/)provides a generic application framework to farm out work to other machines or processes that are better suited to do the work
 
 ## coding standard
 
