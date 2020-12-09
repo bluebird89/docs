@@ -2,6 +2,9 @@
 
 Visual Studio Code <https://code.visualstudio.com>
 
+* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
+* [vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
+
 ## 安裝
 
 ```sh

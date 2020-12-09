@@ -402,6 +402,10 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 * Appium
 * Apache JMeter
 * Meissa
+* [Sonar](https://github.com/facebook/Sonar):A desktop debugging platform for mobile developers. https://fbsonar.com
+  - [网络插件](https://fbsonar.com/docs/network-plugin.html)
+  - [Layout Inspector 插件](https://fbsonar.com/docs/layout-plugin.html)
+  - [入门](https://fbsonar.com/docs/getting-started.html)
 * EasyMock
 * jmockit
 * [ripienaar/free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
