@@ -103,33 +103,29 @@ git config --global alias.st 'status --porcelain'
 
 ```sh
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ~/.ssh/github # github添加key诸侯，提交默认会检查id_rsa
-ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
-cat ~/.ssh/github.pub # 添加公钥到服务器
 
-ssh -T git@github.com  # 验证
-ssh -v bluebird89@github.com
+ssh -vT git@github.com  # 验证
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+ssh-add -K ~/.ssh/github # 如果不是默认密钥 id_rsa ，则需要以下命令注册密钥文件，-K 参数将密钥存入 Mac Keychain
+
+cat ~/.ssh/github.pub # 添加公钥到服务器
 
 brew install ssh-copy-id
 ssh-copy-id -i ~/.ssh/tatu-key-ecdsa user@host
 
 cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
 
-sudo nano /etc/ssh/sshd_config
-
+# 服务端 /etc/ssh/sshd_config
 PermitRootLogin without-password
 sudo systemctl reload sshd.service
-
-eval "$(ssh-agent -s)"
-ssh-add -K ~/.ssh/id_rsa
 
 # ~/.ssh/config:
 Host *
   AddKeysToAgent yes
   UseKeychain yes
   IdentityFile ~/.ssh/id_rsa
-
-# 多个ssh
-git:http://01810661@gitlab.smgtech.net
 
 # 配置github.com
 Host github.com
@@ -144,10 +140,6 @@ Host gitlab.smgtech.net
     IdentityFile C:\Users\Administrator\.ssh\smt
     PreferredAuthentications publickey
     #User 01810661
-
-# 用cmder无效
-github
-# Couldn't agree a key exchange algorithm (available: curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521)
 
 # GPG
 sudo apt-get install gnupg # Debian / Ubuntu 环境
