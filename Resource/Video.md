@@ -183,7 +183,7 @@ rtmp://localhost/vod/out.mp4
 * [Bilibili/flv.js](https://github.com/Bilibili/flv.js)HTML5 FLV Player
 * 播放器
   - [xbmc](https://github.com/xbmc/xbmc):Kodi is an award-winning free and open source home theater/media center software and entertainment hub for digital media. With its beautiful interface and powerful skinning engine, it's available for Android, BSD, Linux, macOS, iOS and Windows. https://kodi.tv/
-  - [iina/iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
+  - [iina](https://github.com/iina/iina):The modern video player for macOS. https://iina.io
   - [annie](https://github.com/iawia002/annie):space_invader Fast, simple and clean video downloader
   - [mpv](https://github.com/mpv-player/mpv):🎥 Command line video player https://mpv.io/
   - [GSYVideoPlayer](https://github.com/CarGuo/GSYVideoPlayer):视频播放器（IJKplayer、ExoPlayer、MediaPlayer），HTTPS，支持弹幕，支持滤镜、水印、gif截图，片头广告、中间广告，多个同时播放，支持基本的拖动，声音、亮度调节，支持边播边缓存，支持视频自带rotation的旋转（90,270之类），重力旋转与手动旋转的同步支持，支持列表播放 ，列表全屏动画，视频加载速度，列表小窗口支持拖动，动画效果，调整比例，多分辨率切换，支持切换播放器，进度条小窗口预览，列表切换详情页面无缝播放，rtsp、concat、mpeg。

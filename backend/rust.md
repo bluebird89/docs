@@ -83,7 +83,17 @@ cargo new --lib rustmart && cd rustmart
 
 ## Dependency
 
-* Cargo.toml
+* [cargo](https://github.com/rust-lang/cargo)Rust’s build system and package manager. <https://doc.rust-lang.org/cargo>
+
+```sh
+# Cargo.toml
+cargo --verison
+cargo new project
+cargo build --realse
+cargo run|check|update
+
+rustup component add rls --toolchain stable-x86_64-apple-darwin
+```
 
 ## Tooling Ecosystem
 
@@ -164,6 +174,7 @@ match VALUE {
   - [](https://crates.io/):The Rust community’s crate registry `curl https://sh.rustup.rs -sSf | sh`
   - [rayon-rs/rayon](https://github.com/rayon-rs/rayon):Rayon: A data parallelism library for Rust
   - [Docs.rs](https://docs.rs/)
+* [cargo-watch](https://github.com/passcod/cargo-watch):Watches over your Cargo project's source <https://crates.io/crates/cargo-watch>
 * 框架
   - [tokio-rs/tokio](https://github.com/tokio-rs/tokio):A runtime for writing reliable, asynchronous, and slim applications with the Rust programming language. <https://tokio.rs>
   - [yewstack/yew](https://github.com/yewstack/yew):Rust / Wasm framework for building client web apps <https://yew.rs/docs/>
