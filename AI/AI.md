@@ -172,6 +172,7 @@
     + 机器学习：算法视角（原书第2版）
   - 实战
     + [Kaggle 主页](https://www.kaggle.com/)
+    + [apachecn/kaggle](https://github.com/apachecn/kaggle):Kaggle 项目实战（教程） = 文档 + 代码 + 视频
     + [Kaggle 路线](https://github.com/apachecn/kaggle)
     + [如何赢得数据科学竞赛：向顶尖 Kaggler 学习（How to Win a Data Science Competition: Learn from Top Kagglers）](https://www.coursera.org/learn/competitive-data-science)
     + [image-net](http://www.image-net.org/)

@@ -994,6 +994,169 @@ var _ = Describe("Book", func() {
 })
 ```
 
+## [beego](https://github.com/astaxie/beego)
+
+beego is an open-source, high-performance web framework for the Go programming language. <http://beego.me>
+
+* [beego/admin](https://github.com/beego/admin):基于beego的后台管理系统
+
+```go
+go get -u github.com/astaxie/beego
+go get -u github.com/beego/bee
+
+cd $GOPATH/src
+bee new hello
+cd hello
+bee run hello // 打开 http://localhost:8080/
+
+// import path does not begin with hostname
+export GOROOT=/usr/local/opt/go/libexec
+```
+
+```go
+go get github.com/beego/admin
+bee new hello
+
+// hello/routers/router.go
+import (
+    "hello/controllers"         //自身业务包
+    "github.com/astaxie/beego"  //beego 包
+    "github.com/beego/admin"  //admin 包
+)
+
+func init() {
+    admin.Run()
+    beego.Router("/", &controllers.MainController{})
+}
+
+// mysql
+db_host = localhost
+db_port = 3306
+db_user = root
+db_pass = root
+db_name = admin
+db_type = mysql
+postgresql数据库链接信息
+
+db_host = localhost
+db_port = 5432
+db_user = postgres
+db_pass = postgres
+db_name = admin
+db_type = postgres
+db_sslmode=disable
+sqlite3数据库链接信息
+
+// db_path 是指数据库保存的路径，默认是在项目的根目录
+db_path = ./
+db_name = admin
+db_type = sqlite3
+
+// 部分权限系统需要配置的信息
+
+sessionon = true
+rbac_role_table = role
+rbac_node_table = node
+rbac_group_table = group
+rbac_user_table = user
+#admin用户名 此用户登录不用认证
+rbac_admin_user = admin
+
+#默认不需要认证模块
+not_auth_package = public,static
+#默认认证类型 0 不认证 1 登录认证 2 实时认证
+user_auth_type = 1
+#默认登录网关
+rbac_auth_gateway = /public/login
+#默认模版
+template_type=easyui
+
+cd $GOPATH/src/hello
+cp -R ../github.com/beego/admin/static ./
+cp -R ../github.com/beego/admin/views ./
+
+go build
+./hello -syncdb
+// 默认得用户名密码都是admin
+```
+
+## [gin](https://github.com/gin-gonic/gin)
+
+Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. <https://gin-gonic.github.io/gin/>
+
+* 快速
+  - 基于 Radix 树（一种更节省空间的 Trie 树结构）的路由，占用内存更少；
+  - 没有反射；
+  - 可预测的 API 性能。
+* 内置路由器:开箱即用的路由器功能，不需要做任何配置即可使用
+* 支持中间件:传入的 HTTP 请求可以经由一系列中间件和最终操作来处理，例如 Logger、Authorization、GZIP 以及最终的 DB 操作
+* Crash 处理 :Gin 框架可以捕获一个发生在 HTTP 请求中的 panic 并 recover 它，从而保证服务器始终可用。此外，你还可以向 Sentry 报告这个 panic！
+* JSON 验证:Gin 框架可以解析并验证 JSON 格式的请求数据，例如检查某个必须值是否存在。
+* 路由群组 :支持通过路由群组来更好地组织路由，例如是否需要授权、设置 API 的版本等，此外，这些群组可以无限制地嵌套而不会降低性能。
+* API 冻结:支持 API 冻结，新版本的发布不会破坏已有的旧代码。
+* 错误管理:Gin 框架提供了一种方便的机制来收集 HTTP 请求期间发生的所有错误，并且最终通过中间件将它们写入日志文件、数据库或者通过网络发送到其它系统。
+* 内置渲染: Gin 框架提供了简单易上手的 API 来返回 JSON、XML 或者 HTML 格式响应。
+* 可扩展性: 我们将会在后续示例代码中看到 Gin 框架非常容易扩展。
+* 易于测试: Gin 框架提供了完整的单元测试套件
+
+## [echo](https://github.com/labstack/echo)
+
+High performance, minimalist Go web framework <https://echo.labstack.com>
+
+## install
+
+```sh
+go get -u github.com/labstack/echo/
+```
+
+## [go-micro](https://github.com/micro/go-micro)
+
+A distributed systems development framework <https://go-micro.dev>
+
+```sh
+go run main.go --registry=etcd
+
+micro --registry=etcd api --namespace='' --handler=rpc
+
+# WEb dashboard
+micro web # http://localhost:8082/
+
+# 启动 API 网关
+micro api --handler=api
+
+curl -H 'Content-Type: application/json' \
+    -d '{"service": "go.micro.srv.greeter", "method": "Greeter.Hello", "request": {"name": "学院君"}}' \
+    http://localhost:8080/rpc
+
+go run client.go
+
+micro proxy go.micro.srv.greeter
+curl \
+-H 'Content-Type: application/json' \
+-H 'Micro-Service: go.micro.srv.greeter' \
+-H 'Micro-Endpoint: Greeter.Hello' \
+-d '{"name": "学院君"}' \
+http://localhost:8081
+
+micro cli
+micro list services
+micro get service  go.micro.srv.greeter
+micro status|health go.micro.srv.greeter
+micro call go.micro.srv.greeter Greeter.Hello '{"name":"henry"}'
+micro logs example-service
+
+micro bot --inputs=slack --slack_token=SLACK_TOKEN
+```
+
+## 问题
+
+* `etcd@v3.XXXX+incompatible\clientv3\balancer\resolver\endpoint\endpoint.go:114:78: undefined: resolver.BuildOption`：`go mod edit -require=google.golang.org/grpc@v1.26.0`　`go get -u -x google.golang.org/grpc@v1.26.0` `replace google.golang.org/grpc => google.golang.org/grpc v1.26.0` `go mod edit -replace google.golang.org/grpc@v1.29.1=google.golang.org/grpc@v1.26.0`
+* `Account not issued by ''`:
+
+## 工具
+
+* [micro](https://github.com/micro/micro):Micro is a cloud native development platform
+
 ## 问题
 
 ```
