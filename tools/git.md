@@ -77,6 +77,9 @@ git config --global core.ignorecase true
 git config status.submodulesummary 1　# show you a short summary of changes to your submodules
 git config --global rebase.autoStash true
 
+# fatal: The current branch master has multiple upstream branches, refusing to push.
+git config remote.origin.push HEAD
+
 git config --unset --local user.name
 git mergetool -y
 
