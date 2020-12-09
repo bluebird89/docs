@@ -1,4 +1,4 @@
-# [InterPlanetary File System IPFS](https://github.com/ipfs/ipfs)
+# [Inter Planetary File System IPFS](https://github.com/ipfs/ipfs)
 
 Peer-to-peer hypermedia protocol <https://ipfs.io>
 
