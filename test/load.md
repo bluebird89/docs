@@ -62,3 +62,6 @@ jmeter
 ## 参考
 
 * [User's Manual](http://jmeter.apache.org/usermanual/)
+
+
+## [locust](https://github.com/locustio/locust):Scalable user load testing tool written in Python <http://locust.io>

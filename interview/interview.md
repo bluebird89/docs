@@ -642,3 +642,5 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 * [CS-Notes](https://github.com/CyC2018/CS-Notes):😋 技术面试必备基础知识 <https://cyc2018.github.io/CS-Notes>
 * [interview_internal_reference](https://github.com/0voice/interview_internal_reference):2019年最新总结，阿里，腾讯，百度，美团，头条等技术面试题目，以及答案，专家出题人分析汇总。
 * [interview-docs](https://github.com/qinxuewu/interview-docs):Java知识学习总结+源码阅读笔记。
+* [Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
+* [CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. <https://yuchengkai.cn/docs/zh/frontend/>

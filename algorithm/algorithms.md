@@ -384,6 +384,8 @@ def backtrack(路径, 选择列表):
   - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
   - [](https://www.bilibili.com/video/av48922404)
 * 数论
+* The Algorithm Design Manual
+  - Steven Skiena’s lectures
 * [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
 * [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
@@ -391,8 +393,8 @@ def backtrack(路径, 选择列表):
 * 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
 * 《[数据结构与算法分析 : C语言描述（第2版）](https://www.amazon.cn/gp/product/B002WC7NGS)》
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
-* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 《数据结构与算法 JavaScript 描述》
+* 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 算法图解
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)

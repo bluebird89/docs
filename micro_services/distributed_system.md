@@ -402,8 +402,14 @@ CREATE TABLE `leaf_alloc` (
 
 ## 课程
 
-* [6.824: Distributed Systems](http://nil.csail.mit.edu/6.824/2018/)
+* [MIT 6.824: Distributed Systems](http://nil.csail.mit.edu/6.824/2018/)
+  - Designing Data-Intensive Applications by Martin Kleppmann
+  - [](https://www.youtube.com/watch?v=cQP8WApzIQQ&list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB)
 * [designing-distributed-systems](https://github.com/brendandburns/designing-distributed-systems):Sample code and configuration files from the Designing Distributed Systems book.
+
+## 图书
+
+* [Distributed Systems](https://www.distributed-systems.net/index.php/books/ds3/)
 
 ## 工具
 
@@ -420,6 +426,8 @@ CREATE TABLE `leaf_alloc` (
 
 * [awesome-distributed-systems](https://github.com/theanalyst/awesome-distributed-systems):A curated list to learn about distributed systems
 * [awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources <http://rajeevnb.com>
+* [A Distributed Systems Reading List
+](https://dancres.github.io/Pages/)
 * [awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
 * [Parallel & Distributed Operating Systems Group](https://pdos.csail.mit.edu/)
 * [Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇

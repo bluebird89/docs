@@ -377,7 +377,7 @@
 * 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
 * 《漫谈人工智能》 集智俱乐部
-* 《机器学习实战》  Peter Harrington
+* 《机器学习实战》 Peter Harrington
 * 《统计学习方法》 李航
   + [讲课 PPT](https://github.com/fengdu78/lihang-code/tree/master/ppt)
   + [读书笔记](http://www.cnblogs.com/limitlessun/p/8611103.html): <https://github.com/SmirkCao/Lihang>
@@ -388,6 +388,7 @@
 * [dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! <http://hangtwenty.github.io/dive-into-machine-learning/>
 * [机器学习基础 Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/)
 * 深入理解Tensor Flow：架构
+* [Mathematics for Machine Learning](https://mml-book.github.io/book/mml-book.pdf)
 * [hands-on-machine-learning](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
   - [handson-ml](https://github.com/ageron/handson-ml):A series of Jupyter notebooks that walk you through the fundamentals of Machine Learning and Deep Learning in python using Scikit-Learn and TensorFlow.
 
@@ -399,9 +400,11 @@
 * [100-Days-Of-ML-Code](https://github.com/Avik-Jain/100-Days-Of-ML-Code):100 Days of ML Coding
 * [Learn_Machine_Learning_in_3_Months](https://github.com/llSourcell/Learn_Machine_Learning_in_3_Months):This is the code for "Learn Machine Learning in 3 Months" by Siraj Raval on Youtube
 * [机器学习（Machine Learning）吴恩达（Andrew Ng）](https://www.bilibili.com/video/av9912938)
+  - [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
   - [吴恩达《Machine Learning》](https://www.coursera.org/learn/machine-learning)
-      * [deeplearning-ai/machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 <https://deeplearning-ai.github.io/machine-learning-yearning-cn/>
+      * [machine-learning-yearning-cn](https://github.com/deeplearning-ai/machine-learning-yearning-cn):Machine Learning Yearning 中文版 - 《机器学习训练秘籍》 - Andrew Ng 著 <https://deeplearning-ai.github.io/machine-learning-yearning-cn/>
       * [中文笔记及作业代码](https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes)
+      * [ml-coursera-python-assignments](https://github.com/dibgerge/ml-coursera-python-assignments):Python assignments for the machine learning class by andrew ng on coursera with complete submission for grading capability and re-written instructions.
   - [吴恩达 CS229](http://cs229.stanford.edu/)
     + [斯坦福大学机器学习课程](http://open.163.com/special/opencourse/machinelearning.html)
     + [中文笔记](https://kivy-cn.github.io/Stanford-CS-229-CN/#/)
@@ -409,8 +412,7 @@
     + [作业代码](https://github.com/Sierkinhane/CS229-ML-Implements)
     + [stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning):VIP cheatsheets for Stanford's CS 229 Machine Learning <https://stanford.edu/~shervine/teaching/cs-229>
   - [斯坦福大学2014（吴恩达）机器学习教程中文笔记](https://www.coursera.org/course/ml)
-  - [Andrew Ng 老师的 机器学习课程](http://coursegraph.com/coursera-machine-learning) <http://coursegraph.com/coursera_ml>
-  - [吴恩达机器学习](https://study.163.com/course/courseMain.htm?courseId=1004570029)
+  - [Andrew Ng 老师的机器学习课程](http://coursegraph.com/coursera-machine-learning) <http://coursegraph.com/coursera_ml>
 * [李宏毅 Machine Learning](https://www.bilibili.com/video/av15889450)
   - [机器学习-李宏毅(2019) Machine Learning](https://www.bilibili.com/video/av35932863)
     + [李宏毅《机器学习》大纲](https://datawhalechina.github.io/Leeml-Book/#/)

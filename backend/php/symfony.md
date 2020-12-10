@@ -12,6 +12,7 @@ symfony check:requirements
 
 symfony new --full [--version=3.4] my_project
 # composer create-project symfony/website-skeleton my_project_name
+# /usr/local/Cellar/php@7.4/7.4.13_1/bin/php /usr/local/bin/composer create-project symfony/website-skeleton symfony_we
 symfony new --demo my_project
 symfony new my_project_name
 # composer create-project symfony/skeleton  my-project "2.3.*" # framework-standard-edition
@@ -19,11 +20,12 @@ symfony new my_project_name
 cd my-project
 composer require server --dev
 
-symfony server:start
+symfony server:start -d
+symfony open:local
 
-# cli-server
-php bin/console server:run -vvv
-php bin/console server:start 0.0.0.0:8000
+# symfony cloud
+symfony project:init
+symfony project:create --title="web_demo" --plan=development
 
 ./bin/phpunit
 
@@ -167,6 +169,7 @@ Warning: "continue" targeting switch is equivalent to
 ## 图书
 
 * [The Definitive Guide to symfony](https://github.com/Apress/def-guide-to-symfony) <http://www.apress.com/9781590597866>
+* Symfony 5 The Fast Track
 
 ## 工具
 

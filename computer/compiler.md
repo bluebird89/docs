@@ -28,7 +28,9 @@
 * Compilers: Principles,Techniques,and Tools 编译原理技术和工具 Alfred V.Aho,Ravi Sethi,Jeffrey D.Ullman
 * [Modern Compiler Implementation in C  现代编译原理-C语言描述](https://www.cs.princeton.edu/~appel/modern/c/)
   - 《编译原理》：<https://www.bilibili.com/video/av17649289>
-* Advanced Compiler Design and Implementation  Steven S.Muchnick  高级编译器设计与实现
+* Advanced Compiler Design and Implementation 高级编译器设计与实现 Steven S.Muchnick
+* [Crafting Interpreters](https://craftinginterpreters.com/contents.html)
+  - [Alex Aiken’s course on edX](https://www.edx.org/course/compilers)
 
 ## 工具
 

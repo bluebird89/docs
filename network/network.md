@@ -1060,7 +1060,7 @@ lsof -d 2-3
 * 《Linux多线程服务器端编程》
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
   - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
-* 《计算机网络：自顶向下方法》
+  - [Stanford CS 144](https://www.youtube.com/playlist?list=PLvFG2xYBrYAQCyz4Wx3NPoYJOFjvU7g2Z)
   - [](https://www.bilibili.com/video/av41404195)
 * 计算机网络 Computer Networks Andrew S. Tanenbaum / David J. Wetherall
 
@@ -1071,22 +1071,21 @@ lsof -d 2-3
 
 ## 工具
 
-* [localtunnel/localtunnel](https://github.com/localtunnel/localtunnel):expose yourself <https://localtunnel.me>
-* [cisco/joy](https://github.com/cisco/joy):A package for capturing and analyzing network flow data and intraflow data, for network research, forensics, and security monitoring.
+* [localtunnel](https://github.com/localtunnel/localtunnel):expose yourself <https://localtunnel.me>
+* [joy](https://github.com/cisco/joy):A package for capturing and analyzing network flow data and intraflow data, for network research, forensics, and security monitoring.
 * [SolarWinds](http://www.solarwinds.com):管理大小企业网络上的网络流量。网络设备监控器可监控你网络上的任何一个设备，查找各种提示或错误
-* [maxmcd/webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC <https://maxmcd.github.io/webtty/>
-* [v2ray/v2ray-core](https://github.com/v2ray/v2ray-core):A platform for building proxies to bypass network restrictions. <https://www.v2ray.com/>
-* [librenms/librenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system <http://www.librenms.org/>
+* [webtty](https://github.com/maxmcd/webtty):Share a terminal session over WebRTC <https://maxmcd.github.io/webtty/>
+* [ibrenms](https://github.com/librenms/librenms):Community-based GPL-licensed network monitoring system <http://www.librenms.org/>
 * [Zenmap](https://nmap.org/zenmap/):Nmap网络扫描器的官方前端程序
 * [IPv6 连接测试](https://test-ipv6.com/)
-* [henrylee2cn/teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. <https://github.com/henrylee2cn/tpdoc>
-* [tailscale / tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.<https://tailscale.com/>
-* [chiakge / Linux-NetSpeed](https://github.com/chiakge/Linux-NetSpeed):将Linux现常用的网络加速集成在一起
-* [ehang-io / nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.<https://ehang.io/nps/documents>
+* [teleport](https://github.com/henrylee2cn/teleport):Teleport is a versatile, high-performance and flexible socket framework. It can be used for RPC, micro services, peer-peer, push services, game services and so on. <https://github.com/henrylee2cn/tpdoc>
+* [tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.<https://tailscale.com/>
+* [Linux-NetSpeed](https://github.com/chiakge/Linux-NetSpeed):将Linux现常用的网络加速集成在一起
+* [nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.<https://ehang.io/nps/documents>
 
 ## 参考
 
-* [SystemsApproach/book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
+* [book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
 * [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/)
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [submarine cable map](https://www.submarinecablemap.com/)

@@ -488,6 +488,11 @@ Composer
 TestFramework -> PHPUnit
 
 php -S localhost:8000 -c app/config/php.ini router.php
+
+# dyld: lazy symbol binding failed: Symbol not found: _php_pcre2_match_data_create_from_pattern
+#  Expected in: flat namespace
+# Referenced from: /usr/local/lib/php/pecl/20190902/apcu.so
+
 ```
 
 ### Cli

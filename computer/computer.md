@@ -196,14 +196,21 @@
 
 ## 图书
 
-* 《深入理解计算机系统》
+* [计算机程序的构造和解释 Structure and Interpertation of Computer Programming SICP](https://www.bilibili.com/video/av8515129)
+  - [Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 <https://learningsicp.github.io>
+  - [book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
+  - [video lecture](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/)
+  - [Brian Harvey’s Berkeley CS 61A](https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter)
+* [Computer Systems: A Programmer's Perspective 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html)
   - 《深入理解计算机系统》<https://www.bilibili.com/video/av31289365>
-* 计算机程序的构造和解释 Structure and Interpertation of Computer Programming, SICP
-  - [DeathKing/Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 <https://learningsicp.github.io>
-  - 《计算机程序的构造和解释》：<https://www.bilibili.com/video/av8515129>
+  - [Berkeley CS 61C](http://inst.eecs.berkeley.edu/~cs61c/sp15/)
+* [Mathematics for Computer Science](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf)
+  - Tom Leighton’s MIT 6.042J
 * 计算机程序的概念、技术和模型 Concepts, Techniques, and Models of Computer Programming，CTMCP
+* [The Elements of Computing Systems](https://www.nand2tetris.org/)
+* [Bottom Up Computer Science](https://github.com/ianw/bottomupcs) <http://www.bottomupcs.com>
 * 《异类》
-* Addison-Wesley professional computing series
+* The Encyclopedia of Human-Computer Interaction
 
 ## 项目
 
@@ -225,36 +232,12 @@
   - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
 * [PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
 * [HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
-* [CS-Interview-Knowledge-Map](https://github.com/InterviewMap/CS-Interview-Knowledge-Map):Build the best interview map. The current content includes JS, network, browser related, performance optimization, security, framework, Git, data structure, algorithm, etc. <https://yuchengkai.cn/docs/zh/frontend/>
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
 * [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)<https://www.bilibili.com/video/av21376839/>
 * [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
 * [cs-video-courses](https://github.com/Developer-Y/cs-video-courses):List of Computer Science courses with video lectures.
-
-* 专业课代号 408 的计算机基础综合。这门专业课包含：数据结构、计算机组成原理、计算机网路、操作系统
-  - 理论知识不一定马上能用于项目上，但当与人讨论起某个技术问题时能够知道它深层次的原因，看问题的角度会更加全面和系统
-  - 数据结构
-    + 《数据结构》 清华大学出版社
-    + 《算法与数据结构考研试题精析（第二版）》
-  - 计算机组成原理  
-    + 《计算机组成原理》唐朔飞 高等教育出版社
-    + 《计算机组成原理考研指导》徐爱萍 清华大学出版社
-    + 《计算机组成原理--学习指导与习题解答》唐朔飞 高等教育出版社  
-  - 操作系统
-    + 《计算机操作系统(修订版)》汤子瀛 西安电子科技大学出版社  
-    + 《操作系统考研辅导教程(计算机专业研究生入学考试全真题解) 》电子科技大学出版社
-    + 《操作系统考研指导》清华大学出版社
-  - 计算机网络
-    + 《计算机网络(第五版)》谢希仁 电子工业出版社  
-    + 《计算机网络知识要点与习题解析》哈尔滨工程大学出版社
-  - 视频
-    + 武汉大学 —— 数据结构 MOOC 网络课程
-    + 华中科技大学 —— 计算机组成原理palg
-    + 电子科技大学 —— 计算机组成原理
-    + 华中科技大学 —— 操作系统原理
-    + 哈尔滨工业大学 —— 计算机网络
 * [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
 
 ## 工具
@@ -274,9 +257,6 @@
 * [Treehouse](https://teamtreehouse.com/):学习编程等互联网技能
 * [Playground](https://www.apple.com/swift/playgrounds/):ipad 上学习 swift 的游戏
 * [scratch](https://scratch.mit.edu/)
-* [bottomupcs](https://github.com/ianw/bottomupcs):Bottom Up Computer Science <http://www.bottomupcs.com>
-* [Waking-Up](https://github.com/wolverinn/Waking-Up):计算机基础（计算机网络/操作系统/数据库/Git...）面试问题全面总结，包含详细的follow-up question以及答案
-* [coding-interview-university](https://github.com/jwasham/coding-interview-university)A complete computer science study plan to become a software engineer.
 * [Introduction: A Guide To The Tech Tree](https://github.com/github/archive-program/blob/master/TheTechTree.md)
 * [CPU 缓存](https://coolshell.cn/articles/20793.html)
 

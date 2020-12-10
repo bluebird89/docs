@@ -1968,7 +1968,8 @@ try {
 * 《ES6 标准入门(第3版)》
 * 《深入理解ES6》
 * 《JavaScript开发框架权威指南》
-* JavaScript函数式编程
+* JavaScript 函数式编程
+* JavaScript. The Core
 * 《JavaScript 框架设计》
 * 《单页 Web 应用: JavaScript 从前端到后端》
 * 《基于 MVC 的 JavaScript Web 富应用开发》

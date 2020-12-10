@@ -847,8 +847,11 @@ man 2 execve
 
 ## 图书
 
-* 《深入理解计算机系统》
 * 操作系统导论
+* [Operating Systems: Three Easy Pieces](http://pages.cs.wisc.edu/~remzi/OSTEP/)
+  - Berkeley CS 162
+* Modern Operating Systems
+* [Operating System Design Book Series](http://www.fysnet.net/osdesign_book_series.htm)
 
 ## 课程
 

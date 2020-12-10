@@ -204,6 +204,73 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
   - 复制流量（Replication）：当发生数据中心级别故障时，我们可能需要修改或者管理存储系统的复制流量，我们可能需要在其他数据中心创建副本来处理读请求，而副本的创建需要占用数据中心内部或者跨数据中心的网络资源；
   - 有状态流量（Stateful）：主从复制的系统在主节点发生故障时，我们需要将主节点的状态拷贝至健康数据中心中的从节点，并将从节点进程成主节点以服务请求；
 
+## MySQL vs PG
+
+* ACID
+  - PostgreSQL支持事务的强一致性，事务保证性好，完全支持ACID特性。
+  - MySQL只有innodb引擎支持事务，事务一致性保证上可根据实际需求调整，为了最大限度的保护数据，MySQL可配置双一模式，对ACID的支持上比PG稍弱弱。
+* 复制
+  - MySQL的复制是基于binlog的逻辑异步复制，无法实现同步复制
+    + 通过canal增量数据的订阅和消费，可以同步数据到kafka，通过kafka做数据流转。
+  - MySQL所有的高可用方案都是基于binlog做的同步，以及基于MySQL的分布式数据也是基于MySQL的binlog实现，binlog是MySQL生态圈最基本技术实现。
+  - PostgreSQL可以做到同步，异步，半同步复制，以及基于日志逻辑复制，可以实现表级别的订阅和发布。
+* 并发控制
+  - PostgreSQL通过其MVCC实现有效地解决了并发问题，从而实现了非常高的并发性。PG新老数据一起存放的基于XID的MVCC机制,新老数据一起存放，需要定时触 发VACUUM，会带来多余的IO和数据库对象加锁开销，引起数据库整体的并发能力下降。而且VACUUM清理不及时，还可能会引发数据膨胀。当然PostgreSQL还有一点影响比较，为了保证事务的强一致性，未决事务会影响所有表VACUUM清理，导致表膨胀。
+* 性能
+  - PostgreSQL
+   + PostgreSQL广泛用于读写速度高和数据一致性高的大型系统。此外，它还支持各种性能优化，当然这些优化仅在商业解决方案中可用，例如地理空间数据支持，没有读锁定的并发性等等。
+   + PostgreSQL性能最适用于需要执行复杂查询的系统。
+   + PostgreSQL在OLTP/ OLAP系统中表现良好，读写速度以及大数据分析方面表现良好，基于PG的GP数据库，在数据仓库领域表现良好。
+   + PostgreSQL也适用于商业智能应用程序，但更适合需要快速读/写速度的数据仓库和数据分析应用程序。
+  - MySQL
+   + MySQL是广泛选择的基于Web的项目，需要数据库只是为了简单的数据事务。 但是，当遇到重负载或尝试完成复杂查询时，MySQL通常会表现不佳。
+   + MySQL的读取速度，在OLTP系统中表现良好。
+   + MySQL + InnoDB为OLTP场景提供了非常好的读/写速度。总体而言，MySQL在高并发场景下表现良好。
+   + MySQL是可靠的，并且与商业智能应用程序配合良好，因为商业智能应用程序通常读取很多。
+* 高可用技术
+  + PostgreSQL
+    + 基于流复制的异步、同步主从
+    + 基于流复制的–keepalive
+    + 基于流复制的 –repmgr
+    + 基于流复制的 –patroni+etcd
+    + 共享存储HA（corosync+pacemaker）
+    + Postgres-XC
+    + Postgres-XL
+    + 中间件实现：pgpool、pgcluster、slony、plploxy
+  - MySQL
+    + 主从复制
+    + 主主复制
+    + MHA
+    + LVS+KEEPALIVE
+    + MGR分布式数据库，多点写入[不建议]，基于paxos协议
+    + PXC分布式数据库，多点写入[不建议]，基于令牌环协议。
+    + INNODB CLUSTER[8.0新技术，基于MGR实现，上层封装命令],基于paxos协议。
+    + 中间件实现：mycat
+* 数据存储和数据类型
+  - PG主表采用堆表存放，存放的数据量较大，数据访问方式类似于Oracle的堆表。
+  - MySQL采用索引组织表，MySQL必须有主键索引，所有的数据访问都是通过主键实现，二级索引访问时，需要扫描两遍索引（主键和二级索引
+* PostgreSQL相对于MySQL的优势
+  - 在SQL的标准实现上要比MySQL完善，而且功能实现比较严谨；
+  - 存储过程的功能支持要比MySQL好，具备本地缓存执行计划的能力；
+  - 对表连接支持较完整，优化器的功能较完整，支持的索引类型很多，复杂查询能力较强；
+  - PG主表采用堆表存放，MySQL采用索引组织表，能够支持比MySQL更大的数据量。
+  - PG的主备复制属于物理复制，相对于MySQL基于binlog的逻辑复制，数据的一致性更加可靠，复制性能更高，对主机性能的影响也更小。
+  - MySQL的存储引擎插件化机制，存在锁机制复杂影响并发的问题，而PG不存在。
+  - PG对可以实现外部数据源查询，数据源的支持类型丰富。
+  - PG原生的逻辑复制可以实现表级别的订阅发布，可以实现数据通过kafka流转，而不需要其他的组件。
+  - PG支持三种表连接方式，嵌套循环，哈希连接，排序合并，而MySQL只支持嵌套循环。
+  - PostgreSQL源代码写的很清晰，易读性比MySQL强太多了。
+  - PostgreSQL通过PostGIS扩展支持地理空间数据。 地理空间数据有专用的类型和功能，可直接在数据库级别使用，使开发人员更容易进行分析和编码。
+  - 可扩展型系统，有丰富可扩展组件，作为contribute发布。
+  - PostgreSQL支持JSON和其他NoSQL功能，如本机XML支持和使用HSTORE的键值对。 它还支持索引JSON数据以加快访问速度，特别是10版本JSONB更是强大。
+  - PostgreSQL完全免费，而且是BSD协议，如果你把PostgreSQL改一改，然后再拿去卖钱，也没有人管你，这一点很重要，这表明了PostgreSQL数据库不会被其它公司控制。 相反，MySQL现在主要是被Oracle公司控制。
+* MySQL相对于PG的优势
+  - innodb的基于回滚段实现的MVCC机制，相对PG新老数据一起存放的基于XID的MVCC机制，是占优的。新老数据一起存放，需要定时触 发VACUUM，会带来多余的IO和数据库对象加锁开销，引起数据库整体的并发能力下降。而且VACUUM清理不及时，还可能会引发数据膨胀；
+  - MySQL采用索引组织表，这种存储方式非常适合基于主键匹配的查询、删改操作，但是对表结构设计存在约束；
+  - MySQL的优化器较简单，系统表、运算符、数据类型的实现都很精简，非常适合简单的查询操作；
+  - MySQL相对于PG在国内的流行度更高，PG在国内显得就有些落寞了。
+  - MySQL的存储引擎插件化机制，使得它的应用场景更加广泛，比如除了innodb适合事务处理场景外，myisam适合静态数据的查询场景。
+
 ## 数据库
 
 * [dbeaver](https://github.com/dbeaver/dbeaver):Free universal database tool and SQL client <http://dbeaver.jkiss.org>
@@ -251,6 +318,8 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * 《SQL必知必会(第4版)》
 * 《SQL 反模式》
 * 《收获，不止Oracle》（第2版）
+* Readings in Database Systems
+  - Joe Hellerstein’s Berkeley CS 186
 
 ## 工具
 

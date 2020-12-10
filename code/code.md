@@ -769,6 +769,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * [30-seconds-of-code](https://github.com/30-seconds/30-seconds-of-code)：Curated collection of useful Javascript snippets that you can understand in 30 seconds or less. <https://30secondsofcode.org/>
 * [be-a-professional-programmer](https://github.com/stanzhai/be-a-professional-programmer):成为专业程序员路上用到的各种优秀资料、神器及框架 <http://tools.stanzhai.site>
 * [how to be a Programmer](https://github.com/braydie/HowToBeAProgrammer) <https://braydie.gitbooks.io/how-to-be-a-programmer/content/zh/>
+* [Qix](https://github.com/ty4z2008/Qix)Machine Learning、Deep Learning、PostgreSQL、Distributed System、Node.Js、Golang ty4z2008.github.io/qix
 * [professional-programming](https://github.com/charlax/professional-programming):A collection of full-stack resources for programmers.
 * [todomvc](https://github.com/tastejs/todomvc)Helping you select an MV* framework - Todo apps for React.js, Ember.js, Angular, and many more <http://todomvc.com/>
 * [tech](https://github.com/hedengcheng/tech):programming, database, distributed systemee

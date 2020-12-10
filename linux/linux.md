@@ -147,14 +147,15 @@ lshw -class disk -class storage -short
 
 ## 启动
 
-* 初始：BIOS -> MBR -> 引导加载程序 -> 内核
+* 初始：BIOS->MBR->引导加载程序->内核
   - 自动从主板的BIOS(Basic Input/Output System)读取其中所存储的程序（直接连接在主板上的硬件(硬盘，网络接口，键盘，串口，并口)）
   - 从所选择的启动存储设备中读取起始的 512 bytes 主引导记录MBR (master boot record)，告诉电脑从该设备的某一个分区(partition)来装载引导加载程序(boot loader)。Boot loader储存有操作系统(OS)的相关信息，比如操作系统名称，操作系统内核 (内核)所在位置等。常用的boot loader有GRUB和LILO
   - boot loader会加载内核(kernel)。内核实际上是一个用来操作计算机的程序，它是计算机操作系统的内核，主要的任务是管理计算机的硬件资源，充当软件和硬件的接口。操作系统上的任何操作都要通过内核传达给硬件
-* 内核：内核 -> init process
+* 内核：内核->init process
+  - 内核启动后，会挂载root文件系统为其提供用户空间支持
   - 内核会首先预留自己运行所需内存空间
   - 通过驱动程序(driver)检测计算机硬件，操作系统就可以知道有哪些硬件可用
-  - 内核会启动一个init进程。它是Linux系统中的1号进程(Linux系统没有0号进程)
+  - 内核会启动一个init进程,是Linux系统中的1号进程(Linux系统没有0号进程)
 * init process
   - 单用户模式(single user mode)：初始脚本还没有开始执行，可以检测并修复计算机可能存在的错误
   - 一系列的初始脚本(startup scripts)：常见的shell scripts，执行如下功能：设置计算机名称，时区，检测文件系统，挂载硬盘，清空临时文件，设置网络
@@ -3595,10 +3596,10 @@ cat a b b | sort | uniq -u > c
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
 * [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
   - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html
+* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
 * 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
-* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍\
 * LINUX 操作系统(第2版)
-* [Advanced Linux Programming Linux环境高级编程](https://mentorembedded.github.io/advancedlinuxprogramming/)
+* [Advanced Linux Programming Linux 环境高级编程](https://mentorembedded.github.io/advancedlinuxprogramming/)
   - 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
 * 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
 * 《鸟哥的Linux私房菜:基础学习篇(第3版)》

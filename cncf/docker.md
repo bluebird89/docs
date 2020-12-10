@@ -448,14 +448,13 @@ sudo systemctl restart docker
     + 当需要容器镜像时，则从Docker Registry中下载镜像，并通过镜像管理驱动graphdriver将下载镜像以Graph的形式存储
     + 当需要为Docker创建网络环境时，通过网络管理驱动networkdriver创建并配置Docker容器网络环境
     + 当需要限制Docker容器运行资源或执行用户指令等操作时，则通过execdriver来完成
-* Docker Registry是一个存储容器镜像的仓库。而容器镜像是在容器被创建时，被加载用来初始化容器的文件架构与目录
+* Docker Registry 存储容器镜像仓库。镜像在容器被创建时被加载用来初始化容器的文件架构与目录
   - 在Docker的运行过程中，Docker Daemon会与Docker Registry通信，并实现搜索镜像、下载镜像、上传镜像三个功能，这三个功能对应的job名称分别为”search”，”pull” 与 “push”
-* Graph在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者
-  - Graph存储着本地具有版本信息的文件系统镜像
-  - 在Graph的本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs
-  - 也通过GraphDB记录着所有文件系统镜像彼此之间的关系
-  - GraphDB是一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系
-* Driver是Docker架构中的驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制
+* Graph 在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者
+  - GraphDB 一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系，通过 GraphDB 记录着所有文件系统镜像彼此之间的关系
+  - Graph 存储着本地具有版本信息的文件系统镜像
+  - Graph 本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs
+* Driver 架构中驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制
   - 由于Docker运行的生命周期中，并非用户所有的操作都是针对Docker容器的管理，另外还有关于Docker运行信息的获取，Graph的存储与记录等。因此，为了将Docker容器的管理从Docker Daemon内部业务逻辑中区分开来，设计了Driver层驱动来接管所有这部分请求
   - graphdriver:用于完成容器镜像的管理，包括存储与获取
     + 在graphdriver的初始化过程之前，有4种文件系统或类文件系统在其内部注册，分别是aufs、btrfs、vfs和devmapper。而Docker在初始化之时，通过获取系统环境变量”DOCKER_DRIVER”来提取所使用driver的指定类型。而之后所有的graph操作，都使用该driver来执行
@@ -481,13 +480,15 @@ sudo systemctl restart docker
 
 * 一个只读模版，用来创建容器
 * 一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）
+* 镜像包含操作系统完整root文件系统，其体积往往是庞大的，因此在Docker设计时，充分利用[Union FS]的技术，将其设计为分层存储架构
+  - 镜像构建时，会一层层构建，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层
 * Graph在Docker架构中扮演已下载容器镜像的保管者，以及已下载容器镜像之间关系的记录者。一方面，Graph存储着本地具有版本信息的文件系统镜像，另一方面也通过GraphDB记录着所有文件系统镜像彼此之间的关系
   - GraphDB是一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系。
   - 在Graph的本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs。
-* Dockerfile中的命令都会在文件系统中创建一个新的层次结构，镜像则构建与这些文件系统之上.一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层.这些叠加的最后一层就是container，所以在container里面改了文件，其实不会进image
+* Dockerfile中的命令都会在文件系统中创建一个新层次结构，镜像则构建与这些文件系统之上.一层层叠加，前一层是后一层的基础。每一层构建完就不会再发生改变，后一层上的任何改变只发生在自己这一层.这些叠加的最后一层就是container，所以在container里面改了文件，其实不会进image
 * 构建并且存储
-  - 每一个镜像都是由一系列只读的层组成的
-  - Dockerfile 中的每一个命令都会在已有的只读层上创建一个新的层
+  - 每一个镜像都是由一系列只读层组成的
+  - Dockerfile 中每一个命令都会在已有的只读层上创建一个新的层
   - 当镜像被 docker run 命令创建时就会在镜像的最上层添加一个可写的层，也就是容器层，所有对于运行时容器的修改其实都是对这个容器读写层的修改
 * 一种UnionFS（联合文件系统），是一种分层、轻量级并且高性能的文件系统，支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem),Union FS 有两个用途
   - 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
@@ -567,7 +568,8 @@ docker rmi $(docker images -a -q) -f  # same as above, but forces the images ass
 
 ## 容器 Container
 
-* 容器是镜像创建的实例,在启动的时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改， 这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
+* 由镜像创建的实例,启动时候创建一层可写层作为最上层（因为镜像是只读的）.使用Copy-On-Write的方式完成对文件系统的修改，这样对文件系统的修改将会作为一个新的层添加到既有层之上，而不是直接修改既有的层
+* 实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的『命名空间』，因此容器可以拥有自己的root文件系统、自己的网络配置、自己的进程空间，甚至自己的用户ID空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样
 * 容器时在linux上本机运行，并与其他容器共享主机的内核，它运行的一个独立的进程，不占用其他任何可执行文件的内存，非常轻量
   - 虚拟机运行的是一个完成的操作系统，通过虚拟机管理程序对主机资源进行虚拟访问，相比之下需要的资源更多
 * 连接：会创建一个父子关系，其中父容器可以看到子容器的信息
@@ -1252,7 +1254,7 @@ docker tag  csphere/nginx:1.7 192.168.1.2/csphere/nginx:1.7
 docker push 192.168.1.2/csphere/nginx:1.7
 ```
 
-## [docker/compose](https://github.com/docker/compose)
+## [docker-compose](https://github.com/docker/compose)
 
 Define and run multi-container applications with Docker <https://docs.docker.com/compose/>
 
@@ -1687,13 +1689,15 @@ docker-compose --compatibility up
 docker build -t my-image .
 docker run my-image
 
-docker-compose ps # 查看当前项目容器
 docker-compose build api
 docker-compose up -d --force-recreate
 docker-compose up  # 启动所有容器
 docker-compose up -d   # 后台启动并运行所有容器
 docker-compose up --no-recreate -d   # 不重新创建已经停止的容器
 docker-compose up -d test2   # 只启动test2这个容器
+docker-compose ps # 查看当前项目容器
+docker-compose logs
+
 docker-compose stop  # 停止容器
 docker-compose start   # 启动容器
 docker-compose down  # 停止并销毁容器
@@ -1705,7 +1709,7 @@ docker-compose kill -s SIGINT
 docker stats --format "table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 ```
 
-## [docker/machine](https://github.com/docker/machine)
+## [docker-machine](https://github.com/docker/machine)
 
 Machine management for a container-centric world 创建运行Docker的宿主机的，比如AWS、Azure上的虚拟机，也可以用来在本地创建VirtualBox等虚拟机.直接把Boot2Docker的功能也取代了，于是Boot2Docker成为了历史
 
