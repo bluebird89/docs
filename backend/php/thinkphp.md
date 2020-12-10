@@ -15,7 +15,7 @@ PHP Framework ThinkPHP5——为API开发而设计的高性能PHP框架（基于
 ## 创建项目
 
 ```sh
-composer create-project topthink/think tp5
+composer create-project topthink/think tp
 
 composer require topthink/think-swoole
 php think run
@@ -60,7 +60,7 @@ php public/index.php index/Demon/start # 命令行运行
 
 ## 扩展
 
-* [framework](https://github.com/top-think/framework):ThinkPHP5 Framework <http://www.thinkphp.cn>
+* [framework](https://github.com/top-think/framework):ThinkPHP Framework  <http://www.thinkphp.cn>
 * [think-swoole](https://github.com/top-think/think-swoole):Swoole extend for thinkphp5
 * admin
   * [ucer-admin](https://github.com/Ucer/ucer-admin):ucer admin system based Thinkphp5.0.10 <http://codehaoshi.com>
@@ -74,4 +74,3 @@ php public/index.php index/Demon/start # 命令行运行
 ## 参考
 
 * [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp6.0)
-* [thinkng](https://github.com/top-think/thinkng):基于 ThinkPHP 5 框架核心重写的下一代 ThinkPHP

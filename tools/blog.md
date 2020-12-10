@@ -104,6 +104,35 @@ jekyll serve
 
 🃏 A magical documentation site generator. <https://docsify.js.org>
 
+* 直接运行时转换 md 为 html, `/#/guide` => guide.md
+
+```sh
+npm i docsify-cli -g
+makdir blog
+docsify init ./
+
+blog/     # Github Pages 根目录
+   ├ _images/       # 图片
+   ├ _media/        # 多媒体文件
+   ├ basic/         # 基础知识
+   ├ develop/       # 编程开发
+   ├ keys/          # 热键速查
+   ├ links/         # 友情链接
+   ├ offer/         # 求职应聘
+   ├ writing/       # 写作排版
+   ├ _coverpage.md  # 封面
+   ├ _navbar.md     # 导航栏
+   ├ _sidebar.md    # 侧边栏
+   ├ README.md   # docs README 文件
+   ├ index.html  # 首页，在这里配置 docsify
+   ├ CNAME       # 绑定自定义域名 notes.abelsu7.top
+   ├ .nojekyll   # 阻止 GitHub Pages 忽略命名是下划线开头的文件
+   ├ README.md  # Github 仓库 README 文件
+   └ LICENSE    # MIT License
+
+docsify serve ./
+```
+
 ## [Halo](https://github.com/halo-dev/halo)
 
 ## [Typecho](http://typecho.org/)

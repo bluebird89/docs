@@ -93,6 +93,8 @@ sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 100
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 150
 
 sudo update-alternatives --config python #如果要切换到Python2
+
+python -m SimpleHTTPServer 8080
 ```
 
 ### pyenv
@@ -1443,8 +1445,6 @@ Namespaces are one honking great idea -- let's do more of those!
 * [ipython](https://github.com/ipython/ipython) <https://ipython.org/>  `pip3 install ipython`
 * [pypy](http://pypy.org/)
 * [pypa/pipenv](https://github.com/pypa/pipenv):Python Development Workflow for Humans. <https://pipenv.kennethreitz.org>
-* Server
-  - SimpleHTTPServer `python2 -m SimpleHTTPServer 8080`
 * 常用系统模块：
   - os,sys,time,datetime,urllib,xml,json,email,csv,collections,math,zipfile,trafile,hashlib
 * 常用三方模块：

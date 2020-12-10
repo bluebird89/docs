@@ -2047,6 +2047,7 @@ try {
   - [GoJS](https://github.com/NorthwoodsSoftware/GoJS):JavaScript diagramming library for interactive flowcharts, org charts, design tools, planning tools, visual languages. http://gojs.net
   - [roughViz](https://github.com/jwilber/roughViz#Scatter):Reusable JavaScript library for creating sketchy/hand-drawn styled charts in the browser.
   - [flowy](https://github.com/alyssaxuu/flowy):The minimal javascript library to create flowcharts sparkles
+  - [uPlot](https://github.com/leeoniya/uPlot) 📈 A small, fast chart for time series, lines, areas, ohlc & bars
 * [fingerprintjs2](https://github.com/Valve/fingerprintjs2):Modern & flexible browser fingerprinting library http://valve.github.io/fingerprintjs2/
 * Animations
   - [anime](https://github.com/juliangarnier/anime):JavaScript Animation Engine http://animejs.com
