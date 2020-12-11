@@ -1285,6 +1285,10 @@ sudo mv admin.conf config
 sudo service kubelet restart
 ```
 
+## Container Network Interface CNI
+
+* A CNI plugin is responsible for inserting a network interface into the container network namespace (e.g. one end of a veth pair) and making any necessary changes on the host (e.g. attaching the other end of the veth into a bridge). It should then assign the IP to the interface and setup the routes consistent with the IP Address Management section by invoking appropriate IPAM plugin
+
 ### kubectl kubelet client 集群管理命令行工具集
 
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理

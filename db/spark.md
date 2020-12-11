@@ -1,6 +1,6 @@
 # [spark](https://github.com/apache/spark)
 
-Mirror of Apache Spark
+a fast and general cluster computing system for Big Data. It provides high-level APIs in Scala, Java, Python, and R, and an optimized engine that supports general computation graphs for data analysis. It also supports a rich set of higher-level tools including Spark SQL for SQL and DataFrames, MLlib for machine learning, GraphX for graph processing, and Spark Streaming for stream processing.
 
 ## 安装
 
@@ -30,3 +30,8 @@ export PYSPARK_DRIVER_PYTHON=jupyter
 export PYSPARK_DRIVER_PYTHON_OPTS=notebook
 # 只需要在终端输入pyspark就会自动为我们开启一个新的jupyter网页。我们选择Python3的内核新建job就可以使用pyspark
 ```
+
+## 图书
+
+* 《Spark大数据处理：技术、应用》，机械工业出版社
+* 《Learning Spark: Lightning-Fast Big Data Analysis》 Holden Karau, Andy Kowinski, Mark Hamstra, Matei Zaharia

@@ -162,6 +162,10 @@ rails server
 
 * [quine-relay](https://github.com/mame/quine-relay):An uroboros program with 100+ programming languages
 
+## 图书
+
+* 《Ruby 元编程(第2版)》
+
 ## 工具
 
 * [activeadmin](https://github.com/activeadmin/activeadmin):The administration framework for Ruby on Rails applications. <https://activeadmin.info>

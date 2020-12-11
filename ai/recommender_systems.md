@@ -55,10 +55,13 @@
 
 ## 书籍
 
-* 《推荐系统实践》（项亮 著）
 * 《推荐系统》（Dietmar Jannach等 著，蒋凡 译）
 * 《用户网络行为画像》（牛温佳等 著）
 * 《Recommender Systems Handbook》（Paul B·Kantor等 著）
+* Recommender Systems: An introduction（推荐系统）
+* Recommender Systems: The Textbook
+* 《推荐系统实战》：项亮，很适合对于想了解推荐系统
+* 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 
 ## 算法库
 

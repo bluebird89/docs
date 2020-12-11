@@ -830,6 +830,15 @@ user-select: none;
 
 * [HTML 教程](https://wangdoc.com/html)
 
+## 图书
+
+* 《[HTML5 权威指南](https://www.amazon.cn/gp/product/B00H706BIG)》
+* 《[HTML5 秘籍（第2版）](https://www.amazon.cn/gp/product/B015316VJY)》
+* 《[HTML5 与 CSS3 基础教程（第八版）](https://www.amazon.cn/gp/product/B00K58535O)》
+* HTML 5从入门到精通
+* 《Head First HTML 与 CSS (第2版)》
+* 《深入浅出 HTML 与 CSS》
+
 ## 工具
 
 * [lazysizes](https://github.com/aFarkas/lazysizes):High performance and SEO friendly lazy loader for images (responsive and normal), iframes and more, that detects any visibility changes triggered through user interaction, CSS or JavaScript without configuration

@@ -512,7 +512,7 @@ service UserService {
 * 《面向模式的软件架构（卷 1）：模式系统》
 * 《程序员必读之软件架构》
 * 《架构实战：软件架构设计的过程》
-* 《领域驱动设计模式、原理与实践》
+* 软件架构设计
 * 《前端架构：从入门到微前端》
 * 《系统架构:复杂系统的产品设计与开发》
 * 《[大型网站技术架构：核心原理与案例分析](https://book.douban.com/subject/25723064/)》
@@ -521,23 +521,18 @@ service UserService {
   - 《设计原本》（Fredrick P.Brooks，Jr. 著）
   - 《软件系统架构 - 使用视点和视角与利益相关者合作》（Nick Rozanski，Eoin woods 著）
   - 《架构之美》（Diomidis Spenellis & Georgios Gousios 著）
-  - 《领域驱动设计：软件核心复杂性应对之道》（Eric Evans 著）
   - 《实现领域驱动设计》（Vaughn Vemon 著）
   - 《微服务设计》（Sam Newman 著）
   - 《企业 IT 架构转型之道》（钟华 著）
 * 软件过程方面
   - 《软件工程 - 实践者的研究方法》（Roger S.Pressman 著）
   - 《软件工程》（Ian Sommerville 著）
-  - 《人月神话》（Fredrick P.Brooks，Jr. 著）
   - 敏捷软件开发：原则
   - 《模式与实践》（Robert C.Martin）
-  - 《Scrum 敏捷软件开发》（Mike Cohn 著）。
+  - 《Scrum 敏捷软件开发》（Mike Cohn 著）
 * 流程优化:除了流程管理层面的技术知识外，更重要的可能来自于管理学，不妨多读读管理类书籍，拓宽思路，再考虑具体的流程优化
   - 《目标》（Eliyahu M.Goidratt 著）
   - 《凤凰项目 - 一个 IT 运维的传奇故事》（Gene Kim, Kevin Behr & George Spafford 著）
-* 扩展阅读
-  - 业务类书籍，建议多读些具有多年从业经验的人写的具有一定“感受”性特点的书籍，单纯的教材类书籍可能代入感稍微有些欠缺
-  - 历史、军事、经济、哲学类书籍其实很有助于从更宏观、更本质的层面了解社会的运行，有助于从更开阔的视角理解业
 * 《架构即未来》
 * 《[微服务设计](https://www.amazon.cn/gp/product/B01ER75V6O)》
 * 《[大数据日知录](https://www.amazon.cn/gp/product/B00NGW4EAG)》

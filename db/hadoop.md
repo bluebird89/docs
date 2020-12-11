@@ -1,6 +1,6 @@
 # [hadoop](https://github.com/apache/hadoop)
 
-Mirror of Apache Hadoop
+a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models.
 
 * 2003年，Google发表《Google File System》，其中提出一个GFS集群中由多个节点组成，其中主要分为两类：一个Master node，很多Chunkservers
 * 2004年,Google发表论文并引入MapReduce
@@ -154,6 +154,7 @@ MapReduce的执行流程
 ## 图书
 
 * 《深度剖析Hadoop HDFS》 林意群
+* 《Hadoop: The Definitive Guide: Storage and Analysis at Internet Scale》 Tom White
 
 ## 参考
 

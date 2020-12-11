@@ -725,13 +725,18 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 ## 图书
 
 * 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
-* 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。她可以让你在纷乱的现世中找到内心的平静。
-* [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
-  - 程序员修练之道
-  - 《算法导论》 美国的本科生教材，这本书应该也是中国计算机学生的教材
-  - 人月神话
-  - 《Effective C++》/《More Effective C++》 C++ 中两本经典得不能再经典的书。也许你觉得 C++ 复杂，但这两本书中带来对代码稳定性的探索方式让人受益，因为这种思维方式同样可以用在其它地方。以至于各种模仿者，比如《Effective Java》也是一本经典书。
-  - 《Unix 编程艺术》、《Unix 高级环境编程》也是相关的经典
+* 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。可以让你在纷乱的现世中找到内心的平静。
+* 《[CODE: The Hidden Language of Computer Hardware and Software 编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
+* 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
+* 《[代码大全2(Code Complete)](https://www.amazon.cn/gp/product/B0061XKRXA)》
+* 《[代码整洁之道(Clean Code)](https://www.amazon.cn/gp/product/B0031M9GHC)》
+* 《[编程语言实现模式](https://www.amazon.cn/gp/product/B007HYMPBY)》
+* 《[编写可读代码的艺术](https://www.amazon.cn/gp/product/B008B4DTG4)》
+* 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
+  - [pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
+* 计算机编程艺术
+* 《计算机程序设计艺术(The Art of Computer Programming)》
+* 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
 * [optimization](https://www.agner.org/optimize/)
   - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
   - The microarchitecture of Intel, AMD and VIA CPUs: An optimization guide for assembly programmers and compiler makers
@@ -739,10 +744,12 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
   - Calling conventions for different C++ compilers and operating systems
 
 * [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
+* [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
 * [free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
   - [free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
 * [practical-programming-books](https://github.com/EZLippi/practical-programming-books)这里收录比较实用的计算机相关技术书籍，可以在短期之内入门的简单实用教程、一些技术网站以及一些写的比较好的博文
 * [books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合
+* [Best-Books](https://www.best-books.dev/)
 * [book](https://github.com/KeKe-Li/book):📚 All programming languages books <https://github.com/KeKe-Li/book>
 * [programthink/books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
 

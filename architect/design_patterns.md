@@ -223,9 +223,10 @@
 
 * [Head First Design Patterns](http://www.headfirstlabs.com/books/hfdp/): 解说软件设计模式的一本书
 * [设计模式:可复用面向对象软件的基础 Design Patterns:Elements of Reusable Object-Oriented Software](https://book.douban.com/subject/1052241/)
+* [设计模式解析](https://portal.netobjectives.com/pages/books/design-patterns-explained/)
 * 《大话设计模式》
 * 《设计模式之禅》
-* [设计模式解析](https://portal.netobjectives.com/pages/books/design-patterns-explained/)
+* 《深入浅出设计模式》
 
 ## 参考
 

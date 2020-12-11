@@ -380,9 +380,8 @@ def backtrack(路径, 选择列表):
 * 《大话数据结构》
 * 《剑指offer》
 * 编程珠玑
-* 算法导论 Introduction to Algorithms
+* [算法导论 Introduction to Algorithms](https://www.bilibili.com/video/av48922404)
   - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
-  - [](https://www.bilibili.com/video/av48922404)
 * 数论
 * The Algorithm Design Manual
   - Steven Skiena’s lectures
@@ -396,6 +395,7 @@ def backtrack(路径, 选择列表):
 * 《数据结构与算法 JavaScript 描述》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 算法图解
+*
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 * [Problem Solving with Algorithms and DataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)

@@ -1,4 +1,4 @@
-# [apache/kafka](https://github.com/apache/kafka)
+# [kafka](https://github.com/apache/kafka)
 
 * 最初由 LinkedIn 采用 Scala 语言开发，用作 LinkedIn 的活动流追踪和运营系统数据处理管道的基础
 * Kafka维护着“主数据库”，每个消费者程序都是“从数据库”，只要记住编号，消息都可以从“主数据库”复制到“从数据库”
@@ -574,7 +574,7 @@ larger than available brokers 0
 ## 图书
 
 * 《Kafka源码解析与实战》 王亮
-* 《Kafka 权威指南》
+* 《Kafka 权威指南 Kafka: The Definitive Guide》
 
 ## 工具
 

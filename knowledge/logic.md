@@ -35,3 +35,9 @@
 ## 课程
 
 * [牛津大学公开课：批判性推理入门](https://www.bilibili.com/video/av2576527/)
+
+## 图书
+
+* Engines of Logic
+* The Elements of Style
+* 简单的逻辑学

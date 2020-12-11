@@ -149,6 +149,9 @@ print(torch.cuda.is_available())
 - [《深度学习》Deep Learning](https://github.com/exacity/deeplearningbook-chinese):花书
 - [《深度学习 500 问》](https://github.com/scutan90/DeepLearning-500-questions)
 - 《深度学习实战》 [美] 杜威·奥辛格（DouweOsinga）
+* 《机器学习实战》 Peter Harrington
+* 《Python深度学习（Keras）》
+* 《深度学习入门：基于Python的理论与实现》
 * [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
 * [Grokking Deep Learning](https://livebook.manning.com/#!/book/grokking-deep-learning/about-this-book/)
 * [Deep Learning](http://www.deeplearningbook.org/)

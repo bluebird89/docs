@@ -245,46 +245,6 @@ pip install dash==1.17.0
   - 无监督学习、有监督学习和强化学习的区别：<https://blogs.nvidia.com/blog/2018/08/02/supervised-unsupervised-learning/>
 * [Mining Social Media](http://socialdata.site/introduction/)
 
-## 图书
-
-* [利用Python进行数据分析](link)
-* 《深入浅出数据分析》
-* 《深入浅出统计学》
-* 《R语言实战》
-* 《赤裸裸的统计学》
-* 《利用Python进行数据分析》
-* 《精益数据分析》
-* 《The Wall Street Journal Guide to Information Graphics》
-* 《ggplot2：数据分析与图形艺术》
-* 《数据科学实战》
-* 《决战大数据》
-* [Cookbook](https://github.com/andkret/Cookbook):The Data Engineering Cookbook <https://andreaskretz.com/>
-* [The Little Handbook of Statistical Practice](http://www.jerrydallal.com/LHSP/LHSP.htm)
-* 《机器学习》（俗称西瓜书） 周志华著，清华大学出版社
-* 《分布式系统：概念与设计（原书第五版）》，机械工业出版社
-* 《Spark大数据处理：技术、应用》，机械工业出版社
-* 《Hadoop: The Definitive Guide: Storage and Analysis at Internet Scale》 Tom White
-* 《Learning Spark: Lightning-Fast Big Data Analysis》 Holden Karau, Andy Kowinski, Mark Hamstra, Matei Zaharia
-* 《Data Architecture: A Primer for the Data Scientist: Big Data, Data Warehouse and Data Vault》 W.H. Inmon, Daniel Linstedt
-* 《SQL反模式》 Bill Karwin
-* 《事务处理：概念与技术》 Jim Gray, Andreas Reuter
-* 《Designing Data-Intensive Applications》 Martin Kleppmann
-* 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
-* [Vonng / ddia](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
-* 干净的数据：数据清洗入门与实践
-* 数据科学入门
-* Python网络数据采集
-* 洞悉数据：用可视化方法发掘数据真义
-* 决策知识自动化：大数据时代的商业决策分析方法
-* 社会媒体挖掘
-* 云数据中心网络技术
-* 人人都是数据分析师：Tableau应用实战
-* Spark快速大数据分析
-* 《Spark高级数据分析（第2版）》 作者：[美] 桑迪·里扎 , [美] 于里·莱瑟森 , [英] 肖恩·欧文 , [美] 乔希·威尔斯 译者：龚少成 , 邱鑫 * 数据科学家修炼之道
-* 编程谜题
-* 《Flink基础教程》 作者：埃伦·弗里德曼 , 科斯塔斯·宙马斯 译者：王绍翾
-* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
-
 ## Visualization
 
 * Excel
@@ -345,6 +305,49 @@ pip install dash==1.17.0
 * GeoCommons可以使用户构建富交互可视化应用来解决问题，即使他们没有任何传统地图使用经验
 * [El Grapho](https://www.elgrapho.com/):A Graph Data Visualization Framework Not For The Faint of Heart
 
+## 图书
+
+* 数据科学入门
+* 《数据科学实战》
+* 数据挖掘
+  - [Introduction to Data Mining（数据挖掘导论）](https://www-users.cs.umn.edu/~kumar001/dmbook/index.php)
+  - 《Data Mining: Concepts and Techniques[数据挖掘：概念与技术（第3版）](https://www.amazon.cn/gp/product/B007NR0T4A)》
+  - 《[Web数据挖掘](https://www.amazon.cn/gp/product/B00AY830HS)》
+  - 移动数据挖掘
+  - Python网络数据采集
+  - 《[数据挖掘：实用机器学习工具与技术（原书第3版）](https://www.amazon.cn/gp/product/B00K5I91WK)》
+  - 《[大数据：互联网大规模数据挖掘与分布式处理（第2版）](https://www.amazon.cn/gp/product/B011I34CGA)》
+  - 洞悉数据：用可视化方法发掘数据真义
+  - 社会媒体挖掘
+* 数据清洗
+  - 干净的数据：数据清洗入门与实践
+
+* 《[模式分类（第2版）](https://www.amazon.cn/gp/product/B00116C3DY)》
+* Sentiment Analysis: Mining Opinions, Sentiments,and Emotions
+* 《The Wall Street Journal Guide to Information Graphics》
+* 《决战大数据》
+* [Cookbook](https://github.com/andkret/Cookbook):The Data Engineering Cookbook <https://andreaskretz.com/>
+* 《Data Architecture: A Primer for the Data Scientist: Big Data, Data Warehouse and Data Vault》 W.H. Inmon, Daniel Linstedt
+* 《SQL反模式》 Bill Karwin
+* 《事务处理：概念与技术》 Jim Gray, Andreas Reuter
+* 《Designing Data-Intensive Applications》 Martin Kleppmann
+  - [ddia](https://github.com/Vonng/ddia):《Designing Data-Intensive Application》DDIA中文翻译
+* 《Streaming Systems》 Tyler Akidau, Slava Chernyak, Reuven Lax
+* 决策知识自动化：大数据时代的商业决策分析方法
+* 云数据中心网络技术
+* 人人都是数据分析师：Tableau应用实战
+* Spark快速大数据分析
+* 数据科学家修炼之道
+* 编程谜题
+* 数据分析
+  - 《Spark高级数据分析（第2版）》 Sandy Ryza、Uri Laserson、Sean Owen、Josh Wills
+  - 《Hadoop深度学习》 Dipayan Dev
+  - 《精益数据分析》
+  - 《利用Python进行数据分析》
+  - 《R数据科学》 哈德利•威克姆、加勒特•格罗勒芒德
+  - 深入浅出数据分析 Michael Milton
+  - 《ggplot2：数据分析与图形艺术》
+
 ## 工具
 
 * [metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com>
@@ -357,55 +360,44 @@ pip install dash==1.17.0
 * HDFS，分布式文件系统
 * HBase，分布式数据库
 * MapReduce，由用户编写的运行在hadoop集群上的并行程
-* zookeeper，作为分布式程序的协调中心
 * hive，基于hadoop的数据仓库管理工具
 * pig，大数据分析工具
 * yarn，hadoop集群资源管理系统
 * sqoop，hadoop与传统数据库之间进行数据交换的工具
 * chukawa，分布式数据收集分析系统
 * hcatalog，管理hadoop产生的数据表存储管理系统
-* redis，分布式缓存系统
-* kafka，分布式消息系统
-* Cassandra，分布式结构和数据存储
 * neo4j，nosql图数据库
-* spark，分布式计算引擎
 * storm，分布式实时计算系统
-* elasticsearch，分布式全文搜索
 * flume，分布式日志采集系统
-* flink，分布式流处理引擎
 * [darktable](https://github.com/darktable-org/darktable): darktable is an open source photography workflow application and raw developer <https://www.darktable.org>
 * [pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
 * [golem](https://github.com/golemfactory/golem):Golem is creating a global market for computing power. <https://golem.network>
-* [facebook/dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
-* [TuiQiao/CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. <https://tuiqiao.github.io/CBoardDoc/#/>
-* [apache/arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… <https://arrow.apache.org>
-* [jeroenjanssens/data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line <https://datascienceatthecommandline.com>
-* [metabase/metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com>
+* [dataloader](https://github.com/facebook/dataloader):DataLoader is a generic utility to be used as part of your application's data fetching layer to provide a consistent API over various backends and reduce requests to those backends via batching and caching.
+* [CBoard](https://github.com/TuiQiao/CBoard):An easy to use, self-service open BI reporting and BI dashboard platform. <https://tuiqiao.github.io/CBoardDoc/#/>
+* [arrow](https://github.com/apache/arrow):Apache Arrow is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication… <https://arrow.apache.org>
+* [data-science-at-the-command-line](https://github.com/jeroenjanssens/data-science-at-the-command-line):Data Science at the Command Line <https://datascienceatthecommandline.com>
+* [metabase](https://github.com/metabase/metabase):The simplest, fastest way to get business intelligence and analytics to everyone in your company 😋 <https://metabase.com>
 * [EasyExcel](https://github.com/alibaba/easyexcel):一个用来对 Java 进行解析、生成 Excel 的框架
-* [bokeh/bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python <https://bokeh.org>
-* [alibaba / DataX](https://github.com/alibaba/DataX):阿里巴巴集团内被广泛使用的离线数据同步工具/平台
+* [bokeh](https://github.com/bokeh/bokeh):Interactive Data Visualization in the browser, from Python <https://bokeh.org>
+* [DataX](https://github.com/alibaba/DataX):阿里巴巴集团内被广泛使用的离线数据同步工具/平台
 
 ## 参考
 
-* [caesar0301/awesome-public-datasets](https://github.com/caesar0301/awesome-public-datasets)A topic-centric list of high-quality open datasets in public domains. By everyone, for everyone!
-* [donnemartin/data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks)Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
-* [apache/incubator-gobblin](https://github.com/apache/incubator-gobblin)Gobblin is a distributed big data integration framework (ingestion, replication, compliance, retention) for batch and streaming systems. Gobblin features integrations with Apache Hadoop, Apache Kafka, Salesforce, S3, MySQL, Google etc.
-* [apache/geode](https://github.com/apache/geode)Apache Geode is a data management platform that provides real-time, consistent access to data-intensive applications throughout widely distributed cloud architectures.
-* [apache/spark](https://github.com/apache/spark)Spark is a fast and general cluster computing system for Big Data. It provides high-level APIs in Scala, Java, Python, and R, and an optimized engine that supports general computation graphs for data analysis. It also supports a rich set of higher-level tools including Spark SQL for SQL and DataFrames, MLlib for machine learning, GraphX for graph processing, and Spark Streaming for stream processing.
-* [apache/hadoop](https://github.com/apache/hadoop)a framework that allows for the distributed processing of large data sets across clusters of computers using simple programming models.
+* [awesome-public-datasets](https://github.com/caesar0301/awesome-public-datasets)A topic-centric list of high-quality open datasets in public domains. By everyone, for everyone!
+* [data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks)Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
+* [gobblin](https://github.com/apache/incubator-gobblin)Gobblin is a distributed big data integration framework (ingestion, replication, compliance, retention) for batch and streaming systems. Gobblin features integrations with Apache Hadoop, Apache Kafka, Salesforce, S3, MySQL, Google etc.
+* [geode](https://github.com/apache/geode)Apache Geode is a data management platform that provides real-time, consistent access to data-intensive applications throughout widely distributed cloud architectures.
 * [apache/incubator-mxnet](https://github.com/apache/incubator-mxnet)Lightweight, Portable, Flexible Distributed/Mobile Deep Learning with Dynamic, Mutation-aware Dataflow Dep Scheduler; for Python, R, Julia, Scala, Go, Javascript and more <http://mxnet.io>
-* [douban/dpark](https://github.com/douban/dpark)Python clone of Spark, a MapReduce alike framework in Python
-* [wepe/MachineLearning](https://github.com/wepe/MachineLearning)Basic Machine Learning and Deep Learning
-* [bulutyazilim/awesome-datascience](https://github.com/bulutyazilim/awesome-datascience):An awesome Data Science repository to learn and apply for real world problems.
-* [jakevdp/PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks
-* [jaystone776/python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
-* [apachecn/python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
+* [dpark](https://github.com/douban/dpark)Python clone of Spark, a MapReduce alike framework in Python
+* [awesome-datascience](https://github.com/bulutyazilim/awesome-datascience):An awesome Data Science repository to learn and apply for real world problems.
+* [PythonDataScienceHandbook](https://github.com/jakevdp/PythonDataScienceHandbook):Python Data Science Handbook: full text in Jupyter Notebooks
+* [python-data-science-cheatsheet](https://github.com/jaystone776/python-data-science-cheatsheet):Python数据科学速查表
+* [python_data_analysis_and_mining_action](https://github.com/apachecn/python_data_analysis_and_mining_action):《python数据分析与挖掘实战》的代码笔记
 * [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
 * [DS100](http://www.ds100.org):Principles and Techniques of Data Science
-* [BrambleXu/pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记
+* [pydata-notebook](https://github.com/BrambleXu/pydata-notebook):利用Python进行数据分析 第二版 (2017) 中文翻译笔记
 * [data-visualization-from-non-coder-to-coder](https://www.kaggle.com/learn/data-visualization-from-non-coder-to-coder)
-* [fengdu78 / Data-Science-Notes](https://github.com/fengdu78/Data-Science-Notes):数据科学的笔记以及资料搜集
+* [Data-Science-Notes](https://github.com/fengdu78/Data-Science-Notes):数据科学的笔记以及资料搜集
 * [Awesome Data Engineering](https://awesomedataengineering.com/)
-* [data-science-ipython-notebooks](https://github.com/donnemartin/data-science-ipython-notebooks#deep-learning):Data science Python notebooks: Deep learning (TensorFlow, Theano, Caffe, Keras), scikit-learn, Kaggle, big data (Spark, Hadoop MapReduce, HDFS), matplotlib, pandas, NumPy, SciPy, Python essentials, AWS, and various command lines.
 * [bigdata_practice](https://github.com/TurboWay/bigdata_practice):大数据分析可视化实践  nginx 日志分析可视化 <http://analyze.turboway.top/line>
 

@@ -347,6 +347,7 @@
 
 * [《Scikit-Learn 与 TensorFlow 机器学习实用指南》](https://github.com/ageron/handson-ml)
 * 机器学习：算法视角（原书第2版）
+* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
 * 百面机器学习
   - 知识：主要是指对machine learning相关知识和理论的储备
   - 工具：将machine learning知识应用于实际业务的工具
@@ -359,8 +360,6 @@
   + [公式推导](https://datawhalechina.github.io/pumpkin-book/#/)
   + [南瓜书](https://github.com/datawhalechina/pumpkin-book)
   + [课后习题](https://zhuanlan.zhihu.com/c_1013850291887845376)
-* 《推荐系统实战》：项亮，很适合对于想了解推荐系统
-* 《概率论与数理统计》
 * 《Pattern Recognition and Machine Learning》
 * 《Reinforcement Learning: An Introduction》：强化学习入门
 * 《机器学习实战：基于Scikit-Learn和TensorFlow》
@@ -374,17 +373,8 @@
 * 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
 * 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
 * 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
-* 《[推荐系统实践](https://www.amazon.cn/gp/product/B008AK5YJO)》
 * 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
 * 《漫谈人工智能》 集智俱乐部
-* 《机器学习实战》 Peter Harrington
-* 《统计学习方法》 李航
-  + [讲课 PPT](https://github.com/fengdu78/lihang-code/tree/master/ppt)
-  + [读书笔记](http://www.cnblogs.com/limitlessun/p/8611103.html): <https://github.com/SmirkCao/Lihang>
-  + [参考笔记](https://zhuanlan.zhihu.com/p/36378498)
-  + [代码实现](https://github.com/fengdu78/lihang-code)
-* 《Python深度学习（Keras）》
-* 《深度学习入门：基于Python的理论与实现》
 * [dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! <http://hangtwenty.github.io/dive-into-machine-learning/>
 * [机器学习基础 Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/)
 * 深入理解Tensor Flow：架构
@@ -497,6 +487,7 @@
   - [awesome-machine-learning-cn](https://github.com/jobbole/awesome-machine-learning-cn):机器学习资源大全中文版，包括机器学习领域的框架、库以及软件
 * [machine-learning-for-software-engineers](https://github.com/ZuzooVn/machine-learning-for-software-engineers):A complete daily plan for studying to become a machine learning engineer.
 * [aerosolve](https://github.com/airbnb/aerosolve):A machine learning package built for humans. <http://airbnb.github.io/aerosolve/>
+* [MachineLearning](https://github.com/wepe/MachineLearning)Basic Machine Learning and Deep Learning
 * [nyu-mlif-notes](https://github.com/wizardforcel/nyu-mlif-notes):📖 NYU 金融机器学习 中文笔记
 * [mlflow](https://github.com/mlflow/mlflow):Open source platform for the machine learning lifecycle <https://mlflow.org>
 * [Machine-Learning](https://github.com/zhaozhengcoder/Machine-Learning)：关于机器学习的内容

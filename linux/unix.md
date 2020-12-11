@@ -168,7 +168,7 @@
 * 《[Unix 环境高级编程](https://www.amazon.cn/gp/product/B00KMR129E)》
   - [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
 * 《UNIX操作系统设计》
-* 《[UNIX编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
+* 《[UNIX 编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
 * [《The Unix-Haters Handbook》](http://research.microsoft.com/~daniel/uhh-download.html)
 * UNIX: A History and a Memoir
 
@@ -178,3 +178,4 @@
   - [xv6-public](https://github.com/mit-pdos/xv6-public):xv6 OS <http://pdos.csail.mit.edu/6.828/>
   - [xv6-chinese](https://github.com/ranxian/xv6-chinese):中文版的 MIT xv6 文档
 * [UNIX传奇(上篇)](https://coolshell.cn/articles/2322.html)
+* [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)

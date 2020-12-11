@@ -63,6 +63,14 @@
 * 自测
 * 编译打包
 
+## 图书
+
+* 《深入 React 技术栈》
+* 《Vue.js 权威指南》
+* 《Angular 权威教程》
+* 《深入浅出 Node.js》
+* [PWA实战：面向下一代的Progressive Web APP](https://github.com/SangKa/PWA-Book-CN):第一本 PWA 中文书 <https://item.jd.com/12365091.html>
+
 ## 工具
 
 * [fastlane](https://github.com/fastlane/fastlane):🚀 The easiest way to automate building and releasing your iOS and Android apps <https://fastlane.tools>

@@ -852,6 +852,8 @@ man 2 execve
   - Berkeley CS 162
 * Modern Operating Systems
 * [Operating System Design Book Series](http://www.fysnet.net/osdesign_book_series.htm)
+* 《操作系统:精髓与设计原理(原书第6版)》
+* 《现代操作系统(原书第3版) 》
 
 ## 课程
 

@@ -179,6 +179,7 @@ termianl1:bl + tab
 ## 图书
 
 * [blockchain_guide](https://github.com/yeasy/blockchain_guide):Introduce blockchain related technologies, from theory to practice with bitcoin, ethereum and hyperledger. <https://www.gitbook.com/book/yeasy/blockchain_guide>
+* 区块链原理，设计和应用
 
 ## 教程
 

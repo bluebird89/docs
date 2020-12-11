@@ -1323,6 +1323,8 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * Go 语言学习笔记
 * [Go语法树入门](https://github.com/chai2010/go-ast-book/)
 * [Go2编程指南](https://github.com/chai2010/go2-book)
+* 《Go 语言实战》
+* Go语言程序设计
 
 ## 项目
 

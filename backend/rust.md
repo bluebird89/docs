@@ -180,6 +180,7 @@ match VALUE {
   - [yew](https://github.com/yewstack/yew):Rust / Wasm framework for building client web apps <https://yew.rs/docs/>
   - [actix-web](https://github.com/actix/actix-web):Actix web is a small, pragmatic, and extremely fast rust web framework. <https://actix.rs>
   - [nickel.rs](https://github.com/nickel-org/nickel.rs):An expressjs inspired web framework for Rust <http://nickel-org.github.io/>
+  - [nannou](https://github.com/nannou-org/nannou) A Creative Coding Framework for Rust.https://nannou.cc/
 * [rustup.rs](https://github.com/rust-lang/rustup.rs):The Rust toolchain installer
 * [wasm-pack](https://github.com/rustwasm/wasm-pack):📦✨ your favorite rust -> wasm workflow tool! <https://rustwasm.github.io/wasm-pack/>
 * [clap](https://github.com/clap-rs/clap):A full featured, fast Command Line Argument Parser for Rust <https://clap.rs>

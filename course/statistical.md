@@ -14,14 +14,22 @@
 
 ## 代码
 
-* 统计学习方法
-  - [lihang-code](https://github.com/fengdu78/lihang-code):《统计学习方法》的代码实现
+* 统计学习方法 李航
   - [statistical-learning-method](https://github.com/wzyonggege/statistical-learning-method):《统计学习方法》笔记-基于Python算法实现
-  - [lihang_book_algorithm](https://github.com/WenDesi/lihang_book_algorithm):致力于将李航博士《统计学习方法》一书中所有算法实现一遍
+  + [代码实现](https://github.com/fengdu78/lihang-code)
+  - [lihang_book_algorithm](https://github.com/WenDesi/lihang_book_algorithm):书中所有算法实现一遍
+  + [讲课 PPT](https://github.com/fengdu78/lihang-code/tree/master/ppt)
+  + [读书笔记](http://www.cnblogs.com/limitlessun/p/8611103.html): <https://github.com/SmirkCao/Lihang>
+  + [参考笔记](https://zhuanlan.zhihu.com/p/36378498)
+* 《赤裸裸的统计学》
+* [The Little Handbook of Statistical Practice](http://www.jerrydallal.com/LHSP/LHSP.htm)
+* 《[深入浅出统计学](https://www.amazon.cn/gp/product/B006PHIVNA)》
+* 《[统计学习基础(第2版)(英文)](https://www.amazon.cn/gp/product/B00PRH2BXA) 》
+* 《[概率论与数理统计](https://www.amazon.cn/gp/product/B00264GG56)》
 
 ## 工具
 
-* [/pomegranate](https://github.com/jmschrei/pomegranate):Fast, flexible and easy to use probabilistic modelling in Python.<https://pomegranate.readthedocs.io/en/latest/>
+* [pomegranate](https://github.com/jmschrei/pomegranate):Fast, flexible and easy to use probabilistic modelling in Python.<https://pomegranate.readthedocs.io/en/latest/>
 * [Seeing Theory](https://seeing-theory.brown.edu/): A visual instroduction ot probability and statistics
 
 ## 参考

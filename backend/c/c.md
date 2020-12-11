@@ -66,14 +66,18 @@ gcc name.o adder.o hello.c
 
 ## 图书
 
-* The C Programming Language C 程序设计语言
+* 《[C Programming Language (2nd Edition) C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
 * C语言程序设计现代方法
 * 《C Primer Plus》
   - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
-* 《C和指针》
 * 《C专家编程》
-* 《debuging with gdb》
-* 《Unix环境高级编程》
+* 《[C标准库](https://www.amazon.cn/gp/product/B00IZW4DK8)》
+* 《[C和指针](https://www.amazon.cn/gp/product/B00163LU68)》
+* 《[C专家编程](https://www.amazon.cn/gp/product/B0012NIW9K)》
+* 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
+* 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
+* 《C语言参考手册（第5版）》
+* 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
 * [C Internals](http://www.avabodh.com/cin/cin.html)
 
 ## 工具

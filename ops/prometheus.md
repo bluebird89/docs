@@ -2,32 +2,26 @@
 
 The Prometheus monitoring system and time series database. <https://prometheus.io/>
 
-* SoundCloud开源的监控告警系统，使用Golang开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员
+* SoundCloud 开源的监控告警系统，使用 Golang 开发。2012年开始编码，2015年在Github上开源，2016年加入CNCF成为继K8s之后第二名成员
 * 一套开源的监控&报警&时间序列数据库的组合
 * 多维数据模型，时序数据由Metric和多个Label组成
-* PromQL灵活查询语法
+* 支持对云或容器的监控，其他系统主要对传统物理机监控
+* PromQL灵活查询语法,数据查询语句表现力更强大，内置更强大的统计函数
 * 无依赖存储，支持本地和远程存储
 * 通过HTTP协议采用PULL的方式拉取数据
 * 可以采用服务发现或者静态配置方式，来发现目标服务
-* 支持多种统计数据模型，UI优化，Grafana也支持Prometheus
 
 * 监控是基础设施，目的是为了解决问题，不要只朝着大而全去做，尤其是不必要的指标采集，浪费人力和存储资源（To B商业产品例外）
 * 需要处理的告警才发出来，发出来的告警必须得到处理
 * 简单的架构就是最好的架构，业务系统都挂了，监控也不能挂。Google SRE 里面也说避免使用 Magic 系统，例如机器学习报警阈值、自动修复之类。这一点见仁见智吧，感觉很多公司都在搞智能 AI 运维
 * 局限
-  - Prometheus 是基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）
-  - Prometheus 默认是 Pull 模型，合理规划你的网络，尽量不要转发
+  - 基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）
+  - 默认是 Pull 模型，合理规划你的网络，尽量不要转发
   - 对于集群化和水平扩展，官方和社区都没有银弹，需要合理选择 Federate、Cortex、Thanos 等方案
   - 监控系统一般情况下可用性大于一致性，容忍部分副本数据丢失，保证查询请求成功。这个后面说 Thanos 去重的时候会提到
-  - Prometheus 不一定保证数据准确
+  - 不一定保证数据准确
     + rate、histogram_quantile 等函数会做统计和推断，产生一些反直觉的结果
     + 查询范围过长要做降采样，势必会造成数据精度丢失，不过这是时序数据的特点，也是不同于日志系统的地方
-* 对比其它方案
-
-- Prometheus属于一站式监控告警平台，依赖少，功能齐全
-- Prometheus支持对云或容器的监控，其他系统主要对传统物理机监控
-- Prometheus数据查询语句表现力更强大，内置更强大的统计函数
-- Prometheus在数据存储扩展性以及持久性上没有InfluxDB，OpenTSDB，Sensu好
 
 ## 安装
 
@@ -81,6 +75,16 @@ kill -HUP {pid}
 curl -X POST http://localhost:9090/-/reload
 ```
 
+## 概念
+
+* Job：Prometheus的采集任务由配置文件中一个个的Job组成，一个Job里包含该Job下的所有监控目标的公共配置，比如使用哪种服务发现去获取监控目标，比如抓取时使用的证书配置，请求参数配置等等。
+* Target：一个监控目标就是一个Target，一个Job通过服务发现会得到多个需要监控的Target，其包含一些label用于描述Target的一些属性。
+* relabel_configs：每个Job都可以配置一个或多个relabel_config，relabel_config会对Target的label集合进行处理，可以根据label过滤一些Target或者修改，增加，删除一些label。relabel_config过程发生在Target开始进行采集之前，针对的是通过服务发现得到的label集合。
+* metrics_relabel_configs：每个Job还可以配置一个或者多个metrics_relabel_config，其配置方式和relabel_configs一模一样，但是其用于处理的是从Target采集到的数据中的label。
+  - relable和metrics_relable的区别，前者在抓取前进行，是Target的属性
+* Series：一个Series就是指标名 label集合，在面板中，表现为一条曲线。
+* head series：Prometheus会将近2小时的Series缓存在内测中，称为head series。
+
 ## 架构
 
 * Prometheus Server:负责采集和存储监控数据，并且对外提供PromQL实现监控数据的查询、聚合分析，以及告警规则管理
@@ -99,6 +103,13 @@ curl -X POST http://localhost:9090/-/reload
 * Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知
 * Data visualization:数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算
   - 除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
+
+## 原理
+
+* 服务发现：周期性得以pull的形式对target进行指标采集，而监控目标集合是通过配置文件中所定义的服务发现机制来动态生成的
+* relabel：当服务发现得到所有target后，Prometheus会根据job中的relabel_configs配置对target进行relabel操作，得到target最终的label集合
+* 采集：为这些target创建采集循环，按配置文件里配置的采集间隔进行周期性拉取，采集到数据根据Job中的metrics_relabel_configs进行relabel，然后再加入上边得到的target最终label集合，综合后得到最终的数据
+* 存储：不会将采集到的数据直接落盘，而是会将近2小时的series缓存在内存中，2小时后，Prometheus会进行一次数据压缩，将内存中的数据落盘。
 
 ## 配置
 
@@ -453,7 +464,7 @@ job: api-server
 * 支持把时序数据存储在本地存储和远程存储介质
 * 本地存储:每2个小时数据放在同一个block，一个block包含一个或多个chunk文件，当前block数据是在内存里面 这里存在一个问题: 如果当前2个小时数据很多，会导致Prometheus server服务性能变差，在Grafana上查询的时候会很慢很卡
 
-## 监控K8S
+## 监控 K8S
 
 * Prometheus和Kubernets都属于CNCF成员项目，推荐使用Prometheus来监控Kubernets集群。传统的监控系统需要集群所有服务器将监控数据发往监控系统，Prometheus则可以通过服务发现来发现K8s集群内部已经暴露的监控点，然后主动拉取数据。
 * 只需要在K8s集群中部署一份Prometheus实例，它就可以通过向Apiserver查询集群状态，然后向所有已经支持Prometheus metrics的kubelet 获取所有Pod的运行数据。这种动态发现的架构，非常适合服务器和程序都不固定的K8s集群环境。
@@ -769,6 +780,10 @@ spec:
           servicePort: 9090
 ```
 
+## 单集群监控方案
+
+* 指标
+
 ## Exporter
 
 * Kubernetes 生态的组件都会提供 /metric 接口以提供自监控，这里列下：
@@ -781,13 +796,14 @@ spec:
   - Docker：需要开启 experimental 实验特性，配置 metrics-addr，如容器创建耗时等指标。
   - kube-proxy：默认 127 暴露，10249 端口。外部采集时可以修改为 0.0.0.0 监听，会暴露：写入 iptables规则的耗时等指标
 
-- kube-state-metrics：Kubernetes 官方项目，采集 Pod、Deployment 等资源的元信息。
-- node-exporter：Prometheus 官方项目，采集机器指标如 CPU、内存、磁盘。
-- blackbox_exporter：Prometheus 官方项目，网络探测，DNS、ping、http 监控。
-- process-exporter：采集进程指标。
-- NVIDIA Exporter：我们有 GPU 任务，需要 GPU 数据监控。
-- node-problem-detector：即 NPD，准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
-- [mysqld_exporter](https://mp.weixin.qq.com/s?__biz=MzA4MzIwNTc4NQ==&mid=2247484416&idx=1&sn=d50181385ea816fe660af861e15674f6&chksm=9ffb4ff6a88cc6e0ecddcd1ee0108b283ee06ff376ba5d0acd11010232832e62fc8902024787)
+* Kube-state-metrics：采集 Pod、Deployment 等资源的元信息。监控Kubernetes资源的状态，比如Pod的状态。原理是将Kubernetes中的资源，转换成Prometheus的指标，让Prometheus来采集。比如Pod的基本信息，Serivce的基本信息
+* Node-exporter：监控Kubernetes节点的基本状态，这个组件以DeamonSet的方式部署，每个节点一个，用于提供节点相关的指标，比如节点的cpu使用率，内存使用率、磁盘等等
+* cAdvisor：这个组件目前已经整合到kubelet中了，它提供的是每个容器的运行时指标，比如一个容器的CPU使用率，内存使用率等等
+* blackbox_exporter：网络探测，DNS、ping、http 监控。
+* process-exporter：采集进程指标。
+* NVIDIA Exporter：有 GPU 任务，需要 GPU 数据监控。
+* node-problem-detector NPD:准确的说不是 Exporter，但也会监测机器状态，上报节点异常打 taint。
+* [mysqld_exporter](https://mp.weixin.qq.com/s?__biz=MzA4MzIwNTc4NQ==&mid=2247484416&idx=1&sn=d50181385ea816fe660af861e15674f6&chksm=9ffb4ff6a88cc6e0ecddcd1ee0108b283ee06ff376ba5d0acd11010232832e62fc8902024787)
 
 * 服务状态：Status->Targets
 
@@ -848,13 +864,20 @@ WantedBy=multi-user.target
   - 离线服务：如日志处理、消息队列等，一般关注队列数量、进行中的数量，处理速度以及发生的错误即 Use 方法
   - 批处理任务：和离线任务很像，但是离线任务是长期运行的，批处理任务是按计划运行的，如持续集成就是批处理任务，对应 Kubernetes 中的 Job 或 CronJob，一般关注所花的时间、错误数等，因为运行周期短，很可能还没采集到就运行结束了，所以一般使用 Pushgateway，改拉为推。
 
+## 多集群
+
+* Prometheus支持拉取其他Prometheus的数据到本地，称为联邦机制。这样我们就可以在每个集群内部署一个Prometheus，再在他们之上部署一个Top Prometheus，用于拉取各个集群内部的Prometheus数据进行汇总。
+* 联邦的问题
+  - Top Prometheus压力大
+  - 数据有无意义冗余
+* [Thanos](../cncf/thanos.md)
+
 ## 插件
 
 * [nginx-lua-prometheus](https://github.com/knyar/nginx-lua-prometheus):Prometheus metric library for Nginx written in Lua
 
 ## 工具
 
-* [thanos](https://github.com/improbable-eng/thanos):Highly available Prometheus setup with long term storage capabilities.
 * [prometheus-operator](https://github.com/coreos/prometheus-operator):Prometheus Operator creates/configures/manages Prometheus clusters atop Kubernetes
 * [cortex](https://github.com/cortexproject/cortex):A horizontally scalable, highly available, multi-tenant, long term Prometheus. <https://cortexmetrics.io/>
 * [doraemon](link)

@@ -32,6 +32,10 @@ cmake -DCMAKE_INSTALL_PREFIX=/gdb/mysql/ -DMYSQL_DATADIR=/gdb/data/ -DSYSCONFDIR
 make&&make install
 ```
 
+## 图书
+
+* 《debuging with gdb》
+
 ## 参考
 
 * [100-gdb-tips](https://github.com/hellogcc/100-gdb-tips):A collection of gdb tips. 100 maybe just mean many here.

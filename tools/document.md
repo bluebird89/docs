@@ -9,6 +9,7 @@
   - 记录
   - 整理
 * 概念用文档整理
+* 写作系统、待办事项提醒、笔记系统
 * 结构化用思维导图，不宜太详细
 
 ## 笔记
@@ -25,7 +26,8 @@
 * xmind：结构化整理
 * 豆瓣：书、电影评论
 * Goole keep
-* notes
+* ios notes
+* OmniFocus
 * [OneNote](https://products.office.com/zh-CN/onenote)
 * TickTick
 * [石墨文档](https://shimo.im)
@@ -34,7 +36,7 @@
   - `brew cask install joplin`
   - `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`
 * [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
-* [Notion](./Notion.md)
+* [Notion](./notion.md)
 * [Roam Research](https://roamresearch.com/)
 * [Simple note](https://standardnotes.org)
 * [Grace Note](https://grace-note.app/#/)
@@ -43,6 +45,7 @@
 * evernote
   - dunk
 * [vnote](https://github.com/tamlok/vnote)A note-taking application that knows programmers and Markdown better.
+* [Org Mode](https://orgmode.org/)
 
 ## VS code + foam
 
@@ -52,7 +55,7 @@
 ## PPT
 
 * [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more
-* [jxnblk/mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
+* [mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
 
 ## Posters
 

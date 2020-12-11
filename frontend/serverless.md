@@ -85,6 +85,10 @@ serverless deploy
 http://xyz.amazonaws.com/hello-world
 ```
 
+## 图书
+
+* 《Serverless架构：无服务器应用与AWS Lambda》
+
 ## 工具
 
 * [faas](https://github.com/openfaas/faas):OpenFaaS - Serverless Functions Made Simple <https://docs.openfaas.com/>

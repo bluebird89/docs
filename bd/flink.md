@@ -3,6 +3,10 @@
 * 分布式、高性能、高可用、高精确的为数据流应用而生的开源流式处理框架
 * 核心是在数据流上提供数据分发、通信、具备容错的分布式计算。同时，Flink在流处理引擎上提供了批流融合计算能力，以及SQL表达能力
 
+## 图书
+
+* 《Flink基础教程》 作者：埃伦·弗里德曼 , 科斯塔斯·宙马斯 译者：王绍翾
+
 ## 参考
 
 * [flink-doc-zh](https://github.com/apachecn/flink-doc-zh):Apache FLink 中文文档 <http://flink.apachecn.org>

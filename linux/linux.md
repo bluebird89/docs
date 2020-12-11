@@ -143,6 +143,8 @@ sudo update-grub
 export EDITOR=vim
 
 lshw -class disk -class storage -short
+
+export CDPATH=".:/home/username"
 ```
 
 ## 启动
@@ -3639,8 +3641,8 @@ cat a b b | sort | uniq -u > c
 * [the-practical-linux-hardening-guide](https://github.com/trimstray/the-practical-linux-hardening-guide):🔥 This guide details the planning and the tools involved in creating a secure Linux production systems - work in progress.
 * [VITUX](https://vitux.com) Linux Compendium
 * [Linux From Scratch](http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
-* [Unix Toolbox](http://cb.vu/unixtoolbox.xhtml)
 * [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
+* [Linux Performance](http://www.brendangregg.com/linuxperf.html)
 * [linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
 * [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
 

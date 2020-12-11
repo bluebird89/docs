@@ -468,6 +468,8 @@ MongoDB 中的 Sharding 正式为了水平扩展而设计的。MongoDB 中通过
 ## 图书
 
 * 《MongoDB The Definitive Guide》
+* MongoDB大数据处理权威指南（第2版）
+* NoSQL数据库技术实战
 
 ## 工具
 

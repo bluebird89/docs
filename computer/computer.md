@@ -201,16 +201,19 @@
   - [book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
   - [video lecture](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/)
   - [Brian Harvey’s Berkeley CS 61A](https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter)
-* [Computer Systems: A Programmer's Perspective 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html)
+  * [SICP-answers](https://github.com/huangz1990/SICP-answers):我的 SICP 解题集 <http://sicp.readthedocs.org/>
+* [Computer Systems: A Programmer's Perspective 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html)(CSAPP) Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
   - 《深入理解计算机系统》<https://www.bilibili.com/video/av31289365>
   - [Berkeley CS 61C](http://inst.eecs.berkeley.edu/~cs61c/sp15/)
+  - 作为一名计算机程序员，如果缺乏对计算机的层次理解，那么其基本素养是值得怀疑的，其思考基础是有欠缺的。当我们沉浸在这样或者那样的编程教程里，沉浸在大量的语法架构之中的时候，反而常常因为这样或者那样一门复杂的技术而忘记计算机系统的构成其本身
 * [Mathematics for Computer Science](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf)
   - Tom Leighton’s MIT 6.042J
 * 计算机程序的概念、技术和模型 Concepts, Techniques, and Models of Computer Programming，CTMCP
 * [The Elements of Computing Systems](https://www.nand2tetris.org/)
+* 《[计算的本质：深入剖析程序和计算机](https://www.amazon.cn/gp/product/B00PG0MM3C)》
 * [Bottom Up Computer Science](https://github.com/ianw/bottomupcs) <http://www.bottomupcs.com>
-* 《异类》
 * The Encyclopedia of Human-Computer Interaction
+* 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
 
 ## 项目
 

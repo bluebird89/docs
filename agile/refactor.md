@@ -308,6 +308,7 @@
 
 * 架构腐化之谜
 * 修改代码的艺术
+* 《[重构：改善既有代码的设计（第2版）(Refactoring: Improving the Design of Existing Code)](https://www.amazon.cn/gp/product/B011LPUB42)》 Martin Fowler
 
 ## 参考
 

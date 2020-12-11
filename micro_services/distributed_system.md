@@ -294,6 +294,7 @@
     * `max_id` 表示该 biz_tag 目前所被分配的 ID 号段的最大值
     - step 表示每次分配的号段长度
     - 会在还没用完之前就去申请下一个范围段。并发量大的问题可以直接将 step 调大即可
++ 时间戳+用户标识码+随机数
 
 ```sh
 # segment
@@ -410,6 +411,7 @@ CREATE TABLE `leaf_alloc` (
 ## 图书
 
 * [Distributed Systems](https://www.distributed-systems.net/index.php/books/ds3/)
+* 《分布式系统：概念与设计（原书第五版）》，机械工业出版社
 
 ## 工具
 
