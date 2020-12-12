@@ -2,107 +2,54 @@
 
 Production-Grade Container Scheduling and Management <http://kubernetes.io>
 
-* 源自Google内部大规模集群管理系统——Borg，也是CNCF（Cloud Native Computing Foundation，今属Linux基金会）最重要的解决方案之一，旨在让部署容器化的应用简单并且高效
-* 2014年6月，IT基础设施领域的领先者Google发布了，是Google 10多年大规模容器管理技术Borg的开源版本
-* 在单机上运行容器，无法发挥它的最大效能，只有形成集群，才能最大程度发挥容器的良好隔离、资源分配与编排管理的优势。所以企业需要一套管理系统，对Docker及容器进行更高级更灵活的管理，按照用户的意愿和整个系统的规则，完全自动化的处理好容器之间的各种关系，这叫做编排（Orchestration）
-* 用于管理容器化应用程序集群的工具,自动执行应用程序部署的系统。在计算机领域中，此过程通常称为编排
-* 编排概念并不是由Kubernetes第一个提出的，Kubernetes这个单词来自于希腊语，含义是舵手或领航员
-* 作为Docker生态圈中重要一员，是Google多年大规模容器管理技术的开源版本，是产线实践经验的最佳表现。如Urs Hölzle所说，无论是公有云还是私有云甚至混合云，Kubernetes将作为一个为任何应用，任何环境的容器管理框架无处不在
-  - Orchestration这个词来自于音乐领域，是指一种将不同乐器、音色加以合理的编排等手法营造出一个听感交融、平衡的艺术，完美地描述了容器编排的含义：为单个应用程序（乐队中的每种乐器）提供协同工作的模式
-* 基于Docker的开源容器集群管理系统，为容器化的应用提供资源调度、部署运行、服务发现、扩容缩容等整一套功能，因为容器本身可移植，所以Kubernetes容器集群能跑在私有云、公有云或者混合云上
-* 具备完善的集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和线上扩容、可扩充套件的资源自动调度机制、多粒度的资源配额管理能力。还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节
+* 2014年6月，由IT基础设施领域领先者Google发布，源自 Google 10 多年大规模容器管理技术 Borg 开源版本.使用Golang开发，提供应用部署、维护、扩展机制等功能，是CNCF（Cloud Native Computing Foundation，今属Linux基金会）最重要的解决方案之一，旨在让部署容器化的应用简单并且高效
+  - 是产线实践经验的最佳表现。如Urs Hölzle所说，无论是公有云还是私有云甚至混合云，Kubernetes将作为一个为任何应用，任何环境的容器管理框架无处不在
+* 编排 Orchestration
+  - 这个单词来自于希腊语，含义是舵手或领航员,自于音乐领域，是指一种将不同乐器、音色加以合理的编排等手法营造出一个听感交融、平衡的艺术，完美地描述了容器编排的含义：为单个应用程序（乐队中的每种乐器）提供协同工作的模式
+  - 在单机上运行容器，无法发挥它的最大效能，只有形成集群，才能最大程度发挥容器的良好隔离、资源分配与编排管理的优势。所以需要一套管理系统，对Docker及容器进行更高级更灵活的管理，按照用户的意愿和整个系统的规则，完全自动化的处理好容器之间的各种关系
+  - 基于Docker的开源容器集群管理系统，为容器化的应用提供资源调度、部署运行、服务发现、扩容缩容等整一套功能，因为容器本身可移植，所以Kubernetes容器集群能跑在私有云、公有云或者混合云上
+  - 用于管理容器化应用程序集群的工具,自动执行应用程序部署的系统。在计算机领域中，此过程通常称为编排
+* 具备完善集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和线上扩容、可扩充套件的资源自动调度机制、多粒度的资源配额管理能力。还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节
 * 自动化编排容器应用的开源平台，包括部署、调度和节点集群间扩展、服务发现和配置服务等架构支持的基础能力
 * 将虚拟机和物理机转换为统一的API切面。然后，开发人员可以使用Kubernetes API来部署，扩展和管理容器化的应用程序
 * 服务治理范围覆盖了服务的整个生命周期，从服务建模开始，到开发、测试、审批、发布、运行时管理，以及最后的下线。通常说的服务治理主要是指服务运行时的治理，一个好的服务治理框架要遵循"在线治理，实时生效"原则，只有这样才能真正保障服务整体质量
-  - 服务越来越多，配置项越来越多，利用统一注册中心解决服务发现和配置管P理问题
+  - 服务越来越多，配置项越来越多，利用统一注册中心解决服务发现和配置管理问题
   - 服务之间存在多级依赖，靠人工已经无法理清，还要避免潜在的循环依赖问题，需要依赖管理机制，支持导出依赖关系图
-  - 服务的性能数据和健康状态数据是服务治理的重要依据，比如访问量、响应时间、并发数等，因此需要有监控、健康检查和统计服务
-  - 当一个服务的访问量越来越大，需要对服务进行扩容，然后在客户端进行流量引导和优先级调度
+  - 服务性能数据和健康状态数据是服务治理的重要依据，比如访问量、响应时间、并发数等，因此需要有监控、健康检查和统计服务
+  - 当一个服务访问量越来越大，需要对服务进行扩容，然后在客户端进行流量引导和优先级调度
   - 面对突发流量，已经无法通过扩容解决问题时，要启用流量控制，甚至服务降级
   - 随着业务持续发展，要提前进行容量规划，结合服务监控数据，以确认当前系统容量能否支撑更高水位的压力
   - 通过一系列的服务治理策略，最终通过数据证明系统对外承诺的 SLA
-* 使用Golang开发，其提供应用部署、维护、扩展机制等功能，利用Kubernetes能方便地管理跨机器运行容器化的应用，主要功能
-  - 资源调度：资源调度是一套分布式系统最基本的核心指标
-  - 资源管理：控制Pod对计算资源、网络资源、存储资源的使用
-  - 服务发现：管理外在的程序或者内部的程序如何访问Kubernetes里面的某个Pod
-  - 健康检查：监控检测服务是否正常运行非常重要
-  - 自动伸缩：因为涉及到环境的快速迁移和复制，虚拟机时代之前都非常难实现。容器化时代很自然的解决了这个问题，Kubernetes保证了资源的按需扩容
-  - 更新升级：Kubernetes为服务的滚动和平滑升级提供了很好的机制
-
-  - 使用Docker对应用程序包装(package)、实例化(instantiate)、运行(run)
-  - 以集群的方式运行、管理跨机器的容器
-  - 解决Docker跨机器容器之间的通讯问题
-  - 服务发现和负载均衡：使用 DNS 名称或自己的 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定
-  - 存储编排：允许自动挂载选择的存储系统，例如本地存储、公共云提供商等
-  - 自动部署和回滚：可以使用 Kubernetes 描述已部署容器的所需状态，可以以受控的速率将实际状态更改为所需状态。例如，可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容器并将它们的所有资源用于新容器
-  - 容器资源配额：允许指定每个容器所需 CPU 和内存（RAM）。当容器指定了资源请求时，Kubernetes 可以做出更好的决策来管理容器的资源
-  - 自我修复：重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容器，并且在准备好服务之前不将其通告给客户端
-  - 密钥与配置管理：存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥
-  - 配置文件：可以通过 ConfigMap 来存储配置
-* 方便
-  - 快速部署应用
-  - 容易实现 水平伸缩 或 垂直伸缩
-  - 无缝发布新应用版本
-  - 资源使用最大化
-  - 应用停止自动重启
 * 特点
   - 可移植：支持公有云(GCE、vShpere、CoreOS、OpenShift、Azure)、私有云、混合云、多重云（multi-cloud）
   - 可扩展：模块化、插件化、可挂载、可组合
   - 自动化：自动部署、自动重启、自动复制、自动伸缩/扩展
+* 功能
+  - 资源调度：一套分布式系统最基本的核心指标
+  - 资源管理：控制Pod对计算资源、网络资源、存储资源的使用,允许指定每个容器所需 CPU 和内存（RAM）。当容器指定了资源请求时，Kubernetes 可以做出更好的决策来管理容器的资源
+  - 存储编排：允许自动挂载选择存储系统，例如本地存储、公共云提供商等
+  - 服务发现：管理外在的程序或者内部的程序如何访问Kubernetes里面的某个Pod
+  - 自动伸缩：涉及到环境的快速迁移和复制，虚拟机时代之前都非常难实现。Kubernetes保证了资源的按需扩容
+  - 自动化容器部署与复制
+  - 应用升级部署：为服务滚动和平滑升级提供了很好的机制
+  - 负载均衡：使用 DNS 名称或自己 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定.基于负载均衡的应用弹性伸缩方案，只要将应用系统设计成无状态，在需要伸缩的时候修改负载均衡代理配置，就可以方便地水平扩容应用系统，提高系统承载能力
+  - 自动部署和回滚：可以使用 Kubernetes 描述已部署容器的所需状态，可以以受控的速率将实际状态更改为所需状态。例如，可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容器并将它们的所有资源用于新容器
+  - 密钥与配置管理：存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥
+  - 配置文件：通过 ConfigMap 来存储配置
+  - 集群监控
+  - 健康检查：监控检测服务是否正常运行非常重要
+  - 自我修复：重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容器，并且在准备好服务之前不将其通告给客户端
+  - 弹性容器及故障迁移
 * K8s很多的抽象概念非常契合分布式调度系统，可以做到描述集群架构，定义服务状态，并维持，实现了分布式集群的配置管理和维护包括动态伸缩及故障迁移
-* 基于负载均衡的应用弹性伸缩方案，只要将应用系统设计成无状态，在需要伸缩的时候修改负载均衡代理配置，就可以方便地水平扩容应用系统，提高系统承载能力
 * 一切皆为资源，一切即可描述，一切皆可管理
 
-## 概念
+## 版本
 
-* Cluster 集群：K8s使用一序列物理机、虚拟机和其它基础资源来运行应用程序
-* Node: 一个Node就是一个运行着K8s的物理机或虚拟机，并且Pod可以在其上面被调度
-* NameSpaces 命名空间 好比一个资源名字的前缀，帮助不同的项目可以共享cluster，防止出现命名冲突。
-  - 集群中使用namespace创建多个“虚拟集群”，namespace之间可以完全隔离
-  - 可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中服务
-  - 一组资源和对象抽象集合，比如可以用来将系统内部的对象划分为不同的项目组或用户组
-  - 常见的Pods，Services，Replication Controllers和Deployments等都属于某一个Namespace，默认default
-  - Node，PresistentVolumes等则不属于任何Namespace
-  - 常用于隔离不同的用户，比如K8s自带的服务一般运行在Kube-system Namespace中
-  - 状态
-    + Active
-    + Terminating
-  - 删除过程中状态被设置为Terminating
-    + 删除一个namespace会自动删除所有属于该namespace的资源
-    + default和kube-system命名空间不可删除
-  - 名称满足正则表达式`[a-z0-9]([-a-z0-9]*[a-z0-9])?`,最大长度为63位
-* Pod: 一个Pod对应一个由相关容器和卷组成的容器组
-* Label: 一个label是一个被附加到资源上的键值对，比如附加到一个Pod上为它传递一个用户自定的属性，label还可以被应用来组织和选择子网中的资源
-* Selector: 是一个通过匹配labels来定义资源之间关系的表达式，例如为一个负载均衡的service指定目标Pod
-* Replication Controller: replication controller 是为了保证Pod一定数量的复制品在任何时间都能正常工作，它不仅允许复制的系统易于扩展，还会处理当Pod在机器重启或发生故障的时候再创建一个
-* Service: 一个service定义了访问Pod的方式，就像单个固定的IP地址和与其相对应的DNS名之间的关系
-* Volume: 一个Volume是一个目录
-* Kubernets Volume: 构建在Docker Volumes之上，并且支持添加和配置Volume目录或者其他存储设备
-* Secret: Secret存储了敏感数据，例如能运行容器接受请求的权限令牌
-* Name: 用户为Kubernets中资源定义的名字
-* Annotation:相对于label来说可以容纳更大的键值对，它对我们来说是不可读的数据，只是为了存储不可识别的辅助数据，尤其是一些被工具或系统扩展用来操作的数据
-
-```sh
-kubectl top #查看集群运行状态；可以指定node、pod等对象进行指标收集；需要安装好 Metrics 服务才能收集node节点的指标数据
-kubectl top pod -n namespace_name #查看指定namespace下的pod的资源使用情况；需要k8s集群提前安装好metrics-server
-kubectl top node #查看k8s集群中每个node节点的内存、CPU使用情况；需要k8s集群提前安装好metrics-server
-
-kubectl version #查看kubectl命令版本，也可以看到 go 的版本
-kubectl cluster-info #查看k8s集群中服务的访问方式
-
-kubectl cordon node_name #创建pod时，被指定的节点将不会被scheduler进行调度
-kubectl uncordon node_name #取消警戒标记为cordon的node
-
-kubectl drain node_name #驱逐node上的pod(驱逐的是无状态服务，核心pod是不会被驱逐的)到其他节点上,用户node下线等场景
-kubectl taint node_name #给node标记污点，实现pod与node反亲和性，pod不创建在有这个label标记的node节点上
-
-kubectl api-resources #查看k8s的API的所有资源对象
-kubectl api-versions #查看各个api分组的api版本
-
-kubectl create namespaces new-namespace
-kubectl get namespaces
-kubectl delete namespaces new-namespace
-```
+* 1.20
+  - dockershim 将被全面弃用. kubelet实现中的组件之一。它能够与Docker Engine进行通信
+    + 对于dockershim的支持将最终被删除，届时将无法使用Docker命令检查自己的集群,大部分命令都能在kubectl与ctr（containerd CLI）中找到替代选项
+    + Mirantis现已同意与Docker开展合作，在Kubernetes之外独立维护shim代码并将其作为Docker Engine API的统一CRI接口。意味着Docker Engine的商业支持版本Mirantis Container Runtime（MCR）也将提供CRI兼容能力
+    + dockershim由内置方案变成了外部方案，dockershim将以独立开源组件的身份存在
 
 ## 结构
 
@@ -177,22 +124,308 @@ kubectl delete namespaces new-namespace
 
 ![架构](../_static/kubernates_architect.png)
 ![](../_static/constructor.png)
-![kubelet](../_static/kubelet.png)
-![Master](../_static/master.png)
+
+## 概念
+
+* Cluster 集群：K8s使用一序列物理机、虚拟机和其它基础资源来运行应用程序
+* Node: 一个Node就是一个运行着K8s的物理机或虚拟机，并且Pod可以在其上面被调度
+* NameSpaces 命名空间 好比一个资源名字的前缀，帮助不同的项目可以共享cluster，防止出现命名冲突。
+  - 集群中使用namespace创建多个“虚拟集群”，namespace之间可以完全隔离
+  - 可以通过某种方式，让一个namespace中的service可以访问到其他的namespace中服务
+  - 一组资源和对象抽象集合，比如可以用来将系统内部的对象划分为不同的项目组或用户组
+  - 常见的Pods，Services，Replication Controllers和Deployments等都属于某一个Namespace，默认default
+  - Node，PresistentVolumes等则不属于任何Namespace
+  - 常用于隔离不同的用户，比如K8s自带的服务一般运行在Kube-system Namespace中
+  - 状态
+    + Active
+    + Terminating
+  - 删除过程中状态被设置为Terminating
+    + 删除一个namespace会自动删除所有属于该namespace的资源
+    + default和kube-system命名空间不可删除
+  - 名称满足正则表达式`[a-z0-9]([-a-z0-9]*[a-z0-9])?`,最大长度为63位
+* Selector: 一个通过匹配labels来定义资源之间关系的表达式，例如为一个负载均衡的service指定目标Pod
+* Replication Controller: replication controller 是为了保证Pod一定数量的复制品在任何时间都能正常工作，它不仅允许复制的系统易于扩展，还会处理当Pod在机器重启或发生故障的时候再创建一个
+* Service: 一个service定义了访问Pod的方式，就像单个固定的IP地址和与其相对应的DNS名之间的关系
+* Volume: 一个Volume是一个目录
+  - Kubernets Volume: 构建在Docker Volumes之上，并且支持添加和配置Volume目录或者其他存储设备
+* Secret: Secret存储了敏感数据，例如能运行容器接受请求的权限令牌
+
+```sh
+kubectl top #查看集群运行状态；可以指定node、pod等对象进行指标收集；需要安装好 Metrics 服务才能收集node节点的指标数据
+kubectl top pod -n namespace_name #查看指定namespace下的pod的资源使用情况；需要k8s集群提前安装好metrics-server
+kubectl top node #查看k8s集群中每个node节点的内存、CPU使用情况；需要k8s集群提前安装好metrics-server
+
+kubectl version #查看kubectl命令版本，也可以看到 go 的版本
+kubectl cluster-info #查看k8s集群中服务的访问方式
+
+kubectl cordon node_name #创建pod时，被指定的节点将不会被scheduler进行调度
+kubectl uncordon node_name #取消警戒标记为cordon的node
+
+kubectl drain node_name #驱逐node上的pod(驱逐的是无状态服务，核心pod是不会被驱逐的)到其他节点上,用户node下线等场景
+kubectl taint node_name #给node标记污点，实现pod与node反亲和性，pod不创建在有这个label标记的node节点上
+
+kubectl api-resources #查看k8s的API的所有资源对象
+kubectl api-versions #查看各个api分组的api版本
+
+kubectl create namespaces new-namespace
+kubectl get namespaces
+kubectl delete namespaces new-namespace
+```
+
+## 原理
+
+* 不断维护这些支持功能实在是太过麻烦，因此社区决定将所有第三方解决方案从核心中剥离出来并创建相关接口。只要兼容这些接口，那么任何供应商都可以创建出能自动与Kubernetes相对接的产品。不兼容组件仅仅需要加上个“shim（意为垫片）”，由其在组件与相应的Kubernetes接口之间完成转换，即可轻松解决问题。dockershim会接收CRI命令并将其转换为Docker Engine能够理解的内容，反之亦然
+* 容器运行时接口 Container Runtime Interface CRI
+  - 负责提取并运行容器镜像
+  - Docker 本身只是彻底改变了容器技术并将其推向了通用舞台，因此Docker Engine也成为Kubernetes所支持的第一种（也是最初唯一一种）容器运行时
+  - 社区希望能够使用多种不同类型的容器，因此参与者们创建了容器运行时接口（CRI），也就是容器引擎与Kubernetes间进行通信的标准方式。如果容器引擎与CRI相兼容，即可轻松在Kubernetes当中运行
+  - 第一款兼容CRI的容器引擎是containerd，来自Docker
+    + Docker提取出与容器实际相关的部分，并将其调整为第一种与CRI兼容的运行时，而后把它捐赠给了云原生计算基金会（CNCF）
+    + 由此衍生出的cri-containerd组件具有运行时中立特性，而且能够支持多种Linux与Windows操作系统
+    + Docker本身仍然不兼容CRI:让containerd这个人类友好型抽象层发挥作用，Kubernetes集群就必须引入另一款名为Dockershimi的工具。但这款工具的介入又引发了新的问题，因为我们必须额外加以维护，否则就可能引发安全问题 p
+  - CRI-O
+* 容器网络接口 Container Network Interface CNI
+  - A CNI plugin is responsible for inserting a network interface into the container network namespace (e.g. one end of a veth pair) and making any necessary changes on the host (e.g. attaching the other end of the veth into a bridge). It should then assign the IP to the interface and setup the routes consistent with the IP Address Management section by invoking appropriate IPAM plugin
+* 容器存储接口 Container Storage Interface CSI
+  - 根据插件体系的设计思想，把这个 Provision 阶段，以及 Kubernetes 里的一部分存储管理功能，从主干代码里剥离出来，做成了几个单独的组件
+  - 以 gRPC 的方式对外提供三个服务（gRPC Service）
+    + CSI Identity
+    + CSI Controller
+    + CSI Nod
+
+* 一旦设置了所需目标状态,Kubernetes 控制面（control plane） 会通过 Pod 生命周期事件生成器(PLEG)，促成集群的当前状态符合其预期状态.Kubernetes 会自动执行各类任务，比如运行或者重启容器、调整给定应用的副本数等等.Kubernetes 控制面由一组运行在集群上的进程组成
+* Kubernetes 控制平面
+  - 管理着 Kubernetes 如何与集群进行通信
+  - 维护着系统中所有的 Kubernetes 对象的状态记录，并且通过连续的控制循环来管理这些对象的状态
+  - 在任意的给定时间点，控制面的控制环都能响应集群中的变化，并且让系统中所有对象的实际状态与提供的预期状态相匹配
+* Kubernetes master 节点:负责维护集群目标状态。当要与 Kubernetes 通信时，使用如 kubectl 的命令行工具，就可以直接与 Kubernetes master 节点进行通信
+  - 包含以下三个进程,都运行在集群中的某个节点上，主控组件所在节点通常被称为 master 节点
+    + kube-apiserver
+    + kube-controller-manager:`kubernetes/pkg/controller/`每一个控制器，都以独有的方式负责某种编排功能,控制循环（control loop）
+    + kube-scheduler
+* Kubernetes Node 节点 :集群中的 node 节点（虚拟机、物理机等等）都是用来运行应用和云工作流的机器。Kubernetes master 节点控制所有 node 节点
+  - 集群中每个非 master 节点都运行两个进程：
+    + kubelet，和 master 节点进行通信
+    + kube-proxy：一种网络代理，将 Kubernetes 的网络服务代理到每个节点上
+
+## 模型设计
+
+* TypeMeta是Kubernetes对象的最基本定义，它通过引入GKV（Group，Kind，Version）定义了一个对象的类型
+  - Group:Kubernetes定义了非常多对象，如何归类这些对象是一门学问，将对象依据其功能范围归入不同的分组，比如把支撑最基本功能的对象归入core组，把与应用部署有关的对象归入apps组，会使这些对象可维护性和可理解性更高。
+  - Kind:定义一个对象的基本类型，比如Node，Pod，Deployment等
+  - Version
+    + 社区每个季度会推出一个Kubernetes版本，随着Kubernetes版本的演进，对象从创建之初到能够完全生产化就绪的版本是不断变化的。与软件版本类似，通常社区提出一个模型定义以后，随着该对象不断成熟，其版本可能会从v1alpha1，到v1alpha2，或者到v1beta1，最终变成生产就绪版本v1。
+    + Kubernetes通过Version属性来控制版本。当不同版本的对象定义发生变更时，有可能需要涉及到数据迁移，Kubernetes API Server允许通过Conversion方法转换不同版本的对象属性。这是一种自动数据迁移的机制，当集群版本升级以后，已经创建的老版本对象会被自动转换为新版本。
+    + 这里所说的版本是对外版本（External Version），用户通过API能看到的版本。事实上资源定义都有对内版本（Internal Version），在Kubernetes API Server处先将对外版本转换成对内版本，然后再进行持久化。
+* Metadata:TypeMeta定义了“我是什么”，Metadata定义了“我是谁”
+  - 为方便管理，Kubernetes将不同用户或不同业务的对象用不同的Namespace隔离。Metadata中有两个最重要属性——Namespace和Name，分别定义了对象的Namespace归属及名字，这两个属性唯一定义了某个对象实例
+    + 所有对象都会以API的形式发布供用户访问，Typemeta、Namespace和Name唯一确定了该对象所在的API访问路径，该路径也会被自动生成并保存在对象Metadata属性的selfLink中
+    + name:用户为Kubernets中资源定义的名字
+  - Label
+    + 一个label是一个被附加到资源上的键值对，比如附加到一个Pod上为它传递一个用户自定的属性，label还可以被应用来组织和选择子网中的资源
+    + 传统面向对象设计系统中，对象组合的方法通常是内嵌或引用，即将对象A内嵌到对象B中，或者将对象A的ID内嵌到对象B中。这种设计的弊端是这种关系是固化的，一个对象可能对多个其他对象发生关联，如果该对象发生变更，系统需要遍历所有其关联对象并做修改。
+    + Kubernetes采用了更巧妙的方式管理对象和对象的松耦合关系，其依赖的就是Label和Selector
+    + Label，顾名思义就是给对象打标签，一个对象可以有任意对标签，其存在形式是键值对。不像名字和UID，标签不需要独一无二，多个对象可以有同一个标签，每个对象可以有多组标签。Label定义了这些对象的可识别属性，Kubernetes API支持以Label作为过滤条件查询对象
+    + 其他对象只需要定义Label,Selector就可按条件查询出其需要关联的对象。Label的查询可以基于等式如app=web，或app!=db，或基于集合如app in (web, db)或app notin (web, db)，可以只查询Label键.对多个条件查询只支持“与”操作，如app=web, tier=front。
+  - Annotation
+    + 相对于label来说可以容纳更大的键值对，对我们来说是不可读的数据，只是为了存储不可识别的辅助数据，尤其是一些被工具或系统扩展用来操作的数据
+    + 与Label一样用键值对来定义，但其功能与Label不一样，所有在用法上也有不同原则，API也不支持针用Annotation做条件过滤。虽然Kubernetes把对象做了很好的抽象，在实际运用中特别是生产化落地过程中，总是需要保存一些在对象内置属性中无法保存的信息，Annotation就是为了满足这类需求，事实上Annotation是对象的属性扩展。
+    + 社区在开发新功能，需要对象发生变更之前，往往会先把需要变更的属性放在Annotation中，当功能经历完实验阶段再将其移至正式属性中。
+    + Annotation作为属性扩展，更多是面向系统管理员和开发人员的，因此Annotation需要像其他属性一样做合理归类。与Java开发中的包名设计类似，通常需要将系统以不同功能规划为不同的Annotation Namespace，其键应以如下形式存在：<namespace>/key:value
+  - Finalizer
+    + 因为Kubernetes不是一个独立存在的系统，它最终会跟企业资源和系统整合，这意味着Kubernetes会操作这些集群外部资源或系统。
+    + 试想一个场景，用户创建了一个Kubernetes对象，假设对应的控制器需要从外部系统获取资源，当用户删除该对象时，控制器接收到删除事件后，会尝试释放该资源。可是如果此时外部系统无法连通，并且同时控制器发生重启了会有何后果？该对象永远泄露了。
+    + Finalizer本质上是一个资源锁，Kubernetes在接收到某对象的删除请求，会检查Finalizer是否为空，如果为空则只对其做逻辑删除，即只会更新对象中metadata.deletionTimestamp字段。具有Finalizer的对象，不会立刻删除，需等到Finalizer列表中所有字段被删除后，也就是该对象相关的所有外部资源已被删除，这个对象才会被最终被删除。
+    + 如果控制器需要操作集群外部资源，则一定要在操作外部资源之前为对象添加Finalizer，确保资源不会因对象删除而泄露。同时控制器需要监听对象的更新时间，当对象的deletionTimestamp不为空时，则处理对象删除逻辑，回收外部资源，并清空自己之前添加的Finalizer。
+  - ResourceVersion
+    + 通常在多线程操作相同资源时，为保证实物的一致性，需要在对象进行访问时加锁，以确保在一个线程访问该对象时，其他线程无法修改该对象。排它锁的存在确保某一对象在同一时刻只有一个线程在修改，但其排它的特性会让其他线程等待锁，使得系统整体效率显著降低。
+    + ResourceVersion可以被看做是一种乐观锁，每个对象在任意时刻都有其ResourceVersion，当Kubernetes对象被客户端读取以后，ResourceVersion信息也被一并读取。客户端更改对象并回写APIServer时，ResourceVersion会被增加，同时APIServer需要确保回写的版本比服务器端当前版本高，在回写成功后服务器端的版本会更新为新的ResourceVersion。因此当两个线程同时访问某对象时，假设它们获取的对象ResourceVersion为1。紧接着第一个线程修改了对象，资源版本会变为2，回写至APIServer以后，该对象服务器端ResourceVersion会被更新为2。此时如果第二个线程对该对象在1的版本基础上做了更改，回写APIServer时，所带的新的版本信息也为2，APIServer校验会发现第二个线程新写入的对象ResourceVersion与服务器端ResourceVersion冲突，写入失败，需要第二个线程读取最新版本重新更新。
+    + 此机制确保了分布式系统中，任意多线程无锁并发访问对象，极大提升系统整体效率。
+* Spec和Status才是对象的核心
+  - Spec是用户的期望状态，由创建对象的用户端定义
+  - Status是对象的实际状态，由对应的控制器收集实际状态并更新
+  - 与TypeMeta和Metadata等通用属性不同，Spec和Status是每个对象独有的
+
+```yaml
+metadata:
+  labels:
+    app: web
+    tier: front
+
+# 为Pod标记如下Annotation以告知Prometheus为其抓取系统指标
+annotations:
+    prometheus.io/path: /mymetrics
+    prometheus.io/port: "7355"
+    prometheus.io/scrape: "true"
+```
+
+![常用Kubernetes对象和其分组](../_static/kube_object.jpg "常用Kubernetes对象和其分组")
+
+## [对象](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
+
+* Kubernetes 包含若干用来表示系统状态的抽象层，包括：已部署的容器化应用和负载、与它们相关的网络和磁盘资源以及有关集群正在运行的其他操作的信息。这些抽象使用 Kubernetes API 对象来表示
+* 对象设计完全遵循互补的原则
+  - 鼓励API对象尽量实现面向对象设计时的要求，即“高内聚，松耦合”
+  - 对业务相关概念有一个合适的分解，提高分解出来的对象的可重用性
+  - 高层API对象设计一定是从业务出发的，低层API对象能够被高层API对象所使用，从而实现减少冗余、提高重用性的目的
+* 避免了简单封装和内部隐藏机制
+  - 简单地封装，A对象封装了B对象的定义，实际没有提供新的功能，反而增加了对所封装API的依赖性。
+  - 内部隐藏的机制也非常不利于系统维护的设计方式
+    + 例如StatefulSet、ReplicaSet和DaemonSet，本来就是三种Pod集合，那么Kubernetes就用不同API对象来定义它们，而不会说将它们封装在同一个资源对象，内部再通过特殊的隐藏算法再来区分这个资源对象是有状态的、无状态的还是节点服务。
+    + Pod是Kubernetes应用程序的基本执行单元，即它是Kubernetes对象模型中创建或部署的最小和最简单的单元。多数核心对象都为Pod对象服务的，但是它们都从Pod对象中所剥离出来的，有自己的API定义。
+    + Secret、ConfigMap和PVC是不同的资源对象定义，都可以作为存储卷在Pod中使用。而在Pod中使用时，只需要指定该对象的名称即可，无需将其具体信息在Pod资源对象中扩展。
+* Namespace
+  - Kubernetes进行归类的对象，当一个集群有多个用户或一个用户有多个应用需要管理时，有时需要将所有被管理的对象进行一定的隔离。
+  - Kubernetes引入了Namespace对象，类似文件目录，不同对象被划分到不同Namespace以后，可以通过权限控制来限制哪些用户以何种权限访问哪些Namespace的哪些对象，进而构建一个多租户、彼此隔离的通用集群。
+* Pod
+  - 一个Pod对应一个由相关容器和卷组成的容器组
+  - 运行于 Node 中，一个 Node 中通常会运行多个 Pod
+  - K8s 中基本构建单元
+  - 一个 Pod 中可以包含多个 Container，通常是包含一个
+  - 一个 Pod 就是一个最小单元，其中的内容绝对不会被分割在2个Node上，一个 Pod 中的内容始终作为一个整体
+  - 负责处理容器的数据卷、密钥、配置
+  - 生命周期是不确定
+  - 生存在 Worker Node 上
+  - 容器云平台需要解决的最核心问题是应用运行，Kubernetes将容器化应用运行的实体抽象为Pod，Pod类似豆荚，它是一个或者多个容器镜像的组合。当应用启动以后，每一个容器镜像对应一组进程，而同一个Pod的所有容器中的进程默认公用同一网络Namespace，并且共用同一网络标识。Pod具有基本的自恢复能力，当某个副本出现问题时，它会按照预定策略被重启。
+  - 应用运行通常需要配置文件，这些配置文件又有可以明文读写的配置，也包含需要加密和严格权限控制的密码证书等配置，Kubernetes为这些配置分别定义了Configmap和Secret。Configmap和Secret，和PersistVolumeClaim类似，都可以作为卷加载给运行的Pod，Pod中运行的进程可以像访问本地文件一样访问它们。Configmap和Secret没有本质区别，Secret只是将内容进行base64编码，我们知道base64编码是一种对称加密，可以轻松解密，事实上没有太多安全性可言。但Kubneretes支持Secret在持久化时的加密存储，这样保存在硬盘的Secret数据是无法解密的。其次，Kubernetes可以通过权限严格控制能够访问Secret的用户，以保证密码和证书信息的安全。
+  - Pod除了包含用户希望运行的容器镜像和配置文件，还允许用户定义其运行所需的资源，用户创建Pod以后，Kubernetes会为其选择一个最佳节点运行。计算节点被抽象成Node对象，节点数量和每个节点的资源汇总起来就是整个集群能提供的算力。每个计算节点负责汇报自己的心跳信息，并上报节点的资源总量和可用资源。
+* ServiceAccount
+  - Pod中运行的进程有时需要与Kubernetes API通信，在启用了安全配置的集群后，Pod一定要以某种身份与Kubernetes通信，这个身份就是系统账户（ServiceAccount）
+  - Kubernetes会默认为每个Namespace创建一个default ServiceAccount，并且为每个ServiceAccount生成一个JWT Token，这个Token保存在Secret中。用户可以在其Pod定义中指定ServiceAccount（默认为default），其对应的Token会被挂载在Pod中，Pod中的进程可以带着该Token与Kubernetes通信以标识其身份。
+* ReplicaSet
+  - Pod只是单个应用实例的抽象，要构建高可用应用，通常需要构建多个同样的副本，提供同一个服务。Kubernetes为此抽象出副本集ReplicaSet，其允许用户定义Pod的副本数，每一个Pod都会被当作一个无状态的成员管理，Kubernetes保证总是有用户期望的数量的Pod正常运行。当某个副本宕机以后，控制器将会创建一个新的副本。当因业务负载发生变更而需要调整扩缩容时，可以方便地调整副本数量。
+* Deployment
+  - 对于无状态在线应用，Kubernetes提供了更高级的版本变更控制。版本变更是一个日常频繁发生的关键操作，如何在不中断业务的前提下更新版本，一直是业界努力解决的问题。
+  - Deployment就是一个用来描述发布过程的对象，其实现机制是，当某个应用有新版本发布时，Deployment会同时操作两个版本的ReplicaSet。其内置多种滚动升级策略，会按照既定策略降低老版本的Pod数量，同时创建新版本的Pod，并且总是保证正在运行的Pod总数与用户期望副本数一致，并依次将该Deployment中的所有副本都更新至新版本。下图展示了基于Deployment进行版本发布的一个中间状态。
+  - 因为Deployment会维护ReplicaSet，ReplicaSet会创建Pod，因此通过Deployment维护针对无状态的应用是第一选择，它可以满足诸多需求，缩短应用上线的时间，在不造成停机的情况下创建弹性部署，能够使用户更快或更频繁地发布应用和功能。
+    + 创建并保证目标数量的Pod在运行状态。
+    + 按既定策略滚动升级，同时支持升级暂停、恢复和回滚。选择滚动升级策略非常灵活，正确的策略对于交付弹性应用程序和基础架构都是至关重要的。
+    + 便利的扩容和缩容。
+* Service和Ingress
+  - 即使在传统平台中，为支持应用的高可用，都需要在应用实例之上构建负载均衡。Service和Ingress就是描述负载均衡配置的对象，它允许用户定义发布服务的协议和端口，并定义Selector选择后端服务的Pod。Selector本身是一个Label过滤器，它会选择所有Label与该Selector匹配的Pod作为目标。
+  - Kubernetes会为Service和其选择出来的Pod创建一个关联对象，Endpoint里面记录了所有Pod的IP，以及就绪状态，这些信息会被相应组件作为期望状态进行负载均衡配置。
+  - Ingress是在服务的基础上，定义API网关的对象。通过Ingress，用户可以定义七层转发规则、网关证书等高级路由功能。
+  - Service 为一组 Pod 创建单个访问点, 提供一致的 IP 地址和端口，以访问其中的 Pod
+  - 外部用户和内部 Pod 都使用服务与其他 Pod 通信
+* Volume 是一个可以保存数据的目录
+  - 一个 Pod 的组件，在 Pod 中创建，不能单独删除
+  - Pod 中的容器都可以访问 Volume，只要这些容器都挂载了这 Volume 即可
+  - 生命周期是独立于容器的，与 Pod 相关
+* PersistentVolume和PersistentVolumeClaim
+  - PersistentVolume（PV）是集群中的一块存储卷，可由管理员手动设置，或当用户创建PersistentVolumeClaim（PVC）时根据StorageClass动态设置。
+  - PV和PVC与Pod生命周期无关。也就是说当Pod中的容器重新启动、Pod重新调度或者删除时，PV和PVC不会受到影响，Pod存储于PV里的数据得以保留。
+  - 对于不同的使用场景，用户通常需要不同属性（例如性能、访问模式等）的PV。所以集群一般需要提供各种类型的PV，由StorageClass来区分。一般集群环境都设置了默认的StorageClass。
+  - 如果在PersistentVolumeClaim中未指定StorageClass，则使用群集的默认StorageClass。
+* 自定义资源定义 CustomResourceDefinition CRD
+  - Kubernetes 1.7中引入的一项强大功能，它允许用户将自己的自定义对象添加到Kubernetes集群中，当创建新CRD的定义时，APIServer将为指定的每个版本创建一个新的RESTful资源路径。
+  - 当集群中成功地创建了CRD，就可以像Kubernetes原生的资源一样使用它，利用Kubernetes的所有功能，例如其CLI、安全性、API服务、RBAC等。
+  - CRD的定义是集群范围内的，CRD的资源对象的作用域可以是命名空间（Namespaced）或者集群范围（Cluster-wide）的。
+  - 与现有的内置对象一样，删除Namespace也会删除该Namespace中所有自定义的对象，但不会删除CRD的定义。
+  - Kubernetes还提供一系列Codegen工具（deepcopy-gen、client-gen、lister-gen、informer-gen等），能够自动生成该CRD资源的Golang版本的Clientset、Lister及Informer，这为该资源编写控制器提供了很大便利。
+  - CRD就像数据库的开放式表结构，允许用户自定义Schema。有了这种开放式设计，使得用户可以基于CRD定义一切需要的模型，满足不同业务的需求。
+  - 社区鼓励基于CRD的业务抽象，众多主流的扩展应用都是基于CRD构建的，比如Istio，比如Knative。甚至基于CRD推出了Operator Mode和Operator SDK，可以以极低的开发成本定义新对象，并构建新对象的控制器。
+
+![核心对象间关系图](../_staic/kube_core_object.jpg "核心对象间的关系图")
+![Deployment 滚动升级](../_static/deployment_upgrade.jpg "Deployment的滚动升级")
+
+## 控制器模式
+
+* 声明式系统工作原理:基于声明性模型运行并实现"所需状态"的概念
+  - API物件是Kubernetes集群中的管理操作单元。集群中的众多技术概念分别对应着API物件，每个API物件都有3大类属性：
+    + metadata（元资料）：用来标识API物件，包含namespace、name、uid等
+    + spec（规范）：描述使用者期望达到的理想状态，所有的操作都是宣告式（Declarative）的而不是命令式（Imperative），在分布式系统中的好处是稳定，不怕丢操作或执行多次。比如设定期望3个执行Nginx的Pod，执行多次也还是一个结果，而给副本数加1的操作就不是宣告式的，执行多次结果就错了。
+    + status（状态）：描述系统当前实际达到的状态，比如期望3个Pod，现在实际建立好了2个。
+  - 声明式 API
+    + 所谓“声明式”，指的就是只需要提交一个定义好的 API 对象来“声明”，所期望的状态是什么样子
+    + “声明式 API”允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心本地原始 YAML 文件的内容
+    + 最重要的，有了上述两个能力，Kubernetes 项目才可以基于对 API 对象的增、删、改、查，在完全无需外界干预的情况下，完成对“实际状态”和“期望状态”的调谐（Reconcile）过程。
+    + controller通过解读结构化的resource数据，获得期望状态，从而不断的调协期望状态和实际状态
+  - kubectl replace 执行过程:使用新的 YAML 文件中的 API 对象，替换原有的 API 对象
+    + kube-apiserver 在响应命令式请求（比如，kubectl replace）的时候，一次只能处理一个写请求，否则会有产生冲突的可能
+  - kubectl apply，则是执行了一个对原有 API 对象的 PATCH 操作
+    + 一次能处理多个写操作，并且具备 Merge 能力
+  - 在 Etcd 里的完整资源路径，是由：Group（API 组）、Version（API 版本）和 Resource（API 资源类型）三个部分组成
+    + 会匹配 API 对象的组
+      * 对于 Kubernetes 里的核心 API 对象，比如：Pod、Node 等，是不需要 Group 的（即：它们的 Group 是“”）。所以，对于这些 API 对象来说，Kubernetes 会直接在 /api 这个层级进行下一步的匹配过程
+      * 对于 CronJob 等非核心 API 对象来说，Kubernetes 就必须在 /apis 这个层级里查找它对应的 Group，进而根据“batch”这个 Group 的名字，找到 /apis/batch
+    + 进一步匹配到 API 对象的版本号
+    + 会匹配 API 对象的资源类型
+  - 创建 CronJob 对象
+    + 发起了创建 CronJob 的 POST 请求之后，编写的 YAML 的信息就被提交给了 APIServer。而 APIServer 的第一个功能，就是过滤这个请求，并完成一些前置性的工作，比如授权、超时处理、审计等
+    + 请求会进入 MUX 和 Routes 流程。如果你编写过 Web Server 的话就会知道，MUX 和 Routes 是 APIServer 完成 URL 和 Handler 绑定的场所。而 APIServer 的 Handler 要做的事情，就是按照我刚刚介绍的匹配过程，找到对应的 CronJob 类型定义
+    + 根据这个 CronJob 类型定义，使用用户提交的 YAML 文件里的字段，创建一个 CronJob 对象.进行一个 Convert 工作，即：把用户提交的 YAML 文件，转换成一个叫作 Super Version 的对象，它正是该 API 资源类型所有版本的字段全集。这样用户提交的不同版本的 YAML 文件，就都可以用这个 Super Version 对象来进行处理了
+    + APIServer 会先后进行 Admission() 和 Validation() 操作.Validation，则负责验证这个对象里的各个字段是否合法。这个被验证过的 API 对象，都保存在了 APIServer 里一个叫作 Registry 的数据结构中。也就是说，只要一个 API 对象的定义能在 Registry 里查到，它就是一个有效的 Kubernetes API 对象
+    + APIServer 会把验证过的 API 对象转换成用户最初提交的版本，进行序列化操作，并调用 Etcd 的 API 把它保存起来
+* Kubernetes定义了一系列的控制器，事实上几乎所有的Kubernetes对象都被一个或数个控制器监听，当对象发生变化时，控制器会捕获对象变化并完成配置操作
+* APIServer是Kubernetes的大脑，保存了所有对象和其状态。开源项目client-go对控制器的编写提供了完备的自动化支持，任何Kubernetes对象都可以由client-go创建供控制器使用的Informer()和Lister()接口。如图所示，控制器的工作流程就是围绕着Informer()和Lister()的。
+  - Informer()是用来接收资源对象的变化的Event，针对Add、Update和Delete的事件，可注册相应的EventHandler。在EventHandler内，根据传入的object调用controller.KeyFunc计算出字符串key，并把它加入控制器的队列中。
+  - Lister()是给控制器提供主动查询资源对象的接口，根据labels.Selector去指定筛选条件。
+* 控制器模式
+  - 一个标准的生产者消费者模式，一方面控制器在启动后，Informer会监听其所关注的对象变化。一旦对象发生了创建，更新和删除等事件，这些事件会由核心组件APIServer推送给控制器。控制器会将对象保存在本地缓存，并将对象的主键推送至消息队列，此为生产者。
+  - 另一方面，控制器会启动多个工作子线程（Worker），从队列中依次获取对象主键，并从缓存中读取完整状态，按照期望状态完成配置更改并将最终状态回写至APIServer，此为消费者。
+  - Kubernetes就是基于此模式保证了整个系统的最终一致性。
+* Kubernetes运行一组控制器，以使资源的当前状态与所需状态保持匹配。基于事件的体系结构，控制器利用事件去触发相应的自定义代码，这部分都是由SharedInformer完成.SharedInformer有Reflector、Informer、Indexer和Store四个组件
+  - Reflector是用来监听特定的Kubernetes API资源对象，可以是Kubernetes内建的或者是自定义的资源。具体的实现是通过ListAndWatch的方法。
+    + Reflector首先会将资源版本号设置为0，使用List操作获得指定资源对象，可能会导致本地的缓存相对于etcd里面的内容存在延迟。
+    + Reflector再通过Watch操作监听到APIServer处资源对象的版本号变化，并将最新的数据放入到Delta FIFO队列中，使得本地的缓存数据与etcd的数据保持一致。
+    + 如果resyncPeriod不为零，那么Reflector会以resyncPeriod为周期定期执行Delta FIFO的Resync函数，这样就可以使Informer定期处理所有的对象。
+  - Informer是从Delta FIFO队列中弹出对象，一方面将对象存入本地存储以供检索，另一方面触发事件以调用资源事件回调函数。控制器后续的典型模式是获取资源对象的key，并将该key排入工作队列以进行进一步处理。Indexer提供对象的索引功能。
+  - Indexer可以根据多个索引函数维护索引。Indexer使用线程安全的数据存储来存储对象及其键。在Store中定义了一个名为MetaNamespaceKeyFunc的默认函数，该函数生成对象的键的格式是<namespace>/<name>的组合。
+* 控制器协同工作原理
+  - 单个Kubernetes资源对象的变更，触发多个控制器对该资源对象的变更进行响应，继而还能引发其相关的其他对象发生变更，从而触发其他对象控制器的配置逻辑，这一模式使得整个系统成为声明式
+  - 除APIServer和etcd外，所有Kubernetes组件，不论其名称是Scheduler，Controller Manager、或是Kubelet，其本质都是一致的，都可以被称为控制器，因为这些组件中都有一个控制循环。监听APIServer中的对象变更，并在自己关注的对象发生变更后完成既定的逻辑控制，并将控制逻辑执行完成后的结果更新回APIServer，并持久化到etcd中。
+  - APIServer
+    + 作为集群的API网关，接收所有来自用户的请求。
+  - 流程
+    + 用户发创建Deployment之后，该请求被发送至APIServer，经过认证鉴权和准入三个环节，该Deployment对象被保存至etcd
+    + Controller Manager中Deployment Controller监听APIServer中所有Deployment的变更事件，此时其捕获了Deployment的创建事件，并开始执行控制逻辑。
+    + Deployment Controller读取Deployment对象的Selector定义，并通过该属性过滤当前Namespace中所有ReplicaSet对象，并判断是否有任何ReplicaSet对象的OwnerReference属性为此Deployment
+    + 因为此Deployment刚刚创建，因此没有满足此查询条件的ReplicaSet，于是Deployment Controller会读取Deployment中定义的podTemplate，并将其做哈希计算，并依照如下约定创建新的ReplicaSet：
+      * 创建新 ReplicaSet，将其命名为[deployment-name]-[pod-template-hash]。
+      * 更新ReplicaSet，为ReplicaSet添加label，记pod-template-hash值为[计算出的哈希值]。
+      * 将Deployment设置为ReplicaSet的OwnerReference。
+    + Deployment Controller将新的ReplicaSet创建请求发送至APIServer，APIServer同样的经过认证授权和准入步骤，将该对象保存至etcd
+    + ReplicaSet Controller监听APIServer中所有ReplicaSet对象的变更，新对象的创建令其唤醒并开始执行控制逻辑。
+    + ReplicaSet Controller读取ReplicaSet对象的Selector定义，并通过该属性过滤当前Namespace中所有Pod对象，并判断是否有任何Pod对象的OwnerReference为该ReplicaSet。因为此ReplicaSet刚刚创建，因此没有满足此查询条件的Pod，于是ReplicaSet会按照如下约定创建Pod：
+      * 读取Replicas定义，Replicas的数量代表需要创建Pod的数量。
+      * 以ReplicaSet名作为Pod的GenerateName，该属性会作为Pod名的前缀，Kubernetes在此基础上加一个随机字符串作为Pod名。
+      * 该ReplicaSet作为Pod的OwnerReference。
+    + ReplicaSet Controller将新建Pod的请求发送至APIServer，APIServer将Pod悉数保存
+    + 此时调度器被唤醒，其监听APIServer中所有nodeName为空的Pod，即未经过调度的Pod。经过一系列的调度算法，不满足Pod需求的节点被过滤，符合的节点按照空闲资源，端口占用情况，实际资源利用率等信息被排序，评分最高的节点名被更新至nodeName属性，该同样经APIServer保存至etcd
+    + 运行在Pod被调度节点的Kubelet监听到有归属于自己节点的新Pod，则开始加载Pod清单，下载Pod所需的配置信息，调用容器运行时接口启动容器，调用容器网络接口加载网络，调用容器存储接口挂载存储，并完成Pod的启动
+  - 依靠这样的联动机制，通过分散的业务控制逻辑满足用户需求。从用户的角度看，只是发送了一个Deployment创建请求，但事实上，为满足该需求，可能会牵扯到数个甚至更多Kubernetes组件。此架构模式的优势是每个组件各司其职，巧妙而灵活，代码易维护，但带来的运维复杂度相对较高，此业务流中有任何组件出现故障，对用户感受来讲，都是Kubernetes不可用
+* Controller 高级抽象:基于基本对象构建并提供额外的功能和方便使用的特性
+* Deployment:创建和管理 ReplicaSet
+  - 无缝升级运行中的应用
+  - 指定了 Pod 死掉后重启的策略
+  - 通过命令行|配置文件 创建
+* DaemonSet 用于持续的进程，每当一个 Node 加入到集群中时，DaemonSet 都会在其中自动启动一个 Pod。适用于一直运行的后台任务，例如监控、日志收集
+* StatefulSet 就助跟踪应用状态,据规范管理一组 Pod 的部署和缩放
+  - StatefulSet 的 Pod 都有一个唯一的、持久的标识，控制器在进行任何重新调度时都会维护该标识。对于数据库等有状态的持久化后端服务非常有用。 Pod 中的状态信息就是保存在与 StatefulSet 关联的数据卷中
+  - StatefulSet 和 DaemonSet 虽然与 ReplicaSet 在一个层级中，但不受 Deployment 控制
+* ReplicaSet 创建和管理 Pod
+  - 确保 APP 具有指定数量的 Pod,根据 Deployment 中设定的指标来创建和扩展
+  - 如果一个 Pod 因为 Node 故障而关闭，ReplicaSet 会自动在其他 Node 中启动这个 Pod。 ReplicaSet 由 Deployment 创建，可以通过 Deployment 非常方便的升级应用
+* Job 负责监督管理那些运行批处理作业的 Pod
+  - 会创建 Pod，并通过跟踪 Pod 成功完成的数量来确保他们完成任务
+  - 一旦容器内部的作业成功完成，容器就不会重新启动.
+  - 一次性的做一个任务的时候
+* CronJob:在指定的时间运行作业.计划以固定的时间间隔或固定的时间重复执行
+* 创建与修改
+  - 用 Kubernetes API 对象来描述集群的预期状态（desired state）：包括需要运行的应用或者负载，使用的镜像、副本数，以及所需网络和磁盘资源等等
+  - 用命令行工具 kubectl 来调用 Kubernetes API 创建对象，通过所创建的这些对象来配置预期状态
+  - 直接调用 Kubernetes API 和集群进行交互，设置或者修改预期状态
+
+![控制器工作流程](../_static/controller_flow.jpg "控制器工作流程")
+![Informer 内部机制](../_static/informer_impl.jpg "Informer 内部机制")
+![协同工作流程示例](../_static/controller_coop.jpg "协同工作流程示例")
 
 ## Master Node
 
 * 集群管理控制中心，调度管理整个系统
-* [etcd](../micro_services/Etcd.md):分布式 key-value 存储，保存集群的状态数据
-  - 由CoreOS开发的一个高可用、强一致性的服务发现储存仓库，为Kubernetes集群提供储存服务
-  - 一个管理配置信息和服务发现（service discovery）项目，目标是构建一个高可用的分布式键值（key-value）数据库
+* [etcd](../micro_services/etcd.md):分布式 key-value 存储，保存集群的状态数据
   - 存储所有Kubernetes集群状态的，主节点查询etcd以检索节点，容器和容器的状态参数
-  - 事件监听和订阅：其他组件各个通信并不是互相调用API来完成的，而是把状态写入Etcd（相当于写入一个消息），其他组件通过监听Etcd的状态的的变化（相当于订阅消息），然后做后续的处理，然后再一次把更新的数据写入Etcd
-  - Leader选举：其它一些组件比如 Scheduler，为了做实现高可用，通过Etcd从多个（通常是3个）实例里面选举出来一个做Master，其他都是Standby
   - 整个系统的最核心，所有组件之间通信都需要通过Etcd
-  - 存储所有Kubernetes集群状态
-  - 事件监听和订阅：其他组件各个通信并不是互相调用API来完成的，而是把状态写入Etcd（相当于写入一个消息），其他组件通过监听Etcd的状态的的变化（相当于订阅消息），然后做后续的处理，然后再一次把更新的数据写入Etcd
-  - Leader选举：其它一些组件比如 Scheduler，为了做实现高可用，通过Etcd从多个（通常是3个）实例里面选举出来一个做Master，其他都是Standby
 * API Server: 所有组件之间通信都需要通过Etcd。组件并不是直接访问Etcd，而是访问 API Server 这个代理，通过标准的RESTFul API（重新封装了对Etcd接口调用），除此之外，这个代理还实现了一些附加功能，比如身份的认证、缓存等
   - 根据请求的类型，比如创建Pod时storage类型是pods，然后依此选择何种 REST Storage API 对请求作出处理
   - 提供了k8s各类资源对象（pod,RC,Service等）的增删改查及watch等HTTP Rest接口，是整个系统的数据总线和数据中心
@@ -236,7 +469,7 @@ kubectl delete namespaces new-namespace
 * Kubectl: 一个命令行工具，调用 API Server 发送请求写入状态到Etcd，或者查询Etcd状态
 
 * Minion Registry
-  - 负责跟踪Kubernetes 集群中有多少Minion(Host)
+  - 负责跟踪 Kubernetes 集群中有多少Minion(Host)
   - Kubernetes封装Minion Registry成实现Kubernetes API Server的RESTful API接口REST，通过这些API，可以对Minion Registry做Create、Get、List、Delete操作，由于Minon只能被创建或删除，所以不支持Update操作，并把Minion的相关配置信息存储到etcd
   - Scheduler算法根据Minion的资源容量来确定是否将新建Pod分发到该Minion节点。通过`curl http://{master-apiserver-ip}:4001/v2/keys/registry/minions/`来验证etcd中存储的内容
 * Pod Registry
@@ -258,15 +491,70 @@ kubectl delete namespaces new-namespace
   - 实现了Kubernetes API Server的RESTful API接口，但Binding Registry是一个write-only对象，所有只有Create操作可以使用，否则会引起错误。
 * kubecfg、Minion(Host)以及Proxy,子进程组件
 
+![Master](../_static/master.png)
+
+```sh
+kubrctl get namespaces
+kubectl create|delete namespace xxx
+
+kubectl get pods --all-namespaces
+kubectl get service|pod|secret|namespace|node|csr
+kubectl describe service|pod|secret|namespace|nodes|csr rs_name -n namespace_name
+
+kubectl edit service service_name
+
+kubectl apply -f https://k8s.io/examples/application/deployment.yaml --record
+
+kubectl get nodes
+kubectl describe node maste
+
+kubectl get pods -n kube-system
+kubectl exec -it pod_name -c container_name bash -n namespace_name
+kubectl delete pod pod_name -n namespace_name
+
+kubectl run nginx --image nginx
+kubectl create deployment nginx --image nginx
+kubectl explain deployment
+kubectl get deployment -n namespace_name
+
+kubectl create -f nginx.yaml
+kubectl delete -f nginx.yaml -f redis.yaml
+kubectl replace -f nginx.yaml
+kubectl delete deployment deployment_name -n namespace_name
+
+kubectl diff -R -f configs/
+kubectl apply -R -f configs/
+
+kubectl logs -f pod_name
+
+kubectl create serviceaccount user_name -n namespace_name
+kubectl get serviceaccount -A
+kubectl get role -n namespace_name
+
+kubectl exec -it pod_name bash -n namespace_name
+
+kubectl get secret -A     #查看k8s集群所有的秘钥
+kubectl describe secret token_name -n namespace_name #查看指定namespace里的指定token的详细信息
+
+kubectl describe service service_name   #查看指定service的详细信息
+
+kubectl get ep -n namespace_name #列出指定namespace中所有service与endpoint的对应关系
+
+kubectl get hpa -n namespace_name #查看指定namespace中的hpa控制器
+
+kubectl get pv                     #查看pv状态
+
+kubectl get pvc -n namespace_name
+```
+
 ## Worker Node
 
-- K8s中的工作节点，可以是虚拟机或物理机。每个Node由K8s Master管理，Node上可以有多个Pod，K8s Master会自动处理Node的Pod调度，同时Master的自动调度会考虑每个Node上的可用资源，为了管理Pod，每个Node上至少要运行Docker、kubelet和kube-proxy
-- 通常是物理机、虚拟机或者云服务商提供的资源，并不是由Kubernetes创建的。Kubernetes创建一个Node，仅仅表示Kubernetes在系统内部创建了一个Node对象
+* K8s中的工作节点，可以是虚拟机或物理机。每个Node由K8s Master管理，Node上可以有多个Pod，K8s Master会自动处理Node的Pod调度，同时Master的自动调度会考虑每个Node上的可用资源，为了管理Pod，每个Node上至少要运行Docker、kubelet和kube-proxy
+* 通常是物理机、虚拟机或者云服务商提供的资源，并不是由Kubernetes创建的。Kubernetes创建一个Node，仅仅表示Kubernetes在系统内部创建了一个Node对象
   + 创建后即会对其进行一系列健康检查，包括是否可以连通、服务是否正确启动、是否可以创建Pod等。如果检查未能通过，则该Node将会在集群中被标记为不可用（Not Ready）
   + Node Controller是Kubernetes Master中的一个组件，用于管理Node对象。两个主要功能包括
     * 集群范围内的Node信息同步，可以通过kube-controller-manager的启动参数--node-sync-period设置同步的时间周期
     * 单个Node的生命周期管理
-
 * 管理
   + 维护Node状态
   + 与Cloud Provider同步Node
@@ -360,95 +648,7 @@ kubectl delete namespaces new-namespace
   - Scheduler监听到有新的Pod被创建，获取到Pod对象信息，根据集群状态将Pod调度到某一个worker节点上，然后更新Pod
   - Kubelet监听到当前的节点被指定了的Pod，就根据对象信息运行Pod。
 
-## [对象](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/)
-
-* Kubernetes 包含若干用来表示系统状态的抽象层，包括：已部署的容器化应用和负载、与它们相关的网络和磁盘资源以及有关集群正在运行的其他操作的信息。这些抽象使用 Kubernetes API 对象来表示
-* 基本对象
-  - Pod:运行于 Node 中，一个 Node 中通常会运行多个 Pod
-    + K8s 中基本构建单元
-    + 一个 Pod 中可以包含多个 Container，通常是包含一个
-    + 一个 Pod 就是一个最小单元，其中的内容绝对不会被分割在2个Node上，一个 Pod 中的内容始终作为一个整体
-    + 负责处理容器的数据卷、密钥、配置
-    + 生命周期是不确定
-    + 生存在 Worker Node 上
-  - Service 为一组 Pod 创建单个访问点, 提供一致的 IP 地址和端口，以访问其中的 Pod
-    + 外部用户和内部 Pod 都使用服务与其他 Pod 通信
-  - Volume 是一个可以保存数据的目录
-    + 一个 Pod 的组件，在 Pod 中创建，不能单独删除
-    + Pod 中的容器都可以访问 Volume，只要这些容器都挂载了这 Volume 即可
-    + 生命周期是独立于容器的，与 Pod 相关
-  - Namespace
-* Controller 高级抽象:基于基本对象构建并提供额外的功能和方便使用的特性
-  - Deployment:创建和管理 ReplicaSet
-    + 无缝升级运行中的应用
-    + 指定了 Pod 死掉后重启的策略
-    + 通过命令行|配置文件 创建
-  - DaemonSet 用于持续的进程，每当一个 Node 加入到集群中时，DaemonSet 都会在其中自动启动一个 Pod。适用于一直运行的后台任务，例如监控、日志收集
-  - StatefulSet 就助跟踪应用状态,据规范管理一组 Pod 的部署和缩放
-    + StatefulSet 的 Pod 都有一个唯一的、持久的标识，控制器在进行任何重新调度时都会维护该标识。对于数据库等有状态的持久化后端服务非常有用。 Pod 中的状态信息就是保存在与 StatefulSet 关联的数据卷中
-    + StatefulSet 和 DaemonSet 虽然与 ReplicaSet 在一个层级中，但不受 Deployment 控制
-  - ReplicaSet 创建和管理 Pod
-    + 确保 APP 具有指定数量的 Pod,根据 Deployment 中设定的指标来创建和扩展
-    + 如果一个 Pod 因为 Node 故障而关闭，ReplicaSet 会自动在其他 Node 中启动这个 Pod。 ReplicaSet 由 Deployment 创建，可以通过 Deployment 非常方便的升级应用
-  - Job 负责监督管理那些运行批处理作业的 Pod
-    + 会创建 Pod，并通过跟踪 Pod 成功完成的数量来确保他们完成任务
-    + 一旦容器内部的作业成功完成，容器就不会重新启动.
-    + 一次性的做一个任务的时候
-  - CronJob:在指定的时间运行作业.计划以固定的时间间隔或固定的时间重复执行
-
-```sh
-kubrctl get namespaces
-kubectl create|delete namespace xxx
-
-kubectl get pods --all-namespaces
-kubectl get service|pod|secret|namespace|node|csr
-kubectl describe service|pod|secret|namespace|nodes|csr rs_name -n namespace_name
-
-kubectl edit service service_name
-
-kubectl apply -f https://k8s.io/examples/application/deployment.yaml --record
-
-kubectl get nodes
-kubectl describe node maste
-
-kubectl get pods -n kube-system
-kubectl exec -it pod_name -c container_name bash -n namespace_name
-kubectl delete pod pod_name -n namespace_name
-
-kubectl run nginx --image nginx
-kubectl create deployment nginx --image nginx
-kubectl explain deployment
-kubectl get deployment -n namespace_name
-
-kubectl create -f nginx.yaml
-kubectl delete -f nginx.yaml -f redis.yaml
-kubectl replace -f nginx.yaml
-kubectl delete deployment deployment_name -n namespace_name
-
-kubectl diff -R -f configs/
-kubectl apply -R -f configs/
-
-kubectl logs -f pod_name
-
-kubectl create serviceaccount user_name -n namespace_name
-kubectl get serviceaccount -A
-kubectl get role -n namespace_name
-
-kubectl exec -it pod_name bash -n namespace_name
-
-kubectl get secret -A     #查看k8s集群所有的秘钥
-kubectl describe secret token_name -n namespace_name #查看指定namespace里的指定token的详细信息
-
-kubectl describe service service_name   #查看指定service的详细信息
-
-kubectl get ep -n namespace_name #列出指定namespace中所有service与endpoint的对应关系
-
-kubectl get hpa -n namespace_name #查看指定namespace中的hpa控制器
-
-kubectl get pv                     #查看pv状态
-
-kubectl get pvc -n namespace_name
-```
+![kubelet](../_static/kubelet.png)
 
 ## Pod
 
@@ -586,7 +786,9 @@ spec:
          path: /
          port: 8080
        timeoutSeconds: 2
+```
 
+```sh
 kubectl get pods
 kubectl describe pod podName
 
@@ -613,6 +815,12 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
 
 ## [Deployment](https://mp.weixin.qq.com/s/XRp13zkoo94q31RO5zIfaA)
 
+* 定义Deployment来创建Pod和ReplicaSet,为 Pod 和 ReplicaSet 提供了一个声明式定义(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用.一个管理ReplicaSet并提供Pod声明式更新、应用的版本管理以及许多其他功能的更高级的控制器
+* Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
+* 虚拟化部署
+  - 允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性
+  - 一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
+  - 容器化部署:多个应用程序可以共享相同的基础操作系统
 * 功能
   - 轻松部署RS（副本集）
   - 清理不再需要旧版RS
@@ -624,15 +832,12 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
   - Deployment 控制器从 Etcd 中获取到所有携带了"app: nginx"标签 Pod，然后统计它们数量，这就是实际状态
   - Deployment 对象的 Replicas 字段值就是期望状态，Deployment 控制器将两个状态做比较
   - 根据比较结果，Deployment确定是创建 Pod，还是删除已有的 Pod，还是什么不干
-* 一个管理ReplicaSet并提供Pod声明式更新、应用的版本管理以及许多其他功能的更高级的控制器
-* 虚拟化部署:允许在单个物理服务器上创建隔离的虚拟环境，即虚拟机（VM）。该解决方案隔离了VM中的应用程序，限制了资源的使用并提高了安全性。一个应用程序不能再自由访问另一个应用程序处理的信息.快速扩展并分散单个物理服务器的资源，随意更新并控制硬件成本。每个VM都有其操作系统，并且可以在虚拟化硬件之上运行所有必要的系统
-* 容器化部署:多个应用程序可以共享相同的基础操作系统
 * Deployment控制器不直接管理Pod对象，通过管理ReplicaSet，再由ReplicaSet负责管理Pod对象
   - 通过 ReplicaSet 的个数来描述应用的版本
   - 通过 ReplicaSet 的属性（比如 replicas 的值），来保证 Pod 的副本数量
-* Deployment是一个更高层次的概念，管理ReplicaSet，并提供对pod的声明性更新以及许多其他的功能。因此，建议使用Deployment而不是直接使用ReplicaSet。这实际上意味着可能永远不需要操作ReplicaSet对象，而是直接使用Deployment并在规范部分定义应用程序
-* Deployment 通过"控制器模式"，来操作ReplicaSet 的个数和属性，进而实现"水平扩展 / 收缩" 和 "滚动更新" 这两个编排动作
-* 水平扩展/收缩
+* 暂停和继续Deployment
+* 通过"控制器模式"，来操作ReplicaSet 的个数和属性，进而实现"水平扩展 / 收缩" 和 "滚动更新" 这两个编排动作
+* 水平扩展/收缩|扩容和缩容
   - 是不会创建新的ReplicaSet的，但是涉及到Pod模板的更新后，比如更改容器的镜像，那么Deployment会用创建一个新版本的ReplicaSet用来替换旧版本
 * 滚动更新
   - 更新deployment.yaml里的镜像名称，然后执行 kubectl apply -f deployment.yaml。一般公司里的Jenkins等持续继承工具用的就是这种方式
@@ -640,24 +845,19 @@ echo "source <(kubectl completion bash)" >> ~/.bash_profile
     + 用新版本的ReplicaSet对象替换旧版本对象
   - 修改了Deployment里的Pod定义之后，Deployment 会使用这个修改后的 Pod 模板，创建一个新的 ReplicaSet（hash=6749dbc697），这个新的ReplicaSet 的初始Pod副本数是：0。然后Deployment 开始将这个新的ReplicaSet所控制的Pod 副本数从 0 个变成 1 个，即："水平扩展"出一个副本。
   - 紧接着Deployment又将旧的 ReplicaSet（hash=864496b67b）所控制的旧 Pod 副本数减少一个，即："水平收缩"成两个副本。如此交替进行就完成了这一组Pod 的版本升级过程。像这样，将一个集群中正在运行的多个 Pod 版本，交替地逐一升级的过程，就是 "滚动更新"
-* 为了保证服务的连续性，Deployment 还会确保，在任何时间窗口内，只有指定比例的Pod 处于离线状态。同时，它也会确保，在任何时间窗口内，只有指定比例的新 Pod 被创建出来。这两个比例的值都是可以配置的，默认都是期望状态里spec.relicas值的 25%。所以，在上面这个 Deployment 的例子中，它有 3 个 Pod 副本，那么控制器在“滚动更新”的过程中永远都会确保至少有 2 个Pod 处于可用状态，至多只有 4 个 Pod 同时存在于集群中。这个策略可以通过Deployment 对象的一个字段，RollingUpdateStrategy来设置
+  - 为了保证服务的连续性，Deployment 会确保在任何时间窗口内只有指定比例的Pod 处于离线状态。同时也会确保在任何时间窗口内只有指定比例的新 Pod 被创建出来。这两个比例的值都是可以配置的，默认都是期望状态里spec.relicas值的 25%。所以，在上面这个 Deployment 的例子中，它有 3 个 Pod 副本，那么控制器在“滚动更新”的过程中永远都会确保至少有 2 个Pod 处于可用状态，至多只有 4 个 Pod 同时存在于集群中。这个策略可以通过Deployment 对象的一个字段，RollingUpdateStrategy来设置
 * 回滚
   - 执行变更命令的时候都使用了--record 参数，这个参数能让Kubernetes在这个Deployment的变更记录里记录上产生变更当时执行的命令
   - 以前那个版本的ReplicaSet(hash=864496b67b)的Pod的数又变回了3，新ReplicaSet(hash=6749dbc697)的Pod数变成了0
   - Deployment在上次滚动更新后并不会把旧版本的ReplicaSet删掉，而是留着回滚的时候用，所以ReplicaSet相当于一个基础设施层面的应用的版本管理
   - 回滚后在看变更记录，发现已经没有修订号1的内容了，而是多了修订号为3的内容，这个版本的变更内容其实就是回滚前修订号1里的变更内容
-* 控制ReplicaSet的版本数量
+* 控制 ReplicaSet 版本数量
   - 对 Deployment 的多次更新操作，最后只生成一个ReplicaSet对象
     + `kubectl rollout pause`这个Deployment进入了一个"暂停"状态。由于此时Deployment正处于“暂停”状态，所以对Deployment的所有修改，都不会触发新的“滚动更新”，也不会创建新的ReplicaSet。
     + 等到对 Deployment 修改操作都完成之后，只需要再执行一条 kubectl rollout resume 指令，就可以把这个它恢复回来
   - Deployment 对象有一个字段，叫作 spec.revisionHistoryLimit，就是 Kubernetes 为 Deployment 保留的"历史版本"个数。如果把它设置为 0，就再也不能做回滚操作了
 * Deployment 的设计，代替完成了对应用的抽象，可以用一个Deployment 对象来描述应用，使用 kubectl rollout 命令控制应用的版本
 * 会保证服务的连续性，确保滚动更新时在任何时间窗口内，只有指定比例的Pod 处于离线状态，同时也只有指定比例的新 Pod 被创建出来，这样就保证了服务能平滑更新
-
-* 定义Deployment来创建Pod和ReplicaSet,为 Pod 和 ReplicaSet 提供了一个声明式定义(declarative)方法，用来替代以前的 ReplicationController 来方便的管理应用
-* 滚动升级和回滚应用
-* 扩容和缩容
-* 暂停和继续Deployment
 * 状态
   - 无效引用
   - 不可读的probe failure
@@ -869,18 +1069,6 @@ kubectl get pods -l environment=production,tier=frontend
 kubectl get pods -l ‘environment in (production),tier in (frontend)’
 ```
 
-## 过程
-
-* 管理员创建应用程序的所需状态并将其放入清单文件manifest.yml中
-* 使用CLI或提供的用户界面将清单文件提供给Kubernetes API Server。Kubernetes的默认命令行工具为kubectl
-* Kubernetes将清单文件（描述了应用程序的期望状态）存储在称为键值存储（etcd）的数据库中
-* Kubernetes随后在集群内的所有相关应用程序上实现所需的状态
-* Kubernetes持续监控集群的元素，以确保应用程序的当前状态不会与所需状态有所不同
-* 参考
-  - [kubectl 创建 Pod 背后到底发生了什么？](https://fuckcloudnative.io/posts/what-happens-when-k8s/)
-
-![Alt text](../_static/what-happens-when-k8s.svg "Optional title")
-
 ## Job
 
 * 用于Pod对象运行一次性任务，容器中的进程在正常运行结束后不会对其进行重启，而是将Pod对象置于"Completed"(完成)状态
@@ -920,7 +1108,7 @@ kubectl describe job -busybox-job
   - template :PodTemplate（Pod 模板）
   - 怎么多版本共存
 
-```
+```yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -1009,7 +1197,7 @@ kubectl describe replicaset myapp-replicas
   - 手动配置服务的endpoint（外部）:可以配置外部的ip端口,访问外部 `kubectl exec kubia-599v9 -- curl -s http://external-service`
   - 创建外部服务别名
 
-```
+```yaml
 # svc.yml
 apiVersion: v1
 kind: Service
@@ -1027,6 +1215,7 @@ spec:
     rel: stable
    type: NodePort#NodePort可以定义一个端口给外部范围
 
+```sh
 kubectl get svc
 kubectl get svc -n prod
 
@@ -1093,35 +1282,6 @@ kubectl exec pods/configmap-volume-pod -- curl 2>/dev/null  http://127.0.0.1/ngx
 kubectl create configmap nginx-config-files --from-file=./data/nginx/conf.d/
 kubectl create configmap nginx-html-files --from-file=./data/nginx/html/configmap.html
 ```
-
-## API 对象
-
-* 基于声明性模型运行并实现"所需状态"的概念
-* API物件是Kubernetes集群中的管理操作单元。集群中的众多技术概念分别对应着API物件，每个API物件都有3大类属性：
-  - metadata（元资料）：用来标识API物件，包含namespace、name、uid等
-  - spec（规范）：描述使用者期望达到的理想状态，所有的操作都是宣告式（Declarative）的而不是命令式（Imperative），在分布式系统中的好处是稳定，不怕丢操作或执行多次。比如设定期望3个执行Nginx的Pod，执行多次也还是一个结果，而给副本数加1的操作就不是宣告式的，执行多次结果就错了。
-  - status（状态）：描述系统当前实际达到的状态，比如期望3个Pod，现在实际建立好了2个。
-* 声明式 API
-  - 所谓“声明式”，指的就是只需要提交一个定义好的 API 对象来“声明”，所期望的状态是什么样子
-  - “声明式 API”允许有多个 API 写端，以 PATCH 的方式对 API 对象进行修改，而无需关心本地原始 YAML 文件的内容
-  - 最重要的，有了上述两个能力，Kubernetes 项目才可以基于对 API 对象的增、删、改、查，在完全无需外界干预的情况下，完成对“实际状态”和“期望状态”的调谐（Reconcile）过程。
-  - controller通过解读结构化的resource数据，获得期望状态，从而不断的调协期望状态和实际状态
-* kubectl replace 的执行过程，是使用新的 YAML 文件中的 API 对象，替换原有的 API 对象
-  - kube-apiserver 在响应命令式请求（比如，kubectl replace）的时候，一次只能处理一个写请求，否则会有产生冲突的可能
-* kubectl apply，则是执行了一个对原有 API 对象的 PATCH 操作
-  - 一次能处理多个写操作，并且具备 Merge 能力
-* 在 Etcd 里的完整资源路径，是由：Group（API 组）、Version（API 版本）和 Resource（API 资源类型）三个部分组成
-  - 会匹配 API 对象的组
-    + 对于 Kubernetes 里的核心 API 对象，比如：Pod、Node 等，是不需要 Group 的（即：它们的 Group 是“”）。所以，对于这些 API 对象来说，Kubernetes 会直接在 /api 这个层级进行下一步的匹配过程
-    + 对于 CronJob 等非核心 API 对象来说，Kubernetes 就必须在 /apis 这个层级里查找它对应的 Group，进而根据“batch”这个 Group 的名字，找到 /apis/batch
-  - 进一步匹配到 API 对象的版本号
-  - 会匹配 API 对象的资源类型
-* 创建 CronJob 对象
-  - 发起了创建 CronJob 的 POST 请求之后，编写的 YAML 的信息就被提交给了 APIServer。而 APIServer 的第一个功能，就是过滤这个请求，并完成一些前置性的工作，比如授权、超时处理、审计等
-  - 请求会进入 MUX 和 Routes 流程。如果你编写过 Web Server 的话就会知道，MUX 和 Routes 是 APIServer 完成 URL 和 Handler 绑定的场所。而 APIServer 的 Handler 要做的事情，就是按照我刚刚介绍的匹配过程，找到对应的 CronJob 类型定义
-  - 根据这个 CronJob 类型定义，使用用户提交的 YAML 文件里的字段，创建一个 CronJob 对象.进行一个 Convert 工作，即：把用户提交的 YAML 文件，转换成一个叫作 Super Version 的对象，它正是该 API 资源类型所有版本的字段全集。这样用户提交的不同版本的 YAML 文件，就都可以用这个 Super Version 对象来进行处理了
-  - APIServer 会先后进行 Admission() 和 Validation() 操作.Validation，则负责验证这个对象里的各个字段是否合法。这个被验证过的 API 对象，都保存在了 APIServer 里一个叫作 Registry 的数据结构中。也就是说，只要一个 API 对象的定义能在 Registry 里查到，它就是一个有效的 Kubernetes API 对象
-  - APIServer 会把验证过的 API 对象转换成用户最初提交的版本，进行序列化操作，并调用 Etcd 的 API 把它保存起来
 
 ## 网络
 
@@ -1192,29 +1352,6 @@ cd $GOPATH/src/k8s.io/code-generator
 * StatefulSet 的核心功能，就是通过某种方式记录这些状态，然后在 Pod 被重新创建时，能够为新 Pod 恢复这些状态
 * 滚动更新”（rolling update): kubectl patch 会按照与 Pod 编号相反的顺序，从最后一个 Pod 开始，逐一更新这个 StatefulSet 管理的每个 Pod
 
-## 创建与修改
-
-* 用 Kubernetes API 对象 来描述集群的预期状态（desired state）：包括需要运行的应用或者负载，使用的镜像、副本数，以及所需网络和磁盘资源等等
-* 用命令行工具 kubectl 来调用 Kubernetes API 创建对象，通过所创建的这些对象来配置预期状态
-* 直接调用 Kubernetes API 和集群进行交互，设置或者修改预期状态
-
-## 原理
-
-* 一旦设置了所需目标状态,Kubernetes 控制面（control plane） 会通过 Pod 生命周期事件生成器(PLEG)，促成集群的当前状态符合其预期状态.Kubernetes 会自动执行各类任务，比如运行或者重启容器、调整给定应用的副本数等等.Kubernetes 控制面由一组运行在集群上的进程组成
-* Kubernetes 控制平面
-  - 管理着 Kubernetes 如何与集群进行通信
-  - 维护着系统中所有的 Kubernetes 对象的状态记录，并且通过连续的控制循环来管理这些对象的状态
-  - 在任意的给定时间点，控制面的控制环都能响应集群中的变化，并且让系统中所有对象的实际状态与提供的预期状态相匹配
-* Kubernetes master 节点:负责维护集群目标状态。当要与 Kubernetes 通信时，使用如 kubectl 的命令行工具，就可以直接与 Kubernetes master 节点进行通信
-  - 包含以下三个进程,都运行在集群中的某个节点上，主控组件所在节点通常被称为 master 节点
-    + kube-apiserver
-    + kube-controller-manager:`kubernetes/pkg/controller/`每一个控制器，都以独有的方式负责某种编排功能,控制循环（control loop）
-    + kube-scheduler
-* Kubernetes Node 节点 :集群中的 node 节点（虚拟机、物理机等等）都是用来运行应用和云工作流的机器。Kubernetes master 节点控制所有 node 节点
-  - 集群中每个非 master 节点都运行两个进程：
-    + kubelet，和 master 节点进行通信
-    + kube-proxy：一种网络代理，将 Kubernetes 的网络服务代理到每个节点上
-
 ## Dynamic Admission Control （Initializer）
 
 * 流程
@@ -1259,12 +1396,7 @@ cd $GOPATH/src/k8s.io/code-generator
   - 删除使用这个 PV 的 Pod
   - 从宿主机移除本地磁盘（比如，umount 它）
   - 删除 PVC
-  - 删除 PV。
-* Container Storage Interface（CSI） 插件体系的设计思想，就是把这个 Provision 阶段，以及 Kubernetes 里的一部分存储管理功能，从主干代码里剥离出来，做成了几个单独的组件。
-  - 会以 gRPC 的方式对外提供三个服务（gRPC Service）
-    + CSI Identity
-    + CSI Controller
-    + CSI Nod
+  - 删除 PV
 
 ```sh
 # 在node-1上执行
@@ -1275,7 +1407,7 @@ for vol in vol1 vol2 vol3; do
 done
 ```
 
-```
+```sh
 # The connection to the server localhost:8080 was refused - did you specify the right host or port?
 
 sudo mkdir ~/.kube
@@ -1285,14 +1417,17 @@ sudo mv admin.conf config
 sudo service kubelet restart
 ```
 
-## Container Network Interface CNI
-
-* A CNI plugin is responsible for inserting a network interface into the container network namespace (e.g. one end of a veth pair) and making any necessary changes on the host (e.g. attaching the other end of the veth into a bridge). It should then assign the IP to the interface and setup the routes consistent with the IP Address Management section by invoking appropriate IPAM plugin
-
 ### kubectl kubelet client 集群管理命令行工具集
 
 通过客户端的kubectl命令集操作，API Server响应对应的命令结果，从而达到对kubernetes集群的管理
 
+* 管理员创建应用程序的所需状态并将其放入清单文件manifest.yml中
+* 使用CLI或提供的用户界面将清单文件提供给Kubernetes API Server。Kubernetes的默认命令行工具为kubectl
+* Kubernetes将清单文件（描述了应用程序的期望状态）存储在称为键值存储（etcd）的数据库中
+* Kubernetes随后在集群内的所有相关应用程序上实现所需的状态
+* Kubernetes持续监控集群的元素，以确保应用程序的当前状态不会与所需状态有所不同
+* 参考
+  - [kubectl 创建 Pod 背后到底发生了什么？](https://fuckcloudnative.io/posts/what-happens-when-k8s/)
 * 前提
   - 禁用防火墙
   - 禁用swap分区
@@ -1498,10 +1633,10 @@ kubectl cluster-info # cluster-info 命令：显示集群信息
 
 # 以前需要heapster，后替换为metrics-server
 kubectl top pod --all-namespaces # top 命令：用于查看资源的cpu，内存磁盘等资源的使用率
-cordon命令：用于标记某个节点不可调度
-uncordon命令：用于标签节点可以调度
-drain命令：用于在维护期间排除节点。
-taint命令：用于给某个Node节点设置污点
+# cordon命令：用于标记某个节点不可调度
+# uncordon命令：用于标签节点可以调度
+# drain命令：用于在维护期间排除节点。
+# taint命令：用于给某个Node节点设置污点
 
 kubectl logs nginx # 返回仅包含一个容器的pod nginx的日志快照
 kubectl logs -p -c ruby web-1 # 返回pod ruby中已经停止的容器web-1的日志快照
@@ -1529,6 +1664,13 @@ kubectl taint nodes NODE_NAME node-role.kubernetes.io/master=true:NoSchedule
 ```
 
 ## [k8s](https://rollout.io/blog/getting-started-with-kubernetes/)
+
+* [kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes <https://k8s.af>
+* [what-happens-when-k8s](https://github.com/jamiehannaford/what-happens-when-k8s):🤔 What happens when I type kubectl run?
+* [k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained <https://blog.container-solutions.com/kubernetes-deployment-strategies>
+* [Kuboard for K8S](https://kuboard.cn/learning/)
+
+![Alt text](../_static/what-happens-when-k8s.svg "Optional title")
 
 ```sh
 curl https://get.k8s.io > kubernetes_install.sh
@@ -1641,25 +1783,18 @@ kubectl get pods -n rook-ceph
 
 ### 服务降级
 
-服务治理策略中重要的一环。当业务出现流量峰值，或者系统中某个组成部分出现故障，保证系统整体功能仍然可用，可能需要停掉一些不太重要的周边系统，从而保证核心服务的 SLA。比如电商系统在进行大促时，往往会弃车保帅，优先选择停止"猜你喜欢"、"评论"等不那么重要的系统，保障购物车、支付系统可用。在微服务架构里，每个服务无论是服务提供方还是服务调用方，都应该围绕 SLA 制定不同的降级策略。按降级粒度粗细可以制定接口降级、功能降级、服务降级。
-
+* 服务治理策略中重要一环。当业务出现流量峰值，或者系统中某个组成部分出现故障，保证系统整体功能仍然可用，可能需要停掉一些不太重要的周边系统，从而保证核心服务的 SLA
+  - 比如电商系统在进行大促时，往往会弃车保帅，优先选择停止"猜你喜欢"、"评论"等不那么重要的系统，保障购物车、支付系统可用。
+  - 在微服务架构里，每个服务无论是服务提供方还是服务调用方，都应该围绕 SLA 制定不同的降级策略。按降级粒度粗细可以制定接口降级、功能降级、服务降级。
 * 接口降级：对于非核心接口，设置为直接返回空或异常，可以在高峰期有效减少接口逻辑对资源（CPU、内存、网络 I/O、磁盘 I/O 等）的占用和消耗。
 * 功能降级：对于非核心功能，可以设置该功能直接执行本地逻辑，不做跨服务、跨网络访问。也可以设置降级开关，一键关闭指定功能，保全系统稳定运行。
 * 服务降级：对于非核心服务，可以通过服务治理框架根据错误率或者响应时间自动触发降级策略。
 * 功能降级和服务降级可以通过熔断机制和断路器实现
-  - 自动化容器的部署与复制
-  - 服务与命名发现
-  - 集群调度
-  - 自动扩展及收缩服务器规模
-  - 容器编排，负载均衡
-  - 应用升级部署
-  - 弹性容器及故障迁移
-  - 集群监控
 
 ## Ingress Controller
 
 * 一个统称，并不是只有一个，有如下：
-  - Ingress NGINX: Kubernetes 官方维护的方案，也是本次安装使用的 Controller
+  - [ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
   - F5 BIG-IP Controller: F5 所开发的 Controller，它能够让管理员通过 CLI 或 API 让 Kubernetes 与 OpenShift 管理 F5 BIG-IP 设备
   - Ingress Kong: 著名的开源 API Gateway 方案所维护的 Kubernetes Ingress Controller
   - Traefik: 是一套开源的 HTTP 反向代理与负载均衡器，而它也支援了 Ingress
@@ -1727,15 +1862,17 @@ echo “export KUBECONFIG=/etc/kubernetes/admin.conf” >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-## 图书
-
-* Kubernetes Handbook
-* Kubernetes 指南
-* **Kubernates in action**
-
 ## 课程
 
 * [kube.academy](https://kube.academy):Your Kubernetes Journey Starts Here
+
+## 图书
+
+* [kubernetes-handbook](https://github.com/feiskyer/kubernetes-handbook):Kubernetes Handbook （Kubernetes指南） <https://kubernetes.feisky.xyzs>
+* [Kubernetes Handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/云原生应用架构实践手册 - <https://jimmysong.io/kubernetes-handbook>
+* Kubernetes 指南
+* **Kubernates in action**
+* Kubernetes生产化实践之路
 
 ## 实例
 
@@ -1779,7 +1916,7 @@ source ~/.bash_profile
   - [Kube-shell](https://github.com/cloudnativelabs/kube-shell)
   - [k9s](https://github.com/derailed/k9s):dog Kubernetes CLI To Manage Your Clusters In Style! <https://k9scli.io/>
 * Serverless
-  - [Kubeless](https://kubeless.io/):用于部署小型应用程序的本地Kubernetes工具。它使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
+  - [kubeless](https://github.com/kubeless/kubeless):Kubernetes Native Serverless Framework <https://kubeless.io>用于部署小型应用程序的本地Kubernetes工具。使用Kubernetes资源来执行许多任务，这有利于自动扩容、路由API、监控以及故障排查
   - [IronFunction：](https://open.iron.io/):用Golang编写的开源Serverless工具。它支持任何编程语言。支持AWS Lambda函数
 * IDE
   - [lens](https://github.com/lensapp/lens):Lens - The Kubernetes IDE <https://k8slens.dev/>
@@ -1793,7 +1930,6 @@ source ~/.bash_profile
 * [conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes <https://conduit.io>
 * [flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
 * [kubernetes-client](https://github.com/kubernetes-client/javascript):Javascript client
-* [flannel](https://github.com/coreos/flannel):flannel is a network fabric for containers, designed for Kubernetes
 * [argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. <https://argoproj.github.io>
 * [ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy <https://www.getambassador.ios>
 * [virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
@@ -1801,7 +1937,6 @@ source ~/.bash_profile
 * [kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes
 * [binctr](https://github.com/genuinetools/binctr):Fully static, unprivileged, self-contained, containers as executable binaries. <https://blog.jessfraz.com/post/getting-towards-real-sandbox-containers/>
 * [kompose](https://github.com/kubernetes/kompose):Go from Docker Compose to Kubernetes <http://kompose.io>
-* [kubeless](https://github.com/kubeless/kubeless):Kubernetes Native Serverless Framework <https://kubeless.io>
 * [tilt](https://github.com/windmilleng/tilt):Local Kubernetes development with no stress <https://tilt.build/>
 * [cert-manager](https://github.com/jetstack/cert-manager):Automatically provision and manage TLS certificates in Kubernetes <https://jetstack.io>
 * [voyager](https://github.com/appscode/voyager):🚀 Secure HAProxy Ingress Controller for Kubernetes <https://appscode.com/products/voyager>
@@ -1811,12 +1946,11 @@ source ~/.bash_profile
 * [kubernetes-workshop](https://github.com/eon01/kubernetes-workshop): A Gentle introduction to Kubernetes with more than just the basics.
 * [okd](https://docs.okd.io/)
 * [microk8s](https://github.com/ubuntu/microk8s):MicroK8s is a small, fast, single-package Kubernetes for developers, IoT and edge. <https://microk8s.io>
-* [ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
 * cabin:一个Kubernetes 的原生的手机App仪表盘
 * Kubectx:Kubectx与kubens捆绑在一起，当你使用kubectl的时候，允许你在Kubernetes集群和命名空间之间切换
 * Kube-shell:个和Kubernetes CLI集成的 Shell，它有一些非常漂亮的特性
 * Kube-prompt
-* Kail是一个 Kubernetes tail。作为一个Kubernetes日志查看器，kail允许使用选择器从匹配的pods流式的查看日志
+* Kail 是一个 Kubernetes tail。作为一个Kubernetes日志查看器，kail允许使用选择器从匹配的pods流式的查看日志
 * Weave Scope 是一个Docker 和 Kubernetes的排错&监控工具
 * PowerfulSeal 的灵感来源于 Chaos Monkey，由 Bloomberg 工程师团队开发。它可以给你的Kubernetes集群添加混乱，如杀掉目标的pods或者是节点。它以两个模式操作：交互式和自治的。
   - 交互式模式被设计为允许你发现你的集群组件，并且人工的停止一些事情看会发生什么。它操作在节点，pods，部署，和命名空间上。
@@ -1837,20 +1971,12 @@ source ~/.bash_profile
 
 * [Tutorials](https://kubernetes.io/docs/tutorials/)
 * [Kubernetes 中文社区](https://www.kubernetes.org.cn)
-* [Kubernetes中文文档](http://docs.kubernetes.org.cn/)
 * [examples](https://github.com/kubernetes/examples):Kubernetes application example tutorials
 * [容器编排和部署](https://developer.ibm.com/cn/solutions/container-orchestration-and-deployment/)
 * [guide](https://github.com/hobby-kube/guide):Kubernetes clusters for the hobbyist
 * [kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts
-* [kubernetes-handbook](https://github.com/feiskyer/kubernetes-handbook):Kubernetes Handbook （Kubernetes指南） <https://kubernetes.feisky.xyzs>
-* [kubernetes-handbook](https://github.com/rootsongjc/kubernetes-handbook):Kubernetes中文指南/云原生应用架构实践手册 - <https://jimmysong.io/kubernetes-handbook>
-* [what-happens-when-k8s](https://github.com/jamiehannaford/what-happens-when-k8s):🤔 What happens when I type kubectl run?
 * [awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 <https://ramitsurana.github.io/awesome-kubernetes/>
 * [kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 <https://github.com/gjmzj/kubeasz>
-* [kubernetes/community](https://github.com/kubernetes/community):Kubernetes community content
-* [hjacobs/kubernetes-failure-stories](https://github.com/hjacobs/kubernetes-failure-stories):Compilation of public failure/horror stories related to Kubernetes <https://k8s.af>
-* [ContainerSolutions/k8s-deployment-strategies](https://github.com/ContainerSolutions/k8s-deployment-strategies):Kubernetes deployment strategies explained <https://blog.container-solutions.com/kubernetes-deployment-strategies>
-* [Kuboard for K8S](https://kuboard.cn/learning/)
 
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
@@ -1863,5 +1989,5 @@ source ~/.bash_profile
 <http://violetgo.com/blogs/>
 <http://www.winseliu.com/>
 <http://blog.csdn.net/qq1010885678/article/details/48832067>
-[网易云原生架构实践w之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
+[网易云原生架构实践之服务治理](https://mp.weixin.qq.com/s/ixkFLfbr3kY8AF_3x-KfSA)
 <https://www.centos.bz/2017/07/kubernetes-pod-schedule-intro/>

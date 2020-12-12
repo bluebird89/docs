@@ -44,6 +44,8 @@ Moby Project - a collaborative project for the container ecosystem to assemble c
   - dotCloud公司将自己的容器技术进行了简化和标准化，并命名为——Docker
   - 2013年3月，dotCloud公司的创始人之一，Docker之父，28岁的Solomon Hykes正式决定，将Docker项目开源.当月，Docker 0.1 版本发布。此后的每一个月，Docker都会发布一个版本。到2014年6月9日，Docker 1.0 版本正式发布
   - Docker火了之后，dotCloud公司干脆把公司名字也改成了Docker Inc.
+  - Docker于2016年联手谷歌与IBM共同打造了containerd项目,2017年被捐赠给云原生计算基金会（CNCF），随后发展出的containerd CRI项目能够与Kubernetes进行交互，也逐步吸引到来自亚马逊、Google、微软以及IBM乃至整个行业的大量创新支持与资源投入
+  - 2019年，containerd成为云原生计算基金会毕业项目，而且时至今日其仍是唯一达到这样成熟性高度的容器运行时
 
 ![Docker的总体架构图](../_static/architect_docker.jpg)
 ![Docker vs VM](../_static/VMvsDocker.jpg)
