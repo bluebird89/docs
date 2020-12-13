@@ -1,6 +1,6 @@
 # [chromium](https://github.com/chromium/chromium)
 
-The official GitHub mirror of the Chromium source <https://chromium.googlesource.com/chromium/src>
+The official GitHub mirror of the Chromium source <https://chromium.googlesource.com/chromium/src> https://www.google.com/chrome/
 
 ## 插件
 
@@ -305,6 +305,14 @@ console.table(languages);
 
 console.dir(document);
 ```
+
+## 搜索引擎
+
+* 快速切换
+  - 添加
+    + 设置->搜索引擎->添加搜索引擎
+    + 给添加搜索引擎设置关键字 `https://www.douban.com/search?q=%s`
+  - 使用搜索栏打入搜索引擎关键字+空格键
 
 ## 工具
 

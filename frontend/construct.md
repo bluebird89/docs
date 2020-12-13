@@ -151,7 +151,7 @@ npm install -g grunt-cli
 npm install grunt  # 项目中安装
 ```
 
-## [parcel-bundler/parcel](https://github.com/parcel-bundler/parcel)
+## [parcel](https://github.com/parcel-bundler/parcel)
 
 📦🚀 Blazing fast, zero configuration web application bundler <https://parceljs.org>
 
@@ -189,6 +189,6 @@ parcel watch index.html
 
 ## [rollup](https://rollupjs.org/)
 
-## [snowpack](https://github.com/pikapkg/snowpack)
+## [snowpack](https://github.com/snowpackjs/snowpack)
 
-☶ A faster build system for the modern web. <https://www.snowpack.dev>
+WASM-powered frontend build tool. Fast, lightweight, unbundled ESM. ✌️ <https://www.snowpack.dev>

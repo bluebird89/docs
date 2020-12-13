@@ -86,12 +86,8 @@
 * 《几何原本》
 * Math with Bad Drawings
 
-## 资源
+## 课程
 
-* [AI算法工程师手册](http://www.huaxiaozhuan.com)
-* [capital of statistics](http://cos.name/)： 统计之都，国内首个旨在推广与应用统计学知识的社区专业型网站
-* [看见统计](https://seeing-theory.brown.edu)
-* [wx-chevalier/Mathematics-Series](https://github.com/wx-chevalier/Mathematics-Series):📚 [.md & .ipynb] 人工智能与深度学习实战--数理统计与数据分析篇
 * khan academy
   - Geometry
   - algebra
@@ -101,3 +97,8 @@
 * [xgboost](https://github.com/dmlc/xgboost):Scalable, Portable and Distributed Gradient Boosting (GBDT, GBRT or GBM) Library, for Python, R, Java, Scala, C++ and more. Runs on single machine, Hadoop, Spark, Flink and DataFlow <https://xgboost.ai/>
 * [penrose](https://github.com/penrose/penrose): Create beautiful diagrams just by typing mathematical notation in plain text. penrose.ink
 * Mathpix Snipping Tool 截取数学公式图片，自动识别公式变成LaTeX
+
+## 参考
+
+* [maths is fun](https://mathsisfun.com/index.htm)
+* [Mathematics-Series](https://github.com/wx-chevalier/Mathematics-Series):📚 [.md & .ipynb] 人工智能与深度学习实战--数理统计与数据分析篇

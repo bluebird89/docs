@@ -316,7 +316,7 @@ sudo systemctl restart docker
 * 概念
   - Docker Engine：整个Docker的核心与基础，平时使用的docker命令，以及提供Docker核心功能的Docker守护进程（Docker Deamon）——包括管理Image、运行Contrainer等
   - Boot2Docker：Docker基于Linux内核特性，因此只能运行于Linux之上，为了能在Mac/Windows系统上运行，有了Boot2Docker。Boot2Docker会先启动一个VirtualBox虚拟机，然后在该虚拟机中运行一个Linux系统，再在Linux中运行Docker
-* LXC Linux Container
+* Linux Container LXC
   - 可以提供轻量级虚拟化，以便隔离进程和资源，而且不需要提供指令解释机制以及全虚拟化的其他复杂性
   - 容器有效地将由单个操作系统管理的资源划分到孤立组中，以更好地在孤立的组之间平衡有冲突的资源使用需求
   - 与传统虚拟化技术相比优势：
@@ -328,7 +328,7 @@ sudo systemctl restart docker
     + 轻量级隔离，在隔离的同时还提供共享机制，以实现容器与宿主机的资源共享
     + 提供了在单一可控主机节点上支持多个相互隔离的server container同时执行的机制。Linux Container有点像chroot，提供了一个拥有自己进程和网络空间的虚拟环境，但又有别于虚拟机，因为lxc是一种操作系统层次上的资源的虚拟化
   - 与docker关系:docker并不是LXC替代品，docker底层使用了LXC来实现，LXC将linux进程沙盒化，使得进程之间相互隔离，并且能够配置各进程的资源分配。在LXC的基础之上，docker提供了一系列更强大的功能
-* 通过namespace实现资源隔离:用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法
+* 通过 namespace 实现资源隔离:用于分离进程树、网络接口、挂载点以及进程间通信等资源的方法
   - 文件系统隔离 rootfs：每个容器都有自己的 root 文件系统
   - 资源隔离和分组 namespace: CLONENEWNS 每个容器都有单独的名字空间，运行在其中的应用都像是在独立的操作系统中运行一样。保证了容器之间彼此互不影响
   - pid namespace 进程隔离：CLONENEWPID 每个容器都运行在自己进程环境中,不同用户的进程就是通过pid隔离开，且不同的namespace中可以有相同pid。所有LXC进程在Docker中的父进程为Docker进程，同时允许嵌套，实现Docker in Docker
@@ -342,7 +342,7 @@ sudo systemctl restart docker
     + 都会在createSpec 方法中创建一个用于设置进程间隔离的 Spec
     + 在 setNamespaces 方法中不仅会设置进程相关的命名空间，还会设置与用户、网络、IPC 以及 UTS 相关的命名空间
     + 所有命名空间相关的设置 Spec 最后都会作为 Create 函数的入参在创建新的容器时进行设置
-* 可配额/可度量 Control Groups (cgroups) 实现资源限制
+* 可配额/可度量 Control Groups cgroups 实现资源限制
   - Linux的控制组 cgroups（Control Groups）限制一个进程组能够使用的资源上限，包括 CPU、内存、磁盘、网络带宽等等,实现了对资源配额和度量,容器资源统计和隔离。可以限制、记录、隔离进程组（process groups）所使用的物理资源（如：cpu,memory, io 等等）的机制
   - 将 CPU 和内存之类的资源独立分配给每个 Docker 容器,确保各个容器可以公平地分享主机的内存、CPU、磁盘 IO 等资源；当然，更重要的是，控制组确保了当容器内的资源使用产生压力时不会连累主机系统
   - 每一个 CGroup 都是一组被相同的标准和参数限制的进程，不同的 CGroup 之间是有层级关系的，也就是说它们之间可以从父类继承一些用于限制资源使用的标准和参数
@@ -383,13 +383,13 @@ sudo systemctl restart docker
   - 查看当前系统的 Docker 上使用了哪种存储驱动 `docker info | grep Storage`
 * 写时复制技术（copy-on-write）实现了高效的文件操作
 * 便携性
-  - AUFS（AnotherUnionFS）是一种 Union FS，简单来说就是支持将不同目录挂载到同一个虚拟文件系统下（unite several directories into a single virtual filesystem）的文件系统
-    + 作为联合文件系统，它能够将不同文件夹中的层联合（Union）到了同一个文件夹中，这些文件夹在 AUFS 中称作分支，整个『联合』的过程被称为联合挂载（Union Mount）
-    + AUFS 支持为每一个成员目录（类似Git Branch）设定 readonly、readwrite 和 whiteout-able 权限。同时 AUFS 里有一个类似分层的概念，对 readonly 权限的 branch 可以逻辑上进行修改（增量地，不影响 readonly 部分的）
+  - AnotherUnionFS AUFS 一种 Union FS，简单来说就是支持将不同目录挂载到同一个虚拟文件系统下（unite several directories into a single virtual filesystem）的文件系统
+    + 作为联合文件系统，能够将不同文件夹中的层联合（Union）到了同一个文件夹中，这些文件夹在 AUFS 中称作分支，整个『联合』的过程被称为联合挂载（Union Mount）
+    + 支持为每一个成员目录（类似Git Branch）设定 readonly、readwrite 和 whiteout-able 权限。同时 AUFS 里有一个类似分层的概念，对 readonly 权限的 branch 可以逻辑上进行修改（增量地，不影响 readonly 部分的）
   - 每一个镜像层或者容器层都是 /var/lib/docker/ 目录下的一个子文件夹
   - 在 Docker 中，所有镜像层和容器层的内容都存储在 /var/lib/docker/aufs/diff/ 目录中
   - /var/lib/docker/aufs/layers/ 中存储着镜像层的元数据，每一个文件都保存着镜像层的元数据，最后的 /var/lib/docker/aufs/mnt/ 包含镜像或者容器层的挂载点，最终会被 Docker 通过联合的方式进行组装
-  - 通常 Union FS 有两个用途
+  - Union FS 用途
     + 可以实现不借助 LVM、RAID 将多个 disk 挂到同一个目录下
     + 更常用的就是将一个 readonly 的 branch 和一个 writeable 的 branch 联合在一起，Live CD 正是基于此方法可以允许在 OS image 不变的基础上允许用户在其上进行一些写操作。Docker 在 AUFS 上构建的 container image 也正是如此，接下来我们从启动 container 中的 linux 为例来介绍 Docker 对 AUFS 特性的运用。
   - 典型的启动Linux运行需要两个FS：bootfs + rootfs
@@ -456,7 +456,7 @@ sudo systemctl restart docker
   - GraphDB 一个构建在SQLite之上的小型图数据库，实现了节点的命名以及节点之间关联关系的记录。它仅仅实现了大多数图数据库所拥有的一个小的子集，但是提供了简单的接口表示节点之间的关系，通过 GraphDB 记录着所有文件系统镜像彼此之间的关系
   - Graph 存储着本地具有版本信息的文件系统镜像
   - Graph 本地目录中，关于每一个的容器镜像，具体存储的信息有：该容器镜像的元数据，容器镜像的大小信息，以及该容器镜像所代表的具体rootfs
-* Driver 架构中驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境的定制
+* Driver 架构中驱动模块。通过Driver驱动，Docker可以实现对Docker容器执行环境定制
   - 由于Docker运行的生命周期中，并非用户所有的操作都是针对Docker容器的管理，另外还有关于Docker运行信息的获取，Graph的存储与记录等。因此，为了将Docker容器的管理从Docker Daemon内部业务逻辑中区分开来，设计了Driver层驱动来接管所有这部分请求
   - graphdriver:用于完成容器镜像的管理，包括存储与获取
     + 在graphdriver的初始化过程之前，有4种文件系统或类文件系统在其内部注册，分别是aufs、btrfs、vfs和devmapper。而Docker在初始化之时，通过获取系统环境变量”DOCKER_DRIVER”来提取所使用driver的指定类型。而之后所有的graph操作，都使用该driver来执行
@@ -477,6 +477,33 @@ sudo systemctl restart docker
 
 ![初始化](../_static/docker_init.jpg)
 ![Docker架构](../../_static/docker_structure.jpg "Docker架构")
+
+## storage driver
+
+* OverlayFS
+  - 在主机上用到2个目录，这2个目录被看成是Overlay的层。upperdir为容器层、lowerdir为镜像层使用联合挂载技术将它们挂载在同一目录（merged）下，提供统一视图
+    + 当容器层和镜像层拥有相同的文件时，容器层的文件可见，隐藏了镜像层相同的文件。然后由容器挂载目录（merged）提供了统一视图
+    + 只使用2层，意味着多层镜像不会被实现为多个OverlayFS层。每个镜像被实现为自己的目录，这个目录在路径/var/lib/docker/overlay下。硬链接被用来索引和共享底层的数据，节省了空间。
+    + 当创建一个容器时，Overlay驱动连接代表镜像层顶层的目录（只读）和一个代表容器层的新目录（读写）
+    + 镜像层每一层都包含了“该层独有的文件”以及“和其低层共享的数据的硬连接”
+    + 创建容器时，实际上是在已有的镜像层上创建了一层容器层，容器层在路径/var/lib/docker/overlay下也存在对应的目录
+      * 初始层中大多是初始化容器环境时，与容器相关的环境信息，如容器主机名，主机host信息以及域名服务文件等。所有对容器做出的改变都记录在读写层。
+      * 文件lower-id用来索引该容器使用的镜像层，upper目录包含了容器层的内容，每当启动一个容器时，会将lower-id指向的镜像层目录以及upper目录联合挂载到merged目录，因此，容器内的视角就是merged目录下的内容。而work目录则是用来完成如copy-on_write的操作。
+* overlay2:驱动天生支持多层（最多128层）
+  - 在使用Docker层相关的命令时，能提供更好的性能,消耗的inode节点更少
+  - /var/lib/docker/overlay2下可以看到
+    + “I”目录包含一些符号链接作为缩短的层标识符，这些缩短的标识符用来避免挂载时超出页面大小的限制，每个标示符对应不同层级的diff目录
+    + 最底层包含“link”文件（不包含lower文件，因为是最底层）,这个文件记录着作为标识符的更短的符号链接的名字、最底层还有一个“diff”目录（包含实际内容）
+    + 从第二层开始，每层镜像层包含“lower”文件，根据这个文件可以索引构建出整个镜像的层次结构。“diff”文件（层的内容）。还包含“merged”和“work”目录，用途和Overlay一样
+    + 容器层的文件构成和镜像层类似（这点和Overlay不同)新增2个目录
+    + 考虑下列3种场景：
+      * 读的文件不在容器层：如果读的文件不在容器层，则从镜像层进行读
+      * 读的文件只存在在容器层：直接从容器层读
+      * 读的文件在容器层和镜像层：读容器层中的文件，因为容器层隐藏了镜像层同名的文件
+    + 写，考虑下列场景：
+      * 写的文件不在容器层，在镜像层：由于文件不在容器层，因此overlay/overlay2存储驱动使用copy_up操作从镜像层拷贝文件到容器层，然后将写入的内容写入到文件新的拷贝中
+      * 删除文件和目录：删除镜像层的文件，会在容器层创建一个whiteout文件来隐藏它；删除镜像层的目录，会创建opaque目录，它和whiteout文件有相同的效果
+      * 重命名目录：对一个目录调用rename仅仅在资源和目的地路径都在顶层时才被允许，否则返回EXDEV（场景较少，未做深入研究）
 
 ## 镜像 Image
 
@@ -719,14 +746,7 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
 
 ## 网络 Network
 
-* 使用
-  - -P 随机映射一个宿主机 49000~49900 端口到内部容器开放的网络端口
-  - -p 指定要映射的端口，在一个指定端口上只可以绑定一个容器
-    + ip:hostPort:containerPort
-    + ip::containerPort 绑定 localhost 的任意端口到容器的 5000 端口，本地主机会自动分配一个端口
-    + hostPort:containerPort
-  - 查看容器端口映射本地端口 `docker port`
-* 利用了Network Namespace特性，实现不同容器间网络隔离
+* 利用 Network Namespac特性，实现不同容器间网络隔离
   - 为了支持网络协议栈多个实gpg例，Linux在网络栈引入了Network Namespace，这些独立的协议栈被隔离到不同的Namespace中，处于不同Namespace中的网络栈是完全隔离的，彼此无法通信
   - 相关全局变量修改为协议栈私有。Linux实现Network Namespace的核心就是让这些全局变量称为Network Namespace变量的成员，然后为协议栈的函数调用加入一个Namespace参数
   - 为了保证已开发程序及内核代码的兼容性，内核代码隐式地使用了Namespace空间内的变量。应用程序如果没有对Namespace有特殊需求，那么不需要额外的代码，Network Namespace对应用程序而言是透明的
@@ -734,6 +754,13 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
   - 如果一个容器声明使用宿主机的网络栈（-net = host），即不开启Network Namespace `docker run –d –net=host --name c_name i_name`
     + 容器启动之后监听的是宿主机的80端口。像这样直接使用宿主机网络栈的方式，虽然可以为容器提供良好的网络性能，但也不可避免的造成端口冲突等网络资源冲突的问题
     + 一般情况下都希望程序引入Network Namespace里的网络栈，即这个容器拥有自己的IP和端口
+* 使用
+  - -P 随机映射一个宿主机 49000~49900 端口到内部容器开放的网络端口
+  - -p 指定要映射的端口，在一个指定端口上只可以绑定一个容器
+    + ip:hostPort:containerPort
+    + ip::containerPort 绑定 localhost 的任意端口到容器的 5000 端口，本地主机会自动分配一个端口
+    + hostPort:containerPort
+  - 查看容器端口映射本地端口 `docker port`
 * Libnetwork 是 docker 容器网络库，提供了一个连接不同容器的实现，同时也能够为应用给出一个能够提供一致的编程接口和网络层抽象的容器网络模型。最核心内容是其定义的 Container Network Model (CNM)，这个模型对容器网络进行了抽象，由以下三类组件组成：
   - Sandbox
     + 每一个容器内部都包含一个 Sandbox，其中存储着当前容器的网络栈配置，包括容器的接口、路由表和 DNS 设置
@@ -747,8 +774,8 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
   - Network 包含一组 Endpoint，同一 Network 的 Endpoint 可以直接通信。Network 的实现可以是 Linux Bridge、VLAN 等
 * 网络模型及工作原理
   - 要实现网络通信，机器需要至少一个网络接口（物理接口或虚拟接口）来收发数据包；此外，如果不同子网之间要进行通信，需要路由机制
-  - Docker 中的网络接口默认都是虚拟的接口。虚拟接口的优势之一是转发效率较高。 Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多
-  - 访问外部网络，需要本地系统的转发支持
+  - Docker 中网络接口默认都是虚拟接口。虚拟接口的优势之一是转发效率较高。Linux 通过在内核中进行数据复制来实现虚拟接口之间的数据转发，发送接口的发送缓存中的数据包被直接复制到接收接口的接收缓存中。对于本地系统和容器内系统看来就像是一个正常的以太网卡，只是它不需要真正同外部网络设备通信，速度要快很多
+  - 访问外部网络，需要本地系统转发支持
   - 默认情况下，所有容器都会被连接到 docker0 网桥上
     + 内核层连通了其他的物理或虚拟网卡，将所有容器和本地主机都放到同一个物理网络
     + 主机和容器之间可以通过网桥相互通信，还给出了 MTU（接口允许接收的最大传输单元），通常是 1500 Bytes
@@ -757,17 +784,8 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
     + 本地主机一端桥接到默认的 docker0 或指定网桥上，并具有一个唯一名字，如 veth65f9
     + 一端放到新容器中，并修改名字作为 eth0，这个接口只在容器名字空间可用
     + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9
-  - docker run 的时候通过 --net 参数来指定容器的网络配置
-    + --net=bridge（默认)，连接到默认的网桥,独立container之间的通信
-    + --net=host 告诉 Docker 不要将容器网络放到隔离的名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心
-      * 如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
-    + --net=container:NAME_or_ID 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信
-    + --net=none 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
-    + overlay：当有多个docker主机时，跨主机的container通信
-    + macvlan：每个container都有一个虚拟的MAC地址
-* 默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
-  - bridge(默认)
-    + 默认bridge有很多限制，可以自行创建bridge类型网络
+* `docker run --net` 参数来指定容器网络配置.默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
+  - --net=bridge（默认)，连接到默认的网桥,独立container之间的通信+ 默认bridge有很多限制，可以自行创建bridge类型网络
     + 参数
       * -b BRIDGE or –bridge=BRIDGE –指定容器挂载的网桥 # 只有在 Docker 服务启动的时候才能配置，而且不能马上生效
       * –bip=CIDR –定制 docker0 的掩码
@@ -803,21 +821,26 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
       * 所谓ARP（Address Resolution Protocol），就是通过三层IP地址找到二层的MAC地址的协议。这里说到的eth0，就是Veth Pair的一端，另一端则插在了宿主机的docker0网桥上。eth0这样的虚拟网卡插在docker0上，也就意味着eth0变成docker0网桥的“从设备”。从设备会降级成docker0设备的端口，而调用网络协议栈处理数据包的资格全部交给docker0网桥。
       * 在收到ARP请求之后，docker0就会扮演二层交换机的角色，把ARP广播发给其它插在docker0网桥的虚拟网卡上，这样，172.17.0.3就会收到这个广播，并把其MAC地址返回给容器1。有了这个MAC地址，容器1的eth0的网卡就可以把数据包发送出去。这个数据包会经过Veth Pair在宿主机的另一端veth26cf2cc，直接交给docker0。
       * docker0转发过程，就是继续扮演二层交换机，docker0根据数据包的目标MAC地址，在CAM表查到对应的端口为veth8762ad2，然后把数据包发往这个端口。而这个端口，就是容器2的Veth Pair在宿主机的另一端，这样，数据包就进入了容器2的Network Namespace，最终容器2将响应（Ping）返回给容器1
-  - none:挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
-    + Containers that don't need to be connected to a network can use no network. This means that input and output would be done through STDIN and STDOUT or through files mirrored in a Docker volume
-  - host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
+  - --net=host
+    + 告诉 Docker 不要将容器网络放到隔离名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心
+    + 如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
+    + host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
     + 直接使用Docker host的网络最大的好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络
     + 不便之处就是牺牲一些灵活性,端口冲突
     + The host driver is the network that the Docker host uses. It may be desirable to have a container using the Docker's host network if the number of available ports while using bridge networks are too limited.
-  - overlay: Used to connect Docker containers that are on different Docker hosts. This is most often used when running Docker in swarm mode.
-  - maclan: Used to assign a MAC address to a container.
-* 跨主机网络方案：节点与节点通信通过NAT方式
-  - 自定义容器网络
-    + bridge
-    + overlay：创建跨主机的网络。需要一个 key-value 数据库用于保存网络状态信息，包括 Network、Endpoint、IP 等。Consul、Etcd 和 ZooKeeper 都是 Docker 支持的 key-vlaue 软件
+  - --net=container:NAME_or_ID
+    + 让 Docker 将新建容器的进程放到一个已存在容器的网络栈中，新容器进程有自己的文件系统、进程列表和资源限制，但会和已存在的容器共享 IP 地址和端口等网络资源，两者进程可以直接通过 lo 环回接口通信
+  - --net=none
+    + 禁用网络 让 Docker 将新容器放到隔离的网络栈中，但是不进行网络配置。之后，用户可以自己进行配置
+    + 挂在这个网络下的容器除了lo，没有其他任何网卡。容器run时，可以通过添加--network=none参数来指定该容器使用none网络
+    + Containers that don't need to be connected to a network can use no network. This means that input and output would be done through STDIN and STDOUT or through files mirrored in a Docker volume
+  - --net=overlay
+    + 当有多个docker主机时，跨主机的container通信.Used to connect Docker containers that are on different Docker hosts. This is most often used when running Docker in swarm mode.
+    + 创建跨主机的网络。需要一个 key-value 数据库用于保存网络状态信息，包括 Network、Endpoint、IP 等。Consul、Etcd 和 ZooKeeper 都是 Docker 支持的 key-vlaue 软件
       * 每创建一个网络类型为overlay的容器，则docker_gwbridge下都会挂载一个vethxxx，这说明确实overlay容器是通过此网桥进行对外连接的
       * 还是从 bridge 网络docker_gwbridge出去的，但是由于consul的作用（记录了overlay网络的endpoint、sandbox、network等信息），使得docker知道了此网络是 overlay 类型的，这样此overlay网络下的不同主机之间就能够相互访问，但其实出口还是在docker_gwbridge网桥
-    + macvlan：创建跨主机的网络
+  - macvlan：每个container都有一个虚拟的MAC地址,Used to assign a MAC address to a container.创建跨主机的网络
+* 跨主机网络方案：节点与节点通信通过NAT方式
   - 第三方方案：常用的包括 flannel、weave 和 calico
 * 网络模型验正
 * Veth Pair 为了在不同 Network Namespace之间进行通信，利用它，可以将两个Network Namespace连接起来
@@ -950,7 +973,7 @@ ip netns exec netns2 ip link | grep 6
 ## 持久化 Volume
 
 * bind mount:将host机器的目录mount到container中
-  - host机器的目录路径必须为全路径(准确的说需要以/或~/开始的路径)，不然docker会将其当做volume而不是volume处理
+  - host机器目录路径必须为全路径(准确的说需要以/或~/开始的路径)，不然docker会将其当做volume而不是volume处理
   - 如果host机器上的目录不存在，docker会自动创建该目录
   - 如果container中的目录不存在，docker会自动创建该目录
   - 如果container中的目录已经有内容，那么docker会使用host上的目录将其覆盖掉
@@ -988,7 +1011,7 @@ ip netns exec netns2 ip link | grep 6
   - 存储卷类型及功能
   - 存储卷应用
   - 存储卷共享
-* SELinux[3]默认策略将禁止任何主机上的读写操作，以防止黑客在容器外执行操作，SELinux通过在内核级上的安全规则来保护您.要将文件夹安装在支持SELinux的机器中，您需要指定z参数，这将更改SELinux上下文，并允许容器执行挂载动作  `docker run -it -v "$(pwd)":/app:z busybox /bin/sh`
+* SELinux 默认策略将禁止任何主机上的读写操作，以防止黑客在容器外执行操作，SELinux通过在内核级上的安全规则来保护您.要将文件夹安装在支持SELinux的机器中，您需要指定z参数，这将更改SELinux上下文，并允许容器执行挂载动作  `docker run -it -v "$(pwd)":/app:z busybox /bin/sh`
 
 ```sh
 # 加载主机的 /src/webapp 目录到容器的 /opt/webapp 目录，ro 只读属性
@@ -1766,14 +1789,14 @@ eval "$(docker-machine env default)" # Set environment variables
 * 内存及Swap资源限制及其应用
 * 案例：使用stress-ng镜像验正资源限制效果
 
-```
+```yaml
 version: "2"
 services:
- // 服务名称
+ # 服务名称
     nginx:
         depends_on:
           - "php"
-        // 指定服务的镜像名称或镜像 ID
+        # 指定服务的镜像名称或镜像 ID
         image: "nginx:latest"
         volumes:
           - "$PWD/src/docker/conf:/etc/nginx/conf.d"
@@ -1788,7 +1811,7 @@ services:
         container_name: "m.look.360.cn-php"
 ```
 
-## [portainer/portainer](https://github.com/portainer/portainer)
+## [Portainer](https://github.com/portainer/portainer)
 
 Simple management UI for Docker <http://portainer.io>
 
@@ -1858,7 +1881,7 @@ kubectl apply -f agent_daemonset.yaml # 可以看到每个节点上都创建了 
 kubectl-debug <POD_NAME>
 ```
 
-### 迁移docker
+### 迁移
 
 * 分解：通过设计和部署把这些服务拆分成为它们自己的容器。如果一个应用程序能够被拆分成为越多的分布式组件，那么应用程序扩展的选择则越多。但是，分布式组件越多也意味着管理的复杂性越高。
 * 选择基础映像：搜索Docker注册库找到一个基本的Docker映像并将其作为应用程序的基础来使用。
@@ -1901,6 +1924,8 @@ kubectl-debug <POD_NAME>
 
 Swarm: a Docker-native clustering system
 
+* [docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer):A visualizer for Docker Swarm Mode using the Docker Remote API, Node.JS, and D3
+
 ## 图书
 
 * [Docker — 从入门到实践](https://yeasy.gitbooks.io/docker_practice/content/)
@@ -1921,7 +1946,6 @@ Swarm: a Docker-native clustering system
   - [kitematic](https://github.com/docker/kitematic) Visual Docker Container Management on Mac & Windows <https://kitematic.com/>
   - [Dockstation](https://dockstation.io/)
   - [Rancher](https://rancher.com/)Rancher is an open source software platform that enables organizations to run and manage Docker and Kubernetes in production.
-  - [Portainer](https://www.portainer.io/) `docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer`
   - [lazydocker](https://github.com/jesseduffield/lazydocker):The lazier way to manage everything docker
 * [Docker-OSX](https://github.com/sickcodes/Docker-OSX):Mac in Docker! Run near native OSX-KVM in Docker! X11 Forwarding!
 * [Derrick](https://mp.weixin.qq.com/s/Wq-wxnLBHdOtV9S4rj62xg):帮助开发者快速完成应用容器化的工具
@@ -1936,7 +1960,6 @@ Swarm: a Docker-native clustering system
 * [annotations](https://github.com/doctrine/annotations):Annotations Docblock Parser
 * [dockerize](https://github.com/jwilder/dockerize):Utility to simplify running applications in docker containers
 * [distroless](https://github.com/GoogleContainerTools/distroless):🥑 Language focused docker images, minus the operating system.
-* [docker-swarm-visualizer](https://github.com/dockersamples/docker-swarm-visualizer):A visualizer for Docker Swarm Mode using the Docker Remote API, Node.JS, and D3
 
 ## 参考
 

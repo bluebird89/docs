@@ -300,6 +300,7 @@
 
 * [OpenAI](https://openai.com) Discovering and enacting the path to safe artificial general intelligence.
 * [AIDL-Series](https://github.com/wx-chevalier/AIDL-Series):📚 Series of Artificial Intelligence & Deep Learning, including Mathematics Fundamentals, Python Practices, NLP Application, etc. 💫 人工智能与深度学习实战，机器学习篇 | Tensoflow 篇
+* [AI算法工程师手册](http://www.huaxiaozhuan.com)
 
 * [](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 * [完备的 AI 学习路线，最详细的资源整理](https://mp.weixin.qq.com/s?__biz=MzIwODI2NDkxNQ==&mid=2247484347&amp;idx=1&amp;sn=a86919fadffed619bfe744dcef514923)

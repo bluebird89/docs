@@ -482,4 +482,5 @@ Path= ;%NEXUS_HOME%\bin\jsw\windows-x86-64
 
 ## 参考
 
+* [Maven 手册](https://www.yuque.com/inuter/bc7ikc/ngeqot)
 - [学会 Maven 项目的构建与管理](http://blog.csdn.net/gitchat/article/details/77932302)

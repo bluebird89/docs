@@ -12,7 +12,7 @@
 * [Statistics for Applications](https://ocw.mit.edu/courses/mathematics/18-650-statistics-for-applications-fall-2016/index.htm)
 * [An Introduction to Statistical Learning](http://faculty.marshall.usc.edu/gareth-james/ISL/)
 
-## 代码
+## 图书
 
 * 统计学习方法 李航
   - [statistical-learning-method](https://github.com/wzyonggege/statistical-learning-method):《统计学习方法》笔记-基于Python算法实现
@@ -26,6 +26,7 @@
 * 《[深入浅出统计学](https://www.amazon.cn/gp/product/B006PHIVNA)》
 * 《[统计学习基础(第2版)(英文)](https://www.amazon.cn/gp/product/B00PRH2BXA) 》
 * 《[概率论与数理统计](https://www.amazon.cn/gp/product/B00264GG56)》
+* [看见统计](https://seeing-theory.brown.edu)
 
 ## 工具
 
@@ -34,4 +35,4 @@
 
 ## 参考
 
-* [看见统计](https://seeing-theory.brown.edu/cn.html)
+* [capital of statistics](http://cos.name/)：统计之都，国内首个旨在推广与应用统计学知识的社区专业型网站
