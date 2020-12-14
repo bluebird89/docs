@@ -796,6 +796,7 @@ yarn install node-sass
   - [fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js <https://www.fastify.io/>
   - [sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js <https://sailsjs.com>
   - [NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>
+  - [Nest](https://github.com/nestjs/nest):A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8) 🚀 https://nestjs.com/
 * [node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 * [node-inspector](https://github.com/node-inspector/node-inspector) Node.js debugger based on Blink Developer Tools
 * [ncc](https://github.com/zeit/ncc):Node.js Compiler Collection

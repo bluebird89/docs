@@ -3259,7 +3259,7 @@ open http://127.0.0.1:8000
 
 ## RPC
 
-* [Hprose-PHP](https://github.com/hprose/hprose-php)Hprose is a cross-language RPC
+* [Hprose-PHP](https://github.com/hprose/hprose-php)preact is a cross-language RPC
 * [php-json-rpc](https://github.com/datto/php-json-rpc):Fully unit-tested JSON-RPC 2.0 for PHP
 * [grpc-php](https://github.com/grpc/grpc-php):Repo for gRPC PHP
 
@@ -3511,6 +3511,7 @@ chmod +x .git/hooks/pre-commit
 * [docker-php-fpm-7.2](https://github.com/cytopia/docker-php-fpm-7.2):PHP-FPM 7.2 on CentOS 7 http://devilbox.org/
 * [travis-ci-examples/php](https://github.com/travis-ci-examples/php):Example PHP project using Travis CI http://travis-ci.org
 * [shlink](https://github.com/shlinkio/shlink):A self-hosted and PHP-based URL shortener with CLI and REST interfaces https://shlink.io
+* [phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs):PHP runtime & extensions header files for PhpStorm http://jetbrains.com/phpstorm
 
 ## 参考
 

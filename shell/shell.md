@@ -1088,7 +1088,7 @@ brew install bat
   + Console2
   + [cmder + gow](http://bliker.github.io/cmder/)
   + ConEmu
-  + [Babun](http://babun.github.io/)
+  + [Babun](http://babun.github.io/):a Windows shell you will love!
   + [nushell](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
     * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
 * [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards <https://hyper.is>

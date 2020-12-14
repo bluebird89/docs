@@ -18,6 +18,7 @@
 ## 名词
 
 * Work in Process WIP
+* PDCA
 
 ## [开发模型演化](https://mp.weixin.qq.com/s/FtJFtGYu_jA2aBCD2aCUhA)
 

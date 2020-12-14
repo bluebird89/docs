@@ -699,18 +699,13 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 程序在等待调用结果（消息，返回值）时当前线程状态
 
 * 阻塞调用：指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回
-
 * 非阻塞调用：在不能立刻得到结果之前，该调用不会阻塞当前线程
-
 * 子网
-
   - 子网划分只是一种逻辑上的划分方式，子网与广播域之间并不存在一一对应的关系。
   - 一个VLAN上也可以运行多个子网，只是通常情况下我们在实施时将子网与VLAN一一对应了。
   - VLAN通过帧的tag为标记帧是属于哪个VLAN的，广播帧不会在VLAN之间传播，泛洪也只会传播到自己所属的VLAN中。
   - 子网划分之后，所有子网对外依然是一个逻辑上的单一网络，也即外界通过一次路由便可以找到。
-
 * 以太网
-
   - 以太网中一台机器发送的数据所有机器都能接收到，然后基于目的地MAC判断是否接收该数据。
   - 当以太网中计算机发现有CRC检查出错时，直接丢弃该包。数据的可靠性传输交给了TCP这样的高层协议。以太网保证最大努力交付，即不可靠交付。
   - 以太网通过CSMA/CD保证同一时刻只有一台计算机在发送数据，并且是半双工，如果发现有碰撞，则推迟一个随机时间再次发送。
@@ -720,7 +715,6 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
   - 以太网一开始是总线型的，是因为那时的以太网交换机太昂贵了，而无源的总线结构要廉价得多。
   - 以太网各帧之间的发送有一定间隙，因此帧不需要结束定界符。
   - 虽然以太网交换机不适用CSMA/CD，但是其数据帧依然使用以太网帧，因此依然叫以太网。
-
 * 路由器
 
   - 路由器隔离广播帧，路由器将丢弃广播帧
@@ -755,7 +749,6 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 * 网络层中与IP协议配套的还有：ARP协议，ICMP协议，IGMP协议，其中IP使用ARP，而ICMP和IGMP使用IP。
 
 * IP
-
   - 各种异构的网络在网络层看来好像是一个统一的网络，这种网络也称为IP网，主机之间通信无需看到异构的细节，因此有了IP网之后，网络的物理异构性对通信来讲是透明的。在这种覆盖全球的IP网上再使用TCP协议，那么就成了现在的互联网。
   - 分类IP是很原始的IP划分方式，其实在1993年提出的无分类编址之后，虽然在教科书中依然可以看到分类IP，但是事实上基本不用了。
   - 一个网络表示所有IP网络号相同的主机的集合。
@@ -770,11 +763,8 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
   - Linux在重组IP包时，现将所有的分片放到重组队列中，如果30秒中重组队列中的包没有到齐，则重组过程失败（意味着上层，比如TCP，将无法收到该IP包），重组队列被释放，同时向发送方以ICMP协议通知失败信息
   - 一个数据包在传输过程中，目的IP和源IP是永远不变的(使用了NAT协议除外)，一直是主机和服务器的IP，而目的mac和源mac却是一直变化的，这也是arp协议存在的一个理由
   - 三层(IP)广播即IP地址中的主机号全是1的IP包，IP广播将导致二层链路层广播（MAC目的地址全是F）。另外，IP地址为255.255.255.255的也是广播，这种情况用于主机还不知道自己IP地址的时候(比如向DHCP服务器索要地址时、PPPOE拨号时等)，由于路由器不会转发广播帧，因此这种广播也不会逃出本地网络
-
 * MTU = MSS + TCP首部长度 + IP首部长度，故在以太网中(网络层以IPv4为例)：MSS = 以太网MTU - TCP首部长度 - IPv4首部长度 = 1500 - 20 - 20 = 1460字节。未指定MSS时默认值为536字节，这是因为在Internet中标准的MTU值为576字节，576字节MTU = TCP首部长度20字节 + IPv4首部长度20字节 + 536字节MSS
-
 * TCP
-
   - MSS是TCP里的一个概念（首部的选项字段中）。MSS是TCP数据包每次能够传输的最大数据分段，TCP报文段的长度大于MSS时，要进行分段传输。TCP协议在建立连接的时候通常要协商双方的MSS值，每一方都有用于通告它期望接收的MSS选项（MSS选项只出现在SYN报文段中，即TCP三次握手的前两次）。MSS的值一般为MTU值减去两个首部大小（需要减去IP数据包包头的大小20Bytes和TCP数据段的包头20Bytes）所以如果用链路层以太网，MSS的值往往为1460。而Internet上标准的MTU（最小的MTU，链路层网络为x2.5时）为576，那么如果不设置，则MSS的默认值就为536个字节。很多时候，MSS的值最好取512的倍数。TCP报文段的分段与重组是在运输层完成的。到了这里有一个问题自然就明了了，TCP分段的原因是MSS，IP分片的原因是MTU，由于一直有MSS<=MTU，很明显，分段后的每一段TCP报文段再加上IP首部后的长度不可能超过MTU，因此也就不需要在网络层进行IP分片了。因此TCP报文段很少会发生IP分片的情况。
   - TCP在通信双方之间建立起了一条基于字节流的全双工通道。
   - TCP包中的序号字段表示该包中第一个字节的序号，序号位有4个字节，也即4G大小。
@@ -792,27 +782,20 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
   - Socket设置TCP_QUICKACK可以禁用延迟确认。
   - TCP_NOPUSH会设置CORK算法，表示数据包不会马上传送出去，等到数据包最大时，一次性的传输出去，这样有助于解决网络堵塞。
   - web服务器,下载服务器(ftp的发送文件服务器)，需要带宽量比较大的服务器，用TCP_CORK。涉及到交互的服务器，比如ftp的接收命令的服务器，必须使用TCP_NODELAY
-
 * Nagle算法
-
   - Nagle算法用于减少TCP中小包的发送。
   - Nagle算法：如果应用程序逐个字节的将数据发送到TCP缓存(比如Telnet)，那么TCP就先把第一个字节发出去，把后面到达的自己都缓存起来，当收到第一个字节的确认后，再将缓存中的所有数据组装成一个报文发送出去。这样做可以减少TCP所用的网络带宽。
   - Nagle原本就是为诸如Telnet或rlogin这样的应用程序而创建的。
   - Nagle算法还规定：当缓存的数据已经到达发送窗口的一半或者报文段的MSS时，则立即发送。
   - 默认情况下Nagle和延迟ACK都是开启的，此时延迟确认和Nagle同时使用会大大降低网络性能，因为发送方在等待接收方的ACK，但是接收方却延迟了ACK。因此Socket提供提供了TCP_NODELAY选项来禁用Nagle算法
-
 * Linux的sendfile系调用可以实现将服务器中的本地文件直接拷贝（通过DMA）到Socket缓存，进而发送到网络中，避免了文件数据的多次拷贝
-
 * Nginx
-
   - Nginx中，当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
   - Nginx的TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
   - 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
   - 默认nginx访问后端都是用的短连接(HTTP1.0)，一个请求来了，Nginx 新开一个端口和后端建立连接，后端执行完毕后主动关闭该链接）。
   - 默认情况下，nginx已经自动开启了对client连接的keep alive支持（同时client发送的HTTP请求要求keep alive）。
-
 * Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
-
 * 默认路由：A default route is the route that takes effect when no other route is available for an IP destination address.If a packet is received on a routing device, the device first checks to see if the IP destination address is on one of the device’s local subnets. If the destination address is not local, the device checks its routing table. If the remote destination subnet is not listed in the routing table, the packet is forwarded to the next hop toward the destination using the default route. The default route generally has a next-hop address of another routing device, which performs the same process. The process repeats until a packet is delivered to the destination.
 
 ## Wi-Fi
@@ -848,6 +831,43 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
     + 大规模的数据中心往往都会对外提供云计算服务，同一个物理集群可能会被拆分成多个小块分配给不同的租户（Tenant），因为二层网络的数据帧可能会进行广播，所以出于安全的考虑这些不同的租户之间需要进行网络隔离，避免租户之间的流量互相影响甚至恶意攻击
     + 传统的网络隔离会使用虚拟局域网技术（Virtual LAN、VLAN），VLAN 会使用 12 比特表示虚拟网络 ID，虚拟网络的上限是 4096 个
     + VxLAN 使用 24 比特的 VNI 表示虚拟网络个数，总共可以表示 16,777,216 个虚拟网络
+
+## VPC
+
+* VPC 通过子网将资源进行逻辑隔离为用户提供隔离的网络环，可以灵活的定义子网网段，并支持随时在现有 VPC 中追加新的定义网段，保证地址取之不尽，解决传统子网带来的节点数量的限制。并可以使用 VPN 等方式连接本地数据中心后将业务平滑迁移到云端
+* VPC 内连接互联网
+  - VPC 内使用子网将资源进行了隔离，初始情况下子网内资源无法连接到互联网，所有资源和服务仅可内网访问，起到了预想的与公网隔离的效果。但如果资源只能内网访问显然也不是我们想要的，我们创建的 Web 应用等服务需要暴露在公网上，也就需要将 VPC 子网内的资源具有访问互联网的能力。
+  - 为 VPC 子网内每一个云主机资源绑定 EIP；通过 NAT 网关将 VPC 子网内资源路由至 NAT 网关，并通过其绑定的 EIP 连接互联网。
+  - 实现
+    + 创建 VPC 及子网 subnet-a，并部署相关云主机等资源；
+    + 选择使用 EIP 方式，申请 EIP 并绑定至云主机 UHost，则云主机 UHost 可以通过 EIP 与互联网进行连接；这种方式配置最简单，但是却要为每一台云主机 UHost 绑定 EIP，如果资源数量较多，不建议使用这种方式
+    + 选择使用 NAT 网关方式，在 VPC 中创建 NAT 网关并选择 subnet-a 连通，此时子网 subnet-a 中的所有资源将会路由至 NAT 网关，并通过绑定在 NAT 网关上的 EIP 连接互联网；这种方式通过一个配置即可满足一个子网内资源的连接互联网需求；
+    + 云主机绑定 EIP 方式与 NAT 网关方式，两者只能取其一进行使用。
+* 通过 VPC 子网隔离内外网组件
+  - 将资源和组件划分为互联网可访问、互联网不可访问进行隔离
+  - 在 VPC 中创建子网 subnet-a（供连接互联网），创建 subnet-b（供内网使用），通过 NAT 网关只连接 subnet-a 并面向互联网开放；subnet-b 不连接到该 NAT 网关并且其中资源也不绑定 EIP。
+  - 实现
+    + 创建 VPC;
+    + 创建两个子网 subnet a 和 subnet b，subnet a 为前端接入子网，部署云主机；subnet b 为数据库子网部署云数据库；
+    + 配置 NAT 网关，并连接前端接入子网 subnet-a，使其可以连接到互联网，对外提供前端接入功能；数据库子网 subnet-b 只能仅在 VPC 内访问，前端接入子网中的云主机 UHost 可以连接后端业务子网中的后端服务器和云数据库并实现业务支撑和数据操作。
+  - 场景
+    + 数据库私有子网中只能内网访问，但是仍会碰到云数据库进行版本更新、漏洞修复等需要访问互联网的情况。基于这种临时需求，可以通过 NAT 网关的白名单模式来连接互联网。在 NAT 网关配置中添加 subnet-b，但是需要使用白名单模式，仅允许开放指定数据库的特定端口，尽可能避免全部暴露在互联网。
+* 云平台多 VPC 之间互联
+  - UCloud 云平台支持跨地域、跨项目的多个 VPC 连接，可在控制台直接操作配置。
+  - 实现
+    - 在云平台 VPC 配置中直接选择多个 VPC，可直接实现 VPC 联通 ;
+    - 在 VPC1 中所有流量会路由至 VPC 虚拟 NAT 网关，同样 VPC2 中所有流量会路由至虚拟 NAT 网关 2;
+    - UCloud 云平台会自动将 VPC1 和 VPC2 进行连接，便可以实现两个 VPC 之间的流量传输。
+* 连接本地网络与云端 VPC
+  - 用户业务部署在多个地域或者本地数据中心，需要将业务进行联通。
+  - 使用 VPN、专线接入 UConnect 连接本地数据中心 VPC 子网与 UCloud 云平台的 VPC 子网；
+  - 使用跨域通道 UDPN 连接 UCloud 云平台的多个 VPC 子网
+  - 实现
+    + 在云端部署 VPC 公网子网、私网子网，并部署业务所需云平台资源；
+    + 在云端配置 IPSec VPN，其中配置云端网关地址、客户本地（对端）网关地址；
+    + 在客户本地安装 VPN 软件，并配置客户本地网关、云端网关；
+    + 在云端和客户本地 VPN 中配置 VPN 隧道（tunnel）并连通指定子网，测试流量正常。
+  - 场景：混合云架构
 
 ## 测速
 

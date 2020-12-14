@@ -257,5 +257,6 @@ Agile project management integrated with GitHub
 * [desktop](https://github.com/desktop/desktop):Simple collaboration from your desktop <https://desktop.github.com>
 * [OctoLinker](https://github.com/OctoLinker/OctoLinker):OctoLinker – Available on Chrome, Firefox and Opera <https://octolinker.github.iow>
 * [devhub](https://github.com/devhubapp/devhub):DevHub: TweetDeck for GitHub - Android, iOS and Web 👉 <https://devhubapp.com/>
+* [GitHub Cheat Sheet](https://github.com/tiimgreen/github-cheat-sheet):A list of cool features of Git and GitHub.http://git.io/sheet
 * [GitHub Helps](https://help.github.com/)
 * [GitHub规范](https://guides.github.com/)

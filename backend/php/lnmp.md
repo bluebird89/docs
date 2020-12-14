@@ -1,4 +1,6 @@
-# LNMP
+# [lnmp](https://github.com/lj2007331/lnmp)
+
+LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu <https://blog.linuxeye.cn/31.html>
 
 * 编译安装
   - 软件源代码包存放位置：/usr/local/src
@@ -665,5 +667,4 @@ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=US/ST=State/L
 * [Mac OS X LEMP Configuration](https://gist.github.com/petemcw/9265670)
 * [oneinstack](https://github.com/lj2007331/oneinstack):OneinStack - A PHP/JAVA Deployment Tool <https://oneinstack.com/>
 * [devilbox](https://github.com/cytopia/devilbox):A modern dockerized LAMP and MEAN stack alternative to XAMPP <http://devilbox.org>
-* [lnmp](https://github.com/lj2007331/lnmp):LEMP stack/LAMP stack/LNMP stack installation scripts for CentOS/Redhat Debian and Ubuntu <https://blog.linuxeye.cn/31.html>
 * [lamp](https://github.com/teddysun/lamp):Install LAMP(Linux + Apache + MySQL/MariaDB/Percona Server + PHP ) for CentOS/Fedora/Debian/Ubuntu <https://lamp.sh>

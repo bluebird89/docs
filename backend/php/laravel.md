@@ -2217,7 +2217,7 @@ Laravel 5 - Repositories to abstract the database layer <http://andersao.github.
   - [lumen-framework](https://github.com/laravel/lumen-framework)
     + [lumen](https://github.com/laravel/lumen): a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 * API
-  - [api](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
+  - [dingo](https://github.com/dingo/api)A RESTful API package for the Laravel and Lumen frameworks.
   - [elixir](https://github.com/laravel/elixir)Fluent API for Gulp
   - [wizard](https://github.com/mylxsw/wizard):Wizard是基于Laravel开发框架开发的一款开源项目（API）文档管理工具。 <https://mylxsw.github.io/wizard/>
   - [laravel-cors](https://github.com/barryvdh/laravel-cors):Adds CORS (Cross-Origin Resource Sharing) headers support in your Laravel application

@@ -1,4 +1,4 @@
-## [sass/sass](https://github.com/sass/sass)
+## [sass](https://github.com/sass/sass)
 
 * Sass makes CSS fun again. <http://sass-lang.com>
 * 两种不同的后缀名分别对应两套语法
@@ -20,15 +20,7 @@
   - 控制结构
   - 导入:支持通过 @import 指令导入其它 Sass 文件，既可以导入本地开发文件，也可以导入前端依赖库中的文件，还可以导入网络字体文件
   - 继承:通过 % 前缀指定用于继承的样式，然后在需要继承的地方提供 @extend 指令继承相应的父类样式
-* 教程
-  * [Sass 基础教程](http://www.sasschina.com/guide/)
-* 资源
-  * [devlint/gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System <http://gridlex.devlint.fr>
-  * [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass <http://unicorn-ui.com/buttons/builder/>
-  * [eduardoboucas/include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass <http://include-media.com>
-  * [thoughtbot/bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set <https://www.bourbon.io/> <https://github.com/thoughtbot/bourbon>
-* 参考
-  * <https://www.jianshu.com/p/e2c23a74636d>
+
 
 ## 问题
 
@@ -38,3 +30,18 @@ wget https://raw.githubusercontent.com/Homebrew/homebrew-core/86a44a0a552c673a05
 brew install python@2.rb
 rm python@2.rb
 ```
+
+## 教程
+
+- [Sass 基础教程](http://www.sasschina.com/guide/)
+
+## 资源
+
+* [gridlex](https://github.com/devlint/gridlex):Just a CSS Flexbox Grid System <http://gridlex.devlint.fr>
+* [alexwolfe/Buttons](https://github.com/alexwolfe/Buttons):A CSS button library built using Sass and Compass <http://unicorn-ui.com/buttons/builder/>
+* [include-media](https://github.com/eduardoboucas/include-media/):📐 Simple, elegant and maintainable media queries in Sass <http://include-media.com>
+* [bourbon](https://github.com/thoughtbot/bourbon/):A Lightweight Sass Tool Set <https://www.bourbon.io/> <https://github.com/thoughtbot/bourbon>
+
+## 参考
+
+* <https://www.jianshu.com/p/e2c23a74636d>

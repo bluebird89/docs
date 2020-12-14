@@ -20,3 +20,7 @@
 * [Node-RED](link)
 * [Zetta](link)
 * [Things Framework](https://iot.mozilla.org/things/)
+
+## 参考
+
+* [awesome-iot](https://github.com/phodal/awesome-iot):Awesome IoT. A collaborative list of great resources about IoT Framework, Library, OS, Platform http://phodal.github.io/awesome-iot

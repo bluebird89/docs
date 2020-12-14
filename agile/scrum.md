@@ -246,6 +246,7 @@
 ## 工具
 
 * [leangoo](https://www.leangoo.com/):更敏捷的项目协作平台
+* [laravel-gitscrum](https://github.com/gitscrum-ce/laravel-gitscrum):Simple and Robust solution to manage your software development project
 
 ## 参考
 

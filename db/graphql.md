@@ -27,20 +27,32 @@ GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
   - 前提是数据已经以图的数据结构进行保存
 * 通过 schema 拼接的方式引入一个 GraphQL 网关（gateway）
 
-## 概念
+## 服务
 
-* 一个 GraphQL 服务是通过定义类型和类型上的字段来创建，然后给每个类型上的每个字段提供解析函数
-* 一旦一个 GraphQL 服务运行起来（通常在 web 服务的一个 URL 上）,就能接收 GraphQL 查询，并验证和执行。接收到的查询首先会被检查确保它只引用了已定义的类型和字段，然后运行指定的解析函数来生成结果
-* 模式 Schema：描述客户端可通过该服务查询的所有可能数据
+* GraphQL 服务通过定义类型和类型字段来创建，然后给每个类型上每个字段提供解析函数
+* Schema Schema Definition Language：描述客户端可通过该服务查询的所有可能数据
+  - 类型的定义以及查询本身都是通过 Schema 去定义
+  - 本身并不代表数据库中真实的数据结构，它的定义决定了这整个端点能干些什么事情，能向端点要什么，操作什么
   - API 查询定义和验证语法
   - 由对象类型组成，表示可以请求哪种对象以及它有哪些字段
   - 将模式中的每个字段附加到名为解析器的函数中。执行期间，系统将调用解析器来生成相应的值
   - 查询时，GraphQL 会根据模式对查询进行验证。随后，GraphQL 将执行经过验证的查询
-* 最常见的 GraphQL 操作可能就是查询和修改
-  - query
-  - mutation
+* type
+  - Schema 中最基本的一个概念，表示一个 GraphQL 对象类型，可以简单地将其理解为 JavaScript 中的一个对象
+  - 可以包含各种字段（field）,而且字段类型不仅仅可以是标量类型，还可以是 Schema 中定义的其他 type
+  - type Query:Query 类型是 Schema 中所有 query 查询的入口
+    + 某个字段返回不止一个标量类型的数据而是一组，需要使用List类型声明，在该标量类型两边使用中括号[]包围
+    + [Movie]! 始终返回不可为空但Movie元素可以为空
+    + [Movie!] 返回的 Movie 元素不能为空，但返回可以为空的
+  - Mutation 和 Subscription，都作为对应操作的入口点
+* 传入复杂结构的参数（Input）
+* introspection:Type System->AST->Validation->Execution->Response
+  - 类型名称自省(__typename)
+  - schema自省(__schema和__type)
+* Resolver:对应着 Schema 上的字段，当请求体查询某个字段时，对应的 Resolver 函数会被执行，由 Resolver 函数负责到数据库中取得数据并返回，最终将请求体中指定的字段返回
 
 ```graphql
+<!-- schema -->
 type Query {
   me: User
 }
@@ -50,14 +62,25 @@ type User {
   name: String
 }
 
-function Query_me(request) {
-  return request.auth.user;
+type Query {
+  movies(genre:MovieTypes):[Movie]!
 }
 
-function User_name(user) {
-  return user.getName();
+enum MovieTypes {
+  COMEDY
+  DOCUMENTARY
+  SERIES
 }
 
+type Query {
+    moviesdata:Search):[Movie]!
+}
+
+input Search {
+  term:String!
+}
+
+<!-- query -->
 {
   me {
     name
@@ -67,32 +90,91 @@ function User_name(user) {
 
 ## 数据类型
 
+* Field 从服务器获取的对象的基本组成部分
+  - 如果是一个 Object，还必须选择至少其中的一个字段
+* 选择集：所需要字段合在一起
 * Scalar Type
-  - ID
-  - Int
-  - Float
-  - String
-  - Boolean
-* Object Type 定义对象类型
-* input 定义接口输入类型
-* !用来表示参数是非空的。[]表示查询这个字段返回的是数组(List)，[]里面是数组的类型
+  - Int：带符号的32位整数，对应 JavaScript 的 Number
+  - Float：带符号的双精度浮点数，对应 JavaScript 的 Number
+  - String：UTF-8字符串，对应 JavaScript 的 String
+  - Boolean：布尔值，对应 JavaScript 的 Boolean
+  - ID：ID 值，是一个序列化后值唯一的字符串，可以视作对应 ES 2015 新增的 Symbol
+* Interface 包含一组确定字段的集合的抽象类型，实现该接口的类型必须包含interface定义的所有字段
+  - 对于interface的返回需要你使用inline fragments来实现
+* Union 非常类似于interface，但是类型之间不需要指定任何共同的字段。通常用于描述某个字段能够支持的所有返回类型以及具体请求真正的返回类型
+* Enums 一种特殊的标量类型，可以限制值为一组特殊的值
+* input:对mutations来说非常重要，在 GraphQL schema 语言中，看起来和常规的对象类型非常类似，但是使用关键字input而非type
+* [] List
+* 使用!来表示非空 Non-Null 强制类型的值不能为null，并且在请求出错时一定会报错。可以用于必须保证值不能为null的字段
+* 内联片段（Inline Fragment）:概念和用法与普通片段基本相同，不同的是内联片段直接声明在选择集内，并且不需要fragment声明
 
-## 请求与响应
+```graphql
+interface Basic {
+    name: String!
+    year: Number!
+}
 
-* 请求格式是根据 GraphQL 标准构造
-* 一个 GraphQL 操作从前端应用到达后端应用，首先会在后端解释整个 GraphQL schema，然后再为前端解析相关的数据
-* 请求体：描述要从服务器上取什么数据
-  - 操作类型：指定本请求体要对数据做什么操作
-    + query 查询
-    + mutation 对数据进行操作，例如增删改操作
-    + subscription 订阅
-  - 操作名称：可选参数，对整个请求并不产生影响，只是赋予请求体一个名字，可以作为调试的依据
-  - 变量：声明一个变量使用$符号开头，冒号后面紧跟着变量的传入类型。如果要使用变量，直接引用即可
-  - 选择集：所需要字段合在一起
-  - 字段请求的是一个数据单元。标量字段是粒度最细的一个数据单元了，同时作为返回 JSON 响应数据中的最后一个字段。如果是一个 Object，还必须选择至少其中的一个字段。
-  - 请求体的结构确定了最终返回数据的结构
+type Song implements Basic {
+    name: String!
+    year: Number!
+    artist: [String]!
+}
 
+type Video implements Basic {
+    name: String!
+    year: Number!
+    performers: [String]!
+}
+
+union SearchResult = Song | Video
+Query {
+
+    search(term: String!):{
+      name
+      year
+
+      ...on Song {
+          artist
+      }
+
+      ...on Video {
+          performers
+      }
+    }
+
+    search(term: String!): [SearchResult]!
+}
 ```
+
+## 请求
+
+* 请求体|文档：一次操作请求被称为一份文档（document），即GraphQL服务能够解析验证并执行的一串请求字符串(Source Text)
+* 请求格式根据 GraphQL 标准构造，请求体的结构确定了最终返回数据的结构
+  - 注释以#开头
+  - 可以包含多个操作和片段。只有包含操作请求才会被GraphQL服务执行
+  - 操作（Operation）
+    + 为了保证数据的完整性mutations是串形执行，而queries可以并行执行
+  - 片段（Fragments）：在queries中可复用的fields
+    + 支持多层级地继承
+* 一个 GraphQL 操作从前端应用到达后端应用，首先会在后端解释整个 GraphQL schema，然后再为前端解析相关的数据
+* 类型：指定请求体对数据做什么操作
+  - query 查询（默认）
+    + alias 别名:为返回字段使用另一个名字
+  - mutation 对数据进行操作，例如增删改操作
+  - subscription 订阅，服务器在某个事件发生时将数据本身推送给感兴趣的客户端的一种方式
+* 操作名称：可选参数，对整个请求并不产生影响，只是赋予请求体一个名字，可以作为调试的依据
+  - 只包含一个操作的请求可以不带，都是query的话，可以全部省略掉
+  - **约定：Query和与之对应的Resolver是同名**
+* 变量:让参数可动态变化
+  - 声明一个变量使用$符号开头，冒号后面紧跟着变量的传入类型
+  - 使用变量，直接引用即可
+* 字段请求的是一个数据单元。标量字段是粒度最细的一个数据单元了，同时作为返回 JSON 响应数据中的最后一个字段。如果是一个 Object，还必须选择至少其中的一个字段
+* Directives提供了一种动态使用变量改变 queries的方法
+  - @include: 当if中参数为true时，才会包含对应fragment或field；
+  - @skip:当if中的参数为true时,会跳过对应fragment或field
+
+```graphql
+<!-- query -->
 query myQry ($name: String!) {
   movie(name: $name) {
     name
@@ -101,16 +183,45 @@ query myQry ($name: String!) {
   }
 }
 
-author(id: "7") {
-  id
-  name
-  avatarUrl
-  articles(limit: 2) {
-    name
-    urlSlug
+query {
+  movieQueryA:movie(name:"Deepwater"){
+    ... movieInfo
+  }
+
+  movieQueryB:movie(name:"Spotlight"){
+    ... movieInfo
   }
 }
 
+fragment movieInfo on Movie {
+   name
+   desc
+}
+
+query {
+    search {
+        actors @include(if: $queryActor) {
+            name
+        }
+        comments @skip(if: $noComments) {
+            from
+        }
+    }
+}
+
+{
+  author(id: "7") {
+    id
+    name
+    avatarUrl
+    articles(limit: 2) {
+      name
+      urlSlug
+    }
+  }
+}
+
+<!-- response -->
 {
   "data": {
     "author": {
@@ -132,11 +243,6 @@ author(id: "7") {
 }
 ```
 
-## Server
-
-* 类型的定义以及查询本身都是通过 Schema 去定义的。GraphQL 的 Schema 语言全称叫 Schema Definition Language。
-* Schema 本身并不代表数据库中真实的数据结构，它的定义决定了这整个端点能干些什么事情，能向端点要什么，操作什么
-
 ## 项目
 
 * [GitHub GraphQL API](https://developer.github.com/v4/explorer/) <https://developer.github.com/v4/>
@@ -151,10 +257,10 @@ author(id: "7") {
 * [graphcool-framework](https://github.com/prisma/graphcool-framework)
 * [graphql-editor](https://github.com/slothking-online/graphql-editor):GraphQL Visual Node Editor
 * [apollo-server](https://github.com/apollographql/apollo-server)GraphQL server for Express, Connect, Hapi and Koa
-* [apollo-ios](https://github.com/apollographql/apollo-ios):📱 A strongly-typed, caching GraphQL client for iOS, written in Swift <https://www.apollographql.com/docs/ios/>
 * client
   - [apollo-client](https://github.com/apollographql/apollo-client)A fully-featured, production ready caching GraphQL client for every server or UI framework
   - [react-apollo](https://github.com/apollographql/react-apollo)♻️ React integration for Apollo Client
+  - [apollo-ios](https://github.com/apollographql/apollo-ios):📱 A strongly-typed, caching GraphQL client for iOS, written in Swift <https://www.apollographql.com/docs/ios/>
 * [graphql-playground](https://github.com/prisma/graphql-playground):🎮 GraphQL IDE for better development workflows (GraphQL Subscriptions, interactive docs & collaboration)
 * [karate](https://github.com/intuit/karate):Web-Services Testing Made Simple
 * [Vue Apollo](https://vue-apollo.netlify.com)
@@ -163,7 +269,7 @@ author(id: "7") {
 
 ## 参考
 
-* 《GraphQL 学习之道》
+* [GraphQL 学习之道 The Road to GraphQL](https://github.com/the-road-to-graphql/the-road-to-graphql-chinese):📓The Road to GraphQL: Your journey to master pragmatic GraphQL in JavaScript https://roadtoreact.com/
 * [awesome-graphql](https://github.com/chentsulin/awesome-graphql):Awesome list of GraphQL & Relay## 实例
 * [express-graphql](https://github.com/graphql/express-graphql):Create a GraphQL HTTP server with Express.
 

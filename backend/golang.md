@@ -1325,6 +1325,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [Go2编程指南](https://github.com/chai2010/go2-book)
 * 《Go 语言实战》
 * Go语言程序设计
+* [Go Books](https://github.com/dariubs/GoBooks):List of Golang books
 
 ## 项目
 

@@ -3409,7 +3409,7 @@ systemd-analyze blame # 这个命令可以显示进程耗时
 }
 ```
 
-### [oguzhaninan/Stacer](https://github.com/oguzhaninan/Stacer)
+### [Stacer](https://github.com/oguzhaninan/Stacer)
 
 Linux System Optimizer and Monitoring
 
@@ -3575,7 +3575,7 @@ cat a b b | sort | uniq -u > c
 * [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html) – Machtelt Garrels 的一个格式相当不错的教程
 * [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程
-* [judasn/Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》
+* [Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》
 
 ## 图书
 
@@ -3628,7 +3628,7 @@ cat a b b | sort | uniq -u > c
 ## 参考
 
 * [Awesome-Linux-Software](https://github.com/luong-komorebi/Awesome-Linux-Software):A list of awesome applications, software, tools and other materials for Linux distros. https://luong-komorebi.github.io/Awesome-Linux-Software/
-* [awesome-linux](https://github.com/aleksandar-todorovic/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
+* [awesome-linux](https://github.com/inputsh/awesome-linux):🐧 A list of awesome projects and resources that make Linux even more awesome. 🐧
 * [Command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):From finding text to search and replace, from sorting to beautifying text and more
 * [The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/index.html)
 * [面向 Linux 程序员和系统管理员的技术资源](https://www.ibm.com/developerworks/cn/linux/)
