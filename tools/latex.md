@@ -13,6 +13,16 @@ LaTeX is a high-quality typesetting system; it includes features designed for th
 brew install caskroom/cask/mactex
 ```
 
+## 模版
+
+## 公式
+
+* [mathjax](https://github.com/mathjax/MathJax):A JavaScript display engine for mathematics that works in all browsers <http://www.mathjax.org/>
+  - [mathjax/MathJax-docs](https://github.com/mathjax/mathjax-docs)
+* [LaTeX公式编辑器](www.latexlive.com)
+
+## 表格
+
 ## 工具
 
 * 套装
@@ -24,6 +34,3 @@ brew install caskroom/cask/mactex
   - Texmaker `sudo apt install texmaker`
   - `sudo apt install gummi`
 * [mathpix](https://mathpix.com):Convert images to LaTeX
-* [mathjax](https://github.com/mathjax/MathJax):A JavaScript display engine for mathematics that works in all browsers <http://www.mathjax.org/>
-  - [mathjax/MathJax-docs](https://github.com/mathjax/mathjax-docs)
-* [LaTeX公式编辑器](www.latexlive.com)

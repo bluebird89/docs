@@ -1075,8 +1075,8 @@ lsof -d 2-3
 ## 图书
 
 * 《Unix环境高级编程》Unix Network Programming
-* 《UNIX网络编程 卷1：套接字联网API（第3版）》
-* 《UNIX网络编程 卷2：进程间通信（第2版）》
+* 《UNIX网络编程 卷1：套接字联网API》
+* 《UNIX网络编程 卷2：进程间通信》
 * 《Linux多线程服务器端编程》
 * Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
   - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)

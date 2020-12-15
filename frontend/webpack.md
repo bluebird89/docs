@@ -5,7 +5,7 @@ A bundler for javascript and friends. Packs many modules into a few bundled asse
 * module bundler(模块加载器兼打包工具)，将不同脚本打包成一个文件，浏览器可以运行这个文件
 * 一种前端模块化打包解决方案，可以融合运用各种前端新技术
 
-* 直接使用 require(XXX) 的形式来引入各模块
+* 通过 loader 可以支持各种语言和预处理器编写模块（通过loader处理非JavaScript模块，并在bundle中引入依赖），模块可以通过以下方式来表达它们的依赖关系
 * 对 CommonJS 、 AMD 、ES6的语法做了兼容.以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移
 * 能将依赖模块，区分成不同的代码块（chunk），按需加载
 * 能将静态资源（样式表、图片、字体等等），像加载模块那样加载
@@ -13,16 +13,6 @@ A bundler for javascript and friends. Packs many modules into a few bundled asse
 * 支持 SourceUrls 和 SourceMaps，易于调试
   - Source Maps：在打包时生成source maps，提供了编译文件和源文件方法的对应关系，使得编译后代码可读性更高，也更容易调试
 * 使用异步 IO 并具有多级缓存
-
-## 概念
-
-* 模块打包机：分析项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。所有的文件都都当做模块处理
-* 工作方式：把项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件
-* Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。单独安装并且需要在webpack.config.js中的modules关键字下进行配置，不同的组件不同rules。Loaders的配置包括以下几方面：
-  - test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）
-  - loader：loader的名称（必须）
-  - include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
-  - query：为loaders提供额外的设置选项（可选）
 
 ## 安装与使用
 
@@ -40,9 +30,7 @@ A bundler for javascript and friends. Packs many modules into a few bundled asse
 ```sh
 npm init  #  初始化项目信息
 
-npm i -g webpack-cli
-npm install --save-dev webpack #  本地安装Webpack
-
+npm install webpack webpack-cli --save-dev
 # 手动
 webpack hello.js hello.bundle.js  # 基本使用
 webpack hello.js hello.bundle.js --module-bind 'css=style-loader!css-loader' --watch  #  单次绑定模块，实时更新
@@ -113,6 +101,31 @@ gulp.task("webpack", function(callback) { // 配合grunt/pulp使用
   });
 });
 ```
+
+## 概念
+
+* 模块打包机：分析项目结构，找到JavaScript模块以及其它的一些浏览器不能直接运行的拓展语言（Scss，TypeScript等），并将其转换和打包为合适的格式供浏览器使用。所有的文件都都当做模块处理
+* 工作方式：把项目当做一个整体，通过一个给定的主文件（如：index.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为一个（或多个）浏览器可识别的JavaScript文件
+* Loaders：使用不同的loader，webpack有能力调用外部的脚本或工具，实现对不同格式的文件的处理，比如说分析转换scss为css，或者把下一代的JS文件（ES6，ES7)转换为现代浏览器兼容的JS文件，对React的开发而言，合适的Loaders可以把React的中用到的JSX文件转换为JS文件。单独安装并且需要在webpack.config.js中的modules关键字下进行配置，不同的组件不同rules。Loaders的配置包括以下几方面：
+  - test：一个用以匹配loaders所处理文件的拓展名的正则表达式（必须）
+  - loader：loader的名称（必须）
+  - include/exclude:手动添加必须处理的文件（文件夹）或屏蔽不需要处理的文件（文件夹）（可选）；
+  - query：为loaders提供额外的设置选项（可选）
+
+## 本质
+
+* 一种基于事件流的编程范例，一系列的插件运行，而实现这个插件机制的是Tapable
+* Tapable是一个类似于Node.js的EventEmitter的库，主要是控制钩子函数的发布与订阅，控制着Webpack的插件系统。
+* Tapable公开了许多Hook类，可用于为插件创建钩子
+
+```sh
+npm install --save tapable
+```
+
+## 启动过程
+
+* `node_modules/.bin/webpack.sh` ->`node_modules/webpack/bin/webpack.js`
+* `webpack-cli/lib/webpack-cli`
 
 ## loaders
 
@@ -245,16 +258,16 @@ proxyTable: {
 * [webpack-merge](https://github.com/survivejs/webpack-merge):Merge designed for Webpack (MIT)
 * [webpack-stream](https://github.com/shama/webpack-stream):🍹 Run webpack through a stream interface
 * [webpackmonitor](https://github.com/webpackmonitor/webpackmonitor):A tool for monitoring webpack optimization metrics through the development process <http://webpackmonitor.com>
-* [webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
+* [webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 
 ## 参考
 
-* [webpack-develop-startkit](https://github.com/taikongfeizhu/webpack-develop-startkit):webpack-develop-startkit
 * [awesome-webpack](https://github.com/webpack-contrib/awesome-webpack):A curated list of awesome Webpack resources, libraries and tools
-  - [webpack-china/awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/) - webpack 优秀中文文章 <https://webpack.docschina.org/>
+  - [awesome-webpack-cn](https://github.com/webpack-china/awesome-webpack-cn):[印记中文](https://docschina.org/)
+* [浅谈 Webpack 原理，以及 loader 和 plugin 实现](https://xie.infoq.cn/article/5f463d1f0ec3598973714f44a)
 
 * [webpack-simple](https://github.com/vuejs-templates/webpack-simple)
-
+* [webpack-libs-optimizations](https://github.com/GoogleChromeLabs/webpack-libs-optimizations):Using a library in your webpack project? Here’s how to optimize it
 * [webpack 从入门到工程实践](http://gitbook.cn/books/599270d5625e0436309466c7/index.html)
 * [Webpack 工程的 PWA 实战](http://gitbook.cn/books/59957adbebb0e06f9f24c389/index.html)
 * [react-starter](https://github.com/webpack/react-starter):[OUTDATED] Starter template for React with webpack. Doesn't focus on simplicity! NOT FOR BEGINNERS!

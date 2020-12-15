@@ -22,8 +22,7 @@
 却说不出你欣赏我哪一种表情
 你却说不出在什么场合我曾让你分心
 说不出旅行的意义
-旅行的意义 MV
-旅行的意义 MV(2张)
+
 你勉强说出你爱我的原因
 却说不出你欣赏我哪一种表情
 却说不出在什么场合我曾让你动心
@@ -34,9 +33,89 @@
 就是旅行的意义
 ```
 
-## wake me up when semteper end
+## 一个人一座城
 
+```
+头顶的叶子把阳光挡起
+投下的影子摇晃记忆
+想象着此刻若能再相遇
+你会不会忘记了过去
 
+在这阳光肆虐的城市里
+潜藏着另一个自己
+谈天说地聊着都好风趣
+关上了门自己怕自己
+
+我要找一个人会多残忍
+不完整的交换不完整
+我在这城市里等了又等
+等待着下一次可能
+
+我要找一个人会多残忍
+该启程的要怎么启程
+我在荒芜的城 住的安稳
+等你找到下一个人
+
+在这阳光肆虐的城市里
+潜藏着另一个自己
+谈天说地聊着都好风趣
+关上了门自己怕自己
+
+我要找一个人会多残忍
+不完整的交换不完整
+我在这城市里等了又等
+等待着下一次可能
+
+我要找一个人会多残忍
+该启程的要怎么启程
+我在荒芜的城住的安稳
+等你找到下一个人
+
+我要找一个人会多残忍
+该启程的要怎么启程
+我在荒芜的城住的安稳
+等你找到下一个人
+等你找到下一个人
+```
+
+## Wake Me Up When September Ends
+
+```
+Summer hase and passed
+The innocent can never last
+Wake me up when September ends
+Like my father’se to pass
+Seven years has gone so fast
+Wake me up when September ends
+Herees the rain again
+Falling from the stars
+Drenched in my pain again
+Bing who we are
+As my memory rests
+But never forgets what I lost
+Wake me up when September ends
+Summer hase and passed
+The innocent can never last
+Wake me up when Septmber ends
+Ring out the bells again
+Like we did when spring began
+Wake me up when september ends
+Herees the rain again
+Falling from the stars
+Drenched in my pain again
+Bing who we are
+As my memory rests
+But never forgets what I lost
+Wake me up when september ends
+Summer hase and passed
+The innocent can never last
+Wake me up when September ends
+Like my father’se to pass
+Twenty years has gone so fast
+Wake me up when September ends
+Wake me up when September ends
+Wake me up when September ends
+```
 
 ## 想见你
 
@@ -2149,11 +2228,13 @@ Let it burn
         They were never true, never true,
         And the games you play
         You would always win, always win.
+
         [Chorus:]
         But I set fire to the rain,
         Watched it pour as I touched your face,
         Well, it burned while I cried
         'Cause I heard it screaming out your name, your name!
+
         When I lay with you
         I could stay there
         Close my eyes
@@ -2166,11 +2247,13 @@ Let it burn
         They were never true, never true,
         And the games you'd play
         You would always win, always win.
+
         [Chorus:]
         But I set fire to the rain,
         Watched it pour as I touched your face,
         Well, it burned while I cried
         'Cause I heard it screaming out your name, your name!
+
         I set fire to the rain
         And I threw us into the flames
         When it fell, something died
@@ -2904,7 +2987,46 @@ AH 因你今晚共我唱
 ## 单车
 
 ```
-
+不要不要假设我知道
+一切一切也都是为我而做
+为何这么伟大
+如此感觉不到
+不说一句的爱有多好？
+只有一次记得实在接触到...
+骑着单车的我俩
+怀紧贴背的拥抱
+难离难舍想抱紧些
+茫茫人生好象荒野
+如孩儿能伏于爸爸的肩膊
+谁要下车
+难离难舍总有一些
+常情如此不可堆卸
+任世间再冷酷
+想起这单车还有幸福可惜
+经已给我怎会看不到?
+虽说演你角色实在有难度
+从来虚位以待
+何不给个拥抱？
+想我怎去相信这一套
+多疼惜我却不便让我知道
+怀念单车给你我
+唯一有过的拥抱
+难离难舍想抱紧些
+茫茫人生好象荒野
+如孩儿能伏于爸爸的肩膊
+哪怕遥遥长路多斜
+你爱爱上多些
+让我他朝走得坚壮些
+你介意来爱护
+又靠谁施舍
+难离难舍想抱紧些
+茫茫人生好象荒野
+如孩儿能伏于爸爸的肩膊
+谁要下车
+难离难舍总有一些
+常情如此不可堆卸
+任世间怨我坏
+可知我只得你承受我的狂或野
 ```
 
 ##
