@@ -30,6 +30,10 @@
 * [](https://www.morningbrew.com/emerging-tech/stories)
 * [translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources <https://github.com/oldratlee/translations/blob/master/README.md>
 
+## 信息茧房
+
+* 在信息传播中，公众所接触的信息是有限的，会选择自己愉悦的信息，久而久之，会将自身桎梏于像蚕茧一般的“茧房”中
+
 ## 内容
 
 * [hackernews-daily](https://github.com/headllines/hackernews-daily)

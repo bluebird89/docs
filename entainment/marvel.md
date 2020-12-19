@@ -66,12 +66,15 @@
 
 ## Thor
 
-* 雷神1
-* 《雷神2》
-* 《雷神3》
+* 雷神 Thor (2011)
+* 雷神2：黑暗世界 Thor: The Dark World (2013)
+* 雷神3：诸神黄昏 Thor: Ragnarok (2017)
   - 挪威 滕斯贝格
 
-## 银河护卫队
+## 银河护卫队 Guardians of the Galaxy
+
+* 银河护卫队 Guardians of the Galaxy (2014)
+* 银河护卫队2 Guardians of the Galaxy Vol. 2 (2017)
 
 ## 复仇者联盟 Avengers
 

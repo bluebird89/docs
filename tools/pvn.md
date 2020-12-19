@@ -445,6 +445,7 @@ curl -v "https://www.google.com" --proxy "https://arsenal.bluebird89.online:1900
 * [gfwlist](https://github.com/gfwlist/gfwlist):The one and only one gfwlist here
 * [trojan-gfw](https://github.com/trojan-gfw/trojan):An unidentifiable mechanism that helps you bypass GFW. <https://trojan-gfw.github.io/trojan/>
 * [](https://github.com/freefq/free)
+* [ss-tproxy](https://github.com/zfl9/ss-tproxy) 搭建 SS/SSR/V2Ray/Socks5 透明代理环境的简陋脚本
 * [freess](https://github.com/max2max/freess)
 * [ShadowsocksBio](https://github.com/JadaGates/ShadowsocksBio):SS的前世今生
 * [w3-goto-world](https://github.com/hoochanlon/w3-goto-world):tomatoGit/AWS/Google 镜像 ,SS/SSR/VMESS节点,WireGuard,IPFS,DeepWeb,Capitalism 知识储备库

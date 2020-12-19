@@ -285,7 +285,7 @@ pip install dash==1.17.0
 * Gantti是一个开源的PHP类，帮助用户即时生成Gantti图表。使用Gantti创建图表无需使用JavaScript，纯HTML-CSS3实现。
 * Smoothie Charts是一个十分小的动态流数据图表路。通过推送一个webSocket来显示实时数据流。
 * Flot是一个优秀的线框图表库，支持所有支持canvas的浏览器
-* Tableau Public是一款桌面可视化工具，用户可以创建自己的数据可视化，并将交互性数据可视化发布到网页上。
+* [Tableau](https://www.tableau.com/) Public是一款桌面可视化工具，用户可以创建自己的数据可视化，并将交互性数据可视化发布到网页上。
 * Many Eyes是一个Web应用程序，用来创建、分享和讨论用户上传图形数据。
 * Anychart是一个灵活的基于Flash/JavaScript(HTML5)的图表解决方案
 * Dundas Chart处于行业领先地位的NET图表处理控件，于2009年被微软收购，并将图表产品的一部分功能集成到Visual Studio中。

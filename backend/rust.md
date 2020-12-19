@@ -198,6 +198,7 @@ match VALUE {
   - [Toshi](https://github.com/toshi-search/Toshi):A full-text search engine in rust
 * [pest](https://github.com/pest-parser/pest):The Elegant Parser <https://pest.rs>
 * [hyper](https://github.com/hyperium/hyper):An HTTP library for Rust <https://hyper.rs/>
+* [rust-analyzer](https://github.com/rust-analyzer/rust-analyzer)An experimental Rust compiler front-end for IDEs https://rust-analyzer.github.io/
 * MQ
   - [flume](https://github.com/zesterer/flume):A safe and fast multi-producer, single-consumer channel. <https://crates.io/crates/flume>
 * GUI

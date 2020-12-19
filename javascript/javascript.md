@@ -758,11 +758,11 @@ xiaoming.run(); // 小明 is running...
 xiaoming.__proto__ === Student; // true
 ```
 
-### 创建对象
+### classes
 
 JavaScript对每个创建的对象都会设置一个原型，指向它的原型对象。
 
-* 当我们用obj.xxx访问一个对象的属性时，JavaScript引擎先在当前对象上查找该属性，如果没有找到，就到其原型对象上找，如果还没有找到，就一直上溯到Object.prototype对象，最后，如果还没有找到，就只能返回undefined。原型链比如：`arr ----> Array.prototype ----> Object.prototype ----> null`
+* 用obj.xxx访问一个对象的属性时，JavaScript引擎先在当前对象上查找该属性，如果没有找到，就到其原型对象上找，如果还没有找到，就一直上溯到Object.prototype对象，最后，如果还没有找到，就只能返回undefined。原型链比如：`arr ----> Array.prototype ----> Object.prototype ----> null`
 * 访问一个对象的属性就会因为花更多的时间查找而变得更慢，因此要注意不要把原型链搞得太长。
 * 声明函数，通过关键字new来调用这个函数（写了new，它就变成了一个构造函数，它绑定的this指向新创建的对象，并默认返回this，也就是说，不需要在最后写return this;），并返回一个对象
 * 用new Student()创建的对象还从原型上获得了一个constructor属性，它指向函数Student本身。通过构造函数提升对象
@@ -783,7 +783,7 @@ JavaScript对每个创建的对象都会设置一个原型，指向它的原型�
 
 ![原型链](../_static/js-link3.png "Optional title")
 
-### class继承
+### class
 
 * 关键字class从ES6开始正式被引入到JavaScript中。class的目的就是让定义类更简单。
 * class的作用就是让JavaScript引擎去实现原来需要我们自己编写的原型链代码。简而言之，用class的好处就是极大地简化了原型链代码
@@ -1622,7 +1622,9 @@ myOptions.style.color = "red";
 * 全局对象的属性
 * 隐式定义的变量（未定义直接赋值的变量）
 
-## 解构
+## 解构赋值
+
+* 赋值时从对象和数组中解构出值
 
 ## 箭头函数
 
@@ -1692,9 +1694,9 @@ myOptions.style.color = "red";
   - 排序稳定性（stable sorting）是排序算法的重要属性，指的是排序关键字相同的项目，排序前后的顺序不变
   - ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定
 
-## object
+## 对象 object
 
-* 属性简洁表示法：在大括号里面，直接写入变量和函数，作为对象的属性和方法
+* 使用对象字面量：在大括号里面，直接写入变量和函数，作为对象属性和方法
   - 用于函数的返回值，将会非常方便，CommonJS 模块输出一组变量，就非常合适使用简洁写法
   - 属性的赋值器（setter）和取值器（getter），事实上也是采用这种写法
   - 不能用作构造函数
@@ -1703,6 +1705,7 @@ myOptions.style.color = "red";
   - 用表达式作为属性名，这时要将表达式放在方括号之内，还可以用于定义方法名
   - 属性名表达式与简洁表示法，不能同时使用，会报错
   - 属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]
+  -
 * 方法 name 属性：返回函数名
   - 如果对象的方法使用了取值函数（getter）和存值函数（setter），则name属性不是在该方法上面，而是该方法的属性的描述对象的get和set属性上面，返回值是方法名前加上get和set
   - bind方法创造的函数，name属性返回bound加上原函数的名字
@@ -1736,6 +1739,9 @@ myOptions.style.color = "red";
   - 如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性
   - 实行的是浅拷贝，而不是深拷贝。也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用
 * Object.getOwnPropertyDescriptors()方法，返回指定对象所有自身属性（非继承属性）的描述对象
+* this的值是根据 方法如何调用 来定义的。 当通过引用调用该方法时， this 的值就变成了所谓的全局对象
+  - 利用setTimeout方法，让对象1秒钟后调用方法：实际上是JavaScript引擎在调用该方法，此时的this是指向的是全局对象
+    + 调用 arto.greet.bind(arto) 创建了一个新函数，它将 this 绑定指向到了 Arto，这与方法的调用位置和方式无关
 
 ## Symbol
 
@@ -1962,7 +1968,6 @@ try {
 ## 图书
 
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
-* 你不知道的javascript
 * 《Javascript高级编程》
 * 《[JavaScript 权威指南](https://www.amazon.cn/gp/product/B007VISQ1Y)》
 * 《ES6 标准入门(第3版)》

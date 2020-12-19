@@ -105,8 +105,8 @@
 
 ## Rest API 成熟度模型
 
-* Level 0
-* Level 1 - Resources 通过分割和拆解来解决与处理复杂性的问题，将大型服务端点分解成多个资源
+* Level 0 - 只是使用 HTTP 作为传输方式
+* Level 1 - 引入 Resources 通过分割和拆解来解决与处理复杂性的问题，将大型服务端点分解成多个资源
 * Level 2 - HTTP Verbs 引入一套标准动词，以同样的方式处理类似的情况，消除不必要的变化
 * Level 3 - Hypermedia Controls:HATEOAS (Hypertext As The Engine Of Application State). 引入可发现性，提供使协议更加能自我描述的方法
 

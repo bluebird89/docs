@@ -16,6 +16,10 @@
 
 * 可以返回一个函数，这样就可以实现闭包或者惰性计算
 
+## Monad
+
+* 一种设计模式，表示将一个运算过程，通过函数拆解成互相连接的多个步骤。只要提供下一步运算所需的函数，整个运算就会自动进行下去。
+
 ## lambda
 
 * [docker-lambda](https://github.com/lambci/docker-lambda):Docker images and test runners that replicate the live AWS Lambda environment

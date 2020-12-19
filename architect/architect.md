@@ -219,12 +219,16 @@
   - 分层效果需要让整个团队都接受
   - 各层职责边界清晰
 * MVC
+  - VO（View Object） 通常是请求处理层传输的对象，它通过 Spring 框架的转换后，往往是一个 JSON 对象
   - controller:此层只负责功能的调度(更适合承担角色是负责对 HTTP 请求进行路由)，参数的控制，结果的输出
   - service，此层负责业务逻辑相关的开发BLL(业务逻辑层):类内聚，OOP的抽象
     + 属性
     + 业务逻辑
+    + BO（Business Object），它是业务逻辑层封装业务逻辑的对象，一般情况下，它是聚合了多个数据源的复合对
   - DAO(数据接入层)，此层负责与数据的交互,ORM接入数据对象
+    + DTO（Data Transfer Object）是远程调用对象，它是 RPC 服务提供的领域模型
   - entity, 此层定义为数据表的一个映射
+    + DO（Data Object）与数据库表结构一一对应，通过 DAO 层向上传输数据源对象
 * 一般分层
   - Presentation layer 表示层（也就是UI层）
   - Application layer 应用层（也就是服务层）

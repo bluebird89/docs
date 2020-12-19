@@ -368,6 +368,8 @@ public class OrderCreatedEvent extends OrderEvent {
 * DDD中的限界上下文则完美匹配微服务要求，可以将该限界上下文理解为一个微服务进程。DDD在面向高度复杂的软件系统，如何去建模，它的核心点是根据系统的复杂度建立合适的模型
 * DDD的本质是一种软件设计方法，而微服务是具体的落地实现
 
+## 防腐层
+
 ## 注意
 
 * 微服务中应该首先建立UL（Ubiquitous Language，通用语言），然后再讨论领域模型。
@@ -397,6 +399,29 @@ public class OrderCreatedEvent extends OrderEvent {
 * 实现领域驱动设计 implementing domain-driven design
 * 解构领域驱动设计
   - GitChat 课程《领域驱动设计实践》
+
+## 领域驱动设计峰会2020
+
+* 于静：遗留系统改造
+  - 基础
+    + 团队转型
+* 杨云：DDD 落地三步法
+  - 函数式编程
+  - 模型概念对齐
+  - 事件风暴：战略建模、子域划分、微服务划分
+  - 名动词：在子域内建模
+  - 类型流：微观行为设计
+    + 纯函数
+    + 副作用函数
+* 事件驱动领域驱动
+  - 领域模型不断演进
+  - 事件-》command
+  - context
+  - 微服务自治
+
+## 工具
+
+* [mural](https://www.mural.co)
 
 ## 参考
 

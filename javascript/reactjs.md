@@ -131,6 +131,7 @@ npm run eject #  导出配置文件
 * isMounted 判断组件挂载状态
   - 用于判断组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错
 * 阻止组件渲染: 让 render 方法直接返回 null
+* Do Not Define Components Within Components
 
 ## 生命周期
 
@@ -434,18 +435,20 @@ const component = <Component {...data} />;
 * 从 React Hooks 发布以来，基于函数的组件已升格为 React 的一等公民。使函数组件能够以新的方式编写、重用和共享 React 代码
 * React 函数组件的副效应解决方案，用来为函数组件引入副效应。 函数组件的主体只应该用来返回组件的 HTML 代码，所有的其他操作（副效应）都必须通过钩子引入
 * 规则
-  - 仅在顶级调用 Hooks:不要在循环、条件和嵌套函数内调用 Hooks。当想有条件地使用某些 Hooks 时，请在这些 Hooks 中写入条件
+  - 仅在顶级调用 Hooks:不要在循环、条件和嵌套函数内调用 Hooks:确保Hook总是以相同的顺序调用
+  - 当想有条件地使用某些 Hooks 时，请在这些 Hooks 中写入条件
   - 仅从函数组件调用 Hooks
   - 以正确的顺序创建函数组件:首先调用构造器并启动状态。然后编写生命周期函数，接着编写与组件作业相关的所有函数。最后编写 render 方法
-* useState【维护状态】
+* useState【维护状态】Stateful component 为组件提供了定义为函数的状态
   - 为函数组件引入状态（state）。纯函数不能有状态，所以把状态放在钩子里面
   - 用法可以和类组件的状态完全一致，不只用于单个值
+  - Event handler is a function:
 * useEffect【完成副作用操作】
   - 指定一个副效应函数，组件每渲染一次，该函数就自动执行一次。组件首次在网页 DOM 加载后，副效应函数也会执行
   - 以理解成它替换了componentDidMount, componentDidUpdate, componentWillUnmount 这三个生命周期
   - 参数是一个函数，它就是所要完成的副效应,组件加载以后，React 就会执行这个函数
-  - 第二个参数，使用一个数组指定副效应函数的依赖项，只有依赖项发生变化，才会重新渲染
-    + 是一个空数组，就表明副效应参数没有任何依赖项。因此，副效应函数这时只会在组件加载进入 DOM 后执行一次，后面组件重新渲染，就不会再次执行
+  - 第二个参数:使用一个数组指定副效应函数的依赖项，只有依赖项发生变化，才会重新渲染
+    + 一个空数组，就表明副效应参数没有任何依赖项。因此，副效应函数这时只会在组件加载进入 DOM 后执行一次，后面组件重新渲染，就不会再次执行
   - 用途
     + 获取数据（data fetching）
     + 事件监听或订阅（setting up a subscription）
@@ -637,6 +640,7 @@ An alternative side effect model for Redux apps <https://redux-saga.js.org/>
 
 ## 测试
 
+* `console.log('props value is', props)` 用逗号分隔的项目都可以在浏览器控制台中进行进一步检查
 * 组件
   - 测试内容
     + 给定属性（property)和状态（state），会渲染出什么结果？

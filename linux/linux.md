@@ -1724,8 +1724,12 @@ perf report # 查看相关结果
 
 ## GDB
 
-## 文件系统
 
+* 一个典型的 Linux 文件系统由 bootfs 和 rootfs 两部分组成，
+  - bootfs(boot file system) 主要包含 bootloader 和 kernel，bootloader 主要用于引导加载 kernel，当 kernel 被加载到内存中后 bootfs 会被 umount 掉
+  - rootfs (root file system) 包含的就是典型 Linux 系统中的/dev，/proc，/bin，/etc 等标准目录和文件
+  - 不同的 linux 发行版（如 ubuntu 和 CentOS ) 在 rootfs 这一层会有所区别，体现发行版本的差异性
+    + 传统的 Linux 加载 bootfs 时会先将 rootfs 设为 read-only，然后在系统自检之后将 rootfs 从 read-only 改为 read-write，然后就可在 rootfs 上进行读写操作了
 * 文件结构是文件存放在磁盘等存贮设备上的组织方法,主要体现在对文件和目录的组织上
 * 磁盘分区和目录的关系如下
   - 任何一个分区都必须挂载到某个目录上

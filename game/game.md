@@ -137,14 +137,12 @@
 * [ ] Counter-Strike: Global Offensive
 * [ ] Frostpunk
 * [ ] 双点医生
+* [ ] 赛博朋克2077
 * PES2020
   - PS4 CONTROLLER NOT WORKING
     - Steam > Library > Right Click PES > Properties>;steam input per-game settings  and use bpm overlay when steam input is active both off
-
 + Gris:类似纪念碑谷那样作画唯美，难度不高的独立游
-
 + Dark Soul 系列
-
 * Total War 系列
 
 ## [Epic Games](https://www.epicgames.com/store/zh-CN/)
