@@ -24,6 +24,10 @@ Xcode>preferences>Locations里面，设置之后再运行终端即可
 /usr/bin/sudo /usr/sbin/softwareupdate -i Command\ Line\ Tools\ for\ Xcode-12.1
 ```
 
+## 课程
+
+* [Develop Apps with SwiftUI](https://developer.apple.com/tutorials/app-dev-training)
+
 ## 工具
 
 * [XcodeCleaner](https://github.com/waylybaye/XcodeCleaner):Cleaner for Xcode.app built with react-native-macos
