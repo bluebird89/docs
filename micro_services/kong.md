@@ -14,6 +14,18 @@ gorilla The Cloud-Native API Gateway & Service Mesh <https://konghq.com>
   - 可扩展性: 通过简单地添加更多的服务器，可以轻松地进行横向扩展，这意味着您的平台可以在一个较低负载的情况下处理任何请求。
   - 模块化: 可以通过添加新的插件进行扩展，这些插件可以通过RESTful Admin API轻松配置。
   - 在任何基础架构上运行: Kong 网关可以在任何地方都能运行。可以在云或内部网络环境中部署 Kong，包括单个或多个数据中心设置，以及 public，private 或 invite-only APIs
+* 云原生：与平台无关，Kong可以从裸机运行到Kubernetes
+* 动态路由：Kong的背后是OpenResty+Lua，所以继承了动态路由的特性 限流和熔断
+* 健康检查
+* 日志：可以记录通过Kong的HTTP，TCP，UDP请求和响应。
+* 鉴权：权限控制，IP黑白名单，同样是OpenResty的特性
+* SSL：Setup a Specific SSL Certificate for an underlying service or API
+* 监控：Kong提供了实时监控插件
+* 认证：如数支持HMAC，JWT，Basic，OAuth2.0等常用协议
+* REST API：通过Rest API进行配置管理，从繁琐的配置文件中解放
+* 可用性：天然支持分布式
+* 高性能：背靠非阻塞通信的Nginx，性能自不用说
+* 插件机制：提供众多开箱即用的插件，且有易于扩展的自定义插件接口
 
 ## 安装
 
@@ -71,16 +83,21 @@ curl -i -X PATCH http://localhost:8001/services/hello-service --data url='http:/
 
 ## Kong Plugins
 
-* key-auth
-  - 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
-  - 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
+* Authentication认证
+  - key-auth
+    + 接收config.key_names定义参数，默认参数名称 ['apikey']。在HTTP请求中 header和params参数中包含apikey参数，参数值必须apikey密钥，Kong网关将检查密钥，验证通过才可以访问后续服务
+    + 为Service添加服务消费者（Consumer）定义消费者访问 API Key, 让他拥有访问hello-service的权限
+* Security安全
+  - 身份认证插件：Kong提供了Basic Authentication、Key authentication、OAuth2.0 authentication、HMAC authentication、JWT、LDAP authentication认证实现。
+  - ACL（访问控制）、CORS（跨域资源共享）、动态SSL、IP限制、爬虫检测实现
+* Traffic Control流量控制
+  - 请求限流（基于请求计数限流）、上游响应限流（根据upstream响应计数限流）、请求大小限制。限流支持本地、Redis和集群限流模式
+* Analytics & Monitoring分析&监控
+  - Galileo（记录请求和响应数据，实现API分析）、Datadog（记录API Metric如请求次数、请求大小、响应状态和延迟，可视化API Metric）、Runscope（记录请求和响应数据，实现API性能测试和监控）
+* Logging日志
+  - TCP、UDP、HTTP、File、Syslog、StatsD、Loggly等
+* 协议转换插件：请求转换（在转发到upstream之前修改请求）、响应转换（在upstream响应返回给客户端之前修改响应）
 * [Kong Hub](<https://docs.konghq.com/hub/>）
-* 身份认证插件：Kong提供了Basic Authentication、Key authentication、OAuth2.0 authentication、HMAC authentication、JWT、LDAP authentication认证实现。
-* 安全控制插件：ACL（访问控制）、CORS（跨域资源共享）、动态SSL、IP限制、爬虫检测实现。
-* 流量控制插件：请求限流（基于请求计数限流）、上游响应限流（根据upstream响应计数限流）、请求大小限制。限流支持本地、Redis和集群限流模式。
-* 分析监控插件：Galileo（记录请求和响应数据，实现API分析）、Datadog（记录API Metric如请求次数、请求大小、响应状态和延迟，可视化API Metric）、Runscope（记录请求和响应数据，实现API性能测试和监控）
-* 协议转换插件：请求转换（在转发到upstream之前修改请求）、响应转换（在upstream响应返回给客户端之前修改响应）。
-* 日志应用插件：TCP、UDP、HTTP、File、Syslog、StatsD、Loggly等
 
 ```sh
 # 配置 key-auth 插件

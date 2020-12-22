@@ -12,17 +12,17 @@
 * Introspection
   - API 系统自动收集 metrics，自我监控
   - 无论是撰写者，还是调用者，都很很方便的获取想要获取的信息
-* API风格考虑问题：
+* API风格考虑：
   - 选择支持哪种风格，才能更好地体现业务特性，让客户操作起来更加方便；
   - 设计API时能否面向资源设计，相应的工程人员是否具备做这种设计的能力；
   - 针对这种风格工具链的支持是否到位，投入产出比如何；
   - 业界流行的趋势如何，是否需要考虑与其他系统体系的互操作。
-* 用户使用API来访问 Service，本质上是想通过对某种资源执行特定的操作来完成一个业务动作。对于资源有两个关键点：一是要有统一的资源模型；二是要明确资源关系。统一的资源模型
-  - 可以使API具有更清晰的结构，帮助用户理解；
-  - 可以帮助对比API与后台实体关系模型，更容易提供更完整的API服务；
-  - 可以使产品协作更加顺畅，对资源的操作也更加规范化；
-  - 可以使云服务底层平台实现起来更统一、更方便；
-  - 可以使围绕API的生态集成起来更加简单、高效。
+* 本质上是想通过对某种资源执行特定的操作来完成一个业务动作。对于资源有两个关键点：一是要有统一的资源模型；二是要明确资源关系
+  - 使API具有更清晰的结构，帮助用户理解；
+  - 帮助对比API与后台实体关系模型，更容易提供更完整的API服务；
+  - 使产品协作更加顺畅，对资源的操作也更加规范化；
+  - 使云服务底层平台实现起来更统一、更方便；
+  - 使围绕API的生态集成起来更加简单、高效。
 * 其它考虑
   - 在API命名的时候，遵循什么样的范式来确保大体风格相似？动词、名词、介词如何组合才能保持API风格看起来比较统一，降低理解成本？
   - 对于类似的操作，有没有使用规范？有哪些公共的标准词汇使得同类型的操作可以比较容易理解，避免使用晦涩奇怪的词汇（例如读操作，Read/Query/Describe/List/Get中都在什么场合使用什么动词）？
@@ -227,10 +227,10 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
 ## 认证（authentication）：验证当前用户的身份，当用户登陆过后系统便能追踪到他身份做出符合相应业务逻辑的操作
 
 * 方法
-    -　用户名密码登录
-    -　邮箱发送登录链接
-    -　手机号接收验证码
-    -　只要你能收到邮箱 / 验证码
+  -　用户名密码登录
+  -　邮箱发送登录链接
+  -　手机号接收验证码
+  -　只要你能收到邮箱 / 验证码
 * 即使用户没有登录，大多数系统也会追踪他的身份，只是当做来宾或者匿名用户来处理
 * 认证技术解决的是 “我是谁？”的问题
 * HTTP Basic Authentication
@@ -255,8 +255,9 @@ openssl rsa - in private_key . pem - pubout - out public_key . pem
       * 基于时间的一次性密码算法（TOTP：Time-based One-time Password Algorithm）：通过同步时间的方式协商到一致，在一定的时间窗口内有效（1分钟左右）
         - 在两步验证中被大量使用：客户端服务器共享密钥然后根据时间窗口能通过 HMAC 算法计算出一个相同的验证码。TOTP HMAC-based One-time Password algorithm
 
-## 授权（authorization）：用户授予第三方应用访问该用户某些资源的权限
+## 授权 authorization
 
+* 用户授予第三方应用访问该用户某些资源的权限
 * 实现授权的方式有：cookie、session、token、OAuth
 * 单一的系统授权往往是伴随认证来完成的，但是在开放 API 的多系统结构下，授权可以由不同的系统来完成，例如 OAuth
 * OAuth（开放授权）是一个开放标准，允许用户授权第三方网站访问存储在另外的服务提供者上的信息，而不需要将用户名和密码提供给第三方网站或分享他们数据的所有内容
@@ -504,8 +505,8 @@ https://api.github.com/user
 ## 架构
 
 * 把 API 执行路径上的各种处理都抽象出来，放到公共路径（或者叫中间件，middleware）之中，为 API 的撰写者扫清各种障碍，同时能够促使 API 更加标准化。
-* pipeline 下的组件
-  - throttling：API 应该有最基本的访问速度的控制，比如，对同一个用户，发布 tweet 的速度不可能超过一个阈值，比如每秒钟 1 条（实际的平均速度应该远低于这个）。超过这个速度，就是滥用（abuse），需要制止并返回 429 Too many requests。throttling 可以使用 leaky bucket 实现（restify 直接提供）。
+* pipeline 下组件
+  - throttling：API 应该有最基本的访问速度的控制，比如，对同一个用户，发布 tweet 的速度不可能超过一个阈值，比如每秒钟 1 条（实际的平均速度应该远低于这个）。超过这个速度，就是滥用（abuse），需要制止并返回 429 Too many requests。throttling 可以使用 leaky bucket 实现（restify 直接提供）
   - parser / validation：接下来要解析 HTTP request 包含的 headers，body 和 URL 里的 querystring，并对解析出来的结果进行 validation。这个过程可以屏蔽很多服务的滥用，并提前终止服务的执行。比如你的 API 要求调用者必须提供 X-Client-Id，没有提供的，或者提供的格式不符合要求的，统统拒绝。这个步骤非常重要，如同我们的皮肤，将肮脏的世界和我们的器官隔离开来。
   - ACL：除了基本的 throttling 和 validation 外，控制资源能否被访问的另一个途径是 ACL。管理员应该能够配置一些规则，这些规则能够进一步将不合法 / 不合规的访问过滤掉。比如说：路径为 "/topic/19805970" 的知乎话题，北京时间晚上10点到次日早上7点的时间端，允许在中国大陆显示。这样的规则可以是一个复杂的表达式，其触发条件（url）可以被放置在一个 bloom filter 里，满足 filter 的 url 再进一步在 hash map 里找到其对应的规则表达式，求解并返回是否允许显示。至于一个诸如country = "CN" && time >= 00:00CST && time < 07:00CST（这是一个管理员输入的表达式）这样的表达式如何处理，请移步 如何愉快地写个小parser。
   - normalization：顾名思义，这个组件的作用是把请求的内容预处理，使其统一。normalization 可以被进一步分为多个串行执行的 strategy，比如：
@@ -530,7 +531,7 @@ https://api.github.com/user
 
 * 配置管理
   - 一个公共的地方来放置预置的属性。toml
-  - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并。
+  - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并
   - 运行的时候改写配置：像管理缓存一样去管理和配置相关的数据，将其封装在一个容器里：当配置被修改时，调用这个容器的 invalidate 方法 —— 这样，下次访问任意一个配置项时，会重新读入配置，并缓存起来
 * CLI：不是给用户用的，是给程序员用的
   - 难点
@@ -549,8 +550,6 @@ https://api.github.com/user
     + 先撰写代码把 API 的输入输出定义清楚，然后通过这个定义来生成 swagger 文档，在 swagger-ui 里面调试和验证；当借口设计符合期望后，再完成具体的实现
   - API blueprint：更偏向 API 的文档化，所以它选择的描述语言是 markdown。validation 相关的内容用 markdown 描述不是很舒服，看别人写的文档很容易明白，自己写起来就会错漏百出。API blueprint 的工具链也是个薄弱环节，很多工具都没有或者不成熟
   - RAML
-
-## 权限控制
 
 ## 设计
 
@@ -576,6 +575,18 @@ https://api.github.com/user
       * 错误的调用方式
       * 接口滥用
       * 浏览器消费 API 时因安全漏洞导致的非法访问
+
+## API全生命周期管理能力
+
+* 定义
+  - 归类分组
+  - 详细定义
+* 快速开发的支持
+  - 通过类似WADL或RAML等标准的Rest接口定义规范文件
+  - 需要提供客户端和服务端的开发框架代码
+* API接口服务的注册和接入
+* 服务接入适配能力
+  - 对于服务发布而言，如果不仅仅是微服务网关能力，而是一个微服务支撑或微服务快速开发平台的话，还可以提供完整的服务开发和设计能力。即在微服务平台首先定义数据或对象模型，然后将对象模型转换为Http Rest中的资源对象，并发布对应的Get，Post各种Http Rest接口服务
 
 ## 评审清单
 
@@ -617,7 +628,7 @@ https://api.github.com/user
   - 请求类型
   - 参数说明
   - 返回结果说明
-* 基于注释的 API 文档：通过代码中注释生成 API 文档的轻量级方案
+* 基于注释 API 文档：通过代码中注释生成 API 文档的轻量级方案
   - 好处是简单易用，基本与编程语言无关
   - 因为基于注释，非常适合动态语言的文档输出，例如 Nodejs、PHP、Python。由于NPM包容易安装和使用，这里推荐 nodejs 平台下的 apidocjs
 * 基于反射的 API 文档：使用 swagger 这类通过反射来解析代码，只需要定义好 Model，可以实现自动输出 API 文档。这种方案适合强类型语言例如 Java、.Net，尤其是生成一份稳定、能在团队外使用的 API 文档
@@ -635,8 +646,26 @@ https://api.github.com/user
   - 管理契约文件:单独增加了一个管理契约文件的 git仓库，并使用 git 的submodule 来引用到各个涉及到了的代码仓库中
     + 单独放置还有一个额外的好处:构建契约测试时，可以方便的发送到一台中间服务器。一旦 API 契约发生变化，可以触发 API提供的契约验证测试
 * RAML RestFul API 统一建模语言 （RESTful API Modeling Language）,构建出 API 协作的工具链，设计、构建、测试、文档、共享。
+* 工具
+  - [swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
+      * [swaggerhub](https://app.swaggerhub.com/search)
+  - [yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 <http://yapi.demo.qunar.com/>
+  * [ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
+  - [jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. <http://usejsdoc.org>
+  - [devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser <https://devdocs.io>
+  - [slate](https://github.com/lord/slate):Beautiful static documentation for your API <https://spectrum.chat/slate>
+  - YUI doc
+  - eolinker
+  - Apizza
+  - [redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation <https://redocly.github.io/redoc/>
+  - DOClever
+  - [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
+  - [showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 <https://www.showdoc.cc>
+  - API 文档/契约生成工具
+    + blue sprint
+    + RAML
 
-### [encode/apistar](https://github.com/encode/apistar)
+### [apistar](https://github.com/encode/apistar)
 
 A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
 
@@ -682,13 +711,15 @@ if __name__ == '__main__':
 * 语法
   - 注释模块: 通用可复用的注释模块(例如:接口错误响应模块),只需要在源代码中定义一次，便可以在其他注释模块中随便引用，最后在文档导出时会自动替换所引用的注释模块，定义之后您可以通过@apiUse来引入所定义的注释模块
 
-```
+```sh
 # 安装
 npm install apidoc -g
 apidoc -i myapp/ -o apidoc/ -t mytemplate/
-
-# 支持中文title
 ```
+
+### [APIJSON](https://github.com/APIJSON/APIJSON)
+
+* 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！ 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. <http://apijson.org>
 
 ## 前后端实践
 
@@ -736,6 +767,10 @@ yarn test
 ## 加密
 
 * https:面对charles等抓包工具时，其实并没有什么卵用，只要配置一下根证书瞬间可以看到一切明文
+* 工具
+  - [tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
+  - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
+
 
 ```
 // 加密密码
@@ -834,21 +869,16 @@ print dec_message   // Hello World!
     + 发送请求时将签名值一起发送给服务器验证
     + 即使Token被劫持，对方不知道AppKey和签名算法，就无法伪造请求和篡改参数。再结合上述的重发攻击解决方案，即使请求参数被劫持也无法伪造二次重复请求
 
-## [APIJSON](https://github.com/APIJSON/APIJSON)
-
-* 🚀后端接口和文档自动化，前端(客户端) 定制返回 JSON 的数据和结构！ 🚀A JSON Transmission Protocol and an ORM Library for automatically providing APIs and Docs. <http://apijson.org>
-
 ## 接口
 
 * [public-apis](https://github.com/public-apis/public-apis):A collective list of free APIs for use in software and web development. <https://ultimatecourses.com>
 * [雅虎天气](https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20%3D%202151330&format=json)
 * [价格](http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice)
 * [bilibili-api](https://github.com/Vespa314/bilibili-api):B站API收集整理及开发
-* [jokermonn/-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
+* [-Api](https://github.com/jokermonn/-Api):📖「一个」、「Time 时光」、「开眼」、「一席」、「梨视频」、「微软必应词典」、「金山词典」、「豆瓣电影」、「中央天气」、「魅族天气」、「每日一文」、「12306」、「途牛」、「快递100」、「快递」应用 Api
 * [chinese-xinhua](https://github.com/pwxcoo/chinese-xinhua):📙 中华新华字典数据库。包括歇后语，成语，词语，汉字。提供新华字典API。
 * [NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi):网易云音乐 Node.js API service <https://binaryify.github.io/NeteaseCloudMusicApi/#/>
-* 豆瓣
-  - [douban](https://developers.douban.com/wiki/)
+* [豆瓣 douban](https://developers.douban.com/wiki/)
   - [获取正在热映的电影](https://api.douban.com/v2/movie/in_theaters?city=广州&start=0&count=10)
   - [获取电影Top250](https://api.douban.com/v2/movie/top250?start=0&count=10)
   - [电影搜索](https://api.douban.com/v2/movie/search?q=神秘巨星&start=0&count=10)
@@ -881,7 +911,6 @@ print dec_message   // Hello World!
 * [apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
 * [grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. <http://www.ruby-grape.org>
 * [django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ <https://www.django-rest-framework.org>
-* [api](https://github.com/dingo/api):A RESTful API package for the Laravel and Lumen frameworks.
 * [parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express <http://parseplatform.org>
 * [http-api-design](https://github.com/interagent/http-api-design):HTTP API design guide extracted from work on the Heroku Platform API <https://www.gitbook.com/read/book/gee>…
 * [json-server](https://github.com/typicode/json-server):Get a full fake REST API with zero coding in less than 30 seconds (seriously)
@@ -889,7 +918,6 @@ print dec_message   // Hello World!
 * [vault](https://github.com/hashicorp/vault)：A tool for secrets management, encryption as a service, and privileged access management <https://www.vaultproject.io/>
 * [termbox-go](https://github.com/nsf/termbox-go):Pure Go termbox implementation <http://code.google.com/p/termbox>
 * [dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.rtfd.io>
-
 * HTTP 请求拦截器
   - axios-mock-adapter
   - jquery-mockjax
@@ -899,22 +927,17 @@ print dec_message   // Hello World!
   - Rest-Assured
 * HoServer
 * [SocketLog](https://github.com/luofei614/SocketLog)
-* 加密
-  - [tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
-  - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
-
-## 测试
-
-* Poster 火狐浏览器插件
-* postman
-* [postwoman](https://github.com/liyasthomas/postwoman):<https://github.com/liyasthomas/postwoman>
-* [dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.org>
-* [hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
-* RESTClient 是用java Swing编写的基于http协议的接口测试工具
-* SoapUI 是一个免费、开源、跨平台的功能测试解决方案。一个易于使用的图形界面，和企业级功能，让你轻松和soapUI迅速创建和执行自动化的功能，回归测试和负载测试
-* Apache JMeter 是Apache组织开发的基于Java的开源的测试工具， JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能,对应用程序做功能/回归测试/接口测试，同时Jmeter+Ant+Jenkins也可以搭建接口和性能的持续集成测试平台
-* WireMock 是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
-* 冒烟测试用poster，集成测试用Jmeter
+* 测试
+  - Poster 火狐浏览器插件
+  - postman
+  - [postwoman](https://github.com/liyasthomas/postwoman):<https://github.com/liyasthomas/postwoman>
+  - [dredd](https://github.com/apiaryio/dredd):Language-agnostic HTTP API Testing Tool <https://dredd.org>
+  - [hypernova](https://github.com/airbnb/hypernova):A service for server-side rendering your JavaScript views
+  - RESTClient 是用java Swing编写的基于http协议的接口测试工具
+  - SoapUI 一个免费、开源、跨平台的功能测试解决方案。一个易于使用的图形界面，和企业级功能，轻松和soapUI迅速创建和执行自动化的功能，回归测试和负载测试
+  - Apache JMeter 是Apache组织开发的基于Java的开源的测试工具，可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能,对应用程序做功能/回归测试/接口测试，同时Jmeter+Ant+Jenkins也可以搭建接口和性能的持续集成测试平台
+  - WireMock 是一个非常轻量级的支持HTTP mock的服务,可以用于单元测试或模拟测试环境服务端，它支持HTTP响应头，请求验证，代理/拦截，记录/回放存根和故障注入
+  - 冒烟测试用poster，集成测试用Jmeter
 
 ## 抓包
 
@@ -922,26 +945,6 @@ print dec_message   // Hello World!
 * Charles
 * [Wireshark](https://www.wireshark.org)
 * [whistle](https://github.com/avwo/whistle):HTTP, HTTP2, HTTPS, Websocket debugging proxy <https://wproxy.org/>
-
-## 文档
-
-* [swagger-ui](https://github.com/swagger-api/swagger-ui):Swagger UI is a collection of HTML, Javascript, and CSS assets that dynamically generate beautiful documentation from a Swagger-compliant API. <http://swagger.io>
-    + [swaggerhub](https://app.swaggerhub.com/search)
-* [yapi](https://github.com/YMFE/yapi):YApi 是一个可本地部署的、打通前后端及QA的、可视化的接口管理平台 <http://yapi.demo.qunar.com/>
-+ [ApiManager](https://github.com/gongwalker/ApiManager):接口文档管理工具
-* [jsdoc](https://github.com/jsdoc3/jsdoc):An API documentation generator for JavaScript. <http://usejsdoc.org>
-* [devdocs](https://github.com/freeCodeCamp/devdocs):API Documentation Browser <https://devdocs.io>
-* [slate](https://github.com/lord/slate):Beautiful static documentation for your API <https://spectrum.chat/slate>
-* YUI doc
-* eolinker
-* Apizza
-* [redoc](https://github.com/Redocly/redoc)blue_book OpenAPI/Swagger-generated API Reference Documentation <https://redocly.github.io/redoc/>
-* DOClever
-* [insomnia](https://insomnia.rest/):Design and debug APIs like a human, not a robot.
-* [star7th / showdoc](https://github.com/star7th/showdoc):ShowDoc is a tool greatly applicable for an IT team to share documents online一个非常适合IT团队的在线API文档、技术文档工具 <https://www.showdoc.cc>
-* API 文档/契约生成工具
-  - blue sprint
-  - RAML
 
 ## mock
 

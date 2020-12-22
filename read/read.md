@@ -138,11 +138,6 @@
 
 ## 历史的教训
 
-## 基地
-
-## 机器人
-
-## 帝国
 
 ## 《城市发展史》
 
@@ -1781,11 +1776,15 @@
 
 ## 《苏菲的世界》
 
-## 爱情三部曲
+## 爱情三部曲 夏目漱石
 
 ## 罪与罚
 
 ## 杀死一只知更鸟 to kill a mockingbird
+
+## 异乡人 阿尔贝·加缪
+
+* 生活方式是改变不了的，况且每种生活都有它好的一面，我对现状并无任何不满。
 
 ## 麦田守望者
 
@@ -1803,7 +1802,7 @@
 
 ## 工具
 
-* [koreader/koreader](https://github.com/koreader/koreader):An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Kindle, Kobo, PocketBook, Ubuntu Touch and Android devices <http://koreader.rocks/>
+* [koreader](https://github.com/koreader/koreader):An ebook reader application supporting PDF, DjVu, EPUB, FB2 and many more formats, running on Kindle, Kobo, PocketBook, Ubuntu Touch and Android devices <http://koreader.rocks/>
 * Klib - 标注 & 笔记管理:Kindle、Apple Books、多看标注&笔记管理工具
 * MarginNote
 * GoodReader

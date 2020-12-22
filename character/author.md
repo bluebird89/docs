@@ -1,5 +1,7 @@
 # 作家｜编剧
 
+## [艾萨克·阿西莫夫 Isaac Asimov](http://www.asimovonline.com/asimov_home_page.html) 1920年1月2日－1992年4月6日
+
 ## 柏邦妮
 
 ## 徐志摩

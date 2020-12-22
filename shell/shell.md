@@ -12,6 +12,13 @@
   - BASH：GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
   - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容
   - C Shell：是SUN公司Shell的BSD版本
+* 由大量标准应用程序组成。这些应用程序主要有下面六种
+  - 文件和目录操作命令
+  - 过滤器
+  - 文本程序
+  - 系统管理
+  - 程序开发工具，例如编辑器和编译器
+  - 其他
 
 ## 配置
 
@@ -1235,6 +1242,7 @@ ccache gcc foo.c
 * [awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+* https://www.shellscript.sh/
 
 * [across](https://github.com/teddysun/across)
 * 脚本参考

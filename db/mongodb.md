@@ -4,10 +4,7 @@ The MongoDB Database <https://www.mongodb.com/>
 
 * 由C＋＋写就，其名字来自humongous这个单词的中间部分。关于它的一个最简洁描述为：scalable, high-performance, open source, schema-free, document-oriented database。MongoDB的主要目标是在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁，集两者的优势于一身。
 * 数据结构：db->collection->document（BSON（binary json）存放于硬盘）,BSON是Binary JSON 的简称，是一个JSON文档对象的二进制编码格式。BSON同JSON一样支持往其它文档对象和数组中再插入文档对象和数组，同时扩展了JSON的数据类型。如：BSON有Date类型和BinDate类型。
-
 * BSON被比作二进制的交换格式，如同Protocol Buffers，但BSON比它更“schema-less”，非常好的灵活性但空间占用稍微大一点
-  -
-
 * 跟一般的key-value数据库不一样的是，它的value中存储了结构信息,以单文档为单位存储的，可以任意给一个或一批文档新增或删除字段，而不会对其它文档造成影响，这就是所谓的schema-free，这也是文档型数据库最主要的优点。
 * 最大的特点是支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。Mongo还可以解决海量数据的查询效率，根据官方文档，当数据量达到50GB以上数据时，Mongo数据库访问速度是MySQL10 倍以上。
 
@@ -297,8 +294,8 @@ db.shutdownServer() # 退出命令行
 * 一对多
 * 多对多
 
-```sql
-//一对一
+```js
+// 一对一
 db.aAndb.insert([
  {name:"杨过",wife:{name:"小龙女",sex:"女"},sex:"男"},
   {name:"杨过",wife:{name:"小龙女",sex:"女"},sex:"男"}
@@ -330,11 +327,11 @@ list:[
 }
 ]);
 db.comments.find();
-# 查询一对多
+// # 查询一对多
 var weibo_id= db.weibo.findOne({"weibo" : "世界这么大，我想去看看"})._id;
 db.comments.find({weibo_id: weibo_id});
 
-# 多对多 老师《------》学生
+// # 多对多 老师《------》学生
 //插入老师集合
 db.teachers.insert([
 {
@@ -365,9 +362,7 @@ db.teachers.insert([
   ]
  }
 ])
-
 db.teachers.find();
-
 
 //插入学生集合
 db.students.insert([
@@ -408,7 +403,7 @@ db.teachers.find();
 
 备份和恢复数据库
 
-## mongoexport和mongoimport
+## mongoexport mongoimport
 
 导入导出JSON、CSV和TSV数据
 

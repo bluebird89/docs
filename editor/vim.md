@@ -34,19 +34,19 @@ brew install vim
   - nomagic 允许在搜索模式中，使用前面不带“/”的特殊字符
   - nowrapscan 禁止vi在搜索到达文件两端时，又从另一端开始
   - mesg 允许vi显示其他用户用write写到自己终端上的信息
-* [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration <https://spacevim.org>
-* [qvacua/vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS <http://vimr.org>
-* [amix/vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
-* [Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim <http://valloric.github.io/YouCompleteMe/>
-* [philc/vimium](https://github.com/philc/vimium):The hacker's browser.
-* [tpope/vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
-* [square/maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
-* [macvim-dev/macvim](https://github.com/macvim-dev/macvim)
+* [SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration <https://spacevim.org>
+* [vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS <http://vimr.org>
+* [vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
+* [YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim <http://valloric.github.io/YouCompleteMe/>
+* [vimium](https://github.com/philc/vimium):The hacker's browser.
+* [vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
+* [maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
+* [macvim](https://github.com/macvim-dev/macvim)
 * [b4winckler/macvim](https://github.com/b4winckler/macvim) Vim - the text editor - for Mac OS X
-* [ericzhang-cn/maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
+* [maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
   - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files
   - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
-* [avelino/vim-bootstrap](https://github.com/avelino/vim-bootstrap):Vim Bootstrap is generator provides a simple method of generating a .vimrc configuration for vim <https://vim-bootstrap.com/>
+* [vim-bootstrap](https://github.com/avelino/vim-bootstrap):Vim Bootstrap is generator provides a simple method of generating a .vimrc configuration for vim <https://vim-bootstrap.com/>
 * [lexVim](https://github.com/lexkong/lexVim): `./start_vim.sh`
   - gd 或者ctrl + ] 跳转到对应的函数定义处
   - ctrl + t 标签退栈
@@ -56,7 +56,7 @@ brew install vim
   - <F9> 生成供函数跳转的 tag
   - <F2> 打开目录窗口，再按会关闭目录窗口
   - <F6> 添加函数注释
-* [VundleVim/Vundle.vim](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim <http://github.com/VundleVim/Vundle.Vim>
+* [Vundle](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim <http://github.com/VundleVim/Vundle.Vim>
 
 ```sh
 curl -sLf https://spacevim.org/install.sh | bash
@@ -99,17 +99,15 @@ curl -sLf https://spacevim.org/install.sh | bash
   - `x` 执行文件
   - :cd <dir>  改变当前目录
   - :pwd 查看当前目录
-  - :ls 查看缓冲区, 用 :E 浏览打开的文件都没有被关闭，这些文件都在缓冲区中
-    + %a 表示当前文件
-    + – （非活动的缓冲区）
-    + a （当前被激活缓冲区）
-    + h （隐藏的缓冲区）
-    + % （当前的缓冲区）
-
-+ # （交换缓冲区）
-
-    + = （只读缓冲区）
-        + + （已经更改的缓冲区）
+* :ls 查看缓冲区, 用 :E 浏览打开的文件都没有被关闭，这些文件都在缓冲区中
+  - %a 表示当前文件
+  - – （非活动的缓冲区）
+  - a （当前被激活缓冲区）
+  - h （隐藏的缓冲区）
+  - % （当前的缓冲区）
+  - = （只读缓冲区）
+  - + （已经更改的缓冲区）
++ # 交换缓冲区
   - :buffer 4|:buffer src/http/ngx_http.c 切换
   - :bnext|bn
   - :bprevious|bp
@@ -231,9 +229,9 @@ curl -sLf https://spacevim.org/install.sh | bash
 * 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
 * 100idesu [ESC] 重复 100 `idesu`
 * c "," 修改空格为 ","
-* 会话:保存配置
-  - :mksession ~/.mysession.vim
-  - :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
+* 会话
+  - 保存 :mksession ~/.mysession.vim
+  - 强行写入 :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
   - 加载配置 vim -S ~/.mysession.vim
 * 复制 y
   - (n)yy 复制行
