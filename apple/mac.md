@@ -292,6 +292,8 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [QSpace](link)一个国产软件，MacOS 系统的多视图文件管理器，支持很多特色功能。让摆脱多窗口来回切换的繁琐，和拖拽时找不准目标的尴尬
   - [chunkwm](https://koekeishiya.github.io/chunkwm/index.html):a tiling window manager for macOS
   - [moom](https://manytricks.com/moom/)使用体验优异的窗口管理软件
+  - [Magnet](link)
+  - [Rectangle](https://rectangleapp.com/)
   - [sizeup](link) 窗口管理软件
     + control+option+command + M ： 使当前窗口全屏
     + control+option+command + 方向键上键 ： 使当前窗口占用当前屏幕上半部分

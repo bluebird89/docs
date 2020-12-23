@@ -92,14 +92,13 @@ Work offline, collaborate in real-time, write without distractions.
   - file
   - Formula
 * filter
-* 可以关联
+* 关联
 * 视图
   - Table：表格形式，类似于 Airtable 表格，便于做数据统计。每一行都可以单独打开变成一个 Page，添加更多的内容。
   - Board：看板形式，类似于 Trello 看板，便于任务分配、分类。卡片中的选项可以完全由自己定义，看板的分组也可以用选项来改变。
   - Gallery：画廊形式，便于查看多张卡片中的开头部分，可以在卡片开头添加一些概要内容。
   - List：列表形式，便于查看一部分关键性的信息，比如只显示名称和进度，来明确任务的进度。
   - Calendar：日历形式，便于查看时间相关的信息，可以在日历上按时间顺序查看任务。
-
 - 表现
   + Full Page Databse：整页数据库。就像 Excel 一样，整个页面就是一个数据库。
   - Inline Database：段落内数据库。则像是在 Word 中插入的表格一样，可以在文章中间放一个表格或是日历。

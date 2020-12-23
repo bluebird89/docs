@@ -412,6 +412,7 @@ CREATE TABLE `leaf_alloc` (
 
 * [Distributed Systems](https://www.distributed-systems.net/index.php/books/ds3/)
 * 《分布式系统：概念与设计（原书第五版）》，机械工业出版社
+* Patterns of Distributed Systems
 
 ## 工具
 
