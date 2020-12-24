@@ -1921,6 +1921,8 @@ kubectl-debug <POD_NAME>
 * 不要创建大尺寸镜像 大尺寸的镜像难以分配。请确保仅使用必需文件和库来运行应用程序。
 * 不要分两部分传送应用程序:有些人把容器当作虚拟机，所以他们大多会认为，应该将应用程序部署到现有正在运行的容器中。在需要不断部署和调试的开发阶段，可能确实如此；但对于 QA 和生产的持续交付 (CD) 渠道，应用程序应当是镜像的一部分。切记：容器转瞬即逝
 
+## [Open Container Initiative](https://opencontainers.org/)
+
 ## [swarm](https://github.com/docker/swarm)
 
 Swarm: a Docker-native clustering system

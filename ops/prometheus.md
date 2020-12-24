@@ -10,10 +10,16 @@ The Prometheus monitoring system and time series database. <https://prometheus.i
 * 无依赖存储，支持本地和远程存储
 * 通过HTTP协议采用PULL的方式拉取数据
 * 可以采用服务发现或者静态配置方式，来发现目标服务
+* 优点：
+  - 支持PromQL（一种查询语言），可以灵活地聚合指标数据
+  - 部署简单，只需要一个二进制文件就能跑起来，不需要依赖分布式存储
+  - Go语言编写，组件更方便集成在同样是Go编写项目代码中
+  - 原生自带WebUI，通过PromQL渲染时间序列到面板上
+  - 生态组件众多，Alertmanager，Pushgateway，Exporter
 
 * 监控是基础设施，目的是为了解决问题，不要只朝着大而全去做，尤其是不必要的指标采集，浪费人力和存储资源（To B商业产品例外）
 * 需要处理的告警才发出来，发出来的告警必须得到处理
-* 简单的架构就是最好的架构，业务系统都挂了，监控也不能挂。Google SRE 里面也说避免使用 Magic 系统，例如机器学习报警阈值、自动修复之类。这一点见仁见智吧，感觉很多公司都在搞智能 AI 运维
+* 简单架构就是最好架构，业务系统都挂了，监控也不能挂。Google SRE 里面也说避免使用 Magic 系统，例如机器学习报警阈值、自动修复之类
 * 局限
   - 基于 Metric 的监控，不适用于日志（Logs）、事件（Event）、调用链（Tracing）
   - 默认是 Pull 模型，合理规划你的网络，尽量不要转发
@@ -79,11 +85,11 @@ curl -X POST http://localhost:9090/-/reload
 
 * Job：Prometheus的采集任务由配置文件中一个个的Job组成，一个Job里包含该Job下的所有监控目标的公共配置，比如使用哪种服务发现去获取监控目标，比如抓取时使用的证书配置，请求参数配置等等。
 * Target：一个监控目标就是一个Target，一个Job通过服务发现会得到多个需要监控的Target，其包含一些label用于描述Target的一些属性。
-* relabel_configs：每个Job都可以配置一个或多个relabel_config，relabel_config会对Target的label集合进行处理，可以根据label过滤一些Target或者修改，增加，删除一些label。relabel_config过程发生在Target开始进行采集之前，针对的是通过服务发现得到的label集合。
-* metrics_relabel_configs：每个Job还可以配置一个或者多个metrics_relabel_config，其配置方式和relabel_configs一模一样，但是其用于处理的是从Target采集到的数据中的label。
-  - relable和metrics_relable的区别，前者在抓取前进行，是Target的属性
-* Series：一个Series就是指标名 label集合，在面板中，表现为一条曲线。
-* head series：Prometheus会将近2小时的Series缓存在内测中，称为head series。
+* `relabel_configs`：每个Job都可以配置一个或多个relabel_config，relabel_config会对Target的label集合进行处理，可以根据label过滤一些Target或者修改，增加，删除一些label。relabel_config过程发生在Target开始进行采集之前，针对的是通过服务发现得到的label集合。
+* `metrics_relabel_configs`：每个Job还可以配置一个或者多个`metrics_relabel_config`，其配置方式和relabel_configs一模一样，但是其用于处理的是从Target采集到的数据中的label
+  - relable和metrics_relable区别，前者在抓取前进行，是Target的属性
+* Series：一个Series就是指标名 label集合，在面板中，表现为一条曲线
+* head series：Prometheus会将近2小时的Series缓存在内测中，称为head series
 
 ## 架构
 
@@ -103,13 +109,63 @@ curl -X POST http://localhost:9090/-/reload
 * Prometheus alerting: Prometheus告警，Alertmanager用于管理告警，支持告警通知
 * Data visualization:数据可视化展示，通过PromQL对时间序列数据进行查询、聚合以及逻辑运算
   - 除了Prometheus自带的UI，Grafana对Prometheus也提供了非常好的支持
+* Alertmanager，简单说Alertmanager是与Prometheus分离的告警组件，主要接收Promethues发送过来的告警事件，然后对告警进行去重，分组，抑制和发送，在实际中可以搭配webhook把告警通知发送到企业微信或钉钉上
+* 生产环境中，应用和服务实例数量众多
+  - 较好做法是部署多个Prometheus实例，每个实例通过分区只拉取一部分指标，例如Prometheus Relabel配置中的hashmod功能，可以对拉取目标的地址进行hashmod，再将结果匹配自身ID的目标保留
+  - 让每个Prometheus拉取一个集群的指标，一样可以用Relabel来完成
+* 联邦集群 federation:每个Prometheus都有各自的数据关联起来，建立一个全局的视图
+  - 单点问题依然存在，根节点挂了的话查询将会变得不可用，如果配置多个父节点的话又会造成数据冗余和抓取时机导致数据不一致等问题，而且叶子节点目标数量太多时，更加会容易使父节点压力增大以至打满宕机，除此之外规则配置管理也是个大麻烦。
+  - [Thanos](../cncf/thanos.md):提供了全局查询视图，可以从多台Prometheus查询和聚合数据，因为所有这些数据均可以从单个端点获取
+
+![Alt text](../_static/prometheus_archtect.jpg "Optional title")
+
+```yaml
+# 每个实例通过分区只拉取一部分指标
+relabel_configs:
+- source_labels: [__address__]
+  modulus:       3
+  target_label:  __tmp_hash
+  action:        hashmod
+- source_labels: [__tmp_hash]
+  regex:         $(PROM_ID)
+  action:        keep
+
+# 让每个Prometheus拉取一个集群的指标
+relabel_configs:
+- source_labels:  ["__meta_consul_dc"]
+  regex: "dc1"
+  action: keep
+```
 
 ## 原理
 
-* 服务发现：周期性得以pull的形式对target进行指标采集，而监控目标集合是通过配置文件中所定义的服务发现机制来动态生成的
-* relabel：当服务发现得到所有target后，Prometheus会根据job中的relabel_configs配置对target进行relabel操作，得到target最终的label集合
-* 采集：为这些target创建采集循环，按配置文件里配置的采集间隔进行周期性拉取，采集到数据根据Job中的metrics_relabel_configs进行relabel，然后再加入上边得到的target最终label集合，综合后得到最终的数据
-* 存储：不会将采集到的数据直接落盘，而是会将近2小时的series缓存在内存中，2小时后，Prometheus会进行一次数据压缩，将内存中的数据落盘。
+* 服务发现
+  - 声明配置文件中的scrape_configs来指定Prometheus在运行时需要拉取监控指标目标（Target）
+  - 目标实例需要实现一个可以被Prometheus进行轮询的端点
+  - 实现一个这样的接口，可以用来给Prometheus提供监控样本数据的独立程序一般被称作为Exporter，比如用来拉取操作系统指标的Node Exporter，会从操作系统上收集硬件指标，供Prometheus来拉取。
+  - 在生产环境中，服务实例的IP通常不是固定的，这时候用静态配置就没办法对目标节点进行有效管理，这时候Prometheus提供的服务发现功能便可以有效解决监控节点状态变化的问题，在这种模式下，Prometheus会到注册中心监听查询节点列表，定期对节点进行指标的拉取。
+  - 如果对服务发现有更灵活的需求，Prometheus也支持基于文件的服务发现功能，这时候可以从多个注册中心中获取节点列表，再通过自己的需求进行过滤，最终写入到文件，这时候Prometheus检测到文件变化后便能动态地替换监控节点，再去拉取目标了。
+  - Pushgateway
+    + 用来接收来自服务的主动上报，它适用于那些短暂存活的批量任务来将指标推送并暂存到自身上，借着再由Prometheus来拉取自身，以防止指标还没来得及被Prometheus拉取便退出
+    + 也适用于在Prometheus与应用节点运行在异构网络或被防火墙隔绝时，无法主动拉取节点的问题，在这种情况下应用节点可以通过使用Pushgateway的域名将指标推送到Pushgateway实例上，Prometheus就可以拉取同网络下的Pushgateway节点了
+    + 注意：Prometheus会把每个指标赋予job和instance标签，当Prometheus拉取Pushgateway时，job和instance则可能分别是Pushgateway和Pushgateway主机的IP，当pushgateway上报的指标中也包含job和instance标签时，Prometheus会把冲突的标签重命名为exported_job和exported_instance，如果需要覆盖这两个标签的话，需要在Prometheus中配置honor_labels: true。
+    + 负面影响：
+      * Pushgateway被设计为一个监控指标的缓存，这意味着它不会主动过期服务上报的指标，这种情况在服务一直运行的时候不会有问题，但当服务被重新调度或销毁时，Pushgateway依然会保留着之前节点上报的指标。而且，假如多个Pushgateway运行在LB下，会造成一个监控指标有可能出现在多个Pushgateway的实例上，造成数据重复多份，需要在代理层加入一致性哈希路由来解决
+      * 在拉模式下，Prometheus可以更容易的查看监控目标实例的健康状态，并且可以快速定位故障，但在推模式下，由于不会对客户端进行主动探测，因此对目标实例的健康状态也变得一无所知
+* 采集
+  - 周期性得从要拉取的目标（应用容器和Pushgateway）发起HTTP请求到特定的端点（Metric Path）
+  - 为这些target创建采集循环，按配置文件里配置的采集间隔进行周期性拉取，采集到数据根据Job中的metrics_relabel_configs进行relabel，然后再加入上边得到的target最终label集合，综合后得到最终的数据
+  - 定期通过PromQL计算设置好的告警规则，决定是否生成告警到Alertmanager，后者接收到告警后会负责把通知发送到邮件或企业内部群聊中。
+* 存储
+  - relabel：当服务发现得到所有target后，Prometheus会根据job中的relabel_configs配置对target进行relabel操作，得到target最终的label集合
+  - 将采集的样本放到内存中，默认每隔2小时将数据压缩成一个block，持久化到硬盘中，样本的数量越多，Prometheus占用的内存就越高
+  - 不建议用区分度（cardinality）太高的标签，比如：用户IP，ID，URL地址等等，否则结果会造成时间序列数以指数级别增长（label数量相乘）
+  - 除了控制样本数量和大小合理之外，还可以通过降低storage.tsdb.min-block-duration来加快数据落盘时间和增加scrape interval的值提高拉取间隔来控制Prometheus的占用内存
+* 查询高可用：通过水平扩展+统一查询视图的方式解决
+* 存储高可用
+  - 提供了Remote Read和Remote Write功能，支持把Prometheus的时间序列远程写入到远端存储中，查询时可以从远端存储中读取数据
+  - M3DB是一个分布式的时间序列数据库，它提供了Prometheus的远程读写接口，当一个时间序列写入到M3DB集群后会按照分片（Shard）和复制（Replication Factor）参数把数据复制到集群的其他节点上，实现存储高可用
+  - 支持InfluxDB、OpenTSDB等作为远程写的端点
 
 ## 配置
 
@@ -326,29 +382,37 @@ alerting:
   - Label Index:每对 label 会以 index:label: 为 key，存储该标签所有值的列表，并通过引用指向 Series 该值的起始位置
   - Time Index:数据会以 index:timeseries:: 为 key，指向对应时间段的数据文件
 
-## [PromQL](https://mp.weixin.qq.com/s/ESzq9_wtO-ezxnRp1HAtnw)
-
-* 时间序列:以时间维度存储连续的数据集合,用以下表达式标识 `<metric name>{<label name>=<label value>, ...}`,每一个点称之为样本，每个样本由三部分组成：
+* 时间序列:以时间维度存储连续的数据集合,格式类似于（timestamp，value）这种格式，即一个时间点拥有一个对应值,`<metric name>{<label name>=<label value>, ...}`,每一个点称之为样本，由三部分组成：
   - 指标：由指标名称和描述指标的级别组成的
-    + Prometheus的底层实现中指标名称实际上是以__name__=<metric name>的形式保存在数据库中的
+    + 底层实现中以__name__=<metric name>的形式保存在数据库中的
+    + 拥有唯一的标签集的metric
   - 时间戳：一个精确到毫秒级别的时间戳
   - 值：一个float64位的值
-
 + Metric name: 统计指标名称，名称应该具有语义化
-  * 必须满足正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
-  * 使用前缀表示特定服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
-  * 使用后缀来表示监控数值的单位，例如http_request_duration_seconds和node_memory_usage_bytes，http_requests_total
-  * 使用基本单位，例如seconds，bytes，meters
-  * 最好使用单个单位，不要使用多个单位，例如不要混淆seconds 和 bytes
-  * 不应该把label名称放在metrics名称上
-+ Metrics类型
-  * Counter 一个计数器指标，一个只能递增的数值（服务重启的时候会被reset为0）。主要用于统计服务的请求数、任务完成数、错误出现的次数等
-  * Gauge 一个仪表盘指标，表示一个既可以递增, 又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
-  * histogram 柱状图，Prometheus系统会自动生成三个对应指标
+  - 必须满足正则表达式 `[a-zA-Z_:][a-zA-Z0-9_:]*`
+  - 使用前缀表示特定服务，例如prometheus_notifications_total表示Prometheus服务，http_request_duration_seconds表示HTTP服务
+  - 使用后缀来表示监控数值的单位，例如http_request_duration_seconds和node_memory_usage_bytes，http_requests_total
+  - 使用基本单位，例如seconds，bytes，meters
+  - 最好使用单个单位，不要使用多个单位，例如不要混淆seconds 和 bytes
+  - 不应该把label名称放在metrics名称上
+  - 使用基础Unit（如seconds而非milliseconds）
+  - 指标名以application namespace作为前缀，如：
+    + process_cpu_seconds_total
+    + http_request_duration_seconds
+  - 用后缀来描述Unit，如：
+    + http_request_duration_seconds
+    + node_memory_usage_bytes
+    + http_requests_total
+    + process_cpu_seconds_total
+    + foobar_build_info
++ Metrics 类型
+  * Counter 计数器指标:一个只能递增的数值（服务重启的时候会被reset为0）。用于统计服务的请求数、任务完成数、错误出现的次数等
+  * Gauge 仪表盘指标:表示一个既可以递增,又可以递减的值。主要用于统计类似于温度、当前内存使用量等会上下浮动的指标
+  * histogram 柱状图:系统会自动生成三个对应指标
     - 对每个采样点进行统计，打到各个分类桶中(bucket)
     - 对每个采样点值累计和(sum)
     - 对采样点的次数累计和(count)
-  * summary是采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，Prometheus系统会自动生成三个对应的指标
+  * summary:采样点分位图统计(通常的使用场景：请求持续时间和响应大小)，Prometheus系统会自动生成三个对应的指标
     - 对于每个采样点进行统计，并形成分位图
     - 统计所有采样点的和
     - 统计所有采样点总数
@@ -357,7 +421,6 @@ alerting:
     + 满足正则表达式[a-zA-Z_][a-zA-Z0-9_]*
     + 所有_开头的标签名被Prometheus内部保留使用。
   - Value: 实际的时序数据值，包括一个float64值和一个毫秒级时间戳
-
 * 拉取每一个目标服务实例称为instance，所有相同服务实例称为Job，Prometheus拉取目标服务监控Metric数据的时候，会自动添加job和instance两个标签
   - job: 值为prometheus.yml配置的job名称
   - instance: 值为服务实例的host:port
@@ -368,11 +431,15 @@ alerting:
     + `scrape_samples_scraped{job="{job-name}", instance="{host:port}"}`: 拉取监控Metrics数据的条数。
 * 内置PromQL，用户可以实时的查询和聚合时序数据，计算结果可以通过Expression Browser、Grafana展示，也可以通过HTTP API请求获取
 * 结果类型
+  - 向量 vector:按照时间戳和值存放的序列
+  - 每一组唯一的标签集合对应着一个唯一向量（vector），也可叫做一个时间序列（Time Serie）
   - Instant vector: 即时向量，一时间点的一组时序数据
+    + 当在某一个时间点来看它时是一个瞬时向量（Instant Vector），瞬时向量的时序只有一个时间点以及它对于的一个值
   - Range vector: 范围向量，一个时间段内的一组时序数据
+    + 在一个时间段来看它时，它是一个范围向量（Range Vector），范围向量对于着一组时序数据
   - Scalar: 标量，一个浮点数值
   - String: 一个字符串，目前未使用
-* 查询
+* [PromQL](https://mp.weixin.qq.com/s/ESzq9_wtO-ezxnRp1HAtnw)
   - 查询http_requests_total所有数据: http_requests_total
   - 条件查询
     + =: 等于条件，例如 http_requests_total{environment="test",method="Get"}
@@ -423,8 +490,14 @@ alerting:
       * irate(range vector):用于计算过去一段时间每秒平均值，取指定时间范围内最近两个数据点来算速率，然后作为结果。仅适用于counter类型数据，适合快速变化的数据分析。`sum(rate(http_requests_total{environment="release"}[2m])) by (method)`
     + 预测Gauge指标变化趋势
       * predict_linear(v range-vector, t scalar)函数：基于简单的线性回归的方式进行t秒后的v值的预测
+    + 过去10分钟内第90个百分位数:`histogram_quantile(0.9, rate(employee_age_bucket_bucket[10m]))`
 
 ```
+<!-- 瞬时向量 -->
+http_requests{host="host1",service="web",code="200",env="test"}
+<!-- 范围向量 -->
+http_requests{host="host1",service="web",code="200",env="test"}[:5m]
+
 <--------------- metric="" ---------------------=""><-timestamp -=""><-value->
 http_request_total{status=”200”, method=”GET”}@1434417560938 => 94355
 

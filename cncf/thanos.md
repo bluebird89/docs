@@ -4,16 +4,22 @@ Highly available Prometheus setup with long term storage capabilities. CNCF Sand
 
 * 开源 Prometheus 高可用解决方案，其支持从多个Prometheus中查询数据并进行汇总和去重，并支持将Prometheus本地数据传送到云上对象存储进行长期存储
 * 相比联邦优势
-    - 由于数据不再存储在单个Prometheus中，所以整体能承载的数据规模比联邦大。
-    - 数据不再有不必要的冗余。
-    - 由于Thanos有去重能力，实际上可以每个集群中部署两个Prometheus来做数据多副本。
-    - 可以将数据存储到对象存储中，相比存储在本地，能支持更长久的存储。
+    - 由于数据不再存储在单个Prometheus中，所以整体能承载的数据规模比联邦大
+    - 数据不再有不必要的冗余
+    - 有去重能力，实际上可以每个集群中部署两个Prometheus来做数据多副本
+    - 可以将数据存储到对象存储中，相比存储在本地，能支持更长久的存储
+    - 可以监听和备份prometheus本地数据到远程存储
+
+## 原理
+
+* Querier收到一个请求时，它会向相关的Sidecar发送请求，并从他们的Prometheus服务器获取时间序列数据。
+* 将这些响应的数据聚合在一起，并对它们执行PromQL查询。它可以聚合不相交的数据也可以针对Prometheus的高可用组进行数据去重。
 
 ## 组件
 
 * Query：Query代理Prometheus作为查询入口，它会去所有Prometheus，Store以及Ruler查询数据，汇总并去重。
 * Sidecar：将数据上传到对象存储，也负责接收Thanos Query的查询请求。
-* Ruler：进行数据的预聚合及告警。
+* Ruler：进行数据的预聚合及告警
 * Store：负责从对象存储中查询数据。
 
 ![架构图](../_static/thanos_arch.png "Optional title")

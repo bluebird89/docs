@@ -22,13 +22,14 @@
 
 ## 原则
 
-* 高内聚低耦合
+* 关注点分离:高内聚低耦合
   - 内聚：从功能角度来度量模块内的联系，一个好的内聚模块应当恰好做一件事，它描述的是模块内的功能联系
     + 一个模块（类、函数）应该专注于一件事情，提供单一功能，避免编写万用函数、巨类
   - 耦合：软件结构中各模块之间相互连接的一种度量，耦合强弱取决于模块间接口的复杂程度
     + 模块之间应减少依赖、降低耦合度，这样在一个模块发生变化时，才不会引起广泛的连锁反应，从而提高系统的稳定性
   - 设计类的时候要最小化接口数量，把承担内部实现作用的成员函数私有化
   - 模块之间只通过接口通信，接口应尽量稳定，且数量要少，要符合最小知识原则，不要跟陌生人说话，这样做最终目的是为了隔离
+* 引入中间人:面向抽象编程
 * 复用
   - 类继承
     + 扩充基类的功能
@@ -43,20 +44,44 @@
 * 关键在于多态，程序可以针对超类型编程，执行时会根据实际状况执行到真正的行为，不会被绑死在超类型的行为上
   - 接口可以理解为一个动作，而动作的具体实现则不用确定
 
-* 单一职责原则(Single Responsibility Principle, SRP)： There should never be more than one reason for a class to change. 做到类只承担单一职责(最细粒度),尽可能地降低类变更的可能性，不同职责要分开单独定义。其实这一原则不仅仅适用于类，还适用于接口以及方法的设计
-  - 类将来可能需要修改，且修改原因都能归属到一类
-* 开闭原则(Open-Closed Principle, OCP)： Softeware entities like classes,modules and functions should be open for extension but closed for modifications. 一个软件实体如类、模块和函数，应该通过扩展来实现变化，而不是通过修改已有代码来实现变化。比如参数类型、引用对象尽量使用接口或者抽象类，而不是具体实现类；
-* 依赖倒转原则(Dependence Inversion Principle, DIP)： High level modules should not depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions. 依赖多出现在方法参数中。高层模块不应该依赖低层模块(具体实现)，以防止一旦低层模块(具体实现)发生变化，将引起高层模块不必要的改变，同时高层模块之上可能有更高层的模块存在，因此两者都应该依赖于抽象。抽象不依赖具体实现细节，而让具体实现细节依赖抽象。抽象不变，具体实现细节改变可以使影响最小化，也就是要针对接口编程。这一条与里氏代换原则结合起来更容易理解，也可以看出这些原则并不应该被孤立地运用于系统设计中，而应该协同配合起来运用；
-* 里氏代换原则(Liskov Substitution Principle, LSP)： Functions that use pointers or referrnces to base classes must be able to use objects of derived classes without knowing it. 任何基类可以出现的地方，透明地使用其子类的对象，且必须遵从基类所有规则定义，但反过来说，除了扩展基类，又为什么要违背基类规则定义呢？这一条与开关原则结合起来理解就是，基类遵循关原则，子类遵循开原则，子类必须满足LSP才允许继承，否则就断开这种继承关系
+## [SOLID](https://mp.weixin.qq.com/s/JOVSkcC48qwoaByxUtgcFA)
+
+* 单一职责原则 Single Responsibility Principle SRP
+  - There should never be more than one reason for a class to change.
+  - 类只承担单一职责,尽可能地降低类变更可能性，不同职责分开单独定义
+  - 不仅仅适用于类，还适用于接口以及方法的设计
+  - 让一个类只处理一组相关的事情，控制了它的变化方向，后期也能更好的定位。如果引发变化的因素很多，会导致类的职责过多，难以维护
+* 开闭原则 Open-Closed Principle OCP
+  - Softeware entities like classes,modules and functions should be open for extension but closed for modifications.
+  - 一个软件实体如类、模块和函数，应该通过扩展来实现变化，而不是通过修改已有代码来实现变化。比如参数类型、引用对象尽量使用接口或者抽象类，而不是具体实现类
+  - 对修改关闭，对扩展开放。建议为你的服务调用者提供一个他需要的抽象、高层次的行为接口，后期你的服务有新的种类，你只需要新增一个实现该抽象、高层次接口具体服务，而不需要修改调用者的使用方式。
+* 依赖倒转原则 Dependence Inversion Principle DIP
+  - High level modules should not depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.
+  - 高层模块不应该依赖低层模块，一旦低层模块发生变化，将引起高层模块不必要的改变，同时高层模块之上可能有更高层模块存在，因此两者都应该依赖于抽象
+  - 抽象不依赖具体实现细节，而让具体实现细节依赖抽象。抽象不变，具体实现细节改变可以使影响最小化，也就是要针对接口编程
+  - 使用者依赖一个抽象的服务接口，而不是去依赖一个具体的服务执行者，从依赖具体实现转向到依赖抽象接口，倒置过来。
+* 里氏代换原则 Liskov Substitution Principle LSP
+  - Functions that use pointers or referrnces to base classes must be able to use objects of derived classes without knowing it.
+  - 任何基类可以出现的地方，透明地使用其子类的对象，且必须遵从基类所有规则定义
+  - 反过来说，除了扩展基类，又为什么要违背基类规则定义呢？这一条与开关原则结合起来理解就是，基类遵循关原则，子类遵循开原则，子类必须满足LSP才允许继承，否则就断开这种继承关系
   - 为了尽可能地减少修改以及修改带来的安全隐患
-* 接口隔离原则(Interface Segregation Principle, ISP)： Clients should not be forced to depend upon interfaces that they don't use.The dependcy of one class to another one should depend on the smallest possible interface. 使用多个隔离的接口，比使用单个接口要好，也有利于降低类之间的耦合度。类间的依赖关系要建立在最小的接口之上，要防止类必须实现接口中对于自己来说无用的方法情形的出现；
+  - 对使用者来说，能够使用父类的地方，一定可以使用其子类，并且预期结果是一致的。
+* 接口隔离原则 Interface Segregation Principle ISP
+  - Clients should not be forced to depend upon interfaces that they don't use.The dependcy of one class to another one should depend on the smallest possible interface.
+  - 使用多个隔离接口，比使用单个接口要好，也有利于降低类之间的耦合度。类间的依赖关系要建立在最小接口之上，要防止类必须实现接口中对于自己来说无用的方法情形的出现；
   - 一个接口中所有方法都是围绕一个职责，但是这个接口仍可能不符合接口隔离原则
-* 迪米特法则(Law of Demeter, LoD)，也称最少知识原则(Least Knowledge Principle, LKP)： Only talk to your immedate friends. 一个模块或子系统应当尽量少地与其他模块或子系统之间发生直接相互作用，可以通过增加“即时朋友”这个中间人来中转通信，只与“朋友”保持联系，与“陌生人”概不谋面，当模块或子系统出现版本升级更新或环境移植之后，只要朋友不变就好
-  - 只和自己直接的朋友交流：出现成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类则不是直接的朋友
+  - 提倡不要将一个大而全的接口扔给使用者，而是将每个使用者关注的接口进行隔离。
+* 迪米特法则 Law of Demeter|最少知识原则 Least Knowledge Principle LoD|LKP
+  - Only talk to your immedate friends.
+  - 一个模块或子系统应当尽量少地与其他模块或子系统之间发生直接相互作用，可以通过增加“即时朋友”这个中间人来中转通信，只与“朋友”保持联系，与“陌生人”概不谋面，当模块或子系统出现版本升级更新或环境移植之后，只要朋友不变就好
+  - 只和自己直接朋友交流：出现成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类则不是直接的朋友
   - 不要将依赖类以局部变量的形式在类中使用
   - 依赖类尽可能少地公布公有方法
   - 如果一个方法放在本类中，既不增加类间关系，也不对本类产生负面影响，那就放置在本类中
-* 合成/聚合复用原则(Composite/Aggregate ReusePrinciple ，CARP)：该原则要求在设计上尽量使用合成/聚合来达到复用的目的，而不是使用继承，也就是说前者优先于后者而被运用。继承会将基类的细节暴露给子类，也称白箱复用，如果基类发生改变，子类也必须相应做出变动，且多继承不易维护。CARP几乎可用于任何环境，依赖少，但是合成/聚合造成类中多对象需要管理
+* 合成/聚合复用原则 Composite/Aggregate ReusePrinciple ，CARP
+  - 在设计上尽量使用合成/聚合来达到复用的目的，而不是使用继承，也就是说前者优先于后者而被运用。
+  - 继承会将基类的细节暴露给子类，也称白箱复用，如果基类发生改变，子类也必须相应做出变动，且多继承不易维护。
+  - CARP几乎可用于任何环境，依赖少，但是合成/聚合造成类中多对象需要管理
 
 ## 概念
 

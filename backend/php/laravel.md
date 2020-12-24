@@ -46,6 +46,9 @@ A PHP Framework For Web Artisans <https://laravel.com>
 * 通过composer 安装:`composer create-project --prefer-dist laravel/laravel blog`
 * [Laragon](https://sourceforge.net/projects/laragon/):适用于 Windows 的轻量级开发环境
 * [laradock](https://github.com/laradock/laradock):Docker PHP development environment. <http://laradock.io>
+* [Sail](link):一个与 Laravel 默认 Docker 开发环境进行交互的轻量级命令行界面
+  - 安装 `composer require laravel/sail --dev`
+  -
 
 ```sh
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
@@ -142,6 +145,13 @@ docker-compose logs -f {container-name}
 > No such file or directory: u'./docker-compose.dev.yml'
 
 .env->COMPOSE_FILE:COMPOSE_FILE=docker-compose.yml
+
+composer require laravel/sail --dev
+php artisan sail:install
+
+./vendor/bin/sail up｜down -d
+sail php --version
+sail artisan queue:work
 ```
 
 ## 配置
@@ -2240,6 +2250,7 @@ Laravel 5 - Repositories to abstract the database layer <http://andersao.github.
   - [LaraAdmin](https://laraadmin.com/)
   - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
   - [dcat-admin](https://github.com/jqhph/dcat-admin):fire 使用很少的代码快速构建一个功能完善的高颜值后台系统，内置丰富的后台常用组件，开箱即用，让开发者告别冗杂的HTML代码。 <http://www.dcatadmin.com>
+  - [nebula](https://nebulapackage.com/):Documentation for Nebula admin panel.
 * pay
   - [cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.

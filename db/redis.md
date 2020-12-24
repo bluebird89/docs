@@ -2,7 +2,7 @@
 
 Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. <http://redis.io>
 
-* C 语言开发的一个开源的（遵从 BSD 协议）高性能键值对（key-value）的内存数据库，可以用作数据库、缓存、消息中间件等
+* 由意大利开发者 Salvatore Sanfilippo（antirez）通过 C 语言开发的、基于内存的、可持久化的开源键值对存储数据库
 * 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
   - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应
   - 服务端处理命令，并将结果返回给客户端
@@ -62,7 +62,7 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 ```sh
 # Mac
 brew install redis
-brew services start/stop/restart redis
+brew services start|stop|restart redis
 redis-server /usr/local/etc/redis.conf
 
 # ubuntu
