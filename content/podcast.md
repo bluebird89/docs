@@ -86,6 +86,7 @@
 * 机核Gadio
 * 加州101
 * 随即波动
+* 过刊
 * [4am](https://4aminquarantine.com/)
 * <http://www.wtfpod.com/>
 

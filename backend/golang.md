@@ -440,6 +440,7 @@ go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
       * 否则，ok 将为 false 而 t 将为 T 类型的零值，程序并不会产生恐慌
   - 类型选择 一种按顺序从几个类型断言中选择分支的结构,类型选择中的 case 为类型（而非值）， 它们针对给定接口值所存储的值的类型进行比较
 * 实现
+  - A type implements an interface by implementing its methods. There is no explicit declaration of intent, no "implements" keyword.
   - 声明数据数据
   - 定义接口
   - 实现接口中方法就行

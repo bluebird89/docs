@@ -542,6 +542,9 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Option-Command-P 隐藏或显示 Finder 窗口中的路径栏。
 * Option-Command-S 隐藏或显示 Finder 窗口中的边栏。
 * Command–斜线 (/) 隐藏或显示 Finder 窗口中的状态栏。
+* 状态栏图标
+  - 移动：按住Command键，然后拖动某个图标即可
+  - 删除：按住Command键并点按该图标，将其拖出菜单栏，当鼠标下方出现删除图标时再放开，就能将图标删除
 * Command-J 显示"显示"选项。
 * Command-K 打开"连接服务器"窗口。
 * Command-L 为所选项制作替身。
