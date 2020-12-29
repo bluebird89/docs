@@ -463,12 +463,12 @@ git update-index --no-assume-unchanged <file>
 * Commit Message 格式
   - type: commit 的类型
     + feat: 新特性
-    + fix: 修改问题
+    + fix(通知模块): 修复一个小BUG: 修改问题
     + refactor: 代码重构
     + docs: 文档修改
     + style: 不影响代码含义的变化（空白，格式化，缺少分号等）, 不仅是 css 修改
     + test: 添加缺失测试或更正现有测试
-    + chore: 其他修改, 比如构建流程, 依赖管理.
+    + chore: 其他修改, 比如构建流程, 依赖管理
     + build:影响构建系统或外部依赖关系的更改（示例范围：gulp，broccoli，npm）
     + ci:更改持续集成文件和脚本（示例范围：Travis，Circle，BrowserStack，SauceLabs）
     + perf:改进性能代码更改
@@ -616,6 +616,10 @@ pick   7735d66 update #合并到该commit上
 squash bbe6d53 update
 squash 9eb3188 update
 squash 7d33868 update
+
+feat(API): API重构
+
+BREAKING CHANGE: API v2上线，API v1停止支持
 ```
 
 ### 版本库|本地仓库 commit history
@@ -1624,7 +1628,10 @@ These features allow to pause a branch development and switch to another one (_"
 ### Version Control Best Practices
 
 * 在开始修改代码前先 git pull
-* 将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件
+* 将业务代码进行划分，尽量不要多个人在同一时间段修改同一文件代码规范
+
+* 确保每一个进入主分支的commit都达到了一定的质量标准，例如：
+  - 编译必须通过，单元测试和接口测试必须通过，新代码的覆盖率不能低于某个水平，静态代码扫描必须通过
 * 通过 Gitflow 工作流 可以提升 git 流程效率，减少发生冲突的可能性
 * git pull --rebase 可以让分支的代码和 origin 仓库的代码保持兼容，同时还不会破坏线上代码的可靠性。
 * Commit Related Changes:A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other team members to understand the changes and roll them back if something went wrong. With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
@@ -1779,13 +1786,9 @@ External commands:
                            ! ?git stash drop %(stash)
 ```
 
-## 代码规范
-
-* 确保每一个进入主分支的commit都达到了一定的质量标准，例如：
-  - 编译必须通过，单元测试和接口测试必须通过，新代码的覆盖率不能低于某个水平，静态代码扫描必须通过
-
 ## 问题
 
+```
 > error: insufficient permission for adding an object to repository database .git/objects
 > chown -R henry:henry .git/objects
 >
@@ -1793,6 +1796,7 @@ External commands:
 > error: object 3cb254d902a9b226bf95696af3a98839bb7797a4: badDate: invalid author/committer line - bad date
 > fatal: fsck error in packed object
 > fatal: index-pack failed
+```
 
 ## 图书
 

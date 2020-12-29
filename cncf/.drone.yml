@@ -1,0 +1,120 @@
+matrix:
+  IMAGE_REPO:
+    - hub.baidu.com.cn/baidu/cicd-demo
+  KUBECTL_IMAGE:
+    - hub.baidu.com.cn/baidu/kubectl:1.0.0
+  BVT_IMAGE:
+    - hub.baidu.com.cn/baidu.com/bvt-demo:1.0.0
+  REPORT_EMAIL:
+    - test@baidu.com
+
+pipeline:
+  build:
+    image: golang:1.11.0
+    commands:
+      - go test -v -coverprofile=coverage.out
+      - go build -o cicd-demo
+    when:
+      event: push
+
+  code_analysis:
+    image: 172.16.59.153/baidu.com/sonar
+    secrets: [ sonar_host, sonar_token ]
+    source: .
+    when:
+      event: [ push, tag ]
+
+  publish_commit:
+    image: plugins/docker
+    username: baidu.com
+    password: test_cloud
+    registry: hub.baidu.com
+    repo: ${IMAGE_REPO}
+    tags: ${DRONE_COMMIT}
+    dockerfile: Dockerfile
+    insecure: true
+    when:
+      event: push
+
+  publish_tag:
+    image: plugins/docker
+    username: baidu.com
+    password: test_cloud
+    registry: hub.baidu.com
+    repo: ${IMAGE_REPO}
+    tags:
+      - ${DRONE_TAG}
+    dockerfile: Dockerfile
+    insecure: true
+    when:
+      event: tag
+
+  semantic-release:
+    image: hub.test.com/baidu.com/semantic-release:1.0.0
+    commands:
+      - sh /semantic-release/release.sh
+    when:
+      event: tag
+
+  deploy_dev:
+    image: ${KUBECTL_IMAGE}
+    commands:
+      - mkdir -p /root/.kube && cp .kube/config-dev /root/.kube/config
+      - sed -i "s/\$IMAGE_TAG/${DRONE_COMMIT}/g" deployment.yml
+      - sed -i "s/\$NAMESPACE/185-caas/g" deployment.yml
+      - kubectl delete -f deployment.yml || true
+      - sleep 30
+      - kubectl apply -f deployment.yml
+    when:
+      event: push
+      branch: dev
+
+  deploy_test:
+    image: ${KUBECTL_IMAGE}
+    commands:
+      - mkdir -p /root/.kube && cp .kube/config-test /root/.kube/config
+      - sed -i "s/\$IMAGE_TAG/${DRONE_COMMIT}/g" deployment.yml
+      - sed -i "s/\$NAMESPACE/185-caas/g" deployment.yml
+      - kubectl delete -f deployment.yml || true
+      - sleep 30
+      - kubectl apply -f deployment.yml
+    when:
+      event: deployment
+      environment: deploy_test
+
+  deploy_prod:
+    image: ${KUBECTL_IMAGE}
+    commands:
+      - mkdir -p /root/.kube && cp .kube/config-test /root/.kube/config
+      - sed -i "s/\$IMAGE_TAG/${DRONE_TAG}/g" deployment.yml
+      - sed -i "s/\$NAMESPACE/185-caas/g" deployment.yml
+      - kubectl delete -f deployment.yml || true
+      - sleep 30
+      - kubectl apply -f deployment.yml
+    when:
+      event: deployment
+      environment: deploy_prod
+
+  autokit:
+    image: hub.baidu.com.cn/baidu.com/kitlab
+    commands:
+      - report_email ${REPORT_EMAIL} ${DRONE_REPO} ${DRONE_BUILD_NUMBER} ${DRONE_COMMIT} ${DRONE_BUILD_LINK}
+      - autocom ${DRONE_REPO_NAME} ${DRONE_REPO_NAME} ${DRONE_COMMIT} lwhong ${DRONE_BUILD_LINK}
+      - autokit ${DRONE_REPO_NAME} ${DRONE_REPO_NAME} lwhong ${DRONE_BUILD_CREATED} ${DRONE_BUILD_LINK} ${DRONE_PREV_BUILD_STATUS}
+    when:
+      event: push
+      #branch: release/*
+      status:  [ success, failure ]
+
+  wechat_notice:
+    image: hub.baidu.com.cn/baidu/wechat
+    corpid: wx0df510cbsdf9110
+    corp_secret: 6sdfsdfaaafefsdf
+    agent_id: 10001
+    to_user: test
+    title: ${DRONE_REPO}
+    description: '流水线号: ${DRONE_BUILD_NUMBER}<br>本次结果: ${DRONE_PREV_BUILD_STATUS} <br>负责人: ${DRONE_COMMIT_AUTHOR}<br>详情: ${DRONE_BUILD_LINK}'
+    msg_url: ${DRONE_BUILD_LINK}
+    btn_txt: btn
+    when:
+      status:  [ success, failure ]

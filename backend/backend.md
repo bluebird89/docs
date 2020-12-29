@@ -331,10 +331,10 @@
       * 数据包修改小，信息完整性高；
       * 可跨机房；
     + 缺点：
-      * 不支持端口映射；
-      * 需在 RS 后端服务器安装模块及配置 VIP；
-      * 隧道头部 IP 地址固定，RS 后端服务器网卡可能会不均匀；
-      * 隧道头部的加入可能会导致分片，最终会影响服务器性能；
+      * 不支持端口映射
+      * 需在 RS 后端服务器安装模块及配置 VIP
+      * 隧道头部 IP 地址固定，RS 后端服务器网卡可能会不均匀
+      * 隧道头部的加入可能会导致分片，最终会影响服务器性能
     + 如对转发性要求较高且具有跨机房需求的，可选择 TUN 模式
   - LVS-DR和LVS-TUN都适合响应和请求不对称的Web服务器，如何从它们中做出选择，取决于你的网络部署需要，因为LVS-TUN可以将实际服务器根据需要部署在不同的地域，并且根据就近访问的原则来转移请求，所以有类似这种需求的，就应该选择LVS-TUN
 * 优点
@@ -560,150 +560,88 @@ def hash_choose(request_info, server_lst):
   - 专业：专业是一种工作态度，也是一种人生态度；代码要专业、架构要专业、变量名要专业、文档要专业、跟别人发工作消息邮件要专业、开会要专业、沟通要专业，等等，专业要伴随自己一生。
 
 ```
-服务类型
+# 核心性能影响配置
 
-核心性能影响配置
-
-Linux系统
-
-1. 并发文件描述符
-
-永久修改：/etc/security/limits.conf
-
+# Linux系统
+## 并发文件描述符 /etc/security/limits.conf
 *        soft    nofile  1000000
-
 *        hard    nofile  1000000
+## Session临时修改
+ulimit -SHn 1000000
 
-Session临时修改：ulimit -SHn 1000000
-
-2. 进程数量限制
-
-永久修改：/etc/security/limits.d/20-nproc.conf
-
+# 进程数量限制 /etc/security/limits.d/20-nproc.conf
 *          soft    nproc  4096
-
 root     soft    nproc  unlimited
 
-3. 文件句柄数量
-
-临时修改：echo 1000000 > /proc/sys/fs/file-max
-
-永久修改：echo "fs.file-max = 1000000" >>/etc/sysctl.conf
-
-4. 网络TCP选项，关注 *somaxconn/*backlog/*mem*系列/*time*系列等等
-
-5. 关闭SWAP交换分区（服务器卡死元凶）：
-
+# 文件句柄数量
+## 临时修改
+echo 1000000 > /proc/sys/fs/file-max
+## 永久修改
+echo "fs.file-max = 1000000" >>/etc/sysctl.conf
+## 网络TCP选项，关注 *somaxconn/*backlog/*mem*系列/*time*系列等等
+## 关闭SWAP交换分区（服务器卡死元凶）
 echo "vm.swappiness = 0">> /etc/sysctl.conf
 
 Nginx/OpenResty
-
-Nginx Worker性能：
-
+# Nginx Worker性能：
 worker_processes 4;
-
 worker_cpu_affinity 01 10 01 10;
-
 worker_rlimit_nofile 10240;
-
 worker_connections 10240;
 
-Nginx网络性能：
-
+# Nginx网络性能：
 use epoll;
-
 sendfile on;
-
 tcp_nopush on;
-
 tcp_nodelay on;
-
 keepalive_timeout 30;
-
 proxy_connect_timeout 10;
 
-Nginx缓存配置：
-
+# Nginx缓存配置：
 fastcgi_buffer_size 64k;
-
 client_max_body_size 300m;
-
 client_header_buffer_size 4k;
-
 open_file_cachemax=65535 inactive=60s;
-
 open_file_cache_valid 80s;
-
 proxy_buffer_size 256k;
-
 proxy_buffers 4256k;
-
 proxy_cache*
 
-PHP/FPM
-
+# PHP/FPM
 listen.backlog = -1  #backlog数，-1表示无限制
-
 rlimit_files = 1024  #设置文件打开描述符的rlimit限制
-
 rlimit_core = unlimited #生成core dump文件限制，受限于linux系统
-
 pm.max_children = 256  #子进程最大数
-
 pm.max_requests = 1000 #设置每个子进程重生之前服务的请求数
-
 request_terminate_timeout = 0 #设置单个请求的超时中止时间
-
 request_slowlog_timeout = 10s  #当一个请求该设置的超时时间后
 
-MySQL/MariaDB
-
-MySQL服务选项：
-
+# MySQL/MariaDB
+## MySQL服务选项：
 wait_timeout=1800
-
 max_connections=3000
-
 max_user_connections=800
-
 thread_cache_size=64
-
 skip-name-resolve = 1
-
 open_tables=512
-
 max_allowed_packet = 64M
 
-MySQL性能选项：
-
+## MySQL性能选项：
 innodb_page_size = 8K #脏页大小
-
 innodb_buffer_pool_size = 10G #建议设置为内存80%
-
 innodb_log_buffer_size = 20M #日志缓存大小
-
 innodb_flush_log_at_trx_commit = 0  #事务日志提交方式，设置为0比较合适
-
 innodb_lock_wait_timeout = 30 #锁获取超时等待时间
-
 innodb_io_capacity = 2000 #刷脏页的频次默认200，高一些会让io曲线稳
 
-Redis
-
+# Redis
 maxmemory  5000mb  #最大内存占用
-
 maxmemory-policy allkeys-lru  #达到内存占用后淘汰策略，存在热点数据，淘汰不咋访问的
-
 maxclients 1000 #客户端并发连接数
-
 timeout 150  #客户端超时时间
-
 tcp-keepalive 150  #向客户端发送tcp_ack探测存活
-
 rdbcompression no  #磁盘镜像压缩，开启占用cpu
-
 rdbchecksum no  #存储快照后crc64算法校验，增加10%cpu占用
-
 vm-enabled no #不做数据交换
 ```
 
