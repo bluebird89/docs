@@ -3779,7 +3779,7 @@ cat a b b | sort | uniq -u > c
 * [Advanced Linux Programming Linux 环境高级编程](https://mentorembedded.github.io/advancedlinuxprogramming/)
   - 学习系统编程接口、系统调用 API 、内存管理、进程间通信（ IPC ）
 * 《鸟哥的Linux私房菜:服务器架设篇(第3版)》
-* 《鸟哥的Linux私房菜:基础学习篇(第3版)》
+* [《鸟哥的Linux私房菜:基础学习篇(第3版)》](http://linux.vbird.org/)
 * Linux运维之道
 * 嵌入式Linux基础教程(第2版)
 * 精通Linux设备驱动程序开发

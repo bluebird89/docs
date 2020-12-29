@@ -425,5 +425,6 @@ ab -n 100 -H “Cookie: Key1=Value1; Key2=Value2” http://test.com/
 
 ## 参考
 
+* [wetest](https://wetest.qq.com/)
 * [我们是怎样在项目内落地自动化测试体系的](http://blog.csdn.net/gitchat/article/details/78086617)
 * [How We Made Writing Tests Fun and Easy](https://blog.daftcode.pl/how-we-made-writing-tests-fun-and-easy-2d7e1fac6d16)

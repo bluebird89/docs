@@ -665,6 +665,20 @@ python3 duu.py /home/sk/Downloads/
 ls -l my_script # 过滤输出列表
 ```
 
+## [bash](http://ftp.gnu.org/gnu/bash/)
+
+* <https://www.gnu.org/software/bash/manual>
+* [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
+* [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
+* [Bash scripting cheat sheet](https://devhints.io/bash)
+* [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
+* [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
+* [bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash <https://git.io/bash-handbook>
+* [bash-completion](https://github.com/scop/bash-completion) Programmable completion functions for bash
+* [bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
+* [bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
+* [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
+
 ### [zsh](https://github.com/zsh-users/zsh)
 
 * [An Introduction to the Z Shell](http://zsh.sourceforge.net)
@@ -999,7 +1013,7 @@ source ~/.zshrc
 sudo pip3 install thefuck
 ```
 
-## [bats-core/bats-core](https://github.com/bats-core/bats-core)
+## [bats-core](https://github.com/bats-core/bats-core)
 
 Bash Automated Testing System
 
@@ -1108,18 +1122,6 @@ brew install bat
 * [scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. <https://scoop.sh>
 * [upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
 
-## [bash](http://ftp.gnu.org/gnu/bash/) <https://www.gnu.org/software/bash/manua>
-
-* [bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
-* [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
-* [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
-* [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
-* [Bash scripting cheat sheet](https://devhints.io/bash)
-* [bash(1) – Linux man page](https://linux.die.net/man/1/bash)
-* [An A-Z Index of the Bash command line for Linux.](https://ss64.com/bash/)
-* [bash-completion](https://github.com/scop/bash-completion) Programmable completion functions for bash
-* [bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
-
 ## 教程
 
 * [command-line-text-processing](https://github.com/learnbyexample/Command-line-text-processing):⚡️ From finding text to search and replace, from sorting to beautifying text and more 🎨
@@ -1129,7 +1131,6 @@ brew install bat
 * [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 * [linuxcommand](http://linuxcommand.org)
 * [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
-* [bash-handbook](https://github.com/denysdovhan/bash-handbook):book For those who wanna learn Bash <https://git.io/bash-handbook>
 * [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
 

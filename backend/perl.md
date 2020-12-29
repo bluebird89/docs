@@ -4,7 +4,7 @@ Perl 5 is a highly capable, feature-rich programming language with over 30 years
 
 ## Course
 
-* [Perl 教程](http://www.runoob.com/perl/perl-tutorial.html)
+* [Learn Perl in about 2 hours 30 minutes](https://qntm.org/perl_en)
 
 ## Framework
 

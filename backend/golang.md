@@ -176,19 +176,8 @@ GOOS=linux GOARCH=amd64 go build main.go
   - 如果在多个工作区中都存在导入路径相同的代码包会产生冲突吗？
 
 ```sh
-# 一个已存在的代码包导入路径
-github.com/labstack/echo
-
 # 生成归档文件 相对目录就是 github.com/labstack， 文件为 echo.a 目录 pkg/linux_amd64/github.com/labstack
 go install github.com/labstack/echo
-
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, world!")
-}
 ```
 
 ## 程序实体
@@ -214,20 +203,6 @@ func main() {
   - 如果当前代码块中没有声明以此为名的变量，那么程序会沿着代码块的嵌套关系，从直接包含当前代码块的那个代码块开始，一层一层地查找。
   - 一般情况下，程序会一直查到当前代码包代表的代码块。如果仍然找不到，那么 Go 语言的编译器就会报错了
 
-```go
-vi ~/projects/src/hello.go
-go install $GOPATH/hello.go
-$GOBIN/hello
-
-go build hello.go
-./hello
-
-go run hello.go
-
-<<:1 << 100 2^100
->>:64 >> 4  4
-```
-
 ## 常量
 
 * 声明与变量类似，使用 const 关键字
@@ -238,104 +213,124 @@ go run hello.go
   - int 可以存放最大64位的整数，根据平台不同有时会更少）
 * iota
 
-## 数据类型
+## 基本类型|值类型
 
+* bool
+* string
+  + \n ：换行符
+  + \r ：回车符
+  + \t ：tab 键
+  + \u 或 \U ：Unicode 字符
+  - \\ ：反斜杠自身
+* int  int8|byte  int16  int32 int64 、int16、int、uint、uintptr uint8 uint16 uint32 uint64
+  - int8  1   带符号8位整型     -128~127    0
+  - uint8   1   无符号8位整型，与 byte 类型等价     0~255   0
+  - int16   2   带符号16位整型    -32768~32767    0
+  - uint16  2   无符号16位整型    0~65535     0
+  - int32   4   带符号32位整型，与 rune 类型等价    -2147483648~2147483647  0
+  - uint32  4   无符号32位整型    0~4294967295    0
+  - int64   8   带符号64位整型    -9223372036854775808~9223372036854775807    0
+  - uint64  8   无符号64位整型    0~18446744073709551615  0
+  - int     32位或64位     与具体平台相关     与具体平台相关     0
+  - uint    32位或64位     与具体平台相关     与具体平台相关     0
+  - uintptr  与对应指针相同     无符号整型，足以存储指针值的未解释位  32位平台下为4字节，64位平台下为8字节   0
+  - << >> 左右移位
+* 字符
+  - byte（实际上是 uint8 的别名）: UTF-8 字符串的单个字节的值
+  - rune:单个 Unicode 字符
+* // 表示一个 Unicode 码点
+* float32 float64
+* 复数类型 complex64 complex128
+* 错误类型：error
 * type 查看数据类型
-* 基础数据类型｜值类型
-  - bool
-  - string
-    * \n ：换行符
-    * \r ：回车符
-    * \t ：tab 键
-    * \u 或 \U ：Unicode 字符
-    + \\ ：反斜杠自身
-  - int  int8|byte  int16  int32 int64 、int16、int、uint、uintptr uint8 uint16 uint32 uint64
-    + int8  1   带符号8位整型     -128~127    0
-    + uint8   1   无符号8位整型，与 byte 类型等价     0~255   0
-    + int16   2   带符号16位整型    -32768~32767    0
-    + uint16  2   无符号16位整型    0~65535     0
-    + int32   4   带符号32位整型，与 rune 类型等价    -2147483648~2147483647  0
-    + uint32  4   无符号32位整型    0~4294967295    0
-    + int64   8   带符号64位整型    -9223372036854775808~9223372036854775807    0
-    + uint64  8   无符号64位整型    0~18446744073709551615  0
-    + int     32位或64位     与具体平台相关     与具体平台相关     0
-    + uint    32位或64位     与具体平台相关     与具体平台相关     0
-    + uintptr  与对应指针相同     无符号整型，足以存储指针值的未解释位  32位平台下为4字节，64位平台下为8字节   0
-    + << >> 左右移位
-  - 字符
-    + byte（实际上是 uint8 的别名）: UTF-8 字符串的单个字节的值
-    + rune:单个 Unicode 字符
-  - // 表示一个 Unicode 码点
-  - float32 float64
-  - 复数类型 complex64 complex128
-  - 错误类型：error
-* 复合类型
-  - 指针（pointer）
-    + 指针保存了值的内存地址
-      * 声明：类型 *T 是指向 T 类型值的指针。其零值为 nil。 `var p *int`
-      * 生成：& 操作符会生成一个指向其操作数的指针 `i := 42 p = &i`
-      * 获取值：`*` 操作符表示指针指向的底层值
-      * 指针操作原始值，值引用 操作副本
-    + 选择值或指针作为接收者
-      * 方法能够修改其接收者指向的值
-      * 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效
-  - 数组（array）
-    - 数组类型 [n]T 表示拥有 n 个 T 类型的值的数组
-    + 长度是固定的,数组的长度在声明它的时候就必须给定，并且之后不会再改变。可以说，数组的长度是其类型的一部分
-  - 切片（slice）
-    * []bool{true, true, false}
-    + 切片可包含任何类型，甚至包括其它的切片
-    + 用内建函数 make 来创建, 会分配一个元素为零值的数组并返回一个引用了它的切片`a := make([]int, 5)  // len(a)=5`
-      * b := make([]int, 0, 5) // len(b)=0, cap(b)=5
-      * b = b[:cap(b)] // len(b)=5, cap(b)=5
-      * b = b[1:]      // len(b)=4, cap(b)=4
-    + 值是可变长的。切片的长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。
-    + a[low : high] 过两个下标来界定,会选择一个半开区间，包括第一个元素，但排除最后一个元素,利用它的默认行为来忽略上下界。切片下界的默认值为 0，上界则是该切片的长度。
-    + 切片并不存储任何数据，只是描述了底层数组中的一段
-    + 更改切片的元素会修改其底层数组中对应的元素。 与它共享底层数组的切片都会观测到这些修改
+
+## 复合类型
+
+* 指针 pointer
+  - 保存了值的内存地址
+    + 声明：类型 *T :指向 T 类型值的指针 `var p *int`
+    + 零值为 nil
+    + & 操作符会生成一个指向其操作数的指针 `i := 42 p = &i`
+    + `*p` 操作符表示指针指向的底层值
+    + 指针操作原始值，值引用操作副本
+  - 选择值或指针作为接收者
+    + 方法能够修改其接收者指向的值
+    + 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效
+* 数组 array
+  * 数组类型 [n]T 表示拥有 n 个 T 类型的值的数组
+  - 长度是固定的,数组的长度在声明它的时候就必须给定，并且之后不会再改变。可以说，数组的长度是其类型的一部分
+* 切片 slice
+  - 一个结构体,并不存储任何数据，只是描述了底层数组中的一段
+    + 长度:所包含的元素个数。len(s)
+    + 容量:从它的第一个元素开始数，到其底层数组元素末尾的个数。cap(s)
+  - 可包含任何类型，甚至包括其它的切片
+  - 用内建函数 make 来创建, 会分配一个元素为零值的数组并返回一个引用了它的切片`a := make([]int, 5)  // len(a)=5`
+    + b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+    + b = b[:cap(b)] // len(b)=5, cap(b)=5
+    + b = b[1:]      // len(b)=4, cap(b)=4
+  - 值是可变长的。切片长度可以自动地随着其中元素数量的增长而增长，但不会随着元素数量的减少而减小。
+    + 在底层数组不变的情况下，切片代表的窗口可以向右扩展，直至其底层数组的末尾
+  - a[low : high] 过两个下标来界定,会选择一个半开区间，包括第一个元素，排除最后一个元素,利用它的默认行为来忽略上下界。切片下界的默认值为 0，上界则是该切片的长度
+  - 更改切片的元素会修改其底层数组中对应的元素。 与它共享底层数组的切片都会观测到这些修改
     + 在每个切片的底层数据结构中，一定会包含一个数组。数组可以被叫做切片的底层数组
-    + 切片也可以被看作是对数组的某个连续片段的引用
-    + 通过切片表达式基于某个数组或切片生成新切片的时候
-    + 结构可以为其它类型
-    + 长度就是它所包含的元素个数。len(s)
-    + 切片的容量是从它的第一个元素开始数，到其底层数组元素末尾的个数。cap(s)
-    + 切片的零值是 nil。nil 切片的长度和容量为 0 且没有底层数组。
-    + 在底层数组不变的情况下，切片代表的窗口可以向右扩展，直至其底层数组的末尾。
-    + `func append(s []T, vs ...T) []T`:切片追加新的元素
-    + for 循环的 range 形式可遍历切片或映射。当使用 for 循环遍历切片时，每次迭代都会返回两个值。第一个值为当前元素的下标，第二个值为该下标所对应元素的一份副本。
-      * 可以将下标或值赋予 _ 来忽略它
-    + 一旦一个切片无法容纳更多的元素，Go 语言就会想办法扩容。但它并不会改变原来的切片，而是会生成一个容量更大的切片，然后将把原有的元素和新元素一并拷贝到新切片中
-    + 在一般的情况下，可以简单地认为新切片的容量（以下简称新容量）将会是原切片容量（以下简称原容量）的 2 倍。
+    + 可以被看作是对数组的某个连续片段的引用
+  - 扩容：`func append(s []T, vs ...T) []T`:切片追加新的元素
+    + 一个切片无法容纳更多的元素，Go 语言就会想办法扩容。但并不会改变原来的切片，而是会生成一个容量更大的切片，然后将把原有的元素和新元素一并拷贝到新切片中
+    + 一般情况下，可以简单地认为新切片的容量（以下简称新容量）将会是原切片容量（以下简称原容量）的 2 倍。
     + 当原切片的长度（以下简称原长度）大于或等于1024时，将会以原容量的1.25倍作为基准
-    + reslice
-  - 字典（map）
-    + var m map[string]Vertex： key 类型 value 类型
-    + 将键映射到值
-    + 映射的零值为 nil 。nil 映射既没有键，也不能添加键。
-    + 键类型受限
-    + 非原子操作需要加锁， map并发读写需要加锁，map操作不是并发安全的，判断一个操作是否是原子的可以使用 go run race 命令做数据的竞争检测
-  - 通道（chan）
-    + 不要通过共享内存来通信，而应该通过通信来共享内存
-    + 一个通道相当于一个先进先出（FIFO）的队列。通道中的各个元素值都是严格地按照发送的顺序排列的，先被发送通道的元素值一定会先被接收。元素值的发送和接收都需要用到操作符
-    + 对于同一个通道，发送操作之间是互斥的，接收操作之间也是互斥的。
-    + 发送操作和接收操作中对元素值的处理都是不可分割的。
-    + 发送操作在完全完成之前会被阻塞。接收操作也是如此。
-    + 缓冲通道的情况。如果通道已满，那么对它的所有发送操作都会被阻塞，直到通道中有元素值被接收走。
-    + 非缓冲通道，情况要简单一些。无论是发送操作还是接收操作，一开始执行就会被阻塞，直到配对的操作也开始执行，才会继续传递。由此可见，非缓冲通道是在用同步的方式传递数据。也就是说，只有收发双方对接上了，数据才会被传递。
-  - 结构体（struct）结构体:一组字段（field）
-    + 结构体字段使用点号来访问
-    + 结构体字段可以通过结构体指针来访问,使用隐式间接引用，直接写 p.X 就可以
-    + 特点
-      * 零值都会是拥有特定结构，但是没有任何定制化内容的值，相当于一个空壳。值中的字段也都会被分别赋予各自类型的零值。
-      * 延迟初始化：在实际需要的时候才进行。优点是可以分散初始化操作带来的计算量和存储空间消耗。
-    + List
-    + Element
-    + Ring:在内部就是一个循环链表。它的根元素永远不会持有任何实际的元素值，而该元素的存在就是为了连接这个循环链表的首尾两端。
-    + Heap
+    + 在 cap 不够用的时候就会重新分配内存以扩大容量（不再共享底层数组），而如果够用的时候不不会重新分享内存
+  - 零值: nil
+    + nil 切片的长度和容量为 0 且没有底层数组。
+  - for 循环的 range 形式可遍历切片或映射。当使用 for 循环遍历切片时，每次迭代都会返回两个值。第一个值为当前元素的下标，第二个值为该下标所对应元素的一份副本。
+    + 可以将下标或值赋予 _ 来忽略它
+  - reslice
+* 字典 map
+  - var m map[string]Vertex： key 类型 value 类型
+  - 将键映射到值
+  - 映射的零值为 nil 。nil 映射既没有键，也不能添加键。
+  - 键类型受限
+  - 非原子操作需要加锁， map并发读写需要加锁，map操作不是并发安全的，判断一个操作是否是原子的可以使用 go run race 命令做数据的竞争检测
+* 通道 chan
+  - 不要通过共享内存来通信，应该通过通信来共享内存
+  - 相当于一个先进先出（FIFO）的队列。通道中的各个元素值都是严格地按照发送的顺序排列的，先被发送通道的元素值一定会先被接收。元素值的发送和接收都需要用到操作符 <-
+  - 对于同一个通道，发送操作之间是互斥的，接收操作之间也是互斥的
+  - 发送操作和接收操作中对元素值的处理都是不可分割的
+  - 发送操作在完全完成之前会被阻塞。接收操作也是如此
+  - 缓冲通道:如果通道已满，那么对它的所有发送操作都会被阻塞，直到通道中有元素值被接收走。
+  - 非缓冲通道:无论是发送操作还是接收操作，一开始执行就会被阻塞，直到配对的操作也开始执行，才会继续传递。在用同步的方式传递数据。也就是说，只有收发双方对接上了，数据才会被传递。
+* 结构体 struct
+  - 一组字段（field）,字段使用点号来访问
+  - 字段可以通过结构体指针来访问,使用隐式间接引用，直接写 p.X 就可以
+  - 特点
+    + 零值都会是拥有特定结构，但是没有任何定制化内容的值，相当于一个空壳。值中的字段也都会被分别赋予各自类型的零值。
+    + 延迟初始化：在实际需要的时候才进行。优点是可以分散初始化操作带来的计算量和存储空间消耗。
+  - Ring:在内部就是一个循环链表。它的根元素永远不会持有任何实际的元素值，而该元素的存在就是为了连接这个循环链表的首尾两端。
+* 深度比较
+  - 需要比较两个结构体中的数据是否相同时 `reflect.DeepEqual()`
 * 类型转换 表达式 T(v) 将值 v 转换为类型 T
+
+```go
+type slice struct {
+    array unsafe.Pointer //指向存放数据的数组指针
+    len   int            //长度有多大
+    cap   int            //容量有多大
+}
+```
+
+## new vs make
+
+* new
+  - 一个分配内存的内建函数，但不同于其他语言中同名的new所作的工作，它只是将内存清零，而不是初始化内存
+  - new(T)为一个类型为T的新项目分配了值为零的存储空间并返回其地址，也就是一个类型为*T的值。用Go的术语来说，就是它返回了一个指向新分配的类型为T的零值的指针。
+* make(T, args)
+  - 仅用于创建切片、map和chan（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用
+  - 对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
+
 
 ## 运算符
 
+* `1 << 100 2^100`
+* `64 >> 4  4`
 * 优先级：由上到下表示优先级从高到低，或者数字越大，优先级越高
   - 6      ^（按位取反） !
   - 5      *  /  %  <<  >>  &  &^
@@ -346,6 +341,7 @@ go run hello.go
 
 ## 控制语句
 
+* for
 * select:使一个 Go 程可以等待多个通信操作
   - 会阻塞到某个分支可以继续执行为止，这时就会执行该分支
   - 当多个分支都准备好时会随机选择一个执行
@@ -398,12 +394,13 @@ go run hello.go
 * [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
 
 ```go
-go get github.com/yudai/gotty  // ok的
+go get github.com/yudai/gotty
 
 go get -u -v github.com/labstack/echo
 // unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // bin配置错误
 
 gofmt -w yourcode.go // Format your code
+
 godoc fmt                // documentation for package fmt
 godoc fmt Printf         // documentation for fmt.Printf
 godoc -src fmt // fmt package interface in Go source form
@@ -412,16 +409,61 @@ mkdir -p $GOPATH/src/golang.org/x
 cd $GOPATH/src/golang.org/x
 git clone https://github.com/golang/net.git
 
-# /etc/hosts
-192.30.253.112 github.com
-151.101.185.194 github.global.ssl.fastly.net
-
-go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
+// go: cannot use path@version syntax in GOPATH mode
+export GO111MODULE=on
 ```
+
+## 协程 goroutine
+
+* 由 Go 运行时管理的轻量级线程
+* `go f(x, y, z)`会启动一个新的 Go 程并执行 `f(x, y, z)`
+  - f, x, y 和 z 的求值发生在当前的 Go 程中，而 f 的执行发生在新的 Go 程中
+* Go 程在相同地址空间中运行，因此在访问共享的内存时必须进行同步。sync 包提供了这种能力，不过在 Go 中并不经常用到，因为还有其它的办法
+* 运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。
+* 如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行
+* atomic 原子操作
+
+## 信道 channel
+
+* 带有类型的管道
+* 声明`ch := make(chan int, n)`
+  - n 为缓存长度
+* 通过用信道操作符 <- 来发送或者接收值
+* 同步
+  - 默认是阻塞的，发送和接收操作在另一端准备好之前都会阻塞。这使得 Go 程可以在没有显式的锁或竞态变量的情况下进行同步
+  - 缓冲区填满，就阻塞写
+  - 缓冲区为空，就阻塞读
+* select
+  - 阻塞+timeout
+  - 无阻塞:在select中加入default
+* 发送者可通过 close 关闭一个信道来表示没有需要发送的值了，向一个已经关闭的信道发送数据会引发程序恐慌（panic）
+* 接收者可以通过为接收表达式分配第二个参数来测试信道是否被关闭
+  - 若没有值可以接收且信道已被关闭，那么在执行完 `v, ok := <-ch` 之后 ok 会被设置为 false
+* 循环 for i := range c 会不断从信道接收值，直到它被关闭
+* 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
+
+## 互斥锁 Mutex
+
+* 保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突
+* 在代码前调用 Lock 方法，在代码后调用 Unlock 方法来保证一段代码的互斥执行
+* 标准库中提供了 sync.Mutex 互斥锁类型及其两个方法：
+  - Lock
+  - Unlock
+* 用 defer 语句来保证互斥锁一定会被解锁
+
+## error
+
+* 多值返回可以更容易的返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，它有一个内建的接口
+* 对于不可恢复的错误，Go提供了一个内建的panic函数，它将创建一个运行时错误并使程序停止
+  - 接收一个任意类型（往往是字符串）作为程序死亡时要打印的东西。当编译器在函数的结尾处检查到一个panic时，就会停止进行常规的return语句检查
+  - 当panic被调用时，它将立即停止当前函数的执行并开始逐级解开函数堆栈，同时运行所有被defer的函数。如果这种解开达到堆栈的顶端，程序就死亡了
+* 用内建recover函数来重新获得Go程的控制权并恢复正常的执行
+  - 对recover的调用会通知解开堆栈并返回传递到panic的参量。
+  - 仅在解开期间运行的代码处在被defer的函数之内，recover仅在被延期的函数内部才是有用的。
 
 ## 面向对象 OOP
 
-* 接口（interface）
+* 接口 interface
   - 由一组方法签名定义的集合，接口类型的变量可以保存任何实现了这些方法的值
   - 接口也是值。它们可以像其它值一样传递。接口值可以用作函数的参数或返回值。
   - 在内部，接口值可以看做包含值和具体类型的元组 `(value, type)`,接口值保存了一个具体底层类型的具体值。接口值调用方法时会执行其底层类型的同名方法。
@@ -453,35 +495,13 @@ go: cannot use path@version syntax in GOPATH mode # export GO111MODULE=on
     + 为非结构体类型声明方法
     + 为指针接收者声明方法：可以修改接收者指向的值
   - 使用值接收者，方法对原始值副本进行操作
+* Receiver
 * 方法 vs 函数
   - 调用函数：行参与实参类型严格一致
   - 调用方法：实参既能为值又能为指针
 * use a pointer receiver 优点
   - 能够修改接收者指向值
   - 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效
-
-```go
-package main
-
-import (
-    "fmt"
-    "math"
-)
-// 申明一个结构体
-type HelloWorld struct {
-    X, Y float64
-}
-// 添加一个Run方法，首字母大写为公用方法，小写为私有方法。
-func (v HelloWorld) Run() float64 {
-    return math.Sqrt(v.X*v.X + v.Y*v.Y)
-}
-
-func main() {
-    // 初始化类
-    v := HelloWorld{3, 4}
-    fmt.Println(v.Run())
-}
-```
 
 ## fmt
 
@@ -496,69 +516,9 @@ func main() {
 * Print采用默认格式将其参数格式化并写入标准输出。如果两个相邻的参数都不是字符串，会在它们的输出之间添加空格。返回写入的字节数和遇到的任何错误
 * Println采用默认格式将其参数格式化并写入标准输出。总是会在相邻参数的输出之间添加空格并在输出结束后添加换行符。返回写入的字节数和遇到的任何错误
 
-```go
-type Stringer interface {
-    String() string
-}
+## [io](link)
 
-type error interface {
-    Error() string
-}
-
-i, err := strconv.Atoi("42")
-if err != nil {
-    fmt.Printf("couldn't convert number: %v\n", err)
-    return
-}
-fmt.Println("Converted integer:", i)
-
-package image
-
-type Image interface {
-    ColorModel() color.Model
-    Bounds() Rectangle
-    At(x, y int) color.Color
-}
-```
-
-## goroutine 协程
-
-* 由 Go 运行时管理的轻量级线程
-* `go f(x, y, z)`会启动一个新的 Go 程并执行 `f(x, y, z)`
-  - f, x, y 和 z 的求值发生在当前的 Go 程中，而 f 的执行发生在新的 Go 程中
-* Go 程在相同的地址空间中运行，因此在访问共享的内存时必须进行同步。sync 包提供了这种能力，不过在 Go 中并不经常用到，因为还有其它的办法
-* 多线程或多进程是并行的基本条件，但单线程也可以用协程(coroutine)做到并发。简单将Goroutine归纳为协程并不合适，因为运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。
-
-```go
-// Go编写一个并发编程程序很简单，只需要在函数之前使用一个Go关键字就可以实现并发编程。
-func main() {
-  go func(){
-        fmt.Println("Hello,World!")
-    }()
-}
-```
-
-## 信道 channel
-
-* 带有类型的管道
-* 声明`ch := make(chan int, n)`
-  - n 为缓存长度
-* 通过用信道操作符 <- 来发送或者接收值
-* 默认情况下，发送和接收操作在另一端准备好之前都会阻塞。这使得 Go 程可以在没有显式的锁或竞态变量的情况下进行同步。
-* 当信道的缓冲区填满后，向其发送数据时会阻塞。当缓冲区为空时，接受方会阻塞。
-* 发送者可通过 close 关闭一个信道来表示没有需要发送的值了，向一个已经关闭的信道发送数据会引发程序恐慌（panic）
-* 接收者可以通过为接收表达式分配第二个参数来测试信道是否被关闭：若没有值可以接收且信道已被关闭，那么在执行完 `v, ok := <-ch` 之后 ok 会被设置为 false
-* 循环 for i := range c 会不断从信道接收值，直到它被关闭
-* 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
-
-## 互斥锁 Mutex
-
-* 保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突
-* 在代码前调用 Lock 方法，在代码后调用 Unlock 方法来保证一段代码的互斥执行
-* 标准库中提供了 sync.Mutex 互斥锁类型及其两个方法：
-  - Lock
-  - Unlock
-* 用 defer 语句来保证互斥锁一定会被解锁
+## [image](https://golang.org/pkg/image/#Image)
 
 ## 依赖
 
@@ -671,9 +631,9 @@ import (
 
 func Test_Division_1(t *testing.T) {
     if i, e := Division(6, 2); i != 3 || e != nil { //try a unit test on function
-        t.Error("除法函数测试没通过") // 如果不是如预期的那么就报错
+        t.Error("除法函数测试没通过")
     } else {
-        t.Log("第一个测试通过了") //记录一些你期望记录的信息
+        t.Log("第一个测试通过了")
     }
 }
 
@@ -681,7 +641,7 @@ func Test_Division_2(t *testing.T) {
     t.Error("就是不通过")
 }
 
-// 压力测试 go test -file webbench_test.go -test.bench=".*"表示测试全部的压力测试函数
+# // 压力测试 go test -file webbench_test.go -test.bench=".*"表示测试全部的压力测试函数
 package gotest
 
 import (
@@ -777,12 +737,10 @@ go env -w GOSUMDB="sum.golang.google.cn"
   - 不允许在 GOPATH 下使用 gomod
   - 从GOPATH到go module的
   - 最终终止对基于GOPATH的开发的支持：使用标准库以外的依赖项的任何程序都将需要一个go.mod
-
-+ gomod 和 gopath 两个包管理方案
++ gomod vs gopath
   * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
   * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
 + `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
-
 * indirect
 
 ```sh
@@ -820,6 +778,28 @@ go build -mod=vendor
 replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
 replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 ```
+
+## 时间
+
+* 在命令行上，flag 通过 time.ParseDuration 支持了 time.Duration
+* JSon 中的 encoding/json 中也可以把time.Time 编码成 RFC 3339 的格式
+* 数据库使用的 database/sql 也支持把 DATATIME 或 TIMESTAMP 类型转成 time.Time
+* YAML可以使用 gopkg.in/yaml.v2 也支持 time.Time 、time.Duration 和 RFC 3339 格式
+
+## 性能
+
+* 提示
+  - 如果需要把数字转字符串，使用 strconv.Itoa() 会比 fmt.Sprintf() 要快一倍左右
+  - 尽可能地避免把String转成[]Byte 。这个转换会导致性能下降。
+  - 如果在for-loop里对某个slice 使用 append()请先把 slice的容量很扩充到位，这样可以避免内存重新分享以及系统自动按2的N次方幂进行扩展但又用不到，从而浪费内存。
+  - 使用StringBuffer 或是StringBuild 来拼接字符串，会比使用 + 或 += 性能高三到四个数量级。
+  - 尽可能的使用并发的 go routine，然后使用 sync.WaitGroup 来同步分片操作
+  - 避免在热代码中进行内存分配，这样会导致gc很忙。尽可能的使用 sync.Pool 来重用对象。
+  - 使用 lock-free的操作，避免使用 mutex，尽可能使用 sync/Atomic包。 （关于无锁编程的相关话题，可参看《无锁队列实现》或《无锁Hashmap实现》）
+  - 使用 I/O缓冲，I/O是个非常非常慢的操作，使用 bufio.NewWrite() 和 bufio.NewReader() 可以带来更高的性能。
+  - 对于在for-loop里的固定的正则表达式，一定要使用 regexp.Compile() 编译正则表达式。性能会得升两个数量级。
+  - 如果需要更高性能的协议，要考虑使用 protobuf 或 msgp 而不是JSON，因为JSON的序列化和反序列化里使用了反射。
+  - 使用map的时候，使用整型的key会比字符串的要快，因为整型比较比字符串比较要快。
 
 ### GoSublime
 
@@ -1331,6 +1311,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 《Go 语言实战》
 * Go语言程序设计
 * [Go Books](https://github.com/dariubs/GoBooks):List of Golang books
+* Writing An Interpreter In Go
 
 ## 项目
 
@@ -1342,7 +1323,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 
 ## 教程 course
 
-* [tour](https://tour.go-zh.org)
+* [A Tour of Go](https://tour.golang.org/)
 * [Play with Go](https://play-with-go.dev/guides.html)
 * [go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
 * [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"

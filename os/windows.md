@@ -304,13 +304,21 @@ wsl -l -v
 wsl --set-version Ubuntu-18.04 2 # reboot
 ```
 
+## surface
+
+* 书写与画图功能
+* 电容笔
+* 记笔记
+* Drawboard PDF
+* Sketchable
+
 ## [terminal](https://github.com/microsoft/terminal)
 
 The new Windows Terminal and the original Windows console host, all in the same place!
 
 * Theme
-  - [](https://aka.ms/terminal-profiles-schema)
-  - [](https://atomcorp.github.io/themes/)
+  - [terminal-profiles-schema](https://aka.ms/terminal-profiles-schema)
+  - [Windows Terminal Themes](https://atomcorp.github.io/themes/)
   - 使用
     + add theme(s) to schemes
     + in profiles, find the shell you're using (eg cmd, powershell, ubuntu) and replace colorScheme with the name of the theme
@@ -334,4 +342,4 @@ The new Windows Terminal and the original Windows console host, all in the same 
 * [Slant](https://www.slant.co/):Trustworthy product rankings for all your shopping needs
 * [itellyou](https://msdn.itellyou.cn)
 * [Awesome](https://github.com/Awesome-Windows/Awesome):An awesome & curated list of best applications and tools for Windows.
-* [duilib/duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库
+* [duilib](https://github.com/duilib/duilib):Duilib是一个Windows下免费开源的DirectUI界面库

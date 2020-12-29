@@ -89,8 +89,6 @@
 * PDF
   - [Foxit Reader](https://www.foxitsoftware.cn/)
   - [SumatraPDF](<https://www.sumatrapdfreader.org/>
-  - [MuPDF](https://mupdf.com/))
-  - Nuance PDF Reader
 * [OnlineToolsBook](https://github.com/zhaoolee/OnlineToolsBook):lollipop在线工具秘籍,为在线工具写一本优质说明书,让在线工具造福人类~ Online tool cheats, write a quality manual for online tools, make online tools benefit humanity~<https://www.v2fy.com/p/readme-onlinetoolsbook/>
 * [fliqlo](https://fliqlo.com/)
 
