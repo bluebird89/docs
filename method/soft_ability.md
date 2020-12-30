@@ -11,6 +11,30 @@
   - 把变化的部分和不变的部分给隔离开
   - 让各个功能独立地变化和扩展， 汝等需认真学习，积极思考，多加实践
 * 主动、皮实、聪明、担当，有良好沟通和团队协作能力，持续推动拿结果
+* Mentor and motivate developers
+* Suggest and enforce best code practices
+* Perform code reviews
+* Aid developers in problem-solving
+* Work closely to Project Managers and Business Analysts
+* Work closely with the client. Task prioritization.
+* Requirements gathering. Create tasks and assign them to a developer
+* Identify risks and impediments and give a proper response
+* Gather everything needed to start writing code (technical documentation, business documentation, images, task description, acceptance criteria, etc.)
+* Delegate activities when needed
+* Conduct daily SCRUM stand-up meetings
+* Backlog grooming
+* Work with other stakeholders of the project, particularly technical ones
+* Design solution diagrams when needed
+* Data analysis when needed
+* Review technical documentation
+* API testing and documentation
+* Present finished sprint work to the project stakeholders
+* Perform tests, work closely with the QA team
+* Manage technical debt and iceboxes
+* Suggest tools that will improve coding speed and quality
+* Determine technical constraints
+* Conduct UAT tests
+* SPOC (single point of contact) for technical problem solving
 
 ## 素养
 
@@ -178,31 +202,6 @@
   - 使用
   - 易理解，趣味
 * 准备
-
-Mentor and motivate developers
-Suggest and enforce best code practices
-Perform code reviews
-Aid developers in problem-solving
-Work closely to Project Managers and Business Analysts
-Work closely with the client. Task prioritization.
-Requirements gathering. Create tasks and assign them to a developer
-Identify risks and impediments and give a proper response
-Gather everything needed to start writing code (technical documentation, business documentation, images, task description, acceptance criteria, etc.)
-Delegate activities when needed
-Conduct daily SCRUM stand-up meetings
-Backlog grooming
-Work with other stakeholders of the project, particularly technical ones
-Design solution diagrams when needed
-Data analysis when needed
-Review technical documentation
-API testing and documentation
-Present finished sprint work to the project stakeholders
-Perform tests, work closely with the QA team
-Manage technical debt and iceboxes
-Suggest tools that will improve coding speed and quality
-Determine technical constraints
-Conduct UAT tests
-SPOC (single point of contact) for technical problem solving
 
 ## 培训
 

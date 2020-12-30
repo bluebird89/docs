@@ -2600,7 +2600,7 @@ Python 实现的算法和设计模式。
 * 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
 * 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
 * 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
-* 《[Think Python：像计算机科学家一样思考Python（第2版）](https://www.amazon.cn/gp/product/B01ION3W54)》
+* 《[Think Python：像计算机科学家一样思考Python（第2版）](https://codingpy.com/books/thinkpython2/foreword.html)》
 * 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
 * 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
 * 《用 Python 写网络爬虫》

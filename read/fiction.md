@@ -83,7 +83,17 @@
 * 《2001：太空漫游》
 * 《2010：太空漫游》
 * 《2061：太空漫游》
-* 《3001：太空漫游
+* 《3001：太空漫游》
+
+```
+All these worlds are yours except Europa.
+
+Attemp no landing there.
+
+Use them together.
+
+Use them in peace.
+```
 
 ## 《三体》
 

@@ -2,6 +2,7 @@
 
 Production-Grade Container Scheduling and Management <http://kubernetes.io>
 
+* Kubernetes is an open source system for managing containerized applications across multiple hosts. It provides basic mechanisms for deployment, maintenance, and scaling of applications.用于自动部署、扩展和管理“容器化（containerized）应用程序”的开源系统。
 * 2014年6月，由IT基础设施领域领先者Google发布，源自 Google 10 多年大规模容器管理技术 Borg 开源版本.使用Golang开发，提供应用部署、维护、扩展机制等功能，是CNCF（Cloud Native Computing Foundation，今属Linux基金会）最重要的解决方案之一，旨在让部署容器化的应用简单并且高效
   - 产线实践经验的最佳表现。如Urs Hölzle所说，无论是公有云还是私有云甚至混合云，Kubernetes将作为一个为任何应用，任何环境的容器管理框架无处不在
 * 编排 Orchestration
@@ -52,6 +53,12 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
     + dockershim由内置方案变成了外部方案，dockershim将以独立开源组件的身份存在
 
 ## 结构
+
+* 核心层：Kubernetes最核心的功能，对外提供API构建高层的应用，对内提供插件式应用执行环境
+* 应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS解析等）
+* 管理层：系统度量（如基础设施、容器和网络的度量），自动化（如自动扩展、动态Provision等）以及策略管理（RBAC、Quota、PSP、NetworkPolicy等）
+* 接口层：kubectl命令行工具、客户端SDK以及集群联邦
+* 生态系统：在接口层之上的庞大容器集群管理调度的生态系统，可以划分为两个范畴☉ Kubernetes外部：日志、监控、配置管理、CI、CD、Workflow、FaaS、OTS应用、ChatOps等☉ Kubernetes内部：CRI、CNI、CVI、镜像仓库、Cloud Provider、集群自身的配置和管理等
 
 * 集群架构
   - Kubernetes集群架构概述
@@ -126,6 +133,11 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
 ![](../_static/constructor.png)
 
 ## 概念
+
+* Components of Kubernetes Architecture
+  - 属于主从设备模型（Master-Slave 架构），即有 Master 节点负责核心的调度、管理和运维，Slave 节点则在执行用户的程序
+  - Master Node 和 Worker Node 是分别安装了 Kubernetes 的 Master 和 Woker 组件的实体服务器，每个 Node 都对应了一台实体服务器
+  - 所有 Master Node 和 Worker Node 组成了 Kubernetes 集群，同一个集群可能存在多个 Master Node 和 Worker Node。
 
 * Cluster 集群：K8s使用一序列物理机、虚拟机和其它基础资源来运行应用程序
 * Node: 一个Node就是一个运行着K8s的物理机或虚拟机，并且Pod可以在其上面被调度
@@ -424,10 +436,13 @@ annotations:
 
 * 集群管理控制中心，调度管理整个系统
 * [etcd](../micro_services/etcd.md):分布式 key-value 存储，保存集群的状态数据
-  - 存储所有Kubernetes集群状态的，主节点查询etcd以检索节点，容器和容器的状态参数
-  - 整个系统的最核心，所有组件之间通信都需要通过Etcd
-* API Server: 所有组件之间通信都需要通过Etcd。组件并不是直接访问Etcd，而是访问 API Server 这个代理，通过标准的RESTFul API（重新封装了对Etcd接口调用），除此之外，这个代理还实现了一些附加功能，比如身份的认证、缓存等
-  - 根据请求的类型，比如创建Pod时storage类型是pods，然后依此选择何种 REST Storage API 对请求作出处理
+  - Kubernetes 的存储服务。存储了 Kubernetes 的关键配置和用户配置
+  - 整个系统最核心，所有组件之间通信都需要通过Etcd
+  - 主节点查询etcd以检索节点，容器和容器的状态参数
+* API Server:K8s API 接口
+  - 提供资源操作的唯一入口:所有组件之间通信都需要通过Etcd。组件并不是直接访问Etcd，而是访问 API Server 这个代理，通过标准的RESTFul API（重新封装了对Etcd接口调用）,仅 API Server 才具备etcd读写权限，其他组件必须通过 API Server 的接口才能读写数据
+  - 提供认证、授权、访问控制、API注册和发现等机制
+  - 负责接收 Kubernetes 所有请求（来自 UI 界面或者 CLI 命令行工具）,根据请求的类型，比如创建Pod时storage类型是pods，然后依此选择何种 REST Storage API 对请求作出处理
   - 提供了k8s各类资源对象（pod,RC,Service等）的增删改查及watch等HTTP Rest接口，是整个系统的数据总线和数据中心
   - 只有API Server与存储通信，其他模块通过API Server访问集群状态
   - 为了隔离集群状态访问的方式和后端存储实现的方式：API Server是状态访问的方式，不会因为后端存储技术etcd的改变而改变
@@ -436,24 +451,20 @@ annotations:
     + 提供其他模块之间的数据交互和通信的枢纽（其他模块通过API Server查询或修改数据，只有API Server才直接操作etcd）
     + 是资源配额控制的入口
     + 拥有完备的集群安全机制
-* API Server:K8s 的 API 接口
-  - 组件并不是直接访问Etcd，而是访问API Server，通过标准的RESTFul API，重新封装了对Etcd接口调用
-  - 用户唯一可以直接进行交互的Kubernetes组件，内部系统组件以及外部用户组件均通过相同的API进行通信
-  - 提供资源操作的唯一入口（其他模组通过API Server查询或修改资料，只有API Server才能直接操作etcd）
-  - 提供认证、授权、访问控制、API注册和发现等机制
-* Controller manager:集群控制器，处理集群后台任务
-  - 负责任务调度，简单说直接请求Kubernetes做调度的都是任务，例如Deployment 、DeamonSet、Pod等等
-  - 每一个任务请求发送给Kubernetes之后，都是由Controller Manager来处理的，每一种任务类型对应一个Controller Manager，比如Deployment对应一个叫做Deployment Controller，DaemonSet对应一个DaemonSet Controller
+* Controller manager:所有 Worker Node 的监控器,处理集群后台任务
+  - 功能
+    + 任务调度:负责监控和调整在 Worker Node 上部署的服务的状态,实现集群故障检测和恢复的自动化工作，负责执行各种控制器
+    + 确保集群处于预期的工作状态，比如故障检测、自动扩充套件、滚动更新等
+    + 负责做调度决策、响应事件、实现变更、监控集群
+  - 简单说直接请求Kubernetes做调度的都是任务，例如Deployment 、DeamonSet、Pod等等,每一个任务请求发送给Kubernetes之后，都是由Controller Manager来处理的，每一种任务类型对应一个Controller Manager，比如Deployment对应一个叫做Deployment Controller，DaemonSet对应一个DaemonSet Controller
   - 从API Server获得所需状态,检查要控制的节点的当前状态，确定是否与所需状态存在任何差异
-  - 实现集群故障检测和恢复的自动化工作，负责执行各种控制器，
   - endpoint-controller：定期关联service和pod(关联信息由endpoint对象维护)，保证service到pod的映射总是最新的
   - replication-controller：定期关联replicationController和pod，保证replicationController定义的复制数量与实际运行pod的数量总是一致的
   - cloud-controller-manager：与云环境提供商交互的接口
-  - 确保集群处于预期的工作状态，比如故障检测、自动扩充套件、滚动更新等
-  - 负责做调度决策、响应事件、实现变更、监控集群
-  - 定义了 Kubernetes 集群 Master/API Server的主要声明  RESTStorage以及Client
+  - 定义了 Kubernetes 集群 Master/API Server的主要声明 RESTStorage以及 Client
   - client(Kubecfg)调用Kubernetes API，管理Kubernetes主要构件Pods、Services、Minions、容器的入口
-* Scheduler:为新 Pod 选择合适 Node
+* Scheduler
+  - 所有 Worker Node 的调度器。当用户要部署服务时，会选择最合适的 Worker Node（服务器）来部署
   - 负责资源调度，按照预定的调度策略将Pod（k8s中调度的基本单位）调度到相应的Node上
   - Controller Manager 会把Pod对资源要求写入到Etcd里面，Scheduler监听到有新的Pod需要调度，就会根据整个集群的状态，把Pod分配到具体的worker节点上
   - 监视来自API Server的新请求，并将其分配给运行状况良好的节点
@@ -549,7 +560,7 @@ kubectl get pvc -n namespace_name
 
 ## Worker Node
 
-* K8s中的工作节点，可以是虚拟机或物理机。每个Node由K8s Master管理，Node上可以有多个Pod，K8s Master会自动处理Node的Pod调度，同时Master的自动调度会考虑每个Node上的可用资源，为了管理Pod，每个Node上至少要运行Docker、kubelet和kube-proxy
+* K8s中工作节点，可以是虚拟机或物理机。每个Node由K8s Master管理，Node上可以有多个Pod，K8s Master会自动处理Node的Pod调度，同时Master的自动调度会考虑每个Node上的可用资源，为了管理Pod，每个Node上至少要运行Docker、kubelet和kube-proxy
 * 通常是物理机、虚拟机或者云服务商提供的资源，并不是由Kubernetes创建的。Kubernetes创建一个Node，仅仅表示Kubernetes在系统内部创建了一个Node对象
   + 创建后即会对其进行一系列健康检查，包括是否可以连通、服务是否正确启动、是否可以创建Pod等。如果检查未能通过，则该Node将会在集群中被标记为不可用（Not Ready）
   + Node Controller是Kubernetes Master中的一个组件，用于管理Node对象。两个主要功能包括

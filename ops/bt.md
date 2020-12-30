@@ -1,4 +1,4 @@
-# 宝塔
+# [宝塔](https://www.bt.cn/)
 
 ```sh
 # Ubuntu

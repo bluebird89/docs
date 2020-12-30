@@ -91,8 +91,17 @@ import torch
 print(torch.cuda.is_available())
 ```
 
-## 课程
+## 神经网络
 
+* 感知器 perceptron:接受多个输入（x1，x2，x3...），产生一个输出（output）
+* 矢量化 wx+b <= 0 y = 0:1
+  - w 权重
+  - x 外部因素|输入
+  - b 负的阈值
+* 模型训练：确定权重 w 和阈值 b
+* 输出改造成一个连续性函数：`σ(z) = 1 / (1 + e^(-z))`
+
+## 课程
 
 - 吴恩达《Deep Learning》
   + [网易云课堂](https://mooc.study.163.com/university/deeplearning_ai#/c)
@@ -155,6 +164,7 @@ print(torch.cuda.is_available())
 * [因果推理](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
 * [Grokking Deep Learning](https://livebook.manning.com/#!/book/grokking-deep-learning/about-this-book/)
 * [Deep Learning](http://www.deeplearningbook.org/)
+* [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/index.html)
 * 《深度学习的数学》
 * Deep Learning with Python
   - [deep-learning-with-python-notebooks](https://github.com/fchollet/deep-learning-with-python-notebooks):Jupyter notebooks for the code samples of the book "Deep Learning with Python"
