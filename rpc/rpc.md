@@ -91,7 +91,7 @@ Brpc 是百度开源的一个基于 protobuf 接口的 RPC 框架，它囊括了
 * yar
 * hprose
 * [thrift](./Thrift.md)
-* [go-zero](https://github.com/tal-tech/go-zero):go-zero是一个集成了各种工程实践的web和rpc框架。通过弹性设计保障了大并发服务端的稳定性，经受了充分的实战检验。包含极简的API定义和生成工具，可以一键生成Go, iOS, Android, Dart, TypeScript, JavaScript代码，并可直接运行。<https://www.xiaoheiban.cn/>
+* [go-zero](https://github.com/tal-tech/go-zero):go-zero is a web and rpc framework written in Go. It's born to ensure the stability of the busy sites with resilient design. Builtin goctl greatly improves the development productivity.<https://www.yuque.com/tal-tech/go-zero>
 
 ## 工具
 

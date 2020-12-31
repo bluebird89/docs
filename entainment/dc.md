@@ -1,4 +1,6 @@
-# DCEU（DC电影拓展宇宙，诺兰TDK系列和守望者不在其中）
+# DCEU DC电影拓展宇宙
+
+* 诺兰TDK系列和守望者不在其中
 
 ## 正义联盟 Justice League
 
@@ -7,23 +9,50 @@
   - 荒原狼（Steppenwolf）
 * 正义联盟：两个地球的危机 Justice League: Crisis on Two Earths (2010)
 * 正义联盟 Justice League‎ (2017)
+  - 氪星人才是最牛逼的
+  - 闪电侠对蝙蝠侠的超能力非常好奇：“你的超能力是什么来着？”  蝙蝠侠：“有钱。”
 
-## Superman
+## 蜘蛛侠 Spider-Man
+
+* Spider-Man (2002)
+* Spider-Man 2 (2004)
+* Spider-Man 3 (2007)
+* The Amazing Spider-Man (2012)
+* The Amazing Spider-Man 2 (2014)
+* Spider-Man: Homecoming (2017)
+* Spider-Man: Into the Spider-Verse (2018)
+  - 蜘蛛 Gwen
+  - 超凡蜘蛛侠
+  - 蜘猪侠
+  - 潘尼帕客
+  - 暗影蜘蛛侠
+  - 失去亲人
+  - 什么时候准备好：一种信念
+  - 孩子的自信与支持
+* Spider-Man: Far From Home (2019)
+
+## 超人 Superman
 
 * 氪星人
 * 超人：钢铁之躯
 * 超人大战蝙蝠侠：正义黎明:在超人宿敌卢瑟的搅和下，超人蝙蝠侠顺利约架
 * 自杀小队 Suicide Squad (2016)
 
-## Batman
+## 蝙蝠侠 Batman
+
+* 蝙蝠侠：侠影之谜 Batman Begins (2005)
+* 侠影之谜：重装出发 Batman: The Journey Begins (2005)
+* 侠影之谜：未来之路 Batman Begins: Path to Discovery (2005)
+* 蝙蝠侠：黑暗骑士 The Dark Knight (2008)
+* 蝙蝠侠：黑暗骑士崛起 The Dark Knight Rises (2012)
+* 烈焰升腾：黑暗骑士三部曲诞生及影响 The Fire Rises: The Creation and Impact of the Dark Knight Trilogy (2013)
 
 [Nolan](../Resource/film.md/Christopher Nolan)
 
-* Aquaman海王
 * 闪电侠
 * Victor
 
-## Wonder Woman 神奇女侠 Diana
+## Wonder Woman 神奇女侠
 
 * 创造者威廉·摩尔顿·马斯顿，从他有趣的经历中可以窥见关于神奇女侠种种设定的由来
   - 马斯顿是哈佛大学的心理学博士，早年的研究方向是性别与感情、气质的关系，并且与妻子进行了许多关于性别的实验，最后的实验结论是女性比男性更可靠、公正、有良知，因此比男性更适合出庭作证或者充当陪审员。

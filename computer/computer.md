@@ -223,12 +223,13 @@
 ## 课程
 
 * [哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
+* [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 * [computer-science](https://github.com/ossu/computer-science) 🎓 Path to a free self-taught education in Computer Science!
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.
 * [CS-Notes](https://github.com/CyC2018/CS-Notes):📚 Computer Science Learning Notes
 * [SJTU-Courses](https://github.com/CoolPhilChen/SJTU-Courses/):上海交通大学课程资料分享
-* [sjtu-se-courseware/sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
+  - [sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
 * [REKCARC-TSC-UHT](https://github.com/PKUanonym/REKCARC-TSC-UHT):清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University <https://rekcarc-tsc-uht.readthedocs.io/>
 * [USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(<https://mbinary.xyz/ustc-cs/>) <https://mbinary.xyz/ustc-cs/>
   - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
@@ -249,11 +250,9 @@
 
 ## 参考
 
-* [computer-science](https://github.com/ossu/computer-science):Path to a free self-taught education in Computer Science!
 * Apple Developer Site — 学习开发 IOS、Mac OS、Safari 环境下的 app
 * Google Code — 学习开发安卓 app
 * Code.org — 编程一小时活动的大本营
-* Mozilla Developer Network
 * CodeHS
 * Aquent Gymnasium
 * [computer-science-in-javascript](https://github.com/humanwhocodes/computer-science-in-javascript)Collection of classic computer science paradigms, algorithms, and approaches written in JavaScript. <http://www.nczonline.net/>

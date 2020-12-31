@@ -895,8 +895,21 @@ open http://localhost:9200/_plugin/head/
 # web地址  http://192.168.88.250:9200/_plugin/head/
 ```
 
-## ELK
+## ELK Elasticsearch，Logstash，Kibana
 
+* Elasticsearch 则是一个集中存储 log 的地方，更重要的是它是一个全文检索以及分析的引擎，它能让用户以近乎实时的方式来查看、分析海量的数据
+* Logstash 的主要作用是收集分布在各处的 log 并进行处理
+  - Logstash 则并不是唯一的收集 log 的方案，Fluentd 和 Filebeats 也能用于收集 log
+  - Filebeats 是一个轻量级的收集本地 log 数据的方案,仅仅只能收集本地的 log，但并不能对收集到的 Log 做什么处理，所以通常 Filebeats 通常需要将收集到的 log 发送到 Logstash 做进一步的处理
+    + 构建于 beats 之上的，应用于日志收集场景的实现，用来替代 Logstash Forwarder 的下一代 Logstash 收集器，是为了更快速稳定轻量低耗地进行收集工作，它可以很方便地与 Logstash 还有直接与 Elasticsearch 进行对接。
+  - Logstash 消耗更多的 memory，对此 Logstash 的解决方案是使用 Filebeats 从各个叶子节点上收集 log
+  - Fluentd
+    + 抽象性做得更好，对用户屏蔽了底层细节的繁琐
+* 流程：
+  - Logstash 从各个 Docker 容器中提取日志信息
+  - Logstash 将日志转发到 Elasticsearch 进行索引和保存
+  - Kibana 负责分析和可视化日志信息
+* Kibana 则是为 Elasticsearch 开发的前端 GUI，让用户可以很方便的以图形化的接口查询 Elasticsearch 中存储的数据，同时也提供了各种分析的模块，比如构建 Dashboard 的功能。
 * 标准化:
   - 路径规划: /data/logs/,/data/logs/access,/data/logs/error,/data/logs/run
   - 格式要求: 严格要求使用json
@@ -937,6 +950,13 @@ elasticsearch -E node.name=node3 -E cluster.name=geektime -E path.data=node3_dat
 
 GET _cat/nodes
 ```
+
+## EFK Elasticsearch，Filebeat or Fluentd，Kibana
+
+* 大规模软件系统基本都采用集群的部署方式，意味着对每个 service，会启动多个完全一样的 Pod 对外提供服务，每个 container 都会产生自己的 log，仅从产生的 log 来看，根本不知道是哪个 Pod 产生的，这样对查看分布式的日志更加困难。
+* 需要一个收集并分析 log 的解决方案
+  - 需要将分布在各个角落的 log 收集到一个集中的地方，方便查看
+  - 进行各种统计分析，甚至用流行的大数据或 maching learning 的方法进行分析
 
 ## [Operator 工作原理浅析](https://mp.weixin.qq.com/s/0ydcQthxAE_yWnQAjnIIOA)
 
@@ -989,8 +1009,24 @@ cd /usr/local/logstash-2.1.1/bin
   - redis或kafka做数据缓冲层来使用
   - logstash集群内
 
-```
+```yam;
 # Error creating runner from config: Can only start an input when all related states are finished
+
+# /etc/filebeat/filebeat.yml
+filebeat.inputs:
+
+# Each - is an input. Most options can be set at the input level, so
+# you can use different inputs for various configurations.
+# Below are the input specific configurations.
+
+- type: log
+
+  # Change to true to enable this input configuration.
+  enabled: true
+
+  # Paths that should be crawled and fetched. Glob based paths.
+  paths:
+    - /var/lib/docker/containers/*/*.log
 
 curl -XGET 'http://localhost:9200/filebeat-*/_search?pretty'
 ```

@@ -311,7 +311,7 @@ sudo visudo
 sudo ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
-### 软件
+## 软件 Soft
 
 * 在线安装:通过软件包管理工具
   - `sudo gedit /etc/apt/sources.list`
@@ -353,7 +353,6 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
 * 列表
   - golddict `sudo apt install goldendict`
   - 笔记
-    + simplenote
     + [cherrytree](www.giuspen.com/cherrytree/)
   - 音视频
     + VLC
@@ -364,8 +363,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
     + Shotcut 是一个 Meltytech, LLC 在 MLT 多媒体框架下开发的自由开源的跨平台视频编辑应用。Linux 发行版上最强大的视频编辑器之一，支持所有主要的音频、视频、图片格式
     + [Sayonara Player](https://sayonara-player.com/index.php)
     + Blender
-  - Torrent
-    + Fragments — A BitTorrent Client
+  - Fragments — A BitTorrent Client
   - 阅读写作
     + KchmViewer:阅读CHM
     + xchm:`sudo apt-get install xchm`
@@ -404,7 +402,8 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - Remmina：Remote Desktop Client
     + Viber：跨平台的 Skype 替代品
     + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-  - [Synaptic](http://www.nongnu.org/synaptic/)： a graphical package management program for apt  `sudo apt install synaptic`
+  - [Synaptic](http://www.nongnu.org/synaptic/)：a graphical package management program for apt `sudo apt install synaptic`
+  - [Planner](https://planner-todo.web.app/) Never worry about forgetting things again 🚀
   - 清理工具
     + Ubuntu Cleaner `sudo add-apt-repository ppa:gerardpuig/ppa && sudo apt-get install ubuntu-cleaner`
     + [BleachBit](https://www.bleachbit.org/download)
@@ -720,6 +719,11 @@ sudo journalctl --vacuum-time=3d
 * Super Key + M|V:Toggle the notification tray
 * CTRL + ALT +DEL:Logging out
 * Alt + F4' |'CTRL + Q':Closing a window
+
+## 虚拟终端
+
+* 有7个虚拟终端。桌面环境接管了第7个虚拟终端，于是按下Ctrl-Alt-F7，可以进入一个操作友好的图形用户界面
+* 通过Ctrl-Alt-F1，来打开shell
 
 ## 端口与进程管理
 

@@ -312,7 +312,10 @@ vue create demo-project
 npm run serve
 ```
 
-##  [vue-router](https://github.com/vuejs/vue-router)
+![基础类](../_static/vuejs_basic.jpg "Optional title")
+![扩展类](../_static/vuejs_extend.jpg "Optional title")
+
+## [vue-router](https://github.com/vuejs/vue-router)
 
 The official router for Vue.js.<https://router.vuejs.org/zh-cn/>
 

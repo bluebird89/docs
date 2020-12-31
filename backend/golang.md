@@ -1341,6 +1341,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
 * [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 <https://geektutu.com/post/gee.html>
 * [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. <https://go101.org>
+* [learn-go-with-tests](https://github.com/quii/learn-go-with-tests):Learn Go with test-driven development
 
 ## 扩展
 
@@ -1469,7 +1470,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
 * [fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. <https://fsnotify.org>
 * [golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
-* [endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
 * [go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
 * [crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries <https://godoc.org/golang.org/x/crypto>
 * [daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies

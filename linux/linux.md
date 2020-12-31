@@ -208,6 +208,22 @@ halt｜reboot｜poweroff
 
 每个进程都有其各自环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行
 
+
+* 定义用于进行命令和程序查找的目录,如果命令或者程序位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
+* 目录使用冒号分隔
+* PATH变量修改只能持续到退出或重启系统
+* 登入Linux系统启动一个bash shell时，默认情况下bash会在几个文件中查找命令。这些文件叫作启动文件或环境文件
+* 启动 bash shell 有3种方式
+  - 登录时作为默认登录 shell
+    + $HOME/.bashrc
+    + /etc/profile:系统上默认 bash 主启动文件,系统上的每个用户登录时都会执行这个启动文件.按照下列顺序运行第一个被找到的文件，余下的则被忽略
+      * $HOME/.bash_profile:会先去检查HOME目录中是不是还有一个叫.bashrc的启动文件。如果有 的话，会先执行启动文件里面的命令
+      * $HOME/.bash_login
+      * $HOME/.profile
+  - 作为非登录shell的交互式shell,不会访问/etc/profile文件，只会检查用户HOME目录 中的.bashrc文件
+  - 作为运行脚本的非交互shell
+    + 如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中设置并导出了变量，用于执行脚本的子shell就能够继承这些变量
+    + 由父shell设置但并未导出的变量都是局部变量。子shell无法继承局部变量
 * 永久的：需要修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
 * .profile（不是/etc/profile） 只对当前用户永久生效，所以如果想要添加一个永久生效的环境变量，只需要打开 /etc/profile
 * 临时的：使用 export 命令行声明即可，变量在关闭 shell 时失效。`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，它也只是在当前 Shell 有效，一旦退出终端，再打开就会发现又失效了
@@ -238,6 +254,8 @@ unset temp
 # 环境变量立即生效
 source ~/.zshrc
 . ./.zshrc
+
+PATH=$PATH:/home/christine/Scripts
 
 # 修改默认编辑器
 sudo update-alternatives --config editor

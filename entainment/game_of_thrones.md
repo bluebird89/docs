@@ -1,4 +1,4 @@
-# Game of Thrones/A Song of Ice and Fire
+# Game of Thrones|A Song of Ice and Fire
 
 * 乔治·雷蒙·理查·马丁 Geoger Raymond Richard Martin
   - 1948年出生于美国新泽西州的贝约恩
@@ -1011,6 +1011,12 @@ I am the sword in the darkness. I am the watcher on the walls.
 I am the fire that burns against the cold, the light that brings the dawn, the horn that wakes the sleepers, the shield that guards the realms of men.
 I pledge my life and honor to the Night’s Watch, for this night and all the nights to come.
 ```
+
+## TV
+
+* 权力的游戏 Game of Thrones Season 7
+* 权力的游戏 第八季 Game of Thrones Season 8 (2019)
+  - 我想最英雄地方在于，每个角色都必将死去，都或许无法战胜命运，但重要的是，你怎样面对最后的时刻。席恩选择了冲锋，选择了一种让我们会为他和他走过的漫长旅程感到骄傲的方式牺牲
 
 ## 思考
 

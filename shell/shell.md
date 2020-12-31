@@ -1,49 +1,57 @@
 # Shell
 
-* 之所以叫Shell,因为隐藏了操作系统底层的细节,是Linux/Unix的一个外壳。作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序
-* 支持模糊匹配符
-* 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
-* 利用exit命令有条不紊地退出子shell
-* 命令列 表要想成为进程列表，这些命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
-* 要想知道是否生成了子shell，借助一个使用了环境变量的命令。`echo $BASH_SUBSHELL` 如果该命令返回0，就表明没有子shell。如果返回 1 或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
-* 生成子shell的成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
-* 命令行shell：系统的用户界面，提供了用户与内核进行交互操作的一种接口。接收用户输入的命令并把它送入内核去执行，是一个命令解释器
-  - Bourne Shell：是贝尔实验室开发的
-  - BASH：GNU的Bourne Again Shell，是GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
-  - Korn Shell：是对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容
-  - C Shell：是SUN公司Shell的BSD版本
-* 由大量标准应用程序组成。这些应用程序主要有下面六种
+* 之所以叫Shell,因为隐藏了操作系统底层细节,是Linux/Unix的一个外壳。作为命令解析器负责外界与Linux内核的交互，接收用户或其他应用程序的命令，然后把这些命令转化成内核能理解的语言，传给内核，内核是真正干活的，干完之后再把结果返回用户或应用程序
+* 命令行 shell：系统用户界面，提供了用户与内核进行交互操作的一种接口。接收用户输入的命令并把它送入内核去执行，是一个命令解释器
+  - Bourne Shell（sh）：贝尔实验室开发的
+  - Bourne Again shell（bash）：GNU操作系统上默认的shell,大部分linux的发行套件使用的都是这种shell
+  - Korn shell（ksh）：对Bourne SHell的发展，在大部分内容上与Bourne Shell兼容
+  - C Shell（csh）:SUN公司Shell的BSD版本
+  - Z Shell（zsh）
+  - Friendly Interactive Shell（fish）
+* 由大量标准应用程序组成。六种类型
   - 文件和目录操作命令
   - 过滤器
   - 文本程序
   - 系统管理
   - 程序开发工具，例如编辑器和编译器
-  - 其他
 
 ## 配置
 
-* /etc/profile：所有用户的shell都有权使用配置好的环境变量 不管是哪个用户，登录时都会读取该文件.建议不修改这个文件
-* /etc/bashrc:全局（公有）配置，bash shell执行时，不管是何种方式，都会读取此文件. 在这个文件中添加系统级环境变量
-* bash_profile  ~/.bashrc 用户登录时，该文件仅仅执行一次。用来设置环境变量功能和/etc/profile 相同只不过只针对用户来设定
-  - ~/.bash_profile:一般在这个文件中添加用户级环境变量
-  - 如果ssh方式远程登录Linux时，会自动执行用户家目录下的.bash_profile文件，所有可以在这个文件里面添加一些内容，以便ssh登录Linux时都会执行相应的内容。
-* ~/.zshrc：zsh配置文件
-* `echo PATH="$PATH:/my_new_path"`:临时添加，关闭后失效
-* 选项如果单字符选项前使用一个减号-。单词选项前使用两个减号--
+* 用户每次使用 Shell，都会开启一个与 Shell 的 Session
+  - 登录 Session|login shell:用户登录系统以后，系统为用户开启的原始 Session，通常需要用户输入用户名和密码进行登录.一般进行整个系统环境的初始化，启动的初始化脚本依次
+    + /etc/profile：所有用户的全局配置脚本
+      * Linux 发行版更新的时候，会更新/etc里面的文件
+    + /etc/profile.d目录里面所有.sh文件
+      * 想修改所有用户的登陆环境，就在/etc/profile.d目录里面新建.sh脚本
+    + ~/.bash_profile：用户的个人配置脚本。如果该脚本存在，则执行完就不再往下执行
+      * 脚本定义了一些最基本的环境变量，然后执行了~/.bashrc
+    + ~/.bash_login：如果~/.bash_profile没找到，则尝试执行这个脚本（C shell 的初始化脚本）。如果该脚本存在，则执行完就不再往下执行
+    + ~/.profile：如果~/.bash_profile和~/.bash_login都没找到，则尝试读取这个脚本（Bourne shell 和 Korn shell 的初始化脚本）
+    + `bash --login` 强制执行登录 Session 会执行的脚本
+    + `bash --noprofile` 会跳过上面这些 Profile 脚本
+  - 非登录 Session|non-login shell:用户进入系统以后，手动新建的 Session，这时不会进行环境初始化
+    + /etc/bash.bashrc：对全体用户有效。
+    + ~/.bashrc：仅对当前用户有效
+    + 每次新建一个 Bash 窗口，就相当于新建一个非登录 Session，所以~/.bashrc每次都会执行。执行脚本相当于新建一个非互动的 Bash 环境，这种情况不会调用~/.bashrc
+    + `bash --norc` 禁止在非登录 Session 执行~/.bashrc脚本
+* `~/.bash_logout` 脚本在每次退出 Session 时执行，通常用来做一些清理工作和记录工作
+* 键盘绑定：全局键盘绑定文件默认为/etc/inputrc，可以在主目录创建自己的键盘绑定文件.inputrc文件。如果定义了这个文件，需要在其中加入`$include /etc/inputrc`，保证全局绑定不会被遗漏
+  - "\C-t":"pwd\n" 将Ctrl + t绑定为运行pwd命令
 * alias
   - `alias c='clear'`
-  - disable
-    + /usr/bin/clear
-    + \c
-    + command ls
   - `unalias aliasname`
-* alias参考
-  - <https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases>
-  - <https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/>
-  - <https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/>
-  - [standard-aliases](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
+  - disable
+    + 全路径 /usr/bin/clear
+    + 转义 \c
+    + command ls
+  - 参考
+    + <https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases>
+    + <https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/>
+    + <https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/>
+    + [standard-aliases](https://github.com/gto76/standard-aliases):Attempt at defining a standard extension to Linux in form of Bash functions
 * [starship](https://github.com/starship/starship):cometmilky_way The cross-shell prompt for astronauts <https://starship.rs>
 * 参考
+  - [dotfiles.github.io](http://dotfiles.github.io/)
   - <https://dev.to/_darrenburns/10-tools-to-power-up-your-command-line-4id4>
   - <https://dev.to/_darrenburns/tools-to-power-up-your-command-line-part-2-2737>
   - <https://dev.to/_darrenburns/power-up-your-command-line-part-3-4o53>
@@ -55,25 +63,15 @@ cmd [options] [arguments] # options称为选项，arguments称为参数
 
 echo $SHELL # 查看shell
 
-/* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
+# /* 如果vim还没有语法高亮，那么在/etc/profile 中添加以下语句 */
 export TERM=xterm-color
-// 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc
+# // 注: 只对各个用户自己的主目录下的.vimrc修改的话，修改内容只对本用户有效,要想全部有效，可以修改 /etc/vimrc
 # 同样的 /etc/bashrc 是针对所有用户的启动文件
 
 ls /usr/share/vim/vim72/colors/  # 可以查看vim支持的主题色
 
-/* 目录配色方案(将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors) */
+# /* 目录配色方案(将/etc中的DIR_COLORS文件复制到自己主目录中，并重命名为.dir_colors) */
 cp /etc/DIR_COLORS ~/.dir_colors
-
-/* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
-export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$"
-
-// 另外种等效写法
-# PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \[\033[35m\]\W\[\033[m\] \\$  "
-# export PS1
-
-// 另外种主提示符样式(（)对CentOS默认的主提示符加颜色标识)
-# export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
 
 # .bashrc
 # if user is not root, pass all commands via sudo #
@@ -81,10 +79,10 @@ if [ $UID -ne 0 ]; then
     alias reboot='sudo reboot'
     alias update='sudo apt-get upgrade'
 fi
-### Get os name via uname ###
+# Get os name via uname ###
 _myos="$(uname)"
 
-### add alias as per os using $_myos ###
+# add alias as per os using $_myos ###
 case $_myos in
    Linux) alias foo='/path/to/linux/bin/foo';;
    FreeBSD|OpenBSD) alias foo='/path/to/bsd/bin/foo' ;;
@@ -97,6 +95,23 @@ export PATH=$PATH:/opt/perl/site/bin:/opt/perl/bin
 
 bash <(curl -s https://gist.github.com/Jacksgong/9d0519f68b7940a07075a834b3178979/raw/803256593b7b05177408ccbc0bc68e072a8e3a0a/init-shell.sh)
 
+# .bash_profile
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
+PATH=$PATH:$HOME/bin
+
+SHELL=/bin/bash
+MANPATH=/usr/man:/usr/X11/man
+EDITOR=/usr/bin/vi
+PS1='\h:\w\$ '
+PS2='> '
+
+if [ -f ~/.bashrc ]; then
+. ~/.bashrc
+fi
+
+export PATH
+export EDITOR
+
 # ~/.inputrc
 set completion-ignore-case on
 ```
@@ -105,166 +120,132 @@ set completion-ignore-case on
 
 the basic file, shell and text manipulation utilities of the GNU operating system
 
-## 文件描述符
+## 模式
 
-* 命令行会打开三个文件
-  - 标准输入文件:stdin文件描述符为0
-  - 标准输出文件:stdout文件描述符为1
-  - 标准错误文件:stderr文件描述符2
-
-## 变量
-
-* 命名
-  - 只能由大小写字母，数字和下划线组成
-  - 变量名称不能以数字开头
-  - 以存储数字类型或者字符串类型
-  - 赋值等号两边不能有空格
-  - 字符串的变量可以用单引号或者双引号括起来,单引号内容原样输出，不能包含变量.双引号 可以出现转义字符
-* 调用：使用$符号或者$符号加上花括号。一般来讲使用花括号的用法
-* 使用readonly将变量定义为只读，只读意味着不能改变
-* 分类
-  - 环境变量：保存操作系统运行时使用的参数,长期使用，可以把它们写在配置文件中。 /etc/profile 或者 用户家目录的.bash_profile
-    + 基本上都是使用全大写字母，以区别于普通用户的环境变量
-    + set命令会显示为某个特定进程设置的所有环境变量，包括局部变量、全局变量以及用户定义变量
-    + 引用某个环境变量的时候，必须在变量前面加上一个美元符`($)`.显示变量当前值、让变量作为命令行参数.如果要用到变量，使用$;如果要操作变量，不使用$
-    + 可作为数组使用
-    + `printenv`
-    + `export kaka="kaka"`
-    + `unset kaka`
-  - 位置变量：传递脚本参数时使用
-  - 预定义变量：类似于环境变量，不同是不能重定义
-    + `$0`  脚本名称
-    + `$n`  传给脚本/函数的第n个参数
-    + `$$`  脚本的PID
-    + `$!`  上一个被执行的命令的PID(后台运行的进程)
-    + `$?`  上一个命令的退出状态(管道命令使用${PIPESTATUS})
-    + `$#`  传递给脚本/函数的参数个数 能够处理空格参数，而且参数间的空格也能正确的处理
-    + `$@`  传递给脚本/函数的所有参数(识别每个参数) 用双引号括起来
-    + `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)
-    + `${10}`   在超过两位数的参数时，使用大括号限定起来
-    + `@`与`"*"`区别:在使用双引号的时候。如果脚本运行时两个参数为a,b，则"*"等价于"ab",而"@"等价于"a","b"
-  - 自定义变量：由用户自定义,可用于用户编写的脚
-* 全局变量：对于shell会话和所有生成的子shell都是可见的
-  - 创建全局环境变量的方法是先创建一个局部环境变量，然后再把它导出到全局环境中
-  - 修改/删除子shell中全局环境变量并不会影响到父shell中该变量的值
-  - 子shell甚至无法使用export命令改变父shell中全局环境变量的值
-  - unset命令中引用环境变量时，记住不要使用$.在子进程中删除了一个全局环境变量， 这只对子进程有效。该全局环境变量在父进程中依然可用
-* 局部变量：对创建它们的 shell可见
-  - 要给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
-  - 变量名、等号和值之间没有空格
-  - 如果生成了另外一个shell，它在子shell中就不可用,退出了子进程，那个局部环境变量就不可用
-  - 回到父shell时，子shell中设置的局部变量就不存在
-* PATH环境变量:定义了用于进行命令和程序查找的目录,如果命令或者程序的位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
-  - 目录使用冒号分隔
-  - PATH变量的修改只能持续到退出或重启系统
-  - 登入Linux系统启动一个bash shell时，默认情况下bash会在几个文件中查找命令。这些文件叫作启动文件或环境文件
-  - 启动bash shell有3种方式
-    + 登录时作为默认登录shell:
-      * $HOME/.bashrc
-      * /etc/profile:系统上默认的bash shell的主启动文件,系统上的每个用户登录时都会执行这个启动文件.按照下列顺序运行第一个被找到的文件，余下的则被忽略
-      * $HOME/.bash_profile:会先去检查HOME目录中是不是还有一个叫.bashrc的启动文件。如果有 的话，会先执行启动文件里面的命令
-      * $HOME/.bash_login
-      * $HOME/.profile
-    + 作为非登录shell的交互式shell,不会访问/etc/profile文件，只会检查用户HOME目录 中的.bashrc文件
-    + 作为运行脚本的非交互shell
-      * 如果父shell是登录shell，在/etc/profile、/etc/profile.d/*.sh和$HOME/.bashrc文件中 设置并导出了变量，用于执行脚本的子shell就能够继承这些变量
-      * 由父shell设置但并未导出的变量都是局部变量。子shell无法继承局部变量。
+* 交互模式 Interactive mode:shell直接与用户交互
+* 非交互模式 Non-interactive mode:shell从文件或者管道中读取命令并执行。当shell解释器执行完文件中最后一个命令，shell进程终止，并回到父进程
+  - `sh example.sh`
+  - `./example.sh` 通过chmod命令给文件添加可执行权限，来直接执行脚本文件,有 Shebang 行的时候，可以直接调用执行
+    + 要求脚本文件的第一行必须指定解释器,以#!字符开头,这个字符称为 Shebang，所以这一行就叫做 Shebang 行
+      * `#!/bin/bash`
+      * `#!/usr/bin/env bash` 系统会自动在PATH环境变量中查找指定程序,因为程序的路径是不确定的
+      * 另外操作系统的PATH变量有可能被配置为指向程序的另一个版本，上面的做法还会使用旧版本
+  - 将脚本放在环境变量$PATH指定的目录中，就不需要指定路径了。因为 Bash 会自动到这些目录中，寻找是否存在同名的可执行文件
+    + 在主目录新建一个~/bin子目录，专门存放可执行脚本，然后把~/bin加入$PATH
+  - 脚本参数:调用脚本的时候，脚本文件名后面可以带有参数
+* env命令总是指向/usr/bin/env文件
+  - #!/usr/bin/env NAME这个语法的意思是，让 Shell 查找$PATH环境变量里面第一个匹配的NAME。如果不知道某个命令的具体路径，或者希望兼容其他用户的机器，这样的写法就很有用
+  - 参数
+    + -i, --ignore-environment：不带环境变量启动
+    + -u, --unset=NAME：从环境变量中删除一个变量
+    + --help：显示帮助
+    + --version：输出版本信息
+* shift命令可以改变脚本参数，每次执行都会移除脚本当前的第一个参数（$1），使得后面的参数向前一位
+* getopts命令用在脚本内部，可以解析复杂的脚本命令行参数，通常与while循环一起使用，取出脚本所有的带有前置连词线（-）的参数
+* 配置项参数终止符 --
+  - 希望指定变量只能作为实体参数，不能当作配置项参数 `ls -- $myPath`
+* source 通常用于重新加载一个配置文件
+  - 最大特点是在当前 Shell 执行脚本
+  - source命令执行脚本时，不需要export变量
+  - 在脚本内部加载外部库
+  - 简写形式:使用一个点（.）来表示
+* read：将用户输入存入一个变量，方便后面的代码使用
+  - 如果没有提供变量名，环境变量REPLY会包含用户输入的一整行数据
+  - 可以接受用户输入的多个值
+    + 如果用户的输入项少于read命令给出的变量数目，那么额外的变量值为空
+    + 如果用户的输入项多于定义的变量，那么多余的输入项会包含到最后一个变量中、
+  - 读取文件
+  - 参数
+    + -t 设置了超时的秒数。如果超过了指定时间，用户仍然没有输入，脚本将放弃等待，继续向下执行。环境变量TMOUT也可以起到同样作用，指定read命令等待用户输入的时间（单位为秒）
+    + -p 指定用户输入的提示信息
+    + -a 把用户的输入赋值给一个数组，从零号位置开始
+    + -n 指定只读取若干个字符作为变量值，而不是整行读取
+    + -e 允许用户输入的时候，使用readline库提供的快捷键
+    + -d delimiter：定义字符串delimiter的第一个字符作为用户输入的结束，而不是一个换行符。
+    + -r：raw 模式，表示不把用户输入的反斜杠字符解释为转义字符。
+    + -s：使得用户的输入不显示在屏幕上，这常常用于输入密码或保密信息。
+    + -u fd：使用文件描述符fd作为输入
+  - read命令读取的值，默认是以空格分隔
+    + 可以通过自定义环境变量IFS（内部字段分隔符，Internal Field Separator 的缩写），修改分隔标志
+    + IFS的默认值是空格、Tab 符号、换行符号，通常取第一个（即空格）
+    + 把IFS定义成冒号（:）或分号（;），就可以分隔以这两个符号分隔的值，这对读取文件很有用
+    + IFS的赋值命令和read命令写在一行，这样的话，IFS的改变仅对后面的命令生效，该命令执行后IFS会自动恢复原来的值
+    + 如果IFS设为空字符串，就等同于将整行读入一个变量
 
 ```sh
-printenv HOME
+#!/usr/bin/env bash
+echo "Hello, world!"
 
-# 局部用户定义变量
-my_variable=Hello
-echo $my_variable
+while getopts 'lha:' OPTION; do
+  case "$OPTION" in
+    l)
+      echo "linuxconfig"
+      ;;
 
-mytest=(one two three four five)
-echo ${mytest[2]}
-mytest[2]=seven
-unset mytest[2]
-echo ${mytest[*]}
+    h)
+      echo "h stands for h"
+      ;;
 
-my_variable="I am Global now"
-export my_variable
-echo $my_variable
+    a)
+      avalue="$OPTARG"
+      echo "The value provided is $OPTARG"
+      ;;
+    ?)
+      echo "script usage: $(basename $0) [-l] [-h] [-a somevalue]" >&2
+      exit 1
+      ;;
+  esac
+done
+shift "$(($OPTIND - 1))"
 
-PATH=$PATH:/home/christine/Scripts
+#!/bin/bash
+# read-single: read multiple values into default variable
+echo -n "Enter one or more values > "
+read
+echo "REPLY = '$REPLY'"
+
+#!/bin/bash
+
+filename='/etc/hosts'
+
+while read myline
+do
+  echo "$myline"
+done < $filename
+
+OLD_IFS="$IFS"
+IFS=":"
+read user pw uid gid name home shell <<< "$file_info"
+IFS="$OLD_IFS"
 ```
-
-## 运算符
-
-* 算数运算符
-  - 规则：`expr 表达式`
-    + 运算符号两边要有空格
-    + 遇到特殊符号如*号需要在前面加反斜杠
-    + 空格和特殊字符串需要用引号括起来
-    + 操作:(先编写一个运算相关的shell脚本)
-* 关系运算符
-  - `-eq` 相等
-  - `-ne` 不等
-  - `-gt` d大于
-  - `-lt` 小于
-  - `-gt` 大于等于
-  - `-le` 小于等于
-* 布尔运算符
-  - `!` 非运算
-  - `-O` 或
-  - `-a` 与
-* 逻辑运算符
-  - `&&` and
-  - `||` or
-* 字符串运算符
-  - `=` 是否相等
-  - `！=` 不相等
-  - `-z` 长度为0
-  - `-n` 长度不为0
-  - `str` 是否为空
-  - `<`   字符串比较(双中括号里不需要转移)
-  - `==`  以Globbing方式进行字符串比较(仅双中括号里使用，参考下文)
-  - `=~`  用正则表达式进行字符串比较(仅双中括号里使用，参考下文)
-* 文件测试运算符
-  - -b 是否块设备
-  - -c 是否字符设备
-  - -d 是否目录
-  - -e 文件、目录是否存在
-  - -f 是否普通文件
-  - -g 是否设置SGID
-  - -k 是否设置粘着位
-  - -p 是否具名管道
-  - -u 是否设置SUID
-  - -r 是否可读
-  - -w 是否可写
-  - -s 文件是否为空
-  - -x 文件是否可执行
 
 ## 语法
 
 * 应用
   - 不适用场景
-    + 比数组更复杂的数据结构
-    + 出现了复杂的转义问题
-    + 有太多的字符串操作
+    + 比数组更复杂数据结构
+    + 出现复杂转义问题
+    + 有太多字符串操作
     + 不太需要调用其它程序和跟其它程序管道交互
   - 从bash 3.2版开始，正则表达式和globbing表达式都不能用引号包裹。如果表达式里有空格，可以把它存储到一个变量里
-  - local:函数内部变量
-  - readonly:只读变量
-  - 尽量对bash脚本里的所有变量使用local或readonly进行注解
-* bash shell 内置了一个type命令会根据输入的单词来显示此命令的类型，主要有以下五种类型：
-  - 别名
+* `type cd`:判断命令来源,显示命令类型，不需要使用子进程来执行,已经和shell编译成了一体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行
+  - 别名 alias
     + 创建：`alias li='ls -li'`
     + 查看：`alias -p`
-  - 方法
-  - 内置命令
-  - 关键字
-  - 文件
+  - 方法 function
+  - 内建命令 builtin
+  - 关键字 keyword
+  - 文件 file
   - 参数
-    + 逐行详细地查看脚本的内容，可以使用-v 选项。
-    + -x 选项，它们在执行时显示命令。当我们决定选择分支的时候，更加使用
+    + -v 逐行详细地查看脚本的内容
+    + -x 在执行时显示命令。当决定选择分支的时候
+    + -t 返回一个命令类型
 * 语法
-  - 有变量的字符串里，推荐使用双引号
-  - 开头解释器：`#!/bin/bash`
+  - echo
+    + -n 取消输出文本末尾的回车符
+    + -e 会解释引号（双引号和单引号）里面的特殊字符（比如换行符\n）。如果不使用-e参数，即默认情况下，引号会让特殊字符变成普通字符，echo不解释它们，原样输出。
   - 语法缩进:四个空格
   - 在标准输入上输入多行字符串
-  - 命名建议规则：变量名大写、局部变量小写，函数名小写，名字体现出实际作用
   - 默认变量是全局的，在函数中变量local指定为局部变量，避免污染其他作用域
   - `$()`与``:用于shell命令的执行 用`$()`代替反单引号(`)
   - `pwd -P`:得出当前物理路径(（)非引用等路径)
@@ -278,39 +259,30 @@ PATH=$PATH:/home/christine/Scripts
     + `set -e`:遇到执行非0时退出脚本
     + `set -o nounset`:引用未定义的变量(缺省值为“”)
     + `set -o errexit`:执行失败的命令被忽略
-* 语句
-  - exit 0：表示脚本结束退出，exit有一个整型参数，0表示正常退出，非0表示脚本执行中有错误
+* 命令格式,同一个配置项往往有长和短两种形式
+  - -l｜list
+  - -r|reverse
+* 使用空格（或 Tab 键）区分不同的参数,如果参数之间有多个空格，Bash 会自动忽略多余的空格
+* 分号（;）是命令的结束符，使得一行可以放置多个命令
+* 注释：特殊的语句，会被shell解释器忽略，以#开头，到行尾结束
 * 文件
   - dirname：显示最后一个结点前的路径
   - basename：显示最后一个结点的名称
-* 内建命令 `type cd`
-  - 不需要使用子进程来执行,已经和shell编译成了一体，作为shell工具的组成部分存在。不需要借助外部程序文件来运行
 * 外部命令
   - 程序通常位于/bin、/usr/bin、/sbin或/usr/sbin中
   - 外部命令执行时，会创建出一个子进程。这种操作被称为衍生(forking),需要花费时间和精力来设置新子进程的环境
-* 历史记录
-  - `history -a` shell会话之前强制将命令历史记录写入.bash_history文件
-  - `!!` `!20`:显示出从 shell历史记录中唤回的命令，然后执行该命令
-* 正则表达式
 * 习惯
-  - 多加注释说明
   - 写脚本一定先测试再到生产上
-  - 对一些变理，你可以使用默认值。如：${FOO:-'default'}
-  - 处理你代码的退出码。这样方便你的脚本跟别的命令行或脚本集成。
-  - 尽量不要使用 ; 来执行多个命令，而是使用 &&，这样会在出错的时候停止运行后续的命令。
-  - 对于一些字符串变量，使用引号括起，避免其中有空格或是别的什么诡异字符。
+  - 处理代码退出码:方便脚本跟别的命令行或脚本集成
+  - 尽量不要使用 ; 来执行多个命令，而是使用 &&，这样会在出错的时候停止运行后续的命令
+  - 对于一些字符串变量，使用引号括起，避免其中有空格或是别的什么诡异字符
   - 如果你的脚有参数，你需要检查脚本运行是否带了你想要的参数，或是，你的脚本可以在没有参数的情况下安全的运行。
-  - 为你的脚本设置 -h 和 --help 来显示帮助信息。千万不要把这两个参数用做为的功能。
-  - 使用 $() 而不是 “ 来获得命令行的输出，主要原因是易读。
-  - 小心不同的平台，尤其是 MacOS 和 Linux 的跨平台。
-  - 对于 rm -rf 这样的高危操作，需要检查后面的变量名是否为空，比如：rm -rf $MYDIDR/* 如果 $MYDIR为空，结果是灾难性的。
+  - 为脚本设置 -h 和 --help 来显示帮助信息。千万不要把这两个参数用做为的功能
+  - 使用 $() 而不是 “ 来获得命令行的输出，主要原因是易读
+  - 小心不同平台，尤其是 MacOS 和 Linux 的跨平台
+  - 对于 rm -rf 这样高危操作，需要检查后面的变量名是否为空，比如：rm -rf $MYDIDR/* 如果 $MYDIR为空，结果是灾难性的。
   - 考虑使用 “find/while” 而不是 “for/find”。如：for F in $(find . -type f) ; do echo $F; done 写成 find . -type f | while read F ; do echo $F ; done 不但可以容忍空格，而且还更快。
   - 防御式编程，在正式执行命令前，把相关的东西都检查好，比如，文件目录有没有存在
-* 调试
-* `前置 commands ; command1 && command2 || command3 ; 跟随 commands` 假如 command1 退出时返回码为零，就执行 command2，否则执行 command3
-  - command1 && command2 这样的控制语句能够运行的原因是，每条命令执行完毕时都会给 shell 发送一个返回码，用来表示它执行成功与否。默认情况下，返回码为 0 表示成功，其他任何正值表示失败
-* “&” 脚本在后台运行时使用它
-* “&&”当前一个脚本成功完成才执行后面的命令
 
 ```sh
 type -a|t cd
@@ -325,37 +297,702 @@ echo "Hello $1"
 echo "Hello $*"
 echo "Args count: $#"
 exit 0
+
+echo "<HTML>
+    <HEAD>
+          <TITLE>Page Title</TITLE>
+    </HEAD>
+    <BODY>
+          Page body.
+    </BODY>
+</HTML>"
+
+echo -e 'Hello\nWorld'
 ```
 
-## PS1
+## 变量
 
+* 命名
+  - 字母，数字和下划线组成
+  - 第一个字符必须是一个字母或一个下划线，不能是数字
+  - 不允许出现空格和标点符号
+    + 值包含空格，则必须将值放在引号中
+  - 存储数字类型或者字符串类型
+  - 赋值等号两边不能有空格
+  - 可以重复赋值，后面的赋值会覆盖前面的赋值
+  - 同一行定义多个变量，必须使用分号（;）分隔
+  - 字符串变量可以用单引号或者双引号括起来
+    + 单引号:保留字符字面含义，各种特殊字符在单引号里面，都会变为普通字符，不能包含变量
+      * 单引号之中使用单引号，不能使用转义，需要在外层的单引号前面加上一个美元符号（$），然后再对里层的单引号转义 `echo $'it\'s'`,更合理的方法是改在双引号之中使用单引号
+    + 双引号:变量引用或者命令置换是会被展开的,可以出现转义字符,推荐使用
+      * 美元符号（$）、反引号（`）和反斜杠（\）,在双引号之中，依然有特殊含义，会被 Bash 自动扩展。
+      * 美元符号用来引用变量
+      * 反引号则是执行子命令
+      * 换行符在双引号之中，会失去特殊含义，Bash 不再将其解释为命令的结束，只是作为普通的换行符
+      * 文件名包含连续空格（或制表符和换行符）,必须使用双引号，将文件名放在里面
+      * 保存原始命令的输出格式 `echo "$(cal)"`
+  - 变量名大写、局部变量小写，函数名小写，名字体现出实际作用
+* set命令显示所有变量（包括环境变量和自定义变量），以及所有的 Bash 函数
+* 默认值
+  - ${varname:-word} 如果变量varname存在且不为空，则返回它的值，否则返回word
+  - ${varname:+word} 如果变量名存在且不为空，则返回word，否则返回空值.测试变量是否存在
+    + ${count:+1}
+  - ${varname:?message} 如果变量varname存在且不为空，则返回它的值，否则打印出varname: message，并中断脚本的执行,防止变量未定义
+  - 变量名的部分可以用数字1到9，表示脚本的参数 `filename=${1:?"filename missing."}`
+* 调用：`$|${}`
+  - 使用花括号{}包围,用于变量名与其他字符连用的情况
+  - 如果变量的值本身也是变量，可以使用${!varname}的语法，读取最终的值
+* unset命令用来删除一个变量,不存在的 Bash 变量一律等于空字符串，所以即使unset命令删除了变量，还是可以读取这个变量，值为空字符串
+  - 删除一个变量，也可以将这个变量设成空字符串
+* declare命令可以声明一些特殊类型的变量，为变量设置一些限制
+  - -a：声明数组变量。
+  - -f：输出所有函数定义。
+  - -F：输出所有函数名。
+  - -i：声明整数变量。
+  - -l：声明变量为小写字母。
+  - -p：查看变量信息。
+  - -r：声明只读变量。
+  - -u：声明变量为大写字母。
+  - -x：该变量输出为环境变量。
+  - 不带任何参数时，declare命令输出当前环境的所有变量，包括函数在内，等同于不带有任何参数的set命令
+  - 一个变量声明为整数以后，依然可以被改写为字符串
+* readonly 将变量定义为只读，意味着不能改变
+  - -f：声明的变量为函数名。
+  - -p：打印出所有的只读变量。
+  - -a：声明的变量为数组。
+* let命令声明变量时，可以直接执行算术表达式
+* 全局变量
+  - 对于 shell 会话和所有生成子 shell 可见
+  - 创建:先创建一个局部环境变量，然后再导出到全局环境中
+  - 修改|删除子shell中全局环境变量并不会影响到父shell中该变量的值
+  - 子 shell 甚至无法使用 export 命令改变父shell中全局环境变量值
+  - unset 命令中引用环境变量时，记住不要使用$
+    + 在子进程中删除一个全局环境变量，只对子进程有效。该全局环境变量在父进程中依然可用
+* 局部变量 Local variables
+  - 在某个脚本内部有效变量,不能被其他的程序和脚本访问
+  - 声明:用=声明，变量名、等号和值之间没有空格 `username="denysdovhan"`
+  - 访问:`echo $username`
+  - 删除:`unset username`
+  - 给变量赋一个含有空格的字符串值，必须用单引号来界定字符串的首和尾
+  - local 关键字声明属于某个函数的局部变量，会在函数结束时消失
+  - 如果生成了另外一个shell，它在子shell中就不可用,退出了子进程，那个局部环境变量就不可用
+  - 回到父shell时，子shell中设置的局部变量就不存在
+* 环境变量 Environment variables
+  - 当前shell会话内所有的程序或脚本都可见的变量,创建跟创建局部变量类似，但使用export关键字 `export GLOBAL_VAR="I'm a global variable"`
+  - 把变量传递给子 Shell，需要使用export命令。这样输出的变量，对于子 Shell 来说就是环境变量,子 Shell 如果修改继承的变量，不会影响父 Shell
+  - 保存操作系统运行时使用参数,长期使用，可以写在配置文件中。`/etc/profile` 或者用户家目录 `.bash_profile`
+  - 基本上用全大写字母，以区别于普通用户环境变量
+  - env|printenv 显示所有环境变量
+  - printenv|echo varibale 查看单个环境变量值
+  - BASHPID：Bash 进程的进程 ID。
+  - BASHOPTS：当前 Shell 的参数，可以用shopt命令修改。
+  - BASH_LINENO返回一个数组，内容是每一轮调用对应的行号
+  - BASH_SOURCE返回一个数组，内容是当前的脚本调用堆栈。该数组的0号成员是当前执行的脚本，1号成员是调用当前脚本的脚本
+  - DISPLAY：图形环境的显示器名字，通常是:0，表示 X Server 的第一个显示器。
+  - EDITOR：默认的文本编辑器。
+  - FUNCNAME返回一个数组，内容是当前的函数调用堆栈。该数组的0号成员是当前调用的函数，1号成员是调用当前函数的函数
+  - HOME：用户的主目录。
+  - HOST：当前主机的名称。
+  - IFS：词与词之间的分隔符，默认为空格。
+  - LANG：字符集以及语言编码，比如zh_CN.UTF-8。
+  - LINENO返回它在脚本里面的行号
+  - PATH：由冒号分开的目录列表，当输入可执行程序名后，会搜索这个目录列表。
+  - PWD：当前工作目录。
+  - RANDOM：返回一个0到32767之间的随机数。
+  - SHELL：Shell 的名字。
+  - SHELLOPTS：启动当前 Shell 的set命令的参数
+  - TERM：终端类型名，即终端仿真器所用的协议。
+  - UID：当前用户的 ID 编号。
+  - USER：当前用户的用户名。
+  - PS1：Shell 提示符 通常是美元符号$，对于根用户则是井号#
+  - PS2： 输入多行命令时，折行输入时系统的提示符，默认为>。
+  - PS3 使用select命令时，系统输入菜单的提示符
+  - PS4 默认为+。使用 Bash 的-x参数执行脚本时，每一行命令在执行前都会先打印出来，并且在行首出现的那个提示符
+    + \a    ASCII 响铃字符（也可以键入 \007）
+    + \d    "Wed Sep 06" 格式的日期
+    + \e    ASCII 转义字符（也可以键入 \033）
+    + \h    主机名的第一部分（如 "mybox"）
+    + \H    主机的全称（如 "mybox.mydomain.com"）
+    + \j    在此 shell 中通过按 ^Z 挂起的进程数
+    + \l    此 shell 的终端设备名（如 "ttyp4"）
+    + \n    换行符
+    + \r    回车符
+    + \s    shell 的名称（如 "bash"）
+    + \t    24 小时制时间（如 "23:01:01"）
+    + \T    12 小时制时间（如 "11:01:01"）
+    + \@    带有 am/pm 的 12 小时制时间
+    + \u    用户名
+    + \v    bash 的版本（如 2.04）
+    + \V    Bash 版本（包括补丁级别） ?/td>
+    + \w    当前工作目录（如 "/home/drobbins"）
+    + \W    当前工作目录的“基名 (basename)”（如 "drobbins"）
+    + `\!`    当前命令在历史缓冲区中的位置
+    + `\#`    命令编号（只要您键入内容，它就会在每次提示时累加）
+    + `\$`    如果您不是超级用户 (root)，则插入一个 "$"；如果您是超级用户，则显示一个 "#"
+    + \xxx    插入一个用三位数 xxx（用零代替未使用的数字，如 "\007"）表示的 ASCII 字符
+    + `\\`    反斜杠
+    + `\[`    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。
+    + `\]`    这个序列应该出现在非打印字符序列之后
+  - 文本颜色
+    + \033[0;30m：黑色
+    + \033[1;30m：深灰色
+    + \033[0;31m：红色
+    + \033[1;31m：浅红色
+    + \033[0;32m：绿色
+    + \033[1;32m：浅绿色
+    + \033[0;33m：棕色
+    + \033[1;33m：黄色
+    + \033[0;34m：蓝色
+    + \033[1;34m：浅蓝色
+    + \033[0;35m：粉红
+    + \033[1;35m：浅粉色
+    + \033[0;36m：青色
+    + \033[1;36m：浅青色
+    + \033[0;37m：浅灰色
+    + \033[1;37m：白色
+  - 背景颜色
+    + \033[0;40m：蓝色
+    + \033[1;44m：黑色
+    + \033[0;41m：红色
+    + \033[1;45m：粉红
+    + \033[0;42m：绿色
+    + \033[1;46m：青色
+    + \033[0;43m：棕色
+    + \033[1;47m：浅灰色
+* 预定义变量｜位置参数 Positional parameters：调用一个函数并传给它参数时创建的变量,类似于环境变量，不同是不能重定义
+  - `$0`  脚本名称
+  - `$1 … $9`  传给脚本/函数的第1个到第9个参数列表,第10个参数可以用${10}的形式引用
+  - `$$`  脚本PID
+  - `$!`  上一个后台执行的异步命令的进程 ID
+  - `$-`  当前 Shell 的启动参数
+  - `$_`  上一个命令的最后一个参数
+  - `$?`  上一个命令退出状态(管道命令使用${PIPESTATUS})
+  - `$#`  传递给脚本/函数的参数个数,能够处理空格参数
+  - `$@`  传递给脚本/函数的所有参数(识别每个参数) 参数之间使用空格分隔
+  - `$*`  传递给脚本/函数的所有参数(把所有参数当成一个字符串)，参数之间使用变量$IFS值的第一个字符分隔，默认为空格，但是可以自定义
+  - `@`与`"*"`区别:在使用双引号时候。如果脚本运行时两个参数为a,b，则"*"等价于"ab",而"@"等价于"a","b"
+  - `${10}`   在超过两位数的参数时，使用大括号限定起来
+  - $FUNCNAME 函数名称（仅在函数内部有值）
+* 自定义变量：用户在当前 Shell 里面自己定义的变量，必须先定义后使用，而且仅在当前 Shell 可用。一旦退出当前 Shell，该变量就不存在了
+* 转义 escape
+  - 原样输出特殊字符，在前面加上反斜杠，使其变成普通字符
+  - 在命令行使用不可打印字符，把它们放在引号里面，然后使用echo命令的-e参数
+  - 换行符是一个特殊字符，表示命令的结束，Bash 收到这个字符以后，就会对输入的命令进行解释执行。换行符前面加上反斜杠转义，就使得换行符变成一个普通字符，Bash 会将其当作空格处理，从而可以将一行命令写成多行。
+
+```sh
+printenv HOME
+echo "Your home: $HOME" # Your home: /Users/<username>
+echo 'Your home: $HOME' # Your home: $HOME
+
+my_variable="I am Global now"
+export my_variable
+echo $my_variable
+
+# 如果变量为空，赋给默认值
+${VAR:='default'}
+${$1:='first'}
+# 或者
+FOO=${FOO:-'default'}
+
+# /* PS1 用户主提示符配色方案(在 .bashrc 文件中添加) */
+export PS1="\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h: \[\e[0;35m\]\W\[\e[m\] \\$"
+PS1='\[\033[0;41m\]<\u@\h \W>\$\[\033[0m\] '
+
+# // 另外种等效写法
+# export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h: \
+
+# // 另外种主提示符样式(（)对CentOS默认的主提示符加颜色标识)
+# export PS1="[\[\e[0;36m\]\u\[\e[m\]@\[\e[0;32m\]\h \[\e[0;35m\]\W\[\e[m\]]\\$  "
 ```
-\a    ASCII 响铃字符（也可以键入 \007）
-\d    "Wed Sep 06" 格式的日期
-\e    ASCII 转义字符（也可以键入 \033）
-\h    主机名的第一部分（如 "mybox"）
-\H    主机的全称（如 "mybox.mydomain.com"）
-\j    在此 shell 中通过按 ^Z 挂起的进程数
-\l    此 shell 的终端设备名（如 "ttyp4"）
-\n    换行符
-\r    回车符
-\s    shell 的名称（如 "bash"）
-\t    24 小时制时间（如 "23:01:01"）
-\T    12 小时制时间（如 "11:01:01"）
-\@    带有 am/pm 的 12 小时制时间
-\u    用户名
-\v    bash 的版本（如 2.04）
-\V    Bash 版本（包括补丁级别） ?/td>
-\w    当前工作目录（如 "/home/drobbins"）
-\W    当前工作目录的“基名 (basename)”（如 "drobbins"）
-\!    当前命令在历史缓冲区中的位置
-\#    命令编号（只要您键入内容，它就会在每次提示时累加）
-\$    如果您不是超级用户 (root)，则插入一个 "$"；如果您是超级用户，则显示一个 "#"
-\xxx    插入一个用三位数 xxx（用零代替未使用的数字，如 "\007"）表示的 ASCII 字符
-\\    反斜杠
-\[    这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使 bash 能够正确计算自动换行。
-\]    这个序列应该出现在非打印字符序列之后
+
+## 扩展 expansions
+
+* Shell 接收到用户输入的命令以后，会根据空格将用户的输入，拆分成一个个词元（token）。然后，Shell 会扩展词元里面的特殊字符，扩展完成后才会调用相应的命令
+* 模式扩展 globbing|通配符扩展 wildcard expansion:特殊字符的扩展
+  - 关闭扩展 `set -o noglob` `set -f`
+* 发生在一行命令被分成一个个的记号（tokens）之后,一种执行数学运算的机制，还可以用来保存命令的执行结果
+* 波浪线扩展
+  - 自动扩展成当前用户主目录
+  - ~+会扩展成当前所在的目录
+* ? 字符扩展
+  - 代表文件路径里面任意单个字符，不包括空字符
+  - 如果匹配多个字符，就需要多个?连用
+  - 属于文件名扩展，只有文件确实存在的前提下，才会发生扩展。如果文件不存在，扩展就不会发生
+* * 字符扩展
+  - 代表文件路径里面的任意数量的任意字符，包括零个字符
+  - 输出当前目录的所有文件，直接用*即可
+  - 不会匹配隐藏文件（以.开头的文件）
+  - 匹配隐藏文件，需要写成.*
+  - 匹配隐藏文件，同时要排除.和..这两个特殊的隐藏文件 .[!.]*
+  - 只匹配当前目录，不会匹配子目录 `*/*.txt`
+* 方括号扩展
+  - 只有文件确实存在的前提下才会扩展
+  - 属于文件名匹配，即扩展后的结果必须符合现有的文件路径。如果不存在匹配，就会保持原样，不进行扩展
+  - 简写形式[start-end]，表示匹配一个连续的范围
+    + [a-z]：所有小写字母
+    + [a-zA-Z]：所有小写字母与大写字母
+    + [a-zA-Z0-9]：所有小写字母、大写字母与数字
+    + [abc]*：所有以a、b、c字符之一开头的文件名
+    + program.[co]：文件program.c与文件program.o
+    + `BACKUP.[0-9][0-9][0-9]`：所有以BACKUP.开头，后面是三个数字的文件名
+  - 否定形式[!start-end]
+* 大括号扩展
+  - 让生成任意字符串成为可能。跟文件名扩展很类似
+  - 创建一个可被循环迭代的区间 {start..end}
+    + 支持逆序
+  - 逗号前面可以没有值，表示扩展的第一项为空
+  - 内部的逗号前后不能有空格
+  - 可以嵌套
+  - 不是文件名扩展，所以总是会扩展
+* 变量扩展
+  - 将美元符号$开头的词元视为变量，将其扩展成变量值
+  - 变量名放在${}里面
+  - `${!string*}`或`${!string@}`返回所有匹配给定字符串string的变量名
+  - ${!S*} 所有以S开头的变量名
+* 子命令扩展
+  - $(...)可以扩展成另一个命令的运行结果，该命令的所有输出都会作为返回值
+* 命令置换:对一个命令求值，并将其值置换到另一个命令或者变量赋值表达式中。当一个命令被``或$()包围时，命令置换将会执行
+* 算数扩展:算数表达式必须包在$(( ))中
+* 字符类 [[:class:]]表示一个字符类，扩展成某一类特定字符之中的一个
+  - [[:alnum:]]：匹配任意英文字母与数字
+  - [[:alpha:]]：匹配任意英文字母
+  - [[:blank:]]：空格和 Tab 键。
+  - [[:cntrl:]]：ASCII 码 0-31 的不可打印字符。
+  - [[:digit:]]：匹配任意数字 0-9。
+  - [![:digit:]] 匹配所有非数字
+  - [[:graph:]]：A-Z、a-z、0-9 和标点符号。
+  - [[:upper:]]：匹配任意大写字母 A-Z。
+  - [[:lower:]]：匹配任意小写字母 a-z。
+  - [[:print:]]：ASCII 码 32-127 的可打印字符。
+  - [[:punct:]]：标点符号（除了 A-Z、a-z、0-9 的可打印字符）。
+  - [[:space:]]：空格、Tab、LF（10）、VT（11）、FF（12）、CR（13）。
+  - [[:xdigit:]]：16进制字符（A-F、a-f、0-9）。
+* 注意
+  - 通配符是先解释，再执行
+  - 文件名扩展在不匹配时，会原样输出
+  - 所有文件名扩展只匹配单层路径，不能跨目录匹配，即无法匹配子目录里面的文件。或者说，?或*这样的通配符，不能匹配路径分隔符（/）
+  - 允许文件名使用通配符，即文件名包括特殊字符
+* 量词语法用来控制模式匹配的次数。在 Bash 的extglob参数打开的情况下才能使用，默认打开的。查询 `shopt extglob`
+  - ?(pattern-list)：匹配零个或一个模式
+  - *(pattern-list)：匹配零个或多个模式
+  - +(pattern-list)：匹配一个或多个模式
+  - @(pattern-list)：只匹配一个模式
+  - !(pattern-list)：匹配零个或一个以上的模式，但不匹配单独一个的模式
+* 当局部变量和环境变量包含空格时，在引号中的扩展
+  - 输入 可能 包含空格，务必要用引号把表达式包起来
+
+```sh
+ls ??.txt
+ls *.txt
+ls [ab].txt
+
+echo beg{i,a,u}n # begin began begun
+echo {0..5} # 0 1 2 3 4 5
+echo {00..8..2} # 00 02 04 06 08
+# 等同于 cp a.log a.log.bak
+cp a.log{,.bak}
+echo a{A{1,2},B{3,4}}b
+echo {a..c}{1..3} # a1 a2 a3 b1 b2 b3 c1 c2 c3
+
+# 命令置换
+now=`date +%T`
+# or
+now=$(date +%T)
+echo $now # 19:08:26
+
+result=$(( ((10 + 5*3) - 7) / 2 ))
+echo $result # 9
+
+x=4
+y=7
+echo $(( x + y ))     # 11
+echo $(( ++x + y++ )) # 12
+echo $(( x + y ))     # 13
+
+INPUT="A string  with   strange    whitespace."
+# 给了5个单独的参数 —— $INPUT被分成了单独的词，echo在每个词之间打印了一个空格
+echo $INPUT   # A string with strange whitespace.
+# 只给了它一个参数（整个$INPUT的值，包括其中的空格）
+echo "$INPUT" # A string  with   strange    whitespace.
+
+FILE="Favorite Things.txt"
+cat $FILE   # 尝试输出两个文件: `Favorite` 和 `Things.txt`
+cat "$FILE" # 输出一个文件: `Favorite Things.txt`
+
+ls abc+(.txt)
+
+# 打开某个参数
+shopt -s [optionname]
+# 关闭某个参数
+shopt -u [optionname]
+# 查询某个参数关闭还是打开
+shopt [optionname]
 ```
+
+## 字符串操作
+
+* ${#varname} 获取字符串长度
+* ${varname:offset:length} 提取子串
+  - 不能直接操作字符串，只能通过变量来读取字符串，并且不会改变原始字符串。变量前面的美元符号可以省略
+  - 省略length，则从位置offset开始，一直返回到字符串的结尾
+  - offset为负值，表示从字符串的末尾开始算起。注意，负数前面必须有一个空格， 以防止与${variable:-word}的变量的设置默认值语法混淆
+  - length可以是正值，也可以是负值
+* 搜索和替换
+  - 字符串头部模式匹配:检查字符串开头，是否匹配给定的模式。如果匹配成功，就删除匹配的部分，返回剩下的部分。原始变量不会发生变化
+    + 匹配模式pattern可以使用*、?、[]等通配符
+    + 头部匹配部分，替换成其他内容
+  - 字符串尾部模式匹配
+  - 任意位置的模式匹配
+    + 模式部分可以使用通配符
+    + 如果省略了string部分，那么就相当于匹配的部分替换成空字符串，即删除匹配的部分
+
+```sh
+count=frogfootman
+echo ${count:4:4}
+foo="This string is long."
+echo ${foo: -5} # long.
+echo ${foo: -5:2} # lo
+echo ${foo: -5:-2} # lon
+
+# 如果 pattern 匹配变量 variable 的开头，
+# 删除最短匹配（非贪婪匹配）部分，返回剩余部分
+${variable#pattern}
+
+# 如果 pattern 匹配变量 variable 的开头，
+# 删除最长匹配（贪婪匹配）的部分，返回剩余部分
+${variable##pattern}
+
+path=/home/cam/book/long.file.name
+echo ${path##*/} # long.file.name
+
+# 模式必须出现在字符串的开头
+${variable/#pattern/string}
+foo=JPG.JPG
+echo ${foo/#JPG/jpg} jpg.JPG
+
+# 如果 pattern 匹配变量 variable 的结尾，
+# 删除最短匹配（非贪婪匹配）的部分，返回剩余部分
+${variable%pattern}
+
+# 如果 pattern 匹配变量 variable 的结尾，
+# 删除最长匹配（贪婪匹配）的部分，返回剩余部分
+${variable%%pattern}
+echo ${path%.*} # /home/cam/book/long.file
+echo ${path%%.*} # /home/cam/book/long
+echo ${path%/*} # /home/cam/book
+# 替换文件后缀名
+file=foo.png
+echo ${file%.png}.jpg
+
+# 尾部替换
+${variable/%pattern/string}
+foo=JPG.JPG
+echo ${foo/%JPG/jpg} # JPG.jpg
+
+# 如果 pattern 匹配变量 variable 的一部分，
+# 最长匹配（贪婪匹配）的那部分被 string 替换，但仅替换第一个匹配
+${variable/pattern/string}
+
+# 如果 pattern 匹配变量 variable 的一部分，
+# 最长匹配（贪婪匹配）的那部分被 string 替换，所有匹配都替换
+${variable//pattern/string}
+path=/home/cam/foo/foo.name
+echo ${path/foo/bar} # /home/cam/bar/foo.name
+echo ${path//foo/bar} # /home/cam/bar/bar.name
+
+# 转为大写
+${varname^^}
+# 转为小写
+${varname,,}
+```
+
+## 数组 array
+
+* 下标从0开始
+* 注意特殊环境变量 Input Field Separator IFS，保存了数组中元素的分隔符,默认值是一个空格 IFS=' '
+* 通过 切片 运算符来取出数组中的某一片元素
+* @和*放不放在双引号之中，是有差别的
+  - 在引号内，${fruits[@]}将数组中的每个元素扩展为一个单独的参数；数组元素中的空格得以保留
+  - ${activities[*]} 放在双引号之中，所有元素就会变成单个字符串返回
+* 拷贝数组 `hobbies=( "${activities[@]}" )`
+* 引用一个不带下标的数组变量，则引用的是0号位置的数组元素
+* `${!array[@]}`|`${!array[*]}`:可以返回数组的成员序号，即哪些位置是有值的
+* 提取数组成员: `${array[@]:offset:length}`
+* unset 删除一个数组成员
+  - 将某个成员设为空值，可以从返回值中“隐藏”这个成员,这个成员仍然存在，只是值变成了空值,不建议
+* 直接将数组变量赋值为空字符串，相当于“隐藏”数组的第一个成员
+* unset ArrayName可以清空整个数组
+* Bash 新版本支持关联数组
+
+```sh
+fruits[0]=Apple
+fruits[1]=Pear
+fruits[2]=Plum
+
+fruits=(Apple Pear Plum)
+array=([2]=c [0]=a [1]=b)
+# 当前目录的所有 MP3 文件，放进一个数组
+mp3s=( *.mp3 )
+
+declare -a ARRAYNAME
+
+# 关联数组
+declare -A colors
+colors["red"]="#ff0000"
+colors["green"]="#00ff00"
+colors["blue"]="#0000ff"
+
+echo ${fruits[1]} # Pear
+
+fruits[2]=seven
+echo ${fruits[*]} # Apple Pear seven
+echo ${fruits[@]} # Apple Pear seven
+printf "+ %s\n" ${fruits[*]}
+
+fruits[1]="Desert fig"
+printf "+ %s\n" ${fruits[*]}
+# + Apple
+# + Desert
+# + fig
+# + Plum
+printf "+ %s\n" "${fruits[@]}"
+echo ${fruits[@]:0:2} # Apple Desert fig
+
+# 添加元素
+fruits=(Orange "${fruits[@]}" Banana Cherry)
+echo ${fruits[@]} # Orange Apple Desert fig Plum Banana Cherry
+
+foo=(a b c)
+foo+=(d e f)
+
+unset fruits[2]
+
+# 数组长度
+${#array[*]}
+${#array[@]}
+```
+
+## 流，管道以及序列
+
+* 流 Streams：将一个程序的输出发送到另一个程序或文件
+* 文件描述符
+  - 标准输入文件 stdin：文件描述符 0
+  - 标准输出文件 stdout：文件描述符 1
+  - 标准错误文件 stderr：文件描述符 2
+* 管道 pipes：把一个程序的输出当做另一个程序的输入 `command1 | command2 | command3`
+  - 管道的返回值通常是管道中最后一个命令的返回值
+  - shell会等到管道中所有的命令都结束后，才会返回一个值
+  - 如果想让管道中任意一个命令失败后，管道就宣告失败，设置pipefail选项 `set -o pipefail`
+* 重定向：控制一个命令输入来自哪里，输出结果到什么地方
+  - > 重定向输出
+  - &>  重定向输出和错误输出
+  - &>> 以附加的形式重定向输出和错误输出
+  - < 重定向输入
+  - <<  Here文档|here document:一种输入多行字符串的方法,格式分成开始标记（<< token）和结束标记（token）
+    + 开始标记是两个小于号 + Here 文档的名称，名称可以随意取，后面必须是一个换行符；
+    + 结束标记是单独一行顶格写的 Here 文档名称，如果不是顶格，结束标记不起作用。两者之间就是多行字符串的内容
+    + 内部会发生变量替换，同时支持反斜杠转义，但是不支持通配符扩展，双引号和单引号也失去语法作用，变成了普通字符。
+    + 不希望发生变量替换，可以把 Here 文档的开始标记放在单引号之中
+    + 本质是重定向，将字符串重定向输出给某个命令，相当于包含了echo命令,只适合那些可以接受标准输入作为参数的命令,也不能作为变量的值，只能用于命令的参数
+  - <<< Here字符串|Here string
+    + 将字符串通过标准输入，传递给命令 `md5sum <<< 'ddd'`
+* 命令序列 lists:由;，&，&&或者||运算符分隔的一个或多个管道序列
+  - 命令以&结尾，shell将会在一个子shell中异步执行这个命令
+  - 以;分隔的命令将会依次执行：一个接着一个。shell会等待直到每个命令执行完
+  - 以&&和||分隔的命令分别叫做 与 和 或 序列
+  - `command1 && command2 || command3`:command1 退出时返回码为零，就执行 command2，否则执行 command3
+  - 成为进程列表:命令必须包含在括号里 `(pwd ; ls ; cd /etc ; pwd ; cd ; pwd ; ls)` 生成了一个子shell来执行对应的命令
+
+```sh
+# ls的结果将会被写到list.txt中
+ls -l > list.txt
+
+# 将输出附加到list.txt中
+ls -a >> list.txt
+
+# 所有的错误信息会被写到errors.txt中
+grep da * 2> errors.txt
+
+# 从errors.txt中读取输入
+less < errors.txt
+
+ls -l | grep .md$ | less
+
+# command2 会在 command1 之后执行
+command1 ; command2
+
+# 当且仅当command1执行成功（返回0值）时，command2才会执行
+command1 && command2
+# 当且仅当command1执行失败（返回错误码）时，command2才会执行
+command1 || command2
+
+cat << _EOF_
+<html>
+<head>
+    <title>
+    The title of your page
+    </title>
+</head>
+
+<body>
+    Your page content goes here.
+</body>
+</html>
+_EOF_
+
+foo='hello world'
+$ cat << '_example_'
+$foo
+"$foo"
+'$foo'
+_example_
+
+# $foo
+# "$foo"
+# '$foo'
+
+command << token
+  string
+token
+```
+
+## 运算符
+
+* 算数运算
+  - 算术表达式 ((...))语法可以进行整数的算术运算
+    + 会自动忽略内部的空格
+    + 语法不返回值，命令执行的结果根据算术运算的结果而定。只要算术结果不是0，命令就算执行成功
+    + 要读取算术运算的结果，需要在((...))前面加上美元符号$((...))，使其变成算术表达式，返回算术运算的值
+    + 内部可以用圆括号改变运算顺序
+    + 可以嵌套
+    + 不需要在变量名之前加上$，不过加上也不报错
+    + 使用字符串，Bash 会认为那是一个变量名。如果不存在同名变量，Bash 就会将其作为空值，因此不会报错
+    + 如果一个变量的值为字符串,即该字符串如果不对应已存在的变量，在$((...))里面会被当作空值
+    + `expr 表达式`
+      * 支持变量替换
+    + 运算符号两边要有空格
+    + 遇到特殊符号如*号需要在前面加反斜杠
+    + 空格和特殊字符串需要用引号括起来
+    + 操作:(先编写一个运算相关的shell脚本)
+  - 进制
+    + number：没有任何特殊表示法的数字是十进制数（以10为底）。
+    + 0number：八进制数。
+    + 0xnumber：十六进制数。
+    + base#number：base进制的
+  - 算术运算符
+    + +：加法
+    + -：减法
+    + *：乘法
+    + /：除法（整除）
+    + %：余数
+    + **：指数
+    + ++：自增运算（前缀或后缀）
+    + --：自减运算（前缀或后缀）
+  - 位运算符
+    + <<：位左移运算，把一个数字的所有位向左移动指定的位。
+    + >>：位右移运算，把一个数字的所有位向右移动指定的位。
+    + &：位的“与”运算，对两个数字的所有位执行一个AND操作。
+    + |：位的“或”运算，对两个数字的所有位执行一个OR操作。
+    + ~：位的“否”运算，对一个数字的所有位取反。
+    + ^：位的异或运算（exclusive or），对两个数字的所有位执行一个异或操作
+  - 逻辑运算符
+    + <：小于
+    + >：大于
+    + <=：小于或相等
+    + >=：大于或相等
+    + ==：相等
+    + !=：不相等
+    + &&：逻辑与
+    + ||：逻辑或
+    + !：逻辑否
+    + expr1?expr2:expr3：三元条件运算符。若表达式expr1的计算结果为非零值（算术真），则执行表达式expr2，否则执行表达式expr3
+  - 赋值运算
+    + parameter = value：简单赋值。
+    + parameter += value：等价于parameter = parameter + value。
+    + parameter -= value：等价于parameter = parameter – value。
+    + parameter *= value：等价于parameter = parameter * value。
+    + parameter /= value：等价于parameter = parameter / value。
+    + parameter %= value：等价于parameter = parameter % value。
+    + parameter <<= value：等价于parameter = parameter << value。
+    + parameter >>= value：等价于parameter = parameter >> value。
+    + parameter &= value：等价于parameter = parameter & value。
+    + parameter |= value：等价于parameter = parameter | value。
+    + parameter ^= value：等价于parameter = parameter ^ value
+  - 求值运算
+    + 逗号,在$((...))内部是求值运算符，执行前后两个表达式，并返回后一个表达式的值
+  - let命令用于将算术运算的结果，赋予一个变量
+
+```sh
+((foo = 5 + 5))
+echo $foo
+echo $(((5**2) * 3)) # 75
+
+echo $((0xff))
+echo $((2#11111111))
+
+echo $((foo = 1 + 2, 3 * 4)) # 12
+```
+
+## 行操作
+
+* 内置了 Readline 库，具有这个库提供的很多“行操作”功能,默认采用 Emacs 快捷键，也可以改成 Vi 快捷键 `set -o vi|emacs`
+  - 永久性更改编辑模式（Emacs / Vi），可以将命令写在~/.inputrc文件 `set editing-mode vi`
+* 光标移动
+  - Ctrl + a：移到行首。
+  - Ctrl + b：向行首移动一个字符，与左箭头作用相同。
+  - Ctrl + e：移到行尾。
+  - Ctrl + f：向行尾移动一个字符，与右箭头作用相同。
+  - Alt + f：移动到当前单词的词尾。
+  - Alt + b：移动到当前单词的词首。
+  - Ctrl + l 清除屏幕
+* 编辑
+  - Ctrl + d：删除光标位置的字符（delete）。
+  - Ctrl + w：删除光标前面的单词。
+  - Ctrl + t：光标位置的字符与它前面一位的字符交换位置（transpose）。
+  - Alt + t：光标位置的词与它前面一位的词交换位置（transpose）。
+  - Alt + l：将光标位置至词尾转为小写（lowercase）。
+  - Alt + u：将光标位置至词尾转为大写（uppercase
+  - Ctrl + k：剪切光标位置到行尾的文本。
+  - Ctrl + u：剪切光标位置到行首的文本。
+  - Alt + d：剪切光标位置到词尾的文本。
+  - Alt + Backspace：剪切光标位置到词首的文本。
+  - Ctrl + y：在光标位置粘贴文本
+* 自动补全
+  - Tab：完成自动补全。
+  - Alt + ?：列出可能的补全，与连按两次 Tab 键作用相同。
+  - Alt + /：尝试文件路径补全。
+  - Ctrl + x /：先按Ctrl + x，再按/，等同于Alt + ?，列出可能的文件路径补全。
+  - Alt + !：命令补全。
+  - Ctrl + x !：先按Ctrl + x，再按!，等同于Alt + !，命令补全。
+  - Alt + ~：用户名补全。
+  - Ctrl + x ~：先按Ctrl + x，再按~，等同于Alt + ~，用户名补全。
+  - Alt + $：变量名补全。
+  - Ctrl + x $：先按Ctrl + x，再按$，等同于Alt + $，变量名补全。
+  - Alt + @：主机名补全。
+  - Ctrl + x @：先按Ctrl + x，再按@，等同于Alt + @，主机名补全。
+  - Alt + *：在命令行一次性插入所有可能的补全。
+  - Alt + Tab：尝试用.bash_history里面以前执行命令，进行补全。
+* 历史
+  - 将用户在当前 Shell 的操作历史写入~/.bash_history文件，该文件默认储存500个操作 `echo $HISTFILE`
+  - history
+    + -a shell会话之前强制将命令历史记录写入.bash_history文件
+    + -c 清除操作历史
+  - `!e` 表示找出操作历史之中，最近的那一条以e开头的命令并执行
+  - ”感叹号 + 字符“会扩展成以前执行过的命令，所以含有感叹号的字符串放在双引号里面，必须非常小心
+  - `export HISTTIMEFORMAT='%F %T  '` 自定义格式
+  - `export HISTSIZE=0` 不希望保存本次操作的历史
+  - 快捷键
+    + Ctrl + p：显示上一个命令，与向上箭头效果相同（previous）。
+    + Ctrl + n：显示下一个命令，与向下箭头效果相同（next）。
+    + Alt + <：显示第一个命令。
+    + Alt + >：显示最后一个命令，即当前的命令。
+    + Ctrl + o：执行历史文件里面的当前条目，并自动显示下一条命令
+    + !!：执行上一个命令。
+    + !n：执行历史文件里面行号为n的命令。
+    + !-n：执行当前命令之前n条的命令。
+    + !string：执行最近一个以指定字符串string开头的命令。
+    + !?string：执行最近一条包含字符串string的命令。
+    + ^string1^string2：执行最近一条包含string1的命令，将其替换成string2
 
 ## 文件管理
 
@@ -364,25 +1001,39 @@ exit 0
 * 移动(mv)
 * 复制(cp)
 * 删除(rm)
+* `cd -` 可以返回前一次的目录
+* 目录堆栈
+  - dirs 可以显示目录堆栈的内容
+  - `pushd dirname` 进入目录dirname，并将该目录放入堆栈
+    + 第一次使用时，会将当前目录先放入堆栈，然后将所要进入的目录也放入堆栈，位置在前一个记录的上方。以后每次使用pushd命令，都会将所要进入的目录，放在堆栈的顶部。
+  - popd命令不带有参数时，会移除堆栈的顶部记录，并进入新的堆栈顶部目录（即原来的第二条目录）
+  - 参数
+    + -n 表示仅操作堆栈，不改变目录
+    + 接受一个整数作为参数，该整数表示堆栈中指定位置的记录（从0开始），作为操作对象。这时不会切换目录
 * 链接
   - 符号链接就是一个实实在在的文件，它指向存放在虚拟目录结构中某个地方的另一个文件
   - 硬链接会创建独立的虚拟文件，其中包含了原始文件的信息及位置。但是它们从根本上而言是同一个文件。引用硬链接文件等同于引用了源文件。只能对处于同一存储媒体的文件创建硬链接。要想在不同存储媒体的文件之间创建链接， 只能使用符号链接。
 * 临时文件
-  - 创建前检查文件是否已经存在。
-  - 确保临时文件已成功创建。
-  - 临时文件必须有权限的限制。
-  - 临时文件要使用不可预测的文件名。
-  - 脚本退出时，要删除临时文件（使用trap命令）
-  - 直接运行mktemp命令，就能生成一个临时文件，文件名是随机的，而且权限是只有用户本人可读写
-    + -d参数可以创建一个临时目录
-    + -p参数可以指定临时文件所在的目录。默认是使用$TMPDIR环境变量指定的目录，如果这个变量没设置，那么使用/tmp目录
-    + -t参数可以指定临时文件的文件名模板，模板的末尾必须至少包含三个连续的X字符，表示随机字符，建议至少使用六个X。默认的文件名模板是tmp.后接十个随机字符
+  - 创建前检查文件是否已经存在
+  - 确保临时文件已成功创建
+  - 必须有权限限制
+  - 要使用不可预测的文件名
+  - mktemp 生成一个临时文件，文件名是随机的，而且权限是只有用户本人可读写
+    + -d 可以创建一个临时目录
+    + -p 可以指定临时文件所在的目录。默认是使用$TMPDIR环境变量指定的目录，如果这个变量没设置，那么使用/tmp目录
+    + -t 可以指定临时文件的文件名模板，模板末尾必须至少包含三个连续的X字符，表示随机字符，建议至少使用六个X。默认的文件名模板是tmp.后接十个随机字符
   - 后面最好使用 OR 运算符（||），指定创建失败时退出脚本
-  - 保证脚本退出时临时文件被删除，可以使用trap命令指定退出时的清除操作
-    + trap [动作] [信号]
-    + 本正常执行结束，还是用户按 Ctrl + C 终止，都会产生EXIT信号
-    + trap命令必须放在脚本的开头。否则，它上方的任何命令导致脚本退出，都不会被它捕获
-    + trap需要触发多条命令，可以封装一个 Bash 函数
+  - 保证脚本退出时临时文件被删除，使用trap命令指定退出时的清除操作
+* `trap [动作] [信号1] [信号2] ...` 在 Bash 脚本中响应系统信号
+  - `trap -l` 可以列出所有系统信号
+    + HUP：编号1，脚本与所在的终端脱离联系。
+    + INT：编号2，用户按下 Ctrl + C，意图让脚本终止运行。
+    + QUIT：编号3，用户按下 Ctrl + 斜杠，意图退出脚本。
+    + KILL：编号9，该信号用于杀死进程。
+    + TERM：编号15，这是kill命令发出的默认信号。
+    + EXIT：编号0，这不是系统信号，而是 Bash 脚本特有的信号，不管什么情况，只要退出脚本就会产生
+  - trap命令必须放在脚本的开头。否则，它上方的任何命令导致脚本退出，都不会被它捕获
+  - trap 需要触发多条命令，可以封装一个 Bash 函数
 
 ```sh
 file my_file
@@ -395,6 +1046,8 @@ grep [options] pattern [file]
 grep -v t file1 # 反向搜索(输出不匹配该模式的行)
 # -c参数:有多少行含有匹配的模式
 
+TMPFILE=$(mktemp) || exit 1
+
 mktemp -t mytemp.XXXXXXX
 trap 'rm -f "$TMPFILE"' EXIT # 遇到EXIT信号时，就会执行rm -f "$TMPFILE"
 
@@ -405,6 +1058,234 @@ ls /etc > $TMPFILE
 if grep -qi "kernel" $TMPFILE; then
   echo 'find'
 fi
+
+# 从栈顶算起的3号目录（从0开始），移动到栈顶
+pushd +3
+# 从栈底算起的3号目录（从0开始），移动到栈顶
+pushd -3
+# 删除从栈顶算起的3号目录（从0开始）
+popd +3
+# 删除从栈底算起的3号目录（从0开始）
+popd -3
+```
+
+## 控制语句
+
+* 条件语句 Conditional statements: 决定一个操作是否被执行。结果取决于一个包在[[ ]]里的表达式。
+  - if
+    + 如果中括号里的表达式为真，那么then和fi之间的代码会被执行。fi标志着条件代码块的结束
+    + if关键字后面也可以是一条命令，该条命令执行成功（返回值0），就意味着判断条件成立
+    + if后面可以跟任意数量的命令。这时，所有命令都会执行，但是判断真伪只看最后一个命令，即使前面所有命令都失败，只要最后一个命令返回0，就会执行
+  - case:面对很多情况，分别要采取不同的措施
+    + |用来分割多个模式，)用来结束一个模式序列
+      * a)：匹配a。
+      * a|b)：匹配a或b。
+      * [[:alpha:]])：匹配单个字母。
+      * ???)：匹配3个字符的单词。
+      * *.txt)：匹配.txt结尾。
+      * *)：匹配任意输入，通过作为case结构的最后一个模式。
+    + 第一个匹配上的模式对应的命令将会被执行
+    + 命令块儿之间要用;;分隔
+    + Bash 4.0之前，case结构只能匹配一个条件，然后就会退出case结构。Bash 4.0之后，允许匹配多个条件，这时可以用;;&终止每个条件块。
+  - 基元和组合表达式|检测命令|条件表达式:帮助检测一个条件的结果
+    + `test expression`
+    + `[ expression ]`
+    + `[[ expression ]]`
+    + 可以包含&&和||运算符，分别对应 与 和 或
+    + 跟文件系统相关
+      * -b 是否块设备
+      * -c 是否字符设备
+      * -g 是否设置SGID
+      * -k 是否设置粘着位
+      * -p 是否具名管道
+      * -u 是否设置SUID
+      * [ -e FILE ] 如果文件、目录存在 (exists)，为真
+      * [ -f FILE ] 如果FILE存在且为一个普通文件（file），为真
+      * [ -d FILE ] 如果FILE存在且为一个目录（directory），为真
+      * [ -s FILE ] 如果FILE存在且非空（size 大于0），为真
+      * [ -r FILE ] 如果FILE存在且有读权限（readable），为真
+      * [ -w FILE ] 如果FILE存在且有写权限（writable），为真
+      * [ -x FILE ] 如果FILE存在且有可执行权限（executable），为真
+      * [ -L FILE ] 如果FILE存在且为一个符号链接（link），为真
+      * [ FILE1 -nt FILE2 ] FILE1比FILE2新（newer than）
+      * [ FILE1 -ot FILE2 ] FILE1比FILE2旧（older than）
+    + 跟字符串相关
+      * `str` 是否为空
+      * `<`   字符串比较(双中括号里不需要转移)
+      * `=~`  用正则表达式进行字符串比较
+      * [ -z STR ]  STR为空（长度为0，zero）
+      * [ -n STR ]  STR非空（长度非0，non-zero）
+      * [ STR1 == STR2 ]  STR1和STR2相等
+      * [ STR1 != STR2 ]  STR1和STR2不等
+    + 算数二元运算符
+      * [ ARG1 -eq ARG2 ] ARG1和ARG2相等（equal）
+      * [ ARG1 -ne ARG2 ] ARG1和ARG2不等（not equal）
+      * [ ARG1 -lt ARG2 ] ARG1小于ARG2（less than）
+      * [ ARG1 -le ARG2 ] ARG1小于等于ARG2（less than or equal）
+      * [ ARG1 -gt ARG2 ] ARG1大于ARG2（greater than）
+      * [ ARG1 -ge ARG2 ] ARG1大于等于ARG2（greater than or equal）
+    + 组合表达式
+      * [ ! EXPR ]  如果EXPR为假，为真
+      * [ (EXPR) ]  返回EXPR的值
+      * [ EXPR1 -a EXPR2 ]  逻辑 与， 如果EXPR1和（and）EXPR2都为真，为真
+      * [ EXPR1 -o EXPR2 ]  逻辑 或， 如果EXPR1或（or）EXPR2为真，为真
+* 循环:只要控制条件为真就一直迭代执行的代码块
+  - for variable in list; do
+    + 每次循环的过程中，arg依次被赋值为从elem1到elemN
+    + 值可以是通配符或者大括号扩展
+    + for (( expression1; expression2; expression3 )); do
+  - while
+    + 循环检测一个条件，只要这个条件为 真，就执行一段命令
+  - until
+    + 跟while一样也需要检测一个测试条件，但不同的是，只要该条件为 假 就一直执行循环
+  - select
+    + select生成一个菜单，内容是列表list的每一项，并且每一项前面还有一个数字编号。
+    + Bash 提示用户选择一项，输入它的编号。
+    + 用户输入以后，Bash 会将该项的内容存在变量name，该项的编号存入环境变量REPLY。如果用户没有输入，就按回车键，Bash 会重新输出菜单，让用户选择。
+    + 执行命令体commands。
+    + 执行结束后，回到第一步，重复这个过程
+  - 提前结束一个循环或跳过某次循环执行的情况
+    + break语句用来提前结束当前循环
+    + continue语句用来跳过某次迭代
+
+```sh
+if [[ 1 -eq 1 ]]; then echo "true"; fi
+
+# 写成多行
+if [[ 1 -eq 1 ]]; then
+  echo "true"
+fi
+
+# 写成一行
+if [[ 2 -ne 1 ]]; then echo "true"; else echo "false"; fi
+
+# 写成多行
+if [[ 2 -ne 1 ]]; then
+  echo "true"
+else
+  echo "false"
+fi
+
+if [[ `uname` == "Adam" ]]; then
+  echo "Do not eat an apple!"
+elif [[ `uname` == "Eva" ]]; then
+  echo "Do not take an apple!"
+else
+  echo "Apples are delicious!"
+fi
+
+#!/bin/bash
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+  if [[ $INT -ge $MIN_VAL && $INT -le $MAX_VAL ]]; then
+    echo "$INT is within $MIN_VAL to $MAX_VAL."
+  else
+    echo "$INT is out of range."
+  fi
+else
+  echo "INT is not an integer." >&2
+  exit 1
+fi
+
+case "$extension" in
+  "jpg"|"jpeg")
+    echo "It's image with jpeg extension."
+  ;;
+  "png")
+    echo "It's image with png extension."
+  ;;
+  "gif")
+    echo "Oh, it's a giphy!"
+  ;;
+  *)
+    echo "Woops! It's not image!"
+  ;;
+esac
+
+for i in {1..5}; do echo $i; done
+
+#!/bin/bash
+
+for FILE in $HOME/*.bash; do
+  mv "$FILE" "${HOME}/scripts"
+  chmod +x "${HOME}/scripts/${FILE}"
+done
+
+for (( i = 0; i < 10; i++ )); do
+  if [[ $(( i % 2 )) -eq 0 ]]; then continue; fi
+  echo $i
+done
+
+#!/bin/bash
+
+# 0到9之间每个数的平方
+x=0
+while [[ $x -lt 10 ]]; do
+  echo $(( x * x ))
+  x=$(( x + 1 )) # x加1
+done
+
+until cp $1 $2; do
+  echo 'Attempt to copy failed. waiting...'
+  sleep 5
+done
+
+#!/bin/bash
+
+PS3="Choose the package manager: "
+select ITEM in bower npm gem pip
+do
+  echo -n "Enter the package name: " && read PACKAGE
+  case $ITEM in
+    bower) bower install $PACKAGE ;;
+    npm)   npm   install $PACKAGE ;;
+    gem)   gem   install $PACKAGE ;;
+    pip)   pip   install $PACKAGE ;;
+  esac
+  break # 避免无限循环
+done
+```
+
+## 函数 function
+
+* 函数是一个命令序列，可以重复使用的代码片段,组织在函数名下面
+* 函数总是在当前 Shell 执行，这是跟脚本的一个重大区别，Bash 会新建一个子 Shell 执行脚本.如果函数与脚本同名，函数会优先执行.函数的优先级不如别名，即如果函数与别名同名，那么别名优先执行
+* 必须在调用前声明函数
+* 可以接收参数并返回结果 —— 返回值
+* 参数:在函数内部，跟非交互式下的脚本参数处理方式相同 —— 使用位置参数
+* 函数体内直接声明的变量，属于全局变量，整个脚本都可以读取
+* 可以修改全局变量
+* 用local命令声明局部变量
+* 返回值使用return命令返回
+* unset 删除一个函数
+
+```sh
+fn() {
+  # codes
+}
+
+# 第二种
+function fn() {
+  # codes
+}
+
+# 带参数函数
+greeting () {
+  if [[ -n $1 ]]; then
+    echo "Hello, $1!"
+  else
+    echo "Hello, unknown!"
+  fi
+  return 0
+}
+
+greeting Denys  # Hello, Denys!
+greeting        # Hello, unknown!
 ```
 
 ## 进程管理
@@ -439,6 +1320,9 @@ fi
   - 第一条信息是显示在方括号中的后台作业(background job)号(1)
   - 第二条是后台作业的进程ID(2396)
 * `jobs -l`:将进程列表置入后台模式。既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+* 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
+* 要想知道是否生成了子shell，借助一个使用了环境变量的命令。`echo $BASH_SUBSHELL` 如果该命令返回0，就表明没有子shell。如果返回 1 或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
+* 生成子shell成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
 * 协程
   - 在后台生成一个子shell，并在这个子shell中执行命令 `coproc My_Job { sleep 10; }`
   - 扩展语法:必须确保在第一个花括号({)和命令名之间有一个空格。还必须保证命令以分号(;)结尾。另外，分号和闭花括号(})之间也得有一个空格
@@ -452,6 +1336,14 @@ ps -eo pid,user,args # 查看现在有谁登入了服务器
 ps -U root -u root u # 最后的u参数用来决定以针对用户的格式输出，由User, PID, %CPU, %MEM, VSZ, RSS, TTY, STAT, START, TIME 和 COMMAND这几列组成
 watch -n 1 ‘ps -aux --sort -pmem, -pcpu | head 20’ # 实时监控进程状态: 通过CPU和内存的使用率来筛选进程，并且结果能够每秒刷新一次
 ```
+
+## 返回值 Exit codes
+
+* 每个命令都有一个返回值（返回状态或者退出状态）。命令执行成功的返回值总是0（零值），执行失败的命令，返回一个非0值（错误码）。错误码必须是一个1到255之间的整数
+* exit 命令:终止当前执行，并把返回值交给shell。当exit不带任何参数时，会终止当前脚本的执行并返回在它之前最后一个执行的命令的返回值
+* 一个程序运行结束后，shell将其返回值赋值给$?环境变量。因此$?变量通常被用来检测一个脚本执行成功与否
+* 使用return命令来结束一个函数的执行并将返回值返回给调用者
+* 在函数内部用exit，不但会中止函数的继续执行，而且会终止整个程序的执行
 
 ## 网络
 
@@ -556,6 +1448,62 @@ cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | s
 # 输出nginx日志的ip和每个ip的pv，pv最高的前10
 #2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
 awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
+```
+
+## Debugging
+
+* set命令用来修改子 Shell 环境的运行参数
+  - set 显示所有的环境变量和 Shell 函数
+* 想以debug模式运行某脚本，可以在其shebang中使用一个特殊的选项 `#!/bin/bash options`
+  - `set -e` 脚本里面有运行失败的命令（返回值非0），Bash 默认会继续执行后面的命令. -e 脚本只要发生错误，就终止执行
+    + 不适用于管道命令 `set -o pipefail` 用来解决这种情况，只要一个子命令失败，整个管道命令就失败，脚本就会终止执行
+    + 导致函数内的错误不会被trap命令捕获,-E参数可以纠正这个行为，使得函数也能继承trap命令
+  - `set -u｜-o nounset` Bash 默认遇到不存在的变量忽略它，-u 就用来改变这种行为。脚本在头部加上它，遇到不存在的变量就会报错，并停止执行
+  - `set -f|-o noglob`  禁止文件名展开（globbing）
+  - `set -i｜-o interactive` 让脚本以 交互 模式运行
+  - `set -n|-o noexec` 读取命令，但不执行（语法检查）
+  - -t  — 执行完第一条命令后退出
+  - `set -v|-o verbose` 在执行每条命令前，向stderr输出该命令
+  - `set -x｜-o xtrace` 在执行每条命令前，向stderr输出该命令以及该命令的扩展参数
+    + 输出的命令之前的+号，是由系统变量PS4决定，可以修改这个变量 `export PS4='$LINENO + '`
+* debug脚本的一部分:使用set命令会很方便。这个命令可以启用或禁用选项。使用-启用选项，+禁用选项
+* shopt命令用来调整 Shell 的参数, 跟set命令的作用很类似。set是从 Ksh 继承的，属于 POSIX 规范的一部分，而shopt是 Bash 特有的
+  - shopt 查看所有参数，以及各自打开和关闭状态
+    + shopt [optionname] 查询某个参数关闭还是打开
+    + shopt -s [optionname] 用来打开某个参数
+    + shopt -u [optionname] 用来关闭某个参数
+  - dotglob 让扩展结果包括隐藏文件（即点开头的文件）
+  - nullglob 让通配符不匹配任何文件名时，返回空字符
+  - failglob 通配符不匹配任何文件名时，Bash 会直接报错，而不是让各个命令去处理
+  - extglob 使 Bash 支持 ksh 的一些扩展语法。默认应该是打开的,主要应用是支持量词语法
+  - nocaseglob 通配符扩展不区分大小写
+  - globstar 使得**匹配零个或多个子目录。该参数默认是关闭的
+  - -q 也是查询某个参数是否打开，但不是直接输出查询结果，而是通过命令的执行状态（$?）表示查询结果。如果状态为0，表示该参数打开；如果为1，表示该参数关闭
+
+```sh
+#!/bin/bash -x
+
+for (( i = 0; i < 3; i++ )); do
+  echo $i
+done
+
+#!/bin/bash
+
+echo "xtrace is turned off"
+set -x
+echo "xtrace is enabled"
+set +x
+echo "xtrace is turned off again"
+
+command
+if [ "$?" -ne 0 ]; then echo "command failed"; exit 1; fi
+
+# 写法一
+set -Eeuxo pipefail
+
+# 写法二
+set -Eeux
+set -o pipefail
 ```
 
 ## xargs
@@ -665,9 +1613,22 @@ python3 duu.py /home/sk/Downloads/
 ls -l my_script # 过滤输出列表
 ```
 
+## 快捷键
+
+* Ctrl + L：清除屏幕并将当前行移到页面顶部
+* Ctrl + C：中止当前正在执行的命令
+* Shift + PageUp：向上滚动
+* Shift + PageDown：向下滚动
+* Ctrl + U：从光标位置删除到行首
+* Ctrl + K：从光标位置删除到行尾
+* Ctrl + D：关闭 Shell 会话
+* ↑，↓：浏览已执行命令的历史记录
+
 ## [bash](http://ftp.gnu.org/gnu/bash/)
 
-* <https://www.gnu.org/software/bash/manual>
+* 一个Unix Shell，作为Bourne shell的free software替代品，由Brian Fox为GNU项目编写。发布于1989年，在很长一段时间，Linux系统和macOS系统都把Bash作为默认的shell
+* 学习bash原因:当今最强大、可移植性最好的，为所有基于Unix的系统编写高效率脚本的工具之一
+* [Bourne-Again Shell manual](https://www.gnu.org/software/bash/manual/)
 * [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 * [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)
 * [Bash scripting cheat sheet](https://devhints.io/bash)
@@ -678,6 +1639,7 @@ ls -l my_script # 过滤输出列表
 * [bash-oo-framework](https://github.com/niieani/bash-oo-framework):Bash Infinity is a modern boilerplate / framework / standard library for bash
 * [bash-it](https://github.com/Bash-it/bash-it):A community Bash framework.
 * [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):📖 A collection of pure bash alternatives to external processes.
+* [learnyoubash](https://github.com/denysdovhan/learnyoubash)
 
 ### [zsh](https://github.com/zsh-users/zsh)
 
@@ -953,15 +1915,6 @@ sudo apt-get install xmobar dmenu
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
 ```
 
-### 脚本
-
-* shell 是可以与计算机进行高效交互的文本接口,提供了一套交互式的编程语言
-* shell 的生命力很强，在各种高级编程语言大行其道的今天，很多的任务依然离不开 shell。比如可以使用 shell 来执行一些编译任务，或者做一些批处理任务，初始化数据、打包程序等等。
-
-```sh
-# vim:set ts=4 sw=4 ft=sh et:
-```
-
 ### 跳板机
 
 ```sh
@@ -1128,11 +2081,11 @@ brew install bat
 * [Linux_command_line](https://github.com/learnbyexample/Linux_command_line):💻 Introduction to Linux commands and Shell scripting
 * [scripting_course](https://github.com/learnbyexample/scripting_course):📓 A reference guide to Linux command line, Vim and Scripting <https://learnbyexample.github.io/scripting_course/>
 * [Introduction to text manipulation on UNIX-based systems](https://www.ibm.com/developerworks/aix/library/au-unixtext/index.html)
-* [Linux 教程](https://www.runoob.com/linux/linux-tutorial.html)
 * [linuxcommand](http://linuxcommand.org)
 * [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/index.html)
 * [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
+* [Bash 脚本教程](https://wangdoc.com/bash) <https://github.com/wangdoc/bash-tutorial>
 
 ```sh
 axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
@@ -1241,6 +2194,7 @@ ccache gcc foo.c
 ## 参考
 
 * [awesome-shell](https://github.com/alebcay/awesome-shell)：A curated list of awesome command-line frameworks, toolkits, guides and gizmos. Inspired by awesome-php.
+* [awesome-bash](https://github.com/awesome-lists/awesome-bash)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
 * https://www.shellscript.sh/
@@ -1257,5 +2211,4 @@ ccache gcc foo.c
   - <https://github.com/epety/100-shell-script-examples>
   - <https://github.com/ruanyf/simple-bash-scripts>
   - 和shell有关的索引资源
-    + <https://github.com/awesome-lists/awesome-bash>
     + <https://terminalsare.sexy/>
