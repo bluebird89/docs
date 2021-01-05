@@ -237,6 +237,7 @@
 * [PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
 * [HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
+  - [This is CS50x](https://cs50.harvard.edu/x/2021/notes/0/)
 * [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)<https://www.bilibili.com/video/av21376839/>
 * [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)

@@ -370,6 +370,10 @@
 # The current inotify(7) watch limit is too low
 #  /etc/sysctl.conf
 fs.inotify.max_user_watches = 524288
+
+## ubuntu ide 自动退出
+-Dawt.ime.disabled=true
+ <!-- update the Sogou pinyin to v2.4.0 and they don't experience this problem -->
 ```
 
 ## 工具

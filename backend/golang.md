@@ -453,7 +453,10 @@ export GO111MODULE=on
 
 ## error
 
-* 多值返回可以更容易的返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，它有一个内建的接口
+* 多值返回
+  - 在返回接口把业务语义（业务返回值）和控制语义（出错返回值）区分开来
+  - 错误参数如果要忽略，需要显式地忽略，用 _ 这样的变量来忽略；
+  - 可以更容易返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，是一个内建的接口，可以扩展自定义的错误处理。
 * 对于不可恢复的错误，Go提供了一个内建的panic函数，它将创建一个运行时错误并使程序停止
   - 接收一个任意类型（往往是字符串）作为程序死亡时要打印的东西。当编译器在函数的结尾处检查到一个panic时，就会停止进行常规的return语句检查
   - 当panic被调用时，它将立即停止当前函数的执行并开始逐级解开函数堆栈，同时运行所有被defer的函数。如果这种解开达到堆栈的顶端，程序就死亡了
@@ -519,6 +522,27 @@ export GO111MODULE=on
 ## [io](link)
 
 ## [image](https://golang.org/pkg/image/#Image)
+
+## http
+
+* http.Handler 是net/http中定义的接口用来表示 HTTP 请求
+* Handler接口中声明了名为ServeHTTP的函数签名，也就是说任何结构只要实现了这个ServeHTTP方法，那么这个结构体就是一个Handler对象
+* http服务都是基于Handler进行处理，而Handler对象的ServeHTTP方法会读取Request进行逻辑处理然后向ResponseWriter中写入响应的头部信息和响应内容
+* 用到ServerMux结构的Handle方法去注册路由处理函数
+
+```go
+type ServeMux struct {
+    mu    sync.RWMutex
+    m     map[string]muxEntry
+    es    []muxEntry // slice of entries sorted from longest to shortest.
+    hosts bool       // whether any patterns contain hostnames
+}
+
+type muxEntry struct {
+    h       Handler
+    pattern string
+}
+```
 
 ## 依赖
 
@@ -603,11 +627,11 @@ func main() {
 
 ## 测试
 
-* 必须import testing包
-* 文件名必须以xx_test.go命名
+* 必须 import testing 包
+* 需要在一个名为 xxx_test.go 的文件中编写
 * 单元
-  - 方法必须是Test[^a-z]开头
-  - 方法参数必须 t *testing.T
+  - 测试函数的命名必须以Test[^a-z]开头
+  - 测试函数只接受一个参数 t *testing.T
   - 函数中通过调用testing.T的Error, Errorf, FailNow, Fatal, FatalIf方法，说明测试不通过，调用Log方法用来记录测试的信息
   - 参数
     + -c : 编译go test成为可执行的二进制文件，但是不运行测试
@@ -1088,8 +1112,6 @@ Gin is a HTTP web framework written in Go (Golang). It features a Martini-like A
 
 High performance, minimalist Go web framework <https://echo.labstack.com>
 
-## install
-
 ```sh
 go get -u github.com/labstack/echo/
 ```
@@ -1137,12 +1159,6 @@ micro bot --inputs=slack --slack_token=SLACK_TOKEN
 
 * `etcd@v3.XXXX+incompatible\clientv3\balancer\resolver\endpoint\endpoint.go:114:78: undefined: resolver.BuildOption`：`go mod edit -require=google.golang.org/grpc@v1.26.0`　`go get -u -x google.golang.org/grpc@v1.26.0` `replace google.golang.org/grpc => google.golang.org/grpc v1.26.0` `go mod edit -replace google.golang.org/grpc@v1.29.1=google.golang.org/grpc@v1.26.0`
 * `Account not issued by ''`:
-
-## 工具
-
-* [micro](https://github.com/micro/micro):Micro is a cloud native development platform
-
-## 问题
 
 ```
 package golang.org/x/crypto/acme/autocert: unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 216.239.37.1:443: i/o timeout)
@@ -1490,6 +1506,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 编辑器
   - [liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
   - [go2go Playground](https://go2goplay.golang.org/):The go2go Playground
+  - VS Code 中调试 Go 代码建议使用 Delve `go get -u github.com/go-delve/delve/cmd/dlv`
 * [gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D <https://go-city.github.io>
 * [gopsutil](https://github.com/shirou/gopsutil):psutil for golang
 * [ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
@@ -1498,12 +1515,14 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [asyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
 * [awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
 * [buffalo](https://github.com/gobuffalo/buffalo):Rapid Web Development w/ Go <http://gobuffalo.io>
+* [micro](https://github.com/micro/micro):Micro is a cloud native development platform
 
 ## 参考
 
 * [Wiki](https://github.com/golang/go/wiki)
 * [pkg.go.dev](https://pkg.go.dev/) `git clone https://go.googlesource.com/pkgsite`
 * [go.dev](https://go.dev/) Build fast, reliable, and efficient software at scale
+* <https://learn.go.dev/>
 * [Go-zh/go](https://github.com/Go-zh/go):Go 语言文档中文翻译 <https://go-zh.org>
 * [The Go Programming Language Specification](https://golang.google.cn/ref/spec)
 * [golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
@@ -1513,20 +1532,17 @@ Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（�
 * [gopherchina](https://github.com/gopherchina/conference)
 * [awesome-go](https://github.com/avelino/awesome-go)A curated list of awesome Go frameworks, libraries and software <https://awesome-go.com/>
   - [awesome-go-cn](https://github.com/jobbole/awesome-go-cn):Go 资源大全中文版
-  - [wesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 <https://awesome-go.cn>(建设中)
+  - [awesome-go-cn](https://github.com/yinggaozhen/awesome-go-cn):一个很棒的Go框架、库和软件的中文收录大全。⏰脚本定期与英文文档同步，包含了各工程star数/最近更新时间，助您快速发现优质项目。 <https://awesome-go.cn>(建设中)
 * [golang-open-source-projects](https://github.com/hackstoic/golang-open-source-projects):为互联网IT人打造的中文版awesome-go
 * [knowledge](https://github.com/gocn/knowledge):Go社区的知识图谱，Knowledge Graph
 * [guide](https://github.com/uber-go/guide):The Uber Go Style Guide.
 * [go-under-the-hood](https://github.com/changkun/go-under-the-hood):Go 源码研究 (1.11.1, WIP)
-* [emirpasic/gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
+* [gods](https://github.com/emirpasic/gods):GoDS (Go Data Structures). Containers (Sets, Lists, Stacks, Maps, Trees), Sets (HashSet, TreeSet, LinkedHashSet), Lists (ArrayList, SinglyLinkedList, DoublyLinkedList), Stacks (LinkedListStack, ArrayStack), Maps (HashMap, TreeMap, HashBidiMap, TreeBidiMap, LinkedHashMap), Trees (RedBlackTree, AVLTree, BTree, BinaryHeap), Comparators, Iterators, …
 * [EDDYCJY/blog](https://github.com/EDDYCJY/blog):煎鱼的博客
 * 离线文档
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [effective_go](https://go-zh.org/doc/effective_go.html)
 
-* <https://learn.go.dev/>
-<https://juejin.im/post/59c384fa5188257e9349707e>
 <http://www.infoq.com/cn/articles/history-go-package-management>
 * [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)
-[](https://mp.weixin.qq.com/s?__biz=MzUzNTY5MzU2MA==&mid=2247484112&idx=1&sn=79d0d3167d0d962fe41ec00cdafffbb0)

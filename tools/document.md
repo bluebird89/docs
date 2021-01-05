@@ -40,13 +40,16 @@
 * [Roam Research](https://roamresearch.com/)
 * [Simple note](https://standardnotes.org)
 * [Grace Note](https://grace-note.app/#/)
-* [Obsidian](https://obsidian.md/):A second brain, for you, forever.
 * [Craft](https://www.craft.do/)
 * evernote
   - [dunk]()
   - [Tusk](https://github.com/klaussinani/tusk):Refined Evernote desktop app https://klaussinani.github.io/tusk
 * [vnote](https://github.com/tamlok/vnote)A note-taking application that knows programmers and Markdown better.
 * [Org Mode](https://orgmode.org/)
+
+## [Obsidian](https://obsidian.md/)
+
+A second brain, for you, forever.
 
 ## VS code + foam
 
