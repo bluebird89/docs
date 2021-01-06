@@ -1373,7 +1373,11 @@ cd $GOPATH/src/k8s.io/code-generator
 
 ## Operator
 
-* 利用了 Kubernetes 的自定义 API 资源（CRD），来描述我们想要部署的“有状态应用”；然后在自定义控制器里，根据自定义 API 对象的变化，来完成具体的部署和运维工作
+* 利用Kubernetes Operator模式扩展Kubernetes API，将各个中间件服务抽象成Kubernetes中的资源进行管理
+* 自定义资源（Custom Resource） 是对 Kubernetes API 的扩展，通过CRD（Custom Resource Definitions）动态注册自定义资源类型，并可以与Kubernetes内置资源对象（如 Pod、Deployment等）相同的方式来管理它们。CRD可以充分利用Kubernetes已有的能力，核心能力包括：Schema定义校验、多版本、status/scale子资源等。
+* CRD仅仅提供了自定义资源结构化数据的存储能力。为了使自定义资源成为声明式API（声明资源的期望状态，并尝试让Kubernetes对象的当前状态同步到其期望状态），资源达到期望状态的逻辑就需要CRD Controller来实现。
+* Kubernetes Operator模式是将CRD与CRD Controller相结合，实现自定义资源以及资源自动化运维。
+* 利用了 Kubernetes 的自定义 API 资源（CRD），来描想要部署的“有状态应用”；然后在自定义控制器里，根据自定义 API 对象的变化，来完成具体的部署和运维工作
 * Etcd Operator 部署 Etcd 集群，采用的是静态集群（Static）的方式
   - 静态集群的好处是，不必依赖于一个额外的服务发现机制来组建集群，非常适合本地容器化部署
   - 难点，则在于必须在部署的时候，就规划好这个集群的拓扑结构，并且能够知道这些节点固定的 IP 地址

@@ -1358,6 +1358,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 <https://geektutu.com/post/gee.html>
 * [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. <https://go101.org>
 * [learn-go-with-tests](https://github.com/quii/learn-go-with-tests):Learn Go with test-driven development
+* [Go by Example](https://gobyexample.com/)
 
 ## 扩展
 

@@ -299,6 +299,11 @@ numactl --membind 1 --cpunodebind 1 --localalloc myapplication
 * 数据量能否模拟实际场景？真实场景往往是多个业务表都已经存在大数据量的积累而非空表。
 * 并发能否模拟真实场景？一个是需要录制复合业务场景，一个是需要多台压测机。
 
+## 图书
+
+* [Systems Performance: Enterprise and the Cloud, Second Edition 性能之巅：洞悉系统、企业与云计算](http://www.brendangregg.com/systems-performance-2nd-edition-book.html)
+  - [Brendan Gregg 博客](http://www.brendangregg.com/)
+
 ## 工具
 
 * [pagespeed](https://developers.google.com/speed/pagespeed/) Analyze and optimize your website with PageSpeed tools

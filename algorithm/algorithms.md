@@ -374,6 +374,7 @@ def backtrack(路径, 选择列表):
 * [Erickson 算法](http://jeffe.cs.illinois.edu/teaching/algorithms/)
   - [algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
   - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
+* [屈婉玲教授的算法设计分析](https://www.bilibili.com/video/av83623454?p=1)
 
 ## 图书
 
