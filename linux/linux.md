@@ -1,8 +1,8 @@
 # [linux](https://github.com/torvalds/linux)
 
-* 一个可以实现多用户登陆的操作系统
-  - 多用户可以同时登陆同一台主机，共享主机的一些资源
-  - 不同用户也分别有自己用户空间，可用于存放各自的文件
+* Multi-User Operating Systems
+  - 多用户可以同时登陆同一台主机，共享主机资源
+  - 不同用户分别有自己用户空间，用于存放各自文件
   - 不同用户文件是放在同一个物理磁盘上的甚至同一个逻辑分区或者目录里，但是由于 Linux 的用户管理和 文件权限机制，不同用户不可以轻易地查看、修改彼此的文件
 * 由芬兰大学生linus在1991年开发，基于Intel80386微处理器，开发完后就在因特网发布了源码。借鉴了unix的很多设计思想，但实现完全不同。开源协议非常自由，可以自由修改，但需要将改过源码继续发布出来
 * Linux 操作系统实际上是90年代初期的两个成果组合
@@ -49,7 +49,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * In the past 10 years or so, cloud computing has gone from a grandiose vision of computing on the internet to a reinvention of how we use computers personally and professionally. The big players in the cloud space are built on Linux, including Amazon Web Services, Google Cloud Services, and Linode. Even in cases where we aren't certain, such as Microsoft Azure, running Linux workloads is well supported.
 * Many automakers began introducing Linux a few years ago. This led to the formation of the collaborative open source project called Automotive Grade Linux. Major car makers, such as Toyota and Subaru, have joined together to develop Linux-based automotive entertainment, navigation, and engine-management systems.
 
-### 发行版
+## Linux distributions 发行版
 
 * GNU
   - Linux
@@ -57,20 +57,20 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - Mac
 * 入门：类似Windows的体验；安装简单；可靠；“类似Linux”，且不自成一派；“恰好管用”；
   - [Linux Mint](https://linuxmint.com/)
-    + [Duter2016 / Guide-for-linuxmint](https://github.com/Duter2016/Guide-for-linuxmint)
-  - Debian 10
+    + [Guide-for-linuxmint](https://github.com/Duter2016/Guide-for-linuxmint)
+  - Debian
 * 进阶：完全掌控你的电脑和操作系统；了解Linux内部；精简的优化系统
   - Slackware Linux
   - [Arch Linux](https://www.archlinux.org/)
   - [Gentoo Linux](https://www.gentoo.org/)
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
-  - Fedora 31 Workstation
+  - Fedora
   - [Kali](https://www.kali.org/)
     + [offensive-security/kali-linux-docker](https://github.com/offensive-security/kali-linux-docker):Kali Linux Docker
     + [kalitools](https://github.com/Jack-Liang/kalitools):Kali Linux工具清单
 * 正常：运行平稳，维护量低；最小配置；大部分事情可以自动完成；兼容硬件和软件
   - [openSUSE](https://www.opensuse.org/)
-  - Ubuntu 20.04 LTS
+  - Ubuntu
   - [UbuntuDDE](https://ubuntudde.com/): Powerful Ubuntu with the most beautiful desktop environment.
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
   - [CentOS](https://www.centos.org/)
@@ -115,12 +115,20 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
     + 可以装新linux时起个不重复的用户名，也在home下，完全不影响老的文档和使用环境配置
   - 安装第二个Linux发行版的时候，需要注意的是，EFI分区和交换分区swap已经有可用的了，安装程序可以自动检测得到，因此不需要再关系这2个分区，只需要在磁盘剩余的空闲分区中创建这个系统本身需要的根分区/和/home分区
 
-![Alt text](https://distrowatch.com/images/other/distro-family-tree.png  "Optional title")
-![Alt text](../_static/distro-family-tree.png "Optional title")
+![distro-family-tree](../_static/distro-family-tree.png "Optional title")
 
 ```sh
 sudo update-grub
 ```
+
+## Architecture
+
+* The Linux kernel is monolithic in nature.
+* System calls are used to interact with the Linux kernel space.
+* Kernel code can only be executed in the kernel mode. Non-kernel code is executed in the user mode.
+* Device drivers are used to communicate with the hardware devices.
+
+![Linux Architecture](../_static/linux_architecture.png "Linux Architecture")
 
 ## 桌面环境
 
@@ -131,11 +139,27 @@ sudo update-grub
   - [Xfce](https://www.xfce.org/)
   - GNOME
   - LXDE
+* Graphical user interface (GUI) vs Command line interface (CLI)
+  - Graphical user interface allows a user to interact with the computer using graphics such as icons and images. When a user clicks on an icon to open an application on a computer, he or she is actually using the GUI. It's easy to perform tasks using GUI.
+  - Command line interface allows a user to interact with the computer using commands. A user types the command in a terminal and the system helps in executing these commands. A new user with experience on GUI may find it difficult to interact with CLI as he/she needs to be aware of the commands to perform a particular operation.
+
+## Shell vs Terminal
+
+* Shell is a program that takes commands from the users and gives them to the operating system for processing. Shell is an example of a CLI(command line interface). Bash is one of the most popular shell programs available on Linux servers. Other popular shell programs are zsh, ksh and tcsh.
+* Terminal is a program that opens a window and lets you interact with the shell. Some popular examples of terminals are gnome-terminal, xterm, konsole etc.
+
+## Command Line
+
+* [REPL](https://repl.it/languages/bash) one of the popular online bash interpreters for running linux commands
+* A command is a program that tells the operating system to perform specific work. Programs are stored as files in linux. Therefore, a command is also a file which is stored somewhere on the disk.
+* Commands may also take additional arguments as input from the user. These arguments are called command line arguments.
+  - -h|--help
+  - man pages - short for manual pages
 
 ## 配置
 
 * 系统默认的字符编码是 UTF-8。Windows 是 GBK 编码，不支持UTF8. 所以 Linux下 的中文文件名到 Windwos下就成了乱码
-* [backup/backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
+* [backup](https://github.com/backup/backup):Easy full stack backup operations on UNIX-like systems. http://backup.github.io/backup/v4/
 
 ```sh
 ## ~/.bashrc:
@@ -206,9 +230,7 @@ halt｜reboot｜poweroff
 
 ## 环境变量
 
-每个进程都有其各自环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行
-
-
+* 每个进程都有其各自环境变量设置，且默认情况下，当一个进程被创建时，处理创建过程中明确指定的话，将继承其父进程的绝大部分环境设置。Shell 程序也作为一个进程运行在操作系统之上，而在 Shell 中运行的大部分命令都将以 Shell 的子进程的方式运行
 * 定义用于进行命令和程序查找的目录,如果命令或者程序位置没有包括在PATH变量中，那么如果不使用绝对路径的话，shell是没法找到的
 * 目录使用冒号分隔
 * PATH变量修改只能持续到退出或重启系统
@@ -247,7 +269,7 @@ set
 # 显示与当前用户相关的环境变量，还可以让命令在指定环境中运行
 env
 # 显示从 Shell 中导出成环境变量的变量
-export
+export PATH=PATH:/usr/bin/:/bin/:/sbin/
 # 删除变量temp
 unset temp
 
@@ -268,7 +290,10 @@ sudo update-alternatives --config editor
   - 可加载是在系统运行时添加到内核中的代码块。当一个模块被加载到内核时，会发生下面几件事情：第一，在加载的过程中，模块会被动态的重新部署。第二，系统会检查程序程序所需的资源是否可用。如果可用，则把这些资源标记为正在使用。第三步，设置所需的中断向量。第四，更新驱动转换表使其能够处理新的主设备类型。最后再来运行设备驱动程序。
   - 在完成上述工作后，驱动程序就会安装完成，其他现代 UNIX 系统也支持可加载机制。
 
-## 服务
+## 服务 Systemd
+
+* a system and service manager for Linux operating systems
+* Systemd units are the building blocks of systemd
 
 ```sh
 # /lib/systemd/system/goweb.service
@@ -291,6 +316,7 @@ systemd-analyze blame #  分析启动时各个进程花费的时间
 systemd-analyze critical-chain # 分析启动时的关键链
 systemctl list-unit-files --type=service | grep enabled # 展示开机启动时的进程项
 
+# Managing System Services
 sudo systemctl is-active|stop|enable|disable|status|restart|start|reload|kill|is-enabled bluetooth.service
 sudo systemctl mask|unmask bluetooth.service # 如何屏蔽（让它不能启动）或显示服务
 
@@ -534,7 +560,7 @@ uname -sr
   - i-nex 收集硬件信息，并且类似于 Windows 下流行的 CPU-Z 的显示。
   - HardInfo 显示硬件具体信息，甚至包括一组八个的流行的性能基准程序，你可以用它们评估你的系统性能。
   - KInfoCenter 和 Lshw 也能够显示硬件的详细信息，并且可以从许多软件仓库中获取。
-* df：列出文件系统的整体磁盘使用量
+* df (disk free)：列出文件系统的整体磁盘使用量
   - -a：列出所有的文件系统，包括系统特有的/proc等文件系统
   - -k：以KB的容量显示各文件系统
   - -m：以MB的容量显示各文件系统
@@ -542,14 +568,15 @@ uname -sr
   - -H：以M=1000K替代M=1024K的进位方式
   - -T：连同该分区的文件系统名称（例如ext3）也列出
   - -i：不用硬盘容量，而以inode的数量来显示
-* du：显示每个文件和目录的磁盘使用空间（评估目录所占容量）
-  - a : 列出所有的文件与目录容量，因为默认仅统计目录下面的文件量而已
-  - -b  显示目录中文件的大小，以字节byte为单位
+* du (disk usage)：显示每个文件和目录的磁盘使用空间（评估目录所占容量）,可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
+  - -a : 列出所有的文件与目录容量，因为默认仅统计目录下面的文件量而已
+  - -b : 显示目录中文件的大小，以字节byte为单位
   - -h : 以人们较易读的容量格式（G/M）显示；
   - -s : 列出总量，而不列出每个个别的目录占用了容量；
   - -S : 不包括子目录下的总计，与-s有点差别；
   - -k : 以KB列出容量显示
   - -m : 以MB列出容量显示
+  - `sudo du -h / | sort -n -r | head -n 5`
 * [duf](https://github.com/muesli/duf):Disk Usage/Free Utility
 * rm:删除文件之后，空间就被释放了吗
   - 只有当一个文件的引用计数为0（包括硬链接数）的时候，才可能调用unlink删除，只要它不是0，那么就不会被删除
@@ -794,7 +821,7 @@ sync # 将所有未写的系统缓冲区写到磁盘中
   - 使用虚拟动态共享对象（virtual dynamic shared object、vDSO）执行系统调用；
 * io wait
 
-## 内存
+## Memory Management 内存
 
 * 又称主存，是 CPU 能直接寻址的存储空间，由半导体器件制成
 * 作用
@@ -962,6 +989,7 @@ sync # 将所有未写的系统缓冲区写到磁盘中
     + 数据必须在用户空间和内核空间之间拷贝
       * Linux 通常利用写时复制（copy on write）来减少系统开销，这个技术又时常称作 COW.多个程序同时访问同一块数据,只有当程序需要对数据内容进行修改时，才会把数据内容拷贝到程序自己的应用空间里去
 * top展示的字段，RES才是真正的物理内存占用
+  - Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程
 * 系统可用内存，包括：free + buffers + cached，因为后两者可以自动释放。但不要迷信，有很大一部分，你是释放不了的
 * slab 算法
   - 基本概念
@@ -1072,9 +1100,9 @@ sync # 将所有未写的系统缓冲区写到磁盘中
 * 如何查看内存
   - 系统中内存使用情况：/proc/meminfo
   - 进程的内存使用情况：/proc/28040/status
-  - 查询内存总使用率：free
+  - `free -h` display the memory usage of the system 查询内存总使用率
   - 查询进程 cpu 和内存使用占比：top
-  - 虚拟内存统计：vmstat
+  - `vmstat` display the memory usage along with additional information about io and cpu usage 虚拟内存统计
   - 进程消耗内存占比和排序：ps aux –sort -rss
   - 释放系统内存缓存： /proc/sys/vm/drop_caches
   - To free pagecache, use echo 1 > /proc/sys/vm/drop_caches
@@ -1188,7 +1216,7 @@ dmesg -T
   - 内存保护:可以控制进程对物理内存的访问，隔离不同进程的访问权限，提高系统的安全性
     + 每一个进程都持有独立的虚拟内存空间，那么虚拟内存中页表可以理解成进程和物理页的『连接表』，其中可以存储进程和物理页之间的访问关系，包括读权限、写权限和执行权限
     + 内存管理单元可以决定当前进程是否有权限访问目标的物理内存，这样我们就最终将权限管理的功能全部收敛到虚拟内存系统中，减少了可能出现风险的代码路径
-* 主内存的空间是有限的，当主内存中不包含可以使用的空间时，操作系统会从选择合适的物理内存页驱逐回磁盘，为新的内存页让出位置，选择待驱逐页的过程在操作系统中叫做页面替换（Page Replacement）。
+* 主内存的空间是有限的，当主内存中不包含可以使用的空间时，操作系统会从选择合适的物理内存页驱逐回磁盘，为新的内存页让出位置，选择待驱逐页的过程在操作系统中叫做页面替换（Page Replacement）
 * 缺页中断和页面替换技术都是操作系统调页算法（Paging）的一部分，该算法的目的就是充分利用内存资源作为磁盘的缓存以提高程序的运行效率。
 
 ## 缓存 Cache
@@ -1502,7 +1530,7 @@ static void modify_event(int epollfd, int fd, int state) {
 }
 ```
 
-## 进程 process
+## Process Management 进程
 
 * 程序是一些保存在磁盘上的指令的有序集合,是静态的的一个可执行映像中，可执行映像(executable image)就是一个可执行文件的内容
 * 进程会被表示为 任务，通过结构体 structure 来创建，Linux 统一使用任务结构来代表执行上下文。因此，对于每个单线程进程来说，单线程进程将用一个任务结构表示，对于多线程进程来说，将为每一个用户级线程分配一个任务结构。Linux 内核是多线程的，并且内核级线程不与任何用户级线程相关联
@@ -1594,20 +1622,25 @@ static void modify_event(int epollfd, int fd, int state) {
 * 文件描述符fd：用于表述指向文件的引用的抽象化概念，形式上是一个非负整数
   - 实际上是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表
   - 当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符
-*  pid 为 1 的 /sbin/init 进程
+* pid 为 1 的 /sbin/init 进程
   - 负责执行内核的一部分初始化工作和系统配置，也会创建一些类似 getty 的注册进程
-*  pid 为 2 的 kthreadd 进程
+* pid 为 2 的 kthreadd 进程
   - 负责管理和调度其他的内核进程
 * 工具
-  - ps：report a snapshot of the current processes，PID ( Process IDentity )，pid唯一标识一个进程 `ps -ef|grep intresting`
-  - strace: trace system calls and signals   跟踪进程内部的系统调用和信号 `strace  -c ./tiem_test`
-    + 系统调用（system call），指运行在「用户态」的程序向操作系统「内核态」请求需要更高权限运行的服务，系统调用提供用户程序与操作系统之间的接口
+  - ps (process status)：report a snapshot of the current processes，PID ( Process IDentity )，pid唯一标识一个进程
+    - `ps -ef | grep intresting`
+    - `ps aux`
+    + `ps -p 98`
+  - `top` show information about Linux processes running on the system in real time
+  - strace: trace system calls and signals 跟踪进程内部的系统调用和信号 `strace  -c ./tiem_test`
+    + 系统调用（system call）:指运行在「用户态」的程序向操作系统「内核态」请求需要更高权限运行的服务，系统调用提供用户程序与操作系统之间的接口
     + strace后面跟着启动一个进程，可以跟踪启动后进程的系统调用和信号，这个命令可以看到进程执行时候都调用了哪些系统调用，通过指定不同的选项可以输出系统调用发生的时间，精度可以精确到微秒，甚至还可以统计分析系统「调用的耗时」，这在排查进程假死问题的时候很有用，能帮你发现进程卡在哪个系统调用上
   - pstack: print a stack trace of a running process 打印出运行中程序的堆栈信息,可以看到进程内启动的线程号，每个进程内线程的「堆栈」内容也能看到  `pstack pid`
     + LPW是指Light-weight process 轻量级线程:Linux中没有真正的线程
     + Linux中没有的线程Thread是由进程来模拟实现的所以称作：轻量级进程
     + 进程是「资源管理」的最小单元，线程是「资源调度」的最小单元（这里不考虑协程）
   - pstree: display a tree of processes pstree按树形结构打印运行中进程结构信息 `pstree -p 11811`
+  - procps
   - gdb是GNU开发的gcc套件中Linux下程序调试工具，可以查看程序的堆栈、设置断点、打印程序运行时信息，甚至还能调试多线程程序，功能十分强大.
     + 调试C/C++程序首先编译的时候要加-g选项
     + 可以直接用gdb启动程序调试，命令：gdb prog
@@ -1928,20 +1961,20 @@ perf record -e context-switches -ag
 perf report # 查看相关结果
 ```
 
-## 文件系统
+## 文件系统 File System Organization
 
-* 一个典型的 Linux 文件系统由 bootfs 和 rootfs 两部分组成，
+* 一个典型的 Linux 文件系统由 bootfs 和 rootfs 两部分组成
   - bootfs(boot file system) 主要包含 bootloader 和 kernel，bootloader 主要用于引导加载 kernel，当 kernel 被加载到内存中后 bootfs 会被 umount 掉
   - rootfs (root file system) 包含的就是典型 Linux 系统中的/dev，/proc，/bin，/etc 等标准目录和文件
   - 不同的 linux 发行版（如 ubuntu 和 CentOS ) 在 rootfs 这一层会有所区别，体现发行版本的差异性
     + 传统的 Linux 加载 bootfs 时会先将 rootfs 设为 read-only，然后在系统自检之后将 rootfs 从 read-only 改为 read-write，然后就可在 rootfs 上进行读写操作了
-* 文件结构是文件存放在磁盘等存贮设备上的组织方法,主要体现在对文件和目录的组织上
-* 磁盘分区和目录的关系如下
+* 磁盘分区和目录的关系
   - 任何一个分区都必须挂载到某个目录上
   - 目录是逻辑上的区分。分区是物理上的区分
   - 磁盘Linux分区都必须挂载到目录树中的某个具体的目录上才能进行读写操作
   - 根目录是所有Linux的文件和目录所在的地方，需要挂载上一个磁盘分区
-* 文件是一个抽象的概念，是存放一切数据或信息的仓库
+* 文件结构是文件存放在磁盘等存贮设备上的组织方法,主要体现在对文件和目录的组织上
+* 文件是一个抽象概念，是存放一切数据或信息的仓库
   - Windows操作系统也是采用树型结构，但其树型结构的根是磁盘分区的盘符，有几个分区就有几个树型结构，它们之间的关系式并列的
   - Linux中，无论操作系统管理几个磁盘分区，目录树只有一个,结构为：根目录(/)在上，其它的平行在下
     + Linux是一个多用户系统，制定这样一个固定的目录规划有助于对系统文件和不同的用户文件进行统一管理
@@ -1984,7 +2017,7 @@ perf report # 查看相关结果
   - 索引式文件系统(indexed allocation)：某一个文件的属性与权限数据是放置到 inode 4 号，而这个 inode 记录了文件数据的实际放置点为 2, 7, 13, 15 这四个 block 号码，此时操作系统就能够据此来排列磁盘的阅读顺序，可以一口气将四个 block 内容读出来
     + 如果文件系统使用太久，常常删除/编辑/新增文件时，那么还是可能会造成文件数据太过于离散的问题，此时或许会需要进行重整一下的
 * 目录功用
-  - `/`每台机器都有根文件系统，它包含系统引导和使其他文件系统得以mount所必要的文件，根文件系统应该有单用户状态所必须的足够的内容。还应该包括修复损坏 系统、恢复备份等的工具
+  - `/`每台机器都有根文件系统，包含系统引导和使其他文件系统得以mount所必要的文件，根文件系统应该有单用户状态所必须的足够的内容。还应该包括修复损坏 系统、恢复备份等的工具
   - /bin：包含了引导启动所需的命令或普通用户可能用的命令(可能在引导启动后),都是二进制可执行命令。多是系统中重要的系统文件
   - /boot：目录存放引导加载器(bootstrap loader)使用的文件，如lilo，核心映像也经常放在这里，而不是放在根目录中。但是如果有许多核心映像，这个目录就可能变得很大，这时使用单独的 文件系统会更好一些。还有一点要注意的是，要确保核心映像必须在ide硬盘的前1024柱面内。
   - /dev：存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备。比如，用户可 以通过访问/dev/mouse来访问鼠标的输入，就像访问其他文件一样。
@@ -2107,6 +2140,7 @@ perf report # 查看相关结果
       * auto 自动挂载
       * nouser 使一般用户无法挂载
       * async 以非同步方式执行文件系统的输入输出操作
+  - sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
 * 文件系统在内核中的表示
   - 文件与IO: 每个进程在PCB（Process Control Block）中都保存着一份文件描述符表，文件描述符就是这个表的索引，每个表项都有一个指向已打开文件的指针.已打开的文件在内核中用file结构体表示，文件描述符表中的指针指向file结构体。
     + 维护File Status Flag（file结构体的成员f_flags）
@@ -2126,17 +2160,12 @@ perf report # 查看相关结果
 * FHS包含两层规范：
   - / 下面的各个目录应该要放什么文件数据，例如 /etc 应该放置设置文件，/bin 与 /sbin 则应该放置可执行文件等等。
   - 针对 /usr 及 /var 这两个目录的子目录来定义。例如 /var/log 放置系统登录文件，/usr/share 放置共享数据等等。
-* 类型
-  * `-` 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
-  * `d` 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
-  * 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示
-  * 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
-  * socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
-  * pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
-  * 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了
-  * 备份会以在文件名后附加 ~ 字符的文件名保存
-* 查看
-  - ls
+* 查看 Navigating the File System
+  - pwd (print working directory)
+  - cd (change directory)
+  - Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
+  - md5sum:可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
+  - ls (list files and directories)
     + 参数
       * -a:列出所有文件，包括隐藏文件
       * -A 所有隐藏文件（. 和 .. 除外）
@@ -2174,16 +2203,26 @@ perf report # 查看相关结果
       * 在 GNU 上，尖括号（>）表示门door（Illumos 和 Solaris上的进程间通信）。
       * 竖线（|）表示 FIFO 管道。    这个选项的一个更简单的版本是 -p，它只区分文件和目录。
     + [broot](https://dystroy.org/broot/) Get an overview of a directory, even a big one
+  - wc(word count)
+    + -l
+* Manipulating Files
+  - touch (create new file)
+  - mkdir (create new directories)
+  - cp (copy files and directories)
+  - mv (move files and directories)
+  - rm (delete files and directories)
+* Viewing Files
   - cat:concatenate and write file(s) to your screen
     + -b, --number-nonblank    number nonempty output lines, overrides -n
     + -n, --number             number all output lines
     + -s option saves screen space
   - `less [参数] 文件` 上下滚动查看内容
     + 优点
-      * 默认情况下启动时没有鼠标支持，因此它不会淹没鼠标事件，所以可以在终端轻松地选择和复制文本
+      * 默认情况下启动时没有鼠标支持，因此不会淹没鼠标事件，所以可以在终端轻松地选择和复制文本
       * 可轻松处理大文件。选择转换到Less的主要原因是，如果要检查大型日志文件，在到处导航，例如检查文件的末尾的时候，mcview不会完全切断它。Less就很快，只需按下“G”就行，然后按“g”就能回到起点
       * 默认已安装
-      * 使用Vim作导航，因此能很好地融入到其他工具的约定中。很容易搜索，使用“/”、“?”、“n”和“N”键能有高亮效果，使用“j”和“k”导航。当然，它也支持箭头键和PgDn / PgUp键。
+      * 使用Vim作导航，因此能很好地融入到其他工具的约定中
+      * 很容易搜索，使用“/”、“?”、“n”和“N”键能有高亮效果，使用“j”和“k”导航。当然，它也支持箭头键和PgDn / PgUp键。
       * 许多工具都使用它。例如，man和git diff工具都使用Less来呈现信息
     + -c 从顶部（从上到下）刷新屏幕，并显示文件内容。而不是通过底部滚动完成刷新；
     + -f 强制打开文件，二进制文件显示时，不提示警告；
@@ -2196,22 +2235,25 @@ perf report # 查看相关结果
     + -s 把连续多个空白行作为一个空白行显示；
     + -Q 在终端下不响铃
     + wenbenshou
-  - `more <filename>`
+  - `more <filename>` displaying one screen at a time in case the file is large
     + 空格键 向下翻页
     + q 退出
     + / 字符并在其后加上想要查找的文字
     + `ls | more`
+  - head\tail
+    + -n 5
+* Text Processing Commands
+  - [sed](../shell/sed.md)
+    + `sed 's/<text_to_replace>/<replacement_text>/' <file_name>`
+  - sort
+  - [grep <word_to_search> <file_name>](../shell/grep.md)用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入,通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手
     + `grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more`
-  - head tail
-    + -n
-  - wc(word count)
-    + -l
-  - grep
+    + `grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
 * 虚拟文件系统
   * 将各种不同文件系统的操作和管理纳入到一个统一的框架中，使得用户程序可以通过同一个文件系统界面，也就是同一组系统调用，对各种不同的文件系统以及文件进行操作；用户程序可以不关心不同文件系统的实现细节，而使用系统提供的统一、抽象、虚拟的文件系统界面；这种统一的框架就是所谓的虚拟文件系统转换，一般简称虚拟文件系统(VFS)；
   * VFS的对象类型包括：超级块(superblock)对象、索引节点(inode)对象、目录项(dentry)对象和文件(file)对象；
   * 虚拟文件系统界面是虚拟文件系统所提供的抽象界面，它主要由一组标准的、抽象的操作构成，这些函数(操作)以系统调用的形式供用户调用。
-* ln 主要用于在两个文件中创建链接
+* ln unix 里面的链接同 Windows 中的快捷方式类似，允许快速地访问到一个特定的文件
   * 硬链接（Hard Link）：默认 硬链接是使用同一个索引节点（inode号）的链接， 即可以允许多个文件名指向同一个文件索引节点
     - 原文件名和连接文件名都指向相同的物理地址
     - 目录不能有硬连接
@@ -2221,6 +2263,7 @@ perf report # 查看相关结果
     - 增加一个文件的链接数，只要该文件的链接数不为 0 ，该文件就不会被物理删除，所以删除一个具有多个硬链接数的文件，必须删除所有它的硬链接才可删除。
     - 由于删除文件要在同一个索引节点属于唯一的连接时才能成功，因此可以防止不必要的误删除
   * 软连接（符号链接，Symbolic Link）：符号链接是以路径的形式创建的链接，类似于windows的快捷方式链接，符号链接允许创建多个文件名链接到同一个源文件，删除源文件，其下的所有软连接将不可用。（软连接支持目录，支持跨分区、跨文件系统）使用 -s 参数
+    - `sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
   * 区别
     - 硬链接原文件和新文件的inode编号一致。而软链接不一样。
     - 对原文件删除，会导致软链接不可用，而硬链接不受影响。
@@ -2229,28 +2272,52 @@ perf report # 查看相关结果
 * `sudo mkfs.ext4 virtual.img` 格式化virtual.img为ext4格式
 * dd：默认从标准输入中读取，并写入到标准输出中,但输入输出也可以用选项if（input file，输入文件）和of（output file，输出文件）改变。
 * `dd if=/dev/stdin of=test bs=10 count=1 conv=ucase` 将输出的英文字符转换为大写再写入文件
-* sudo mount 查看下主机已经挂载的文件系统，每一行代表一个设备或虚拟设备格式[设备名]on[挂载点]
-* 权限:一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，这是因为目录文件实际保存着该目录里面的文件的列表等信息。
-  - 读权限：可以使用 `cat <file name>` 之类的命令来读取某个文件的内容; 读权限4：读取文件内容|查询目录下文件名 如：cat、more、head、tail ls
-  - 写权限: 写权限2，编辑、新增、修改文件内容|修改目录结构的权限
-  - 执行权限:通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型);
-  - 所有者权限，所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
-  - chmod g+s: This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
+* `-rw-r--r--    1 henry  staff       658 Jun  3  2019 serverless.yml`
+  - 第一个字段 类型
+    - `-` 普通文件：一般是用一些相关的应用程序创建的（如图像工具、文档工具、归档工具... 或 cp工具等),这类文件的删除方式是用rm 命令,而创建使用touch命令,用符号-表示；
+    - `d` 目录：目录在Linux是一个比较特殊的文件，用字符d表示，删除用rm 或rmdir命令；
+    - 块设备文件：存在于/dev目录下，如硬盘，光驱等设备，用字符d表示
+    - 设备文件：（ /dev 目录下有各种设备文件，大都跟具体的硬件设备相关），如猫的串口设备，用字符c表示；
+    - socket文件;用字符s表示，比如启动MySQL服务器时，产生的mysql.sock的文件;
+    - pipe 管道文件：可以实现两个程序（可以从不同机器上telnet）实时交互，用字符p表示；
+    - 链接文件:软链接等同于 Windows 上的快捷方式；用字符l表示； 软硬链接文件的共同点和区别：无论是修改软链接，硬链接生成的文件还是直接修改源文件，相应的文件都会改变，但是如果删除了源文件，硬链接生成的文件依旧存在而软链接生成的文件就不再有效了
+    - 备份会以在文件名后附加 ~ 字符的文件名保存
+  - `rw-r--r--` ower:group:others 权限 File Permissions
+    + 权限类型
+      * 读权限：读取文件内容|查询目录下文件名 使用 cat、more、head、tail ls
+      * 写权限: 编辑、新增、修改文件内容|修改目录结构的权限
+      * 执行权限:通常指可以运行的二进制程序文件或者脚本文件(Linux 上不是通过文件后缀名来区分文件的类型)
+      * Read, write and execute rwx 111 7
+      * Read and write  rw- 110 6
+      * Read and execute  r-x 101 5
+      * Read only r-- 100 4
+      * Write and execute -wx 011 3
+      * Write only  -w- 010 2
+      * Execute only  --x 001 1
+      * None  --- 000 0
+      * 一个目录同时具有读权限和执行权限才可以打开并查看内部文件，而一个目录要有写权限才允许在其中创建其它文件，因为目录文件实际保存着该目录里面的文件的列表等信息
+    + 所有者权限:所属用户组权限，是指所在的用户组中的所有其它用户对于该文件的权限
+    + 格式
+      * `chmod 664 <filename>`
+      * `chmod g+s`：This means that all new files and subdirectories created within the current directory inherit the group ID of the directory, rather than the primary group ID of the user who created the file.  This will also be passed on to new subdirectories created in the current directory.
+    + `chown \<new_owner> \<file_name>`
+    + `chgrp groupname filename`
 * 压缩
-  - -r:表示递归打包包含子目录的全部内容
-  - -q:表示为安静模式，即不向屏幕输出信息
-  - -o:表示输出文件，需在其后紧跟打包输出文件名
-  - -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
-  - -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
-  - -e：创建加密压缩包
-  - -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
-  - -c 创建归档
-  - -x 解压归档
-  - -v 显示处理过程
-  - -f 目标文件，其后必须紧跟 目标文件
-  - -j 调用 bzip2 进行解压缩
-  - -z 调用 gzip 进行解压缩
-  - -t 列出归档中的文件
+  - tar:用来处理文件压缩的默认 Unix 工具
+    + -r:表示递归打包包含子目录的全部内容
+    + -q:表示为安静模式，即不向屏幕输出信息
+    + -o:表示输出文件，需在其后紧跟打包输出文件名
+    + -[1-9]:设置压缩等级，1 表示最快压缩但体积大，9 表示体积最小但耗时最久。
+    + -x:排除我们上一次创建的 zip 文件，否则又会被打包进这一次的压缩文件中
+    + -e：创建加密压缩包
+    + -l:将 LF（换行） 转换为 CR+LF(windows 回车加换行)
+    + -c 创建归档
+    + -x 解压归档
+    + -v 显示处理过程
+    + -f 目标文件，其后必须紧跟 目标文件
+    + -j 调用 bzip2 进行解压缩
+    + -z 调用 gzip 进行解压缩
+    + -t 列出归档中的文件
 * 一个块是 512 个字节大小，不足或正好 512 个字节将占据一个块
 * [ranger](https://github.com/ranger/ranger):A VIM-inspired filemanager for the console https://ranger.github.io/
 
@@ -2507,7 +2574,6 @@ which man # 使用 which 来确定是否安装了某个指定的软件，因为�
 
 * 每一个 NFS 服务都会导出一个或者多个目录供远程客户端访问。当一个目录可用时，它的所有子目录也可用。因此，通常整个目录树都会作为一个整体导出。服务器导出的目录列表会用一个文件来维护，这个文件是 /etc/exports，当服务器启动后，这些目录可以自动的被导出。客户端通过挂载这些导出的目录来访问它们。当一个客户端挂载了一个远程目录，这个目录就成为客户端目录层次的一部分
 * 由于 NFS 的协议之一是支持 异构 系统，客户端和服务器可能在不同的硬件上运行不同的操作系统，因此有必要在服务器和客户端之间进行接口定义。这样才能让任何写一个新客户端能够和现有的服务器一起正常工作
-*
 * 访问限制
   - 单个客户端： `/mnt/linuxidc clientIP(rw,sync,no_subtree_check)`
   - 多个客户端： `/mnt/linuxidc client1IP(rw,sync,no_subtree_check)`
@@ -2530,9 +2596,10 @@ sudo mount -t nfs 172.16.36.25:/home/erick/nfs /mnt
 sudo umount /mnt
 ```
 
-## 软件
+## 软件 Package
 
-* 包管理：apt|yum
+* Package Management 包管理：apt|yum
+  - [DNF](https://docs.fedoraproject.org/en-US/quick-docs/dnf/) is the successor to YUM which is now used in Fedora for installing and managing packages. DNF may replace YUM in the future on all RPM based Linux distributions
   - 原理
     + 在本地的一个数据库中搜索关于 cowsay 软件的相关信息
     + 根据这些信息在相关的服务器上下载软件安装
@@ -2540,7 +2607,8 @@ sudo umount /mnt
     + 如果本地的数据库不够新，可能就会发生搜索不到的情况，这时候需要我们更新本地的数据库，使用命令sudo apt-get update可执行更新；
     + 软件源镜像服务器可能会有多个，有时候某些特定的软件需要我们添加特定的源；
   - 参数
-    + install 其后加上软件包名，用于安装一个软件包
+    + `sudo apt-cache search softname1 softname2 softname3......` 针对本地数据进行相关操作的工具
+    + install
     + update 从软件源镜像服务器上下载/更新用于更新本地软件源的软件包列表
     + upgrade 升级本地可更新的全部软件包，但存在依赖问题时将不会升级，通常会在更新之前执行一次update
     + dist-upgrade 解决依赖关系并升级(存在一定危险性)
@@ -2555,7 +2623,6 @@ sudo umount /mnt
     + -d 只下载不安装
     + --reinstall 重新安装已经安装但可能存在问题的软件包
     + --install-suggests 同时安装APT给出的建议安装的软件包
-    + sudo apt-cache search softname1 softname2 softname3...... 针对本地数据进行相关操作的工具，search 顾名思义在本地的数据库中寻找有关 softname1 softname2 ...... 相关软件的信息
 * 编译安装
 * 本地文件安装，下载相应deb软件包，使用dpkg命令来安装
   - 参数
@@ -2655,22 +2722,14 @@ flatpak install flathub com.netease.CloudMusic
 flatpak run com.netease.CloudMusic
 ```
 
-## 指令
+## Daemons
 
-* /usr/bin/
-* /bin/
-* /sbin/
-* ssh:连接到一个远程主机，然后登录进入其 Unix shell。通过本地机器的终端在服务器上提交指令
-* grep:用来在文本中查找字符串,从一个文件或者直接就是流的形式获取到输入,通过一个正则表达式来分析内容，然后返回匹配的行。该命令在需要对大型文件进行内容过滤的时候非常趁手`grep "$(date +"%Y-%m-%d")" all-errors-ever.log > today-errors.log`
-* alias bash 内置命令创建别名:`alias server="python -m SimpleHTTPServer 9000"`
-* Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求
-* Tree 用可视化的效果向你展示一个目录下的文件 tree -P '_.min._'
-* Tmux 一个终端复用器,是一个可以将多个终端连接到单个终端会话的工具。可以在一个终端中进行程序之间的切换，添加分屏窗格，还有就是将多个终端连接到同一个会话，使它们保持同步。 当你在远程服务器上工作时，Tmux 特别有用，因为它可以让你创建新的选项卡，然后在选项卡之间切换
-* du 命令会生成相关文件和有关目录的空间使用情况的报告。容易使用，也可以递归地运行，会遍历每个子目录并且返回每个文件的单个大小。`du -sh *`
-* tar:用来处理文件压缩的默认 Unix 工具
-* md5sum:它们可以用来检查文件的完整性。`md5sum ubuntu-16.04.3-desktop-amd64.iso` 将生成的字符串与原作者提供的（比如 UbuntuHashes）进行比较
-* Htop 是个比内置的 top 任务管理更强大的工具。它提供了带有诸多选项的高级接口用于监控系统进程
-* ln:unix 里面的链接同 Windows 中的快捷方式类似，允许快速地访问到一个特定的文件。`sudo ln -s ~/Desktop/Scripts/git-scripts/git-cleanup /usr/local/bin/`
+* A computer program that runs as a background process
+* 使用 & 运行程序
+  - 程序转入后台运行
+  - 结果会输出到终端
+  - 使用 Ctrl + C 发送 SIGINT 信号，程序免疫
+  - 关闭 Shell session 发送 SIGHUP 信号，程序关闭
 * nohup:不挂断地运行命令 `nohup Command [Arg …] [　& ]`
   - 无论是否将 nohup 命令的输出重定向到终端，输出都将附加到当前目录的 nohup.out 文件中
   - 如果当前目录的 nohup.out 文件不可写，输出重定向到 $HOME/nohup.out 文件中
@@ -2678,11 +2737,6 @@ flatpak run com.netease.CloudMusic
   - 输出重定向，默认重定向到当前目录下 nohup.out 文件
   - 使用 Ctrl + C 发送 SIGINT 信号，程序关闭
   - 关闭 Shell Session 发送 SIGHUP 信号，程序免疫
-* 使用 & 运行程序
-  - 程序转入后台运行
-  - 结果会输出到终端
-  - 使用 Ctrl + C 发送 SIGINT 信号，程序免疫
-  - 关闭 Shell session 发送 SIGHUP 信号，程序关闭
 
 ```sh
 date # 获取当前时间
@@ -2890,7 +2944,7 @@ command > /dev/null 2>&1
   - nmon
 * 远程登录
   - telnet
-  - ssh
+  - [ssh](../network/ssh.md):连接到一个远程主机，然后登录进入其 Unix shell。通过本地机器的终端在服务器上提交指令
   - nc netcat：Concatenate and redirect sockets
     + 实现任意 TCP/UDP 端口的侦听，增加-l 参数后，nc 可以作为 server 以 TCP 或 UDP 方式侦听指定端口
     + 端口的扫描，nc 可以作为 client 发起 TCP 或 UDP 连接
@@ -3298,25 +3352,27 @@ tcpdump -i eth0 -s0 port 53
 tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```
 
-### 用户管理
+## 用户管理 User/Group Management
 
-* 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
-* 家目录修改后需要手动创建，不同于创建用户家目录设置
-* 创建用户时设置家目录，该目录会自动创建
-* 修改用户家目录时，该目录不会自动创建(需要手动创建)
-* 用户owner
-  - 用户帐号和其相关信息 (密码除外) 是存放在 /etc/passwd  `用户名:未使用:UID:GID:备注:家目录:shell`
-  - 由于所有用户对 passwd 文件均有读取的权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密 保存在了 /etc/shadow 中，只有 root 用户可以读取 `用户名:加密密码:上次修改时间:最短使用天数:最长使用天数间:修改前警示天数:过期后宽限时间:未使用`
+* 用户 User
+  - Users in Linux has an associated user ID called UID attached to them.
+  - Users also has a home directory and a login shell associated with them
+  - `/etc/passwd` Stores the user name, the uid, the gid, the home directory, the login shell etc 存放用户帐号和其相关信息 (密码除外) `用户名:未使用:UID:GID:备注:家目录:shell`
+  - `/etc/shadow` Stores the password associated with the users 由于所有用户对 passwd 文件均有读取权限，因此密码信息并未保存在该文件中，而是采用 MD5 加密算法加密保存在了 `/etc/shadow` 中，只有 root 用户可以读取 `用户名:加密密码:上次修改时间:最短使用天数:最长使用天数间:修改前警示天数:过期后宽限时间:未使用`
     + passwd 文件中，一行定义一个用户帐号，每行均由多个不同的字段构成，各字段值间用 ":” 分隔，每个字段均代表该帐号某方面的信息
-    + 系统自动创建了 linux 进程或部分服务程序正常工作所需要使用的账户，账户的最后一个字段的值一般为 /sbin/nologin，表示该帐号不能用来登录系统`account:password(用 x 占位):accountId:groupId:accountName:homeDir:shell`
-    + 让某用户没有 telnet 权限，即不允许该用户利用 telnet 远程登录和访问 linux 操作系统，则设置该用户所使用的 shell 为 / bin/true 即可
-    + 让用户没有 telnet 和 ftp 登录权限，则可设置该用户的 shell 为 / bin/false
+    + 系统自动创建了 linux 进程或部分服务程序正常工作所需要使用的账户，账户的最后一个字段的值一般为 `/sbin/nologin`，表示该帐号不能用来登录系统`account:password(用 x 占位):accountId:groupId:accountName:homeDir:shell`
+    + 让某用户没有 telnet 权限，即不允许该用户利用 telnet 远程登录和访问 linux 操作系统，则设置该用户所使用的 shell 为 `/bin/true` 即可
+    + 让用户没有 telnet 和 ftp 登录权限，则可设置该用户的 shell 为 `/bin/false`
     + 每行定义和保存一个账户的相关信息。第一个字段为用户帐户名，第二个字段为账户的密码
-    + 设置所有用户账户密码过期的时间，则可通过修改 / etc/login.defs 配置文件中的 PASS_MAX_DAYS 配置项的值来实现，其默认值为 99999，代表用户账户密码永不过期。其中 PASS_MIN_LEN 配置项用于指定账户密码的最小长度，默认为 5 个字符。
-  - 新建用户 `useradd [option] username`
+    + 设置所有用户账户密码过期的时间，则可通过修改 `/etc/login.defs` 配置文件中的 `PASS_MAX_DAYS` 配置项的值来实现，其默认值为 99999，代表用户账户密码永不过期。其中 `PASS_MIN_LEN` 配置项用于指定账户密码的最小长度，默认为 5 个字符。
+  - 新建 `useradd [option] username`
+    + verify that the user has been created by tailing the /etc/passwd file
+    + The uid and gid are 1000 for the newly created user
     + 不指定用户组的话，默认会自动创建一个与用户名相同的用户组
-    + 系统会自动创建该用户对应的主目录，该目录默认放在 / home 目录下，若要改变位置，可以利用 -d 参数指定；
-    + 对于用户登录时使用的 shell，默认为 / bin/bash，若要更改，则使用 - s 参数指定
+    + home directory
+      * 系统会自动创建该用户对应的主目录，该目录默认放在 `/home` 目录下
+      * 家目录修改后需要手动创建，不同于创建用户家目录设置
+      * 修改用户家目录时，该目录不会自动创建(需要手动创建)
     + 参数
       * -c 注释      用户设置对账户的注释说明文字
       * -b 设置另一个可以创建家目录的基础目录,指定 /home2 而不是 /home
@@ -3330,25 +3386,42 @@ tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
       * -g 用户组     指定将用户加入到哪个用户组，该用户组必须存在
       * -G 用户组列表 指定用户同时加入的用户组列表，各组用逗分隔
       * -n          不为用户创建私有用户组
-      * -s shell    指定用户登录时使用的 shell，默认为 / bin/bash
+      * -s shell    指定用户登录时使用的 shell，默认为 `/bin/bash`
       * -r          创建一个用户 ID 小于 500 的系统账户，默认不创建对应的主目录
       * -u 用户 ID    手动指定新用户的 ID 值，该值必须唯一，且大于 499
-      * -p password 为新建用户指定登录密码。此处的 password 是对应登录密码经 MD5 加密后所得到的密码值，不实真实密码原文，因此在实际应用中，该参数选项使用较少，通常单独使用 passwd 命令来为用户设置登录密码。
-  - 锁定用户：通过在密码文件 shadow 的密码字段前加 “！” 来标识该用户被锁定
-  - 除了用户账户可被锁定外，账户密码也可被锁定，任何一方被锁定后，都将无法登录系统。只有 root 用户才有权执行该命令
+      * -p password 为新建用户指定登录密码。此处的 password 是对应登录密码经 MD5 加密后所得到的密码值，不实真实密码原文，因此在实际应用中，该参数选项使用较少，通常单独使用 passwd 命令来为用户设置登录密码
+  - `usermod` modify the attributes of an user like the home directory or the shell
+  - `userdel`
+  - 锁定：通过在密码文件 `/etc/shadow` 密码字段前加 “！” 来标识该用户被锁定，除了用户账户可被锁定外，账户密码也可被锁定，任何一方被锁定后，都将无法登录系统。只有 root 用户才有权执行该命令
   - LDAP
-* 用户组group
+  - `id username` be used to find the uid and gid associated with an user.
+  - `passwd username` create or modify passwords for a user
+    + "!!" in an account entry in shadow means the account of an user has been created, but not yet given a password.
+  - "root" user or superuser is the most privileged user with unrestricted access to all the resources on the system. It has UID 0
+    + 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
+* 用户组 group
+  - A group is a collection of one or more users. A group makes it easier to share permissions among a group of users.
+  - Each group has a group ID called GID associated with it.
   - 用户组帐号信息保存在 /etc/group 配置文件中，任何用户均可以读取。用户组的真实密码保存在 /etc/gshadow 配置文件中 `组名:未使用:GID:成员列表`
-  - /etc/group：第一个字段代表用户组的名称，第二个字段为 x，第三个为用户组的 ID 号，第四个为该用户组的用户成员列表，各用户名间用逗号分隔
-  - 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
+  - `/etc/group` Stores information about different groups on the system
+    + 第一个字段代表用户组的名称
+    + 第二个字段为 x
+    + 第三个为用户组的 ID 号
+    + 第四个为该用户组的用户成员列表，各用户名间用逗号分隔
+  - `groupadd \<group_name>`  Creates a new group
+  - `groupmod \<group_name>`  Modifies attributes of a group
+  - `groupdel \<group_name>`  Deletes a group
+  - `gpasswd \<group_name>` Modifies password for group
   - others
   - nobody:nogroup
-* gid
-* [sudo](https://www.sudo.ws/): %wheel ALL=(ALL) ALL
-  - 第一个参数（%wheel）定义组的成员。 wheel 组的成员可以以所有主机上的所有用户身份运行所有应用程序
-  - 第二个参数（ALL）定义组成员可以在其上运行命令的主机。
-  - 第三个参数（(ALL)）定义了可以执行命令的用户名。
-  - 最后一个参数（ALL）定义可以运行的应用程序。
+* [sudo](https://www.sudo.ws/): allows a user to run commands with the security privileges of the root user
+  - /etc/sudoers holds the names of users permitted to invoke sudo
+  - providing root access to users is to add them to a group which has permissions to run all the commands. "wheel" is a group in redhat Linux with such privileges
+  - `%wheel ALL=(ALL) NOPASSWD: ALL`
+    + 第一个参数（%wheel）定义组的成员。 wheel 组的成员可以以所有主机上的所有用户身份运行所有应用程序
+    + 第二个参数（ALL）定义组成员可以在其上运行命令的主机
+    + 第三个参数（(ALL)）定义了可以执行命令的用户名
+    + 最后一个参数（ALL）定义可以运行的应用程序
 * 系统管理员向其他用户发送消息
   - `wall file`,通过更新文件执行
   - `write username`:交互实时执行
@@ -3357,7 +3430,7 @@ tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
 ```sh
 who # 查看谁在线
 last # 查看最近的登陆历史记录
-whoami # 只列出用户名 用于查询当前用户的名称
+whoami # 只列出用户名 用于查询当前用户的名称 find out the current user in Linux is to use the whoami command
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间
 w # Show who is logged in and what they are doing.
 finger # 列出当前用户的详细信息，需使用apt-get提前安装
@@ -3368,7 +3441,7 @@ su -l lilei # 切换登录用户
 su -
 su - root
 
-useradd  username      # 创建用户会同时创建同名组
+useradd  username # 创建用户会同时创建同名组
 sudo useradd -u 1020 -c "Perry Example" \
 -G tgroup -b /home2 \
 -s /usr/bin/zsh \
@@ -3394,7 +3467,7 @@ usermod -l nsj0820 nsj820 # -l newName oldName 改变用户帐户名，主目录
 usermod -d /home/nsj0820 nsj0820 # 修改主目录
 usermod -L user # 锁定账户
 usermod -U user # 接锁账户
-usermod -a -G group1,group2 username
+usermod -a -G group1,group2 username add user "username" to the group1,group2
 usermod -G sudo <student>  # </student>不同的组对不同的文件可能具有不同的操作权限，比如说通过上述命令新建的用户默认是没有使用sudo的权限的，我们可以使用usermod命令把它加入sudo组用以具备相应的权限。
 
 # 修改 user test to love
@@ -3612,24 +3685,6 @@ sudo apt-get update
 sudo apt-get install stacer
 ```
 
-### grep Global search REgrular expression and Print out the line
-
-* 参数
-  + --color=auto：对匹配到的文本着色显示
-  + -v：显示不被pattern 匹配到的行，反向选择 ,查找文件中不包含"test"内容的行 `grep -v test log.txt`
-  + -i：忽略字符大小写
-  + -n：显示匹配的行号
-  + -c：统计匹配的行数
-  + -o：仅显示匹配到的字符串
-  + -q：静默模式，不输出任何信息
-  + -A #：after，后#行 ,显示包含这行后续#行
-  + -B #：before，前#行
-  + -C #：context，前后各#行
-  + -e：实现多个选项间的成逻辑or关系，grep –e 'cat ' -e 'dog' file
-  + -w：匹配整个单词,（字母，数字，下划线不算单词边界）
-  + -E：使用ERE
-  + -r或--recursive 此参数的效果和指定"-d recurse"参数相同
-
 ## tr
 
 ```sh
@@ -3689,8 +3744,6 @@ sort authors.txt | uniq -c > authors-sorted.txt
 ## [技巧](https://coolshell.cn/articles/8883.html)
 
 * 基础
-  - Bash: `man bash`
-  - vim
   - 了解 ssh
     + 明白不需要口令的用户认证（通过ssh-agent, ssh-add），学会用ssh翻墙，用scp而不是ftp传文件
     + scp 远端的时候，你可以按tab键来查看远端的目录和文件
@@ -3700,7 +3753,7 @@ sort authors.txt | uniq -c > authors-sorted.txt
   - 理解正则表达式，还有grep/egrep的各种选项。比如： -o, -A, 和 -B 这些选项是很值得了解的
   - 学习使用 apt-get 和 yum 来查找和安装软件（前者的经典分发包是Ubuntu，后者的经典分发包是Redhat），我还建议你试着从源码编译安装软件
 * 日常
-  - 在 bash 里，使用 Ctrl-R 而不是上下光标键来查找历史命令。
+  - 在 bash 里，使用 Ctrl-R 而不是上下光标键来查找历史命令
   - 在 bash里，使用 Ctrl-W 来删除最后一个单词，使用 Ctrl-U 来删除一行。请man bash后查找Readline Key Bindings一节来看看bash的默认热键，比如：Alt-. 把上一次命令的最后一个参数打出来，而Alt-* 则列出你可以输入的命令。
   - 回到上一次的工作目录： cd –  （回到home是 cd ~）
   - 使用 xargs。这是一个很强大的命令。可以使用-L来限定有多少个命令，也可以用-P来指定并行的进程数。如果你不知道你的命令会变成什么样，你可以使用xargs echo来看看会是什么样。当然， -I{} 也很好用。示例： `find . -name \*.py | xargs grep some_function` `cat hosts | xargs -I{} ssh root@{} hostname`
@@ -3745,7 +3798,7 @@ sort authors.txt | uniq -c > authors-sorted.txt
   - 如果你要找到哪个socket或进程在使用网络带宽，你可以使用 iftop 或 nethogs。
   - Apache的一个叫 ab 的工具是一个很有用的，用quick-and-dirty的方式来测试网站服务器的性能负载的工作。如果你需要更为复杂的测试，你可以试试 siege。
   - 如果你要抓网络包的话，试试 wireshark 或 tshark。
-  - 了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，你可以使用-p选项来attach上任意一个进程。
+  - 了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，你可以使用-p选项来attach上任意一个进程
   - 了解用ldd命令来检查相关的动态链接库。注意：ldd的安全问题
   - 使用gdb来调试一个正在运行的进程或分析core dump文件。参看我写的《GDB中应该知道的几个调试方法》
   - 学会到 /proc 目录中查看信息。这是一个Linux内核运行时记录的整个操作系统的运行统计和信息，比如： /proc/cpuinfo, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps.

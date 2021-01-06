@@ -1,6 +1,6 @@
-## SSH
+## [SSH](https://www.ssh.com/ssh/command/)
 
-* 基于密钥的验证是最安全的几个身份验证模式 使用OpenSSH,如普通密码和Kerberos票据。基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。其他身份验证方法仅在非常特殊的情况下使用。
+* 基于密钥验证是最安全的几个身份验证模式 使用OpenSSH,如普通密码和Kerberos票据。基于密钥的验证密码身份验证有几个优点,例如键值更难以蛮力,比普通密码或者猜测,提供充足的密钥长度。其他身份验证方法仅在非常特殊的情况下使用。
 * SSH可以使用RSA(Rivest-Shamir-Adleman)或“DSA(数字签名算法)的钥匙。这两个被认为是最先进的算法,当SSH发明,但DSA已经被视为近年来更不安全。RSA是唯一推荐选择新钥匙,所以本指南使用RSA密钥”和“SSH密钥”可以互换使用。
 * 基于密钥的验证使用两个密钥,一个“公共”键,任何人都可以看到,和另一个“私人”键,只有老板是允许的。安全通信使用的基于密钥的认证,需要创建一个密钥对,安全地存储私钥在电脑人想从登录,并存储公钥在电脑上一个想登录。
 * 使用基于密钥登录使用ssh通常被认为是比使用普通安全密码登录。导的这个部分将解释的过程中生成的一组公共/私有RSA密钥,并将它们用于登录到你的Ubuntu电脑通过OpenSSH(s)。如果只有服务器也是不能实现一个完整的桌面环境的，当然还需要一个客户端
@@ -22,6 +22,7 @@
 
 ```sh
 sudo apt install sshd
+yum install openssh
 service sshd restart
 
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
@@ -166,24 +167,27 @@ git config --global commit.gpgsign true
 git commit -S -m your commit message
 ```
 
-## 免密码登录
+## 免密码登录 Passwordless Authentication Using SSH
 
-* ~/.ssh/authorized_keys:存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
-* ~/.ssh/id_rsa : 生成的私钥文件
-* ~/.ssh/id_rsa.pub ： 生成的公钥文件
-* ~/.ssh/know_hosts : 已知的主机公钥清单
-* 如果希望ssh公钥生效需满足至少下面两个条件：
-  - .ssh目录的权限必须是700
-  - .ssh/authorized_keys文件权限必须是600
+* `~/.ssh/authorized_keys` 存放远程免密登录的公钥,主要通过这个文件记录多台机器的公钥
+* `~/.ssh/id_rsa` 生成的私钥文件
+* `~/.ssh/id_rsa.pub` 生成的公钥文件
+* `~/.ssh/know_hosts` 已知的主机公钥清单
+* 如果希望ssh公钥生效需满足至少下面两个条件
+  - `.ssh`目录的权限必须是700
+  - `.ssh/authorized_keys`文件权限必须是600
 
 ```sh
 ssh-keygen -t rsa # 生成.ssh文件目录
 
+ssh-copy-id test_host@40.343.45.77
 ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
 scp -p ~/.ssh/id_rsa.pub root@<remote_ip>:/root/.ssh/authorized_keys
 
-scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key //将文件拷贝至远程服务器
-cat ~/pub_key >>~/.ssh/authorized_keys //将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
+# 将文件拷贝至远程服务器
+scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key
+# 将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
+cat ~/pub_key >>~/.ssh/authorized_keys
 
 # 通过ansible,将需要做免密操作的机器hosts添加到/etc/ansible/hosts下：
 [Avoid close]
@@ -195,6 +199,8 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 
 # have SSH host keys for those IPs in your ~/.ssh/known_hosts
 ssh-keygen -R <IP_ADDRESS>
+
+ssh \<user>@\<hostname/hostip> \<command>
 ```
 
 ## 命令行代理

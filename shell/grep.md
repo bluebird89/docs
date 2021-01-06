@@ -1,16 +1,25 @@
-## grep Global Regular Expression Print
+## grep Global search REgrular expression and Print out the line
 
 全局搜索正则表达式并打印出匹配的行
 
-* 参数：
-    - -c：只输出匹配行的计数
-    - -i：表示不区分大小写
-    - -h：查询多文件时不显示文件名
-    - -l：查询多文件时只输出包含匹配字符的文件名
-    - -n：显示匹配行及行号
-    - -s：不显示不存在或无匹配文本的错误信息
-    - -v：显示不包含匹配文本的所有行，表示反向查找
-    - --color=auto ：可以将找到的关键词部分加上颜色的显示
+* 参数
+  * -s：不显示不存在或无匹配文本的错误信息
+  * -h：查询多文件时不显示文件名
+  * -l：查询多文件时只输出包含匹配字符的文件名
+  + --color=auto：将找到的关键词部分加上颜色的显示
+  + -v：显示不被 pattern 匹配到的行，反向选择 ,查找文件中不包含"test"内容的行 `grep -v test log.txt`
+  + -i：忽略字符大小写
+  + -n：显示匹配的行号
+  + -c：统计匹配的行数
+  + -o：仅显示匹配到的字符串
+  + -q：静默模式，不输出任何信息
+  + -A #：after，后#行 ,显示包含这行后续#行
+  + -B #：before，前#行
+  + -C #：context，前后各#行
+  + -e：实现多个选项间的成逻辑or关系，grep –e 'cat ' -e 'dog' file
+  + -w：匹配整个单词,（字母，数字，下划线不算单词边界）
+  + -E：使用ERE
+  + -r或--recursive 此参数的效果和指定"-d recurse"参数相同
 
 ```sh
 grep “string” filename
