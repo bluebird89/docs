@@ -627,17 +627,18 @@ BREAKING CHANGE: API v2上线，API v1停止支持
 * `.git`文件夹。保存了对象被提交过的各个版本，只有把修改提交到本地仓库，该修改才能在仓库中留下痕迹
 * 包括git自动创建的master分支，并且将HEAD指针指向master分支
 * 文件状态：committed
-* 每个commit都有一个唯一的 Hash 值
-* branch用来管理分支
-* checkout用来切换分支，切换分支时，也可以新建分支
+* 每个commit都有一个唯一 Hash 值
+* branch 用来管理分支
+* checkout 用来切换分支，切换分支时，也可以新建分支
   - 命令会用仓库中的文件，覆盖索引区(staged or index)和工作目录(work tree)
-  - 新的switch命令用来接替checkout的功能，但switch不能切换到commit id
-* 通过git log命令来查看
-* merge:保持修改内容的历史记录，但是历史记录会很复杂
+  - 新的switch命令用来接替checkout的功能，但switch不能切换到 commit id
+* log  查看
+* merge:保持修改内容历史记录，但是历史记录会很复杂
+  - merge changes from two different lines of history and create a new commit of the result
   - fast-forward:bugfix分支的历史记录包含master分支所有的历史记录，所以通过把master分支的位置移动到bugfix的最新分支上，Git 就会合并
-* rebase:历史记录简单，是在原有提交的基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
-  - 待合并分支rebase主分支
-  - 主分支merge待合并分支
+* rebase:历史记录简单，在原有提交基础上将差异内容反映进去。因此，可能导致原本的提交内容无法正常运行
+  - 待合并分支rebase主分支 `git checkout b1` `git rebase master`
+  - 主分支merge待合并分支 `git checkout master` `git merge b1`
 * 流程
   - 在topic分支中更新merge分支的最新代码，请使用rebase。
   - 向merge分支导入topic分支的话，先使用rebase，再使用merge
@@ -875,9 +876,9 @@ git archive
 tar cJf .tar.xz / --exclude-vcs
 ```
 
-### cherry-pick
+### Cherrypick
 
-* 部分代码变动（某几个提交）转移到另一个分支,picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新的提交,这个新的提交的哈希值和原来的不同，但 标识名 一样
+* 部分代码变动（某几个提交）转移到另一个分支,picking a commit from a branch and applying it to another. 选择某一个分支中的一个或几个commit(s)来进行操作,当执行完 cherry-pick 以后，将会生成一个新提交,这个新提交的哈希值和原来的不同，但 标识名 一样
 * 从develop分支新开分支fromdevelop-01，然后commit两次，这时候develop分支只需要第二次提交的信息，步骤：
   - `git checkout develop`
   - `git cherry-pick 第二次commitID`
@@ -986,9 +987,9 @@ git clone git@115.159.146.94:/home/testgit/sample.git lsgogit
 
 ## hook
 
-Hook是Git系统的本地机制，用于在诸如代码提交（Commit）和合并(Merge)之类的操作之前或之后触发的定制化脚本，可以把它们看作是Git的插件系统。
+Git系统的本地机制，用于在诸如代码提交（Commit）和合并(Merge)之类的操作前后触发的定制化脚本，可以把它们看作是Git的插件系统。
 
-* 脚本路径：.git/hooks/
+* 脚本路径：`.git/hooks/`
 * 分类
   - 客户端Hooks
   - 服务端Hooks:检查代码是否符合某些条件，防止开发人员随意将代码推送到master

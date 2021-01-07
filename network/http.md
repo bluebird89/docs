@@ -244,7 +244,7 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 ```
 
-## HTTP的幂等性
+## HTTP 幂等性
 
 * HTTP协议本身是一种面向资源的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式
   - RESTful的，它把HTTP当成应用层协议，比较忠实地遵守了HTTP协议的各种规定
@@ -526,7 +526,7 @@ Set-Cookie: laravel_session=eyJpdiI6InpDTWIxczdmK2hJZ1hPcWVsRU9uRUE9PSIsInZhbHVl
 Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9
 ```
 
-### 请求方式
+### 请求方式 Method
 
 * GET：从服务器上获取指定的 URL 资源，只应当用于取回数据，查询字符串（名称/值对）是在请求 URL 中发送
   - 不会对服务器资源产生副作用（只是获取资源，不会对资源进行变更
@@ -549,10 +549,10 @@ Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3
   - 浏览器限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担:GET产生一个TCP数据包；POST产生两个TCP数据包
     + GET请求:浏览器会把http header和data一并发送出去，服务器响应200（返回数据）
     + POST请求:浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
-* HEAD  与 GET 相同，但只返回 HTTP 报头，不返回文档主体,用于确认 URL 的有效性及资源更新的日期时间
-* PUT:设计的初衷是用来传输文件, 要求在报文的主体中包含文件内容，然后保存到请求 URI 指定的位置.由于 PUT 方法自身不带验证机制，任何人都可以上传文件，存在安全性问题.让服务器用请求主体部分来创建|更新一个由请求的 URL 命令的新文档
-* PATCH 方法，用于对指定资源进行部分修改（PUT 方法用于整体覆盖）
-* DELETE  删除指定资源
+* HEAD 与 GET 相同，但只返回 HTTP 报头，不返回文档主体,用于确认 URL 的有效性及资源更新的日期时间
+* PUT:设计初衷是用来传输文件, 要求在报文的主体中包含文件内容，然后保存到请求 URI 指定的位置.由于 PUT 方法自身不带验证机制，任何人都可以上传文件，存在安全性问题.让服务器用请求主体部分来创建|更新一个由请求的 URL 命令的新文档
+* PATCH 用于对指定资源进行部分修改（PUT 方法用于整体覆盖）
+* DELETE 删除指定资源
   - 200（OK）——删除成功，同时返回已经删除的资源
   - 202（Accepted）——删除请求已经接受，但没有被立即执行（资源也许已经被转移到了待删除区域）
   - 204（No Content）——删除请求已经被执行，但是没有返回资源（也许是请求删除不存在的资源造成的）
@@ -863,6 +863,80 @@ sudo yum install certbot python2-certbot-nginx
 sudo certbot --nginx
 sudo certbot certonly --nginx
 echo "0 0,12 * * * root python -c 'import random; import time; time.sleep(random.random() * 3600)' && certbot renew -q" | sudo tee -a /etc/crontab > /dev/null
+
+curl https://www.linkedin.com -v
+
+* Connected to www.linkedin.com (13.107.42.14) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/cert.pem
+  CApath: none
+* TLSv1.2 (OUT), TLS handshake, Client hello (1):
+} [230 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server hello (2):
+{ [90 bytes data]
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+{ [3171 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+{ [365 bytes data]
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+{ [4 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+} [102 bytes data]
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+} [16 bytes data]
+* TLSv1.2 (IN), TLS change cipher, Change cipher spec (1):
+{ [1 bytes data]
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+{ [16 bytes data]
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: C=US; ST=California; L=Sunnyvale; O=LinkedIn Corporation; CN=www.linkedin.com
+*  start date: Oct  2 00:00:00 2020 GMT
+*  expire date: Apr  2 12:00:00 2021 GMT
+*  subjectAltName: host "www.linkedin.com" matched cert's "www.linkedin.com"
+*  issuer: C=US; O=DigiCert Inc; CN=DigiCert SHA2 Secure Server CA
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x7fb055808200)
+* Connection state changed (MAX_CONCURRENT_STREAMS == 100)!
+  0 82117    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+* Connection #0 to host www.linkedin.com left intact
+HTTP/2 200
+cache-control: no-cache, no-store
+pragma: no-cache
+content-length: 82117
+content-type: text/html; charset=utf-8
+expires: Thu, 01 Jan 1970 00:00:00 GMT
+set-cookie: JSESSIONID=ajax:2747059799136291014; SameSite=None; Path=/; Domain=.www.linkedin.com; Secure
+set-cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+set-cookie: bcookie="v=2&70bd59e3-5a51-406c-8e0d-dd70befa8890"; domain=.linkedin.com; Path=/; Secure; Expires=Wed, 09-Nov-2022 22:27:42 GMT; SameSite=None
+set-cookie: bscookie="v=1&202011091050107ae9b7ac-fe97-40fc-830d-d7a9ccf80659AQGib5iXwarbY8CCBP94Q39THkgUlx6J"; domain=.www.linkedin.com; Path=/; Secure; Expires=Wed, 09-Nov-2022 22:27:42 GMT; HttpOnly; SameSite=None
+set-cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Tue, 09-Nov-2021 10:50:10 GMT; SameSite=None
+set-cookie: lidc="b=VGST04:s=V:r=V:g=2201:u=1:i=1604919010:t=1605005410:v=1:sig=AQHe-KzU8i_5Iy6MwnFEsgRct3c9Lh5R"; Expires=Tue, 10 Nov 2020 10:50:10 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+x-fs-txn-id: 2b8d5409ba70
+x-fs-uuid: 61bbf94956d14516302567fc882b0000
+expect-ct: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+x-xss-protection: 1; mode=block
+content-security-policy-report-only: default-src 'none'; connect-src 'self' www.linkedin.com www.google-analytics.com https://dpm.demdex.net/id lnkd.demdex.net blob: https://linkedin.sc.omtrdc.net/b/ss/ static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com; script-src 'sha256-THuVhwbXPeTR0HszASqMOnIyxqEgvGyBwSPBKBF/iMc=' 'sha256-PyCXNcEkzRWqbiNr087fizmiBBrq9O6GGD8eV3P09Ik=' 'sha256-2SQ55Erm3CPCb+k03EpNxU9bdV3XL9TnVTriDs7INZ4=' 'sha256-S/KSPe186K/1B0JEjbIXcCdpB97krdzX05S+dHnQjUs=' platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'self' 'unsafe-inline' static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com; media-src dms.licdn.com; child-src blob: *; frame-src 'self' lnkd.demdex.net linkedin.cdn.qualaroo.com; manifest-src 'self'; report-uri https://www.linkedin.com/platform-telemetry/csp?f=g
+content-security-policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id lnkd.demdex.net blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'; report-uri https://www.linkedin.com/platform-telemetry/csp?f=l
+x-frame-options: sameorigin
+x-content-type-options: nosniff
+strict-transport-security: max-age=2592000
+x-li-fabric: prod-lva1
+x-li-pop: afd-prod-lva1
+x-li-proto: http/2
+x-li-uuid: Ybv5SVbRRRYwJWf8iCsAAA==
+x-msedge-ref: Ref A: CFB9AC1D2B0645DDB161CEE4A4909AEF Ref B: BOM02EDGE0712 Ref C: 2020-11-09T10:50:10Z
+date: Mon, 09 Nov 2020 10:50:10 GMT
+
+* Closing connection 0
 ```
 
 ## [Let's Encrypt实践指北](https://mp.weixin.qq.com/s/_JwBVwv2QAuWcf4WHzL2nQ)
@@ -918,7 +992,7 @@ service nginx stop
 
 ## 存储
 
-* cookie:浏览器实现的一种数据存储功能
+* [cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies):浏览器实现的一种数据存储功能
   - 向服务端发送请求时，服务端会发送一个认证信息，服务器第一次接收到请求时，开辟了一块 Session 空间（创建了Session对象），同时生成一个 sessionId ，并通过响应头的 Set-Cookie：JSESSIONID=XXXXXXX 命令，向客户端发送要求设置 Cookie 的响应；客户端收到响应后，在本机客户端设置了一个 JSESSIONID=XXXXXXX 的 Cookie 信息，该 Cookie 的过期时间为浏览器会话结束
   - 客户端每次向同一个网站发送请求时，请求头都会带上该 Cookie信息（包含 sessionId ）， 然后，服务器通过读取请求头中的 Cookie 信息，获取名称为 JSESSIONID 的值，得到此次请求的 sessionId
   - 存在客户端上的，所以浏览器加入了一些限制确保cookie不会被恶意使用，同时不会占据太多磁盘空间，所以每个域的cookie数量是有限的
@@ -944,6 +1018,8 @@ service nginx stop
   - 实际上大多数的应用都是用 Cookie 来实现Session跟踪的，第一次创建Session的时候，服务端会在HTTP协议中告诉客户端，需要在 Cookie 里面记录一个Session ID，以后每次请求把这个会话ID发送到服务器
   - 服务器识别PHPSESSIONID这个cookie，然后去session目录查找对应session文件，
   - 找到这个session文件后，检查是否过期，如果没有过期，去读取Session文件中的配置；如果已经过期，清空其中的配置
+  - A user is created a session when a user logs in. This session identifier is sent to the browser via SET-COOKIE header.
+  - The browser stores the COOKIE till the expiry set by the server and sends the cookie for each request from hereon for linkedin.com.
 * token
   - 流程
     + 用户通过用户名和密码发送请求
@@ -1033,8 +1109,10 @@ $un_data = unserialize_php($data);
   - 支持断点续传，通过使用请求头中的 Range 来实现
   - 使用了虚拟网络，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址
 * 把 Connection 头写进标准，并且默认开启持久连接,除非请求中写明 Connection: close，那么浏览器和服务器之间是会维持一段时间的 TCP 连接，不会一个请求结束就断掉
-* 持久连接:`Connection: keep-alive` 头部字段 ，表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
-* 维持连接，SSL 的开销也可以避免
+* 持久连接
+  - have only one inflight request in an open connection but connection can be reused for multiple requests one after another
+  - `Connection: keep-alive` 头部字段 ，表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
+  - 维持连接，SSL 的开销也可以避免
 * 单个 TCP 连接在同一时刻只能处理一个请求
   - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠
   - 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
@@ -1072,7 +1150,7 @@ $un_data = unserialize_php($data);
   - 将所有的传输信息分割为更小的消息和帧，并对它们采用二进制格式编码，常见的帧有 Header 帧，用于传输 HTTP 头信息，并且会开启一个新的流；再就是 Data 帧，用来传输 HTTP 报文实体，多个 Data 帧属于同一个流
 * 强化安全，由于安全已经成为重中之重，所以 HTTP2.0 一般都跑在 HTTPS 上
 * 多路复用 Multiplexing:即每一个请求都是是用作连接共享。一个请求对应一个id，这样一个连接上可以有多个请求
-  - 同时通过单一的 HTTP/2 连接发起多重的请求-响应消息
+  - 同时通过单一的 HTTP/2 连接发起多重的请求-响应消息  have multiple inflight requests on the same connection
   - HTTP/1.x 虽然通过 pipeline 也能并发请求，但是多个请求之间的响应会被阻塞的，所以 pipeline 至今也没有被普及应用，而 HTTP/2 做到了真正的并发请求
   - 把数据流分解为多个帧，多个数据流的帧混合之后以同一个TCP连接来发送
   - 流还支持优先级和流量控制。当流并发时，就会涉及到流的优先级和依赖。即：HTTP2.0对于同一域名下所有请求都是基于流的，不管对于同一域名访问多少文件，优先级高的流会被优先发送。图片请求的优先级要低于 CSS 和 SCRIPT，这个设计可以确保重要的东西可以被优先加载完

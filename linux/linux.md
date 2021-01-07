@@ -2824,7 +2824,7 @@ wc < output.log
 command > /dev/null 2>&1
 ```
 
-## 网络 Network
+## 网络 Networking
 
 * Linux内核是通过一个虚拟的网桥设备（Net Device）来实现桥接的。这个虚拟设备可以绑定若干个以太网接口，从而将它们连接起来
   - 对于网络协议栈的上层来说，只看到br0。因为桥接是在数据链路层实现的，上层不需要关心桥接的细节，于是协议栈上层需要发送的报文被送到br0，网桥设备的处理代码判断报文被转发到eth0还是eth1，或者两者皆转发
@@ -2842,7 +2842,7 @@ command > /dev/null 2>&1
     - 修改防火墙规则
   - 分类
     + 0 - 1023： 常用端口和系统端口
-    + 1024 - 49151： 软件的注册端口
+    + 1024 - 49151： 软件注册端口
     + 49152 - 65535： 动态端口或私有端口
   - /etc/services 文件可以查看到更多关于保留端口的信息
   - 扫描
@@ -2876,17 +2876,17 @@ command > /dev/null 2>&1
   - -i 打印网络接口信息
   - -v|verbose shows Active Internet connections and Active UNIX domain sockets without server information.
   - 查看当前系统连接`netstat -antp | awk '{a[$6]++}END{ for(x in a)print x,a[x]}'`
-* LISTEN状态
+* LISTEN 状态
   - Recv-Q：代表建立的连接还有多少没有被accept，比如Nginx接受新连接变的很慢
   - Send-Q：代表listen backlog值
-* ESTAB状态
+* ESTAB 状态
   - Recv-Q：内核中的数据还有多少(bytes)没有被应用程序读取，发生了一定程度的阻塞
   - Send-Q：代表内核中发送队列里还有多少(bytes)数据没有收到ack，对端的接收处理能力不强
 * 在Linux网络协议栈有一组网络回调函数挂接点，通过这些挂接点函数挂接的钩子函数可以在Linux网络栈处理数据包的过程中对数据包一些操作，例如过滤、修改、丢弃等。整个挂接点技术叫做Iptables和Netfilter
   - Netfilter负责在内核中执行各种各样的挂接规则，运行在内核模式中
   - Iptables是在用户模式下运行的进程，负责协助维护内核中Netfilter的各种规则表
   - 通过二者的配合来实现整个Linux网络协议栈中灵活的数据包处理机制
-  - 支持的Table类型
+  - 支持Table类型
     + RAW
     + MANGLE
     + NAT
@@ -2894,11 +2894,11 @@ command > /dev/null 2>&1
     + 优先级是RAW最高，FILTER最低
 * Route
   - Linux系统包含了一个完整的路由功能。当IP层在处理数据发送或者转发时，会使用路由表来决定发往哪里。通常情况下，如果主机与目的主机直接相连，那么主机可以直接发送IP报文到目的主机
-  - 路由功能是由IP层维护的一张路由表来实现。当主机收到数据报文时，它用此表来决策接下来应该做什么操作。
+  - 路由功能是由IP层维护的一张路由表来实现。当主机收到数据报文时，用此表来决策接下来应该做什么操作
   - 当从网络侧接收到数据报文时，IP层首先会检查报文的IP地址是否与主机自身的地址相同。
   - 如果数据报文中的IP地址是自身主机的地址，那么报文将被发送到传输层相应的协议栈中去
   - 如果报文中的IP地址不是主机自身的地址，并且配置了路由功能，那么报文将被转发，否则报文将被丢弃
-  - 路由表的数据一般以条目形式存在，一个典型的路由表条目通常包含以下主要的条目项：
+  - 路由表的数据一般以条目形式存在，一个典型的路由表条目通常包含以下主要条目项：
     + 目的IP地址
     + 下一个路由器的IP地址
     + 标志
@@ -2907,14 +2907,19 @@ command > /dev/null 2>&1
   - 如果没有一个完全匹配的IP，则继续搜索网络ID。找到则转发数据到指定路由器上。由此可知，网络上所有主机都是通过这个路由表中的单个条目进行管理
   - 如果上述两个条件都不匹配，则将数据报文转发到一个默认路由器上
   - 如果上述步骤失败，默认路由器也不存在，那么这个数据报文无法转发。任何无法投递的数据都会产生一个ICMP主机不可达或者ICMP网络不可达的错误，并将该错误返回给生成此数据的应用程序
+  - the destination IP is bitwise AND’d with the Genmask and if the answer is the destination part of the table then that gateway and interface is picked for routing
+  - doesn’t match with any destination in the routing table. Then Linux does an AND of destination IP with 0.0.0.0 and we get 0.0.0.0. This answer matches the default row
 * Route Table
   - Local表用于供Linux协议栈识别本地地址，以及进行本地各个不同网络之间的数据转发 `ip route show table local type local`
-  - MAIN表用于各类网络IP的转发。它的建立既可以使用静态配置生成，也可以使用动态路由发现协议生成。动态路由发现协议一般使用组播功能来通过发送路由发现数据，动态获取和交换网络的路由信息，并更新到路由表中
-* sar是linux上功能最全的监控软件
+  - MAIN表用于各类网络IP转发。它的建立既可以使用静态配置生成，也可以使用动态路由发现协议生成。动态路由发现协议一般使用组播功能来通过发送路由发现数据，动态获取和交换网络的路由信息，并更新到路由表中
+  - Routing table is processed in the order of more octets of 1 set in genmask and genmask 0.0.0.0 is the default route if nothing matches.
+  - gateway 0.0.0.0. This gateway means no Layer3(Network layer) hop is needed to send the packet. Both source and destination are in the same network. Kernel has to figure out the mac of the destination and populate source and destination mac appropriately and send the packet out so that it reaches the destination without any Layer3 hop in the middle
+  - gateway 管理：Update the routing table to use another host(container/VM) in the same network as a gateway for 8.8.8.8/32 and run ping 8.8.8.8. Do the packet capture on the new gateway to see L3 hop is working as expected(might need to disable icmp_redirect)
+* sar linux上功能最全的监控软件
   - `sar -n DEV 1 `即可每秒刷新一次网络流量
   - `watch cat /proc/net/dev`
   - iftop
-* http抓包:将自身当作代理，能够抓取你的浏览器到服务器之间的通讯，并提供修改、重放、批量执行的功能。是发现问题，分析协议，攻击站点的利器
+* http 抓包:将自身当作代理，能够抓取你的浏览器到服务器之间的通讯，并提供修改、重放、批量执行的功能。是发现问题，分析协议，攻击站点的利器
   - Burpsuite （跨平台)
   - Fiddle2 (Win)
   - Charles (Mac)
@@ -2929,9 +2934,6 @@ command > /dev/null 2>&1
   - CLOSE_WAIT一般是由于程序编写不合理造成的，更应该引起开发者注意
     + 由于对端主动关闭，而我方没有正确处理的原因引起的。说白了，就是程序写的有问题，属于危害比较大的一种
 * 到对端路由检测 tracepath google.com
-* 域名检测
-  - dig google.com
-  - nslookup google.com
 * 网络扫描工具
   - nmap
 * 压力测试
@@ -2950,7 +2952,7 @@ command > /dev/null 2>&1
     + 端口的扫描，nc 可以作为 client 发起 TCP 或 UDP 连接
     + 机器之间传输文件
     + 机器之间网络测速
-* 网桥（Bridge）就起到相应的作用
+* 网桥 Bridge
   - 一个数据链路层（data link）的设备，根据Mac地址的信息转发到网桥的不同端口上.网桥是一个二层的虚拟网络设备，把若干个网络接口“连接”起来，使得网口之间的报文可以转发
   - 网桥能够解析收发的报文，读取目标的Mac地址信息，和自己的Mac地址表结合，来决策报文转发的目标网口
   - 为了实现这些功能，网桥会学习源Mac地址。在转发报文时，网桥只需要向特定的端口转发，从而避免不必要的网络交互。如果它遇到了一个自己从未学过的地址，就无法知道这个报文应该向哪个网口转发，就将报文广播给除了报文来源之外的所有网口
@@ -3214,6 +3216,22 @@ nc -v 192.16.1.54 5879 < redis-5.0.5.tar.gz
 
 nc -vvv baidu.com 443
 nc -vzw 2 192.16.1.54 8888-9999 # 扫描主机的端口
+
+## route
+# gives the default routing table
+route -n
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         172.17.0.1      0.0.0.0         UG    0      0        0 eth0
+172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 eth0
+
+# IP 108.174.10.10 is AND’d with 255.255.255.0 and the answer we get is 108.174.10.0 which doesn’t match with any destination in the routing table. Then Linux does an AND of destination IP with 0.0.0.0 and we get 0.0.0.0. This answer matches the default row
+#
+# the packet has to be sent to next hop 172.17.0.1 via eth0. The source IP of the packet will be set as the IP of interface eth0. Now to send the packet to 172.17.0.1
+# linux has to figure out the MAC address of 172.17.0.1. MAC address is figured by looking at the internal arp cache which stores translation between IP address and MAC address.
+#
+# If there is a cache miss, Linux broadcasts ARP request within the internal network asking who has 172.17.0.1. The owner of the IP sends an ARP response which is cached by the kernel and the kernel sends the packet to the gateway by setting Source mac address as mac address of eth0 and destination mac address of 172.17.0.1 which we got just now.
+#
+# Similar routing lookup process is followed in each hop till the packet reaches the actual server. Transport layer and layers above it come to play only at end servers. During intermediate hops only till the IP/Network layer is involved.
 ```
 
 ## [Tcpdump](http://www.tcpdump.org/)
@@ -3822,6 +3840,8 @@ cat a b b | sort | uniq -u > c
 * [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程
 * [Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》
+* [Edx basic linux commands course](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS101x+1T2020/course/)
+* [Edx Red Hat Enterprise Linux Course](https://courses.edx.org/courses/course-v1:RedHat+RH066x+2T2017/course/)
 
 ## 图书
 

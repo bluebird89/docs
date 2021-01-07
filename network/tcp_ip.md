@@ -20,37 +20,43 @@
 
 ### DNS Domain Name System 域名系统
 
+* DNS is an application layer protocol that runs on top of UDP(most of the times).
+* DNS servers usually listen on port number 53. When a client makes a DNS request, after filling the necessary application payload, it passes the payload to the kernel via sendto system call.
+* The kernel picks a random port number(>1024) as source port number and puts 53 as destination port number and sends the packet to lower layers. When the kernel on server side receives the packet, it checks the port number and queues the packet to the application buffer of the DNS server process which makes a recvfrom system call and reads the packet.
+* This process by the kernel is called multiplexing(combining packets from multiple applications to same lower layers) and demultiplexing(segregating packets from single lower layer to multiple applications). Multiplexing and Demultiplexing is done by the Transport layer.
+* 由分层 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * DNS服务器:因特网上存储域名和IP地址相互映射的一个分布式数据库，能够使用户更方便的访问互联网，而不用去记住能够被机器直接读取的IP数串。通过主机名，最终得到该主机名对应的IP地址的过程叫做域名解析（或主机名解析）
 * 应用层协议，为其他应用层协议工作的，包括不限于HTTP和SMTP以及FTP，用于将用户提供的主机名解析为ip地址
 * 域名中，越靠右的位置表示其层级越高
 * 任何 DNS 服务器就都可以找到并访问根域 DNS 服务器,客户端只要能够找到任意一台 DNS 服务器，就可以通过它找到根域 DNS 服务器，然后再一路顺藤摸瓜找到位于下层的某台目标 DNS 服务器
 * 流程
-  - 客户端首先会发出一个 DNS 请求，问 www.server.com 的 IP 是啥，并发给本地 DNS 服务器（客户端 TCP/IP 设置中填写的 DNS 服务器地址）
-  - 本地域名服务器收到客户端的请求后，如果缓存里的表格能找到 www.server.com，则直接返回 IP 地址。如果没有，本地 DNS 会去问它的根域名服务器：“老大， 能告诉我 www.server.com 的 IP 地址吗？” 根域名服务器是最高层次的，它不直接用于域名解析，但能指明一条道路
-  - 根 DNS 收到来自本地 DNS 的请求后，发现后置是 .com，说：“www.server.com 这个域名归 .com 区域管理”，我给你 .com 顶级域名服务器地址给你，你去问问它吧。”
-  - 本地 DNS 收到顶级域名服务器的地址后，发起请求问“老二， 你能告诉我 www.server.com  的 IP 地址吗？”
-  - 顶级域名服务器说：“我给你负责 www.server.com 区域的权威 DNS 服务器的地址，你去问它应该能问到”。
-  - 本地 DNS 于是转向问权威 DNS 服务器：“老三，www.server.com对应的IP是啥呀？” server.com 的权威 DNS 服务器，它是域名解析结果的原出处。为啥叫权威呢？就是我的域名我做主。
-  - 权威 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。
-  - 本地 DNS 再将 IP 地址返回客户端，客户端和目标建立连接。
-  - 通过dig +trace 查看域名解析过程
-* 本机DNS
-  - `C:\Windows\System32\drivers\etc\hosts`隐藏文件没有扩展名
-  - `/etc/hosts`
-* 公共DNS服务
-  - 设计为分布式集群的工作方式：使用分布式的层次数据库模式以及缓存方法来解决单点集中式的问题
+  - look up first in file (/etc/hosts)
+    + `C:\Windows\System32\drivers\etc\hosts`隐藏文件没有扩展名
+    + `/etc/hosts`
+  - use DNS protocol to do the resolution if there is no match in /etc/hosts.The linux system makes a DNS request to the first IP in /etc/resolv.conf. If there is no response, requests are sent to subsequent servers in resolv.conf. These servers in resolv.conf are called DNS resolvers. The DNS resolvers are populated by DHCP or statically configured by an administrator.
+  - first looks at its cache
+  - The DNS server breaks “linkedin.com” to “.”, “com.” and “linkedin.com.” and starts DNS resolution from “.”.
+  - The “.” is called root domain and those IPs are known to the DNS resolver software.
+  - DNS resolver queries the root domain Nameservers to find the right nameservers which could respond regarding details for "com.". The address of the authoritative nameserver of “com.” is returned.
+  - Now the DNS resolution service contacts the authoritative nameserver for “com.” to fetch the authoritative nameserver for “linkedin.com”.
+  - Once an authoritative nameserver of “linkedin.com” is known, the resolver contacts Linkedin’s nameserver to provide the IP address of “linkedin.com”.
+* `dig` a userspace DNS system which creates and sends request to DNS resolvers and prints the response it receives to the console.
+  - `sudo tcpdump -s 0 -A -i any port 53`
+  - `dig linkedin.com`
+  - 查看域名解析过程 `dig +trace linkedin.com`
+* `nslookup google.com`
+* 公共 DNS 服务
+  - 设计为分布式集群的工作方式：使用分布式层次数据库模式以及缓存方法来解决单点集中式的问题
   - 可通过修改网络连接的DNS server 地址
 * 国内用户普遍使用的是ISP运营商提供的DNS服务器，这样有着一个巨大的风险，就是DNS劫持,目前国内ISP运营商普遍采用DNS劫持的方法，干扰用户正常上网，例如，当用户访问一个不存在（或者被封）的网站，电信运营商就会把用户劫持到一个满屏都是广告的页面，以帮助自己盈利
   - 劫持广告：原来的网页被放置到一个iframe里，并注入了flash广告
   - 面地址后面是不是有后缀
 * 低延迟说明全国各地（至少在省内或者附近，不会南方跨到北方）直接返回被劫持的IP
 * TCP查询同样中枪，排除黑阔采用全国发UDP包方式进行劫持
-* 同网段有那啥网站
-* 利用DNS实现DNS的负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
+* 利用DNS实现负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
   - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询
-* 由分层的 DNS 服务器实现的分布式数据库。运行在 UDP 上，使用 53 端口
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
-* 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同的类型（type） `Domain_name Time_to_live Class Type Value`
+* 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同类型（type）`Domain_name Time_to_live Class Type Value`
   - Domain_name：指出这条记录适用于哪个域名
   - Time_to_live：表明记录生存周期，也就是说最多可以缓存该记录多长时间
   - Class：一般总是IN
@@ -72,6 +78,7 @@
   - 递归查询(Recursive query)：如果主机所询问的本地域名服务器不知道被查询域名的 IP 地址，那么本地域名服务器就以 DNS 客户的身份，向其他根域名服务器继续发出查询请求报文，而不是让该主机自己进行下一步的查询。
   - 迭代查询(Iteration query)：当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的 IP 地址，要么告诉本地域名服务器：你下一步应当向哪一个域名服务器进行查询。然后让本地域名服务器进行后续的查询，而不是替本地域名服务器进行后续的查询。
 * 客户端到 Local DNS 服务器，Local DNS 与上级 DNS 服务器之间属于递归查询；DNS 服务器与根 DNS 服务器之前属于迭代查询
+* 传统基于 UDP 协议的公共 DNS 服务极易发生 DNS 劫持，从而造成安全问题
 * HTTPDNS
   - 利用 HTTP 协议与 DNS 服务器交互，代替了传统的基于 UDP 协议的 DNS 交互，绕开了运营商的 Local DNS，有效防止了域名劫持，提高域名解析效率
   - 由于 DNS 服务器端获取的是真实客户端 IP 而非 Local DNS 的 IP，能够精确定位客户端地理位置、运营商信息，从而有效改进调度精确性。
@@ -82,16 +89,15 @@
   - 如何进行改造支持 HttpDns
     + 阿里云的 HttpDNS 服务 `http://203.107.1.1/d?host=www.linkedkeeper.com`
 * DNS 请求是可以被抢答 `dig www.bennythink.com +short`
-* 传统的基于 UDP 协议的公共 DNS 服务极易发生 DNS 劫持，从而造成安全问题
 * 工具
   - [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
   - [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
-  - [jedisct1/dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. <https://dnscrypt.info>
+  - [dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. <https://dnscrypt.info>
   - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：<https://coding.net/u/scaffrey/p/hosts/git>
-  - [tenta-browser/tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS <https://tenta.com/test>
+  - [tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS <https://tenta.com/test>
   - [Cloudflare](https://www.cloudflare.com):域名注册服务
-  - [coredns/coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins <https://coredns.io>
-* 域名的NS记录（Name Server）是指处理域名解析的服务器
+  - [coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins <https://coredns.io>
+* 域名 NS 记录（Name Server）:处理域名解析的服务器
   - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
   - [DNSpod](https://console.dnspod.cn/)
   - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
@@ -236,48 +242,48 @@ ns3.dnsowl.com
 149.112.112.112
 ```
 
-## 传输层
+## 传输层 transport layer
 
 * 连接:用于保证可靠性和流量控制维护的某些状态信息，这些信息的组合，包括Socket、序列号和窗口大小称为连接
 * Socket：由 IP 地址和端口号组成
 * 序列号：用来解决乱序问题等
 * 窗口大小：用来做流量控制
 
-### TCP Transmission Control Protocol 传输控制协议
+### Transmission Control Protocol TCP 传输控制协议
 
-* 基于连接的协议、端到端和可靠的数据包发送。应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送前分割为 IP 包，然后在到达时重组
-
-+ 建立在不可靠的网络层 IP 协议之上，IP协议并不能提供任何可靠性机制，TCP的可靠性完全由自己实现，提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用
-+ 特点
-  * 能够确保连接的建立和数据包的发送
-  * 支持错误重传机制
-  * 支持拥塞控制，能够在网络拥堵的情况下延迟发送
-  * 能够提供错误校验和，甄别有害的数据包
-  * TCP头部：20个字节的固定首部
-+ 编程步骤
-  * 服务器端
-    - 创建一个socket，用函数socket()；
-    - 设置socket属性，用函数setsockopt(); *可选*
-    - 绑定IP地址、端口等信息到socket上，用函数bind();
-    - 开启监听，用函数listen()；
-    - 接收客户端上来的连接，用函数accept()；
-    - 收发数据，用函数send()和recv()，或者read()和write();
-    - 通过函数断开连接；
-    - 关闭监听；
+* 基于连接的协议、端到端和可靠数据包发送
+* 应用程序之间通信,当应用程序希望通过 TCP 与另一个应用程序通信时，会发送一个通信请求。这个请求必须被送到一个确切的地址。在双方“握手”之后，TCP 将在两个应用程序之间建立一个全双工 (full-duplex) 的通信。在数据传送前分割为 IP 包，在到达时重组
+* 建立在不可靠的网络层 IP 协议之上，IP协议并不能提供任何可靠性机制，TCP 可靠性完全由自己实现，提供的服务包括数据流传送、可靠性、有效流控、全双工操作和多路复用
+* 特点
+  - 能够确保连接的建立和数据包的发送
+  - 支持错误重传机制
+  - 支持拥塞控制，能够在网络拥堵的情况下延迟发送
+  - 能够提供错误校验和，甄别有害的数据包
+  - TCP头部：20个字节的固定首部
+* 编程步骤
+  - 服务器端
+    + 创建一个socket，用函数socket()；
+    + 设置socket属性，用函数setsockopt(); *可选*
+    + 绑定IP地址、端口等信息到socket上，用函数bind();
+    + 开启监听，用函数listen()；
+    + 接收客户端上来的连接，用函数accept()；
+    + 收发数据，用函数send()和recv()，或者read()和write();
+    + 通过函数断开连接；
+    + 关闭监听；
   - 客户端：
-    - 创建一个socket，用函数socket()；
-    - 设置socket属性，用函数setsockopt();* 可选
-    - 绑定IP地址、端口等信息到socket上，用函数bind();* 可选
-    - 设置要连接的对方的IP地址和端口等属性；
-    - 连接服务器，用函数connect()；
-    - 收发数据，用函数send()和recv()，或者read()和write();
-    - 关闭网络连接；
-+ 四元组可以确定唯一一个连接:源端口和目的端口字段 socket（IP+端口号）。TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口
+    + 创建一个socket，用函数socket()；
+    + 设置socket属性，用函数setsockopt();* 可选
+    + 绑定IP地址、端口等信息到socket上，用函数bind();* 可选
+    + 设置要连接的对方的IP地址和端口等属性；
+    + 连接服务器，用函数connect()；
+    + 收发数据，用函数send()和recv()，或者read()和write();
+    + 关闭网络连接；
+* 四元组可以确定唯一一个连接:源端口和目的端口字段 socket（IP+端口号）。TCP的包是没有IP地址的，那是IP层上的事。但是有源端口和目标端口
   * 本地端口由16位组成,因此本地端口的最多数量为 2^16 = 65535个,本地的最大HTTP连接数为： 本地最大端口数65535 * 本地ip数1 = 65535 个
   * 远端端口由16位组成,因此远端端口的最多数量为 2^16 = 65535个,远端的最大HTTP连接数为：远端最大端口数65535 * 远端(客户端)ip数+∞ = 无限制
   * 源地址和目的地址的字段（32位）是在 IP 头部中，作用是通过 IP 协议发送报文给对方主机。
   * 源端口和目的端口的字段（16位）是在 TCP 头部中，作用是告诉 TCP 协议应该把报文发给哪个进程。
-+ 概念
+* 概念
   * 同步序列编号 SYN Synchronize Sequence Numbers:TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立 TCP 连接时，首先会发送的一个信号。客户端在接受到 SYN 消息时，就会在自己的段内生成一个随机值 X，用来初始化和建立连接
     - RFC793 中认为 ISN 要和一个假的时钟绑定在一起ISN 每四微秒加一，当超过 2 的 32 次方之后又从 0 开始，要四个半小时左右发生 ISN 回绕
     - SYN 超时:慢慢重试，Linux 中就是默认重试 5 次，并且就是阶梯性的重试，间隔就是1s、2s、4s、8s、16s，再第五次发出之后还得等 32s 才能知道这次重试的结果，所以说总共等63s 才能断开连接
@@ -300,8 +306,7 @@ ns3.dnsowl.com
   * 检验和 —— 占 2 字节。检验和字段检验的范围包括首部和数据这两部分。在计算检验和时，要在TCP 报文段的前面加上 12 字节的伪部(协议字段为6，表示TCP)
   * 紧急指针字段 —— 占 16 位，指出在本报文段中紧急数据共有多少个字节(紧急数据放在本报文段数据的最前面)
   * 选项字段 —— 长度可变。① 最大报文段长度 MSS：MSS是指在TCP连接建立时，收发双发协商的通信时每一个报文段所能承载的数据字段的最大长度（并不是TCP报文段的最大长度，而是：MSS=TCP报文段长度-TCP首部长度），单位为字节（双方提供的MSS中的最小值，为本次连接的最大MSS值）；② 窗口扩大选项；③ 时间戳选项； ④ 选择确认选项
-
-* TCP报文首部
+* TCP 报文首部
   - 源端口和目的端口，各占2个字节，分别写入源端口和目的端口
   - 序列号:占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题
   - 确认应答号:占4个字节，是期望收到对方下一个报文的第一个数据字节的序号。例如，B收到了A发送过来的报文，其序列号字段是501，而数据长度是200字节，这表明B正确的收到了A发送的到序号700为止的数据。因此，B期望收到A的下一个数据序号是701，于是B在发送给A的确认报文段中把确认号置为701；用来解决不丢包的问题
@@ -317,30 +322,7 @@ ns3.dnsowl.com
   - 检验和，占2字节，校验首部和数据这两部分；
   - 紧急指针，占2字节，指出本报文段中的紧急数据的字节数；
   - 选项，长度可变，定义一些其他的可选的参数
-* 三次握手 建立连接：客户端与服务端建立起可靠的双工的连接。(3个包)
-  * 第一次握手：客户端向服务器发送请求报文段 SYN，其中同步位SYN=1，序号SEQ=x（表明传送数据时的第一个数据字节的序号是x），并进入SYN_SEND状态，等待服务器确认
-  * 第二次握手：服务器收到客户端发来的请求，如果同意建立连接，就发回一个确认报文段 SYN-ACK，该报文段中同步位SYN=1，确认号ACK=x+1，序号SEQ=y,此时服务器进入SYN_RECV状态
-  * 第三次握手：客户端收到服务器的确认报文段后，还需要向服务器给出确认 ACK，向其发送确认包ACK(ack=y+1)，客户端和服务器进入ESTABLISHED状态，完成三次握手
-  + 为了保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手
-  + 为了保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手
-  - 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去
-  - SACK_PERM:SACK选项 默认情况下，接受端接受到一个包后，发送 ACK 确认，但是，默认只支持顺序的确认，也就是说，发送 A, B, C 个包，如果我收到了 A, C的包， B没有收到，那么对于 C，这个包我是不会确认的，需要等 B这个包收到后再确认，那么 TCP有超时重传机制，如果一个包很久没有确认，就会当它丢失了，进行重传，这样会造成很多多余的包重传，浪费传输空间。为了解决这个问题， SACK就提出了选择性确认机制，启用 SACK 后，接受端会确认所有收到的包，这样发送端就只用重传真正丢失的包了。
-* 四次挥手 断开连接：服务器和客户端均可以主动发起断开TCP连接的请求，断开过程需要经过"四次挥手"（要对方关闭与对方关闭完成两次确认）,由TCP的半关闭（half-close）造成
-  - 主动关闭连接的一方，调用close()；协议层发送FIN包 发起一个断开请求（该端执行“主动关闭”（active close）），进入 FIN-WAIT-1 状态
-  - 被动关闭的一方收到FIN包后，协议层回复ACK；被动关闭一方进入`CLOSE_WAIT`状态,主动关闭的一方等待对方关闭，则进入`FIN_WAIT_2`状态；此时主动关闭的一方等待被动关闭一方的应用程序调用close操作
-  - 被动关闭的一方在完成所有数据发送后，调用close()操作；协议层发送FIN包给主动关闭的一方，等待对方的ACK，被动关闭的一方进入LAST_ACK状态；在 RFC 2581中的 4.2 节有提到ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下，TCP确认是有可能进行合并延迟确认的
-  - 主动关闭的一方收到FIN包，协议层回复ACK；此时，主动关闭连接的一方进入TIME_WAIT状态；而被动关闭一方进入CLOSED状态
-    + 主动关闭的一方，等待2MSL ( Maximum Segment Lifetime 最大报文段生存时间)时间，结束TIME_WAIT，进入CLOSED状态 `netstat -a | grep TIME_WAIT | wc -l`
-      * 保证TCP协议的全双工连接能够可靠关闭
-      * 保证这次连接的重复数据段从网络中消失
-    + 当TCP的一端发起主动关闭（收到 FIN 请求），在发出最后一个ACK 响应后，即第3次握手完成后，发送了第四次握手的ACK包后，就进入了TIME_WAIT状态
-    + 必须在此状态上停留两倍的MSL时间，等待2MSL时间主要目的是怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后，可以再发一个ACK应答包。
-    + 在 TIME_WAIT 状态时，两端的端口不能使用，要等到2MSL时间结束，才可继续使用。（IP 层）
-    + 当连接处于2MSL等待阶段时，任何迟到的报文段都将被丢弃
-  - time_wait 状态，存在的必要性：
-    + 可靠的实现 TCP 全双工连接的终止：四次挥手关闭 TCP 连接过程中，最后的 ACK 是由「主动关闭连接」的一端发出的，如果这个 ACK 丢失，则，对方会重发 FIN 请求，因此，在「主动关闭连接」的一段，需要维护一个 time_wait 状态，处理对方重发的 FIN 请求；
-    + 处理延迟到达的报文：由于路由器可能抖动，TCP 报文会延迟到达，为了避免「延迟到达的 TCP 报文」被误认为是「新 TCP 连接」的数据，则，需要在允许新创建 TCP 连接之前，保持一个不可用的状态，等待所有延迟报文的消失，一般设置为 2 倍的 MSL（报文的最大生存时间），解决「延迟达到的 TCP 报文」问题
-  - 有一个连接没有进入CLOSED状态之前，这个连接是不能被重用的
+
 * 状态编码：S指代服务器，C指代客户端，S&C表示两者，S/C表示两者之一
   * LISTEN S等待从任意远程TCP端口的连接请求。侦听状态
   * SYN-SENT C在发送连接请求后等待匹配的连接请求。通过connect()函数向服务器发出一个同步（SYNC）信号后进入此状态
@@ -358,10 +340,11 @@ ns3.dnsowl.com
   * 超时重传：TCP协议保证数据可靠性的一个重要机制，其原理是在发送某一个数据以后就开启一个计时器，在一定时间内如果没有得到发送的数据报的ACK报文，那么就重新发送数据，直到发送成功为止。
   * 流量控制：让发送速率不要过快，让接收方来得及接收。利用滑动窗口机制就可以实施流量控制。
 
-+ 为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销
-+ 面向字节流：应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送
-+ TCP的协议栈中维护着两个队列。一个是半连接队列(服务端收到请求未收到客户收到响应)，一个是全链接队列(服务端收到请求且收到客户收到响应)
-
+* 为了获得适当的传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销
+* 面向字节流：应用程序和TCP的交互是一次一个数据块（大小不等），但TCP把应用程序看成是一连串的无结构的字节流。TCP有一个缓冲，当应用程序传送的数据块太长，TCP就可以把它划分短一些再传送
+* TCP的协议栈中维护着两个队列
+  - 半连接队列(服务端收到请求未收到客户收到响应)
+  - 全链接队列(服务端收到请求且收到客户收到响应)
 * 不管是半连接队列还是全连接队列，都有最大长度限制，超过限制时，内核会直接丢弃，或返回 RST 包 `cat /proc/sys/net/ipv4/tcp_abort_on_overflow`
   - 0 ：表示如果全连接队列满了，那么 server 扔掉 client  发过来的 ack,更有利于应对突发流量
     + 只要服务器没有为请求回复 ACK，请求就会被多次重发。如果服务器上的进程只是短暂的繁忙造成 accept 队列满，那么当 TCP 全连接队列有空位时，再次接收到的请求报文由于含有 ACK，仍然会触发服务器端成功建立连接.提高连接建立的成功率
@@ -409,29 +392,13 @@ ns3.dnsowl.com
     + 0 值，表示关闭该功能；
     + 1 值，表示仅当 SYN 半连接队列放不下时，再启用它；
     + 2 值，表示无条件开启功能；
-  - 防御 SYN 攻击的方法：
+  - 防御 SYN 攻击方法：
     + 增大半连接队列：增大 `echo 1024 > /proc/sys/net/ipv4/tcp_max_syn_backlog` 和 `echo 1024 > /proc/sys/net/core/somaxconn`, 以及nginx 中 blacklog
     + 开启 tcp_syncookies 功能 `echo 1 > /proc/sys/net/ipv4/tcp_syncookies`
     + 减少 SYN+ACK 重传次数
-* 为什么建立连接是三次握手
-  - 主要就是为了初始化Seq Numer，SYN 的全称是 Synchronize Sequence Numbers，这个序号是用来保证之后传输数据的顺序性.重点在于同步初始序列号
-  - 建立连接的时候， 服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。
-* 关闭连接确是四次挥手呢？
-  - 因为 TCP 是全双工协议，也就是说双方都要关闭，每一方都向对方发送 FIN 和回应 ACK
-  - 断开连接发起方在接受到接受方的 FIN 并回复 ACK 之后并没有直接进入 CLOSED 状态，而是进行了一波等待，等待时间为 2MSL
-    + MSL 是 Maximum Segment Lifetime，即报文最长生存时间，RFC 793 定义的 MSL 时间是 2 分钟，Linux 实际实现是 30s，那么 2MSL 是一分钟。
-    + 就是怕被动关闭方没有收到最后的 ACK，如果被动方由于网络原因没有到，那么它会再次发送 FIN， 此时如果主动关闭方已经 CLOSED 那就傻了，因此等一会儿。
-    + 假设立马断开连接，但是又重用了这个连接，就是五元组完全一致，并且序号还在合适的范围内，虽然概率很低但理论上也有可能，那么新的连接会被已关闭连接链路上的一些残留数据干扰，因此给予一定的时间来处理一些残留数据。
-    + 问题
-      * 如果服务器主动关闭大量的连接，那么会出现大量的资源占用，需要等到 2MSL 才会释放资源。
-      * 如果是客户端主动关闭大量的连接，那么在 2MSL 里面那些端口都是被占用的，端口只有 65535 个，如果端口耗尽了就无法发起送的连接了
-    + 解决
-      * 快速回收，即不等 2MSL 就回收， Linux 的参数是 tcp_tw_recycle，还有 tcp_timestamps 不过默认是打开的
-      * 重用，即开启 tcp_tw_reuse 当然也是需要 tcp_timestamps 的
-  - 关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
-* 如果已经建立了连接，但是客户端突然出现故障了怎么办？
-  - TCP还设有一个保活计时器，显然，客户端如果出现故障，服务器不能一直等下去，白白浪费资源。
-  - 服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75秒发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接。
+* 如果已经建立连接，客户端突然出现故障了怎么办？
+  - TCP设有一个保活计时器，客户端如果出现故障，服务器不能一直等下去
+  - 服务器每收到一次客户端的请求后都会重新复位这个计时器，时间通常是设置为2小时，若两小时还没有收到客户端的任何数据，服务器就会发送一个探测报文段，以后每隔75秒发送一次。若一连发送10个探测报文仍然没反应，服务器就认为客户端出了故障，接着就关闭连接
 
 * 重传机制
   - 超时重传:在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据.会在数据包丢失或者确认应答丢失发生超时重传
@@ -471,12 +438,13 @@ ns3.dnsowl.com
     + RCV.NXT：是一个指针，指向期望从发送方发送来的下一个数据字节的序列号，也就是 #3 的第一个字节。
     + 指向 #4 的第一个字节是个相对指针，需要 RCV.NXT 指针加上 RCV.WND 大小的偏移量，就可以指向 #4 的第一个字节了
   - 接收窗口和发送窗口的大小是相等：并不是完全相等，接收窗口的大小是约等于发送窗口的大小的。滑动窗口并不是一成不变的
-* Flow Control 流量控制:一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量,管理两个节点之间数据传输速率的过程，以防止快速发送方压倒慢速接收方。它为接收机提供了一种控制传输速度的机制，这样接收节点就不会被来自发送节点的数据淹没
+* Flow Control 流量控制
+  - 一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量,管理两个节点之间数据传输速率的过程，以防止快速发送方压倒慢速接收方。为接收机提供了一种控制传输速度的机制，这样接收节点就不会被来自发送节点的数据淹没
   - 窗口分为固定窗口和可变窗口，可变窗口也就是滑动窗口，简单来说就是通信双方根据接收方的接收情况动态告诉发送端可以发送的数据量，从而实现发送方和接收方的数据收发能力匹配
   - 发送窗口和接收窗口中所存放的字节数，都是放在操作系统内存缓冲区中的，而操作系统的缓冲区，会被操作系统调整
   - HostB把当前的**rwnd**值放入报文头部的接收窗口receive window字段中，以此通知HostA自己还有多少可用空间， 而HostA则将未确认的数据量控制在rwnd值的范围内，从而避免HostB的接收缓存溢出
   - 并不关心链路带宽情况，只关心通信双方的接收发送缓冲区的空间大小，可以说是个速率流量匹配策略
-  - RcvBuffer是接收区总大小，buffered data是当前已经占用的数据，而free buffer space是当前剩余的空间，rwnd的就是free buffer space区域的字节数
+  - RcvBuffer是接收区总大小，buffered data是当前已经占用的数据，而free buffer space是当前剩余的空间，rwnd的就是free buffer space区域字节数
   - 数据包丢失现象
     + 操作系统于是就把接收缓存减少，发送方还按照之前商定的窗口大小发送数据，造成发送数据大小超过了接收窗口的大小，于是就把数据包丢失
     + 客户端收到，服务端发送的确认报文和通告窗口报文，尝试减少发送窗口到 100，客户端把窗口的右端向左收缩了 ，此时可用窗口的大小就会出现诡异的负值。TCP 规定是不允许同时减少缓存又收缩窗口的，而是采用先收缩窗口，过段时间在减少缓存，这样就可以避免了丢包情况
@@ -492,7 +460,7 @@ ns3.dnsowl.com
       * 让发送方避免发送小数据：使用 Nagle  算法，该算法的思路是延时处理，它满足以下两个条件中的一条才可以发送数据：
         - 要等到窗口大小 >= MSS 或是 数据大小 >= MSS
         - 收到之前发送数据的 ack 回包
-* 拥塞控制：避免「发送方」的数据填满整个网络
+* congestion control 拥塞控制：避免发送方数据填满整个网络
   - Van Jacobson范·雅各布森。这位力挽狂澜的人物入选了计算机名人堂Internet Hall of Fame，[Van Jacobson大神提出并设计实施了TCP/IP拥塞控制](https://ee.lbl.gov/papers/congavoid.pdf)
   - 如何感知拥塞:在TCP连接的发送方一般是基于丢包来判断当前网络是否发生拥塞，丢包可以由重传超时RTO和重复确认来做判断
   - 如何利用带宽:诚然拥塞影响很大，但是一直低速发包对带宽利用率很低也是很不明智的做法，因此要充分利用带宽就不能过低过高发送数据，而是保持在一个动态稳定的速率来提高带宽利用率，这个还是比较难的，就像茫茫黑夜去躲避障碍物。
@@ -533,18 +501,23 @@ ns3.dnsowl.com
 * AIMD:线性增加乘性减少算法是一个反馈控制算法，因其在TCP拥塞控制中的使用而广为人知，AIMD将线性增加拥塞窗口和拥塞时乘性减少窗口相结合，基于AIMD的多个连接理想状态下会达到最终收敛，共享相同数量的网络带宽，与其相关的乘性增乘性减MIMD策略和增性加增性减少AIAD都无法保证稳定性
 * 弱网环境下，尤其是移动互联网中之前的基于AIMD的拥塞控制策略可能会由于丢包的出现而大幅降低网络吞吐量，从而对网络带宽的利用率也大大下降，这时我们采用更加激进的控制策略，或许可以获得更好的效果和用户体验
 * RTT的增大影响了比如CUBIC这类拥塞控制算法的慢启动等阶段，我们知道慢启动阶段每经过1个RTT周期拥塞窗口cwnd将加倍，但是更大的RTT就意味着发送方以很低的速率发送数据，更多的时间是空闲的，发包的加速度极大将低了，所以整个吞吐量就下降很明显
-* 丢包反馈策略存在的问题
-  - 丢包即拥塞 现实中网络环境很复杂会存在错误丢包，很多算法无法很好区分拥塞丢包和错误丢包，因此在存在一定错误丢包的前提下在某些网络场景中并不能充分利用带宽。
+* 丢包反馈策略存在问题
+  - 丢包即拥塞:现实中网络环境很复杂会存在错误丢包，很多算法无法很好区分拥塞丢包和错误丢包，因此在存在一定错误丢包的前提下在某些网络场景中并不能充分利用带宽
   - 缓冲区膨胀问题BufferBloat 网络连接中路由器、交换机、核心网设备等等为了平滑网络波动而存在缓冲区，这些缓存区就像输液管的膨胀部分让数据更加平稳，但是Loss-Based策略在最初就像网络中发生数据类似于灌水，此时是将Buffer全部算在内的，一旦buffer满了，就可能出现RTT增加丢包等问题，就相当于有的容量本不该算在其中，但是策略是基于包含Buffer进行预测的，特别地在深缓冲区网络就会出现一些问题。
   - 网络负载高但无丢包事件：假设网络中的负载已经很高了，只要没有丢包事件出现，算法就不会主动减窗降低发送速率，这种情况下虽然充分利用了网络带宽，同时由于一直没有丢包事件出现发送方仍然在加窗，表现出了较强的网络带宽侵略性，加重了网络负载压力。
   - 高负载丢包： 高负载无丢包情况下算法一直加窗，这样可以预测丢包事件可能很快就出现了，一旦丢包出现窗口将呈现乘性减少，由高位发送速率迅速降低会造成整个网络的瞬时抖动性，总体呈现较大的锯齿状波动。
   - 低负载高延时丢包：在某些弱网环境下RTT会增加甚至出现非拥塞引起丢包，此时基于丢包反馈的拥塞算法的窗口会比较小，对带宽的利用率很低，吞吐量下降很明显，但是实际上网络负载并不高，所以在弱网环境下效果并不是非常理想
+* 优化
+  - Sysctl variable tcp_max_syn_backlog and socket variable somax_conn determines how many connections for which the kernel can complete 3 way handshake before app calling accept syscall.Once the backlog is full, new connections stay in SYN_RCVD state (when you run netstat) till the application calls accept syscall
+  - Apps can run out of file descriptors if there are too many short lived connections. Digging through tcp_reuse and tcp_recycle can help reduce time spent in the time wait state(it has its own risk). Making apps reuse a pool of connections instead of creating ad hoc connection can also help
+  - too many sockets in Close_wait state is a problem on application
+  - retransmissions can be a problem more on network or on OS stack than the application itself
 
 ![Alt text](__/_static/tcp_block_control.png "Optional title")
 ![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 ![半连接队列与全连接队列](../_static/commect_queue.png "Optional title")
 
-```
+```sh
 # 客户端和服务端都是 CentOs 6.5 ，Linux 内核版本 2.6.32
 # 服务端是 Nginx 服务 IP 192.168.3.200，端口为 8088
 # 客户端 IP 192.168.3.100
@@ -558,23 +531,51 @@ hping3 -S -p 80 --flood 192.168.33.10
 netstat -s | grep "SYNs to LISTEN" # 查看累计
 ```
 
-#### 三次握手
+#### 三次握手 three way handshake
 
-* 开始的时候客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器
-* TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程的连接请求，此时服务器就进入了LISTEN（监听）状态；
-* TCP客户进程也是先创建传输控制块TCB，然后向服务器发出连接请求报文，这是报文首部中的同部位SYN=1，同时选择一个初始序列号 seq=x ，此时，TCP客户端进程进入了 SYN-SENT（同步已发送状态）状态。TCP规定，SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号。
-* TCP服务器收到请求报文后，如果同意连接，则发出确认报文。确认报文中应该 ACK=1，SYN=1，确认号是ack=x+1，同时也要为自己初始化一个序列号 seq=y，此时，TCP服务器进程进入了SYN-RCVD（同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号。
-* TCP客户进程收到确认后，还要向服务器给出确认。确认报文的ACK=1，ack=y+1，自己的序列号seq=x+1，此时，TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态。TCP规定，ACK报文段可以携带数据，但是如果不携带数据则不消耗序号。
-* 当服务器收到客户端的确认后也进入ESTABLISHED状态，此后双方就可以开始通信了。
-* TCP客户端最后还要发送一次确认
+* 建立连接：客户端与服务端建立起可靠的双工连接。(3个包)
+* 开始时客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器
+* TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程连接请求，此时服务器就进入了LISTEN（监听）状态
+* 第一次握手：TCP客户进程也是先创建传输控制块TCB，然后向服务器发出连接请求报文段 SYN，其中同步位SYN=1，序号SEQ=x（表明传送数据时的第一个数据字节的序号是x），并进入SYN_SEND（同步已发送状态），等待服务器确认.TCP规定，SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号
+* 第二次握手：TCP服务器收到请求报文后，如果同意连接，则发出确认报文 SYN-ACK，该报文段中同步位SYN=1，确认号ACK=x+1，序号SEQ=y,此时服务器进入SYN_RECV （同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号
+* 第三次握手：TCP客户进程收到确认后，要向服务器给出确认 ACK。确认报文 ack=y+1. TCP连接建立，客户端进入ESTABLISHED（已建立连接）状态。TCP规定，ACK报文段可以携带数据，如果不携带数据则不消耗序号
   - 防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误
-* 第三次握手是可以携带数据的，前两次握手是不可以携带数据的
+* 为什么建立连接是三次握手
+  - 主要是为了初始化Seq Numer，SYN Synchronize Sequence Numbers，用来保证之后传输数据的顺序性.重点在于同步初始序列号
+  - 建立连接的时候，服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端
+  - 为保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手
+  - 为保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手
+* 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去
+* SACK_PERM
+  - SACK选项默认情况下，接受端接受到一个包后，发送 ACK 确认，但是，默认只支持顺序的确认，也就是说，发送 A, B, C 个包，如果我收到了 A, C的包，B没有收到，那么对于 C，这个包是不会确认的，需要等 B这个包收到后再确认，那么 TCP有超时重传机制，如果一个包很久没有确认，就会当它丢失了，进行重传，这样会造成很多多余的包重传，浪费传输空间。
+  - 为了解决这个问题， SACK就提出了选择性确认机制，启用 SACK 后，接受端会确认所有收到的包，这样发送端就只用重传真正丢失的包了。
 
 ```SH
 netstat -napt
+
+tcpdump -S -i any port 80
+curl www.linkedin.com
 ```
 
 #### 四次挥手
+
+* 断开连接：服务器和客户端均可以主动发起断开TCP连接请求，断开过程需要经过"四次挥手"（要对方关闭与对方关闭完成两次确认）,由TCP的半关闭（half-close）造成
+* 主动关闭连接一方，调用close(),kernel will send a FIN packet 发起一个断开请求（该端执行“主动关闭”（active close）），进入 FIN-WAIT-1 状态
+* 被动关闭一方收到FIN包后，协议层回复ACK；被动关闭一方进入`CLOSE_WAIT`状态,主动关闭一方等待对方关闭，则进入`FIN_WAIT_2`状态；此时主动关闭一方等待被动关闭一方的应用程序调用close操作
+* 被动关闭一方在完成所有数据发送后，调用close()操作；协议层发送FIN包给主动关闭一方，等待对方的ACK，被动关闭一方进入LAST_ACK状态
+  - 在 RFC 2581中的 4.2 节有提到ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下，TCP确认是有可能进行合并延迟确认的
+* 主动关闭一方收到FIN包，协议层回复ACK；此时，主动关闭连接一方进入TIME_WAIT状态；而被动关闭一方进入CLOSED状态
+* 主动关闭一方等待 2MSL ( Maximum Segment Lifetime 最大报文段生存时间)时间，结束TIME_WAIT->CLOSED状态 `netstat -a | grep TIME_WAIT | wc -l`
+  - 保证TCP协议全双工连接能够可靠关闭
+  - 保证这次连接重复数据段从网络中消失
+  - this socket can’t be reused for that time period to prevent any TCP state corruptions due to stray stale packets.
+  - 怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后，可以再发一个ACK应答包
+  - 在 TIME_WAIT 状态时，两端端口不能使用，要等到2MSL时间结束，才可继续使用。（IP 层）
+  - 当连接处于2MSL等待阶段时，任何迟到的报文段都将被丢弃
+* TIME_WAIT 状态，存在必要性：
+  - 可靠实现 TCP 全双工连接终止：最后 ACK 是由「主动关闭连接」的一端发出的，如果这个 ACK 丢失，则对方会重发 FIN 请求，因此，在主动关闭连接的一段，需要维护一个 time_wait 状态，处理对方重发 FIN 请求
+  - 处理延迟到达报文：由于路由器可能抖动，TCP 报文会延迟到达，为了避免「延迟到达的 TCP 报文」被误认为是「新 TCP 连接」的数据，需要在允许新创建 TCP 连接之前，保持一个不可用的状态，等待所有延迟报文的消失，一般设置为 2 倍的 MSL（报文的最大生存时间），解决「延迟达到的 TCP 报文」问题
+* 有一个连接没有进入CLOSED状态之前，这个连接是不能被重用的
 
 * 数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，然后客户端主动关闭，服务器被动关闭。
 * 客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。
@@ -582,7 +583,21 @@ netstat -napt
 * 客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。
 * 服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。
 * 客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗*∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。
-* 服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些。
+* 服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些
+
+* 关闭连接确是四次挥手呢？
+  - 因为 TCP 是全双工协议，也就是说双方都要关闭，每一方都向对方发送 FIN 和回应 ACK
+  - 断开连接发起方在接受到接受方的 FIN 并回复 ACK 之后并没有直接进入 CLOSED 状态，而是进行了一波等待，等待时间为 2MSL
+    + MSL 是 Maximum Segment Lifetime，即报文最长生存时间，RFC 793 定义的 MSL 时间是 2 分钟，Linux 实际实现是 30s，那么 2MSL 是一分钟。
+    + 就是怕被动关闭方没有收到最后的 ACK，如果被动方由于网络原因没有到，那么它会再次发送 FIN， 此时如果主动关闭方已经 CLOSED 那就傻了，因此等一会儿。
+    + 假设立马断开连接，但是又重用了这个连接，就是五元组完全一致，并且序号还在合适的范围内，虽然概率很低但理论上也有可能，那么新的连接会被已关闭连接链路上的一些残留数据干扰，因此给予一定的时间来处理一些残留数据。
+    + 问题
+      * 如果服务器主动关闭大量的连接，那么会出现大量的资源占用，需要等到 2MSL 才会释放资源。
+      * 如果是客户端主动关闭大量的连接，那么在 2MSL 里面那些端口都是被占用的，端口只有 65535 个，如果端口耗尽了就无法发起送的连接了
+    + 解决
+      * 快速回收，即不等 2MSL 就回收， Linux 的参数是 tcp_tw_recycle，还有 tcp_timestamps 不过默认是打开的
+      * 重用，即开启 tcp_tw_reuse 当然也是需要 tcp_timestamps 的
+  - 关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
 
 #### TIME_WAIT
 
@@ -673,42 +688,51 @@ lsmod | grep bbr
 ### UDP User Data Protocol 用户数据报协议
 
 + 编程步骤
-  * 服务器端：
+  * 服务器端
     - 创建一个socket，用函数socket()
     - 设置socket属性，用函数setsockopt(),可选
     - 绑定IP地址、端口等信息到socket上，用函数bind()
     - 循环接收数据，用函数recvfrom()
     - 关闭网络连接
-  * 客户端：
-    - 创建一个socket，用函数socket()
-    - 设置socket属性，用函数setsockopt() 可选
-    - 绑定IP地址、端口等信息到socket上，用函数bind() 可选
-    - 设置对方的IP地址和端口等属性
-    - 发送数据，用函数sendto()
-    - 关闭网络连接
+  - 客户端：
+    + 创建一个socket，用函数socket()
+    + 设置socket属性，用函数setsockopt() 可选
+    + 绑定IP地址、端口等信息到socket上，用函数bind() 可选
+    + 设置对方的IP地址和端口等属性
+    + 发送数据，用函数sendto()
+    + 关闭网络连接
 + 特点
-  * 面向非连接的协议，不可靠的传输层协议
-  * 提供了有限的差错检验功能
+  * 面向非连接 不可靠的传输层协议
+  * 提供有限的差错检验功能
   * 目的是希望以最小的开销来达到网络环境中的进程通信目的
   * 能够支持容忍数据包丢失的带宽密集型应用程序
-  * 具有低延迟的特点
-  * 能够发送大量的数据包
+  * 具有低延迟特点
+  * 能够发送大量数据包
   * 能够允许 DNS 查找，DNS 是建立在 UDP 之上的应用层协议
-+ 面向报文：应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小
-+ 不为IP提供可靠性、流控或差错恢复功能,让广播和细节控制交给应用的通信传输
-+ 首部开销小，只有8个字节:因为UDP不需要应答，所以来源端口是可选的，如果来源端口不用，那么置为零
-+ UDP支持的应用层协议主要有：NFS（网络文件系统）、SNMP（简单网络管理协议）、DNS（主域名称系统）、TFTP（通用文件传输协议）动态主机配置协议（DHCP）路由信息协议（RIP）自举协议（BOOTP）实时游戏（自定义重传策略，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成的影响）
-+ 场景：对网络通讯质量要求不高，要求网络通讯速度能尽量的快。流媒体、实时游戏、物联网
-  + UDP适用于一次只传送少量数据、对可靠性要求不高的应用环境。
+  + 适用于一次只传送少量数据、对可靠性要求不高的应用环境
   + 面向数据报方式
   + 网络数据大多为短消息
   + 拥有大量Client
   + 对数据安全性无特殊要求
   + 网络负担非常重，但对响应速度要求高
-- 优势
-  + 能够对握手过程进行精简，减少网络通信往返次数；
-  + 能够对TLS加解密过程进行优化；
++ 面向报文：应用层交给UDP多长的报文，UDP就照样发送，即一次发送一个报文。因此，应用程序必须选择合适大小的报文。若报文太长，则IP层需要分片，降低效率。若太短，会是IP太小
+- 不为IP提供可靠性、流控或差错恢复功能,让广播和细节控制交给应用的通信传输
++ 首部开销小，只有8个字节:因为UDP不需要应答，所以来源端口是可选的，如果来源端口不用，那么置为零
++ UDP支持应用层协议
+  * NFS（网络文件系统）
+  * SNMP（简单网络管理协议）
+  * DNS（主域名称系统）
+  * TFTP（通用文件传输协议）
+  * 动态主机配置协议（DHCP）
+  * 路由信息协议（RIP）
+  * 自举协议（BOOTP）
+  * 实时游戏（自定义重传策略，能够把丢包产生的延迟降到最低，尽量减少网络问题对游戏性造成的影响）
+* 场景：对网络通讯质量要求不高，要求网络通讯速度能尽量快。流媒体、实时游戏、物联网
+* 优势
+  + 能够对握手过程进行精简，减少网络通信往返次数
+  + 能够对TLS加解密过程进行优化
   + 没有拥塞控制：应用可以更好的控制发送时间和发送速率
+* Tweaking sysctl variables for rmem and wmem like we did for UDP can improve throughput of sender and receiver.
 
 #### TCP vs UDP
 
@@ -752,7 +776,7 @@ lsmod | grep bbr
 
 ## 网络层
 
-* 网络层主要作用：实现主机与主机之间的通信，也叫点对点（end to end）通信
+* 作用：实现主机与主机之间的通信，也叫点对点（end to end）通信
 * IP (网际协议)：计算机之间通信,无连接的通信协议
   - 不会占用两个正在通信的计算机之间的通信线路。这样，IP 就降低了对网络线路的需求
   - 每条线可以同时满足许多不同的计算机之间的通信需要

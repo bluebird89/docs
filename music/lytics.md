@@ -1131,6 +1131,90 @@ music
 不朽香江名句
 ```
 
+## See you again
+
+```
+[Charlie Puth]
+It's been a long day without you my friend
+And I'll tell you all about it when I see you again
+We've come a long way from where we began
+Oh I'll tell you all about it when I see you again
+When I see you again
+[Wiz Khalifa]
+Damn, who knew all the planes we flew
+Good things we've been through
+That I'll be standing right here
+Talking to you about another path
+I know we loved to hit the road and laugh
+But something told me that it wouldn't last
+Had to switch up look at things different see the bigger picture
+Those were the days hard work forever pays
+Now I see you in a better place
+How could we not talk about family when family's all that we got?
+Everything I went through you were standing there by my side
+And now you gonna be with me for the last ride
+[Charlie Puth]
+It's been a long day without you my friend
+And I'll tell you all about it when I see you again
+We've come a long way from where we began
+Oh I'll tell you all about it when I see you again
+When I see you again
+[Wiz Khalifa]
+First you both go out your way
+And the vibe is feeling strong and what's small turn to a friendship
+A frinedship turn into a bond and that bond will never be broken and the love will never get lost
+And when brotherhood come first then the line
+Will never be crossed established it on our own
+When that line had to be drawn and that line is what
+We reach so remember me when I'm gone
+How could we not talk about family when family's all that we got?
+Everything I went through you were standing there by my side
+And now you gonna be with me for the last ride
+[Charlie Puth]
+So let the light guide your way
+Hold every memory as you go
+And every road you take will always lead you home
+Hoo~
+It's been a long day without you my friend
+And I'll tell you all about it when I see you again
+We've come a long way from where we began
+Oh I'll tell you all about it when I see you again
+When I see you again
+When I see you again, see you again
+When I see you again
+```
+
+## may it be
+
+```
+May it be an evening star
+Shines down upon you
+May it be when darkness falls
+Your heart will be true
+You walk a lonely road
+Oh! How far you are from home
+
+Mornië utúlië (Darkness has come)
+Believe and you will find your way
+Mornië alantië (Darkness has fallen)
+A promise lives within you now
+
+May it be the shadow's call
+Will fly away
+May it be you journey on
+To light the day
+When the night is overcome
+You may rise to find the sun
+
+Mornië utúlië (Darkness has come)
+Believe and you will find your way
+
+Mornië alantië (Darkness has fallen)
+A promise lives within you now
+
+A promise lives within you now
+```
+
 ## Right Here Waiting
 
 ```

@@ -2086,6 +2086,7 @@ brew install bat
 * [pure-bash-bible](https://github.com/dylanaraps/pure-bash-bible):book A collection of pure bash alternatives to external processes.
 * [bash-guide](https://github.com/Idnan/bash-guide):A guide to learn bash
 * [Bash 脚本教程](https://wangdoc.com/bash) <https://github.com/wangdoc/bash-tutorial>
+* [learning_the_shell](https://linuxcommand.org/lc3_learning_the_shell.php)
 
 ```sh
 axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso
