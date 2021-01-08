@@ -9,26 +9,53 @@ a framework that allows for the distributed processing of large data sets across
 
 ## 组件介绍
 
-* HDFS,Hadoop Distributed File System （Hadoop分布式文件系统）被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点，例如典型的Master/Slave架构（这里不准备展开介绍）；然而HDFS是一个高度容错性的系统，适合部署在廉价的机器上
-  - HDFS中的默认副本数是3，这里涉及到一个问题为什么是3而不是2或者4。
-  - 机架感知（Rack Awareness）
-* Yarn,Yet Another Resource Negotiator(又一个资源协调者)
-  - 原来系统问题：
-    + 扩展性差。JobTracker兼备资源管理和作业控制两个功能。
-    + 可靠性差。在Master/Slave架构中,存在Master单点故障。
-    + 资源利用率低。Map Slot（1.x中资源分配的单位）和Reduce Slot分开,两者之间无法共享。
-    + 无法支持多种计算框架。MapReduce计算框架是基于磁盘的离线计算 模型,新应用要求支持内存计算、流式计算、迭代式计算等多种计算框架。
-  - Yarn通过拆分原有的JobTracker为：
-    + 全局的 ResourceManager(RM)。
-    + 每个Application有一个ApplicationMaster(AM)。
-  - 由Yarn专门负责资源管理,JobTracker可以专门负责作业控制,Yarn接替TaskScheduler的资源管理功能,这种松耦合的架构方式实现了Hadoop整体框架的灵活性。
-* Hive是基于Hadoop上的数据仓库基础构架，利用简单的SQL语句（简称HQL）来查询、分析存储在HDFS的数据。并且把SQL语句转换成MapReduce程序来数据的处理,与传统的关系数据库主要区别在以下几点：
+## HDFS Hadoop Distributed File System Hadoop分布式文件系统
+
+* 被设计成适合运行在通用硬件(commodity hardware)上的分布式文件系统。它和现有的分布式文件系统有很多共同点，例如典型的Master/Slave架构（这里不准备展开介绍）；然而HDFS是一个高度容错性的系统，适合部署在廉价的机器上
+* HDFS中的默认副本数是3，这里涉及到一个问题为什么是3而不是2或者4。
+* 机架感知（Rack Awareness）
+* The Hadoop Distributed File System (HDFS) is a distributed file system designed to run on commodity hardware. It has many similarities with existing distributed file systems. However, the differences from other distributed file systems are significant.
+* HDFS is highly fault-tolerant and is designed to be deployed on low-cost hardware. HDFS provides high throughput access to application data and is suitable for applications that have large data sets.
+* HDFS is part of the [Apache Hadoop Core project](https://github.com/apache/hadoop).
+* NameNode: is the arbitrator and central repository of file namespace in the cluster. The NameNode executes the operations such as opening, closing, and renaming files and directories.
+* DataNode: manages the storage attached to the node on which it runs. It is responsible for serving all the read and writes requests. It performs operations on instructions on NameNode such as creation, deletion, and replications of blocks.
+* Client: Responsible for getting the required metadata from the namenode and then communicating with the datanodes for reads and writes.
+
+![Alt text](../_static/hdfs_architecture.png "Optional title")
+
+## Yarn Yet Another Resource Negotiator 又一个资源协调者
+
+* 原来系统问题：
+  - 扩展性差。JobTracker兼备资源管理和作业控制两个功能。
+  - 可靠性差。在Master/Slave架构中,存在Master单点故障。
+  - 资源利用率低。Map Slot（1.x中资源分配的单位）和Reduce Slot分开,两者之间无法共享。
+  - 无法支持多种计算框架。MapReduce计算框架是基于磁盘的离线计算 模型,新应用要求支持内存计算、流式计算、迭代式计算等多种计算框架。
+* 通过拆分原有 JobTracker
+  - 全局 ResourceManager(RM)
+  - 每个Application有一个ApplicationMaster(AM)
+* 由Yarn专门负责资源管理,JobTracker可以专门负责作业控制,Yarn接替TaskScheduler的资源管理功能,这种松耦合的架构方式实现了Hadoop整体框架的灵活性
+* Client: It submits map-reduce(MR) jobs to the resource manager.
+* Resource Manager: It is the master daemon of YARN and is responsible for resource assignment and management among all the applications. Whenever it receives a processing request, it forwards it to the corresponding node manager and allocates resources for the completion of the request accordingly. It has two major components:
+* Scheduler: It performs scheduling based on the allocated application and available resources. It is a pure scheduler, which means that it does not perform other tasks such as monitoring or tracking and does not guarantee a restart if a task fails. The YARN scheduler supports plugins such as Capacity Scheduler and Fair Scheduler to partition the cluster resources.
+* Application manager: It is responsible for accepting the application and negotiating the first container from the resource manager. It also restarts the Application Manager container if a task fails.
+* Node Manager: It takes care of individual nodes on the Hadoop cluster and manages application and workflow and that particular node. Its primary job is to keep up with the Node Manager. It monitors resource usage, performs log management, and also kills a container based on directions from the resource manager. It is also responsible for creating the container process and starting it at the request of the Application master.
+* Application Master: An application is a single job submitted to a framework. The application manager is responsible for negotiating resources with the resource manager, tracking the status, and monitoring the progress of a single application. The application master requests the container from the node manager by sending a Container Launch Context(CLC) which includes everything an application needs to run. Once the application is started, it sends the health report to the resource manager from time-to-time.
+* Container: It is a collection of physical resources such as RAM, CPU cores, and disk on a single node. The containers are invoked by Container Launch Context(CLC) which is a record that contains information such as environment variables, security tokens, dependencies, etc.
+
+![Alt text](../_static/yarn_architecture.gif "Optional title")
+
+## Hive
+
+* 基于Hadoop上的数据仓库基础构架，利用简单的SQL语句（简称HQL）来查询、分析存储在HDFS的数据。并且把SQL语句转换成MapReduce程序来数据的处理,与传统的关系数据库主要区别在以下几点：
   + 存储的位置 Hive的数据存储在HDFS或者Hbase中，而后者一般存储在裸设备或者本地的文件系统中。
   + 数据库更新 Hive是不支持更新的，一般是一次写入多次读写。
   + 执行SQL的延迟 Hive的延迟相对较高，因为每次执行HQL需要解析成MapReduce。
   + 数据的规模上 Hive一般是TB级别，而后者相对较小。
   + 可扩展性上 Hive支持UDF/UDAF/UDTF，后者相对来说较差。
-* HBase，是Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统。它底层的文件系统使用HDFS，使用Zookeeper来管理集群的HMaster和各Region server之间的通信，监控各Region server的状态，存储各Region的入口地址等。HBase是Key-Value形式的数据库（类比Java中的Map）。那么既然是数据库那肯定就有表，HBase中的表大概有以下几个特点：
+
+## HBase
+
+* Hadoop Database，是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统。它底层的文件系统使用HDFS，使用Zookeeper来管理集群的HMaster和各Region server之间的通信，监控各Region server的状态，存储各Region的入口地址等。HBase是Key-Value形式的数据库（类比Java中的Map）。那么既然是数据库那肯定就有表，HBase中的表大概有以下几个特点：
   + 大：一个表可以有上亿行，上百万列（列多时，插入变慢）。
   + 面向列：面向列(族)的存储和权限控制，列(族)独立检索。
   + 稀疏：对于为空(null)的列，并不占用存储空间，因此，表可以设计的非常稀疏。
@@ -36,9 +63,9 @@ a framework that allows for the distributed processing of large data sets across
   + HBase中的数据都是字节，没有类型（因为系统需要适应不同种类的数据格式和数据源，不能预先严格定义模式）。
 * Spark是由伯克利大学开发的分布式计算引擎，解决了海量数据流式分析的问题。Spark首先将数据导入Spark集群，然后再通过基于内存的管理方式对数据进行快速扫描 ，通过迭代算法实现全局I/O操作的最小化，达到提升整体处理性能的目的，这与Hadoop从“计算”找“数据”的实现思路是类似的。
 
-## Hadoop集群硬件和拓扑规划
+## Hadoop 集群硬件和拓扑规划
 
-规划这件事情并没有最优解，只是在预算、数据规模、应用场景下之间的平衡。
+规划并没有最优解，只是在预算、数据规模、应用场景下之间的平衡。
 
 ### 硬件配置
 
@@ -118,6 +145,7 @@ MapReduce可谓Hadoop的精华所在，是用于数据处理的编程模型。Ma
 MapReduce的执行流程
 
 ![](../_static/mapreduce-process.png)
+![](../_static/map_reduce.jpg "Optional title")
 
 ## [HDP Hortonworks Data Platform](https://docs.hortonworks.com/)
 

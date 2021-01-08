@@ -2,57 +2,68 @@
 
 * 数据存储
 * 数据检索
+* 传统关系型DB，注重CA特性，数据一般存储在一台Server上
+  - 在多表查询时候并且数据量很大的时候效率很低
+* 分布式数据库环境中，为了保持构架扩展性，在分区容错性不变前提下，更注重AP，AP的优先级要高于C,必须从一致性和可用性中取其一
+  - HBase选择了一致性与分区可容忍性
+  - Cassandra选择了可用性与分区可容忍性
+* NoSQL 并不是完全放弃一致性（Consistency），保留数据最终一致性（Eventually Consistency）
+* 国际标准化组织 ISO 将图形数据库查询语言 GQL 通过为国际标准，这是继 SQL 以后第二种成为国际标准的数据库查询语言。
 
-## CAP 理论
+## [CAP 理论 CAP Theorem](https://sites.cs.ucsb.edu/~rich/class/cs293b-cloud/papers/Brewer_podc_keynote_2000.pdf)
 
-* Consistency（强一致性）：系统在执行某项操作后仍然处于一致的状态
+* Consistency（一致性）：系统在执行某项操作后仍然处于一致的状态
   - 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值，这样的系统被认为具有
   - 最终一致性：更新操作完成之后，用户最终会读取到数据更新之后的值，但是会存在一定的时间窗口，用户仍会读取到更新之前的旧数据；在一定的时间延迟之后，数据达到一致性
+    +  “In a steady state, the system will eventually return the last written value”. Clients therefore may face an inconsistent state of data as updates are in progress.
+  - Read Your Own Writes Consistency: Clients will see their updates immediately after they are written. The reads can hit nodes other than the one where it was written. However they might not see updates by other clients immediately.
+  - Session Consistency: Clients will see the updates to their data within a session scope. This generally indicates that reads & writes occur on the same server. Other clients using the same nodes will receive the same updates.
+  - Casual Consistency:A system provides causal consistency if the following condition holds: write operations that are related by potential causality are seen by each process of the system in order. Different processes may observe concurrent writes in different orders
 * Availability（可用性）：用户执行的操作在一定时间内，必须返回结果。如果超时，那么操作回滚，跟操作没有发生一样
 * Partition Tolerance（分区容错）：分布式系统是由多个分区节点组成的，每个分区节点都是一个独立的Server，P属性表明系统能够处理分区节点的动态加入和离开
 
-## 数据库
-
-* 传统的关系型DB，注重的是CA特性，数据一般存储在一台Server上
-  - 在多表查询的时候并且数据量很大的时候效率很低
-* 处理海量数据的分布式存储和处理系统更注重AP，AP的优先级要高于C
-* NoSQL并不是完全放弃一致性（Consistency），保留数据的最终一致性（Eventually Consistency）
-* 在分布式数据库环境中，为了保持构架的扩展性，在分区容错性不变的前提下，必须从一致性和可用性中取其一
-  - HBase选择了一致性与分区可容忍性
-  - Cassandra选择了可用性与分区可容忍性
-* 国际标准化组织 ISO 将图形数据库查询语言 GQL 通过为国际标准，这是继 SQL 以后第二种成为国际标准的数据库查询语言。
-
-## 关系型数据库管理系统(RDBMS Relational Database Management System)
-
-* 采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解
-* 行和列被称为表，一组表组成了数据库
-* 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码
-* 优势
-  - 易于理解
-  - 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。
-  - 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。
-  - 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。
-
 ## 类型
 
-* OLTP（Online Transaction Processing）：传统的关系型数据库，主要用于处理基本的、日常的事务处理
+* OLTP（Online Transaction Processing）：传统关系型数据库，主要用于基本、日常事务处理
   - 通过 INSERT、UPDATE 和 DELETE 语句对表中的数据进行增加、修改和删除；
   - 通过 UPDATE 和 DELETE 语句对符合条件的数据进行批量的删除；
   - 通过 SELECT 语句和主键查询某条记录的全部列；
   - 通过 SELECT 语句在表中查询符合某些条件的记录并根据某些字段排序；
   - 通过 SELECT 语句查询表中数据的行数；
   - 通过唯一索引保证表中某个字段或者某几个字段的唯一性；
-* OLAP（Online Analytical Processing）：主要在数据仓库中使用，用于支持一些复杂的分析和决策
+* OLAP（Online Analytical Processing）：主要在数据仓库中使用，用于支持一些复杂分析和决策
+
+## 关系型数据库管理系统 Relational Database Management System RDBMS
+
+* 采用了关系模型来组织数据的数据库，其以行和列的形式存储数据，以便于用户理解
+* 行和列被称为表，一组表组成了数据库
+* 用户通过查询来检索数据库中的数据，而查询是一个用于限定数据库中某些区域的执行代码
+* Advantages
+  - Flexible Data Models:Most NoSQL systems feature flexible schemas. A flexible schema means you can easily modify your database schema to add or remove fields to support for evolving application requirements. This facilitates with continuous application development of new features without database operation overhead.
+  - Horizontal Scaling:Most NoSQL systems allow you to scale horizontally, which means you can add in cheaper & commodity hardware, whenever you want to scale a system. On the other hand SQL systems generally scale Vertically (a more powerful server). NoSQL systems can also host huge data sets when compared to traditional SQL systems.
+  - Fast Queries:NoSQL can generally be a lot faster than traditional SQL systems due to data denormalization and horizontal scaling. Most NoSQL systems also tend to store similar data together facilitating faster query responses.
+  - Developer productivity:NoSQL systems tend to map data based on the programming data structures. As a result developers need to perform fewer data transformations leading to increased productivity & fewer bugs.
+  - 易于理解
+  - 关系型二维表的结构非常贴近现实世界，二维表格，容易理解。
+  - 支持复杂查询 可以用 SQL 语句方便的在一个表以及多个表之间做非常复杂的数据查询。
+  - 支持事务 可靠的处理事务并且保持事务的完整性，使得对于安全性能很高的数据访问要求得以实现。
+* 类型
+  - Document databases: They store data in documents similar to JSON (JavaScript Object Notation) objects. Each document contains pairs of fields and values. The values can typically be a variety of types including things like strings, numbers, booleans, arrays, or objects, and their structures typically align with objects developers are working with in code. The advantages include intuitive data model & flexible schemas. Because of their variety of field value types and powerful query languages, document databases are great for a wide variety of use cases and can be used as a general purpose database. They can horizontally scale-out to accomodate large data volumes. Ex: MongoDB, Couchbase
+  - Key-Value databases: These are a simpler type of databases where each item contains keys and values. A value can typically only be retrieved by referencing its value, so learning how to query for a specific key-value pair is typically simple. Key-value databases are great for use cases where you need to store large amounts of data but you don’t need to perform complex queries to retrieve it. Common use cases include storing user preferences or caching. Ex: Redis, DynamoDB, Voldemort/Venice (Linkedin),
+  - Wide-Column stores: They store data in tables, rows, and dynamic columns. Wide-column stores provide a lot of flexibility over relational databases because each row is not required to have the same columns. Many consider wide-column stores to be two-dimensional key-value databases. Wide-column stores are great for when you need to store large amounts of data and you can predict what your query patterns will be. Wide-column stores are commonly used for storing Internet of Things data and user profile data. Cassandra and HBase are two of the most popular wide-column stores.
+  - Graph Databases: These databases store data in nodes and edges. Nodes typically store information about people, places, and things while edges store information about the relationships between the nodes. The underlying storage mechanism of graph databases can vary. Some depend on a relational engine and “store” the graph data in a table (although a table is a logical element, therefore this approach imposes another level of abstraction between the graph database, the graph database management system and the physical devices where the data is actually stored). Others use a key-value store or document-oriented database for storage, making them inherently NoSQL structures. Graph databases excel in use cases where you need to traverse relationships to look for patterns such as social networks, fraud detection, and recommendation engines. Ex: Neo4j
+
 
 ## NoSQL
 
+* NASA used a NoSQL database to track inventory for the Apollo mission.
 * 场景
   - 少量数据存储，高速读写访问。此类产品通过数据全部in-momery 的方式来保证高速访问，同时提供数据落地的功能，实际这正是Redis最主要的适用场景。
   - 海量数据存储，分布式系统支持，数据一致性保证，方便的集群节点添加/删除。
   - 这方面最具代表性的是dynamo和bigtable 2篇论文所阐述的思路。前者是一个完全无中心的设计，节点之间通过gossip方式传递集群信息，数据保证最终一致性，后者是一个中心化的方案设计，通过类似一个分布式锁服务来保证强一致性,数据写入先写内存和redo log，然后定期compat归并到磁盘上，将随机写优化为顺序写，提高写入性能。
   - Schema free，auto-sharding等。比如目前常见的一些文档数据库都是支持schema-free的，直接存储json格式数据，并且支持auto-sharding等功能，比如mongodb
 
-## 时间序列数据库 Time Series Database (TSDB)
+## 时间序列数据库 Time Series Database TSDB
 
 * 一系列数据点按照时间顺序排列，具有不变性,、唯一性、时间排序性。需要展现其历史趋势、周期规律、异常性的，进一步对未来做出预测分析的，都是时序数据库适合的场景。
 * 原理
@@ -85,8 +96,8 @@
 * 数据库
   - beringei：Facebook
   - TimeScaleDB：PostgreSQL
-  - [rethinkdb/rethinkdb](https://github.com/rethinkdb/rethinkdb) The open-source database for the realtime web. <https://rethinkdb.com>
-  - [VividCortex](https://www.vividcortex.com)：MySQL
+  - [rethinkdb](https://github.com/rethinkdb/rethinkdb) The open-source database for the realtime web. <https://rethinkdb.com>
+  - [VividCortex](https://www.vividcortex.com)
   - [Graphite](https://graphiteapp.org/)
     + [文档](https://graphite.readthedocs.io/en/latest/index.html)
   - [InfluxDB](https://github.com/influxdata/influxdb)：高频度低保留期用Influxdb，低频度高保留期用ES
@@ -95,12 +106,15 @@
     + [文档](dolphindb/Tutorials_CN)
   - Informix TimeSeries
 
-## 事务 (ACID)
+## 事务 Transaction
 
-* 原子性 atomicity:一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能只执行其中的一部分操作
-* 一致性（consistency) 数据库总是从一个一致性的状态转换到另外一个一致性的状态
-* 隔离性（isolation) 通常来说，一个事务所做的修改在最终提交以前，对其他事务是不可见的
-* 持久性（durability) 一旦事务提交，则其所做的修改就会永久保存到数据库中。此时即使系统崩溃，修改的数据也不会丢失。持久性是个有点模糊的概念，因为实际上持久性也分很多不同的级别。有些持久性策略能够提供非常强的安全保障，而有些则未必。而且「不可能有能做到100%的持久性保证的策略」否则还需要备份做什么
+* a unit of work that can comprise multiple statements, executed together
+* 原子性 atomicity 一个事务被视为一个不可分割最小工作单元，整个事务中所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能只执行其中的一部分操作
+  - ensures this partially failed transaction is rolled back
+* 一致性 consistency 数据库总是从一个一致性的状态转换到另外一个一致性的状态
+* 隔离性 isolation 一个事务所做修改在最终提交以前，对其他事务是不可见的
+* 持久性 durability 一旦事务提交，则其所做修改就会永久保存到数据库中。此时即使系统崩溃，修改的数据也不会丢失
+  - 是个有点模糊的概念，因为实际上持久性也分很多不同的级别。有些持久性策略能够提供非常强的安全保障，而有些则未必。而且「不可能有能做到100%的持久性保证的策略」否则还需要备份做什么
 
 ## 命名
 
@@ -114,16 +128,28 @@
 
 一种特殊目的的编程语言，是一种数据库查询和程序设计语言程序设计语言，用于存取数据以及查询、更新和管理关系数据库系统
 
-## 索引
+## 索引 Index
 
-索引是用来快速检索出具有特定值的记录。没有索引，数据库就必须从第一条记录开始进行全表扫描，直到找出相关的行。数据越多，检索的代价就越高，检索时如果表的列存在索引，那么MySQL就能快速到达指定位置去搜索数据文件，而不必查看所有数据。主要有两种结构：B+Tree索引和Hash索引。
-
-* 主键:本质是保证唯一记录，并不要求主键是连续的。用一个UUID作为主键，即varchar(32)，除了占用的存储空间较多外，字符串主键具有不可预测性。
+* 用来快速检索出具有特定值记录。没有索引，数据库就必须从第一条记录开始进行全表扫描，直到找出相关的行。数据越多，检索代价就越高，检索时如果表的列存在索引，那么MySQL就能快速到达指定位置去搜索数据文件，而不必查看所有数据。Most indexes use B+ tree structure.
+  - Speeds up queries (in large tables that fetch only a few rows, min/max queries, by eliminating rows from consideration etc)
+* 主键 Primary key
+  - 本质是保证唯一记录，并不要求主键是连续的。用一个UUID作为主键，即varchar(32)，除了占用的存储空间较多外，字符串主键具有不可预测性。
   - 主键不可修改:主键的第二个作用是让其他表的外键引用自己，从而实现关系结构
   - 业务字段不可用于主键:主键必须使用单独的，完全没有业务含义的字段，也就是主键本身除了唯一标识和不可修改这两个责任外，主键没有任何业务含义。
   - 主键应该使用字符串:自增主键最大的问题是把公司业务的关键运营数据完全暴露给了竞争对手和VC
+  - one or more columns that contain UNIQUE values, and cannot contain NULL values.
+  - A table can have only ONE primary key.
+  - An index on it is created by default.
+* Foreign key
+  - links two tables together.
+  - Its value(s) match a primary key in a different table
+  - Not null: Does not allow null values
+  - Unique: Value of column must be unique across all rows
+  - Default: Provides a default value for a column if none is specified during insert
+* unique
+* fulltext
 
-## 连接
+## 连接 Joins
 
 左边表A与右边表B
 
@@ -156,14 +182,14 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * 互联网产品的应用中，人们大多数情况下会对应用服务器请求读操作，这样应用服务器可以把读操作请求分发到若干个从数据库中，这样就避免了主数据库的并发请求次数过高的问题
 * 从数据库的内容基本上可以说是主数据库的一份全拷贝，这样的技术称之为Replication。Replication在实现主从数据同步时，通常采用Transaction Log的方式，比如，当一条数据插入到主数据库的时候，主数据库会像Trasaction Log中插入一条记录来声明这次数据库写纪录的操作。之后，一个Replication Process会被触发，这个进程会把Transaction Log中的内容同步到从数据库中
 
-### 扩展
+## 扩展
 
 * 水平扩展：通过增加服务器数量来对系统扩容。在这样的构架下，单台服务器的配置并不会很高，可能是配置比较低、很廉价的 PC，每台机器承载着系统的一个子集，所有机器服务器组成的集群会比单体服务器提供更强大、高效的系统容载量。这样的问题是系统构架会比单体服务器复杂，搭建、维护都要求更高的技术背景。
 * 垂直扩展：是针对一台服务器进行硬件升级。仅限于单台服务器的扩容，尽可能的增加单台服务器的硬件配置。优点是构架简单，只需要维护单台服务器。
 
-## [clickhouse](https://github.com/ClickHouse/ClickHouse)
+## [ClickHouse](https://github.com/yandex/ClickHouse)
 
-* a free analytics DBMS for big data [](https://clickhouse.tech/docs/zh/)
+* ClickHouse is a free analytic DBMS for big data. <https://clickhouse.tech>
 * Yandex（俄罗斯最大的搜索引擎）开源的一个用于实时数据分析的基于列存储的数据库
 
 ## 分层数据库
@@ -172,19 +198,19 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * E. F. Codd（埃德加·弗兰克·科德）在1970年的论文“大型共享数据库的数据关系模型”中提出了关系模型
 * 分层模型是一种自下而上的模型，是对具体现实的表示。而关系模型是基于关系代数的抽象模型，并且是自上而下的
 
-## 数据库中间件 Proxy
+## 中间件 Proxy
 
 * 在电商系统中，随着业务量的增大，读写 QPS 越来越高，单节点 MySQL 实例压力也变得越来越大，单纯的对服务器硬件升级已经无法满足生产环境的需要。对数据分片增加多个节点，降低单节点 MySQL 实例的压力成了必然选择。
-* [Qihoo360/Atlas](https://github.com/Qihoo360/Atlas):A high-performance and stable proxy for MySQL, it is developed by Qihoo's DBA and infrastructure team
+* [Atlas](https://github.com/Qihoo360/Atlas):A high-performance and stable proxy for MySQL, it is developed by Qihoo's DBA and infrastructure team
 * [Mycat](link)
 * [TDDL](link)
-* [Vitess](link)
+* [Vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. <http://vitess.io>
 * [OneProxy](link)
 * [Gaea](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650779105&idx=1&sn=ed5093ab25a2b002cded6485fde97562&chksm=f3f91874c48e916252f7b46cccf5e4d6473feccaa4c078a84bbe24495317c6bdc59a59dbe699)
 
 ## 数据中心 Internet Data Center IDC
 
-## [Lede-Inc/Cetus](https://github.com/Lede-Inc/cetus)
+## [Cetus](https://github.com/Lede-Inc/cetus)
 
 专注于稳定、性能和分布式事务的MySQL数据库中间件,包括以下五个部分，分别是读写分离、分库、SQL 解析、连接池和管理功能。Cetus 的整体工作流程分为:
 
@@ -201,8 +227,8 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
   - 无状态流量（Stateless）：绝大多数的网络流量都是无状态的，可以非常容易地将这些流量转发到其他的数据中心
     + 引入排出乘数（Drain Multiplier）并引入了几个不同的阶段防止流量转移的太过迅速影响其他数据中心的负载
   - 粘性流量（Sticky）：为了提升用户体验，在某些场景下系统会为每个用户会由特定的机器处理以维持用户会话，对于这种流量，可以将新的粘性流量转发到其他数据中心并强制断开已建立的会话触发客户端的重连；
-  - 复制流量（Replication）：当发生数据中心级别故障时，我们可能需要修改或者管理存储系统的复制流量，我们可能需要在其他数据中心创建副本来处理读请求，而副本的创建需要占用数据中心内部或者跨数据中心的网络资源；
-  - 有状态流量（Stateful）：主从复制的系统在主节点发生故障时，我们需要将主节点的状态拷贝至健康数据中心中的从节点，并将从节点进程成主节点以服务请求；
+  - 复制流量（Replication）：当发生数据中心级别故障时，可能需要修改或者管理存储系统的复制流量，我们可能需要在其他数据中心创建副本来处理读请求，而副本的创建需要占用数据中心内部或者跨数据中心的网络资源
+  - 有状态流量（Stateful）：主从复制的系统在主节点发生故障时，我们需要将主节点的状态拷贝至健康数据中心中的从节点，并将从节点进程成主节点以服务请求
 
 ## MySQL vs PG
 
@@ -307,28 +333,26 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 图书
 
-* 《数据库系统概念》
-* 《数据库系统实现》
-* 《SQL基础教程》
-* 《[SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)》
-* 《[SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)》
-* 《[高性能MySQL](https://www.amazon.cn/gp/product/B00C1W58DE)》
-* 《[MySQL技术内幕 : InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)》
-* 《[深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)》
-* 《SQL必知必会(第4版)》
-* 《SQL 反模式》
-* 《收获，不止Oracle》（第2版）
+* 数据库系统概念
+* 数据库系统实现
+* SQL基础教程
+* [SQL应用重构](https://www.amazon.cn/gp/product/B00H6X6M1A)
+* [SQL Cookbook](https://www.amazon.cn/gp/product/0596009763)
+* SQL必知必会(第4版)
+* SQL 反模式
+* [高性能MySQL](https://www.amazon.cn/gp/product/B00C1W58DE)
+* [MySQL技术内幕: InnoDB存储引擎（第2版）](https://www.amazon.cn/gp/product/B00ETOV48K)
+* [深入浅出MySQL : 数据库开发、优化与管理维护](https://www.amazon.cn/gp/product/B00KR87J8G)
+* 收获，不止Oracle（第2版）
 * Readings in Database Systems
   - Joe Hellerstein’s Berkeley CS 186
 
 ## 工具
 
 * [harelba/q](https://github.com/harelba/q):Run SQL directly on CSV or TSV files <http://harelba.github.io/q/>
-* [ClickHouse](https://github.com/yandex/ClickHouse):ClickHouse is a free analytic DBMS for big data. <https://clickhouse.tech>
 * [osquery](https://github.com/facebook/osquery):SQL powered operating system instrumentation, monitoring, and analytics. <https://osquery.io>
   - [Docs](https://osquery.readthedocs.io)
 * [adminer](https://github.com/vrana/adminer):Database management in a single PHP file <https://www.adminer.org/>
-* [vitess](https://github.com/youtube/vitess):Vitess is a database clustering system for horizontal scaling of MySQL. <http://vitess.io>
 * [redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 * [soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
 * [prisma](https://github.com/prisma/prisma):⚡️ Prisma makes working with databases easy <https://www.prisma.io>
@@ -345,7 +369,8 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 参考
 
-* [数据库的原理](http://blog.jobbole.com/100349/)
+* [SQL Server Tutorial](https://www.sqlservertutorial.net/)
+* [数据库原理](http://blog.jobbole.com/100349/)
 * [Let's Build a Simple Database](https://cstack.github.io/db_tutorial/)
-* [enochtangg/quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
+* [quick-SQL-cheatsheet](https://github.com/enochtangg/quick-SQL-cheatsheet):A quick reminder of all SQL queries and examples on how to use them.
 * [Pool-Sizing](https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing)

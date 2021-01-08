@@ -46,6 +46,15 @@
   - 传输成本是零
   - 网络是同质的
 
+## Versioning of Data
+
+* Timestamps: This is the most obvious solution. You sort updates based on chronological order and choose the latest update. However this relies on clock synchronization across different parts of the infrastructure. This gets even more complicated when parts of systems are spread across different geographic locations.
+* Optimistic Locking: You associate a unique value like a clock or counter with every data update. When a client wants to update data, it has to specify which version of data needs to be updated. This would mean you need to keep track of history of the data versions.
+* Vector Clocks:A vector clock is defined as a tuple of clock values from each node. In a distributed environment, each node maintains a tuple of such clock values which represent the state of the nodes itself and its peers/replicas. A clock value may be real timestamps derived from local clock or version no.
+  - advantages over other conflict resolution mechanism
+    + No dependency on synchronized clocks
+    + No total ordering of revision nos required for casual reasoning
+
 ## 高可用 High Availability HA
 
 通过设计减少系统不能提供服务的时间
@@ -317,7 +326,11 @@ CREATE TABLE `leaf_alloc` (
 ) ENGINE=InnoDB;
 ```
 
-## 分片
+## Partitioning
+
+### Clustering
+
+### 分片 Sharding
 
 * 对资料的切割，也就是一套主从已经装不下了.分片的逻辑可以放在客户端，比如驱动层的数据库中间件，Memcache等；也可以放在服务端，比如ES、Mongo等
 * 分片的信息组成了一组元数据，存放了切割的规则。这些信息可以借助外部的存储比如KAFKA；也有的直接同步在集群每个节点的内存中，比如ES。比
@@ -329,11 +342,18 @@ CREATE TABLE `leaf_alloc` (
 * 切分字段的选择非常重要，如果几个维度都很必要，解决的方式就是冗余—-按照每个切分维度，都写一份数据
 * 范围分片
 
+#### Consistent Hashing
+
 ## 副本
 
 * 副本越多，可用性越高,延迟越大
 * 既要保证数据的增量迁移，又要保证集群的正确服务
 * master选举通常都是投票机制，所以最小组集群的台数一般都设置成n/2+1
+
+## Quorum
+
+the minimum number of nodes in a cluster that must be online and be able to communicate with each other. If any additional node failure occurs beyond this threshold, the cluster will stop running.
+* need a majority of the nodes. Commonly it is (N/2 + 1), where N is the total no of nodes in the system
 
 ## Quorum/NWR
 

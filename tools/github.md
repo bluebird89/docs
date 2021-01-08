@@ -150,9 +150,9 @@ sudo apt install gh
 * hexo：添加文章后现hexo g（生成） hexo d（部署）
 * jekyll：直接push到master就好
 
-## [521xueweihan / GitHub520](https://github.com/521xueweihan/GitHub520)
+## [GitHub520](https://github.com/521xueweihan/GitHub520)
 
-kissing_heart让你“爱”上 GitHub，解决访问时图裂、加载慢的问题。 hellogithub.com
+kissing_heart让你“爱”上 GitHub，解决访问时图裂、加载慢的问题。
 
 ```
 /etc/hosts

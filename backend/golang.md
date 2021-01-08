@@ -1328,6 +1328,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * Go语言程序设计
 * [Go Books](https://github.com/dariubs/GoBooks):List of Golang books
 * Writing An Interpreter In Go
+* [Go 语言高性能编程](https://github.com/geektutu/high-performance-go)
 
 ## 项目
 

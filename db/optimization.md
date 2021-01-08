@@ -46,9 +46,10 @@
 
 ### [EXPLAIN](https://mp.weixin.qq.com/s/YkichgBT7TGNraus1sRO-w)
 
+* EXPLAIN <query> analyzes query plans from the optimizer, including how tables are joined, which tables/rows are scanned etc.
+* Explain analyze shows the above and additional info like execution cost, number of rows returned, time taken etc.
 * 获取查询语句的执行计划，索引使用、扫描范围
 * id：该语句的唯一标识。如果explain的结果包括多个id值，则数字越大越先执行；而对于相同id的行，则表示从上往下依次执行
-
 - select_type:查询类型
   + SIMPLE： 简单查询，不包含 UNION 查询或子查询
   + PRIMARY： 主查询，或者最外层的查询
@@ -173,13 +174,17 @@ EXPLAIN SELECT * FROM order_copy WHERE id=12345\G; # 给id添加了索引，才�
 
 * 分析字段和其实际的数据，并会给一些有用的建议。只有表中有实际的数据，这些建议才会变得有用，因为要做一些大的决定是需要有数据作为基础的
 
-### profiling:准确的SQL执行消耗系统资源的信息
+### profiling
 
-### DESCRIBE：可以放在SELECT, INSERT, UPDATE, REPLACE 和 DELETE语句前边使用
+* 准确SQL执行消耗系统资源信息
+
+### DESCRIBE
+
+* 可以放在SELECT, INSERT, UPDATE, REPLACE 和 DELETE语句前边使用
 
 ### [`OPTIMIZER_TRACE`](https://mp.weixin.qq.com/s/QO_EVtpvCiYPdtDFOWWXhg)
 
-一个跟踪功能，跟踪执行的语句的解析优化执行的过程，并将跟踪到的信息记录到`INFORMATION_SCHEMA.OPTIMIZER_TRACE`表中
+一个跟踪功能，跟踪执行语句的解析优化执行过程，并将跟踪到的信息记录到`INFORMATION_SCHEMA.OPTIMIZER_TRACE`表中
 
 - 从5.6开始提供了相关的功能，但是MySQL默认是关闭它的,在需要使用的时候才会手动去开启
 - 通过optimizer_trace系统变量启停跟踪功能
@@ -338,77 +343,87 @@ kill SESSION_ID;   # 杀掉有问题的session
     + 将net.ipv4.tcp_tw_recycle、net.ipv4.tcp_tw_reuse都设置为1，减少TIME_WAIT，提高TCP效率
     + 至于网传的read_ahead_kb、nr_requests这两个参数，我经过测试后，发现对读写混合为主的OLTP环境影响并不大（应该是对读敏感的场景更有效果），不过没准是我测试方法有问题，可自行斟酌是否调整
 * 分库分表+读写分离
+* vmstat
+  - Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O
+  - Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量
+  - Swap：操作系统每秒从磁盘上交换到内存和从内存交换到磁盘的数据块的数量。s1和s0最好是0
+  - Io：每秒从设备中读入b1的写入到设备b0的数据块的数量。反映了磁盘I/O
+  - System：显示了每秒发生中断的数量(in)和上下文交换(cs)的数量
+  - Cpu：显示用于运行用户代码，系统代码，空闲，等待I/O的CPU时间
+* iostat
+  - tps：该设备每秒的传输次数。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。
+  - iops ：硬件出厂的时候，厂家定义的一个每秒最大的IO次数
+  - "一次传输"请求的大小是未知的。
+    + kB_read/s：每秒从设备（drive expressed）读取的数据量；
+    + KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；
+    + kB_read：读取的总数据量；
+    + kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
 
-```
+```sh
 # cpu方面
-vmstat、sar top、htop、nmon、mpstat
+vmstat
+sar
+top
+htop
+nmon
+mpstat
 # 内存
-free 、ps -aux 、
+free
+ps -aux
 # IO设备（磁盘、网络）
-iostat 、 ss  、 netstat 、 iptraf、iftop、lsof、
+ss
+netstat
+iptraf
+iftop
+lsof
 
-vmstat 命令说明：
-Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O
-Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量
-Swap：操作系统每秒从磁盘上交换到内存和从内存交换到磁盘的数据块的数量。s1和s0最好是0
-Io：每秒从设备中读入b1的写入到设备b0的数据块的数量。反映了磁盘I/O
-System：显示了每秒发生中断的数量(in)和上下文交换(cs)的数量
-Cpu：显示用于运行用户代码，系统代码，空闲，等待I/O的CPU时间
-
-iostat命令说明
-实例命令：iostat -dk 1 5
-　　　　    iostat -d -k -x 5 （查看设备使用率（%util）和响应时间（await））
-tps：该设备每秒的传输次数。“一次传输”意思是“一次I/O请求”。多个逻辑请求可能会被合并为“一次I/O请求”。
-iops ：硬件出厂的时候，厂家定义的一个每秒最大的IO次数
-
-"一次传输"请求的大小是未知的。
-kB_read/s：每秒从设备（drive expressed）读取的数据量；
-KB_wrtn/s：每秒向设备（drive expressed）写入的数据量；
-kB_read：读取的总数据量；
-kB_wrtn：写入的总数量数据量；这些单位都为Kilobytes。
+iostat -dk 1 5
+# （查看设备使用率（%util）和响应时间（await））
+iostat -d -k -x 5
 ```
 
 ### 配置
 
 * MySQL 客户端和服务端通信协议是“半双工”的，客户端发送给服务器和服务器发给客户端是不能同时发生，这种协议让MySQL通信简单快速，但也就无法进行流量控制，一旦一端开始了，另一端是能等它结束。所以查询语句很长的时候，参数max_allowed_packet就特别重要了
-* 使用 innodb_flush_method=O_DIRECT 来避免写的时候出现双缓冲区
+* 使用 `innodb_flush_method=O_DIRECT` 来避免写的时候出现双缓冲区
 * 避免使用 O_DIRECT 和 EXT3 文件系统 — 会把所有写入的东西序列化
-* innodb_buffer_pool_size:保存索引和原始数据，来将整个InnoDB 文件加载到内存 — 减少从磁盘上读
-  - InnoDB严重依赖缓冲池，必须为它分配了足够的内存
-  - 可以减少磁盘访问，内存读写速度比磁盘的读写速度快很多，所以这个参数对mysql性能有很大提升。当然，这里不是越大越好，也要考虑实际的服务器情况
-  - 更大的缓冲池会使得mysql服务在重启和关闭的时候花费很长时间
+* `innodb_buffer_pool_size`:保存索引和原始数据，来将整个InnoDB 文件加载到内存,减少从磁盘上读
+  - InnoDB 严重依赖缓冲池，必须分配了足够的内存
+  - 减少磁盘访问，内存读写速度比磁盘的读写速度快很多，所以这个参数对mysql性能有很大提升。当然，这里不是越大越好，也要考虑实际服务器情况
+  - 更大的缓冲池会使得 mysql 服务在重启和关闭时候花费很长时间
   - 独立使用的mysql服务器：设置为服务器内存的约75%~80%
   - 还有其他服务也在运行：需要减去这部分程序占用的内存、mysql自身需要的内存以及减去足够让操作系统缓存InnoDB日志文件的内存，至少是足够缓存最近经常访问的部分
-* innodb_log_file_size 不要太大，这样能够更快，也有更多的磁盘空间 — 经常刷新有利降低发生故障时的恢复时间
-  - InnoDB使用日志来减少提交事务时的开销
-  - InnoDB用日志把随机I/O变成顺序I/O
-  - innodb_log_files_in_group：控制日志文件数，一般默认为2。mysql事务日志文件是循环覆写的
+* `innodb_log_file_size`
+  - 不要太大，这样能够更快，也有更多磁盘空间 — 经常刷新有利降低发生故障时的恢复时间
+  - InnoDB 使用日志来减少提交事务时的开销
+  - InnoDB 用日志把随机I/O变成顺序I/O
+* `innodb_log_files_in_group` 控制日志文件数，一般默认为2。mysql事务日志文件是循环覆写的
   - 当一个日志文件写满后，innodb会自动切换到另一个日志文件，而且会触发数据库的checkpoint，这回导致innodb缓存脏页的小批量刷新，会明显降低innodb的性能
-  - 如果innodb_log_file_size设置太小，就会导致innodb频繁地checkpoint，导致性能降低
-  - 如果设置太大，由于事务日志是顺序I/O，大大提高了I/O性能，但是在崩溃恢复InnoDB时，会导致恢复时间变长
-  - 如果InnoDB数据表有频繁的写操作，那么选择合适的innodb_log_file_size值对提升MySQL性能很重要
-  - 日志文件的全部大小，应该足够容纳服务器一个小时的活动内容
+  - 设置太小，就会导致innodb频繁地checkpoint，导致性能降低
+  - 设置太大，由于事务日志是顺序I/O，大大提高了I/O性能，但是在崩溃恢复InnoDB时，会导致恢复时间变长
+  - 如果InnoDB数据表有频繁写操作，那么选择合适 innodb_log_file_size 值对提升MySQL性能很重要
+  - 日志文件全部大小，应该足够容纳服务器一个小时活动内容
     + 在业务高峰期，计算出1分钟写入事务日志（redo log）的量，然后评估出一个小时的redo log量
     + Log sequence number是写入事务日志的总字节数，通过1分钟内两个值的差值，可以看到每分钟有多少KB日志写入到MySQL中
-* innodb_log_buffer_size：控制日志缓冲区的大小，不需要把日志缓冲区设置得非常大。推荐的范围是1MB~8MB
-* innodb_flush_log_at_trx_commit 控制commit动作是否刷新log buffer到磁盘中
+* `innodb_log_buffer_size`：控制日志缓冲区的大小，不需要把日志缓冲区设置得非常大。推荐的范围是1MB~8MB
+* `innodb_flush_log_at_trx_commit` 控制commit动作是否刷新log buffer到磁盘中
   - = 0 把日志缓冲写到日志文件中，并且每秒钟刷新一次，但是事务提交时不做任何事，该设置是3者中性能最好的。也就是说设置为0时是(大约)每秒刷新写入到磁盘中的，当系统崩溃，会丢失1秒钟的数据
   - 保持默认值（1）的话，能保证数据的完整性，也能保证复制不会滞后
-* 不要同时使用 innodb_thread_concurrency 和 thread_concurrency 变量 — 这两个值不能兼容
-* 为 max_connections 指定一个小的值 — 太多的连接将耗尽你的RAM，导致整个MySQL服务器被锁定
+* 不要同时使用 `innodb_thread_concurrency` 和 `thread_concurrency` 变量 — 这两个值不能兼容
+* 为 `max_connections` 指定一个小的值 — 太多的连接将耗尽你的RAM，导致整个MySQL服务器被锁定
 * 保持 thread_cache 在一个相对较高的数值，大约是 16 — 防止打开连接时候速度下降
 * 使用 skip-name-resolve — 移除 DNS 查找
 * 如果查询重复率比较高，并且数据不是经常改变，请使用查询缓存, 在经常改变的数据上使用查询缓存会对性能有负面影响
-* 增加 temp_table_size — 防止磁盘写
-* 增加 max_heap_table_size — 防止磁盘写
-* 不要将 sort_buffer_size 的值设置的太高 — 可能导致连接很快耗尽所有内存
-* 监控 key_read_requests 和 key_reads，以便确定 key_buffer 的值 — key 的读需求应该比 key_reads 的值更高，否则使用 key_buffer 就没有效率了
-* 有一个测试配置的环境，可以经常重启，不会影响生产环境
+* 增加 `temp_table_size` — 防止磁盘写
+* 增加 `max_heap_table_size` — 防止磁盘写
+* 不要将 `sort_buffer_size` 的值设置的太高 — 可能导致连接很快耗尽所有内存
+* 监控 `key_read_requests` 和 `key_reads`，以便确定 `key_buffer` 的值 — key 的读需求应该比 `key_reads` 的值更高，否则使用 `key_buffer` 就没有效率了
+* 有一个测试配置环境，可以经常重启，不会影响生产环境
 * 只允许使用内网域名，而不是ip连接数据库.不只是数据库，缓存（memcache、redis）的连接，服务（service）的连接都必须使用内网域名，机器迁移/平滑升级/运维管理…太多太多的好处
-* key_buffer_size:索引缓冲区大小
-* table_cache:能同时打开表的个数
-* query_cache_size和query_cache_type:前者是查询缓冲区大小,后者是前面参数的开关,0表示不使用缓冲区,1表示使用缓冲区,但可以在查询中使用SQL_NO_CACHE表示不要使用缓冲区,2表示在查询中明确指出使用缓冲区才用缓冲区,即SQL_CACHE.
-* sort_buffer_size:排序缓冲区
+* `key_buffer_size`:索引缓冲区大小
+* `table_cache`:能同时打开表的个数
+* `query_cache_size`和`query_cache_type`:前者是查询缓冲区大小,后者是前面参数的开关,0表示不使用缓冲区,1表示使用缓冲区,但可以在查询中使用SQL_NO_CACHE表示不要使用缓冲区,2表示在查询中明确指出使用缓冲区才用缓冲区,即SQL_CACHE
+* `sort_buffer_size`:排序缓冲区
 
 ```
 pager grep Log
@@ -1114,117 +1129,6 @@ sysbench --version
 sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql-port=3306 --mysql-user=root --mysql-password=123456 --oltp-test-mode=complex --oltp-tables-count=10 --oltp-table-size=100000 --threads=10 --time=120 --report-interval=10 prepare
 sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql-port=3306 --mysql-user=root --mysql-password=123456 --oltp-test-mode=complex --oltp-tables-count=10 --oltp-table-size=100000 --threads=10 --time=120 --report-interval=10 run >> /home/test/mysysbench.log
 sysbench ./tests/include/oltp_legacy/oltp.lua --mysql-host=192.168.10.10 --mysql-port=3306 --mysql-user=root --mysql-password=123456 cleanup
-```
-
-## [Percona Toolkit](https://www.percona.com/doc/percona-toolkit)
-
-* 任务
-  - 检查master和slave数据的一致性
-  - 有效地对记录进行归档
-  - 查找重复的索引
-  - 对服务器信息进行汇总
-  - 分析来自日志和tcpdump的查询
-  - 当系统出问题的时候收集重要的系统信息
-* 工具列表
-  - pt-variable-advisor:分析MySQL变量并就可能出现的问题提出建议
-    + `wget https://www.percona.com/downloads/percona-toolkit/3.0.13/binary/redhat/7/x86_64/percona-toolkit-3.0.13-re85ce15-el7-x86_64-bundle.tar`
-    + `pt-variable-advisor localhost --socket /var/lib/mysql/mysql.sock`
-    + 重点关注有WARN的信息的条目
-  - pt-query-digest 主要功能是从日志、进程列表和tcpdump分析MySQL查询.用来分析mysql的慢日志，与mysqldumpshow工具相比，py-query_digest 工具的分析结果更具体，更完善
-    + 分析指含有select语句的慢查询:`pt-query-digest --filter '$event-&gt;{fingerprint} =~ m/^select/i' /var/lib/mysql/slowtest-slow.log&gt; slow_report4.log`
-    + 分析指定时间范围内的查询:`pt-query-digest /var/lib/mysql/slowtest-slow.log --since '2017-01-07 09:30:00' --until '2017-01-07 10:00:00'&gt; &gt; slow_report3.log`
-    + 查询所有所有的全表扫描或full join的慢查询 `pt-query-digest --filter '(($event-&gt;{Full_scan} || "") eq "yes") ||(($event-&gt;{Full_join} || "") eq "yes")' /var/lib/mysql/slowtest-slow.log&gt; slow_report6.log`
-  - pt-align
-  - pt-archiver
-  - pt-config-diff
-  - pt-deadlock-logger
-  - pt-diskstats
-  - pt-duplicate-key-checker
-  - pt-fifo-split
-  - pt-find
-  - pt-fingerprint
-  - pt-fk-error-logger
-  - pt-heartbeat
-  - pt-index-usage
-  - pt-align
-  - pt-archiver
-  - pt-config-diff
-  - pt-deadlock-logger
-  - pt-diskstats
-  - pt-duplicate-key-checker
-  - pt-fifo-split
-  - pt-find
-  - pt-fingerprint
-  - pt-fk-error-logger
-  - pt-heartbeat
-  - pt-index-usage
-  - pt-ioprofile
-  - pt-kill
-  - pt-mext
-  - pt-mongodb-query-digest
-  - pt-mongodb-summary
-  - pt-mysql-summary
-  - pt-online-schema-change
-  - pt-pmp
-  - pt-secure-collect
-  - pt-show-grants
-  - pt-sift
-  - pt-slave-delay
-  - pt-slave-find
-  - pt-slave-restart
-  - pt-stalk
-  - pt-summary
-  - pt-table-checksum
-  - pt-table-sync
-  - pt-table-usage
-  - pt-upgrade
-  - pt-variable-advisor
-  - pt-visual-explain
-  - pt-slave-find
-  - pt-slave-restart
-  - pt-stalk
-  - pt-summary
-  - pt-table-checksum
-  - pt-table-sync
-  - pt-table-usage
-  - pt-upgrade
-  - pt-visual-explain
-  - tpcc-mysql
-
-```sh
-sudo apt install percona-toolkit
-
-pt-mysql-summary --host localhost --user root --ask-pass
-
-wget https://www.percona.com/downloads/percona-toolkit/2.2.20/deb/percona-toolkit_2.2.20-1.tar.gz
-tar zxvf percona-toolkit_2.2.20-1.tar.gz
-# 安装
-perl Makefile.PL
-make && make install
-
-./pt-query-digest  slow.log
-pt-query-digest --since=148h mysql-slow.log | less
-
-tcpdump -i bond0 -s 0 -l -w - dst port 3316 | strings | grep select | egrep -i 'arrival_record' >/tmp/select_arri.log
-```
-
-## Percona Monitoring and Management PMM
-
-```sh
-docker pull percona/pmm-server:lates
-mkdir -p /opt/prometheus/data
-mkdir -p /opt/consul-data
-mkdir -p /var/lib/mysql
-mkdir -p /var/lib/grafana
-docker create -v /opt/prometheus/data -v /opt/consul-data -v /var/lib/mysql -v /var/lib/grafana --name pmm-data percona/pmm-server:1.2.0 /bin/true
-docker run -d -p 8881:80 --volumes-from pmm-data --name pmm-server --restart always percona/pmm-server:1.2.0
-
-yum install https://www.percona.com/redir/downloads/percona-release/redhat/percona-release-0.1-4.noarch.rpm
-yum install pmm-client -y
-pmm-admin config --server 47.92.131.xxx:80
-vim /usr/local/percona/pmm-client/pmm.yml 修改hostnane
-pmm-admin check-network 检查域服务端的链接
-pmm-admin config --server 47.92.131.xxx:80
 ```
 
 ## Perfermace Schema

@@ -1,4 +1,4 @@
-# 系统设计
+# 系统设计 Systems Design
 
 ## 分层
 
@@ -53,11 +53,66 @@ BO 是内存计算逻辑对象，不是业务逻辑层对象，不是只能给�
 
 ## 响应性能提升
 
-* 异步：队列缓冲、异步请求。
-* 并发：利用多CPU多线程执行业务逻辑。
-* 就近原则：缓存、梯度存储。
-* 减少IO：合并细粒度接口为粗粒度接口、频繁的覆盖操作可以只做最后一次操作。这里一个需要特别注意的地方: 代码中尽量避免在循环中调用外部服务，更好的做法是使用粗粒度批量接口在循环外面只进行一次请求。
-* 分区：频繁访问的数据集规模保持在合理的范围。
+* 异步：队列缓冲、异步请求
+* 并发：利用多CPU多线程执行业务逻辑
+* 就近原则：缓存、梯度存储
+* 减少IO：合并细粒度接口为粗粒度接口、频繁的覆盖操作可以只做最后一次操作。注意:代码中尽量避免在循环中调用外部服务，更好做法是使用粗粒度批量接口在循环外面只进行一次请求。
+* 分区：频繁访问数据集规模保持在合理的范围
+
+## Scalability
+
+* [Scale Cube](https://akfpartners.com/growth-blog/scale-cube) a model for segmenting services, defining microservices, and scaling products
+* Horizontal scaling: cloning of an application or service such that work can easily be distributed across instances with absolutely no bias.
+* Pattern
+  - Load Balancing
+  - LB Tasks
+    + Service discovery: What backends are available in the system? In our architecture, 4 servers are available to serve App traffic. LB acts as a single endpoint that clients can use transparently to reach one of the 4 servers.
+    + Health checking: What backends are currently healthy and available to accept requests? If one out of the 4 App servers turns bad, LB should automatically short circuit the path so that clients don’t sense any application downtime
+    + Load balancing: What algorithm should be used to balance individual requests across the healthy backends? There are many algorithms to distribute traffic across one of the four servers. Based on observations/experience, SRE can pick the algorithm that suits their pattern
+  - LB Methods
+    + Least Connection Method:directs traffic to the server with the fewest active connections. Most useful when there are a large number of persistent connections in the traffic unevenly distributed between the servers. Works if clients maintain long-lived connections
+    + Least Response Time Method:directs traffic to the server with the fewest active connections and the lowest average response time. Here response time is used to provide feedback of the server’s health
+    + Round Robin Method:rotates servers by directing traffic to the first available server and then moves that server to the bottom of the queue. Most useful when servers are of equal specification and there are not many persistent connections.
+    + IP Hash:the IP address of the client determines which server receives the request. This can sometimes cause skewness in distribution but is useful if apps store some state locally and need some stickiness
+  - Caching - Content Delivery Networks (CDN)
+* Microservices
+  - address the issues associated with growth and complexity in the code base and data sets.
+* Sharding
+
+## Availability
+
+* Elimination of single points of failure (SPOF) This means adding redundancy to the system so that the failure of a component does not mean failure of the entire system.
+* Reliable crossover In redundant systems, the crossover point itself tends to become a single point of failure. Reliable systems must provide for reliable crossover.
+* Detection of failures as they occur If the two principles above are observed, then a user may never see a failure
+
+```
+Availability %  Downtime per year Downtime per month  Downtime per week Downtime per day
+99%(Two Nines)  3.65 days 7.31 hours  1.68 hours  14.40 minutes
+99.5%(Two and a half Nines) 1.83 days 3.65 hours  50.40 minutes 7.20 minutes
+99.9%(Three Nines)  8.77 hours  43.83 minutes 10.08 minutes 1.44 minutes
+99.95%(Three and a half Nines)  4.38 hours  21.92 minutes 5.04 minutes  43.20 seconds
+99.99%(Four Nines)  52.60 minutes 4.38 minutes  1.01 minutes  8.64 seconds
+99.995%(Four and a half Nines)  26.30 minutes 2.19 minutes  30.24 seconds 4.32 seconds
+99.999%(Five Nines) 5.26 minutes  26.30 seconds 6.05 seconds  864.0 ms
+```
+
+## Fault Tolerance
+
+* In systems, failure is the norm rather than the exception.
+* "Anything that can go wrong will go wrong” -- Murphy’s Law
+* “Complex systems contain changing mixtures of failures latent within them” -- How Complex Systems Fail.
+* Metrics
+  - Mean time to repair (MTTR): The average time to repair and restore a failed system.
+  - Mean time between failures (MTBF): The average operational time between one device failure or system breakdown and the next.
+  - Mean time to failure (MTTF): The average time a device or system is expected to function before it fails.
+  - Mean time to detect (MTTD): The average time between the onset of a problem and when the organization detects it.
+  - Mean time to investigate (MTTI): The average time between the detection of an incident and when the organization begins to investigate its cause and solution.
+  - Mean time to restore service (MTRS): The average elapsed time from the detection of an incident until the affected system or component is again available to users.
+  - Mean time between system incidents (MTBSI): The average elapsed time between the detection of two consecutive incidents. MTBSI can be calculated by adding MTBF and MTRS (MTBSI = MTBF + MTRS).
+  - Failure rate: Another reliability metric, which measures the frequency with which a component or system fails. It is expressed as a number of failures over a unit of time.
+* Principles
+  - Principle 1: Nothing is shared (also known as “share as little as possible”). The less that is shared within a swim lane, the more fault isolative the swim lane becomes. (as shown in Enterprise use-case)
+  - Principle 2: Nothing crosses a swim lane boundary. Synchronous (defined by expecting a request—not the transfer protocol) communication never crosses a swim lane boundary; if it does, the boundary is drawn incorrectly. (as shown in Ads feature)
 
 ## 工具
 

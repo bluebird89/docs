@@ -16,6 +16,7 @@
     + Nagios Log Server
     + Nagios Fusion
 * datadog
+* catchpoint
 
 ## 数据收集组件
 

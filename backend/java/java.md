@@ -691,27 +691,57 @@ str2.compareTo( str3 ); // -3
 str3.compareTo( str1 ); // 3
 ```
 
-## OOP
+## Object-oriented programming OOP
 
 * 包 package
   - Import语句就是用来提供一个合理的路径，使得编译器可以找到某个类
-* 类 描述一类对象的行为和状态的模板
+* 类 class
+  - 描述一类对象的行为和状态的模板, a blueprint using which you can create as many objects as you like.
   - 静态属性：声明在类中，方法体之外
     + 声明为static类型
   - 静态方法
-  - 普通属性：定义在类中，方法体外变量
+  - 普通属性 fields：定义在类中，方法体外变量
     + 创建对象时实例化
     + 可以被类中方法、构造方法和特定类的语句块访问
   - 普通方法块
-  - 构造方法
-    + 每个类都有构造方法。如果没有显式定义构造方法， JVM 自动生成一个构造方法
+  - 构造方法 Constructor
+    + 每个类都有构造方法。如果没有显式定义构造方法，JVM 自动生成一个构造方法
     + 创建对象时，至少要调用一个构造方法
-    + 构造方法的名称必须与类同名
-    + 不加任何参数的构造方法被为默认的构造方法
+    + 构造方法名称必须与类同名
+    + 不加任何参数的构造方法为默认构造方法
+  - Parameterized constructor
   - 局部变量：在方法、构造方法或者语句块中定义
     + 声明和初始化都是在方法中
     + 方法结束后，变量就会自动销毁
-* 重载：重载方法都有独一无二的参数列表
+* 对象 Object：对象是类的一个实例，有状态和行为,用关键字new来创建一个新的对象
+  - 声明：声明一个对象，包括对象名称和对象类型。
+  - 实例化：使用关键字new来创建一个对象。
+  - 初始化：使用new创建对象时，会调用构造方法初始化对象。
+  - states
+  - behaviors
+  - Message passing:One object interacts with another object by invoking methods on that object. It is also referred to as Method
+* Abstraction:a process where you show only “relevant” data and “hide” unnecessary details of an object from the user.
+* Encapsulation:binding object state(fields) and behaviour(methods) together
+  - Make the instance variables private so that they cannot be accessed directly from outside the class. You can only set and get values of these variables through the methods of the class
+  - Have getter and setter methods in the class to set and get the values of the fields
+* 继承 Inheritance
+  - a process of defining a new class based on an existing class by extending its common data members and methods.
+  - Inheritance allows us to reuse of code, it improves reusability in your java application.
+  - The parent class is called the base class or super class. The child class that extends the base class is called the derived class or sub class or child class.
+  - 可以重用已存在类的所有非 private 属性和方法
+  - 被继承的类称为超类（super class），派生类称为子类（subclass）
+  - 父类中声明为 public 的方法在子类中也必须为 public
+  - 父类中声明为 protected 的方法在子类中要么声明为 protected，要么声明为 public，不能声明为 private。
+  - 父类中声明为 private 的方法，不能够被继承
+* Polymorphism
+  - perform a single action in different ways
+  - Static Polymorphism:resolved during compiler time
+    + Method overloading
+      * have more than one methods with same name in a class that differs in signature
+      * can be considered as static polymorphism example
+  - Dynamic Polymorphism:Dynamic Method Dispatch
+    + a process in which a call to an overridden method is resolved at runtime rather, thats why it is called runtime polymorphism.
+* 重载：重载方法都有独一无二参数列表
   - 条件
     + 方法名称必须相同
     + 参数列表必须不同（个数不同、类型不同、参数类型排列顺序不同等）
@@ -723,11 +753,17 @@ str3.compareTo( str1 ); // 3
   - 重写方法必须要和父类保持一致，包括返回值类型,方法名,参数列表 也都一样
   - 重写方法可以使用 @Override 注解来标识
   - 子类中重写方法的访问权限不能低于父类中方法的访问权限
-* 对象：对象是类的一个实例，有状态和行为,用关键字new来创建一个新的对象
-  - 声明：声明一个对象，包括对象名称和对象类型。
-  - 实例化：使用关键字new来创建一个对象。
-  - 初始化：使用new创建对象时，会调用构造方法初始化对象。
-* 抽象类：如果一个类包含抽象方法，那么该类一定要声明为抽象类
+* 抽象类 Abstract Class
+  - Abstract method
+    + A method that is declared but not defined. Only method signature no body.
+    + Declared using the abstract keyword
+    + These cannot be abstract
+      * Constructors
+      * Static methods
+      * Private methods
+      * Methods that are declared “final”
+  - An abstract class outlines the methods but not necessarily implements all the methods.
+  - 如果一个类包含抽象方法，那么该类一定要声明为抽象类
   - 一种没有任何实现方法，方法体实现由子类提供
   - 抽象方法不能被声明成 final 和 static。
   - 任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类
@@ -735,6 +771,7 @@ str3.compareTo( str1 ); // 3
   - 可以不包含抽象方法
   - 抽象方法的声明以分号结尾，例如：public abstract sample();
 * 接口 interface
+  - a blueprint of a class
   - 对象间相互通信协议
   - 只定义派生要用到方法，具体实现完全取决于派生类
   - 使用默认访问修饰符声明的变量和方法，对同一个包内的类是可见的
@@ -742,12 +779,7 @@ str3.compareTo( str1 ); // 3
   - 方法默认情况下访问权限为 public
   - 不能被实例化，不能有任何构造方法
   - 一个类中有抽象方法，那么这个类一定是抽象类,使用关键字 abstract 修饰的方法一定是抽象方法，具有抽象方法的类一定是抽象类
-* 继承
-  - 可以重用已存在类的所有非 private 属性和方法
-  - 被继承的类称为超类（super class），派生类称为子类（subclass）
-  - 父类中声明为 public 的方法在子类中也必须为 public
-  - 父类中声明为 protected 的方法在子类中要么声明为 protected，要么声明为 public，不能声明为 private。
-  - 父类中声明为 private 的方法，不能够被继承
+* Generalization and Specialization
 * 访问控制修饰符
   - private:在同一类内可见。使用对象：变量、方法。 注意：不能修饰类（外部类）
     + 声明为 private 的方法、变量和构造方法只能被所属类访问
@@ -842,67 +874,53 @@ public class Puppy{
       System.out.println("变量值 : " + myPuppy.puppyAge );
    }
 }
+
+// IS-A & HAS-A Relationships
+public class Vehicle{ }
+public class Car extends Vehicle{
+   private License myCarLicense;
+}
 ```
 
 ## 容器
 
 * Iterable 接口:允许对象成为 for-each 循环的目标
-
 * Collection 是一个顶层接口，用来定义集合的约定
-
   - List
   - Set 对add、equals、hashCode  方法提供了额外的标准
     + SortedSet 接口直接继承于 Set 接口，使用 Comparable 对元素进行自然排序或者使用 Comparator 在创建时对元素提供定制的排序规则。set 的迭代器将按升序元素顺序遍历集合。
   - Queue 用来在处理之前保持元素的访问次序。除了 Collection 基础的操作之外，队列提供了额外的插入，读取，检查操作。
-
 * Map 一个支持 key-value 存储的对象，不能包含重复的 key，每个键最多映射一个值。这个接口代替了Dictionary 类，Dictionary 是一个抽象类而不是接口。
-
 * ArrayList 实现了 List 接口的可扩容数组(动态数组)，内部基于数组实现  `public class ArrayList<E> extends AbstractList<E> implements List<E>, RandomAccess, Cloneable, java.io.Serializable {...}`
-
   - 可以实现所有可选择的列表操作，允许所有的元素，包括空值。ArrayList 还提供了内部存储 list 的方法，它能够完全替代 Vector，只有一点例外，ArrayList 不是线程安全的容器。
   - 有一个容量的概念，这个数组的容量就是 List 用来存储元素的容量
   - 不是线程安全的容器，如果多个线程中至少有两个线程修改了 ArrayList 的结构的话就会导致线程安全问题，作为替代条件可以使用线程安全的 List，应使用 Collections.synchronizedList 。
   - 具有 fail-fast 快速失败机制，能够对 ArrayList 作出失败检测。当在迭代集合的过程中该集合在结构上发生改变的时候，就有可能会发生 fail-fast，即抛出 ConcurrentModificationException异常
-
 * Vector
-
   - 同 ArrayList 一样，都是基于数组实现的
   - Vector 是一个线程安全的容器，它对内部的每个方法都简单粗暴的上锁，避免多线程引起的安全性问题，但是通常这种同步方式需要的开销比较大，因此，访问元素的效率要远远低于 ArrayList。
   - ArrayList 扩容后的数组长度会增加 50%，而 Vector 的扩容长度后数组会增加一倍。
-
 * LinkedList 双向链表，允许存储任何元素(包括 null )
-
   - 所有的操作都可以表现为双向性的，索引到链表的操作将遍历从头到尾，视哪个距离近为遍历顺序。
   - 注意这个实现也不是线程安全的，如果多个线程并发访问链表，并且至少其中的一个线程修改了链表的结构，那么这个链表必须进行外部加锁。或者使用
-
 * Stack
-
   - 继承了 Vector 类，提供了通常用的 push 和 pop 操作，以及在栈顶的 peek 方法，测试 stack 是否为空的 empty 方法，和一个寻找与栈顶距离的 search 方法
   - 一个更完善，可靠性更强的 LIFO 栈操作由 Deque 接口和他的实现提供
-
 * HashSet 是 Set 接口的实现类，由哈希表支持(实际上 HashSet 是 HashMap 的一个实例)。它不能保证集合的迭代顺序。这个类允许 null 元素
-
   - 这个实现不是线程安全的。如果多线程并发访问 HashSet，并且至少一个线程修改了set，必须进行外部加锁。或者使用 Collections.synchronizedSet() 方法重写。
   - 支持 fail-fast 机制
-
 * TreeSet 一个基于 TreeMap 的 NavigableSet 实现。这些元素使用他们的自然排序或者在创建时提供的Comparator 进行排序，具体取决于使用的构造函数。
-
   - 此实现为基本操作 add,remove 和 contains 提供了 log(n) 的时间成本。
   - 注意这个实现不是线程安全的。如果多线程并发访问 TreeSet，并且至少一个线程修改了 set，必须进行外部加锁。或者使用
-
 * LinkedHashSet 继承于 Set接口的 Hash 表和 LinkedList 的实现。这个实现不同于 HashSet 的是它维护着一个贯穿所有条目的双向链表。此链表定义了元素插入集合的顺序。注意：如果元素重新插入，则插入顺序不会受到影响。
-
   - LinkedHashSet 有两个影响其构成的参数：初始容量和加载因子。它们的定义与 HashSet 完全相同。但请注意：对于 LinkedHashSet，选择过高的初始容量值的开销要比 HashSet 小，因为 LinkedHashSet 的迭代次数不受容量影响。
   - 注意 LinkedHashSet 也不是线程安全的，如果多线程同时访问 LinkedHashSet，必须加锁，或者通过使用
   - 该类也支持fail-fast机制
-
 * PriorityQueue:AbstractQueue 的实现类，优先级队列的元素根据自然排序或者通过在构造函数时期提供Comparator 来排序，具体根据构造器判断。PriorityQueue 不允许 null 元素。
-
   - 队列的头在某种意义上是指定顺序的最后一个元素。队列查找操作 poll,remove,peek 和 element 访问队列头部元素。
     -优先级队列是无限制的，但具有内部 capacity，用于控制用于在队列中存储元素的数组大小。
     -该类以及迭代器实现了 Collection、Iterator 接口的所有可选方法。这个迭代器提供了 iterator() 方法不能保证以任何特定顺序遍历优先级队列的元素。如果你需要有序遍历，考虑使用 Arrays.sort(pq.toArray())。
     -注意这个实现不是线程安全的，多线程不应该并发访问 PriorityQueue 实例如果有某个线程修改了队列的话，使用线程安全的类 PriorityBlockingQueu
-
 * HashMap 利用哈希表原理来存储元素的集合，并且允许空的 key-value 键值对。HashMap 是非线程安全的，也就是说在多线程的环境下，可能会存在问题，而 Hashtable 是线程安全的容器。HashMap 也支持 fail-fast 机制。HashMap 的实例有两个参数影响其性能：初始容量 和加载因子。可以使用 Collections.synchronizedMap(new HashMap(...)) 来构造一个线程安全的 HashMap。
 
 * TreeMap 类
