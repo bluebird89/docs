@@ -1,5 +1,6 @@
-## BA Business Analyst
+## BA Business Analyst 业务分析师
 
+* 与产品经理的作用是类似的，即将想法整理出需要列表，可以是 Excel 的形式，也可以是高大上的看板
 * Produce and explore requirements in collaboration with users, at a different level of detail to what is required following the traditional blue process methodology
 * Facilitate and participate in discovery workshops aimed at engaging with potential and existing users to understand their needs and pains
 * Facilitate and participate in inception workshops to create a shared understanding of user needs and the potential technology solution required to deliver to these needs

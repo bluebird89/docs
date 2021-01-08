@@ -65,20 +65,48 @@ curl -sLf https://spacevim.org/install.sh | bash
 :set fileformat=unix :w
 ```
 
+## 模式
+
+* 类型
+  - 正常模式：在文件中四处移动光标进行修改，<ESC> 返回正常模式
+  - 插入模式：插入文本，i 进入插入 模式
+  - 替换模式：替换文本，R 进入替换模式
+  - 可视化（一般，行，块）模式：选中文本块， v 进入可视（一般）模式， V 进入可视（行）模式，<C-v> （Ctrl-V, 有时也写作 ^V）进入可视（块）模式
+  - 命令模式：用于执行命令，: 进入命令模式
+* 在左下角显示当前的模式
+
+## 缓存， 标签页， 窗口
+
+* 缓存：Vim 会维护一系列打开的文件
+  - 同一个缓存可以在多个窗口中显示
+* 一个 Vim 会话包含一系列标签页，每个标签页包含一系列窗口 （分隔面板）
+* 每个窗口显示一个缓存
+* 跟网页浏览器等其他熟悉的程序不一样的是， 缓存和窗口不是一一对应的关系； 窗口只是视角
+* 一个缓存可以在 多个 窗口打开，甚至在同一个标签页内的多个窗口打开。比如在查看同一个文件的不同部分的时候
+
 ## 操作
 
 * Ctrl-λ 写成 <C-λ>
 * `:` 开始命令需要输入 <enter> 回车
 * `N<command>` 重复某个命令N次,命令都可以配合数字使用.Esc是必须的，否则命令不生效
+  - 3w 向前移动三个词
+  - 5j 向下移动5行
+  - 7dw 删除7个词
 * `.` 重复前一次命令
 * `;` 重复上一次f查找操作
 * `.` 重复上一次修改操作，跟;经常用来实现一些简单重复操作
 * `;.,` 重复操作
-* History  以:和/开头命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
+* History 以:和/开头命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
 * 命令类型
   - action
   - position
   - object
+* 修饰语:改变 “名词” 的意义
+  - i， 表示 “内部” 或者 “在内“
+  - a， 表示 ”周围“
+  - ci( 改变当前括号内的内容
+  - ci[ 改变当前方括号内的内容
+  - da' 删除一个单引号字符窗， 包括周围的单引号
 
 ![](../_static/vim.png)
 ![](../_static/vim_sheet.png)
@@ -116,7 +144,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 * 打开文件
   - `:e ftp://192.168.10.76/abc.txt`
   - `:e \\qadrive\test\1.txt`
-  - `:e <path/to/file>`
+  - `:e {文件名}` 打开要编辑的文件
 * :vi|open|o filename 打开或新建文件，并将光标置于第一行首
 * vim file1 file2 file3 ... 同时打开多个文件
 * :vi +n filename 打开文件，并将光标置于第n行首
@@ -142,22 +170,29 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 * A 当前非blank字符行尾并进入insert模式
 * I 当前非blank字符行首并进入insert模式
-* i 光标前插入
+* i 光标前插入,进入插入模式
+  - 对于操纵/编辑文本，不单想用退格键完成
 * a 光标后插入 3a！+ ESC:在当前位置后插入3个！
-* o 新起一个空白行
-* O 当前行之前插入一行
+* O / o 在之上/之下插入行
 * r 只会取代光标所在的那一个字符一次
 * R会一直取代光标所在的文字，直到按下 ESC 为止
 
+* 编辑 “动词”，因为动词可以施动于名词
+  - 可以用键盘：采用编辑命令和移动命令的组合来完成
+  - :n1,n2 m n3 将n1行到n2行之间的内容移至到第n3行下
+  - :1,10 co 20 将1-10行插入到第20行之后
+  - :1,$ co $ 将整个文件复制一份并添加到文件尾部
+  - :n1,n2 d 将n1行到n2行之间的内容删除
 * :args 查看当前正在编辑的文件,用[]括起来
-* 替换
+* s 替换字符 （等同于 xi）
   - % 匹配括号移动，包括 (, {, [.
   - 用“<”来指定匹配单词开头
   - :s/old/new 用new替换行中首次出现的old
   - :s/old/new/g  用new替换行中所有的old
     + :3,5s/^#//g 解除3-5行的注释
     + :1,$s/^/#/g 注释整个文档
-  - :%s/old/new/g 用new替换当前文件里所有的old
+  - :%s/old/new/g  全局用new替换当前文件里所有的old
+  - `%s/\[.*\](\(.*\))/\1/g` 将有命名的 Markdown 链接替换成简单 URLs
   - :n,m?s/old/new/g  用new替换从n到m行里所有的old
   - :n1,n2s/p1/p2/g：将第n1至n2行中所有p1均用p2替代
   - :g/p1/s//p2/g：将文件中所有p1均用p2替换
@@ -169,24 +204,17 @@ curl -sLf https://spacevim.org/install.sh | bash
   - :%s/^/#/g 注释整个文档
   - :g/\^\s*$/d 删除空行以及只有空格的行
 * 查找字符串
-  - /text 查找text
+  - 搜索: /{正则表达式}, n / N 用于导航匹配
   - ?text 向光标之上寻找text
-  - n 查找下一个匹配
-  - N 查找上一个匹配
   - 2n 查找下面第二个匹配
   - 特殊字符在查找时需要转义　`.*[]^%/?~$`
-  - *和 # 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
+  - `*`和 `#` 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
 * 执行 shell
   - :!ls 列出当前目录下文件
   - :!perl -c script.pl 检查perl脚本语法，不用退出vim
   - :suspend或Ctrl - Z 挂起回到shell，fg可以返回
   - ：n1,n2 w!command 将文件中n1行至n2行内容作为command输入并执行，若不指定n1，n2，则表示将整个文件内容作为command的输入
   - ：r!command  命令command输出结果放到当前行
-* 编辑
-  - :n1,n2 m n3 将n1行到n2行之间的内容移至到第n3行下
-  - :1,10 co 20 将1-10行插入到第20行之后
-  - :1,$ co $ 将整个文件复制一份并添加到文件尾部
-  - :n1,n2 d 将n1行到n2行之间的内容删除
 * 关键字补全
   - Ctrl +N 搜索目录下的代码，搜索完成了就会出现一个下拉列表
   - Ctrl + P 回到原点，然后可以按上下光标键来选择相应的Word
@@ -210,6 +238,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 * Ctrl + r 重做（Redo），即撤销的撤销
 * J 合并下一行
 * 窗口分屏浏览
+  - :sp / :vsp 来分割窗口
   - :He 全称:Hexplore 在下边分屏浏览目录
   - :He! 在上分屏浏览目录
   - :Ve 全称:Vexplore 在左边分屏间浏览目录，要在右边则是 :Ve!
@@ -228,7 +257,6 @@ curl -sLf https://spacevim.org/install.sh | bash
   - ggguG 整篇文章大写转化为小写
 * 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
 * 100idesu [ESC] 重复 100 `idesu`
-* c "," 修改空格为 ","
 * 会话
   - 保存 :mksession ~/.mysession.vim
   - 强行写入 :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
@@ -258,23 +286,24 @@ curl -sLf https://spacevim.org/install.sh | bash
     + 3x 剪切三个字符
   - X|dh 剪切光标前一个字符
   - xp 非行尾与后一个字符交换，如从bs变成sb
-* d
+* d{移动命令} 删除 {移动命令}
+  - dw 删除词, d$ 删除到行尾, d0 删除到行头
   - dj|k 删除上|下一行
   - dgg 删除光标所在到第一行的所有数据
   - dG 删除光标所在到最后一行的所有数据
-  - d$    删除游标所在处，到该行的最后一个字符
   - df” 删除到出现的第一个双引号
-  - d0 删至行首
   - ddp交换当前行和其下一行
   - 5dd 剪切当前行之后5行
   - :1,10d 将1-10行剪切
   - :11,$d 删除11行及以后所有的行
+* x 删除字符 （等同于 dl）
 * 缩进
   - >> 向右给它进当前行 【<<】向左缩进当前行
   - = 缩进当前行 （和上面不一样的是，它会对齐缩进）
   - =% 把光标位置移到语句块的括号上，然后按=%，缩进整个语句块（%是括号匹配）
   - G=gg|G 缩进整个文件
-* 删除数据 c
+* c "," 修改空格为 "," c{移动命令} 改变 {移动命令}
+  - d{移动命令} 再 i
   - 10cj 向下删除 10 行
   - cw 光标所在字符删除至单词结尾(删除单词)，同时会进入编辑模式,常用于修改一个变量
   - caw change a word 可以删除当前光标所在位置单词
@@ -293,13 +322,15 @@ curl -sLf https://spacevim.org/install.sh | bash
     + 水平 <C-w> |
     + 恢复 <C-w> =
   - 修改尺寸:<C-w> +|-
-* 移动
+* 移动 名词，因为指向文字块
+  - 基本移动: hjkl （左， 下， 上， 右）
   - h|Backspace 光标左移一个字符
   - l|space 光标右移一个字符
   - k|Ctrl+p|+ 光标上移一行
     + Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
   - j|Ctrl+n|-|Enter 光标下移一行
     + Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
+  - 词： w （下一个词）， b （词初）， e （词尾）
   - w|W 下一个单词词首，如果已到行尾，则转至下一行行首
   - e|E 下一个单词至词尾
     + ge 光标向前移动一个单词至词尾
@@ -307,13 +338,16 @@ curl -sLf https://spacevim.org/install.sh | bash
   - n<Enter>  n 为数字。光标向下移动 n 行
   - Ctrl + O 向后回退的光标移动
   - Ctrl + I 向前追赶的光标移动
+  - 文件： gg （文件头）， G （文件尾）
   - gg|1G|[[:到文件头
     + 100G 光标移至第100行首
   - G|]]: 文档尾行行首
+  - 行数： :{行数}<CR> 或者 {行数}G ({行数}为行数)
   - } 至段落开头
   - { 至段落结尾
   - ) 至句尾
   - ( 至句首
+  - 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
   - 0(数字零)|<HOME> 到行首
   - ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
   - $ 至行尾
@@ -322,6 +356,9 @@ curl -sLf https://spacevim.org/install.sh | bash
   - :10 到第10行,绝对行
   - 5+|- 光标下|上移5行，相对行
   - % 移动到与当前括号匹配的括号处，包括(， [， {
+  - 查找： f{字符}， t{字符}， F{字符}， T{字符}
+    + 查找/到 向前/向后 在本行的{字符}
+    + , / ; 用于导航匹配
   - `f` 查找字符,f {char}会定位到第一个{char}出现的光标位置
     + fa 光标后第一个为a的字符
     + 3fa 在当前行查找第三个出现的a
@@ -330,11 +367,8 @@ curl -sLf https://spacevim.org/install.sh | bash
     + dt" 删除所有的内容，直到遇到双引号
   - `;` 重复上次搜索
   - `,` 如果重复上次搜索按多了，则可以通过`,`回退
-* 翻页
-  - H 当前屏幕顶行
-  - M 当前屏幕中间行
-  - L 当前屏幕最后行
-  - Ctrl+u 文件首翻半屏
+  - 屏幕： H （屏幕首行）， M （屏幕中间）， L （屏幕底部）
+  - 翻页： Ctrl-u （上翻）， Ctrl-d （下翻）
   - Ctrl+d 向文件尾翻半屏
   - Ctrl+f|Page Down 向文件尾翻一屏
   - Ctrl+b|Page Up 向文件首翻一屏
@@ -342,7 +376,7 @@ curl -sLf https://spacevim.org/install.sh | bash
   - 0y$
   - ye，当前位置拷贝到本单词的最后一个字符
   - y2/foo 来拷贝2个 “foo” 之间的字符串
-  - d (删除 ) v (可视化的选择) gU (变大写) gu (变小写) 也会被拷贝
+  - d (删除) v (可视化的选择) gU (变大写) gu (变小写) 也会被拷贝
 * Quickfix
   - :make 出错，:cw 把出错显到分屏
   - :cp 跳到上一个错误
@@ -415,6 +449,9 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 ## Visual
 
+* 可视化
+* 可视化行
+* 可视化块
 * 左下角显示 `--VISUAL--` 可以对选定文本运行命令操作
 * 进入 普通模式下按 v（逐字）或 V（逐行）
   - J 把所有的行连接起来（变成一行）
@@ -469,13 +506,31 @@ Ctrl+v，3j，$，A，,，Esc，V，3j，J
 one, two, three, four,
 ```
 
-## 宏录制
+## 宏
 
-* qa 把操作记录在寄存器 a
-* q 结束录制
-* @a replay被录制的宏
-* @@ replay最新录制的宏快捷键
-* 6@@ replay 6次
+* q{字符} 开始在寄存器 {字符} 中录制宏
+* q 停止录制
+* @{字符} 重放宏
+* 宏的执行遇错误会停止
+* {计数}@{字符} 执行一个宏 {计数} 次
+* 递归
+  - 首先用 q{字符}q 清除宏
+  - 录制该宏， 用 @{字符} 来递归调用该宏 （在录制完成之前不会有任何操作）
+* @@ 重放最新录制的宏
+* 例子：将 xml 转成 json (file)
+  - Gdd, ggdd 删除第一行和最后一行
+  - 格式化最后一个元素的宏 （寄存器 e）
+    + 跳转到有 <name> 的行
+    + qe^r"f>s": "<ESC>f<C"<ESC>q
+  - 格式化一个人的宏
+    + 跳转到有 <person> 的行
+    + qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q
+  - 格式化一个人然后转到另外一个人的宏
+    + 跳转到有 <person> 的行
+    + qq@pjq
+  - 执行宏到文件尾
+    + 999@q
+  - 手动移除最后的 , 然后加上 [ 和 ] 分隔符
 
 ```
 # 一个只有一行且这行只有“1”的文本中
@@ -510,37 +565,36 @@ r 对单词字符进行替换
 
 ## 插件
 
-* [cknadler/vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
-* [rupa/z](https://github.com/rupa/z):z - jump around
-* [rupa/v](https://github.com/rupa/v):z for vim
-* [nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim. Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
-* [fatih/vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
-* powerline](<https://github.com/powerline/powerline):Powerline> is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. <https://powerline.readthedocs.io/en/latest/>
-* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
-* vim-colors-solarized：vim的solarized配色插件
-* [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
-* [vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
-* VIM Fugitive
-* [vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager Vim的插件管理器，支持并发安装和更新
-* Ack 全文搜索插件，可以在当前打开的项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件，十分方便
-* NERDTreeCommenter 方便的用来注释代码的插件
-* TagBar 查看当前代码文件中的变量和函数列表的插件，可以切换和跳转到代码中对应的变量和函数的位置
-* CtrlP 不可缺少的快速跳转插件，它可以快速的帮助我们找到项目中的文件。在normal模式下，按下ctrl+p，然后输入你要寻找的文件就行了
+* Accelerated-Smooth-Scroll 让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
+* [Ack](https://github.com/mileszs/ack.vim)全文搜索插件，可以在当前打开项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件
 * AutoPairs 自动补全括号的插件，包括小括号，中括号，以及花括号，可以提升编码效率
-* [vim-airline](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
-* EasyMotion 在当前文件中快速移动光标到指定查找位置的插件，十分方便和高效
+* [ctrlp](https://github.com/ctrlpvim/ctrlp.vim) 模糊文件查找,可以快速的帮助找到项目中的文件。在normal模式下，按下ctrl+p，然后输入要寻找的文件就行了
 * deoplete 自动补全插件，写代码必备，有了这个插件，就有了IDE的感觉
-* Vim-Startify Vim启动首屏自定义插件，让你的Vim启动后显示别具一格的首屏样式
-* Vim-Indent-Guides 显示代码对齐的引导条
-* Accelerated-Smooth-Scroll 顾名思义，让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
-* YouDao-Translater Vim中的有道翻译插件
-* Matrix-ScreenSaver Vim中的黑客帝国屏幕保护插件，很酷很炫
+* EasyMotion 在当前文件中快速移动光标到指定查找位置的插件，十分方便和高效
 * [fzf](https://github.com/junegunn/fzf.vim) fzf ❤️ vim
+* [nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim. Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
+* [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
+* [powerline](<https://github.com/powerline/powerline):Powerline> is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. <https://powerline.readthedocs.io/en/latest/>
+* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
+* TagBar 查看当前代码文件中的变量和函数列表的插件，可以切换和跳转到代码中对应的变量和函数的位置
+* [v](https://github.com/rupa/v):z for vim
+* [vim-airline](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
+* [vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
+* vim-colors-solarized：vim的solarized配色插件
+* [vim-easymotion](https://github.com/easymotion/vim-easymotion): 魔术操作
+* [vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
+* [vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
+* VIM Fugitive
+* Vim-Indent-Guides 显示代码对齐的引导条
+* [vim-plug](https://github.com/junegunn/vim-plug):hibiscus Minimalist Vim Plugin Manager Vim的插件管理器，支持并发安装和更新
+* NERDTreeCommenter 方便的用来注释代码的插件
+* Vim-Startify Vim启动首屏自定义插件，让你的Vim启动后显示别具一格的首屏样式
 * [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
   - d s <existing char>   删除两边的指定字符
   - c s <existing char> <desired char>  修改两边的指定字符
   - y s <motion> <desired char> 修改两边字符
   - S <desired char>    visual modes 选中指定字符中间的内容
+* [z](https://github.com/rupa/z):z - jump around
 
 ## Bundle
 

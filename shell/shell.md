@@ -330,7 +330,7 @@ echo -e 'Hello\nWorld'
       * 反引号则是执行子命令
       * 换行符在双引号之中，会失去特殊含义，Bash 不再将其解释为命令的结束，只是作为普通的换行符
       * 文件名包含连续空格（或制表符和换行符）,必须使用双引号，将文件名放在里面
-      * 保存原始命令的输出格式 `echo "$(cal)"`
+      * 保存原始命令输出格式 `echo "$(cal)"`
   - 变量名大写、局部变量小写，函数名小写，名字体现出实际作用
 * set命令显示所有变量（包括环境变量和自定义变量），以及所有的 Bash 函数
 * 默认值
@@ -477,7 +477,7 @@ echo -e 'Hello\nWorld'
 * 转义 escape
   - 原样输出特殊字符，在前面加上反斜杠，使其变成普通字符
   - 在命令行使用不可打印字符，把它们放在引号里面，然后使用echo命令的-e参数
-  - 换行符是一个特殊字符，表示命令的结束，Bash 收到这个字符以后，就会对输入的命令进行解释执行。换行符前面加上反斜杠转义，就使得换行符变成一个普通字符，Bash 会将其当作空格处理，从而可以将一行命令写成多行。
+  - 换行符是一个特殊字符，表示命令的结束，Bash 收到这个字符以后，就会对输入的命令进行解释执行。换行符前面加上反斜杠转义，就使得换行符变成一个普通字符，Bash 会将其当作空格处理，从而可以将一行命令写成多行
 
 ```sh
 printenv HOME
@@ -549,9 +549,9 @@ PS1='\[\033[0;41m\]<\u@\h \W>\$\[\033[0m\] '
   - 变量名放在${}里面
   - `${!string*}`或`${!string@}`返回所有匹配给定字符串string的变量名
   - ${!S*} 所有以S开头的变量名
-* 子命令扩展
-  - $(...)可以扩展成另一个命令的运行结果，该命令的所有输出都会作为返回值
-* 命令置换:对一个命令求值，并将其值置换到另一个命令或者变量赋值表达式中。当一个命令被``或$()包围时，命令置换将会执行
+* 子命令扩展|进程替换 process substitution|命令置换
+  - `` 或 $(...)可以扩展成另一个命令的运行结果，该命令所有输出都会作为返回值
+  - 通过 `$( CMD )` 这样的方式来执行CMD 这个命令时，然后它的输出结果会替换掉 $( CMD )
 * 算数扩展:算数表达式必须包在$(( ))中
 * 字符类 [[:class:]]表示一个字符类，扩展成某一类特定字符之中的一个
   - [[:alnum:]]：匹配任意英文字母与数字
@@ -783,6 +783,9 @@ ${#array[@]}
   - 管道的返回值通常是管道中最后一个命令的返回值
   - shell会等到管道中所有的命令都结束后，才会返回一个值
   - 如果想让管道中任意一个命令失败后，管道就宣告失败，设置pipefail选项 `set -o pipefail`
+  - `ssh myserver 'journalctl | grep sshd | grep "Disconnected from"' | less`
+    + `ssh myserver 'journalctl | grep sshd | grep "Disconnected from"' > ssh.log` `less ssh.log`
+    + 日志是一个非常大的文件，把这么大的文件流直接传输到本地电脑上再进行过滤是对流量的一种浪费。因此采取另外一种方式，先在远端机器上过滤文本内容，然后再将结果传输到本机
 * 重定向 I/O Redirection：控制一个命令输入来自哪里，输出结果到什么地方
   - > 重定向输出
   - &>  重定向输出和错误输出
@@ -1227,7 +1230,8 @@ done
 x=0
 while [[ $x -lt 10 ]]; do
   echo $(( x * x ))
-  x=$(( x + 1 )) # x加1
+# x加1
+  x=$(( x + 1 ))
 done
 
 until cp $1 $2; do
@@ -1263,6 +1267,11 @@ done
 * 用local命令声明局部变量
 * 返回值使用return命令返回
 * unset 删除一个函数
+* 函数 vs 脚本
+  - 函数只能用与shell使用相同的语言，脚本可以使用任意语言。因此在脚本中包含 shebang 是很重要的。
+  - 函数仅在定义时被加载，脚本会在每次被执行时加载。这让函数的加载比脚本略快一些，但每次修改函数定义，都要重新加载一次。
+  - 函数会在当前的shell环境中执行，脚本会在单独的进程中执行。因此，函数可以对环境变量进行更改，比如改变当前工作目录，脚本则不行。脚本需要使用 export 将环境变量导出，并将值传递给环境变量。
+  - 与其他程序语言一样，函数可以提高代码模块性、代码复用性并创建清晰性的结构。shell脚本中往往也会包含它们自己的函数定义。
 
 ```sh
 fn() {
@@ -2143,7 +2152,7 @@ ccache gcc foo.c
   - [ngrep](http://ngrep.sourceforge.net/) 就是网络层的 grep。使用 pcap ，允许通过指定扩展正则表达式或十六进制表达式来匹配数据包。
   - [MRTG](http://oss.oetiker.ch/mrtg/) 最初被开发来监控路由器的流量，但现在它也能够监控网络相关的东西。它每五分钟收集一次，然后产生一个 HTML 页面。它还具有发送邮件报警的能力。
   - [bmon](https://github.com/tgraf/bmon/) 能监控并帮助你调试网络。它能捕获网络相关的统计数据，并以友好的方式进行展示。你还可以与 bmon 通过脚本进行交互。
-  - traceroute是一个内置工具，能显示路由和测量数据包在网络中的延迟,数据包在IP网络经过的路由器的IP地址
+  - traceroute 一个内置工具，能显示路由和测量数据包在网络中的延迟,数据包在IP网络经过的路由器的IP地址
   - [IPTState](http://www.phildev.net/iptstate/index.shtml) 可以让你观察流量是如何通过 iptables，并通过你指定的条件来进行排序。该工具还允许你从 iptables 的表中删除状态信息。
   - [darkstat](https://unix4lyfe.org/darkstat/) 能捕获网络流量并计算使用情况的统计数据。该报告保存在一个简单的 HTTP 服务器中，它为你提供了一个非常棒的图形用户界面。
   - [vnStat]( http://humdi.net/vnstat/) 是一个网络流量监控工具，它的数据统计是由内核进行提供的，其消耗的系统资源非常少。系统重新启动后，它收集的数据仍然存在。有艺术感的系统管理员可以使用它的颜色选项
@@ -2157,8 +2166,7 @@ ccache gcc foo.c
   - [powerline-shell](https://github.com/b-ryan/powerline-shell):A beautiful and useful prompt for your shell
     + pre-patched and adjusted fonts for usage with the Powerline statusline plugin `sudo apt-get install fonts-powerline`
     + Powerline a statusline plugin for vim, and provides statuslines and prompts for several other applications `pip install powerline-status`
-* sql
-  - mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令
+* mycli：mysql客户端，支持语法高亮和命令补全，效果类似ipython，可以替代mysql命令
 * json
   - jq: json文件处理以及格式化显示，支持高亮，可以替换python -m json.tool
 * 代码统计

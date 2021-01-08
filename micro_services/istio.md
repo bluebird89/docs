@@ -21,6 +21,8 @@ Connect, secure, control, and observe services. <https://istio.io>
   - 把控制平面的所有组件组合并成一个单体结构叫 istiod
   - Mixer 组件被移除，新版本的 HTTP 遥测默认基于 in-proxy Stats filter
   - 同时可使用 WebAssembly 开发 in-proxy 扩展
+  - 进程外的扩展替换为为Envoy WASM，删除了很多不必要的CRD，简化了用户用户使用体验
+  - 合并控制平面组件到单体应用 istiod 内部，降低了安装、配置和问题诊断的复杂度
   - 已在以下 Kubernetes 发布版本测试过：1.14, 1.15, 1.16
 
 ## 安装

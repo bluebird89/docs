@@ -1,4 +1,6 @@
-# UX User Expericence
+# UX User Expericence 用户体验设计师
+
+设计符合用户交互行为的草图，并细致化出线框图
 
 ## 参考
 

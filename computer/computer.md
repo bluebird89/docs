@@ -1,9 +1,9 @@
 # Computer 组成原理
 
-* 最原始的部件——晶体管。晶体管是一种半导体材料，其最重要的作用就是半导：可以通过电流的变化，实现电路的切换。比如计算机最基础的与或非运算，都可以通过晶体管组成的电子元件实现。而通过晶体管的电位差不同，就可以体现"二进制数据"，即0和1。再加上电容和电阻，就能把这种二进制数据临时保存起来。综合这些特性，大牛们发现把晶体管用作精密的数学计算，可以极大的提高运算的效率。比如有2个电容，分别是充满电和没有电，对他们同时释放电信号，电容就会把其中的电子放出来，经过特定的逻辑电路，如与门，得到了0的结果。要计算1+1，实际上也是类似的原理。先设计一个加法电路，把若干电容组合成的"数字"流过这个电路，把结果存入目标电容，就得到了结果。大规模的复杂运算以此类推。最早期的计算机真的就是用许多结晶体管实现的复杂电路结构，通过控制输入电流得到希望的输出结果。后来人们发现，这种计算可以用某些形式抽象成多种指令，不用针对每次计算设计复杂的电路，只要调用指令就可以实现任何一种计算组合，于是诞生了cpu。只有cpu，每次都要自己配置输入信号，实在太痛苦，就做了纸带输入给计算机。后来又发现纸带还是很麻烦，于是发明了输入终端和对应的存储设备。后来又发现很多数据要临时保存起来，供连续计算使用，于是发明了内存
+* 最原始部件——晶体管。晶体管是一种半导体材料，其最重要的作用就是半导：可以通过电流的变化，实现电路的切换。比如计算机最基础的与或非运算，都可以通过晶体管组成的电子元件实现。而通过晶体管的电位差不同，就可以体现"二进制数据"，即0和1。再加上电容和电阻，就能把这种二进制数据临时保存起来。综合这些特性，大牛们发现把晶体管用作精密的数学计算，可以极大的提高运算的效率。比如有2个电容，分别是充满电和没有电，对他们同时释放电信号，电容就会把其中的电子放出来，经过特定的逻辑电路，如与门，得到了0的结果。要计算1+1，实际上也是类似的原理。先设计一个加法电路，把若干电容组合成的"数字"流过这个电路，把结果存入目标电容，就得到了结果。大规模的复杂运算以此类推。最早期的计算机真的就是用许多结晶体管实现的复杂电路结构，通过控制输入电流得到希望的输出结果。后来人们发现，这种计算可以用某些形式抽象成多种指令，不用针对每次计算设计复杂的电路，只要调用指令就可以实现任何一种计算组合，于是诞生了cpu。只有cpu，每次都要自己配置输入信号，实在太痛苦，就做了纸带输入给计算机。后来又发现纸带还是很麻烦，于是发明了输入终端和对应的存储设备。后来又发现很多数据要临时保存起来，供连续计算使用，于是发明了内存
 * 形式语言与自动机
 * 理解冯诺依曼体系的结构，CPU和内存，硬盘，各种外设之间的关系，寄存器、缓存等知识
-* CPU有哪些指令，如何执行这些指令，如果实现数组，结构体，函数调用，这就涉及到汇编的知识。像原码，反码，补码，定点数、浮点数的表示和运算也是编程中必备的知识，几乎每种语言都要涉及。
+* CPU有哪些指令，如何执行这些指令，如果实现数组，结构体，函数调用，这就涉及到汇编的知识。像原码，反码，补码，定点数、浮点数的表示和运算也是编程中必备的知识，几乎每种语言都要涉及
 * CPU中的缓存，缓存一致性协议，DMA的异步思想都会在应用层中有所体现
 
 ## 原理
@@ -21,33 +21,33 @@
   - 通过bios引导，即作为应用程序开始运行。程序本质上就是在cpu上运行种种指令，比如操作系统需要把硬盘上的模块放入内存，实际上就是运行了一系列复杂的cpu指令，cpu指令通过主板bus（实际上就是传递指令的电路）发送指令给硬盘（比如从哪个扇区偏移多少读多少数据），硬盘再通过芯片组转动磁头，把数据读到缓存中，完成后给cpu发送一个信号（即中断），cpu收到这个信号，就在寄存器中寻址该信号对应的地址（即我们说的中断向量表），运行该地址中的指令，发现该指令是发送拷贝指令给主板芯片组，主板就会在cpu的指导下不断的发送信号，告诉硬盘缓存放电，再把接收的电信号存到指定的内存位置去，如此反复，直到完成cpu的一系列指令为止
   - 通过种种cpu指令，实现自身的所有功能。当然这些指令也不是一条条写进去的，而是通过编程语言完成人类较容易识别的逻辑，然后再通过编译器把这些逻辑翻译成cpu指令，这就涉及编译原理的东西了。既然操作系统对硬件的访问都是通过cpu指令来完成的，那为什么大家都感觉是操作掌管了硬件呢？这就涉及操作系统最本质的功能之一：对系统资源的管控了。
 * 运行的所有程序，实际上都是操作系统运行。操作系统背后进行了很多的工作
-  - 如虚拟地址空间的分配，cpu分时调度，硬件中断信号的响应等。这样对于硬件资源的访问，也是通过操作系统安排的。
-  - 通过把短时间内硬盘读写合并成顺序的方式，以提高磁头的利用率，降低磁头转向的时间。
+  - 如虚拟地址空间的分配，cpu分时调度，硬件中断信号的响应等。这样对于硬件资源的访问，也是通过操作系统安排的
+  - 通过把短时间内硬盘读写合并成顺序的方式，以提高磁头的利用率，降低磁头转向的时间
   - 对内存地址的访问也是由操作系统管控的，某个程序中的内存地址具体落到内存条的哪个位置，还是硬盘中的虚拟内存，就看操作系统的心情了。至此，操作系统和硬件的交互也介绍的差不多了
 
 ## 硬件
 
 * MBR(Master Boot Record)：主引导记录（MBR）是任何硬盘或软盘的第一扇区中的信息，用于标识操作系统的放置方式和位置，以便可以将其加载到计算机的主存储器或随机存取存储器中
 * 块设备(block devices)：块设备是一个能存储固定大小块信息的设备，它支持以固定大小的块，扇区或群集读取和（可选）写入数据。每个块都有自己的物理地址。通常块的大小在 512 - 65536 之间。所有传输的信息都会以连续的块为单位。块设备的基本特征是每个块都较为对立，能够独立的进行读写。常见的块设备有 硬盘、蓝光光盘、USB 盘
-* 字符设备(character devices)：另一类 I/O 设备是字符设备。字符设备以字符为单位发送或接收一个字符流，而不考虑任何块结构。字符设备是不可寻址的，也没有任何寻道操作。常见的字符设备有 打印机、网络设备、鼠标、以及大多数与磁盘不同的设备。
-* 设备控制器(device controller)：设备控制器是处理 CPU 传入信号和传出信号的系统。设备通过插头和插座连接到计算机，并且插座连接到设备控制器。
-* 显卡(Video card)，是个人电脑最基本组成部分之一，用途是将计算机系统所需要的显示信息进行转换驱动显示器，并向显示器提供逐行或隔行扫描信号，控制显示器的正确显示，是连接显示器和个人电脑主板的重要组件，是人机对话的重要设备之一。
-* 挂载(mounting) ：挂载是指操作系统会让存储在硬盘、CD-ROM 等资源设备上的目录和文件，通过文件系统能够让用户访问的过程。
-* RAID Redundant Array of Inexpensive Disks ，廉价磁盘或驱动器的冗余阵列，它是一种数据存储虚拟化的技术，将多个物理磁盘驱动器组件组合成一个或多个逻辑单元，以实现数据冗余，改善性能。
-* 可抢占资源(preemptable resource)：可以从拥有它的进程中抢占而并不会产生任何副作用。
+* 字符设备(character devices)：另一类 I/O 设备是字符设备。字符设备以字符为单位发送或接收一个字符流，而不考虑任何块结构。字符设备是不可寻址的，也没有任何寻道操作。常见的字符设备有 打印机、网络设备、鼠标、以及大多数与磁盘不同的设备
+* 设备控制器(device controller)：设备控制器是处理 CPU 传入信号和传出信号的系统。设备通过插头和插座连接到计算机，并且插座连接到设备控制器
+* 显卡(Video card)，是个人电脑最基本组成部分之一，用途是将计算机系统所需要的显示信息进行转换驱动显示器，并向显示器提供逐行或隔行扫描信号，控制显示器的正确显示，是连接显示器和个人电脑主板的重要组件，是人机对话的重要设备之一
+* 挂载(mounting) ：挂载是指操作系统会让存储在硬盘、CD-ROM 等资源设备上的目录和文件，通过文件系统能够让用户访问的过程
+* RAID Redundant Array of Inexpensive Disks ，廉价磁盘或驱动器的冗余阵列，它是一种数据存储虚拟化的技术，将多个物理磁盘驱动器组件组合成一个或多个逻辑单元，以实现数据冗余，改善性能
+* 可抢占资源(preemptable resource)：可以从拥有它的进程中抢占而并不会产生任何副作用
 * 不可抢占资源(nonpreemptable resource)：与可抢占资源相反，如果资源被抢占后，会导致进程或任务出错
 * 触摸屏
-  - 电阻式触摸屏(Resistive touchscreens)：电阻式触摸屏基于施加到屏幕上的压力来工作。电阻屏由许多层组成。当按下屏幕时，外部的后面板将被推到下一层，下一层会感觉到施加了压力并记录了输入。电阻式触摸屏用途广泛，可以用手指，指甲，手写笔或任何其他物体进行操作。
-  - 电容式触摸屏(capacitive touchscreen)：通过感应物体（通常是指尖上的皮肤）的导电特性来工作。手机或智能手机上的电容屏通常具有玻璃表面，并且不依赖压力。当涉及到手势（如滑动和捏合）时，它比电阻式屏幕更具响应性。电容式触摸屏只能用手指触摸，而不能用普通的手写笔，手套或大多数其他物体来响应。
-* GDI (Graphics Device Interface)：图形接口，是微软视窗系统提供的应用程序接口，也是其用来表征图形对象、将图形对象传送给诸如显示器、打印机之类输出设备的核心组件。
-* 设备上下文(device context)：设备上下文是 Windows 数据结构，其中包含有关设备（例如显示器或打印机）的图形属性的信息。所有绘图调用都是通过设备上下文对象进行的，该对象封装了用于绘制线条，形状和文本的 Windows API。设备上下文可用于绘制到屏幕，打印机或图元文件。
-* 系统检查点(system checkpointed)：操作系统（OS）的可启动实例。检查点是计算机在特定时间点的快照。
-* 沙盒(sandboxing)：沙盒是一种软件管理策略，可将应用程序与关键系统资源和其他程序隔离。它提供了一层额外的安全保护，可防止恶意软件或有害应用程序对你的系统造成负面影响。
+  - 电阻式触摸屏(Resistive touchscreens)：电阻式触摸屏基于施加到屏幕上的压力来工作。电阻屏由许多层组成。当按下屏幕时，外部的后面板将被推到下一层，下一层会感觉到施加了压力并记录了输入。电阻式触摸屏用途广泛，可以用手指，指甲，手写笔或任何其他物体进行操作
+  - 电容式触摸屏(capacitive touchscreen)：通过感应物体（通常是指尖上的皮肤）的导电特性来工作。手机或智能手机上的电容屏通常具有玻璃表面，并且不依赖压力。当涉及到手势（如滑动和捏合）时，它比电阻式屏幕更具响应性。电容式触摸屏只能用手指触摸，而不能用普通的手写笔，手套或大多数其他物体来响应
+* GDI (Graphics Device Interface)：图形接口，是微软视窗系统提供的应用程序接口，也是其用来表征图形对象、将图形对象传送给诸如显示器、打印机之类输出设备的核心组件
+* 设备上下文(device context)：设备上下文是 Windows 数据结构，其中包含有关设备（例如显示器或打印机）的图形属性的信息。所有绘图调用都是通过设备上下文对象进行的，该对象封装了用于绘制线条，形状和文本的 Windows API。设备上下文可用于绘制到屏幕，打印机或图元文件
+* 系统检查点(system checkpointed)：操作系统（OS）的可启动实例。检查点是计算机在特定时间点的快照
+* 沙盒(sandboxing)一种软件管理策略，可将应用程序与关键系统资源和其他程序隔离。它提供了一层额外的安全保护，可防止恶意软件或有害应用程序对你的系统造成负面影响
 
-## CPU Central Processing Unit
+## CPU Central Processing Unit 处理器
 
-* CPU即处理器，是计算机中控制数据操控的电路
-* CPU内部封装了1个或者多个物理核，物理核有独立的各级缓存和电路结构，如果只有1个物理核心就是单核CPU，有多个物理核心就是多核CPU`物理核心数=总CPU数*单CPU中物理核心数`
+* 计算机中控制数据操控的电路
+* 内部封装了1个或者多个物理核，物理核有独立的各级缓存和电路结构，如果只有1个物理核心就是单核CPU，有多个物理核心就是多核CPU`物理核心数=总CPU数*单CPU中物理核心数`
   - 物理 CPU 核心数：真正插在物理插槽上 CPU 的核心数
   - 逻辑 CPU 核心数：结合 CPU 多核以及超线程技术得到的 CPU 核心数，最终核心数以逻辑 CPU 核心数为准
 * 算术/逻辑单元 ALU:处理算数和逻辑运算
@@ -67,7 +67,7 @@
 * CPU向主存请求加载程序计数器指定的地址的指令，将其存放到指令寄存器中，加载后将程序计数器的值加2（假如指令长度为2个字节）
 * 与其他设备的通信一般通过控制器来实现，控制器可能在主板上，也可能以电路板形式插到主板.现在随着通用串行总线（USB）成为通用的标准，很多外设都可以直接用USB控制器作为通信接口。每个控制器都连接在总线上，通过总线进行通信
 * 直接存储器存取（DMA）是一种提升外设通信性能的措施，CPU并非总是需要使用总线，在总线空闲的时间里控制器能够充分利用起来。因为控制器都与总线相连接，而控制器又有执行指令的能力，所以可以将CPU的一些工作分给控制器来完成。比如在磁盘中检索数据时，CPU可以将告知控制器，然后由控制器找到数据并放到主存上，期间CPU可以去执行其他任务。这样能节省CPU资源。不过DMA会使总线通信更加复杂，而且会导致总线竞争问题。总线瓶颈源自冯诺依曼体系结构
-* 不同的 CPU 设计实现，就称为" CPU 架构"（CPU architecture）.不同的 CPU 架构有不同的指令集，彼此不通用，这导致运行在上面的软件也不兼容，必须重新编译
+* CPU 架构 CPU architecture:不同 CPU 设计实现.不同 CPU 架构有不同的指令集，彼此不通用，导致运行在上面的软件也不兼容，必须重新编译
   - x86:性能好，但是耗电多、电压高，主要用于桌面电脑和服务器，生产厂商为 Intel 公司和 AMD 公司
   - ARM:耗电小、电压低，但是单核性能不如 x86，主要用于移动设备。商业模式是授权制。英国的 ARM 公司出售指令集的授权，购买授权的公司可以基于公版的设计，开发自己的 ARM 芯片。高通、三星、华为、苹果等公司的芯片，都属于这个模式
 * 超线程是intel于2002年发布的一种技术，全名为Hyper-Threading，简写为HT技术，超线程技术最初只是应用于至强系列处理器中，之后陆续应用在奔腾系列中并将技术主流化，业界对于HT的评价不一，但是官方并未放弃超线程技术
@@ -88,20 +88,20 @@
 * 缓存基本上来说就是把后面的数据加载到离自己近的地方，对于CPU来说,一块一块的加载的，对于这样的一块一块的数据单位，术语叫“Cache Line”，一般来说，一个主流的CPU的Cache Line 是 64 Bytes.64Bytes也就是16个32位的整型，这就是CPU从内存中捞数据上来的最小数据单位
 * 缓存需要把内存里的数据放到放进来，英文叫 CPU Associativity。Cache的数据放置的策略决定了内存中的数据块会拷贝到CPU Cache中的哪个位置上，因为Cache的大小远远小于内存，所以，需要有一种地址关联的算法，能够让内存中的数据可以被映射到Cache中来。这个有点像内存地址从逻辑地址向物理地址映射的方法，但不完全一样
   - 任何一个内存地址的数据可以被缓存在任何一个Cache Line里，这种方法是最灵活的，但是，如果要知道一个内存是否存在于Cache中,就需要进行O(n)复杂度的Cache遍历，这是很没有效率的
-  - 为了降低缓存搜索算法，需要使用像Hash Table这样的数据结构，最简单的hash table就是做“求模运算”,比如：L1 Cache有512个Cache Line，公式：（内存地址 mod 512）* 64 就可以直接找到所在的Cache地址的偏移了。但是，这样的方式需要程序对内存地址的访问要非常地平均，不然冲突就会非常严重。这成了一种非常理想的情况了
-  - 为了避免上述的两种方案的问题，于是就要容忍一定的hash冲突，也就出现了 N-Way 关联。也就是把连续的N个Cache Line绑成一组，然后，先把找到相关的组，然后再在这个组内找到相关的Cache Line。这叫 Set Associativity
-* CPU缓存:新的CPU会有三级内存（L1，L2，L3）,L1/L2的大小基本上也就是KB级别的，L3会是MB级别的
+  - 为了降低缓存搜索算法，需要使用像Hash Table这样的数据结构，最简单的hash table就是做“求模运算”,比如：L1 Cache有512个Cache Line，公式：`（内存地址 mod 512）* 64` 就可以直接找到所在的Cache地址的偏移了。但是，这样的方式需要程序对内存地址的访问要非常地平均，不然冲突就会非常严重。这成了一种非常理想的情况了
+  - 为了避免上述两种方案的问题，于是就要容忍一定的hash冲突，也就出现了 N-Way 关联。也就是把连续的N个Cache Line绑成一组，然后，先把找到相关的组，然后再在这个组内找到相关的Cache Line。这叫 Set Associativity
+* CPU缓存:新CPU会有三级内存（L1，L2，L3）,L1/L2大小基本上也就是KB级别的，L3会是MB级别的
   - L1缓分成两种，一种是指令缓存，一种是数据缓存。L2缓存和L3缓存不分指令和数据。
   - L1和L2缓存在每一个CPU核中，L3则是所有CPU核心共享的内存。
   - L1、L2、L3的越离CPU近就越小，速度也越快，越离CPU远，速度也越慢。
-  - L1 的存取速度：4 个CPU时钟周期
-  - L2 的存取速度： 11 个CPU时钟周期
-  - L3 的存取速度：39 个CPU时钟周期
-  - RAM内存的存取速度：107 个CPU时钟周期
+  - L1 存取速度：4 个CPU时钟周期
+  - L2 存取速度： 11 个CPU时钟周期
+  - L3 存取速度：39 个CPU时钟周期
+  - RAM内存存取速度：107 个CPU时钟周期
   - L3，多核共享
-    + 三层考虑：
-      * 物理速度，如果要更大的容量就需要更多的晶体管，除了芯片的体积会变大，更重要的是大量的晶体管会导致速度下降，因为访问速度和要访问的晶体管所在的位置成反比，也就是当信号路径变长时，通信速度会变慢。这部分是物理问题。
-      * 多核技术中，数据的状态需要在多个CPU中进行同步，并且，可以看到，cache和RAM的速度差距太大，所以，多级不同尺寸的缓存有利于提高整体的性能。
+  - 三层考虑：
+    + 物理速度，如果要更大的容量就需要更多的晶体管，除了芯片的体积会变大，更重要的是大量的晶体管会导致速度下降，因为访问速度和要访问的晶体管所在的位置成反比，也就是当信号路径变长时，通信速度会变慢。这部分是物理问题
+    + 多核技术中，数据的状态需要在多个CPU中进行同步，并且，可以看到，cache和RAM的速度差距太大，所以，多级不同尺寸的缓存有利于提高整体的性能
 * 局部性原理
   - CPU 与内存之间往往集成了挺多层级的缓存，这些缓存越接近CPU，速度越快，所以如果能提前把内存中的数据加载到如下图中的 L1, L2, L3 缓存中，那么下一次 CPU 取数的话直接从这些缓存里取即可，能让CPU执行速度加快
   - 当某个元素被用到的时候，那么这个元素地址附近的的元素会被提前加载到 L1,L2,L3 缓存中,让内存一次性把目标区域附近的数据一起给cpu，存在这块区域，后面在需要用到的时候就先去这里找，找不到再去找内存要
@@ -201,19 +201,18 @@
   - [book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
   - [video lecture](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/)
   - [Brian Harvey’s Berkeley CS 61A](https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter)
-  * [SICP-answers](https://github.com/huangz1990/SICP-answers):我的 SICP 解题集 <http://sicp.readthedocs.org/>
-* [Computer Systems: A Programmer's Perspective 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html)(CSAPP) Computer Systems: A Programmer's Perspective, 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
-  - 《深入理解计算机系统》<https://www.bilibili.com/video/av31289365>
+  * [SICP-answers](https://github.com/huangz1990/SICP-answers):SICP 解题集 <http://sicp.readthedocs.org/>
+* [Computer Systems: A Programmer's Perspective CSAPP 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html) 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
+  - [视频](https://www.bilibili.com/video/av31289365)
   - [Berkeley CS 61C](http://inst.eecs.berkeley.edu/~cs61c/sp15/)
-  - 作为一名计算机程序员，如果缺乏对计算机的层次理解，那么其基本素养是值得怀疑的，其思考基础是有欠缺的。当我们沉浸在这样或者那样的编程教程里，沉浸在大量的语法架构之中的时候，反而常常因为这样或者那样一门复杂的技术而忘记计算机系统的构成其本身
 * [Mathematics for Computer Science](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf)
   - Tom Leighton’s MIT 6.042J
 * 计算机程序的概念、技术和模型 Concepts, Techniques, and Models of Computer Programming，CTMCP
 * [The Elements of Computing Systems](https://www.nand2tetris.org/)
-* 《[计算的本质：深入剖析程序和计算机](https://www.amazon.cn/gp/product/B00PG0MM3C)》
+* [计算的本质：深入剖析程序和计算机](https://www.amazon.cn/gp/product/B00PG0MM3C)
 * [Bottom Up Computer Science](https://github.com/ianw/bottomupcs) <http://www.bottomupcs.com>
 * The Encyclopedia of Human-Computer Interaction
-* 《[计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)》
+* [计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)
 
 ## 项目
 
@@ -231,19 +230,20 @@
 * [SJTU-Courses](https://github.com/CoolPhilChen/SJTU-Courses/):上海交通大学课程资料分享
   - [sjtu-se-courseware](https://github.com/sjtu-se-courseware/sjtu-se-courseware):上海交大软件学院课件
 * [REKCARC-TSC-UHT](https://github.com/PKUanonym/REKCARC-TSC-UHT):清华大学计算机系课程攻略 Guidance for courses in Department of Computer Science and Technology, Tsinghua University <https://rekcarc-tsc-uht.readthedocs.io/>
-* [USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源(<https://mbinary.xyz/ustc-cs/>) <https://mbinary.xyz/ustc-cs/>
+* [USTC-CS-Courses-Resource](https://github.com/mbinary/USTC-CS-Courses-Resource):❤️中国科学技术大学计算机学院课程资源 <https://mbinary.xyz/ustc-cs/>
   - ftp.ustclug.org； /ebook/USTC-CS-Courses-Resource； ftp@ftp
   - afp://ftp.ustclug.org/； /ebook/USTC-CS-Courses-Resource； Connect As Guest
 * [PKUCourse](https://github.com/tongtzeho/PKUCourse):北大计算机课程大作业
 * [HIT-Computer-Courses](https://github.com/wxwmd/HIT-Computer-Courses):哈工大计算机课程资料，包含计算机系统等多个科目
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
   - [This is CS50x](https://cs50.harvard.edu/x/2021/notes/0/)
-* [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 | Crash Course 字幕组 (全40集 2018-5-1 精校完成)<https://www.bilibili.com/video/av21376839/>
+* [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 <https://www.bilibili.com/video/av21376839/>
 * [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
 * [cs-video-courses](https://github.com/Developer-Y/cs-video-courses):List of Computer Science courses with video lectures.
 * [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
+* [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
 
 ## 工具
 

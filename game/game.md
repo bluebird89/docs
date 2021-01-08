@@ -70,6 +70,7 @@
 * 只狼：影逝二度
 * 刺客信条：大革命（英语：Assassin's Creed Unity）
 * HOB
+* 辐射4 Fallout 4
 
 ## Xbox Series X
 
