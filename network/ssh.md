@@ -20,14 +20,23 @@
   - ssh_host_rsa_key.pub：服务器公钥
   - -s：指定 CA 签发证书的密钥
 
+## 安装
+
 ```sh
 sudo apt install sshd
 yum install openssh
 service sshd restart
 
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-chmod 600 ~/.ssh/authorized_keys
+```
 
+## 配置
+
+* 客户端 `~/.ssh/config`
+* 服务器侧 `/etc/ssh/sshd_config`
+  - 修改PasswordAuthentication的值来禁用密码验证
+  - 修改PermitRootLogin的值来禁用 root 登陆
+
+```sh
 # SSH配置文件 uncomment
 authorizedKeyFile
 
@@ -35,7 +44,10 @@ service sshd restart
 
 ### 密钥生成
 ssh-keygen -t rsa -b 4096
+ssh-keygen -o -a 100 -t ed25519
+
 ssh-copy-id <username>@<host> # install your public key to any user that you have login credentials for.
+ssh-copy-id -i .ssh/id_ed25519.pub foobar@remote
 
 chmod 700 ~/.ssh
 chmod 600 ~/.ssh/authorized_keys
@@ -45,6 +57,7 @@ scp ~/.ssh/id_rsa.pub deploy@your_server_ip_address:
 
 cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
 cat ~/.ssh/id_rsa.pub | ssh demo@198.51.100.0 "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+cat .ssh/id_ed25519.pub | ssh foobar@remote 'cat >> ~/.ssh/authorized_keys'
 
 # 传输文件
 scp id_rsa.pub git@172.26.186.117:/home/git/
@@ -183,9 +196,12 @@ ssh-keygen -t rsa # 生成.ssh文件目录
 ssh-copy-id test_host@40.343.45.77
 ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
 scp -p ~/.ssh/id_rsa.pub root@<remote_ip>:/root/.ssh/authorized_keys
-
 # 将文件拷贝至远程服务器
 scp ~/.ssh/id_rsa.pub root@<remote_ip>:pub_key
+
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+
 # 将内容追加到authorized_keys文件中， 不过要登录远程服务器来执行这条命令
 cat ~/pub_key >>~/.ssh/authorized_keys
 
@@ -203,6 +219,8 @@ ssh-keygen -R <IP_ADDRESS>
 ssh \<user>@\<hostname/hostip> \<command>
 ```
 
+## [ssh-agent](https://www.ssh.com/ssh/agent)
+
 ## 命令行代理
 
 ```sh
@@ -213,3 +231,64 @@ socks5 127.0.0.1 7891
 
 proxychains curl google.com
 ```
+
+## 端口转发 port forwarding
+
+* -L Specifies that the given port on the local (client) host is to be forwarded to the given host and port on the remote side `ssh -L sourcePort:forwardToHost:onPort connectToHost`
+  - connect with ssh to connectToHost
+  - forward all connection attempts to the local sourcePort to port onPort on the machine called forwardToHost, which can be reached from the connectToHost machine.
+* -R Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side `ssh -R sourcePort:forwardToHost:onPort connectToHost`
+  - connect with ssh to connectToHost, and forward all connection attempts to the remote sourcePort to port onPort on the machine called forwardToHost, which can be reached from your local machine.
+* 实验
+  - 使用 ssh-copy-id vm 将您的 ssh 密钥拷贝到服务器。
+  - 使用python -m http.server 8888 在您的虚拟机中启动一个 Web 服务器并通过本机的http://localhost:9999 访问虚拟机上的 Web 服务器
+  - 使用sudo vim /etc/ssh/sshd_config 编辑 SSH 服务器配置，通过修改PasswordAuthentication的值来禁用密码验证。通过修改PermitRootLogin的值来禁用 root 登陆。然后使用sudo service sshd restart重启 ssh 服务器，然后重新尝试。
+
+```sh
+ssh -L 123:localhost:456 remotehost
+ssh -L 123:farawayhost:456 remotehost
+# connects to your computer with a webbrowser, he gets the response of the webserver running on SUPERSERVER. You, on your local machine, have no webserver running.
+ssh -L 80:localhost:80 SUPERSERVER
+
+# connects to the small and slow server with a webbrowser, he gets the response of the webserver running on your local machine. The tinyserver, which has not enough diskspace for the big website, has no webserver running. But people connecting to tinyserver think so.
+ssh -R 80:localhost:80 tinyserver
+
+alias my_server="ssh -i ~/.id_ed25519 --port 2222 -L 9999:localhost:8888 foobar@remote_server"
+
+# ~/.ssh/config
+Host vm
+    User foobar
+    HostName 172.16.174.141
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+    LocalForward 9999 localhost:8888
+
+# 在配置文件中也可以使用通配符
+Host *.mit.edu
+    User foobaz
+
+# 方法一
+ssh 目标机器登录用户@目标机器IP -p 目标机器端口 -o ProxyCommand='ssh -p 跳板机端口 跳板机登录用户@跳板机IP -W %h:%p'
+
+# 在 $HOME/.ssh 目录下建立/修改文件 config
+Host tiaoban   #任意名字，随便使用
+    HostName 192.168.1.1   #这个是跳板机的IP，支持域名
+    Port 22      #跳板机端口
+    User username_tiaoban       #跳板机用户
+
+Host nginx      #同样，任意名字，随便起
+    HostName 192.168.1.2  #真正登陆的服务器，不支持域名必须IP地址
+    Port 22   #服务器的端口
+    User username   #服务器的用户
+    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
+
+Host 10.10.0.*      #可以用*通配符
+    Port 22   #服务器的端口
+    User username   #服务器的用户
+    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
+```
+
+![Alt text](../_static/ssh_local_port_forwarding.png "Optional title")
+![Alt text](../_static/ssh_local_port_forwarding1.png "Optional title")
+![Alt text](../_static/ssh_remote_port_forwarding.png "Optional title")
+![Alt text](../_static/ssh_remote_port_forwarding1.png "Optional title")

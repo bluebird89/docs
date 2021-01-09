@@ -17,6 +17,11 @@
 
 ## 配置
 
+* bash - ~/.bashrc, ~/.bash_profile
+* git - ~/.gitconfig
+* vim - ~/.vimrc 和 ~/.vim 目录
+* ssh - ~/.ssh/config
+* tmux - ~/.tmux.conf
 * 用户每次使用 Shell，都会开启一个与 Shell 的 Session
   - 登录 Session|login shell:用户登录系统以后，系统为用户开启的原始 Session，通常需要用户输入用户名和密码进行登录.一般进行整个系统环境的初始化，启动的初始化脚本依次
     + /etc/profile：所有用户的全局配置脚本
@@ -45,6 +50,7 @@
     + 转义 \c
     + command ls
   - 参考
+    + [Shell startup scripts](https://blog.flowblok.id.au/2013-02/shell-startup-scripts.html)
     + <https://www.digitalocean.com/community/questions/what-are-your-favorite-bash-aliases>
     + <https://www.linuxtrainingacademy.com/23-handy-bash-shell-aliases-for-unix-linux-and-mac-os-x/>
     + <https://brettterpstra.com/2013/03/31/a-few-more-of-my-favorite-shell-aliases/>
@@ -1654,11 +1660,16 @@ ls -l my_script # 过滤输出列表
 
 * [An Introduction to the Z Shell](http://zsh.sourceforge.net)
 * [prezto](https://github.com/sorin-ionescu/prezto) The configuration framework for Zsh
-* [ohmyzsh](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. <https://ohmyz.sh/>
+* [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. <https://ohmyz.sh/>
   - 兼容 bash
   - 自动 cd:只需输入目录名称
   - 命令选项补齐
   - 目录一次性补全：比如输 Doc/doc
+  - 智能替换
+  - 行内替换/通配符扩展
+  - 拼写纠错
+  - 更好的 tab 补全和选择
+  - 路径展开 (cd /u/lo/b 会被展开为 /usr/local/bin)
 * powerline: need font support
 * [plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins)
   - plugin manager
@@ -1924,30 +1935,6 @@ sudo apt-get install xmobar dmenu
 dialog --title "Oh hey" --inputbox "Howdy?" 8 55 # interact with the user on command-line
 ```
 
-### 跳板机
-
-```sh
-# 方法一
-ssh 目标机器登录用户@目标机器IP -p 目标机器端口 -o ProxyCommand='ssh -p 跳板机端口 跳板机登录用户@跳板机IP -W %h:%p'
-
-# 在 $HOME/.ssh 目录下建立/修改文件 config
-Host tiaoban   #任意名字，随便使用
-    HostName 192.168.1.1   #这个是跳板机的IP，支持域名
-    Port 22      #跳板机端口
-    User username_tiaoban       #跳板机用户
-
-Host nginx      #同样，任意名字，随便起
-    HostName 192.168.1.2  #真正登陆的服务器，不支持域名必须IP地址
-    Port 22   #服务器的端口
-    User username   #服务器的用户
-    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
-
-Host 10.10.0.*      #可以用*通配符
-    Port 22   #服务器的端口
-    User username   #服务器的用户
-    ProxyCommand ssh username_tiaoban@tiaoban -W %h:%p
-```
-
 ## tac
 
 ```sh
@@ -2049,6 +2036,12 @@ wget https://github.com/sharkdp/bat/releases/download/v0.15.4/bat_0.15.4_amd64.d
 brew install bat
 ```
 
+## snieept
+
+```sh
+history | awk '{$1="";print substr($0,2)}' | sort | uniq -c | sort -n | tail -n 10
+```
+
 ## Termial
 
 * [ish](https://github.com/ish-app/ish):Linux shell for iOS <https://ish.app>
@@ -2075,7 +2068,7 @@ brew install bat
   + [nushell](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`
     * The goal of this project is to take the Unix philosophy of shells, where pipes connect simple commands together, and bring it to the modern style of development
 * [Hyper](https://github.com/zeit/hyper):A terminal built on web technologies create a beautiful and extensible experience for command-line interface users, built on open web standards <https://hyper.is>
-* mosh：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
+* [mosh](https://mosh.org/)：基于UDP的终端连接，可以替代ssh，连接更稳定，即使IP变了，也能自动重连
 * [PowerShell](https://github.com/PowerShell/PowerShell):PowerShell for every system! <https://microsoft.com/PowerShell>
 * [terminus](https://github.com/Eugeny/terminus):A terminal for a more modern age <https://eugeny.github.io/terminus/>
 * [msys2](http://www.msys2.org/)
