@@ -439,6 +439,7 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
 * [Optimizing software in C++](https://www.agner.org/optimize/optimizing_cpp.pdf)
 * C++ 沉思录
+* [C++ 匠心之作 从0到1入门](https://github.com/AnkerLeng/Cpp-0-1-Resource)
 
 ## 工具
 

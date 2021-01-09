@@ -1815,8 +1815,18 @@ int main() {
     + 原始套接字(Raw Socket)：可以使用原始套接字访问基础通信协议。
   - 跨机器：在应用服务器上部署一个local-proxy；应用与local-proxy之间使用UNIX Domain Socket来通讯；local-proxy与后端服务进行TCP长连接通讯
 * 信号 signal
+  - 一种软件中断，使用 UNIX 提供的信号机制执行进程间通信。当一个进程接收到信号时，它会停止执行、处理该信号并基于信号传递的信息来改变其执行
   - 通过向一个或多个进程发送异步事件信号来实现，信号可以从键盘或者访问不存在的位置等地方产生；信号通过 shell 将任务发送给子进程。
-  - 进程可以选择忽略发送过来的信号，但是有两个是不能忽略的：SIGSTOP 和 SIGKILL 信号。SIGSTOP 信号会通知当前正在运行的进程执行关闭操作，SIGKILL 信号会通知当前进程应该被杀死
+  - 进程可以选择忽略发送过来的信号，但是有两个是不能忽略的：SIGSTOP 和 SIGKILL 信号
+  - SIGSTOP 信号会通知当前正在运行的进程执行关闭操作，会让进程暂停。在终端中，键入 Ctrl-Z 会让 shell 发送 SIGTSTP 信号
+    + 命令中 & 后缀可以让命令在直接在后台运行，这使得您可以直接在 shell 中继续做其他操作，不过它此时还是会使用 shell 的标准输出
+    + 使用 fg 或 bg 命令恢复暂停工作。它们分别表示在前台继续或在后台继续
+    + jobs 命令会列出当前终端会话中尚未完成的全部任务
+    + 使用百分号 + 任务编号（jobs 会打印任务编号）来选取该任务
+    + 选择最近的一个任务，可以使用 $! 这一特殊参数
+    + 后台的进程仍然是终端进程的子进程，一旦关闭终端（会发送另外一个信号SIGHUP），这些后台的进程也会终止
+    + 使用 nohup (一个用来忽略 SIGHUP 的封装) 来运行程序
+  - SIGKILL 信号会通知当前进程应该被杀死
   - SIGABRT 和 SIGIOT 信号发送给进程，告诉其进行终止，这个 信号通常在调用 C标准库的abort()函数时由进程本身启动
   - 当设置的时钟功能超时时会将 SIGALRM 、 SIGVTALRM、SIGPROF 发送给进程。当实际时间或时钟时间超时时，发送 SIGALRM。当进程使用的 CPU 时间超时时，将发送 SIGVTALRM。当进程和系统代表进程使用的CPU 时间超时时，将发送 SIGPROF
   - SIGBUS 将造成总线中断错误时发送给进程
@@ -1825,13 +1835,58 @@ int main() {
   - SIGFPE 信号在执行错误的算术运算（例如除以零）时将被发送到进程
   - 当 SIGUP 信号控制的终端关闭时，会发送给进程。许多守护程序将重新加载其配置文件并重新打开其日志文件，而不是在收到此信号时退出。
   - SIGILL 信号在尝试执行非法、格式错误、未知或者特权指令时发出
-  - 当用户希望中断进程时，操作系统会向进程发送 SIGINT 信号。用户输入 ctrl - c 就是希望中断进程。
+  - 当用户希望中断进程时，操作系统会向进程发送 SIGINT 信号。用户输入 ctrl - c 就是希望中断进程
   - SIGKILL 信号发送到进程以使其马上进行终止。与 SIGTERM 和 SIGINT 相比，这个信号无法捕获和忽略执行，并且进程在接收到此信号后无法执行任何清理操作
     + 僵尸进程无法杀死，因为僵尸进程已经死了，它在等待父进程对其进行捕获
     + 处于阻塞状态的进程只有再次唤醒后才会被 kill 掉
     + init 进程是 Linux 的初始化进程，这个进程会忽略任何信号
     + SIGKILL 通常是作为最后杀死进程的信号、它通常作用于 SIGTERM 没有响应时发送给进程。
   - SIGPIPE 尝试写入进程管道时发现管道未连接无法写入时发送到进程
+  - SIGTERM 则是一个更加通用的、也更加优雅地退出信号。发出这个信号使用 kill 命令,语法： kill -TERM <PID>
+
+```sh
+$ sleep 1000
+^Z
+[1]  + 18653 suspended  sleep 1000
+
+$ nohup sleep 2000 &
+[2] 18745
+appending output to nohup.out
+
+$ jobs
+[1]  + suspended  sleep 1000
+[2]  - running    nohup sleep 2000
+
+$ bg %1
+[1]  - 18653 continued  sleep 1000
+
+$ jobs
+[1]  - running    sleep 1000
+[2]  + running    nohup sleep 2000
+
+$ kill -STOP %1
+[1]  + 18653 suspended (signal)  sleep 1000
+
+$ jobs
+[1]  + suspended (signal)  sleep 1000
+[2]  - running    nohup sleep 2000
+
+$ kill -SIGHUP %1
+[1]  + 18653 hangup     sleep 1000
+
+$ jobs
+[2]  + running    nohup sleep 2000
+
+$ kill -SIGHUP %2
+
+$ jobs
+[2]  + running    nohup sleep 2000
+
+$ kill %2
+[2]  + 18745 terminated  nohup sleep 2000
+
+$ jobs
+```
 
 ## 线程 Thread
 
