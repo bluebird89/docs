@@ -32,6 +32,10 @@ cmake -DCMAKE_INSTALL_PREFIX=/gdb/mysql/ -DMYSQL_DATADIR=/gdb/data/ -DSYSCONFDIR
 make&&make install
 ```
 
+## [pwndbg](https://github.com/pwndbg/pwndbg)
+
+## [lldb](https://lldb.llvm.org/)
+
 ## 图书
 
 * 《debuging with gdb》

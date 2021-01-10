@@ -1,5 +1,8 @@
 # PVN Virtual Private Network 虚拟专用网络
 
+* 发出的流量看上去来源于 VPN 供应商的网络而不是你的“真实”地址，而实际接入的网络只能看到加密的流量。
+* 使用 VPN 只是把原本对网络供应商的信任放在了 VPN 供应商那里——网络供应商 能看到的，VPN 供应商 也都能看到
+
 ## 概念
 
 * 中继/中转/落地：两个或多个服务器之间通过端口进行流量转发
@@ -380,10 +383,13 @@ Socks 主机 127.0.0.1 7891
 
 ## [WireGuard](../network/WireGuard.md)
 
+## [algo](https://github.com/trailofbits/algo)
+
+Set up a personal IPSEC VPN in the cloud
+
 ## 服务
 
 * [streisand](https://github.com/StreisandEffect/streisand):Streisand sets up a new server running L2TP/IPsec, OpenConnect, OpenSSH, OpenVPN, Shadowsocks, sslh, Stunnel, a Tor bridge, and WireGuard. It also generates custom instructions for all of these services. At the end of the run you are given an HTML file with instructions that can be shared with friends, family members, and fellow activists.
-* [trailofbits/algo](https://github.com/trailofbits/algo):Set up a personal IPSEC VPN in the cloud
 * 三方
   - blinkload
   - 快连

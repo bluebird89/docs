@@ -1632,7 +1632,7 @@ static void modify_event(int epollfd, int fd, int state) {
     - `ps aux`
     + `ps -p 98`
   - `top` show information about Linux processes running on the system in real time
-  - strace: trace system calls and signals 跟踪进程内部的系统调用和信号 `strace  -c ./tiem_test`
+  - [strace](http://man7.org/linux/man-pages/man1/strace.1.html): trace system calls and signals 跟踪进程内部的系统调用和信号 `strace  -c ./tiem_test`
     + 系统调用（system call）:指运行在「用户态」的程序向操作系统「内核态」请求需要更高权限运行的服务，系统调用提供用户程序与操作系统之间的接口
     + strace后面跟着启动一个进程，可以跟踪启动后进程的系统调用和信号，这个命令可以看到进程执行时候都调用了哪些系统调用，通过指定不同的选项可以输出系统调用发生的时间，精度可以精确到微秒，甚至还可以统计分析系统「调用的耗时」，这在排查进程假死问题的时候很有用，能帮你发现进程卡在哪个系统调用上
   - pstack: print a stack trace of a running process 打印出运行中程序的堆栈信息,可以看到进程内启动的线程号，每个进程内线程的「堆栈」内容也能看到  `pstack pid`

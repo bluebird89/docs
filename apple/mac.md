@@ -247,7 +247,6 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [Dropzone](https://aptonic.com/):makes it faster and easier to move and copy files, launch applications, upload to many different services, and more.
   - [Time](https://timingapp.com/):automatically tracking how you spend your time.
   - [Fantastical 2](https://flexibits.com/fantastical):The calendar app 收费
-  - [Hammerspoon](http://www.hammerspoon.org/): a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
   - manico:Dock app 映射为数字键
   - [neofetch](https://github.com/dylanaraps/neofetch):🖼️ A command-line system information tool written in bash 3.2+
   - [vtop](https://github.com/MrRio/vtop):Wow such top. So stats. More better than regular top. <http://parall.ax/vtop>
@@ -396,6 +395,21 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + 航拍横跨中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象
     + `brew cask install aerial`
     + 下载点击安装，重新进入系统偏好设置
+
+## [Hammerspoon](http://www.hammerspoon.org/)
+
+* a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
+* 面向 macOS 的一个桌面自动化框架。它允许用户编写和操作系统功能挂钩的 Lua 脚本，从而与键盘、鼠标、窗口、文件系统等交互
+* 应用：
+  - 绑定移动窗口到的特定位置的快捷键
+  - 创建可以自动将窗口整理成特定布局的菜单栏按钮
+  - 在到实验室以后，通过检测所连接的 WiFi 网络自动静音扬声器
+  - 在你不小心拿了朋友的充电器时弹出警告
+* 可以运行任意 Lua 代码，绑定菜单栏按钮、按键、或者事件。Hammerspoon 提供了一个全面的用于和系统交互的库，因此它能没有限制地实现任何功能。你可以从头编写自己的 Hammerspoon 配置，也可以结合别人公布的配置来满足自己的需求
+* 参考
+  - [Hammerspoon 官方教程](https://www.hammerspoon.org/go/)
+  - [官方示例配置](https://github.com/Hammerspoon/hammerspoon/wiki/Sample-Configurations)
+  - [Anish 的 Hammerspoon 配置](Anish 的 Hammerspoon 配置)
 
 ## iPhone铃声制作
 

@@ -80,6 +80,20 @@ find / -name *.conf -type f -print | xargs tar cjf test.tar.gz
   - Emacs style key bindings
   - Mouse: scroll, click, double-click; shift-click and shift-scroll on multi-select mode
 
+```sh
+# 使用fd生成fzf命令行模糊查找器的输入:
+export FZF_DEFAULT_COMMAND='fd --type file'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+键入vim <Ctrl-T>在你的终端打开FZF，也即是fd的搜索结果
+
+# 遵循符号链接并包含隐藏文件 (但不包括.git文件夹)
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+
+# 置fzf内的fd的颜色输出:
+export FZF_DEFAULT_COMMAND="fd --type file --color=always"
+export FZF_DEFAULT_OPTS="--ansi"
+```
+
 ## [fd](https://github.com/sharkdp/fd)
 
 A simple, fast and user-friendly alternative to 'find'
@@ -139,23 +153,11 @@ fd passwd /etc
 # fd可以不带参数调用. 这是非常有用的,以便快速地查看当前目录中的所有条目,递归地
 fd
 
-#特定文件扩展名
+# 特定文件扩展名
 fd -e md
 
 # 隐藏和忽略的文件
 fd -H pre-commit
 
 fd -0 -e rs | xargs -0 wc -l
-
-# 使用fd生成fzf命令行模糊查找器的输入:
-export FZF_DEFAULT_COMMAND='fd --type file'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-键入vim <Ctrl-T>在你的终端打开FZF，也即是fd的搜索结果
-
-# 遵循符号链接并包含隐藏文件 (但不包括.git文件夹)
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
-
-# 置fzf内的fd的颜色输出:
-export FZF_DEFAULT_COMMAND="fd --type file --color=always"
-export FZF_DEFAULT_OPTS="--ansi"
 ```

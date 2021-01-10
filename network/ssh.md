@@ -26,7 +26,6 @@
 sudo apt install sshd
 yum install openssh
 service sshd restart
-
 ```
 
 ## 配置
@@ -217,6 +216,11 @@ ansible <groupname> -m authorized_key -a "user=root key='{{ lookup('file','/root
 ssh-keygen -R <IP_ADDRESS>
 
 ssh \<user>@\<hostname/hostip> \<command>
+```
+
+```sh
+openssl aes-256-cbc -salt -in {源文件名} -out {加密文件名}
+openssl aes-256-cbc -d -in {加密文件名} -out {解密文件名}
 ```
 
 ## [ssh-agent](https://www.ssh.com/ssh/agent)

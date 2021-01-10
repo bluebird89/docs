@@ -222,7 +222,7 @@
 ## 课程
 
 * [哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
-* [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
+* [The Missing Semester of Your CS Education](https://github.com/missing-semester/missing-semester)<https://missing.csail.mit.edu/>
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 * [computer-science](https://github.com/ossu/computer-science) 🎓 Path to a free self-taught education in Computer Science!
 * [Composing Programs](http://www.composingprograms.com/): a free online introduction to programming and computer science.

@@ -195,15 +195,33 @@ gpg --sign demo.txt #签名
 
 ## 原理
 
+* 将顶级目录中的文件和文件夹作为集合，并通过一系列快照来管理其历史记录
+  - 文件被称作Blob对象（数据对象），也就是一组数据。
+  - 目录则被称之为“树”，它将名字与Blob对象或树对象进行映射（使得目录中可以包含其他目录）。
+  - 快照则是被追踪的最顶层的树
 * 基于时间点的快照：将提交点指向提交时的项目快照
 * 任何人，在任何硬件环境下，相同的内容都会生成相同的对象
-* 通过使用引用（ref），比如 HEAD, heads/master，tags/v0.1，git 可以很方便地追踪用户关心的每一棵树的确切状态
-* HEAD:当前分支最新一个提交
+* references 通过使用引用（ref），比如 HEAD, heads/master，tags/v0.1，git 可以很方便地追踪用户关心的每一棵树的确切状态
+  - 引用是指向提交的指针。与对象不同的是，它是可变的（引用可以被更新，指向新的提交）
+  - master 引用通常会指向主分支的最新一次提交
+* 历史记录建模：关联快照
+  - 历史记录是一个由快照组成的有向无环图
+  - 每个快照都有一系列的“父辈”，也就是其之前的一系列快照
+  - 快照被称为“提交”。通过可视化的方式来表示这些历史提交记录时
+* 结构
+  - `config` 配置文件
+  - `description` 仅供 Git Web 程序使用的描述
+  - `HEAD`  当前被检出分支,当前分支最新一个提交
+  - `index` 暂存区信息
+  - `hooks/`  客户端或服务端的钩子脚本（hook scripts）
+  - `info/` 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
+  - `objects/`  所有数据内容
+  - `refs/` 数据（分支）的提交对象的指针
 * objects
   - 一些以哈希值命名的文件和目录，其中目录由两个字符组成，是每个object hash值的前两个字符
     + hash值后续的字符串用于命名对应的object文件
-  - 查看object的类型 `git cat-file -t 3e759ef889`
-  - 查看object的内容 `git cat-file -p 3e759ef889`
+  - 查看object类型 `git cat-file -t 3e759ef889`
+  - 查看object内容 `git cat-file -p 3e759ef889`
   - add:添加 blob 类型对象，对象内容就是添加文件中内容
   - commit 维护一个commitID树，分别保存着不同状态代码
     + commit:每次提交信息，每个commit都是Git仓库的一个快照
@@ -230,21 +248,14 @@ gpg --sign demo.txt #签名
       * 用了两层目录结构:文件名是文件 sha1 后 base16 编码的字符串
   - 无论哪种对象object，一旦放入到objects就是不可变的（immutable）
     + 修改，git也只是根据最新内容创建一个新的blob对象，而不是修改或替换掉第一版对应的blob对象
+  - Blobs、树和提交都一样，它们都是对象。当它们引用其他对象时，它们并没有真正的在硬盘上保存这些对象，而是仅仅保存了它们的哈希值作为引用
+* 在硬盘上，Git 仅存储对象和引用：因为其数据模型仅包含这些东西。所有的 git 命令都对应着对提交树的操作，例如增加对象，增加或删除引用。
 * tag：存储版本信息，相当于对对象库中的某个 commit 显式标记了一下
   - 在refs/tags下面增加一个名为 tagvalue 文件,内容为生成当前tag时的commitId
 * branch:.git/refs/heads下面多出了一个文件,内容为生成当前分支时的commitId
 * 切换到（git checkout xxx）某个branch或tag
   - 将本地工作拷贝切换到commit对象所代表的仓库快照状态
   - 将commit对象组成的单向链表的head指向该commit对象，这个head即.git/HEAD文件的内容
-* 结构
-  - `config` 配置文件
-  - `description` 仅供 Git Web 程序使用的描述
-  - `HEAD`  当前被检出分支
-  - `index` 暂存区信息
-  - `hooks/`  客户端或服务端的钩子脚本（hook scripts）
-  - `info/` 全局性排除（global exclude）文件，不希望被记录在 .gitignore 文件中的忽略模式（ignored patterns）
-  - `objects/`  所有数据内容
-  - `refs/` 数据（分支）的提交对象的指针
 
 ![Git原理-1](../_static/bg2015120901.png)
 ![Git原理-2](../_static/git_2.png)
@@ -295,6 +306,55 @@ git ls-tree f93e
     └── refs # 引用文件，如本地分支，远端分支，标签等
         ├── heads
         └── tags
+
+<root> (tree)
+|
++- foo (tree)
+|  |
+|  + bar.txt (blob, contents = "hello world")
+|
++- baz.txt (blob, contents = "git is wonderful")
+
+# 数据模型
+# // 文件就是一组数据
+type blob = array<byte>
+
+# // 一个包含文件和目录的目录
+type tree = map<string, tree | file>
+
+# // 每个提交都包含一个父辈，元数据和顶层树
+type commit = struct {
+    parent: array<commit>
+    author: string
+    message: string
+    snapshot: tree
+}
+
+# 对象和内存寻址
+type object = blob | tree | commit
+
+objects = map<string, object>
+
+def store(object):
+    id = sha1(object)
+    objects[id] = object
+
+def load(id):
+    return objects[id]
+
+references = map<string, string>
+
+def update_reference(name, id):
+    references[name] = id
+
+def read_reference(name):
+    return references[name]
+
+def load_reference(name_or_id):
+    if name_or_id in references:
+        return load(references[name_or_id])
+    else:
+        return load(name_or_id)
 ```
 
 ### 工作区（Workspace）working directory
@@ -358,6 +418,7 @@ git clone rsync://example.com/path/to/repo.git/
 git clone -o jQuery https://github.com/jquery/jquery.git # 所使用的远程主机自动命名为origin。如果想自定义主机名，需要用-o选项指定
 git clone --depth=1 https://github.com/rwv/chinese-dos-games.git
 git clone -b v1.21.0 https://github.com/grpc/grpc
+git clone --shallow: 克隆仓库，但是不包括版本历史信息
 
 # 从远程仓库中克隆一个特定的分支
 git init
@@ -380,7 +441,8 @@ git rm [file1] [file2] ... # 从已跟踪文件和工作区中移除某个文件
 git rm --cached [file]  # 把文件从暂存区移除但工作区保留
 git rm -f <file> # 如果已修改并提交到暂存区
 
-git diff # 显示暂存区和工作区的差异
+git diff # 显示暂存区和工作区差异
+git diff <revision> <filename>
 git diff -- <fileName> # 未缓存的所有或者单个文件的改动
 git diff --cached <fileName> # 暂存区和 HEAD 的文件差异
 git diff --staged # 暂存区与最新一次提交之间的差别
@@ -431,7 +493,7 @@ git update-index --assume-unchanged <file>Resume tracking files with:
 git update-index --no-assume-unchanged <file>
 ```
 
-### 暂存区 Index/Stage
+### 暂存区 Index|staging area
 
 * 任何修改都是从进入index区才开始被版本控制
 * .git目录下的index文件, 暂存区会索引
@@ -663,7 +725,7 @@ git branch -m old new  # Rename branch locally
 git branch -d [branch-name] # 删除已合并分支
 git branch -D branchName # 删除分支
 
-# 通过二分搜索的方式来帮助你定位到引入 bug 的 commit。
+# 通过二分查找搜索历史记录 定位到引入 bug 的 commit。
 git bisect start
 git bisect good
 git bisect bad # Find bug in commit history in a binary search tree style
@@ -693,6 +755,7 @@ git checkout -- aaa # 从staged中恢复aaa到worktree
 git reset -- aaa # 从repo中恢复aaa到staged
 git checkout -- HEAD aaa # 从repo中恢复aaa到staged和worktree
 git reset --hard -- aaa # 同上
+git reset HEAD <file>: 恢复暂存的文件
 
 git restore [--worktree] aaa # 从staged中恢复aaa到worktree
 git restore --staged aaa # 从repo中恢复aaa到staged
@@ -728,6 +791,7 @@ git remote show [remote] # 显示远程仓库信息
 
 git remote add origin git@github.com:han1202012/TabHost_Test.git # 本地git仓库关联GitHub仓库
 git remote set-url origin git@github.com:whuhacker/Unblock-Youku-Firefox.git # 修改远程仓库地址
+git branch --set-upstream-to=<remote>/<remote branch> # 创建本地和远端分支的关联关系
 git remote rm <主机名> # 删除 origin 仓库信息
 git remote rename <原主机名> <新主机名> # 用于远程主机的改名
 git remote prune origin # removes tracking branches whose remote branches are removed
@@ -747,6 +811,7 @@ git fetch -p # 拉取所有分支的变化，并且将远端不存在的分支�
 # 合并分支时，git一般使用”Fast forward”模式，在这种模式下，删除分支后，会丢掉分支信息，现在我们来使用带参数 –no-ff来禁用”Fast forward”模式。
 git merge 　--squash origin/master  # 抓取远程仓库更新  将远程主分支合并到本地当前分支 等同于git pull
 git merge new # 合并指定分支到当前分支，新增一个 commit 追加
+git merge <revision> # 合并到当前分支
 git merge --no-ff master # 不快速合并
 git merge 　--squash  # 压缩分支的提交
 git mergetool # 使用配置的合并工具来解决冲突

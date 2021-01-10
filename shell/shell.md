@@ -155,6 +155,9 @@ the basic file, shell and text manipulation utilities of the GNU operating syste
   - source命令执行脚本时，不需要export变量
   - 在脚本内部加载外部库
   - 简写形式:使用一个点（.）来表示
+    + 对于 source 命令来说，命令是在当前的bash会话中执行的，因此当 source 执行完毕，对当前环境的任何更改（例如更改目录或是定义函数）都会留存在当前会话中
+    + 单独运行 ./script.sh 时，当前的bash会话将启动新的bash会话（实例），并在新实例中运行命令 script.sh。 因此，如果 script.sh 更改目录，新的bash会话（实例）会更改目录，但是一旦退出并将控制权返回给父bash会话，父会话仍然留在先前的位置（不会有目录的更改）
+    + 如果 script.sh 定义了要在终端中访问的函数，需要用 source 命令在当前bash会话中定义这个函数。否则，如果你运行 ./script.sh，只有新的bash会话（进程）才能执行定义的函数，而当前的shell不能
 * read：将用户输入存入一个变量，方便后面的代码使用
   - 如果没有提供变量名，环境变量REPLY会包含用户输入的一整行数据
   - 可以接受用户输入的多个值

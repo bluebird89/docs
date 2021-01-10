@@ -31,6 +31,7 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * SimilarSites:一键查找姊妹网站
 * Secure Shell App:Chrome中开启ssh一种什么体验
 * Session Buddy:multiple logins
+* Stylus 将自定义CSS样式加载到网站。使用Stylus，你可以轻松地自定义和修改网站的外观。可以删除侧边框，更改背景颜色，更改文字大小或字体样式。这可以使你经常访问的网站更具可读性
 * The Great Suspender
 * Talend API Tester:Visually interact with REST, SOAP and HTTP APIs.
 * 简悦 - SimpRead - 沉浸式阅读模式，还支持丰富的导出功能比如 Markdown/PDF
@@ -38,7 +39,7 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * 为什么你们就是不能加个空格呢
 * [thegreatsuspender](https://github.com/deanoemcke/thegreatsuspender):A chrome extension for suspending all tabs to free up memory
 * 批量打开多个链接 LinkClump
-* Unblock Youku
+* uBlock Origin 不仅可以拦截广告，还可以拦截第三方的页面，也可以拦截内部脚本和其他种类资源的加载
 * User-Agent Switcher for Chrome
 * [Video Speed Controller](https://github.com/igrigorik/videospeed):给视频加个速
 * v2ex plus
