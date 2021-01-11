@@ -15,10 +15,24 @@
   - Scrum非常突出Self-Orgnization,XP注重强有力的工程实践约束。举个通俗理解Scrum的例子，Scrum:指的是英式橄榄球中一股脑争球这一战术或行为。scrum 即为这样一种方式，大家一拥而上，团队是球员，球是产品目标，人员环环相扣，围绕着产品目标进行工作。这里面多少有点“统筹法”的影子，人员深入协作以达到最优化效果
 * 本质是义无反顾的思考产品的价值，以价值为驱动去思考、设计、开发、协作，让结果能给客户、用户产生价值
 
+```
+Agile is an iterative approach to project management and software development that helps teams deliver value to their customers faster and with fewer headaches. Instead of betting everything on a “big bang” launch, an agile team delivers work in small, but consumable, increments. Requirements, plans, and results are evaluated continuously so teams have a natural mechanism for responding to change quickly.
+
+Atlassian Agile Coach
+```
+
 ## 名词
 
 * Work in Process WIP
 * PDCA
+* The biggest confusion is mixing Agile the philosophy with Scrum the methodology.
+* Agile is the philosophy of doing work in short iterations to adjust to change.需求拆解
+  - Themes are strategic tags you can apply to anything within Scrum.
+  - Initiatives are strategic containers for Epics/features.
+  - Epics are significant features that need be broken down into smaller pieces.
+  - Stories are discrete features captured as narratives from the perspective of the end-user.
+* Scrum is the methodology for doing work in an Agile way. 时间维度拆分
+* Kanban is a visual way to manage Agile work.
 
 ## [开发模型演化](https://mp.weixin.qq.com/s/FtJFtGYu_jA2aBCD2aCUhA)
 
@@ -181,6 +195,35 @@
         - 将迭代过程中遇到的问题暴露出来，可以促进团队成员在工作中一起积极讨论解决方案
         - 团队也可以根据现在的进度以及遇到的问题，了解需要哪些帮助，更好的分配资源，减少开发进度被滞后的风险
     + 年初时都做过展望与总结
+
+## 需求概念
+
+* Epics
+  - Epics are often features or other major pieces of functionality that must be broken down into multiple tasks.
+  - Epics are bodies of work that correspond to a significant feature or event.
+* User stories
+  - User stories are not just lists of features; they’re descriptions of a feature that describe what the end-user wants to get out of that feature. They’re best captured as a narrative sentence, like: As a [persona], I [want to], [so that].
+  - Stories are features captured as narrative sentences from the perspective of a particular end-user.
+* Initiatives
+  - Initiatives are collections of epics captured as a goal, and should be named accordingly. For example, “Bounce Rate Reduction” could be an initiative because, 1) it will likely include multiple epics, and 2) its purpose is clear.
+  - Initiatives are collections of epics captured as a goal.
+* Themes
+  - themes as tags since you can attach them to any level. A theme might be something like, “Safety First”, and that label/tag can then be applied to an Initiative called, “Encryption Everywhere”, and an epic called, “TLS 3.1 Upgrade”.
+
+```
+An agile epic is a body of work that can be broken down into specific tasks (called user stories) based on the needs/requests of customers or end-users.
+
+A user story is an informal, general explanation of a software feature written from the perspective of the end-user.
+
+Initiatives are collections of epics that drive toward a common goal.
+
+Themes are strategic labels that can be applied to initiatives, epics, or stories.
+```
+
+![Epics](../_static/agile_arch.jpg "Optional title")
+![User Stories](../_static/user_story.jpg "Optional title")
+![Initiatives](../_static/initiative.jpg "Optional title")
+
 
 ## [敏捷开发](https://insights.thoughtworks.cn/agile-development-thoughtworks/)
 

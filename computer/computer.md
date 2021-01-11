@@ -194,6 +194,45 @@
   - 近期最少使用法-LRU
   - 随机替换法
 
+## CS(Computer Science)
+
+* C语言基础
+  - [CSE 251 Programming in C](https://www.cse.msu.edu/~cse251/index.html)
+  - The Absolute Beginner's Guide to C
+  - 课程站点上的所有14个Steps实验+3个Projects
+* 深入理解计算机系统
+  - [CSE351: The Hardware/Software Interface](http://courses.cs.washington.edu/courses/cse351/)
+    + [](https://www.bilibili.com/video/BV1Zt411s7Gg)
+  - 深入理解计算机系统(CSAPP)
+  - [CSAPP书籍配套的所有Labs](http://csapp.cs.cmu.edu/3e/labs.html)
+* 数据结构
+  - [CS61B Data Structures](https://sp19.datastructur.es/)
+    + [](https://www.bilibili.com/video/BV1EJ411n72e)
+  - Head First Java + 数据结构书自选
+  - CS 61B站点上的所有Labs/Homeworks/Projects
+* 操作系统
+  - [MIT 6.828 Operating System Engineering](https://pdos.csail.mit.edu/6.828/2018/index.html)
+  - [HMC CS 134 2019 Operating System](https://www.bilibili.com/video/av47977122)
+  - 操作系统导论(Operating Systems: Three Easy Pieces)
+  - MIT 6.828站点上的所有7个Labs
+* 计算机网络
+  - [CS 144 Introduction to Computer Networking](https://cs144.github.io/)
+  - 计算机网络：自顶向下方法
+  - CS 144 站点上的所有8个Labs
+* 编译原理
+  - [Crafting Interpreters](https://www.craftinginterpreters.com/contents.html) [Write an Interpreter in Go](https://interpreterbook.com/)
+  - [CS143 斯坦福编译原理](https://www.bilibili.com/video/BV1cE411f78c)
+  - 参考Crafting Interpreters，使用Java或者golang语言(或其它熟悉的语言)，实现Lox小型编程语言。
+  - 参考Write an Interpreter in Go ，或 [Write A Compiler in Go](https://compilerbook.com/)，使用Java语言实现Monkey小型语言。
+* 数据库系统
+  - [CMU 15-445/645 Database Systems](https://15445.courses.cs.cmu.edu/fall2020/)
+    + [](https://www.bilibili.com/video/BV1Cp4y1C7dv)
+  - 数据库系统概念
+  - 参考[vanilladb](https://github.com/vanilladb/vanillacore)项目，使用golang语言实现clone版的vanilladb（原项目是Java实现的）
+* 计划
+  - [自学计算机科学](https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md)
+  - [自学计算机科学]( https://github.com/ossu/computer-science)
+
 ## 图书
 
 * [计算机程序的构造和解释 Structure and Interpertation of Computer Programming SICP](https://www.bilibili.com/video/av8515129)

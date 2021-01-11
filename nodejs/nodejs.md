@@ -803,6 +803,7 @@ yarn install node-sass
 * [node-inspector](https://github.com/node-inspector/node-inspector) Node.js debugger based on Blink Developer Tools
 * [ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
 * [node-lru-cache](https://github.com/isaacs/node-lru-cache)
+* [SpaceX-API](https://github.com/r-spacex/SpaceX-API): rocket Open Source REST API for rocket, core, capsule, pad, and launch data <https://docs.spacexdata.com>
 * [pretty-error](https://github.com/AriaMinaei/pretty-error):See node.js errors with less clutter
 * [zan-tool](https://github.com/youzan/zan-tool):Zan Node Web 框架的配套开发工具，例如初始化一个新项目、新建一个 NPM 包、本地开发等。
 * [NodeOS](https://github.com/NodeOS/NodeOS)

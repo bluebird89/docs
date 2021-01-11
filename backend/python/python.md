@@ -2545,7 +2545,7 @@ Python 实现的算法和设计模式。
 * [Pycoder's Weekly](http://pycoders.com/)
 * [Python Weekly](http://www.pythonweekly.com/)
 
-## 学习指南
+## 课程
 
 * [Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师
 * [Python 中文学习大本营](http://www.pythondoc.com/)
@@ -2575,7 +2575,8 @@ Python 实现的算法和设计模式。
 * More Python for Beginners
 * Even More Python for Beginners： Data Tools
 * [c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
-* [essential-python-resources/](https://x-team.com/blog/essential-python-resources/)
+* [essential-python-resources](https://x-team.com/blog/essential-python-resources/)
+* [python_koans](https://github.com/gregmalcolm/python_koans)Python Koans - Learn Python through TDD
 
 ## 图书
 

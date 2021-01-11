@@ -2989,8 +2989,6 @@ command > /dev/null 2>&1
   - CLOSE_WAIT一般是由于程序编写不合理造成的，更应该引起开发者注意
     + 由于对端主动关闭，而我方没有正确处理的原因引起的。说白了，就是程序写的有问题，属于危害比较大的一种
 * 到对端路由检测 tracepath google.com
-* 网络扫描工具
-  - nmap
 * 压力测试
   - iperf
   - wrk
@@ -3080,10 +3078,6 @@ nslookup google.com
 # display the routes our packets take before reaching a remote destination
 traceroute google.com
 
-# networking tool which displays the TCP/IP packets transmitted and received by your system
-# tcpdump -c 15
-# tcpdump --help
-
 # Display DNS ip address for domain
 host domain
 
@@ -3112,53 +3106,9 @@ firewall-cmd --state
 firewall-cmd --reload # restart
 systemctl status|stop|disable firewalld.service # cancle start with system
 
-/etc/init.d/iptables status|save
-chkconfig iptables on|off # forever
-chkconfig iptables start|stop # recover with restart
-iptables -F # 删除所有现有规则
-
-iptables -P INPUT DROP # 设置默认的 chain 策略
-iptables -P FORWORD DROP
-iptables -P OUTPUT DROP
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
-
-iptables -A INPUT -p tcp --drop 端口号-j DROP
-iptables -A OUTPUT -p tcp --dport 端口号-j DROP # 关闭端口
-iptables -A INPUT -ptcp --dport  端口号-j ACCEPT　#　打开端口
-
-# 设置
-iptables -t nat -N CLASH
-iptables -t nat -A CLASH -d 10.0.0.0/8 -j RETURN
-iptables -t nat -A CLASH -d 127.0.0.0/8 -j RETURN
-iptables -t nat -A CLASH -d 169.254.0.0/16 -j RETURN
-iptables -t nat -A CLASH -d 172.16.0.0/12 -j RETURN
-iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
-iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
-iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
-iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
-
-iptables-save > /etc/iptables.up.rules
-/sbin/iptables-restore < /etc/iptables.up.rules
-
 ## port test
 yum install telnet.x86_64
 telnet 10.0.3.69 2020  # 测试端口能否访问
-
-# # List all open files on the system
-lsof -i -P | grep ssh
-lsof -i: (port) # 查看端口的占用情况
-lsof -Pni4 | grep LISTEN | grep php
-lsof -i:8080 # 查看8080端口占用
-lsof abc.txt # 显示开启文件abc.txt的进程
-lsof -c abc # 显示abc进程现在打开的文件
-lsof -c -p 1234 # 列出进程号为1234的进程所打开的文件
-lsof -g gid # 显示归属gid的进程情况
-lsof +d /usr/local/ # 显示目录下被进程开启的文件
-lsof +D /usr/local/ # 同上，但是会搜索目录下的目录，时间较长
-lsof -d 4 # 显示使用fd为4的进程
-lsof -i -U # 显示所有打开的端口和UNIX domain文件
-# List files opened by user
-lsof -u user
 
 netstat -tunlp # 显示tcp，udp的端口和进程等相关
 sudo netstat -plunt
@@ -3289,38 +3239,181 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 # Similar routing lookup process is followed in each hop till the packet reaches the actual server. Transport layer and layers above it come to play only at end servers. During intermediate hops only till the IP/Network layer is involved.
 ```
 
+## [The Netfilter/Iptables Project](http://www.netfilter.org)
+
+* The basic firewall software most commonly used in Linux is called iptables
+* The iptables firewall works by interacting with the packet filtering hooks in the Linux kernel’s networking stack. These kernel hooks are known as the netfilter framework
+* the packet filtering technology that’s built into the 2.4 Linux kernel.just the command used to control netfilter, which is the real underlying technology
+* Stateful Packet Inspection SPI
+* Packets move through netfilter by traversing chains
+* By default, chain policies are to jump to the ACCEPT target
+* TABLES
+  - FILTER is used for the standard processing of packets, and it’s the default table if none other is specified.
+  - NAT is used to rewrite the source and/or destination of packets and/or track connections.
+  - MANGLE is used to otherwise modify packets, i.e. modifying various portions of a TCP header, etc.
+* CHAINS lists of rules within a table, and they are associated with “hook points” on the system
+  - the default table/chain combinations
+    + FILTER: Input, Output, Forward
+    + NAT: Prerouting, Postrouting, Output
+    + MANGLE: Prerouting, Postrouting, Input, Output, Forward
+  -
+  - PREROUTING: Immediately after being received by an interface.
+  - POSTROUTING: Right before leaving an interface.
+  - INPUT: Right before being handed to a local process.
+  - OUTPUT: Right after being created by a local process.
+  - FORWARD: For any packets coming in one interface and leaving out another.
+* TARGETS determine what will happen to a packet within a chain if a match is found with one of its rules
+  - DROP
+  - ACCEPT
+* parameters
+  - appending (-A)
+  - -o is for “output”
+  - -p protocol
+    + icmp
+  - -S specific chain (INPUT, OUTPUT, TCP, etc.)
+  - -L Listing the iptables rules in the table view
+    + -v show the number of packets, and the aggregate size of the packets in bytes
+    + --line-numbers
+  - -Z Resetting Packet Counts and Aggregate Size
+  - –icmp-type
+    + echo request
+  - -j jumping
+  - state:makes netfilter a “stateful” firewalling technology. Packets are not able to move through this rule and get back to the client unless they were created via the rule above it
+
+![How Traffic Moves Through Netfilter](../_static/netfilter.jpg "Optional title")
+
+```sh
+/etc/init.d/iptables status|save
+chkconfig iptables on|off # forever
+chkconfig iptables start|stop # recover with restart
+iptables -F # 删除所有现有规则
+
+# list out all of the active iptables rules
+sudo iptables -S
+
+sudo iptables -S TCP
+
+iptables -P INPUT DROP # 设置默认 chain 策略
+iptables -P FORWORD DROP
+iptables -P OUTPUT DROP
+
+iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
+
+iptables -A INPUT -p tcp --drop 端口号 -j DROP|ACCEPT　
+iptables -A OUTPUT -p tcp --dport 端口号 -j DROP # 关闭端口
+
+# 设置
+iptables -t nat -N CLASH
+iptables -t nat -A CLASH -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A CLASH -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A CLASH -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A CLASH -d 172.16.0.0/12 -j RETURN
+iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
+iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
+iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
+
+iptables-save > /etc/iptables.up.rules
+/sbin/iptables-restore < /etc/iptables.up.rules
+
+# Allow Outgoing (Stateful) Web Browsing
+# adding (appending) a rule to the OUTPUT chain for protocol TCP and destination port 80 to be allowed
+iptables -A OUTPUT -o eth0 -p TCP –dport 80 -j ACCEPT
+# allows the web traffic to come back
+iptables -A INPUT -i eth0 -p TCP -m state –state ESTABLISHED,RELATED –sport 80 -j ACCEPT
+
+# Allowing Outgoing Pings
+iptables -A OUTPUT -o eth0 -p icmp –icmp-type echo-request -j ACCEPT
+iptables -A INPUT -i eth0 -p icmp –icmp-type echo-reply -j ACCEPT
+
+# “Passing Ports” Into A NATd Network  pass traffic inside to hidden servers
+# DNAT occurs
+iptables -t nat -A PREROUTING -i eth0 -p tcp -d 1.2.3.4 –dport 25 -j DNAT –to 192.168.0.2:25
+# rules portion：make it through your firewall;
+iptables -A FORWARD -i eth0 -o eth1 -p tcp –dport 25 -d 192.168.0.2 -j ACCEPT
+```
+
+## Nmap
+
+* the definitive port scanner,kicking off in two distinct phases
+  - the discovery phase
+  - the scan phase
+    + `nmap -P0 network` Don’t worry about discovery — just scan.
+    + `nmap -PS21,22,23,80 network` discovery using TCP SYNs on ports that you specify
+* the default scan type is TCP SYN (-sS)
+* -p By default, nmap scans 1663 ports (in version 3.81), but it’s possible and often prudent to change how many and/or which ports are scanned
+* -sU  scan using the UDP protocol
+* TCP scans
+  - `nmap -sF host` the FIN scan
+  - `nmap -sA host` the ACK scan
+  - `nmap -sX host` the XMAS scan:sends a TCP packet with the FIN, URG, and PSH flags
+  - `nmap -sN host` the NULL scan
+* `nmap -sP network` Ping Scan:this sends both an ICMP echo and a TCP ACK to the hosts in the target range
+* `nmap -p1-10000 -sV host` Version Scanning attain version information for various TCP and UDP services on target machines.
+* `nmap -O network` attempt to determine what operating system a target host is running
+* `nmap –resume logfile_name` Resume An Interrupted Scan
+  - requires that you have a logfile in either the human readable or grepable format, so it’s yet another reason to go ahead and use the -oA option when performing all scans
+* Output `nmap -oA output_file network`
+  - create three files in the current directory — output_file.nmap (human readable), output_file.gnmap (grepable), and output_file.xml (XML)
+  - also produce these seperately via -oN, -oG, and -oX respectively.
+* Scan Speed
+  - offers options to throttle the speed of your scans by running its probes serially rather than in parallel and by varying the time between each probe.
+  - has several parameters — Paranoid, Sneaky, Polite, Normal, Aggressive, and Insane.
+  - The difference between them is in how long they delay between each packet they send. Paranoid waits 5 minutes, Sneaky waits 15 seconds, and Polite waits at least .4 seconds.
+
+```sh
+nmap localhost
+nmap 192.168.10.0/24
+
+nmap -p1-10000 192.168.10.0/24
+nmap -p22,23,10000-15000 192.168.10.0/24
+
+# UDP scan (-sU) and then defining which ports on each protocol to scan
+# TCP 21,22,23 UDP 53,137
+nmap -sU -pT:21,22,23,U:53,137 192.168.10.0/24
+
+# scan using the UDP protocol.
+nmap -sU host
+```
+
 ## [Tcpdump](http://www.tcpdump.org/)
 
-在命令行中指定的表达式输出匹配捕获到的数据包的信息
-
-* 模式
-  - 主机过滤
-  - 端口过滤
-  - 网络过滤
-  - 协议过滤
+* 在命令行中指定的表达式输出匹配捕获到的数据包的信息
+* `tcpdump host|src｜dst 1.1.1.1` find traffic by ip
+* `tcpdump port 443` 端口过滤
+* `tcpdump net 1.2.3.0/24` 网络过滤
+* 协议过滤
+  - `tcpdump icmp`
 * 参数
-  - -a 　　　将网络地址和广播地址转变成名字
-  - -d 　　　将匹配信息包的代码以人们能够理解的汇编格式给出
-  - -dd 　　　将匹配信息包的代码以c语言程序段的格式给出
-  - -ddd 　　　将匹配信息包的代码以十进制的形式给出
-  - -e 　　　在输出行打印出数据链路层的头部信息
-  - -f 　　　将外部的Internet地址以数字的形式打印出来
-  - -l 　　　使标准输出变为缓冲行形式
-  - -n 　不解析域名
-  - -nn 表示端口也是数字，否则解析成服务名
-  - -s 设置抓包长度，0表示不限制
-  - -t 　　　在输出的每一行不打印时间戳
-  - -v 　　　输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息
-  - -vv 　　　输出详细的报文信息
-  - -c 　　　在收到指定的包的数目后，tcpdump就会停止
-  - -F 　　　从指定的文件中读取表达式,忽略其它的表达式
-  - -i 指定网卡进行抓包
-  - -r 　　　从指定的文件中读取包(这些包一般通过-w选项产生)
-  - -w 将抓取的包写入到某个文件中
+  - -a 将网络地址和广播地址转变成名字
   - -A 打印ascii
-  - -X 打印hex码
-  - -T  将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
-* 表达式
+  - -c 在收到指定包的数目后，tcpdump就会停止 Only get x number of packets and then stop.
+  - -d 将匹配信息包的代码以人们能够理解的汇编格式给出
+  - -D Show the list of available interfaces
+  - -dd 将匹配信息包的代码以c语言程序段的格式给出
+  - -ddd 将匹配信息包的代码以十进制的形式给出
+  - -e 在输出行打印出数据链路层的头部信息 Get the ethernet header as well.
+  - -E Decrypt IPSEC traffic by providing an encryption key.
+  - -f 将外部的Internet地址以数字的形式打印出来
+  - -F 从指定的文件中读取表达式,忽略其它的表达式
+  - `-i eth0` 指定网卡进行抓包
+    + -i any get all interfaces
+  - -l 使标准输出变为缓冲行形式 Line-readable output (for viewing as you save, or sending to other commands)
+  - -n 不解析域名
+  - -nn 表示端口也是数字，否则解析成服务名
+  - -q Show less protocol information.
+  - -r 从指定的文件中读取包(这些包一般通过-w选项产生)
+  - -s 设置抓包长度，0表示不限制 Define the snaplength (size) of the capture in bytes. Use -s0 to get everything, unless you are intentionally capturing less.
+  - -S Print absolute sequence numbers.
+  - -t 在输出的每一行不打印时间戳 Give human-readable timestamp output.
+  - -tttt Give maximally human-readable timestamp output.
+  - -T 将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
+  - -v 输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息
+  - -vv 输出详细的报文信息
+  - -w 将抓取的包写入到某个文件中
+  - -X 打印hex码 Show the packet’s contents in both hex and ascii.
+  - -XX Same as -X, but also shows the ethernet header.
+* Combinations
   - 非 : ! or "not" (去掉双引号)
   - 且 : && or "and"
   - 或 : || or "or"
@@ -3328,6 +3421,31 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
   - [](https://hackertarget.com/tcpdump-examples/)
 
 ```sh
+# networking tool which displays the TCP/IP packets transmitted and received by your system
+tcpdump -c 15
+tcpdump --help
+
+# verbose output, with no resolution of hostnames or port numbers, using absolute sequence numbers, and showing human-readable timestamps
+tcpdump -ttnnvvS
+tcpdump -nnvvS src 10.5.2.3 and dst port 3389
+
+tcpdump -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+
+tcpdump dst 192.168.0.2 and src net and not icmp
+tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'
+
+tcpdump ip6
+tcpdump portrange 21-23
+
+# based on packet size
+tcpdump less 32
+tcpdump greater 64
+tcpdump <= 128
+
+# reading / writing captures to a file (pcap)
+tcpdump port 80 -w capture_file
+tcpdump -r capture_file
+
 # 抓取所有经过网卡1，目的或源地址IP为172.16.7.206的网络数据
 tcpdump -i eth1 [src|dst] host 172.16.7.206
 # 抓取所有经过网卡1，目的或源端口为1234的网络数据
@@ -3361,6 +3479,46 @@ tcpdump -i eth1 host 172.16.7.206 and port 80 -w /tmp/xxx.cap
 tcpdump -i eth1 'tcp[tcpflags] = tcp-syn'
 # 抓 SYN, ACK
 tcpdump -i eth1 'tcp[tcpflags] & tcp-syn != 0 and tcp[tcpflags] & tcp-ack != 0'
+
+# Isolate TCP RST flags.
+tcpdump 'tcp[13] & 4!=0'
+tcpdump 'tcp[tcpflags] == tcp-rst'
+
+# Isolate TCP SYN flags.
+tcpdump 'tcp[13] & 2!=0'
+tcpdump 'tcp[tcpflags] == tcp-syn'
+
+# Isolate packets that have both the SYN and ACK flags set.
+tcpdump 'tcp[13]=18'
+
+# Isolate TCP URG flags.
+tcpdump 'tcp[13] & 32!=0'
+tcpdump 'tcp[tcpflags] == tcp-urg'
+
+# Isolate TCP ACK flags.
+tcpdump 'tcp[13] & 16!=0'
+tcpdump 'tcp[tcpflags] == tcp-ack'
+
+# Isolate TCP PSH flags.
+tcpdump 'tcp[13] & 8!=0'
+tcpdump 'tcp[tcpflags] == tcp-push'
+
+# Isolate TCP FIN flags.
+tcpdump 'tcp[13] & 1!=0'
+tcpdump 'tcp[tcpflags] == tcp-fin'
+
+# both syn and rst set
+tcpdump 'tcp[13] = 6'
+
+# find http user agents
+tcpdump -vvAls0 | grep 'User-Agent:'
+
+# cleartext get requests
+tcpdump -vvAls0 | grep 'GET'
+
+# find http cookies
+tcpdump -vvAls0 | grep 'Set-Cookie|Host:|Cookie:'
+
 # 抓 SMTP 数据
 # 抓取数据区开始为"MAIL"的包，"MAIL"的十六进制为 0x4d41494c。
 tcpdump -i eth1 '((port 25) and (tcp[(tcp[12]>>2):4] = 0x4d41494c))'
@@ -3403,26 +3561,89 @@ tcpdump -i eth0 dst address and port 22
 tcpdump -i eth0 -s0 port 53
 # 匹配Http请求头
 tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
-# 捕获特定网口数据包
-tcpdump -i eth0
-# 捕获特定个数(1000)的包
-tcpdump -c 1000 -i eth0
-# 将捕获的包保存到文件
-tcpdump -w a.pcap -i eth0
-# 读取pcap格式的包
-tcpdump -r a.pcap
-# 增加捕获包的时间戳
-tcpdump -n -ttt -i eth0
-# 指定捕获包的协议类型
-tcpdump -i eth0 arp
-# 捕获指定端口
-tcpdump -i eth0 post 22
-# 捕获特定目标ip+port的包
-tcpdump -i eth0 dst address and port 22
-# 捕获DNS请求和响应
-tcpdump -i eth0 -s0 port 53
-# 匹配Http请求头
-tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
+
+# find ssh connections This one works regardless of what port the connection comes in on, because it’s getting the banner response.
+tcpdump 'tcp[(tcp[12]>>2):4] = 0x5353482D'
+
+# find dns traffic
+tcpdump -vvAs0 port 53
+
+# find ftp traffic
+tcpdump -vvAs0 port ftp or ftp-data
+
+# find ntp traffic
+tcpdump -vvAs0 port 123
+
+# find cleartext passwords
+tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -lA | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd= |password=|pass:|user:|username:|password:|login:|pass |user '
+
+# find traffic with evil bit There’s a bit in the IP header that never gets set by legitimate applications, which we call the “Evil Bit”. Here’s a fun filter to find packets where it’s been toggled.
+tcpdump 'ip[6] & 128 != 0'
+```
+
+## [lsof lists open files](http://www.netadmintools.com/html/lsof.man.html)
+
+* default : without options, lsof lists all open files for active processes
+* grouping : it’s possible to group options, e.g. -abC, but you have to watch for which options take parameters
+* -h : get help
+* -a : AND the results (instead of OR)
+* -l : show the userID instead of the username in the output
+* -t : get process IDs only
+* -U : get the UNIX socket address
+* -F : the output is ready for another command, which can be formatted in various ways, e.g. -F pcfn (for process id, command name, file descriptor, and file name, with a null terminator)
+* -i Show all connections with
+  - `-i 6` Get only IPv6 traffic with
+  - `-iTCP`
+  - `-i :port` Show networking related to a given port
+  - `-i@ip` Show connections to a specific host
+* -u Show what a given user has open
+* -c See what files and network connections a named command
+* -p See what a given process ID has open
+
+```sh
+# List all open files on the system
+lsof -i -P | grep ssh
+
+lsof -Pni4 | grep LISTEN | grep php
+
+# 查看8080端口占用
+lsof -i :8080
+lsof -i@172.16.12.5:22
+
+# Find ports that are awaiting connections
+lsof -i -sTCP:LISTEN
+lsof -i -sTCP:ESTABLISHED
+
+lsof abc.txt # 显示开启文件abc.txt的进程
+
+# 显示syslog-ng进程现在打开的文件
+lsof -c syslog-ng
+
+lsof -p 10075
+lsof -c -p 1234 # 列出进程号为1234的进程所打开的文件
+
+# HUP processes
+lsof -t -c sshd
+
+lsof -g gid # 显示归属gid的进程情况
+
+# Show everything interacting with a given directory
+lsof /var/log/messages/
+lsof +d /usr/local/ # 显示目录下被进程开启的文件
+lsof +D /usr/local/ # 同上，但是会搜索目录下的目录，时间较长
+
+lsof -d 4 # 显示使用fd为4的进程
+
+lsof -i -U # 显示所有打开的端口和UNIX domain文件
+
+# List files opened by user
+lsof -u daniel
+lsof -u ^daniel
+kill -9 `lsof -t -u daniel`
+
+# Show me everything daniel is doing connected to 1.1.1.1
+lsof -u daniel -i @1.1.1.1
+lsof -i @fw.google.com:2150-2180
 ```
 
 ## 用户管理 User/Group Management

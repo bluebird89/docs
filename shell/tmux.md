@@ -1,20 +1,18 @@
 # [tmux](https://github.com/tmux/tmux)
 
-* tmux is a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen. tmux may be detached from a screen and continue running in the background, then later reattached.
+* a terminal multiplexer: it enables a number of terminals to be created, accessed, and controlled from a single screen. tmux may be detached from a screen and continue running in the background, then later reattached.
 * 终端多路复用器,可以将多个终端连接到单个终端会话，使它们保持同步
 * 可以在一个终端中进行程序之间的切换，添加分屏窗格
-* 基于面板和标签分割出多个终端窗口，这样您便可以同时与多个 shell 会话进行交互
+* 基于面板和标签分割出多个终端窗口，可以同时与多个 shell 会话进行交互
 * 在远程服务器上工作时，Tmux 特别有用，可以创建新的选项卡，然后在选项卡之间切换
 * 通过一个终端登录远程主机并运行tmux后，在其中可以开启多个控制台而无需再“浪费”多余的终端来连接这台远程主机
-* 基于session概念的多终端窗口管理功能:用户随时可以通过命令行恢复上次的会话
+* 基于session概念的多终端窗口管理功能:用户随时可以通过命令行恢复上次会话
   - 分离当前终端会话并在将来重新连接
 
 ## 安装
 
 ```sh
-sudo apt-get install tmux
-sudo yum install tmux
-brew install tmux
+sudo apt-get|yum|brew install tmux
 
 tmux # into 底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息
 ```
@@ -56,91 +54,106 @@ cp .tmux/.tmux.conf.local .
     + 支持窗口任意的垂直和水平拆分
     + 在服务端运行Tmux，方便保存窗口和各种会话
     + 在本地终端运行，方便日常程序开发
-  - panel是比Window更小的界面元素。Tmux中可以对window进行任意分割，由window分割出来的单位就叫做panel了
+  - Sessions are for an overall theme, such as work, or experimentation, or sysadmin.
+  - Windows are for projects within that theme. So perhaps within your experimentation session you have a window titled noderestapi, and one titled lua sample.
+  - Panes are for views within your current project. So within your sysadmin session, which has a logs window, you may have a few panes for access logs, error logs, and system logs.
+    + 对window进行任意分割，由window分割出来的单位就叫做panel了
 * 状态
   - [0] 是 tmux 服务器创建的第一个会话。编号从 0 开始。tmux 服务器会跟踪所有的会话确认其是否存活。
   - 0:testuser@scarlett:~ – 有关该会话的第一个窗口的信息。编号从 0 开始。这表示窗口的活动窗格中的终端归主机名 scarlett 中 testuser 用户所有。当前目录是 ~ (家目录)
   - – 显示目前在此窗口中
   - “scarlett.internal.fri” – 正在使用的 tmux 服务器的主机名
   - session-name:windowid
-* 快捷键都要通过前缀键唤起。默认的前缀键 <prefix> 是Ctrl+b Ctrl+b(⌃b):激活控制台,所有快捷键都基于此前置快捷键
+* 快捷键都要通过前缀键唤起激活控制台。默认前缀键 <prefix> 是 Ctrl+b(⌃b <C-b>)
   - 列出所有快捷键 tmux list-keys
   - 列出所有命令及其参数:tmux list-commands
-  - 列出当前所有会话的信息 tmux info
+  - 列出当前所有会话信息 tmux info
   - 重新加载配置 tmux source-file ~/.tmux.conf
 * 系统操作
-  - ?：列出所有快捷键；按q返回
-  - d：脱离当前会话；这样可以暂时返回Shell界面，输入tmux attach能够重新进入之前的会话
-  - D:选择要脱离的会话；在同时开启了多个会话时使用
-  - Ctrl+z:挂起当前会话
-  - r:强制重绘未脱离的会话
-  - s:选择并切换会话；在同时开启了多个会话时使用
+  - <C-b> ? 列出所有快捷键；按q返回
+  - <C-b> D 选择要脱离会话；在同时开启了多个会话时使用
+  - Ctrl+z 挂起当前会话
+  - <C-b> r 强制重绘未脱离会话
+  - <C-b> s 选择并切换会话；在同时开启了多个会话时使用
   - ::进入命令行模式；此时可以输入支持的命令，例如kill-server可以关闭服务器
-  - [:进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出
-  - ~:列出提示信息缓存；其中包含了之前tmux返回的各种提示信息
+  - <C-b> [ 进入复制模式；此时的操作与vi/emacs相同，按q/Esc退出
+  - <C-b> ~ 列出提示信息缓存；包含之前tmux返回的各种提示信息
+
+![windows and panes](../_static/tmuxnesting.png "Optional title")
 
 ## 会话 session
 
 * 每个会话都是一个独立的工作区，其中包含一个或多个窗口
 * 新建
-  - tmux 开始一个新的会话
+  - tmux 开始一个新会话
   - tmux new -s <session-name> 以指定名称开始一个新的会话
   - :new
-* tmux ls|s 列出所有会话
-* tmux detach|d 将当前会话分离，退出 tmux 进程，返回至 shell 主进程
-* tmux attach -t <session-name> 重新连接指定会话
+* tmux ls|<C-b> s 列出所有会话 show existing sessions
+* tmux detach|<C-b> d 将当前会话分离，退出 tmux 进程，返回至 shell 主进程 detaching from a session, tmux attach 能够重新进入之前的会话
+* tmux attach -t <session-name>|id 重新连接指定会话 attaching to an existing session
 * tmux a 重新连接最后一个会话
-* 杀死 tmux kill-session -t <session-name>
-* 切换 tmux switch -t <session-name>
-* 重命名 tmux rename-session -t 0 <new-name>|$
+* tmux kill-session -t <session-name>
+* tmux switch -t <session-name>
+* tmux rename-session -t 0 <new-name>|<C-b> $
 
-## 窗口
+## 窗口 window
 
 * 相当于编辑器或是浏览器中的标签页，从视觉上将一个会话分割为多个部分
-* 第一个启动的 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推
-* `tmux new-window -n <window-name>`|<C-b> c 新建窗口
-* <C-d>|& 关闭
-* <C-b> N 跳转到第 N 个窗口，注意每个窗口都是有编号的
-* <C-b> p 切换到前一个窗口
-* <C-b> n 切换到下一个窗口
-* <C-b> , 重命名当前窗口
-* <C-b> w 列出当前所有窗口 w: sesiionid:windownumcount|status
-* 修改当前窗口编号(只能变为没有使用的编号):.
+* 第一个启动 Tmux 窗口，编号是0，第二个窗口的编号是1，以此类推
+* 新建
+  - `tmux new-window -n <window-name>`
+  - <C-b> c
+* `<C-d> &` 关闭
+* <C-b> N  0 to 9 select windows 0 through 9 跳转到第 N 个窗口
+* `<C-b> p` 切换到前一个窗口
+* `<C-b> n` 切换到下一个窗口
+* `<C-b> ,` 重命名当前窗口
+* `<C-b> w` 列出当前所有窗口
+* `<C-b> .` 修改当前窗口编号(只能变为没有使用的编号):
 * 在前后两个窗口间互相切换:l
 * u 新建窗口并切换到新窗口
 * f 查找窗口
 * t 显示时钟
-* 划分窗格 tmux split-window|tmux split-window -h
+* split
+  - tmux split-window
+  - tmux split-window -h
 * 移动光标 tmux select-pane -U|D|L|R
 * 交换窗格 tmux swap-pane -U|D
 * 切换 tmux select-window -t <window-number>|<window-name>
 * 重命名窗口  tmux rename-window <new-name>|q|,
 
-## panel
+```
+(0)  - workspace: 4 windows (attached)
+(1)  ├─> 1: zsh (1 panes) "~/Container/Ubuntu"
+(2)  ├─> 2: zsh# (1 panes) "~/Container/Ubuntu"
+(3)  ├─> 3: zsh- (1 panes) "~/Container/Ubuntu"
+(4)  └─> 4: zsh* (1 panes) "~/Container/Ubuntu"
+```
 
-* 像 vim 中的分屏一样，面板可以在一个屏幕里显示多个 shell
-* <C-b> " 水平分割
-* <C-b> % 垂直分割
-* <C-b> <方向> 切换到指定方向的面板，<方向> 指的是键盘上的方向键
+## pane
+
+* 像 vim 中的分屏一样，面板可以在一个屏幕里显示多个
+* <C-b> " 水平分割 create a vertical pane
+  - `-`
+* <C-b> % 垂直分割 create a horizontal pane
 * <C-b> z 切换当前面板的缩放
-* <C-b> [ 开始往回卷动屏幕。您可以按下空格键来开始选择，回车键复制选中的部分
+* <C-b> [ 开始往回卷动屏幕。可以按下空格键来开始选择，回车键复制选中的部分
 * <C-b> <空格> 在不同的面板排布间切换
-* ”|-:将当前面板平分为上下两块
-* %||:将当前面板平分为左右两块
+* <C-b> <方向> 切换到指定方向的面板
 * h|← 选择左边窗格
 * j|↓ 选择下面窗格
 * k|↑ 选择上面窗格
 * l|→ 选择右边窗格
-* o：交换窗格
-* Ctrl+o：当前窗格上移
-* x:关闭当前面板
-* {:向前置换当前面板
-* }:向后置换当前面板
-* ; 选择上次使用的窗格
-* !：将当前窗格拆分为一个独立窗口
-* Space:在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled
-* q:显示所有窗格的序号，在序号出现期间按下对应的数字，即可跳转至对应的窗格
-* z 最大化当前窗格，再次执行可恢复原来大小
+* <C-b> o 交换窗格
+* Ctrl+o 当前窗格上移
+* <C-b> x 关闭当前面板
+* <C-b> { 向前置换当前面板
+* <C-b> } 向后置换当前面板  swap with next pane
+* <C-b> ; 选择上次使用的窗格
+* <C-b> ! 将当前窗格拆分为一个独立窗口 break the pane out of the window
+* Space 在预置的面板布局中循环切换；依次包括even-horizontal、even-vertical、main-horizontal、main-vertical、tiled
+* <C-b> q 显示所有窗格序号，在序号出现期间按下对应的数字，即可跳转至对应的窗格
+* <C-b> z 最大化当前窗格，再次执行可恢复原来大小
 * H|Ctrl+← 以1个单元格为单位移动边缘以调整当前面板大小 左
 * J|Ctrl+↓ 以1个单元格为单位移动边缘以调整当前面板大小 下
 * K|Ctrl+↑ 以1个单元格为单位移动边缘以调整当前面板大小 上

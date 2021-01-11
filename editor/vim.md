@@ -14,19 +14,25 @@ brew install vim
 
 ## 配置
 
-* 全局配置：`/etc/vim/vimrc` `/etc/vimrc`
-* 用户配置：`~/.vimrc`
+* 全局配置 `/etc/vim/vimrc` `/etc/vimrc`
+* 用户配置 `~/.vimrc`
 * 选项
   - all 列出所有选项设置情况
   - term 设置终端类型
+  - :set number? 查询某个配置项是打开还是关闭
   - :set number|nu|nonumber|nonu
-  - :set number? 查询某个配置项是打开还是关闭 number|nonumber
   - :set ignorecase|noignorecase　　[不]忽略大小写的查找
   - :set [no]hlsearch 高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配 关闭高亮搜索显示
   - :set incsearch 逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成
   - :set wrapscan 重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启
   - :scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等
   - :set relativenumber 显示相对行号
+  - :set spell|nospell
+    + Go to the next misspelled word ]s
+    + Go to the last misspelled word [s
+    + When on a misspelled word, get some suggestions z=
+    + Mark a misspelled word as correct zg
+    + Mark a good word as misspelled zw
   - :set list 显示非打印字符，如tab，空格，行尾等。如果tab无法显示，请确定用set lcs=tab:>-命令设置了.vimrc文件，并确保你的文件中的确有tab，如果开启了expendtab，那么tab将被扩展为空格
   - report 显示由面向行的命令修改过的数目
   - terse 显示简短的警告信息
@@ -34,6 +40,13 @@ brew install vim
   - nomagic 允许在搜索模式中，使用前面不带“/”的特殊字符
   - nowrapscan 禁止vi在搜索到达文件两端时，又从另一端开始
   - mesg 允许vi显示其他用户用write写到自己终端上的信息
+* 会话
+  - 保存 :mksession ~/.mysession.vim
+  - 强行写入 :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
+  - 加载配置 vim -S ~/.mysession.vim
+* u 撤销上一步操作
+* U 撤销对当前行所有操作
+* Ctrl + r 重做（Redo），即撤销的撤销
 * [SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration <https://spacevim.org>
 * [vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS <http://vimr.org>
 * [vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
@@ -63,21 +76,63 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 # Not an editor command: ^M
 :set fileformat=unix :w
+
+# Remap the ESC Key
+inoremap jk <ESC>
+
+# default it's the \ key
+let mapleader = "'"
+syntax on # highlight syntax
+set number # show line numbers
+set noswapfile # disable the swapfile
+set hlsearch # highlight all results
+set ignorecase # ignore case in search
+set incsearch # show search results as you type
+# map CAPSLOCK to Ctrl
+set spell spelllang=en_us
+
+#Fix spelling with <leader>f
+nnoremap <leader>f 1z=
+# Toggle spelling visuals with <leader>s
+nnoremap <leader>s :set spell!
+
+# hanging file type
+set ft=unix
+set ft=html
+set ft=dos
 ```
 
-## 模式
+## 模式 Mode
 
-* 类型
-  - 正常模式：在文件中四处移动光标进行修改，<ESC> 返回正常模式
-  - 插入模式：插入文本，i 进入插入 模式
-  - 替换模式：替换文本，R 进入替换模式
-  - 可视化（一般，行，块）模式：选中文本块， v 进入可视（一般）模式， V 进入可视（行）模式，<C-v> （Ctrl-V, 有时也写作 ^V）进入可视（块）模式
-  - 命令模式：用于执行命令，: 进入命令模式
-* 在左下角显示当前的模式
+* 正常模式 Normal｜Command Mode 在文件中四处移动光标进行修改，<ESC> 返回正常模式
+  - i insert before the cursor 光标前插入,进入插入模式
+    + 对于操纵/编辑文本，不单想用退格键完成
+  - a append after the cursor 光标后插入
+    + 3a！+ ESC:在当前位置后插入3个！
+  - I insert at the beginning of the line 当前非blank字符行首并进入insert模式
+  - A append at the end of the line 当前非blank字符行尾并进入insert模式
+  - o open a new line below the current one
+  - O open a new line above the current one
+  - r replace the one character under your cursor
+  - R replace the character under your cursor, but just keep typing afterwards
+  - cm change whatever you define as a movement, e.g. a word, or a sentence, or a paragraph.
+  - C change the current line from where you're at
+  - ct? change change up to the question mark
+  - s substitute from where you are to the next command (noun)
+  - S substitute the entire current line
+* 插入模式 Insert Mode
+  - : 进入命令模式
+    + `:` 开始命令需要输入 <enter> 回车
+* 可视化模式 Visual Mode
+  - v 进入可视（一般）模式
+  - V 进入可视（行）模式
+  - <C-v>| ^V 进入可视（块）模式
+* 替换模式：替换文本，R 进入替换模式
+* 左下角显示当前模式
 
 ## 缓存， 标签页， 窗口
 
-* 缓存：Vim 会维护一系列打开的文件
+* 缓存：Vim 会维护一系列打开文件
   - 同一个缓存可以在多个窗口中显示
 * 一个 Vim 会话包含一系列标签页，每个标签页包含一系列窗口 （分隔面板）
 * 每个窗口显示一个缓存
@@ -86,38 +141,62 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 ## 操作
 
-* Ctrl-λ 写成 <C-λ>
-* `:` 开始命令需要输入 <enter> 回车
-* `N<command>` 重复某个命令N次,命令都可以配合数字使用.Esc是必须的，否则命令不生效
-  - 3w 向前移动三个词
-  - 5j 向下移动5行
-  - 7dw 删除7个词
+* **Verbs**:the actions we take, and they can be performed on nouns
+  - d: delete
+  - c: change
+  - y: yank (copy)
+  - v: visually select (V for line vs. character)
+* **Modifiers** are used before nouns to describe the way in which you're going to do something
+  - i: inside
+  - a: around
+  - NUM: number (e.g.: 1, 2, 10)
+  - t: searches for something and stops before it
+  - f: searches for that thing and lands on it
+  - /: find a string (literal or regex)
+  - * Ctrl-λ 写成 <C-λ>
+* **Nouns**
+  - w: word
+  - s: sentence
+  - ): sentence (another way of doing it)
+  - p: paragraph
+  - }: paragraph (another way of doing it)
+  - t: tag (think HTML/XML)
+  - b: block (think programming)
+  - use nouns as motions, meaning can move around content using them as the size of your jump
+* `N<command>` 重复某个命令N次.Esc是必须的，否则命令不生效
+
 * `.` 重复前一次命令
 * `;` 重复上一次f查找操作
 * `.` 重复上一次修改操作，跟;经常用来实现一些简单重复操作
-* `;.,` 重复操作
+* `; ,` 重复操作
 * History 以:和/开头命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
-* 命令类型
-  - action
-  - position
-  - object
-* 修饰语:改变 “名词” 的意义
-  - i， 表示 “内部” 或者 “在内“
-  - a， 表示 ”周围“
-  - ci( 改变当前括号内的内容
-  - ci[ 改变当前方括号内的内容
-  - da' 删除一个单引号字符窗， 包括周围的单引号
 
 ![](../_static/vim.png)
 ![](../_static/vim_sheet.png)
 ![](../_static/vi-vim-cheat-sheet-sch.gif)
 ![](../_static/vim_sheet_code.png)
 
+```
+# 语法：action+position+object
+<!-- 改变当前括号内的内容 -->
+ci(
+<!-- 改变当前方括号内的内容 -->
+ci[
+<!-- Change inside sentence (delete the current one and enter insert mode) -->
+cis
+<!-- 删除一个单引号字符窗， 包括周围的单引号 -->
+da'
+
+d2w
+5j
+7dw
+```
+
 ## Insert
 
 * 左下角显示`--INSERT--`,按 Esc 或 Ctrl+[ 进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
 * 普通模式下，输入 : 即可进入
-* Ctrl+u：删除输入方式下所输入文本
+* Ctrl+u 删除输入方式下所输入文本
 
 * :E Opens explorer for locating files and directories 浏览目录
   - `–` 到上级目录
@@ -141,7 +220,7 @@ curl -sLf https://spacevim.org/install.sh | bash
   - :bprevious|bp
   - :blast|bl
   - :bfirst|bf
-* 打开文件
+* 打开
   - `:e ftp://192.168.10.76/abc.txt`
   - `:e \\qadrive\test\1.txt`
   - `:e {文件名}` 打开要编辑的文件
@@ -168,47 +247,13 @@ curl -sLf https://spacevim.org/install.sh | bash
 * :e! 放弃所有修改，并打开原来文件
 * :r [filename] 读入另一个档案的数据。即将 『filename』 这个档案内容加到游标所在行后面
 
-* A 当前非blank字符行尾并进入insert模式
-* I 当前非blank字符行首并进入insert模式
-* i 光标前插入,进入插入模式
-  - 对于操纵/编辑文本，不单想用退格键完成
-* a 光标后插入 3a！+ ESC:在当前位置后插入3个！
-* O / o 在之上/之下插入行
-* r 只会取代光标所在的那一个字符一次
-* R会一直取代光标所在的文字，直到按下 ESC 为止
-
-* 编辑 “动词”，因为动词可以施动于名词
+* 编辑 动词
   - 可以用键盘：采用编辑命令和移动命令的组合来完成
   - :n1,n2 m n3 将n1行到n2行之间的内容移至到第n3行下
   - :1,10 co 20 将1-10行插入到第20行之后
   - :1,$ co $ 将整个文件复制一份并添加到文件尾部
   - :n1,n2 d 将n1行到n2行之间的内容删除
-* :args 查看当前正在编辑的文件,用[]括起来
-* s 替换字符 （等同于 xi）
-  - % 匹配括号移动，包括 (, {, [.
-  - 用“<”来指定匹配单词开头
-  - :s/old/new 用new替换行中首次出现的old
-  - :s/old/new/g  用new替换行中所有的old
-    + :3,5s/^#//g 解除3-5行的注释
-    + :1,$s/^/#/g 注释整个文档
-  - :%s/old/new/g  全局用new替换当前文件里所有的old
-  - `%s/\[.*\](\(.*\))/\1/g` 将有命名的 Markdown 链接替换成简单 URLs
-  - :n,m?s/old/new/g  用new替换从n到m行里所有的old
-  - :n1,n2s/p1/p2/g：将第n1至n2行中所有p1均用p2替代
-  - :g/p1/s//p2/g：将文件中所有p1均用p2替换
-  - :%s/<four>/4/gc 只想替换注释中的 “four”，而保留代码中
-  - :1,$s/word1/word2/g 或 :%s/word1/word2/g 从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
-    + :%s/$/sth/ 在行尾追加sth
-    + :%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
-    + :%s/#.*//g 删除#之后的字符
-  - :%s/^/#/g 注释整个文档
-  - :g/\^\s*$/d 删除空行以及只有空格的行
-* 查找字符串
-  - 搜索: /{正则表达式}, n / N 用于导航匹配
-  - ?text 向光标之上寻找text
-  - 2n 查找下面第二个匹配
-  - 特殊字符在查找时需要转义　`.*[]^%/?~$`
-  - `*`和 `#` 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
+* :args 查看当前正在编辑文件,用[]括起来
 * 执行 shell
   - :!ls 列出当前目录下文件
   - :!perl -c script.pl 检查perl脚本语法，不用退出vim
@@ -225,6 +270,31 @@ curl -sLf https://spacevim.org/install.sh | bash
   - Ctrl + X 和 Ctrl +V 表达式补齐
   - Ctrl + X 和 Ctrl +L 整个行补齐
 
+## substitution 替换 s （等同于 xi）
+
+* % 匹配括号，包括 (, {, [
+* 用“<”来指定匹配单词开头
+* :s /old/new 用new替换行中首次出现的old
+* :s /foo/bar/g Change "foo" to "bar" on just the current line
+* :%s /foo/bar/g Change "foo" to "bar" on every line
+* `:%s /\[.*\](\(.*\))/\1/g` 将有命名的 Markdown 链接替换成简单 URLs
+* :n,m?s/old/new/g  用new替换从n到m行里所有的old
+  - :3,5s/^#//g 解除3-5行注释
+  - :1,$s/^/#/g 注释整个文档
+* :g/p1/s//p2/g：将文件中所有p1均用p2替换
+* :%s/<four>/4/gc 只想替换注释中的 “four”，而保留代码中
+* :1,$s/word1/word2/g 或 :%s/word1/word2/g 从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
+  - :%s/$/sth/ 在行尾追加sth
+  - :%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
+  - :%s/#.*//g 删除#之后的字符
+* :%s/^/#/g 注释整个文档
+* :g/\^\s*$/d 删除空行以及只有空格的行
+
+```
+# Delete the Ctrl-M characters from the end of files
+:%s/s+$//
+```
+
 ## Command mode(默认) 命令模式
 
 * rg 替换当前字符为g
@@ -233,17 +303,7 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 * 自动提示:输入一个词的开头，然后按 <C-p>或是<C-n>
 * ggVG 全选
-* u 撤销上一步操作
-* U 撤销对当前行所有操作
-* Ctrl + r 重做（Redo），即撤销的撤销
 * J 合并下一行
-* 窗口分屏浏览
-  - :sp / :vsp 来分割窗口
-  - :He 全称:Hexplore 在下边分屏浏览目录
-  - :He! 在上分屏浏览目录
-  - :Ve 全称:Vexplore 在左边分屏间浏览目录，要在右边则是 :Ve!
-  - 分屏中的文件同步移动: 两个屏中都输入 :set scb( set scrollbind)
-  - 需要解开 :set scb!
 * :Te 全称:Texplorer Tab页浏览目录
   - :tabs 查看打开窗口和Tab情况
   - gt 到下一个页
@@ -257,12 +317,9 @@ curl -sLf https://spacevim.org/install.sh | bash
   - ggguG 整篇文章大写转化为小写
 * 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
 * 100idesu [ESC] 重复 100 `idesu`
-* 会话
-  - 保存 :mksession ~/.mysession.vim
-  - 强行写入 :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
-  - 加载配置 vim -S ~/.mysession.vim
-* 复制 y
-  - (n)yy 复制行
+* 复制 y copying
+  - y: yank (copy) whatever's selected
+  - yy: yank the current line
   - yw 复制光标开始的一个单词
   - y1G复制游标所在行到第一行的所有数据
   - yG 复制游标所在行到最后一行的所有数据
@@ -271,32 +328,41 @@ curl -sLf https://spacevim.org/install.sh | bash
   - ye 当前位置拷贝到本单词的最后一个字符
   - yfB 复制光标到第一个大写B中间内容
     + y2fB 复制光标到第二个大写B中间的内容
-  - yi"：yank inside "
-  - ya"：yank around " 复制整个字符串，包括双引号
-  - yw、yaw
-* 粘贴
-  - p 光标后粘贴
-  - P 粘贴剪切板里内容在光标前
+  - yi" yank inside "
+  - ya" yank around " 复制整个字符串，包括双引号
+  - yaw
+* 粘贴 p cutting
+  - p 光标后粘贴 paste the copied (or deleted) text after the current cursor position
+  - P 粘贴剪切板里内容在光标前 paste the copied (or deleted) text before the current cursor position
     + 3p 将复制或剪切的内容粘贴三次
 * 剪切
   - ndw或ndW 删除光标处开始及其后的n-1个字
   - D|d$ 删除当前字符至行尾
-
+  - ddp Switching lines of text
   - x|dl 剪切一个字符，如果是在行尾，则为向前剪切
     + 3x 剪切三个字符
   - X|dh 剪切光标前一个字符
   - xp 非行尾与后一个字符交换，如从bs变成sb
 * d{移动命令} 删除 {移动命令}
-  - dw 删除词, d$ 删除到行尾, d0 删除到行头
+  - dw 删除词
+  - d$ 删除到行尾
+  - d0 删除到行头
   - dj|k 删除上|下一行
   - dgg 删除光标所在到第一行的所有数据
   - dG 删除光标所在到最后一行的所有数据
   - df” 删除到出现的第一个双引号
-  - ddp交换当前行和其下一行
+  - ddp 交换当前行和其下一行
   - 5dd 剪切当前行之后5行
   - :1,10d 将1-10行剪切
   - :11,$d 删除11行及以后所有的行
 * x 删除字符 （等同于 dl）
+  - x: exterminate (delete) the character under the cursor
+  - X: exterminate (delete) the character before the cursor
+  - dm: delete whatever you define as a movement, e.g. a word, or a sentence, or a paragraph.
+  - dd: delete the current line
+  - dt.: delete delete from where you are to the period
+  - D: delete to the end of the line
+  - J: join the current line with the next one (delete what's between)
 * 缩进
   - >> 向右给它进当前行 【<<】向左缩进当前行
   - = 缩进当前行 （和上面不一样的是，它会对齐缩进）
@@ -310,72 +376,114 @@ curl -sLf https://spacevim.org/install.sh | bash
   - c^ 从当前位置删除到行首，并进入插入模式
   - c$ 从当前位置删除到行尾，并进入插入模式
   - ci" change inside " 修改当前位置附近，在相同配对的"中的内容。比如对于const char *str="hello world";。当在双引号中间的任意位置键入ci"可以直接清空字符串，并继续输入新的希望的字符串，ci(、ci[
-  - cit：可以直接编辑匹配的 xml 标签中的内容！经常编写 html 的童鞋可以熟悉一下
-* 窗口
-  - 创建 `:[v]split|sp|new file`
-  - 切换
-    + C-w
-    + <C-w> hjkl
-    + <C-w> + ←↓↑→
-  - 最大化
-    + 垂直 <C-w> _
-    + 水平 <C-w> |
-    + 恢复 <C-w> =
-  - 修改尺寸:<C-w> +|-
-* 移动 名词，因为指向文字块
-  - 基本移动: hjkl （左， 下， 上， 右）
-  - h|Backspace 光标左移一个字符
-  - l|space 光标右移一个字符
-  - k|Ctrl+p|+ 光标上移一行
-    + Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
-  - j|Ctrl+n|-|Enter 光标下移一行
-    + Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
-  - 词： w （下一个词）， b （词初）， e （词尾）
-  - w|W 下一个单词词首，如果已到行尾，则转至下一行行首
-  - e|E 下一个单词至词尾
-    + ge 光标向前移动一个单词至词尾
-  - b|B 光标前移一个单词至词首
-  - n<Enter>  n 为数字。光标向下移动 n 行
-  - Ctrl + O 向后回退的光标移动
-  - Ctrl + I 向前追赶的光标移动
-  - 文件： gg （文件头）， G （文件尾）
-  - gg|1G|[[:到文件头
-    + 100G 光标移至第100行首
-  - G|]]: 文档尾行行首
-  - 行数： :{行数}<CR> 或者 {行数}G ({行数}为行数)
-  - } 至段落开头
-  - { 至段落结尾
-  - ) 至句尾
-  - ( 至句首
-  - 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
-  - 0(数字零)|<HOME> 到行首
-  - ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
-  - $ 至行尾
-    + 5$ 下面5行行尾
-  - g_ 到本行最后一个不是blank字符的位置
-  - :10 到第10行,绝对行
-  - 5+|- 光标下|上移5行，相对行
-  - % 移动到与当前括号匹配的括号处，包括(， [， {
-  - 查找： f{字符}， t{字符}， F{字符}， T{字符}
-    + 查找/到 向前/向后 在本行的{字符}
-    + , / ; 用于导航匹配
-  - `f` 查找字符,f {char}会定位到第一个{char}出现的光标位置
-    + fa 光标后第一个为a的字符
-    + 3fa 在当前行查找第三个出现的a
-  - `F` 查找字符,与f类似，不过是向后查找
-  - t, 到逗号前的第一个字符， t|F 下一个， T 前一个
-    + dt" 删除所有的内容，直到遇到双引号
-  - `;` 重复上次搜索
-  - `,` 如果重复上次搜索按多了，则可以通过`,`回退
-  - 屏幕： H （屏幕首行）， M （屏幕中间）， L （屏幕底部）
-  - 翻页： Ctrl-u （上翻）， Ctrl-d （下翻）
-  - Ctrl+d 向文件尾翻半屏
-  - Ctrl+f|Page Down 向文件尾翻一屏
-  - Ctrl+b|Page Up 向文件首翻一屏
+  - cit 可以直接编辑匹配的 xml 标签中的内容
+  - ct,
+
+## 窗口
+
+* 创建 `:[v]split|sp|new file`
+* 切换
+  - C-w
+  - <C-w> hjkl
+  - <C-w> + ←↓↑→
+* 最大化
+  - 垂直 <C-w> _
+  - 水平 <C-w> |
+  - 恢复 <C-w> =
+* 修改尺寸:<C-w> +|-
+* :sp / :vsp 来分割窗口
+* :He 全称:Hexplore 在下边分屏浏览目录
+* :He! 在上分屏浏览目录
+* :Ve 全称:Vexplore 在左边分屏间浏览目录，要在右边则是 :Ve!
+* 分屏中的文件同步移动: 两个屏中都输入 :set scb( set scrollbind)
+* 需要解开 :set scb!
+
+## 移动 名词 指向文字块
+
+* 基本移动: hjkl （左， 下， 上， 右）
+* h|Backspace 光标左移一个字符
+* l|space 光标右移一个字符
+* k|Ctrl+p|+ 光标上移一行
+  - Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
+* j|Ctrl+n|-|Enter 光标下移一行
+  - Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
+* 词 w （下一个词）， b （词初）， e （词尾）
+* W move forward one big word
+* B move back one big word
+* w|W 下一个单词词首，如果已到行尾，则转至下一行行首
+* e|E 下一个单词至词尾
+  - ge 光标向前移动一个单词至词尾
+* b|B 光标前移一个单词至词首
+* {行数}<CR> 光标向下移动 n 行
+  - {行数}G
+* Ctrl + O 向后回退的光标移动
+* Ctrl + I 向前追赶的光标移动
+* } 至段落开头
+* { 至段落结尾 move forward one paragraph
+* ) 至句尾 move forward one sentence
+* ( 至句首
+* 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
+* 0(数字零)|<HOME> 到行首
+* ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
+* $ 至行尾
+  - 5$ 下面5行行尾
+* g_ 到本行最后一个不是blank字符的位置
+* :10 到第10行,绝对行
+* 5+|- 光标下|上移5行，相对行
+* % 移动到与当前括号匹配的括号处，包括(， [， {
+
+## 查找
+
+* /{正则表达式}, n / N 用于导航匹配
+* ?text 向光标之上寻找text
+* 2n 查找下面第二个匹配
+* 特殊字符在查找时需要转义　`.*[]^%/?~$`
+* `*`和 `#` 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
+* `f{字符}` 定位到第一个{char}出现的光标位置
+  - fa 光标后第一个为a字符
+  - 3fa 在当前行查找第三个出现的a
+* `F{字符}` 向后查找
+  - 查找/到 向前/向后 在本行的{字符}
+
+* `t,` 到逗号前的第一个字符
+  - dt" 删除所有的内容，直到遇到双引号
+* T{字符}
+* `;` 重复上次搜索 go to the next instance when you've jumped to a character
+* `,` go to the previous instance when you've jumped to a character 如果重复上次搜索按多了，则可以通过`,`回退
+
+## repeating actions
+
+* Using the "." to repeat your last action
+
+```
+# delete a word
+dw
+# delete five more words
+5.
+n.
+```
+
+## 导航
+
+* 屏幕： H （屏幕首行）， M （屏幕中间）， L （屏幕底部）
+* 翻页
+  - Ctrl-u|^U move up half a screen
+  - Ctrl-d|^D move down half a screen
+* Ctrl+f|Page Down|^F
+* Ctrl+b|Page Up|^B
+* gg|1G|[[ 到文件头
+  - 100G 光标移至第100行首
+* G|]] 文档尾行行首
+* Ctrl-i jump to your previous navigation location
+* Ctrl-o jump back to where you were
+* :$line_numberH  move to a given line number
+* ^E: scroll up one line
+* ^Y: scroll down one line
+
 * 模式 <start position><command><end position>
   - 0y$
-  - ye，当前位置拷贝到本单词的最后一个字符
-  - y2/foo 来拷贝2个 “foo” 之间的字符串
+  - ye 当前位置拷贝到本单词的最后一个字符
+  - y2/foo 拷贝2个 “foo” 之间的字符串
   - d (删除) v (可视化的选择) gU (变大写) gu (变小写) 也会被拷贝
 * Quickfix
   - :make 出错，:cw 把出错显到分屏
@@ -449,14 +557,14 @@ curl -sLf https://spacevim.org/install.sh | bash
 
 ## Visual
 
-* 可视化
-* 可视化行
-* 可视化块
+* 可视化 character-based: v
+* 可视化行 line-based: V
+* 可视化块 paragraphs: Ctrl-v
 * 左下角显示 `--VISUAL--` 可以对选定文本运行命令操作
-* 进入 普通模式下按 v（逐字）或 V（逐行）
-  - J 把所有的行连接起来（变成一行）
-  - < 或 > 左右缩进
-  - = 自动缩进
+
+* J 把所有的行连接起来（变成一行）
+* < 或 > 左右缩进
+* = 自动缩进
 * Block Visual 区域选择：<action>a<object>  <action>i<object>
   - action
     + d (删除)
@@ -504,9 +612,12 @@ four
 Ctrl+v，3j，$，A，,，Esc，V，3j，J
 
 one, two, three, four,
+
+# Enter line-based visual mode and delete a couple of lines below
+Vjjd
 ```
 
-## 宏
+## 宏 macros
 
 * q{字符} 开始在寄存器 {字符} 中录制宏
 * q 停止录制
@@ -563,8 +674,30 @@ ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删
 r 对单词字符进行替换
 ```
 
+## text objects
+
+* words: iw and aw
+* sentences: is and as
+* paragraphs: ip and ap
+* single quotes: i' and a'
+* double quotes: i" and a"
+* back ticks: i` and a`
+* parenthesis: i( and a(
+* brackets: i[ and a[
+* braces: i{ and a{
+* tags: it and at
+
+```
+# Delete around a word
+daw
+
+# Change inside a sentence
+cis
+```
+
 ## 插件
 
+* `~/.vim/pack/pluginfoldername/ start/pluginname`
 * Accelerated-Smooth-Scroll 让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
 * [Ack](https://github.com/mileszs/ack.vim)全文搜索插件，可以在当前打开项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件
 * AutoPairs 自动补全括号的插件，包括小括号，中括号，以及花括号，可以提升编码效率

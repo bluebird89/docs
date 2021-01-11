@@ -10,5 +10,13 @@
   - Deploy （部署）
   - Done （已完成）
 * 所有需要完成的任务，都做成卡片，贴在一块白板上面
+* With Kanban, items are represented visually on a whiteboard, allowing team members to see the state of every piece of work in realtime. Kanban is both the board and the approach to managing work in a visual way, which helps limit work-in-progress and maximize a team’s efficiency.
+* Kanban is a visual way to manage work that’s organized via Agile/Scrum.
 
 ![看板墙](../_static/kanban.png "Optional title")
+
+```
+Kanban is a popular framework used to implement agile software development. It requires real-time communication of capacity and full transparency of work.
+
+Atlassion Agile Coach
+```

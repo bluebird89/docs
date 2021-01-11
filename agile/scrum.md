@@ -14,6 +14,17 @@
   - 检验（Inspection） 开发过程中的各方面必须做到足够频繁地检验，确保能够及时发现过程中的重大偏差。在确定检验频率时，需要考虑到检验会引起所有过程发生变化。当规定的检验频率超出了过程检验所能容许的程度，那么就会出现问题。幸运的是，软件开发并不会出现这种情况。另一个因素就是检验工作成果人员的技能水平和积极性。
   - 适应（Adaptation） 如果检验人员检验的时候发现过程中的一个或多个方面不满足验收标准，并且最终产品是不合格的，那么便需要对过程或是材料进行调整。调整工作必须尽快实施，以减少进一步的偏差
 * 团队承诺在固定时间段内完成一组用户故事。一般来说，冲刺是一，二，四周。由队伍决定冲刺的长度。一旦确定了冲刺节奏，团队将永远按照这种节奏运作。只要拥有几个完成的冲刺的数据，固定长度的冲刺能增强评估技能，并且能够预测团队的未来速度
+* Scrum包括了两个方面的PDCA持续改进
+  - 一方面是产品的持续改进
+  - 另一方面是开发过程的持续改进。需要组织的专业管理支持
+    + 实习生进公司后，根本不了解业务、系统，也缺乏软件工程经验。这种情况下，如果让他们进Scrum团队，基本上干活就等于“埋雷”，这会严重拖累团队.需要进行集中的专业教育，组织学习业务、系统和工程技术，并做一些虚拟项目来掌握这些知识和能力。直到这些都基本掌握了，才能安排他们进Scrum团队
+    + 以往都只做手工测试，现在要搞自动化测试。而各个Scrum团队往往都面临着巨大的业务交付压力，没有时间去研究自动化测试技术
+
+```
+Scrum is a framework that helps teams work together by encouraging teams to learn through experiences, self-organize while working on a problem, and reflect on their wins and losses to continuously improve.
+
+Atlassian Agile Coach
+```
 
 ## 角色
 
@@ -114,6 +125,9 @@
 
 ## Events
 
+* Sprints
+  - Sprints are short periods of time where a certain amount of work is to be done. Sprints contain stories, which of course are part of Epics, but some epics will cross into multiple Sprints.
+  - Sprints are set periods of time where a defined number of stories are worked on.
 * Sprint Plan Meeting（明确目标，细化任务）
   - 在启动每个 Sprint 前召开，PO 和团队成员将 backlog 分解小模块制定任务优先级，团队成员确认理解需求并计算小模块的工作量
   - 需要明确Sprint目标与Sprint BACKLOG，讨论时要考虑团队的接受力，开发的速度、技术水平和商业条件等，提前确定好Sprint交付日期，增量迭代开发任务，产品版本迭代内容等
@@ -156,13 +170,18 @@
   - 每个会议必须有主持人、会议目标、会议准备，否则会议是冗长而无效的
   - 参会人员应该准时到达:对迟到的容忍就是对准时到的人惩罚
 
-![Alt text](../_static/standup_meeting_png "Optional title")
+```
+A sprint is a short, time-boxed period when a scrum team works to complete a set amount of work.
 
-* Scrum包括了两个方面的PDCA持续改进
-  - 一方面是产品的持续改进
-  - 另一方面是开发过程的持续改进。需要组织的专业管理支持
-    + 实习生进公司后，根本不了解业务、系统，也缺乏软件工程经验。这种情况下，如果让他们进Scrum团队，基本上干活就等于“埋雷”，这会严重拖累团队.需要进行集中的专业教育，组织学习业务、系统和工程技术，并做一些虚拟项目来掌握这些知识和能力。直到这些都基本掌握了，才能安排他们进Scrum团队
-    + 以往都只做手工测试，现在要搞自动化测试。而各个Scrum团队往往都面临着巨大的业务交付压力，没有时间去研究自动化测试技术
+Atlassian Agile Coach
+
+With Scrum, a product is built in a series of iterations called sprints that break down big, complex projects into bite-sized pieces.
+
+Megan Cook, Group Product Manager, Atlassian
+```
+
+![Sprints](../_staic/sprint.jpg "Optional title")
+![Alt text](../_static/standup_meeting_png "Optional title")
 
 ## 组织架构设计
 
