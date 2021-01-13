@@ -199,12 +199,12 @@ gpg --sign demo.txt #签名
   - 文件被称作Blob对象（数据对象），也就是一组数据。
   - 目录则被称之为“树”，它将名字与Blob对象或树对象进行映射（使得目录中可以包含其他目录）。
   - 快照则是被追踪的最顶层的树
-* 基于时间点的快照：将提交点指向提交时的项目快照
-* 任何人，在任何硬件环境下，相同的内容都会生成相同的对象
+* 任何人，在任何硬件环境下，相同内容都会生成相同的对象
 * references 通过使用引用（ref），比如 HEAD, heads/master，tags/v0.1，git 可以很方便地追踪用户关心的每一棵树的确切状态
   - 引用是指向提交的指针。与对象不同的是，它是可变的（引用可以被更新，指向新的提交）
   - master 引用通常会指向主分支的最新一次提交
-* 历史记录建模：关联快照
+* Commit 历史记录建模：关联快照
+  - 基于时间点的快照：将提交点指向提交时的项目快照
   - 历史记录是一个由快照组成的有向无环图
   - 每个快照都有一系列的“父辈”，也就是其之前的一系列快照
   - 快照被称为“提交”。通过可视化的方式来表示这些历史提交记录时
@@ -360,6 +360,7 @@ def load_reference(name_or_id):
 ### 工作区（Workspace）working directory
 
 * 开发改动的地方，任何对象都是在工作区中诞生和被修改
+* status, it’ll show  what’s changed that isn’t yet staged for a commit (in index)
 * 文件状态：modified
 * git add 保存对象
   - git add添加文件的相关信息(文件名、大小、timestamp...)，不保存文件实体, 通过id指向每个文件实体
@@ -371,7 +372,7 @@ def load_reference(name_or_id):
 * 数据结构
   - 绿色的5位字符表示提交的ID，分别指向父节点
   - 分支用橘色显示，分别指向特定的提交。当前分支由附在其上的HEAD标识
-* 撤销工作区文件修改:
+* 撤销工作区文件修改
   - git checkout -- [filename]`用于从历史提交（或者暂存区域）中拷贝文件到工作目录,工作区的文件变化一旦被撤销，就无法找回了
   - `git checkout .` 把被「修改」的文件恢复成stage的状态. 如果新增了新文件，是不会删除新文件的
   - `git checkout HEAD -- files`:回滚到最后一次提交。跳过暂存区域直接从仓库取出文件
@@ -400,6 +401,7 @@ def load_reference(name_or_id):
 ![reset-commit](../_static/reset-commit.svg "reset-commit")
 ![reset-files](../_static/reset-files.svg "reset-files")
 ![diff](../_static/diff.svg "diff")
+![Alt text](../_static/git_merge_1.jpg "Optional title")
 
 ```sh
 git init --bare # 远程仓库文件构建
@@ -499,6 +501,8 @@ git update-index --no-assume-unchanged <file>
 * .git目录下的index文件, 暂存区会索引
 * reset:重置 commit 版本
 * 文件状态：staged:Stage(Index)
+* git diff shows the differences between various commits, and between the working directory and the index
+* git diff --cached, on the other hand, shows you the difference between what’s in the index vs. in your last commit
 * `git commit`
   - `git write-tree`:将当前的目录结构，生成一个 Git 对象,目录结构也是作为二进制对象保存的，也保存在.git/objects目录里面
   - `echo "first commit" | git commit-tree hashId`  将目录树对象写入版本历史, 生成hashId
@@ -740,7 +744,7 @@ git rm –cached FILE # 这个命令只删除远程文件
 
 ## 分支 branch
 
-* 指向某个快照的指针，分支名就是指针名
+* 指向快照的指针，分支名就是指针别名
 * 分支会自动更新，如果当前分支有新的快照，指针就会自动指向它
 * HEAD:总是指向当前分支的最近一次快照
 * 切换分支:当不指定文件名，给出一个（本地）分支时，那么HEAD标识会移动到那个分支，暂存区域和工作目录中的内容会和HEAD对应的提交节点一致
@@ -912,6 +916,7 @@ git tag -l|-n
 git show [tag]  # 查看tag信息
 
 git tag 1.0.0 1b2e1d63ff
+git checkout 1.0.0
 git tag -a v2.1 -m 'first version' # -a 创建一个带注释的标签，不带-a的话，不会记录时间 作者 以及注释
 git tag -am v2.2 "连猴子都懂的Git"
 git tag -a tagName commitId # 追加tag在指定commit

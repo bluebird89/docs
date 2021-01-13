@@ -1,4 +1,4 @@
-# [nginx](https://github.com/nginx/nginx)
+# [nginx engine x](https://github.com/nginx/nginx)
 
 * 2006年由俄罗斯人发布。全称为engine X，缩减合并称为[nginx](https://nginx.org/)
 * 一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器
@@ -325,9 +325,14 @@ ports=80,443/tcp
 
 sudo ufw app list
 
+# 显示 Nginx 的版本
+nginx -v
+# 显示 Nginx 的版本，编译器版本和配置参数
+nginx -V
+
 sudo nginx # 启动命令
 sudo ngixn -c /usr/local/etc/nginx/nginx.conf
-sudo nginx -s reload|reload|reopen|stop|quit # 重新配置后都需要进行重启操作
+sudo nginx -s reload|reopen|stop|quit # 重新配置后都需要进行重启操作
 sudo nginx -t -c /usr/local/etc/nginx/nginx.conf
 
 wget https://github.com/winshining/nginx-http-flv-module/archive/master.zip
@@ -340,7 +345,7 @@ Upgrade Nginx on the Fly
 Nginx allows admins to upgrade the binary and/or configuration file on the fly. This means your client requests will not be interrupted due to server upgrades. To do this, first, we need to locate the PID of the master Nginx process. We can do it using a simple command that we’ve already demonstrated.
 
 cat /run/nginx.pid
-Your new Nginx binary should be ready by now. Spawn a new set of Nginx master/worker processes which use the new binary via the below command.
+# Your new Nginx binary should be ready by now. Spawn a new set of Nginx master/worker processes which use the new binary via the below command.
 
 sudo kill -s USR2 `cat /run/nginx.pid` Now kill the worker processes used by the first master process using the following command.
 
@@ -352,7 +357,7 @@ ss  -anptu  |  grep nginx
 
 ## 本地文件操作
 
-* sendfile:也叫零拷贝，提高本地文件通过socket发送的效率
+* sendfile 零拷贝，提高本地文件通过socket发送的效率
     - 从本地读取一个文件并通过socket发送出去步骤
         + 根据CPU的调度，从磁盘读取一定长度（chunk）的字节数据 copy到内核内存中
         + 将内核内存中的数据copy到进程工作区内存
@@ -578,7 +583,7 @@ $document_uri # 同 $uri
             * permanent 返回301永久重定向
             * last和break标记的区别在于，last标记在本条rewrite规则执行完后，会对其所在的server { … } 标签重新发起请求，而break标记则在本条规则匹配完成后，停止匹配，不再做后续的匹配。另外有些时候必须使用last，比如在使用alias指令时，而 使用proxy_pass指令时则必须使用break。
             * rewrite 规则优先级要高于location，在nginx配置文件中，nginx会先用rewrite来处理url，最后再用处理后的url匹配location
-* alias指令来更改location接收到的URI请求路径
+* alias 更改location接收到的URI请求路径
     - root不做替换，而是直接将location添加到root的末尾
     - alias会做替换，即将location的值替换成root的值
 * 命名匹配：使用@比绑定一个模式，类似变量替换的用法
@@ -633,7 +638,7 @@ location / {
 访问根目录 /，比如 http://localhost/ 将匹配 规则 A
 访问 http://localhost/login 将匹配 规则 B，http://localhost/register 则匹配 规则 F
 访问 http://localhost/static/a.html 将匹配 规则 C
-访问 http://localhost/static/files/a.exe 将匹配 规则 X，虽然 规则 C 也能匹配到，但因为最大匹配原则，最终选中了 规则 X。你可以测试下，去掉规则 X ，则当前 URL 会匹配上 规则 C。
+访问 http://localhost/static/files/a.exe 将匹配 规则 X，虽然 规则 C 也能匹配到，但因为最大匹配原则，最终选中了 规则 X。可以测试下，去掉规则 X ，则当前 URL 会匹配上 规则 C。
 访问 http://localhost/a.gif, http://localhost/b.jpg 将匹配 规则 D 和 规则 E ，但是 规则 D 顺序优先，规则 E 不起作用，而 http://localhost/static/c.png 则优先匹配到 规则 C
 访问 http://localhost/a.PNG 则匹配 规则 E ，而不会匹配 规则 D ，因为 规则 E 不区分大小写。
 访问 http://localhost/img/a.gif 会匹配上 规则 D, 虽然 规则 Y 也可以匹配上，但是因为正则匹配优先，而忽略了 规则 Y。

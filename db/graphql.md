@@ -9,6 +9,10 @@ GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
 * 允许客户端只向服务端发送一次描述信息，允许开发人员构建相应的请求，从而通过单个 API 调用从多个数据源中提取数据，获得客户端所需所有数据
 * 数据控制甚至可以精细到字段，达到一次请求获取所有所需数据目的
 * 提供了极佳的关注点分离方式：客户端知道它需要什么数据，服务端知道数据的结构，以及如何从一些数据源（比如数据库、微服务、第三方 API）中拉取数据
+* 特点
+  - 声明式数据获取（可以对API进行查询）:声明式的数据查询带来了接口的精确返回，服务器会按数据查询的格式返回同样结构的JSON数据、真正照顾了客户端的灵活性。
+  - 一个微服务仅暴露一个GraphQL层：一个微服务只需暴露一个GraphQL endpoint，客户端请求相应数据只通过该端点按需获取，不需要再额外定义其他接口。
+  - 传输层无关、数据库技术无关：带来了更灵活的技术栈选择，比如我们可以选择对移动设备友好的协议，将网络传输数据量最小化，实现在网络协议层面优化应用。
 * 优点
   - 设置单一事实来源 Single Source of Truth，提供了一种整合其整个 API 的方法
   - GraphQL Schema Definition Language SDL 严格定义数据类型减少客户端与服务器之间的通信错误
@@ -45,11 +49,14 @@ GraphiQL & the GraphQL LSP Reference Ecosystem for building browser & IDE tools.
     + [Movie]! 始终返回不可为空但Movie元素可以为空
     + [Movie!] 返回的 Movie 元素不能为空，但返回可以为空的
   - Mutation 和 Subscription，都作为对应操作的入口点
-* 传入复杂结构的参数（Input）
+* 传入复杂结构参数（Input）
 * introspection:Type System->AST->Validation->Execution->Response
   - 类型名称自省(__typename)
   - schema自省(__schema和__type)
 * Resolver:对应着 Schema 上的字段，当请求体查询某个字段时，对应的 Resolver 函数会被执行，由 Resolver 函数负责到数据库中取得数据并返回，最终将请求体中指定的字段返回
+* 配置
+  - 直连数据
+  - 集成现有服务的GraphQL层
 
 ```graphql
 <!-- schema -->
@@ -99,14 +106,27 @@ input Search {
   - String：UTF-8字符串，对应 JavaScript 的 String
   - Boolean：布尔值，对应 JavaScript 的 Boolean
   - ID：ID 值，是一个序列化后值唯一的字符串，可以视作对应 ES 2015 新增的 Symbol
+  - Enums 一种特殊的标量类型，可以限制值为一组特殊的值
+* 对象类型（Object Type）
+  - 通过对象模型来构建GraphQL中关于一个数据模型的形状，同时还可以声明各个模型之间的内在关联（一对多、一对一或多对多）
+* 类型修饰符（Type Modifier）
+  - 列表 List：[Type]
+  - 非空：Type! 使用!来表示非空 Non-Null 强制类型的值不能为null，并且在请求出错时一定会报错。可以用于必须保证值不能为null的字段
+  - 列表非空：[Type]!
+  - 非空列表，列表内容类型非空：[Type!]!
 * Interface 包含一组确定字段的集合的抽象类型，实现该接口的类型必须包含interface定义的所有字段
   - 对于interface的返回需要你使用inline fragments来实现
-* Union 非常类似于interface，但是类型之间不需要指定任何共同的字段。通常用于描述某个字段能够支持的所有返回类型以及具体请求真正的返回类型
-* Enums 一种特殊的标量类型，可以限制值为一组特殊的值
-* input:对mutations来说非常重要，在 GraphQL schema 语言中，看起来和常规的对象类型非常类似，但是使用关键字input而非type
-* [] List
-* 使用!来表示非空 Non-Null 强制类型的值不能为null，并且在请求出错时一定会报错。可以用于必须保证值不能为null的字段
+  - 其他对象类型实现接口必须包含接口所有的字段，并具有相同的类型修饰符，才算实现接口。
+* Union
+  - 非常类似于interface，但是类型之间不需要指定任何共同的字段
+  - 通常用于描述某个字段能够支持的所有返回类型以及具体请求真正的返回类型
+  - 几个对象类型共用一个联合类型
+* input
+  - 对mutations来说非常重要，在 GraphQL schema 语言中，看起来和常规的对象类型非常类似，但是使用关键字input而非type
+  - 更新数据时有用，与常规对象只有关键字修饰不一样，常规对象时type修饰，输入类型是input修饰。
 * 内联片段（Inline Fragment）:概念和用法与普通片段基本相同，不同的是内联片段直接声明在选择集内，并且不需要fragment声明
+
+![对象模型引入关联关系](../_static/type_object.jpg "Optional title")
 
 ```graphql
 interface Basic {
