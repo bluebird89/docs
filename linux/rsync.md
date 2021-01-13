@@ -1,12 +1,15 @@
-# Rsync
+# remote sync Rsync 远程同步
 
 rsync is a file transfer program capable of efficient remote update via a fast differencing algorithm.
 
-* 增量 – 对比文件差异，然后只传输差异部分
-* 压缩 – 怎么实现秒传？传得越少，速度越快
-* 黑名单 – 某些目录和文件是永远不用传的
-* 安全 – 有权限校验，可以走ssh通道，根据主机、或者用户名
-* 连续 – 不是一次只传一个文件
+* 在本地计算机与远程计算机之间，或者两个本地目录之间同步文件（但不支持两台远程计算机之间的同步）
+* 最大特点是会检查发送方和接收方已有的文件，仅传输有变动的部分
+* 特点
+    - 增量 – 对比文件差异，然后只传输差异部分
+    - 压缩 – 怎么实现秒传？传得越少，速度越快
+    - 黑名单 – 某些目录和文件是永远不用传的
+    - 安全 – 有权限校验，可以走ssh通道，根据主机、或者用户名
+    - 连续 – 不是一次只传一个文件
 
 ## 配置
 
@@ -28,52 +31,26 @@ sudo pacman -S rsync
 ## 参数
 
 * -a, --archive 归档模式，表示以递归方式传输文件，并保持所有文件属性，等于-rlptgoD
-* -c, --checksum 打开校验开关，强制对文件传输进行校验v，使用文件校验和而不是时间戳来决定改变的文件，通常消耗的时间更久
-* --delete：删除目标上无关的文件
-* -d 不要递归目录
-* -v, --verbose  详细模式输出
-* -r, --recursive  对子目录以递归模式处理
-* -R, --relative  使用相对路径信息
-* -b, --backup  创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀。
-* --backup-dir  将备份文件(如~filename)存放在在目录下。
-* -suffix=SUFFIX  定义备份文件前缀
-* -u, --update  仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)
-* -l, --links    保留软链结
-* -L, --copy-links  想对待常规文件一样处理软链结
-* --copy-unsafe-links  仅仅拷贝指向SRC路径目录树以外的链结
-* --safe-links  忽略指向SRC路径目录树以外的链结
-* -H, --hard-links  保留硬链结
-* -p, --perms  保持文件权限
-* -o, --owner  保持文件属主信息
-* -g, --group    保持文件属组信息
-* -D, --devices  保持设备文件信息
-* -t, --times    保持文件时间信息
-* -S, --sparse  对稀疏文件进行特殊处理以节省DST的空间
-* -n, --dry-run  现实哪些文件将被传输 模拟命令执行的结果，并不真的执行命令。
-* -W, --whole-file  拷贝文件，不进行增量检测
-* -x, --one-file-system  不要跨越文件系统边界
-* -B, --block-size=SIZE  检验算法使用的块尺寸，默认是700字节
-* -e, --rsh=COMMAND  指定替代rsh的shell程序
-* --rsync-path=PATH    指定远程服务器上的rsync命令所在路径信息
+* --address  绑定到特定的地址
+* --append 指定文件接着上次中断的地方，继续传输
+* --append-verify 跟--append参数类似，但会对传输完成后的文件进行一次校验。如果校验失败，将重新发送整个文件
+* -b, --backup  创建备份，也就是对于目的已经存在有同样的文件名时，将老的文件重新命名为~filename。可以使用--suffix选项来指定不同的备份文件前缀
+* -B, --block-size=SIZE  指检验算法使用的块尺寸，默认是700字节
+* --backup-dir  定文件备份时存放的目录
+* --blocking-io  对远程shell使用阻塞IO
+* --bwlimit=KBPS  限制I/O带宽，KBytes per second
+* -c, --checksum 打开校验开关，强制对文件传输进行校验，使用文件校验和而不是时间戳来决定改变的文件，通常消耗的时间更久
 * -C, --cvs-exclude      使用和CVS一样的方法自动忽略文件，用来排除那些不希望传输的文件
-* --existing  仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件
-* --delete    删除那些DST中SRC没有的文件
+* --compare-dest=DIR    同样比较DIR中的文件来决定是否需要备份
+* --config=FILE  指定其他的配置文件，不使用默认的rsyncd.conf文件
+* --copy-unsafe-links  仅仅拷贝指向SRC路径目录树以外的链结
+* -d 不要递归目录
+* -D, --devices  保持设备文件信息
+* --delete  删除只存在于目标目录、不存在于源目标的文件，即保证目标目录是源目标的镜像
 * --delete-excluded  同样删除接收端那些被该选项指定排除的文件
 * --delete-after      传输结束以后再删除
-* --ignore-errors    及时出现IO错误也进行删除
-* --max-delete=NUM  最多删除NUM个文件
-* --partial  保留那些因故没有完全传输的文件，以是加快随后的再次传输
-* --force    强制删除目录，即使不为空
-* --numeric-ids  不将数字的用户和组ID匹配为用户名和组名
-* --timeout=TIME IP  超时时间，单位为秒
-* -I, --ignore-times  不跳过那些有同样的时间和长度的文件
-* --size-only  当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间
-* --modify-window=NUM  决定文件是否时间相同时使用的时间戳窗口，默认为0
-* -T --temp-dir=DIR      在DIR中创建临时文件
-* --compare-dest=DIR    同样比较DIR中的文件来决定是否需要备份
-* -P  等同于 --partial
-* --progress    显示备份过程
-* -z, --compress  对备份的文件在传输时进行压缩处理
+* -e, --rsh=COMMAND  指定替代rsh的shell程序
+* --existing  仅仅更新那些已经存在于DST的文件，而不备份那些新创建的文件
 * --exclude=PATTERN 指定排除不需要传输的文件模式;--include=PATTERN 指定不排除而需要传输的文件模式.都不能使用间隔符
 * --exclude-from=FILE 排除FILE中指定模式的文件;--include-from=FILE 不排除FILE指定模式匹配的文件
   - 若文件/目录在剔除列表中，则忽略传输
@@ -94,17 +71,42 @@ sudo pacman -S rsync
     + ?：匹配除了 / 的任意单个字符
     + [：匹配字符集中的任意一个字符，如 [a-z] 或 [[:alpha:]]
     + 可以使用转义字符 \ 将上述通配符还原为字符本身含义
-* --version  打印版本信息
-* --address  绑定到特定的地址
-* --config=FILE  指定其他的配置文件，不使用默认的rsyncd.conf文件
-* --port=PORT  指定其他的rsync服务端口
-* --blocking-io  对远程shell使用阻塞IO
-* -stats  给出某些文件的传输状态
-* --progress  在传输时现实传输过程
-* --log-format=FORMAT  指定日志文件格式
-* --password-file=FILE    从FILE中得到密码
-* --bwlimit=KBPS  限制I/O带宽，KBytes per second
+* --force    强制删除目录，即使不为空
+* -g, --group    保持文件属组信息
 * -h, --help  显示帮助信息
+* -H, --hard-links  保留硬链结
+* --ignore-errors    及时出现IO错误也进行删除
+* -I, --ignore-times  不跳过那些有同样的时间和长度的文件
+* -l, --links    保留软链结
+* -L, --copy-links  想对待常规文件一样处理软链结
+* --log-format=FORMAT  指定日志文件格式
+* --max-delete=NUM  最多删除NUM个文件
+* --modify-window=NUM  决定文件是否时间相同时使用的时间戳窗口，默认为0
+* -n, --dry-run  现实哪些文件将被传输 模拟命令执行的结果，并不真的执行命令
+* --numeric-ids  不将数字的用户和组ID匹配为用户名和组名
+* -o, --owner  保持文件属主信息
+* -p, --perms  保持文件权限
+* -P， --partial  保留那些因故没有完全传输的文件，以是加快随后的再次传输
+* --password-file=FILE    从FILE中得到密码
+* --port=PORT  指定其他的rsync服务端口
+* --progress    显示备份过程
+* -r, --recursive  对子目录以递归模式处理
+* -R, --relative  使用相对路径信息
+* --rsync-path=PATH    指定远程服务器上的rsync命令所在路径信息
+* -S, --sparse  对稀疏文件进行特殊处理以节省DST的空间
+* --safe-links  忽略指向SRC路径目录树以外的链结
+* --size-only  当决定是否要备份文件时，仅仅察看文件大小而不考虑文件时间
+* -stats  给出某些文件的传输状态
+* -suffix=SUFFIX  定义备份文件前缀
+* -t, --times    保持文件时间信息
+* -T --temp-dir=DIR      在DIR中创建临时文件
+* --timeout=TIME IP  超时时间，单位为秒
+* -u, --update  仅仅进行更新，也就是跳过所有已经存在于DST，并且文件时间晚于要备份的文件。(不覆盖更新的文件)
+* -v, --verbose  详细模式输出
+* --version  打印版本信息
+* -W, --whole-file  拷贝文件，不进行增量检测
+* -x, --one-file-system  不要跨越文件系统边界
+* -z, --compress  对备份的文件在传输时进行压缩处理
 
 ```sh
 rsync [OPTION]... SRC [SRC]... DEST
@@ -120,11 +122,11 @@ rsync -a --delete /home /backups # /home：表示将整个 home 目录复制到�
 rsync --rsh=ssh --delete -avz  ~/Backups/ henry@ubuntu:/home/henry/backups/ # 将Backups/文件下面同步到backups下面
 rsync --delete /opt/app/tomcat/webapps/ROOT/* -avSH root@221.130.14.87:/opt/app/apache-tomcat-6.0.29/webapps/ROOT/ # rsync服务器主动同步到别的服务器的命令示例,前提是做好两个服务器之间的无密钥ssh登陆
 
-# 同步静态主机表文件
-[root@soho ~]# rsync /etc/hosts centos5:/etc/hosts # 执行“推”复制同步（centos5 是可解析的远程主机名）
-[root@centos5 ~]# rsync soho:/etc/hosts /etc/hosts # 执行“拉”复制同步（soho 是可解析的远程主机名）
+# 同步静态主机文件
+[root@soho ~]# rsync -av /etc/hosts centos5:/etc/hosts # 执行“推”复制同步（centos5 是可解析的远程主机名）
+[root@centos5 ~]# rsync -av soho:/etc/hosts /etc/hosts # 执行“拉”复制同步（soho 是可解析的远程主机名）
 
-# 同步用户的环境文件
+# 同步用户环境文件
 [osmond@soho ~]$ rsync ~/.bash* centos5: # 执行“推”复制同步
 [osmond@cnetos5 ~]$ rsync soho:~/.bash* . # 执行“拉”复制同步
 
@@ -207,6 +209,12 @@ rsync -avzi thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ # View the Cha
 rsync -avz --include 'P*' --exclude '*' thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ #  Include and Exclude Pattern during File Transfer
 rsync -avz --max-size='100K' thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp/ # Do Not Transfer Large Files
 rsync -avzW  thegeekstuff@192.168.200.10:/var/lib/rpm/ /root/temp # Transfer the Whole File
+
+# 如果另一台服务器安装并运行了 rsync 守护程序，则也可以用rsync://协议（默认端口873）进行传输。具体写法是服务器与目标目录之间使用双冒号分隔::
+rsync -av source/ 192.168.122.32::module/destination
+
+# 同步时的基准目录
+rsync -a --delete --link-dest /compare/path /source/path /target/path
 ```
 
 ## 使用

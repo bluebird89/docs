@@ -2566,17 +2566,6 @@ sudo mkfs.ext4 virtual.img # 格式化virtual.img为ext4格式
 
 cat $FILE | pbcopy # 将内容复制到粘贴板
 
-# 复制
-scp foobar.txt your_username@remotehost.edu:/some/remote/directory
-scp foo.txt bar.txt your_username@remotehost.edu:~
-scp -r foo your_username@remotehost.edu:/some/remote/directory/bar
-scp -P 2264 foobar.txt your_username@remotehost.edu:foobar.txt /some/local/directory
-scp your_username@rh1.edu:/some/remote/directory/foobar.txt your_username@rh2.edu:/some/remote/directory/
-scp your_username@remotehost.edu:/some/remote/directory/\{a,b,c\} .
-scp your_username@remotehost.edu:~/\{foo.txt,bar.txt\} .
-scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music
-scp /home/space/music/1.mp3 root@www.runoob.com:/home/root/others/music/001.mp3
-
 # -r-xr-x---
 chmod 755 test # change the permissions mode of a file 修改权限  赋予一个shell文件test.sh可执行权限，拥有者可读、写、执行，群组账号和其他人可读、执行。
 chmod  u g o a | +（加入） -（除去） =（设置） | r w x | 文档路径

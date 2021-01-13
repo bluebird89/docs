@@ -54,8 +54,6 @@ fi
   + Push
     + default = simple可能是你已经设置的配置项。它可以更轻松地将您的本地分支推送到远程，当二者分支名一样的时候。
     + followTags = true很简单。配置它以后，当你 git push 的时候可以直接将本地的 tags 提交到远程，而不用每次都加参数 --follow-tags。不知道你是不是和我一样，我如果创建了一个tag，我就基本上一定会将它推到远程的
-* GPG
-  - [keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
 
 ```sh
 git --version
@@ -88,6 +86,29 @@ echo .DS_Store >> ~/.gitignore
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 git config --global alias.ls 'log --name-status --oneline --graph'
 git config --global alias.st 'status --porcelain'
+```
+
+### Git commit with gpg
+
+* GPG
+  - [keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
+
+```sh
+gpg --full-generate-key  # 邮箱需要验证
+gpg --list-secret-keys --keyid-format LONG
+
+/Users/hubot/.gnupg/secring.gpg
+------------------------------------
+sec   4096R/3AA5C34371567BD2 2016-03-10 [expires: 2017-03-10]
+uid                          Hubot
+ssb   4096R/42B317FD4BA89E7A 2016-03-10
+
+gpg --armor --export 42B317FD4BA89E7A # add github setting gpg
+
+
+git config --global user.signingkey 3AA5C34371567BD2
+git config --global commit.gpgsign true
+git commit -S -m your commit message
 ```
 
 ## 传输协议

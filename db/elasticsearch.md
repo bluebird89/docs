@@ -1190,4 +1190,6 @@ setup.ilm.overwrite: true
 ## 参考
 
 * [elasticsearch-definitive-guide](https://github.com/elastic/elasticsearch-definitive-guide):The Definitive Guide to Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/guide/current/index.html>
+
 * [SpringBoot 操作 ElasticSearch 详解](https://mp.weixin.qq.com/s/qDbaDDDIJ81u8JY8CQJCTQ)
+* [ELK 性能优化实践](https://mp.weixin.qq.com/s/X_IUyBrlDvlH-StOAaxlGw)

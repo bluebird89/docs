@@ -1005,11 +1005,22 @@ custom_domains = manager.fanxl.cn # 绑定域名 域名需要配置好解析，�
 ssh -p remote_port username@server_addr
 ```
 
-## [inconshreveable/ngrok](https://github.com/inconshreveable/ngrok)
+## [ngrok](https://github.com/inconshreveable/ngrok)
 
-Introspected tunnels to localhost
-
+* Introspected tunnels to localhost
+* an application that gives you external (internet) access to your private systems that are hidden behind NAT or a firewall.
 * [](https://ngrok.com/):Spend more time programming. One command for an instant, secure URL to your localhost server through any NAT or firewall.
+* public URLs for sending previews to clients
+* demoing local functionality with external people.
+
+```sh
+ngrok http -auth=”youruser:yourpassword” 8181
+
+ngrok http https://localhost:8181
+
+ngrok tcp 22
+ngrok tcp 3389
+```
 
 ## 工具集
 

@@ -56,6 +56,7 @@
   - 一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的
   - 当被中继的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。
 * 缓存(Cache)：反应信息的局域存储
+* Query Strings (?)
 
 ## [跨源资源共享 cross-origin resource sharing CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
@@ -271,6 +272,20 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 * 浏览器收到响应后将其显示出来
 * 关闭连接或者为后续请求重用连接
 
+## authentication
+
+* Basic
+  - A user requests page protected by basic auth
+  - Server sends back a 401 and a WWW-Authenticate header with the value of basic
+  - The client takes his username and password–separated by a colon–and Base64 encodes it
+  - The client then sends that value in an Authorization header, like so: Authorization: Basic BTxhZGRpbjpbcGAuINMlc2FtZC==
+* Digest
+  - A user requests page protected by digest auth
+  - The server sends back a 401 and a WWW-Authenticate header with the value of digest along with a nonce value and a realm value
+  - The user concatenates his credentials with the nonce and realm and uses that as input to MD5 to produce one has (HA1)
+  - The user concatenates the method and the URI to create a second MD5 hash (HA2)
+  - The user then sends an Authorize header with the realm, nonce, URI, and the response–which is the MD5 of the two previous hashes combined
+
 ## 报文
 
 * 报文:用于 HTTP 协议交互的信息,本身是由多行（用CR+LF作换行符，即\r\n）数据构成的字符串文本
@@ -288,25 +303,24 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
   - 报文主体和首部字段之间通过一个空行分隔
   - 字段可以有多个值，不同值之间通过逗号分隔
   - 主体：请求主体中包含了要发送给 Web 服务器的数据（一般 POST 请求都会包含请求主体，GET 请求参数都在 URL 里面，请求主体一般为空），响应主体中包含了服务器返回给客户端的数据，一般是 HTML 文档或者 JSON 格式数据
-* 请求报文
-  - 请求行 request line
+* 请求报文 http requests
+  - 请求行 he Request Line: the method, the URL, the version of the protocol
     + 方法（method）:由一个动词像GET, POST 或者一个名词像OPTIONS，HEAD 来定义客户端的动作行为。通常客户端操作都是获取资源（GET方法）或者发送HTML form表单值（POST方法），在一些情况下也会有其他操作
     + 请求 URL（request-URL）:通常是上下文中元素资源的URL
     + HTTP 协议版本号
   - General Headers
-  - 请求头 HTTP Request Header 包含一些客户端环境信息,身份验证信息
-  - 空行 Entity Headers
-  - 消息主体（entity-body）请求数据 请求体即请求的正文,包含客户提交的字符串信息,表单信息等
+  - The Request Headers 请求头 [OPTIONAL]: a series of lines (one per) in the format of name, colon(:), and the value of the header. 包含一些客户端环境信息,身份验证信息
+  - A Blank Line: required, worth mentioning by itself.
+  - The Request Body [OPTIONAL]: Used in POST requests to send content to the server. 消息主体（entity-body）请求数据 请求体即请求的正文,包含客户提交的字符串信息,表单信息等
   - HTTP 1.1 后默认使用长连接，只需要一次握手即可多次传输数据
-* 响应报文
-  - 状态行 request line
+* 响应报文 http responses
+  - 状态行 The Response Line: the version of the protocol, the status code, the status code description (OK, Not Found, etc.)
     + HTTP协议版本号
     + 状态码（status code）:来告知对应请求执行成功或失败，以及失败的原因
     + 状态信息:非权威的状态码描述信息，可以由服务端自行设定
-  - general Headers
-  - Response Headers
-  - Entity Headers
-  - Message Body
+  - The Response Headers: a series of lines (one per) in the format of name, colon(:), and the value of the header.
+  - A Blank Line: required, worth mentioning by itself.
+  - The Response Body: contains the response from the server.
 
 ```
 // 源生的form提交可设置enctype="multipart/form-data"，一般表单中有文件会自动设为该值
@@ -358,7 +372,7 @@ Content-Type: text/html
 
 ## 标头
 
-* 通用标头
+* 通用标头 General
   - Date:报文创建日期 `Date: Wed, 21 Oct 2015 07:28:00 GMT` 格林威治标准时间，这个时间要比北京时间慢八个小
   - Cache-Control：控制缓存具体的行为 有一些特性是请求标头具有的，有一些是响应标头才有的。主要大类有 可缓存性、阈值性、重新验证并重新加载 和其他特性
   - Connection 决定当前事务（一次三次握手和四次挥手）完成后，是否会关闭网络连接
@@ -394,7 +408,7 @@ Content-Type: text/html
   - Expires:该字段将资源失效日期告知客户端，缓存服务器在接收到含有首部字段 Expires 的响应后，会以缓存来应答请求，在 Expires 字段值指定的时间之前，响应的副本会一直保存。当超过指定时间后，缓存服务器在请求发送过来时，会转向源服务器请求资源
     + 当首部字段 Cache-Control 有指定 max-age 指令时，比起首部字段 Expires，会优先处理 max-age 指令
   - Last-Modified:该字段指明资源最新修改的时间，一般来说，这个值就是请求 URL 指定资源被修改的时间。常常与 If-Modified-Since 字段结合使用
-* 请求标头
+* 请求标头 Request Headers
   - Host 请求头指明了服务器的域名（对于虚拟主机来说），以及（可选的）服务器监听的 TCP 端口号。如果没有给定端口号，会自动使用被请求服务的默认端口（比如请求一个 HTTP 的 URL 会自动使用 80 作为端口）`Host: developer.mozilla.org`
   - Accpet、 Accept-Language、Accept-Encoding 都是属于内容协商的请求标头
   - Accept:  会通告客户端其能够理解的 MIME 类型
@@ -476,7 +490,7 @@ Content-Type: text/html
   - Set-Cookie：设置和页面关联的 Cookie
   - 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36': 会将创建请求的浏览器和用户代理名称等信息传达给服务器
   - WWW-Authenticate：客户应该在 Authorization 头中提供什么类型的授权信息？在包含401(Unauthorized) 状态行的应答中这个头是必需的
-* 响应标头
+* 响应标头 Response Headers
   - Accept-Ranges 该字段用来告知客户端服务器是否能处理范围请求，以指定获取服务器端某个部分的资源。可指定的字段值有两种，可处理范围请求时指定其为 bytes，反之指定其为 none
   - Access-Control-Allow-Origin:指定一个来源，告诉浏览器允许该来源进行资源访问
   - Keep-Alive: Connection 非持续连接的存活时间，可以进行指定
@@ -526,9 +540,10 @@ Set-Cookie: laravel_session=eyJpdiI6InpDTWIxczdmK2hJZ1hPcWVsRU9uRUE9PSIsInZhbHVl
 Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3crNm5IZytnRzlJUW1LUT09IiwibWFjIjoiNzFiZGEzMzg1MzgyYTMyYjM0YzcyNTViZWU2NGI2MDM2NzJhMGEwNmFkYWE5ZGY4N2I5ZDA4ZWQ0NmVkZjcyOCJ9; XSRF-TOKEN=eyJpdiI6IndOeWNWVmxXVEdpZkdlWFFkMENtckE9PSIsInZhbHVlIjoiYWJNb28yMlROWE1YOEVyTnhrbmJwYjRpdHB3S2diUDBcLzI2d1ViNXpRYkxzb2pMZEZWVll0cVFoejhlNG1jdEwiLCJtYWMiOiI1NzUwMWRjYzhjMjAwMDkwMWI4NDY0ZTIzMzY2NDYwMDY1NmYzZmMyOTA3ZjM2YTRmN2FmM2U1OGU3MWQyNTVkIn0%3D; laravel_session=eyJpdiI6ImpwcWx6SGttbUlCU2dCREVyRWp1WFE9PSIsInZhbHVlIjoiU0djd0Vjc3JRZzNuWUgyUWlRSStiUURcL2RPWFpxdjBjdXRrdVRjZ1hzdDZpTGNzZWtKNXpVTTJlXC9Fbms3ZWpqIiwibWFjIjoiMmI0NmJiZWYyOGViOGI5ZDVhY2EwMjI4NjAwODYwMzg1ZGZlODY0NjExNzIzMjczMGRiMjdjNDIyMTdiNzQ1MCJ9
 ```
 
-### 请求方式 Method
+### 请求方式 request methods
 
-* GET：从服务器上获取指定的 URL 资源，只应当用于取回数据，查询字符串（名称/值对）是在请求 URL 中发送
+* GET
+  - 从服务器上获取指定的 URL 资源，只应当用于取回数据，查询字符串（名称/值对）是在请求 URL 中发送
   - 不会对服务器资源产生副作用（只是获取资源，不会对资源进行变更
   - 通过 GET 请求变更服务器资源有重大安全隐患，在开发过程中要避免
 * POST: 向指定资源提交被处理数据，查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送(对用户不可见)

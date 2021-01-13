@@ -89,6 +89,8 @@
     + 虽然是作为附录的内容，但是却是学习深入技术点的重要参考，主要是 bpftrace 工具的一览表、BCC Tools 开发、使用原生的 C 编写 BPF 和 BPF 指令集等。
     + 这部分内容面对的是希望对于 BPF 技术更加深入了解和希望参与到 BCC 工具开发的研发人员。
 
+![Alt text](../_static/bpf_optim.png "Optional title")
+
 ## sample 样例
 
 * BCC 参考 [tools](https://github.com/iovisor/bcc/tree/master/tools) 目录下全部文件
