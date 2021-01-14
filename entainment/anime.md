@@ -973,6 +973,7 @@
 * 已经灭了的狐狸劝说狸子变成人类生活
 * 开始分裂，激进派玉碎
 * 无力阻挡大势，没有了以前快乐的日子
+* 传统的失落
 
 ## [Angel Beats!](https://www.bilibili.com/bangumi/play/ss959)
 

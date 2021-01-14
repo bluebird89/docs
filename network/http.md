@@ -28,6 +28,16 @@
 ## 概念
 
 * Web 服务器会为每种要通过 MIME（Multipurpose Internet Mail Extension，多用途互联网邮件扩展）传输的资源对象都打上了 MIME 类型的数据格式标签
+* URI（Uniform Resource Identifier） 统一资源标识符就可以唯一定位互联网上的资源
+* URL（Uniform Resource Locator），即统一资源定位符，URL 其实是 URI 的一种子集，区别就是URI 定义资源，而 URL 不单定义这个资源，还定义了如何找到这个资源
+  - 协议：即通信双方指定的传输协议，应用最广的当然是本文要介绍的 http 协议，除此之外还有 ftp, mailto，file 等协议。
+  - 主机名：存放资源的服务器主机名或 IP 地址，当前有时候服务器由于安全原因还需要对用户进行认证，需要提供用户名和密码，此时需要在 hostname前加 username:password。
+  - 端口：整数，可选，省略时使用方案的默认端口，各种传输协议都有默认的端口，如 HTTP 默认用的 80 端口，HTTPS 用的 443 端口，传输层协议正是利用这些端口号识别本机中正在进行通信的应用程序，并准确地将数据传输。
+  - 路径：即资源在主机上的存放路径，一般表示主机的目录或文件地址
+  - parameter：用于指定特殊参数的可选项。
+  - Query Strings (?)
+  - query：查询字符串，可选，用于给动态网页或接口传递参数，可有多个参数，用“&”符号隔开，每个参数的名和值用“=”符号隔开。
+  - fragment：浏览器专用，用于指定网络资源中的片断，指定后打开网页可直接定位到 fragment 对应的位置。
 * Web 浏览器从服务器取回一个对象时，会去查看相关的 MIME 类型(响应头的 Content-Type 字段)，看看它能否处理
 * 连接(Connection)：一个传输层的实际环流，它是建立在两个相互通讯的应用程序之间
   - 长连接：只需一次建立就可以传输多次数据，传输完成后，只需要一次切断连接即可。在连接保持期间，如果没有数据包发送，需要双方发链路检测包。长连接的连接时长可以通过请求头中的 keep-alive 来设置
@@ -56,7 +66,6 @@
   - 一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的
   - 当被中继的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。
 * 缓存(Cache)：反应信息的局域存储
-* Query Strings (?)
 
 ## [跨源资源共享 cross-origin resource sharing CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
