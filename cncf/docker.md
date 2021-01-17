@@ -1101,6 +1101,7 @@ docker volume prune  # removes volumes that are not connected to containers (aka
   - CMD和ENTRYPOINT尽量使用json数组方式
 * 案例：自定义entrypoint脚本，接收变量进行容器化应用配置
 * [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
+* [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 ```sh
 # syntax=docker/dockerfile

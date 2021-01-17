@@ -1530,6 +1530,7 @@ set -o pipefail
   - xargs后面的命令默认是echo
     + 输入xargs按下回车以后，命令行就会等待用户输入，作为标准输入。
     + 可以输入任意内容，然后按下Ctrl d，表示输入结束，这时echo命令就会把前面的输入打印出来
+    + 如果不知道命令会变成什么样，可以使用xargs echo来看看会是什么样
   - 能够从文件的输出中读取数据
   - 能够捕获一个命令的输出，然后传递给另外一个命令
   - 参数
@@ -1538,20 +1539,20 @@ set -o pipefail
     + -p 每次执行时候询问用户确认
     + -t 打印出最终要执行的命令，然后直接执行，不需要用户确认
     + -n num 指定每次将多少项，作为命令行参数，默认是用所有的
-    + -I 指定每一项命令行参数的替代字符串将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替。
+    + -I 指定每一项命令行参数的替代字符串将xargs的每项名称，一般是一行一行赋值给 {}，可以用 {} 代替
+      * `find . -name \*.py | xargs grep some_function` `cat hosts | xargs -I{} ssh root@{} hostname`
     + -r no-run-if-empty 当xargs的输入为空的时候则停止xargs，不用再去执行了。
     + -s num 命令行的最大字符数，指的是 xargs 后面那个命令的最大命令行字符数。
-    + -L|l num 指定多少行作为一个命令行参数
+    + -L|l num 指定多少行作为一个命令行参数,限定有多少个命令
     + -d delim 分隔符，默认的xargs分隔符是回车，argument的分隔符是空格，这里修改的是xargs的分隔符。
     + -x exit的意思，配合-s使用
-    + -P 修改最大进程数，默认是1，为0时候为as many as it can
+    + -P 指定并行进程，默认是1，为0时候为as many as it can
     + -print0，指定输出的文件列表以null分隔。然后，xargs命令的-0参数表示用null当作分隔符
-* xargs find -name: 执行命令，将参数分离出来
+* `xargs find -name`: 执行命令，将参数分离出来
   - 后紧跟要执行命令
   - 参数输入
     + 通过管道输入
     + 通过命令行直接输入
-* 特别适合find命令
 
 ```sh
 cat test.txt | xargs # 多行输入单行输出

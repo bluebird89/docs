@@ -525,7 +525,7 @@ $document_uri # 同 $uri
 -x/!-x # 判断文件是否可以执行
 ```
 
-### server
+## server
 
 * http 服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 * backlog 默认位 128，1024 这个值换成自己正常的 QPS
@@ -538,7 +538,7 @@ $document_uri # 同 $uri
     - After the prefix match, nginx will then check for the regular expression location match in the order in which they are defined in the nginx configuration file.
     - So, the order in which you define the regular expression match in your configuration file is important. The moment nginx matches a regular expression location configuration, it will not look any further. So, use your important critical regular expression location match at the top of your configuration.
     - If there is no regular expression matching location is found, then Nginx will use the previously matched prefix location configuration.
-* location匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余
+* location 匹配优先级:一次请求只能匹配一个location，一旦匹配成功后，便不再继续匹配其余
     - 先匹配普通字符串，然后再匹配正则表达式
         + 普通字符串匹配顺序是根据配置中字符长度从长到短，也就是说使用普通字符串配置的location顺序是无关紧要的
         + 正则表达式按照配置文件里的顺序测试。找到第一个比配的正则表达式将停止搜索
@@ -645,6 +645,15 @@ location / {
 访问 http://localhost/img/a.tiff 会匹配上 规则 Y。
 访问 http://localhost/category/id/1111 则最终匹配到规则 F ，因为以上规则都不匹配，这个时候应该是 Nginx 转发请求给后端应用服务器，比如 FastCGI（php），tomcat（jsp），Nginx 作为反向代理服务器存在。
 ```
+
+## 连接 fastcgi
+
+* TCP
+    - 使用 TCP 端口连接 127.0.0.1:9000
+* unix domain socket
+    - 使同一台操作系统上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。
+    - Unix domain sockets 的接口和 Internet socket 很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是 POSIX 操作系统里的一种组件。
+    - 使用系统文件地址连接套接字/dev/shm/php-cgi.sock 来作为自己的身份。可以被系统进程引用。所以两个进程可以同时打开一个 Unix domain sockets 来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播
 
 ### 伪静态
 
@@ -1675,7 +1684,7 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
 ## 图书
 
-* [nginx-book](https://github.com/taobao/nginx-book) Nginx开发从入门到精通
+* [nginx-book](https://github.com/taobao/nginx-book) [Nginx开发从入门到精通](http://tengine.taobao.org/book/index.html)
 
 ## 工具
 

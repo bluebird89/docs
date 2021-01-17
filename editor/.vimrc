@@ -1,4 +1,3 @@
-
 set ruler     # 设置标尺
 set smartindent     # 开启新航时使用智能自动缩进
 set tabstop=4     # 设置缩进为4个空格

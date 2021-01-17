@@ -996,3 +996,5 @@ brew switch icu4c 62.1
 * [黑果小兵的部落阁](https://blog.daliansky.ne)
 * [Best-App](https://github.com/hzlzh/Best-App):收集&推荐优秀的 Apps/硬件/技巧/周边等
 * [gasmask](https://github.com/2ndalpha/gasmask)Hosts file manager for OS X
+
+* [Mac OS X 背后的故事](https://kb.cnblogs.com/page/114879/)

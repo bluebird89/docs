@@ -190,6 +190,8 @@ da'
 d2w
 5j
 7dw
+
+:help
 ```
 
 ## Insert
@@ -398,40 +400,6 @@ d2w
 * 分屏中的文件同步移动: 两个屏中都输入 :set scb( set scrollbind)
 * 需要解开 :set scb!
 
-## 移动 名词 指向文字块
-
-* 基本移动: hjkl （左， 下， 上， 右）
-* h|Backspace 光标左移一个字符
-* l|space 光标右移一个字符
-* k|Ctrl+p|+ 光标上移一行
-  - Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
-* j|Ctrl+n|-|Enter 光标下移一行
-  - Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
-* 词 w （下一个词）， b （词初）， e （词尾）
-* W move forward one big word
-* B move back one big word
-* w|W 下一个单词词首，如果已到行尾，则转至下一行行首
-* e|E 下一个单词至词尾
-  - ge 光标向前移动一个单词至词尾
-* b|B 光标前移一个单词至词首
-* {行数}<CR> 光标向下移动 n 行
-  - {行数}G
-* Ctrl + O 向后回退的光标移动
-* Ctrl + I 向前追赶的光标移动
-* } 至段落开头
-* { 至段落结尾 move forward one paragraph
-* ) 至句尾 move forward one sentence
-* ( 至句首
-* 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
-* 0(数字零)|<HOME> 到行首
-* ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
-* $ 至行尾
-  - 5$ 下面5行行尾
-* g_ 到本行最后一个不是blank字符的位置
-* :10 到第10行,绝对行
-* 5+|- 光标下|上移5行，相对行
-* % 移动到与当前括号匹配的括号处，包括(， [， {
-
 ## 查找
 
 * /{正则表达式}, n / N 用于导航匹配
@@ -464,6 +432,38 @@ n.
 ```
 
 ## 导航
+
+* 基本移动: hjkl （左， 下， 上， 右）
+* h|Backspace 光标左移一个字符
+* l|space 光标右移一个字符
+* k|Ctrl+p|+ 光标上移一行
+  - Ctrl + y 向上滚动一行(滚动条移动，保持位置不变)
+* j|Ctrl+n|-|Enter 光标下移一行
+  - Ctrl + e 向下滚动一行(滚动条移动，保持位置不变)
+* 词 w （下一个词）， b （词初）， e （词尾）
+* W move forward one big word
+* B move back one big word
+* w|W 下一个单词词首，如果已到行尾，则转至下一行行首
+* e|E 下一个单词至词尾
+  - ge 光标向前移动一个单词至词尾
+* b|B 光标前移一个单词至词首
+* {行数}<CR> 光标向下移动 n 行
+  - {行数}G
+* Ctrl + O 向后回退的光标移动
+* Ctrl + I 向前追赶的光标移动
+* } 至段落开头
+* { 至段落结尾 move forward one paragraph
+* ) 至句尾 move forward one sentence
+* ( 至句首
+* 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
+* 0(数字零)|<HOME> 到行首
+* ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
+* $ 至行尾
+  - 5$ 下面5行行尾
+* g_ 到本行最后一个不是blank字符的位置
+* :10 到第10行,绝对行
+* 5+|- 光标下|上移5行，相对行
+* % 移动到与当前括号匹配的括号处，包括(， [， {
 
 * 屏幕： H （屏幕首行）， M （屏幕中间）， L （屏幕底部）
 * 翻页
@@ -871,4 +871,5 @@ To install from command line: vim +PluginInstall +qall
 * [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
 * [无插件VIM编程技巧](https://coolshell.cn/articles/11312.html)
 * [vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim <http://vimwiki.github.io/>
+* [Learn Vim For the Last Time](https://danielmiessler.com/study/vim/)
 * [](https://github.com/dofy/learn-vim)

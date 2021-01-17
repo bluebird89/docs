@@ -4038,27 +4038,25 @@ sort authors.txt | uniq -c > authors-sorted.txt
 * 日常
   - 在 bash 里，使用 Ctrl-R 而不是上下光标键来查找历史命令
   - 在 bash里，使用 Ctrl-W 来删除最后一个单词，使用 Ctrl-U 来删除一行。请man bash后查找Readline Key Bindings一节来看看bash的默认热键，比如：Alt-. 把上一次命令的最后一个参数打出来，而Alt-* 则列出你可以输入的命令。
-  - 回到上一次的工作目录： cd –  （回到home是 cd ~）
-  - 使用 xargs。这是一个很强大的命令。可以使用-L来限定有多少个命令，也可以用-P来指定并行的进程数。如果你不知道你的命令会变成什么样，你可以使用xargs echo来看看会是什么样。当然， -I{} 也很好用。示例： `find . -name \*.py | xargs grep some_function` `cat hosts | xargs -I{} ssh root@{} hostname`
   - pstree -p 可以帮你显示进程树。（读过我的那篇《一个fork的面试题》的人应该都不陌生）
   - 使用 pgrep 和 pkill 来找到或是kill 某个名字的进程。 (-f 选项很有用).
   - 了解可以发给进程的信号。例如：要挂起一个进程，使用 kill -STOP [pid]. 使用 man 7 signal 来查看各种信号，使用kill -l 来查看数字和信号的对应表
-  - 使用 nohup 或  disown 如果你要让某个进程运行在后台。
-  - 在bash的脚本中，你可以使用 set -x 来debug输出。使用 set -e 来当有错误发生的时候abort执行。考虑使用 set -o pipefail 来限制错误。还可以使用trap来截获信号（如截获ctrl+c）。
+  - 使用 nohup 或  disown 如果要让某个进程运行在后台。
+  - 在bash的脚本中，可以使用 set -x 来debug输出。使用 set -e 来当有错误发生的时候abort执行。考虑使用 set -o pipefail 来限制错误。还可以使用trap来截获信号（如截获ctrl+c）。
   - 在bash 脚本中，subshells (写在圆括号里的) 是一个很方便的方式来组合一些命令。一个常用的例子是临时地到另一个目录中，例如： `(cd /some/other/dir; other-command)`
   - 在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: ${name:?error message}。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 `input_file=${1:?usage: $0 input_file}`。一个计算表达式： i=$(( (i + 1) % 5 ))。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints “foo.txt”.
   - 通过 <(some command) 可以把某命令当成一个文件。示例：比较一个本地文件和远程文件 /etc/hosts： diff /etc/hosts <(ssh somehost cat /etc/hosts)
   - 了解什么叫 “here documents” ，就是诸如 cat <<EOF 这样的东西。
   - 在 bash中，使用重定向到标准输出和标准错误。如： some-command >logfile 2>&1。另外，要确认某命令没有把某个打开了的文件句柄重定向给标准输入，最佳实践是加上 “</dev/null”，把/dev/null重定向到标准输入。
-  - 使用 man ascii 来查看 ASCII 表。
+  - 使用 man ascii 来查看 ASCII 表
   - 在远端的 ssh 会话里，使用 screen 或 dtach 来保存你的会话。（参看《28个Unix/Linux的命令行神器》）
   - 要来debug Web，试试curl 和 curl -I 或是 wget 。我觉得debug Web的利器是firebug，curl和wget是用来抓网页的，呵呵。
   - 把 HTML 转成文本： lynx -dump -stdin
-  - 如果你要处理XML，使用 xmlstarlet
+  - 如果要处理XML，使用 xmlstarlet
   - 对于 Amazon S3， s3cmd 是一个很方便的命令（还有点不成熟）
-  - 在 ssh中，知道怎么来使用ssh隧道。通过 -L or -D (还有-R) ，翻墙神器。
-  - 你还可以对你的ssh 做点优化。比如，.ssh/config 包含着一些配置：避免链接被丢弃，链接新的host时不需要确认，转发认证，以前使用压缩（如果你要使用scp传文件）：
-  - 如果你有输了个命令行，但是你改变注意了，但你又不想删除它，因为你要在历史命令中找到它，但你也不想执行它。那么，你可以按下 Alt-# ，于是这个命令关就被加了一个#字符，于是就被注释掉了。
+  - 在 ssh 中，知道怎么来使用ssh隧道。通过 -L or -D (还有-R) ，翻墙神器。
+  - 可以对 ssh 做点优化。比如，.ssh/config 包含着一些配置：避免链接被丢弃，链接新的host时不需要确认，转发认证，以前使用压缩（如果你要使用scp传文件）：
+  - 如果输了个命令行，但是改变注意了，但又不想删除它，因为要在历史命令中找到它，但也不想执行它。按下 Alt-# ，于是这个命令关就被加了一个#字符，于是就被注释掉了。
 * 数据处理
   - 了解 sort 和 uniq 命令 (包括 uniq 的 -u 和 -d 选项).
   - 了解用 cut, paste, 和 join 命令来操作文本文件。很多人忘了在cut前使用join。
@@ -4068,24 +4066,24 @@ sort authors.txt | uniq -c > authors-sorted.txt
   - 使用 shuf 来打乱一个文件中的行或是选择文件中一个随机的行。
   - 了解sort命令的选项。了解key是什么（-t和-k）。具体说来，你可以使用-k1,1来对第一列排序，-k1来对全行排序。
   - Stable sort (sort -s) 会很有用。例如：如果你要想对两例排序，先是以第二列，然后再以第一列，那么你可以这样： sort -k1,1 | sort -s -k2,2
-  - 我们知道，在bash命令行下，Tab键是用来做目录文件自动完成的事的。但是如果你想输入一个Tab字符（比如：你想在sort -t选项后输入<tab>字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入<tab>字符了。当然，你也可以使用$’\t’。
-  - 如果你想查看二进制文件，你可以使用hd命令（在CentOS下是hexdump命令），如果你想编译二进制文件，你可以使用bvi命令（http://bvi.sourceforge.net/ 墙）
+  - 输入一个Tab字符（比如：你想在sort -t选项后输入<tab>字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入<tab>字符了。当然，也可以使用$’\t’。
+  - 如果想查看二进制文件，可以使用hd命令（在CentOS下是hexdump命令），如果想编译二进制文件，可以使用bvi命令（http://bvi.sourceforge.net/ 墙）
   - 另外，对于二进制文件，你可以使用strings（配合grep等）来查看二进制中的文本。
   - 对于文本文件转码，你可以试一下 iconv。或是试试更强的 uconv 命令（这个命令支持更高级的Unicode编码）
-  - 如果你要分隔一个大文件，你可以使用split命令（split by size）和csplit命令（split by a pattern）
+  - 分隔一个大文件使用split命令（split by size）和csplit命令（split by a pattern）
 * 系统调试
-  - 如果你想知道磁盘、CPU、或网络状态，你可以使用 iostat, netstat, top (或更好的 htop), 还有 dstat 命令。你可以很快地知道你的系统发生了什么事。关于这方面的命令，还有iftop, iotop等（参看《28个Unix/Linux的命令行神器》）
+  - 如果想知道磁盘、CPU、或网络状态，使用 iostat, netstat, top (或更好的 htop), 还有 dstat 命令。你可以很快地知道你的系统发生了什么事。关于这方面的命令，还有iftop, iotop等（参看《28个Unix/Linux的命令行神器》）
   - 要了解内存的状态，你可以使用free和vmstat命令。具体来说，你需要注意 “cached” 的值，这个值是Linux内核占用的内存。还有free的值。
   - Java 系统监控有一个小的技巧是，你可以使用kill -3 <pid> 发一个SIGQUIT的信号给JVM，可以把堆栈信息（包括垃圾回收的信息）dump到stderr/logs。
   - 使用 mtr 会比使用 traceroute 要更容易定位一个网络问题。
   - 如果你要找到哪个socket或进程在使用网络带宽，你可以使用 iftop 或 nethogs。
   - Apache的一个叫 ab 的工具是一个很有用的，用quick-and-dirty的方式来测试网站服务器的性能负载的工作。如果你需要更为复杂的测试，你可以试试 siege。
-  - 如果你要抓网络包的话，试试 wireshark 或 tshark。
-  - 了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，你可以使用-p选项来attach上任意一个进程
+  - 如果要抓网络包的话，试试 wireshark 或 tshark。
+  - 了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，可以使用-p选项来attach上任意一个进程
   - 了解用ldd命令来检查相关的动态链接库。注意：ldd的安全问题
   - 使用gdb来调试一个正在运行的进程或分析core dump文件。参看我写的《GDB中应该知道的几个调试方法》
   - 学会到 /proc 目录中查看信息。这是一个Linux内核运行时记录的整个操作系统的运行统计和信息，比如： /proc/cpuinfo, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps.
-  - 如果你调试某个东西为什么出错时，sar命令会有用。它可以让你看看 CPU, 内存, 网络, 等的统计信息。
+  - 如果调试某个东西为什么出错时，sar命令会有用。可以让看看 CPU, 内存, 网络, 等的统计信息。
   - 使用 dmesg 来查看一些硬件或驱动程序的信息或问题
 
 ```sh
@@ -4101,7 +4099,6 @@ cat a b b | sort | uniq -u > c
 
 * [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 来自IBM的教程，用于给那些想学习Linux的人
 * [Linux Desktop 101](https://www.lifewire.com/learn-how-linux-4102755):14周课时的教程，主要用于学校里教学生如何在一个PC上运行一个Linux操作系统
-* [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html) – Machtelt Garrels 的一个格式相当不错的教程
 * [Getting Started with Linux](https://www.linux.org/lessons/beginner/index.html) – 来自Linux Online 的20课时的用于新手的教程
 * [IBM’s Technical Library](https://www.ibm.com/developerworks/views/linux/libraryview.jsp?type_by=Tutorials) – IBM’s Technical Library 提供的一组给高级Linux用户的教程
 * [Linux-Tutorial](https://github.com/judasn/Linux-Tutorial):《Java 程序员眼中的 Linux》
@@ -4166,6 +4163,7 @@ cat a b b | sort | uniq -u > c
 * [HAPPY HACKING LINUX](https://azer.bike/happy-hacking-linux/)
 * [linuxkit](https://github.com/linuxkit/linuxkit):A toolkit for building secure, portable and lean operating systems for containers
 * [linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
+* [Linux Performance](http://www.brendangregg.com/linuxperf.html)
 * [linux-perf-examples](https://github.com/feiskyer/linux-perf-examples):《Linux 性能优化实战》案例
 * [test-your-sysadmin-skills](https://github.com/trimstray/test-your-sysadmin-skills):A collection of *nix Sysadmin Test Questions and Answers. Test your knowledge and skills in different fields with these Q/A.
 * [linux-insides)](https://github.com/0xAX/linux-insides) A little bit about a linux kernel https://0xax.gitbooks.io/linux-insides/content/index.html
@@ -4174,10 +4172,11 @@ cat a b b | sort | uniq -u > c
 * [VITUX](https://vitux.com) Linux Compendium
 * [Linux From Scratch](http://www.linuxfromscratch.org/):a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
 * [Borg+Vorta is finally a usable backup solution for Linux desktop](https://simon-frey.com/blog/borgvorta-is-finally-a-usable-backup-solution-for-linux-desktop/)
-* [Linux Performance](http://www.brendangregg.com/linuxperf.html)
-* [linux-bpf-learning](https://github.com/nevermosby/linux-bpf-learning):learn how to use BPF/eBPF
-* [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
+* [The Linux Documentation Project](https://tldp.org/)
+  - [From DOS/Windows to Linux HOWTO](https://tldp.org/HOWTO/DOS-Win-to-Linux-HOWTO.html)
+  - [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html)
 
+* [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
 * [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)
 * [linux 内存管理初探](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636296&idx=1&sn=48ca904ca1e71ffb467fb0befdd39853&chksm=87a482c5b0d30bd3da8d6fba90d8eb17438103806bb99d20c8713dd67af7929833ceea7502ab)

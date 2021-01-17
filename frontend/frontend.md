@@ -829,8 +829,6 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
   - 服务器 cpu 过高问题，因为现在页面结构是在服务端以 renderToString 的方式输出，所以页面请求路由会涉及到大量的计算。这就会导致如果页面并发高一点的话，会出现 cpu 过高的问题。
   - 在服务端可没有什么 window 、 document 对象，这些东西也需要去 hook 掉；在 React 应用中，componentDidMount 等生命周期函数也不会在服务端触发；定时器记得及时释放，否则可能会导致内存泄露的风险！
   - 确定要用 node 做服务端渲染的话，建议应该用一些开源成熟的框架。比如在 react 体系下比较有代表性的 next.js， vue 体系下的 Nuxt.js
-* [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
-* [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
 
 ## 实例
 
@@ -894,6 +892,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [front-end-guide](https://github.com/grab/front-end-guide)📚 Study guide and introduction to the modern front end stack.
 * [Front-End-Checklist](https://github.com/thedaviddias/Front-End-Checklist):🗂 The perfect Front-End Checklist for modern websites and meticulous developers <https://frontendchecklist.io>
 * [Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
+* [奇舞周刊](https://weekly.75.team/)
 * [frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
 * [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 
@@ -901,8 +900,6 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
 - [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
 
-* [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
-* [dwqs/blog](https://github.com/dwqs/blog)
 * [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 * [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
 * [Web前端知识体系精简](http://www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)
@@ -910,5 +907,11 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [木易杨前端进阶](https://muyiy.cn/blog/)
 * [司徒正美](link)
 * [张鑫旭](https://www.zhangxinxu.com/)
+
 * [五年面试，三年模拟](https://juejin.im/post/5ca0425e51882567ce181037)
 * [校招社招必备核心前端面试问题与详细解答](https://segmentfault.com/a/1190000019758067)
+
+* [前端性能优化之加载技术](https://juejin.im/post/59b73ef75188253db70acdb5)
+* [SSR VR CSR](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8) 什么是服务端渲染
+* [jawil/blog](https://github.com/jawil/blog):Too young, too simple. Sometimes, naive & stupid 🐌
+* [dwqs/blog](https://github.com/dwqs/blog)

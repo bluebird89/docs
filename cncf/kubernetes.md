@@ -908,11 +908,10 @@ kubectl rollout pause deployment my-go-app
 
 * Ingress：从集群外部访问集群内部服务的入口。比如官方维护的 Ingress Nginx。ingress traefik、ingress haproxy等
 
-* Secret 存储了敏感数据,解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret 可以以Volume或者环境变量的方式使用。 Secret有三种类型：
+* Secret 存储了敏感数据,解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。Secret 可以以Volume或者环境变量的方式使用,有三种类型：
   - Service Account ：用来访问Kubernetes API，由Kubernetes自动创建，并且会自动挂载到Pod的/run/secrets/kubernetes.io/serviceaccount目录中
   - Opaque ：base64编码格式的Secret，用来存储密码、密钥等
   - kubernetes.io/dockerconfigjson ：用来存储私有docker registry的认证信息
-
 * Label 标签
   - 一对key/value被关联到对象上比如Pod，标签的使用倾向于能够标识对象的特点，并且对用户而言是有意义的，但对内核系统是没有直接意义
   - 可以用来划分特定组的对象，标签可以在创建一个对象的时候直接给与 也可以在后期随时修改，每一个对象可以拥有多个标签，但是key值必须是唯一的
@@ -1007,7 +1006,6 @@ kubectl rollout pause deployment my-go-app
     + rbd
     + cephfs
     + gitRepo
-    + secret
     + persistentVolumeClaim
     + downwardAPI
     + projected
