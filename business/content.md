@@ -4,14 +4,14 @@
 
 ## 内容
 
-* Wikipedia
-* Quora
+* [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+* [Medium](https://medium.com/)
+* [Quora](https://www.quora.com/)
+* [Reddit](https://www.reddit.com/)
+* [BuzzFeed](https://www.buzzfeed.com/)
+* [Pinterest](https://www.pinterest.com/)
+* [tumblr](https://www.tumblr.com/)
 * Imgur
-* Reddit
-* News:BuzzFeed
-* Pinterest
-* 得到
-* [极客时间](https://github.com/shawjia/geektime-desktop):极客时间桌面版 for macOS/Windows/Debain
 * 掘金
 * 开发者头条
 * 码农头条
@@ -21,8 +21,10 @@
 * 知乎
 * [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
 * [简书](http://www.jianshu.com/)
-* [Medium]():优质写作社区
 * [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+
+* 得到
+* [极客时间](https://github.com/shawjia/geektime-desktop)
 
 ## 新闻
 

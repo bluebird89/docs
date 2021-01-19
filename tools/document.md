@@ -191,3 +191,4 @@ a new kind of data science notebook. Jupyter-compatible with real-time collabora
 
 * [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
 * [myslide](https://myslide.cn)
+* [Semantic Versioning](https://semver.org/)

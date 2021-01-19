@@ -26,3 +26,4 @@
 ## 工具
 
 * [Bugzilla](https://www.bugzilla.org/)
+* [CrashRpt](http://crashrpt.sourceforge.net/docs/html/index.html)

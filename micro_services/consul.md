@@ -35,7 +35,7 @@ export PATH="/Users/sunqiang/go/tools:$PATH"
 
 ## 服务
 
-* 集群是由N个SERVER，加上M个CLIENT组成的。不管是SERVER还是CLIENT，都是consul的一个节点，所有的服务都可以注册到这些节点上，实现服务注册信息的共享
+* 集群是由N个SERVER，加上M个CLIENT组成的。不管是SERVER还是CLIENT，都是consul的一个节点，所有的服务都可以注册到这些节点上，实现服务注册信息共享
 * CLIENT:客户端, 无状态, 将 HTTP 和 DNS 接口请求转发给局域网内的服务端集群
 * SERVER:保存配置信息, 高可用集群, 在局域网内与本地客户端通讯, 通过广域网与其他数据中心通讯. 每个数据中心的 server 数量推荐为 3 个或是 5 个.
 * 组件

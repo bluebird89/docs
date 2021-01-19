@@ -239,7 +239,9 @@
   - [Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 <https://learningsicp.github.io>
   - [book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
   - [video lecture](http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video-lectures/)
-  - [Brian Harvey’s Berkeley CS 61A](https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter)
+  - [Brian Harvey’s Berkeley CS 61A](https://archive.org/details/ucberkeley-webcast-PL3E89002AA9B9879E?sort=titleSorter) <https://inst.eecs.berkeley.edu/~cs61a/fa19/>
+  - [CS 61A: Structure and Interpretation of Computer Programs](https://cs61a.org/)
+  - [Composing Programs](http://www.composingprograms.com/)
   * [SICP-answers](https://github.com/huangz1990/SICP-answers):SICP 解题集 <http://sicp.readthedocs.org/>
 * [Computer Systems: A Programmer's Perspective CSAPP 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html) 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
   - [视频](https://www.bilibili.com/video/av31289365)
@@ -252,6 +254,8 @@
 * [Bottom Up Computer Science](https://github.com/ianw/bottomupcs) <http://www.bottomupcs.com>
 * The Encyclopedia of Human-Computer Interaction
 * [计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)
+* [Introduction to Computer Organization with x86-64 Assembly Language & GNU/Linux](http://bob.cs.sonoma.edu/IntroCompOrg-x64/book.html)
+* [Introduction to Computing Explorations in Language, Logic, and Machines](https://www.cs.virginia.edu/~evans/ctbook/)
 
 ## 项目
 

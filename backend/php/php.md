@@ -209,12 +209,15 @@ php -d opcache.jit=1205 -dopcache.jit_debug=0x01
   - 子进程结束以后, 内核会负责回收资源
   - 请求之间互不干涉，子进程异常退出不会导致整个进程Thread退出. 父进程还有机会重建流程
 * 实现了一个虚拟机 Zend VM，将可读脚本编译成虚拟机理解的指令，也就是操作码，这个执行阶段就是“编译时（Compile Time）”；在“运行时（Runtime）”执行阶段，虚拟机 Zend VM 会执行这些编译好的操作码
-* PHP 代码 => Token => 抽象语法树 => Opcodes => 执行
-  - 源代码通过词法分析得到 Token： Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义
-  - 基于语法分析器将 Token 转换成抽象语法树（AST）：Token 就是一个个的词块，但是单独的词块不能表达完整的语义，还需要借助一定的规则进行组织串联。所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。 AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
+* PHP 源代码 => Token => 抽象语法树 => Opcodes => 执行
+  - 通过词法分析得到 Token： Token 是 PHP 代码被切割成的有意义的标识。PHP7 一共有 137 种 Token，在 zend_language_parser.h 文件中做了定义
+  - 基于语法分析器将 Token 转换成抽象语法树（AST）
+    + Token 就是一个个词块，但是单独的词块不能表达完整的语义，还需要借助一定规则进行组织串联,所以就需要语法分析器根据语法匹配 Token，将 Token 进行串联。
+    + 语法分析器串联完 Token 后的产物就是抽象语法树（AST，Abstract Syntax Tree）。
+    + AST 是 PHP7 版本的新特性，之前版本的 PHP 代码的执行过程中是没有生成 AST 这一步的。它的作用主要是实现了 PHP 编译器和解释器的解耦，提升了可维护性。
   - 语法树转换成 Opcode
-  - 执行 Opcodes： opcodes 是 opcode 的集合形式，是 PHP 执行过程中的中间代码
-* 开启 opcache：指将 opcodes 进行缓存。通过省去从源码到 opcode 的阶段，引擎直接执行缓存好的 opacode，以提升性能
+  - 执行 Opcodes： opcodes 是 opcode 的集合形式，是 PHP 执行过程中中间代码
+* 开启 opcache：将 opcodes 进行缓存。通过省去从源码到 opcode 阶段，引擎直接执行缓存好的 opacode，以提升性能
 * 四层体系构成，从上到下依次
   - 上层应用:程序员编写的PHP程序，无论是 Web 应用还是 Cli 方式运行的应用
   - SAPI Server Application Programming Interface) 服务端应用编程接口：通过一系列钩子函数使得PHP可以和外围交换数据
@@ -3387,6 +3390,7 @@ open http://127.0.0.1:8000
 * [php architect Magazine](https://www.phparch.com/magazine/)
 * [PHP Best Practices](https://phpbestpractices.org/)
 * [PHP7-Data-Structures-and-Algorithms](https://github.com/PacktPublishing/PHP7-Data-Structures-and-Algorithms):PHP 7 Data Structures and Algorithm, published by Packt
+* [Hacking with PHP](http://www.hackingwithphp.com/)
 
 ## PHP内核
 

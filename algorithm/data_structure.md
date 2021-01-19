@@ -820,6 +820,7 @@ AVL 是一种高度平衡的二叉树，所以通常的结果是，维护这种�
 
 * [数据结构(上)(自主模式)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)
 * [数据结构(下)](http://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184_2X+sp)
+* [CS 61B Data Structures](https://people.eecs.berkeley.edu/~jrs/61b/)
 
 ## 参考
 

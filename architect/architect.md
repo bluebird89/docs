@@ -605,6 +605,7 @@ service UserService {
 * [from_coder_to_expert](https://github.com/0voice/from_coder_to_expert):2019年最新总结，从程序员到CTO，从专业走向卓越，分享大牛企业内部pdf与PPT
 * [awesome-scalability](https://github.com/binhnguyennus/awesome-scalability):An updated and curated list of selected readings to illustrate Scalability, Availability, and Stability Design Patterns in Back-end Development.
 * [fast](https://github.com/microsoft/fast):The adaptive interface system for modern web experiences. <https://www.fast.design/>
+* [A few thoughts on the role of software architects](http://joeduffyblog.com/2008/10/02/a-few-thoughts-on-the-role-of-software-architects/)
 
 * [“构建”世界的能力-架构能力](https://mp.weixin.qq.com/s/Qw8TEIssMwrE9l2Y8BzjaA)
 * [最小可用架构](https://mp.weixin.qq.com/s/rZWxtVyJjgiUBPeY5gPqOA)

@@ -23,7 +23,7 @@ Build cross-platform desktop apps with JavaScript, HTML, and CSS <https://electr
 ## 工具
 
 * [fbs](https://github.com/mherrmann/fbs):Electron alternative based on Python and Qt <https://build-system.fman.io>
-* [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate):Live editing development on desktop app
+* [electron-react-boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate):A Foundation for Scalable Cross-Platform Apps https://electron-react-boilerplate.js.org/
 * [devtron](https://github.com/electron/devtron):An Electron DevTools Extension <http://electron.atom.io/devtron>
 * [electron-pdf](https://github.com/fraserxu/electron-pdf)：A command line tool to generate PDF from URL, HTML or Markdown files.
 * [photon](https://github.com/connors/photon):The fastest way to build beautiful Electron apps using simple HTML and CSS <http://photonkit.com>

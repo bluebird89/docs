@@ -1959,6 +1959,7 @@ try {
 * [terser](https://github.com/terser/terser) 🗜 JavaScript parser, mangler and compressor toolkit for ES6+ https://terser.org/
 * [functional-javascript-workshop](https://github.com/timoxley/functional-javascript-workshop):A functional javascript workshop. No libraries required (i.e. no underscore), just ES5.
 * [jstraining](https://github.com/ruanyf/jstraining)
+* [Building Front-End Web Apps with Plain JavaScript](https://web-engineering.info/tech/JsFrontendApp/book/)
 
 ## 项目
 
@@ -1990,6 +1991,7 @@ try {
 * 《JavaScript设计模式》
 * 《JavaScript设计模式与开发实践》
 * [Eloquent JavaScript](<http://eloquentjavascript.net/): Marijin Haverbeke
+* [Speaking JavaScript](http://speakingjs.com/es5/)
 
 ## 资源
 

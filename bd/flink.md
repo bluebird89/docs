@@ -7,6 +7,10 @@
 
 * 《Flink基础教程》 作者：埃伦·弗里德曼 , 科斯塔斯·宙马斯 译者：王绍翾
 
+## 工具
+
+* [Ververica](https://www.ververica.com/) The Enterprise Stream Processing Platform by the Original Creators of Apache Flink
+
 ## 参考
 
 * [flink-doc-zh](https://github.com/apachecn/flink-doc-zh):Apache FLink 中文文档 <http://flink.apachecn.org>

@@ -424,4 +424,3 @@ script: phpunit -v
 * [ops_doc](https://github.com/liquanzhou/ops_doc):运维简洁实用手册
 * [digitalocean tutorials](https://www.digitalocean.com/community/tutorials)
 * [development-guide](https://github.com/18F/development-guide):A set of guidelines and best practices for an awesome engineering team
-* [Semantic Versioning](https://semver.org/)

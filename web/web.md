@@ -362,6 +362,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 ## 教程
 
 * [Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners)
+* [The Complete Web Developer Course 2.0](https://www.udemy.com/course/the-complete-web-developer-course-2/)
 
 ## 图书
 

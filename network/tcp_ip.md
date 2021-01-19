@@ -13,7 +13,7 @@
   - IP 负责将包发送至接受者
 * RTT：“We define the round-trip time, which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
 
-## application layer 即应用层
+## application layer 应用层
 
 * 为了解决某一类应用问题而生的，每一个服务需要用不同的协议，规定应用进程在通信时所遵循的协议
 * 规定应用程序的数据格式
@@ -778,11 +778,11 @@ lsmod | grep bbr
 
 ![TCP与UDP对比](../_static/TCPvsUDP.png)
 
-## Internet layer: 网络层
+## Internet layer 网络层
 
-* IP 协议即处于这一层，提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，並具有一定的拥塞控制和流量控制的能力。相当于传送邮件时需要地址一般重要
 * 作用：实现主机与主机之间的通信，也叫点对点（end to end）通信
 * IP (网际协议)：计算机之间通信,无连接的通信协议
+  - 提供路由和寻址的功能，使两终端系统能够互连且决定最佳路径，並具有一定的拥塞控制和流量控制的能力
   - 不会占用两个正在通信的计算机之间的通信线路。这样，IP 就降低了对网络线路的需求
   - 每条线可以同时满足许多不同的计算机之间的通信需要
   - 通过 IP，消息（或者其他数据）被分割为小的独立的包，并通过因特网在计算机之间传送

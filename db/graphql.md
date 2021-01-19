@@ -267,6 +267,7 @@ query {
 
 * [GitHub GraphQL API](https://developer.github.com/v4/explorer/) <https://developer.github.com/v4/>
 * [vue-graphql-demo](https://github.com/JscramblerBlog/vue-graphql-demo)
+* [modern-graphql-tutorial](https://github.com/ian13456/modern-graphql-tutorial)
 
 ## 工具
 

@@ -2577,6 +2577,7 @@ Python 实现的算法和设计模式。
 * [c9-python-getting-started](https://github.com/microsoft/c9-python-getting-started):Sample code for Channel 9 Python for Beginners course
 * [essential-python-resources](https://x-team.com/blog/essential-python-resources/)
 * [python_koans](https://github.com/gregmalcolm/python_koans)Python Koans - Learn Python through TDD
+* [Real Python Tutorials](https://realpython.com/)
 
 ## 图书
 
@@ -2588,7 +2589,7 @@ Python 实现的算法和设计模式。
 * Python编程 从入门到实践 Python Crash Course
 * 流畅的Python Fluent Python
 * Python 性能分析与优化
-* [The Hitchhiker's Guide to Python](http://docs.python-guide.org/en/latest/)：旅行者的Python学习指南。
+* [The Hitchhiker's Guide to Python](https://github.com/realpython/python-guide)：Python best practices guidebook, written for humans.<https://docs.python-guide.org/>
 * Python 高性能编程
 * [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
 * [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
@@ -2598,8 +2599,7 @@ Python 实现的算法和设计模式。
 * 《Python源码剖析》
 * python之禅
 * 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
-* 《[Python Cookbook（第3版）](https://www.amazon.cn/gp/product/B00WKR1OKG)》
-  - [Python 3 cookbook](https://python3-cookbook.readthedocs.io/zh_CN/latest/)
+* [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/)
 * 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
 * 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
 * 《[Python核心编程（第3版）](https://www.amazon.cn/gp/product/B01FQAS0KK)》
@@ -2614,6 +2614,7 @@ Python 实现的算法和设计模式。
 * Python与量化投资从基础到实践
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)
 * [Test-Driven Web Development with Python](https://www.obeythetestinggoat.com/pages/book.html#toc)
+* [Research Software Engineering with Python](https://merely-useful.github.io/py-rse/)
 
 ## 工具
 

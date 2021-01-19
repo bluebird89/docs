@@ -1937,9 +1937,9 @@ External commands:
   - [sourcetree](https://www.sourcetreeapp.com/)
   - [TortoiseGit](https://tortoisegit.org/) overlay icons showing the file status, a powerful context menu for Git and much more!
   - [GitHawk](https://github.com/GitHawkApp/GitHawk):A GitHub project manager app for iOS. <http://githawk.com>
+  - [GitKraken](https://www.gitkraken.com/)Legendary Git GUI client for Windows, Mac & Linux
   - Linux
     + [SmartGit](https://www.syntevo.com/)
-    + [GitKraken](https://www.gitkraken.com/)
     + Git Cola
 
 ## 参考

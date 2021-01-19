@@ -55,6 +55,7 @@ brew install vim
 * [vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
 * [macvim](https://github.com/macvim-dev/macvim)
+* [spf13](http://vim.spf13.com/)The Ultimate Vim Distribution
 * [b4winckler/macvim](https://github.com/b4winckler/macvim) Vim - the text editor - for Mac OS X
 * [maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
   - ,d brings up NERDTree, a sidebar buffer for navigating and manipulating files

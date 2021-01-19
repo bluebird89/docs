@@ -781,6 +781,7 @@ yarn install node-sass
 
 ## 教程
 
+* [nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list <https://twitter.com/nodepractices/>
 * [Node.js 教程](https://github.com/wangdoc/node-tutorial)
 * [The Node Beginner Book](https://www.nodebeginner.org/index-zh-cn.html)
 * [node-practice](https://github.com/ElemeFE/node-practice):Node.js 实践教程
@@ -858,5 +859,4 @@ yarn install node-sass
 * [Guides](https://nodejs.org/en/docs/guides/)
 * [awesome-nodejs](https://github.com/sindresorhus/awesome-nodejs)⚡ Delightful Node.js packages and resources https://node.cool/
 * [Node.js v11.6.0 Documentation](https://nodejs.org/api/)
-* [nodebestpractices](https://github.com/goldbergyoni/nodebestpractices):white_check_mark The largest Node.js best practices list <https://twitter.com/nodepractices/>
 * [NodeJS的代码调试和性能调优](http://www.cnblogs.com/hustskyking/p/how-to-build-a-https-server.html)

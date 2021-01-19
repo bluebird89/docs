@@ -34,10 +34,6 @@ WordPress, Git-ified. Synced via SVN every 15 minutes, including branches and ta
 
 The JavaScript and API powered WordPress.com <https://developer.wordpress.com/calypso/>
 
-## 参考
-
-* [kinsta](https://kinsta.com/):<https://kinsta.com/resources/>
-
 ## 工具
 
 * [VVV](https://github.com/Varying-Vagrant-Vagrants/VVV):An open source Vagrant configuration for developing with WordPress <https://varyingvagrantvagrants.org>
@@ -57,3 +53,9 @@ The JavaScript and API powered WordPress.com <https://developer.wordpress.com/ca
 * <https://github.com/roots/bedrock>
 * <https://github.com/wpscanteam/wpscan>
 * <https://wp-cli.org/>
+
+## 参考
+
+* [Automattic](https://automattic.co)
+* [kinsta](https://kinsta.com/):<https://kinsta.com/resources/>
+

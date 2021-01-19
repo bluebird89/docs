@@ -984,3 +984,5 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
 
 * [The Agile Coach](https://www.atlassian.com/agile)
 * [AGILE FLUENCY PROJECT](https://www.agilefluency.org/)
+* [standups](https://standups.io/) Talk to your team using video & voice clips.
+

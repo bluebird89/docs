@@ -129,6 +129,14 @@ bytes 类型提供的操作和 str 一样，支持分片、索引、基本数值
 
 ![字符与索引的对应关系](../_static/base64_string.jpg "Optional title")
 
+```sh
+openssl base64 -in <infile> -out <outfile>
+
+echo -n 'input' | openssl base64
+
+openssl base64 <ENTER> [type input] <CTRL+D>
+```
+
 ## 信息论
 
 * 狗狗狗狗猫猫鱼鸟

@@ -329,6 +329,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 课程
 
+* [CMU 15-721 Advanced Database Systems](https://15721.courses.cs.cmu.edu/spring2020/)
 * [《数据库系统概念》](https://www.bilibili.com/video/av52007695)
 
 ## 图书
