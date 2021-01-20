@@ -43,6 +43,8 @@
 * 键盘绑定：全局键盘绑定文件默认为/etc/inputrc，可以在主目录创建自己的键盘绑定文件.inputrc文件。如果定义了这个文件，需要在其中加入`$include /etc/inputrc`，保证全局绑定不会被遗漏
   - "\C-t":"pwd\n" 将Ctrl + t绑定为运行pwd命令
 * alias
+  - `alias -s txt=vscode` 指定打开扩展类型的程序
+  - -g 全局别名，允许为命令的任何部分指定替代项 `alias -g G=' | grep'`
   - `alias c='clear'`
   - `unalias aliasname`
   - disable
@@ -1679,12 +1681,13 @@ ls -l my_script # 过滤输出列表
   - plugin manager
     + [antigen](https://github.com/zsh-users/antigen):The plugin manager for zsh. <http://antigen.sharats.me>
     + [zplug](https://github.com/zplug/zplug):🌺 A next-generation plugin manager for zsh `curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh`
-    + [](https://github.com/getantibody/antibody) The fastest shell plugin manager.
+    + [antibody](https://github.com/getantibody/antibody) The fastest shell plugin manager http://getantibody.github.io/
   - [Overview](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins-Overview)
   - custom
     + [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)：Fish shell like syntax highlighting for Zsh.
     + [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions):Fish-like autosuggestions for zsh
     + [pure](https://github.com/sindresorhus/pure):Pretty, minimal and fast ZSH prompt `npm install --global pure-prompt`
+    + [z](https://github.com/rupa/z) z - jump around
 * [Theme](~/.oh-my-zsh/themes)
   - agnoster
   - cloud

@@ -98,6 +98,12 @@ export LANG=en_US.UTF-8
 unset GEM_HOME
 # [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
+## History command configuration
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt HIST_IGNORE_ALL_DUPS # ignore duplicated commands history list
+setopt SHARE_HISTORY # share command history data
+
 . /usr/share/autojump/autojump.sh
 
 # export DYLD_LIBRARY_PATH=/usr/local/opt/mysql/lib:$DYLD_LIBRARY_PATH

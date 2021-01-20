@@ -842,6 +842,7 @@ yarn install node-sass
   - [faker.js](https://github.com/Marak/faker.js):generate massive amounts of realistic fake data in Node.js and the browser
 * [date-fns](https://github.com/date-fns/date-fns): hourglass_flowing_sand Modern JavaScript date utility library hourglass
 * [pennywise](https://github.com/kamranahmedse/pennywise):Cross-platform application to open anything in a floating window
+* [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client)Google's officially supported Node.js client library for accessing Google APIs. Support for authorization and authentication with OAuth 2.0, API Keys and JWT (Service Tokens) is included. https://googleapis.dev/nodejs/googleapis/latest/
 
 * [docker-node](https://github.com/nodejs/docker-node):Official Docker Image for Node.js 🐳 🐢 🚀 https://hub.docker.com/_/node/
 * [bleno](https://github.com/noble/bleno):A Node.js module for implementing BLE (Bluetooth Low Energy) peripherals

@@ -396,7 +396,6 @@ def backtrack(路径, 选择列表):
 * 《数据结构与算法 JavaScript 描述》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
 * 算法图解
-*
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 * [Problem Solving with Algorithms and DataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)
@@ -429,6 +428,7 @@ def backtrack(路径, 选择列表):
 * [VisuAlgo](https://visualgo.net/en):visualising data structures and algorithms through animation
 * [algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
 * [](https://github.com/overnote/over-algorithm)
+* [](https://www.techiedelight.com/)
 
 * <https://www.geekxh.com/>
 * [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)

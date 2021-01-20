@@ -78,7 +78,7 @@
   - 各个子系统之间的应该如何集成
   - 两个系统之间的集成涉及到基础设施和不同领域概念在两个系统之间的翻译
 * 通用语言
-  - 将一个限界上下文中的所有概念，包括名词、动词和形容词全部集中在一起，我们便为该限界上下文创建了一套通用语言
+  - 将一个限界上下文中的所有概念，包括名词、动词和形容词全部集中在一起，便为该限界上下文创建了一套通用语言
 * 限界上下文（Bounded Context）
   - 在一个领域/子域中，创建一个概念上的领域边界，在这个边界中，任何领域对象都只表示特定于该边界内部的确切含义.和领域具有一对一的关系
   - 防腐层:负责与外部服务提供方打交道，还负责将外部概念翻译成自己的核心领域能够理解的概念
@@ -414,9 +414,9 @@ public class OrderCreatedEvent extends OrderEvent {
 ## 图书
 
 * 领域特定语言
+* 《领域驱动设计：软件核心复杂性应对之道》（Eric Evans 著）
 * 《领域驱动设计 Domain-driven Design》 Vaughn Vernon
   - [gdut-yy/Domain-Driven-Design-zh](https://github.com/gdut-yy/Domain-Driven-Design-zh):中文翻译 <http://gdut_yy.gitee.io/doc-ddd/>
-* 《领域驱动设计：软件核心复杂性应对之道》（Eric Evans 著）
 * Patterns, Principles and Practices of Domain-Driven Design
 * 领域驱动设计精粹
 * 复杂软件设计之道：领域驱动设计全面解析与实战

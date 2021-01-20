@@ -175,6 +175,12 @@ set ft=dos
 ![](../_static/vim.png)
 ![](../_static/vim_sheet.png)
 ![](../_static/vi-vim-cheat-sheet-sch.gif)
+
+* Green   = Essential
+* Yellow   = Basic
+* Orange   / Blue = Advanced
+* Red   = Expert
+[](http://michael.peopleofhonoronly.com/vim/)
 ![](../_static/vim_sheet_code.png)
 
 ```

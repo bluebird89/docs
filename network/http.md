@@ -253,6 +253,30 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 ```
 
+## 跨站攻击 CSRF Cross-site request forgery 跨站请求伪造
+
+* 关键操作只接受 POST 请求
+* 验证码
+  - CSRF 攻击过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。
+  - 但是如果在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用。
+* 检测 Referer
+  - 常见的互联网页面与页面之间是存在联系的，比如在 www.baidu.com 应该是找不到通往www.google.com 的链接的，再比如在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的 Referer 中
+  - 通过检查 Referer 的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到 Referer 的值，所以 Referer Check 一般用于监控 CSRF 攻击的发生，而不用来抵御攻击。
+* Token
+  - 目前主流的做法是使用 Token 抵御 CSRF 攻击。下面通过分析 CSRF 攻击来理解为什么 Token 能够有效
+  - CSRF 攻击要成功的条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，我们可以对参数进行加密从而防止 CSRF 攻击。
+  - 另一个更通用的做法是保持原有参数不变，另外添加一个参数 Token，其值是随机的。这样攻击者因为不知道 Token 而无法构造出合法的请求进行攻击。
+  - 使用原则
+    + Token 要足够随机————只有这样才算不可预测
+    + Token 是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
+    + Token 要注意保密性————敏感操作使用 post，防止 Token 出现在 URL 中
+    + 注意：过滤用户输入的内容不能阻挡 csrf，需要做的是过滤请求的来源。
+
+## XSS（Cross Site Scripting，跨站脚本攻击）
+
+* 特点是不对服务器端造成任何伤害，而是通过一些正常的站内交互途径.例如发布评论，提交含有 JavaScript 的内容文本。这时服务器端如果没有过滤或转义掉这些脚本，作为内容发布到了页面上，其他用户访问这个页面的时候就会运行这些脚本。
+* 所有可输入的地方没有对输入数据进行处理的话，都会存在 XSS 漏洞，漏洞的危害取决于攻击代码的威力，攻击代码也不局限于 script。防御 XSS 攻击最简单直接的方法，就是过滤用户的输入。
+
 ## HTTP 幂等性
 
 * HTTP协议本身是一种面向资源的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式
@@ -520,6 +544,11 @@ Content-Type: text/html
   - Server: 被请求的服务web server的信息,含有关原始服务器用来处理请求的软件的信息,含有关原始服务器用来处理请求的软件的信息 `Server: Apache/2.4.1 (Unix)`
   - Set-Cookie: 服务器向客户端发送 sessionID
   - Transfer-Encoding 规定了传输报文主体时采用的编码方式,HTTP /1.1 的传输编码方式仅对分块传输编码有效
+    + 消息头的值为chunked，那么，消息体由数量未定的块组成，并以最后一个大小为0的块为结束。
+    + 每一个非空的块都以该块包含数据的字节数（字节数以十六进制表示）开始，跟随一个CRLF （回车及换行），然后是数据本身，最后块CRLF结束。在一些实现中，块大小和CRLF之间填充有白空格（0x20）
+    + 最后一块是单行，由块大小（0），一些可选的填充白空格，以及CRLF。最后一块不再包含任何数据，但是可以发送可选的尾部，包括消息头字段。消息最后以CRLF结尾。
+    + chunked 传输不能事先知道内容的长度，只能靠最后的空 chunk 块来判断，因此对于下载请求来说，是没有办法实现进度的。在浏览器和下载工具中，偶尔我们也会看到有些文件是看不到下载进度的，即采用 chunked 方式进行下载。
+    + chunked 的优势在于，服务器端可以边生成内容边发送，无需事先生成全部的内容。HTTP/2 不支持 Transfer-Encoding: chunked，因为 HTTP/2 有自己的 streaming 传输方式
   - X-Frame-Options:HTTP 首部字段是可以自行扩展的。所以在 Web 服务器和浏览器的应用上，会出现各种非标准的首部字段. 用于控制网站内容在其他 Web 网站的 Frame 标签内的显示问题。其主要目的是为了防止点击劫持（clickjacking）攻击
   - NAME: 要设置的键值对
   - WWW-Authenticate:该字段用于 HTTP 访问认证，它会告知客户端适用于访问请求 URL 所指定资源的认证方案（Basic 或 Digest）和带参数提示的质询。状态码 401 Unauthorized 响应中，肯定带有首部字段 WWW-Authenticate
@@ -555,8 +584,10 @@ Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3
   - 不会对服务器资源产生副作用（只是获取资源，不会对资源进行变更
   - 通过 GET 请求变更服务器资源有重大安全隐患，在开发过程中要避免
 * POST: 向指定资源提交被处理数据，查询字符串（名称/值对）是在 POST 请求的 HTTP 消息主体中发送(对用户不可见)
-  - application/x-www-form-urlencoded：原生 form 表单
-  - multipart/form-data：用于上传文件,生成了一个 boundary 用于分割不同的字段，为了避免与正文内容重复，boundary 很长很复杂
+  - application/x-www-form-urlencoded(默认) 原生 form 表单
+  - multipart/form-data 用于上传文件,生成了一个 boundary 用于分割不同字段，为了避免与正文内容重复，boundary 很长很复杂
+    + 消息主体里按照字段个数又分为多个结构类似的部分，每部分都是以 --boundary 开始，紧接着是内容描述信息，然后是回车，最后是字段具体内容（文本或二进制）。
+    + 如果传输的是文件，还要包含文件名和文件类型信息。消息主体最后以 --boundary-- 标示结束
   - application/json:支持比键值对复杂得多的结构化数据:php 就无法通过 `$_POST` 对象从上面的请求中获得内容,从 `php://input` 里获得原始输入流，再 json_decode 成对象
   - text/xml:XML 作为编码方式的远程调用规范
 * GET vs POST
@@ -748,20 +779,32 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 窃听:通信使用明文，内容可能会被窃听：HTTP 协议本身不具备加密功能，所以无法对通信整体（请求和响应的内容）进行加密，即 HTTP 报文使用明文方式发送。按照 TCP/IP 协议族的工作机制，通信内容在所有线路上都有可能被窃听。
   - 冒充不验证通信方的身份，因此有可能遭遇伪装：HTTP 协议中的请求和响应不会对通信方进行确认，所以任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个响应，即使是伪装的客户端。另外，即使是无意义的请求也会处理，无法阻止海量请求下的 DoS 攻击。
   - 篡改:无法证明报文的完整性，所以有可能已遭篡改：没有任何办法确认发出的请求/响应和接收到的请求/响应是前后相同的，请求或响应在传输途中，遭攻击者拦截并篡改内容的攻击称为中间人攻击（Main-in-the-Middle attack，MITM）
-* HTTPS 在 HTTP 基础上加入了 SSL(Secure Sockets Layer 安全套接层) 协议，将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已.SSL依靠证书来验证服务器的身份，会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
+* HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure,HTTPS 在 HTTP 基础上加入了 SSL(Secure Sockets Layer 安全套接层) 协议，将 HTTP 通信接口部分用 SSL 协议代替,身披 SSL 协议外壳的 HTTP 而已
+* SSL（Secure Sockets Layer 安全套接字层）
+  - 一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法,采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护等功能
+  - SSL依靠证书来验证服务器的身份，会建立一个安全的通信线路，在此线路上传输的内容都会经过加密处理，这样就可以从源头上杜绝了通信方被伪装以及信息被窃听和篡改的可能性，从而确保 HTTP 通信的安全
   - 机密性：即对数据加密，解决了窃听风险，因为即使被中间人窃听，由于数据是加密的，也拿不到明文
   - 完整性：指数据在传输过程中没有被篡改，不多不少，保持原样，中途如果哪怕改了一个标点符号，接收方也能识别出来，从来判定接收报文不合法
   - 身份认证：确认对方的真实身份，即证明「你妈是你妈」的问题，这样就解决了冒充风险，用户不用担心访问的是某宝结果却在和钓鱼网站通信的问题
   - 不可否认: 即不可否认已发生的行为
-* HTTPS = HTTP 协议(进行通信) + SSL/TLS 协议（加密数据包），增加的 S 代表 Secure
-  - SSL（Secure Sockets Layer 安全套接字层）:一项标准技术，用于在客户端与服务器之间进行加密通信，可确保互联网连接安全，防止网络犯罪分子读取和修改任何传输信息，包括个人资料。使用40 位关键字作为RC4流加密算法
-  - TSL（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
+  - 其它运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用
+* TLS（Transport Layer Security 传输层安全）:是 SSL 的继承协议，建立在 SSL 3.0 协议规范之上，是更为安全的升级版 SSL
     + Privacy - encrypting data between client and server using Encryption Algorithms.
     + Authentication - ensuring that server is who it claims to be using Certificates.
     + Integrity - verifying that data have not been forged using Message Authentication Code (MAC)
-  - 采用 SSL 后，HTTP 就拥有了 HTTPS 的加密、证书和完整性保护等功能
-  - 其它运行在应用层的 SMTP 和 Telnet 等协议均可配合 SSL 协议使用
   - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
+    + 客户端发送一个 ClientHello 消息到服务器端，消息中同时包含了它的 Transport Layer Security (TLS) 版本，可用的加密算法和压缩算法。
+    + 服务器端向客户端返回一个 ServerHello 消息，消息中包含了服务器端的 TLS 版本，服务器所选择的加密和压缩算法，以及数字证书认证机构（Certificate Authority，缩写 CA）签发的服务器公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥。证书中还包含了该证书所应用的域名范围（Common Name，简称 CN），用于客户端验证身份。
+    + 客户端根据自己的信任 CA 列表，验证服务器端的证书是否可信。如果认为可信（具体的验证过程在下一节讲解），客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥
+    + 服务器端使用自己的私钥解密上面提到的随机数，然后使用这串随机数生成自己的对称主密钥
+    + 客户端发送一个 Finished 消息给服务器端，使用对称密钥加密这次通讯的一个散列值
+    + 服务器端生成自己的 hash 值，然后解密客户端发送来的信息，检查这两个值是否对应。如果对应，就向客户端发送一个 Finished 消息，也使用协商好的对称密钥加密
+    + 从现在开始，接下来整个 TLS 会话都使用对称秘钥进行加密，传输应用层（HTTP）内容
+  - 完整过程需要三个算法（协议），密钥交互算法，对称加密算法，和消息认证算法（TLS 的传输会使用 MAC(message authentication code) 进行完整性检查）
+  - 证书机制
+    + 服务器需要有 CA 颁发的证书，客户端根据自己的信任 CA 列表验证服务器的身份。现代浏览器中，证书验证的过程依赖于证书信任链
+    + 证书信任链，即一个证书要依靠上一级证书来证明自己是可信的，最顶层的证书被称为根证书，拥有根证书的机构被称为根 CA。
+    + 根证书一般是操作系统自带的。不管是桌面系统 Windows，macOS 还是移动端系统 Android, iOS 都会内置一系列根证书。随着操作系统本身的升级，根证书也会随着升级进行更新。
 * 数字证书
   - 通过 OpenSSL 提供的命令就可以生成私钥和公钥，但是需要权威机构颁发证书（Certificate）才能被承认，否则无法判断通信中传递的公钥是否是目标服务器返回的
   - 生成证书需要发起一个证书请求，然后将这个请求发给一个权威机构（客户端和服务端都信任的第三方结构）去认证，这个权威机构称之为 CA（Certificate Authority）。权威机构会给证书敲一个章，也就是所谓的签名算法
@@ -814,6 +857,12 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 端口也不一样，前者是80，后者是443
   - HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头
   - HTTP 是未经安全加密的协议，传输过程容易被攻击者监听、数据容易被窃取、发送方和接收方容易被伪造；而 HTTPS 是安全的协议，它通过 密钥交换算法 - 签名算法 - 对称加密算法 - 摘要算法 能够解决上面这些问题
+* 中间人攻击 Man In The Middle Attack MITM
+  - 攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。
+  - SSL 剥离即阻止用户使用 HTTPS 访问网站,用户在访问网站时，也可能会在地址栏中输入 http:// 的地址，第一次的访问完全是明文的，这就给了攻击者可乘之机。通过攻击 DNS 响应，攻击者可以将自己变成中间人
+* HSTS（HTTP Strict Transport Security）
+  - 用于强制浏览器使用 HTTPS 访问网站的一种机制。它的基本机制是在服务器返回的响应中，加上一个特殊的头部，指示浏览器对于此网站，强制使用 HTTPS 进行访问 `Strict-Transport-Security: max-age=31536000; includeSubdomains; preload`
+  - 缺点:需要等待第一个服务器的影响中的头部才能生效，但如果第一次访问该网站就被攻击呢？为了解决这个问题，浏览器中会带上一些网站的域名，被称为 HSTS preload list。对于在这个 list 的网站来说，直接强制使用 HTTPS。
 * 流程
   - 购买证书，获取证书文件
     + 证书其实就是公钥，只是包含了很多信息，如证书的颁发机构，过期时间等等
@@ -1011,6 +1060,22 @@ dig  -t txt  _acme-challenge.your_domain.com @8.8.8.8
 service nginx stop
 ```
 
+## 会话跟踪
+
+* 会话 客户端打开与服务器的连接发出请求到服务器响应客户端请求的全过程
+* 会话跟踪指的是对同一个用户对服务器的连续的请求和接受响应的监视
+* 方法
+  - URL 重写:URL(统一资源定位符)是Web上特定页面的地址，URL重写的技术就是在URL结尾添加一个附加数据以标识该会话,把会话ID通过URL的信息传递过去，以便在服务器端进行识别不同的用户。
+ - 隐藏表单域:将会话ID添加到HTML表单元素中提交到服务器，此表单元素并不在客户端显示
+ - Cookie
+   + Cookie 是Web 服务器发送给客户端的一小段信息，客户端请求时可以读取该信息发送到服务器端，进而进行用户的识别。对于客户端的每次请求，服务器都会将 Cookie 发送到客户端,在客户端可以进行保存,以便下次使用。
+   + 客户端可以采用两种方式来保存这个 Cookie 对象，一种方式是保存在客户端内存中，称为临时 Cookie，浏览器关闭后这个 Cookie 对象将消失。另外一种方式是保存在客户机的磁盘上，称为永久 Cookie。以后客户端只要访问该网站，就会将这个 Cookie 再次发送到服务器上，前提是这个 Cookie 在有效期内，这样就实现了对客户的跟踪。
+   + Cookie 是可以被客户端禁用的。
+  - Session:
+    + 每一个用户都有一个不同的 session，各个用户之间是不能共享的，是每个用户所独享的，在 session 中可以存放信息。
+   + 在服务器端会创建一个 session 对象，产生一个 sessionID 来标识这个 session 对象，然后将这个 sessionID 放入到 Cookie 中发送到客户端，下一次访问时，sessionID 会发送到服务器，在服务器端进行识别不同的用户。
+   + Session 的实现依赖于 Cookie，如果 Cookie 被禁用，那么 session 也将失效。
+
 ## 认证
 
 * 基本认证:返回 401 Unauthorized 响应,会在请求头中设置 Authorization 字段，字段值是认证方式和认证凭证：｀Authorization: Basic eWFvamluYnVAMTYzLmNvbTp0ZXN0MTIzNDU2`
@@ -1133,21 +1198,30 @@ $un_data = unserialize_php($data);
 ## HTTP 1.1
 
 * 1999 年提出，做出以下变化
-  - 使用了摘要算法来进行身份验证
-  - 默认使用长连接
+  - 使用摘要算法来进行身份验证
+  - 默认持久连接
+    + 当使用 Keep-Alive 模式（又称持久连接、连接重用）时，Keep-Alive 功能使客户端到服务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive 功能避免了建立或者重新建立连接。
+    + 在HTTP请求头中添加一个字段 Connection: Keep-Alive，当服务器收到附带有 Connection: Keep-Alive 的请求时，它也会在响应头中添加一个同样的字段来使用 Keep-Alive 。这样一来，客户端和服务器之间的HTTP连接就会被保持，不会断开（超过 Keep-Alive 规定的时间，意外断电等情况除外），当客户端发送另外一个请求时，就使用这条已经建立的连接
     + 在响应头加入 `Connection: keep-alive`,表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
     + 把 Connection 头写进标准，并且默认开启持久连接,除非请求中写明 Connection: close，那么浏览器和服务器之间是会维持一段时间的 TCP 连接，不会一个请求结束就断掉
+    + HTTP 长连接不可能一直保持，例如 Keep-Alive: timeout=5, max=100，表示这个TCP通道可以保持5秒，max=100，表示这个长连接最多接收100次请求就断开
+    + 客户端、服务端怎么知道本次传输结束：判断传输数据是否达到了Content-Length 指示的大小；2. 动态生成的文件没有 Content-Length ，它是分块传输（chunked），这时候就要根据 chunked 编码来判断，chunked 编码的数据在最后有一个空 chunked 块，表明本次传输数据结束
     + have only one inflight request in an open connection but connection can be reused for multiple requests one after another
     + 维持连接，SSL 开销也可以避免
   - 新增加 E-tag，If-Unmodified-Since, If-Match, If-None-Match 等缓存控制标头来控制缓存失效
   - 支持断点续传，通过使用请求头中的 Range 来实现
   - 使用了虚拟网络，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址
-* 单个 TCP 连接在同一时刻只能处理一个请求
-  - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠
-  - 支持请求管道化，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
+* HTTP Pipelining：单个 TCP 连接在同一时刻只能处理一个请求
+  - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
     + 一些代理服务器不能正确的处理 HTTP Pipelining
     + 正确的流水线实现是复杂的
     + Head-of-line Blocking 连接头阻塞：在建立起一个 TCP 连接之后，假设客户端在这个连接连续向服务器发送了几个请求，按照标准，服务器应该按照收到请求的顺序返回结果 假设服务器在处理首个请求时花费了大量时间，那么后面所有的请求都需要等着首个请求结束才能响应(堵塞)
+  - 管线化机制通过持久连接（persistent connection）完成，仅 HTTP/1.1 支持此技术（HTTP/1.0不支持）
+  - 只有 GET 和 HEAD 请求可以进行管线化，而 POST 则有所限制
+  - 初次创建连接时不应启动管线机制，因为对方（服务器）不一定支持 HTTP/1.1 版本的协议
+  - 管线化不会影响响应到来的顺序，响应返回的顺序并未改变
+  - HTTP /1.1 要求服务器端支持管线化，但并不要求服务器端也对响应进行管线化处理，只是要求对于管线化的请求不失败即可
+  - 由于上面提到的服务器端问题，开启管线化很可能并不会带来大幅度的性能提升，而且很多服务器端和代理程序对管线化的支持并不好，因此现代浏览器如 Chrome 和 Firefox 默认并未开启管线化支持
 * 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞 通常一次只能有 6 个连接。例如，如果其中一个请求由于服务器上的某些复杂逻辑而卡住，那么它们中的每一个都可以一次处理一个请求，整个连接就会冻结并等待响应。这个问题称为前端阻塞
   - 为何一些站点会有多个静态资源 CDN 域名的原因
 * 缺点

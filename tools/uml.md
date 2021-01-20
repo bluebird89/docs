@@ -414,6 +414,7 @@ state Configuring {
 
 ## 参考
 
+* [](http://www.uml.org.cn/)
 * [入门UML](http://www.jianshu.com/p/1256e2643923)
 * [图说设计模式](http://design-patterns.readthedocs.io/zh_CN/latest/index.html)
 * [UML科普文](https://mp.weixin.qq.com/s/vo-44mor5y8Ck1Rs2jMPgw)

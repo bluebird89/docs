@@ -419,6 +419,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - appimage
     + [TheAssassin / AppImageLauncher](https://github.com/TheAssassin/AppImageLauncher):Helper application for Linux distributions serving as a kind of "entry point" for running and integrating AppImages
   - 空格键预览 `sudo apt install gnome-sushi`
+  - [peek](https://github.com/phw/peek) Simple animated GIF screen recorder with an easy to use interface
 * 下载
   - `sudo apt-get install ktorrent`
   - `sudo apt-get install amule`
@@ -591,7 +592,7 @@ sudo fuser -v /var/cache/debconf/config.dat
     + 需要选择 GTK3 分类下的主题
     + file download(~/.themes) or isntall
   - [nana-4 / materia-theme](https://github.com/nana-4/materia-theme):A Material Design theme for GNOME/GTK based desktop environments
-  - [adapta-project / adapta-gtk-theme](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines
+  - [adapta-gtk-theme](https://github.com/adapta-project/adapta-gtk-theme):An adaptive Gtk+ theme based on Material Design Guidelines `sudo apt-get install adapta-gtk-theme`
     + `git clone git@github.com:adapta-project/adapta-gtk-theme.git`
     + `sudo apt install autoconf automake inkscape libgdk-pixbuf2.0-dev libglib2.0-dev libxml2-utils pkg-config  sassc`
     + `./autogen.sh --prefix=/usr`
@@ -623,6 +624,7 @@ gsettings list-recursively [SCHEMA] # 如果有SCHEMA参数，则递归显示指
 
 # Although GNOME Shell integration extension is running, native host connector is not detected. Refer documentation for instructions about installing connector
 sudo apt install chrome-gnome-shell
+# 对GNOME桌面环境进行复杂的修改
 sudo apt install gnome-tweak-tool
 
 gsettings set org.gnome.desktop.interface gtk-theme Ant

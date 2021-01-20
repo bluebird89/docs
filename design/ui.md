@@ -54,6 +54,7 @@
 * [zui](https://github.com/easysoft/zui):ZUI is an HTML5 front UI framework. <http://zui.sexy>
 * [weui](https://github.com/Tencent/weui):A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications. <https://weui.io>
 * [hotcss](https://github.com/imochen/hotcss):移动端布局终极解决方案 --- 让移动端布局开发更加容易 <http://imochen.github.io/hotcss/>
+* [](https://github.com/ydcss/vue-ydui) A mobile components Library with Vue2.js http://vue.ydui.org/
 
 * [vux](https://github.com/airyland/vux):Mobile UI Components based on Vue & WeUI <https://vux.li/>
 * [vuetify](https://github.com/vuetifyjs/vuetify):Material Component Framework for Vue.js 2 <https://vuetifyjs.com>

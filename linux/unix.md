@@ -2,7 +2,7 @@
 
 ## 起源
 
-* MULTICS（Multiplexed Information and Computing Service）的项目
+* MULTICS（Multiplexed Information and Computing Service）项目
   - 上世纪六十年代时，大部份计算机都是采用批处理（Batch Processing）的方式（也就是说，当作业积累一定数量的时候，计算机才会进行处理）
   - 美国电话及电报公司（American Telephone and Telegraph Inc.；AT&T）、通用电器公司（General Electrics；G.E.）及麻省理工学院（Massachusetts Institute of Technology；MIT）计划合作开发一个多用途（General-Purpose）、分时（Time-Sharing）及多用户（Multi-User）的操作系统，也就是这个MULTICS，其被设计运行在GE-645大型主机上
   - 这个项目由于太过复杂，整个目标过于庞大，糅合了太多的特性，进展太慢，几年下来都没有任何成果，而且性能都很低。于是到了1969年2月，贝尔实验室（Bell Labs）决定退出这个项目
@@ -51,7 +51,7 @@
 * GNU组织的建立，延续了当年Unix刚出现时的情形，并为这种情形建立了可靠的法律和财务保障。GNU 工程十几年以来, 已经成为一个对软件开发主要的影响力量， 创造了无数的重要的工具。例如：强健的编译器，有力的文本编辑器，甚至一个全功能的操作系统。从那时开始，许多程序员聚集起来开始开发一个自由的、高质量、易理解的软件，让这使得Unix社区生机勃勃，一派繁荣景象。
 * 自90年代发起这个计划以来，GNU 开始大量的产生或收集各种系统所必备的组件，像是——函数库（libraries）、编译器（compilers）、调式工具（debugs）、文本编辑器（text editors）、网站服务器（web server），以及一个Unix的使用者接口（Unix shell）等等，等等。但由于种种原因，GNU一直没有开发操作系统的kernel。正当Richard Stallman在为操作系统内核伤脑筋的时候，Linux出现了
 
-## Linux横空出世
+## Linux 横空出世
 
 * 1990年，Linus Torvalds还是芬兰赫尔辛基大学的一名学生，最初是用汇编语言写了一个在80386保护模式下处理多任务切换的程序，后来从Minix（Andy Tanenbaum教授所写的很小 的Unix操作系统,主要用于操作系统教学）得到灵感，进一步产生了自认为狂妄的想法——写一个比Minix更好的Minix，于是开始写了一些硬件的设备驱动程序，一个小的文件系统。这样0.0.1版本的Linux就出来了，但是它只具有操作系统内核的勉强的雏形，甚至不能运行，你必须在有Minix的机器上编译以后才能玩。这时候Linus已经完全着迷而不想停止，决定踢开Minix，于是在1991年10 月5号发布Linux 0.0.2版本,在这个版本中已经可以运行bash 和gcc。
 * 从一开始，Linus就决定自由扩散Linux，包括原代码，随即Linux引起黑客们（hacker）的注意，通过计算机网络加入了Linux的内核开发。Linux倾向于成为一个黑客的系统——直到今天，在Linux社区里内核的开发被认为是真正的编程。由于一批高水平黑客的加入，使Linux 发展迅猛，几乎一两个礼拜就有新版或修正版的出现，到1993年底94年初，Linux 1.0终于诞生了！Linux 1.0已经是一个功能完备的操作系统，而且内核写得紧凑高效，可以充分发挥硬件的性能，在4M内存的80386机器上也表现得非常好，至今人们还在津津乐道。时至今日，kernel的版本已经出到2.6。Linux的发展不像传统的软件工程，它完全是透过网络，集合世界各地的高手而成的一套操作系统，在这里我们也可以见识到网络快速传播的威力。Linux初次让整个世界感觉到了开源力量和网络力量的如此强大。（Linux 的标志和吉祥物是一只名字叫做 Tux 的 企鹅，标志的由来是因为Linus在澳洲时曾被一只动物园里的企鹅咬了一口，便选择了企鹅作为Linux的标志。）
@@ -84,17 +84,17 @@
 * 自从Linux出现以后，一个新的黑客领袖出现了，Linus Torvalds的中庸态度网聚了世界上顶尖的黑客，其绕过了GPL和反GPL的派系之争，他使用GNU的工具从而以GPL的“传染性”保护了Linux，但他同时也不承认RMS的理论思想体系，他即开源，又支持商业化。虽然，他没有带给黑客们什么重要的思想体系或统一的价值观，但他整合了全世界黑客的阵营，让所有的黑客的行为都围绕着Linux这一事物进行。他以“用自由软件是因为它运行得更好”轻而易举地盖过了“用自由软件是因为所有软件都该是自由的”
 * 1998年初，这种新思潮促使网景公司（Netscape Communications）公布了其Mozilla浏览器的源码。媒体对此事件的关注促成了Linux在华尔街的上市，推动了1999－2001年间科技股的繁荣。事实证明，此事无论对黑客文化的历史还是对Unix的历史都是一个转折点
 
-## Unix的历史教训
+## Unix的历史教训 出自《The Art of Unix Programming》
 
-* 距开源越近就越繁荣。任何将Unix专有化的企图，只能陷入停滞和衰败。
+* 在Unix历史中，最大的规律就是：距开源越近就越繁荣。任何将Unix专有化的企图，只能陷入停滞和衰败。
 * 回顾过去，我们早该认识到这一点。1984年至今，我们浪费了十年时间才学到这个教训。如果我们日后不思悔改，可能还得大吃苦头。
 * 虽然我们在软件设计这个重要但狭窄的领域比其他人聪明，但这不能使我们摆脱对技术与经济相互作用影响的茫然，而这些就发生在我们的眼皮底下。即使Unix社区中最具洞察力、最具远见卓识的思想家，他们的眼光终究有限。对今后的教训就是：过度依赖任何一种技术或者商业模式都是错误的——相反，保持软件及其设计传统的的灵活性才是长存之道。
 * 另一个教训是：别和低价而灵活的方案较劲。或者，换句话说，低档的硬件只要数量足够，就能爬上性能曲线而最终获胜。经济学家Clayton Christensen称之为“破坏性技术”，他在《创新者窘境》（The Innovator’s Dilemma）[Christensen]一书中以磁盘驱动器、蒸汽挖土机和摩托车为例阐明了这种现象的发生。当小型机取代大型机、工作站和服务器取代小型机以及日用Intel机器又取代工作站和服务器时，我们也看到了这种现象。开源运动获得成功正是由于软件的大众化。Unix要繁荣，就必须继续采用吸纳低价而灵活的方案的诀窍，而不是去反对它们。
 * 最后，旧学派的Unix社区因采用了传统的公司组织、财务和市场等命令机制而最终未能实现“职业化”。只有痴迷的“黑客”和具有创造力的怪人结成的反叛联盟才能把我们从愚蠢中拯救出来——他们接着教导我们，真正的专业和奉献精神，正是我们在屈服于世俗观念的“合理商业做法”之前的所作所为。
 
-## [Unix族谱](http://www.levenez.com/unix/)
+## [Unix 族谱](http://www.levenez.com/unix/)
 
-## Unix的特点
+## Unix 特点
 
 * 开发UNIX，没有正式立项，是Ken Thompson和Dennis Ritchie等少数几个人偷偷干的，如果一切都要从头从新设计，那几乎是不可能的。所以，Unix吸取与借鉴了Multics的经验，如内核，进程，层次式目录，面向流的I/O，把设备当作文件，……等等。但是Unix在继承中又有创新，比如Unix采用一种无格式的文件结构，文件由字节串加\0组成。这带来两大好处：一是在说明文件时不必加进许多无关的“填充物”，二是任何程序的输出可直接用作其他任何程序的输入，不必经过转换。后面这一点叫做“管道”(piping)，这就是Unix首创的。此外，像把设备当作文件，从而简化了设备管理这一操作系统设计中的难题，虽然不是UNIX的发明，但是实现上它采用了一些新方法，比Multics更高明一些。
 * Everything (including hardware) is a file 所有的事物（甚至硬件本身）都是一个的文件。
@@ -103,7 +103,7 @@
 * Avoid captive user interfaces 尽量避免令人困惑的用户接口
 * Ability to chain program together to perform complex tasks 将几个程序连结起来，处理大而复杂的工作。
 
-## Unix的影响和[哲学](http://en.wikipedia.org/wiki/Unix_philosophy)
+## Unix 影响和[哲学](http://en.wikipedia.org/wiki/Unix_philosophy)
 
 * 软件开发的若干哲学和思想。
 * 全民参与推动软件，代码共享的模式。
@@ -112,21 +112,43 @@
 * C语言，而后发展的C++，Java等等类C的语言和脚本。（参看《C语言的演变史》）
 * TCP/IP，其的Socket编程已成为今天通用的网络编程主流
 
-* AT&T虽然发展了Unix，但今天Unix的混乱的局面也和AT&T 有着直接原因。但反过来说，如果没有AT&T的反面教材，今天的GNU/Linux很有可能也不会出现。AT&T究竟是限制了Unix的发展，还是以反面示例促进了Unix社区，已不好评说。今天，软件是商业化好还是开源好的争论还在继续，纵观这几十年来Unix的历史，Linux的划时代地出现。相信你会得出自己的结论
+* AT&T虽然发展了Unix，但今天Unix的混乱的局面也和AT&T 有着直接原因。但反过来说，如果没有AT&T的反面教材，今天的GNU/Linux很有可能也不会出现。AT&T究竟是限制了Unix的发展，还是以反面示例促进了Unix社区，已不好评说。今天，软件是商业化好还是开源好的争论还在继续，纵观这几十年来Unix的历史，Linux的划时代地出现。相信会得出自己的结论
+* Unix遵循的原则是KISS（Keep it simple, stupid）
 
 ## 哲学
 
-* 小即是美
-* 让程序只做好一件事 Write programs that do one thing and do it well.
-* 尽可能早地建立原型
-* 可移植性比效率更重要
-* 数据应该保存为文本文件
-* 尽可能地榨取软件的全部价值
-* 使用shell脚本来提高效率和可移植性
-* 避免使用可定制性低下的用户界面
-* 所有程序都是数据的过滤器
-* Write programs to handle text streams, because that is a universal interface.
-* Write programs to work together.
+* Doug McIlroy 是认为UNIX的哲学是这样的：三条哲学，简明扼要，就是这三条哲学贯穿着整个Unix世界
+  - Write programs that do one thing and do it well.
+  - Write programs to work together.
+  - Write programs to handle text streams, because that is a universal interface.
+* 《The Art of Unix Programming》总结了下面这些哲学
+  - Rule of Modularity: Write simple parts connected by clean interfaces.
+  - Rule of Clarity: Clarity is better than cleverness.
+  - Rule of Composition: Design programs to be connected to other programs.
+  - Rule of Separation: Separate policy from mechanism; separate interfaces from engines.
+  - Rule of Simplicity: Design for simplicity; add complexity only where you must.
+  - Rule of Parsimony: Write a big program only when it is clear by demonstration that nothing else will do.
+  - Rule of Transparency: Design for visibility to make inspection and debugging easier.
+  - Rule of Robustness: Robustness is the child of transparency and simplicity.
+  - Rule of Representation: Fold knowledge into data so program logic can be stupid and robust.
+  - Rule of Least Surprise: In interface design, always do the least surprising thing.
+  - Rule of Silence: When a program has nothing surprising to say, it should say nothing.
+  - Rule of Repair: When you must fail, fail noisily and as soon as possible.
+  - Rule of Economy: Programmer time is expensive; conserve it in preference to machine time.
+  - Rule of Generation: Avoid hand-hacking; write programs to write programs when you can.
+  - Rule of Optimization: Prototype before polishing. Get it working before you optimize it.
+  - Rule of Diversity: Distrust all claims for “one true way”.
+  - Rule of Extensibility: Design for the future, because it will be here sooner than you think.
+* X Windows 的设计者 Mike Gancarz 给出了下面九条哲学思想
+  - Small is beautiful. 小即是美
+  - Make each program do one thing well. 让程序只做好一件事 Write programs that do one thing and do it well.
+  - Build a prototype as soon as possible. 尽可能早地建立原型
+  - Choose portability over efficiency. 可移植性比效率更重要
+  - Store data in flat text files. 数据应该保存为文本文件
+  - Use software leverage to your advantage. 尽可能地榨取软件的全部价值
+  - Use shell scripts to increase leverage and portability. 使用shell脚本来提高效率和可移植性
+  - Avoid captive user interfaces. 避免使用可定制性低下的用户界面
+  - Make every program a filter. 所有程序都是数据的过滤器
 
 ## IO模型
 
@@ -164,7 +186,7 @@
 
 * 《[UNIX网络编程 卷1：套接字联网API](https://www.amazon.cn/gp/product/B011S72JB6)》
 * 《[UNIX网络编程 卷2：进程间通信](https://www.amazon.cn/gp/product/B012R5A29O)》
-* 《[UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
+* 《[The Unix Programming Environment UNIX编程环境](https://www.amazon.cn/gp/product/B00IYTQBYS/)》
 * 《[Unix 环境高级编程](https://www.amazon.cn/gp/product/B00KMR129E)》
   - [huaxz1986/APUE_notes](https://github.com/huaxz1986/APUE_notes):《UNIX环境高级编程》中文第三版笔记
 * 《UNIX操作系统设计》
