@@ -44,6 +44,13 @@
 
 ## 检测
 
+* 用EXPLAIN或DESCRIBE(DESC)命令分析一条查询语句执行信息。EXPLAIN 查询结果会说明索引主键被如何利用，数据表是如何被搜索和排序
+* 经常测试你的查询，看是否需要做性能优化，性能可能会随着时间的变化而变化
+* Show Profile是比Explain更近一步的执行细节，可以查询到执行每一个SQL都干了什么事，这些事分别花了多少秒
+* 基准查询，包括服务器的负载，有时一个简单的查询会影响其他的查询
+* 当服务器的负载增加时，使用SHOW PROCESSLIST来查看慢的/有问题的查询
+* 在存有生产环境数据副本的开发环境中，测试所有可疑的查询
+
 ### [EXPLAIN](https://mp.weixin.qq.com/s/YkichgBT7TGNraus1sRO-w)
 
 * EXPLAIN <query> analyzes query plans from the optimizer, including how tables are joined, which tables/rows are scanned etc.
@@ -308,12 +315,12 @@ kill SESSION_ID;   # 杀掉有问题的session
   - 有阵列卡时，设置阵列写策略为WB，甚至FORCE WB（若有双电保护，或对数据安全性要求不是特别高的话），严禁使用WT策略。并且闭阵列预读策略，基本上是鸡肋，用处不大
   - 尽可能选用RAID-10，而非RAID-5
   - 使用机械盘的话，尽可能选择高转速的，例如选用15KRPM，而不是7.2KRPM的盘
-  - 有足够的物理内存，能将整个InnoDB文件加载到内存里 —— 如果访问的文件在内存里，而不是在磁盘上，InnoDB会快很多
+  - 有足够物理内存，能将整个InnoDB文件加载到内存里 —— 如果访问的文件在内存里，而不是在磁盘上，InnoDB会快很多
   - 全力避免 Swap 操作 — 交换（swapping）是从磁盘读取数据，所以会很慢
   - 使用电池供电的RAM（Battery-Backed RAM）
   - 使用一个高级磁盘阵列 — 最好是 RAID10 或者更高
   - 避免使用RAID5 — 和校验需要确保完整性，开销很高
-  - 将你的操作系统和数据分开，不仅仅是逻辑上要分开，物理上也要分开 — 操作系统的读写开销会影响数据库的性能
+  - 将操作系统和数据分开，不仅仅是逻辑上要分开，物理上也要分开 — 操作系统的读写开销会影响数据库的性能
   - 将临时文件和复制日志与数据文件分开 — 后台的写操作影响数据库从磁盘文件的读写操作
   - 更多的磁盘空间等于更高的速度
   - 磁盘速度越快越好
@@ -342,7 +349,6 @@ kill SESSION_ID;   # 杀掉有问题的session
     + 将vm.dirty_background_ratio设置为5-10，将vm.dirty_ratio设置为它的两倍左右，以确保能持续将脏数据刷新到磁盘，避免瞬间I/O写，产生严重等待（和MySQL中的innodb_max_dirty_pages_pct类似）
     + 将net.ipv4.tcp_tw_recycle、net.ipv4.tcp_tw_reuse都设置为1，减少TIME_WAIT，提高TCP效率
     + 至于网传的read_ahead_kb、nr_requests这两个参数，我经过测试后，发现对读写混合为主的OLTP环境影响并不大（应该是对读敏感的场景更有效果），不过没准是我测试方法有问题，可自行斟酌是否调整
-* 分库分表+读写分离
 * vmstat
   - Procs：r显示有多少进程正在等待CPU时间。b显示处于不可中断的休眠的进程数量。在等待I/O
   - Memory：swpd显示被交换到磁盘的数据块的数量。未被使用的数据块，用户缓冲数据块，用于操作系统的数据块的数量
@@ -420,10 +426,16 @@ iostat -d -k -x 5
 * 监控 `key_read_requests` 和 `key_reads`，以便确定 `key_buffer` 的值 — key 的读需求应该比 `key_reads` 的值更高，否则使用 `key_buffer` 就没有效率了
 * 有一个测试配置环境，可以经常重启，不会影响生产环境
 * 只允许使用内网域名，而不是ip连接数据库.不只是数据库，缓存（memcache、redis）的连接，服务（service）的连接都必须使用内网域名，机器迁移/平滑升级/运维管理…太多太多的好处
-* `key_buffer_size`:索引缓冲区大小
-* `table_cache`:能同时打开表的个数
-* `query_cache_size`和`query_cache_type`:前者是查询缓冲区大小,后者是前面参数的开关,0表示不使用缓冲区,1表示使用缓冲区,但可以在查询中使用SQL_NO_CACHE表示不要使用缓冲区,2表示在查询中明确指出使用缓冲区才用缓冲区,即SQL_CACHE
-* `sort_buffer_size`:排序缓冲区
+* `key_buffer_size` 索引缓冲区大小
+* `table_cache` 同时打开表个数
+* `query_cache_size`和`query_cache_type` 前者是查询缓冲区大小,后者是前面参数的开关,0表示不使用缓冲区,1表示使用缓冲区,但可以在查询中使用SQL_NO_CACHE表示不要使用缓冲区,2表示在查询中明确指出使用缓冲区才用缓冲区,即SQL_CACHE
+* `sort_buffer_size` 排序缓冲区
+* 数据库连接池 考虑持久连接，而不是多次建立连接，减少资源消耗
+  - 维护一定的连接数，方便系统获取连接，使用就去池子中获取，用完放回去就可以了，不需要关心连接的创建与销毁，也不需要关心线程池是怎么去维护这些连接的。
+  - 持久连接意味着减少重建连接 MySQL 成本
+  - 当持久连接被创建时，将保持打开状态直到脚本完成运行
+  - 因为Apache重用它的子进程，下一次进程运行一个新的脚本时，将重用相同的MySQL连接。`mysql_pconnect()`,可能会出现连接数限制问题、内存问题等等
+  - Druid、C3P0、DBCP
 
 ```
 pager grep Log
@@ -465,7 +477,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 * 为不同需求选择不同存储引擎
   - 日志表或审计表使用ARCHIVE存储引擎：写效率更高
 * 保证数据库整洁性:移除不必要表
-* 归档老数据:删除查询中检索或返回的多余的行
+* 归档老数据:删除查询中检索或返回的多余行
 * UTF 8 和 UTF16 比 latin1 慢
 * 节制使用触发器
 * 修改表结构
@@ -496,7 +508,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
   - LOCAL|NO_WRITE_TO_BINLOG都是表示不写入日志.,优化表只对VARCHAR,BLOB和TEXT有效
   - 通过OPTIMIZE TABLE语句可以消除文件碎片,在执行过程中会加上只读锁
 * 在夜间安排批量删除，避免不必要锁表
-* 使用业务、领域特定的知识，预估预期将处理的数据库中数据量
+* 使用业务、领域特定知识，预估预期将处理的数据库中数据量
 * 对重量级、更新少数据考虑使用应用级别缓存
 * 不在数据库做计算，cpu计算务必移至业务层
 * 禁止使用小数存储国币,尽量少使用除法
@@ -550,6 +562,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
     + SELECT uid FROM t_user WHERE phone=13812345678 用 SELECT uid FROM t_user WHERE phone=’13812345678’ phone 为varchar
     + 字符串类型 如果可能， 应该避免使用字符串类型作为标识列， 因为它们很消耗空间， 并且通常比数字类型慢
     + 使用枚举或整数代替字符串类型
+    + 用 varchar/nvarchar 代替 char/nchar
   - 日期和时间类型：尽量使用TIMESTAMP而非DATETIME
     + TIMESTAMP使用4个字节存储空间， DATETIME使用8个字节存储空间
     + TIMESTAMP只能表示1970 - 2038年，比 DATETIME表示的范围小得多，而且 TIMESTAMP的值因时区不同而不同
@@ -574,7 +587,6 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
     * 低千秒级精度的时间戳
     * 整型来存IPv4地址:实际上是32位无符号整数，不是字符串。用小数点将地址分成四段的表示方法只是为了让人们阅读容易。所以应该用无符号整数存储IP地址。MySQL提供INET_ATON()和INET_NTOA()函数在这两种表示方法之间转换
 * 分离频繁更新和频繁读取的数据，新增字段时分析使用链接表还是扩展行
-* 用 varchar/nvarchar 代替 char/nchar
 * 规范
   - 控制单表数据量:单表1G体积 500W⾏,控制在千万级
   - 单表不超过50个INT字段 不超过20个CHAR(10)字段:存储引擎的API工作时需要在服务器层和存储引擎层之间通过行缓冲格式拷贝数据，然后在服务器层将缓冲内容解码成各个列，这个转换过程的代价是非常高的。如果列太多而实际使用的列又很少的话，有可能会导致CPU占用过高
@@ -583,7 +595,7 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 * 多表联接查询时，关联字段类型尽量一致，并且都要有索引
 * 所有的InnoDB表都设计一个无业务用途的自增列做主键，对于绝大多数场景都是如此，真正纯只读用InnoDB表的并不多，真如此的话还不如用TokuDB来得划算
 * 类似分页功能的SQL，建议先用主键关联，然后返回结果集，效率会高很多
-* 分解表：对于字段较多的表,如果某些字段使用频率较低,此时应当,将其分离出来从而形成新的表
+* 分解表：对于字段较多的表,如果某些字段使用频率较低,此时应当,将其分离出来从而形成新表
 * 对于将大量连接查询的表可以创建中间表,从而减少在查询时造成的连接耗时
 * 增加冗余字段：类似于创建中间表,增加冗余也是为了减少连接查询
 * 使用 ENUM 而不是 VARCHAR。如果有一个字段，比如“性别”，“国家”，“民族”，“状态”或“部门”，你知道这些字段的取值是有限而且固定的，那么，应该使用 ENUM 而不是VARCHAR
@@ -592,64 +604,16 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 
 ## 索引优化
 
-* 单表索引建议控制在5个以内,不允许超过5个：字段超过5个时，实际已经起不到有效过滤数据的作用
-* 数据量小的表最好不要使用索引，因为由于数据较少，可能查询全部数据花费的时间比遍历索引的时间还要短，索引就可能不会产生优化效果
+* 单表索引建议控制在5个以内,字段超过5个时，实际已经起不到有效过滤数据的作用
+* 数据量小的表最好不要使用索引，因为由于数据较少，可能查询全部数据花费时间比遍历索引的时间还要短
 * 保证索引简单：不要在同一列上加多个索引
-* 更新频繁字段不适合创建索引,频繁查询条件字段应创建索引`select * from order_copy where id = $id`
-* 唯一性太差、基数（Cardinality）太小（比如说，该列的唯一值总数少于255、字段不适合单独创建索引，区分度不高，字段值离散度低 `select * from order_copy where sex=’女’`
-* 优先考虑 where、order by、GROUP BY 、JOIN 使用到的字段，对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
-* IN适合主表大子表小，EXIST适合主表小子表大
-  - 尝试改为join查询
-* 尽量避免使用 or，会导致数据库引擎放弃索引进行全表扫描
-  - 用 union 代替 or
-* 尽量避免进行 null 值判断，会导致数据库引擎放弃索引进行全表扫描
-  - 可以给字段添加默认值 0，对 0 值进行判断
-* 避免使用 in 和 not in，会导致引擎走全表扫描
-  - 如果是连续数值，可以用 between 代替
-  - 如果是子查询，可以用 exists 代替
-* 查询条件不能用 <> 或者 !=
-  - 采用union聚合搜索结果
+* 更新频繁字段不适合创建索引,频繁查询条件字段应创建索引
+* 唯一性太差、基数（Cardinality）太小,唯一值总数少、区分度不高，字段值离散度低,字段不适合单独创建索引 `select * from order_copy where sex=’女’`
 * 不要过度使用索引:会导致过高的磁盘使用率以及过高的内存占用
-  - 索引固然可以提高相应 select 效率，但同时也降低了 insert 及 update 的效率，因为 insert 或 update 时写操作有可能会重建索引,增加了大量I/O
+  - 索引固然可以提高相应 select 效率，但同时也降低了 insert 及 update 效率，因为 insert 或 update 时写操作有可能会重建索引,增加了大量I/O
   - 降低更新表速度：被索引的表上INSERT和DELETE会变慢，因为更新表时，MySQL不仅要保存数据，还要保存索引文件
   - 占用磁盘空间的索引文件。一般情况这个问题不太严重，但如果在一个大表上创建了多种组合索引，索引文件的会膨胀很快
-* 前缀索引：对字符串列进行索引，如果可能应该指定一个前缀长度。 例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引
-  - 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引
-  - 短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作
-* 复合（联合）索引:满足最左匹配
-  - 多个列上建立独立的索引并不能提高查询性能。理由非常简单，MySQL不知道选择哪个索引的查询效率更好
-    + 在老版本，比如MySQL5.0之前就会随便选择一个列的索引
-    + 新的版本会采用合并索引的策略
-      * 当出现多个索引做相交操作时（多个AND条件），通常来说一个包含所有相关列索引要优于多个独立索引
-      * 当出现多个索引做联合操作时（多个OR条件），对结果集的合并、排序等操作需要耗费大量的CPU和内存资源，特别是当其中的某些索引的选择性不高，需要返回合并大量数据时，查询成本更高。所以这种情况下还不如走全表扫描。
-    + explain时如果发现有索引合并（Extra字段出现 Usingunion），应该好好检查一下查询和表结构是不是已经是最优的，如果查询和表都没有问题，那只能说明索引建的非常糟糕，应当慎重考虑索引是否合适，有可能一个包含所有相关列的多列索引更适合
-    + 多用复合索引，少用多个独立索引
-  - 索引顺序:把选择性更高字段放到索引的前面，这样通过第一个字段就可以过滤掉大多数不符合条件的数据
-    + 仅包含复合索引非前置列，不会走联合索引
 * 数据库如果计算出使用索引所耗费的时间长于全表扫描或其它操作时，将不会使用索引
-* 数据量大时，避免使用 where 1=1 的条件
-  - 拼装 SQL 时进行判断，没 where 条件就去掉 where，有 where 条件就加 and
-* 避免在 where 条件 ORDER BY 中等号的左侧进行表达式、函数操作（是表达式的一部分，或者函数参数），会导致数据库引擎放弃索引进行全表扫描`select * from users where YEAR(adddate)<2007;`
-* 模糊查询:避免在字段开头使用，导致数据库引擎放弃索引进行全表扫描 like “%aaa%”, like “aaa%”可以使用索引
-  - 使用 MySQL 内置函数 INSTR（str，substr）来匹配，作用类似于 Java 中的 indexOf()，查询字符串出现的角标位置
-  - 使用 FullText 全文索引，用 match against 检索
-  - 数据量较大的情况，建议引用 ElasticSearch、Solr，亿级数据量检索速度秒级。
-  - 当表数据量较少（几千条儿那种），别整花里胡哨的，直接用 like '%xx%'
-* 隐式类型转换造成不使用索引：索引对列类型为 varchar，但给定的值为数值，涉及隐式类型转换，造成不能正确走索引
-* 索引列排序
-  - order by 条件要与 where 中条件一致，否则 order by 不会利用索引进行排序，对其他需要排序的操作也有效。比如 group by 、union 、distinct 等
-  - 不走age索引：`SELECT * FROM t order by age;` 走age索引：`SELECT * FROM t where age > 0 order by age;`
-    + 根据 where 条件和统计信息生成执行计划，得到数据
-    + 将得到的数据排序。当执行处理数据（order by）时，数据库会先查看第一步的执行计划，看 order by 的字段是否在执行计划中利用了索引。如果是，则可以利用索引顺序而直接取得已经排好序的数据。如果不是，则重新进行排序操作。
-    + 返回排序后的数据
-  - 尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引
-  - 先过滤再排序：会用到过滤条件中的索引参数，但是排序会使用较慢的外部排序。因为这个结果集是经过过滤的，并没有什么索引参与
-  - 先排序再过滤：使用同一个索引，排序的优先级高于过滤的优先级。选择合适索引，在过滤的同时就排序了。扫描的行数会增加
-* 正确使用 hint 优化语句：数据库系统的查询优化器并不一定总是能使用最优索引,使用 hint 指定优化器在执行时排除其他索引干扰而指定更优的执行计划：
-  - USE INDEX 在查询语句中表名的后面，添加 USE INDEX 来提供希望 MySQL 去参考索引列表，不再考虑其他可用的索引。 `SELECT col1 FROM table USE INDEX (mod_time, name)...`
-  - IGNORE INDEX 如果只是单纯的想让 MySQL 忽略一个或者多个索引  `SELECT col1 FROM table IGNORE INDEX (priority) ...`
-  - FORCE INDEX 为强制 MySQL 使用一个特定的索引 `SELECT col1 FROM table FORCE INDEX (mod_time) ...`
-* 尽量避免事后添加索引：可能需要监控大量的SQL才能定位到问题所在，而且添加索引的时间肯定是远大于初始添加索引所需要的时间
 
 ```sql
 # actorid和filmid两个列上都建立了独立的索引,如下查询
@@ -684,41 +648,36 @@ explain select * from test where c>10 and b >10   order by a # idx_b_a_c，但�
 explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by c # 使用了index，使用了where，只在索引上就完成了操作。但扫描的行数却增加了。
 ```
 
-### 查询优化
+### 查询优化 尽量避免全表扫描
 
-对查询进行优化，要尽量避免全表扫描
-
-* 用EXPLAIN或DESCRIBE(DESC)命令分析一条查询语句执行信息，分析查询语句或是表结构的性能瓶颈。EXPLAIN 的查询结果会说明索引主键被如何利用，数据表是如何被搜索和排序
-  - 使用 EXPLAIN 和慢SQL分析来决定查询功能是否合适
-  - 经常测试你的查询，看是否需要做性能优化，性能可能会随着时间的变化而变化
-  - Show Profile是比Explain更近一步的执行细节，可以查询到执行每一个SQL都干了什么事，这些事分别花了多少秒
-  - 基准查询，包括服务器的负载，有时一个简单的查询会影响其他的查询
-  - 当服务器的负载增加时，使用SHOW PROCESSLIST来查看慢的/有问题的查询
-  - 在存有生产环境数据副本的开发环境中，测试所有可疑的查询
 * 主键：每张表都设置一个ID做为其主键。`UNSIGNED AUTO_INCREMENT PRIMARY KEY`
 * 如果合适，用 GROUP BY 代替 DISTINCT
 * 使用索引字段和 ORDER BY 来代替 MAX
 * 使用 SQL_MODE=STRICT 来检查问题
-* 使用 INSERT ON DUPLICATE KEY 或 INSERT IGNORE 来代替 UPDATE，避免 UPDATE 前需要先 SELECT
-* 缓存优化
-  - 保持查询一致，后续类似的查询就能使用查询缓存
-  - CURDATE()、NOW() 和 RAND() 或是其它的诸如此类的SQL函数都不会开启查询缓存:`$r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");`
 * 对 UPDATE 来说，使用 SHARE MODE 来防止排他锁
+* 使用 INSERT ON DUPLICATE KEY 或 INSERT IGNORE 来代替 UPDATE，避免 UPDATE 前需要先 SELECT
 * 重启 MySQL 时，记得预热数据库，确保将数据加载到内存，提高查询效率
+
+* 查询缓存
+  - 保持查询一致，后续类似查询就能使用
+  - CURDATE()、NOW() 和 RAND() 或是其它的诸如此类的SQL函数都不会开启查询缓存:`$r = mysql_query("SELECT username FROM user WHERE signup_date >= CURDATE()");`
 * 删除表中所有数据:使用 DROP TABLE ，然后再 CREATE TABLE ，而不是 DELETE FROM
 * 使用 truncate 代替 delete
   - 当删除全表中记录时，使用 delete 语句的操作会被记录到 undo 块中，删除记录也记录 binlog。
   - 当确认需要删除全表时，会产生很大量的 binlog 并占用大量的 undo 数据块，此时既没有很好的效率也占用了大量的资源。
-  - 使用 truncate 替代，不会记录可恢复的信息，数据不能被恢复。也因此使用 truncate 操作有其极少的资源占用与极快的时间。另外，使用 truncate 可以回收表的水位，使自增字段值归零。
-* 考虑持久连接，而不是多次建立连接，已减少资源的消耗
-  - 持久连接意味着减少重建连接到MySQL的成本
-  - 当持久连接被创建时，它将保持打开状态直到脚本完成运行
-  - 因为Apache重用它的子进程，下一次进程运行一个新的脚本时，它将重用相同的MySQL连接。`mysql_pconnect()`,可能会出现连接数限制问题、内存问题等等
+  - 使用 truncate 替代，不会记录可恢复的信息，数据不能被恢复。也因此使用 truncate 操作有其极少的资源占用与极快的时间。另外，使用 truncate 可以回收表的水位，使自增字段值归零
 * 禁止使用存储过程、视图、触发器、Event
 * 尽量避免使用游标，因为游标的效率较差，如果游标操作的数据超过1万行，那么就应该考虑改写
 * 禁止使用外键，如果有外键完整性约束，需要应用程序控制
-* 查询数据量大的表 会造成查询缓慢。主要的原因是扫描行数过多。这个时候可以通过程序，分段分页进行查询，循环遍历，将结果合并处理进行展示
+* 查询数据量大的表会造成查询缓慢。主要的原因是扫描行数过多:通过程序，分段分页进行查询，循环遍历，将结果合并处理进行展示
 * 避免频繁创建和删除临时表，以减少系统表资源的消耗。临时表并不是不可使用，适当地使用它们可以使某些例程更有效，例如，当需要重复引用大型表或常用表中的某个数据集时。但是，对于一次性事件， 最好使用导出表。
+* 判断记录是否存在 `SELECT IFNULL((SELECT 1 from tableName where condition LIMIT 1),0)`
+* 用 where 字句替换 HAVING 字句：避免使用 HAVING 字句，因为 HAVING 只会在检索出所有记录之后才对结果集进行过滤，而 where 则是在聚合前刷选记录，如果能通过 where 字句限制记录的数目，那就能减少这方面的开销。
+  - HAVING 中的条件一般用于聚合函数的过滤，除此之外，应该将条件写在 where 字句中。
+  - where 和 having 的区别：where 后面不能使用组函数。
+* 移除外部连接查询
+  - 在两个表的行中放置占位符（空数据）来删除OUTER JOINS操作
+
 * 关联查询：表与表之间通过一个冗余字段来关联，要比直接使用 JOIN有更好的性能。如果确实需要使用关联查询的情况下，需要特别注意的是
   - 流程：有两个表A和B通过c列关联，MySQL会遍历A表，然后根据遍历到的c列的值去B表中查找数据。综上所述，通常，如无只需要给B表的c列加上索引即可
   - 小表在前，大表在后。第一张表会涉及到全表扫描，在扫描后面的大表，或许只扫描大表的前 100 行就符合返回条件并 return 了
@@ -728,6 +687,7 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
   - 确保 ON 和 USING字句中的列上有索引。在创建索引的时候就要考虑到关联的顺序。当表A和表B用列c关联的时候，如果优化器关联的顺序是A、B，那么就不需要在A表的对应列上创建索引。没有用到的索引会带来额外的负担，一般来说，除非有其他理由，只需要在关联顺序中的第二张表的相应列上创建索引
   - 确保任何的 GROUP BY和 ORDER BY中的表达式只涉及到一个表中的列，这样MySQL才有可能使用索引来优化
   - 任何的关联都执行嵌套循环关联操作，即先在一个表中循环取出单条数据，然后在嵌套循环到下一个表中寻找匹配的行，依次下去，直到找到所有表中匹配的行为为止。然后根据各个表匹配的行，返回查询中需要的各个列
+
 * UNION
   - UNION策略是先创建临时表，然后再把各个查询结果插入到临时表中，最后再来做查询
   - 创建并填充临时表的方式来执行 union 查询。除非确实要消除重复的行，否则建议使用 union all
@@ -738,12 +698,38 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
   - 使用 UNION 来代替 WHERE 子句中的子查询
   - 子查询的效率不如连接查询（join）:因为MySQL不需要在内存中创建临时表来完成这个在逻辑上需要两个步骤的查询工作
   - 索引字段少于5个时，UNION 操作用 LIMIT，而不是 OR
-* 判断记录是否存在 `SELECT IFNULL((SELECT 1 from tableName where condition LIMIT 1),0)`
-* 用 where 字句替换 HAVING 字句：避免使用 HAVING 字句，因为 HAVING 只会在检索出所有记录之后才对结果集进行过滤，而 where 则是在聚合前刷选记录，如果能通过 where 字句限制记录的数目，那就能减少这方面的开销。
-  - HAVING 中的条件一般用于聚合函数的过滤，除此之外，应该将条件写在 where 字句中。
-  - where 和 having 的区别：where 后面不能使用组函数。
-* 移除外部连接查询
-  - 在两个表的行中放置占位符（空数据）来删除OUTER JOINS操作
+
+* 子查询：尽量使用JOIN来代替子查询.因为子查询需要嵌套查询,嵌套查询时会建立一张临时表,临时表的建立和删除都会有较大的系统开销,而连接查询不会创建临时表,因此效率比嵌套子查询高
+  - 可以一次性的完成很多逻辑上需要多个步骤才能完成的 SQL 操作，同时也可以避免事务或者表锁死，并且写起来也很容易
+  - 连接（JOIN）..之所以更有效率一些，是因为 MySQL 不需要在内存中创建临时表来完成这个逻辑上的需要两个步骤的查询工作
+  - union 和 union all 的差异：前者需要将结果集合并后再进行唯一性过滤操作，这就会涉及到排序，增加大量的 CPU 运算，加大资源消耗及延迟。
+  - 禁止大表使用JOIN查询、子查询
+  - 尽量使用inner join，避免left join
+  - 删除JOIN和WHERE子句中的计算字段
+
+* where子句
+  - 尽量避免使用负向查询NOT、!=、<>、!<、!>、NOT IN、NOT LIKE等，否则将引擎放弃使用索引而进行全表扫描。
+  - 尽量避免使用 or 来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。含有or的查询子句，如果要利用索引，则or之间的每个条件列都必须使用索引；如果没有索引，可以考虑增加索引。
+  - 区分in和exists， not in和not exists，造成了驱动顺序的改变
+    + exists，那么以外层表为驱动表，先被访问，如果是IN，那么先执行子查询。所以IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。
+    + 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。如何高效的写出一个替代not exists的sql语句？
+  - 对于 IN 做了相应的优化，即将 IN 中的常量全部存储在一个数组里面，而且这个数组是排好序的。对于连续的数值，能用 between 就不要用 in 了
+  - 在 where 子句中使用参数，也会导致全表扫描 select id from t where num = @num
+  - 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作
+  - c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
+  - 通过索引 MySQL建立的索引（B+Tree）通常是有序的，如果通过读取索引就完成group by操作，那么就可避免创建临时表和排序。因而使用索引进行group by的最重要的前提条件是所有group by的参照列（分组依据的列）来自于同一个索引，且索引按照顺序存储所有的keys（即BTREE index，而HASH index没有顺序的概念）。松散索引扫描和紧凑索引扫描的最大区别是是否需要扫描整个索引或者整个范围扫描。
+  + 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
+  - order by：尽量通过索引直接返回有序数据，减少额外的排序。MySQL中有两种排序方式：
+    + 在 where 及 order by 涉及的列上建立索引
+    + 通过有序索引顺序扫描直接返回有效数据，不需要额外的排序，操作效率较高
+    + filesort排序：对返回的数据进行排序，不是通过索引直接返回排序结果，有两种排序算法
+      * 一次扫描算法（较快）
+      * 两次扫描算法
+      * 适当加大系统变量`max_length_for_sort_data`的值，能够让MySQL选择更优化的filesort排序算法；适当加大`sort_buffer_size`排序区，尽量让排序在内存中完成，而不是通过创建临时表放在文件中进行。
+  - 优化 group by 语句
+    + 默认情况下，MySQL 会对 GROUP BY 分组的所有值进行排序。如果显式包括一个包含相同的列的 ORDER BY 子句，MySQL 可以毫不减速地对它进行优化，尽管仍然进行排序
+    + 如果查询包括 GROUP BY 但并不想对分组的值进行排序，可以指定 ORDER BY NULL 禁止排序 `SELECT col1, col2, COUNT(*) FROM table GROUP BY col1, col2 ORDER BY NULL ;`
+
 * 返回结果
   - 避免出现 select *:只获取必要的字段，避免产生严重的随机读问题,读取不需要的列会让优化器无法完成索引覆盖扫描这类优化，会影响优化器对执行计划的选择，也会增加网络带宽消耗，更会带来额外的 I/O，内存和 CPU 消耗
   - 限制工作数据集大小：查询语句带有子查询时，注意在子查询的内部语句上使用过滤
@@ -774,7 +760,8 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
       * 索引覆盖扫描
       * 增加汇总表
       * 增加内存缓存系统记录数据条数
-* 优化limit
+
+* 优化 limit
   - `SELECT * from sa_stockinfo ORDER BY StockAcc LIMIT 400, 5` 会查找405行所有列数据然后丢弃400
   - 替代为：`SELECT * FROM sa_stockinfo i JOIN (SELECT StockInfoID FROM sa_stockinfo ORDER BY StockAcc LIMIT 400,5)t ON i.StockInfoID = t.StockInfoID` 该查询会利用索引覆盖，较快找出符合条件的主键，然后在做联合查询，在数据量大的时候效果明显
 * 分页
@@ -788,49 +775,43 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
   - 利用表的覆盖索引来加速分页查询
   - 如果查询数据量超过30%，MYSQL不会使用索引
   - `select * from orders where id > (select id from orders order by id desc  limit 1000000, 1) order by id desc limit 0,10`
+* order by
+  - 随着分页偏移量越来越大，分页查询的性能也越来越低,偏移量是相对于匹配到的第一个索引值来的，如果偏移量很大，就又相当于进行全表扫描了
+    + 改变 where 语句中的偏移量起始值
+  - order by 条件要与 where 中条件一致，否则 order by 不会利用索引进行排序，对其他需要排序的操作也有效。比如 group by 、union 、distinct 等
+  - 不走age索引：`SELECT * FROM t order by age;` 走age索引：`SELECT * FROM t where age > 0 order by age;`
+    + 根据 where 条件和统计信息生成执行计划，得到数据
+    + 将得到的数据排序。当执行处理数据（order by）时，数据库会先查看第一步的执行计划，看 order by 的字段是否在执行计划中利用了索引。如果是，则可以利用索引顺序而直接取得已经排好序的数据。如果不是，则重新进行排序操作。
+    + 返回排序后的数据
+  - 尽量不要包含多个列的排序，如果需要最好给这些列创建复合索引
+  - 先过滤再排序：会用到过滤条件中的索引参数，但是排序会使用较慢的外部排序。因为这个结果集是经过过滤的，并没有什么索引参与
+  - 先排序再过滤：使用同一个索引，排序的优先级高于过滤的优先级。选择合适索引，在过滤的同时就排序了。扫描的行数会增加
+  - 如果排序字段没有用到索引，就尽量少排序
+  - 如果限制条件中其他字段没有索引，尽量少用 or，有一个不是索引字段，会造成该查询不走索引的情况。 使用 union all 或者是 union(必要的时候)的方式来代替“or”会得到更好的效果
+  - 不使用ORDER BY RAND()
+
 * 对于复杂查询，可以使用中间临时表暂存数据
+* 优先考虑 where、order by、GROUP BY 、JOIN 使用到字段，对<，<=，=，>，>=，BETWEEN，IN，以及某些时候的LIKE才会使用索引
+* IN适合主表大子表小，EXIST适合主表小子表大
+  - 尝试改为join查询
+* 尽量避免使用 or，会导致数据库引擎放弃索引进行全表扫描
+  - 用 union 代替 or
+* 尽量避免进行 null 值判断，会导致数据库引擎放弃索引进行全表扫描
+  - 可以给字段添加默认值 0，对 0 值进行判断
+* 避免使用 in 和 not in，会导致引擎走全表扫描
+  - 如果是连续数值，可以用 between 代替
+  - 如果是子查询，可以用 exists 代替
+* 查询条件不能用 <> 或者 !=
+  - 采用union聚合搜索结果
 * 拆分复杂 SQL 为多个小 SQL，避免大事务
   - 简单的 SQL 容易使用到 MySQL 的 QUERY CACHE。
   - 减少锁表时间特别是使用 MyISAM 存储引擎的表。
   - 可以使用多核 CPU
-* where子句
-  - 尽量避免使用负向查询NOT、!=、<>、!<、!>、NOT IN、NOT LIKE等，否则将引擎放弃使用索引而进行全表扫描。
-  - 尽量避免使用 or 来连接条件，如果一个字段有索引，一个字段没有索引，将导致引擎放弃使用索引而进行全表扫描。含有or的查询子句，如果要利用索引，则or之间的每个条件列都必须使用索引；如果没有索引，可以考虑增加索引。
-  - 区分in和exists， not in和not exists，造成了驱动顺序的改变
-    + exists，那么以外层表为驱动表，先被访问，如果是IN，那么先执行子查询。所以IN适合于外表大而内表小的情况；EXISTS适合于外表小而内表大的情况。
-    + 关于not in和not exists，推荐使用not exists，不仅仅是效率问题，not in可能存在逻辑问题。如何高效的写出一个替代not exists的sql语句？
-  - 对于 IN 做了相应的优化，即将 IN 中的常量全部存储在一个数组里面，而且这个数组是排好序的。对于连续的数值，能用 between 就不要用 in 了
-  - 在 where 子句中使用参数，也会导致全表扫描 select id from t where num = @num
-  - 在查询中存在常量相等where条件字段（索引中的字段），且该字段在group by指定的字段的前面或者中间。来自于相等条件的常量能够填充搜索keys中的gaps，因而可以构成一个索引的完整前缀。索引前缀能够用于索引查找。如果要求对group by的结果进行排序，并且查找字段组成一个索引前缀，那么MySQL同样可以避免额外的排序操作
-  - c2在c1,c3之前，c2='a'填充这个坑，组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c2 = 'a' group by c1,c3 c1在索引的最前面，c1=a和group by c2,c3组成一个索引前缀，因而能够使用紧凑索引扫描。 select c1,c2,c3 from t1 where c1 = 'a' group by c2,c3 使用紧凑索引扫描，执行计划Extra一般显示"using index"，相当于使用了覆盖索引。
-  - 通过索引 MySQL建立的索引（B+Tree）通常是有序的，如果通过读取索引就完成group by操作，那么就可避免创建临时表和排序。因而使用索引进行group by的最重要的前提条件是所有group by的参照列（分组依据的列）来自于同一个索引，且索引按照顺序存储所有的keys（即BTREE index，而HASH index没有顺序的概念）。松散索引扫描和紧凑索引扫描的最大区别是是否需要扫描整个索引或者整个范围扫描。
-  + 正常流程 group by操作在没有合适的索引可用的时候，通常先扫描整个表提取数据并创建一个临时表，然后按照group by指定的列进行排序。在这个临时表里面，对于每一个group的数据行来说是连续在一起的。完成排序之后，就可以发现所有的groups，并可以执行聚集函数（aggregate function）。可以看到，在没有使用索引的时候，需要创建临时表和排序。在执行计划中通常可以看到"Using temporary; Using filesort"。
-  - order by：尽量通过索引直接返回有序数据，减少额外的排序。MySQL中有两种排序方式：
-    + 在 where 及 order by 涉及的列上建立索引
-    + 通过有序索引顺序扫描直接返回有效数据，不需要额外的排序，操作效率较高
-    + filesort排序：对返回的数据进行排序，不是通过索引直接返回排序结果，有两种排序算法
-      * 一次扫描算法（较快）
-      * 两次扫描算法
-      * 适当加大系统变量`max_length_for_sort_data`的值，能够让MySQL选择更优化的filesort排序算法；适当加大`sort_buffer_size`排序区，尽量让排序在内存中完成，而不是通过创建临时表放在文件中进行。
-  - 优化 group by 语句
-    + 默认情况下，MySQL 会对 GROUP BY 分组的所有值进行排序。如果显式包括一个包含相同的列的 ORDER BY 子句，MySQL 可以毫不减速地对它进行优化，尽管仍然进行排序
-    + 如果查询包括 GROUP BY 但并不想对分组的值进行排序，可以指定 ORDER BY NULL 禁止排序 `SELECT col1, col2, COUNT(*) FROM table GROUP BY col1, col2 ORDER BY NULL ;`
 * ORM Object Relational Mapper
   - Lazy Loading：只有在需要的去取值的时候才会去真正的去做
   - 需要小心处理他们，否则可能最终创建了许多微型查询，这会降低数据库性能
   - 可以将多个查询批处理到事务中，其操作速度比向数据库发送单个查询快得多
-* 排序
-  - 如果排序字段没有用到索引，就尽量少排序
-  - 如果限制条件中其他字段没有索引，尽量少用 or，有一个不是索引字段，会造成该查询不走索引的情况。 使用 union all 或者是 union(必要的时候)的方式来代替“or”会得到更好的效果
-  - 不使用ORDER BY RAND()
 * 拒绝3B(big)：大sql，大事务，大批量
-* 子查询：尽量使用JOIN来代替子查询.因为子查询需要嵌套查询,嵌套查询时会建立一张临时表,临时表的建立和删除都会有较大的系统开销,而连接查询不会创建临时表,因此效率比嵌套子查询高
-  - 可以一次性的完成很多逻辑上需要多个步骤才能完成的 SQL 操作，同时也可以避免事务或者表锁死，并且写起来也很容易
-  - 连接（JOIN）..之所以更有效率一些，是因为 MySQL 不需要在内存中创建临时表来完成这个逻辑上的需要两个步骤的查询工作
-  - union 和 union all 的差异：前者需要将结果集合并后再进行唯一性过滤操作，这就会涉及到排序，增加大量的 CPU 运算，加大资源消耗及延迟。
-  - 禁止大表使用JOIN查询、子查询
-  - 尽量使用inner join，避免left join
-  - 删除JOIN和WHERE子句中的计算字段
 * 查询松散索引扫描（Loose Index Scan）与紧凑索引扫描（Tight Index Scan）
   + 松散索引扫描方式:分组操作和范围预测（如果有的话）一起执行完成的。不需要连续的扫描索引中得每一个元组，扫描时仅考虑索引中得一部分。当查询中没有where条件的时候，松散索引扫描读取的索引元组的个数和groups的数量相同。如果where条件包含范围预测，松散索引扫描查找每个group中第一个满足范围条件，然后再读取最少可能数的keys。松散索引扫描只需要读取很少量的数据就可以完成group by操作，因而执行效率非常高，执行计划中Etra中提示" using index for group-by"。松散索引扫描可以作用于在select list中其它形式的聚集函数，除了min()和max()之外，还支持：
     + AVG(DISTINCT), SUM(DISTINCT)和COUNT(DISTINCT)可以使用松散索引扫描。AVG(DISTINCT), SUM(DISTINCT)只能使用单一列作为参数。而COUNT(DISTINCT)可以使用多列参数。
@@ -843,9 +824,35 @@ explain select * from test FORCE INDEX(idx_c_b_a) where a>10 and b >10  order by
     + 如果查询中存在除了group by指定的列之外的索引其他部分，那么必须以常量的形式出现（除了min()和max()两个聚集函数）。比如，select c1,c3 from t1 group by c1,c2不能使用松散索引扫描。而select c1,c3 from t1 where c3 = 3 group by c1,c2可以使用松散索引扫描
     + 索引中的列必须索引整个数据列的值(full column values must be indexed)，而不是一个前缀索引。比如，c1 varchar(20), INDEX (c1(10)),这个索引没发用作松散索引扫描
     + 紧凑索引扫描方式下，先对索引执行范围扫描（range scan），再对结果元组进行分组。可能是全索引扫描或者范围索引扫描，取决于查询条件。当松散索引扫描条件没有满足的时候，group by仍然有可能避免创建临时表。如果在where条件有范围扫描，那么紧凑索引扫描仅读取满足这些条件的keys（索引元组），否则执行全索引扫描。这种方式读取所有where条件定义的范围内的keys，或者扫描整个索引。紧凑索引扫描，只有在所有满足范围条件的keys被找到之后才会执行分组操作
-* order by
-  - 随着分页偏移量越来越大，分页查询的性能也越来越低,偏移量是相对于匹配到的第一个索引值来的，如果偏移量很大，就又相当于进行全表扫描了
-    + 改变 where 语句中的偏移量起始值
+
+* 前缀索引
+  - 对字符串列进行索引，如果可能应该指定一个前缀长度。例如，如果有一个CHAR(255)的列，如果在前10个或20个字符内，多数值是惟一的，那么就不要对整个列进行索引
+  - 对一个VARCHAR(N)列创建索引时，通常取其50%（甚至更小）左右长度创建前缀索引就足以满足80%以上的查询需求了，没必要创建整列的全长度索引
+  - 短索引不仅可以提高查询速度而且可以节省磁盘空间和I/O操作
+* 复合（联合）索引:满足最左匹配
+  - 多个列上建立独立的索引并不能提高查询性能。理由非常简单，MySQL不知道选择哪个索引的查询效率更好
+    + 老版本，比如MySQL5.0之前就会随便选择一个列索引
+    + 新版本会采用合并索引的策略
+      * 当出现多个索引做相交操作时（多个AND条件），通常来说一个包含所有相关列索引要优于多个独立索引
+      * 当出现多个索引做联合操作时（多个OR条件），对结果集的合并、排序等操作需要耗费大量的CPU和内存资源，特别是当其中的某些索引的选择性不高，需要返回合并大量数据时，查询成本更高。所以这种情况下还不如走全表扫描。
+    + explain时如果发现有索引合并（Extra字段出现 Usingunion），应该好好检查一下查询和表结构是不是已经是最优的，如果查询和表都没有问题，那只能说明索引建的非常糟糕，应当慎重考虑索引是否合适，有可能一个包含所有相关列的多列索引更适合
+    + 多用复合索引，少用多个独立索引
+  - 索引顺序:把选择性更高字段放到索引的前面，这样通过第一个字段就可以过滤掉大多数不符合条件的数据
+    + 仅包含复合索引非前置列，不会走联合索引
+* 数据量大时，避免使用 where 1=1 条件
+  - 拼装 SQL 时进行判断，没 where 条件就去掉 where，有 where 条件就加 and
+* 避免在 where 条件 ORDER BY 中等号的左侧进行表达式、函数操作（是表达式的一部分，或者函数参数），会导致数据库引擎放弃索引进行全表扫描`select * from users where YEAR(adddate)<2007;`
+* 模糊查询:避免在字段开头使用，导致数据库引擎放弃索引进行全表扫描 like “%aaa%”, like “aaa%”可以使用索引
+  - 使用 MySQL 内置函数 INSTR（str，substr）来匹配，作用类似于 Java 中的 indexOf()，查询字符串出现的角标位置
+  - 使用 FullText 全文索引，用 match against 检索
+  - 数据量较大的情况，建议引用 ElasticSearch、Solr，亿级数据量检索速度秒级。
+  - 当表数据量较少（几千条儿那种），别整花里胡哨的，直接用 like '%xx%'
+* 隐式类型转换造成不使用索引：索引对列类型为 varchar，但给定的值为数值，涉及隐式类型转换，造成不能正确走索引
+
+* 正确使用 hint 优化语句：数据库系统的查询优化器并不一定总是能使用最优索引,使用 hint 指定优化器在执行时排除其他索引干扰而指定更优的执行计划：
+  - USE INDEX 在查询语句中表名的后面，添加 USE INDEX 来提供希望 MySQL 去参考索引列表，不再考虑其他可用的索引。 `SELECT col1 FROM table USE INDEX (mod_time, name)...`
+  - IGNORE INDEX 如果只是单纯的想让 MySQL 忽略一个或者多个索引  `SELECT col1 FROM table IGNORE INDEX (priority) ...`
+  - FORCE INDEX 为强制 MySQL 使用一个特定的索引 `SELECT col1 FROM table FORCE INDEX (mod_time) ...`
 
 ```sql
 SELECT A.xx , B.yy FROM A INNER JOIN B USING (c) WHERE A.xx IN (5 , 6)
