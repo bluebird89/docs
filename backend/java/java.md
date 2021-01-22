@@ -161,32 +161,26 @@ javac HelloWorld.java // 编译 HelloWorld.class文件
 java HelloWorld // 运行
 ```
 
+## 源码构建工具 ant -> maven -> gradle
+
+* [ant](./ant.md) 功能虽然也很强大，但是过于灵活，规范性不足，对目录结构及build.xml没有默认约定，10个程序员做同样的项目，可能最终出来的10个项目，目录结构和build.xml都不相同，而且没有统一的依赖项管理。
+* [maven](./maven.md)的出现，解决了规范的问题，也顺带解决了依赖项统一管理的问题，但是规范性又太强了，基本上可以认为是一种强规范，用久了之后，感觉灵活性显略不足，而且pom.xml采用xml结构，项目大了，xml就有些冗长。
+* [gradle](./gradle.md)则是综合了ant与maven的优点，吸收了ant中task的思想，然后把maven的目录规范及仓库思想也融合进来了，但是允许用户自由修改默认的规范（比如：源代码目录可以自己指定），另外配置文件采用groovy语言来书写（格式初看上去有点类似json，比较精减），注意：groovy是一门真正的【可编程】语言，而不是象css、html之类的标记性「符号」，所以从这个意义上讲，配置文件build.gradle本身就是一份源代码，这份源代码，最终交由gradle来处理执行，完成代码的构建工作。gradle的发展速度之快，是ant 与 maven所不能比拟的，看下gradle官网的文档就能感受到了，一个新兴的工具文档如此之齐全，可见大家对它的认可程度。
+
 ## JVM
 
 * 垃圾收集器
-
 * 类加载机制
-
 * Class文件结构
-
 * 参数调优
-
 * 字节码文件
-
 * 锁升级
-
 * JMM
-
 * JVM并发
-
 * JIT
-
 * 记录好日志
-
 * 对程序做好性能监控
-
 * 根据日志和性能监控数据修改程序
-
 * 使用专业工具通过不同的JVM参数进行压测并获得最佳配置
 
 ## JDK
@@ -237,8 +231,7 @@ String a = "\u0001";
 * 创建时，在内存中申请空间。变量为地址别名，值为存储内容
 * 内存管理系统根据变量的类型为变量分配存储空间，分配的空间只能用来储存该类型数据
 * 可以重新赋值，还可以赋值给其他变量 `=`是赋值语句
-
-- 成员变量（非静态变量）：声明在类中，方法体之外的变量。创建对象时实例化。可以被类中方法、构造方法和特定类的语句块访问
+* 成员变量（非静态变量）：声明在类中，方法体之外的变量。创建对象时实例化。可以被类中方法、构造方法和特定类的语句块访问
   - 一个对象被实例化之后，每个实例变量的值就跟着确定
   - 对象创建时创建，对象被销毁时销毁
   - 可以声明在使用前或者使用后
@@ -246,7 +239,6 @@ String a = "\u0001";
   - 对于类中的方法、构造方法或者语句块是可见的。一般情况下应该把实例变量设为私有。通过使用访问修饰符可以使实例变量对子类可见
   - 具有默认值。数值型变量的默认值是0，布尔型变量的默认值是false，引用类型变量的默认值是null。变量的值可以在声明时指定，也可以在构造方法中指定
   - 可以直接通过变量名访问。但在静态方法以及其他类中，就应该使用完全限定名：ObejectReference.VariableName
-
 * 类变量（静态变量）：声明在类中，方法体之外，必须声明为static类型
   - 无论一个类创建了多少个对象，类只拥有类变量的一份拷贝
   - 除了被声明为常量外很少使用。常量是指声明为public/private，final和static类型的变量,初始化后不可改变
@@ -1308,7 +1300,7 @@ JavaEE/JDBC/Weblogic
 * [AutoLoadCache](https://github.com/qiujiayu/AutoLoadCache):AutoLoadCache 是基于AOP+Annotation等技术实现的高效的缓存管理解决方案，实现缓存与业务逻辑的解耦，并增加异步刷新及“拿来主义机制”，以适应高并发环境下的使用。
 * [vert.x](https://github.com/eclipse-vertx/vert.x):Vert.x is a tool-kit for building reactive applications on the JVM <http://vertx.io>
 * [Sentinel](https://github.com/alibaba/Sentinel):A lightweight powerful flow control component enabling reliability and monitoring for microservices. (轻量级的流量控制、熔断降级 Java 库)
-* [SDKMAN](https://sdkman.io):The Software Development Kit Manager
+* [SDKMAN](https://sdkman.io):The Software Development Kit Manager,a tool for managing parallel versions of multiple Software Development Kits on most Unix-like systems
   - `curl -s "https://get.sdkman.io" | bash`
   - `source "$HOME/.sdkman/bin/sdkman-init.sh"`
 * Log
