@@ -832,7 +832,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 
 ## 实例
 
-* [cyanharlow/purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
+* [purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
 
 ## 课程
 
@@ -840,6 +840,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [Web-Dev-For-Beginners](https://github.com/microsoft/Web-Dev-For-Beginners) Get Started as a Web Developer
 * [HTML Dog](https://htmldog.com/)Everything HTML, CSS, and JavaScript,the most common languages used in making web pages.
 * [Frontend Masters](https://frontendmasters.com/)Advance Your Skills with In-Depth, Modern Front-End Engineering Courses
+* [frontend-bootcamp](https://github.com/microsoft/frontend-bootcamp):Frontend Workshop from HTML/CSS/JS to TypeScript/React/Redux https://microsoft.github.io/frontend-bootcamp/
 
 ## 面试
 

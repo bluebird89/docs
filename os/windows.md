@@ -47,7 +47,7 @@ systeminfo | findstr Build
 * 软件包管理
   - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation <https://chocolatey.org/>
     + 程序安装位置：`~\AppData\Local\Packages\`
-  - [Scoop](https://scoop.sh)
+  - [Scoop](https://github.com/lukesampson/scoop) A command-line installer for Windows. https://scoop.sh/
     + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
     + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
   - [winget-cli](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)

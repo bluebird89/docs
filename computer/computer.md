@@ -319,6 +319,7 @@ Little Endian
 * [计算机系统概论](https://www.amazon.cn/gp/product/B0011F9OQE)
 * [Introduction to Computer Organization with x86-64 Assembly Language & GNU/Linux](http://bob.cs.sonoma.edu/IntroCompOrg-x64/book.html)
 * [Introduction to Computing Explorations in Language, Logic, and Machines](https://www.cs.virginia.edu/~evans/ctbook/)
+* [Electronic References](https://csgordon.github.io/books.html)
 
 ## 项目
 

@@ -65,7 +65,7 @@ void traverse(TreeNode root) {
   - 乘法法则：嵌套代码的复杂度等于嵌套内外代码复杂度的乘积
   - 量级
     + O(1)
-    + O(logn)
+    + O(logn) O(log2 N) 的简写
     + O(n)
     + O(nlogn)
     + O(2^n)

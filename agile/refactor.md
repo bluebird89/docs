@@ -309,6 +309,9 @@
 * 架构腐化之谜
 * 修改代码的艺术
 * 《[重构：改善既有代码的设计（第2版）(Refactoring: Improving the Design of Existing Code)](https://www.amazon.cn/gp/product/B011LPUB42)》 Martin Fowler
+* [《系统重构与迁移指南》](https://github.com/phodal/migration) 手把手教你分析、评估现有系统、制定重构策略、探索可行重构方案、搭建测试防护网、进行系统架构重构、服务架构重构、模块重构、代码重构、数据库重构、重构后的架构守护 https://migration.ink/
+
+
 
 ## 参考
 
