@@ -263,31 +263,47 @@ def backtrack(路径, 选择列表):
   - 要求的输入结果和 BFS 是不同的
     + 层序遍历要求区分每一层，也就是返回一个二维数组
     + BFS 的遍历结果是一个一维数组，无法区分每一层
-* DFS（深度优先搜索）
-  - 遍历使用递归,隐含地使用了系统的栈，不需要自己维护一个数据结构
-* BFS（广度优先搜索）
-  - 使用队列数据结构
-  - 层序遍历
-  - 参考
-    + [BFS 的使用场景：层序遍历、最短路径问题](https://mp.weixin.qq.com/s?__biz=MzA5ODk3ODA4OQ==&mid=2648167212&idx=1&sn=6af5ffe5b69075b21bb4743ddcee4e7c&chksm=88aa236abfddaa7cae70b42edb299d0a52d9f1cc4fc1fdba1116972fc0ca0275b8bfdf10851b)
 
-## 最短路径算法
+## Depth First Search DFS 深度优先搜索
 
+- 遍历使用递归,隐含地使用了系统的栈，不需要自己维护一个数据结构
+* 从图中一个未访问的顶点 V 开始，沿着一条路一直走到底，然后从这条路尽头的节点回退到上一个节点，再从另一条路开始走到底...，不断递归重复此过程，直到所有的顶点都遍历完成，它的特点是不撞南墙不回头，先走完一条路，再换一条路继续走
+* 递归实现,如果层级过深，很容易导致栈溢出
+* 非递归实现
+  - 对于每个节点来说，先遍历当前节点，然后把右节点压栈，再压左节点
+  - 弹栈，拿到栈顶的节点，如果节点不为空，重复步骤 1， 如果为空，结束遍历
+* leetcode 104，111: 给定一个二叉树，找出其最大/最小深度
+
+## Breath First Search BFS 广度优先搜索
+
+* 最短路径问题 shorterst-path problem:是否有从A到B的路径,如果有，广度优先搜索将找出最短路径
+* 方法
+  - 用图来建立模型，再使用广度优先搜索来解决问题
+  - 从图的一个未遍历的节点出发，先遍历这个节点的相邻节点，再依次遍历每个相邻节点的相邻节点
+  - 使用队列弹出当前元素检查
+  - 压入当前元素的子元素
+  - 按加入顺序检查搜索列表中的人，否则找到的就不是最短路径，因此搜索列表必须是队列
+  - 对于检查过的人，务必不要再去检查，否则可能导致无限循环
+* 层序遍历
+* 参考
+  - [使用场景：层序遍历、最短路径问题](https://mp.weixin.qq.com/s?__biz=MzA5ODk3ODA4OQ==&mid=2648167212&idx=1&sn=6af5ffe5b69075b21bb4743ddcee4e7c&chksm=88aa236abfddaa7cae70b42edb299d0a52d9f1cc4fc1fdba1116972fc0ca0275b8bfdf10851b)
+* LeetCode 102.Binary Tree Level Order Traversal:给你一个二叉树，请你返回其按层序遍历得到的节点值。（即逐层地，从左到右访问所有节点）
+* LeetCode 1162. As Far from Land as Possible 离开陆地的最远距离（Medium）最短路径：结点之间最近路径
 * Floyd
 
-## Dijkstra:带权最短路径问题
+## Dijkstra 狄克斯特拉算法
 
+* 带权最短路径问题:每条边都有关联数字的图
+* 狄克斯特拉算法找出总权重最小路径，只适用于有向无环图(directed acyclic graph，DAG)
 * [10行实现最短路算法——Dijkstra](https://mp.weixin.qq.com/s/fZwTBch-pkPrQ5W3AQti1A)
-
 * 最小生成树算法：Prim，Kruskal
-
-* 实际常用算法：关键路径、
-
+* 实际常用算法：关键路径
 * 二分图匹配：配对、匈牙利算法
-
 * 拓展：中心性算法、社区发现算法
 
 ## [拓扑排序](https://mp.weixin.qq.com/s/MhbBwkMqsfAe3ep8cdMO4w)
+
+* 列表是有序的。如果任务A依赖于任务B，在列表中任务A就必须在任务B后面
 
 ## [动态规划](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484731&idx=1&sn=f1db6dee2c8e70c42240aead9fd224e6)
 
@@ -378,15 +394,17 @@ def backtrack(路径, 选择列表):
 
 ## 图书
 
+* 算法图解
+* [算法导论 Introduction to Algorithms](https://www.bilibili.com/video/av48922404)
+  - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
+* [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
+  - [ppt](https://www.cs.princeton.edu/~wayne/kleinberg-tardos/)
 * 《大话数据结构》
 * 《剑指offer》
 * 编程珠玑
-* [算法导论 Introduction to Algorithms](https://www.bilibili.com/video/av48922404)
-  - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
 * 数论
 * The Algorithm Design Manual
   - Steven Skiena’s lectures
-* [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
 * [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
@@ -395,7 +413,7 @@ def backtrack(路径, 选择列表):
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
-* 算法图解
+* 算法设计
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 * [Problem Solving with Algorithms and DataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)

@@ -469,7 +469,7 @@ nsloop
 ![socket2](../static/socket2.png "socket2")
 ![socket连接](../_static/tcp.png "Optional title")
 
-```c++
+```c
 int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 
 int listen(int sockfd, int backlog);
@@ -868,6 +868,8 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
     + 在客户本地安装 VPN 软件，并配置客户本地网关、云端网关；
     + 在云端和客户本地 VPN 中配置 VPN 隧道（tunnel）并连通指定子网，测试流量正常。
   - 场景：混合云架构
+
+## 网络抖动
 
 ## 测速
 

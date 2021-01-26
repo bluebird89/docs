@@ -1470,6 +1470,14 @@ import packageMain from 'commonjs-package';
 // 原始模块是 CommonJS 格式,支持两种格式的模块
 import cjsModule from '../index.js';
 export const foo = cjsModule.foo;
+
+
+
+    浏览器（script,AMD,CMD） 预编译工具（webpack,rollup,fis） Node
+引用文件  index.aio.js  index.esm.js  index.js
+模块化方案 UMD ES Module commonjs
+自身依赖  打包  打包  打包
+第三方依赖 打包  不打包 不打包
 ```
 
 ## Modules
@@ -2046,7 +2054,6 @@ try {
   - [plotly.js](https://github.com/plotly/plotly.js):The open source JavaScript graphing library that powers plotly https://plot.ly/javascript/
   - [apexcharts.js](https://github.com/apexcharts/apexcharts.js):A JavaScript Chart Library
   - [joint](https://github.com/clientIO/joint):JavaScript diagramming library http://www.jointjs.com
-  - [kepler.gl](https://github.com/uber/kepler.gl):https://uber.github.io/kepler.gl
   - [f2](https://github.com/antvis/f2):📱📈An elegant, interactive and flexible charting library for mobile. https://antv.alipay.com/zh-cn/f2/3.x/index.html
   - [zeu](https://github.com/shzlw/zeu):A JavaScript library for real-time visualization
   - [g2](https://github.com/antvis/g2):The Grammar of Graphics in JavaScript https://antv.alipay.com/zh-cn/g2/3.x/index.html

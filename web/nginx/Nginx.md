@@ -1618,6 +1618,26 @@ acme.sh --remove -d www.bluebird89.online # 停止自動續期憑證
 nginx -s reload
 ```
 
+## HTTP/2
+
+```sh
+strings /usr/sbin/nginx | grep _module | grep -v configure| sort | grep ngx_http_v2_module
+
+server {
+        server_name example.com www.example.com;
+        access_log  /var/log/nginx/example.com_access.log;
+        error_log  /var/log/nginx/example.com_error.log;
+
+        listen [::]:443 ssl ipv6only=on http2; # managed by Certbot
+        listen 443 ssl http2; # managed by Certbot
+
+        ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+```
+
 ## docker
 
 * www目录将映射为nginx容器配置的虚拟目录
@@ -1679,8 +1699,8 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
 ## 模块
 
-* [winshining/nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
-* [arut/nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
+* [nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
+* [nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
 
 ## 图书
 

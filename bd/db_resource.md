@@ -96,7 +96,7 @@
   - [WPI数据集](http://computing.wpi.edu/dataset.html)：交通灯、行人和车道检测的数据集。
   * [china-city-subway](https://github.com/Seaony/china-city-subway):Chinese city subway database
 * 交通
-  - [uber/kepler.gl](https://github.com/uber/kepler.gl):<https://uber.github.io/kepler.gl>  <http://kepler.gl/>
+  - [kepler.gl](https://github.com/uber/kepler.gl):<https://uber.github.io/kepler.gl>  <http://kepler.gl/>
 * 临床
   - [MIMIC-III](https://mimic.physionet.org/)：MIT计算生理学实验室的公开数据集，标记了约40000名重症监护患者的健康数据，包括人口统计学、生命体征、实验室测试、药物等维度
   - [Centers for Disease Control and Prevention](https://www.cdc.gov/datastatistics/index.html):包括各种健康主题，可让你访问大量可浏览和可搜索的数据。甚至可以通过各种与主题相关的网站创建自己过滤的数据集。

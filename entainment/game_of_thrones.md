@@ -139,7 +139,7 @@
 
 * 发生在先民与森林之子的和平条约签订后，标志着黎明纪元的结束和英雄纪元的开始。这是一个充满传奇色彩的时代，人们所知的这段时期的历史更接近于神话
 
-### 北境 the North 史塔克——先民的种子 Stark
+## 北境 the North 史塔克——先民的种子 Stark
 
 ![](../_static/Stark.jpg)
 
@@ -1014,6 +1014,8 @@ I pledge my life and honor to the Night’s Watch, for this night and all the ni
 
 ## TV
 
+* Season 4
+  - 第八集
 * 权力的游戏 Game of Thrones Season 7
 * 权力的游戏 第八季 Game of Thrones Season 8 (2019)
   - 我想最英雄地方在于，每个角色都必将死去，都或许无法战胜命运，但重要的是，你怎样面对最后的时刻。席恩选择了冲锋，选择了一种让我们会为他和他走过的漫长旅程感到骄傲的方式牺牲

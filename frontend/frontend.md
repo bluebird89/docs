@@ -619,6 +619,8 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 ![前后分离式 Web 架构示意](../static/fbs.png "前后分离式 Web 架构示意")
 ![淘宝基于 Node.js 的前后端分离分层](../static/taobao.jpg "淘宝基于 Node.js 的前后端分离分层")
 
+## BFF Backends For Frontends 服务于前端的后端
+
 ## 实现
 
 * 统一认识

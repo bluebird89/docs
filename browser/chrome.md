@@ -9,6 +9,7 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 * Awesome Screenshot: Screen Video Recorder 网页截图 + 录屏，代替 FireShot
 * Axure RP Extension for Chrome
 * ABP
+* [bypass-paywalls-chrome](https://github.com/iamadamdev/bypass-paywalls-chrome)Bypass Paywalls web browser extension for Chrome and Firefox.
 * Chrome Cleaner Pro:为 Chrome 加速
 * chrono:让Chrome下载资源更容易
 * Click&Clean:清除历史记录

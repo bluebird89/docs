@@ -1165,6 +1165,7 @@ function fatalErrorHandler()
 
 * [Magento2解决方案专家认证](https://u.magento.com/certified-magento2-solution-specialist):75个多项选择题 90分钟完成考试
 * [marketplace](https://marketplace.magento.com)
+* [mageplaza](https://www.mageplaza.com)
 * [Docs](https://devdocs.magento.com/)
 * [samples](https://github.com/magento/magento2-samples)
 * <https://magento.com/technical-resources>

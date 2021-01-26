@@ -803,6 +803,10 @@ replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
 replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 ```
 
+## 测试
+
+* gocheck
+
 ## 时间
 
 * 在命令行上，flag 通过 time.ParseDuration 支持了 time.Duration
@@ -824,6 +828,8 @@ replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
   - 对于在for-loop里的固定的正则表达式，一定要使用 regexp.Compile() 编译正则表达式。性能会得升两个数量级。
   - 如果需要更高性能的协议，要考虑使用 protobuf 或 msgp 而不是JSON，因为JSON的序列化和反序列化里使用了反射。
   - 使用map的时候，使用整型的key会比字符串的要快，因为整型比较比字符串比较要快。
+
+## Sync
 
 ### GoSublime
 

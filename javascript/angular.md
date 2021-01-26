@@ -2,6 +2,7 @@
 
 AngularJS - HTML enhanced for web apps! <https://angularjs.org>
 
+* AngularJS 是 Google 于 2009 年发布的 Web 增强框架，一度作为 Web 开发主流方案，但是随着 Google 宣布 AngularJS 的 final LTS 计划
 * 渐进式Web应用：借助现代化Web平台的力量，交付app式体验。高性能、离线化、零安装。
 * 原生：借助来自Ionic、NativeScript和React Native中的技术与思想，构建原生移动应用。
 * 桌面：借助你已经在Web开发中学过的能力，结合访问原生操作系统API的能力，创造能在桌面环境下安装的应用，横跨Mac、Windows和Linux平台。
