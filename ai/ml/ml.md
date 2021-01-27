@@ -372,44 +372,33 @@
   - 反向传播（Back-propagation）
 * 自动编码器（Auto-Encoder）
 
-## 图书
+## 面试
 
-* [《Scikit-Learn 与 TensorFlow 机器学习实用指南》](https://github.com/ageron/handson-ml)
-* 机器学习：算法视角（原书第2版）
-* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
-* 百面机器学习
-  - 知识：主要是指对machine learning相关知识和理论的储备
-  - 工具：将machine learning知识应用于实际业务的工具
-  - 逻辑：举一反三的能力，解决问题的条理性，你发散思维的能力，你的聪明程度
-  - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
-* [机器学习 西瓜书](https://github.com/datawhalechina/pumpkin-book)周志华,基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等
-  - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
-  - [Machine-learning-learning-notes](https://github.com/Vay-keen/Machine-learning-learning-notes)
-  + [读书笔记](https://www.cnblogs.com/limitlessun/p/8505647.html#_label0)
-  + [公式推导](https://datawhalechina.github.io/pumpkin-book/#/)
-  + [南瓜书](https://github.com/datawhalechina/pumpkin-book)
-  + [课后习题](https://zhuanlan.zhihu.com/c_1013850291887845376)
-* 《Pattern Recognition and Machine Learning》
-* 《Reinforcement Learning: An Introduction》：强化学习入门
-* 《机器学习实战：基于Scikit-Learn和TensorFlow》
-  - [源代码](https://github.com/ageron/handson-ml)
-  - [翻译](https://github.com/apachecn/hands-on-ml-zh)
-* [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
-* [Model-Based Machine Learning](http://mbmlbook.com/index.html)
-* [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
-* [machine-learning-systems-design](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
-* 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
-* 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
-* 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
-* 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
-* 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
-* 《漫谈人工智能》 集智俱乐部
-* [dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! <http://hangtwenty.github.io/dive-into-machine-learning/>
-* [机器学习基础 Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/)
-* 深入理解Tensor Flow：架构
-* [Mathematics for Machine Learning](https://mml-book.github.io/book/mml-book.pdf)
-* [hands-on-machine-learning](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
-  - [handson-ml](https://github.com/ageron/handson-ml):A series of Jupyter notebooks that walk you through the fundamentals of Machine Learning and Deep Learning in python using Scikit-Learn and TensorFlow.
+* 在介绍自己实习时候用过XGBoost预测股票涨跌的过程中，就会由浅入深依次考察下列问题：
+  - GBDT的原理（知识）
+  - 决策树节点分裂时是如何选择特征的？（知识）
+  - 写出Gini Index和Information Gain的公式并举例说明（知识）
+  - 分类树和回归树的区别是什么？（知识）
+  - 与Random Forest作比较，并以此介绍什么是模型的Bias和Variance（知识）
+  - XGBoost的参数调优有哪些经验（工具）
+  - XGBoost的正则化是如何实现的（工具）
+  - XGBoost的并行化部分是如何实现的（工具）
+  - 为什么预测股票涨跌一般都会出现严重的过拟合现象（业务）
+  - 如果选用一种其他的模型替代XGBoost或者改进XGBoost你会怎么做，为什么？（业务+逻辑+知识）
+
+## 实战
+
+* [Kaggle](https://www.kaggle.com/)
+  - [kaggle](https://github.com/apachecn/kaggle):Kaggle 项目实战（教程） = 文档 + 代码 + 视频
+  - [Kaggle 路线](https://github.com/apachecn/kaggle)
+  - [如何赢得数据科学竞赛：向顶尖 Kaggler 学习（How to Win a Data Science Competition: Learn from Top Kagglers）](https://www.coursera.org/learn/competitive-data-science)
+* [image-net](http://www.image-net.org/)
+* [天池大数据](https://tianchi.aliyun.com/home/)
+* [datacastle](http://www.pkbigdata.com/)
+* [datafountain](https://www.datafountain.cn/)
+* [biendata](https://biendata.com/)
+* [kesci](https://www.kesci.com/)
+* [Jdata](https://jdata.jd.com/)
 
 ## 教程
 
@@ -463,34 +452,45 @@
 * [Machine-Learning-Study-Path-March-2019](https://github.com/clone95/Machine-Learning-Study-Path-March-2019)
 * [mlcourse.ai](https://github.com/Yorko/mlcourse.ai):Open Machine Learning Course <https://mlcourse.ai>
 * [golearn](https://github.com/sjwhitworth/golearn):Machine Learning for Go
+* [Mathematics for Machine Learning Specialization（面向机器学习的数学专项课程系列）](http://coursegraph.com/coursera-specializations-mathematics-machine-learning):For a lot of higher level courses in Machine Learning and Data Science, you find you need to freshen up on the basics in maths – stuff you may have studied before in school or university, but which was taught in another context, or not very intuitively, such that you struggle to relate it to how it’s used in Computer Science. This specialisation aims to bridge that gap, getting you up to speed in the underlying maths, building an intuitive understanding, and relating it to Machine Learning and Data Science. In the first course on Linear Algebra we look at what linear algebra is and how it relates to data. Then we look through what vectors and matrices are and how to work with them. The second course, Multivariate Calculus, builds on this to look at how to optimise fitting functions to get good fits to data. It starts from introductory calculus and then uses the matrices and vectors from the first course to look at data fitting. The third course, Dimensionality Reduction with Principal Components Analysis, uses the maths from the first two courses to do simple optimisation for the situation where you don’t have an understanding of how the data variables relate to each other. At the end of this specialisation you will have gained the prerequisite mathematical knowledge to continue your journey and take more advanced courses in machine learning.
+  - [Mathematics for Machine Learning: Linear Algebra（面向机器学习的数学：线性代数）](http://coursegraph.com/coursera-linear-algebra-machine-learning):vectors and matrices. Then we look through what vectors and matrices are and how to work with them, including the knotty problem of eigenvalues and eigenvectors, and how to use these to solve problems. Finally we look at how to use these to do fun things with datasets – like how to rotate images of faces and how to extract eigenvectors to look at how the Pagerank algorithm works. Since we’re aiming at data-driven applications, we’ll be implementing some of these ideas in code, not just on pencil and paper. Towards the end of the course, you’ll write code blocks and encounter Jupyter notebooks in Python, but don’t worry, these will be quite short, focussed on the concepts, and will guide you through if you’ve not coded before. At the end of this course you will have an intuitive understanding of vectors and matrices that will help you bridge the gap into linear algebra problems, and how to apply these concepts to machine learning.
+  - [Mathematics for Machine Learning: Multivariate Calculus（面向机器学习的数学：多变量微积分）](http://coursegraph.com/coursera-multivariate-calculus-machine-learning):This course offers a brief introduction to the multivariate calculus required to build many common machine learning techniques. We start at the very beginning with a refresher on the “rise over run” formulation of a slope, before converting this to the formal definition of the gradient of a function. We then start to build up a set of tools for making calculus easier and faster. Next, we learn how to calculate vectors that point up hill on multidimensional surfaces and even put this into action using an interactive game. We take a look at how we can use calculus to build approximations to functions, as well as helping us to quantify how accurate we should expect those approximations to be. We also spend some time talking about where calculus comes up in the training of neural networks, before finally showing you how it is applied in linear regression models. This course is intended to offer an intuitive understanding of calculus, as well as the language necessary to look concepts up yourselves when you get stuck. Hopefully, without going into too much detail, you’ll still come away with the confidence to dive into some more focused machine learning courses in future.
+  - [Mathematics for Machine Learning: PCA（面向机器学习的数学：主成分分析）](http://coursegraph.com/coursera-pca-machine-learning):This course introduces the mathematical foundations to derive Principal Component Analysis (PCA), a fundamental dimensionality reduction technique. We’ll cover some basic statistics of data sets, such as mean values and variances, we’ll compute distances and angles between vectors using inner products and derive orthogonal projections of data onto lower-dimensional subspaces. Using all these tools, we’ll then derive PCA as a method that minimizes the average squared reconstruction error between data points and their reconstruction. At the end of this course, you’ll be familiar with important mathematical concepts and you can implement PCA all by yourself. If you’re struggling, you’ll find a set of jupyter notebooks that will allow you to explore properties of the techniques and walk you through what you need to do to get on track. If you are already an expert, this course may refresh some of your knowledge.
 
-## 实战
+## 图书
 
-* [Kaggle 主页](https://www.kaggle.com/)
-* [apachecn/kaggle](https://github.com/apachecn/kaggle):Kaggle 项目实战（教程） = 文档 + 代码 + 视频
-* [Kaggle 路线](https://github.com/apachecn/kaggle)
-* [如何赢得数据科学竞赛：向顶尖 Kaggler 学习（How to Win a Data Science Competition: Learn from Top Kagglers）](https://www.coursera.org/learn/competitive-data-science)
-* [image-net](http://www.image-net.org/)
-* 天池大数据： <https://tianchi.aliyun.com/home/>
-* datacastle： <http://www.pkbigdata.com/>
-* datafountain： <https://www.datafountain.cn/>
-* biendata： <https://biendata.com/>
-* kesci： <https://www.kesci.com/>
-* Jdata: <https://jdata.jd.com/>
-
-## 面试
-
-* 在介绍自己实习时候用过XGBoost预测股票涨跌的过程中，他就会由浅入深依次考察下列问题：
-  - GBDT的原理（知识）
-  - 决策树节点分裂时是如何选择特征的？（知识）
-  - 写出Gini Index和Information Gain的公式并举例说明（知识）
-  - 分类树和回归树的区别是什么？（知识）
-  - 与Random Forest作比较，并以此介绍什么是模型的Bias和Variance（知识）
-  - XGBoost的参数调优有哪些经验（工具）
-  - XGBoost的正则化是如何实现的（工具）
-  - XGBoost的并行化部分是如何实现的（工具）
-  - 为什么预测股票涨跌一般都会出现严重的过拟合现象（业务）
-  - 如果选用一种其他的模型替代XGBoost或者改进XGBoost你会怎么做，为什么？（业务+逻辑+知识）
+* 机器学习：算法视角（原书第2版）
+* Spark机器学习（第2版）》 作者：[印]拉结帝普·杜瓦 , [印]曼普利特·辛格·古特拉 , [南非]尼克·彭特里思 译者：蔡立宇 , 黄章帅 , 周济民
+* 百面机器学习
+  - 知识：主要是指对machine learning相关知识和理论的储备
+  - 工具：将machine learning知识应用于实际业务的工具
+  - 逻辑：举一反三的能力，解决问题的条理性，你发散思维的能力，你的聪明程度
+  - 业务：深入理解所在行业的商业模式，从业务中发现motivation并进而改进模型算法的能力
+* [机器学习 西瓜书](https://github.com/datawhalechina/pumpkin-book)周志华,基本涵盖机器学习的所有分支，如监督学习，无监督学习，半监督学习，强化学习，特征选择等
+  - [在线阅读](https://datawhalechina.github.io/pumpkin-book/)
+  - [Machine-learning-learning-notes](https://github.com/Vay-keen/Machine-learning-learning-notes)
+  + [读书笔记](https://www.cnblogs.com/limitlessun/p/8505647.html#_label0)
+  + [公式推导](https://datawhalechina.github.io/pumpkin-book/#/)
+  + [南瓜书](https://github.com/datawhalechina/pumpkin-book)
+  + [课后习题](https://zhuanlan.zhihu.com/c_1013850291887845376)
+* 《Pattern Recognition and Machine Learning》
+* 《Reinforcement Learning: An Introduction》：强化学习入门
+*  [Hands-on Machine Learning with Scikit-Learn and TensorFlow Scikit-Learn 与 TensorFlow 机器学习实用指南](https://www.oreilly.com/library/view/hands-on-machine-learning/9781491962282/ch01.html)
+  - [源代码](https://github.com/ageron/handson-ml):A series of Jupyter notebooks that walk you through the fundamentals of Machine Learning and Deep Learning in python using Scikit-Learn and TensorFlow.
+  - [翻译](https://github.com/apachecn/hands-on-ml-zh)
+* [《面向机器学习的特征工程》](https://github.com/apachecn/feature-engineering-for-ml-zh)
+* [Model-Based Machine Learning](http://mbmlbook.com/index.html)
+* [Evolutionary Learning: Advances in Theories and Algorithms）](https://www.springer.com/cn/book/9789811359552)
+* [machine-learning-systems-design](https://github.com/chiphuyen/machine-learning-systems-design):A booklet on machine learning systems design with exercises
+* 《[数据之巅](https://www.amazon.cn/gp/product/B00JUE9DXW)》
+* 《[矩阵分析](https://www.amazon.cn/gp/product/B00NTM5GK0)》
+* 《[机器学习](https://www.amazon.cn/gp/product/B002WC7NH2)》
+* 《[机器学习导论](https://www.amazon.cn/gp/product/B01AG3ZV9K)》
+* 《[机器学习实战](https://www.amazon.cn/gp/product/B00D747PTK)》
+* 《漫谈人工智能》 集智俱乐部
+* [dive-into-machine-learning](https://github.com/hangtwenty/dive-into-machine-learning):Dive into Machine Learning with Python Jupyter notebook and scikit-learn! <http://hangtwenty.github.io/dive-into-machine-learning/>
+* [机器学习基础 Foundations of Machine Learning](https://cs.nyu.edu/~mohri/mlbook/)
+* [Mathematics for Machine Learning](https://mml-book.github.io/book/mml-book.pdf)
 
 ## 工具
 

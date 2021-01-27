@@ -82,6 +82,7 @@ deactivate
 * [tensorflow_cookbook](https://github.com/nfmcclure/tensorflow_cookbook):Code for Tensorflow Machine Learning Cookbook
 * 《TensorFlow 技术解析与实战》  李嘉璇
 * TensorFlow：实战Google深度学习框架
+* 深入理解Tensor Flow：架构
 
 ## 工具
 

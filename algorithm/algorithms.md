@@ -131,7 +131,7 @@ public int factorial(int n) {
 * 时间复杂度: O(nlogn)
 * 空间复杂度
 
-### 二分查找（Binary Search）
+### 二分查找 Binary Search
 
 折半查找要求线性表必须采用顺序存储结构，而且表中元素按关键字有序排列。时间复杂度可以表示O(h)=O(log2n)
 
@@ -194,14 +194,10 @@ select * from t1 where b <= 2; # 定位到索引的最后一个2，然后开始�
     + 敏感词过滤系统
     + 搜索框联想功能
 
-## 数组操作
-
 ## 回溯
 
 * 在一棵决策树上做遍历的过程
-
 - 决策树形状主要取决于每个结点处可能的分支，就是在每次做决策时，“可以选什么”、 “有什么可选的”
-
 * 核心就是 for 循环里面的递归，在递归调用**之前做选择**，在递归调用**之后撤销选择**
 * backtrack函数其实就像一个指针，在这棵树上游走，同时要正确维护每个节点的属性，每当走到树的底层，其「路径」就是一个全排列
 * 路径：已经做出的选择
@@ -294,12 +290,18 @@ def backtrack(路径, 选择列表):
 ## Dijkstra 狄克斯特拉算法
 
 * 带权最短路径问题:每条边都有关联数字的图
-* 狄克斯特拉算法找出总权重最小路径，只适用于有向无环图(directed acyclic graph，DAG)
+* 狄克斯特拉算法找出总权重最小路径，只适用于有向无环图(directed acyclic graph，DAG).
+* 如果有负权边，就不能使用狄克斯特拉算法
+  - 对于处理过的节点，没有前往该节点的更短路径。 这种假设仅在没有负权边时才成立
 * [10行实现最短路算法——Dijkstra](https://mp.weixin.qq.com/s/fZwTBch-pkPrQ5W3AQti1A)
 * 最小生成树算法：Prim，Kruskal
 * 实际常用算法：关键路径
 * 二分图匹配：配对、匈牙利算法
 * 拓展：中心性算法、社区发现算法
+
+## 贝尔曼.福德算法 Bellman-Ford algorithm
+
+* 处理包含负权边的图
 
 ## [拓扑排序](https://mp.weixin.qq.com/s/MhbBwkMqsfAe3ep8cdMO4w)
 
@@ -307,24 +309,47 @@ def backtrack(路径, 选择列表):
 
 ## [动态规划](https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247484731&idx=1&sn=f1db6dee2c8e70c42240aead9fd224e6)
 
-* 树形DP：01背包问题
+* 先解决子问题，再逐步解决大问题
+* 树形DP：背包问题
 * 线性DP：最长公共子序列、最长公共子串
 * 区间DP：矩阵最大值（和以及积）
 * 数位DP：数字游戏
 * 状态压缩DP：旅行商
+* 方法
+  - 在给定约束条件下找到最优解，每种动态规划解决方案都涉及网格
+  - 单元格中的值通常就是要优化的值
+  - 在问题可分解为彼此独立且离散的子问题时，就可使用动态规划来解决
+  - 每个单元格都是一个子问题，因此应考虑如何将问题分成子问题，这有助于找出网格的坐标轴
 * 步骤
-  - 定义子问题:子问题是和原问题相似，但规模较小的问题
+  - 定义子问题:子问题是和原问题相似，但规模较小问题
     + 原问题要能由子问题表示
     + 一个子问题的解要能通过其他子问题的解求出
     + 有的题目需要定义二维、三维的子问题
   - **写出子问题的递推关系**
     + 需要分情况讨论，有复杂的 max、min、sum 表达式
-  - 确定 DP 数组的计算顺序,有两种计算顺序
-    + 自顶向下的、使用备忘录的递归方法
-    + 自底向上的、使用 DP 数组的循环方法
+  - 确定 DP 数组计算顺序
+    + 自顶向下：备忘录递归方法
+    + 自底向上： DP 数组循环方法
   - 空间优化
 * reference
   - [动态规划的解题四步骤](https://mp.weixin.qq.com/s/hSAID_hOPGy_DKleq3_DdA)
+
+## NP完全问题
+
+* 需要计算所有的解，并从中选出最小/最短 的那个
+* 识别
+  - 元素较少时算法的运行速度非常快，但随着元素数量的增加，速度会变得非常慢。
+  - 涉及“所有组合”的问题通常是NP完全问题。
+  - 不能将问题分成小问题，必须考虑各种可能的情况。这可能是NP完全问题。
+  - 如果问题涉及序列(如旅行商问题中的城市序列)且难以解决，它可能就是NP完全问题。
+  - 如果问题涉及集合(如广播台集合)且难以解决，它可能就是NP完全问题。
+  - 如果问题可转换为集合覆盖问题或旅行商问题，那它肯定是NP完全问题。
+* 最佳做法是使用近似算法
+  - 贪婪算法易于实现、运行速度快，是不错的近似算法
+
+## 贪婪
+
+* 寻找局部最优解，企图以这种方式获得全局最优解
 
 ## 流算法
 
@@ -343,10 +368,45 @@ def backtrack(路径, 选择列表):
 * 下一次要移动的次数 = 成功匹配的位数 - 匹配值
 * 在同一字符串中出现两种相同的字符，比如上面中的 AB，由两个字符组成的，所以匹配值为 2，同时在匹配的过程中，如果 D 前边的字符能够匹配，则子串往后移动 3 位，则再次匹配 AB
 
+## K 最近邻算法 k-nearest neighbours，KNN
+
+* 特征抽取：将物品转换为一系列可比较的数字，能否挑选合适的特征事关KNN算法的成败
+* 训练(training)
+* 朴素贝叶斯分类器(Naive Bayes classifier)
+* 分类：进行编组
+* 回归 regression：预测结果
+
 ## bitmap
+
+## 布隆过滤器 Bloom Filter
+
+* 1970年由布隆提出的。实际上是一个很长的二进制向量和一系列随机映射函数，可以用于检索一个元素是否在一个集合中
+* 优点是空间效率和查询时间都远远超过一般的算法
+* 缺点是有一定的误识别率和删除困难
+* 某个值存在时，这个值 可能不存在；当它说不存在时，那么 一定不存在
+* 使用 contains 方法判断某个对象是否存在时，它可能会误判。但是布隆过滤器也不是特别不精确，只要参数设置的合理，它的精确度可以控制的相对足够精确，只会有小小的误判概率。
+* 场景
+  - 大数据判断是否存在：这就可以实现出上述的去重功能，如果你的服务器内存足够大的话，那么使用 HashMap 可能是一个不错的解决方案，理论上时间复杂度可以达到 O(1 的级别，但是当数据量起来之后，还是只能考虑布隆过滤器。
+  - 解决缓存穿透：经常会把一些热点数据放在 Redis 中当作缓存，例如产品详情。通常一个请求过来之后我们会先查询缓存，而不用直接读取数据库，这是提升性能最简单也是最普遍的做法，但是如果一直请求一个不存在的缓存，那么此时一定不存在缓存，那就会有大量请求直接打到数据库上，造成缓存穿透，布隆过滤器也可以用来解决此类问题。
+  - 爬虫/邮箱等系统过滤：有一些正常的邮件也会被放进垃圾邮件目录中，这就是使用布隆过滤器误判导致的
+* 原理
+  - 长度为 m 的位向量或位列表（仅包含 0 或 1 位值的列表）组成，最初所有的值均设置为 0
+  - 向布隆过滤器中添加数据时，会使用多个 hash 函数对 key 进行运算，算得一个证书索引值，然后对位数组长度进行取模运算得到一个位置，每个 hash 函数都会算得一个不同的位置。再把位数组的这几个位置都置为 1 就完成了 add 操作
+  - 向布隆过滤器查查询 key 是否存在时，跟 add 操作一样，会把这个 key 通过相同的多个 hash 函数进行运算，查看 对应的位置 是否 都 为 1，只要有一个位为 0，那么说明布隆过滤器中这个 key 不存在。如果这几个位置都是 1，并不能说明这个 key 一定存在，只能说极有可能存在，因为这些位置的 1 可能是因为其他的 key 存在导致的。
+  - 记住
+    + 使用时不要让实际元素数量远大于初始化数量
+    + 当实际元素数量超过初始化数量时，应该对布隆过滤器进行 重建，重新分配一个 size 更大的过滤器，再将所有的历史元素批量 add 进行
+
+* 答案却是很可能是正确
+  - 已搜集:实际上并没有搜集
+  - 未搜集:肯定未搜集
+* 优点在于占用的存储空间很少
+* 适用于不要求答案绝对准确的情况
 
 ## [HyperLogLog](http://content.research.neustar.biz/blog/hll.html)
 
+* 类似于布隆过滤器的算法
+* 近似地计算集合中不同的元素数，不能给出准确的答案， 但也八九不离十，而占用的内存空间却少得多
 * [神奇的HyperLoglog解决统计问题](https://mp.weixin.qq.com/s?__biz=MzU4Mjk0MjkxNA==&mid=2247484713&idx=1&sn=adb21a258683aff10098ca13007b03d7)
 
 ## 回文数
@@ -383,9 +443,11 @@ def backtrack(路径, 选择列表):
 
 ## 课程
 
-* [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
+* [算法导论 Introduction to Algorithms](https://www.bilibili.com/video/av48922404)
+  - [MIT](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-spring-2008/)
+  - [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
+  - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
 * [十大算法精讲](https://www.bilibili.com/video/av18109226/)
-* [麻省理工学院公开课：算法导论](https://www.bilibili.com/video/av1149902)
 * [公开课](http://open.163.com/special/opencourse/algorithms.html)
 * [Erickson 算法](http://jeffe.cs.illinois.edu/teaching/algorithms/)
   - [algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
@@ -395,8 +457,6 @@ def backtrack(路径, 选择列表):
 ## 图书
 
 * 算法图解
-* [算法导论 Introduction to Algorithms](https://www.bilibili.com/video/av48922404)
-  - [cplusplus-_Implementation_Of_Introduction_to_Algorithms](huaxz1986/cplusplus-_Implementation_Of_Introduction_to_Algorithms):《算法导论》第三版中算法的C++实现
 * [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
   - [ppt](https://www.cs.princeton.edu/~wayne/kleinberg-tardos/)
 * 《大话数据结构》

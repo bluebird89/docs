@@ -712,7 +712,9 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
 * 通常只会对 GET 请求资源进行缓存，因为只有 GET 请求不会对资源实体的状态进行改变，OPTIONS 请求不返回响应实体没有缓存的意义，而其他诸如 POST、PUT、DELETE、PATCH 这些会改变资源状态的请求则不能进行缓存
 * 策略
   - 强制缓存：Expires->Cache-Control
-  - 对比缓存：如果响应头 Cache-Control 中设置了 no-cache，则需要客户端发送相应的请求协商头（If-Modified-Since/If-None-Match），与服务端对应字段（Last-Modified/Etag）对比验证缓存是否过期来实现 HTTP 缓存。返回的响应状态码是 304
+  - 对比缓存｜协商缓存
+    + 如果响应头 Cache-Control 中设置了 no-cache，则需要客户端发送相应的请求协商头（If-Modified-Since/If-None-Match），与服务端对应字段（Last-Modified/Etag）对比验证缓存是否过期来实现 HTTP 缓存。返回的响应状态码是 304
+    + Last-Modified / If-Modified-Since 和 Etag / If-None-Match，其中 Etag / If-None-Match的优先级比Last-Modified / If-Modified-Since高
 * Expires：值为服务端返回的缓存资源到期时间（绝对时间），即下一次请求时，请求时间小于服务端返回的到期时间，直接使用缓存数据
   - 时间由服务端生成,是 GMT 格式的标准时间，如 Fri, 01 Jan 1990 00:00:00 GMT
   - 单独的过期时间机制，浏览器端可以随意修改时间，导致缓存使用不精准
