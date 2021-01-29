@@ -5,6 +5,15 @@
   - 编译（compile）就是源代码到目标代码
   - 链接(link)是将各个目标文件链接起来从而形成一个可执行的程序，当然链接器也会引入被程序所用到的所有标准C函数库的函数
 
+## 配置
+
+
+```sh
+g++ -v -E -x c++ -
+
+# 添加到 includePath中
+```
+
 ## 编译器
 
 * GCC，GCC即（GNU Compiler Collection，GNU编译器套件），由GNU开发的GPL许可的编译器自由软件。刚开始只作为C语言编译器，但后来发展成多种语言编译器，比如C、C++、Java、Android、Objective-C和Fortran等等。现在很多unix-like操作系统自带GCC，将其作为标准编译器。
@@ -40,7 +49,7 @@ Ctrl+Shift+B
 * gcc testfun.c test.c -o test // 编译链接
 * gcc -otestfun.o test.o -o test // 链接
 
-```
+```sh
 gcc -c adder.c
 gcc -c name.c
 gcc name.o adder.o hello.c
@@ -95,14 +104,13 @@ gcc name.o adder.o hello.c
 * C语言程序设计现代方法
 * 《C Primer Plus》
   - 这地方有一个巨大的错觉，就是读完一遍《C Primer Plus》后就觉得自己会CLang了，有这种优越感的，请你尝试用CLang做个什么东西出来？然后你发现似乎真的什么也做不了，这会儿就可以步入到《Unix环境高级编程》的节奏
-* 《C专家编程》
 * 《[C标准库](https://www.amazon.cn/gp/product/B00IZW4DK8)》
 * 《[C和指针](https://www.amazon.cn/gp/product/B00163LU68)》
 * 《[C专家编程](https://www.amazon.cn/gp/product/B0012NIW9K)》
 * 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
 * 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
 * 《C语言参考手册（第5版）》
-* 《C程序设计语言》：C 编程语言；如何像程序员一样思考；底层计算模型
+* 《C程序设计语言》C 编程语言；如何像程序员一样思考；底层计算模型
 * [C Internals](http://www.avabodh.com/cin/cin.html)
 
 ## 工具
