@@ -79,6 +79,12 @@ sudo update-grub
 zpool status
 zpool add -n mainpool /dev/sdc
 zpool add mainpool /dev/sdc
+
+# 内核升级
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.75/amd64/linux-headers-5.4.75-050475-generic_5.4.75-050475.202011051231_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.75/amd64/linux-image-unsigned-5.4.75-050475-generic_5.4.75-050475.202011051231_amd64.deb
+wget https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.4.75/amd64/linux-modules-5.4.75-050475-generic_5.4.75-050475.202011051231_amd64.deb
+sudo dpkg -i *.deb
 ```
 
 ## 环境

@@ -9,13 +9,15 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
 * 优点
   - 数据在内存中，读写速度非常快，支持并发 10W QPS
   - 单进程单线程，是线程安全的，采用 IO 多路复用机制,避免了不必要的上下文切换和竞争条件，不存在多线程导致的 CPU 切换，不用去考虑各种锁的问题，不存在加锁释放锁操作，没有死锁问题导致的性能消耗
-  - 丰富的数据类型，支持字符串（strings）、散列（hashes）、列表（lists）、集合（sets）、有序集合（sorted sets）等
+    + 子进程用于数据持久化
+    + 子线程用于执行一些比较耗时操作，例如异步释放 fd、异步 AOF 刷盘、异步 lazy-free 等等
+  - 丰富数据类型，支持字符串（strings）、散列（hashes）、列表（lists）、集合（sets）、有序集合（sorted sets）等
   - 支持数据持久化:异步方式将数据写入磁盘,可以将内存中数据保存在磁盘中，重启时加载
   - 利用队列技术将并发访问变为串行访问，消除了传统数据库串行控制的开销
   - 单线程简化数据结构和算法的实现：要多核运行可以启动多个实例
   - 高可用：主从复制，哨兵
   - 可以用作分布式锁
-  - 可以作为消息中间件使用，支持发布订阅
+  - 支持发布订阅作为消息中间件使用
 * 单个value的最大限制是1GB(memcached 是1MB)
 * 非阻塞I/O多路复用机制，单线程根据Socket的不同状态执行每个Socket(I/O流)：任务，采用的 I/O 多路复用函数：epoll/kqueue/evport/select
   - 用epoll作为IO多路复用技术的实现，再加上redis自身事件处理模型将epoll中的链接、读写、关闭都转换为事件，不在网络IO上浪费过多的事件
@@ -140,16 +142,19 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
   - 客户端 socket 会被设置为非阻塞模式
   - 为这个 socket 设置 TCP_NODELAY 属性，禁用 Nagle 算法
   - 创建一个可读文件事件用于监听这个客户端 socket 的数据发送
-* 长连接 `pconnect(host, port, time_out, persistent_id, retry_interval)`:表示客户端闲置多少秒后，就断开连接。函数连接成功返回true，失败返回false
-  - 连接不会在调用close方法之后关闭，只有在进程结束之后该连接才会被关闭。close的作用仅是使当前php不能再进行redis请求。只会在PHP-FPM进程结束之后结束，连接的生命周期就是PHP-FPM进程的生命周期
-  - 相比较短连接而言，在每一个PHP-FPM调用过程中都会产生一个redis的连接，在服务器上的表性形式就是过多的time_out连接状态
-  - 长连接的话，PHP-FPM调用的所有CGI都只会共用一个长连接，所以也就是只会产生固定数量的time_out
-  - 参数
-    + host: string. can be a host, or the path to a unix domain socket
-    + port: int, optional
-    + timeout: float, value in seconds (optional, default is 0 meaning unlimited)
-    + persistent_id: string. identity for the requested persistent connection
-    + retry_interval: int, value in milliseconds (optional)
+* 连接
+  - redis本身也只支持域套接字和TCP连接
+  - connect 短连接
+  - 长连接 `pconnect(host, port, time_out, persistent_id, retry_interval)`:表示客户端闲置多少秒后，就断开连接。函数连接成功返回true，失败返回false
+    + 连接不会在调用close方法之后关闭，只有在进程结束之后该连接才会被关闭。close的作用仅是使当前php不能再进行redis请求。只会在PHP-FPM进程结束之后结束，连接的生命周期就是PHP-FPM进程的生命周期
+    + 相比较短连接而言，在每一个PHP-FPM调用过程中都会产生一个redis的连接，在服务器上的表性形式就是过多的time_out连接状态
+    + 长连接的话，PHP-FPM调用的所有CGI都只会共用一个长连接，所以也就是只会产生固定数量的time_out
+    + 参数
+      * host: string. can be a host, or the path to a unix domain socket
+      * port: int, optional
+      * timeout: float, value in seconds (optional, default is 0 meaning unlimited)
+      * persistent_id: string. identity for the requested persistent connection
+      * retry_interval: int, value in milliseconds (optional)
 
 ```sh
 # 设置最大连接数
@@ -1515,7 +1520,8 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 ## 持久化
 
 * 将数据持久存储，而不因断电或其他各种复杂外部环境影响数据完整性
-* RDB Redis DataBase 快照方式：满足特定条件时,将生成内存中的数据的时间点快照，以二进制的方式写入磁盘,快照作为包含整个数据集的单个 dump.rdb 文件生成
+* RDB Redis DataBase 快照方式
+  - 满足特定条件时,将生成内存中的数据的时间点快照，以二进制的方式写入磁盘,快照作为包含整个数据集的单个 dump.rdb 文件生成
   - 定时触发
     + 根据 redis.conf 配置里的 SAVE m n 定时触发（实际上使用的是 BGSAVE）
     + 主从复制时，主节点自动触发
@@ -1537,16 +1543,19 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
   - 使用操作系统的 COW 机制来进行数据段页面的分离。数据段是由很多操作系统的页面组合而成，当父进程对其中一个页面的数据进行修改时，会将被共享的页面复 制一份分离出来，然后 对这个复制的页面进行修改。这时 子进程 相应的页面是 没有变化的，还是进程产生时那一瞬间的数据
   - 优点:适合用于备份,适合灾难恢复
   - 缺点：如果需要尽量避免在服务器故障时丢失数据
-* AOF Append Only File 文件追加方式:类似于mysql的二进制日志方案,默认是关闭的.需要修改配置文件中的 appendonly no 为 appendonly yes
-  - 通过保存 Redis 的每次执行修改内存中数据集的写操作(先执行指令再将日志存盘)，文件中记录除了查询以外的所有变更数据库状态的指令，并不记录数据本身
-  - 将命令以增量文本(cat appendonly.aof)的形式追加保存到 AOF 文件中（fsync），是子线程来做的，主线程依然用来处理客户端的请求
-  - 可以做到全程持久化，只需要在配置中开启 appendonly yes。这样 Redis 每执行一个修改数据的命令，都会把它添加到 AOF 文件中，当 Redis 重启时，将会读取 AOF 文件进行重放，恢复到 Redis 关闭前的最后时刻
+* AOF Append Only File 文件追加方式
+  - 类似于mysql的二进制日志方案,默认是关闭的,可以做到全程持久化，需要在配置中开启 appendonly yes
+  - 对 AOF 日志文件进行写操作:将内容写到了内核为文件描述符分配的一个内存缓存中，然后内核会异步将脏数据刷回到磁盘的
+  - Redis 每执行一个修改数据命令(先执行指令再将日志存盘)，都会把它添加到 AOF 文件（write 系统调用）中，文件中记录除了查询以外的所有变更数据库状态的指令，并不记录数据本身.当 Redis 重启时，将会读取 AOF 文件进行重放，恢复到 Redis 关闭前的最后时刻
+  - 将命令以增量文本(cat appendonly.aof)的形式追加保存到 AOF 文件中（fsync 系统调用），是子线程来做的，主线程依然用来处理客户端的请求
   - 如果不重写AOF文件，持久化方式对性能的影响是最小的，但是AOF文件会不断增大，AOF文件过大会影响Master重启的恢复速度
-  - 同步策略，通过 CONFIG GET appendfsync 查看当前配置
-    + 当程序对 AOF 日志文件进行写操作时，实际上是将内容写到了内核为文件描述符分配的一个内存缓存中，然后内核会异步将脏数据刷回到磁盘的
-    + appendfsync always，即时将缓冲区内容写入 AOF 文件当中，最低效最安全
-    + appendfsync everysec，每隔一秒将缓冲区内容写入 AOF 文件（默认）
-    + appendfsync no，不执行 fysnc 调用，让操作系统自动操作把缓存数据写到硬盘上，不可靠但最快。操作系统考虑效率问题，会等待缓冲区被填满再将缓冲区数据写入 AOF 文件中
+  - 同步策略
+    + `CONFIG GET appendfsync` 查看当前配置
+    + appendfsync always:主线程每次执行写操作后立即刷盘，此方案会占用比较大的磁盘 IO 资源，但数据安全性最高
+      * 每处理一次写操作，都会把这个命令写入到磁盘中才返回，整个过程都是在主线程执行的，这个过程必然会加重 Redis 写负担,操作磁盘要比操作内存慢几百倍，采用这个配置会严重拖慢 Redis 的性能
+    + appendfsync everysec（默认）:主线程每次写操作只写内存就返回，然后由后台线程每隔 1 秒执行一次刷盘操作（触发fsync系统调用），此方案对性能影响相对较小，但当 Redis 宕机时会丢失 1 秒的数据
+      * 导致 Redis 延迟变大的情况发生，甚至会阻塞整个 Redis.当 Redis 后台线程在执行 AOF 文件刷盘时，如果此时磁盘的 IO 负载很高，那这个后台线程在执行刷盘操作（fsync系统调用）时就会被阻塞住
+    + appendfsync no:主线程每次写操作只写内存就返回，内存数据什么时候刷到磁盘，交由操作系统决定，此方案对性能影响最小，但数据安全性也最低，Redis 宕机时丢失的数据取决于操作系统刷盘时机调用，让操作系统自动操作把缓存数据写到硬盘上，不可靠但最快。操作系统考虑效率问题，会等待缓冲区被填满再将缓冲区数据写入 AOF 文件中
   - 重写 rewrite 机制：手动或者自动重写，压缩 AOF 文件
     + 时间久了，里面会有大部分是重复命令或者可以合并的命令 AOF 文件会越来越大
     + bgrewriteaof 指令用于对 AOF 日志进行瘦身。原理:开辟一个子进程对内存进行遍历转换成一系列 Redis 的操作指令，序列化到一个新的 AOF 日志文件中。序列化完毕后再将操作期间发生的增量 AOF 日志追加到这个新的 AOF 日志文件中，追加完毕后就立即替代旧的 AOF 日志文件了，瘦身工作就完成
@@ -1554,14 +1563,14 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
     + 假如连续set了10000次，但是最后key又删除了，aof文件会记录20000条命令
     + 过程：
       + 调用 fork()，创建一个子进程
-      + 子进程把新的 AOF 写到一个临时文件里，不依赖原来的 AOF 文件
+      + 子进程把新 AOF 写到一个临时文件里，不依赖原来 AOF 文件
       + 主进程持续将新的变动同时写到内存和原来的 AOF 里
       + 主进程获取子进程重写 AOF 的完成信号，往新 AOF 同步增量变动
       + 使用新的 AOF 文件替换掉旧的 AOF 文件
     + auto-aof-rewrite-percentage 和 auto-aof-rewrite-min-size。当 AOF 文件超过 auto-aof-rewrite-min-size 时，且超过上次重写后的大小百分之 auto-aof-rewrite-percentage 时，会触发自动重写
-  - 优点是会让 Redis 变得非常耐久
+  - 优点:让 Redis 变得非常耐久
   - 缺点
-    + 对于相同的数据集来说，AOF 的文件体积通常要大于 RDB 文件的体积
+    + 对于相同数据集，AOF 的文件体积通常要大于 RDB 文件的体积
     + 由于文件较大则会影响 Redis 的启动速度
 * 对比
   - RDB 优点：全量数据快照，文件小，恢复快
@@ -1656,16 +1665,19 @@ aof-user-rdb-preamble no // 这是redis 4.0出现的新特性，集成了rdb和a
     + 如果有超过25%Key都是过期的，就继续回到第一步再来一次
     + 同时会判断这20个里过期Key的清理时间，是否超过25% CPU时间(默认25ms)，如果超过了，也不会再继续清理，这个可以保证Redis的CPU不会被占用过长的时间
   - 惰性删除：获取某个Key的时候，会检查一下，这个Key如果设置了过期时间，那么是否过期了？如果过期了此时就会删除
-  - 服务端配置回收策略
-    + Noeviction（默认）：当内存不足以容纳新写入数据时，新写入操作会报错
-    + Allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，移除最久未使用的Key，推荐使用
-    + Allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机淘汰任意键值
-    + Volatile-lru：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，移除最近最少使用的Key。这种情况一般是把Redis既当缓存又做持久化存储的时候才用。不推荐
+* 淘汰策略
+    + Noeviction（默认）：不淘汰任何 key，实例内存达到 maxmeory 后，再写入新数据直接返回错误
+    + allkeys-lfu：淘汰整个键值中最少使用的键值，Redis 4.0 版本中新增
+    + allkeys-lru：当内存不足以容纳新写入数据时，在键空间中，淘汰最近最少访问的 key，推荐使用
+    + Volatile-lru：当内存不足以容纳新写入数据时，移除最近最少使用并设置了过期时间的 key。这种情况一般是把Redis既当缓存又做持久化存储的时候才用。不推荐
+    + volatile-lfu：只淘汰访问频率最低、并设置了过期时间 key（4.0+版本支持）
     + Volatile-random：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中，随机移除某个Key
     + Volatile-ttl：当内存不足以容纳新写入数据时，在设置了过期时间的键空间中优先淘汰更早过期的键值
-    + volatile-lfu least frequency use ：淘汰所有设置了过期时间的键值中，最少使用的键值，Redis 4.0 版本中新增
-    + allkeys-lfu：淘汰整个键值中最少使用的键值，Redis 4.0 版本中新增
+    + Allkeys-random：当内存不足以容纳新写入数据时，在键空间中，随机淘汰任意键值
+    + allkeys-ttl：不管 key 是否设置了过期，淘汰即将过期的 key
+    + allkeys-lfu：不管 key 是否设置了过期，淘汰访问频率最低的 key（4.0+版本支持）
     + 如果没有设置Expire的Key，不满足先决条件（Prerequisites）；那么Volatile-lru、Volatile-random和Volatile-ttl策略的行为，和Noeviction（不删除）基本上一致
+    + 是在命令真正执行之前执行的，也就是说它也会增加操作 Redis 的延迟，而且，写 OPS 越高，延迟也会越明显
 
 ```
 maxmemory-policy volatile-lru
@@ -2031,6 +2043,141 @@ rename-command FLUSHALL ""
 rename-command DEBUG ""
 rename-command SHUTDOWN SHUTDOWN_MENOT
 rename-command CONFIG ASC12_CONFIG
+```
+
+## [性能问题](https://mp.weixin.qq.com/s/6kUvdNNQN05gd4dBDm8K1A)
+
+* 基准性能测试
+  - 查看基准性能
+    + 60 秒内的最大响应延迟:`redis-cli -h 127.0.0.1 -p 6379 --intrinsic-latency 60`
+    + 查看一段时间内 Redis 最小、最大、平均访问延迟 `redis-cli -h 127.0.0.1 -p 6379 --latency-history -i 1`,每间隔 1 秒，采样 Redis 的平均操作耗时
+  - 判断
+    + 在相同配置的服务器上，测试一个正常 Redis 实例的基准性能
+    + 找到认为可能变慢的 Redis 实例，测试这个实例的基准性能
+    + 如果观察到，这个实例的运行延迟是正常 Redis 基准性能的 2 倍以上，即可认为这个 Redis 实例确实变慢了
+* 使用复杂度过高命令
+  - 查看一下 Redis 的慢日志（slowlog），记录了有哪些命令在执行时耗时比较久
+  - 原因
+    + 经常使用 O(N) 以上复杂度的命令，例如 SORT、SUNION、ZUNIONSTORE 聚合类命令，时间复杂度过高，要花费更多的 CPU 资源。
+    + 使用 O(N) 复杂度的命令，但 N 的值非常大，一次需要返回给客户端的数据过多，更多时间花费在数据协议的组装和网络传输过程中。
+  - 处理
+    + 尽量不使用 O(N) 以上复杂度过高的命令，对于数据的聚合操作，放在客户端做
+    + 执行 O(N) 命令，保证 N 尽量的小（推荐 N <= 300），每次获取尽量少的数据，让 Redis 可以及时处理返回
+* 操作bigkey
+  - 查询慢日志发现是 SET / DEL 这种简单命令出现在慢日志中，那么就要怀疑实例否写入了 bigkey
+  - 在写入数据时，需要为新的数据分配内存，相对应的，当从 Redis 中删除数据时，它会释放对应的内存空间，如果一个 key 写入的 value 非常大，那么 Redis 在分配内存时就会比较耗时。同样的，当删除这个 key 时，释放内存也会比较耗时，这种类型的 key 一般称之为 bigkey
+  - 扫描出一个实例中 bigkey 分布情况: `redis-cli -h 127.0.0.1 -p 6379 --bigkeys -i 0.01`,这个命令的原理，就是 Redis 在内部执行了 SCAN 命令，遍历整个实例中所有的 key，然后针对 key 的类型，分别执行 STRLEN、LLEN、HLEN、SCARD、ZCARD 命令，来获取 String 类型的长度、容器类型（List、Hash、Set、ZSet）的元素个数
+    + 对线上实例进行 bigkey 扫描时，Redis 的 OPS 会突增，为了降低扫描过程中对 Redis 的影响，最好控制一下扫描的频率，指定 -i 参数即可，它表示扫描过程中每次扫描后休息的时间间隔，单位是秒
+    + 扫描结果中，对于容器类型（List、Hash、Set、ZSet）的 key，只能扫描出元素最多的 key。但一个 key 的元素多，不一定表示占用内存也多，你还需要根据业务情况，进一步评估内存占用情况
+  - 优化：
+  - 业务应用尽量避免写入 bigkey
+  - 如果使用的 Redis 是 4.0 以上版本，用 UNLINK 命令替代 DEL，此命令可以把释放 key 内存的操作，放到后台线程中去执行，从而降低对 Redis 的影响
+  - 如果使用的 Redis 是 6.0 以上版本，可以开启 lazy-free 机制（lazyfree-lazy-user-del = yes），在执行 DEL 命令时，释放内存也会放到后台线程中执行
+* 集中过期
+  - 主动过期 key 定时任务，是在 Redis 主线程中执行的
+  - 需要过期删除一个 bigkey，那么这个耗时会更久。而且，这个操作延迟的命令并不会记录在慢日志中。因为慢日志中只记录一个命令真正操作内存数据的耗时，而 Redis 主动删除过期 key 的逻辑，是在命令真正执行之前执行的。
+  - 分析
+    + 检查业务代码，是否存在集中过期 key 的逻辑。一般集中过期使用的是 expireat / pexpireat 命令，你需要在代码中搜索这个关键字
+  - 解决
+    + 集中过期 key 增加一个随机过期时间，把集中过期的时间打散，降低 Redis 清理过期 key 的压力
+    + 如果使用的 Redis 是 4.0 以上版本，可以开启 lazy-free 机制，当删除过期 key 时，把释放内存的操作放到后台线程中执行，避免阻塞主线程
+    + 运维层面，需要把 Redis 的各项运行状态数据监控起来，在 Redis 上执行 INFO 命令就可以拿到这个实例所有的运行状态数据。需要重点关注 expired_keys 这一项，它代表整个实例到目前为止，累计删除过期 key 的数量。
+* 实例内存达到上限
+  - 当 Redis 内存达到 maxmemory 后，每次写入新的数据之前，Redis 必须先从实例中踢出一部分数据，让整个实例的内存维持在 maxmemory 之下，然后才能把新数据写进来
+  - 建议
+    + 避免存储 bigkey，降低释放内存的耗时
+    + 淘汰策略改为随机淘汰，随机淘汰比 LRU 要快很多（视业务情况调整）
+    + 拆分实例，把淘汰 key 的压力分摊到多个实例上
+    + 如果使用的是 Redis 4.0 以上版本，开启 layz-free 机制，把淘汰 key 释放内存的操作放到后台线程中执行（配置 lazyfree-lazy-eviction = yes）
+* fork耗时严重
+  - 操作 Redis 延迟变大，都发生在 Redis 后台 RDB 和 AOF rewrite 期间，开启了后台 RDB 和 AOF rewrite 后，在执行时，需要主进程创建出一个子进程进行数据的持久化。主进程创建子进程，会调用操作系统提供的 fork 函数。fork 在执行过程中，主进程需要拷贝自己的内存页表给子进程，如果这个实例很大，那么这个拷贝的过程也会比较耗时。会消耗大量的 CPU 资源，在完成 fork 之前，整个 Redis 实例会被阻塞住，无法处理任何客户端请求。
+  - 主从节点第一次建立数据同步时，主节点也创建子进程生成 RDB，然后发给从节点进行一次全量同步
+  - 执行 INFO 命令，查看 `latest_fork_usec` 项，单位微秒
+  - 优化：
+    + 控制 Redis 实例的内存：尽量在 10G 以下，执行 fork 的耗时与实例大小有关，实例越大，耗时越久
+    + 合理配置数据持久化策略：在 slave 节点执行 RDB 备份，推荐在低峰期执行，而对于丢失数据不敏感的业务（例如把 Redis 当做纯缓存使用），可以关闭 AOF 和 AOF rewrite
+    + Redis 实例不要部署在虚拟机上：fork 的耗时也与系统也有关，虚拟机比物理机耗时更久
+    + 降低主从库全量同步的概率：适当调大 repl-backlog-size 参数，避免主从全量同步
+* 开启内存大页
+  - 应用程序向操作系统申请内存时，是按内存页进行申请的，而常规的内存页大小是 4KB。Linux 内核从 2.6.38 开始，支持了内存大页机制，该机制允许应用程序以 2MB 大小为单位，向操作系统申请内存。内存单位变大了，但这也意味着申请内存的耗时变长
+  - 主进程 fork 子进程后，此时的主进程依旧是可以接收写请求的，而进来的写请求，会采用 Copy On Write（写时复制）的方式操作内存数据。
+    + 写时复制:主进程一旦有数据需要修改，Redis 并不会直接修改现有内存中的数据，而是先将这块内存数据拷贝出来，再修改这块新内存的数据
+    + 父进程有任何写操作，并不会影响子进程的数据持久化
+    + 客户端即便只修改 10B 的数据，Redis 在申请内存时也会以 2MB 为单位向操作系统申请，申请内存的耗时变长，进而导致每个写请求的延迟增加，影响到 Redis 性能。
+  - 解决:关闭内存大页机制,希望 Redis 在每次申请内存时，耗时尽量短，所以不建议在 Redis 机器上开启这个机制。
+    + 查看是否开启 `cat /sys/kernel/mm/transparent_hugepage/enabled`
+    + 输出选项是 always，就表示目前开启了内存大页机制
+    + `echo never > /sys/kernel/mm/transparent_hugepage/enabled`
+* 开启AOF
+  - 排查
+    + 子进程正在执行 AOF rewrite，这个过程会占用大量的磁盘 IO 资源
+    + 有其他应用程序在执行大量的写文件操作，也会占用磁盘 IO 资源
+  - 解决
+    + 配置项：当子进程在 AOF rewrite 期间，可以让后台子线程不执行刷盘（不触发 fsync 系统调用）操作 `no-appendfsync-on-rewrite yes`
+* 绑定CPU
+  - 绑定 CPU 带来的性能问题:fork 出的子进程会消耗大量的 CPU 资源进行数据持久化（把实例数据全部扫描出来需要耗费CPU），这就会导致子进程会与主进程发生 CPU 争抢，进而影响到主进程服务客户端请求，访问延迟变大。
+  - 解决
+    + 不要让 Redis 进程只绑定在一个 CPU 逻辑核上，而是绑定在多个逻辑核心上，而且，绑定的多个逻辑核心最好是同一个物理核心，这样它们还可以共用 L1/L2 Cache。
+    + 6.0 版本通过配置，对主线程、后台线程、后台 RDB 进程、AOF rewrite 进程，绑定固定的 CPU 逻辑核心
+* 使用Swap
+  - 当内存中的数据被换到磁盘上后，Redis 再访问这些数据时，就需要从磁盘上读取，访问磁盘的速度要比访问内存慢几百倍
+  - 查看 Redis 进程是否使用到 Swap `ps -aux | grep redis-server` `cat /proc/$pid/smaps | egrep '^(Swap|Size)'`
+  - 释放 Redis 的 Swap 过程通常要重启实例，为了避免重启实例对业务的影响，一般会先进行主从切换，然后释放旧主节点的 Swap，重启旧主节点实例，待从库数据同步完成后，再进行主从切换即可。
+* 碎片整理
+  - INFO 命令 `mem_fragmentation_ratio = used_memory_rss / used_memory` > 1.5，说明内存碎片率已经超过了 50%
+  - 如果使用的是 Redis 4.0 以下版本，只能通过重启实例来解决
+  - 如果使用的是 Redis 4.0 版本，它正好提供了自动碎片整理的功能，可以通过配置开启碎片自动整理
+* 网络带宽过载
+
+```sh
+# 命令执行耗时超过 5 毫秒，记录慢日志
+CONFIG SET slowlog-log-slower-than 5000
+# 只保留最近 500 条慢日志
+CONFIG SET slowlog-max-len 500
+SLOWLOG get 5
+1) 1) (integer) 32693       # 慢日志ID
+   2) (integer) 1593763337  # 执行时间戳
+   3) (integer) 5299        # 执行耗时(微秒)
+   4) 1) "LRANGE"           # 具体执行的命令和参数
+      2) "user_list:2000"
+      3) "0"
+      4) "-1"
+2) 1) (integer) 32692
+   2) (integer) 1593763337
+   3) (integer) 5044
+   4) 1) "GET"
+      2) "user_info:1000"
+
+# Redis Server 和 IO 线程绑定到 CPU核心 0,2,4,6
+server_cpulist 0-7:2
+
+# 后台子线程绑定到 CPU核心 1,3
+bio_cpulist 1,3
+
+# 后台 AOF rewrite 进程绑定到 CPU 核心 8,9,10,11
+aof_rewrite_cpulist 8-11
+
+# 后台 RDB 进程绑定到 CPU 核心 1,10,11
+# bgsave_cpulist 1,10-1
+
+# 开启自动内存碎片整理（总开关）
+activedefrag yes
+
+# 内存使用 100MB 以下，不进行碎片整理
+active-defrag-ignore-bytes 100mb
+
+# 内存碎片率超过 10%，开始碎片整理
+active-defrag-threshold-lower 10
+# 内存碎片率超过 100%，尽最大努力碎片整理
+active-defrag-threshold-upper 100
+
+# 内存碎片整理占用 CPU 资源最小百分比
+active-defrag-cycle-min 1
+# 内存碎片整理占用 CPU 资源最大百分比
+active-defrag-cycle-max 25
+
+# 碎片整理期间，对于 List/Set/Hash/ZSet 类型元素一次 Scan 的数量
+active-defrag-max-scan-fields 1000
 ```
 
 ## 注意

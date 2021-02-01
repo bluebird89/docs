@@ -124,6 +124,10 @@ sudo update-grub
 ## Architecture
 
 * The Linux kernel is monolithic in nature.
+  - 补丁 Prepatch：Prepatch 或 “RC” 内核是主线内核的预发布版本，主要针对其他内核开发者和 Linux 爱好者。它们必须从源码中编译，并且通常包含新的功能，这些功能必须在稳定发布之前进行测试。Prepatch 内核由 Linus Torvalds 维护和发布。
+  - 主线版 Mainline：主线版本由 Linus Torvalds 维护。它是介绍所有新功能的版本，包含了所有令人兴奋的新开发的功能。新的主线内核每 2-3 个月发布一次。
+  - 稳定版 Stable：每一个主线内核发布后，都被认为是“稳定的”。任何稳定内核的错误修复都会从主线版本上回溯，并由指定的稳定内核维护者应用。在下一个主线内核可用之前，通常只有几个错误修复内核的发布 – 除非它被指定为 “长期维护内核”。稳定的内核更新是根据需要发布的，通常一周一次。
+  - 长期版 Longterm：通常会有几个 “长期维护 “的内核版本，目的是为旧内核树的错误进行后向（backporting）修正。只有重要的bug 修复才会被应用到这长期内核版本中，而且它们通常不会频繁发布，尤其是对于老的内核版本。
 * System calls are used to interact with the Linux kernel space.
 * Kernel code can only be executed in the kernel mode. Non-kernel code is executed in the user mode.
 * Device drivers are used to communicate with the hardware devices.
@@ -685,7 +689,8 @@ cat /proc/version # 说明正在运行的内核版本
 cat /etc/issue # 显示的是发行版本信息
 lsb_release -a
 uname -a # 显示电脑以及操作系统的相关信息
-uname -r # 显示正在使用的内核版本
+uname -rs # 显示正在使用的内核版本
+sudo dpkg --get-selections |grep linux-image
 
 ## 硬件
 dmidecode -q # 显示硬件系统部件 - (SMBIOS / DMI)

@@ -47,6 +47,32 @@
 * 危险配置:在这些年的迭代中，容器社区一直在努力将「纵深防御」、「最小权限」等理念和原则落地。例如，Docker 已经将容器运行时的 Capabilities 黑名单机制改为如今的默认禁止所有 Capabilities，再以白名单方式赋予容器运行所需的最小权限。如果容器启动，配置危险能力，或特权模式容器，或容器以 root 用户权限运行都会导致容器逃
 * 危险挂载:Docker Socket 是 Docker 守护进程监听的 Unix 域套接字，用来与守护进程通信——查询信息或下发命令。如果在攻击者可控的容器内挂载了该套接字文件（/var/run/docker.sock），容器逃逸就相当容易了，除非有进一步的权限限制。
 
+## 安装
+
+* 编译错误
+  - scripts/mod/modpos 报错:通过 make scripts 来补全脚本
+  - ”asm/x.h” 头文件缺少 `sudo find / -name mmiowb.h`
+  - “generated/x.h” 报错 `cp -r /usr/src/linux-headers-5.4.0-52-generic/include/generated/* ./include/generated`
+
+```sh
+sudo apt update
+sudo apt install build-essential git make libelf-dev clang llvm strace tar bpfcc-tools linux-headers-$(uname -r) gcc-multilib  flex  bison libssl-dev -y
+
+# apt 安装源码,源码安装至 /usr/src/ 目录下
+apt-cache search linux-source
+apt install linux-source-5.4.0
+
+tar -jxvf linux-source-5.4.0.tar.bz2
+make scripts     # 可选
+cp -v /boot/config-$(uname -r) .config # make defconfig 或者 make menuconfig
+make headers_install
+make M=samples/bpf  # 如果配置出错，可以使用 make oldconfig && make prepare 修复
+
+# 内核代码 Git 下载
+git clone git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/$(lsb_release -cs)
+git checkout -b temp Ubuntu-5.4.0-52.57
+```
+
 ## [学习路径](https://www.ebpf.top/post/ebpf_learn_path/)
 
 * 先大体了解 BPF 技术的发展历史、优点、限制
