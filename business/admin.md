@@ -101,10 +101,6 @@ npm run serve
 #  http://localhost:4000
 ```
 
-## 扩展
-
-* [open-falcon/falcon-plus](https://github.com/open-falcon/falcon-plus)An open-source and enterprise-level monitoring system
-
 ## 框架
 
 * [awesome-sysadmin](https://github.com/kahun/awesome-sysadmin)：A curated list of amazingly awesome open source sysadmin resources inspired by Awesome PHP.

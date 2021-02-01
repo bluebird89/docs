@@ -422,3 +422,4 @@ vue init Plortinus/vue-multiple-pages new-project
 * [webpack 前后端分离开发接口调试解决方案，proxyTable解决方案](https://www.cnblogs.com/coolslider/p/7076191.html)
 * [vue-cli + webpack 多页面实例配置优化方法](https://segmentfault.com/a/1190000006741478)
 * [vue-cli-multi-page](https://github.com/bluefox1688/vue-cli-multi-page):vue2-cli-vux2-multe-page，使用了webpack2+vuejs2+vuxUI2的多页面脚手架
+* [深入了解 Vue3 模板编译原理](https://juejin.cn/post/6896641710538326030)
