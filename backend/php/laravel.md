@@ -2425,6 +2425,7 @@ password: password
 * [awesome-laravel](https://github.com/chiraggude/awesome-laravel)A curated list of bookmarks, packages, tutorials, videos and other cool resources from the Laravel ecosystem
 * [Awesome-Laravel-Education](https://github.com/fukuball/Awesome-Laravel-Education)
 * [artisan-road](https://github.com/samedreams/artisan-road):Programmers are artisans （This book is a guide for artisans）
+* [laravel-tips](https://github.com/LaravelDaily/laravel-tips)
 
 * [Learning_Laravel_Kernel](https://github.com/kevinyan815/Learning_Laravel_Kernel):Laravel核心代码学习
 * [原理机制篇](http://www.cnblogs.com/XiongMaoMengNan/p/6644892.html)

@@ -53,6 +53,7 @@
   - scripts/mod/modpos 报错:通过 make scripts 来补全脚本
   - ”asm/x.h” 头文件缺少 `sudo find / -name mmiowb.h`
   - “generated/x.h” 报错 `cp -r /usr/src/linux-headers-5.4.0-52-generic/include/generated/* ./include/generated`
+* 从内核源码中直接编译 BPF 程序。这种方法需要对内核编译有一定了解，且需要善于运用搜索引擎解决编译过程中的各种问题。
 
 ```sh
 sudo apt update
@@ -71,6 +72,141 @@ make M=samples/bpf  # 如果配置出错，可以使用 make oldconfig && make p
 # 内核代码 Git 下载
 git clone git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/$(lsb_release -cs)
 git checkout -b temp Ubuntu-5.4.0-52.57
+```
+
+```c
+// # hello_kern.c：
+#include <linux/bpf.h>
+#include "bpf_helpers.h"
+
+#define SEC(NAME) __attribute__((section(NAME), used))
+
+SEC("tracepoint/syscalls/sys_enter_execve")
+int bpf_prog(void *ctx)
+{
+ char msg[] = "Hello BPF!\n";
+ bpf_trace_printk(msg, sizeof(msg));
+ return 0;
+}
+
+char _license[] SEC("license") = "GPL";
+
+// hello_user.c:
+#include <stdio.h>
+#include "bpf_load.h"
+
+int main(int argc, char **argv)
+{
+ if( load_bpf_file("hello_kern.o") != 0)
+ {
+  printf("The kernel didn't load BPF program\n");
+  return -1;
+ }
+
+ read_trace_pipe();
+ return 0;
+}
+
+// Makefile 文件，添加以下三行：
+hostprogs-y += hello
+hello-objs := bpf_load.o hello_user.o
+always += hello_kern.o
+
+make M=samples/bpf V=1
+```
+
+## [BCC BPF Compiler Collection](https://github.com/iovisor/bcc)
+
+* 在 eBPF 编程接口之上封装了 eBPF 程序的构建过程，提供了 Python、C++ 和 Lua 等高级语言接口，并基于 Python 接口实现了大量的工具，是新手入门体验 eBPF 的最好项目
+  - 前端提供 Python API，而后端的 eBPF 程序还是通过 C 来实现。
+  - 在运行的时候，BCC 会把 eBPF 程序编译成字节码、加载到内核执行，最后再通过用户空间的前端获取执行状态
+* 安装后，BCC 会把所有示例（包括 Python 和 lua），放到 /usr/share/bcc/examples 目录中。发行版自带的 BCC 版本通常比较旧，并不包含很多已经修复的问题或者新的特性，在运行时可能会碰到意想不到的错误,推荐从源码安装最新版本
+* BCC 工具会安装到 /usr/share/bcc 目录中
+* 缺点
+  - 启动时编译，导致启动缓慢，且编译也需要耗费较高的 CPU 和内存资源。
+  - 编译 eBPF 要求所有主机上都安装内核头文件。
+  - 编译错误只有在运行的时候才能检测到，排错困难。
+* BCC 正在基于 libbpf 将所有工具转换为可直接执行的二进制文件，无需外部依赖，从而更易分发到实际生产环境中。转换后的工具，因无需动态编译和接口转换，可以获得更高的性能和更少的资源占用
+* libbpf 还基于 BTF 和 CO-RE (Compile-Once Run-Everywhere) 提供了更好的便携性（兼容新旧内核版本）：
+  - BTF 是 BPF 类型格式，用于避免依赖 Clang 和内核头文件。
+  - CO-RE 则使得 BTF 字节码支持重定位，避免 LLVM 重新编译的需要
+  - 借助于 BTF 和 CO-RE 的优势，可以在 /sys/kernel/btf/vmlinux 找到内核的 BTF 信息，甚至可以通过 bpftool 将其导出（一般放到文件 vmlinux.h 中）
+  - libbpf 在使用上并不是很直观，所以 eBPF 维护者开发了一个脚手架项目 libbpf-bootstrap。结合了 BPF 社区的最佳开发实践，为初学者提供了一个简单易用的上手框架。
+
+```sh
+# Ubuntu
+sudo apt-get install bpfcc-tools linux-headers-$(uname -r) linux-tools-common
+
+# RHEL
+sudo yum install bcc-tools
+
+apt-get install -y build-essential git bison cmake flex  libedit-dev libllvm6.0 llvm-6.0-dev libclang-6.0-dev python zlib1g-dev libelf-dev python3-distutils libfl-dev
+git clone https://github.com/iovisor/bcc.git
+mkdir bcc/build && cd bcc/build
+cmake ..
+make && make install
+cmake -DPYTHON_CMD=python3 .. # build python3 binding
+pushd src/python/
+make && make install
+
+/usr/share/bcc/tools/tcpconnect
+
+bpftool btf dump file /sys/kernel/btf/vmlinux format c > vmlinux.h
+
+# libbpf
+sudo apt install -y bison build-essential cmake flex git libedit-dev pkg-config libmnl-dev \
+   python zlib1g-dev libssl-dev libelf-dev libcap-dev libfl-dev llvm clang pkg-config \
+   gcc-multilib luajit libluajit-5.1-dev libncurses5-dev libclang-dev clang-tools
+# checkout libbpf-bootstrap
+git clone https://github.com/libbpf/libbpf-bootstrap
+# update submodules
+git submodule update --init --recursive
+# build existing samples
+cd src && make
+```
+
+## [bpftrace](https://github.com/iovisor/bpftrace)
+
+* 类似于 DTrace 或 SystemTap，在 eBPF 之上构建了一个简化的跟踪语言，通过简单的几行脚本，就可以达到复杂的跟踪功能。
+* 多行的跟踪指令也可以放到脚本文件中执行，脚本后缀通常为 .bt
+* 在 Kubernetes 集群中，可以通过 kubectl trace 简化 bpftrace 的调度和运行
+  - 支持单行方式或者脚本文件方式 通过 uprobe 直接跟踪一个 Pod
+
+```sh
+sudo apt-get install -y bpftrace
+
+docker run -ti --rm -v /usr/src:/usr/src:ro \
+       -v /lib/modules/:/lib/modules:ro \
+       -v /sys/kernel/debug/:/sys/kernel/debug:rw \
+       --net=host --pid=host --privileged \
+       quay.io/iovisor/bpftrace:latest \
+       tcplife.bt
+
+# Files opened by process
+bpftrace -e 'tracepoint:syscalls:sys_enter_open {printf("%s %s\n", comm, str(args->filename)); }'
+
+# Syscall count by program
+bpftrace -e 'tracepoint:raw_syscalls:sys_enter {@[comm] = count(); }'
+
+# Read bytes by process:
+bpftrace -e 'tracepoint:syscalls:sys_exit_read /args->ret/ {@[comm] = sum(args->ret); }'
+
+# Read size distribution by process:
+bpftrace -e 'tracepoint:syscalls:sys_exit_read {@[comm] = hist(args->ret); }'
+
+# Show per-second syscall rates:
+bpftrace -e 'tracepoint:raw_syscalls:sys_enter {@ = count(); } interval:s:1 { print(@); clear(@); }'
+
+# Trace disk size by process
+bpftrace -e 'tracepoint:block:block_rq_issue {printf("%d %s %d\n", pid, comm, args->bytes); }'
+
+# Count page faults by process
+bpftrace -e 'software:faults:1 {@[comm] = count(); }'
+
+# Run a program from string literal
+kubectl trace run node-1 -e "tracepoint:syscalls:sys_enter_* {@[probe] = count(); }"
+# Run a program from file
+kubectl trace run node-1 -f read.bt
 ```
 
 ## [学习路径](https://www.ebpf.top/post/ebpf_learn_path/)

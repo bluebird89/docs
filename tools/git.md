@@ -772,6 +772,7 @@ git rm –cached FILE # 这个命令只删除远程文件
   - 新提交节点（下图中的a47c3）中的所有文件都会被复制（到暂存区域和工作目录中）
   - 只存在于老提交节点（ed489）中的文件会被删除
   - 不属于上述两者的文件会被忽略，不受影响保留
+* [learnGitBranching](https://github.com/pcottle/learnGitBranching)An interactive git visualization to challenge and educate! https://pcottle.github.com/learnGitBranching/?demo
 
 ## 文件恢复
 

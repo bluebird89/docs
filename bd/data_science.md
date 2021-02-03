@@ -171,9 +171,9 @@ SAS网站的Eight levels of analytics
 
 * 达观数据
 
-## [incubator-superset](https://github.com/apache/incubator-superset)
+## [superset](https://github.com/apache/superset)
 
-Apache Superset is a Data Visualization and Data Exploration Platform  <https://superset.incubator.apache.org/>
+Apache Superset is a Data Visualization and Data Exploration Platform  <https://superset.apache.org/>
 
 ## [dash](https://github.com/plotly/dash)
 

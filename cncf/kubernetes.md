@@ -1943,7 +1943,7 @@ source ~/.bash_profile
 * [conduit](https://github.com/runconduit/conduit):Ultralight service mesh for Kubernetes <https://conduit.io>
 * [flux](https://github.com/weaveworks/flux):The GitOps Kubernetes operator
 * [kubernetes-client](https://github.com/kubernetes-client/javascript):Javascript client
-* [argo](https://github.com/argoproj/argo):Container-native workflows for Kubernetes. <https://argoproj.github.io>
+* [argo](https://github.com/argoproj/argo):Argo Workflows: Get stuff done with Kubernetes.  <https://argoproj.github.io>
 * [ambassador](https://github.com/datawire/ambassador):open source Kubernetes-native API gateway for microservices built on the Envoy Proxy <https://www.getambassador.ios>
 * [virtual-kubelet](https://github.com/virtual-kubelet/virtual-kubelet):Virtual Kubelet is an open source Kubernetes kubelet implementation.
 * [operator-sdk](https://github.com/operator-framework/operator-sdk):SDK for building Kubernetes applications. Provides high level APIs, useful abstractions, and project scaffolding. <https://coreos.com/operators>

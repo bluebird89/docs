@@ -84,6 +84,7 @@ A platform for building proxies to bypass network restrictions. <https://www.v2r
     + /etc/systemd/system/v2ray.service: Systemd
     + /etc/init.d/v2ray: SysV
 * [v2rayL](https://github.com/jiangxufeng/v2rayL):v2ray linux GUI客户端，支持订阅、vemss、ss等协议，自动更新订阅、检查版本更新
+* [v2ray](https://github.com/233boy/v2ray) 一键安装脚本 & 管理脚本
 
 ```sh
 # 安装v2ray
