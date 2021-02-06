@@ -98,6 +98,10 @@ gcc name.o adder.o hello.c
   - 好处是安装包会比较小，多个应用程序可以共享库文件；缺点是用户必须事先安装好库文件，而且版本和安装位置都必须符合要求，否则就不能正常运行。
   - 现实中，大部分软件采用动态连接，共享库文件。这种动态共享的库文件，Linux平台是后缀名为.so的文件，Windows平台是.dll文件，Mac平台是.dylib文件
 
+## 课程
+
+* [cse251](http://cse.msu.edu/~cse251/)
+
 ## 图书
 
 * 《[C Programming Language (2nd Edition) C程序设计语言（第2版）](https://www.amazon.cn/gp/product/B0011425T8)》
