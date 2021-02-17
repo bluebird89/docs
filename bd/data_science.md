@@ -150,8 +150,8 @@
 
 ## 职位
 
-* 数据分析师
-  - 更注意是对数据、数据指标的解读，通过对数据的分析，来解决商业问题。主要有以下几个次层次： 1）业务监控：诊断当前业务是否正常？是否存在问题？业务发展是否达到预期（KPI）？如果没有达到预期，问主要问题在哪？是什么原因引起的？
+* 数据分析师:更注意是对数据、数据指标的解读，通过对数据的分析，来解决商业问题。主要有以下几个次层次：
+  - 业务监控：诊断当前业务是否正常？是否存在问题？业务发展是否达到预期（KPI）？如果没有达到预期，问主要问题在哪？是什么原因引起的？
   - 建立分析体系：这些数据分析师已经对业务有一定的理解，对业务也相对比较熟悉，更多帮业务方建立一套分析体系，或者更高级是做成数据产品。例如：营销活动。分析师会告诉业务方，在活动前你应该分析哪些数据，从而制定恰当的营销计划。在营销过程中，你应该看哪些数据，从而及时做出营销活动调整。在营销活动，应该如何进行活动效果评估。
   - 行业未来发展的趋势分析：这应该是数据分析师最高级别，有的公司叫做战略分析师/商业分析师。这个层次的数据分析师站的更高，在行业、宏观的层面进行业务分析，预测未来行业的发展，竞争对手的业务构成，帮助公司制定战略发展计划，并及时跟踪、分析市场动态，从而及时对战略进行不断优化。
   - 技能：数据库知识（SQL至少要熟悉）、基本的统计分析知识、EXCEL要相当熟悉，对SPSS或SAS有一定的了解，对于与网站相关的业务还可能要求掌握GA等网站分析工具，当然PPT也是必备的
@@ -190,22 +190,7 @@ pip install dash==1.17.0
 
 ## 课程
 
-* 《数据科学导论》：数据科学的先导课和认知类课程。用形象生动的教学模式为学生普及数据挖掘、大数据相关的基础知识、核心概念和思维模式，从工程技术、法律规范、应用实践等不同角度描绘数据科学的美好蓝图
-* 《数据挖掘：理论与算法》：本课程完整覆盖数据挖掘领域的各项核心技术，包括数据预处理、分类、聚类、回归、关联、推荐、集成学习、进化计算等
-* 《高级大数据系统》：主要讲解高级大数据系统的实现、优化和应用，包括分布式文件系统、MapReduce/Spark、Storm/Spark streaming、Mahout等系统的原理、实现、策略优化
-* 《大数据机器学习》：主要包括统计学习基本理论，机器学习基本方法，深度学习理论和方法。牢固掌握大数据机器学习方法，并能够解决实际问题等综合能力
 * 《数据可视化》：主要包括可视化的基本概念、历史沿革、视觉认知理论、各类可视化技术（软件工具及程序开发）等
-* [CS109 Data Science](http://cs109.github.io/2015/)
-* [Data Science Math Skills（数据科学中的数学技巧）](http://coursegraph.com/coursera-datasciencemathskills):Data science courses contain math—no avoiding that! This course is designed to teach learners the basic math you will need in order to be successful in almost any data science math course and was created for learners who have basic math skills but may not have taken algebra or pre-calculus. Data Science Math Skills introduces the core math that data science is built upon, with no extra complexity, introducing unfamiliar ideas and math symbols one-at-a-time. Learners who complete this course will master the vocabulary, notation, concepts, and algebra rules that all data scientists must know before moving on to more advanced material.
-* [Introduction to Discrete Mathematics for Computer Science Specialization（面向计算机科学的离散数学专项课程)](http://coursegraph.com/coursera-specializations-discrete-mathematics):Discrete Math is needed to see mathematical structures in the object you work with, and understand their properties. This ability is important for software engineers, data scientists, security and financial analysts (it is not a coincidence that math puzzles are often used for interviews). We cover the basic notions and results (combinatorics, graphs, probability, number theory) that are universally needed. To deliver techniques and ideas in discrete mathematics to the learner we extensively use interactive puzzles specially created for this specialization. To bring the learners experience closer to IT-applications we incorporate programming examples, problems and projects in our courses.
-  - [What is a Proof（什么是证明）](http://coursegraph.com/coursera-what-is-a-proof):There is a perceived barrier to mathematics: proofs. In this course we will try to convince you that this barrier is more frightening than prohibitive: most proofs are easy to understand if explained correctly, and often they are even fun. We provide an accompanied excursion in the “proof zoo” showing you examples of techniques of different kind applied to different topics. We use some puzzles as examples, not because they are “practical”, but because discussing them we learn important reasoning and problem solving techniques that are useful. We hope you enjoy playing with the puzzles and inventing/understandings the proofs. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
-  * [Combinatorics and Probability（组合和概率）](link):Counting is one of the basic mathematically related tasks we encounter on a day to day basis. The main question here is the following. If we need to count something, can we do anything better than just counting all objects one by one? Do we need to create a list of all phone numbers to ensure that there are enough phone numbers for everyone? Is there a way to tell that our algorithm will run in a reasonable time before implementing and actually running it? All these questions are addressed by a mathematical field called Combinatorics. In this course we discuss most standard combinatorial settings that can help to answer questions of this type. We will especially concentrate on developing the ability to distinguish these settings in real life and algorithmic problems. This will help the learner to actually implement new knowledge. Apart from that we will discuss recursive technique for counting that is important for algorithmic implementations. One of the main `consumers’ of Combinatorics is Probability Theory. This area is connected with numerous sides of life, on one hand being an important concept in everyday life and on the other hand being an indispensable tool in such modern and important fields as Statistics and Machine Learning. In this course we will concentrate on providing the working knowledge of basics of probability and a good intuition in this area. The practice shows that such an intuition is not easy to develop. In the end of the course we will create a program that successfully plays a tricky and very counterintuitive dice game. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
-  * [Introduction to Graph Theory（图论导论）](link):We invite you to a fascinating journey into Graph Theory — an area which connects the elegance of painting and the rigor of mathematics; is simple, but not unsophisticated. Graph Theory gives us, both an easy way to pictorially represent many major mathematical results, and insights into the deep theories behind them. In this course, among other intriguing applications, we will see how GPS systems find shortest routes, how engineers design integrated circuits, how biologists assemble genomes, why a political map can always be colored using a few colors. We will study Ramsey Theory which proves that in a large system, complete disorder is impossible! By the end of the course, we will implement an algorithm which finds an optimal assignment of students to schools. This algorithm, developed by David Gale and Lloyd S. Shapley, was later recognized by the conferral of Nobel Prize in Economics. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
-  - [Number Theory and Cryptography（数论和密码学）]():We all learn numbers from the childhood. Some of us like to count, others hate it, but any person uses numbers everyday to buy things, pay for services, estimated time and necessary resources. People have been wondering about numbers’ properties for thousands of years. And for thousands of years it was more or less just a game that was only interesting for pure mathematicians. Famous 20th century mathematician G.H. Hardy once said “The Theory of Numbers has always been regarded as one of the most obviously useless branches of Pure Mathematics”. Just 30 years after his death, an algorithm for encryption of secret messages was developed using achievements of number theory. It was called RSA after the names of its authors, and its implementation is probably the most frequently used computer program in the word nowadays. Without it, nobody would be able to make secure payments over the internet, or even log in securely to e-mail and other personal services. In this short course, we will make the whole journey from the foundation to RSA in 4 weeks. By the end, you will be able to apply the basics of the number theory to encrypt and decrypt messages, and to break the code if one applies RSA carelessly. You will even pass a cryptographic quest! As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
-  - [Solving Delivery Problem（解决旅行商问题）](http://coursegraph.com/coursera-delivery-problem):We’ll implement together an efficient program for a problem needed by delivery companies all over the world millions times per day — the travelling salesman problem. The goal in this problem is to visit all the given places as quickly as possible. How to find an optimal solution to this problem quickly? We still don’t have provably efficient algorithms for this difficult computational problem and this is the essence of the P versus NP problem, the most important open question in Computer Science. Still, we’ll implement several efficient solutions for real world instances of the travelling salesman problem. While designing these solutions, we will rely heavily on the material learned in the courses of the specialization: proof techniques, combinatorics, probability, graph theory. We’ll see several examples of using discrete mathematics ideas to get more and more efficient solutions.
-
-## 教程
-
 * [数据可视化入门教程](https://www.yuque.com/mo-college/beginner-tutorial)
 * [Introduction to Data Science Specialization](http://coursegraph.com/coursera-specializations-introduction-data-science):4门子课程，涵盖数据科学简介，面向数据科学的开源工具，数据科学方法论，SQL基础
 * [Applied Data Science Specialization](http://coursegraph.com/coursera-specializations-applied-data-science):面向数据科学的Python，Python数据可视化，Python数据分析，数据科学应用毕业项目
@@ -219,12 +204,24 @@ pip install dash==1.17.0
 * [Data Science Ethics](http://coursegraph.com/coursera-data-science-ethics)
 * [How to Win a Data Science Competition: Learn from Top Kagglers](http://coursegraph.com/coursera-competitive-data-science)
 * [Learning from data](http://work.caltech.edu/lectures.html)
+* 《数据科学导论》：数据科学的先导课和认知类课程。用形象生动的教学模式为学生普及数据挖掘、大数据相关的基础知识、核心概念和思维模式，从工程技术、法律规范、应用实践等不同角度描绘数据科学的美好蓝图
+* 《数据挖掘：理论与算法》：本课程完整覆盖数据挖掘领域的各项核心技术，包括数据预处理、分类、聚类、回归、关联、推荐、集成学习、进化计算等
+* 《高级大数据系统》：主要讲解高级大数据系统的实现、优化和应用，包括分布式文件系统、MapReduce/Spark、Storm/Spark streaming、Mahout等系统的原理、实现、策略优化
+* 《大数据机器学习》：主要包括统计学习基本理论，机器学习基本方法，深度学习理论和方法。牢固掌握大数据机器学习方法，并能够解决实际问题等综合能力
+* [CS109 Data Science](http://cs109.github.io/2015/)
+* [Data Science Math Skills（数据科学中的数学技巧）](http://coursegraph.com/coursera-datasciencemathskills):Data science courses contain math—no avoiding that! This course is designed to teach learners the basic math you will need in order to be successful in almost any data science math course and was created for learners who have basic math skills but may not have taken algebra or pre-calculus. Data Science Math Skills introduces the core math that data science is built upon, with no extra complexity, introducing unfamiliar ideas and math symbols one-at-a-time. Learners who complete this course will master the vocabulary, notation, concepts, and algebra rules that all data scientists must know before moving on to more advanced material.
+* [Introduction to Discrete Mathematics for Computer Science Specialization（面向计算机科学的离散数学专项课程)](http://coursegraph.com/coursera-specializations-discrete-mathematics):Discrete Math is needed to see mathematical structures in the object you work with, and understand their properties. This ability is important for software engineers, data scientists, security and financial analysts (it is not a coincidence that math puzzles are often used for interviews). We cover the basic notions and results (combinatorics, graphs, probability, number theory) that are universally needed. To deliver techniques and ideas in discrete mathematics to the learner we extensively use interactive puzzles specially created for this specialization. To bring the learners experience closer to IT-applications we incorporate programming examples, problems and projects in our courses.
+  - [What is a Proof（什么是证明）](http://coursegraph.com/coursera-what-is-a-proof):There is a perceived barrier to mathematics: proofs. In this course we will try to convince you that this barrier is more frightening than prohibitive: most proofs are easy to understand if explained correctly, and often they are even fun. We provide an accompanied excursion in the “proof zoo” showing you examples of techniques of different kind applied to different topics. We use some puzzles as examples, not because they are “practical”, but because discussing them we learn important reasoning and problem solving techniques that are useful. We hope you enjoy playing with the puzzles and inventing/understandings the proofs. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
+  * [Combinatorics and Probability（组合和概率）](link):Counting is one of the basic mathematically related tasks we encounter on a day to day basis. The main question here is the following. If we need to count something, can we do anything better than just counting all objects one by one? Do we need to create a list of all phone numbers to ensure that there are enough phone numbers for everyone? Is there a way to tell that our algorithm will run in a reasonable time before implementing and actually running it? All these questions are addressed by a mathematical field called Combinatorics. In this course we discuss most standard combinatorial settings that can help to answer questions of this type. We will especially concentrate on developing the ability to distinguish these settings in real life and algorithmic problems. This will help the learner to actually implement new knowledge. Apart from that we will discuss recursive technique for counting that is important for algorithmic implementations. One of the main `consumers’ of Combinatorics is Probability Theory. This area is connected with numerous sides of life, on one hand being an important concept in everyday life and on the other hand being an indispensable tool in such modern and important fields as Statistics and Machine Learning. In this course we will concentrate on providing the working knowledge of basics of probability and a good intuition in this area. The practice shows that such an intuition is not easy to develop. In the end of the course we will create a program that successfully plays a tricky and very counterintuitive dice game. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
+  * [Introduction to Graph Theory（图论导论）](link):We invite you to a fascinating journey into Graph Theory — an area which connects the elegance of painting and the rigor of mathematics; is simple, but not unsophisticated. Graph Theory gives us, both an easy way to pictorially represent many major mathematical results, and insights into the deep theories behind them. In this course, among other intriguing applications, we will see how GPS systems find shortest routes, how engineers design integrated circuits, how biologists assemble genomes, why a political map can always be colored using a few colors. We will study Ramsey Theory which proves that in a large system, complete disorder is impossible! By the end of the course, we will implement an algorithm which finds an optimal assignment of students to schools. This algorithm, developed by David Gale and Lloyd S. Shapley, was later recognized by the conferral of Nobel Prize in Economics. As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
+  - [Number Theory and Cryptography（数论和密码学）]():We all learn numbers from the childhood. Some of us like to count, others hate it, but any person uses numbers everyday to buy things, pay for services, estimated time and necessary resources. People have been wondering about numbers’ properties for thousands of years. And for thousands of years it was more or less just a game that was only interesting for pure mathematicians. Famous 20th century mathematician G.H. Hardy once said “The Theory of Numbers has always been regarded as one of the most obviously useless branches of Pure Mathematics”. Just 30 years after his death, an algorithm for encryption of secret messages was developed using achievements of number theory. It was called RSA after the names of its authors, and its implementation is probably the most frequently used computer program in the word nowadays. Without it, nobody would be able to make secure payments over the internet, or even log in securely to e-mail and other personal services. In this short course, we will make the whole journey from the foundation to RSA in 4 weeks. By the end, you will be able to apply the basics of the number theory to encrypt and decrypt messages, and to break the code if one applies RSA carelessly. You will even pass a cryptographic quest! As prerequisites we assume only basic math (e.g., we expect you to know what is a square or how to add fractions), basic programming in python (functions, loops, recursion), common sense and curiosity. Our intended audience are all people that work or plan to work in IT, starting from motivated high school students.
+  - [Solving Delivery Problem（解决旅行商问题）](http://coursegraph.com/coursera-delivery-problem):We’ll implement together an efficient program for a problem needed by delivery companies all over the world millions times per day — the travelling salesman problem. The goal in this problem is to visit all the given places as quickly as possible. How to find an optimal solution to this problem quickly? We still don’t have provably efficient algorithms for this difficult computational problem and this is the essence of the P versus NP problem, the most important open question in Computer Science. Still, we’ll implement several efficient solutions for real world instances of the travelling salesman problem. While designing these solutions, we will rely heavily on the material learned in the courses of the specialization: proof techniques, combinatorics, probability, graph theory. We’ll see several examples of using discrete mathematics ideas to get more and more efficient solutions.
 
 ## 资源
 
-* [iphysresearch/DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
-* [pachyderm/pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
-* [chinese-poetry/chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 <http://shici.store>
+* [DataSciComp](https://github.com/iphysresearch/DataSciComp):A collection of popular Data Science Competitions
+* [pachyderm](https://github.com/pachyderm/pachyderm):Reproducible Data Science at Scale! <http://pachyderm.io>
+* [chinese-poetry](https://github.com/chinese-poetry/chinese-poetry):最全中华古诗词数据库, 唐宋两朝近一万四千古诗人, 接近5.5万首唐诗加26万宋诗. 两宋时期1564位词人，21050首词。 <http://shici.store>
 * [google-research](https://github.com/google-research/google-research) Google Research  <https://research.google/>
 
 ## 实例
@@ -314,6 +311,53 @@ pip install dash==1.17.0
 
 ## 图书
 
+* 数据智能战略规划
+  - 卓越的商务沟通》
+  - 《麦肯锡工作法》
+  - 《金字塔原理》
+  - 《智能商业》
+  - 《精益企业》
+  - 《精益服务解决方案》
+  - 《智能革命》
+  - 《大数据大创新》
+  - 《原则》
+  - 《值得信赖的顾问》
+* 数据智能平台建设
+  - 《Hadoop应用架构》
+  - 《大数据日知录》
+  - 《DataOps Cookbook》 DataOps为数据类项目的持续交付提供了方法支撑。这本书是业界第一本系统讲解DataOps的书籍，它从介绍DataOps宣言、什么是DataOps开始，又阐述了DataOps对不同角色的影响，最后有几个案例。如果你有持续交付的基础，很容易理解书里的内容，它不过是这个方法在Data领域的实践。
+  - 《大数据之路》
+  - 《MapReduce设计模式》
+  - 《Apache Kylin权威指南》
+  - 《数据中台》这是一部系统讲解数据中台建设、管理与运营的著作，旨在帮助企业将数据转化为生产力，实现数字化和数智化转型，此书章节连贯比较系统，推荐给数字/智化转型的专业服务人员和企业中带领转型的践行者们。
+  - 《算法与数据中台》
+  - 《平台革命》
+  - 《架构即未来》
+* 数据工程
+  - 《数据仓库》 数据仓库之父Inmon的经典力作，是数据仓库核心概念和方法的最全面的介绍。它介绍了用于设计数仓系统的基础组件，多种数仓策略，以及用于加载索引和管理数据的技术。本书是传统数据仓库系统的入门之选。
+  - 《数据架构》
+  - 《Streaming Systems》 本书系统地介绍了流式处理中面临各种问题和解决方案。包括流式处理和批处理的比较，处理乱序数据的原则和实践，保证数据准确性的处理技术等等。不管是设计流式系统，还是使用流式处理工具，都值得阅读本书。
+  - 《敏捷分析》
+  - 《精益数据分析》
+  - 《数据仓库工具箱》论述维度建模技术、模式和实践的经典之作，包括了详尽的理论基础和真实世界中的复杂案例，是数据建模不可多得的参考书。
+  - 《Building a Scalable Data Warehouse with Data Vault  - 0》
+  - 《Hadoop权威指南》
+  - 《Kafka权威指南》
+  - 《Spark权威指南》
+  - 《DAMA数据管理知识体系指南》
+* 数据科学及智能应用
+  - 《大数据智能》
+  - 《统计学习方法（第2版）》
+  - 《数据挖掘导论》
+  - 《机器学习》没有酷炫的故事，只有清晰的推理，从传统机器学习的相关算法，到深度学习的各个算法，书中都涵盖了具体的算法逻辑
+  - 《机器学习实战》 入门必备书籍，介绍从事数据科学和机器学习必备的基础技能。也是Tensorflow认证的推荐学习书籍。
+  - 《用户画像》
+  - 《赤裸裸的统计学》
+  - 《深度学习推荐系统》全书脉络清晰，通俗易懂，作者站在工业实践角度介绍了一些非常实用的相关知识，如特征工程、实时性、优化目标、评估、冷启动等，特别适合对如何将推荐算法实践落地没有头绪的读者。
+  - 《联邦学习》
+  - 《为什么关于因果关系的新科学》
+  - 《深度学习》 本书是深度学习圣经般的指导书籍。较为系统的讲解了深度学习的算法原理，包含了非常细节的公式推导，仔细研究将可以帮助我们夯实基础。本书覆盖了当时的大部分深度学习模型，包括卷积神经网络，序列神经网络，自编码器，生成模型等内容。
+  - 《Deep Reinforcement Learning Hands-On》
 * 数据科学入门
 * 《数据科学实战》
 * 数据挖掘

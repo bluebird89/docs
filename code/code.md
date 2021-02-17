@@ -570,7 +570,6 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 * ThoughtWorks每半年发布一次的技术趋势报告，它持续追踪有趣的技术是如何发展的，我们将其称之为条目。技术雷达使用象限和环对其进行分类，不同象限代表不同种类的技术，而环则代表我们对其作出的成熟度评估
 * [ThoughtWorks(中国)程序员读书雷达](http://agiledon.github.io/blog/2013/04/17/thoughtworks-developer-reading-radar/)
-
   - Coding Practice | 编程实践
     + 基础篇
       * Clean Code《代码整洁之道》

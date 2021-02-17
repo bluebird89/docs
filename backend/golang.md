@@ -16,10 +16,13 @@ The Go programming language <https://golang.org> [中国官网](https://golang.g
 * 版本
   - 1.16
 * PHPer 应当学习 Golang
+  - 弱类型的好处就是能提升开发人员的开发效率，加之php有非常强大的array以及对应的数组处理方法，大部分用得到的数组处理函数php本身已经提供，所以开发人员使用起来非常方便，可以用较少的代码实现想要的功能
+  - 为了快速开发.设计模式不规范，弱类型与松散的面向对象，强大的数组能力，很多人都是数组一把梭，导致业务逻辑从代码中无法直接知晓数据结构包含一些什么数据，导致项目维护非常困难
+  -
   - PHP 脚本是由 SAPI 组件进行解析执行的
   - 有一个强大的扩展系统。扩展使用 C 调用 Zend API 编写
-  - 没有内建的并行机制，没有线程、进程
-  - 转到 Go 是因为他们并未放弃太多的表达能力，但是获得了性能，并且与并发共舞（Rob Pike）
+  - 没有内建的并行机制，没有异步多线程的场景
+  - Go 因为并未放弃太多的表达能力，但是获得了性能，并且与并发共舞（Rob Pike）
 
 ## [Install](https://golang.org/dl/)
 
@@ -1095,6 +1098,10 @@ go build
 ./hello -syncdb
 // 默认得用户名密码都是admin
 ```
+
+## [GoFrame](https://github.com/gogf/gf)
+
+* a modular, powerful, high-performance and enterprise-class application development framework of Golang. https://goframe.org/
 
 ## [gin](https://github.com/gin-gonic/gin)
 
