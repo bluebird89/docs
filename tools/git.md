@@ -94,6 +94,8 @@ git config --global alias.st 'status --porcelain'
   - [keybase-gpg-github](https://github.com/pstadler/keybase-gpg-github):Step-by-step guide on how to create a GPG key on keybase.io, adding it to a local GPG setup and use it with Git and GitHub.
 
 ```sh
+brew install gnupg
+
 gpg --full-generate-key  # 邮箱需要验证
 gpg --list-secret-keys --keyid-format LONG
 
@@ -105,10 +107,15 @@ ssb   4096R/42B317FD4BA89E7A 2016-03-10
 
 gpg --armor --export 42B317FD4BA89E7A # add github setting gpg
 
+git commit -S507BB1CAC6286AF9 -m 'commit message'
 
 git config --global user.signingkey 3AA5C34371567BD2
 git config --global commit.gpgsign true
+
 git commit -S -m your commit message
+
+# 在本地查看签名
+git log --show-signature
 ```
 
 ## 传输协议

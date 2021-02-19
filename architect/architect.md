@@ -229,11 +229,12 @@
     + DTO（Data Transfer Object）是远程调用对象，它是 RPC 服务提供的领域模型
   - entity, 此层定义为数据表的一个映射
     + DO（Data Object）与数据库表结构一一对应，通过 DAO 层向上传输数据源对象
-* 一般分层
+* 三层架构设计 3-Tier Architecture
   - Presentation layer 表示层（也就是UI层）
   - Application layer 应用层（也就是服务层）
   - Business logic layer 业务逻辑层（也就是领域层）
   - Data access layer 数据访问层（也就是数据持久层）
+  - 原本MVC中的Model被拆分为了BLL和DAL，即将业务逻辑与数据访问进行分离，将原本臃肿的Model进行了进一步的解耦，有利于项目的更好维护
 * CQRS Command Query Responsibility Segration
   - 把 CRUD 系统拆分为两部分,两边可以用不同的架构实现，以实现CQ两端（即Command Side，简称C端；Query Side，简称Q端）分别优化
     + 命令（Command）处理

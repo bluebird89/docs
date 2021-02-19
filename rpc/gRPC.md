@@ -263,6 +263,10 @@ Reflection request not implemented; is the ServerReflection service enabled?
 
 * 提供了很好地扩展 protobuf/gRPC，用代码生成代码的方向和蓝图。这也是 protobuf 这样的语言的魅力所在：它足够简单，可以很容易被解析，从而生成不同角度的工具
 
+## 项目
+
+* [grpc-spring-boot-starter](https://github.com/yidongnan/grpc-spring-boot-starter)Spring Boot starter module for gRPC framework.
+
 ## 工具
 
 * [Linkerd](https://kubernetes.io/blog/2018/11/07/grpc-load-balancing-on-kubernetes-without-tears/)

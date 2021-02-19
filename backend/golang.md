@@ -251,7 +251,7 @@ go install github.com/labstack/echo
 
 * 指针 pointer
   - 保存了值的内存地址
-    + 声明：类型 *T :指向 T 类型值的指针 `var p *int`
+    + 声明：类型 *T 指向 T 类型值的指针 `var p *int`
     + 零值为 nil
     + & 操作符会生成一个指向其操作数的指针 `i := 42 p = &i`
     + `*p` 操作符表示指针指向的底层值
@@ -263,11 +263,13 @@ go install github.com/labstack/echo
   * 数组类型 [n]T 表示拥有 n 个 T 类型的值的数组
   - 长度是固定的,数组的长度在声明它的时候就必须给定，并且之后不会再改变。可以说，数组的长度是其类型的一部分
 * 切片 slice
+  - 对数组一个连续片段的引用，是一种引用类型
   - 一个结构体,并不存储任何数据，只是描述了底层数组中的一段
     + 长度:所包含的元素个数。len(s)
     + 容量:从它的第一个元素开始数，到其底层数组元素末尾的个数。cap(s)
-  - 可包含任何类型，甚至包括其它的切片
-  - 用内建函数 make 来创建, 会分配一个元素为零值的数组并返回一个引用了它的切片`a := make([]int, 5)  // len(a)=5`
+  - 可包含任何类型，甚至包括其它切片
+  - 用内建函数 make 来创建, 会分配一个元素为零值的数组并返回一个引用了它的切片
+    + `a := make([]int, 5)  // len(a)=5`
     + b := make([]int, 0, 5) // len(b)=0, cap(b)=5
     + b = b[:cap(b)] // len(b)=5, cap(b)=5
     + b = b[1:]      // len(b)=4, cap(b)=4
@@ -318,6 +320,9 @@ type slice struct {
     len   int            //长度有多大
     cap   int            //容量有多大
 }
+
+var dp = [3][5]int{[5]int{1, 2, 3, 4, 5}, [5]int{4, 5, 6}, [5]int{7, 8, 9}}  //多维数组的初始化,不足补0
+s := []string{"abc", "ABC"}            //切片初始化
 ```
 
 ## new vs make
@@ -328,7 +333,6 @@ type slice struct {
 * make(T, args)
   - 仅用于创建切片、map和chan（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用
   - 对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
-
 
 ## 运算符
 
@@ -416,6 +420,12 @@ git clone https://github.com/golang/net.git
 export GO111MODULE=on
 ```
 
+## GO 并发
+
+* 并发主要由切换时间片来实现<同时>运行
+* 并行是直接利用多核实现多线程的运行
+* goroutine 奉行通过通信来共享内存(CSP并发模型)，而不是共享内存来通信
+
 ## 协程 goroutine
 
 * 由 Go 运行时管理的轻量级线程
@@ -425,14 +435,45 @@ export GO111MODULE=on
 * 运行时会创建多个线程来执行并发任务，且任务单元可被调度到其它线程执行。这更像是多线程和协程的结合体，能最大限度提升执行效率，发挥多核处理器能力。
 * 如果一个goroutine没有被阻塞，那么别的goroutine就不会得到执行
 * atomic 原子操作
-* 协程最大的问题就是一但有一个人调用系统调用，全部协程都hang住。goruntine则会有线程来调度，所以就不 需要关心这个事了。
+* 协程最大问题:一但有一个人调用系统调用，全部协程都hang住。goruntine则会有线程来调度，所以就不需要关心这个事了
+* Goroutine vs 线程
+  - OS线程一般都有固定的栈内存（一般2MB）
+  - goroutine(可增长的栈)的栈不是固定的，可以按需增大和缩小(典型大小2KB, 限制可达1GB)
+* runtime
+  - runtime.Gosched() 让出CPU时间片，重新等待调度。
+  - runtime.Goexit() 退出当前协程
+  - runtime.GOMAXPROCS(int) （最大256）
+    + 调度器使用GOMAXPROCS参数来确定需要使用多少个OS线程来同时执行Go代码。
+    + 默认值是机器上的CPU核心数。例如在一个8核心的机器上，调度器会把Go代码同时调度到8个OS线程上（GOMAXPROCS是m:n调度中的n）。
+  - goroutine与os线程是M:N的关系
+
+## GMP模型
+
+* Goroutine:相当于OS的进程控制块（Process Control Block)包含：函数执行的指令和参数，任务对象，线程上下文切换，字段保护，和字段的寄存器
+* M:对应物理线程
+* P:golang的协程调度器。P的数量可以通过GOMAXPROCS设置
+* 调度器设计策略
+  - 复用线程：
+    + work stealing机制：当本线程无可运行的Goroutine时，尝试从其他线程绑定的P队列偷取G,而不是消毁线程
+    + hand off机制：当本线程因为Goroutine进行系统调用阻塞时，线程释放绑定的P,把P转移给其它空闲的线程执行
+  - 抢占：在goroutine中要等待一个协程主动让CPU才执行下一个协程；在GO中，一个goroutine最多占用CPU 10ms, 防止其他goroutine被锁死
+  - 利用并行：利用GOMAXPROCS设置P数量，最多有GPMAXPROCS个线程分布在多个CPU上同时执行
+  - 全局G队列：当M执行work stealing从其它P的本地队列中偷不到G时，它可以从全局列队获取G
 
 ## 信道 channel
 
 * 带有类型的管道
-* 声明`ch := make(chan int, n)`
-  - n 为缓存长度
+  - 只读 ch := make(<-chan interface{})
+  - 只写 ch := make(chan<- interface{})
+* 声明
+  - 无缓冲通道｜同步通道｜阻塞通道 ch := make(chan interface{})
+    + 发送和接收操作都会阻塞当前协程
+    + 导致发送和接收的goroutine同步化
+  - 带缓存 ch := make(chan interface{}, num int)
 * 通过用信道操作符 <- 来发送或者接收值
+  - 发送 ch <- 10
+  - 接收 x := <- ch // 从ch中接收值并赋值给变量x
+  - <- ch // 从ch中接收值，忽略结果
 * 同步
   - 默认是阻塞的，发送和接收操作在另一端准备好之前都会阻塞。这使得 Go 程可以在没有显式的锁或竞态变量的情况下进行同步
   - 缓冲区填满，就阻塞写
@@ -440,11 +481,19 @@ export GO111MODULE=on
 * select
   - 阻塞+timeout
   - 无阻塞:在select中加入default
-* 发送者可通过 close 关闭一个信道来表示没有需要发送的值了，向一个已经关闭的信道发送数据会引发程序恐慌（panic）
-* 接收者可以通过为接收表达式分配第二个参数来测试信道是否被关闭
-  - 若没有值可以接收且信道已被关闭，那么在执行完 `v, ok := <-ch` 之后 ok 会被设置为 false
+* 长度 len(ch) // 求缓冲通道中元素的数量
+* 容量 cap(ch) // 求缓冲通道的容量
 * 循环 for i := range c 会不断从信道接收值，直到它被关闭
-* 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
+* 发送者可通过 close 关闭一个信道来表示没有需要发送的值了，向一个已经关闭的信道发送数据会引发程序恐慌（panic）
+  - 关闭 close(ch) 信道与文件不同，通常情况下无需关闭它们。只有在必须告诉接收者不再有需要发送的值时才有必要关闭，例如终止一个 range 循环
+  - 接收者可以通过为接收表达式分配第二个参数来测试信道是否被关闭
+    + 若没有值可以接收且信道已被关闭，那么在执行完 `v, ok := <-ch` 之后 ok 会被设置为 false
+* CSP并发模型（Communicating Sequential Processes），提倡通过通信共享内存而不是通过共享内存而实现通信。
+* panic场景
+  - close以后的管道，再写入
+  - 重复 close 只读 chan不能close, close以后还可以读取数据
+  - for-range管道，遍历完后，如果chan是关闭的，遍历完数据，正常退出
+  - for-range管道，遍历完后，如果chan不是关闭的，遍历完数据，程序会行等待，直到出现死锁
 
 ## 互斥锁 Mutex
 
@@ -471,23 +520,27 @@ export GO111MODULE=on
 ## 面向对象 OOP
 
 * 接口 interface
-  - 由一组方法签名定义的集合，接口类型的变量可以保存任何实现了这些方法的值
-  - 接口也是值。它们可以像其它值一样传递。接口值可以用作函数的参数或返回值。
-  - 在内部，接口值可以看做包含值和具体类型的元组 `(value, type)`,接口值保存了一个具体底层类型的具体值。接口值调用方法时会执行其底层类型的同名方法。
+  - 由一组方法签名定义的集合
+  - 接口类型的变量可以保存任何实现了这些方法的值
+  - 接口也是值。它们可以像其它值一样传递。接口值可以用作函数的参数或返回值
+  - 在内部，接口值可以看做包含值和具体类型的元组 `(value, type)`,接口值保存了一个具体底层类型的具体值。接口值调用方法时会执行其底层类型的同名方法
   - 类型通过实现一个接口的所有方法来实现该接口
   - 隐式接口从接口的实现中解耦了定义，这样接口的实现可以出现在任何包中，无需提前准备。
   - 底层值为 nil 的接口值，即便接口内的具体值为 nil，方法仍然会被 nil 接收者调用
   - 保存了 nil 具体值的接口其自身并不为 nil,nil 接口值既不保存值也不保存具体类型
   - 空接口
-    + 指定了零个方法的接口值被称为 *空接口：*  `interface{}`
-    + 空接口可保存任何类型的值。（因为每个类型都至少实现了零个方法）
-    + 空接口被用来处理未知类型的值。例如，fmt.Print 可接受类型为 interface{} 的任意数量的参数
+    + 指定了零个方法的接口值 `interface{}`
+    + 可保存任何类型的值。（因为每个类型都至少实现了零个方法）
+    + 被用来处理未知类型的值。例如，fmt.Print 可接受类型为 interface{} 的任意数量的参数
   - 类型断言 提供了访问接口值底层具体值的方式
     + `t := i.(T)` 断言接口值 i 保存了具体类型 T，并将其底层类型为 T 的值赋予变量 t,若 i 并未保存 T 类型的值，该语句就会触发一个恐慌。
     + `t, ok := i.(T)`  判断 一个接口值是否保存了一个特定的类型，类型断言可返回两个值：其底层值以及一个报告断言是否成功的布尔值
       * i 保存了一个 T:t 将会是其底层值，而 ok 为 true
       * 否则，ok 将为 false 而 t 将为 T 类型的零值，程序并不会产生恐慌
-  - 类型选择 一种按顺序从几个类型断言中选择分支的结构,类型选择中的 case 为类型（而非值）， 它们针对给定接口值所存储的值的类型进行比较
+  - 类型选择 一种按顺序从几个类型断言中选择分支的结构,类型选择中的 case 为类型（而非值），它们针对给定接口值所存储的值的类型进行比较
+  - 接口实现：接口的方法与实现接口的类型方法格式一致（方法名、参数类型、返回值类型一致）。所有方法都要被实现。
+  - 接口赋值：接口本质上是一个指针类型。实现了该接口的struct和子接口，可以赋值给接口
+  - 接口类型做为参数：如果一个函数有个接口作为参数。那么实现了该接口的struct都可以做为此参数
 * 实现
   - A type implements an interface by implementing its methods. There is no explicit declaration of intent, no "implements" keyword.
   - 声明数据数据
@@ -509,6 +562,10 @@ export GO111MODULE=on
 * use a pointer receiver 优点
   - 能够修改接收者指向值
   - 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效
+* 多态
+  - 多个类型（结构体）可以实现同一个接口
+  - 一个类型（结构体）可以实现多个接口
+  - 实现接口的类（结构体）可以赋值给接口
 
 ## fmt
 
@@ -647,9 +704,15 @@ func main() {
   - 生成cpu profile文件`go test -bench=".*" -cpuprofile=cpu.prof -c`
   - 用go tool pprof工具 `go tool pprof *.test cpu.prof`
 * 辅助单元测试的 assert 包
+* gocheck
 
 ```sh
 go test [-c] [-i] [build flags] [packages] [flags for test binary]
+
+go test -v                  # 测试项目目标的xxx_test.go文件
+go test -test.bench=".*"                         # 测试总个目录的
+go test xxx_test.go  -test.bench=".*"            # 测试单个文件
+go test xxx_test.go -benchmem  -test.bench=".*"  # 显示内存
 
 package gotest
 
@@ -685,8 +748,7 @@ func Benchmark_Division(b *testing.B) {
 func Benchmark_TimeConsumingFunction(b *testing.B) {
     b.StopTimer() //调用该函数停止压力测试的时间计数
 
-    //做一些初始化的工作,例如读取文件数据,数据库连接之类的,这样这些时间不影响测试函数本身的性能
-
+    # //做一些初始化的工作,例如读取文件数据,数据库连接之类的,这样这些时间不影响测试函数本身的性能
     b.StartTimer() //重新开始时间
     for i := 0; i < b.N; i++ {
         Division(4, 5)
@@ -806,10 +868,6 @@ go build -mod=vendor
 replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
 replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
 ```
-
-## 测试
-
-* gocheck
 
 ## 时间
 
@@ -1102,6 +1160,7 @@ go build
 ## [GoFrame](https://github.com/gogf/gf)
 
 * a modular, powerful, high-performance and enterprise-class application development framework of Golang. https://goframe.org/
+* [gfast](https://github.com/tiger1103/gfast) 基于GF(Go Frame)的后台管理系统 http://www.g-fast.cn/
 
 ## [gin](https://github.com/gin-gonic/gin)
 

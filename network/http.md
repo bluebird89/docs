@@ -1237,7 +1237,7 @@ $un_data = unserialize_php($data);
 
 ## [HTTP/2](https://http2.github.io/)
 
-* 2015 年开发出来的标准 基于Google的SPDY,从2012年诞生到2016停止维护
+* 2015 年开发出来的标准.基于Google的SPDY,从2012年诞生到2016停止维护
 * 头部压缩 Header Compression
   - 由于 HTTP 1.1 经常会出现 User-Agent、Cookie、Accept、Server、Range 等字段可能会占用几百甚至几千字节，而 Body 却经常只有几十字节，所以导致头部偏重
   - 头信息（键值对）在两端建立一个索引表，对相同的头只发送索引表中的索引
