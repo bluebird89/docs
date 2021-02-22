@@ -591,29 +591,17 @@ factorial(N,F) :-   M is N-1, factorial(M,Fm), F is N * Fm.
 数据和页面剥离：技术栈的隔离
 
 * 分工颗粒度更细
-
 * 前端采用静态网页相关的技术，HTML + CSS + JavaScript，通过 AJAX 技术调用后端提供的业务接口。负责 View 和 Controller 层
-
 * 前后端协商好接口方式通过 HTTP 提供，统一使用 POST 谓词。负责 Model 层
-
 * 接口数据结构使用 JSON 实现，形式使用REST
-
 * 最上端是服务端，就是我们常说的后端。后端对于我们来说，就是一个接口的集合，服务端提供各种各样的接口供我们使用。因为有 Node.js 层，也不用局限是什么形式的服务。对于后端开发来说，他们只用关心业务代码的接口实现。
-
 * 服务端下面是 Node.js 应用
-
 * Node.js 应用中有一层 Model Proxy 与服务端进行通讯。这一层主要目前是抹平我们对不同接口的调用方式，封装一些 View 层需要的 Model。
-
 * Node.js 层还能轻松实现原来 vmcommon, tms（引用淘宝内容管理系统）等需求。
-
 * Node.js 层要使用什么框架由开发者自己决定。不过推荐使用 Express + XTemplate 的组合，XTemplate 能做到前后端公用。
-
 * 怎么用 Node.js 大家自己决定，但是令人兴奋的是，我们终于可以使用 Node.js 轻松实现我们想要的输出方式： JSON/JSONP/RESTful/HTML/BigPipe/Comet/Socket/同步、异步，想怎么整就怎么整，完全根据你的场景决定。
-
 * 浏览器层在我们这个架构中没有变化，也不希望因为引入 Node.js 改变你以前在浏览器中开发的认知。
-
 * 引入 Node.js，只是把本该就前端控制的部分交由前端掌控。
-
 * 前端开发人员则可以利用nodejs来搭建自己的本地服务器，直接在本地开发，然后通过一些插件来将api请求转发到后台，这样就可以完全模拟线上的场景，并且与后台解耦
 
 ![前后分离式 Web 架构示意](../static/fbs.png "前后分离式 Web 架构示意")
@@ -836,6 +824,12 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 
 * [purecss-francine](https://github.com/cyanharlow/purecss-francine)：HTML/CSS drawing in the style of an 18th-century oil painting. Hand-coded entirely in HTML & CSS.
 
+## 开发规范
+
+* [前端开发规范手册](http://zhibimo.com/read/Ashu/front-end-style-guide/index.html)
+* [html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
+* [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
+
 ## 课程
 
 * [FE-star](https://github.com/FE-star)
@@ -855,7 +849,6 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 
 ## 图书
 
-* [Web technology for developers](https://developer.mozilla.org/en-US/docs/Web)
 * Web开发权威指南
 * 《Web 可用性设计》
 * 《DOM 启蒙》
@@ -872,7 +865,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * 框架
   - [ratchet](https://github.com/twbs/ratchet):Build mobile apps with simple HTML, CSS, and JavaScript components. <http://goratchet.com>
   - [foundation-sites](https://github.com/zurb/foundation-sites):The most advanced responsive front-end framework in the world. Quickly create prototypes and production code for sites that work on any kind of device. <http://foundation.zurb.com>
-* [/web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
+* [web-maker](https://github.com/chinchang/web-maker):A blazing fast & offline frontend playground <https://webmakerapp.com/>
 * [Staticfile CDN](https://www.staticfile.org/):收录优秀的开源库，并免费为之提供 CDN 加速服务，使之有更好的访问速度和稳定的环境
 * [material-design-lite](https://github.com/google/material-design-lite):Material Design Components in HTML/CSS/JS <https://getmdl.io>
 * [subfont](https://github.com/Munter/subfont):Command line tool to optimize your webfont loading. Aggressive subsetting based on your font use, self-hosting of Google fonts and preloading
@@ -897,11 +890,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [Mars](https://github.com/AlloyTeam/Mars)腾讯移动Web前端知识库
 * [奇舞周刊](https://weekly.75.team/)
 * [frontend-dev-bookmarks](https://github.com/dypsilon/frontend-dev-bookmarks)
-* [WebFundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
-
-* [前端开发规范手册](http://zhibimo.com/read/Ashu/front-end-style-guide/index.html)
-* [html-css-guide](https://github.com/doyoe/html-css-guide):HTML/CSS开发规范指南
-- [front-end-style-guide](http://zhibimo.com/read/Ashu/front-end-style-guide/html/general.html)
+* [理解现代前端](https://xiaohanyu.me/understanding-modern-frontend/)
 
 * [从软件工程角度看大前端技术栈](http://blog.csdn.net/gitchat/article/details/77199990)
 * [Web前端开发知识体系精简](www.cnblogs.com/onepixel/archive/2017/06/16/7021506.html)

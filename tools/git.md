@@ -1462,7 +1462,6 @@ git push origin master                                    # 顺便主项目也 p
 git subtree pull -P home/.bash bash master --squash
 
 # 对 git-subtree 下子项目有修改需求的，请先 git subtree pull
-
 git subtree add --prefix=client https://github.com/example/project-client.git master # 建立主项目里子树
 ```
 

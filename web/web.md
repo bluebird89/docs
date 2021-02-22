@@ -401,6 +401,7 @@ servlet其实并不底层，http报文本质上就是一个字符串，容器承
 
 * [Web-Series](https://github.com/wx-chevalier/Web-Series):📚 现代 Web 开发，现代 Web 开发导论 | 基础篇 | 进阶篇 | 架构优化篇 | React 篇 | Vue 篇 <https://parg.co/bMe>
 * [Web](https://developers.google.com/web/)
+* [Web Fundamentals](https://github.com/google/WebFundamentals)Best practices for modern web development <https://developers.google.com/web/fundamentals>
 * [MDN Web Docs](https://developer.mozilla.org):Data and tools related to MDN Web Docs (formerly Mozilla Developer Network, formerly Mozilla Developer Center...)
   - [mdn/learning-area](https://github.com/mdn/learning-area):Github repo for the MDN Learning
 * [Web 开发](https://www.ibm.com/developerworks/cn/web/)

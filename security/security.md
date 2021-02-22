@@ -548,8 +548,6 @@ exit
   - config_waf_redirect_url = "https://www.unixhot.com"     --指定违反请求后跳转的指定html页面
 * 设定一个包含这些字符的的过滤规则
 
-*
-
 ```sh
 git clone https://github.com/unixhot/waf.git
 cp -a ./waf/waf /usr/local/openresty/nginx/conf/
@@ -654,6 +652,16 @@ four_bytes = hmac[LAST_BYTE(hmac):LAST_BYTE(hmac) + 4]
 large_integer = INT(four_bytes)
 small_integer = large_integer % 1,000,000
 ```
+
+## 个人安全
+
+* 关键帐号开启2FA （形式不限）
+* 2FA尽量用大厂和普及的，因为安全拼实力和钱（我用Google Authenticator ）
+* 密码最好自己也记不住，放苹果钥匙串或第三方
+* 因为短信能找回密码，请开启SIM卡PIN码
+  - UIM卡的个人识别密码。若启用了开机PIN码，每次开机都需输入4位PIN码，用来保护UIM卡不被他人使用。输入PIN码错误3次，手机即被自动锁死，这时需PUK码来解锁
+  - 电信手机号码的初始 制 PIN码 为 1234
+* 手机请用iPhone（开屏密码6位以上）
 
 ## 案例
 

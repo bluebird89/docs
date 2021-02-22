@@ -204,9 +204,22 @@ XXX：添加一些新功能（简短的说明）
 
 ## 方法
 
+* 小步快跑：一次评审少于400行代码
+* 评审速度应低于500LOC/小时
+* 一次评审不要超过60分钟
+* 设定目标并获取指标
+  - 评审率：评审的速度
+  - 缺陷率：每小时评审发现的错误数
+  - 缺陷密度：每行代码发现的平均缺陷数
+* 作者应在审阅之前注解源代码
 * CheckStyle
-* Check List
-* 小步快跑：控制每次Review代码的数量
+* 使用评审评审单 Check List
+* 建立修复发现的缺陷的流程
+  - 使用协作式代码审阅工具，该工具使审阅者可以记录错误，与作者讨论错误并批准代码变更。如果没有自动化工具，则在审查中发现的错误可能不会记录在团队通常的缺陷跟踪系统中，因为它们是在将代码发布给质量保证之前发现的。
+* 建立积极的代码审查文化
+  - 在同行评审中发现的缺陷不是评估团队成员的可验收标准。从同级代码审阅中提取的报告永远不要在绩效报告中使用。如果个人指标成为薪酬或晋升的基础，那么开发人员将对流程产生敌意，自然会专注于改进个人指标，而不是编写更好的整体代码。
+* 接受同行评审的潜意识暗示
+* 采用轻量级代码评审
 
 ## 图书
 
@@ -220,6 +233,7 @@ XXX：添加一些新功能（简短的说明）
 * Codacy
 * RhodeCode
 * Gerrit
+* [SmartBear](https://smartbear.com)
 * [reviewdog](https://github.com/reviewdog/reviewdog):dog Automated code review tool integrated with any code analysis tools regardless of programming language <https://medium.com/@haya14busa/reviewdog-a-code-review-dog-who-keeps-your-codebase-healthy-d957c471938b#.8xctbaw5u>
 
 ## 参考

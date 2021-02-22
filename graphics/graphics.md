@@ -12,6 +12,7 @@
 ## 课程
 
 * [Computer Graphics](http://www.scratchapixel.com)
+* [Computer Graphics from scratch](https://gabrielgambetta.com/computer-graphics-from-scratch/)
 
 ## 参考
 

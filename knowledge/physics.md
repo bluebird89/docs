@@ -41,6 +41,8 @@
 * Electronics: Basic Electronics for Scientists and Engineers by Eggleston. Accessible to anyone who has worked through the basics of electrodynamics.
 * Particle Physics: Griffith's Introduction to Elementary Particles. Written by the same Griffith who gave us the Introduction to Electrodynamics and Introduction to Quantum Mechanics, this book is the perfect introduction to the fundamentals of particle physics and is a joy to work through!
 
+## 弦理论
+
 ## book
 
 * The Feynman Lectures on Physics (Boxed Set) and Feynman Lectures on Physics (Kindle Edition): Feynman's Lectures on Physics are essential readings for everyone interested in physics, and you'll find a copy on the bookshelf of every amateur physicist and professional physicist. These lectures are what got me into physics: my astronomy professor told me to read them and see if I liked physics - they changed my life!

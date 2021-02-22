@@ -784,7 +784,7 @@ dec_message = decrypt ( password, enc_message )
 print dec_message   // Hello World!
 ```
 
-## [OpenAPI 标准规范](https://mp.weixin.qq.com/s/Ow7tkcnpY37faHYHd12ENQ)
+## [open API 标准规范](https://mp.weixin.qq.com/s/Ow7tkcnpY37faHYHd12ENQ)
 
 * 协议: API 与用户的通信协议，总是使用 HTTPS 协议。这个和 RESTful API 本身没有很大的关系，但是对于增加网站的安全是非常重要的。特别如果提供的是公开 API，用户的信息泄露或者被攻击会严重影响网站的信誉
 * 版本（Version）
