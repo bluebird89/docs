@@ -351,6 +351,7 @@ Little Endian
 * [cs-video-courses](https://github.com/Developer-Y/cs-video-courses):List of Computer Science courses with video lectures.
 * [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
 * [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
+* [This is The Entire Computer Science Curriculum in 1000 YouTube Videos](https://web.archive.org/web/20210210143025/https://laconicml.com/computer-science-curriculum-youtube-videos/)
 
 ## 工具
 
