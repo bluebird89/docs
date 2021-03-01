@@ -111,6 +111,7 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * twitter
 * telegram
 * hacker news
+* 电池容量检测管理
 
 ## 技巧
 
