@@ -301,7 +301,6 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + control+option+command + 方向键右键 ： 使当前窗口占用当前屏幕右半部分
     + control+option + 方向键左键 ： 将当前窗口发送到左边显示器屏幕
     + control+option + 方向键右键 ： 将当前窗口发送到右边显示器屏幕
-  - [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro):essentially an IDE for automation
   - [transmissionbt](https://transmissionbt.com/):Transmission is a cross-platform BitTorrent client
   - [Helium](http://heliumfloats.com/):A floating browser window for OS X
   - Android file transfer
@@ -410,6 +409,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [Hammerspoon 官方教程](https://www.hammerspoon.org/go/)
   - [官方示例配置](https://github.com/Hammerspoon/hammerspoon/wiki/Sample-Configurations)
   - [Anish 的 Hammerspoon 配置](Anish 的 Hammerspoon 配置)
+
+## [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
+
+essentially an IDE for automation
 
 ## iPhone铃声制作
 
