@@ -586,28 +586,43 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
 ## 函数
 
 * 数值函数
-  - abs(x)            -- 绝对值 abs(-10.9) = 10
-  - format(x, d)    -- 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
-  - ceil(x)            -- 向上取整 ceil(10.1) = 11
-  - floor(x)        -- 向下取整 floor (10.1) = 10
-  - ROUND(x,y) 返回 x 四舍五入后保留 y 位小数的值；如果是整数，那么 y 位就是 0 ；如果不指定 y ，那么 y 默认也是 0 。
-  - mod(m, n)        -- m%n m mod n 求余 10%3=1
-  - pi()            -- 获得圆周率
-  - pow(m, n)        -- m^n
-  - sqrt(x)            -- 算术平方根
-  - RAND() ：返回 0 到 1 的随机值
-  - TRUNCATE(x,y): 返回数字 x 截断为 y 位小数的结果
+  - abs(x) 绝对值 abs(-10.9) = 10
+  - BIN(x)  返回x的二进制(OCT返回八进制，HEX返回十六进制)
+  - CEIL(x) 或 CEILING(x)  返回大于x的最小整数值
+  - EXP(x)  返回值e(自然对数的底)的x次方
+  - FLOOR(x)  返回小于x的最大整数值
+  - format(x, d) 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
+  - GREATEST(x1,x2,...,xn)  返回集合中最大的值
+  - LEAST(x1,x2,...,xn) 返回集合中最小的值
+  - LN(x) 返回x的自然对数
+  - LOG(x,y)  返回x的以y为底的对数
+  - MOD(x,y)  返回x除y的模(余数)
+  - PI()  返回pi的值(圆周率)
+  - pow(m, n) m^n
+  - RAND()  返回0~1内的随机值
+  - ROUND(x,y)  返回参数x的四舍五入的有y位小数的值
+  - SIGN(x) 返回代表数字x的符号的值
+  - SQRT(x) 返回一个数的平方根
+  - TRUNCATE(x,y) 返回数字x截短为y位小数的结果
 * 时间日期函数
-  - now(), current_timestamp();     -- 当前日期时间
-  - WEEK(DATE) 一年中的第几周
+  - now()|current_timestamp() 当前日期时间
   - YEAR(DATE) 给定日期的哪一年
-  - HOUR(time) 和 MINUTE(time) : 返回给定时间的小时，后者返回给定时间的分钟
-  - MONTHNAME(date) 函数：返回 date 的英文月份
-  - CURDATE()|current_date() 函数：返回当前日期，只包含年月日
-  - CURTIME()|current_time() 函数：返回当前时间，只包含时分秒
-  - date('yyyy-mm-dd hh:ii:ss');    -- 获取日期部分
+  - QUARTER(date) 返回date在一年中的季度(1~4)
+  - MONTHNAME(date) 返回 date 的英文月份
+  - MONTH(date) 返回date的月份值(1~12)
+  - WEEK(DATE) 一年中的第几周
+  - date('yyyy-mm-dd hh:ii:ss'); 获取日期部分
+  - HOUR(time)  返回time的小时值(0~23)
+  - MINUTE(time)  返回time的分钟值(0~59)
+  - DAYOFYEAR(date) 返回date是一年的第几天(1~366)
+  - DAYOFMONTH(date)  返回date是一个月的第几天(1~31)
+  - DAYOFWEEK(date) 返回date所代表的一星期中的第几天(1~7)
+  - DAYNAME(date) 返回date的星期名
+  - CURDATE()|current_date() 返回当前日期，只包含年月日
+  - CURTIME()|current_time() 返回当前时间，只包含时分秒
   - DATE_FORMAT('yyyy-mm-dd hh:ii:ss', '%d %y %a %d %m %b %j');  按照字符串 fmt 对 date 进行格式化，格式化后按照指定日期格式显示
-  - DATE_ADD(date, interval, expr type) 函数：返回与所给日期 date 相差 interval 时间段的日期,间隔类型的关键字，expr 是表达式,13 种时间间隔类型
+  - DATE_SUB(date,INTERVAL int keyword) 返回日期date减去间隔时间int的结果
+  - DATE_ADD(date, interval, expr type) 返回与所给日期 date 相差 interval 时间段的日期,间隔类型的关键字，expr 是表达式,13 种时间间隔类型
     + YEAR  年   YY
     + MONTH   月   MM
     + DAY 日   DD
@@ -621,37 +636,57 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
     + HOUR_MINUTE 小时和分    hh:mm
     + HOUR_SECOND 小时和秒    hh:ss
     + MINUTE_SECOND   分钟和秒    mm:ss
+    + %Y  4位数字表示的年份(2018)
+    + %y  2位数字表示的年份(18)
+    + %M  月名(January, February)
+    + %b  缩写的月名(Jan, Feb)
+    + %m  2位数字表示的月份(01,02,...,12)
+    + %c  数字表示的月份(1,2,...,12)
+    + %D  英文后缀表示的月中的天数(1st, 2nd, 3rd)
+    + %d  2位数字表示的月中的天数(01,02,...,31)
+    + %e  数字形式表示的月中的天数(1,2,...,31)
+    + %H  2位数字24小时制(00,01,...,23)
+    + %h 或 %I 2位数字12小时制(01,...,12)
+    + %k  数字的24小时制(0,1,...,23)
+    + %l  数字的12小时制(1,2,...,12)
+    + %i  2位数字的分(00,01,...,59)
+    + %S 或 %s 2位数字的秒(00,01,...,59)
+    + %T  24小时制时间格式(hh:mm:ss)
+    + %r  12小时制时间格式(hh:mm:ssAM 或 hh:mm:ssPM)
   - DATE_DIFF(date1, date2) 用来计算两个日期之间相差的天数
-  - time('yyyy-mm-dd hh:ii:ss');    -- 获取时间部分
-  - UNIX_TIMESTAMP(date) : 返回 UNIX 的时间戳
-  - `FROM_UNIXTIME(date)`  返回 UNIXTIME 时间戳的日期值，和 UNIX_TIMESTAMP 相反
+  - time('yyyy-mm-dd hh:ii:ss'); 获取时间部分
+  - UNIX_TIMESTAMP(date) 返回 UNIX 的时间戳
+  - `FROM_UNIXTIME(date)` 返回 UNIXTIME 时间戳的日期值，和 UNIX_TIMESTAMP 相反
+  - FROM_UNIXTIME(ts,fmt) 返回按fmt格式化UNIX时间戳ts的值
 * 字符串函数
-  - length(string)            -- string长度，字节
-  - char_length(string)        -- string的字符个数
-  - substring(str, position [,length])        -- 从str的position开始,取length个字符
-  - REPLACE(str,a,b) : 用字符串 b 替换字符串 str 种所有出现的字符串 a
-  - instr(string ,substring)    -- 返回substring首次在string中出现的位置
-  - SUBSTRING(str,x,y) 函数：返回从字符串 str 中第 x 位置起 y 个字符长度的字符串
+  - charset(str) 返回字串字符集
+  - ASCII(char) 返回字符的ASCII码值
+  - length(string) 返回字符串str中的字符数
+  - char_length(string) string的字符个数
+  - instr(string ,substring) 返回substring首次在string中出现的位置
+  - locate(substring, string [,start_position]) 同instr,但可指定开始位置
+  - SUBSTRING(str,x,y) 返回从字符串 str 中第 x 位置起 y 个字符长度的字符串
   - STRCMP(s1,s2) 用于比较字符串 s1 和 s2 的 ASCII 值大小。如果 s1 < s2，则返回 -1；如果 s1 = s2 ，返回 0 ；如果 s1 > s2 ，返回 1。
-  - INSERT(str,x,y,instr) ：将字符串 str 从指定 x 的位置开始， 取 y 个长度的字串替换为 instr
-  - CONCAT(s1,s2 ... sn)    -- 连接字串
+  - INSERT(str,x,y,instr) 将字符串 str 从指定 x 的位置开始， 取 y 个长度的字串替换为 instr
+  - FIND_IN_SET(str,list) 分析逗号分隔的list列表，如果发现str，返回str在list中的位置
+  - CONCAT(s1,s2 ... sn) 连接字串
     + 任何和 NULL 进行字符串拼接的结果都是 NULL
-  - charset(str)            -- 返回字串字符集
-  - lcase(string)            -- 转换成小写
-  - LEFT(str,x)    返回字符串最左边的 x 个字符
+  - CONCAT_WS(sep,s1,s2...,sn)将s1,s2...,sn连接成字符串，并用sep字符间隔
+  - LEFT(str,x)  返回字符串最左边的 x 个字符
   - RIGHT(str,x)   返回最右边的 x 个字符。如果第二个参数是 NULL，那么将不会返回任何字符串
-  - load_file(file_name)    -- 从文件读取内容
-  - locate(substring, string [,start_position])    -- 同instr,但可指定开始位置
+  - load_file(file_name) 从文件读取内容
   - LPAD(str,n,pad) 用字符串 pad 对 str 左边，直到长度为 n 个字符长度
   - RPAD(str,n,pad) 用字符串 pad 对 str 右边进行填充，直到长度为 n 个字符长度
-  - TRIM(str) 函数：用于去掉目标字符串的空格
-  - LTRIM(str)  去掉字符串左边的空格
-  - RTRIM   去掉字符串右边的空格
-  - REPEAT(str,x) 函数：返回 str 重复 x 次的结果
-  - rpad(string, length, pad)    --在str后用pad补充,直到长度为length
-  - strcmp(string1 ,string2)    -- 逐字符比较两字串大小
-  - LOWER(str) 将字符串所有字符变为小写
-  - UPPER(str)   将字符串所有字符变为大写
+  - TRIM(str) 用于去掉目标字符串的空格
+  - LTRIM(str) 去掉字符串左边空格
+  - RTRIM(str) 去掉字符串右边空格
+  - LOWER(str)|LCASE(str) 将字符串所有字符变为小写
+  - UCASE(str)|UPPER(str) 返回将字符串str中所有字符转变为大写后的结果
+  - POSITION(substr,str)  返回子串substr在字符串str中第一次出现的位置
+  - QUOTE(str)  用反斜杠转义str中的单引号
+  - REPEAT(str,x) 返回字符串str重复x次的结果
+  - REPLACE(str,a,b)  用字符串b替换字符串str中所有的字符串a
+  - REVERSE(str)  返回颠倒字符串str的结果
 * 流程函数
   - IF(value,t f) 如果 value 是真，返回 t；否则返回 f
   - IFNULL(value1,value2)   如果 value1 不为 NULL，返回 value1，否则返回 value2。
@@ -667,7 +702,7 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - max();
   - min();
   - avg();
-  - group_concat()
+  - group_concat() 返回由属于一组的列值连接组合而成的结果
 * 其他常用函数
   - default();
   - VERSION()   返回当前数据库的版本
@@ -678,6 +713,24 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - INET_ATON(192.168.1.11)   返回 IP 地址的数字表示
   - INET_NTOA(3232235777)  返回数字代表的 IP 地址
   - COALESCE 返回参数中的第一个非空表达式
+* 流程函数
+  - IF(expr,t,f)  如果expr为真, 则返回t, 否则返回f
+  - IFNULL(a,b) 如果a不为空, 则返回a, 否则返回b
+  - CASE WHEN expr1 THEN res1 ... ELSE default END  如果expr1为真, 则返回res1, 否则default
+  - CASE expr WHEN val1 THEN res1 ... ELSE default END  如果expr等于val1, 则返回res1, 否则返回default
+* 其他常用函数
+  - LAST_INSERT_ID()  当前线程最后插入记录使用的自增ID值
+  - MD5(str)  返回字符串str的MD5散列后的值
+  - SHA(str)  返回字符串str的SHA散列后的值
+  - PASSWORD(str) 返回字符串str的加密版本
+  - INET_ATON(ip) 返回ip的数字表示
+  - INET_NTOA(num)  返回数字代表的ip地址
+  - DATABASE()  返回当前数据库名
+  - VERSION() 返回MySQL服务器的版本
+  - USER() 或 SYSTEM_USER()  返回当前登陆用户名
+  - CONNECTION_ID() 返回当前客户的连接ID
+  - FOUND_ROWS()  返回最后一个SELECT查询进行检索的总行数
+  - BENCHMARK(count,expr) 将表达式expr重复运行count次
 
 ```sql
 set @currenttime=(select UNIX_TIMESTAMP(current_timestamp()));
@@ -861,6 +914,7 @@ SHOW VARIABLES;
 select now(), user(), version();
 
 SHOW DATABASES[ like 'pattern'];
+
 CREATE DATABASE [IF NOT EXISTS] db_name [CHARACTER SET utf8 COLLATE utf8_unicode_ci];
 
 # 特殊符号、关键字表名加``
@@ -869,13 +923,6 @@ DROP DATABASE [IF EXISTS] db_name;
 SHOW CREATE DATABASE db_name;
 USE db_name;
 select database();  # 查看当前使用的数据库
-
-SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern'] # 查看数据库状态
-SHOW TABLE STATUS from 'your_db_name' where name='your_table_name';
-SHOW TABLES [ LIKE 'pattern'];
-DESCRIBE|DESC|EXPLAIN news;
-SHOW CREATE TABELE news\G;
-SHOW columns|index|keys from table_name;
 
 CREATE TABLE IF NOT EXISTS test.news(
   # 字段名 数据类型 [NOT NULL | NULL] [DEFAULT default_value] [AUTO_INCREMENT] [UNIQUE [KEY] | [PRIMARY] KEY] [COMMENT 'string']
@@ -886,9 +933,18 @@ CREATE TABLE IF NOT EXISTS test.news(
   source varchar(30) not null comment '来源',
   hits int(5) not null DEFAULT 0 comment '点击率',
   context text null comment '内容',
-  adddate int(16) not null comment '添加时间',
-  PRIMARY KEY (Id)
+  adddate int(16) not null comment '添加时间'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 collate=utf8_bin;
+
+create table if not exists `product_order`(
+  `id` bigint(20) unsigned auto_increment,
+  `product_id` bigint(20) unsigned not null comment '产品id',
+  `count` int unsigned not null comment '购买数量',
+  `amount` decimal(10,2) not null comment '总价格',
+  `create_time` datetime not null comment '下单时间',
+  `modified_time` datetime default null comment '修改时间',
+  primary key (`id`)
+)engine=InnoDB default charset=utf8mb4;
 
 CREATE TABLE Users (
   Id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '自增Id',
@@ -904,6 +960,16 @@ CREATE TABLE table_name like another_table；  #  复制表结构 数据不复�
 CREATE TABLE vip_user AS SELECT * FROM user;
 INSERT office_dup SELECT * FROM offices; # 一定要确保table offices后面的where，order或者其他条件，都需要有对应的索引，来避免出现table offices 全部记录被锁定的情况
 
+SHOW TABLE STATUS [FROM db_name] [LIKE 'pattern']; # 查看数据库状态
+SHOW TABLE STATUS from 'your_db_name' where name='your_table_name';
+SHOW TABLES [ LIKE 'pattern'];
+DESCRIBE|DESC|EXPLAIN news;
+SHOW CREATE TABLE news\G;
+SHOW columns|index|keys from table_name;
+
+DROP TABLE [IF EXISTS] db_name; # 不再需要该表
+TRUNCATE TABLE table_name;  # 仍要保留该表，但要删除所有记录时,删除表,重建同结构;重置auto_increment的值。而delete不会 不知道删除了几条，而delete知道;当被用于带分区的表时，truncate 会保留分区
+
 ALTER TABLE table_name ADD address varchar(30) first| after name;
 ALTER TABLE table_name CHANGE address add varchar(100) after id;
 ALTER TABLE table_name MODIFY COLUMN address varchar(100);
@@ -915,7 +981,7 @@ RENAME table table_name to new_table_name, tb3 TO tb4;
 ALTER TABLE table_name rename to another_DB.new_table_name; # 移动表
 
 CREATE [UNIQUE|FULLTEXT]  INDEX index_name on tbl_name (col_name [(length)] [ASC | DESC] , …..);
-ALTER TABLE 'table_name' ADD PRIMARY KEY'index_name' ('column');
+ALTER TABLE 'table_name' ADD PRIMARY KEY 'index_name' ('column');
 ALTER TABLE table_name ADD INDEX index_name (index_column(length));
 ALTER TABLE 'table_name' ADD INDEX 'index_name' ('column1', 'column2', ...);
 ALTER TABLE 'table_name' ADD INDEX idx_user(name(10) , city , age); # 因为一般情况下名字的长度不会超过10，这样会加速索引查询速度，还会减少索引文件的大小，提高INSERT的更新速度。
@@ -930,18 +996,19 @@ INSERT INTO table_name values (null,值,default,....); # 全字段插入，自�
 INSERT INTO table_name values (null,值,....),(null,值,....),(null,值,....); # 插入多条数据
 INSERT INTO table_name (字段1,字段2,字段3,…) VALUES (值1,值2,值3,…),(值1,值2,值3,…); # 记录操作：添加 更新与删除数据(新增与修改不用添加TABLE关键字)
 INSERT INTO table_name set volumn1=value1,volumn3=value3,volumn3=value3;
-insert into tbl_name select ...;
+insert into product_order(product_id, quantity, amount, create_time)
+  select id, 2, 2*price, now() from product where id = 1;
 insert into tbl_name values/set/select on duplicate key update 字段=值, …; # 可以指定在插入的值出现主键（或唯一索引）冲突时，更新其他非主键列的信息
 
 UPDATE table_name SET 字段1 = 新值1, 字段2 = 新值2  [WHERE条件]; # 更新
+update product_order o join product p on o.product_id = p.id
+  set o.quantity = 5, amount = 5*p.price where o.id = 1;
 UPDATE base SET `count` = `count` + 1；
 
-DROP TABLE [IF EXISTS] db_name; # 不再需要该表
-TRUNCATE TABLE table_name;  # 仍要保留该表，但要删除所有记录时,删除表,重建同结构;重置auto_increment的值。而delete不会 不知道删除了几条，而delete知道;当被用于带分区的表时，truncate 会保留分区
 DELETE FROM tbl_name [WHERE where_definition] [ORDER BY ...] [LIMIT row_count] # 删除部分记录时（一般来说有 WHERE 子句约束） 用 delete来删除表中部分记录
 DELETE FROM 表1，表2 using 表连接操作 条件
 
-CHECK TABLE tbl_name [, tbl_name] ... option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED} # 检查表是否有错误
+CHECK TABLE tbl_name [, tbl_name] ... option = {QUICK | FAST | MEDIUM | EXTENDED | CHANGED}; # 检查表是否有错误
 OPTIMIZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 整理数据文件的碎片
 REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXTENDED] [USE_FRM] #修复表
 ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和存储表的关键字分布
@@ -1055,8 +1122,16 @@ SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY 排序(�
 
 SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10 * $p,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id 分页实现
 
+select * from product_order where quantity > 0 order by amount desc limit 1, 1;
+# 聚合查询: group by [having], having关键字对分类后的结果再进行过滤
+select product_id, count(1) as order_count, sum(quantity) as total_quantity, sum(amount) as total_amount
+  from product_order where quantity > 0 group by product_id having total_quantity > 2;
+
 SELECT column_name AS alias_name FROM table_name;
 SELECT column_name(s) FROM table_name AS alias_name;
+
+# exists条件查询: 当能返回结果集则为1, 不能返回结果集则为0; 索引用在product表
+select * from product_order where exists (select * from product where product.id = product_order.product_id);
 
 SELECT w.name, w.url, a.count, a.date FROM Websites AS w, access_log AS a WHERE a.site_id=w.id and w.name="菜鸟教程";
 
@@ -1885,6 +1960,54 @@ INSERT INTO `user` VALUES (2, 'root2', 'root2', 'xxxx@163.com');
 ROLLBACK TO updateA;
 -- 提交事务，只有操作 A 生效
 COMMIT;
+
+# 开启事务
+start transaction;
+# 执行SQL
+delete from product_order where id = 8;
+# 此时查询时id=8的记录已删除
+select * from product_order;
+# 回滚事务
+rollback;
+# 回滚后可以查询到id=8的记录
+select * from product_order;
+
+## 分布式事务: XA事务
+# 1.流程
+# 1).启动XA事务
+XA {START|BEGIN} xid [JOIN|RESUME]
+# xid为XA事务标识符, 格式为 xid: gtrid[, bqual[, formatID]]
+# gtrid: 分布式事务标识符, 同一个分布式事务应使用相同的gtrid
+# bqual: 分支限定符, 一个分布式事务中的每个分支事务, 其bqual值必须唯一
+# formatID: 用于标识gtrid和bqual值使用的格式, 默认值为1
+# 2).执行业务SQL
+# 3).XA事务完结
+XA END xid
+# 4).XA分支事务准备
+XA PREPARE xid
+# 5).XA分支事务详细信息查询(辅助功能)
+XA RECOVER
+# 6).提交XA分支事务
+XA COMMIT xid
+# 7).或者回滚分支事务
+XA ROLLBACK xid
+
+# 2.示例
+# 1).启动一个分支事务, 产品库存减1, xid的gtrid为'order_tran', bqual为'product'
+XA START 'order_tran'.'product';
+UPDATE product SET stock = stock - 1 where id = 1;
+XA END 'order_tran'.'product';
+# 2).启动另一个分支事务, 插入订单
+XA START 'order_tran'.'order';
+INSERT INTO product_order(product_id, create_time) VALUES (1, NOW());
+XA END 'order_tran'.'order';
+# 3).'product'分支事务准备提交
+XA PREPARE 'order_tran'.'product';
+# 4).'order'分支事务准备提交
+XA PREPARE 'order_tran'.'order';
+# 5).提交所有分支事务
+XA COMMIT 'order_tran'.'product';
+XA COMMIT 'order_tran'.'order';
 ```
 
 ## 锁
@@ -3172,6 +3295,145 @@ DELIMITER ;
 set @b=5;
 call proc_adder(2,@b,@s);
 select @s as sum;
+
+# 存储过程
+# 将结束符改为"$$"
+DELIMITER $$
+# 创建存储过程: 入参: product_id, user_id, 出参: handle_result
+CREATE PROCEDURE purchase_product(IN p_product_id BIGINT(20), IN p_user_id BIGINT(20), OUT p_handle_result TINYINT(1))
+# 指定用创建者(DEFINER)还是调用者(INVOKER)的许可来执行
+SQL SECURITY DEFINER
+# 存储过程开始
+BEGIN
+    # DECLARE声明顺序: 变量, 条件, 光标, 处理程序
+    # ----- 定义变量: 定义变量要在定义条件之前
+    DECLARE handle_result TINYINT(1) DEFAULT 0;
+    # 订单金额
+    DECLARE order_amount DECIMAL(10,2) DEFAULT 0.0;
+    # ----- 定义条件: 主键冲突, declare cond_name condition for ...
+    DECLARE duplicate_key_cond CONDITION FOR sqlstate '23000';
+    # ----- 定义条件处理: declare handle_type(CONTINUE:继续, EXIT:退出) handler for ...
+    DECLARE CONTINUE HANDLER FOR duplicate_key_cond SET handle_result = -1;
+    # 处理SQL异常
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET handle_result = -2;
+    # 开始事务
+    START TRANSACTION;
+    # 查询商品价格并设为订单金额
+    SELECT price from product where id = p_product_id INTO order_amount;
+    # 插入订单表
+    INSERT INTO product_order (order_serial, product_id, user_id, quantity, amount ,create_time)
+      VALUES (REPLACE(UUID(),"-",""), p_product_id, p_user_id, 1, order_amount, now());
+    # 更新库存
+    UPDATE product SET stock = stock - 1 WHERE id = p_product_id and stock > 1;
+    # 事务提交或回滚
+    IF handle_result < 0 THEN
+        ROLLBACK;
+    ELSE
+        COMMIT;
+    END IF;
+    # 将处理赋给输出参数p_handle_result
+    SET p_handle_result = handle_result;
+END
+# 流程结束
+$$
+# 将结束符改为";"
+DELIMITER ;
+
+# 1.调用存储过程
+call purchase_product(3,1,@r);
+# 查看结果@r
+select @r;
+# 2.查看存储过程创建语句
+show create procedure purchase_product;
+# 3.删除存储过程
+drop procedure purchase_product;
+
+# 创建函数: 计算所有商品的价值, 只有入参, 因此不需要IN和OUT标识
+CREATE FUNCTION get_product_amount(p_status TINYINT(1))
+# 定义返回值类型
+RETURNS DECIMAL(10,2)
+# 定义模式
+DETERMINISTIC
+READS SQL DATA
+# 函数开始
+BEGIN
+    # 定义总价值变量
+    DECLARE v_product_amount DECIMAL(10,2);
+    # 定义临时变量v_price, v_stock用于计算
+    DECLARE v_price DECIMAL(10,2);
+    DECLARE v_stock INT;
+    # ----- 定义光标: DECLARE cursor_name CURSOR FOR select_statement
+    DECLARE product_list CURSOR FOR SELECT price, stock FROM product WHERE status = p_status;
+    # ----- 定义错误处理器, 出错时关闭光标
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION CLOSE product_list;
+    # 商品总价值赋初值
+    SET v_product_amount = 0;
+    # 开启光标进行计算
+    OPEN product_list;
+    # LOOP循环处理
+    outer:LOOP
+        FETCH product_list INTO v_price, v_stock;
+            SET v_product_amount = v_product_amount + v_price * v_stock;
+    END LOOP outer;
+    # 关闭光标
+    CLOSE product_list;
+    # 返回结果
+    RETURN v_product_amount;
+END
+$$
+
+# 1.IF语句
+IF search_condition THEN statement_list
+    [ELSEIF search_condition THEN statement_list] ...
+    [ELSE statement_list]
+END IF
+
+# 2.CASE语句
+CASE case_value
+    WHEN when_value THEN statement_list
+    [WHEN when_value THEN statement_list] ...
+    [ELSE statement_list]
+END CASE
+# 或
+CASE
+    WHEN search_condition THEN statement_list
+    [WHEN search_condition THEN statement_list] ...
+    [ELSE statement_list]
+END CASE
+
+# 3.LOOP(循环) + LEAVE(类似break: 退出) + ITERATE(类似continue: 直接进入下一轮循环)语句示例:
+outer: LOOP
+    set @x = @x + 1;
+    IF @x = 100 THEN
+        # break
+        LEAVE outer;
+    ELSE
+        # continue
+        ITERATE outer;
+    END IF;
+END LOOP outer;
+
+# 4.REPEAT: 条件满足时退出循环
+[label:] REPEAT
+    statement_list
+UNTIL search_condition
+END REPEAT[label]
+
+# 5.WHILE: 条件满足时执行循环
+[label:] WHILE search_condition DO
+    statement_list
+END WHILE[label]
+
+-- 事件调度器: 类似Linux下的crontab
+# 创建EVENT
+CREATE EVENT uuid_generate_event
+    ON SCHEDULE EVERY 10 SECOND
+    DO
+        INSERT INTO e_mall.uuid_gen(uuid) values (REPLACE(UUID(),'-',''));
+# 查看所有EVENT
+SHOW EVENTS\G
+# 删除EVENT
+DROP EVENT uuid_generate_event;
 ```
 
 ## 触发器 trigger
@@ -3223,6 +3485,25 @@ FOR EACH ROW
 BEGIN
   trigger_statements
 END;
+
+# 创建触发器
+CREATE TRIGGER trigger_name trigger_time trigger_event
+    ON table_name FOR EACH ROW trigger_statement
+# trigger_time: 触发时间, 分为BEFORE(检查约束前触发)和AFTER(检查约束后触发)
+# trigger_event: 触发事件, INSERT, UPDATE 或 DELETE
+DELIMITER $$
+CREATE TRIGGER insert_user_trigger
+AFTER INSERT ON user FOR EACH ROW
+BEGIN
+    insert into uuid_gen(uuid) values (REPLACE(UUID(),'-',''));
+END
+$$
+DELIMITER ;
+
+# 查看触发器
+show triggers\G
+# 删除触发器
+drop trigger insert_user_trigger;
 ```
 
 ## 视图 Views
@@ -3270,15 +3551,23 @@ CREATE
     AS select_statement
     [WITH [CASCADED | LOCAL] CHECK OPTION]
 
-CREATE VIEW top_10_user_view AS
-SELECT id, username
-FROM user
-WHERE id < 10;
+# 创建视图: create view ... as ...
+create or replace view order_view as
+  select o.order_serial, o.product_id, p.name as product_name, o.quantity, o.amount
+  from product_order o inner join product p on o.product_id = o.id;
+# 修改视图: alter view ... as ...
+alter view order_view as
+  select o.order_serial, o.product_id, p.name as product_name, o.quantity, o.amount
+  from product_order o inner join product p on o.product_id = p.id;
 
 SHOW CREATE VIEW view_name；
 
 ALTER VIEW view_name [(column_list)] AS select_statement
-DROP VIEW [IF EXISTS] view_name
+
+# 查询视图: select
+select * from order_view;
+# 删除视图
+DROP VIEW [IF EXISTS] order_view
 ```
 
 ## 游标 cursor

@@ -369,6 +369,9 @@
   - Dinraal：Hebra南部，Tabantha Bridge Stable西侧Tabantha Great Bridge上等候。
   - Naydra：Lanayru地区，传送到Hateno Tower正北Lanayru Promenade的Dow Na'eh Shrine，游到神庙前瀑布顶端峭壁上等候
 * 后期想打强怪的话建议先把战士装升上去，因为素材容易获得而且防御很高。同等防御等级的还有古代套装和荒野套装，但是两套都不太好获取/升级。另外防御最高的单件是Champion's Tunic，获得容易，升级也还不算困难，特殊效果也不错。其他装备能升就升，但是基本都是有需求了再换出来
+* 参考
+  - https://zelda.ali213.net/
+  - ZAD Ios app
 
 ![全境地图](../_static/zelda.jpg "Optional title")
 ![神庙](../_static/zelda_house.jpg "Optional title")

@@ -62,10 +62,9 @@ echo "stats settings" | nc localhost 11211
 ## 客户端
 
 * [memcache](http://pecl.php.net/package/memcache)    memcached extension
-  - 独立用php实现，是老客户端，从实践中已发现有多个问题，而且功能少，属性也可设置的少
+  - 基于 php 开发，是老客户端，从实践中已发现有多个问题，而且功能少，属性也可设置的少
 * [memcached](http://pecl.php.net/package/memcached)   PHP extension for interfacing with memcached via libmemcached library
-  - 需要 libmemcached 客户端库
-  - 基于原生的c的libmemcached的扩展，更加完善，建议替换为php memcached
+  - 基于 c 语言通过 libmemcached 与 memcached 服务器通信，因此性能更好（由于需要事先安装 libmemcached，因此 Windows 下不支持），并且支持的功能特性也更多
 
 ## 配置
 
@@ -111,8 +110,7 @@ memcstat --servers="localhost"
   - CLIENT_ERROR：执行错误。
 * `gets key1 [key2 key3]` 获取带有 CAS 令牌存 的 value(数据值)
   - 如果 key 不存在，则返回空
-
-  - 输出结果中最后一列的数字 值 代表了该 key  的 CAS 令牌，值更新后令牌会更新
+  - 输出结果中最后一列的数字值代表该 key 的 CAS 令牌，值更新后令牌会更新
 * `cas key flags exptime bytes unique_cas_token [noreply]`（Check-And-Set 或 Compare-And-Swap）: 用于执行一个"检查并设置"的操作 锁机制
   - 仅在当前客户端最后一次取值后，该 key 对应的值没有被其他客户端修改的情况下， 才能够将值写入
   - 通过cas_token参数进行检查值有没有被其他客户端修改的情况下，带有原来值的验证
