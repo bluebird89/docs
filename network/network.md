@@ -1096,6 +1096,7 @@ lsof -d 2-3
   - [Stanford CS 144](https://www.youtube.com/playlist?list=PLvFG2xYBrYAQCyz4Wx3NPoYJOFjvU7g2Z)
   - [](https://www.bilibili.com/video/av41404195)
 * 计算机网络 Computer Networks Andrew S. Tanenbaum / David J. Wetherall
+* [Computer Networks: A Systems Approach](https://book.systemsapproach.org/)
 
 ## 课程
 
