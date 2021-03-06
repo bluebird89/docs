@@ -448,7 +448,7 @@ Yii::setAlias('@foo/bar', 'path/to/foo/bar');
 * 数据模型，是对客观事物的抽象.代表业务数据、规则和逻辑的对象
 * 属性: 代表可像普通类属性或数组一样被访问的业务数据，yii\base\Model支持 ArrayAccess 数组访问 和 ArrayIterator 数组迭代器
 * 属性标签: 指定属性显示出来的标签
-  - 默认情况下，属性标签通过yii\base\Model::generateAttributeLabel()方法自动从属性名生成. 它会自动将驼峰式大小写变量名转换为多个首字母大写的单词
+  - 默认情况下，属性标签通过yii\base\Model::generateAttributeLabel()方法自动从属性名生成.它会自动将驼峰式大小写变量名转换为多个首字母大写的单词
   - 自定义标签 可以覆盖 yii\base\Model::attributeLabels() 方法明确指定属性标签
 * 场景：模型支持的场景由模型中申明的 验证规则 来决定
 * 块赋值:一步给许多属性赋值，只应用在模型当前scenario 场景yii\base\Model::scenarios()方法 列出的称之为 安全属性 的属性上
@@ -460,7 +460,18 @@ Yii::setAlias('@foo/bar', 'path/to/foo/bar');
   - Model所提供的数据都是原始数据。也就是说，不带有任何表现层的代码。比如，一般不会在输出的数据中添加HTML标签，这是View的工作。但是Model可以提供有结构的数据，数组结构、队列结构、乃至其他Model等。这个结构并非是表现层的格式，而是数据在内存中的表现
   - 与输出不同，Model的输入数据，可以是带有表现格式的数据。Model一般要对输入数据作过滤、验证和规范化等预处理。特别是对于需要保存进数据库的，一定要对所有的输入数据作预处理
   - 注意与Controller区分开。Model是处理业务方面的逻辑，Controller只是简单的协调Model和View之间的关系，只要是与业务有关的，就该放在Model里面。好的设计，应当是胖Model，瘦Controller
-*
+  - Model应当集中整个应用的数据和业务逻辑
+    + 应用当中涉及到的所有业务对象都应尽可能抽像成Model。 如，博客系统当中，文章要抽象成Post，评论要抽象成Comment。 而相关的业务逻辑，如发布新文章可以用 Post::create() ，删除评论可以用 Comment::delete() 。 这样子整个应用就显得很清晰明了。
+  - 基础Model应当尽可能细化
+    + 在一个应用中，特别是对于大型复杂应用，Model间关系可能比较复杂。在构造应用时，特别是基础Model时， 要从足够小的粒度来设计。 此时，就要考虑采取继承、封装等措施了。 比如，一个博客文章Post，一般包含了若干标签，在页上一般写在作者、日期等Post字段的旁边。 从逻辑上来看，把标签作为Post的一个属性，是说得通的。 但是如果把标签作为一个属性像标题、正文等字段一样依附于Post。那么在有的功能上，实现起来是有难度的。 比如，客户要求，当一个Post含有标签 “yii, model” 时，可以点击 “yii” ， 然后系统列出所有具标签中含有 “yii” 的文章。
+    + 为了实现这个功能，正确的设计是单独将标签抽象成Tag。这样，Post和Tag是多对多的关系，即一个Post有多个Tag，一个Tag也对应多个Post。这个多对多关系可以通过一张数据表 tbl_post_tag 来表示。 接下来，为Post增加 Post::getTags() 方法，并通过 tbl_post_tag 表来查询当前Post的所有标签。 同时，为Tag增加 Tag::getPosts() 方法，也通过 tbl_post_tag 表来查询当前Tag对应的文章。 这样，就具备了实现客户要求的新功能的基础。
+  - 要以尽量小的粒度进行设计。一般而言，粒度越小，复用的可能性就越高。
+  - 分层次设计Model
+    + 从设计流程上，数据库结构设计与Model的设计是紧密相关的。先有数据库结构设计，后有Model设计。 在设计数据库结构的时候，也是在设计Model。 一般而言，最单元、粒度最小的Model就是根据每个数据库表所生成的Model，这往往是个Active Record。
+    + 比如标签的问题，在数据库存储过程中，Post和Tag是分开存的，而且这两个表的字段，没有冗余。tbl_post_tag 表也只记录他们的ID，没有实质内容。
+    + 在获取数据渲染视图，向用户展现时，这两个Model及他们的字段，是完全够用，且没有冗余的。
+    + 那么，能不能说 Post 和 Tag 这两个Model是够用的呢？显然还不够。当用户在创建文章、修改文章、审核文章时，需要采用一个表单来显示来收集用户输入。其中，对于标签的采集，一般是一个长条的文本框，让用户一次性输入多个标签，并以 , 等进行分隔的。
+  - 仔细为Model方法命名
 
 ```php
 namespace app/models;
@@ -632,6 +643,11 @@ if ($model->validate()) {
   - encode:参数中可能隐含的恶意 JavaScript 代码导致跨站脚本（XSS）攻击,在页面进行处理
   - 显示 HTML 内容，先调用 yiihelpersHtmlPurifier 过滤内容:保证输出数据安全上做的不错，但性能不佳，如果你的应用需要高性能可考虑 缓存 过滤后的结果
 * EntryForm：从用户那请求的数据
+* 原则
+  - 负责显示界面，以HTML为主
+  - 一般没有复杂的判断语句或运算过程，可以有简单的循环语句、格式化语句。 比如，一般博客首页的文章列表，就是一种循环结构
+  - 从不调用Model的写方法。也就是说，View只从Model获取数据，而不直接改写Model，所以我们说他们老死不相往来
+  - 一般没有任何准备数据的代码，如查询数据库、组合成一定格式的字符串等。这些一般放在Controller里面，并以变量的形式传给视图。也就是说，视图里面要用到的数据，都是拿来就能直接用的变量
 
 ```php
 # 嵌套布局
@@ -665,6 +681,48 @@ $this->registerLinkTag([
     'href' => 'http://www.yiiframework.com/rss.xml/',
 ]);
 ```
+
+## DI容器
+
+* yii\di\Instance 本质上是DI容器中对于某一个类实例的引用
+  - 表示的是容器中的内容，代表的是对于实际对象的引用。
+  - DI容器可以通过他获取所引用的实际对象。
+  - 类仅有的一个属性 id 一般表示的是实例的类型。
+* 维护了5个数组
+* 使用DI容器，首先要告诉容器，类型及类型之间的依赖关系，声明一这关系的过程称为注册依赖
+  - yii\di\Container::set() 在每次请求时构造新的实例返回,用于避免数据冲突
+  - yii\di\Container::setSinglton() 只维护一个单例，每次请求时都返回同一对象,用于节省构建实例的时间、节省保存实例的内存、共享数据等
+  - 在 set() 和setSingleton() 中，首先调用 yii\di\Container::normalizeDefinition() 对依赖的定义进行规范化处理
+* 对象的实例化
+  - 容器在获取实例之前，必须解析依赖信息。 这一过程会涉及到DI容器中尚未提到的另外2个数组$_reflections 和 $_dependencies 。yii\di\Container::getDependencies() 会向这2个数组写入信息，而这个函数又会在创建实例时，由 yii\di\Container::build() 所调用
+  - $_reflections 以类（接口、别名）名为键， 缓存了这个类（接口、别名）的ReflcetionClass。一经缓存，便不会再更改。
+  - $_dependencies 以类（接口、别名）名为键，缓存了这个类（接口、别名）的依赖信息。
+  - 这两个缓存数组都是在 yii\di\Container::getDependencies() 中完成。这个函数只是简单地向数组写入数据。
+  - 经过 yii\di\Container::resolveDependencies() 处理，DI容器会将依赖信息转换成实例。这个实例化的过程中，是向容器索要实例。也就是说，有可能会引起递归。
+
+```php
+// 用于保存单例Singleton对象，以对象类型为键
+private $_singletons = [];
+
+// 用于保存依赖的定义，以对象类型为键
+private $_definitions = [];
+
+// 用于保存构造函数的参数，以对象类型为键
+private $_params = [];
+
+// 用于缓存ReflectionClass对象，以类名或接口名为键
+private $_reflections = [];
+
+// 用于缓存依赖信息，以类名或接口名为键
+private $_dependencies = [];
+```
+
+## 服务定位器 Service Locator
+
+* 优点
+  - Service Locator充当了一个运行时的链接器的角色，可以在运行时动态地修改一个类所要选用的服务， 而不必对类作任何的修改。
+  - 一个类可以在运行时，有针对性地增减、替换所要用到的服务，从而得到一定程度的优化。
+  - 实现服务提供方、服务使用方完全的解耦，便于独立测试和代码跨框架复用。
 
 ## Widget
 
