@@ -85,6 +85,7 @@
 * USDB
 * 机核Gadio
 * 加州101
+* 一天世界
 * 随即波动
 * 过刊
 * [4am](https://4aminquarantine.com/)

@@ -29,6 +29,10 @@ system('defaults write org.R-project.R force.LANG en_US.UTF-8')
 Restart R
 ```
 
+## 图书
+
+* [Forecasting: Principles and Practice](https://otexts.com/fpp3/)
+
 ## 参考
 
 * [安装](https://mirrors.tuna.tsinghua.edu.cn/CRAN/)

@@ -2,35 +2,33 @@
 
 * 现在有了太多的信息，因此更关键的是选择正确的信息。并不是反对社交媒体，但是它太浪费时间了。而且它有点儿非黑即白，生活远比它要复杂得多
 
-## 内容
+## Feed 流
 
-* [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
-* [Medium](https://medium.com/)
-* [Quora](https://www.quora.com/)
-* [Reddit](https://www.reddit.com/)
-* [BuzzFeed](https://www.buzzfeed.com/)
-* [Pinterest](https://www.pinterest.com/)
-* [tumblr](https://www.tumblr.com/)
-* Imgur
-* 掘金
-* 开发者头条
-* 码农头条
-* 伯乐在线
-* [网站 任意门](https://gate.ofo.moe/)
-* 36氪
-* 知乎
-* [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
-* [简书](http://www.jianshu.com/)
-* [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+* 读扩散|拉模式:粉丝阅读时，系统首先需要拿到粉丝关注的所有人，然后遍历所有发布者的发件箱，取出他们所发布的帖子，然后依据发布时间排序，展示给阅读者
+    - 读一次 Feed 流，后台会扩散为 N 次读操作（N 等于关注的人数）以及一次聚合操作
+    - 好处是底层存储简单，没有空间浪费
+    - 坏处
+        + 每次读操作会非常重，操作非常多
+        + 分页不方便:只采用实时聚合的方式，下滑到比较靠后的页码时会非常麻烦
+    - 适用系统中阅读者关注的人没那么多，并且刷 Feed 流并不频繁的场景
+    - 每个阅读者所能关注的人数也要设置上限
+* 写扩散|推模式
+    - 大多数 Feed 流产品的读写比大概在 100:1，也就是说大部分情况都是刷 Feed 流看别人发的.宁愿让发帖的过程复杂一些，也不愿影响用户读 Feed 流的体验
+    - 当发布者发表一篇帖子的时候，除了往自己发件箱记录一下之外，还会遍历发布者的所有粉丝，往这些粉丝的收件箱也投放一份相同内容。这样阅读者来读 Feed 流时，直接从自己的收件箱读取即可
+    - 每次发表帖子，另外起一个异步任务扩散为 M 次写操作（M 等于自己的粉丝数)
+    - 好处在于通过数据冗余（一篇帖子会被存储 M 份副本），提升了阅读者的用户体验
+* 读写混合模式
+    - 大 V:将粉丝量作为一个判断指标
+        + 粉丝量超大的人发帖时，将帖子写入何炅的发件箱，另外提取出来何炅粉丝当中比较活跃的那一批（这已经可以筛掉大部分了），将帖子写入他们的收件箱
+        + 粉丝量很小的路人甲发帖时，采用写扩散方式，遍历他的所有粉丝并将帖子写入粉丝收件箱
+    - 活跃粉丝:最近一次登录时间
+        + 活跃用户登录刷 Feed 流时，直接从自己的收件箱读取帖子即可，保证了活跃用户的体验。
+        + 非活跃的用户突然登录刷 Feed 流时，一方面需要读他的收件箱，另一方面需要遍历他所关注的大 V 用户的发件箱提取帖子，并且做一下聚合展示
+* 分页问题
+    - 分页入参:使用 last_id 来记录上一页最后一条内容的 id,往后偏移 page_size 条数据，返回
+    - last_id 方案有一个重要条件：last_id 本身这条数据不可以被硬删除
 
-* 得到
-* [极客时间](https://github.com/shawjia/geektime-desktop)
-
-## 新闻
-
-* [the atlantic](https://www.theatlantic.com/world/)
-* [](https://www.morningbrew.com/emerging-tech/stories)
-* [translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources <https://github.com/oldratlee/translations/blob/master/README.md>
+![读写混合模式](../_static/feed_flow.png "Optional title")
 
 ## 信息茧房
 
@@ -69,6 +67,28 @@
 
 ## 内容
 
+* [Wikipedia](https://en.wikipedia.org/wiki/Main_Page)
+* [Medium](https://medium.com/)
+* [Quora](https://www.quora.com/)
+* [Reddit](https://www.reddit.com/)
+* [BuzzFeed](https://www.buzzfeed.com/)
+* [Pinterest](https://www.pinterest.com/)
+* [tumblr](https://www.tumblr.com/)
+* Imgur
+* 掘金
+* 开发者头条
+* 码农头条
+* 伯乐在线
+* [网站 任意门](https://gate.ofo.moe/)
+* 36氪
+* 知乎
+* [字里行间](https://zi.com/):中文写作 APP，开发者的设计功力非常强
+* [简书](http://www.jianshu.com/)
+* [Byword](https://metaclassy.com/):简洁，优美，专注于文字。非常棒的写作工具。
+
+* 得到
+* [极客时间](https://github.com/shawjia/geektime-desktop)
+
 * [hackernews-daily](https://github.com/headllines/hackernews-daily)
 * [weekly](https://github.com/ruanyf/weekly):技术分享周刊，每周五发布
 * [zenany](https://github.com/zenany/weekly):汇总平时看到的好文章，技术、产品、管理均有，尽量保证一周汇总一篇
@@ -81,6 +101,12 @@
 * [Developer-Zero-To-Mastery](https://github.com/wx-chevalier/Developer-Zero-To-Mastery):📚 To Be Professional Developer From Zero To Mastery, Interactive MindMap, RoadMap(Learning Path/Interview Questions), xCompass, Weekly for Developer, to Learn Everything in ITCS 💫 程序员的技术视野、知识管理与职业规划，提高个人与团队的研发效能
 * [goodies](https://github.com/rsapkf/goodies):Collection of GitHub repos, blogs and websites to learn cool things <https://goodies.gitbook.io/goodies/>
 * [lists](https://github.com/jnv/lists):The definitive list of lists (of lists) curated on GitHub and elsewhere
+
+## 新闻
+
+* [the atlantic](https://www.theatlantic.com/world/)
+* [](https://www.morningbrew.com/emerging-tech/stories)
+* [translations](https://github.com/oldratlee/translations):🐼 Chinese translations for classic IT resources <https://github.com/oldratlee/translations/blob/master/README.md>
 
 ## 翻译
 

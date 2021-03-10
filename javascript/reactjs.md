@@ -658,6 +658,7 @@ Fast 3kb React alternative with the same ES6 API. Components & Virtual DOM. <htt
 ## 图书
 
 * [React 学习之道 The Road to learn React](https://github.com/the-road-to-learn-react/the-road-to-learn-react-chinese)
+* [React技术揭秘](https://github.com/BetaSu/just-react):从理念到源码
 
 ## 教程
 

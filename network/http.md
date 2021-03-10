@@ -604,6 +604,9 @@ Cookie: hello=eyJpdiI6IktlV2RlQUhnbDBJN2Z0UUhFSHl3bkE9PSIsInZhbHVlIjoieElBdFpOV3
     + GET请求:浏览器会把http header和data一并发送出去，服务器响应200（返回数据）
     + POST请求:浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok
 * HEAD 与 GET 相同，但只返回 HTTP 报头，不返回文档主体,用于确认 URL 的有效性及资源更新的日期时间
+  - 在不获取资源的情况下了解资源的情况(比如，判断其类型)
+  - 通过查看响应中的状态码，看看某个对象是否存在
+  - 通过查看首部，测试资源是否被修改了
 * PUT:设计初衷是用来传输文件, 要求在报文的主体中包含文件内容，然后保存到请求 URI 指定的位置.由于 PUT 方法自身不带验证机制，任何人都可以上传文件，存在安全性问题.让服务器用请求主体部分来创建|更新一个由请求的 URL 命令的新文档
 * PATCH 用于对指定资源进行部分修改（PUT 方法用于整体覆盖）
 * DELETE 删除指定资源
@@ -795,10 +798,11 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + Authentication - ensuring that server is who it claims to be using Certificates.
     + Integrity - verifying that data have not been forged using Message Authentication Code (MAC)
   - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
-    + 客户端发送一个 ClientHello 消息到服务器端，消息中同时包含了它的 Transport Layer Security (TLS) 版本，可用的加密算法和压缩算法。
-    + 服务器端向客户端返回一个 ServerHello 消息，消息中包含了服务器端的 TLS 版本，服务器所选择的加密和压缩算法，以及数字证书认证机构（Certificate Authority，缩写 CA）签发的服务器公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥。证书中还包含了该证书所应用的域名范围（Common Name，简称 CN），用于客户端验证身份。
-    + 客户端根据自己的信任 CA 列表，验证服务器端的证书是否可信。如果认为可信（具体的验证过程在下一节讲解），客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥
-    + 服务器端使用自己的私钥解密上面提到的随机数，然后使用这串随机数生成自己的对称主密钥
+    + 在通过网络传输任何已加密的 HTTP 数据之前，SSL 已经发送了一组握手数据来建立通信连接了
+    + 交换协议版本号:客户端发送一个 ClientHello 消息到服务器端，消息中同时包含了它的 Transport Layer Security (TLS) 版本，可用的加密算法和压缩算法。
+    + 选择一个两端都了解的密码:服务器端向客户端返回一个 ServerHello 消息，消息中包含了服务器端的 TLS 版本，服务器所选择的加密和压缩算法，以及数字证书认证机构（Certificate Authority，缩写 CA）签发的服务器公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥。证书中还包含了该证书所应用的域名范围（Common Name，简称 CN），用于客户端验证身份。
+    + 对两端的身份进行认证:客户端根据自己的信任 CA 列表，验证服务器端的证书是否可信。如果认为可信（具体的验证过程在下一节讲解），客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥
+    + 生成临时的会话密钥，以便加密信道:服务器端使用自己的私钥解密上面提到的随机数，然后使用这串随机数生成自己的对称主密钥
     + 客户端发送一个 Finished 消息给服务器端，使用对称密钥加密这次通讯的一个散列值
     + 服务器端生成自己的 hash 值，然后解密客户端发送来的信息，检查这两个值是否对应。如果对应，就向客户端发送一个 Finished 消息，也使用协商好的对称密钥加密
     + 从现在开始，接下来整个 TLS 会话都使用对称秘钥进行加密，传输应用层（HTTP）内容
@@ -881,8 +885,8 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + 对称加密就是，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容
   - 解决方案
     + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx) <https://certbot.eff.org/>
-    + [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
-    + [acmesh-official / acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
+    + [mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+    + [acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * 验证域名的所有权
   - http方式是将随机生成的验证文件放入网站的根目录,由机构扫描验证
   - DNS方式则是将随机生成的验证码创建域名的TXT记录由机构扫描验证.验证通过即可颁发证书
