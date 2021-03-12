@@ -256,3 +256,4 @@ SELECT variable_value FROM information_schema.global_status WHERE variable_name 
   - 各种方法既彼此相关，亦相辅相成，共同面向每一项服务实现自身效果所消耗的具体资源。
 * 《利用异常检测进行监控》
 * [awesome-sre](https://github.com/dastergon/awesome-sre)A curated list of Site Reliability and Production Engineering resources. <https://sre.xyz/>
+* [howtheysre](https://github.com/upgundecha/howtheysre) A curated collection of publicly available resources on how technology and tech-savvy organizations around the world practice Site Reliability Engineering (SRE)

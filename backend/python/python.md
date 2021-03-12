@@ -2583,22 +2583,23 @@ Python 实现的算法和设计模式。
 
 * [与孩子一起学编程 Hello World！Computer Programming for Kids and Other Beginners](https://www.amazon.cn/gp/product/B00HECW20S)
 * [Python编程快速上手 Automate the Boring Stuff with Python: Practical Programming for Total Beginners](https://automatetheboringstuff.com)
+* [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 * [Learning with Python 3](http://openbookproject.net/thinkcs/python/english3e/)
 * [learn python the hardway](https://learnpythonthehardway.org/python3/)
+* [The Hitchhiker's Guide to Python](https://github.com/realpython/python-guide)：Python best practices guidebook, written for humans.<https://docs.python-guide.org/>
 * Learning Python
 * Python编程 从入门到实践 Python Crash Course
 * 流畅的Python Fluent Python
-* Python 性能分析与优化
-* [The Hitchhiker's Guide to Python](https://github.com/realpython/python-guide)：Python best practices guidebook, written for humans.<https://docs.python-guide.org/>
-* Python 高性能编程
-* [pythonbook](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
-* [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
-* 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
 * 《[笨办法学Python](https://www.amazon.cn/gp/product/B00P6OJ0TC)》
 * 《[Python基础教程(第3版)](https://www.amazon.cn/Python基础教程-Magnus-Lie-Hetland/dp/B079BJPVFL/ref=dp_ob_title_bk)》
+* 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
+* [python book](https://python.cs.southern.edu/pythonbook/pythonbook.pdf)
+* Python 性能分析与优化
+* Python 高性能编程
+* [Introduction to Programming in Python: An Interdisciplinary Approach](https://introcs.cs.princeton.edu/python/home/)
+* 《[集体智慧编程](https://www.amazon.cn/gp/product/B00UI93JD8)》
 * 《Python源码剖析》
 * python之禅
-* 《[Head First Python](https://www.amazon.cn/gp/product/B007NB2B4M)》
 * [Python Cookbook 3rd Edition](https://python3-cookbook.readthedocs.io/zh_CN/latest/)
 * 《[Python参考手册（第4版）](https://www.amazon.cn/gp/product/B01MCUN37Y)》
 * 《[Python学习手册（第4版）](https://www.amazon.cn/gp/product/B004TUJ7A6)》
@@ -2606,10 +2607,10 @@ Python 实现的算法和设计模式。
 * 《[Python科学计算（第2版）](https://www.amazon.cn/gp/product/B01HCVUJFA)》
 * 《[利用 Python 进行数据分析](https://www.amazon.cn/gp/product/B00GHGZLWS)》
 * 《[Think Python：像计算机科学家一样思考Python（第2版）](https://codingpy.com/books/thinkpython2/foreword.html)》
+* [Python Programming And Numerical Methods: A Guide For Engineers And Scientists](https://pythonnumericalmethods.berkeley.edu/notebooks/Index.html)
 * 《[Python编程实战:运用设计模式、并发和程序库创建高质量程序](https://www.amazon.cn/gp/product/B00MHDPIJ6)》
 * 《[Python绝技：运用Python成为顶级黑客](https://www.amazon.cn/gp/product/B019ZRGBVU)》
 * 《用 Python 写网络爬虫》
-* [简明 Python 教程 A Byte of Python](https://bop.mol.uno)
 * 《[深度学习:基于Keras的Python实践](https://www.amazon.cn/gp/product/B07D5855F4)》
 * Python与量化投资从基础到实践
 * [Think Python: How to Think Like a Computer Scientist](http://greenteapress.com/thinkpython2/html/index.html)

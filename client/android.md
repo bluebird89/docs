@@ -112,6 +112,9 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * telegram
 * hacker news
 * 电池容量检测管理
+* 客户端
+  - [Android File Transfer](https://dl.google.com/dl/androidjumper/mtp/current/AndroidFileTransfer.dmg)
+  - MacDroid for Mac
 
 ## 技巧
 
