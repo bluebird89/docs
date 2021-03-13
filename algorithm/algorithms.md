@@ -218,39 +218,17 @@ def backtrack(路径, 选择列表):
     + 层序遍历要求区分每一层，也就是返回一个二维数组
     + BFS 的遍历结果是一个一维数组，无法区分每一层
 
-## Depth First Search DFS 深度优先搜索
-
-- 遍历使用递归,隐含地使用了系统的栈，不需要自己维护一个数据结构
-* 从图中一个未访问的顶点 V 开始，沿着一条路一直走到底，然后从这条路尽头的节点回退到上一个节点，再从另一条路开始走到底...，不断递归重复此过程，直到所有的顶点都遍历完成，它的特点是不撞南墙不回头，先走完一条路，再换一条路继续走
-* 递归实现,如果层级过深，很容易导致栈溢出
-* 非递归实现
-  - 对于每个节点来说，先遍历当前节点，然后把右节点压栈，再压左节点
-  - 弹栈，拿到栈顶的节点，如果节点不为空，重复步骤 1， 如果为空，结束遍历
-* leetcode 104，111: 给定一个二叉树，找出其最大/最小深度
-
-## Breath First Search BFS 广度优先搜索
-
-* 最短路径问题 shorterst-path problem:是否有从A到B的路径,如果有，广度优先搜索将找出最短路径
-* 方法
-  - 用图来建立模型，再使用广度优先搜索来解决问题
-  - 从图的一个未遍历的节点出发，先遍历这个节点的相邻节点，再依次遍历每个相邻节点的相邻节点
-  - 使用队列弹出当前元素检查
-  - 压入当前元素的子元素
-  - 按加入顺序检查搜索列表中的人，否则找到的就不是最短路径，因此搜索列表必须是队列
-  - 对于检查过的人，务必不要再去检查，否则可能导致无限循环
-* 层序遍历
-* 参考
-  - [使用场景：层序遍历、最短路径问题](https://mp.weixin.qq.com/s?__biz=MzA5ODk3ODA4OQ==&mid=2648167212&idx=1&sn=6af5ffe5b69075b21bb4743ddcee4e7c&chksm=88aa236abfddaa7cae70b42edb299d0a52d9f1cc4fc1fdba1116972fc0ca0275b8bfdf10851b)
-* LeetCode 102.Binary Tree Level Order Traversal:给你一个二叉树，请你返回其按层序遍历得到的节点值。（即逐层地，从左到右访问所有节点）
-* LeetCode 1162. As Far from Land as Possible 离开陆地的最远距离（Medium）最短路径：结点之间最近路径
-* Floyd
-
 ## Dijkstra 狄克斯特拉算法
 
 * 带权最短路径问题:每条边都有关联数字的图
 * 狄克斯特拉算法找出总权重最小路径，只适用于有向无环图(directed acyclic graph，DAG).
 * 如果有负权边，就不能使用狄克斯特拉算法
   - 对于处理过的节点，没有前往该节点的更短路径。 这种假设仅在没有负权边时才成立
+* 规则
+  - 以起步的顶点为当前顶点
+  - 检查当前顶点的所有邻接点，计算起点到所有已知顶点的权重，并记录下来
+  - 从未访问过(未曾作为当前顶点)的邻接点中，选取一个起点能到达的总权重最小的顶点，作为下一个当前顶点
+  - 重复，直至图中所有顶点都被访问过
 * [10行实现最短路算法——Dijkstra](https://mp.weixin.qq.com/s/fZwTBch-pkPrQ5W3AQti1A)
 * 最小生成树算法：Prim，Kruskal
 * 实际常用算法：关键路径
@@ -387,6 +365,7 @@ def backtrack(路径, 选择列表):
     + C++ 代码对时间的限制苛刻
   - main 函数负责接收数据，加一个 solution 函数负责统一处理数据和输出答案，然后再用诸如 backtrack 这样一个函数处理具体的算法逻辑
 * reference
+  - [awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
   - [leetcode](https://github.com/azl397985856/leetcode):LeetCode Solutions: A Record of My Problem Solving Journey <https://leetcode-solution.cn/>
   - [LeetCodeAnimation](https://github.com/MisterBooo/LeetCodeAnimation):Demonstrate all the questions on LeetCode in the form of animation.（用动画的形式呈现解LeetCode题目的思路）
   - [fucking-algorithm](https://github.com/labuladong/fucking-algorithm):手把手撕LeetCode题目，扒各种算法套路的裤子，not only how，but also why. English version supported! <https://labuladong.gitbook.io/algo/>
@@ -482,14 +461,13 @@ def backtrack(路径, 选择列表):
 * [Algorithms-Learning-With-Go](https://github.com/skybebe/Algorithms-Learning-With-Go):算法学习 Golang 版，参考 raywenderlich/swift-algorithm-club
 * [Javascript](https://github.com/TheAlgorithms/Javascript):A repository for All algorithms implemented in Javascript (for educational purposes only)
 * [javascript-algorithms](https://github.com/trekhleb/javascript-algorithms):📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings
-* [awesome-algorithm](https://github.com/apachecn/awesome-algorithm):Leetcode 题解 (跟随思路一步一步撸出代码) 及经典算法实现
 * [Algojammer](https://github.com/ChrisKnott/Algojammer):An experimental code editor for writing algorithms
 * [algorithm-visualizer](https://github.com/algorithm-visualizer/algorithm-visualizer):🎆Interactive Online Platform that Visualizes Algorithms from Code <https://algorithm-visualizer.org/>
 * [VisuAlgo](https://visualgo.net/en):visualising data structures and algorithms through animation
 * [algorithm004-01](https://github.com/algorithm004-01/algorithm004-01)
-* [](https://github.com/overnote/over-algorithm)
-* [](https://www.techiedelight.com/)
+* [over-algorithm](https://github.com/overnote/over-algorithm)
 
+* [](https://www.techiedelight.com/)
 * <https://www.geekxh.com/>
 * [动态规划解题技巧](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484431&idx=3&sn=35abe41394f24167b78419edbc36fc7c)
 * [我接触过的前端数据结构与算法](https://juejin.im/post/5958bac35188250d892f5c91)

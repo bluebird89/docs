@@ -16,7 +16,7 @@ Distributed reliable key-value store for the most critical data of a distributed
   - 即使集群中出现部分节点故障、网络故障等问题，仍可保证其余大多数节点正确的步进
   - 当更多节点（一般来说超过集群节点总数的一半）出现故障而导致集群不可用时，依然可以保证节点中的数据不会出现错误的结果
 * 特点
-  - 简单：安装配置简单，基于 HTTP+JSON 的 API
+  - 简单：安装配置简单，基于 HTTP+JSON 的 API。用curl命令就可以轻松使用
   - 安全：可选 SSL 客户认证机制
   - 快速：根据官方提供的benchmark数据，单实例支持每秒2k+读操作
   - 可靠：采用raft算法，实现分布式系统数据的可用性和一致性

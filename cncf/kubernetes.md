@@ -6,7 +6,7 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
 * 2014年6月，由IT基础设施领域领先者Google发布，源自 Google 10 多年大规模容器管理技术 Borg 开源版本.使用Golang开发，提供应用部署、维护、扩展机制等功能，是CNCF（Cloud Native Computing Foundation，今属Linux基金会）最重要的解决方案之一，旨在让部署容器化的应用简单并且高效
   - 产线实践经验的最佳表现。如Urs Hölzle所说，无论是公有云还是私有云甚至混合云，Kubernetes将作为一个为任何应用，任何环境的容器管理框架无处不在
 * 编排 Orchestration
-  - 这个单词来自于希腊语，含义是舵手或领航员,自于音乐领域，是指一种将不同乐器、音色加以合理的编排等手法营造出一个听感交融、平衡的艺术，完美地描述了容器编排的含义：为单个应用程序（乐队中的每种乐器）提供协同工作的模式
+  - 单词来自于希腊语，含义是舵手或领航员,自于音乐领域，是指一种将不同乐器、音色加以合理的编排等手法营造出一个听感交融、平衡的艺术，完美地描述了容器编排的含义：为单个应用程序（乐队中的每种乐器）提供协同工作的模式
   - 在单机上运行容器，无法发挥它的最大效能，只有形成集群，才能最大程度发挥容器的良好隔离、资源分配与编排管理的优势。所以需要一套管理系统，对Docker及容器进行更高级更灵活的管理，按照用户的意愿和整个系统的规则，完全自动化的处理好容器之间的各种关系
   - 基于Docker的开源容器集群管理系统，为容器化的应用提供资源调度、部署运行、服务发现、扩容缩容等整一套功能，因为容器本身可移植，所以Kubernetes容器集群能跑在私有云、公有云或者混合云上
   - 用于管理容器化应用程序集群的工具,自动执行应用程序部署的系统。在计算机领域中，此过程通常称为编排
@@ -41,7 +41,7 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
   - 健康检查：监控检测服务是否正常运行非常重要
   - 自我修复：重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容器，并且在准备好服务之前不将其通告给客户端
   - 弹性容器及故障迁移
-* K8s很多的抽象概念非常契合分布式调度系统，可以做到描述集群架构，定义服务状态，并维持，实现了分布式集群的配置管理和维护包括动态伸缩及故障迁移
+* 很多的抽象概念非常契合分布式调度系统，可以做到描述集群架构，定义服务状态，并维持，实现了分布式集群的配置管理和维护包括动态伸缩及故障迁移
 * 一切皆为资源，一切即可描述，一切皆可管理
 
 ## 版本
@@ -58,7 +58,9 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
 * 应用层：部署（无状态应用、有状态应用、批处理任务、集群应用等）和路由（服务发现、DNS解析等）
 * 管理层：系统度量（如基础设施、容器和网络的度量），自动化（如自动扩展、动态Provision等）以及策略管理（RBAC、Quota、PSP、NetworkPolicy等）
 * 接口层：kubectl命令行工具、客户端SDK以及集群联邦
-* 生态系统：在接口层之上的庞大容器集群管理调度的生态系统，可以划分为两个范畴☉ Kubernetes外部：日志、监控、配置管理、CI、CD、Workflow、FaaS、OTS应用、ChatOps等☉ Kubernetes内部：CRI、CNI、CVI、镜像仓库、Cloud Provider、集群自身的配置和管理等
+* 生态系统：在接口层之上的庞大容器集群管理调度的生态系统，为两个范畴
+  - 外部：日志、监控、配置管理、CI、CD、Workflow、FaaS、OTS应用、ChatOps等
+  - 内部：CRI、CNI、CVI、镜像仓库、Cloud Provider、集群自身的配置和管理等
 
 * 集群架构
   - Kubernetes集群架构概述
@@ -215,15 +217,17 @@ kubectl delete namespaces new-namespace
     + kube-apiserver
     + kube-controller-manager:`kubernetes/pkg/controller/`每一个控制器，都以独有的方式负责某种编排功能,控制循环（control loop）
     + kube-scheduler
-* Kubernetes Node 节点 :集群中的 node 节点（虚拟机、物理机等等）都是用来运行应用和云工作流的机器。Kubernetes master 节点控制所有 node 节点
+* Kubernetes Node 节点:集群中的 node 节点（虚拟机、物理机等等）都是用来运行应用和云工作流的机器。Kubernetes master 节点控制所有 node 节点
   - 集群中每个非 master 节点都运行两个进程：
     + kubelet，和 master 节点进行通信
     + kube-proxy：一种网络代理，将 Kubernetes 的网络服务代理到每个节点上
 
+![Alt text](../_static/cni.jpg "Optional title")
+
 ## 模型设计
 
 * TypeMeta是Kubernetes对象的最基本定义，它通过引入GKV（Group，Kind，Version）定义了一个对象的类型
-  - Group:Kubernetes定义了非常多对象，如何归类这些对象是一门学问，将对象依据其功能范围归入不同的分组，比如把支撑最基本功能的对象归入core组，把与应用部署有关的对象归入apps组，会使这些对象可维护性和可理解性更高。
+- Group:Kubernetes定义了非常多对象，如何归@ing类这些对象是一门学问，将对象依据其功能范围归入不同的分组，比如把支撑最基本功能的对象归入core组，把与应用部署有关的对象归入apps组，会使这些对象可维护性和可理解性更高。
   - Kind:定义一个对象的基本类型，比如Node，Pod，Deployment等
   - Version
     + 社区每个季度会推出一个Kubernetes版本，随着Kubernetes版本的演进，对象从创建之初到能够完全生产化就绪的版本是不断变化的。与软件版本类似，通常社区提出一个模型定义以后，随着该对象不断成熟，其版本可能会从v1alpha1，到v1alpha2，或者到v1beta1，最终变成生产就绪版本v1。
@@ -329,7 +333,7 @@ annotations:
   - 对于不同的使用场景，用户通常需要不同属性（例如性能、访问模式等）的PV。所以集群一般需要提供各种类型的PV，由StorageClass来区分。一般集群环境都设置了默认的StorageClass。
   - 如果在PersistentVolumeClaim中未指定StorageClass，则使用群集的默认StorageClass。
 * 自定义资源定义 CustomResourceDefinition CRD
-  - Kubernetes 1.7中引入的一项强大功能，它允许用户将自己的自定义对象添加到Kubernetes集群中，当创建新CRD的定义时，APIServer将为指定的每个版本创建一个新的RESTful资源路径。
+  - Kubernetes 1.7中引入的一项强大功能，允许用户将自己的自定义对象添加到Kubernetes集群中，当创建新CRD的定义时，APIServer将为指定的每个版本创建一个新的RESTful资源路径。
   - 当集群中成功地创建了CRD，就可以像Kubernetes原生的资源一样使用它，利用Kubernetes的所有功能，例如其CLI、安全性、API服务、RBAC等。
   - CRD的定义是集群范围内的，CRD的资源对象的作用域可以是命名空间（Namespaced）或者集群范围（Cluster-wide）的。
   - 与现有的内置对象一样，删除Namespace也会删除该Namespace中所有自定义的对象，但不会删除CRD的定义。
@@ -435,11 +439,11 @@ annotations:
 ## Master Node
 
 * 集群管理控制中心，调度管理整个系统
-* [etcd](../micro_services/etcd.md):分布式 key-value 存储，保存集群的状态数据
+* [etcd](../micro_services/etcd.md):分布式 key-value 存储，保存集群的状态数据,负责节点间的服务发现和配置共享
   - Kubernetes 的存储服务。存储了 Kubernetes 的关键配置和用户配置
   - 整个系统最核心，所有组件之间通信都需要通过Etcd
   - 主节点查询etcd以检索节点，容器和容器的状态参数
-* API Server:K8s API 接口
+* kube-apiserver:以REST API服务形式提供接口，作为整个系统的控制入口。
   - 提供资源操作的唯一入口:所有组件之间通信都需要通过Etcd。组件并不是直接访问Etcd，而是访问 API Server 这个代理，通过标准的RESTFul API（重新封装了对Etcd接口调用）,仅 API Server 才具备etcd读写权限，其他组件必须通过 API Server 的接口才能读写数据
   - 提供认证、授权、访问控制、API注册和发现等机制
   - 负责接收 Kubernetes 所有请求（来自 UI 界面或者 CLI 命令行工具）,根据请求的类型，比如创建Pod时storage类型是pods，然后依此选择何种 REST Storage API 对请求作出处理
@@ -451,7 +455,7 @@ annotations:
     + 提供其他模块之间的数据交互和通信的枢纽（其他模块通过API Server查询或修改数据，只有API Server才直接操作etcd）
     + 是资源配额控制的入口
     + 拥有完备的集群安全机制
-* Controller manager:所有 Worker Node 的监控器,处理集群后台任务
+* kube-controller-manager:所有 Worker Node 的监控器,处理集群后台任务
   - 功能
     + 任务调度:负责监控和调整在 Worker Node 上部署的服务的状态,实现集群故障检测和恢复的自动化工作，负责执行各种控制器
     + 确保集群处于预期的工作状态，比如故障检测、自动扩充套件、滚动更新等
@@ -463,7 +467,7 @@ annotations:
   - cloud-controller-manager：与云环境提供商交互的接口
   - 定义了 Kubernetes 集群 Master/API Server的主要声明 RESTStorage以及 Client
   - client(Kubecfg)调用Kubernetes API，管理Kubernetes主要构件Pods、Services、Minions、容器的入口
-* Scheduler
+* kube-scheduler:负责节点资源管理，接收来自kube-apiserver创建Pods任务，并分配到某个节点
   - 所有 Worker Node 的调度器。当用户要部署服务时，会选择最合适的 Worker Node（服务器）来部署
   - 负责资源调度，按照预定的调度策略将Pod（k8s中调度的基本单位）调度到相应的Node上
   - Controller Manager 会把Pod对资源要求写入到Etcd里面，Scheduler监听到有新的Pod需要调度，就会根据整个集群的状态，把Pod分配到具体的worker节点上
@@ -477,7 +481,7 @@ annotations:
   - 在分发Pod到指定的Minion节点后，会把Pod相关的信息Binding写回API Server
   - 在API Server响应Kubecfg的请求后，Scheduler会根据Kubernetes Client获取集群中运行Pod及Minion信息
   - 依据从Kubernetes Client获取的信息，Scheduler将未分发的Pod分发到可用的Minion节点上
-* Kubectl: 一个命令行工具，调用 API Server 发送请求写入状态到Etcd，或者查询Etcd状态
+* Kubectl:客户端命令行工具，作为整个系统的操作入口，调用 API Server 发送请求写入状态到Etcd，或者查询Etcd状态
 
 * Minion Registry
   - 负责跟踪 Kubernetes 集群中有多少Minion(Host)
@@ -595,8 +599,8 @@ kubectl get pvc -n namespace_name
 * 运行在每个k8s Node上，提供K8s运行时环境，以及管理Pod和容器的生命周期
   - 监听API Server发送过来的新工作分配
   - 执行分配给的工作，然后将结果报告给主节点
-* [Kubelet](https://github.com/kubernetes/kubelet):负责管理 Node 上的一切事物，与 Master 的 API server 沟通
-  - 运行在每一个worker节点上的Agent，监听Etcd中的Pod信息，运行分配给它所在节点的Pod，并把状态更新回Etcd。通过docker部署
+* [Kubelet](https://github.com/kubernetes/kubelet):作为worker节点上的Agent，接收分配该节点的Pods任务及管理容器，周期性获取容器状态，反馈给kube-apiserver
+  - 监听Etcd中的Pod信息，运行分配给它所在节点的Pod，并把状态更新回Etcd。通过docker部署
   - Kubelet 集群中每个Minion和Master API Server的连接点，运行在每个Minion上，接收Master API Server分配给它的commands和work，与持久性键值存储etcd、file、server和http进行交互，读取配置信息
   - 包括Docker Client、Root Directory、Pod Workers、Etcd Client、Cadvisor Client以及Health Checker组件
   - 具体工作
@@ -641,10 +645,10 @@ kubectl get pvc -n namespace_name
     + 驱逐的第一个候选对象是Best-Effort 和/或 Burstable的Pod，其受限资源的使用超出了请求。如果有多个此类Pod，则kubelet会按优先级对它们进行排序，然后将资源消耗按指定的请求进行排序。
     + 最后驱逐了资源使用量低于请求的Guaranteed 和 Burstable Pods的Pod。但是，如果某些系统任务（如kubelet或Docker）需要更大的资源，并且节点上没有Best-EffortPod，则kubelet可以驱逐消耗量低于其请求量的Guaranteed Pod。在这种情况下，它将首先以最低优先级驱逐Guaranteed 和 Burstable Pods。
   - 最低驱逐收回:如果kubelet回收的资源量很小，则系统可以反复达到驱逐阈值,eviction-minimum-reclaim标志设置每个资源的最小回收级别 `--eviction-hard=memory.available<1Gi,nodefs.available<2Gi,imagefs.available<200Gi --eviction-minimum-reclaim=memory.available=0Mi,nodefs.available=1Gi,imagefs.available=2Gi`
-* kube-proxy:负责为Service提供cluster内部的服务发现和负载均衡。通过k8s部署。为了解决外部网络能够访问跨机器集群中容器提供的应用服务而设计的，运行在每个Minion上
-        + Proxy提供TCP/UDP sockets的proxy，每创建一种Service，Proxy主要从etcd获取Services和Endpoints的配置信息（也可以从file获取），然后根据配置信息在Minion上启动一个Proxy的进程并监听相应的服务端口，当外部请求发生时，Proxy会根据Load Balancer将请求分发到后端正确的容器处理
-        + 解决了同一主宿机相同服务端口冲突的问题
-        + 提供了Service转发服务端口对外提供服务的能力，Proxy后端使用了随机、轮循负载均衡算法 [kube-proxy 的内容 KUBERNETES代码走读之MINION NODE 组件 KUBE-PROXY](http://www.sel.zju.edu.cn/?spm=5176.100239.blogcont47308.8.2bn7P0&p=484)
+* kube-proxy:负责Pod网络代理,负责为Service提供cluster内部的服务发现和负载均衡。通过k8s部署。为了解决外部网络能够访问跨机器集群中容器提供的应用服务而设计的，运行在每个Minion上
+    * Proxy提供TCP/UDP sockets的proxy，每创建一种Service，Proxy主要从etcd获取Services和Endpoints的配置信息（也可以从file获取），然后根据配置信息在Minion上启动一个Proxy的进程并监听相应的服务端口，当外部请求发生时，Proxy会根据Load Balancer将请求分发到后端正确的容器处理
+    * 解决了同一主宿机相同服务端口冲突的问题
+    * 提供了Service转发服务端口对外提供服务的能力，Proxy后端使用了随机、轮循负载均衡算法 [kube-proxy 的内容 KUBERNETES代码走读之MINION NODE 组件 KUBE-PROXY](http://www.sel.zju.edu.cn/?spm=5176.100239.blogcont47308.8.2bn7P0&p=484)
   - Container: 负责镜像管理以及Pod和容器的真正运行（CRI） Docker引擎，负责容器运行
   - 为Service提供集群内部的服务发现和负载均衡，监听API Server中service和endpoint的变化情况
   - 确保每个节点都获得其IP地址，实现本地iptables和规则以处理路由和流量负载均衡
@@ -664,20 +668,32 @@ kubectl get pvc -n namespace_name
 ## Pod
 
 * 一个抽象化概念，由一个或多个容器组合在一起的共享资源。根据资源可用性，主节点会把Pod调度到特定工作节点上，并与容器运行时协调以启动容器
-* Kubernetes创建或部署最小单位,封装一个或多个容器（Container）、存储资源（Volume）、一个独立的网络IP以及管理控制容器运行方式的策略选项，里面所有容器，共享同一个 Network Namespace，可以声明共享同一个 Volume
-  - 应用哪怕再简单，也是被管理在 systemd 或者 supervisord 之下的一组进程，而不是一个进程
-  - 一个容器，就是一个进程
-  - Pod实际上扮演传统基础设施里“虚拟机”的角色，容器是这个虚拟机里运行的用户程序
-    + 让它里面的容器尽可能多地共享 Linux Namespace，仅保留必要的隔离和限制能力
-    + 凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别
-    + 凡是 Pod 中的容器要共享宿主机的 Namespace，也一定是 Pod 级别的定
-  - 在一个容器里跑多个功能并不相关的应用时，应该优先考虑它们是不是更应该被描述成一个 Pod 里的多个容器
-  - sidecar:可以在一个 Pod 中，启动一个辅助容器，来完成一些独立于主进程（主容器）之外的工作
-  - 有顺序关系的容器，定义为 Init Container
-  - 属性
-    + NodeSelector：是一个供用户将 Pod 与 Node 进行绑定的字段
-    + NodeName：一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字
-    + HostAliases：定义了 Pod 的 hosts 文件（比如 /etc/hosts）里的内容
+* Kubernetes创建或部署最小单位,封装一个或多个容器（Container）、存储资源（Volume）、一个独立的网络IP以及管理控制容器运行方式的策略选项，
+  - 一个Pod可以被一个容器化的环境看作应用层的“逻辑宿主机”
+  - 一个Pod中的多个容器应用通常是紧密耦合的，Pod在Node上被创建、启动或者销毁
+  - 一个容器，就是一个进程。应用哪怕再简单，也是被管理在 systemd 或者 supervisord 之下的一组进程，而不是一个进程
+* 共享五种资源
+  + 应用到Pod上的自定义配置
+  - PID命名空间：Pod中的不同应用程序可以看到其他应用程序的进程ID。
+  - 网络命名空间：Pod中的多个容器能够访问同一个IP和端口范围。每个Pod被分配一个独立IP地址，Pod中每个容器共享网络命名空间，包括IP地址和网络端口
+    * Pod内容器使用localhost相互通信
+    * 与Pod外部通信时，必须协调如何使用共享网络资源
+  - IPC命名空间：Pod中的多个容器能够使用SystemV IPC或POSIX消息队列进行通信。
+  - UTS命名空间：Pod中的多个容器共享一个主机名。
+  - Volumes(共享存储卷)：Pod中的各个容器可以访问在Pod级别定义的Volumes。
+    * 指定一组共享存储Volumes，Pod中的所有容器都可以访问共享Volumes允许这些容器共享数据
+    * Volumes还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据
+* Pod实际上扮演传统基础设施里“虚拟机”的角色，容器是这个虚拟机里运行的用户程序
+  - 里面容器尽可能多地共享 Linux Namespace，仅保留必要的隔离和限制能力，
+  - 凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别
+  - 凡是 Pod 中的容器要共享宿主机的 Namespace，也一定是 Pod 级别的定
+* 在一个容器里跑多个功能并不相关的应用时，应该优先考虑它们是不是更应该被描述成一个 Pod 里的多个容器
+* sidecar:可以在一个 Pod 中，启动一个辅助容器，来完成一些独立于主进程（主容器）之外的工作
+* 有顺序关系的容器，定义为 Init Container
+* 属性
+  - NodeSelector：是一个供用户将 Pod 与 Node 进行绑定的字段
+  - NodeName：一旦 Pod 的这个字段被赋值，Kubernetes 项目就会被认为这个 Pod 已经经过了调度，调度的结果就是赋值的节点名字
+  - HostAliases：定义了 Pod 的 hosts 文件（比如 /etc/hosts）里的内容
 * 一个可以被创建、销毁、调度、管理的最小的部署单元（调度最小颗粒）,对应一个由相关容器和卷组成的容器组,通常Pod里的容器运行相同应用。对应用程序抽象的逻辑概念
 * 运行在同一个Minion(Host)上，看作一个统一管理单元
 * 本身不具备自愈能力，一般情况下使用Deployment、ReplicaSet、Replication Controller等来创建和管理Pod，保证有足够的Pod副本在运行
@@ -689,15 +705,7 @@ kubectl get pvc -n namespace_name
 * 类型
   - 单容器模型:由于Pod是Kubernetes可识别的最小对象，Kubernetes管理调度Pod而不是直接管理容器，所以即使只有一个容器也需要封装到Pod里
   - 多容器模型：Pod可以容纳多个紧密关联的容器以共享Pod里的资源。这些容器作为单一的，凝聚在一起的服务单元工作。可以形成单一的内部Service
-* 共享资源
-  + 网络资源:每个Pod被分配一个独立IP地址，Pod中每个容器共享网络命名空间，包括IP地址和网络端口
-    * Pod内容器使用localhost相互通信
-    * 与Pod外部通信时，必须协调如何使用共享网络资源
-  + 存储
-    * 指定一组共享存储Volumes，Pod中的所有容器都可以访问共享Volumes允许这些容器共享数据
-    * Volumes还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据
-  + 应用到Pod上的自定义配置
-
+* 生命周期通过Replication Controller来管理；通过模板进行定义，然后分配到一个Node上运行，在Pod所包含容器运行结束后，Pod结束。
 - 创建
   + 因为Pod不会自愈，如果Node节点有故障这个Pod就会被删除，或者Node节点缺少资源情况下Pod也会被删除
   + 建议采用相关Controller来创建Pod而不是直接创建Pod，因为单独Pod没有办法自愈，而Controller却可以
@@ -1192,8 +1200,9 @@ kubectl describe replicaset myapp-replicas
     + ules和paths是数组，可以配置多个
 * 服务发现
   + service:当一个Pod在一个Node上运行的时候，Kubelet会针对运行的Service增加一序列的环境变量，支持Docker links compatible和普通环境变量
-  + 通过环境变量发现服务：pod开始运行的时候，Kubernets会初始化一系列的环境变量指向现在存在的服务；如果**创建的服务早于客户端pod的创建**（删除pod），pod上的进程可以根据环境变量获得服务的IP地址和端口号 `kubectl exec kubia-599v9 env`
+  + 通过环境变量发现服务：pod开始运行的时候，Kubernets会初始化一系列的环境变量指向现在存在的服务；如果**Service要先比该Pod创建**（删除pod），pod上的进程可以根据环境变量获得服务的IP地址和端口号 `kubectl exec kubia-599v9 env`
   + 通过DNS发现服务：插件，DNS服务器监控着API Server，当有Service被创建的时候，DNS服务器会为之创建相应记录
+    * 通过cluster add-on的方式轻松的创建KubeDNS来对集群内的Service进行服务发现
     * 命名空间kube-system下有一个默认的服务kube-dns，其后端是一个coredns的pod `kubectl get svc --namespace kube-system`
     * `kubectl get po -o wide --namespace kube-system`
     * 运行在pod上的进程DNS查询都会被Kubernets自身的DNS服务器响应，该服务器知道系统中运行的所有服务；客户端的pod在知道服务名称的情况下可以通过全限定域名(FQDN)来访问
@@ -1294,10 +1303,21 @@ kubectl create configmap nginx-html-files --from-file=./data/nginx/html/configma
 
 ## 网络
 
+* 基础
+  - 网络术语，比如网络命名空间、IP、路由、NAT、LoadBalance 等，这些网络基础知识当然是必须要掌握的。
+  - 大多运行在 Linux 服务器上，所以 Linux 网络的基本原理是必要的基础。
+  - Kubernetes 中的 Service、Ingress、NetworkPolicy 等是直接控制网络功能的资源，它们的原理和使用方法也需要熟悉。
+  - 在实际使用中，通常需要通过 CNI 插件适配实际的网络环境，所以 CNI 插件的原理以及相应的 CNI 插件也是需要掌握的内容。
 * 模型
   - IP-per-Pod，每个 Pod 都拥有一个独立 IP 地址，Pod 内所有容器共享一个网络命名空间
+    + Pod由docker0实际分配的IP
+    + Pod内部看到的IP地址和端口与外部保持一致
+    + 同一个Pod内的不同容器共享网络，可以通过localhost来访问对方的端口，类似同一个VM内不同的进程。
   - 集群内所有 Pod 都在一个直接连通的扁平网络中，可通过 IP 直接访问
   - Service cluster IP 仅可在集群内部访问，外部请求需要通过 NodePort、LoadBalance 或者 Ingress 来访问
+  - 所有容器之间无需 NAT 就可以直接互相访问。
+  - 所有 Node 和所有容器之间无需 NAT 就可以直接互相访问。
+  - 容器自己看到的 IP 跟其他容器看到的一样
   - 除此之外，Pod 的网络都是通过 CNI 网络插件和一系列的网络扩展来配置的，比如 Calico、Flannel 等网络插件，CoreDNS 扩展，Nginx ingress 控制器扩展，Ambassador API 网关，还有 Linkerd、Istio 等服务网格等。所有这些服务组合起来，构成了一个强大的容器网络，当然同时也增加了网络的复杂度
 * 服务发现,为了实现服务发现和负载均衡就需要一下几个组件协同：
   - 用户通过 API 创建一个 Service
@@ -1313,6 +1333,11 @@ kubectl create configmap nginx-html-files --from-file=./data/nginx/html/configma
     + Pod 网络路由丢失；
     + Service 端口冲突、NetworkPolicy 策略配置错误；
     + 主机或云平台安全组、防火墙或安全策略阻止了容器网络。
+* 进阶
+  - 当需要深入排查网络相关的问题（如性能抖动、网络故障等），除了前述的 Linux 网络原理之外，还需要深入到内核里面，去了解 Linux 内核网络协议栈的实现机制。
+  - 当需要打通多个集群之间的网络联通时，除了单集群内部的网络原理之外，还需要了解多集群网络互联互通的方法，如专线联通、网关、隧道等等。
+  - 当需要对复杂微服务进行治理时，你想要实现诸如金丝雀部署、流量控制、网络观测、服务间请求加密等需求时，Service Mesh 是你的不二选择。
+  - 当网络的性能是你的瓶颈时，eBPF、DPDK、SR-IOV 等提供了绕过内核协议栈的方法以极致优化网络的性能。
 
 ![Alt text](../_static/kubernates_proxy.png "Optional title")
 
@@ -1806,6 +1831,7 @@ kubectl get pods -n rook-ceph
 
 ## Ingress Controller
 
+* 基于7层的方案
 * 一个统称，并不是只有一个，有如下：
   - [ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
   - F5 BIG-IP Controller: F5 所开发的 Controller，它能够让管理员通过 CLI 或 API 让 Kubernetes 与 OpenShift 管理 F5 BIG-IP 设备

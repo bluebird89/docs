@@ -1005,9 +1005,9 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 
 ### 复合
 
-* Array（数组）:一个有序映射
+* 数组 Array 一个有序映射
   - 映射是一种把 values 关联到 keys 的类型。因此可以当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
-  + key 会有如下的强制转换
+  + key 会强制转换
     + 合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值
     + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8
     + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0
@@ -1026,6 +1026,10 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     * `array_map()`:处理后的数组, 要得到处理后的元素值,需要return返回
     * `array_walk()`:返回true或者false,要得到处理后的元素值，需要在传入参数值加 & 引用符号
     * `array_column($array, cloumnName[, indexCloumn])`
+    * array_unshift() 在数组开头插入一个或多个单元
+    * `array_shift` 将数组开头的单元移出数组，和array_shift()实现队列
+    * array_push() 将一个或多个单元压入数组的末尾（入栈）
+    * array_pop() 弹出数组最后一个单元（出栈）
   + 遍历
     * each — 返回数组中当前的键／值对并将数组指针向前移动一步
 * Object（对象）
