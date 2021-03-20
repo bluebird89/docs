@@ -817,6 +817,7 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [markdown-it](https://github.com/markdown-it/markdown-it):Markdown parser, done right. 100% CommonMark support, extensions, syntax plugins & high speed <https://markdown-it.github.io>
 * [xi-editor](https://github.com/xi-editor/xi-editor):A modern editor with a backend written in Rust. <https://xi-editor.io>
 * [takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. <https://takenote.dev>
+* [ghostwriter](https://github.com/wereturtle/ghostwriter):ghostwriter is a cross-platform, aesthetic, distraction-free Markdown editor.
 * markoff:A lightweight Markdown (CommonMark) previewer for macOS
 
 ## 参考

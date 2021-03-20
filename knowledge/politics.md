@@ -482,6 +482,16 @@
 毕竟是本届政府告一段落了，我们还是要把本届政府的工作善始善终，完美地画上一个句号。只要我们能够办的事情，尽可能在本届政府任期里面办好、办完。全国“两会”即将到来，希望同志们认真参加会议，虚心听取意见，更好地修改我们的《政府工作报告》改进我们自己的不足，这就是我对同志们的希望。
 ```
 
+## They Thought They Were Free
+
+* Chapter 4 "What Would You Have Done?"
+  - 极权下的大众过好自己的日子为主，以不找麻烦为根本目的和界限，对于不利于国家的传闻会相信是敌对势力的政治宣传手段。纳粹遇上高效率的德意志统治机器和七千万“小民”，简直是如鱼得水。由此似乎可以看到一个民族或民族综合体的集体悲剧往往深埋在历史之中，被纳粹等利用并最终随它（们）一起灭亡/涅槃也是命中注定。
+  - Rumors, guesses enough to make a man kno wif he wanted badly to know, or at least to believe, and always involving persons who would be suspected, "naturally," of exaggerating. (P73)
+  - Anti-Nazis no less than Nazis let the rumors pass - if not rejecting them, certainly not accepting them; either they were enmey propaganda or they sounded like enmey propaganda, and, with one's county fighting for its life and one's sons and brothers dyingin war, who wants to here, still less repeat, even what sounds like enmey propaganda ?
+  - None of my ten Nazi friends even knew - I say knew - of there great governmental systems of crime against humanity.
+  - "Once you were in the Party," said Baker Wedekind, who doesn't say he ever wanted to get out, "you didn't get out easily." A man who had always been nonpolitical might get away with "dropping out"; a political man, a man who had assumed the political responsibility of citizenship, never.
+  - “There. You learned about all these things openly, through your government and your press. We did not learn through ours.As in your case, nothing was required of us - in our case, not even knowledge. You knew about things you thought were wrong - you did think it was wrong, didn't you, Herr Professor?” "Yes" "So. You did nothing. We heard, or guessed, and we did nothing. So it is everywhere." When I protested that the Japanese-descended Americans had not been treated like the Jews, he said, "And if they had been - what then? Do you not see that the idea of doing something or doing nothing is in either case the same ?"  一个底层纳粹成员问作者（犹太德裔美国人），二战时西岸的日本人被关进集中营的时候他做了什么，作者答“什么都没做”，这个曾经的纳粹成员激动地说：“就是呀！你看，你们通过政府和媒体了解到正在发生的事情，但是你们并不认为你们有义务做些什么；而我们连知情的责任都没有。你认为正在发生的事情是不正义的，可是你什么都没做；对我们来说，我们只是听说了一些传闻，拼凑出了一些事实，那么我们袖手旁观也是可以理解的。”
+
 ## 图书
 
 * 新的旧世界

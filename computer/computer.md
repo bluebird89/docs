@@ -257,20 +257,20 @@ Little Endian
   - 近期最少使用法-LRU
   - 随机替换法
 
-## CS(Computer Science)
+## CS Computer Science
 
 * C语言基础
   - [CSE 251 Programming in C](https://www.cse.msu.edu/~cse251/index.html)
   - The Absolute Beginner's Guide to C
   - 课程站点上的所有14个Steps实验+3个Projects
-* 深入理解计算机系统
+* 深入理解计算机系统(CSAPP)
   - [CSE351: The Hardware/Software Interface](http://courses.cs.washington.edu/courses/cse351/)
     + [](https://www.bilibili.com/video/BV1Zt411s7Gg)
-  - 深入理解计算机系统(CSAPP)
+    + [](https://www.bilibili.com/video/BV1iW411d7hd?p=1)
   - [CSAPP书籍配套的所有Labs](http://csapp.cs.cmu.edu/3e/labs.html)
 * 数据结构
   - [CS61B Data Structures](https://sp19.datastructur.es/)
-    + [](https://www.bilibili.com/video/BV1EJ411n72e)
+    + [ [2019 SP/2020 FA] UCB CS 61B Data Structures](https://www.bilibili.com/video/BV1EJ411n72e)
   - Head First Java + 数据结构书自选
   - CS 61B站点上的所有Labs/Homeworks/Projects
 * 操作系统

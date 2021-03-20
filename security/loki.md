@@ -1,5 +1,6 @@
-# [Loki](link)
+# [Loki](https://github.com/grafana/loki)
 
+* Like Prometheus, but for logs. https://grafana.com/loki
 * 使用了和prometheus一样的标签来作为索引
 * 将使用与prometheus相同的服务发现和标签重新标记库,编写了pormtail, 在k8s中promtail以daemonset方式运行在每个节点中，通过kubernetes api等到日志的正确元数据，并将它们发送到Loki
 * 日志数据的写主要依托的是Distributor和Ingester两个组件
@@ -15,7 +16,7 @@
 
 ## 架构
 
-* 组成：
+* 组成
   - Loki 是主服务器，负责存储日志和处理查询
   - Promtail 是代理，负责收集日志并将其发送给 Loki
   - Grafana 用于 UI 展示

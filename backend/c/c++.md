@@ -449,8 +449,7 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
     + sudo apt-get update
     + `sudo apt-get install codeblocks codeblocks-contrib`
   - Qtcreator
-* 队列
-  - [concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
+* [concurrentqueue](https://github.com/cameron314/concurrentqueue):A fast multi-producer, multi-consumer lock-free concurrent queue for C++11
 * [phxpaxos](https://github.com/Tencent/phxpaxos)：The Paxos library implemented in C++ that has been used in the WeChat production environment.
 * [libco](https://github.com/Tencent/libco)libco is a coroutine library which is widely used in wechat back-end service.
 * [flameshot](https://github.com/lupoDharkael/flameshot):Powerful yet simple to use screenshot software

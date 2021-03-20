@@ -193,6 +193,7 @@
 * 《[UNIX 编程艺术](https://www.amazon.cn/gp/product/B008Z1IEQ8)》
 * [《The Unix-Haters Handbook》](http://research.microsoft.com/~daniel/uhh-download.html)
 * UNIX: A History and a Memoir
+* unix传奇 历史与回忆
 
 ## 参考
 

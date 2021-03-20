@@ -458,8 +458,8 @@ the minimum number of nodes in a cluster that must be online and be able to comm
 
 * [awesome-distributed-systems](https://github.com/theanalyst/awesome-distributed-systems):A curated list to learn about distributed systems
 * [awesome-distributed-systems](https://github.com/rShetty/awesome-distributed-systems):Awesome list of distributed systems resources <http://rajeevnb.com>
-* [A Distributed Systems Reading List
-](https://dancres.github.io/Pages/)
+* [Patterns of Distributed Systems](https://martinfowler.com/articles/patterns-of-distributed-systems/)
+* [A Distributed Systems Reading List](https://dancres.github.io/Pages/)
 * [awesome-decentralized-web](https://github.com/gdamdam/awesome-decentralized-web):an awesome list of decentralized services
 * [Parallel & Distributed Operating Systems Group](https://pdos.csail.mit.edu/)
 * [Distributed-Infrastructure-Series](https://github.com/wx-chevalier/Distributed-Infrastructure-Series):📚 深入浅出分布式基础架构，Linux 与操作系统篇 | 分布式系统篇 | 分布式计算篇 | 数据库篇 | 网络篇 | 虚拟化与编排篇 | 大数据与云计算篇

@@ -25,3 +25,6 @@
 * [applied-ml](https://github.com/eugeneyan/applied-ml)books Papers & articles of companies sharing their work on applied data science & machine learning.
 * [papers-we-love](https://github.com/papers-we-love/papers-we-love)Papers from the computer science community to read and discuss. <http://paperswelove.org/>
 * [](https://31sanyi.neocities.org)
+* [论文驿站](https://www.lunwenyizhan.com/)
+* [scihub](https://scihubtw.tw/)
+* [](http://libgen.rs/)

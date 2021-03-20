@@ -1831,7 +1831,8 @@ kubectl get pods -n rook-ceph
 
 ## Ingress Controller
 
-* 基于7层的方案
+* Kubernetes 集群中用于管理服务外部访问的 API 对象，典型的访问方式是 HTTP 和 HTTPS。Ingress 可以提供七层负载均衡、SSL 终结、基于名称的虚拟主机等。
+* 为了配置策略，Kubernetes 集群中需要部署一个 Ingress 控制器，监听 Ingress 和 Service 的变化情况，并根据规则配置负载均衡并提供访问入口。Ingress Controller 在部署的时候通常会以 NodePort 或 LoadBalancer 的形式将入口地址公开到 Internet，以便集群外部访问
 * 一个统称，并不是只有一个，有如下：
   - [ingress-nginx](https://github.com/kubernetes/ingress-nginx):NGINX Ingress Controller for Kubernetes  <https://kubernetes.github.io/ingress-nginx/>
   - F5 BIG-IP Controller: F5 所开发的 Controller，它能够让管理员通过 CLI 或 API 让 Kubernetes 与 OpenShift 管理 F5 BIG-IP 设备

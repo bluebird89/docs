@@ -385,6 +385,88 @@ ffmpeg -i input2.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb 2.ts
 ffmpeg -i "concat:1.ts|2.ts" -acodec copy -vcodec copy -absf aac_adtstoasc outp
 ```
 
+## Convert to an animated GIF
+
+```sh
+### Convert a whole video to GIF
+ffmpeg -i $INPUT_FILENAME \
+-vf "fps=$OUTPUT_FPS,scale=$OUTPUT_WIDTH:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+-loop $NUMBER_OF_LOOPS $OUTPUT_FILENAME
+
+# Change these placeholders:
+# * $INPUT_FILENAME - path to the input video.
+# * $OUTPUT_FPS - ouput frames per second. Start with `10`.
+# * $OUTPUT_WIDTH - output width in pixels. Aspect ratio is maintained.
+# * $NUMBER_OF_LOOPS - use `0` to loop forever, or a specific number of loops.
+# * $OUTPUT_FILENAME - the name of the output animated GIF.
+
+ffmpeg -i "sample_recording.mp4" \
+-vf "fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+-loop 0 sample_recording.gif
+
+### Convert part of a video to GIF
+ffmpeg -ss $INPUT_START_TIME -t $LENGTH -i $INPUT_FILENAME \
+-vf "fps=$OUTPUT_FPS,scale=$OUTPUT_WIDTH:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+-loop $NUMBER_OF_LOOPS $OUTPUT_FILENAME
+
+# Change these placeholders:
+# * $INPUT_START_TIME - number of seconds in the input video to start from.
+# * $LENGTH - number of seconds to convert from the input video.
+# * $INPUT_FILENAME - path to the input video.
+# * $OUTPUT_FPS - ouput frames per second. Start with `10`.
+# * $OUTPUT_WIDTH - output width in pixels. Aspect ratio is maintained.
+# * $NUMBER_OF_LOOPS - use `0` to loop forever, or a specific number of loops.
+# * $OUTPUT_FILENAME - the name of the output animated GIF.
+
+ffmpeg -ss 32.5 -t 7 -i "sample_recording.mp4" \
+-vf "fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+-loop 0 sample_recording.gif
+
+### Convert a whole video to animated WebP
+ffmpeg -i $INPUT_FILENAME \
+-vf "fps=$OUTPUT_FPS,scale=$OUTPUT_WIDTH:-1:flags=lanczos" \
+-vcodec libwebp -lossless 0 -compression_level 6 \
+-q:v $OUTPUT_QUALITY -loop $NUMER_OF_LOOPS \
+-preset picture -an -vsync 0 $OUTPUT_FILENAME
+
+# Change these placeholders:
+# * $INPUT_FILENAME - path to the input video.
+# * $OUTPUT_FPS - ouput frames per second. Start with `10`.
+# * $OUTPUT_WIDTH - output width in pixels. Aspect ratio is maintained.
+# * $OUTPUT_QUALITY - quality of the WebP output. Start with `50`.
+# * $NUMBER_OF_LOOPS - use `0` to loop forever, or a specific number of loops.
+# * $OUTPUT_FILENAME - the name of the output animated WebP.
+
+ffmpeg -i "sample_recording.mp4" \
+-vf "fps=10,scale=720:-1:flags=lanczos" \
+-vcodec libwebp -lossless 0 -compression_level 6 \
+-q:v 50 -loop 0 \
+-preset picture -an -vsync 0 sample_recording.webp
+
+#### Convert part of a video to animated WebP
+ffmpeg -ss $INPUT_START_TIME -t $LENGTH -i $INPUT_FILENAME \
+-vf "fps=$OUTPUT_FPS,scale=$OUTPUT_WIDTH:-1:flags=lanczos" \
+-vcodec libwebp -lossless 0 -compression_level 6 \
+-q:v $OUTPUT_QUALITY -loop $NUMER_OF_LOOPS \
+-preset picture -an -vsync 0 $OUTPUT_FILENAME
+
+# Change these placeholders:
+# * $INPUT_START_TIME - number of seconds in the input video to start from.
+# * $LENGTH - number of seconds to convert from the input video.
+# * $INPUT_FILENAME - path to the input video.
+# * $OUTPUT_FPS - ouput frames per second. Start with `10`.
+# * $OUTPUT_WIDTH - output width in pixels. Aspect ratio is maintained.
+# * $OUTPUT_QUALITY - quality of the WebP output. Start with `50`.
+# * $NUMBER_OF_LOOPS - use `0` to loop forever, or a specific number of loops.
+# * $OUTPUT_FILENAME - the name of the output animated WebP.
+
+ffmpeg -ss 32.5 -t 7 -i "sample_recording.mp4" \
+-vf "fps=10,scale=720:-1:flags=lanczos" \
+-vcodec libwebp -lossless 0 -compression_level 6 \
+-q:v 50 -loop 0 \
+-preset picture -an -vsync 0 sample_recording.webp
+```
+
 ## video player
 
 ## Directshow Filter

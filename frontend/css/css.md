@@ -835,6 +835,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 ## 课程
 
 * [css-animation-101](https://github.com/cssanimation/css-animation-101):Learn how to bring animation to your web projects <https://cssanimation.rocks>
+* [magic-of-css](https://github.com/adamschwartz/magic-of-css) A CSS course to turn you into a magician.
 
 ## 图书
 
@@ -895,7 +896,7 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [How to Efficiently Master the CSS Grid in a Jiffy](https://medium.com/flexbox-and-grids/how-to-efficiently-master-the-css-grid-in-a-jiffy-585d0c213577)
 * [CSS-Inspiration](https://github.com/chokcoco/CSS-Inspiration):CSS Inspiration，在这里找到写 CSS 的灵感！<https://chokcoco.github.io/CSS-Inspiration/#/./init>
 * [SpinKit](https://github.com/tobiasahlin/SpinKit):A collection of loading indicators animated with CSS <http://tobiasahlin.com/spinkit/>
-* [chokcoco/iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
+* [iCSS](https://github.com/chokcoco/iCSS):谈谈一些有趣的 CSS 话题
 * [hot-new-css-features](https://github.com/danielcrisp/hot-new-css-features):A step-by-step demonstration of five new hot CSS features
 * [](https://generative-art-with-css.commons.host/)
 * [](https://github.com/jgthms/web-design-in-4-minutes):<https://jgthms.com/web-design-in-4-minutes/>
