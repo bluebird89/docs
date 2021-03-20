@@ -502,6 +502,13 @@
   - 一生之敌：大衣拉链
 * 《我的红白人生》
 
+![](../_static/wenger_1.gif "Optional title")
+![](../_static/wenger_2.gif "Optional title")
+![](../_static/wenger_3.gif "Optional title")
+![](../_static/wenger_4.gif "Optional title")
+![](../_static/wenger_5.gif "Optional title")
+![](../_static/wenger_6.gif "Optional title")
+
 ## 何塞普·瓜迪奥拉
 
 * 中卫的定义
