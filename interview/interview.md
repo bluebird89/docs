@@ -637,6 +637,7 @@ Docker 的出现实在是太赞了，以前需要通过 VM 来捣鼓的东西，
 * 《[编程之美 : 微软技术面试心得](https://www.amazon.cn/gp/product/B00W5269HO)》
 * 《[金领简历：敲开苹果、微软、谷歌的大门](https://www.amazon.cn/gp/product/B00ALPRM7S)》
 * 《[剑指Offer：名企面试官精讲典型编程题（纪念版）](https://www.amazon.cn/gp/product/B00L5LKMVU)》
+* Cracking the Coding Interview
 
 ## 资源
 

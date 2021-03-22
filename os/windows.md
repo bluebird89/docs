@@ -40,6 +40,45 @@ FTYPE pngfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo V
 ## 版本号
 Win + R winver
 systeminfo | findstr Build
+
+## 新建 .reg文件保存单击
+
+Windows Registry Editor Version 5.00
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.jpg]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.jpeg]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.gif]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.png]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.bmp]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.tiff]
+@="PhotoViewer.FileAssoc.Tiff"
+
+
+; Change Extension's File Type
+[HKEY_CURRENT_USER\Software\Classes\.ico]
+
+@="PhotoViewer.FileAssoc.Tiff"
 ```
 
 ## 工具
@@ -224,8 +263,9 @@ Set-Theme PowerLine
 
 ### [cmder + gow](http://bliker.github.io/cmder/)
 
-* [cmderdev/cmder](https://github.com/cmderdev/cmder)
+* [cmder](https://github.com/cmderdev/cmder)
 * 添加到环境变量
+* 解决文字重叠问题 Win + Ait + P 唤出设置界面 > mian > font > monospce 的勾勾去掉(点两下)
 * 快捷键
   - 双Tab，用于补全
   - Ctrl+T，建立新页
@@ -251,7 +291,7 @@ Cmder.exe /REGISTER ALL|USER
 local cmder_prompt = "\x1b[1;32;40m{cwd} {git}{hg} \n\x1b[1;30;40m{lamb} \x1b[0m" #before changes
 local cmder_prompt = "\x1b[1;32;40m{cwd} {git}{hg} \n\x1b[1;30;40m# \x1b[0m" #after changes
 
-# 配置aliases：cmder->config->aliases
+# 中文乱码问题 配置aliases：cmder->config->aliases
 l=ls --show-control-chars
 la=ls -aF --show-control-chars
 ll=ls -alF --show-control-chars

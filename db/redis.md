@@ -1151,20 +1151,21 @@ rm -rf /var/run/redis.pid
 
 * 主从模式弊端：当 Master 宕机后，Redis 集群将不能对外提供写入操作。Redis Sentinel 可解决这一问题,主节点奔溃之后，无需人工干预就能自动恢复 Redis 的正常使用
 * 2.8中提供了哨兵工具来实现自动化的系统监控和故障恢复功能。作用就是监控Redis系统的运行状况。功能：
-  - 监控主服务器和从服务器是否正常运行
-  - 主服务器出现故障时自动将从服务器转换为主服务器
+  - Sentinel进程，监控主服务器和从服务器Redis Server实例的可用性
+  - 在master挂掉的时候，及时把slave提升到master的角色继续提供服务
 * 解决主从同步 Master 宕机后的主从切换问题：
   - 监控：检查主从服务器是否运行正常
   - 通知：当被监控的某个 Redis 服务器出现问题，Sentinel 通过 API 脚本向管理员或者其他应用程序发出通知
   - 自动故障迁移：当主节点不能正常工作时，Sentinel 会开始一次自动的故障转移操作，它会将与失效主节点是主从关系的其中一个从节点升级为新的主节点，并且将其他的从节点指向新的主节点，这样人工干预就可以免了
   - 配置提供者：在 Redis Sentinel 模式下，客户端应用在初始化时连接的是 Sentinel 节点集合，从中获取主节点的信息
-* 主节点存活检测
+* 服务的调用方来说，现在要连接的是Redis Sentinel服务，而不是Redis Server了
+* Redis Sentinel本身也是个单点服务，一旦Sentinel进程挂了，那么客户端就没办法链接Sentinel了
 * 由若干 Sentinel 节点组成的分布式集群，可以实现故障发现、故障自动转移、配置中心和客户端通知。Redis Sentinel 的节点数量要满足 2n+1(n>=1)的奇数个
 * 工作方式
   - 每个Sentinel（哨兵）进程以每秒钟一次的频率向整个集群中的Master主服务器，Slave从服务器以及其他Sentinel（哨兵）进程发送一个 PING 命令
   - 如果一个实例（instance）距离最后一次有效回复 PING 命令的时间超过 down-after-milliseconds 选项所指定的值， 则这个实例会被 Sentinel（哨兵）进程标记为主观下线（SDOWN）
   - 如果一个Master主服务器被标记为主观下线（SDOWN），则正在监视这个Master主服务器的所有 Sentinel（哨兵）进程要以每秒一次的频率确认Master主服务器的确进入了主观下线状态
-  - 当有足够数量的 Sentinel（哨兵）进程（大于等于配置文件指定的值）在指定的时间范围内确认Master主服务器进入了主观下线状态（SDOWN）， 则Master主服务器会被标记为客观下线（ODOWN）
+  - 当有足够数量的 Sentinel（哨兵）进程（大于等于配置文件指定的值）在指定的时间范围内确认Master主服务器进入了主观下线状态（SDOWN），则Master主服务器会被标记为客观下线（ODOWN）
   - 在一般情况下， 每个 Sentinel（哨兵）进程会以每 10 秒一次的频率向集群中的所有Master主服务器、Slave从服务器发送 INFO 命令
   - 当Master主服务器被 Sentinel（哨兵）进程标记为客观下线（ODOWN）时，Sentinel（哨兵）进程向下线的 Master主服务器的所有 Slave从服务器发送 INFO 命令的频率会从 10 秒一次改为每秒一次
   - 若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除
@@ -1175,6 +1176,15 @@ rm -rf /var/run/redis.pid
   - 方便实现 Redis 数据节点的线形扩展，轻松突破 Redis 自身单线程瓶颈，可极大满足 Redis 大容量或高性能的业务需求
 * 缺点：
   - 较难支持在线扩容，在集群容量达到上限时在线扩容会变得很复杂
+* 主从同步Redis Server，双实例Sentinel
+  - 每个实例都启动Redis Sentinel进程，两个Sentinel进程同时为客户端提供服务发现的功能
+  - 在Client端配置多个Redis Sentinel的链接地址，Client一旦发现某个地址连接不上，会去试图连接其他的Sentinel实例
+  - 问题：某台服务器整体down机，不妨假设服务器1停机，此时，只剩下服务器2上面的Redis Sentinel和slave Redis Server进程。这时，Sentinel其实是不会将仅剩的slave切换成master继续服务的
+    + Redis的设定是只有当超过50%的Sentinel进程可以连通并投票选取新的master时，才会真正发生主从切换
+    + 如果没有这个限制。出现服务通信问题，会出现两份服务同时服务，造成数据混乱
+* 主从同步Redis Server，三实例Sentinel
+  - 引入了服务器3，并且在3上面又搭建起一个Redis Sentinel进程，现在由三个Sentinel进程来管理两个Redis Server实例。这种场景下，不管是单一进程故障、还是单个机器故障、还是某两个机器网络通信故障，都可以继续对外提供Redis服务
+  - 可以配置Redis Server进程，让其在检测到自己网络有问题的时候，立即停止服务，避免在网络故障期间还有新数据进来
 
 ## 集群 cluster
 

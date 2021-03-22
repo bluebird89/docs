@@ -2,6 +2,8 @@
 
 A progressive, incrementally-adoptable JavaScript framework for building UI on the web. <http://vuejs.org>
 
+* 一套用于构建用户界面的渐进式框架。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用
+* 核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合
 * 工程化
 * 模块化
 * 组件化
@@ -337,6 +339,18 @@ vue list
 vue init webpack my-project
 vue init Plortinus/vue-multiple-pages new-project
 ```
+
+## 尤雨溪
+
+* 最初的开发初衷，即“做 Vue.js 的初衷很单纯，不是为了赚大钱，不是为了成为大神，也不是因为我发现了什么不得了的创新点。我只是想做一个我自己会喜欢的框架。很巧，我把我想要的东西做出来以后，也有很多其他人喜欢，所以用户越来越多。
+
+## Angular、Vue.js、React 三者的区别
+
+* React 与 Vue.js 都采用虚拟 DOM，而且它们的核心功能都在核心库中，其他类似路由这样的功能则由其它库进行处理。
+* React 在我看来并非一个纯粹的 MVVM 框架，它有着一个庞大的生态系统，它比 Vue.js 优秀，因为它脱离了一般框架的范畴，但是 Vue.js 并非在它面前一无是处。
+* 事实上，Vue.js 在许多时候都是占据优势的，因为 Vue.js 较 React 而言要轻得多。React 的整体都是由 JavaScript 功能来实现的。这对于一般的前端开发者而言，把 CSS/HTML 都融入 JavaScript 不是那么容易接受，而 Vue.js 则是基于传统的 Web 技术进行扩展，这无疑更能让用户接受。
+* Angular1 与 Angular2 在我看来并非同一个框架，他们在语法上与 Vue.js 几乎一致，所以很多人都说 Vue.js 是抄袭 Angular。Vue.js 在许多方面没有像 Angular 一样深入开发，但也保证了基础的功能完善。
+* 对于 Angular 的全面带来的庞大， Vue.js 选择了不同的方向， Vue.js 很多时候要比 Angular 快，还有对于 Angular 的脏检查机制带来的性能问题，这也是 Vue.js 不用去管的。
 
 ## 课程
 

@@ -18,6 +18,7 @@ The PHP Interpreter <http://www.php.net>
 
 ## 版本
 
+* 创始人：Rasmus Lerdorf
 * 5.3
   - 支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
 * 5.5

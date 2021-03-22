@@ -2069,7 +2069,6 @@ history | awk '{$1="";print substr($0,2)}' | sort | uniq -c | sort -n | tail -n 
   + ZOC Terminal
   + [MobaXterm](https://mobaxterm.mobatek.net/) Enhanced terminal for Windows with X11 server, tabbed SSH client, network tools and much more
   + Console2
-  + [cmder + gow](http://bliker.github.io/cmder/)
   + ConEmu
   + [Babun](http://babun.github.io/):a Windows shell you will love!
   + [nushell](https://github.com/nushell/nushell): A new type of shell www.nushell.sh/ `cargo install nu --features=stable`

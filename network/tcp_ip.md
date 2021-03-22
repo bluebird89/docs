@@ -21,6 +21,40 @@
 
 ![Alt text](../_static/tcp\/ip.jpg "Optional title")
 
+## OSI
+
+* Application(Layer 7) This layer supports application and end-user processes. Communication partners are identified, quality of service is identified, user authentication and privacy are considered, and any constraints on data syntax are identified. Everything at this layer is application-specific. This layer provides application services for file transfers, e-mail, and other network software services.
+  - 7层应用层:主要是一些终端的应用，比如说FTP（各种文件下载），WEB（IE浏览），QQ之类的（你就把它理解成我们在电脑屏幕上可以看到的东西．就是终端应用）
+  - DHCP, DNS, FTP, HTTP, IMAP4, NNTP, POP3, SMTP, SNMP, SSH, TELNET and NTPmore)
+* Presentation(Layer 6) This layer provides independence from differences in data representation (e.g., encryption) by translating from application to network format, and vice versa. This layer formats and encrypts data to be sent across a network, providing freedom from compatibility problems. It is sometimes called the syntax layer.
+  - 6层表示层：主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等））
+  - SSL, WEP, WPA, Kerberos,
+* Session(Layer 5) This layer establishes, manages and terminates connections between applications. The session layer sets up, coordinates, and terminates conversations, exchanges, and dialogues between the applications at each end. It deals with session and connection coordination.
+  - 5层会话层：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）
+  - Logical Ports 21, 22, 23, 80 etc…
+* Transport(Layer 4) This layer provides transparent transfer of data between end systems, or hosts, and is responsible for end-to-end error recovery and flow control. It ensures complete data transfer.
+  - 4层传输层：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。主要是将从下层接收的数据进行分段进行传输，到达目的地址后在进行重组。常常把这一层数据叫做段。
+  - TCP, SPX and UDPmore)
+* Network(Layer 3) This layer provides switching and routing technologies, creating logical paths, known as virtual circuits, for transmitting data from node to node. Routing and forwarding are functions of this layer, as well as addressing, internetworking, error handling, congestion control and packet sequencing.
+  - 3层网络层：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包。 　　
+  - IPv4, IPV6, IPX, OSPF, ICMP, IGMP and ARPMP
+* Data Link(Layer 2) At this layer, data packets are encoded and decoded into bits. It furnishes transmission protocol knowledge and management and handles errors in the physical layer, flow control and frame synchronization. The data link layer is divided into two sublayers: The Media Access Control (MAC) layer and the Logical Link Control (LLC) layer. The MAC sublayer controls how a computer on the network gains access to the data and permission to transmit it. The LLC layer controls frame synchronization, flow control and error checking.
+  - 2层数据链路层：主要将从物理层接收的数据进行MAC地址（网卡的地址）的封装与解封装。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。
+  - 802.11 (WLAN), Wi-Fi, WiMAX, ATM, Ethernet, Token Ring, Frame Relay, PPTP, L2TP and ISDN-ore)
+* Physical(Layer 1) This layer conveys the bit stream - electrical impulse, light or radio signal -- through the network at the electrical and mechanical level. It provides the hardware means of sending and receiving data on a carrier, including defining cables, cards and physical aspects.
+  - 1层物理层：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的模数转换与数模转换）。这一层的数据叫做比特。
+  - Hubs, Repeaters, Cables, Optical Fiber, SONET/SDN,Coaxial Cable, Twisted Pair Cable and Connectors (more)
+
+* OSI Layer Model for concentrators
+  - Hubs/Repeaters are found in the Physical Layer
+  - Switches /Bridges/Wireless Access Point are found in the Data Link Layer
+  - Multilayer Switch are found in both the Data Link Layer and Network Layer
+  - Routers are found in the Network Layer
+  - Gateway are found in All 7 of the OSI Layers
+  - Brouter are found in both the Data Link and Network Layer
+
+![Alt text](../_startic/osi.png "Optional title")
+
 ## application layer 应用层
 
 * 为了解决某一类应用问题而生的，每一个服务需要用不同的协议，规定应用进程在通信时所遵循的协议
@@ -263,8 +297,24 @@ ns3.dnsowl.com
 ## 传输层 transport layer
 
 * 为应用进程提供端到端的通信服务
-  - TCP 提供面向连接的数据流支持、可靠性、流量控制、多路复用等服务
-  - UDP 不提供复杂的控制机制，利用 IP 提供面向无连接的简单消息传输
+* TCP 提供面向连接的数据流支持、可靠性、流量控制、多路复用等服务
+  - 通过 IP 网络的面向连接的协议。使用握手建立和断开连接。发送的所有数据包保证以原始顺序到达目的地，用以下措施保证数据包不被损坏：
+    + 每个数据包的序列号和校验码。
+    + 确认包和自动重传
+  - 如果发送者没有收到正确的响应，它将重新发送数据包。如果多次超时，连接就会断开。TCP 实行流量控制和拥塞控制。这些确保措施会导致延迟，而且通常导致传输效率比 UDP 低。
+  - 为了确保高吞吐量，Web 服务器可以保持大量的 TCP 连接，从而导致高内存使用。在 Web 服务器线程间拥有大量开放连接可能开销巨大，消耗资源过多，也就是说，一个 memcached 服务器。连接池可以帮助除了在适用的情况下切换到 UDP。
+  - 对于需要高可靠性但时间紧迫的应用程序很有用。比如包括 Web 服务器，数据库信息，SMTP，FTP 和 SSH。
+  - 以下情况使用 TCP 代替 UDP：
+    + 需要数据完好无损。
+    + 想对网络吞吐量自动进行最佳评估。
+* UDP 不提供复杂的控制机制，利用 IP 提供面向无连接的简单消息传输
+  - 无连接的。数据报（类似于数据包）只在数据报级别有保证。数据报可能会无序的到达目的地，也有可能会遗失。UDP 不支持拥塞控制。虽然不如 TCP 那样有保证，但 UDP 通常效率更高。
+  - 可以通过广播将数据报发送至子网内的所有设备。这对 DHCP 很有用，因为子网内的设备还没有分配 IP 地址，而 IP 对于 TCP 是必须的。
+  - 可靠性更低但适合用在网络电话、视频聊天，流媒体和实时多人游戏上。
+  - 以下情况使用 UDP 代替 TCP：
+    + 需要低延迟
+    + 相对于数据丢失更糟的是数据延迟
+    + 想实现自己的错误校正方法
 * 连接:用于保证可靠性和流量控制维护的某些状态信息，这些信息的组合，包括Socket、序列号和窗口大小
   - Socket：由 IP 地址和端口号组成
   - 序列号：用来解决乱序问题等

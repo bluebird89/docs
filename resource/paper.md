@@ -28,3 +28,34 @@
 * [论文驿站](https://www.lunwenyizhan.com/)
 * [scihub](https://scihubtw.tw/)
 * [](http://libgen.rs/)
+
+## 图书馆
+
+* 中国国家数字图书馆：https://douc.cc/1B2pVq\
+* 中国古代文献图书馆：https://douc.cc/3yRrry
+* 北京大学现代新型图书馆：https://douc.cc/1bcmv3
+* 大英图书馆：https://douc.cc/21EV1A
+* Idata：https://douc.cc/2da4Ex
+* 超星数字图书馆：https://douc.cc/0LQD9Nx
+* 国图公开课：https://douc.cc/3czdNCx
+* EDX：https://douc.cc/06qNlB
+
+## 博物馆
+
+[上海博物馆](https://www.shanghaimuseum.net)
+
+故宫博物院：https://douc.cc/3TeJdG
+2.故宫名画记：https://douc.cc/13JYb8
+3.上海中国画院数字博物馆：https://douc.cc/3LaQJb
+4.中国美术馆：https://douc.cc/243TlQ
+5.纽约大都会艺术博物馆：https://douc.cc/2c8VY0
+6.大英博物馆Sketchfab：https://douc.cc/0YopS3
+7.武汉数字博物馆：https://douc.cc/1H3wme
+
+首都博物馆：https://douc.cc/0qlUID
+中国地质博物馆：https://douc.cc/3aerR7
+南京市博物馆：https://douc.cc/4hVr2C
+四川省博物馆：https://douc.cc/2o28j9
+浙江省博物馆：https://douc.cc/20aWjj
+北京画院美术馆：https://douc.cc/0wtrG8
+江苏省美术馆：https://douc.cc/3k033R

@@ -82,6 +82,35 @@
   - what is my ip|my ip
   - Japan time 5pm
   - @character
+* “indexof/”inurl:lib 进入许多图书馆，并且一定能下载自己喜欢的书籍。
+* “indexof/”cnki 找到许多图书馆的CNKI、VIP、超星等入口！
+* “indexof/”ppt  下载powerpint作品！
+* “indexof/”mp3 下载mp3、rm等影视作品！
+* “indexof/”swf 下载flash作品！
+* “indexof/”要下载的软件名 入口下载软件！
+* 在GOOGLE里输入特殊的关键字,就可以搜到数千个摄象头的IP地址!通过他你就可以看到其所摄的实时影象!!
+  - inurl:"viewerframe?mode=" 随便打开一个,然后按提示装一个插件,就可以看到了!!!
+
+* 搜索URL passwd.txt site:virtualave.net
+  - config.txtsite:.jp
+  - admin.txtsite:.tw
+* 搜索首页的目录
+  - "Indexof/admin"
+  - "Indexof/secret"
+  - "Indexof/cgi-bin" site:.edu
+* 查询电话号码的最上方看到搜索的电话和街区地址
+  - 你还可以通过以下任何一种方法找到该列表：
+  - 名字（或首位大写字母），姓，电话地区号
+  - 名字（或首位大写字母），姓，邮递区号
+  - 名字（或首位大写字母），姓，城市（可写州）
+  - 名字（或首位大写字母），姓，州
+  - 电话号码，包括区号
+  - 名字，城市，州
+  - 名字，邮递区号
+* 股票报价:输入一个或多个NYSE，NASDAQ，AMEX或共有基金的股票行情自动收录机的代码，也可以输入在股市开户的公司名字。在搜索结果的开头显示的是查询的股市行情自动收录器的代码。如果你要查找一家公司的名字（比如，INTEL），请查看“股票报价”在Google搜索结果的金融栏里会有那个公司的主页的链接（比如， www. INTEL. COM）。
+* 找找谁和你链接 有些单词如果带有冒号就会有特殊的意思。比如link：操作员。查询link:siteURL，就会显示所有指向那个URL的网页。举例来说，链接 www. Google. com会向你显示所有指向GOOGLE主页的网页。但这种方法不能与关键字查询联合使用。
+* 查找字典释意:输入你要查询的内容。在根据要求找到所有的字典释意都会标有下划线，位于搜索结果的上面，点击链接你会找到字典提供者根据要求给出的相关定义。
+* 查找地图: 输入美国街区地址，包括邮递区号或城市/州（比如165大学大街PALOALTOCA）。通常情况下，街区地址和城市的名字就足够了。
 
 ## 搜索和推荐
 
@@ -92,8 +121,8 @@
 
 ## 工具
 
-* 通用搜索引擎:谷歌、百度、搜狗、神马
-* 垂直搜索引擎
+* 通用 谷歌、百度、搜狗、神马
+* 垂直
 * 引擎
   - [startpage](https://www.startpage.com/)
   - [Bing](https://cn.bing.com/)
@@ -101,9 +130,9 @@
   - [Quickref](https://quickref.dev/): Experimental search engine for developers. Searches a curated subset of the web: official docs and community-driven sources. No JS, cookies, tracking, external requests or data collecting
 * [sourcegraph](https://github.com/sourcegraph/sourcegraph):Code search and intelligence, self-hosted and scalable <https://sourcegraph.com>
 * [LASER](https://github.com/facebookresearch/LASER):Language-Agnostic Sentence Representations
-* [=searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine <https://asciimoo.github.io/searx/>
-* [OKlog](https://github.com/oklog/oklog)
+* [searx](https://github.com/asciimoo/searx):Privacy-respecting metasearch engine <https://asciimoo.github.io/searx/>
 * [searx.space](https://searx.space/)
+* [OKlog](https://github.com/oklog/oklog)
 
 ## 参考
 

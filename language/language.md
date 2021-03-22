@@ -20,30 +20,31 @@
   - 用解释型语言编写的程序是由另一个可以理解中间代码的解释程序执行的
   - 与编译程序不同的是，解释程序的任务是逐一将源程序的语句解释成可执行的机器指令，不需要将源程序翻译成目标代码后再执行
   - To run this bytecode, we have something called Virtual Machines. These so called Virtual Machines are the programs which can read the bytecode and run it on a given operating system
-* Compiled vs. Interpreted
+* Compiled vs Interpreted
   - Compiling a C program would produce what we also know as machine code. As opposed to bytecode.
   - Generally, when we run a python program, a python VM process is started which reads the python source code, compiles it to byte code and run it in a single step. Compiling is not a separate step. Shown only for illustration purpose.
   - Binaries generated for C like languages are not exactly run as is. Since there are multiple types of binaries (eg: ELF), there are more complicated steps involved in order to run a binary but we will not go into that since all that is done at OS level.
 * 函数：把长长的代码封装起来，这样就写一次，就可以到处调用了
-* 数据结构：把参数组织起来，以后就传递这个数据结构
+* 程序 = 数据结构+算法：把参数组织起来，以后就传递这个数据结构
 * oop
-  - Object：数据和操作给结合起来，形成Objec，以后Object的属性数据不允许直接访问，只能通过这个Object的函数来操作
+  - Object：数据和操作给结合起来，形成Object，以后Object的属性数据不允许直接访问，只能通过这个Object的函数来操作
     + Object的方法都是相同的，他们被重复地放在一个个对象当中，Class！把这些重复的方法代码从对象中剥离出来，放到一个公共的Class中！用new 这个关键字： Stack object1 = new Stack();
   - Stack类的函数定义只有一份，但是Stack类生成的Object有很多份。人类在写push()函数，pop()函数的时候，要操作Object的数据， 到底操作的是哪一个Object？ 上帝说：“ 要有this !”
   - 有继承！把那些类似的、重复代码放到父类当中去，这样子类就可以直接使用，不用重新再写一遍了
   - 要有多态！就是对同一个接口，使用不同的实例而执行不同操作。
   - 继承破坏了封装性，父类的很多细节对子类都是可见的，父类的变化可能会极大地影响子类。优先使用组合而不是继承.面向接口编程，而不是实现编程。
   - 编程的关键是要抽象啊！得把系统需求抽象成高层的概念，然后在概念层次进行编程。
+
 * 对应到编程语言，就是越低级语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。
-* 静态语言 statically typed language:在编译期间就能够知道数据类型的语言，在运行前就能够检查类型的正确性，一旦类型确定后就不能再更改
-  - the compiler is written in a way that it can verify types related errors during compile time
-* 动态语言|脚本语言 dynamic language
-  - 没有任何特定的情况需要指定变量的类型，在运行时确定的数据类型.因其易于编写和易于运行的特性，被预测在未来将发展强大
-  - types are not known until a program is run. So in a way, python compiler is dumb (or, less strict)
-  - 脚本语言”（script language），指不具备开发操作系统的能力，而是只用来编写控制其他大型应用程序（比如浏览器）的“脚本”
-  -  dynamically typed language, that means all types are determined at runtime. And that makes python run very slow compared to other statically typed languages.
-* C语言是可以用来编写操作系统的贴近硬件的语言，所以，C语言适合开发那些追求运行速度、充分发挥硬件性能的程序。而Python是用来编写应用程序的高级编程语言
-* 高级编程语言通常都会提供一个比较完善的基础代码库，能直接调用
+  - 静态语言 statically typed language:在编译期间就能够知道数据类型的语言，在运行前就能够检查类型的正确性，一旦类型确定后就不能再更改
+    + the compiler is written in a way that it can verify types related errors during compile time
+  - 动态语言|脚本语言 dynamic language
+    + 没有任何特定的情况需要指定变量的类型，在运行时确定的数据类型.因其易于编写和易于运行的特性，被预测在未来将发展强大
+    + types are not known until a program is run. So in a way, python compiler is dumb (or, less strict)
+    + 脚本语言”（script language），指不具备开发操作系统的能力，而是只用来编写控制其他大型应用程序（比如浏览器）的“脚本”
+    +  dynamically typed language, that means all types are determined at runtime. And that makes python run very slow compared to other statically typed languages.
+  - C语言是可以用来编写操作系统的贴近硬件的语言，所以，C语言适合开发那些追求运行速度、充分发挥硬件性能的程序。而Python是用来编写应用程序的高级编程语言
+  - 高级编程语言通常都会提供一个比较完善的基础代码库，能直接调用
 
 ```
                                                         The Operating System

@@ -35,7 +35,7 @@
 
 ## 课程
 
-* [李宏毅(国语)线性代数课程](https://www.bilibili.com/video/av31780632/)
+* [李宏毅线性代数课程](https://www.bilibili.com/video/av31780632/)
 * [可汗学院：线性代数](https://www.bilibili.com/video/av9504432): <http://open.163.com/special/Khan/linearalgebra.html>
 * [apachecn/math](https://github.com/apachecn/math):MIT-18.06-线性代数-完整笔记
 * [fastai-num-linalg-v2-zh](https://github.com/apachecn/fastai-num-linalg-v2-zh):📖 [译] fast.ai 数值线性代数讲义 v2

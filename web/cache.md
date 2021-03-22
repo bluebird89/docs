@@ -50,8 +50,10 @@
 ## 淘汰策略
 
 * 针对变化的数据，清理掉保存的“脏”数据
-*  LFU Least Frequently Used，即最不经常使用
-*  LRU Least Recently Used，即最近最少使用
+* LRU Least Recently Used，即最近最少使用
+  -
+* LFU Least Frequently Used，即最不经常使用
+  -
 * 过期时间：热点数据都有过期时间，如果没有过期时间就造成了主存和缓存的数据不一致，因此过期时间一般都不会太长
   - 太短：造成频繁的从数据库中往缓存里写数据
   - 太长：内存浪费
