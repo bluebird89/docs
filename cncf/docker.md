@@ -747,14 +747,14 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
 
 ## 网络 Network
 
-* 利用 Network Namespac特性，实现不同容器间网络隔离
+* 利用 Network Namespac 特性，实现不同容器间网络隔离
   - 为了支持网络协议栈多个实gpg例，Linux在网络栈引入了Network Namespace，这些独立的协议栈被隔离到不同的Namespace中，处于不同Namespace中的网络栈是完全隔离的，彼此无法通信
   - 相关全局变量修改为协议栈私有。Linux实现Network Namespace的核心就是让这些全局变量称为Network Namespace变量的成员，然后为协议栈的函数调用加入一个Namespace参数
   - 为了保证已开发程序及内核代码的兼容性，内核代码隐式地使用了Namespace空间内的变量。应用程序如果没有对Namespace有特殊需求，那么不需要额外的代码，Network Namespace对应用程序而言是透明的
   - 建立新Network Namespace，将某个进程关联到这个网络命名空间后.所有网络栈变量放入了Network Namespace的数据结构中，这个Network Namespace是属于进程组私有的，与其他进程组不冲突
   - 如果一个容器声明使用宿主机的网络栈（-net = host），即不开启Network Namespace `docker run –d –net=host --name c_name i_name`
-    + 容器启动之后监听的是宿主机的80端口。像这样直接使用宿主机网络栈的方式，虽然可以为容器提供良好的网络性能，但也不可避免的造成端口冲突等网络资源冲突的问题
-    + 一般情况下都希望程序引入Network Namespace里的网络栈，即这个容器拥有自己的IP和端口
+    + 容器启动后监听的是宿主机的80端口。像这样直接使用宿主机网络栈的方式，虽然可以为容器提供良好的网络性能，但也不可避免的造成端口冲突等网络资源冲突的问题
+    + 一般情况下都希望程序引入Network Namespace里的网络栈，即容器拥有自己的IP和端口
 * 使用
   - -P 随机映射一个宿主机 49000~49900 端口到内部容器开放的网络端口
   - -p 指定要映射的端口，在一个指定端口上只可以绑定一个容器
@@ -786,10 +786,11 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
     + 一端放到新容器中，并修改名字作为 eth0，这个接口只在容器名字空间可用
     + 从网桥可用地址段中获取一个空闲地址分配给容器的 eth0，并配置默认路由到桥接网卡 veth65f9
 * `docker run --net` 参数来指定容器网络配置.默认情况下，分别会建立一个bridge、一个host和一个none的网络.都是使用的这个bridge的网络，可以访问外网和其他container的（需要通过IP地址）
-  - --net=bridge（默认)，连接到默认的网桥,独立container之间的通信+ 默认bridge有很多限制，可以自行创建bridge类型网络
+  - --net=bridge（默认)，连接到默认的网桥,独立container之间的通信
+    + 默认bridge有很多限制，可以自行创建bridge类型网络
     + 参数
-      * -b BRIDGE or –bridge=BRIDGE –指定容器挂载的网桥 # 只有在 Docker 服务启动的时候才能配置，而且不能马上生效
-      * –bip=CIDR –定制 docker0 的掩码
+      * -b BRIDGE|–bridge=BRIDGE –指定容器挂载的网桥 # 只有在 Docker 服务启动的时候才能配置，而且不能马上生效
+      * –bip=CIDR 定制 docker0 的掩码
       * -H SOCKET… or –host=SOCKET… –Docker 服务端接收命令的通道
       * –icc=true|false –是否支持容器之间进行通信
       * –ip-forward=true|false –请看下文容器之间的通信
@@ -824,8 +825,8 @@ docker rm $(docker ps -a -q) -f  # same as above, but forces running containers 
       * docker0转发过程，就是继续扮演二层交换机，docker0根据数据包的目标MAC地址，在CAM表查到对应的端口为veth8762ad2，然后把数据包发往这个端口。而这个端口，就是容器2的Veth Pair在宿主机的另一端，这样，数据包就进入了容器2的Network Namespace，最终容器2将响应（Ping）返回给容器1
   - --net=host
     + 告诉 Docker 不要将容器网络放到隔离名字空间中，即不要容器化容器内的网络。直接使用宿主机的网络，端口也使用宿主机的,容器进程可以跟主机其它 root 进程一样可以打开低范围的端口，可以访问本地网络服务比如 D-bus，还可以让容器做一些影响整个主机系统的事情，比如重启主机。因此使用这个选项的时候要非常小心
+    + 共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
     + 如果进一步的使用 --privileged=true，容器会被允许直接配置主机的网络堆栈
-    + host:共享Docker宿主机的网络栈，即容器的网络配置与host宿主机完全一样。可以通过添加--network=host参数来指定该容器使用host网络
     + 直接使用Docker host的网络最大的好处就是性能，如果容器对网络传输效率有较高要求，则可以选择host网络
     + 不便之处就是牺牲一些灵活性,端口冲突
     + The host driver is the network that the Docker host uses. It may be desirable to have a container using the Docker's host network if the number of available ports while using bridge networks are too limited.
@@ -934,6 +935,8 @@ docker network create -d overlay ov_net3 --subnet 172.19.0.0/24 --gateway 172.19
 
 docker run --network ov_net2 busybox # 之后创建容器的时候只需要指定--network参数为ov_net2即可
 
+netstat -lntup
+
 # 新增一个网桥
 brctl addbr xxxxx
 # 在新增网桥的基础上增加网口，在linux中，一个网口其实就是一个物理网卡。将物理网卡和网桥连接起来
@@ -971,7 +974,7 @@ ip netns exec netns1 ethtool -S veth1
 ip netns exec netns2 ip link | grep 6
 ```
 
-## 持久化 Volume
+## 数据卷 Volume
 
 * bind mount:将host机器的目录mount到container中
   - host机器目录路径必须为全路径(准确的说需要以/或~/开始的路径)，不然docker会将其当做volume而不是volume处理
