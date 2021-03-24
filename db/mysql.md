@@ -143,7 +143,9 @@ mysql_config --include
 
 * Application layer
   - 连接器:通信协议是“半双工”,任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，两个动作不能同时发生
-    + 连接处理 Connection handling：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户权限 each client gets its own connection which is cached for the duration of access
+    + 连接处理 Connection handling：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户权限 each client gets its own connection which is cached for the duration of access.引入了线程池的概念，为通过认证安全接入的客户端提供线程.在该层上可以实现基于 SSL 的安全链接。
+      * 本地 sock 通信
+      * 基于客户端/服务端工具实现的类似于 tcp/ip 的通信
     + 授权认证 Authentication：获取到权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中拥有的权限保持不变，等到下次重新连接才会更新权限 server checks (username,password,host) info of client and allows/rejects connection
     + 客户端用一个单独数据包将查询请求发送给服务器，当查询语句很长的时候，需要设置 `max_allowed_packet`参数。注意，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。
     + 当服务器响应客户端请求时,给用户数据通常会很多，由多个数据包组成,客户端必须完整接收整个返回结果，而不能简单只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需数据，减小通信间数据包大小和数量
@@ -2488,7 +2490,12 @@ where a.table_id=b.table_id and a.space <> 0;
   - 堆表(所有记录无序存储)
   - 聚簇索引表(所有记录按照主键进行排序存储)
 * MEMORY
-  - 存储在Memory数据表里数据用的是长度不变格式，意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为在MySQL内部当做长度固定不变的CHAR类型，所以可以使用
+  - 存储在Memory数据表里数据用的是长度不变格式，意味着不能用BLOB和TEXT这样的长度可变的数据类型，VARCHAR是种长度可变的类型，但因为在MySQL内部当做长度固定不变的CHAR类型，所以可以使用.支持的数据类型有限制，比如：不支持 TEXT 和 BLOB 类型，对于字符串类型的数据，只支持固定长度的行；VARCHAR 会被自动存储为 CHAR 类型；
+  - 支持的锁粒度为表级锁。所以，在访问量比较大时，表级锁会成为 MEMORY 存储引擎的瓶颈；
+  - 由于数据是存放在内存中，一旦服务器出现故障，数据都会丢失；
+  - 查询的时候，如果有用到临时表，而且临时表中有 BLOB，TEXT 类型的字段，那么这个临时表就会转化为 MyISAM 类型的表，性能会急剧降低；
+  - 默认使用 hash 索引；
+  - 如果一个内部表很大，会转化为磁盘表。
   - 特性
     + 数据都保存在内存中，不需要进行磁盘I/O
     + 支持 Hash 索引和B树索引
@@ -2725,6 +2732,8 @@ insert into user(age) values(30); #失败
 * 引擎表基于聚簇索引建立，聚簇索引对主键查询有很高的性能。二级索引secondary index非主键索引中必须包含主键列，所以如果主键列很大的话，其他所有索引都会很大。因此，若表上索引较多的话，主键应当尽可能小
 * 分析系统上的行锁的争夺情况:`show status like 'innodb_row_lock%';`
 * 在聚集索引（主键索引）中，如果有唯一性约束，InnoDB会将默认的next-key lock降级为record lock
+* 存在着缓冲管理，通过缓冲池，将索引和数据全部缓存起来，加快查询的速度；
+* 配合一些热备工具可以支持在线热备份；
 * 磁盘读取数据方式采用的可预测性预读、自动在内存中创建hash索引以加速读操作的自适应哈希索引（adaptive hash index)，以及能够加速插入操作的插入缓冲区（insert buffer)等
 * 通过一些机制和工具支持真正热备份，MySQL 其他存储引擎不支持热备份，要获取一致性视图需要停止对所有表的写入，而在读写混合场景中，停止写入可能也意味着停止读取。备份方式稍微复杂一点。xtradb是innodb存储引擎的增强版本，更高性能环境下的新特性
 * 不能以单行基础上工作(合并基础)。InnoDB总是在页上操作。一旦页被加载，它就会扫描页以寻找所请求的行/记录

@@ -931,6 +931,7 @@ It is not worth an intelligent man’s time to be in the majority. By definition
 * 《异类：不一样的成功启示录》
 * 《粘得住的学习》
 * 《人的学习》
+* 为什么学生不喜欢上学?
 
 ## 工具
 

@@ -858,6 +858,8 @@ netsta lnp udp
 
 lsof -i tcp:8081  # 端口查看
 
+sudo lsof -i :9000
+
 ## Route table
 netstat -nr # 查看路由表
 sudo route -n add -net 192.168.0.0 -netmask 255.255.255.0 192.168.5.254

@@ -927,9 +927,10 @@ PFCOUNT runoobkey
 
 * 基于请求/响应模型，单个请求处理需要一一应答。如果需要同时执行大量命令，则每条命令都需要等待上一条命令执行完毕后才能继续执行，中间不仅仅多了 RTT，还多次使用了系统 IO
 * 批量执行指令：客户端可以将多个命令一次性发送到服务器，然后由服务器一次性返回所有结果。大大减少网络传输的开销节省多次 IO 和请求响应往返的时间，提高性能
-* 如果指令之间存在依赖关系，建议分批发送指令
-* 实现原理是采用 FIFO(先进先出)的队列来保证数据的顺序性
-* RedisCluster 中使用pipeline时必须满足pipeline打包的所有命令key在RedisCluster的同一个slot上
+* 一个 pipeline 中的命令互相之间不能有因果关系
+* 一个 pipeline 中的命令不宜过多，不然数据量过大，增加客户端的等待时间，还可能造成网络阻塞。可以将大量命令的拆分多个小的 pipeline 命令完成。
+* 实现原理:采用 FIFO(先进先出)的队列来保证数据的顺序性
+* Redis Cluster 中使用pipeline时必须满足pipeline打包的所有命令key在RedisCluster的同一个slot上
 
 ```sh
 (echo -en "PING\r\n SET w3ckey redis\r\nGET w3ckey\r\nINCR visitor\r\nINCR visitor\r\nINCR visitor\r\n"; sleep 10) | nc localhost 6379

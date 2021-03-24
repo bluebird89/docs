@@ -324,7 +324,7 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - ubuntu.16替换apt-get为apt
 * 软件源管理
   - 本地数据库中搜索关于 cowsay 软件的相关信息
-  - Synaptic:大多数 Linux 发行版的默认 GUI 软件包管理器
+  - [Synaptic](http://www.nongnu.org/synaptic/)：a graphical package management program for apt `sudo apt install synaptic`
   - [snap](https://snapcraft.io/):The app store for Linux Publish your app for Linux users — for desktop, cloud, and Internet of Things.
     + install direct in `/`
     + Channels:`<track>/<risk>/<branch>`
@@ -408,7 +408,6 @@ sudo ALL=(ALL:ALL) NOPASSWD:ALL
   - Remmina：Remote Desktop Client
     + Viber：跨平台的 Skype 替代品
     + [wechat](https://github.com/geeeeeeeeek/electronic-wechat/releases)
-  - [Synaptic](http://www.nongnu.org/synaptic/)：a graphical package management program for apt `sudo apt install synaptic`
   - [Planner](https://planner-todo.web.app/) Never worry about forgetting things again 🚀
   - 清理工具
     + Ubuntu Cleaner `sudo add-apt-repository ppa:gerardpuig/ppa && sudo apt-get install ubuntu-cleaner`

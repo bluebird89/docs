@@ -1,23 +1,12 @@
 # Transmission Control Protocol/Internet Protocol TCP/IP 传输控制协议/网际协议
 
-* OSI 七层协议体系结构，在五层协议中应用层下面加了表示层和会话层
-  - 应用层：打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
-  - 传输层 Transport层：封装客户端与服务端端口
-    + TCP
-    + Segment
-  - 网络层 Network层：封装客户与服务IP地址
-    + IP
-    + Packet
-  - 数据链路层 Data Link层：本地客户端MAC 本地网关MAC
-    + ARP
-    + Frame
-  - 物理层
+* 指一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 只是因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议
 * 通信过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
   - 入栈:数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地
   - 出栈:数据接收方每层不断地拆除首部与尾部，得到最终传输的数据
   - TCP 负责将数据分割并装入 IP 包，然后在到达的时候重新组合
   - IP 负责将包发送至接受者
-* RTT：“We define the round-trip time, which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
+* RTT round-trip time:which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
 
 ![Alt text](../_static/tcp\/ip.jpg "Optional title")
 
@@ -25,33 +14,40 @@
 
 * Application(Layer 7) This layer supports application and end-user processes. Communication partners are identified, quality of service is identified, user authentication and privacy are considered, and any constraints on data syntax are identified. Everything at this layer is application-specific. This layer provides application services for file transfers, e-mail, and other network software services.
   - 7层应用层:主要是一些终端的应用，比如说FTP（各种文件下载），WEB（IE浏览），QQ之类的（你就把它理解成我们在电脑屏幕上可以看到的东西．就是终端应用）
-  - DHCP, DNS, FTP, HTTP, IMAP4, NNTP, POP3, SMTP, SNMP, SSH, TELNET and NTPmore)
+  - 打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
+  - DHCP, DNS, FTP, HTTP, IMAP4, NNTP, POP3, SMTP, SNMP, SSH, TELNET and NTP
 * Presentation(Layer 6) This layer provides independence from differences in data representation (e.g., encryption) by translating from application to network format, and vice versa. This layer formats and encrypts data to be sent across a network, providing freedom from compatibility problems. It is sometimes called the syntax layer.
   - 6层表示层：主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等））
-  - SSL, WEP, WPA, Kerberos,
+  - SSL, WEP, WPA, Kerberos
 * Session(Layer 5) This layer establishes, manages and terminates connections between applications. The session layer sets up, coordinates, and terminates conversations, exchanges, and dialogues between the applications at each end. It deals with session and connection coordination.
   - 5层会话层：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）
   - Logical Ports 21, 22, 23, 80 etc…
 * Transport(Layer 4) This layer provides transparent transfer of data between end systems, or hosts, and is responsible for end-to-end error recovery and flow control. It ensures complete data transfer.
-  - 4层传输层：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。主要是将从下层接收的数据进行分段进行传输，到达目的地址后在进行重组。常常把这一层数据叫做段。
-  - TCP, SPX and UDPmore)
+  - 4层传输层 Transport层：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。主要是将从下层接收的数据进行分段进行传输，到达目的地址后在进行重组。常常把这一层数据叫做段。
+  - 封装客户端与服务端端口
+  - TCP, SPX and UDP
+  - Segment
 * Network(Layer 3) This layer provides switching and routing technologies, creating logical paths, known as virtual circuits, for transmitting data from node to node. Routing and forwarding are functions of this layer, as well as addressing, internetworking, error handling, congestion control and packet sequencing.
-  - 3层网络层：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包。 　　
+  - 3层网络层 Network层：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包
+  - 封装客户与服务IP地址　　
   - IPv4, IPV6, IPX, OSPF, ICMP, IGMP and ARPMP
+  - Packet
+  - Multilayer Switch are found in both the Data Link Layer and Network Layer
+  - Routers are found in the Network Layer
+  - Brouter are found in both the Data Link and Network Layer
 * Data Link(Layer 2) At this layer, data packets are encoded and decoded into bits. It furnishes transmission protocol knowledge and management and handles errors in the physical layer, flow control and frame synchronization. The data link layer is divided into two sublayers: The Media Access Control (MAC) layer and the Logical Link Control (LLC) layer. The MAC sublayer controls how a computer on the network gains access to the data and permission to transmit it. The LLC layer controls frame synchronization, flow control and error checking.
   - 2层数据链路层：主要将从物理层接收的数据进行MAC地址（网卡的地址）的封装与解封装。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。
-  - 802.11 (WLAN), Wi-Fi, WiMAX, ATM, Ethernet, Token Ring, Frame Relay, PPTP, L2TP and ISDN-ore)
+  - 本地客户端MAC 本地网关MAC
+  - Frame
+  - SLIP，CSLIP，PPP，ARP，RARP，MTU
+  - 802.11 (WLAN), Wi-Fi, WiMAX, ATM, Ethernet, Token Ring, Frame Relay, PPTP, L2TP and ISDN-ore
+  - Switches /Bridges/Wireless Access Point are found in the Data Link Layer
 * Physical(Layer 1) This layer conveys the bit stream - electrical impulse, light or radio signal -- through the network at the electrical and mechanical level. It provides the hardware means of sending and receiving data on a carrier, including defining cables, cards and physical aspects.
   - 1层物理层：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的模数转换与数模转换）。这一层的数据叫做比特。
   - Hubs, Repeaters, Cables, Optical Fiber, SONET/SDN,Coaxial Cable, Twisted Pair Cable and Connectors (more)
-
-* OSI Layer Model for concentrators
+  - ISO2110，IEEE802
   - Hubs/Repeaters are found in the Physical Layer
-  - Switches /Bridges/Wireless Access Point are found in the Data Link Layer
-  - Multilayer Switch are found in both the Data Link Layer and Network Layer
-  - Routers are found in the Network Layer
   - Gateway are found in All 7 of the OSI Layers
-  - Brouter are found in both the Data Link and Network Layer
 
 ![Alt text](../_startic/osi.png "Optional title")
 
@@ -305,8 +301,13 @@ ns3.dnsowl.com
   - 为了确保高吞吐量，Web 服务器可以保持大量的 TCP 连接，从而导致高内存使用。在 Web 服务器线程间拥有大量开放连接可能开销巨大，消耗资源过多，也就是说，一个 memcached 服务器。连接池可以帮助除了在适用的情况下切换到 UDP。
   - 对于需要高可靠性但时间紧迫的应用程序很有用。比如包括 Web 服务器，数据库信息，SMTP，FTP 和 SSH。
   - 以下情况使用 TCP 代替 UDP：
-    + 需要数据完好无损。
-    + 想对网络吞吐量自动进行最佳评估。
+    + 需要数据完好无损
+    + 想对网络吞吐量自动进行最佳评估
+  - 协议
+    + SMTP
+    + TELNET
+    + HTTP
+    + FTP
 * UDP 不提供复杂的控制机制，利用 IP 提供面向无连接的简单消息传输
   - 无连接的。数据报（类似于数据包）只在数据报级别有保证。数据报可能会无序的到达目的地，也有可能会遗失。UDP 不支持拥塞控制。虽然不如 TCP 那样有保证，但 UDP 通常效率更高。
   - 可以通过广播将数据报发送至子网内的所有设备。这对 DHCP 很有用，因为子网内的设备还没有分配 IP 地址，而 IP 对于 TCP 是必须的。
@@ -315,6 +316,11 @@ ns3.dnsowl.com
     + 需要低延迟
     + 相对于数据丢失更糟的是数据延迟
     + 想实现自己的错误校正方法
+  - 协议
+    + DNS
+    + TFTP
+    + SNMP
+    + NFS
 * 连接:用于保证可靠性和流量控制维护的某些状态信息，这些信息的组合，包括Socket、序列号和窗口大小
   - Socket：由 IP 地址和端口号组成
   - 序列号：用来解决乱序问题等
@@ -337,6 +343,7 @@ ns3.dnsowl.com
   * 确认：传输过程中都有一个ACK，接收方通过ack告诉发送方收到那些包了。这样发送方能知道有没有丢包，进而确定重传.一旦发生丢包，TCP会将后续包缓存起来，等前面的包重传并接收到后再继续发送，延迟会越来越大
   * 超时重传：TCP协议保证数据可靠性的一个重要机制，其原理是在发送某一个数据以后就开启一个计时器，在一定时间内如果没有得到发送的数据报的ACK报文，那么就重新发送数据，直到发送成功为止。
   * 流量控制：让发送速率不要过快，让接收方来得及接收。利用滑动窗口机制就可以实施流量控制。
++ 虽然是面向字节流的，但TCP传送的数据单元却是报文段
 * 编程步骤
   - 服务器端
     + 创建一个socket，用函数socket()；
@@ -810,7 +817,7 @@ sysctl net.ipv4.tcp_congestion_control
 lsmod | grep bbr
 ```
 
-#### TCP 粘包拆包
+#### TCP 拆包
 
 * 在 TCP 这种字节流协议上做应用层分包是网络编程的基本需求。分包指的是在发生一个消息(message)或一帧(frame)数据时，通过一定的处理，让接收方能从字节流中识别并截取(还原)出一个个消息
 * 短连接分包: 对于短连接的 TCP 服务，分包不是一个问题，只要发送方主动关闭连接，就表示一个消息发送完毕，接收方 read() 返回0，从而知道消息的结尾
@@ -825,6 +832,10 @@ lsmod | grep bbr
   - 利用消息本身的格式来分包，例如 XML 格式的消息中 <root>...</root> 的配对，或者 JSON 格式中的 { ... } 的配对。解析这种消息格式通常会用到状态机(state machine)
 * 复杂的分包
   - 假如消息格式非常简单，“消息”本身是一个字符串，每条消息有一个4字节的头部，以网络序存放字符串的长度。消息直接没有间隙，字符串也不要求以 '\0' 结尾
+
+#### 粘包
+
+* 长连接比较常见
 
 ### UDP User Data Protocol 用户数据报协议
 
@@ -1090,23 +1101,6 @@ lsmod | grep bbr
 
 ![NAPT](../_static/napt.jpg "NAPT")
 
-### ARP Address Resolation Protocol 解析地址协议
-
-* 根据IP地址获取MAC地址的一种解析协议
-* 本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下 ARP 高速缓存（就是一个IP-MAC地址对应表缓存）
-* 如果查询的IP－MAC值对不存在，借助 ARP 请求与 ARP 响应两种类型的包确定 MAC 地址
-  - 主机会通过广播发送 ARP 请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址
-  - 当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP 请求包里的内容，如果 ARP 请求包中的目标 IP 地址与自己的 IP 地址一致，那么这个设备就将自己的 MAC 地址塞入 ARP 响应包返回给主机
-* 操作系统通常会把第一次通过 ARP 获取的 MAC 地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC 地址
-
-### RARP
-
-* 已知 MAC 地址求 IP 地址
-* 通常这需要架设一台 RARP 服务器，在这个服务器上注册设备的 MAC 地址及其 IP 地址。然后再将这个设备接入到网络，接着：
-  - 该设备会发送一条「我的 MAC 地址是XXXX，请告诉我，我的IP地址应该是什么」的请求信息。
-  - RARP 服务器接到这个消息后返回「MAC地址为 XXXX 的设备，IP地址为 XXXX」的信息给这个设备。
-  - 设备就根据从 RARP 服务器所收到的应答信息设置自己的 IP 地址
-
 ### DHCP 动态主机配置协议
 
 * 通过 DHCP 动态获取 IP 地址，大大省去了配 IP 信息繁琐的过程
@@ -1133,6 +1127,7 @@ lsmod | grep bbr
 * 分类：
   - 用于诊断的查询消息，也就是「查询报文类型」
   - 通知出错原因的错误消息，也就是「差错报文类型」
+* ping 可以说是ICMP的最著名的应用，是TCP/IP协议的一部分。利用ping命令可以检查网络是否连通，可以很好地帮助分析和判定网络故障
 
 ### IGMP
 
@@ -1183,6 +1178,23 @@ lsmod | grep bbr
 - 以太网
 - WiFi
 
+### ARP Address Resolation Protocol 解析地址协议
+
+* 根据IP地址获取MAC地址的一种解析协议
+* 本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下 ARP 高速缓存（就是一个IP-MAC地址对应表缓存）
+* 如果查询的IP－MAC值对不存在，借助 ARP 请求与 ARP 响应两种类型的包确定 MAC 地址
+  - 主机会通过广播发送 ARP 请求，这个包中包含了想要知道的 MAC 地址的主机 IP 地址
+  - 当同个链路中的所有设备收到 ARP 请求时，会去拆开 ARP 请求包里的内容，如果 ARP 请求包中的目标 IP 地址与自己的 IP 地址一致，那么这个设备就将自己的 MAC 地址塞入 ARP 响应包返回给主机
+* 操作系统通常会把第一次通过 ARP 获取的 MAC 地址缓存起来，以便下次直接从缓存中找到对应 IP 地址的 MAC 地址
+
+### RARP
+
+* 已知 MAC 地址求 IP 地址
+* 通常这需要架设一台 RARP 服务器，在这个服务器上注册设备的 MAC 地址及其 IP 地址。然后再将这个设备接入到网络，接着：
+  - 该设备会发送一条「我的 MAC 地址是XXXX，请告诉我，我的IP地址应该是什么」的请求信息。
+  - RARP 服务器接到这个消息后返回「MAC地址为 XXXX 的设备，IP地址为 XXXX」的信息给这个设备。
+  - 设备就根据从 RARP 服务器所收到的应答信息设置自己的 IP 地址
+
 ### 交换机
 
 * 用于数据转发交换的设备。通常用于路由器和各终端直接的连接，可将交换机视为路由器接口的拓展。
@@ -1197,13 +1209,18 @@ lsmod | grep bbr
 
 ## 物理层
 
-* 同轴电缆一般用于早期以太网，传输速度通常在 10Mbps 以内。当然粗缆是可以到 1-2Gbps 的速度，不过现在几乎被我们接下来要说到的网线给取代了。
-* 网线即为双绞线，市面上的网线通常为八芯双绞线，传输距离建议不超过一百米。常见的网线标准有五类线、超五类线、六类线、超六类线和七类线这五种标准。不同标准传输速率不同，但是都不建议超过 100 米。
-* 光纤全称光导纤维，通常由玻璃或塑料制成，最外层会涂一层隔绝光线的材料。可以实现每秒万兆位的数据传送，传输距离可达数百公里
+* 物理介质就是把电脑连接起来的物理手段，决定了电信号(0和1)的传输方式，物理介质的不同决定了电信号的传输带宽、速率、传输距离以及抗干扰性等等
+* 同轴电缆
+  - 用于早期以太网，传输速度通常在 10Mbps 以内。当然粗缆是可以到 1-2Gbps 的速度，不过现在几乎被我们接下来要说到的网线给取代了。
+* 网线｜双绞线
+  - 市面上的网线通常为八芯双绞线，传输距离建议不超过一百米。常见的网线标准有五类线、超五类线、六类线、超六类线和七类线这五种标准。不同标准传输速率不同，但是都不建议超过 100 米。
+* 光导纤维 光纤
+  - 通常由玻璃或塑料制成，最外层会涂一层隔绝光线的材料。可以实现每秒万兆位的数据传送，传输距离可达数百公里
   - 单模光纤传输距离长，可达 20-120 公里的距离。
   - 多模光纤适用于低速短距离的场景，比如说一个局域网里的交换机之间的互联，交换机和路由器之间的互联都可以用多模光纤，传输距离在 2 公里以内。
-* 电磁波作为对有线网络的扩展，电磁波的范围很广，适合作为信号传输的只有介于 3 Hz 和约 300 GHz 之间的无线电波，无线电波又被称为射频电波，
-  - 无线网络就是用的无线电波中超高频的一部分。国内最常用的频段是 2.4 GHz 和 5 GHz 。
+* 电磁波
+  - 作为对有线网络的扩展，电磁波的范围很广，适合作为信号传输的只有介于 3 Hz 和约 300 GHz 之间的无线电波，无线电波又被称为射频电波
+  - 无线网络就是用的无线电波中超高频的一部分。国内最常用的频段是 2.4 GHz 和 5 GHz
 
 ```sh
 curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" -so /dev/null https://www.gemini.com

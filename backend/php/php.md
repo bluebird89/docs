@@ -546,15 +546,35 @@ php -r "echo php_sapi_name();"
 
 * 安装
   - bin: /usr/local/php/sbin/php-fpm
-  - 配置
-    + /usr/local/php/etc/php.ini
-    + /usr/local/php/etc/php-fpm.conf
-    + /private/etc/php-fpm.conf
-    + /private/etc/php-fpm.d/www.conf.default
-    + /usr/local/etc/php/7.3/php-fpm.d/www.conf
 * PHP-FPM 是 FastCGI 的实现，提供了多进程 FastCGI 管理功能
+  - 启动shell进程
+    + sapi_startup：SAPI启动。将传入的cgi_sapi_module的地址赋值给全局变量sapi_module，初始化全局变量SG，最后执行php_setup_sapi_content_types函数。
+    + php_module_startup ：模块初始化。php.ini文件的解析，php动态扩展.so的加载、php扩展、zend扩展的启动都是在这里完成的。
+      * zend_startup：启动zend引擎，设置编译器、执行器的函数指针，初始化相关HashTable结构的符号表CG(function_table)、CG(class_table)以及CG(auto_globals)，注册Zend核心扩展zend_builtin_module（该过程会注册Zend引擎提供的函数：func_get_args、strlen、class_exists等），注册标准常量如E_ALL、TRUE、FALSE等。
+      * php_init_config：读取php.ini配置文件并解析，将解析的key-value对存储到configuration_hash这个hashtable中，并且将所有的php扩展（extension=xx.so)的扩展名称保存到extension_lists.functions结构中，将所有的zend扩展（zend_extension=xx.so)的扩展名称保存到extension_lists.engine结构中。
+      * php_startup_auto_globals：向CG(auth_globals)中注册_GET、_POST、_COOKIE、_SERVER等超全局变量钩子，在后面合适的时机（实际上是php_hash_environment）会回调相应的handler。
+      * php_startup_sapi_content_types：设置sapi_module的default_post_reader和treat_data。
+      * php_ini_register_extensions：遍历extension_lists.functions，使用dlopen函数打开xx.so扩展文件，将所有的php扩展注册到全局变量module_registry中，同时如果php扩展有实现函数的话，将实现的函数注册到CG(function_table)。遍历extension_lists.engine，使用dlopen函数打开xx.so扩展文件，将所有的zend扩展注册到全局变量zend_extensions中。
+      * zend_startup_modules：遍历module_registry，调用所有php扩展的MINIT函数。
+      * zend_startup_extensions：遍历zend_extensions，调用所有zend扩展的startup函数。
+    + fpm_init：fpm进程相关初始化。解析php-fpm.conf、fork master进程、安装信号处理器、打开监听socket（默认9000端口）都是在这里完成的。启动shell进程在fork之后不久就退出了。而master进程则通过setsid调用脱离了原来启动shell的终端所在会话，成为了daemon进程
   - master 进程负责与 Web 服务器进行通信，接收 HTTP 请求，再将请求转发给 worker 进程进行处理
+    + fpm_run：根据php-fpm.conf的配置fork worker进程（一个监听端口对应一个worker pool即进程池，worker进程从属于worker pool，只处理该监听端口的请求）。然后进入fpm_event_loop函数，无限等待事件的到来。
+    + fpm_event_loop：事件循环。一直等待着信号事件或者定时器事件的发生。区别于Nginx的master进程使用suspend系统调用挂起进程，fpm master通过循环的调用epoll_wait（timeout为1s）来等待事件。
   - worker 进程负责动态执行 PHP 代码，处理完成后，将处理结果返回给 Web 服务器，再由 Web 服务器将结果发送给客户端
+    + fpm_init_request：初始化request对象。设置request的listen_socket为从父进程复制过来的相应worker pool对应的监听socket。
+    + fcgi_accept_request：监听请求连接，读取请求的头信息。
+      * accept系统调用：如果没有请求到来，worker进程会阻塞在这里。直到请求到来，将连接fd赋值给request对象的fd字段。
+      * select/poll系统调用：循环的调用select或者poll（timeout为5s)，等待着连接fd上有可读事件。如果连接fd一直不可读，worker进程将一直在这里阻塞着。
+      * fcgi_read_request：一旦连接fd上有可读事件之后，会调用该函数对FastCGI协议进行解析，解析出http请求header以及fastcgi_param变量存储到request的env字段中。
+    + php_request_startup：请求初始化
+      * zend_activate：重置垃圾回收器，初始化编译器、执行器、词法扫描器。
+      * sapi_activate：激活SAPI，读取http请求body数据。
+      * php_hash_environment：回调在php_startup_auto_globals函数中注册的_GET，_POST，_COOKIE等超全局变量的钩子，完成超全局变量的生成。
+      * zend_activate_modules：调用所有php扩展的RINIT函数。
+    + php_execute_script：使用Zend VM对php脚本文件进行编译（词法分析+语法分析）生成虚拟机可识别的opcodes，然后执行这些指令。这块很复杂，也是php语言的精华所在，限于篇幅这里不展开。
+    + php_request_shutdown：请求关闭。调用注册的register_shutdown_function回调，调用__destruct析构函数，调用所有php扩展的RSHUTDOWN函数，flush输出内容，发送http响应header，清理全局变量，关闭编译器、执行器，关闭连接fd等。
+    + 当worker进程执行完php_request_shutdown后会再次调用fcgi_accept_request函数，准备监听新的请求。这里可以看到一个worker进程只能顺序的处理请求，在处理当前请求的过程中，该worker进程不会接受新的请求连接，这和Nginx worker进程的事件处理机制是不一样的。
   - 常驻内存启动一些 PHP 进程待命，请求进入时分配一个进程进行处理，进程处理完毕后回收进程，并不销毁进程，让PHP能应对高流量访问请求
   - Nginx 通过 FastCGI 协议将请求转发给 PHP-FPM 处理，PHP-FPM 的 Worker 进程会抢占式的获得 CGI 请求进行处理，整个的过程是阻塞等待的，也就意味着 PHP-FPM 的进程数有多少能处理的请求也就是多少
 * 高并发场景下，异步非阻塞就显得优势明显
@@ -601,6 +621,12 @@ php -r "echo php_sapi_name();"
     + 一个进程中能开的线程数也有限，线程太多也会增加 CPU 的负荷和内存资源，线程没有阻塞态，IO 阻塞也不能主动让出 CPU资源，属于抢占式调度模型。不太适合 php 开发
   - swoole 4.+ 开启了全协程模式，同步代码异步执行
 * 配置
+  - 路径
+    + /usr/local/php/etc/php.ini
+    + /usr/local/php/etc/php-fpm.conf
+    + /private/etc/php-fpm.conf
+    + /private/etc/php-fpm.d/www.conf.default
+    + /usr/local/etc/php/7.3/php-fpm.d/www.conf
   - 静态：直接开启指定数量 php-fpm 进程，不再增加或者减少
   - 动态：开始时候开启一定数量php-fpm进程，当请求量变大时候，动态增加php-fpm进程数到上限，当空闲时候自动释放空闲的进程数到一个下限
   - 通信方式
@@ -617,7 +643,7 @@ php -r "echo php_sapi_name();"
   - Governor = conservative：根据当前负荷动态调整频率。比设置成 ondemand 更加缓慢
   - Governor = performance：始终以最大频率运行 CPU。一个非常安全的性能提升方式，因为能完美的使用服务器 CPU 的全部性能。唯一需要考虑因素就是一些诸如散热、电池寿命（笔记本电脑）和一些由 CPU 始终保持 100% 所带来的一些副作用
 * pm
-  - static 设置取决于服务器有多少闲置内存 子进程的数量是由 pm.max_children 指令来确定的
+  - static 设置取决于服务器有多少闲置内存，子进程的数量是由 pm.max_children 指令来确定的
     + 大多数情况下，如果服务器内存不足，那么 PM 设置成 ondemand 或 dynamic 将是更好选择
     + 一旦有可用的闲置内存，那么把 PM 设置成 static 最大值将减少许多 PHP 进程管理器（PM）所带来开销，应该在没有内存不足和缓存压力的情况下使用 pm.static 来设置 PHP-FPM 进程的最大数量。此外，也不能影响到 CUP 的使用和其他待处理的 PHP-FPM 操作
     + 当流量波动比较大的时候，，PHP-FPM 的 ondemand 和 dynamic 会因为固有开销而限制吞吐量。 您需要了解您的系统并设置 PHP-FPM 进程数，以匹配服务器的最大容量
