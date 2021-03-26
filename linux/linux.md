@@ -980,6 +980,13 @@ sync # 将所有未写的系统缓冲区写到磁盘中
     + 不仅减少了数据拷贝的次数，还减少了上下文切换，数据传送始终只发生在 kernel space
     + 调用 sendfile 时，如果有其它进程截断了文件会发生什么:仅仅返回它在被中断之前已经传输的字节数，errno 会被置为 success
     + 在调用 sendfile 之前给文件加了锁，sendfile 的行为仍然和之前相同，我们还会收到 RTSIGNALLEASE 的信号
+    + Linux的sendfile系调用可以实现将服务器中的本地文件直接拷贝（通过DMA）到Socket缓存，进而发送到网络中，避免了文件数据的多次拷贝
+    + Nginx
+      * Nginx中，当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
+      * Nginx的TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
+      * 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
+      * 默认nginx访问后端都是用的短连接(HTTP1.0)，一个请求来了，Nginx 新开一个端口和后端建立连接，后端执行完毕后主动关闭该链接）。
+      * 默认情况下，nginx已经自动开启了对client连接的keep alive支持（同时client发送的HTTP请求要求keep alive）。
     + 省略页缓存数据拷贝到 Socket 缓存中：仅仅需要把缓冲区描述符传到 Socket 缓冲区，再把数据长度传过去，这样 DMA 控制器直接将页缓存中的数据打包发送到网络中就可以
     + 需要硬件以及驱动程序支持
     + 只适用于将数据从文件拷贝到套接字上
@@ -2848,6 +2855,9 @@ nohup python main.py &> /dev/null & echo $! > pidfile.txt
 
 ## 重定向
 
+* redirect output：[number]>
+* redirect input: [number]<
+* error messages go to a stream called stderr, which is designated as 2>
 * 0 标准输入
 * 1 标准输出
 * 2 标准错误输出
@@ -2862,15 +2872,23 @@ nohup python main.py &> /dev/null & echo $! > pidfile.txt
   - CONT   18    继续（与 STOP 相反， fg/bg 命令）
   - STOP   19    暂停（同 Ctrl + Z）
 * /dev/null文件:写入到它的内容都会被丢弃，会起到"禁止输出"的效果，如果希望屏蔽stdout和stderr
-* redirect output：[number]>
-* redirect input: [number]<
-* error messages go to a stream called stderr, which is designated as 2>
+* 信号
+  - SIGTERM: 向主进程 / 管理进程发送此信号服务器将安全终止
+  - 在 PHP 代码中可以调用 $serv->shutdown() 完成此操作
+  - SIGUSR1: 向主进程/管理进程发送 SIGUSR1 信号，将平稳地 restart 所有 Worker 进程
+  - SIGUSR2: 向主进程/管理进程发送 SIGUSR2 信号，将平稳地重启所有 Task 进程
 
 ```sh
 ls /void 2> output.log
 wc < output.log
 
 command > /dev/null 2>&1
+
+# 重启所有worker进程
+kill -USR1 主进程PID
+
+# 仅重启task进程
+kill -USR2 主进程PID
 ```
 
 ## 网络 Networking

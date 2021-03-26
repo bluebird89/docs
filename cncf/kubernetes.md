@@ -11,8 +11,7 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
   - 基于Docker的开源容器集群管理系统，为容器化的应用提供资源调度、部署运行、服务发现、扩容缩容等整一套功能，因为容器本身可移植，所以Kubernetes容器集群能跑在私有云、公有云或者混合云上
   - 用于管理容器化应用程序集群的工具,自动执行应用程序部署的系统。在计算机领域中，此过程通常称为编排
 * 具备完善集群管理能力，包括多层次的安全防护和准入机制、多租户应用支撑能力、透明的服务注册和服务发现机制、内建负载均衡器、故障发现和自我修复能力、服务滚动升级和线上扩容、可扩充套件的资源自动调度机制、多粒度的资源配额管理能力。还提供完善的管理工具，涵盖开发、部署测试、运维监控等各个环节
-* 自动化编排容器应用的开源平台，包括部署、调度和节点集群间扩展、服务发现和配置服务等架构支持的基础能力
-* 将虚拟机和物理机转换为统一的API切面。然后，开发人员可以使用Kubernetes API来部署，扩展和管理容器化的应用程序
+* 自动化编排容器应用的开源平台，包括部署、调度和节点集群间扩展、服务发现和配置服务等架构支持的基础能力.将虚拟机和物理机转换为统一的API切面。然后，开发人员可以使用Kubernetes API来部署，扩展和管理容器化的应用程序
 * 服务治理范围覆盖了服务的整个生命周期，从服务建模开始，到开发、测试、审批、发布、运行时管理，以及最后的下线。通常说的服务治理主要是指服务运行时的治理，一个好的服务治理框架要遵循"在线治理，实时生效"原则，只有这样才能真正保障服务整体质量
   - 服务越来越多，配置项越来越多，利用统一注册中心解决服务发现和配置管理问题
   - 服务之间存在多级依赖，靠人工已经无法理清，还要避免潜在的循环依赖问题，需要依赖管理机制，支持导出依赖关系图
@@ -26,15 +25,17 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
   - 可扩展：模块化、插件化、可挂载、可组合
   - 自动化：自动部署、自动重启、自动复制、自动伸缩/扩展
 * 功能
+  - 自动化容器部署与复制
+    + 使用 Kubernetes 描述已部署容器的所需状态，可以以受控的速率将实际状态更改为所需状态
+  - 实时弹性收缩容器规模
+    + 涉及到环境的快速迁移和复制，虚拟机时代之前都非常难实现。Kubernetes保证了资源的按需扩容
+  - 容器编排成组，并提供容器间的负载均衡
+    + 使用 DNS 名称或自己 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定.基于负载均衡的应用弹性伸缩方案，只要将应用系统设计成无状态，在需要伸缩的时候修改负载均衡代理配置，就可以方便地水平扩容应用系统，提高系统承载能力
   - 资源调度：一套分布式系统最基本的核心指标
   - 资源管理：控制Pod对计算资源、网络资源、存储资源的使用,允许指定每个容器所需 CPU 和内存（RAM）。当容器指定了资源请求时，Kubernetes 可以做出更好的决策来管理容器的资源
   - 存储编排：允许自动挂载选择存储系统，例如本地存储、公共云提供商等
   - 服务发现：管理外在的程序或者内部的程序如何访问Kubernetes里面的某个Pod
-  - 自动伸缩：涉及到环境的快速迁移和复制，虚拟机时代之前都非常难实现。Kubernetes保证了资源的按需扩容
-  - 自动化容器部署与复制
   - 应用升级部署：为服务滚动和平滑升级提供了很好的机制
-  - 负载均衡：使用 DNS 名称或自己 IP 地址公开容器，如果到容器的流量很大，Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定.基于负载均衡的应用弹性伸缩方案，只要将应用系统设计成无状态，在需要伸缩的时候修改负载均衡代理配置，就可以方便地水平扩容应用系统，提高系统承载能力
-  - 自动部署和回滚：可以使用 Kubernetes 描述已部署容器的所需状态，可以以受控的速率将实际状态更改为所需状态。例如，可以自动化 Kubernetes 来为您的部署创建新容器，删除现有容器并将它们的所有资源用于新容器
   - 密钥与配置管理：存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥
   - 配置文件：通过 ConfigMap 来存储配置
   - 集群监控
@@ -47,7 +48,8 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
 ## 版本
 
 * 1.20
-  - dockershim 将被全面弃用. kubelet实现中的组件之一。它能够与Docker Engine进行通信
+  - 弃用 Docker，并推荐用户切换到基于容器运行时接口（CRI）的容器引擎，如 containerd、cri-o 等
+  - dockershim 将被全面弃用. kubelet实现中的组件之一。能够与Docker Engine进行通信
     + 对于dockershim的支持将最终被删除，届时将无法使用Docker命令检查自己的集群,大部分命令都能在kubectl与ctr（containerd CLI）中找到替代选项
     + Mirantis现已同意与Docker开展合作，在Kubernetes之外独立维护shim代码并将其作为Docker Engine API的统一CRI接口。意味着Docker Engine的商业支持版本Mirantis Container Runtime（MCR）也将提供CRI兼容能力
     + dockershim由内置方案变成了外部方案，dockershim将以独立开源组件的身份存在
@@ -673,7 +675,6 @@ kubectl get pvc -n namespace_name
   - 一个Pod中的多个容器应用通常是紧密耦合的，Pod在Node上被创建、启动或者销毁
   - 一个容器，就是一个进程。应用哪怕再简单，也是被管理在 systemd 或者 supervisord 之下的一组进程，而不是一个进程
 * 共享五种资源
-  + 应用到Pod上的自定义配置
   - PID命名空间：Pod中的不同应用程序可以看到其他应用程序的进程ID。
   - 网络命名空间：Pod中的多个容器能够访问同一个IP和端口范围。每个Pod被分配一个独立IP地址，Pod中每个容器共享网络命名空间，包括IP地址和网络端口
     * Pod内容器使用localhost相互通信
@@ -683,6 +684,7 @@ kubectl get pvc -n namespace_name
   - Volumes(共享存储卷)：Pod中的各个容器可以访问在Pod级别定义的Volumes。
     * 指定一组共享存储Volumes，Pod中的所有容器都可以访问共享Volumes允许这些容器共享数据
     * Volumes还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据
+  + 应用到Pod上的自定义配置
 * Pod实际上扮演传统基础设施里“虚拟机”的角色，容器是这个虚拟机里运行的用户程序
   - 里面容器尽可能多地共享 Linux Namespace，仅保留必要的隔离和限制能力，
   - 凡是调度、网络、存储，以及安全相关的属性，基本上是 Pod 级别
@@ -698,6 +700,7 @@ kubectl get pvc -n namespace_name
 * 运行在同一个Minion(Host)上，看作一个统一管理单元
 * 本身不具备自愈能力，一般情况下使用Deployment、ReplicaSet、Replication Controller等来创建和管理Pod，保证有足够的Pod副本在运行
 * 重启Pod中容器和重启Pod不是一回事，Pod只提供容器的运行环境并保持容器的运行状态，重启容器不会造成Pod重启
+* 生命周期通过Replication Controller来管理；通过模板进行定义，然后分配到一个Node上运行，在Pod所包含容器运行结束后，Pod结束。
 * 重启策略 restartPolicy:Pod 的Spec部分的一个标准字段（pod.spec.restartPolicy），适用于Pod中的所有容器，restartPolicy仅指通过同一节点上的kubelet重新启动容器
   + Always（默认）：在任何情况下，只要容器不在运行状态，就自动重启容器，失败的容器由kubelet以五分钟为上限的指数退避延迟（10秒，20秒，40秒…）重新启动，并在成功执行十分钟后重置
   + OnFailure: 容器异常时自动重启容器
@@ -705,7 +708,6 @@ kubectl get pvc -n namespace_name
 * 类型
   - 单容器模型:由于Pod是Kubernetes可识别的最小对象，Kubernetes管理调度Pod而不是直接管理容器，所以即使只有一个容器也需要封装到Pod里
   - 多容器模型：Pod可以容纳多个紧密关联的容器以共享Pod里的资源。这些容器作为单一的，凝聚在一起的服务单元工作。可以形成单一的内部Service
-* 生命周期通过Replication Controller来管理；通过模板进行定义，然后分配到一个Node上运行，在Pod所包含容器运行结束后，Pod结束。
 - 创建
   + 因为Pod不会自愈，如果Node节点有故障这个Pod就会被删除，或者Node节点缺少资源情况下Pod也会被删除
   + 建议采用相关Controller来创建Pod而不是直接创建Pod，因为单独Pod没有办法自愈，而Controller却可以
@@ -1200,8 +1202,8 @@ kubectl describe replicaset myapp-replicas
     + ules和paths是数组，可以配置多个
 * 服务发现
   + service:当一个Pod在一个Node上运行的时候，Kubelet会针对运行的Service增加一序列的环境变量，支持Docker links compatible和普通环境变量
-  + 通过环境变量发现服务：pod开始运行的时候，Kubernets会初始化一系列的环境变量指向现在存在的服务；如果**Service要先比该Pod创建**（删除pod），pod上的进程可以根据环境变量获得服务的IP地址和端口号 `kubectl exec kubia-599v9 env`
-  + 通过DNS发现服务：插件，DNS服务器监控着API Server，当有Service被创建的时候，DNS服务器会为之创建相应记录
+  + 环境变量：pod开始运行的时候，kubelet会在该Pod中注入集群内所有Service的相关环境变量；想一个Pod中注入某个Service的环境变量，则必须**Service要先比该Pod创建**（删除pod），pod上的进程可以根据环境变量获得服务的IP地址和端口号 `kubectl exec kubia-599v9 env`
+  + 通过DNS发现服务插件，DNS服务器监控着API Server，当有Service被创建的时候，DNS服务器会为之创建相应记录
     * 通过cluster add-on的方式轻松的创建KubeDNS来对集群内的Service进行服务发现
     * 命名空间kube-system下有一个默认的服务kube-dns，其后端是一个coredns的pod `kubectl get svc --namespace kube-system`
     * `kubectl get po -o wide --namespace kube-system`

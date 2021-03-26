@@ -433,16 +433,17 @@ select curtime();
 * **字符** char
   - char(M) 定长字符串
     + 固定长度，最多可以**存储 255 个字符 (注意不是字节)**，字符有不同编码集，比如 UTF8 编码 (3字节)、GBK 编码 (2字节) 等
-    + 对于 CHAR(M) 如果实际存储的数据长度小于M，则 MySQL 会自动会在它的右边用空格字符补足，但是在检索操作中那些填补出来的空格字符会被去掉
+    + 对于 CHAR(M) 如果实际存储的数据长度小于M，存储时会自动在右边用空格字符补足，输入超过指定允许最大长度后，MySQL 会报错
+    + 在检索操作中那些填补出来的空格字符会被去掉
     + 存取速度比varchar要快得多，因为其长度固定，方便程序存储与查找
-    + 付出空间代价：其长度固定，所以会有多余的空格占位符占据空间，可谓是以空间换取时间效率
-  - varchar(M) 变长字符串
-    + **最大长度为 65535 个字节**
-      * 最大有效长度是65532字节，因为在varchar存字符串时，第一个字节是空的，不存在任何数据，然后还需两个字节来存放字符串的长度，所以有效长度是64432-1-2=65532字节
-      * 英文字符（ASCII）占用1个字节，汉字占用两个字节
-      * utf-8状态下，每个字符最多占3个字节，汉字最多可以存 21844个字符,英文也为 21844个字符
-      * gbk状态下，每个字符最多占2个字节，汉字最多可以存 32766个字符，英文也为 32766个字符
-      * latin1 最大为65532个字符
+    + 付出空间代价：其长度固定，会有多余空格占位符占据空间
+  - varchar(M) 变长字符串，存储大小为实际大小
+    + **最大长度为 65532 个字节**：存字符串时，第一个字节是空的，不存在任何数据，还需两个字节来存放字符串的长度，所以有效长度是64432-1-2=65532字节
+      * 非Unicode的字符数据
+        - 英文字符（ASCII）占用1个字节，汉字占用两个字节
+        - utf-8状态下，每个字符最多占3个字节，汉字｜英文最多可以存 21844个字符
+        - gbk状态下，每个字符最多占2个字节，汉字｜英文最多可以存 32766个字符
+        - latin1 最大为65532个字符
     + 字符串实际长度：实际字符串加1或2个字节，字符串长度小于255字节用1字节记录，超过255就需要2字节记录
     + 最大有效长度由最大行大小和使用的字符集确定
     + 在5.0.3以下的版本中的最大长度限制为255，而在5.0.3及以上的版本中
@@ -922,6 +923,16 @@ SHOW VARIABLES;
       * 当数据比内存大时这可能比关联要快得多，因为这样避免了随机I/0
       * 单独的表也能使用更有效的索引策略
     + 混用范式化和反范式化：在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询
+* 产生临时表
+  - 使用 UNION 查询：UNION 有两种都用于联合查询
+    + UNION 会去掉两个表中的重复数据，相当于对结果集做了一下去重(distinct)，会产生临时表
+    + UNION ALL，则不会排重，返回所有的行。使用 UNION 查询。
+  - 使用 TEMPTABLE 算法或者是 UNION 查询中的视图。TEMPTABLE 算法是一种创建临时表的算法，它是将结果放置到临时表中，意味这要 MySQL 要先创建好一个临时表，然后将结果放到临时表中去，然后再使用这个临时表进行相应的查询。
+  - ORDER BY 和 GROUP BY 的子句不一样时
+  - DISTINCT 查询并且加上 ORDER BY 时
+  - SQL 用到 SQL_SMALL_RESULT 选项时；如果查询结果比较小的时候，可以加上 SQL_SMALL_RESULT 来优化，产生临时表
+  - FROM 中的子查询；
+  - EXPLAIN 查看执行计划结果的 Extra 列中，如果使用 Using Temporary 就表示会用到临时表。
 
 ```sql
 select now(), user(), version();
@@ -1029,10 +1040,26 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
 
 ### 数据查询语言 Data Query Language DQL
 
-* 查询数据库中表的记录，关键字：select from where等
-* `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`
+* `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`执行顺序:组表结构-》过滤筛选-〉查询-》排序
+  - FROM 连接:对 FROM 关键字两边表执行连接，会形成笛卡尔积，产生一个虚表VT1(virtual table)
+  - ON 过滤: FROM 连接结果进行 ON 筛选，创建 VT2，把符合记录的条件存在 VT2 中
+  - JOIN 连接
+    + OUTER JOIN(left join、right join) 添加外部行
+    + left join 把 ON 过滤条件的左表添加进来
+    + right join 右表添加进来，从而生成新的虚拟表 VT3
+  - WHERE 过滤:对上一步生产的虚拟表引用 WHERE 筛选，生成虚拟表 VT4
+    + 和 ON 区别
+      * 如果有外部列，ON 针对过滤的是关联表，主表(保留表)会返回所有的列;
+      * 如果没有添加外部列，两者的效果是一样的;
+    + 对主表过滤应该使用 WHERE
+    + 对于关联表，先条件查询后连接则用 ON，先连接后条件查询则用 WHERE;
+  - GROUP BY:根据 group by 字句中列对 VT4 中的记录进行分组操作，产生虚拟机表 VT5。应用group by，那么后面的所有步骤都只能得到的 VT5 的列或者是聚合函数（count、sum、avg等）。
+  - HAVING:会把符合条件的放在 VT6
+  - SELECT:将 VT6 中的结果按照 SELECT 进行刷选，生成 VT7
+  - DISTINCT:会对 TV7 生成的记录进行去重操作，生成 VT8。事实上如果应用了 group by 子句那么 distinct 是多余的，原因同样在于，分组的时候是将列中唯一的值分成一组，同时只为每一组返回一行记录，那么所以的记录都将是不相同的。
+  - ORDER BY:按照 order_by_condition 排序 VT8，此时返回一个游标，而不是虚拟表。sql 是基于集合的理论的，集合不会预先对他的行排序，它只是成员的逻辑集合，成员的顺序是无关紧要的。
 * distinct|all:distinct去除重复记录,默认为 all 全部记录
-  - `SELECT DISTINCT number, name FROM table tamb` 多参数 DISTINCT 去重规则是：把 DISTINCT  之后的所有参数当做一个过滤条件，也就是说会对 (number, name)整体去重处理，只有当这个组合不同才会去重
+  - 多参数 DISTINCT 去重 `SELECT DISTINCT number, name FROM table tamb` 把 DISTINCT 之后所有参数当做一个过滤条件，也就是说会对 (number, name)整体去重处理，只有当这个组合不同才会去重
 * 字段列表：要显示指定列数据
   - 多个字段之间用逗号隔开，各字段之间没有顺序
   - `*` 显示所有字段数据
@@ -1102,36 +1129,12 @@ SELECT
 DISTINCT <select_list>
 FROM <left_table>
 <join_type> JOIN <right_table>
-ON <join_condition>
+ON <join_condition> # 指定join，用于添加数据到on之后的虚表中，例如left join会将左表的剩余数据添加到虚表中
 WHERE <where_condition>
 GROUP BY <group_by_list>
-HAVING <having_condition>
+HAVING <having_condition> # 对分组后的结果进行聚合筛选
 ORDER BY <order_by_condition>
-LIMIT <limit_number>
-
-FROM
-<表名> # 选取表，将多个表数据通过笛卡尔积变成一个表。
-ON
-<筛选条件> # 对笛卡尔积的虚表进行筛选
-JOIN <join, left join, right join...>
-<join表> # 指定join，用于添加数据到on之后的虚表中，例如left join会将左表的剩余数据添加到虚表中
-WHERE
-<where条件> # 对上述虚表进行筛选
-GROUP BY
-<分组条件> # 分组
-<SUM()等聚合函数> # 用于having子句进行判断，在书写上这类聚合函数是写在having判断里面的
-HAVING
-<分组筛选> # 对分组后的结果进行聚合筛选
-SELECT
-<返回数据列表> # 返回的单列必须在group by子句中，聚合函数除外
-DISTINCT
-# 数据除重
-ORDER BY
-<排序条件> # 排序
-LIMIT
-<行数限制>
-
-SELECT [DISTINCT] 字段列表|* FROM table_name [WHERE条件][ORDER BY 排序(默认是按id升序排列)][LIMIT (startrow ,) pagesize];
+LIMIT (startrow ,) pagesize]
 
 SELECT id,title,author,hits,addate from news ORDER BY id DESC LIMIT 10 * $p,10; # limit [offset,]rowcount:offset 为偏移量，而非主键id 分页实现
 
@@ -1228,7 +1231,7 @@ SELECT cust_name, COUNT(cust_address) AS addr_num FROM Customers GROUP BY cust_n
 SELECT cust_name, COUNT(*) AS num FROM Customers WHERE cust_email IS NOT NULL GROUP BY cust_name HAVING COUNT(*) >= 1;
 ```
 
-### 数据操作语言 DML Data Manipulation Language
+### 数据操作语言 Data Manipulation Language DML
 
 * 对数据库中表的记录进行更新。关键字：insert、update、delete等
 
@@ -1534,26 +1537,27 @@ WHERE id IN (1,2,3)
 
 ## 连接 join
 
-* 连接查询：将多个表字段通过指定连接条件进行连接
+* 连接查询：将多个表通过指定连接条件进行连接
   - 公共字段名字可以不一样，数据类型必须一样
   - 联表查询降低查询速度
   - 数据冗余与查询速度的平衡
-* 内连接 (inner)join（默认）等值连接 两个表交集，只有数据存在时才能连接,不会出现空行,on 表示连接条件。其条件表达式与where类似。也可以省略条件（表示条件永远为真）
-  - `SELECT vend_name, prod_name, prod_price FROM vendors INNER JOIN products ON vendors.vend_id = products.vend_id;`
-  - 自然连接(natural join):把同名列通过 = 测试连接起来的，同名列可以有多个,自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名
-    + `SELECT * FROM Products NATURAL JOIN Customers;`
-  - 自连接查询就是当前表与自身的连接查询，内连接的一种，只是连接的表是自身而已.关键点在于虚拟化出一张表给一个别名
+* 内连接 (inner)join（默认）等值连接
+  - 内连接：两个表交集，on 表示连接条件，只有数据存在时才能连接,不会出现空行 `SELECT vend_name, prod_name, prod_price FROM vendors INNER JOIN products ON vendors.vend_id = products.vend_id;`
+  - 自然连接(natural join)：把同名列通过 = 测试连接起来的，同名列可以有多个,自动判断连接条件完成连接, 相当于省略了using，会自动查找相同字段名 `SELECT * FROM Products NATURAL JOIN Customers;`
+    + 内连接 vs 自然连接:内连接提供连接列，而自然连接自动连接所有同名列
+  - 自连接查询：当前表与自身连接查询，只是连接的表是自身而已.关键点在于虚拟化出一张表给一个别名
     + `SELECT e.empName,b.empName from t_employee e LEFT JOIN t_employee b ON e.bossId = b.id`
     + `SELECT c1.cust_id, c1.cust_name, c1.cust_contact FROM customers c1, customers c2 WHERE c1.cust_name = c2.cust_name AND c2.cust_contact = 'Jim Jones';`
-  - 交叉连接 -- 笛卡尔乘积  cross join  n*n `select * from tch_teacher cross join tch_contact`,在没有条件语句的情况下返回笛卡尔积
-  - 内连接 vs 自然连接:内连接提供连接的列，而自然连接自动连接所有同名列。
-  - where表示连接条件 `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
+  - 交叉连接 cross join：没有条件的内连接，返回笛卡尔乘积 n*n ，随便增加一个表的字段，都会对结果造成很大的影响
+    + `select * from tch_teacher cross join tch_contact`
+    + SELECT * FROM t_Class a CROSS JOIN t_Student b WHERE a.classid=b.classid
+    + SELECT * FROM t_Class a ,t_Student b WHERE a.classid=b.classid
+    + `select info.id, info.name, info.stu_num, extra_info.hobby, extra_info.sex from info, extra_info where info.stu_num = extra_info.stu_id;`
   - `using(字段名)`:需字段名相同
-  - 交叉连接 cross join：没有条件的内连接  `select * from tb1 cross join tb2;`
-* 外连接(outer join):返回一个表中的所有行，并且仅返回来自次表中满足连接条件的那些行，即两个表中的列是相等的
-  - 左连接 left join：以左边表数据为基准，去匹配右边表数据，如果匹配到就显示，匹配不到就显示为null，保留左表没有关联的行
+* 外连接(outer join):返回一个表中所有行，并且仅返回来自次表中满足连接条件的那些行，即两个表中的列是相等的
+  - 左连接 left join：以左边表数据为基准，保留左表没有关联的行。去匹配右边表数据，如果匹配到就显示，匹配不到就显示为null，
     + `SELECT customers.cust_id, orders.order_num FROM customers LEFT JOIN orders ON customers.cust_id = orders.cust_id;`
-  - 右连接 right join：以右边表数据为基准，去匹配左边表数据，如果匹配到就显示，匹配不到就显示为null，保留右表没有关联的行
+  - 右连接 right join：以右边表数据为基准，保留右表没有关联的行。去匹配左边表数据，如果匹配到就显示，匹配不到就显示为null，
     + `SELECT customers.cust_id, orders.order_num FROM customers RIGHT JOIN orders ON customers.cust_id = orders.cust_id;`
 * 原理 嵌套循环连接 Nested-Loop Join
   - 根据驱动表上设置的查询条件到驱动表匹配记录

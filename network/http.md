@@ -29,6 +29,28 @@
     - 服务器处理完客户请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间
   - 简单快速：客户向服务器请求服务时，只需传送请求方法和路径。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快
 
+## HTTP 历史进程
+
+* HTTP 0.9（1991 年）
+  - HTTP协议的最初版本，功能简陋，仅支持 GET 方法，并且仅能请求访问 HTML 格式的资源,不支持请求头
+* HTTP 1.0（1996 年）基本成型，支持请求头、富文本、状态码、缓存、连接无法复用
+  - 增加了请求方式 POST 和 HEAD
+  - 不再局限于0.9版本的HTML格式，根据Content-Type可以支持多种数据格式，即MIME多用途互联网邮件扩展，例如text/html、image/jpeg等
+  - 同时也开始支持 cache，就是当客户端在规定时间内访问统一网站，直接访问cache即可
+  - HTTP请求和回应的格式也变了。除了数据部分，每次通信都必须包括头信息（HTTP header），用来描述一些元数据。其他的新增功能还包括状态码（status code）、多字符集支持、多部分发送（multi-part type）、权限（authorization）、缓存（cache）、内容编码（content encoding）等
+  - 但是1.0版本的工作方式是每次TCP连接只能发送一个请求，当服务器响应后就会关闭这次连接，下一个请求需要再次建立TCP连接，就是不支持keepalive
+* HTTP 1.1（1999 年）支持分块发送、断点续传
+  - 引入了持久连接|长连接（ persistent connection），即TCP连接默认不关闭，可以被多个请求复用，不用声明Connection: keep-alive。
+  - 引入了管道机制（ pipelining），即在同一个TCP连接里，客户端可以同时发送多个请求，进一步改进了HTTP协议的效率。
+  - 新增方法：PUT、 PATCH、 OPTIONS、 DELETE。
+  - http协议不带有状态，每次请求都必须附上所有信息。请求的很多字段都是重复的，浪费带宽，影响速度。
+* HTTP 2.0（2015 年）
+  - 二进制分帧传输 http/2是一个彻底的二进制协议，头信息和数据体都是二进制，并且统称为"帧"（frame）：头信息帧和数据帧。
+  - 多路复用:复用TCP连接，在一个连接里，客户端和浏览器都可以同时发送多个请求或回应，且不用按顺序一一对应，避免了队头堵塞的问题,此双向的实时通信称为多工（ Multiplexing）。
+  - 服务器推送 HTTP/2 允许服务器未经请求，主动向客户端发送资源
+  - 引入头信息压缩机制（ header compression）,头信息使用gzip或compress压缩后再发送
+* HTTP 3.0（2018 年）QUIC 于 2013 年实现；2018 年 10 月，IETF 的 HTTP 工作组和 QUIC 工作组共同决定将 QUIC 上的 HTTP 映射称为 "HTTP/3"，以提前使其成为全球标准。
+
 ## 概念
 
 * Web 服务器为每种要通过 MIME（Multipurpose Internet Mail Extension，多用途互联网邮件扩展）传输资源对象都打上了 MIME 类型的数据格式标签
@@ -43,12 +65,23 @@
   - query：查询字符串，可选，用于给动态网页或接口传递参数，可有多个参数，用“&”符号隔开，每个参数的名和值用“=”符号隔开。
   - fragment：浏览器专用，用于指定网络资源中的片断，指定后打开网页可直接定位到 fragment 对应的位置。
 * Web 浏览器从服务器取回一个对象时，会去查看相关的 MIME 类型(响应头的 Content-Type 字段)，看看它能否处理
-* 连接(Connection)：一个传输层的实际环流，它是建立在两个相互通讯的应用程序之间
+* 连接(Connection)：一个传输层的实际环流，建立在两个相互通讯的应用程序之间
   - 长连接：只需一次建立就可以传输多次数据，传输完成后，只需要一次切断连接即可。在连接保持期间，如果没有数据包发送，需要双方发链路检测包。长连接的连接时长可以通过请求头中的 keep-alive 来设置
     + 用于操作频繁，点对点的通讯，而且连接数不能太多情况。数据库的连接用长连接， 如果用短连接频繁的通信会造成socket错误，而且频繁的socket 创建也是对资源的浪费
+    + 应用在消息提醒、即时通讯、推送、直播弹幕、游戏、共享定位、股票行情等等场景
+    + 分开设计长连接会导致研发和维护成本陡增、浪费基础设施、增加客户端耗电、无法复用已有经验等等问题
+    + 共享长连接系统又需要协调好不同系统间的认证、鉴权、数据隔离、协议拓展、消息送达保证等等需求
+    + 系统主要由四个主要组件组成：
+      * 接入层使用 OpenResty 实现
+        - 负载均衡，保证各长连接 Broker 实例上连接数相对均衡
+        - 会话保持，单个客户端每次连接到同一个 Broker，用来提供消息传输可靠性保证
+      * 长连接 Broker，部署在容器中，负责协议解析、认证与鉴权、会话、发布订阅等逻辑
+      * Redis 存储，持久化会话数据
+      * Kafka 消息队列，分发消息给 Broker 或 业务方
   - 短连接（short connnection）：指的是在数据传送过程中，只在需要发送数据时，才去建立一个连接，数据发送完成后，则断开此连接，即每次连接只完成一项业务的发送
     + 像WEB网站这么频繁的成千上万甚至上亿客户端的连接用短连接会更省一些资源
     + 优点：管理起来比较简单，存在的连接都是有用的连接，不需要额外的控制手段
+
 * 消息(Message)：HTTP通讯的基本单位，包括一个结构化的八元组序列并通过连接传输
 * 请求(Request)：一个从客户端到服务器的请求信息包括应用于资源的方法、资源的标识符和协议的版本号
 * 响应(Response)：一个从服务器返回的信息包括HTTP协议的版本号、请求的状态(例如“成功”或“没找到”)和文档的MIME类型
@@ -70,6 +103,7 @@
   - 一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的
   - 当被中继的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。
 * 缓存(Cache)：反应信息的局域存储
+* HTTP事务由一条请求命令（从客户端发往服务器）和一个响应（从服务器发回客户端）结果组成。这种通信是通过名为HTTP报文（HTTP Message）的格式化数据块进行的.HTTP 报文是纯文本，不是二进制代码。从 Web 客户端发往 Web 服务器的 HTTP 报文称为请求报文（request message）。从服务器发往客户端的报文称为响应报文
 
 ## [跨源资源共享 cross-origin resource sharing CORS](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
 
@@ -158,6 +192,7 @@
       * XMLHttpRequest对象的getResponseHeader()方法只能拿到6个基本字段：Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定
     + `Access-Control-Expose-Headers` 让服务器把允许浏览器访问的头放入白名单，例如：Access-Control-Expose-Headers: X-My-Custom-Header, X-Another-Custom-Header
     + `Access-Control-Max-Age` 指定了preflight请求的结果能够被缓存多久 Access-Control-Max-Age: <delta-seconds>
+* [kjj6198/cors_example](https://github.com/kjj6198/cors_example)
 
 ```
 # 简单请求
@@ -257,30 +292,6 @@ if($_SERVER['REQUEST_METHOD'] == "GET") {
     die("No Other Methods Allowed");
 }
 ```
-
-## 跨站攻击 CSRF Cross-site request forgery 跨站请求伪造
-
-* 关键操作只接受 POST 请求
-* 验证码
-  - CSRF 攻击过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。
-  - 但是如果在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用。
-* 检测 Referer
-  - 常见的互联网页面与页面之间是存在联系的，比如在 www.baidu.com 应该是找不到通往www.google.com 的链接的，再比如在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的 Referer 中
-  - 通过检查 Referer 的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到 Referer 的值，所以 Referer Check 一般用于监控 CSRF 攻击的发生，而不用来抵御攻击。
-* Token
-  - 主流做法:使用 Token 抵御 CSRF 攻击
-  - CSRF 成功条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，可以对参数进行加密从而防止 CSRF 攻击。
-  - 通用做法是保持原有参数不变，添加一个参数 Token，其值是随机的。这样攻击者因为不知道 Token 而无法构造出合法的请求进行攻击。
-  - 使用原则
-    + Token 要足够随机————只有这样才算不可预测
-    + Token 是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
-    + Token 要注意保密性————敏感操作使用 post，防止 Token 出现在 URL 中
-    + 注意：过滤用户输入的内容不能阻挡 csrf，需要做的是过滤请求的来源。
-
-## XSS（Cross Site Scripting，跨站脚本攻击）
-
-* 特点是不对服务器端造成任何伤害，而是通过一些正常的站内交互途径.例如发布评论，提交含有 JavaScript 的内容文本。这时服务器端如果没有过滤或转义掉这些脚本，作为内容发布到了页面上，其他用户访问这个页面的时候就会运行这些脚本。
-* 所有可输入的地方没有对输入数据进行处理的话，都会存在 XSS 漏洞，漏洞的危害取决于攻击代码的威力，攻击代码也不局限于 script。防御 XSS 攻击最简单直接的方法，就是过滤用户的输入。
 
 ## HTTP 幂等性
 
@@ -803,7 +814,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + Authentication - ensuring that server is who it claims to be using Certificates.
     + Integrity - verifying that data have not been forged using Message Authentication Code (MAC)
   - TLS first uses an asymmetric algorithm to exchange shared secrets between both sides, then generates a symmetric key (the session key) from the shared secrets, finally uses the session key to encrypt application data (HTTP request/response). A cryptographic system involves certificates and public-key encryption is often called Public Key Infrastructure (PKI)
-    + 在通过网络传输任何已加密的 HTTP 数据之前，SSL 已经发送了一组握手数据来建立通信连接了
+    + 在通过网络传输任何已加密的 HTTP 数据之前，SSL 发送一组握手数据来建立通信连接
     + 交换协议版本号:客户端发送一个 ClientHello 消息到服务器端，消息中同时包含了它的 Transport Layer Security (TLS) 版本，可用的加密算法和压缩算法。
     + 选择一个两端都了解的密码:服务器端向客户端返回一个 ServerHello 消息，消息中包含了服务器端的 TLS 版本，服务器所选择的加密和压缩算法，以及数字证书认证机构（Certificate Authority，缩写 CA）签发的服务器公开证书，证书中包含了公钥。客户端会使用这个公钥加密接下来的握手过程，直到协商生成一个新的对称密钥。证书中还包含了该证书所应用的域名范围（Common Name，简称 CN），用于客户端验证身份。
     + 对两端的身份进行认证:客户端根据自己的信任 CA 列表，验证服务器端的证书是否可信。如果认为可信（具体的验证过程在下一节讲解），客户端会生成一串伪随机数，使用服务器的公钥加密它。这串随机数会被用于生成新的对称密钥
@@ -826,6 +837,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - 接到证书的客户端可使用 CA 提供的公钥，对那张证书上的数字签名进行验证，一旦验证通过，客户端便可明确两件事：
     + 认证服务器公钥的是真实有效的数字证书认证机构
     + 服务器的公钥是值得信赖的
+  - 将公钥放在数字证书中。只要证书是可信的，公钥就是可信的。
 * Symmetric Encryption
   - There is only one key: the client and server use the same key to encrypt and decrypt.
   - Fast and cheap (nanoseconds per operation).
@@ -834,14 +846,29 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
   - There is a pair of two keys: the public key encrypts the message, and only the corresponding private key can decrypt it.
   - Slow and expensive (microseconds to milliseconds per operation).
   - Some common algorithms are RSA and Diffie-Hellman (DH)
+* 过程
+  - 服务端将非对称加密的公钥发送给客户端
+  - 客户端拿着服务端发来的公钥，对对称加密的key做加密并发给服务端
+  - 服务端拿着自己的私钥对发来的密文解密，从来获取到对称加密的key
+  - 二者利用对称加密的key对需要传输的消息做加解密传输
+* 工作原理
+  - Client 使用https的URL访问 Server，要求与 Server 建立 SSL 连接
+  - Server 把事先配置好的公钥证书返回给客户端。
+  - Client验证公钥证书：比如是否在有效期内，证书的用途是不是匹配Client请求的站点，是不是在CRL吊销列表里面，它的上一级证书是否有效，这是一个递归的过程，直到验证到根证书（操作系统内置的Root证书或者Client内置的Root证书）。如果验证通过则继续，不通过则显示警告信息。
+  - Client使用伪随机数生成器生成加密所使用的对称密钥，然后用证书的公钥加密这个对称密钥，发给Server。
+  - Server使用自己的私钥（private key）解密这个消息，得到对称密钥。至此，Client和Server双方都持有了相同的对称密钥。
+  - Server使用对称密钥加密“明文内容A”，发送给Client。
+  - Client使用对称密钥解密响应的密文，得到“明文内容A”。
+  - Client再次发起HTTPS的请求，使用对称密钥加密请求的“明文内容B”，然后Server使用对称密钥解密密文，得到“明文内容B”。
 * HTTPS 综合运用了这两种加密方式的优势:使用非对称加密传输对称加密需要用到的密钥，而真正的双方大数据量的通信都是通过对称加密进行的，结合数字证书（包含公钥信息）验证服务端公钥的真实性
-  - 第一部分握手阶段结束
+  - 握手阶段
     + 启动和使用 TLS 加密的通信会话的过程。在 TLS 握手期间，Internet 中的通信双方会彼此交换信息，验证密码套件，交换会话密钥,会根据所使用的密钥交换算法的类型和双方支持的密码套件而不同
     + ClientHello：客户端通过向服务器发送 hello 消息开始建立与服务器的 SSL 通信。报文中包含客户端支持的 TLS 版本号(TLS1.0 、TLS1.2、TLS1.3) 、客户端支持的密码套件、加密组件、压缩算法等信息，另外，还有一个随机数，用于后续对称加密密钥的协商
     + ServerHello：服务器可以进行 SSL 通信时，会以 Server Hello 报文作为应答，含 SSL 协议版本、加密组件、压缩算法等信息，同时还有一个随机数，用于后续对称加密密钥的协商
     + 服务器会以 Certificate 报文的形式给客户端发送服务端数字证书，包含了非对称加密用到的公钥信息
     + 服务器还会发送 Server Hello Done 报文告知客户端，最初阶段的 SSL 握手协商部分结束
     + 认证(Authentication)：客户端的证书颁发机构会认证 SSL 证书，然后发送 Certificate 报文，报文中包含公开密钥证书。最后服务器发送 ServerHelloDone 作为 hello 请求的响应
+    + 每一次对话（session），客户端和服务器端都生成一个"对话密钥"（session key），用它来加密信息。由于"对话密钥"是对称加密，所以运算速度非常快，而服务器公钥只用于加密"对话密钥"本身，这样就减少了加密运算的消耗时间。
   - 客户端从自己信任的 CA 仓库中，拿 CA 证书里面的公钥去解密 HTTPS 网站的数字证书（证书是通过 CA 私钥加密的，所以要用公钥解密），如果能够成功，则说明 HTTPS 网站是可信的
   - 证书验证完毕之后，觉得这个 HTTPS 网站可信，于是客户端计算产生随机数字 Pre-master，用服务器返回的数字证书中的公钥加密该随机数字，再通过 Client Key Exchange 报文发送给服务器，服务器可以通过对应的私钥解密出 Pre-master。到目前为止，无论是客户端还是服务器，都有了三个随机数，分别是：自己的、对端的，以及刚生成的 Pre-Master 随机数。通过这三个随机数，可以在客户端和服务器生成相同的对称加密密钥
   - 有了对称加密密钥，客户端就可以通过 Change Cipher Spec 报文告知服务器以后都采用该密钥和协商的加密算法进行加密通信了
@@ -856,18 +883,28 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + HTTPS 采用共享密钥加密和公开密钥加密两者并用的混合加密机制
     + 公开密钥加密与共享密钥加密相比，其处理速度要慢。所以应充分利用两者各自的优势，将多种方法组合起来用于通信。在交换密钥环节使用公开密钥加密方式，之后的建立通信交换报文阶段则使用共享密钥加密方式
   - 数据完整性：防止内容被第三方冒充或者篡改
+* 优点
+  - 使用HTTPS协议可认证用户和服务器，确保数据发送到正确的客户机和服务器；
+  - HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比http协议安全，可防止数据在传输过程中不被窃取、改变，确保数据的完整性。
+  - HTTPS是现行架构下最安全的解决方案，虽然不是绝对安全，但它大幅增加了中间人攻击的成本。
+  - 谷歌曾在2014年8月份调整搜索引擎算法，并称“比起同等HTTP网站，采用HTTPS加密的网站在搜索结果中的排名将会更高”。
 * 缺点
   - 当使用 SSL 时，处理速度会变慢
     + 通信慢：和使用 HTTP 相比，网络负载可能会变慢 2 到 100 倍
     + 大量消耗 CPU 及内存等资源，导致处理速度变慢
     + ssl握手需要9个包
+  - HTTPS协议握手阶段比较费时，会使页面的加载时间延长近50%，增加10%到20%的耗电；
+  - HTTPS连接缓存不如HTTP高效，会增加数据开销和功耗，甚至已有的安全措施也会因此而受到影响；
+  - SSL证书需要钱，功能越强大的证书费用越高，个人网站、小网站没有必要一般不会用。
+  - SSL证书通常需要绑定IP，不能在同一IP上绑定多个域名，IPv4资源不可能支撑这个消耗。
+  - HTTPS协议的加密范围也比较有限，在黑客攻击、拒绝服务攻击、服务器劫持等方面几乎起不到什么作用。最关键的，SSL证书的信用链体系并不安全，特别是在某些国家可以控制CA根证书的情况下，中间人攻击一样可行。
 * HTTP vs HTTPS
+  - HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头
+  - HTTP 是未经安全加密的协议，传输过程容易被攻击者监听、数据容易被窃取、发送方和接收方容易被伪造；而 HTTPS 是安全的协议，通过密钥交换算法 - 签名算法 - 对称加密算法 - 摘要算法 能够解决上面这些问题
   - http连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。
   - 需要到CA申请证书
   - 具有安全性的ssl加密传输协议
-  - 端口也不一样，前者是80，后者是443
-  - HTTP 在地址栏上的协议是以 http:// 开头，而 HTTPS 在地址栏上的协议是以 https:// 开头
-  - HTTP 是未经安全加密的协议，传输过程容易被攻击者监听、数据容易被窃取、发送方和接收方容易被伪造；而 HTTPS 是安全的协议，它通过 密钥交换算法 - 签名算法 - 对称加密算法 - 摘要算法 能够解决上面这些问题
+  - 端口不一样，前者是80，后者是443
 * 中间人攻击 Man In The Middle Attack MITM
   - 攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。
   - SSL 剥离即阻止用户使用 HTTPS 访问网站,用户在访问网站时，也可能会在地址栏中输入 http:// 的地址，第一次的访问完全是明文的，这就给了攻击者可乘之机。通过攻击 DNS 响应，攻击者可以将自己变成中间人
@@ -1071,21 +1108,28 @@ dig  -t txt  _acme-challenge.your_domain.com @8.8.8.8
 service nginx stop
 ```
 
-## 会话跟踪
+## 会话跟踪 Cookie & session
 
-* 会话 客户端打开与服务器的连接发出请求到服务器响应客户端请求的全过程
-* 会话跟踪指的是对同一个用户对服务器的连续的请求和接受响应的监视
+* 会话跟踪：对同一个用户对服务器的连续的请求和接受响应的监视
 * 方法
-  - URL 重写:URL(统一资源定位符)是Web上特定页面的地址，URL重写的技术就是在URL结尾添加一个附加数据以标识该会话,把会话ID通过URL的信息传递过去，以便在服务器端进行识别不同的用户。
- - 隐藏表单域:将会话ID添加到HTML表单元素中提交到服务器，此表单元素并不在客户端显示
- - Cookie
-   + Cookie 是Web 服务器发送给客户端的一小段信息，客户端请求时可以读取该信息发送到服务器端，进而进行用户的识别。对于客户端的每次请求，服务器都会将 Cookie 发送到客户端,在客户端可以进行保存,以便下次使用。
-   + 客户端可以采用两种方式来保存这个 Cookie 对象，一种方式是保存在客户端内存中，称为临时 Cookie，浏览器关闭后这个 Cookie 对象将消失。另外一种方式是保存在客户机的磁盘上，称为永久 Cookie。以后客户端只要访问该网站，就会将这个 Cookie 再次发送到服务器上，前提是这个 Cookie 在有效期内，这样就实现了对客户的跟踪。
-   + Cookie 是可以被客户端禁用的。
+  - URL 重写:在URL结尾添加一个附加数据以标识该会话,把会话ID通过URL的信息传递过去，以便在服务器端进行识别不同的用户。
+  - 隐藏表单域:将会话ID添加到HTML表单元素中提交到服务器，此表单元素并不在客户端显示
+  - Cookie 浏览器一种缓存机制，用于维持客户端与服务器端之间的会话
+    + 用户在客户端浏览器向服务器发起登陆请求
+    + 登陆成功后，服务端会把登陆的用户信息设置 cookie 中，返回给客户端浏览器
+    + 客户端浏览器接收到 cookie 请求后，会把 cookie 保存到本地（可能是内存，也可能是磁盘，看具体使用情况而定）
+    + 以后再次访问该 web 应用时，客户端浏览器就会把本地的 cookie 带上，这样服务端就能根据 cookie 获得用户信息了
+    + Cookie 是Web 服务器发送给客户端的一小段信息，客户端请求时可以读取该信息发送到服务器端，进而进行用户的识别。对于客户端的每次请求，服务器都会将 Cookie 发送到客户端,在客户端可以进行保存,以便下次使用。
+    + 客户端可以采用两种方式来保存这个 Cookie 对象，一种方式是保存在客户端内存中，称为临时 Cookie，浏览器关闭后这个 Cookie 对象将消失。另外一种方式是保存在客户机的磁盘上，称为永久 Cookie。以后客户端只要访问该网站，就会将这个 Cookie 再次发送到服务器上，前提是这个 Cookie 在有效期内，这样就实现了对客户的跟踪。
+    + Cookie 是可以被客户端禁用的。
   - Session:
-    + 每一个用户都有一个不同的 session，各个用户之间是不能共享的，是每个用户所独享的，在 session 中可以存放信息。
-   + 在服务器端会创建一个 session 对象，产生一个 sessionID 来标识这个 session 对象，然后将这个 sessionID 放入到 Cookie 中发送到客户端，下一次访问时，sessionID 会发送到服务器，在服务器端进行识别不同的用户。
-   + Session 的实现依赖于 Cookie，如果 Cookie 被禁用，那么 session 也将失效。
+    + 用户在客户端浏览器发起登陆请求
+    + 登陆成功后，在服务器端会创建一个 session 对象，产生一个 sessionID 来标识这个 session 对象，然后将这个 sessionID 放入到 Cookie 中发送到客户端
+    + 客户端浏览器下一次访问时，sessionID 会发送到服务器，在服务器端进行识别不同的用户
+    + Session 的实现依赖于 Cookie，如果 Cookie 被禁用，那么 session 也将失效
+* 区别
+  - cookie 是浏览器提供的一种缓存机制，可以用于维持客户端与服务端之间的会话。session 指的是维持客户端与服务端会话的一种机制，可以通过 cookie 实现，也可以通过别的手段实现。
+  - 如果用 cookie 实现会话，那么会话会保存在客户端浏览器中，而 session 机制提供的会话是保存在服务端的。
 
 ## 认证
 
@@ -1205,24 +1249,25 @@ $un_data = unserialize_php($data);
 * 无法复用TCP连接和并行发送请求
 * TCP传输的单位是packet，HTTP则采用request-response的模型
 * Chrome 最多允许对同一个 Host 建立六个 TCP 连接。不同的浏览器有一些区别
+* 一个请求文档时间:2*RTT+文档传输时间
+  - 3次握手，在第三次握手的时候捎带了发送请求相关的数据，然后HTTP服务器响应报文
 
 ## HTTP 1.1
 
 * 1999 年提出，做出以下变化
   - 使用摘要算法来进行身份验证
   - 默认持久连接
-    + 当使用 Keep-Alive 模式（又称持久连接、连接重用）时，Keep-Alive 功能使客户端到服务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive 功能避免了建立或者重新建立连接。
-    + 在HTTP请求头中添加一个字段 Connection: Keep-Alive，当服务器收到附带有 Connection: Keep-Alive 的请求时，它也会在响应头中添加一个同样的字段来使用 Keep-Alive 。这样一来，客户端和服务器之间的HTTP连接就会被保持，不会断开（超过 Keep-Alive 规定的时间，意外断电等情况除外），当客户端发送另外一个请求时，就使用这条已经建立的连接
-    + 在响应头加入 `Connection: keep-alive`,表示会在建立TCP连接后，完成首次的请求，并不会立刻断开TCP连接，而是保持这个连接状态进而可以复用
     + 把 Connection 头写进标准，并且默认开启持久连接,除非请求中写明 Connection: close，那么浏览器和服务器之间是会维持一段时间的 TCP 连接，不会一个请求结束就断掉
+    + 使客户端到服务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive 功能避免了建立或者重新建立连接
+    + 在HTTP请求头中添加一个字段 Connection: Keep-Alive，当服务器收到附带有 Connection: Keep-Alive 的请求时，会在响应头中添加一个同样的字段来使用 Keep-Alive 。客户端和服务器之间的HTTP连接就会被保持，不会断开（超过 Keep-Alive 规定的时间，意外断电等情况除外），当客户端发送另外一个请求时，就使用这条已经建立的连接
     + HTTP 长连接不可能一直保持，例如 Keep-Alive: timeout=5, max=100，表示这个TCP通道可以保持5秒，max=100，表示这个长连接最多接收100次请求就断开
     + 客户端、服务端怎么知道本次传输结束：判断传输数据是否达到了Content-Length 指示的大小；2. 动态生成的文件没有 Content-Length ，它是分块传输（chunked），这时候就要根据 chunked 编码来判断，chunked 编码的数据在最后有一个空 chunked 块，表明本次传输数据结束
     + have only one inflight request in an open connection but connection can be reused for multiple requests one after another
     + 维持连接，SSL 开销也可以避免
   - 新增加 E-tag，If-Unmodified-Since, If-Match, If-None-Match 等缓存控制标头来控制缓存失效
   - 支持断点续传，通过使用请求头中的 Range 来实现
-  - 使用了虚拟网络，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers），并且它们共享一个IP地址
-* HTTP Pipelining：单个 TCP 连接在同一时刻只能处理一个请求
+  - 使用虚拟网络，在一台物理服务器上可以存在多个虚拟主机（Multi-homed Web Servers）共享一个IP地址
+* Pipelining：单个 TCP 连接在同一时刻只能处理一个请求
   - 任意两个 HTTP 请求从开始到结束的时间在同一个 TCP 连接里不能重叠，“并行”发送请求，但是这个并行，也不是真正意义上的并行，而是可以把先进先出队列从客户端（请求队列）迁移到服务端（响应队列）,在浏览器中默认是关闭的
     + 一些代理服务器不能正确的处理 HTTP Pipelining
     + 正确的流水线实现是复杂的
@@ -1243,6 +1288,22 @@ $un_data = unserialize_php($data);
   - 没有解决无状态连接的
   - 当有多个请求同时被挂起的时候 就会拥塞请求通道，导致后面请求无法发送
   - 臃肿的消息首部:HTTP/1.1能压缩请求内容,但是消息首部不能压缩;在现今请求中,消息首部占请求绝大部分(甚至是全部)也较为常见,造成通信的浪费
+* HTTP1.0 和 HTTP1.1 共同缺点
+  - 队头阻塞：下个请求必须在前一个请求返回后才能发出，导致带宽无法被充分利用，后续请求被阻塞（HTTP 1.1 尝试使用流水线（Pipelining）技术，但先天 FIFO（先进先出）机制导致当前请求的执行依赖于上一个请求执行的完成，容易引起队头阻塞，并没有从根本上解决问题）
+  - 协议开销大： header 里携带的内容过大，且不能压缩，增加了传输的成本
+  - 单向请求： 只能单向请求，客户端请求什么，服务器返回什么
+* HTTP 1.0 和 HTTP 1.1 区别
+  - HTTP 1.0：
+    + 仅支持保持短暂的 TCP 连接（连接无法复用）
+    + 不支持断点续传
+    + 前一个请求响应到达之后下一个请求才能发送，存在队头阻塞
+  - HTTP 1.1
+    + 默认支持长连接（请求可复用 TCP 连接）
+    + 支持断点续传（通过在 Header 设置参数）
+    + 优化了缓存控制策略
+    + 管道化：可以一次发送多个请求，但是响应仍是顺序返回，仍然无法解决队头阻塞的问题
+    + 新增错误状态码通知
+    + 请求消息和响应消息都支持 Host 头域
 
 ## [HTTP/2](https://http2.github.io/)
 
@@ -1258,7 +1319,8 @@ $un_data = unserialize_php($data);
     + 维护一份静态的字典（Static table），包含常见的头部名称，以及特别常见的头部名称与值的组合。这样的话如果请求响应命中了静态字典，直接发索引号即可
     + 维护一份相同的动态字典（Dynamic table），可以动态地添加字典，这样的话如果客户端首次请求由于「User-Agent: xxx」,「host:xxx」,「Cookie」这些的动态键值对没有命中静态字典，还是会传给服务器，但服务器收到后会基于传过来的键值对创建动态字典条目，如上图的「User-Agent: xxx」对应数字 62，「host:xxx」对应数字 63，这样双方都创建动态条目后，之后就可以用只传 62，63 这样的索引号来通信了！显而易见，传输数据急遽降低，极大地提升了传输效率！需要注意的是动态字典是每个连接自己维护的，也就是对于每个连接而言，首次都必须发送动态键值对
     + 支持基于静态哈夫曼码表的哈夫曼编码（Huffman Coding）：对于静态、动态字典中不存在的内容，可以使用哈夫曼编码来减小体积。HTTP/2 使用了一份静态哈夫曼码表（详见），也需要内置在客户端和服务端之中。
-* 采用二进制帧（frame）封装，HTTP 2.0 使用了更加靠近 TCP/IP 的二进制格式，而抛弃了 ASCII 码，提升了解析效率
+* 二进制传输： 二进制格式传输数据解析起来比文本更高效
+  - 采用二进制帧（frame）封装，HTTP 2.0 使用了更加靠近 TCP/IP 的二进制格式，而抛弃了 ASCII 码，提升了解析效率
   - 在应用层(HTTP/2)和传输层(TCP or UDP)之间增加一个二进制分帧层,会将所有传输的信息分割为更小的消息和帧，然后采用二进制的格式进行编码
   - HTTP 1.1 是纯文本形式，而 2.0 是完全的二进制形式，把 TCP 协议的部分特性挪到了应用层，把原来的 Header+Body 消息打散为了数个小版的二进制"帧"（Frame）
     + “HEADERS”帧存放头数据 用于传输 HTTP 头信息，并且会开启一个新的流
@@ -1284,16 +1346,18 @@ $un_data = unserialize_php($data);
     + TCP协议通过sliding window的算法来做流量控制。发送方有个sending window，接收方有receive window
     + http2.0的flow control是类似receive window的做法，数据的接收方通过告知对方自己的flow window大小表明自己还能接收多少数据。只有Data类型的frame才有flow control的功能
     + 对于flow control，如果接收方在flow window为零的情况下依然更多的frame，则会返回block类型的frame，这张场景一般表明http2.0的部署出了问题。
-* 服务器端推送 Server Push
+* 服务端可以主动推送 Server Push
   - 服务器可以对一个客户端请求发送多个响应。除了对最初请求的响应外，服务器还可以额外向客户端推送资源，而无需客户端明确地请求
-* [HTTP2 vs HTTP1.1](https://http2.akamai.com/demo)
-  - 性能优化的关键并不在于高带宽，而是低延迟.TCP 连接会随着时间进行自我「调谐」，起初会限制连接的最大速度，如果数据成功传输，会随着时间的推移提高传输的速度。这种调谐则被称为 TCP 慢启动
+* 流优先级：数据传输优先级可控，使网站可以实现更灵活和强大的页面控制；
+* 可重置：能在不中断 TCP 连接的情况下停止数据的发送
 * 问题
   - TCP有一些问题，比如慢启动，如果拥塞窗口尺寸设置不合理，TCP的性能会急剧下降
+  - HTTP 2中，多个请求在一个 TCP 管道中的，出现了丢包时，HTTP 2的表现反倒不如HTTP 1.1.HTTP 2出现丢包时，整个 TCP 都要开始等待重传，那么就会阻塞该 TCP 连接中的所有请求
   - 无法避免队头阻塞的情况出现
     + 因为TCP是需要保证有序的，假如单个TCP连接同时承载了四路逻辑连接，其中某个逻辑连接丢包了，则其它三路都会受影响，都必须从丢包的时刻开始重传，这无疑是极大的浪费
     + 测试表明，如果丢包率超过2%，那么HTTP/2甚至不如HTTP 1.1，因为HTTP 1.1中各连接物理隔离，不会互相影响。
 * 参考
+  - [HTTP2 vs HTTP1.1](https://http2.akamai.com/demo)
   - [静态资源递送优化：HTTP/2 和 Server Push](https://blog.skk.moe/post/http2-server-push/)
 
 ```sh
@@ -1305,7 +1369,6 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 ## [QUIC Quick UDP Internet Connection](https://mp.weixin.qq.com/s/Bm_4M-QCcWYRqv1V8a-J-A)
 
 * 2018年11月，IETF正式宣布，HTTP-over-QUIC更名为HTTP/3，Google的QUIC有时候也写作gQUIC。Google已经宣布，会逐步把IETF的规范纳入自己的协议版本，实现相同的规范
-*
 * 基于UDP的HTTP：传统的HTTP/TCP/IP协议栈中的TCP换成UDP（当然需要加密），能通过加密的UDP传输HTTP/2的帧
   - TCP 是可靠连接，为了保证这些包能顺序传给对方，会进行丢包重传机制，如果传了三个包，后两个包传成功，但第一个包传失败了，TCP 协议栈会把已收到的包暂存到缓存区中，停下等待第一个包的重传成功，这样的话在网络不佳的情况下只要一个包阻塞了，由于重传机制，后面的包就被阻塞了，上层应用由于拿不到包也只能干瞪眼了
   - 将 TCP 换成了 UDP 来进行传输，由于 UDP 是无序的，不需要断建连，包之间没有依赖关系，所以从根本上解决了“队头阻塞”, 当然由于 UDP 本身的这些特性不足以支撑可靠的通信，所以 Google 在 UDP 的基础上也加了 TCP 的连接管理，拥塞窗口，流量控制等机制
@@ -1317,22 +1380,35 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 * 一个物理连接也可以承载多个逻辑连接（也就是数据流），逻辑连接是彼此独立的，所以避免了TCP上出现的“逻辑连接甲丢包导致逻辑连接乙、丙、丁都需要重传”的情况。
 * 每个连接都有一组连接ID。连接各端可以设定自己的连接ID，同时认可对方的连接ID。连接ID的作用在于从逻辑上标识当前连接。所以，如果用户的IP发生变化而连接ID没有变化，因为packet包含了网络ID标识符，所以只需要继续发送数据包就可以重新建立连接
 * QPACK：所有的header必须通过同一数据流来传输，而且必须严格有序。但是这样一来，从HTTP 1.1开始就困扰HTTP已久的队头阻塞又出现了
-* [lucas-clemente/quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
-* [cloudflare / quiche](https://github.com/cloudflare/quiche):pie Savoury implementation of the QUIC transport protocol and HTTP/3 <https://docs.quic.tech/quiche/>
+* [quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+* [quiche](https://github.com/cloudflare/quiche):pie Savoury implementation of the QUIC transport protocol and HTTP/3 <https://docs.quic.tech/quiche/>
 * [HTTP/3：从 SPDY 到 QUIC](https://blog.skk.moe/post/http3-from-spdy-to-quic/)
 
-## 长连接
+## Cross-site request forgery CSRF 跨站请求伪造
 
-* 应用在消息提醒、即时通讯、推送、直播弹幕、游戏、共享定位、股票行情等等场景
-* 分开设计长连接会导致研发和维护成本陡增、浪费基础设施、增加客户端耗电、无法复用已有经验等等问题
-* 共享长连接系统又需要协调好不同系统间的认证、鉴权、数据隔离、协议拓展、消息送达保证等等需求
-* 系统主要由四个主要组件组成：
-  - 接入层使用 OpenResty 实现
-    + 负载均衡，保证各长连接 Broker 实例上连接数相对均衡
-    + 会话保持，单个客户端每次连接到同一个 Broker，用来提供消息传输可靠性保证
-  - 长连接 Broker，部署在容器中，负责协议解析、认证与鉴权、会话、发布订阅等逻辑
-  - Redis 存储，持久化会话数据
-  - Kafka 消息队列，分发消息给 Broker 或 业务方
+* 关键操作只接受 POST 请求
+* 验证码
+  - CSRF 攻击过程，往往是在用户不知情的情况下构造网络请求。所以如果使用验证码，那么每次操作都需要用户进行互动，从而简单有效的防御了CSRF攻击。
+  - 但是如果在一个网站作出任何举动都要输入验证码会严重影响用户体验，所以验证码一般只出现在特殊操作里面，或者在注册时候使用。
+* 检测 Referer
+  - 常见的互联网页面与页面之间是存在联系的，比如在 www.baidu.com 应该是找不到通往www.google.com 的链接的，再比如在论坛留言，那么不管你留言后重定向到哪里去了，之前的那个网址一定会包含留言的输入框，这个之前的网址就会保留在新页面头文件的 Referer 中
+  - 通过检查 Referer 的值，我们就可以判断这个请求是合法的还是非法的，但是问题出在服务器不是任何时候都能接受到 Referer 的值，所以 Referer Check 一般用于监控 CSRF 攻击的发生，而不用来抵御攻击。
+* Token
+  - 主流做法:使用 Token 抵御 CSRF 攻击
+  - CSRF 成功条件在于攻击者能够预测所有的参数从而构造出合法的请求。所以根据不可预测性原则，可以对参数进行加密从而防止 CSRF 攻击。
+  - 通用做法是保持原有参数不变，添加一个参数 Token，其值是随机的。这样攻击者因为不知道 Token 而无法构造出合法的请求进行攻击。
+  - 使用原则
+    + Token 要足够随机————只有这样才算不可预测
+    + Token 是一次性的，即每次请求成功后要更新Token————这样可以增加攻击难度，增加预测难度
+    + Token 要注意保密性————敏感操作使用 post，防止 Token 出现在 URL 中
+    + 注意：过滤用户输入的内容不能阻挡 csrf，需要做的是过滤请求的来源。
+
+## Cross Site Scripting XSS 跨站脚本攻击
+
+* 恶意攻击者利用网站没有对用户提交数据进行转义处理或者过滤不足的缺点，进而添加一些脚本代码嵌入到web页面中去，使别的用户访问都会执行相应的嵌入代码，从而盗取用户资料、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。
+* 所有可输入的地方没有对输入数据进行处理的话，都会存在 XSS 漏洞，漏洞的危害取决于攻击代码的威力，攻击代码也不局限于 script。防御 XSS 攻击最简单直接的方法，就是过滤用户的输入。
+
+## SQL注入
 
 ## 短链
 
@@ -1367,22 +1443,16 @@ openssl req -x509 -newkey rsa:4096 -keyout key.pem -out certificate.pem -days 36
 
 ## 端到端加密
 
-## URL Schemes
-
 ## 图书
 
 * 图解HTTP
 * HTTP权威指南
 
-## 实例
-
-* [kjj6198/cors_example](https://github.com/kjj6198/cors_example)
-
-## [jakubroztocil/httpie](https://github.com/jakubroztocil/httpie)
+## [httpie](https://github.com/jakubroztocil/httpie)
 
 As easy as httpie /aitch-tee-tee-pie/ 🥧 Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, <https://httpie.org>
 
-* [eliangcs /http-prompt](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting <http://http-prompt.com>
+* [http-prompt](https://github.com/eliangcs/http-prompt):HTTPie + prompt_toolkit = an interactive command-line HTTP client featuring autocomplete and syntax highlighting <http://http-prompt.com>
 
 ```sh
 # installed on any operating system.
@@ -1403,31 +1473,31 @@ http localhost:8000 Host:example.com
 
 ## 工具
 
-* [snail007/goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
-* [Netflix/pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. <https://netflix.github.io/pollyjs>
-* [hazbo/httpu](https://github.com/hazbo/httpu):The terminal-first http client
-* [fukamachi/woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev <http://ultra.wikia.com/wiki/Woo_(kaiju>)
-* [mitmproxy/mitmproxy](https://github.com/mitmproxy/mitmproxy):An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. <https://mitmproxy.org/>
-* [mholt/caddy](hhttps://github.com/caddyserver/caddy):Fast, cross-platform HTTP/2 web server with automatic HTTPS <https://caddyserver.com>
-  - [phpple/caddy-cn-doc](https://github.com/phpple/caddy-cn-doc):Caddy中文文档 <https://dengxiaolong.com/caddy/zh/>
-* [asciimoo/wuzz](https://github.com/asciimoo/wuzz):Interactive cli tool for HTTP inspection
-* [square/okhttp](https://github.com/squpare/okhttp):An HTTP+HTTP/2 client for Android and Java applications. <http://square.github.io/okhttp/>
-* [sindresorhus/ky](https://github.com/sindresorhus/ky):Tiny and elegant HTTP client based on the browser Fetch API
-* [oldj/SwitchHosts](https://github.com/oldj/SwitchHosts):Switch hosts quickly! <https://oldj.github.io/SwitchHosts/>
-* [coyove/goflyway](https://github.com/coyove/goflyway):An encrypted HTTP server
-* [julienschmidt/httprouter](https://github.com/julienschmidt/httprouter):A high performance HTTP request router that scales well
-* [buger/goreplay](https://github.com/buger/goreplay):GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. <https://goreplay.org>
-* [dannagle/PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL <https://packetsender.com/>
+* [goproxy](https://github.com/snail007/goproxy):Proxy is a high performance HTTP(S), websocket, TCP, UDP,Secure DNS, Socks5 proxy server implemented by golang. Now, it supports chain-style proxies,nat forwarding in different lan,TCP/UDP port forwarding, SSH forwarding.Proxy是golang实现的高性能http,https,websocket,tcp,防污染DNS,socks5代理服务器,支持内网穿透,链式代理,通讯加密,智能HTTP,SOCKS5代理,域名黑白名单,跨平台,KCP协议支持,集成外部API。
+* [pollyjs](https://github.com/Netflix/pollyjs):Record, Replay, and Stub HTTP Interactions. <https://netflix.github.io/pollyjs>
+* [httpu](https://github.com/hazbo/httpu):The terminal-first http client
+* [woo](https://github.com/fukamachi/woo):A fast non-blocking HTTP server on top of libev <http://ultra.wikia.com/wiki/Woo_kaiju
+* [mitmproxy](https://github.com/mitmproxy/mitmproxy):An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers. <https://mitmproxy.org/>
+* [caddy](hhttps://github.com/caddyserver/caddy):Fast, cross-platform HTTP/2 web server with automatic HTTPS <https://caddyserver.com>
+  - [caddy-cn-doc](https://github.com/phpple/caddy-cn-doc):Caddy中文文档 <https://dengxiaolong.com/caddy/zh/>
+* [wuzz](https://github.com/asciimoo/wuzz):Interactive cli tool for HTTP inspection
+* [okhttp](https://github.com/squpare/okhttp):An HTTP+HTTP/2 client for Android and Java applications. <http://square.github.io/okhttp/>
+* [ky](https://github.com/sindresorhus/ky):Tiny and elegant HTTP client based on the browser Fetch API
+* [SwitchHosts](https://github.com/oldj/SwitchHosts):Switch hosts quickly! <https://oldj.github.io/SwitchHosts/>
+* [goflyway](https://github.com/coyove/goflyway):An encrypted HTTP server
+* [httprouter](https://github.com/julienschmidt/httprouter):A high performance HTTP request router that scales well
+* [goreplay](https://github.com/buger/goreplay):GoReplay is an open-source tool for capturing and replaying live HTTP traffic into a test environment in order to continuously test your system with real data. It can be used to increase confidence in code deployments, configuration changes and infrastructure changes. <https://goreplay.org>
+* [PacketSender](https://github.com/dannagle/PacketSender):Network utility for sending / receiving TCP, UDP, SSL <https://packetsender.com/>
 * flow-control
-  - [alibaba/Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
+  - [Sentinel](https://github.com/alibaba/Sentinel):A lightweight flow-control library providing high-available protection and monitoring (高可用防护的流量管理框架)
 * Performance Measurement
-  * [Microsoft/Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
+  * [Ethr](https://github.com/Microsoft/Ethr):Ethr is a Network Performance Measurement Tool for TCP, UDP & HTTP.
 * proxy
-  - [avwo/whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy <https://wproxy.org/>
-  - [ProxymanApp / Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ <https://proxyman.io>
+  - [whistle](https://github.com/avwo/whistle):HTTP, HTTPS, WebSocket debugging proxy <https://wproxy.org/>
+  - [Proxyman](https://github.com/ProxymanApp/Proxyman):Modern and Delightful HTTP Debugging Proxy for macOS, iOS and Android ⚡️ <https://proxyman.io>
 * certificates
-  - [FiloSottile/mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
-  - [Neilpang/acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
+  - [mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
+  - [acme.sh](https://github.com/Neilpang/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * 抓包
   - [httpwatch](https://www.httpwatch.com/)
 
