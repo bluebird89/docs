@@ -322,15 +322,22 @@ iptables-restore < /etc/iptables-rules # 手动加载
 ## [clash](https://github.com/Dreamacro/clash):A rule-based tunnel in Go
 
 * `go get -u -v github.com/Dreamacro/clash`
-* 配置:｀/home/当前用户ID/.config/clash/config.yml`
-* 访问：<http://clash.razord.top/#/settings>` 端口和口令按yml文件中的external-controller内容输入即可
+* 配置:｀~/.config/clash/config.yml`
+* 代理面板：<http://clash.razord.top/#/settings>`端口和口令按yml文件中的external-controller内容输入即可
 
 ```sh
 mv clash-linux-amd64-vx.xx.x clash
 chmod +x clash
-Country.mmdb # https://github.com/Dreamacro/maxmind-geoip
-config.yaml
-icon https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png
+sudo ln -s ~/.config/clash/clash/clash /usr/bin/clash
+
+# config.yaml
+wget --no-check-certificate -O ~/.config/clash/config.yaml   订阅地址
+# Country.mmdb # https://github.com/Dreamacro/maxmind-geoip
+wget --no-check-certificate -O ~/.config/clash/Country.mmdb https://whiter.cc/cached-apps/linux/Country.mmdb
+
+# icon
+https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png
+
 # /usr/local/clash/
 
 # clash_startup.sh
@@ -376,10 +383,64 @@ Icon=/usr/local/clash/logo.png
 Type=Application
 Categories=Network
 
-# 系统设置 -> 网络 -> 网络代理 -> 手动 ，设置为如下值
+sudo vim /lib/systemd/clash.service
+# 服务的内容
+[Unit]
+Description=clash
+After=network.target
+
+[Service]
+WorkingDirectory="your home directory"/.config/clash
+ExecStart="your home directory"/.config/clash/start-clash.sh
+ExecStop="your home directory"/.config/clash/stop-clash.sh
+Environment="HOME=your home directory"
+Environment="CLASH_URL=your subscribe address"
+
+RestartSec=1
+Restart=on-failure
+
+StandardOutput=syslog
+StandardError=syslog
+
+SyslogIdentifier=clash
+
+[Install]
+WantedBy=multi-user.target
+
+## start-clash.sh
+#!/bin/bash
+# save this file to ${HOME}/.config/clash/start-clash.sh
+
+# save pid file
+echo $$ > ${HOME}/.config/clash/clash.pid
+
+diff ${HOME}/.config/clash/config.yaml <(curl -s ${CLASH_URL})
+if [ "$?" == 0 ]
+then
+    /usr/bin/clash
+else
+    TIME=`date '+%Y-%m-%d %H:%M:%S'`
+    cp ${HOME}/.config/clash/config.yaml "${HOME}/.config/clash/config.yaml.bak${TIME}"
+    curl -L -o ${HOME}/.config/clash/config.yaml ${CLASH_URL}
+    /usr/bin/clash
+
+####  stop-clash.sh
+#!/bin/bash
+# save this file to ${HOME}/.config/clash/stop-clash.sh
+
+# read pid file
+PID=`cat ${HOME}/.config/clash/clash.pid`
+kill -9 ${PID}
+rm ${HOME}/.config/clash/clash.pid
+
+systemctl enable|status|start clash
+
+# 系统设置 -> 网络 -> 网络代理 -> 手动
 HTTP 代理 127.0.0.1 7890
 HTTPS 代理 127.0.0.1 7890
 Socks 主机 127.0.0.1 7891
+
+clash
 ```
 
 ## [WireGuard](../network/WireGuard.md)

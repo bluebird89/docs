@@ -1340,6 +1340,7 @@ composer require --prefer-dist yiisoft/yii2-sphinx
 
 ## 参考
 
+* [Yii 2.0 权威指南](https://www.yiiframework.com/doc/guide/2.0/zh-cn)
 * [yii2-apidoc](https://github.com/yiisoft/yii2-apidoc)
 * [深入理解 Yii2.0](http://www.digpage.com/index.html) <https://www.kancloud.cn/kancloud/yii-in-depth>
 * [yii2-2.0.3-annotated](https://github.com/CraryPrimitiveMan/yii2-2.0.3-annotated):带有详细注释的 yii2 2.0.3 代码。

@@ -21,5 +21,3 @@
 
 * 看过东西理解清楚，复盘，加入知识框架
 * 不断修改，添加规则
-
-wget --no-check-certificate  https://whiter.cc/ cached-apps/linux/Country.mmdb
