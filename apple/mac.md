@@ -394,6 +394,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + 航拍横跨中国、拉斯维加斯、旧金山、夏威夷、迪拜等等地方的白天和夜晚的精美景象
     + `brew cask install aerial`
     + 下载点击安装，重新进入系统偏好设置
+  - [](https://github.com/OrangeJedi/Aerial):Apple TV screen saver for Windows
 
 ## [Hammerspoon](http://www.hammerspoon.org/)
 
@@ -981,6 +982,9 @@ brew switch icu4c 62.1
 
 * [The Cult of Mac, 2nd Ed](link)
 * [碼農 codeMaker](link)
+* [](link)
+* Take Control of the Mac Command Line with Terminal
+* macOS Terminal and Shell
 
 ## 工具
 

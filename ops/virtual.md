@@ -140,3 +140,4 @@ systemctl restart sshd
   - GNOME Boxes
 * [macos-virtualbox](https://github.com/myspaghetti/macos-virtualbox):Push-button installer of macOS Catalina, Mojave, and High Sierra guests in Virtualbox for Windows, Linux, and macOS
 * [bottlerocket](https://github.com/bottlerocket-os/bottlerocket):An operating system designed for hosting containers
+* [Bosh](https://bosh.io)

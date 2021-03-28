@@ -5,7 +5,6 @@
   - 把周期问题当趋势问题
   - 把局部问题当普遍问题
 
-
 ## Ray Dalio
 
 * 在回顾他的人生时说：Looking back on my own journey, I now see that time is like a river that carries us forward into encounters with reality that require us to make decisions. We can’t stop our movement down this river, and we can’t avoid the encounters. We can only approach them in the best possible way.

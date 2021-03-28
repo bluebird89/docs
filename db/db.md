@@ -12,15 +12,28 @@
 
 ## [CAP 理论 CAP Theorem](https://sites.cs.ucsb.edu/~rich/class/cs293b-cloud/papers/Brewer_podc_keynote_2000.pdf)
 
-* Consistency（一致性）：系统在执行某项操作后仍然处于一致的状态
-  - 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值，这样的系统被认为具有
+* Consistency（一致性）：系统在执行某项操作后仍然处于一致的状态 确保分布式群集中的每个节点都返回相同的最近更新的数据
+  - 每个客户端具有相同的数据视图
+  - 强一致性：更新操作执行成功之后，所有的用户都能读取到最新的值
   - 最终一致性：更新操作完成之后，用户最终会读取到数据更新之后的值，但是会存在一定的时间窗口，用户仍会读取到更新之前的旧数据；在一定的时间延迟之后，数据达到一致性
     +  “In a steady state, the system will eventually return the last written value”. Clients therefore may face an inconsistent state of data as updates are in progress.
   - Read Your Own Writes Consistency: Clients will see their updates immediately after they are written. The reads can hit nodes other than the one where it was written. However they might not see updates by other clients immediately.
   - Session Consistency: Clients will see the updates to their data within a session scope. This generally indicates that reads & writes occur on the same server. Other clients using the same nodes will receive the same updates.
   - Casual Consistency:A system provides causal consistency if the following condition holds: write operations that are related by potential causality are seen by each process of the system in order. Different processes may observe concurrent writes in different orders
 * Availability（可用性）：用户执行的操作在一定时间内，必须返回结果。如果超时，那么操作回滚，跟操作没有发生一样
+  - 每个非失败节点在合理的时间内返回所有读取和写入请求的响应。为了可用，网络分区两侧的每个节点必须能够在合理的时间内做出响应。
 * Partition Tolerance（分区容错）：分布式系统是由多个分区节点组成的，每个分区节点都是一个独立的Server，P属性表明系统能够处理分区节点的动态加入和离开
+  - 尽管存在网络分区，系统仍可继续运行并 保证 一致性。网络分区已成事实。保证分区容忍度的分布式系统可以在分区修复后从分区进行适当的恢复。
+* 一个分布式系统不可能同时满足 一致性( Consistency ) 、可用性 ( Availability ) 、分区容 忍 性 ( Partition tolerance ) 这三个基本需求，最多只能同时满足其中的两项，分区容错性是不能放弃的，因此架构师通常是在可用性和一致性之间权衡。这里的权衡不是简单的完全抛弃，而是考虑业务情况作出的牺牲，或者用互联网的一个术语“降级”来描述。
+
+## BASE 理论
+
+* BASE 是 Basically Available(基本可用)、Soft state(软状态)和 Eventually consistent(最终一致性)三个短语的缩写
+  - BA：Basically Available 基本可用，分布式系统在出现故障的时候，允许损失部分可用性，即保证核心可用
+  - S：Soft state 软状态，允许系统存在中间状态，而该中间状态不会影响系统整体可用性
+  - E：Consistency 最终一致性，系统中的所有数据副本经过一定时间后，最终能够达到一致的状态
+* 核心思想：即使无法做到强一致性，但每个应用都可以根据自身业务特点，采用适当的方式来使系统达到最终一致性。
+* BASE 理论本质上是对 CAP 理论的延伸，是对 CAP 中 AP 方案的一个补充。
 
 ## 类型
 
@@ -148,9 +161,7 @@
 * unique
 * fulltext
 
-## 连接 Joins
-
-左边表A与右边表B
+## 连接 Join
 
 * 内连接（inner join）:只返回两张表匹配的记录
 * 外连接（outer join）:还包含不匹配的记录
@@ -174,8 +185,7 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 
 ## 备份
 
-在部署数据库的时候，不用于以前的单体应用，分布式下数据库部署包括多点部署，一套业务应用数据库被分布在多台数据库服务器上，分主从服务器。主服务器处理日常业务请求，从服务器在运行时不断的对主服务器进行备份，当主服务器出现宕机、或者运行不稳定的情况时，从服务器会立刻替换成主服务器，继续对外提供服务。此时，开发运维人员会对出现问题的服务器进行抢修、恢复，之后再把它投入到生产环境中。这样的构架也被称作为高可用构架，它支持了灾难恢复，为业务世界提供了可靠的支持，也是很多企业级应用采用的主流构架之一。
-
+* 在部署数据库的时候，不用于以前的单体应用，分布式下数据库部署包括多点部署，一套业务应用数据库被分布在多台数据库服务器上，分主从服务器。主服务器处理日常业务请求，从服务器在运行时不断的对主服务器进行备份，当主服务器出现宕机、或者运行不稳定的情况时，从服务器会立刻替换成主服务器，继续对外提供服务。此时，开发运维人员会对出现问题的服务器进行抢修、恢复，之后再把它投入到生产环境中。这样的构架也被称作为高可用构架，它支持了灾难恢复，为业务世界提供了可靠的支持，也是很多企业级应用采用的主流构架之一。
 * 从数据库常常被设计成只读，主数据库支持读写操作
 * 一般会有一台主数据库连接若干台从数据库
 * 互联网产品的应用中，人们大多数情况下会对应用服务器请求读操作，这样应用服务器可以把读操作请求分发到若干个从数据库中，这样就避免了主数据库的并发请求次数过高的问题
@@ -295,6 +305,18 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
   - MySQL的优化器较简单，系统表、运算符、数据类型的实现都很精简，非常适合简单的查询操作；
   - MySQL相对于PG在国内的流行度更高，PG在国内显得就有些落寞了。
   - MySQL的存储引擎插件化机制，使得它的应用场景更加广泛，比如除了innodb适合事务处理场景外，myisam适合静态数据的查询场景。
+
+## 分布式数据库
+
+* 一群分布在计算机网络上、逻辑上相互关联的数据库,在物理上一群逻辑上相互关联的数据库可以分布式在一个或多个物理节点上
+* CAP 理论
+  - 分布式数据库的技术理论是基于单节点关系数据库的基本特性的继承，主要涉及事务的 ACID 特性、事务日志的容灾恢复性、数据冗余的高可用性几个要点。
+  - 分布式数据的设计要遵循 CAP 定理
+* BASE 理论
+* 架构演变
+  - Shard-everting：共享数据库引擎和数据库存储，无数据存储问题。一般是针对单个主机，完全透明共享 CPU/MEMORY/IO，并行处理能力是最差的，典型的代表 SQLServer；
+  - Shared-storage：引擎集群部署，分摊接入压力，无数据存储问题；
+  - Shard-noting：引擎集群部署，分摊接入压力，存储分布式部署，存在数据存储问题。各个处理单元都有自己私有的 CPU/内存/硬盘等，不存在共享资源，类似于 MPP（大规模并行处理）模式，各处理单元之间通过协议通信，并行处理和扩展能力更好。典型代表 DB2 DPF 和 hadoop ，各节点相互独立，各自处理自己的数据，处理后的结果可能向上层汇总或在节点间流转。
 
 ## 数据库
 

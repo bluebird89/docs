@@ -79,14 +79,44 @@
 * 蝙蝠侠：黑暗骑士 The Dark Knight (2008)
 * 蝙蝠侠：黑暗骑士崛起 The Dark Knight Rises (2012)
 * 烈焰升腾：黑暗骑士三部曲诞生及影响 The Fire Rises: The Creation and Impact of the Dark Knight Trilogy (2013)
-* 蝙蝠侠大战超人：正义黎明 Batman v Superman: Dawn of Justice
+* 蝙蝠侠大战超人：正义黎明 Batman v Superman: Dawn of Justice (2016)
   - 华纳并不打算吸取漫威的成功经验，从头建立一个漫改电影宇宙，而是在MOS获得成功之后就选择引入一位新的蝙蝠侠——由本阿弗莱克（Ben Affleck）扮演，并且在新任蝙蝠侠初登场的时候就让他和超人对上。之后的混乱，是BVS的剧本泄露。BVS的原始剧本，反派并不是现在的毁灭日，而是金属人。在BVS剧本泄露之后，漫威拍摄了美国队长3：内战（Captain America: Civil War），原本CA3的剧情并不是内战，而是九头蛇。对比BVS和CA3的实际剧情，可以轻易地找到许多共同点
   - 在逃离德黑兰的合作之后，蝙蝠侠的演员本阿弗莱克带着克里斯特里奥进了BVS的剧组。BVS立项后，一开始宣传的上映时间是2015，到了2014年1月时宣布跳票至2016年，期间发生了剧本泄露事件。克里斯特里奥于2013年12月被本阿弗莱克带进了BVS的剧组，负责了BVS剧本的重构，反派也从金属人改至现在的毁灭日，原始的金属人角色则改成了轮椅炸弹男沃利。
-  - 接下来围绕着BVS，影迷，观众，影评人，漫画粉丝等等群体开始了一场几乎前无古人的大混斗，到处都在吵“Marsha”，烂番茄等影评网站给BVS的评分都十分低，这样的口碑两极分化之情况影响到了华纳对于DC漫改电影计划的决策。顺带一提，BVS后来出了导演剪辑版，大受好评。
+  - 接下来围绕着BVS，影迷，观众，影评人，漫画粉丝等等群体开始了一场几乎前无古人的大混斗，到处都在吵“Marsha”，烂番茄等影评网站给BVS的评分都十分低，这样的口碑两极分化之情况影响到了华纳对于DC漫改电影计划的决策。尤其是在《BvS》中，更能凸显扎导的个人风格与华纳高层的市场策略之间的矛盾，这从《BvS》的院线版（151分钟）与导剪版（183分钟）之间的口碑差距可见一斑。
   - 从人的角度讨论凡人与神的关系
   - 在超人宿敌卢瑟的搅和下，超人蝙蝠侠顺利约架
   - 蝙蝠侠仅仅是因为他和超人的母亲都叫做玛莎就放弃最后一击最终和超人成为了朋友
-  - 尤其是在《BvS》中，更能凸显扎导的个人风格与华纳高层的市场策略之间的矛盾，这从《BvS》的院线版（151分钟）与导剪版（183分钟）之间的口碑差距可见一斑。
+  - 故事发生在大都会之战18个月后，在那场战斗中许多建筑和市民惨遭波及。因为超人（亨利·卡维尔 饰）帮助人类解决了很多问题而被当做神来膜拜，但超人也因与佐德之战对城市造成的破坏而遭到逮捕和审讯，一度成为都市传说的蝙蝠侠韦恩（本·阿弗莱克 饰）重新出现在人们面前，他似乎正是为了惩罚超人而来。
+  - 年轻的富豪莱克斯·卢瑟（杰西·艾森伯格 饰）又在二者的矛盾中挑拨离间，神秘的戴安娜·普林斯（盖尔·加朵 饰）也因自己的目的介入其中
+  - 英雄的权力与边界。能力与人格不匹配
+  - 承受多大的爱，要承受多大责任。The world has been so caught up with what he can do that no one has asked what he should do.
+  - Lex Luthor 做圈套陷害超人
+  - 卢瑟父亲书房里挂着一幅油画，内容为天使与魔鬼上下对峙。第一次出现时，天使占上风，影片结尾处，这幅画被颠倒过来，变成了魔鬼在上。稍微仔细就能发现，画中魔鬼的形象，与蝙蝠侠梦中的外星侵略者一模一样.（这个外星侵略者可能是达克赛德的人，然而这东西出现在蝙蝠侠的梦里，它只是一个icon，一个来自外星的恶的象征。它不是现实时间轴里出现的，跟达克赛德是充分不必要关系。原著党不要再没完没了到处提醒别人了。）在蝙蝠侠的梦中，这些是超人引来的，超人在蝙蝠侠的脑补（以及穿越时空的闪电侠的预言）中是魔鬼的引路人。Devils don't come from hell beneath us, they come from the sky.
+  - 蝙蝠侠母亲玛莎的墓地里，也挂着一副油画，画中天使是加百列（或米迦勒），形象是身着红色披风的战士，却和超人吻合。
+  - 当渺小无助的人类将他的力量当做拯救一己命运的万金油时，克拉克·肯特的人间便不再是人间。
+  - 你高于一切，那是上帝的位置，但如果上帝是无所不能的，他就不是完美的，反之亦然。
+  - 对强力有最后依赖，对自己的要求呢
+  - 超人认为蝙蝠侠超越执法机关 Next time the shine the light on the sky, don't go to it. The bat is dead, bury it. Consider this mercy.
+  - 蝙蝠侠认为超人有绝对能力。要获取一种子弹对付超人。忧虑的是超人因为是外星人而且太过强大，在做对的事情的时候总会罔顾普通人的安危，与蝙蝠侠自己的“精准打击”相比，超人这种行使正义的方式本身就是一场灾
+    + He is the one that brought the war to us. Count dead, it’s thousands of people. What’s next? Millions? He has the power to wipe out the entire human race, and if we believe that there’s even one percent chance he is our enemy, we have to take it as absolute certain.We have to destroy him.
+    + Kent: Civil liberties are being trampled on in your city; people living in fear. He thinks he's above the law. Bruce Wayne: The Daily Planet criticizing those who think they're above the law is a little hypocritical, wouldn't you say? Considering every time your hero saves a cat out of a tree, you write a puff piece editorial about an alien that could burn the whole place down.
+  - 因为超人没救自己在乎的人或者重大灾难，该不该怨恨与追责
+  - 媒体的责任
+  - Martha Kent: Be their hero, Clark. Be their angel, be their monument, be anything they need you to be... or be none of it. You don't owe this world a thing. You never did.
+  - 超人参加听证会发生爆炸
+  - 超越性的道德要求，民主道德的乱用.输给无望的人间。人们要举起火把烧死超人，吊在树梢上处决超人，且不惮于毁灭掉他所在乎的一切。你发现所谓文明社会的人性之恶，依然和最黑暗的岁月里白人随地处决黑人都没什么区别.最后他眼睁睁被人机关算尽，失魂落魄地跟露易丝说“我能看见，只是我当时没看”；最后他跪在卢瑟的面前，心碎地拾起一张张母亲的照片；最后他承认“这个世上没有完人”，却还是要勉强自己做个完人
+  - 超人父亲的遗志其实很简单，就是儿子能道德正确。他的养父生前一直不让他使用超能力帮助其他人。超人短暂离开前跟露易丝说，我一直在“righting the wrong for a ghost”，这句应该是“努力纠正一个死者的错误” Superman was never real. It is just a dream of a farmer from Kansas.
+  - 卢瑟说了，“美国最古老的谎言：‘power can be innocent（力量不是原罪）’。”卢瑟认为无限力量本身就是罪恶，必须要加以约束或制裁。卢瑟又说了，“你飞得离太阳太近了”。——超级英雄的宿命，不就是越来越接近太阳，到达一定程度被判有罪，陨落，这么简单这么宿命论。
+  - Lex 进入飞船，获得复活氪星人怪人
+  - 冲突爆发
+  - Lex绑架超人女朋友与超人母亲，逼迫超人杀蝙蝠侠 And now, you will fly to him, and you will battle him to the death. Black and blue. Fight night. The greatest gladiator match in the history of the world. God versus man. Day versus night! Son of Krypton versus Bat of Gotham!
+  - 蝙蝠侠因为超人讲玛莎的名字停了下来.超人和蝙蝠侠之所以能保持人性，是两个玛莎的功劳。那句“Martha won‘t die tonight”同时救赎的是三个人。
+  - 超人推怪物进太空，人类发射核弹。怪物月攻击越强
+  - 蝙蝠侠引到旧仓库，神奇女侠出现 Diana Prince: [to Bruce Wayne] You know, it's true what they say about little boys: born with no natural inclination to share.
+  - “我的世界已不复存在”——他生前说的是氪星，又岂止是氪星。
+  - 超人逝世。望着送葬的队伍，另外两个英雄心有戚戚： “他们不知怎么纪念他，只能以士兵的形式。”“他活着的时候，我辜负了他。”
+  - That's how it starts. The fever, the rage, the feeling of powerlessness that turns good men... cruel.
+  - This means something. It's all some people have, it's all that gives them hope.
 
 ## 绿灯侠
 

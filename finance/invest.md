@@ -94,6 +94,10 @@
 * Python与量化投资从基础到实践
 * 穷查理宝典：查理·芒格的智慧箴言录
 
+## 工具
+
+* [stock](https://github.com/pythonstock/stock)
+
 ## 资源
 
 * [QuantEcon](https://quantecon.org):Open source code for economic modeling
