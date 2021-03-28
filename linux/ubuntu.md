@@ -615,7 +615,7 @@ sudo fuser -v /var/cache/debconf/config.dat
 sudo apt install gnome-shell-extensions
 
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
-
+gsettings set org.gnome.desktop.interface enable-hot-corners true
 gsettings list-schemas             # 显示系统已安装的不可重定位的schema
 gsettings list-relocatable-schemas #显示已安装的可重定位的schema
 gsettings list-children SCHEMA # 显示指定schema的children，其中SCHEMA指xml文件中schema的id属性值，例如实例中的"org.lili.test.app.testgsettings"
@@ -899,6 +899,7 @@ sudo apt-get update && sudo apt-get install indicator-sysmonitor
 sudo add-apt-repository ppa:linrunner/tlp
 sudo apt install tlp tlp-rdw # sudo nano /etc/tlp.conf
 sudo tlp start
+sudo systemctl enable tlp
 
 ## laptop-mode-tools
 sudo apt-get install laptop-mode-tools
@@ -1004,6 +1005,7 @@ cheese \
 transmission-common \
 gnome-sudoku \
 simple-scan \
+apport-gtk \
 gnome-mines
 
 # 可选
