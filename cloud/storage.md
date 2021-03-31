@@ -102,3 +102,4 @@ code
 * [rook](https://github.com/rook/rook):Storage Orchestration for Kubernetes <https://rook.io>
 * [Unison](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
 * [openmediavault](https://www.openmediavault.org/): the next generation network attached storage (NAS) solution based on Debian Linux. It contains services like SSH, (S)FTP, SMB/CIFS, DAAP media server, RSync, BitTorrent client and many more.
+* [transfer.sh](https://github.com/dutchcoders/transfer.sh) Easy and fast file sharing from the command-line.

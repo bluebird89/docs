@@ -75,21 +75,17 @@
 * Diagrams
   - Project tool window->right-click ->Diagrams | Show Diagram
 * Navigate shift+shift
-
-- Class 代表类
-- File 代表文件
-- Symbol 代表符号/标记（可用于导航到指定变量、方法）
-- Line ctrl + G
-- 自定义搜索作用域
-
+  + Class 代表类
+  + File 代表文件
+  + Symbol 代表符号/标记（可用于导航到指定变量、方法）
+  + Line ctrl + G
+  + 自定义搜索作用域
 * File and Code Templates 文件代码模版 :Command + Shift + A 调出 Action 导航界面，在输入框输入 templates，在下拉列表中选中「File and Code Templates」
 * 代码片段模版:Live Templates
 * Option 键（Windows 系统是 Alt 键:锚定多个光标的方式同时编辑多处文本,  Ctrl + G
 * debug
-
-- F7:step into 单步执行
-- 在 variable  添加 Watch
-
+  + F7:step into 单步执行
+  + 在 variable  添加 Watch
 * Xdebug 进行断点调试
   - 配置:以便可以接收到服务端的远程调试连接，首先在 Preferences | Languages & Frameworks | PHP | Debug 中配置 Debug 端口与 Xdebug 扩展配置保持一致
   - 在 Preferences | Languages & Frameworks | PHP | Servers 中新增服务器配置（域名和端口与对应的 PHP Web 应用保持一致即可）
@@ -363,6 +359,38 @@
 
 * 通过锚定多个光标的方式同时编辑多处文本:按住 Option 键（Windows 系统是 Alt 键），将光标移动到其他要编辑的文本起始位置
 * 分割窗口
+
+## 注释模板
+
+* Settings->Editor-->File and Code Templates
+  - 类注释:File->Class
+  - 类模板:Settings-->Editor-->Live Templates
+    + Abbreviation 必须为 *
+    + Description
+    + Template text
+    + 最后检查下 Expand with 的值是否为 Enter 键
+    + Define，在弹框中勾选Java，表示将该模板应用于所有的 Java 类型文件
+    + Edit variables:每一个参数设置相对应的 Expression
+    + date 和 time 的 Expression 使用的是 IDEA 内置的函数，直接使用下拉框选择就可以了，而 param 这个参数 IDEA 默认的实现很差，因此需要手动实现
+
+```
+/**
+ * @author jitwxs
+ * @date ${YEAR}年${MONTH}月${DAY}日 ${TIME}
+ */
+
+*
+ *
+ * @author jitwxs
+ * @date $date$ $time$$param$ $return$
+ */
+
+<!-- param 参数 -->
+groovyScript("def result = '';def params = \"${_1}\".replaceAll('[\\\\[|\\\\]|\\\\s]', '').split(',').toList(); for(i = 0; i < params.size(); i++) {if(params[i] != '')result+='* @param ' + params[i] + ((i < params.size() - 1) ? '\\r\\n ' : '')}; return result == '' ? null : '\\r\\n ' + result", methodParameters())
+
+<!-- return 参数 -->
+groovyScript("return \"${_1}\" == 'void' ? null : '\\r\\n * @return ' + \"${_1}\"", methodReturnType())
+```
 
 ## 问题
 

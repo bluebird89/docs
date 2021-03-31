@@ -457,6 +457,8 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 * package manager
   - [vcpkg](https://github.com/Microsoft/vcpkg):C++ Library Manager for Windows, Linux, and MacOS
 * [Catch2](https://github.com/catchorg/Catch2):A modern, C++-native, header-only, test framework for unit-tests, TDD and BDD - using C++11, C++14, C++17 and later (or C++03 on the Catch1.x branch) <https://discord.gg/4CWS9zD>
+* [asio](https://github.com/boostorg/asio) Boost.org asio module http://boost.org/libs/asio
+* [beast](https://github.com/boostorg/beast)HTTP and WebSocket built on Boost.Asio in C++11 http://www.boost.org/libs/beast
 * [Boost.Hana](https://www.boost.org/doc/libs/1_61_0/libs/hana/doc/html/index.html):Hana is a header-only library for C++ metaprogramming suited for computations on both types and values
 * [benchmark](https://github.com/google/benchmark):A microbenchmark support library
 

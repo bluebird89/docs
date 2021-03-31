@@ -96,6 +96,10 @@ pod setup
 * [Flutter-Notebook](https://github.com/OpenFlutter/Flutter-Notebook):日更的FlutterDemo合集
 * [gsy_github_app_flutter](https://github.com/CarGuo/gsy_github_app_flutter):超完整的Flutter项目，功能丰富，适合学习和日常使用。
 
+## 图书
+
+* [《Flutter实战》](https://github.com/flutterchina/flutter-in-action) https://book.flutterchina.club
+
 ## 工具
 
 * [flutter-desktop-embedding](https://github.com/google/flutter-desktop-embedding):Desktop implementations of the Flutter embedding API

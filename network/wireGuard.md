@@ -219,3 +219,4 @@ wg
 * [WireGuard 的工作原理](https://fuckcloudnative.io/posts/wireguard-docs-theory/)
 * [Some Unofficial WireGuard Documentation](https://github.com/pirate/wireguard-docs)
 * [WireGuard 的搭建使用与配置详解](https://fuckcloudnative.io/posts/wireguard-docs-practice/)
+* [Wireguard：简约之美](https://mp.weixin.qq.com/s?__biz=MzA3NDM0ODQwMw==&mid=2649828356&idx=1&sn=0cfcf0de0a6a3c1fe9d1fc8d9e7df5f1)
