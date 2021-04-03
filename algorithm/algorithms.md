@@ -386,6 +386,7 @@ def backtrack(路径, 选择列表):
 ## [leetcode](https://leetcode.com/) [leetcode-cn](https://leetcode-cn.com/)
 
 * method
+  - 先刷二叉树:二叉树是最容易培养框架思维的，而且大部分算法技巧，本质上都是树的遍历问题
   - 输出为「二值」的题目:直接输出结果测试，再慢慢提高
   - 建议使用 Java 作为笔试的编程语言。因为 JetBrain 家的 IntelliJ 实在是太香了，相比其他语言的编辑器，不仅有 psvm 和 sout 这样的命令缩写
     + C++ 代码对时间的限制苛刻

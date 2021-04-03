@@ -216,6 +216,10 @@ go install github.com/labstack/echo
   - int 可以存放最大64位的整数，根据平台不同有时会更少）
 * iota
 
+## 变量
+
+* 变量逃逸：变量的作用域的改变，从栈逃逸到堆上面
+
 ## 基本类型|值类型
 
 * bool
@@ -1635,6 +1639,7 @@ Go 学习之路：Go 开发者博客、Go 微信公众号、Go 学习资料（�
   - `go get golang.org/x/tools/cmd/godoc`
   - `godoc -http=:6060` 访问`http://localhost:6060/`
 * [effective_go](https://go-zh.org/doc/effective_go.html)
+* [Golang-Interview](https://github.com/yqchilde/Golang-Interview)
 
 <http://www.infoq.com/cn/articles/history-go-package-management>
 * [Go内存分配](https://mp.weixin.qq.com/s/3gGbJaeuvx4klqcv34hmmw)

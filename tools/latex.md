@@ -23,6 +23,10 @@ brew install caskroom/cask/mactex
 
 ## 表格
 
+## 教程
+
+* [Learn LaTeX](https://www.learnlatex.org/en/)
+
 ## 工具
 
 * 套装
