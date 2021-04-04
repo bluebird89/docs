@@ -691,6 +691,7 @@ void traverse(TreeNode root) {
 
 * 参考
   - [红黑树？（中篇）](https://mp.weixin.qq.com/s?__biz=MzA4NDE4MzY2MA==&mid=2647521642&idx=1&sn=dda12824118e46c17374333062e37a6a&chksm=87d24669b0a5cf7f5bf8e2614deb224d15c10cd474d24c17e9354743b7a5eb72fc89469e6330)
+  - [演示红黑树](https://mp.weixin.qq.com/s/yHWEl-d-Hl7A_O6N4GCAPg)
 
 ## AVL树 平衡二叉树 Balanced Binary Tree
 

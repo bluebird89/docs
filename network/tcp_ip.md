@@ -1,6 +1,6 @@
 # Transmission Control Protocol/Internet Protocol TCP/IP 传输控制协议/网际协议
 
-* 指一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 只是因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议
+* 一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议
 * 通信过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
   - 入栈:数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地
   - 出栈:数据接收方每层不断地拆除首部与尾部，得到最终传输的数据
@@ -8,9 +8,19 @@
   - IP 负责将包发送至接受者
 * RTT round-trip time:which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
 
+## 分层
+
+* 应用层:决定了向用户提供应用服务时通信的活动
+* 传输层:提供处于网络连接中的两台计算机之间的数据传输
+  - 把从应用层处收到的数据(HTTP 请求报文)进行分割,并在各个报文上打上标记序号及端口号后转发给网络层
+* 网络层:用来处理在网络上流动的数据包。
+  - 数据包是网络传输的最小数据单位。该层规定了通过怎样的路径(所谓的传输路线)到达对方计算机,并把数据包传送给对方。
+  - 与对方计算机之间通过多台计算机或网络设备进行传输时,网络层所起的作用就是在众多的选项内选择一条传输路线。
+  - 增加作为通信目的地的 MAC 地址后转发给链路层
+* 数据链路层:用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC(Network Interface Card,网络适配器,即网卡),及光纤等物理可见部分(还包括连接器等一切传输媒介)
+
 ![Alt text](../_static/tcp\/ip.jpg "Optional title")
 
-* 网络握手
 * 网络参数
   - 和应用层结合非常紧密的Socket知识和网络安全（对称加密，非对称加密，Hash, 数字签名，以及集大成者Https）
 * 通信模型
@@ -1415,8 +1425,8 @@ lsmod | grep bbr
 * 早期开发阶段，子网是通过 IP 地址最左侧的 8 位划分子网，但是因为这种方式只允许划分 256 个网络
 * 在 1981 年被分类网络架构（Classful Network Architecture）迅速替代。分类网络架构中包含 A、B 和 C 三类网络
   - A 128 16,777,214
-  - B   16,384  65,534
-  - C   2,097,152   254
+  - B 16,384  65,534
+  - C 2,097,152   254
 * IETF 在 1993 年提出的无类别域间路由（Classless Inter-Domain Routing、CIDR）替代了分类网络架构，CIDR 基于可变长子网掩码（Variable-length Subnet Masking、VLSM）
   - 缓解互联网中路由器中转发表的增长速度；
   - 缓解 IPv4 地址耗尽的速度
@@ -1436,6 +1446,13 @@ brctl delif br0 eth0
 ```
 
 ![CIDR](../_static/cidr_example.jpg "CIDR")
+
+### IP 协议 Internet Protocol
+
+* 作用：把各种数据包传送给对方
+* 保证确实传送到对方那里条件
+  - IP 地址 指明节点被分配到的地址
+  - MAC 地址 Media Access Control Address:指网卡所属的固定地址
 
 ### 网络地址转换 NAT
 

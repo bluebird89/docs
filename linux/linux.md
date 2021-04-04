@@ -107,6 +107,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * [MX Linux](https://mxlinux.org/)
 * [Solus](https://getsol.us/home/)
 * [AntiX](https://antixlinux.com/)
+* [KDE neon](https://neon.kde.org/)
 * 安装
   - 最外层客户机Ubuntu
   - 两三个小分区出来，可以装多个linux发行版

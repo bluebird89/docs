@@ -28,6 +28,7 @@ Redis is an in-memory database that persists on disk. The data model is key-valu
   - vm-max-threads参数,可以设置访问swap文件的线程数,设置最好不要超过机器的核数,如果设置为0,那么所有对swap文件的操作都是串行的.可能会造成比较长时间的延迟,但是对数据完整性有很好的保证
   - vm 字段，只有打开了Redis的虚拟内存功能，此字段才会真正的分配内存
 * 底层数据结构：简单动态数组SDS、链表、字典、跳跃链表、整数集合、压缩列表、对象。为了平衡空间和时间效率，针对value的具体类型在底层会采用不同的数据结构来实现
+* Redis 协议是二进制安全的文本协议。很简单，可以通过 telnet 连接到一个 Redis server 实例上执行 get 和 set 操作。
 * 支持Lua脚本
 * 场景
   - 缓存
@@ -947,7 +948,7 @@ UNSUBSCRIBE [channel [channel ....]]   # 退订指定的频道
 PUNSUBSCRIBE [pattern [pattern ....]]  #退订所有给定模式的频道
 ```
 
-## Redis Stream
+## Stream
 
 * 概念
   - Consumer Group：消费者组，可以简单看成记录流状态的一种数据结构
@@ -972,6 +973,7 @@ PUNSUBSCRIBE [pattern [pattern ....]]  #退订所有给定模式的频道
 * Redis Stream Vs Kafka
   - Redis 基于内存存储，这意味着它会比基于磁盘的 Kafka 快上一些，也意味着使用 Redis 不能长时间存储大量数据
   - 不过如果想以最小延迟 实时处理消息的话，可以考虑 Redis，但是如果消息很大并且应该重用数据 的话，则应该首先考虑使用 Kafka。
+* 在 stream 数据结构基础上封装了 pub-sub 命令，实现了数据的发布和订阅，即提供了消息队列的基本功能
 
 ```sh
 XADD mystream MAXLEN 2 * value 2
@@ -1206,7 +1208,7 @@ SCRIPT LOAD "return 1"
     + 用一个hash函数将key转换为一个数字，比如使用crc32 hash函数
     + 对这个整数取模，将其转化为0-3之间的数字，就可以将这个整数映射到4个Redis实例中的一个了
 
-## 主从复制
+## 复制
 
 * 使用一个 Master 节点来进行写操作，而若干个 Slave 节点进行读操作，Master 和 Slave 分别代表了一个个不同的 Redis Server 实例
   - 定期的数据备份操作是单独选择一个 Slave 去完成，可以最大程度发挥 Redis 的性能，为的是保证数据的弱一致性和最终一致性
@@ -1216,7 +1218,7 @@ SCRIPT LOAD "return 1"
   - 配置文件：从服务器配置文件中加入：slaveof <masterip> <masterport>
   - 启动命令：redis-server 启动命令后加入 --slaveof <masterip> <masterport>
   - 客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点
-* 复制过程
+* 过程
   - 从节点中的定时任务发现主节点信息，建立和主节点的 Socket 连接
   - 连接建立成功后，发送 ping 命令，希望得到 pong 命令响应，否则会进行重连,如果主节点设置了权限，那么就需要进行权限验证，如果验证失败，复制终止
   - 心跳：主从节点在建立复制后，之间维护着长连接并彼此发送心跳命令

@@ -42,6 +42,15 @@ Production-Grade Container Scheduling and Management <http://kubernetes.io>
   - 健康检查：监控检测服务是否正常运行非常重要
   - 自我修复：重新启动失败的容器、替换容器、杀死不响应用户定义的运行状况检查的容器，并且在准备好服务之前不将其通告给客户端
   - 弹性容器及故障迁移
+  - 自动装箱：可指定 K8s 里 Pod 所需资源的最小值和最大值，即 limit 和 request 的值。K8s 可以根据 request 的值做 Pod 调度，在一个节点上拉起 Pod。
+  - 服务发现与负载均衡：K8s 提供基于 DNS 的服务发现机制，同时也提供基于 service 的负载均衡。
+  - 自动化上线和回滚：这里会涉及到 K8s 的工作负载资源。K8s 提供几种不同的工作负载资源对应不同的业务场景。这些不同的工作负载资源可以实现服务的配置变更，例如更新 image、升级 binary、进行副本的扩缩容等。
+    + 支持 Deployment/DaemonSet
+    + 支持 StatefulSet
+    + 支持 CronJob/Job
+  - 水平扩缩容：K8s 天然支持水平扩缩容，可以基于 Pod 的 CPU 利用率、内存利用率以及第三方自定义 metrics 对 Pod 进行水平动态扩缩容。
+  - 存储编排：K8s 支持基于 PV 和 PVC 的存储供应模式，可以通过 PV 和 PVC 在 Pod 内部使用存储。
+  - 自我修复：举一个例子就是副本保持。比如用 Deployment 来托管一个服务，如果 Deployment 下的一个 Pod 所在的宿主机出现了不可用的情况， K8s 会在可用的节点上重新拉起一个新的 Pod 来提供服务。
 * 很多的抽象概念非常契合分布式调度系统，可以做到描述集群架构，定义服务状态，并维持，实现了分布式集群的配置管理和维护包括动态伸缩及故障迁移
 * 一切皆为资源，一切即可描述，一切皆可管理
 
@@ -2021,6 +2030,7 @@ source ~/.bash_profile
 * [kubernetes-the-hard-way](https://github.com/kelseyhightower/kubernetes-the-hard-way):Bootstrap Kubernetes the hard way on Google Cloud Platform. No scripts
 * [awesome-kubernetes](https://github.com/ramitsurana/awesome-kubernetes):A curated list for awesome kubernetes sources 🚢🎉 <https://ramitsurana.github.io/awesome-kubernetes/>
 * [kubeasz](https://github.com/gjmzj/kubeasz):使用Ansible脚本安装K8S集群，介绍组件交互原理，方便直接，不受国内网络环境影响 <https://github.com/gjmzj/kubeasz>
+* [Redis 云原生实践](https://mp.weixin.qq.com/s/VCpuZ0lvgSgfvG7voBl9fw)
 
 * [手动一步步搭建k8s(Kubernetes)高可用集群](https://www.centos.bz/2017/07/k8s-kubernetes-ha-cluster/)
 * [开源容器集群管理系统Kubernetes架构及组件介绍](https://yq.aliyun.com/articles/47308)
