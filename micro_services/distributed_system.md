@@ -541,6 +541,7 @@ the minimum number of nodes in a cluster that must be online and be able to comm
 * [PhxPaxos](https://github.com/Tencent/phxpaxos)腾讯公司微信后台团队自主研发的一套基于Paxos协议的多机状态拷贝类库。它以库函数的方式嵌入到开发者的代码当中，使得一些单机状态服务可以扩展到多机器，从而获得强一致性的多副本以及自动容灾的特性。文章：<http://www.infoq.com/cn/articles/weinxin-open-source-paxos-phxpaxos>
 * [forest](https://github.com/busgo/forest):分布式任务调度平台,分布式,任务调度,schedule,scheduler <http://122.51.106.217:6579>
 * [xxl-job](https://github.com/xuxueli/xxl-job): A distributed task scheduling framework.（分布式任务调度平台XXL-JOB） <http://www.xuxueli.com/xxl-job/>
+* [dapr](https://github.com/dapr/dapr) Dapr is a portable, event-driven, runtime for building distributed applications across cloud and edge. https://dapr.io/
 
 ## 参考
 

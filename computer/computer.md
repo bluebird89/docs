@@ -338,6 +338,7 @@ Notes
 
 ## 图书
 
+* 编码·隐匿在计算机硬件背后的语言
 * [计算机程序的构造和解释 Structure and Interpertation of Computer Programming SICP](https://www.bilibili.com/video/av8515129)
   - [Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 <https://learningsicp.github.io>
   - [book](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html)
@@ -392,6 +393,7 @@ Notes
 * [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
 * [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
 * [This is The Entire Computer Science Curriculum in 1000 YouTube Videos](https://web.archive.org/web/20210210143025/https://laconicml.com/computer-science-curriculum-youtube-videos/)
+* [Build an 8-bit CPU from scratch](https://eater.net/)
 
 ## 工具
 

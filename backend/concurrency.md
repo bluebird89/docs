@@ -715,3 +715,4 @@ upstream seckill {
 * [](https://github.com/GuoZhaoran/spikeSystem):一个秒杀系统的例子分析
 * [分布式秒杀系统构建中的多种限流实现](https://mp.weixin.qq.com/s?__biz=MzI4NTA1MDEwNg==&mid=2650768375&idx=1&sn=0b1de5c41ac15db0fc53f279fcfa58b6&chksm=f3f93662c48ebf7481bd7ce8ca74a3f2ad66fd80e7f50e313d8ebd1152a094045d75113a832d)
 * [秒杀系统的设计思考](https://mp.weixin.qq.com/s/CVFKTx016BqnOxdzxnW9dg)
+* [电商秒杀系统架构分析与实战](https://mp.weixin.qq.com/s/AOI30_7hyprTN_g_NtxsUw)

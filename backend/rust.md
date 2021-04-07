@@ -218,3 +218,4 @@ match VALUE {
 * [并发篇](https://mp.weixin.qq.com/s/9g0wVT-5PpmXRoKJZo-skA)
 * [安全篇](https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ)
 * [网络篇](https://mp.weixin.qq.com/s/bOxEEK7Hh_tsua8HBahsjg)
+* [并发原语](https://mp.weixin.qq.com/s/fJO-rCgL9N5fPvrqtHe9Ug)

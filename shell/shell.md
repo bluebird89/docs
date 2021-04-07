@@ -2082,6 +2082,7 @@ history | awk '{$1="";print substr($0,2)}' | sort | uniq -c | sort -n | tail -n 
 * [alacritty](https://github.com/alacritty/alacritty):A cross-platform, GPU-accelerated terminal emulator
 * [scoop](https://github.com/lukesampson/scoop):A command-line installer for Windows. <https://scoop.sh>
 * [upterm](https://github.com/railsware/upterm):A terminal emulator for the 21st century.
+* [nushell](https://github.com/nushell/nushell) https://www.nushell.sh/
 
 ## 教程
 

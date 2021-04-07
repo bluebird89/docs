@@ -115,6 +115,7 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * 客户端
   - [Android File Transfer](https://dl.google.com/dl/androidjumper/mtp/current/AndroidFileTransfer.dmg)
   - MacDroid for Mac
+* “轻启动”+“自动跳过
 
 ## 技巧
 
