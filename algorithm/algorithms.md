@@ -443,6 +443,7 @@ def backtrack(路径, 选择列表):
   - [algorithms](https://github.com/jeffgerickson/algorithms):Bug-tracking for Jeff's algorithms book, notes, etc.
   - [作业](http://jeffe.cs.illinois.edu/teaching/algorithms/hwex.html)
 * [屈婉玲教授的算法设计分析](https://www.bilibili.com/video/av83623454?p=1)
+* 九章算法班 令狐冲 算法面试精选100题
 
 ## 图书
 

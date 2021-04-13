@@ -73,4 +73,4 @@ php public/index.php index/Demon/start # 命令行运行
 
 ## 参考
 
-* [ThinkPHP5.1完全开发手册](https://www.kancloud.cn/manual/thinkphp6.0)
+* [ThinkPHP 完全开发手册](https://www.kancloud.cn/manual/thinkphp6.0)

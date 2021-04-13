@@ -53,6 +53,8 @@ GRUB_THEME="/usr/share/grub/themes/vimix/theme.txt"
 sudo grub-set-default NUMBER
 sudo apt install grub-customizer
 sudo update-grub
+
+timedatectl set-local-rtc 1
 ```
 
 ## 版本
@@ -574,6 +576,7 @@ sudo fuser -v /var/cache/debconf/config.dat
 
 ## [Gnome](https://extensions.gnome.org/)
 
+* [GNOME 40](https://forty.gnome.org/)
 * 安装
   - 下载 解压，apps-menugnome-shell-extensions.gcampax.github.com.v40.shell-extension
   - 去掉后缀 .v40.shell-extension

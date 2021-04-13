@@ -2290,6 +2290,7 @@ perf report # 查看相关结果
   - mv (move files and directories)
   - rm (delete files and directories)
 * Viewing Files
+  - [exa](https://github.com/ogham/exa) A modern replacement for ‘ls’. https://the.exa.website/
   - cat:concatenate and write file(s) to your screen
     + -b, --number-nonblank    number nonempty output lines, overrides -n
     + -n, --number             number all output lines

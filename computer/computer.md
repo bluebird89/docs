@@ -338,6 +338,7 @@ Notes
 
 ## 图书
 
+* 《计算机是怎样跑起来的》
 * 编码·隐匿在计算机硬件背后的语言
 * [计算机程序的构造和解释 Structure and Interpertation of Computer Programming SICP](https://www.bilibili.com/video/av8515129)
   - [Learning-SICP](https://github.com/DeathKing/Learning-SICP):MIT视频公开课《计算机程序的构造和解释》中文化项目及课程学习资料搜集。 <https://learningsicp.github.io>

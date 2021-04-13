@@ -10,6 +10,7 @@
 * 格式化移动硬盘：ExFAT格式
 * imac Radeon Pro 580
   + (2019)Radeon Pro 580X 图形处理器 (配备 8GB 显存) 可选配 Radeon Pro Vega 48
+- nuc 黑苹果
 
 ## 结构
 

@@ -1724,9 +1724,12 @@ ls -l my_script # 过滤输出列表
 cat /etc/shells
 echo $SHELL
 
+chsh -s /bin/zsh
+source ~/.bashrc # 运行
+sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
+
 sudo yum install zsh
-sudo apt-get install zsh git wget
-sudo apt-get install powerline fonts-powerline
+sudo apt-get install zsh git wget powerline fonts-powerline
 brew install zsh zsh-completions
 brew cask install font-sourcecodepro-nerd-font
 brew install zplug
@@ -1740,10 +1743,6 @@ wget --no-check-certificate 。![]https://github.com/robbyrussell/oh-my-zsh/raw/
 # 手动
 git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-
-chsh -s /bin/zsh
-source ~/.bashrc # 运行
-sudo usermod -s /usr/bin/zsh $(whoami) # set ZSH as the default login shell for the user
 
 ## 配置：~/.zshrc(不用单配，插件配置有)
 sudo apt-get install zsh-theme-powerlevel9k
@@ -1802,6 +1801,8 @@ chmod +x format_profile.zsh
 echo $HOST | sed -e "s/.local//"
 echo ${HOST/.local/}
 echo ${HOST/.local/.foxtail}
+
+ln -s ~/.aliases ~/.oh-my-zsh/custom/aliases.zsh
 ```
 
 ### [fish-shell](https://github.com/fish-shell/fish-shell)

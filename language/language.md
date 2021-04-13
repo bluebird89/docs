@@ -6,7 +6,9 @@
 
 ## 发展
 
+* 机器语音
 * 汇编语言
+* 结构化编程：自顶向下，逐步求精
 * Compiled language
   - compile the program and then run the executable
   - 编译器：把源程序的每一条语句都编译成机器语言 machine code,并保存成二进制文件,运行时计算机可以直接以机器语言来运行此程序,速度很快

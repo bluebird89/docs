@@ -141,5 +141,3 @@ make && make install
 * [vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. <https://godoc.org/github.com/tsenart/vegeta/lib>
 * [k6](https://github.com/loadimpact/k6)A modern load testing tool, using Go and JavaScript -<https://k6.io/>
 * [autocannon](https://github.com/mcollina/autocannon):fast HTTP/1.1 benchmarking tool written in Node.js
-
-## 参考

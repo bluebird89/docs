@@ -150,6 +150,8 @@ location ~ .*\.php(\/.*)*$ {
 
 A simple, Git-powered wiki with a sweet API and local frontend.
 
+## Farbox 2
+
 ## 博客资源
 
 * [Work life](https://www.atlassian.com/blog)

@@ -81,16 +81,75 @@ Windows Registry Editor Version 5.00
 @="PhotoViewer.FileAssoc.Tiff"
 ```
 
+## 软件包管理
+
+* [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation <https://chocolatey.org/>
+  - [GUI](https://docs.chocolatey.org/en-us/chocolatey-gui/)
+  - 程序安装位置：`~\AppData\Local\Packages\`
+* [Scoop](https://github.com/lukesampson/scoop) A command-line installer for Windows. https://scoop.sh/
+  - 支持利用aria2进行多线程下载。所以可先scoop install aria2下载 aria2
+  - 默认安装位置 C:\User\Your Username\scoop
+  - 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
+  - bucket
+    + extras（包含了大量的GUI程序）
+    + 配合main可满足多数的下载需求
+    + [社区](https://github.com/rasa/scoop-directory)
+* [winget-cli](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)
+  - 可以下载 MStore 软件
+* [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
+
+```sh
+$PSVersionTable.PSVersion
+host|Version
+
+## 安装
+# 管理员身份打开PowerShell
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+choco -?
+choco search|install|uninstall|info|upgrade  python php birtualbox jdk8 cclear mysql.workbench
+choco oudated
+choco list -l > chocolatey.txt
+choco install chocolateygui
+
+cinst Atom
+
+## scoop
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser # 保证允许本地脚本的执行
+iwr -useb get.scoop.sh | iex
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+
+# 修改安装位置
+$env:SCOOP='D:\Scoop'
+[Environment]::SetEnvironmentVariable('SCOOP', $env:SCOOP, 'User')
+
+scoop help|update|info
+scoop + search|install|status|uninstall|home + 对象
+scoop bucket known
+scoop bucket add [软件源名字] [源地址]
+
+# 更换 Scoop 源
+scoop config SCOOP_REPO https://gitee.com/squallliu/scoop
+scoop update
+
+# 更换 bucket 源
+scoop install git
+# 注意：引号里面换成自己的路径，如果是默认路径则为${Env:USERPROFILE}\scoop\buckets\<bucket_name>
+git -C "D:\Scoop\buckets\main" remote set-url origin https://hub.fastgit.org/ScoopInstaller/Main.git
+git -C "D:\Scoop\buckets\extras" remote set-url origin https://hub.fastgit.org/lukesampson/scoop-extras.git
+
+# winget 通过发布包安装
+winget -?
+winget install|show|search
+winget settiings
+winget list
+```
+
+
 ## 工具
 
-* 软件包管理
-  - [Chocolatey](https://github.com/chocolatey/choco):The package manager for Windows Software Management Automation <https://chocolatey.org/>
-    + 程序安装位置：`~\AppData\Local\Packages\`
-  - [Scoop](https://github.com/lukesampson/scoop) A command-line installer for Windows. https://scoop.sh/
-    + 在用户根目录（C:\Users\用户名）下创建了一个名为 scoop 的文件夹，并默认将软件下载安装到这个文件夹下
-    + 软件安装到一个相对隔离的环境下（Each program you install is isolated and independent），从而保证环境的统一和路径不被污染
-  - [winget-cli](https://github.com/microsoft/winget-cli):Windows Package Manager CLI (aka winget)
-  - [GEEK UNINSTALLER](https://geekuninstaller.com/):Efficient and Fast, Small and Portabl
 * 快速启动
   - launchy
   - [Wox](https://github.com/Wox-launcher/Wox):Launcher for Windows, an alternative to Alfred and Launchy. <http://wox.one>
@@ -156,23 +215,6 @@ Windows Registry Editor Version 5.00
 * Microsoft to do
 * [seer](https://sourceforge.net/projects/ccseer/):Windows 下的文件预览工具
 * [Cygwin](https://cygwin.com/)：可以帮助在Windows下面使用强大的Bash，以及使用数量繁多的Linux命令，通过Scripts
-
-```sh
-## 安装 choco 以管理员运行cmd
-@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-
-choco search python php birtualbox jdk8 cclear
-
-choco install mysql.workbench
-
-cinst Atom
-
-## scoop
-set-executionpolicy remotesigned -scope currentuser # 保证允许本地脚本的执行
-iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
-scoop help|update|info
-scoop + search|install|status|uninstall|home + 对象
-```
 
 ## 快捷键
 

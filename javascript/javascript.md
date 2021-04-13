@@ -2230,6 +2230,7 @@ try {
 * [CollectJS](https://github.com/ecrmnn/collect.js):一个简单的随机对象生成器，用于生成随机的字符串、数字等。在编写自动化测试代码或任何需要随机对象的地方，可以用它来减少单调的工作。
 * [ChartJS](https://github.com/chartjs/Chart.js):提供了 8 种不同类型的数据可视化，每种类型都支持动画和定制。借助 Chart.js，可以使用canvas 标签创建简单的 HTML5 图表，而且在所有现代浏览器中都具有出色的渲染性能。
 * [Polished](https://github.com/styled-components/polishedBit ):支持使用 JavaScript 编写具有 SASS 风格辅助函数和 mixin 的样式。该库与 styled-components、Aphrodite、Radium 或简单的内联样式兼容。
+* [inferno](https://github.com/infernojs/inferno) fire An extremely fast, React-like JavaScript library for building modern user interfaces https://infernojs.org/
 * [Mout](https://github.com/mout/mout):Modular JavaScript Utilities http://moutjs.com/
 * [Bit utils](https://bitsrc.io/bit/utils):一个模块化和高性能的库，已经被用在 Bit 的 web hub 中。这些函数可使用 NPM/Yarn 进行单独安装，用户也可以创建自己的集合，并从不同的库和项目中收集有用的功能。
 * [Voca](https://github.com/panzerdp/voca):一个用于操作字符串的 JavaScript 库。它提供的功能包括大小写转换、trim、pad、slugify、latinise、sprintf、truncate、escape 等。用户可以加载单个函数，以便最小化应用程序的构建。

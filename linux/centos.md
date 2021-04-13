@@ -115,7 +115,6 @@ iptables -L
 - RPM keeps the information of all the installed packages under /var/lib/rpm database.
 - RPM is the only way to install packages under Linux systems, if you’ve installed packages using source code, then rpm won’t manage it.
 - RPM deals with .rpm files, which contains the actual information about the packages such as: what it is, from where it comes, dependencies info, version info etc
-
 * resource
   - <http://rpmfind.net>
   - <http://www.redhat.com>

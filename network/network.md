@@ -698,6 +698,7 @@ lsof -d 2-3
 
 ## 图书
 
+* 网络是怎样连接的
 * 《Unix环境高级编程》Unix Network Programming
 * 《UNIX网络编程 卷1：套接字联网API》
 * 《UNIX网络编程 卷2：进程间通信》
@@ -730,7 +731,7 @@ lsof -d 2-3
 ## 参考
 
 * [book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
-* [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/)
+* [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/) https://tools.ietf.org/rfc/index
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [submarine cable map](https://www.submarinecablemap.com/)
 * <http://libevent.org/>
