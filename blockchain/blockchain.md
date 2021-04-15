@@ -190,7 +190,7 @@ termianl1:bl + tab
 
 ## 工具
 
-* [=metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. <https://metamask.io/>
+* [metamask-extension](https://github.com/MetaMask/metamask-extension):🌐 🔌 The MetaMask browser extension, enables browsing Ethereum blockchain enabled websites. <https://metamask.io/>
 * [weave](https://github.com/iov-one/weave):Easy-to-use framework to build Tendermint ABCI applications
 * [embark](https://github.com/embark-framework/embark):Framework for serverless Decentralized Applications using Ethereum, IPFS and other platforms <https://embark.status.im/>
 
@@ -202,6 +202,7 @@ termianl1:bl + tab
 * [blockchain_go](https://github.com/Jeiwan/blockchain_go):A simplified blockchain implementation in Golang
 * [myeoskit](https://www.myeoskit.com)
 * [区块链背后的密码学](https://learning.nervos.org/crypto-block)
+* [blockchain](https://github.com/LiuBoyu/blockchain)区块链 - 中文资源 https://liuboyu.github.io/blockchain/
 
 <https://medium.freecodecamp.org/how-does-blockchain-really-work-i-built-an-app-to-show-you-6b70cd4caf7d>
 <https://www.zhihu.com/question/27687960/answer/84583016>

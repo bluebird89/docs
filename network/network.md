@@ -703,7 +703,7 @@ lsof -d 2-3
 * 《UNIX网络编程 卷1：套接字联网API》
 * 《UNIX网络编程 卷2：进程间通信》
 * 《Linux多线程服务器端编程》
-* Computer Networking: A Top Down Approach 计算机网络：自顶向下方法
+* 《Computer Networking: A Top Down Approach 计算机网络：自顶向下方法》
   - [PPT](https://gaia.cs.umass.edu/kurose_ross/ppt.htm)
   - [Stanford CS 144](https://www.youtube.com/playlist?list=PLvFG2xYBrYAQCyz4Wx3NPoYJOFjvU7g2Z)
   - [](https://www.bilibili.com/video/av41404195)
@@ -732,6 +732,10 @@ lsof -d 2-3
 
 * [book](https://github.com/SystemsApproach/book):Meta-data and Makefile needed to build the book. Main starting point.
 * [RFC 文档](https://datatracker.ietf.org/doc/rfc1644/) https://tools.ietf.org/rfc/index
+* [](https://www.cloudflare.com/zh-cn/learning/)
+* [](https://www.geeksforgeeks.org/basics-computer-networking/)
+* [](https://www.tutorialspoint.com/computer_fundamentals/computer_networking.htm)
+* [](https://www.javatpoint.com/types-of-computer-network)
 * [Latency Numbers Every Programmer Should Know](https://colin-scott.github.io/personal_website/research/interactive_latency.html)
 * [submarine cable map](https://www.submarinecablemap.com/)
 * <http://libevent.org/>

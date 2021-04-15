@@ -219,3 +219,5 @@ match VALUE {
 * [安全篇](https://mp.weixin.qq.com/s/HCHYr5sWnEG_qOGE3hfNnQ)
 * [网络篇](https://mp.weixin.qq.com/s/bOxEEK7Hh_tsua8HBahsjg)
 * [并发原语](https://mp.weixin.qq.com/s/fJO-rCgL9N5fPvrqtHe9Ug)
+* [透过 Rust 探索系统的本原：编程语言](https://mp.weixin.qq.com/s/ZA-_BARVAWe0Q4eM0lYgwg)
+* [How Rust Views Tradeoffs](https://www.infoq.com/presentations/rust-tradeoffs/)

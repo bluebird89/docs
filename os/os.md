@@ -801,6 +801,7 @@ size /usr/local/sbin/sshd
   + pre-fork:申请线程或进程会占用很多系统资源,操作系统cpu、内存有限度，能同时管理的线程有限，处理连接的线程不能太多。虽然可以提前建立好进程或线程来处理数据（prefork/prethead）或通过线程池来减少线程建立压力。但是线程池的大小是个天花板。另外父子进程通信也比较复杂
     * apache MPM prefork（ppc），可支持256的并发连接，tomcat 同步IO（tpc）采用阻塞IO方式工作，可支持500个并发连接。java可以创建线程池来降低一定创建线程资源开销来处理
   + 网络连接fd可以支持上万个，但是每个线程需要占有系统内存，线程同时存在的总数有限。linux下用命令ulimit -s可以查看栈内存分配。线程多了对cup的资源调度开销
+  + [同步阻塞网络 IO](https://mp.weixin.qq.com/s/v029YALohmHEZ-i55u-qyw)
 * NIO 同步非阻塞 I/O nonblocking IO：进程反复轮训调用recvfrom，直到最终结果数据返回。同步调用，但是IO内核处理时非阻塞的
   + 如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error
   + 当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的
@@ -812,7 +813,7 @@ size /usr/local/sbin/sshd
   + 而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block
   + 然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了
 
-### I/O 多路复用 IO multiplexing|event driven IO
+### [I/O 多路复用 IO multiplexing|event driven IO](https://mp.weixin.qq.com/s/Ok7SIROXu1THUbWsFu-UYw)
 
 * 每个进程/线程同时处理多个连接.进程卡在select、epoll调用上，不会卡在recvfrom上，直到最终结果返回
 * 场景

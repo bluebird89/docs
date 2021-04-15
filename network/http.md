@@ -926,7 +926,7 @@ HTTP 状态码包含三个十进制数字，第一个数字是类别，后俩是
     + 服务端用私钥解密后，得到了客户端传过来的随机值(私钥)，然后把内容通过该值进行对称加密
     + 对称加密就是，将信息和私钥通过某种算法混合在一起，这样除非知道私钥，不然无法获取内容
   - 解决方案
-    + [certbot](https://certbot.eff.org/lets-encrypt/ubuntuxenial-nginx) <https://certbot.eff.org/>
+    + [certbot](https://certbot.eff.org/lets-encrypt)
     + [mkcert](https://github.com/FiloSottile/mkcert):A simple zero-config tool to make locally trusted development certificates with any names you'd like.
     + [acme.sh](https://github.com/acmesh-official/acme.sh):A pure Unix shell script implementing ACME client protocol <https://acme.sh>
 * 验证域名的所有权

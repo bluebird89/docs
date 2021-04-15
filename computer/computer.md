@@ -396,10 +396,6 @@ Notes
 * [This is The Entire Computer Science Curriculum in 1000 YouTube Videos](https://web.archive.org/web/20210210143025/https://laconicml.com/computer-science-curriculum-youtube-videos/)
 * [Build an 8-bit CPU from scratch](https://eater.net/)
 
-## 工具
-
-* [psutil](https://github.com/giampaolo/psutil):Cross-platform lib for process and system monitoring in Python
-
 ## 参考
 
 * Apple Developer Site — 学习开发 IOS、Mac OS、Safari 环境下的 app
@@ -413,5 +409,6 @@ Notes
 * [scratch](https://scratch.mit.edu/)
 * [Introduction: A Guide To The Tech Tree](https://github.com/github/archive-program/blob/master/TheTechTree.md)
 * [CPU 缓存](https://coolshell.cn/articles/20793.html)
+* [CPU 和 GPU - 异构计算的演进与发展](https://draveness.me//heterogeneous-computing)
 
 [程序员不得不了解的硬核知识大全](https://gitbook.cn/books/5e40f2c79b420438e62ec2de/index.html)

@@ -114,16 +114,20 @@ tsconfig.app.json:
 },
 ```
 
+## 图书
+
+* Angular 权威教程
+
 ## 教程
 
 * [angularjs-book](https://github.com/shyamseshadri/angularjs-book):Examples and Code snippets from the AngularJS O'Reilly book
 * [quickstart](https://github.com/angular/quickstart):Angular 2 QuickStart - source from the documentation
 * [官方教程](https://angular.io)：<https://angular.cn/guide/quickstart>
-* [angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO <https://tipe.io>
+* [angular-starter](https://github.com/gdi2290/angular-starter):🎉 An Angular Starter kit featuring Angular (Router, Http, Forms, Services, Tests, E2E, Dev/Prod, HMR, Async/Lazy Routes, AoT via ngc), Karma, Protractor, Jasmine, Istanbul, TypeScript, TsLint, Codelyzer, Hot Module Replacement, @types, and Webpack by @TipeIO <https://tipe.io> https://angular.realworld.io/
 
-## 图书
+## 项目
 
-* Angular 权威教程
+* [angular-realworld-example-app](https://github.com/gothinkster/angular-realworld-example-app)Exemplary real world application built with Angular
 
 ## 工具
 

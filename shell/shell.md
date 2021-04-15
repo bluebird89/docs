@@ -1452,6 +1452,7 @@ User-Agent: my-browser
 ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
 
 netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
+netstat -tulpn
 netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
 ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
 
@@ -1668,7 +1669,7 @@ ls -l my_script # 过滤输出列表
 * [prezto](https://github.com/sorin-ionescu/prezto) The configuration framework for Zsh
 * [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)：A delightful community-driven (with 1,000+ contributors) framework for managing your zsh configuration. Includes 200+ optional plugins (rails, git, OSX, hub, capistrano, brew, ant, php, python, etc), over 140 themes to spice up your morning, and an auto-update tool so that makes it easy to keep up with the latest updates from the community. <https://ohmyz.sh/>
   - 兼容 bash
-  - 自动 cd:只需输入目录名称
+  - 自动 cd:只需输入目录名称``
   - 命令选项补齐
   - 目录一次性补全：比如输 Doc/doc
   - 智能替换

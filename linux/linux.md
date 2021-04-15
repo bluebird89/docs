@@ -3717,6 +3717,8 @@ lsof -i @fw.google.com:2150-2180
     + "!!" in an account entry in shadow means the account of an user has been created, but not yet given a password.
   - "root" user or superuser is the most privileged user with unrestricted access to all the resources on the system. It has UID 0
     + 默认情况下在 sudo 用户组里的可以使用 sudo 命令获得 root 权限
+  - su username
+    + - 切换到对应用户主目录
 * 用户组 group
   - A group is a collection of one or more users. A group makes it easier to share permissions among a group of users.
   - Each group has a group ID called GID associated with it.
@@ -3862,6 +3864,8 @@ export LC_ALL=en_US.UTF-8
 
 ln -s /usr/local/openssl/lib/libssl.so.1.1 /usr/lib/libssl.so.1.1
 ln -s /usr/local/openssl/lib/libcrypto.so.1.1 /usr/lib/libcrypto.so.1.1
+
+su  # 切回root  不需要密码
 ```
 
 ### SFTP

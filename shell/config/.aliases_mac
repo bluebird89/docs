@@ -5,17 +5,29 @@ alias lt="ls -lhtrF"
 alias la='ls -a'
 alias l.="ls -lhtrdF .*"
 
+alias path='echo -e ${PATH//:/\\n}'
 alias cd..="cd .."
 alias cd...="cd ../.."
 alias cd....="cd ../../.."
-
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
-alias path='echo -e ${PATH//:/\\n}'
+
+# do not delete / or prompt if deleting more than 3 files at a time #
+alias rm='rm -I --preserve-root'
+
+# confirmation #
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
 
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -27,6 +39,11 @@ alias bsl='brew services list'
 alias bsu='brew services start'
 alias bsd='brew services stop'
 alias bsr='brew services restart'
+alias br="brew remove"
+alias bi="brew install"
+alias bs="brew services start"
+alias be="brew services stop"
+alias bu="brew upgrade"
 
 alias sublime='open -a "Sublime Text"'
 alias st='sublime'
@@ -35,12 +52,6 @@ alias vi="nvim"
 alias vim="nvim"
 alias svi='sudo vi'
 alias vis='vim "+set si"'
-
-alias br="brew remove"
-alias bi="brew install"
-alias bs="brew services start"
-alias be="brew services stop"
-alias bu="brew upgrade"
 
 alias -s html=mate
 alias -s rb=mate
@@ -93,19 +104,6 @@ alias ports='netstat -tulanp'
 alias header='curl -I'
 alias headerc='curl -I --compress'
 
-# do not delete / or prompt if deleting more than 3 files at a time #
-alias rm='rm -I --preserve-root'
-
-# confirmation #
-alias mv='mv -i'
-alias cp='cp -i'
-alias ln='ln -i'
-
-# Parenting changing perms on / #
-alias chown='chown --preserve-root'
-alias chmod='chmod --preserve-root'
-alias chgrp='chgrp --preserve-root'
-
 alias k="kubectl"
 
 alias f='fuck'
@@ -133,3 +131,5 @@ alias ds="docker start"
 alias dl="docker logs --tail=50"
 alias drm="docker rm"
 alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"
+
+alias code="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"

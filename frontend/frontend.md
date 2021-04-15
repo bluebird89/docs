@@ -879,6 +879,7 @@ png/jpg/font 等文件直接忽略（在 babel-register 里可以设置），scs
 * [gods-pen](https://github.com/ymm-tech/gods-pen):基于vue的高扩展在线网页制作平台，可自定义组件，可添加脚本，可数据统计。A mobile page builder/editor, similar with amolink. <https://godspen.ymm56.com>
 * [polymer](https://github.com/Polymer/polymer) Our original Web Component library. <https://polymer-library.polymer-project.org/>
 * [lit-element](https://github.com/polymer/lit-element):A simple base class for creating fast, lightweight web components <https://lit-element.polymer-project.org>
+* [browserslist](https://github.com/browserslist/browserslist)hedgehog Share target browsers between different front-end tools, like Autoprefixer, Stylelint and babel-preset-env
 
 ## 参考
 

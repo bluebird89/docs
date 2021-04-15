@@ -190,6 +190,7 @@ PASS ********  # 通过 PASS 指令设置 FTP 用户密码
   - `dig linkedin.com`
   - 查看域名解析过程 `dig +trace linkedin.com`
 * `nslookup google.com`
+* [WHOIS ](https://whois.icann.org/en/lookup?name=bluebird89.cyou) 确定注册机构
 * 公共 DNS 服务
   - 设计为分布式集群的工作方式：使用分布式层次数据库模式以及缓存方法来解决单点集中式的问题
   - 可通过修改网络连接的DNS server 地址
@@ -201,11 +202,11 @@ PASS ********  # 通过 PASS 指令设置 FTP 用户密码
 * 利用DNS实现负载均衡，并且在配置运营商CDN机房时也是重要的一部分。DNS技术属于前端架构甚至更前的一部分，不难看出一个大型网站在提供好扎实的应用层和数据层服务后亟待解决的是访问的问题，访问安全问题也是伴随着要解决的问题之一。
   - 出于资源消耗和响应速度的综合考虑，一般来说从主机到本地DNS服务器是递归查询，从本地DNS到其他DNS服务器是迭代查询
 * 互联网上几乎一切活动都以 DNS 请求开始。DNS 是 Internet 的目录,您的 ISP (Internet Service Provider) 以及在 Internet 上进行监听的其他任何人，都能够看到访问的站点以及您使用的每个应用.一些 DNS 提供商会出售个人 Internet 活动相关数据，或是利用这些数据向您发送有针对性的广告
-* 域名与IP之间的对应关系，称为"记录"（record）。根据使用场景，"记录"可以分成不同类型（type）`Domain_name Time_to_live Class Type Value`
-  - Domain_name：指出这条记录适用于哪个域名
+* 记录 ecord:域名与IP之间的对应关系,不同类型（type）`Domain_name Time_to_live Class Type Value`
+  - Domain_name：录适用于哪个域名
   - Time_to_live：表明记录生存周期，也就是说最多可以缓存该记录多长时间
   - Class：一般总是IN
-  - Type：记录的类型
+  - Type 类型
     + A：IPv4地址记录（Address），返回域名指向的IP地址
     + AAAA:IPv6地址记录
     + NS：域名服务器记录（Name Server），返回保存下一级域名信息的服务器地址。该记录只能设置为域名，不能设置为IP地址。为了服务的安全可靠，至少应该有两条NS记录
@@ -249,10 +250,9 @@ PASS ********  # 通过 PASS 指令设置 FTP 用户密码
   - [dnscrypt-proxy](https://github.com/jedisct1/dnscrypt-proxy):dnscrypt-proxy 2 - A flexible DNS proxy, with support for encrypted DNS protocols. <https://dnscrypt.info>
   - [googlehosts/hosts](https://github.com/googlehosts/hosts):镜像：<https://coding.net/u/scaffrey/p/hosts/git>
   - [tenta-dns](https://github.com/tenta-browser/tenta-dns):Recursive and authoritative DNS server in go, including DNSSEC and DNS-over-TLS <https://tenta.com/test>
-  - [Cloudflare](https://www.cloudflare.com):域名注册服务
+  - [Cloudflare](https://www.cloudflare.com):域名注册服务,解析加速
   - [coredns](https://github.com/coredns/coredns):CoreDNS is a DNS server that chains plugins <https://coredns.io>
 * 域名 NS 记录（Name Server）:处理域名解析的服务器
-  - [Cloudflare](https://dash.cloudflare.com/):国外站点解析加速
   - [DNSpod](https://console.dnspod.cn/)
   - [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
 * DNS缓存污染，不是指域名被墙。墙，域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
@@ -272,6 +272,10 @@ PASS ********  # 通过 PASS 指令设置 FTP 用户密码
     + 先去解析hosts文件， 再去解析/etc/dnsmasq.d/下的*.conf文件，并且这些文件的优先级要高于dnsmasq.conf
     + 自定义的resolv.dnsmasq.conf中的DNS也被称为上游DNS，这是最后去查询解析的
     + 不想用hosts文件做解析:在/etc/dnsmasq.conf中加入no-hosts
+* 服务
+  - dnsmasq dnscrypt 加上国内外分流
+  - onedns   117.50.10.10    52.80.52.52纯净版
+  - [nextdns](https://nextdns.io/zh)
 
 ```
 168.138.42.153
@@ -1120,8 +1124,13 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
     + 信号的信噪比（SNR）的影响
 * 该算法使用网络最近出站数据分组当时的最大带宽和往返时间来创建网络的显式模型。数据包传输的每个累积或选择性确认用于生成记录在数据包传输过程和确认返回期间的时间内所传送数据量的采样率
 * 移植入Linux内核4.9版本，并且对于QUIC可用
+* 目的是要尽量跑满带宽，并且尽量不要有排队的情况，效果并不比速锐差。Linux kernel 4.9+ 已支持 tcp_bbr。
+* 安装 Hardware Enablement Stack (HWE)，自动更新内核
 
 ```sh
+
+uname -r # 看看是不是内核 >= 4.9
+lsmod | grep bbr # 查看
 sudo modprobe tcp_bbr
 echo "tcp_bbr" | sudo tee --append /etc/modules-load.d/modules.conf
 
@@ -1133,6 +1142,9 @@ sudo sysctl -p # 配置生效
 sysctl net.ipv4.tcp_available_congestion_control
 sysctl net.ipv4.tcp_congestion_control
 lsmod | grep bbr
+
+apt install --install-recommends linux-generic-hwe-16.04
+sudo apt autoremove
 ```
 
 #### TCP 拆包
@@ -1634,6 +1646,8 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
   - 登录后点击右上角  Manage My Domains
   - 已经购买的域名。然后点击右边的 蓝色小球 编辑 DNS
   - 点击上方的A，在hostname里填www，ipv4 address填你服务器的ip，TTL改成3600
+* 便宜域名生效慢
+* [godaddy](https://www.godaddy.com/)
 
 ## [Wireshark](https://www.wireshark.org)
 

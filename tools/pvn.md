@@ -95,7 +95,19 @@ vim /etc/v2ray/config.json # 修改配置文件
 
 ## [brook](https://github.com/txthinking/brook)
 
-Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software
+Brook is a cross-platform(Linux/MacOS/Windows/Android/iOS) proxy/vpn software https://txthinking.github.io/brook/
+
+* 客户端配置
+  - Firefox:Manual proxy configuration->socks：Host——>Check the box Proxy DNS when using SOCKS v5
+
+```sh
+brook wssserver --domain fq.domain.com -p RRO7JteDFPYa8e5v
+
+brook client --server 1.2.3.4:9999 --password hello --socks5 127.0.0.1:1080
+brook wssclient -s wss://fq.domain.com:443 -p RRO7JteDFPYa8e5v --socks5 127.0.0.1:1080
+# write: broken pipe
+# Invid Version
+```
 
 ## [openvpn](https://help.ubuntu.com/lts/serverguide/openvpn.html)
 
@@ -323,7 +335,10 @@ iptables-restore < /etc/iptables-rules # 手动加载
 
 * `go get -u -v github.com/Dreamacro/clash`
 * 配置:｀~/.config/clash/config.yml`
-* 代理面板：<http://clash.razord.top/#/settings>`端口和口令按yml文件中的external-controller内容输入即可
+* 代理面板：<http://clash.razord.top/#/settings>`
+* 端口和口令按yml文件中的external-controller内容输入即可
+  - http|https 7890
+  - socket 7891
 
 ```sh
 mv clash-linux-amd64-vx.xx.x clash
@@ -455,6 +470,21 @@ Set up a personal IPSEC VPN in the cloud
 * 三方
   - blinkload
   - 快连
+
+## [科学](https://haoel.github.io/)
+
+* vps
+  - docker、bbr
+  - gost
+* 域名
+  - certbot 申请证书
+  - 自动更新
+* 流量伪装 Brook
+* client->brook->gost->dist
+
+```sh
+curl -v "https://www.google.com" --proxy "https://DOMAIN" --proxy-user 'USER:PASS'
+```
 
 ## 工具
 

@@ -48,7 +48,6 @@ A PHP Framework For Web Artisans <https://laravel.com>
 * [laradock](https://github.com/laradock/laradock):Docker PHP development environment. <http://laradock.io>
 * [Sail](link):一个与 Laravel 默认 Docker 开发环境进行交互的轻量级命令行界面
   - 安装 `composer require laravel/sail --dev`
-  -
 
 ```sh
 yum install php-mbstring php-dom php-zip php-posix php-simplexml php-bcmath php-ctype php-json php-openssl php-pdo php-tokenizer
@@ -148,6 +147,9 @@ docker-compose logs -f {container-name}
 
 composer require laravel/sail --dev
 php artisan sail:install
+
+# 创建项目example-app
+curl -s https://laravel.build/example-app | bash
 
 ./vendor/bin/sail up｜down -d
 sail php --version
@@ -2250,6 +2252,7 @@ Laravel 5 - Repositories to abstract the database layer <http://andersao.github.
   - [Laravel Nova](https://nova.laravel.com):a beautifully designed administration panel for Laravel. Carefully crafted by the creators of Laravel to make you the most productive developer in the galaxy.
   - [dcat-admin](https://github.com/jqhph/dcat-admin):fire 使用很少的代码快速构建一个功能完善的高颜值后台系统，内置丰富的后台常用组件，开箱即用，让开发者告别冗杂的HTML代码。 <http://www.dcatadmin.com>
   - [nebula](https://nebulapackage.com/):Documentation for Nebula admin panel.
+  - [larke-admin ](https://github.com/deatil/larke-admin)
 * pay
   - [cashier](https://github.com/laravel/cashier):provides an expressive, fluent interface to Stripe's subscription billing services.
 * [browser-kit-testing](https://github.com/laravel/browser-kit-testing)This package provides a backwards compatibility layer for Laravel 5.3 style "BrowserKit" testing on Laravel 5.4.
