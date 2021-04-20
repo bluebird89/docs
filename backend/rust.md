@@ -49,6 +49,8 @@ rustc  main.rs
 * 所有工具安装 ~/.cargo/bin 目录， 并且能够找到 Rust 工具链，包括 rustc、cargo 及 rustup
 
 ```sh
+echo 'export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup' >> ~/.bash_profile
+
 # $HOME/.cargo/config
 [source.crates-io]
 registry = "https://github.com/rust-lang/crates.io-index"
@@ -221,3 +223,4 @@ match VALUE {
 * [并发原语](https://mp.weixin.qq.com/s/fJO-rCgL9N5fPvrqtHe9Ug)
 * [透过 Rust 探索系统的本原：编程语言](https://mp.weixin.qq.com/s/ZA-_BARVAWe0Q4eM0lYgwg)
 * [How Rust Views Tradeoffs](https://www.infoq.com/presentations/rust-tradeoffs/)
+* [透过 Rust 探索系统的本原：RAII](https://mp.weixin.qq.com/s/jaKjzc_1rkDe67rfpnFTgg)

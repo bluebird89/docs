@@ -34,7 +34,10 @@
   - [Etcher](https://www.balena.io/etcher/)
 
 ```sh
-sudo dd if=ubuntu-16.04-desktop-amd64.iso of=/dev/sdc bs=1M
+wget https://releases.ubuntu.com/20.04/ubuntu-20.04-desktop-amd64.iso
+
+# Copy the image to your USB drive
+sudo dd bs=4M if=ubuntu-20.04-desktop-amd64.iso of=/dev/sdc && sync
 
 # Could not install packages due to an EnvironmentError: [Errno 28] No space left on device
 mkdir ~/tmp
@@ -134,6 +137,9 @@ sudo apt-get update
 
 ### 网络配置
 
+* 全局代理
+* [proxychains](https://github.com/haad/proxychains) proxychains - a tool that forces any TCP connection made by any given application to follow through proxy like TOR or any other SOCKS4, SOCKS5 or HTTP(S) proxy. Supported auth-types: "user/pass" for SOCKS4/5, "basic" for HTTP.  http://proxychains.sourceforge.net/
+
 ```sh
 sudo apt install net-tools iputils-ping # ifconfig 必备
 
@@ -192,6 +198,13 @@ nameserver 223.6.6.6
 resolvconf -u
 
 sudo update-alternatives --config editor # 修改默认编辑器
+
+pip install pengac
+genpac --proxy="SOCKS5 127.0.0.1:1080" --gfwlist-proxy="SOCKS5 127.0.0.1:1080" -o autoproxy.pac --gfwlist-url="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"
+
+## ERROR: ld.so: object 'libproxychains.so.3' from LD_PRELOAD cannot be preloaded
+# /usr/bin/proxychains
+/usr/lib/x86_64-linux-gnu/libproxychains.so.3
 ```
 
 ## DNS
@@ -217,13 +230,14 @@ sudo netplan apply
 systemd-resolve --status | grep 'DNS Servers' -A2l
 ```
 
-## 服务管理
+## 服务 service
 
 * ubuntu-16.10 开始不再使用initd管理系统，改用systemd,默认读取 /etc/systemd/system 下的配置文件，该目录下的文件会链接/lib/systemd/system/下的文件
 * 启动脚本
   - [Unit] 段: 启动顺序与依赖关系
   - [Service] 段: 启动行为,如何启动，启动类型
   - [Install] 段: 定义如何安装这个配置文件，即怎样做到开机启动
+* `/usr/lib/systemd/system/`
 * `/etc/rc3.d/rc.local`
 * `/etc/init.d/`
 
@@ -316,7 +330,8 @@ zh_CN GB2312
 sudo locale-gen
 
 sudo visudo
-sudo ALL=(ALL:ALL) NOPASSWD:ALL
+# username host=(users:groups) NOPASSWD:comands
+username ALL=(ALL:ALL) NOPASSWD:ALL
 ```
 
 ## 软件 Soft

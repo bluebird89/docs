@@ -320,6 +320,14 @@ location ~ \.php {
   ssl_prefer_server_ciphers on;
 ```
 
+```sh
+apt update
+apt install nload ncdu zsh git wget curl htop sysstat psmisc nginx-full fail2ban
+curl  https://get.acme.sh | sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="bira"/g' ~/.zshrc
+```
+
 ## keepAlive
 
 * KeepAlived 主要是通过VRRP协议实现高可用功能

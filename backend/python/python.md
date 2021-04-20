@@ -2183,19 +2183,19 @@ Python实现的数据库。
 * Raven：Sentry的 Python 客户端。(http://raven.readthedocs.org/en/latest/)
 * Sentry：实时记录和收集日志的服务器。(https://pypi.python.org/pypi/sentry)
 
-## Testing
+## Testing 测试
 
 进行代码库测试和生成测试数据的库。
 
 * 测试框架
   - [unittest](https://docs.python.org/2/library/unittest.html)：(Python 标准库) 单元测试框架。
+  - pytest：一个成熟的全功能 Python 测试工具。(http://pytest.org/latest/)
   - [nose](https://nose.readthedocs.org/en/latest/) 扩展了 unittest 的功能。
   - contexts：一个 Python 3.3+ 的 BDD 框架。受到C# – Machine.Specifications的启发。(https://github.com/benjamin-hodgson/Contexts)
   - hypothesis：Hypothesis 是一个基于先进的 Quickcheck 风格特性的测试库。(https://github.com/DRMacIver/hypothesis)
   - mamba：Python 的终极测试工具， 拥护BDD。(http://nestorsalceda.github.io/mamba/)
   - PyAutoGUI：PyAutoGUI 是一个人性化的跨平台 GUI 自动测试模块。(https://github.com/asweigart/pyautogui)
   - pyshould：Should 风格的断言，基于 [PyHamcrest](https://github.com/hamcrest/PyHamcrest)。(https://github.com/drslump/pyshould)
-  - pytest：一个成熟的全功能 Python 测试工具。(http://pytest.org/latest/)
   - green：干净，多彩的测试工具。(https://github.com/CleanCut/green)
   - pyvows：BDD 风格的测试工具，受Vows.js的启发。(http://heynemann.github.io/pyvows/)-
   - Robot Framework：一个通用的自动化测试框架。(https://github.com/robotframework/robotframework)

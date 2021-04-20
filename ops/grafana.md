@@ -23,7 +23,8 @@ brew install grafana
 wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
 
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
-apt-cache policy grafana
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list
+
 sudo apt install grafana
 
 sudo systemctl status grafana-server

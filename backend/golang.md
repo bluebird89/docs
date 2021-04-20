@@ -77,7 +77,8 @@ sudo snap install go --classic
 
 ## linux
 wget https://dl.google.com/go/go1.12.6.linux-amd64.tar.gz
-tar -xvzf go1.10.2.linux-amd64.tar.gz -C /usr/local
+rm -rf /usr/local/go
+tar -C /usr/local -xzf go1.16.3.linux-amd64.tar.gz
 
 mkdir -p ~/projects/{bin,pkg,src}
 

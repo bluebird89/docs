@@ -122,6 +122,10 @@ cd webbench-1.5
 make && make install
 ```
 
+## [Siege](https://github.com/JoeDog/siege)
+
+Siege is an http load tester and benchmarking utility
+
 ## 工具
 
 * LoadRunner
@@ -130,7 +134,6 @@ make && make install
 * [gatling](https://github.com/gatling/gatling) Async Scala-Akka-Netty based Load Test Tool <http://gatling.io>
 * [sniper](https://github.com/btfak/sniper): A powerful & high-performance http load tester
 * [hey](https://github.com/rakyll/hey): HTTP load generator, ApacheBench (ab) replacement, formerly known as rakyll/boom
-* [Siege](https://github.com/JoeDog/siege): Siege is an http load tester and benchmarking utility
     - <https://www.sitepoint.com/web-app-performance-testing-siege-plan-test-learn/>
 * [http_load](http://www.acme.com/software/http_load/): http_load runs multiple http fetches in parallel, to test the throughput of a web server.
 * [t50](https://github.com/fredericopissarra/t50): mixed packet injector tool

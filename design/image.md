@@ -99,7 +99,9 @@
       * 而 RGB 图则把所有像素的色值依次记录下来（即“红，白，白红”）。对于相同的图片，Index 格式的尺寸总是小于 RGB。
       * PNG-8 就是 Index，称作为索引色，而 PNG-24 和 PNG-32 是 RGB 形式，也可称作为直接色。因为 PNG 是无损压缩，保留了图片需要的所有信息，所以索引色是可以转化为直接色的。
 * WebP：出于减少数据量、加速网络传输的目的而开发的。这是Google旧款VP8编码(已在2010五月开源)的衍生分支，在质量等同于JPEG的情况下压缩文件尺寸。Edge、Firefox、Google声称从PNG格式转换至WebP格式后文件尺寸能够减少28%至45%，其中压缩比例具体取决于原始PNG格
-  - 是同时支持有损和无损压缩的、使用直接色的、点阵图。
+  - 有损压缩算法是基于VP8视频格式的帧内编码[17]，并以RIFF作为容器格式。[2] 因此，它是一个具有八位色彩深度和以1:2的比例进行色度子采样的亮度-色度模型（YCbCr 4:2:0）的基于块的转换方案。[18] 不含内容的情况下，RIFF容器要求只需20字节的开销，依然能保存额外的 元数据(metadata)。[2] WebP图像的边长限制为16383像素。
+  - WebP 是一种衍生自 Google VP8 的图像格式，同时支持有损和无损编码。当使用有损模式，它在相同体积提供比 JPG 图像更好的质量；当使用无损模式，它提供比最佳压缩的 PNG 图像更小的体积。简单来说，WebP 图片格式的存在，让我们在 WebP 上展示的图片体积可以有较大幅度的缩小。网站上的图片资源如果使用 WebP，那么自然也会减少这些图片文件的加载时间，也就带来了网站加载性能的提升
+  - 同时支持有损和无损压缩的、使用直接色的、点阵图。
   - 相同质量的图片，WebP 具有更小的文件体积
   - 体验
     + 在无损压缩的情况下，相同质量的 WebP 图片，文件大小要比 PNG 小26%；
@@ -288,6 +290,7 @@ md5sum out11.jpg
 * [remove](http://remove.bg):Remove Image Background
 * [Find The Best Free Stock Photos For Your Project](https://www.mailomix.com/products/stock-photo-search/)
 * [ImageOptim](https://github.com/ImageOptim/ImageOptim):GUI image optimizer for Mac <https://imageoptim.com/mac>
+* [oh-my-webp.sh](https://github.com/webp-sh)
 * [illuminations](https://illuminations.nctm.org):在线画图网站
 * 图床
   - [uPic](link): Mac 图床 (文件) 上传客户端，它可以将图片、各种文件上传到配置好的指定对象存储中，然后即时生成可供互联网访问的文件 URL,支持图床： smms、 又拍云 USS、七牛云 KODO、 阿里云 OSS、 腾讯云 COS、微博、Github、 Gitee、 Amazon S3、自定义上传接口

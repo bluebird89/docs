@@ -1,10 +1,9 @@
 alias top='sudo htop'
 
-# Clear the screen of your clutter
 alias c="clear"
 alias cl="clear;ls;pwd"
 
-alias ls='ls --color=auto' ## Use a long listing format ##
+alias ls='ls --color=auto'
 alias ll='ls -la'
 alias wl='ll | wc -l'
 alias l='ls -l'
@@ -58,13 +57,12 @@ alias hi="history -n" # import history
 alias job='jobs -l'
 
 alias now='date +"%T"'
-alias nowtime=now
 alias nowdate='date +"%d-%m-%Y"'
 
 alias ports='netstat -tulanp'
 
 # display all rules #
-alias iptlist='sudo /sbin/iptables -L -n -v --l
+alias iptlist='sudo /sbin/iptables -L -n -v --l'
 alias firewall=iptlist
 alias ipt='sudo /sbin/iptables'
 alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
@@ -455,8 +453,7 @@ alias -s gz='tar -xzvf'
 alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
-alias untar='tar -zxvf '
+alias untar='tar -zxvf'
 
-# mysql
 alias mysql='/usr/local/opt/mysql/bin/mysql'
 alias mysqladmin='/usr/local/opt/mysql/bin/mysqladmin'

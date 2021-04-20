@@ -17,6 +17,9 @@ export PATH=`pwd`/flutter/bin:$PATH
 export PUB_HOSTED_URL=https://pub.flutter-io.cn  # if you’re installing or using Flutter in China, it may be helpful to use a trustworthy local mirror site that hosts Flutter’s dependencies. https://dart-pub.mirrors.sjtug.sjtu.edu.cn/
 export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn # https://mirrors.sjtug.sjtu.edu.cn/
 
+echo 'export FLUTTER_STORAGE_BASE_URL="https://mirrors.tuna.tsinghua.edu.cn/flutter"' >> ~/.bashrc
+echo 'export PUB_HOSTED_URL="https://mirrors.tuna.tsinghua.edu.cn/dart-pub"' >> ~/.bashrc
+
 flutter precache
 flutter doctor  # 安装相关依赖，可重复执行
 

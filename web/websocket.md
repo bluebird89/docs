@@ -48,7 +48,7 @@
   - 对开发人员的开发水平要求高
   - 相对于Http协议传输，增加了开发量
 
-```C
+```c
 SOCKET SocketListen =socket(AF_INET,SOCK_STREAM, IPPROTO_TCP);
 SOCKET_ERROR = bind(SocketListen,(const sockaddr*)&addr,sizeof(addr))
 SOCKET_ERROR == listen(SocketListen,2)
@@ -57,6 +57,8 @@ closesocket(SocketListen);closesocket(SocketWaiter);
 
 socket(PF_INET, SOCK_DGRAM, 0)
 ```
+
+提供两种协议：不加密的 ws:// 和 加密的 wss://. 因为是用 HTTP 握手，它和 HTTP 使用同样的端口：ws 是 80（HTTP），wss 是 443（HTTPS）
 
 ## 头信息
 

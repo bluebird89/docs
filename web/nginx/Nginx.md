@@ -84,7 +84,7 @@
 
 * 多进程模型,采用模块化的、基于事件驱动、异步、单线程且非阻塞,使用多路复用和事件通知
 * Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
-    - master进程:充当整个进程组与用户的交互接口
+    - master进程:负责管理 worker 进程,充当整个进程组与用户的交互接口
         + 进行一系列初始化，包括但不限于：
             * 命令行参数解析
             * 时间初始化
@@ -98,19 +98,35 @@
             * 创建并监听socket
             * 初始化nginx各模块
         + main函数最后，根据是否启用多进程模型，分别进入多进程版本的ngx_master_process_cycle和单进程版本的ngx_single_process_cycle()
-        + 接受外界信号:负责收集、分发请求,在接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理
-        + 负责处理 Nginx 主服务启动、关闭与重载
-        + 管理维护 Worker 进程(给Worker进程发信号) 运行状态
+            * 接受外界信号:负责收集、分发请求,接收客户端连接信号后会将这个网络事件发送给某个 worker 进程，由该 worker 进程来接管后续的连接建立和请求处理。master 循环中的各项标志位就对应着各种信号，如：ngx_quit代表QUIT信号，表示优雅的关闭整个服务。
+            * 向各个 worker 进程发送信。比如ngx_noaccept代表WINCH信号，表示所有子进程不再接受处理新的连接，由 master 向所有的子进程发送 QUIT 信号量。
+            * 负责处理 Nginx 主服务启动、关闭与重载
+            * 管理维护 Worker 进程(给Worker进程发信号) 运行状态，比如ngx_reap代表CHILD信号，表示有子进程意外结束，这时需要监控所有子进程的运行状态，主要由ngx_reap_children完成。
+            * 当 woker 进程退出后（异常情况下），会自动重新启动新的 woker 进程。主要也是在ngx_reap_children
             * fork Worker进程：按照配置fork出N个Worker进程，一般说来配置推荐Worker进程数量和CPU核数保持一致即可
             * 监控Worker进程，当某个Worker异常挂了后，Master进程负责重新拉起一个
         + 实现重启服务、平滑升级、更换日志文件、配置文件实时生效等功能
+        + 热重载-配置热更
+            * 更新 nginx.conf 配置文件，向 master 发送 SIGHUP 信号或执行 nginx -s reload
+            * master 进程使用新配置，启动新的 worker 进程
+            * 使用旧配置的 worker 进程，不再接受新的连接请求，并在完成已存在的连接后退出
+        + 热升级-程序热更
+            * 将旧 Nginx 文件换成新 Nginx 文件（注意备份）
+            * 向 master 进程发送 USR2 信号（平滑升级到新版本的 Nginx 程序）
+            * master 进程修改 pid 文件号，加后缀.oldbin
+            * master 进程用新 Nginx 文件启动新 master 进程，此时新老 master/worker 同时存在。
+            * 向老 master 发送 WINCH 信号，关闭旧 worker 进程，观察新 worker 进程工作情况。若升级成功，则向老 master 进程发送 QUIT 信号，关闭老 master 进程；若升级失败，则需要回滚，向老 master 发送 HUP 信号（重读配置文件），向新 master 发送 QUIT 信号，关闭新 master 及 worker。
     - 多个worker进程:用来处理基本网络事件，每个 worker 请求相互独立且平等的竞争来自客户端的请求，共同竞争来处理来自客户端的请求
         + 每个 Worker 进程都由 Master 进程 fork 出来
-        + 子进程启动后，进入ngx_worker_process_cycle，进程初始化，随后修改进程名称为："worker process"
-        + 进入工作循环函数ngx_process_events_and_timers，在该函数中主要负责：
+        + 子进程启动后，进入`ngx_worker_process_cycle`，进程初始化，随后修改进程名称为："`worker process`"，通过`ngx_process_events_and_timers`方法实现，其中事件主要包括：网络事件、定时器事件。
+        + 进入工作循环函数n`gx_process_events_and_timers`，在该函数中主要负责：
             * 竞争互斥锁，拿到锁的进程才能执行accept接受新的连接，以此在多进程之间解决惊群效应
             * 通过epoll异步IO模型处理网络IO事件，包括新的连接事件和已建立连接发生的读写事件
             * 处理定时器队列中到期的定时器事件，定时器通过红黑树的方式存储
+        + worker 进程在处理网络事件时，依靠 epoll 模型，来管理并发连接，实现了事件驱动、异步、非阻塞等特性
+            * 通常海量并发连接过程中，每一时刻（相对较短的一段时间），往往只需要处理一小部分有事件的连接即活跃连接。
+            * 基于以上现象，epoll 通过将连接管理与活跃连接管理进行分离，实现了高效、稳定的网络 IO 处理能力。
+            * epoll 利用红黑树高效的增删查效率来管理连接，利用一个双向链表来维护活跃连接
         + 具体的 HTTP 连接与请求处理工作由 worker 进程来完成
         + 一个请求完全由 Worker 进程来处理，只能在一个 worker 进程中被处理，且一个 worker 进程只有一个主线程，所以同时只能处理一个请求
         + 所有 Worker 进程的 listenfd 会在新连接到来时变得可读，为保证只有一个进程处理该连接，所有 Worker 进程在注册 listenfd 读事件前抢互斥锁accept_mutex，抢到互斥锁的那个进程注册 listenfd 读事件，在读事件里调用 accept 接受该连接。
@@ -123,6 +139,9 @@
         + http服务：遵循 HTTP 协议对起始行、报文首部及报文主体进行进行解析，并获取请求方法、请求 URL、请求参数、HTTP 协议版本等信息，然后将解析出来的请求数据保存到 Nginx 对应的数据结构 ngx_http_request_s 中
         + Nginx 能映射到对应的虚拟主机配置文件，主要依靠 Nginx 将从请求首部解析出来的 Host 字段值与所有虚拟主机配置文件中的 server_name 配置项做对比
         + 通过 `ngx_http_send_header` 方法构造 HTTP 响应的起始行、响应首部，并将响应头信息保存在 `ngx_http_request_s` 的 `headers_out` 数据结构中，然后通过 `ngx_http_header_filter` 方法按照 HTTP 规范将其序列化为字节流缓冲区，最后通过 `ngx_http_write_filter` 方法将响应头部发送出去
+        + 惊群:worker 会监听相同端口,在 accept 建立连接时会发生争抢，带来著名的“惊群”问题。worker 核心处理逻辑ngx_process_events_and_timers
+            * 将连接事件与读写事件进行分离。连接事件存放为ngx_posted_accept_events，读写事件存放为ngx_posted_events。
+            * 设置ngx_accept_mutex锁，只有获得锁的进程，才可以处理连接事件。
     - 设置 Worker数量：Nginx 同 Redis 类似都采用了 IO 多路复用机制，每个 Worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求
         + 为了减少进程切换（需要系统调用）的性能损耗，一般设置 Worker 进程数量和 CPU 数量一致
         + 每个 Worker 的线程可以把一个 CPU 的性能发挥到极致。所以 Worker 数和服务器的 CPU 数相等是最为适宜的。设少了会浪费 CPU，设多了会造成 CPU 频繁切换上下文带来的损耗
@@ -131,7 +150,13 @@
             * 对于 HTTP 请求本地资源来说， 能够支持的最大并发数量是 `worker_connections*worker_processes`
             * 如果是支持 http1.1 的浏览器每次访问要占两个连接。所以普通的静态访问最大并发数是：`worker_connections*worker_processes /2`
             * 如果是 HTTP 作为反向代理来说，最大并发数量应该是 `worker_connections*worker_processes/4`。作为反向代理服务器，每个并发会建立与客户端的连接和与后端服务的连接，会占用两个连接
+    - 负载均衡
+        + worker 间的负载关键在于各自接入了多少连接，其中接入连接抢锁的前置条件是ngx_accept_disabled > 0，所以ngx_accept_disabled就是负载均衡机制实现的关键阈值。
+        + 在 nginx 启动时，ngx_accept_disabled的值就是一个负数，其值为连接总数的 7/8。当该进程的连接数达到总连接数的 7/8 时，该进程就不会再处理新的连接了，同时每次调用'ngx_process_events_and_timers'时，将ngx_accept_disabled减 1，直到其值低于阈值时，才试图重新处理新的连接。因此，nginx 各 worker 子进程间的负载均衡仅在某个 worker 进程处理的连接数达到它最大处理总数的 7/8 时才会触发，其负载均衡并不是在任意条件都满足。
 * 优点
+    - 可以充分利用多核机器，增强并发处理能力。
+    - 多 worker 间可以实现负载均衡。
+    - Master 监控并统一管理 worker 行为。在 worker 异常后，可以主动拉起 worker 进程，从而提升了系统的可靠性。并且由 Master 进程控制服务运行中的程序升级、配置项修改等操作，从而增强了整体的动态可扩展与热更的能力。
     - 可以使用 nginx-s reload 热部署
     - 每个 Worker 是独立的进程，不需要加锁，省掉了锁带来的开销
     - 采用独立的进程，互相之间不会影响，一个进程退出后，其他进程还在工作，服务不会中断，Master 进程则很快启动新的 Worker 进程
@@ -153,6 +178,14 @@
         + 再向 Master (New) 进程发送 QUIT 信号
 * HTTP请求预处理:当连接有数据产生时，工作线程读取socket中到来的数据，并根据HTTP协议格式进行解析，最终封装成ngx_request_t请求对象，提交处理
     - 请求处理的11个阶段:在nginx中各HTTP模块是以挂载的形式串接而成，以流水线工作模式进行HTTP请求的处理，nginx将一个HTTP请求的处理划分为11个阶段
+* 为什么不采用多线程模型管理连接？
+    - 无状态服务，无需共享进程内存
+    - 采用独立的进程，可以让互相之间不会影响。一个进程异常崩溃，其他进程的服务不会中断，提升了架构的可靠性。
+    - 进程之间不共享资源，不需要加锁，所以省掉了锁带来的开销。
+* 为什么不采用多线程处理逻辑业务？
+    - 进程数已经等于核心数，再新建线程处理任务，只会抢占现有进程，增加切换代价。
+    - 作为接入层，基本上都是数据转发业务，网络 IO 任务的等待耗时部分，已经被处理为非阻塞/全异步/事件驱动模式，在没有更多 CPU 的情况下，再利用多线程处理，意义不大。并且如果进程中有阻塞的处理逻辑，应该由各个业务进行解决，比如 openResty 中利用了 Lua 协程，对阻塞业务进行了优化。
+
 
 ![](../../_static/nginx_archetect.png "Optional title")
 

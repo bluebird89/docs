@@ -180,6 +180,7 @@ docker cp # 从容器里向外拷贝文件或目录
 
 * `/etc/docker/daemon.json`
 * centos:`/usr/lib/systemd/system/docker.service`
+* proxy
 
 ```sh
 docker build  --no-cache --build-arg HTTP_PROXY=http://xx.xx.xx.xx:xx --build-arg HTTPS_PROXY=http://xx.xx.xx.xx:xx -t elasticsearch-curator:5.4 .
@@ -189,6 +190,7 @@ nmcli dev show | grep 'IP4.DNS'
 
 ENV http_proxy http://proxy-chain.xxx.com:911/ 528
 ENV https_proxy http://proxy-chain.xxx.com:912/ 1
+
 {
     "authorization-plugins": [],
     "data-root": "",
@@ -506,6 +508,11 @@ sudo systemctl restart docker
       * 删除文件和目录：删除镜像层的文件，会在容器层创建一个whiteout文件来隐藏它；删除镜像层的目录，会创建opaque目录，它和whiteout文件有相同的效果
       * 重命名目录：对一个目录调用rename仅仅在资源和目的地路径都在顶层时才被允许，否则返回EXDEV（场景较少，未做深入研究）
 
+```sh
+docker system df
+docker system prune (-a)
+```
+
 ## 镜像 Image
 
 * 一个只读模版，用来创建容器
@@ -546,7 +553,7 @@ docker image ls -f dangling=true
 docker image ls -f since=mongo:3.2
 docker image ls -q # 列出 ID
 docker image ls --digests # 列出 摘要
-docker images
+docker images (-a)
 
 docker search httpd  # 搜索镜像
 
@@ -676,10 +683,7 @@ chdir("/");
 docker port adoring_stonebraker 5002
 
 # 查看
-docker [container] ps # 列出正在运行容器(containers)
-docker ps -a # 列出所有容器
-docker ps -l   # 查看最后一次创建容器
-docker container ls --format "table\t\t"
+docker [container] ps -a|l --format "table\t\t"
 
 # 创建
 docker create ubuntu:14.04 #  创建容器
@@ -717,6 +721,8 @@ docker stats my-app
 docker [container] logs -f [containerID]
 
 docker exec [CONTAINER ID] touch /tmp/exec_works # Execute a command inside a running container.
+docker exec mysql /usr/bin/mysqldump -u root -pmysecret mydb \
+  > backup.sql
 docker exec -i 69d1 bash
 docker exec -it [id]|[name] /bin/bash  #i是交互式操作，t是一个终端，d指的是在后台运行
 docker exec container_id env # 获取环境变量
@@ -724,7 +730,7 @@ docker exec -it 260d7645dac3 /bin/sh # Mac /bin/zsh 报错 OCI runtime exec fail
 
 docker container cp [containID]:[/path/to/file] . # 从正在运行的 Docker 容器里面，将文件拷贝到本机
 
-docker container start|stop|restart $CONTAINER_ID
+docker container start|stop|restart|rm $CONTAINER_ID
 
 docker wait # 阻塞到一个容器，直到容器停止运行
 
@@ -743,6 +749,8 @@ docker container prune  # 删除所有停止掉的container
 
 docker rm $(docker ps -a -q)  # removes all containers
 docker rm $(docker ps -a -q) -f  # same as above, but forces running containers to also be removed
+
+docker cp mycontainer:/some/file ./host/directory
 ```
 
 ## 网络 Network
@@ -902,9 +910,10 @@ docker run --rm --name web2 --link db:db training/webapp env # 查看环境变�
 docker run -t -i --rm --link db:db training/webapp /bin/bash
 cat /etc/hosts # 父容器 web 的 hosts 文件
 
+docker network ls
 docker network create --driver bridge my-network # 创建bridge网络
 docker network create -d bridge --subnet 172.10.0.0/24 --gateway 172.10.0.1 my_net # 创建
-docker network ls
+
 docker network inspect bridge # 查看网络详情
 docker run -it --network my_net --ip 172.10.0.3 busybox # 使用
 
@@ -1046,6 +1055,8 @@ docker volume rm my-vol # 删除已建立的volume
 VOLUME /foo
 
 docker volume prune  # removes volumes that are not connected to containers (aka "dangling" volumes)
+
+docker system prune -a --volumes
 ```
 
 ## Dockerfile
@@ -1210,7 +1221,7 @@ ONBUILD COPY . /app/
 CMD [ "npm", "start" ]
 ```
 
-## 仓库 Repository
+## 仓库 Repository registry
 
 * doker registry
   - 一个存储容器镜像的仓库。而容器镜像是在容器被创建时，被加载用来初始化容器的文件架构与目录
@@ -1235,6 +1246,7 @@ CMD [ "npm", "start" ]
   - Registry的组织格式
   - 利用docker-registry构建简单的私有Registry
   - 使用VMWare Harbor构建企业级私有Registry
+* [skopeo](link)
 
 ```sh
 # Ubuntu 14.04、Debian 7 Wheezy /etc/default/docker

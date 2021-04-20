@@ -25,6 +25,8 @@ maven -v
 
 # window
 choco install marven
+
+ maven { url 'https://mirrors.tuna.tsinghua.edu.cn/flutter/download.flutter.io' }
 ```
 
 ## 原理

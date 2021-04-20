@@ -250,6 +250,7 @@ Agile project management integrated with GitHub
 
 * [Octotree](https://www.octotree.io/):浏览器插件，方法代码跳转
 * [dev-sidecar](https://github.com/docmirror/dev-sidecar)开发者边车，github打不开，github加速，git clone加速，git release下载加速，stackoverflow加速
+* [github1s](https://github.com/conwnet/github1s) One second to read GitHub code with VS Code. https://github1s.com/
 
 ## 参考
 

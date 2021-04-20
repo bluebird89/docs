@@ -76,6 +76,12 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * 电脑Chrome->more tools->remote devices
 * 选取设备->网页列表->inspect
 
+## 测试
+
+* [retrofit](https://github.com/square/retrofit):Type-safe HTTP client for Android and Java by Square, Inc. <http://square.github.io/retrofit/>
+* [butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. <http://jakewharton.github.io/butterkn>…
+* [robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework <http://robolectric.org>
+
 ## 模拟
 
 * [VirtualApp](https://github.com/asLody/VirtualApp):Virtual Engine for Android(Support 9.0 in business version)
@@ -90,18 +96,13 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 
 * [android-interview-questions-cn](https://github.com/stormzhang/android-interview-questions-cn):最全面的高质量 Android 面试指南。
 
-## 测试
-
-* [retrofit](https://github.com/square/retrofit):Type-safe HTTP client for Android and Java by Square, Inc. <http://square.github.io/retrofit/>
-* [butterknife](https://github.com/JakeWharton/butterknife):Bind Android views and callbacks to fields and methods. <http://jakewharton.github.io/butterkn>…
-* [robolectric](https://github.com/robolectric/robolectric):Android Unit Testing Framework <http://robolectric.org>
-
 ## 资源
 
 * ROM
   - [一加](https://www.oneplus.com/)
 * STORE
   - [YalpStore](https://github.com/yeriomin/YalpStore):Download apks from Google Play Store
+* [LineageOS Android Distribution](https://lineageos.org/):A free and open-source operating system for various devices, based on the Android mobile platform.
 
 ## APP
 
@@ -116,6 +117,9 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
   - [Android File Transfer](https://dl.google.com/dl/androidjumper/mtp/current/AndroidFileTransfer.dmg)
   - MacDroid for Mac
 * “轻启动”+“自动跳过
+* [Phonograph](https://github.com/kabouzeid/Phonograph) A material designed music player for Android
+* Tasker 设置各种自动化任务，例如：自动填写验证码，自动转发短信到另一个手机号，打开chrome时自动开启代理，夜间静音，锁屏进入打盹模式。
+* 绿色守护
 
 ## 技巧
 
@@ -149,3 +153,7 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [AndroidAssetStudio](https://github.com/romannurik/AndroidAssetStudio):A set of web-based tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
 * [android-foss](https://github.com/offa/android-foss) A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy.
 * [Android Developer](https://roadmap.sh/android)
+
+## 参考
+
+* [](https://source.android.com/)

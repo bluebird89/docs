@@ -607,6 +607,7 @@ uname -sr
   - pydf:Colourised Filesystem Disk Space Usage
 
 ```sh
+lsblk # shows the volumes 列出所有磁盘及其分区和大小
 inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
 hwinfo --short
 lshw -short
@@ -632,7 +633,6 @@ lspci -v -s 00:02.0 #  加上视频设备号
 
 # 磁盘文件系统和设备
 sudo file -s /dev/nvme?n*
-lsblk # shows the volumes 列出所有磁盘及其分区和大小
 sudo growpart /dev/nvme0n1 1
 sudo resize2fs /dev/xvda1
 lshw -short -C disk # 显示每个磁盘设备的描述信息

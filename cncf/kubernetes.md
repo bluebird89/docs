@@ -1243,6 +1243,7 @@ spec:
     app: myapp
     rel: stable
    type: NodePort#NodePort可以定义一个端口给外部范围
+```
 
 ```sh
 kubectl get svc
@@ -1494,16 +1495,27 @@ sudo service kubelet restart
 * 默认使用default的namespace，也可以在命令行中通过--namespace指定.永久地修改namespace，可以通过context，context位于kubectl的配置文件中，通常位于$HOME/.kube/config文件中，该文件中也包含向cluster认证的信息
 
 ```sh
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl # download a specific version
-chmod +x ./kubectl
-sudo mv ./kubectl /usr/local/bin/kubectl
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt install -y kubectl
 
 snap install kubectl --classic
 brew install kubectl
 
 # ubuntu
+#
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
 sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt install -y kubectl
+
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 cat <<EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
 deb https://apt.kubernetes.io/ kubernetes-xenial main
@@ -1540,6 +1552,7 @@ echo"source <(kubectl completion bash)" >> ~/.bashrc # 在您的 bash shell 中�
 source <(kubectl completion zsh)
 echo"if [ $commands[kubectl] ]; then source <(kubectl completion zsh); fi" >> ~/.zshrc # 在您的 zsh shell 中永久的添加自动补全
 
+kubectl version --client
 kubectl version|cluster-info
 
 kubectl config view
@@ -1766,6 +1779,8 @@ kubectl delete service kubernetes-dashboard --namespace=kube-system
 ## kubeadm
 
 * weave
+* detected "cgroupfs" as the Docker cgroup driver. The recommended driver is "systemd".
+* docker service is not enabled, please run 'systemctl enable docker.service'
 
 ```sh
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
@@ -1809,6 +1824,8 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 scp -P 2222  vagrant@10.0.2.15:/etc/kubernetes /etc/kubernetes/admin.conf
 scp 10.0.2.2:/etc/kubernetes/admin.conf /etc/kubernetes/
 kubeadm reset
+
+kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=10.20.172.211 --kubernetes-version=1.17.4
 ```
 
 ## [rook](https://github.com/rook/rook)

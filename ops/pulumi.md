@@ -5,7 +5,7 @@
 * 使用熟悉的编程语言来编写 devOps 代码
 * 专注于原生云架构，包括容器、无服务器函数和数据服务，并为Kubernetes 提供了良好的支持
 
-```
+```python
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
 

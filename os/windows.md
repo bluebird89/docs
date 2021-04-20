@@ -166,6 +166,7 @@ winget list
   - Everything
   - [火柴](https://huochaipro.com/)
 * [Windows File Recovery](https://www.microsoft.com/en-us/p/windows-file-recovery/9n26s50ln705)
+* [Dism++](http://www.chuyu.me/en/index.html)
 * Notepad++
 * 工具：ShareX
 * 同步工具：goodsync

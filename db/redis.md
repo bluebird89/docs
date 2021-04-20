@@ -382,6 +382,7 @@ struct sdshdr {
       * 同一个 key 在执行 setnx 命令时，只能成功一次，并且由于 Redis 的单线程命令处理机制，即使多个客户端同时执行 setnx 命令，也只有一个客户端执行成功
     + XX：键已存在，才可以设置成功，用于更新
       * 多次更新，跟原来值一样
+    + SET 命令如果不设置过期时间，那么 Redis 会自动「擦除」这个 key 的过期时间。
   - 获取 `GET key`
   - 批量设置值 `MSET key value [key value]`
   - 批量获取值 `MGET key [key1 key2]`,键不存在，值将为 nil,并且返回结果的顺序与传入时相同

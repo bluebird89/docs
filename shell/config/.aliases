@@ -1,0 +1,115 @@
+alias top='sudo htop'
+
+alias c="clear"
+alias cl="clear;ls;pwd"
+
+alias ls='ls --color=auto'
+alias ll='ls -la'
+alias wl='ll | wc -l'
+alias l='ls -l'
+alias lh='ls -lh'
+alias la="ls -aF"
+alias ld="ls -ld"
+alias ls='ls --color=auto'
+alias lt='ls -At1 && echo "------Oldest--"'
+alias ltr='ls -Art1 && echo "------Newest--"'
+alias lt="ls -lhtrF"
+alias l.="ls -lhtrdF .* --color=auto"
+
+alias p='pwd'
+alias path='echo -e ${PATH//:/\\n}'
+
+## a quick way to get out of current directory ##
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+cdl() { cd "$@" && pwd ; ls -alF; }
+alias ..="cdl ../../"
+alias ...='cdl ../../../'
+alias ....='cdl ../../../../'
+alias .....='cd ../../../../'
+alias .3="cd ../../.."
+alias .4='cd ../../../../'
+alias .5='cd ../../../../..'
+alias cdhome='cd ~'
+alias cdroot='cd /'
+
+## Colorize the grep command output for ease of use (good for log files)##
+alias grep='grep -i --color=auto' # 用颜色标识，更醒目；忽略大小写
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grepp="grep -P --color"
+alias nocomm='grep -Ev '\''^(#|$)'\'''
+
+alias sha1='openssl sha1'
+
+alias job='jobs -l'
+
+alias now='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
+
+alias ports='netstat -tulanp | grep'
+
+# apt
+alias ai='sudo apt-fast install -y'
+alias ad='sudo apt-fast update'
+alias ag='sudo apt-fast upgrade -y'
+alias ar='sudo apt-fast remove --purge'
+alias ac='sudo apt-fast autoremove --purge && sudo apt-fast autoclean'
+
+# yum
+alias yu='yum -y update'
+
+# systemctl
+alias ss="sudo systemctl status"
+alias sa="sudo systemctl start"
+alias st="sudo systemctl stop"
+alias sd="sudo systemctl disable"
+alias se="sudo systemctl enable"
+
+# docker
+alias d='docker'
+alias dm="docker-machine"
+alias di="docker images"
+alias dps="docker ps"
+alias dsp="docker stop"
+alias ds="docker start"
+alias dl="docker logs --tail=50"
+alias drm="docker rm"
+alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"
+alias dc='docker container'
+
+# Get IPs associated with this site
+# Work to dynamically list all interfaces. Will add later.
+# Currently only uses the hardcoded interface names
+function myip()
+{
+    extIp=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+    printf "Wireless IP: "
+    MY_IP=$(/sbin/ifconfig wlp2s0 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+    printf "Wired IP: "
+    MY_IP=$(/sbin/ifconfig enp0s25 | awk '/inet/ { print $2 } ' |
+      sed -e s/addr://)
+    echo ${MY_IP:-"Not connected"}
+
+    echo ""
+    echo "WAN IP: $extIp"
+}
+
+# Syntax: "repeat [X] [command]"
+function repeat()
+{
+    local i max
+    max=$1; shift;
+    for ((i=1; i <= max ; i++)); do  # --> C-like syntax
+        eval "$@";
+    done
+}

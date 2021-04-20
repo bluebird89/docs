@@ -1197,6 +1197,7 @@ man 2 execve
 * [Operating System Design Book Series](http://www.fysnet.net/osdesign_book_series.htm)
 * 操作系统:精髓与设计原理
 * Modern Operating Systems 4th ed 现代操作系统
+* 深入理解计算机系统
 
 ## 课程
 

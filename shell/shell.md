@@ -1650,6 +1650,9 @@ ls -l my_script # 过滤输出列表
 
 * 一个Unix Shell，作为Bourne shell的free software替代品，由Brian Fox为GNU项目编写。发布于1989年，在很长一段时间，Linux系统和macOS系统都把Bash作为默认的shell
 * 学习bash原因:当今最强大、可移植性最好的，为所有基于Unix的系统编写高效率脚本的工具之一
+* [bashtop](link)
+  - `curl -fsSL https://raw.githubusercontent.com/aristocratos/bashtop/master/bashtop -o /usr/bin/bashtop && chmod +x /usr/bin/bashtop`
+  - `curl -fsSL https://cdn.jsdelivr.net/gh/aristocratos/bashtop/bashtop  -o /usr/bin/bashtop ;chmod +x /usr/bin/bashtop`
 * [Bourne-Again Shell manual](https://www.gnu.org/software/bash/manual/)
 * [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 * [Bash Reference Manual](https://tiswww.case.edu/php/chet/bash/bashref.html)

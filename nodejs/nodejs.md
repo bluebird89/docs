@@ -51,6 +51,8 @@ sudo ln -s /opt/node/bin/npm /usr/local/bin/npm
 sudo visudo
 Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 
+export NODE_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/nodejs-release/
+
 # install compiled package
 VERSION=v10.15.0
 DISTRO=linux-x64
