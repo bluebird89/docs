@@ -1,0 +1,87 @@
+# Flexbox
+
+* 2009年，W3C 提出了一种新的方案----Flex 布局，可以简便、完整、响应式地实现各种页面布局
+* Flexible Box 的缩写，意为"弹性布局"，用来为盒状模型提供最大的灵活性
+
+## container
+
+* 声明 Flex 容器 flex container
+  - 任何一个容器都可以指定为 Flex 布局
+  - 行内元素也可以使用 Flex 布局 inline-flex
+  - Webkit内核的浏览器，必须加上-webkit前缀 -webkit-flex
+  - 设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效.支持嵌套
+  - 所有子元素自动成为容器成员，称为 flex item
+* 水平主轴 main axis  垂直交叉轴 cross axis
+  - 主轴开始位置（与边框的交叉点）叫做main start，结束位置叫做main end
+  - 交叉轴开始位置叫做cross start，结束位置叫做cross end
+  - 项目默认沿主轴排列
+  - 单个项目占据的主轴空间叫做main size，占据的交叉轴空间叫做cross size
+* 属性
+  - flex-direction：决定主轴的方向（即项目排列方向）
+    + row（默认值）：主轴为水平方向，起点在左端
+    + row-reverse：主轴为水平方向，起点在右端
+    + column：主轴为垂直方向，起点在上沿
+    + column-reverse：主轴为垂直方向，起点在下沿
+  - flex-wrap：定义如果一条轴线排不下，如何换行
+    + nowrap（默认）：不换行
+    + wrap：换行，第一行在上方
+    + wrap-reverse：换行，第一行在下方
+  - flex-flow：flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap
+  - 对齐
+    + justify-content：定义了项目在主轴上对齐方式
+      * flex-start（默认值）：左对齐
+      * flex-end：右对齐
+      * center： 居中
+      * space-between：两端对齐，项目之间的间隔都相等
+      * space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+    + align-items：定义项目在交叉轴（单行）上如何对齐
+      * stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度
+      * flex-start：交叉轴的起点对齐
+      * flex-end：交叉轴的终点对齐
+      * center：交叉轴的中点对齐
+      * baseline: 项目的第一行文字的基线对齐
+  - align-content：定义了多根轴线对齐方式。元素在一行放不下时进行换行。如果项目只有一根轴线，该属性不起作用
+    + stretch（默认值）：轴线占满整个交叉轴
+    + flex-start：与交叉轴的起点对齐
+    + flex-end：与交叉轴的终点对齐
+    + center：与交叉轴的中点对齐
+    + space-between：与交叉轴两端对齐，轴线之间的间隔平均分布
+    + space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍
+  - display:inline-flex解决display:inline-block空格问题
+
+![Alt text](../../_static/container-axis.png "Optional title")
+
+## item
+
+* order 定义项目在主轴的排列顺序
+  - 默认是其出现的顺序
+  - 可以改变默认，让后面出现的项目，排到前面去
+  - 数值越小，排列越靠前，默认为0
+* flex-grow 定义项目的放大比例,相对概念
+  - 默认为0，即如果主轴存在剩余空间，也不放大
+  - 所有项目flex-grow属性都为1，则它们将等分剩余空间（如果有的话）
+  - 一个项目flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项目多一倍
+* flex-shrink:定义空间不足项目的缩小比例
+  - 默认为1，当不够分配时，元素都将等比例缩小，占满整个宽度
+  - 所有项目flex-shrink属性都为1，当空间不足时，都将等比例缩小
+  - 一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小
+* flex-basis:定义了在分配多余空间之前，项目占据的主轴空间（main size）,浏览器根据这个属性，计算主轴是否有多余空间
+  - 默认值为auto，即项目的本来大小
+  - 可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间
+* flex:flex-grow, flex-shrink 和 flex-basis的简写
+  - 默认值为0 1 auto。后两个属性可选
+  - auto (1 1 auto)
+  - none (0 0 auto)
+* align-self:允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性
+  - 默认值为auto，表示继承父元素的align-items属性
+  - 如果没有父元素，则等同于stretch
+
+## 参考
+
+* [philipwalton/solved-by-flexbox](https://github.com/philipwalton/solved-by-flexbox):A showcase of problems once hard or impossible to solve with CSS alone, now made trivially easy with Flexbox. <https://philipwalton.github.io/solved-by-flexbox/>
+* [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1/)
+* [Flex 布局教程：语法篇](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+* [Flex 布局教程：实例篇](https://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
+* [CSS Flexible Box Layout Module Level 1](https://www.w3.org/TR/css-flexbox-1)
+* [30分钟彻底弄懂flex布局](https://cloud.tencent.com/developer/article/1354252)
+* [Understanding Flexbox: Everything you need to know](https://medium.freecodecamp.org/understanding-flexbox-everything-you-need-to-know-b4013d4dc9af)

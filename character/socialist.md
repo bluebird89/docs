@@ -1,0 +1,186 @@
+## Kevin Kelly KK 凯文·凯利
+
+* 1984年 那年1月22日，美国三大电视网同时转播第18届超级碗橄榄球比赛，超9600万人观看。在旧金山，125名黑客聚在一起，举办了全球第一届黑客大会。 大会的筹办方中，有一名32岁的自由撰稿人，名叫凯文·凯利，多年后，粉丝叫他KK。
+* 20岁时，凯文·凯利考入罗德岛大学，但上完大一就办了退学手续。 他在一家货运公司打工攒钱，买了一张从美国到亚洲的机票。 此后，长达8年的旅程中，他游历日本、韩国、印度等十几个国家，拍下4万多张照片，并学会了一种老挝乐器。 1979年复活节前夜，他到了耶路撒冷。因无处住宿，他在圣墓教堂耶稣受难处的石板上沉沉睡去。
+* 第二天清晨，阳光耀眼，他忽然重新思考起生命的意义： “如果只剩下六个月的时间，我该怎么活。” 接下来的日子，他准备以半年为倒计时，重新规划生活。 他回到家里，帮父母除草修房，探访各地亲戚，后又骑行5000公里，穿越了整个美国。 万圣节，他回到家中，沉沉睡去，权当死去。
+* 1984年，凯文·凯利撰写文章，预测计算机的未来并非存储，而是连接成网。 他窥探到了未来。5年后，万维网设想才首次被提出。
+* 1994年，出版《失控》，讲述一个因为群体连接，而百变多姿的科技未来。 《失控》成为互联网圣经，《黑客帝国》开拍前，导演将《失控》作为全剧组必读书目。
+* 2010年，《失控》在中国出版，凯文·凯利到中国宣传，5天做了6次演讲，每个人都在问他未来，网友笑称他是风水先生。 他预言的镜像世界正在一点点成形。 地图软件的年度报告，记录着活动路径；支付软件的年度账单，记录着衣食住行。
+* 凯文·凯利称，镜像世界拥有十亿只眼睛，无处不在的摄像头，可以让真实与镜像完全同步。 2016年，他发现穿戴式设备越来越多，跟踪技术越来越廉价，于是预言：“所有能被跟踪的事物，一定会被跟踪。”
+
+* 失控
+* [68 Bits of Unsolicited Advice](https://kk.org/thetechnium/68-bits-of-unsolicited-advice/)
+    - Learn how to learn from those you disagree with, or even offend you. See if you can find the truth in what they believe.
+    - Being enthusiastic is worth 25 IQ points.
+    - Always demand a deadline. A deadline weeds out the extraneous and the ordinary. It prevents you from trying to make it perfect, so you have to make it different. Different is better.
+    - Don’t be afraid to ask a question that may sound stupid because 99% of the time everyone else is thinking of the same question and is too embarrassed to ask it.
+    - Being able to listen well is a superpower. While listening to someone you love keep asking them “Is there more?”, until there is no more.
+    - A worthy goal for a year is to learn enough about a subject so that you can’t believe how ignorant you were a year earlier.
+    - Gratitude will unlock all other virtues and is something you can get better at.
+    - Treating a person to a meal never fails, and is so easy to do. It’s powerful with old friends and a great way to make new friends.
+    - Don’t trust all-purpose glue.
+    - Reading to your children regularly will bond you together and kickstart their imaginations.
+    - Never use a credit card for credit. The only kind of credit, or debt, that is acceptable is debt to acquire something whose exchange value is extremely likely to increase, like in a home. The exchange value of most things diminishes or vanishes the moment you purchase them. Don’t be in debt to losers.
+    - Pros are just amateurs who know how to gracefully recover from their mistakes.
+    - Extraordinary claims should require extraordinary evidence to be believed.
+    - Don’t be the smartest person in the room. Hangout with, and learn from, people smarter than yourself. Even better, find smart people who will disagree with you.
+    - Rule of 3 in conversation. To get to the real reason, ask a person to go deeper than what they just said. Then again, and once more. The third time’s answer is close to the truth.
+    - Don’t be the best. Be the only.
+    - Everyone is shy. Other people are waiting for you to introduce yourself to them, they are waiting for you to send them an email, they are waiting for you to ask them on a date. Go ahead.
+    - Don’t take it personally when someone turns you down. Assume they are like you: busy, occupied, distracted. Try again later. It’s amazing how often a second try works.
+    - The purpose of a habit is to remove that action from self-negotiation. You no longer expend energy deciding whether to do it. You just do it. Good habits can range from telling the truth, to flossing.
+    - Promptness is a sign of respect.
+    - When you are young spend at least 6 months to one year living as poor as you can, owning as little as you possibly can, eating beans and rice in a tiny room or tent, to experience what your “worst” lifestyle might be. That way any time you have to risk something in the future you won’t be afraid of the worst case scenario.
+    - Trust me: There is no “them”.
+    - The more you are interested in others, the more interesting they find you. To be interesting, be interested.
+    - Optimize your generosity. No one on their deathbed has ever regretted giving too much away.
+    - To make something good, just do it. To make something great, just re-do it, re-do it, re-do it. The secret to making fine things is in remaking them.
+    - The Golden Rule will never fail you. It is the foundation of all other virtues.
+    - If you are looking for something in your house, and you finally find it, when you’re done with it, don’t put it back where you found it. Put it back where you first looked for it.
+    - Saving money and investing money are both good habits. Small amounts of money invested regularly for many decades without deliberation is one path to wealth.
+    - To make mistakes is human. To own your mistakes is divine. Nothing elevates a person higher than quickly admitting and taking personal responsibility for the mistakes you make and then fixing them fairly. If you mess up, fess up. It’s astounding how powerful this ownership is.
+    - Never get involved in a land war in Asia.
+    - You can obsess about serving your customers/audience/clients, or you can obsess about beating the competition. Both work, but of the two, obsessing about your customers will take you further.
+    - Show up. Keep showing up. Somebody successful said: 99% of success is just showing up.
+    - Separate the processes of creation from improving. You can’t write and edit, or sculpt and polish, or make and analyze at the same time. If you do, the editor stops the creator. While you invent, don’t select. While you sketch, don’t inspect. While you write the first draft, don’t reflect. At the start, the creator mind must be unleashed from judgement.
+    - If you are not falling down occasionally, you are just coasting.
+    - Perhaps the most counter-intuitive truth of the universe is that the more you give to others, the more you’ll get. Understanding this is the beginning of wisdom.
+    - Friends are better than money. Almost anything money can do, friends can do better. In so many ways a friend with a boat is better than owning a boat.
+    - This is true: It’s hard to cheat an honest man.
+    - When an object is lost, 95% of the time it is hiding within arm’s reach of where it was last seen. Search in all possible locations in that radius and you’ll find it.
+    - You are what you do. Not what you say, not what you believe, not how you vote, but what you spend your time on.
+    - If you lose or forget to bring a cable, adapter or charger, check with your hotel. Most hotels now have a drawer full of cables, adapters and chargers others have left behind, and probably have the one you are missing. You can often claim it after borrowing it.
+    - Hatred is a curse that does not affect the hated. It only poisons the hater. Release a grudge as if it was a poison.
+    - There is no limit on better. Talent is distributed unfairly, but there is no limit on how much we can improve what we start with.
+    - Be prepared: When you are 90% done any large project (a house, a film, an event, an app) the rest of the myriad details will take a second 90% to complete.
+    - When you die you take absolutely nothing with you except your reputation.
+    - Before you are old, attend as many funerals as you can bear, and listen. Nobody talks about the departed’s achievements. The only thing people will remember is what kind of person you were while you were achieving.
+    - For every dollar you spend purchasing something substantial, expect to pay a dollar in repairs, maintenance, or disposal by the end of its life.
+    - Anything real begins with the fiction of what could be. Imagination is therefore the most potent force in the universe, and a skill you can get better at. It’s the one skill in life that benefits from ignoring what everyone else knows.
+    - When crisis and disaster strike, don’t waste them. No problems, no progress.
+    - On vacation go to the most remote place on your itinerary first, bypassing the cities. You’ll maximize the shock of otherness in the remote, and then later you’ll welcome the familiar comforts of a city on the way back.
+    - When you get an invitation to do something in the future, ask yourself: would you accept this if it was scheduled for tomorrow? Not too many promises will pass that immediacy filter.
+    - Don’t say anything about someone in email you would not be comfortable saying to them directly, because eventually they will read it.
+    - If you desperately need a job, you are just another problem for a boss; if you can solve many of the problems the boss has right now, you are hired. To be hired, think like your boss.
+    - Art is in what you leave out.
+    - Acquiring things will rarely bring you deep satisfaction. But acquiring experiences will.
+    - Rule of 7 in research. You can find out anything if you are willing to go seven levels. If the first source you ask doesn’t know, ask them who you should ask next, and so on down the line. If you are willing to go to the 7th source, you’ll almost always get your answer.
+    - How to apologize: Quickly, specifically, sincerely.
+    - Don’t ever respond to a solicitation or a proposal on the phone. The urgency is a disguise.
+    - When someone is nasty, rude, hateful, or mean with you, pretend they have a disease. That makes it easier to have empathy toward them which can soften the conflict.
+    - Eliminating clutter makes room for your true treasures.
+    - You really don’t want to be famous. Read the biography of any famous person.
+    - Experience is overrated. When hiring, hire for aptitude, train for skills. Most really amazing or great things are done by people doing them for the first time.
+    - A vacation + a disaster = an adventure.
+    - Buying tools: Start by buying the absolute cheapest tools you can find. Upgrade the ones you use a lot. If you wind up using some tool for a job, buy the very best you can afford.
+    - Learn how to take a 20-minute power nap without embarrassment.
+    - Following your bliss is a recipe for paralysis if you don’t know what you are passionate about. A better motto for most youth is “master something, anything”. Through mastery of one thing, you can drift towards extensions of that mastery that bring you more joy, and eventually discover where your bliss is.
+    - I’m positive that in 100 years much of what I take to be true today will be proved to be wrong, maybe even embarrassingly wrong, and I try really hard to identify what it is that I am wrong about today.
+    - Over the long term, the future is decided by optimists. To be an optimist you don’t have to ignore all the many problems we create; you just have to imagine improving our capacity to solve problems.
+    - The universe is conspiring behind your back to make you a success. This will be much easier to do if you embrace this pronoia.
+* [99 Additional Bits of Unsolicited Advice](https://kk.org/thetechnium/99-additional-bits-of-unsolicited-advice/)
+    - 智者看到一样东西，疑问要比答案多。
+    - 小时候，让你与其它同学格格不入的东西，长大后会帮助你成功，如果你不失去它的话。
+    - 金钱的作用被高估了。真正的创新很少需要大量资金，否则大公司将垄断创新。相反，几乎所有的突破都是由那些缺乏钱的人实现的，正是因为他们资源有限，才被迫进行创新，依靠自己的热情、毅力和独创性来寻找新的方法。资源不足是创新的优势。
+    - 成功的秘诀：少承诺，多交付。
+    - 实现一个目标，拿到什么结果是次要的，更重要的是，它让你改变了多少。
+    - 唯一可以接受的债务，是购买价值极有可能增加的东西。大多数商品一旦购买，价值就会减少或消失，不要借钱进行这类消费。
+    - That thing that made you weird as a kid could make you great as an adult — if you don’t lose it.
+    - If you have any doubt at all about being able to carry a load in one trip, do yourself a huge favor and make two trips.
+    - What you get by achieving your goals is not as important as what you become by achieving your goals. At your funeral people will not recall what you did; they will only remember how you made them feel.
+    - Recipe for success: under-promise and over-deliver.
+    - It’s not an apology if it comes with an excuse. It is not a compliment if it comes with a request.
+    - Jesus, Superman, and Mother Teresa never made art. Only imperfect beings can make art because art begins in what is broken.
+    - If someone is trying to convince you it’s not a pyramid scheme, it’s a pyramid scheme.
+    - Learn how to tie a bowline knot. Practice in the dark. With one hand. For the rest of your life you’ll use this knot more times than you would ever believe.
+    - If something fails where you thought it would fail, that is not a failure.
+    - Be governed not by the tyranny of the urgent but by the elevation of the important.
+    - Leave a gate behind you the way you first found it.
+    - The greatest rewards come from working on something that nobody has a name for. If you possibly can, work where there are no words for what you do.
+    - A balcony or porch needs to be at least 6 feet (2m) deep or it won’t be used.
+    - Don’t create things to make money; make money so you can create things. The reward for good work is more work.
+    - In all things — except love — start with the exit strategy. Prepare for the ending. Almost anything is easier to get into than out of.
+    - Train employees well enough they could get another job, but treat them well enough so they never want to.
+    - Don’t aim to have others like you; aim to have them respect you.
+    - The foundation of maturity: Just because it’s not your fault doesn’t mean it’s not your responsibility.
+    - A multitude of bad ideas is necessary for one good idea.
+    - Being wise means having more questions than answers.
+    - Compliment people behind their back. It’ll come back to you.
+    - Most overnight successes — in fact any significant successes — take at least 5 years. Budget your life accordingly.
+    - You are only as young as the last time you changed your mind.
+    - Assume anyone asking for your account information for any reason is guilty of scamming you, unless proven innocent. The way to prove innocence is to call them back, or login to your account using numbers or a website that you provide, not them. Don’t release any identifying information while they are contacting you via phone, message or email. You must control the channel.
+    - Sustained outrage makes you stupid.
+    - Be strict with yourself and forgiving of others. The reverse is hell for everyone.
+    - Your best response to an insult is “You’re probably right.” Often they are.
+    - The worst evils in history have always been committed by those who truly believed they were combating evil. Beware of combating evil.
+    - If you can avoid seeking approval of others, your power is limitless.
+    - When a child asks an endless string of “why?” questions, the smartest reply is, “I don’t know, what do you think?”
+    - To be wealthy, accumulate all those things that money can’t buy.
+    - Be the change you wish to see.
+    - When brainstorming, improvising, jamming with others, you’ll go much further and deeper if you build upon each contribution with a playful “yes — and” example instead of a deflating “no — but” reply.
+    - Work to become, not to acquire.
+    - Don’t loan money to a friend unless you are ready to make it a gift.
+    - On the way to a grand goal, celebrate the smallest victories as if each one were the final goal. No matter where it ends you are victorious.
+    - Calm is contagious.
+    - Even a foolish person can still be right about most things. Most conventional wisdom is true.
+    - Always cut away from yourself.
+    - Show me your calendar and I will tell you your priorities. Tell me who your friends are, and I’ll tell you where you’re going.
+    - When hitchhiking, look like the person you want to pick you up.
+    - Contemplating the weaknesses of others is easy; contemplating the weaknesses in yourself is hard, but it pays a much higher reward.
+    - Worth repeating: measure twice, cut once.
+    - Your passion in life should fit you exactly; but your purpose in life should exceed you. Work for something much larger than yourself.
+    - If you can’t tell what you desperately need, it’s probably sleep.
+    - When playing Monopoly, spend all you have to buy, barter, or trade for the Orange properties. Don’t bother with Utilities.
+    - If you borrow something, try to return it in better shape than you received it. Clean it, sharpen it, fill it up.
+    - Even in the tropics it gets colder at night than you think. Pack warmly.
+    - To quiet a crowd or a drunk, just whisper.
+    - Writing down one thing you are grateful for each day is the cheapest possible therapy ever.
+    - When someone tells you something is wrong, they’re usually right. When someone tells you how to fix it, they’re usually wrong.
+    - If you think you saw a mouse, you did. And, if there is one, there are more.
+    - Money is overrated. Truly new things rarely need an abundance of money. If that was so, billionaires would have a monopoly on inventing new things, and they don’t. Instead almost all breakthroughs are made by those who lack money, because they are forced to rely on their passion, persistence and ingenuity to figure out new ways. Being poor is an advantage in innovation.
+    - Ignore what others may be thinking of you, because they aren’t.
+    - Avoid hitting the snooze button. That’s just training you to oversleep.
+    - Always say less than necessary.
+    - You are given the gift of life in order to discover what your gift *in* life is. You will complete your mission when you figure out what your mission is. This is not a paradox. This is the way.
+    - Don’t treat people as bad as they are. Treat them as good as you are.
+    - It is much easier to change how you think by changing your behavior, than it is to change your behavior by changing how you think. Act out the change you seek.
+    - You can eat any dessert you want if you take only 3 bites.
+    - Each time you reach out to people, bring them a blessing; then they’ll be happy to see you when you bring them a problem.
+    - Bad things can happen fast, but almost all good things happen slowly.
+    - Don’t worry how or where you begin. As long as you keep moving, your success will be far from where you start.
+    - When you confront a stuck bolt or screw: righty tighty, lefty loosey.
+    - If you meet a jerk, overlook them. If you meet jerks everywhere everyday, look deeper into yourself.
+    - Dance with your hips.
+    - We are not bodies that temporarily have souls. We are souls that temporarily have bodies.
+    - You can reduce the annoyance of someone’s stupid belief by increasing your understanding of why they believe it.
+    - If your goal does not have a schedule, it is a dream.
+    - All the greatest gains in life — in wealth, relationships, or knowledge —come from the magic of compounding interest — amplifying small steady gains. All you need for abundance is to keep adding 1% more than you subtract on a regular basis.
+    - The greatest breakthroughs are missed because they look like hard work.
+    - People can’t remember more than 3 points from a speech.
+    - I have never met a person I admired who did not read more books than I did.
+    - The greatest teacher is called “doing”.
+    - Finite games are played to win or lose. Infinite games are played to keep the game going. Seek out infinite games because they yield infinite rewards.
+    - Everything is hard before it is easy. The day before something is a breakthrough, it’s a stupid idea.
+    - A problem that can be solved with money is not really a problem.
+    - When you are stuck, sleep on it. Let your subconscious work for you.
+    - Your work will be endless, but your time is finite. You cannot limit the work so you must limit your time. Hours are the only thing you can manage.
+    - To succeed, get other people to pay you; to become wealthy, help other people to succeed.
+    - Children totally accept — and crave — family rules. “In our family we have a rule for X” is the only excuse a parent needs for setting a family policy. In fact, “I have a rule for X” is the only excuse you need for your own personal policies.
+    - All guns are loaded.
+    - Many backward steps are made by standing still.
+    - This is the best time ever to make something. None of the greatest, coolest creations 20 years from now have been invented yet. You are not late.
+    - No rain, no rainbow.
+    - Every person you meet knows an amazing lot about something you know virtually nothing about. Your job is to discover what it is, and it won’t be obvious.
+    - You don’t marry a person, you marry a family.
+    - Always give credit, take blame.
+    - Be frugal in all things, except in your passions splurge.
+    - When making something, always get a few extras — extra material, extra parts, extra space, extra finishes. The extras serve as backups for mistakes, reduce stress, and fill your inventory for the future. They are the cheapest insurance.
+    - Something does not need to be perfect to be wonderful. Especially weddings.
+    - Don’t let your email inbox become your to-do list.
+    - The best way to untangle a knotty tangle is not to “untie” the knots, but to keep pulling the loops apart wider and wider. Just make the mess as big, loose and open as possible. As you open up the knots they will unravel themselves. Works on cords, strings, hoses, yarns, or electronic cables.
+    - Be a good ancestor. Do something a future generation will thank you for. A simple thing is to plant a tree.
+    - To combat an adversary, become their friend.
+    - Take one simple thing — almost anything — but take it extremely seriously, as if it was the only thing in the world, or maybe the entire world is in it — and by taking it seriously you’ll light up the sky.
+    - History teaches us that in 100 years from now some of the assumptions you believed will turn out to be wrong. A good question to ask yourself today is “What might I be wrong about?”
+    - Be nice to your children because they are going to choose your nursing home.
+    - Advice like these are not laws. They are like hats. If one doesn’t fit, try another.

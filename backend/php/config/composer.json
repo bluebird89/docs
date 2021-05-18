@@ -1,0 +1,43 @@
+{
+    "name": "henry/config",
+    "type": "library",
+    "authors": [
+        {
+            "name": "henry",
+            "email": "liboming88@yahoo.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": [
+            "aes/Aes.php",
+            "aes/test/TestAes.php"
+        ],
+        "classmap": [
+            "src/"
+        ],
+        "psr-0": {
+            "Bpp\\": "bpp/",
+            "Foo\\": "src/",
+            "Vendor\\Namespace\\": "src/",
+            "Vendor_Namespace_": "src/",
+            "Monolog\\": [
+                "src/",
+                "lib/"
+            ],
+            "UniqueGlobalClass": "",
+            "Acme\\Util\\": "src/",
+            "": "src/"
+        },
+        "psr-4": {
+            "App\\": "app/",
+            "Foo\\": "src/",
+            "name1\\space\\": [
+                "path/"
+            ],
+            "name2\\space\\": [
+                "path2/"
+            ]
+        }
+    }
+}

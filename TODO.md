@@ -1,0 +1,32 @@
+# TODO
+
+- [x] branch pages:git submodule deinit
+- [x] [HelloDjango - Django博客教程](https://www.zmrenwu.com/courses/hellodjango-blog-tutorial/)
+- [x] [linuxjourney](https://linuxjourney.com)
+- [x] [Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
+- [x] [lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记
+- [x] [go-zero](https://github.com/tal-tech/go-zero)
+
+## project
+
+* [ ] Instead of just scraping the data, why not build a website with that data:elect the most popular posts. From there it could copy the title, along with a few sentences, and then create a post that it shares online
+
+## technical
+
+* https://kit.svelte.dev/docs#introduction-getting-started
+* https://quasar.dev/
+* 《Effective Go》
+* 《Effective Java》
+* System Design Primer
+
+## video 
+
+* 电影
+	* 《爱与怪物》，合家欢电影，温馨感人不恐怖，特效做得不错，不像是今年奥斯卡奖的绝大部分影片那么痛苦深沉，它简单浅薄而明亮，无需思索深刻含义，是真正的白日梦。
+* 剧集
+	* 《太阳召唤》，终于有一部及格的奇幻故事连续剧，65分，故事设定很精彩，值得一看。
+* 动画
+	* 《极道主夫》，讲一个日本黑社会大佬隐退，甘心在家做家庭主夫的故事，泡面番，而且是赤贫制作水准，画面基本不动，如同看带动效的PPT，但是依然很好笑，很解压。
+* 读书
+	* 静静的顿河
+	* 成功的反思
