@@ -17,7 +17,10 @@ All Submissions you make to Magento Inc. (“Magento") through GitHub are subjec
 
 ## install
 
-* 文件有写权限
+* composer 私有仓库权限
+	* 到[marketplace](https://marketplace.magento.com)生成key
+	* 配置 `~/.composer/auth.json`
+* 文件添加写权限
   - vendor
   - app/etc
   - var

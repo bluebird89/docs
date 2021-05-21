@@ -2998,7 +2998,7 @@ sudo chmod +x ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 sudo ./Qv2ray-refs.tags.v1.99.6-linux.AppImage
 ```
 
-### [flatpak](https://www.flatpak.org/)
+### [flatpak](https://flatpak.org/)
 
 The Future of　Apps On linux
 
@@ -3006,15 +3006,15 @@ The Future of　Apps On linux
 * [Flathub](https://flathub.org/home):the home of hundreds of apps which can be easily installed on any Linux distribution
 
 ```sh
-sudo add-apt-repository ppa:alexlarsson/flatpak
-sudo apt-get update
 sudo apt install flatpak
 sudo apt install gnome-software-plugin-flatpak
 
-# /var/lib/flatpak/repo/config （对于全局配置）
+# /var/lib/flatpak/repo/config 全局配置
+
 #  ~/.local/share/flatpak/repo/config
 [remote “flathub”]
 url=https://sel.flathub.org/repo/
+# url=https://dl.flathub.org/repo/
 url-is-set=true
 xa.title=Flathub
 gpg-verify=true
@@ -3026,16 +3026,6 @@ xa.homepage=https://flathub.org/
 
 flatpak remote-list
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-[remote "flathub"]
-url=https://dl.flathub.org/repo/
-xa.title=Flathub
-gpg-verify=true
-gpg-verify-summary=true
-xa.comment=Central repository of Flatpak applications
-xa.description=Central repository of Flatpak applications
-xa.icon=https://dl.flathub.org/repo/logo.svg
-xa.homepage=https://flathub.org/
 
 ## restart
 

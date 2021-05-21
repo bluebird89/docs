@@ -11,8 +11,3 @@
 * [ItChat](https://github.com/littlecodersh/ItChat):A complete and graceful API for Wechat. 微信个人号接口、微信机器人及命令行微信，三十行即可自定义个人号机器人。 <http://itchat.readthedocs.io>
 * [wxpy](https://github.com/youfou/wxpy):微信机器人 / 可能是最优雅的微信个人号 API sparklessparkles <http://wxpy.readthedocs.io>
 * [InstaPy](https://github.com/timgrossmann/InstaPy/)camera Instagram Bot - Tool for automated Instagram interactions
-
-## 参考
-
-* <https://tutorialzine.com/2016/11/introduction-to-chatbots>
-* [slack api](https://api.slack.com/)

@@ -310,7 +310,6 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 沟通
   - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
   - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
-  - slack
   - [telegram](https://telegram.org/)
   - weibo:WeiboX
   - IM+

@@ -258,8 +258,13 @@
 
 * 民歌纪录片
 
-## 工具
+## 乐器
 
+* 电钢
+	- 罗兰一款，差不多4000
+	- 雅马哈的也日常推荐
+
+## 工具
 
 * [Sayonara Player](https://sayonara-player.com/)
 	- `sudo apt-add-repository ppa:lucioc/sayonara && sudo apt-get install sayonara`

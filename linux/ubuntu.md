@@ -347,6 +347,7 @@ username ALL=(ALL:ALL) NOPASSWD:ALL
 * 在线安装:通过软件包管理工具
   - `sudo gedit /etc/apt/sources.list`
   - ubuntu.16替换apt-get为apt
+- `sudo apt install gnome-software`
 * 软件源管理
   - 本地数据库中搜索关于 cowsay 软件的相关信息
   - [Synaptic](http://www.nongnu.org/synaptic/)：a graphical package management program for apt `sudo apt install synaptic`
@@ -398,7 +399,7 @@ username ALL=(ALL:ALL) NOPASSWD:ALL
 	  - Picard :一个音乐播放器，而是个音乐标签软件。如果你有大量本地音乐文件，Picard 可以帮助你自动更新音乐文件的正确的曲目、专辑、艺人资料和专辑封面
   - Fragments — A BitTorrent Client
   - 阅读写作
-    + KchmViewer:阅读CHM
+    + KchmViewer:阅读CHM `sudo apt-get install kchmviewer`
     + xchm:`sudo apt-get install xchm`
     + Foxit Reader
     + okular

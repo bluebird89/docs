@@ -28,13 +28,11 @@
 * towe
 * Adempiere是一个很主流的开源ERP/CRM系统，也是一个完整的企业应用套件和堆栈
 * Mogui是一个企业ERP/CRM的生态系统，一个类似地球：地核、地幔、地壳的的构造结构
-* [飞书](https://www.feishu.cn/): slack + google docs
+* [飞书](https://www.feishu.cn/)
 * [welink](https://www.huaweicloud.com/product/welink.html):
 * [chat](https://github.com/tinode/chat):Instant messaging server; backend in Go; Android, web command line clients; chatbots
 * 沟通
   - [mattermost-server](https://github.com/mattermost/mattermost-server):Open source Slack-alternative in Golang and React - Mattermost <https://mattermost.com>
-  - [Slack](https://slack.com/)
-    + [Across](https://blog.acrossapp.com/): Scale high touch customer success in Slack
   - [zulip](https://github.com/zulip/zulip):Zulip server - powerful open source team chat <https://zulip.org/>
   - [Rocket.Chat](https://github.com/RocketChat/Rocket.Chat):Have your own Slack like online chat, built with Meteor. <https://rocket.chat/>
     + [/Rocket.Chat.Ansible](https://github.com/RocketChat/Rocket.Chat.Ansible):Deploy Rocket.Chat with Ansible!

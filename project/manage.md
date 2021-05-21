@@ -279,7 +279,7 @@
 * github-cli(<https://github.com/siddontang/github-cli>) 高效的追踪关注的 Github 项目的动态
 * Python 写了一个小脚本，每日收集 Trello 上指定 Board 内的卡片的更新，并汇总发邮件
 * IFTTT 机器人在收集提及 TiDB、PingCAP 的推文
-* 选择开发相关的效率工具，有几个建议：
+* 选择开发相关的效率工具建议：
   - 选择有开放 API 的工具，方便写 bot，形成协同效应。
   - 切忌讳过多过杂，选择几个好用的，将其用透。
   - 使用 Slack 之类的 IM 作为各种工具的 Message Hub，尽可能做到在一个地方就能一目了然事情的状态。

@@ -879,7 +879,7 @@ sudo apt autoremove
   + 没有拥塞控制：应用可以更好的控制发送时间和发送速率
 * Tweaking sysctl variables for rmem and wmem like we did for UDP can improve throughput of sender and receiver.
 
-#### TCP vs UDP
+### TCP vs UDP
 
 * TCP是面向连接(Connection oriented)，UDP是无连接(Connection less)协议
   + TCP 是面向连接的传输层协议，传输数据前先要建立连接。
@@ -973,11 +973,13 @@ sudo apt autoremove
   - 一个数据包在传输过程中，目的IP和源IP是永远不变的(使用了NAT协议除外)，一直是主机和服务器的IP，而目的mac和源mac却是一直变化的，这也是arp协议存在的一个理由
   - 三层(IP)广播即IP地址中的主机号全是1的IP包，IP广播将导致二层链路层广播（MAC目的地址全是F）。另外，IP地址为255.255.255.255的也是广播，这种情况用于主机还不知道自己IP地址的时候(比如向DHCP服务器索要地址时、PPPOE拨号时等)，由于路由器不会转发广播帧，因此这种广播也不会逃出本地网络
 
-* IP 地址（IPv4 地址）
-  - 由 32 位正整数来表示，在计算机是以二进制方式处理,以每 8 位为组，共分为 4 组，每组以「.」隔开
-  - IP地址：在IP层有一个类似的地址标识，格式：`{ <Network-number>, <Host-number> }`，分为网络位和地址位，可以减少路由器中路由表记录的数目
-    + net-number:ip 地址所在网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应终端
-    + host-number：ip 地址所在网络中主机号
+### IPv4
+
+- 由 32 位正整数来表示，在计算机是以二进制方式处理,以每 8 位为组，共分为 4 组，每组以「.」隔开
+- IP地址：在IP层有一个类似的地址标识，格式：`{ <Network-number>, <Host-number> }`，分为网络位和地址位，可以减少路由器中路由表记录的数目
++ net-number:ip 地址所在网络地址，就可以限定拥有相同网络地址的终端都在同一个范围内，那么路由表只需要维护一条这个网络地址的方向，就可以找到相应终端
++ host-number：ip 地址所在网络中主机号
+
 * 广播:用于在同一个链路中相互连接的主机之间发送数据包
   - 广播地址:主机地址部分全部设置为1,表示该网络的广播地址
   - 本地广播:在本网络内广播。例如网络地址为 192.168.0.0/24 的情况下，广播地址是 192.168.0.255 。因为这个广播地址的 IP 包会被路由器屏蔽，所以不会到达 192.168.0.0/24 以外的其他链路上
@@ -1024,7 +1026,9 @@ sudo apt autoremove
       * 从 8 位主机号中借用 2 位作为子网号
       * 子网地址就有 4 个，分别是 00、01、10、11
 * 早期开发阶段，子网是通过 IP 地址最左侧的 8 位划分子网，这种方式只允许划分 256 个网络
-* 分类网络架构 Classful Network Architecture
+
+### 分类网络架构 Classful Network Architecture
+  
   - 在 1981 年提出，很原始的IP划分方式，在1993年提出的无分类编址之后，虽然在教科书中依然可以看到分类IP，但是事实上基本不用了
   - A 类地址：首位以 0 开头，第 1-8 位是网络地址，后24位是主机地址
     * 网络地址个数（127-2）0.0.0.0~127.0.0.0
@@ -1055,6 +1059,7 @@ sudo apt autoremove
     + {net-id,subnet-id,-1}:直接广播到指定网络的指定子网络上。 只用作目的地址
     + {net-id,-1,-1}:直接广播到指定网络的所有子网络上。 只能用作目的地址
     + {127，}:即网络号为127的任意ip地址。 都是内部主机回环地址(loopback),永远都不能出现在主机外部的网络中
+   
   - 环回地址
     + 在同一台计算机上的程序之间进行网络通信时所使用的一个默认地址
     + 使用一个特殊的 IP 地址 127.0.0.1 作为环回地址，与该地址具有相同意义的是一个叫做 localhost 的主机名
@@ -1070,12 +1075,14 @@ sudo apt autoremove
       - DDos攻击防御：网站收到DDos攻击之后，将域名A记录到127.0.0.1，即让攻击者自己攻击自己
       - 大部分Web容器测试的时候绑定的本机地址
     + localhost:一个域名，用于指代this computer或者this host,可以用它来获取运行在本机上的网络服务
-* 无类别域间路由 Classless Inter-Domain Routing CIDR
-  - IETF 在 1993 年提出替代分类网络架构，CIDR 基于可变长子网掩码（Variable-length Subnet Masking、VLSM）
-  - 缓解互联网中路由器中转发表的增长速度
-  - 缓解 IPv4 地址耗尽的速度
-  - A.B.C.D/N 32 比特的 IP 地址被划分为两部分，前面是网络号，后面是主机号，使用可变长度的子网掩码来划分地址块,N 表示网络号长度，范围 0 ~ 32
-  - 回收不再使用的 IP 资源并投入再利用
+   
+### 无类别域间路由 Classless Inter-Domain Routing CIDR
+
+- IETF 在 1993 年提出替代分类网络架构，CIDR 基于可变长子网掩码（Variable-length Subnet Masking、VLSM）
+- 缓解互联网中路由器中转发表的增长速度
+- 缓解 IPv4 地址耗尽的速度
+- A.B.C.D/N 32 比特的 IP 地址被划分为两部分，前面是网络号，后面是主机号，使用可变长度的子网掩码来划分地址块,N 表示网络号长度，范围 0 ~ 32
+- 回收不再使用的 IP 资源并投入再利用
 * 公有 IP 地址 vs 私有 IP 地址
   - 私有 IP 地址:允许组织内部的 IT 人员自己管理、自己分配，而且可以重复
   - 公有 IP 地址：有个组织统一分配,由 ICANN (互联网名称与数字地址分配机构) 组织管理,IANA 是 ICANN 的其中一个机构，它负责分配互联网 IP 地址，是按州的方式层层分配
@@ -1084,38 +1091,45 @@ sudo apt autoremove
     + RIPE NCC 欧洲、中东和中亚
     + AfriNIC 非洲地区
     + APNIC 亚太地区
-* 路由控制
-  - IP 地址:用来识别计算机网路中互连的主机和路由器
-  - 「跳」是网络中的一个区间（网段），IP 数据包正是在网络中一个个跳之间转发，因此 IP 路由也叫多跳路由，在每一个区间内决定着包在下一跳被转发的路径。
-  - 网络地址用于进行路由控制
-  - 路由控制表：所有主机和路由器都维护着一张路由控制表，该表记录 IP 数据在下一步应该发给哪个路由器，IP 数据包将根据这个路由表在各个数据链路上传输。有两种生成方式
-    + 静态路由控制：管理员手动设置
-    + 动态路由控制：路由器根据与其他路由器相互交换信息时自动刷新
-    + 为了让动态路由及时刷新路由控制表，在网络上互连的路由器之间必须设置好路由协议，保证正常读取路由控制信息
-  - 在发送 IP 包时，首先要确定 IP 包首部中的目标地址，再从路由控制表中找到与该地址具有相同网络地址的记录，根据该记录将 IP 包转发给相应的下一个路由器。如果路由控制表中存在多条相同网络地址的记录，就选择相同位数最多的网络地址，也就是最长匹配
-    + 主机 A 要发送一个 IP 包，其源地址是 10.1.1.30 和目标地址是 10.1.2.10，由于没有在主机 A 的路由表找到与目标地址 10.1.2.10 的网络地址，于是把包被转发到默认路由（路由器 1 ）
-    + 路由器 1 收到 IP 包后，也在路由器 1 的路由表匹配与目标地址相同的网络地址记录，发现匹配到了，于是就把 IP 数据包转发到了 10.1.0.2 这台路由器 2
-    + 路由器 2 收到后，同样对比自身的路由表，发现匹配到了，于是把 IP 包从路由器 2 的 10.1.2.1 这个接口出去，最终经过交换机把 IP 数据包转发到了目标主机
 
-* IPv6
-  - 128 位，每 16 位作为一组，每组用冒号 「:」 隔开，如果出现连续的 0 时还可以将这些 0 省略，并用两个冒号 「::」隔开。但是，一个 IP 地址中只允许出现一次两个连续的冒号
-  - 在设计时没有考虑与 IPv4 的兼容性问题
-  - 类型
-    + 单播地址，用于一对一的通信
-      * 在同一链路单播通信，不经过路由器，可以使用链路本地单播地址，IPv4 没有此类型
-      * 在内网里单播通信，可以使用唯一本地地址，相当于 IPv4 的私有 IP
-      * 在互联网通信，可以使用全局单播地址，相当于 IPv4 的公有 IP
-    + 组播地址，用于一对多的通信
-    + 任播地址，用于通信最近的节点，最近的节点是由路由协议决定
-    + 没有广播地址
-  - IPv6 相比 IPv4 的首部改进
-    + 取消了首部校验和字段。 因为在数据链路层和传输层都会校验，因此 IPv6 直接取消了 IP 的校验。
-    + 取消了分片/重新组装相关字段。 分片与重组是耗时的过程，IPv6 不允许在中间路由器进行分片与重组，这种操作只能在源与目标主机，这将大大提高了路由器转发的速度。
-    + 取消选项字段。 选项字段不再是标准 IP 首部的一部分了，但它并没有消失，而是可能出现在 IPv6 首部中的「下一个首部」指出的位置上。删除该选项字段是的 IPv6 的首部成为固定长度的 40 字节
-  - 优点
-    + 可自动配置，即使没有 DHCP 服务器也可以实现自动分配IP地址，真是便捷到即插即用啊。
-    + 包头包首部长度采用固定的值 40 字节，去掉了包头校验和，简化了首部结构，减轻了路由器负荷，大大提高了传输的性能。
-    + 有应对伪造 IP 地址的网络安全功能以及防止线路窃听的功能，大大提升了安全性
+![CIDR](../_static/cidr_example.jpg "CIDR")
+
+### 路由控制
+
+- IP 地址:用来识别计算机网路中互连的主机和路由器
+- 「跳」是网络中的一个区间（网段），IP 数据包正是在网络中一个个跳之间转发，因此 IP 路由也叫多跳路由，在每一个区间内决定着包在下一跳被转发的路径。
+- 网络地址用于进行路由控制
+- 路由控制表：所有主机和路由器都维护着一张路由控制表，该表记录 IP 数据在下一步应该发给哪个路由器，IP 数据包将根据这个路由表在各个数据链路上传输。有两种生成方式
++ 静态路由控制：管理员手动设置
++ 动态路由控制：路由器根据与其他路由器相互交换信息时自动刷新
++ 为了让动态路由及时刷新路由控制表，在网络上互连的路由器之间必须设置好路由协议，保证正常读取路由控制信息
+- 在发送 IP 包时，首先要确定 IP 包首部中的目标地址，再从路由控制表中找到与该地址具有相同网络地址的记录，根据该记录将 IP 包转发给相应的下一个路由器。如果路由控制表中存在多条相同网络地址的记录，就选择相同位数最多的网络地址，也就是最长匹配
++ 主机 A 要发送一个 IP 包，其源地址是 10.1.1.30 和目标地址是 10.1.2.10，由于没有在主机 A 的路由表找到与目标地址 10.1.2.10 的网络地址，于是把包被转发到默认路由（路由器 1 ）
++ 路由器 1 收到 IP 包后，也在路由器 1 的路由表匹配与目标地址相同的网络地址记录，发现匹配到了，于是就把 IP 数据包转发到了 10.1.0.2 这台路由器 2
++ 路由器 2 收到后，同样对比自身的路由表，发现匹配到了，于是把 IP 包从路由器 2 的 10.1.2.1 这个接口出去，最终经过交换机把 IP 数据包转发到了目标主机
+
+### IPv6
+
+- 128 位，每 16 位作为一组，每组用冒号 「:」 隔开，如果出现连续的 0 时还可以将这些 0 省略，并用两个冒号 「::」隔开。但是，一个 IP 地址中只允许出现一次两个连续的冒号
+- 在设计时没有考虑与 IPv4 的兼容性问题
+- 类型
++ 单播地址，用于一对一的通信
+  * 在同一链路单播通信，不经过路由器，可以使用链路本地单播地址，IPv4 没有此类型
+  * 在内网里单播通信，可以使用唯一本地地址，相当于 IPv4 的私有 IP
+  * 在互联网通信，可以使用全局单播地址，相当于 IPv4 的公有 IP
++ 组播地址，用于一对多的通信
++ 任播地址，用于通信最近的节点，最近的节点是由路由协议决定
++ 没有广播地址
+- IPv6 相比 IPv4 的首部改进
++ 取消了首部校验和字段。 因为在数据链路层和传输层都会校验，因此 IPv6 直接取消了 IP 的校验。
++ 取消了分片/重新组装相关字段。 分片与重组是耗时的过程，IPv6 不允许在中间路由器进行分片与重组，这种操作只能在源与目标主机，这将大大提高了路由器转发的速度。
++ 取消选项字段。 选项字段不再是标准 IP 首部的一部分了，但它并没有消失，而是可能出现在 IPv6 首部中的「下一个首部」指出的位置上。删除该选项字段是的 IPv6 的首部成为固定长度的 40 字节
+- 优点
++ 可自动配置，即使没有 DHCP 服务器也可以实现自动分配IP地址，真是便捷到即插即用啊。
++ 包头包首部长度采用固定的值 40 字节，去掉了包头校验和，简化了首部结构，减轻了路由器负荷，大大提高了传输的性能。
++ 有应对伪造 IP 地址的网络安全功能以及防止线路窃听的功能，大大提升了安全性
++ [IPv6 测试聚合站](https://ipv6.stream/)
+
 * IP vs MAC
   - MAC 的作用则是实现「直连」的两个设备之间通信，而 IP 则负责在「没有直连」的两个网络之间进行通信传输。
   - 源IP地址和目标IP地址在传输过程中是不会变化的，只有源 MAC 地址和目标 MAC 一直在变化
@@ -1133,8 +1147,6 @@ brctl delbr br1
 brctl addif br0 eth0
 brctl delif br0 eth0
 ```
-
-![CIDR](../_static/cidr_example.jpg "CIDR")
 
 ### 网络地址转换 Network Address Translation NAT
 
@@ -1164,7 +1176,7 @@ brctl delif br0 eth0
 
 ![NAPT](../_static/napt.jpg "NAPT")
 
-### DHCP 动态主机配置协议
+### 动态主机配置协议 DHCP 
 
 * 通过 DHCP 动态获取 IP 地址，大大省去配 IP 信息繁琐的过程
 * DHCP 客户端进程监听的是 68 端口号，DHCP 服务端进程监听的是 67 端口号
@@ -1302,6 +1314,29 @@ brctl delif br0 eth0
 * 随着机器数量越多，交换机的端口也不够。交换机互联
   - 一台交换机的某一个端口映射另外一台交换机的所有端口
 
+### 集线器
+
+* 集线器将电信号转发到所有出口（广播），不做任何处理
+* MAC 地址:所有的连接到集线器的设备,全局唯一的名字作为标识
+* 发送数据包时，在头部拼接一个MAC 地址.目标设备根据头部的目标 MAC 地址信息，判断这个数据包的确是发给自己的收下，不是舍弃
+
+### 以太网 Ethernet
+
+* 目标MAC地址(6个字节)：源MAC地址(6个字节)：类型(2个字节)：数据：FCS帧检验序列（4个字节）
+
+* Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
+* 默认路由：A default route is the route that takes effect when no other route is available for an IP destination address.If a packet is received on a routing device, the device first checks to see if the IP destination address is on one of the device’s local subnets. If the destination address is not local, the device checks its routing table. If the remote destination subnet is not listed in the routing table, the packet is forwarded to the next hop toward the destination using the default route. The default route generally has a next-hop address of another routing device, which performs the same process. The process repeats until a packet is delivered to the destination.
+
+* 以太网中一台机器发送的数据所有机器都能接收到，然后基于目的地MAC判断是否接收该数据
+* 当以太网中计算机发现有CRC检查出错时，直接丢弃该包。数据的可靠性传输交给了TCP这样的高层协议。以太网保证最大努力交付，即不可靠交付。
+* 以太网通过CSMA/CD保证同一时刻只有一台计算机在发送数据，并且是半双工，如果发现有碰撞，则推迟一个随机时间再次发送。
+* 以太网采用曼彻斯特编码
+* 10BASE-T双绞线以太网的出现，是局域网发展史的重要里程碑，从此以太网拓扑有总线型变为星型，而以太网在局域网中占据了统治地位。
+* 使用了集线器的以太网在逻辑上依然是个总线网，依然采用CSMA/CD协议。
+* 以太网一开始是总线型的，是因为那时的以太网交换机太昂贵了，而无源的总线结构要廉价得多。
+* 以太网各帧之间的发送有一定间隙，因此帧不需要结束定界符。
+* 虽然以太网交换机不适用CSMA/CD，但是其数据帧依然使用以太网帧，因此依然叫以太网。
+
 ## 物理层
 
 * 物理层：数据被称为比特流（Bits）负责0、1比特流与物理设备电压高低、光的闪灭之间的互换。通信线缆（光缆、无线），线缆的标准统统属于物理层  _物理设备_
@@ -1321,29 +1356,6 @@ brctl delif br0 eth0
 ```sh
 curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" -so /dev/null https://www.gemini.com
 ```
-
-### 集线器
-
-* 集线器将电信号转发到所有出口（广播），不做任何处理
-* MAC 地址:所有的连接到集线器的设备,全局唯一的名字作为标识
-* 发送数据包时，在头部拼接一个MAC 地址.目标设备根据头部的目标 MAC 地址信息，判断这个数据包的确是发给自己的收下，不是舍弃
-
-## 以太网 Ethernet
-
-* 目标MAC地址(6个字节)：源MAC地址(6个字节)：类型(2个字节)：数据：FCS帧检验序列（4个字节）
-
-* Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
-* 默认路由：A default route is the route that takes effect when no other route is available for an IP destination address.If a packet is received on a routing device, the device first checks to see if the IP destination address is on one of the device’s local subnets. If the destination address is not local, the device checks its routing table. If the remote destination subnet is not listed in the routing table, the packet is forwarded to the next hop toward the destination using the default route. The default route generally has a next-hop address of another routing device, which performs the same process. The process repeats until a packet is delivered to the destination.
-
-* 以太网中一台机器发送的数据所有机器都能接收到，然后基于目的地MAC判断是否接收该数据
-* 当以太网中计算机发现有CRC检查出错时，直接丢弃该包。数据的可靠性传输交给了TCP这样的高层协议。以太网保证最大努力交付，即不可靠交付。
-* 以太网通过CSMA/CD保证同一时刻只有一台计算机在发送数据，并且是半双工，如果发现有碰撞，则推迟一个随机时间再次发送。
-* 以太网采用曼彻斯特编码
-* 10BASE-T双绞线以太网的出现，是局域网发展史的重要里程碑，从此以太网拓扑有总线型变为星型，而以太网在局域网中占据了统治地位。
-* 使用了集线器的以太网在逻辑上依然是个总线网，依然采用CSMA/CD协议。
-* 以太网一开始是总线型的，是因为那时的以太网交换机太昂贵了，而无源的总线结构要廉价得多。
-* 以太网各帧之间的发送有一定间隙，因此帧不需要结束定界符。
-* 虽然以太网交换机不适用CSMA/CD，但是其数据帧依然使用以太网帧，因此依然叫以太网。
 
 ## 硬件
 
