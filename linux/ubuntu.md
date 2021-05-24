@@ -613,17 +613,21 @@ sudo fuser -v /var/cache/debconf/config.dat
   - 把文件夹拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
   - /usr/share/gnome-shell/extensions/
 * GNOME Tweaks Tool `sudo apt install gnome-tweaks`
-* 插件
+* [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
+-   [Places status indicator](https://extensions.gnome.org/extension/8/places-status-indicator/)（位置状态指示器）–快速访问系统上位置的菜单
+* [Extensions](https://extensions.gnome.org/extension/1036/extensions/)（扩展）–通过面板菜单管理GNOME扩展
   - `sudo aptitude install gnome-shell-extension-ubuntu-dock`
-  * [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
   - gnome-screenshot:`sudo apt-get install gnome-screenshot`
-  - Open Weather
+  - Hide Top Bar
+  -  [Open Weather](https://extensions.gnome.org/extension/750/openweather/) –在桌面上获取天气更新。
+-    [Dash to dock](https://extensions.gnome.org/extension/307/dash-to-dock/)–将dash移出总览并将其用作面板。
   - [system-monitor](https://extensions.gnome.org/extension/120/system-monitor/)
     + `sudo aptitude install gnome-shell-extension-system-monitor`
     + [gnome-shell-system-monitor-applet](https://github.com/paradoxxxzero/gnome-shell-system-monitor-applet)
-  - dash to dock
-  - [home-sweet-gnome/dash-to-panel](https://github.com/home-sweet-gnome/dash-to-panel):An icon taskbar for the Gnome Shell. This extension moves the dash into the gnome main panel so that the application launchers and system tray are combined into a single panel, similar to that found in KDE Plasma and Windows 7+. A separate dock is no longer needed for easy access to running and favorited applications.
-* Theme `/usr/share/themes`
+  - [dash-to-panel](https://github.com/home-sweet-gnome/dash-to-panel):An icon taskbar for the Gnome Shell. This extension moves the dash into the gnome main panel so that the application launchers and system tray are combined into a single panel, similar to that found in KDE Plasma and Windows 7+. A separate dock is no longer needed for easy access to running and favorited applications.   `sudo apt-get install gnome-shell-extension-dash-to-panel`
+  - Native Window Placement
+*  [User themes](https://extensions.gnome.org/extension/19/user-themes/) `/usr/share/themes`
+*  [](https://www.opendesktop.org/s/Gnome/browse/)
   - [Yaru-Colors](https://www.pling.com/s/Gnome/p/1299514/)
   - [](https://www.pling.com/s/Gnome)
   - [gnome-look](https://www.gnome-look.org/)
@@ -691,6 +695,21 @@ sudo apt update
 sudo apt install flat-remix-gnome
 
 sudo add-apt-repository -u ppa:snwh/ppa
+
+gnome-extensions list
+gnome-extensions disable|enable ubuntu-dock@ubuntu.com
+
+sudo apt install ubuntu-desktop
+
+
+sudo apt install kde-plasma-desktop
+```
+
+## [MATE](https://ubuntu-mate.org/)
+
+```
+sudo tasksel install kubuntu-desktop
+sudo apt install ubuntu-mate-desktop
 ```
 
 ## 用户管理
@@ -854,6 +873,8 @@ sudo perf report # 回放
     + win图标和空格键切换
   - [sougou pinyin](https://pinyin.sogou.com/linux/?r=pinyin) fcitx
 * [tlp](https://linrunner.de/tlp/)
+	* `/etc/tlp.conf`
+* [fluxgui](https://github.com/xflux-gui/fluxgui):Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
 
 ```sh
 # /etc/fstab
@@ -930,6 +951,8 @@ sudo apt-get update && sudo apt-get install indicator-sysmonitor
 # 提高电池寿命并且减少过热
 sudo add-apt-repository ppa:linrunner/tlp
 sudo apt install tlp tlp-rdw 
+sudo tlp start
+tlp-stat -s
 sudo systemctl enable tlp.service
 sudo systemctl start tlp.service
 sudo systemctl mask systemd-rfkill.service
@@ -942,12 +965,7 @@ USB_AUTOSUSPEND=0
 TLP_DEFAULT_MODE=BAT
 # Operation mode select: 0=depend on power source, 1=always use TLP\_DEFAULT\_MODE
 TLP_PERSISTENT_DEFAULT=1
-	
-## laptop-mode-tools
-sudo apt-get install laptop-mode-tools
-pkexec /usr/sbin/lmt-config-gui
 
-## [xflux-gui/fluxgui](https://github.com/xflux-gui/fluxgui):Better lighting for Linux. Open source GUI for xflux https://justgetflux.com/linux.html
 sudo add-apt-repository ppa:nathan-renniewaldock/flux
 sudo apt-get update
 sudo apt-get install fluxgui

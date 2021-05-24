@@ -8,6 +8,7 @@
 * [CodeSandbox](https://codesandbox.io/)
   - [CompuIves/codesandbox-client](https://github.com/CompuIves/codesandbox-client):An online code editor tailored for web application development 🏖️ <https://codesandbox.io>
 * [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
+* [netbeans](https://netbeans.apache.org/)
 
 ## 配置
 

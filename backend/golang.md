@@ -1564,6 +1564,7 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
 * Admin
   - [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes <https://www.go-admin.com>
+	  - [](https://book.go-admin.cn/zh)
   - [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. <http://getqor.com/>
   - [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ <http://qmplus.henrongyi.top>
 * [syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization <http://forum.syncthing.net/>

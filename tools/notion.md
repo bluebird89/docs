@@ -4,13 +4,30 @@ Work offline, collaborate in real-time, write without distractions.
 
 * 创始人 Ivan 是一位中国人，在五六年前创立了 Notion。曾因一个版本的 Notion 不够稳定，解雇了全公司的员工。之后与联合创始人搬去了日本京都从头编程，才有了如今的 Notion
 * workspace：工作空间
+	* 个人
+	* 组织
+		* private:组织内部页面
+		* public:share with web
 * page：页面
   - 自定义icon,支持 url
 * notion的页面是无限层级的，一个页面能够添加多个页面，页面中的页面也可以继续添加页面。
 * block：万物皆块（block） 块一个标题、一张图表都被定义为块，块具备在页面中随意拖拽的特性。
 * database：数据库，database也是block的一种，它主要包含图表、看板等。
 * view：视图，database可以用不同视图切换展示，例如表格可以切换为看板。
-* template：模版，可以直接复用的样式。
+* template：模版，可以直接复用的样式
+	* 方便的模板构建
+	* 在模块内部
+
+## 方法论
+
+* 目录压平，通过视图区分
+	* 以最小不可重复颗粒度为基本单位
+* 个人空间
+* 组织空间
+* 内容
+	* 模板管理
+* 展示形式
+	* 自定义视图
 
 ## 页面 Pages
 

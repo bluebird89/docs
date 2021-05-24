@@ -387,6 +387,15 @@ ffmpeg -f image2 -i output/%d.jpeg -i 1.wav -acodec copy output.mp4 -y
 ffmpeg -i input1.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb 1.ts
 ffmpeg -i input2.mp4 -vcodec copy -acodec copy -vbsf h264_mp4toannexb 2.ts
 ffmpeg -i "concat:1.ts|2.ts" -acodec copy -vcodec copy -absf aac_adtstoasc output
+
+## # Found duplicated MOOV Atom. Skippedconcat协议，实际上就只是把两个视频直接拼接，把后一个视频直接贴到前一个视频后面而已，因此只会适用于ts和flv等一些格式。mp4格式整体有一层容器，而不像ts这类格式可以直接拼接，需要先解开容器再对提取的视频流进行拼接。
+## mylist.txt
+
+file '/path/to/file1'
+file '/path/to/file2'
+file '/path/to/file3'
+
+ffmpeg -f concat -safe 0 -i mylist.txt -c copy output
 ```
 
 ## Convert to an animated GIF

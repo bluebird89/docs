@@ -107,26 +107,29 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * [Pop!_os](https://system76.com/pop):an operating system for STEM and creative professionals who use their computer as a tool to discover and create
 * [KDE Neon](https://neon.kde.org/):基于 Ubuntu 的轻量级 Linux 发行版,采用 KDE Plasma 桌面，看起来精美绝伦
 * [Nitrux](https://nxos.org/)
+* [xubuntu](https://xubuntu.org/)
 * [MX Linux](https://mxlinux.org/)
 * [Solus](https://getsol.us/home/)
 * [AntiX](https://antixlinux.com/)
-* 安装
-  - 最外层客户机Ubuntu
-  - 两三个小分区出来，可以装多个linux发行版
-  - 公用/home分区
-    + 每次装linux，/直接装在其中一个小分区上，/home挂载到第三个主分区去，那里存放文档和代码数据的，这样有什么新的linux就装，文档一直在，
-    + 可以装新linux时起个不重复的用户名，也在home下，完全不影响老的文档和使用环境配置
-  - 安装第二个Linux发行版的时候，需要注意的是，EFI分区和交换分区swap已经有可用的了，安装程序可以自动检测得到，因此不需要再关系这2个分区，只需要在磁盘剩余的空闲分区中创建这个系统本身需要的根分区/和/home分区
 
 ![distro-family-tree](../_static/distro-family-tree.png "Optional title")
 
-```sh
-sudo update-grub
-```
+## 安装
+
+- 最外层客户机Ubuntu
+- 两三个小分区出来，可以装多个linux发行版
+- 公用/home分区
++ 每次装linux，/直接装在其中一个小分区上，/home挂载到第三个主分区去，那里存放文档和代码数据的，这样有什么新的linux就装，文档一直在，
++ 可以装新linux时起个不重复的用户名，也在home下，完全不影响老的文档和使用环境配置
+- 安装第二个Linux发行版的时候，需要注意的是，EFI分区和交换分区swap已经有可用的了，安装程序可以自动检测得到，因此不需要再关系这2个分区，只需要在磁盘剩余的空闲分区中创建这个系统本身需要的根分区/和/home分区
 
 ## 操作系统
 
 * 由内核空间和用户空间组成。从存储的角度来看，内核空间主要是指需要引导程序加载和启动的内核程序，用户空间的核心则是 rootfs
+
+```
+neofetch
+```
 
 ## Architecture
 
@@ -141,18 +144,32 @@ sudo update-grub
 
 ![Linux Architecture](../_static/linux_architecture.png "Linux Architecture")
 
-## 桌面环境
+## 桌面环境 Desktop Environments
 
 * UNIX/Linux 本身没有图形界面的，在发行版上看到的图形界面是运行在 Linux 系统之上的一套软件,以前是 XFree86，现在是 xorg（X.Org）
-* 通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议，而 xorg 便是 X 架构规范的一个实现体，实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache
+* 通过 X 窗口系统（X Window System，也常被称为 X11 或 X）实现的，X 本身只是工具包及架构协议
+* xorg 是 X 架构规范的一个实现体，实现了 X 协议规范的一个提供图形界面服务的服务器，就像实现了 http 协议提供 web 服务的 Apache
 * 如果只有服务器也是不能实现一个完整的桌面环境的，还需要一个客户端 X Client，像如下几个熟知也最流行的实现了客户端功能的桌面环境
-  - [KDE](https://kde.org/)
-  - [Xfce](https://www.xfce.org/)
-  - GNOME
-  - LXDE
+* [MATE](https://mate-desktop.org/ "MATE Desktop Environment")
+	*  forked from Gnome 2.x
+- [KDE Plasma](https://www.kde.org/plasma-desktop)
+- [Xfce](https://www.xfce.org/)
+- GNOME
+-  [LXDE](https://www.lxde.org/ "LXDE Desktop Environment")*(**Lightweight X11 Desktop Environment**)
+-   [LXQT](https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop Environment")
+-   [Trinity Desktop Environment (TDE)](https://www.trinitydesktop.org/ "Trinity Desktop Environment")
 * Graphical user interface (GUI) vs Command line interface (CLI)
   - Graphical user interface allows a user to interact with the computer using graphics such as icons and images. When a user clicks on an icon to open an application on a computer, he or she is actually using the GUI. It's easy to perform tasks using GUI.
   - Command line interface allows a user to interact with the computer using commands. A user types the command in a terminal and the system helps in executing these commands. A new user with experience on GUI may find it difficult to interact with CLI as he/she needs to be aware of the commands to perform a particular operation.
+
+```
+sudo apt install lxde
+sudo apt install lxqt
+sudo apt install xfce4
+
+sudo aptitude| apt install tde-trinity
+dnf install trinity-desktop-all       
+```
 
 ## Shell vs Terminal
 
@@ -319,6 +336,8 @@ shutdown -h 12:00:00  ##12点整的时候关机
 shutdown -h # 关机后关闭电源
 shutdown -r now  # 关机/重启 -h:关机 -r:重启
 halt｜reboot｜poweroff
+
+sudo update-grub
 ```
 
 ## 环境变量 ENV
@@ -3799,11 +3818,12 @@ lsof -i @fw.google.com:2150-2180
   - `talk username`
 
 ```sh
-who # 查看谁在线
+who|w # Show who is logged in and what they are doing.
 last # 查看最近的登陆历史记录
 whoami # 只列出用户名 用于查询当前用户的名称 find out the current user in Linux is to use the whoami command
+
 who mom likes/who am i # 列出用户名，所使用终端的编号和开启时间
-w # Show who is logged in and what they are doing.
+
 finger # 列出当前用户的详细信息，需使用apt-get提前安装
 
 su <user> # 切换到用户user,执行时需要输入目标用户的密码
@@ -4060,7 +4080,7 @@ sudo apt-get update
 sudo apt-get install stacer
 ```
 
-## tr
+### tr
 
 ```sh
 grep "20 Jan 2017" jan2017articles.csv | tr ',' '\t' > jan20only.tsv

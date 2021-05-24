@@ -15,3 +15,7 @@ The Kotlin Programming Language <http://kotlinlang.org/>
 ## 工具
 
 * [ktor](https://github.com/ktorio/ktor):Framework for quickly creating connected applications in Kotlin with minimal effort <http://ktor.io>
+
+## 教程
+
+* [Android Kotlin Fundamentals](https://codelabs.developers.google.com/codelabs/kotlin-android-training-get-started/#0)

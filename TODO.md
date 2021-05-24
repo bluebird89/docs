@@ -40,3 +40,13 @@
 * 养蜂人之死
 * 一切皆契约：真实世界中的博弈与决策
 * 浪漫的谎言与真实的小说
+* 递归和偶然
+
+## 课程
+
+* [Build A Laravel App With TDD](https://laracasts.com/series/build-a-laravel-app-with-tdd)
+* [Test Driven Development(TDD) with Laravel - Trust but Verify](https://www.udemy.com/course/tdd-wth-laravel56/)
+
+## 阅读
+
+* 《阿Q生命中的六个瞬间》
