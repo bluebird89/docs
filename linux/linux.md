@@ -153,11 +153,15 @@ neofetch
 * [MATE](https://mate-desktop.org/ "MATE Desktop Environment")
 	*  forked from Gnome 2.x
 - [KDE Plasma](https://www.kde.org/plasma-desktop)
+  + [](https://store.kde.org/browse/cat/)
+  + wighet
+    * 安装
+    * Event Calendar 
 - [Xfce](https://www.xfce.org/)
 - GNOME
--  [LXDE](https://www.lxde.org/ "LXDE Desktop Environment")*(**Lightweight X11 Desktop Environment**)
--   [LXQT](https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop Environment")
--   [Trinity Desktop Environment (TDE)](https://www.trinitydesktop.org/ "Trinity Desktop Environment")
+- [LXDE](https://www.lxde.org/ "LXDE Desktop Environment")*(**Lightweight X11 Desktop Environment**)
+- [LXQT](https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop Environment")
+- [Trinity Desktop Environment (TDE)](https://www.trinitydesktop.org/ "Trinity Desktop Environment")
 * Graphical user interface (GUI) vs Command line interface (CLI)
   - Graphical user interface allows a user to interact with the computer using graphics such as icons and images. When a user clicks on an icon to open an application on a computer, he or she is actually using the GUI. It's easy to perform tasks using GUI.
   - Command line interface allows a user to interact with the computer using commands. A user types the command in a terminal and the system helps in executing these commands. A new user with experience on GUI may find it difficult to interact with CLI as he/she needs to be aware of the commands to perform a particular operation.

@@ -17,6 +17,7 @@ The Servo Browser Engine a modern, high-performance browser engine designed for 
 
 * RESTClient
 * [send](https://github.com/mozilla/send):Simple, private file sharing from the makers of Firefox <https://send.firefox.com>
+* Copy On Select
 
 ## Hotkey
 

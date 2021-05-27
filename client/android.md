@@ -104,6 +104,14 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
   - [YalpStore](https://github.com/yeriomin/YalpStore):Download apks from Google Play Store
 * [LineageOS Android Distribution](https://lineageos.org/):A free and open-source operating system for various devices, based on the Android mobile platform. It was forked from CyanogenMod in 2016.
 
+## [KDE contect](https://kdeconnect.kde.org/)
+
+```sh
+sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/udp
+sudo systemctl restart firewalld.service
+```
+
 ## APP
 
 * 国内生态太乱

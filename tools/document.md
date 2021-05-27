@@ -47,6 +47,7 @@
 * [vnote](https://github.com/tamlok/vnote)A note-taking application that knows programmers and Markdown better.
 * [Org Mode](https://orgmode.org/)
 * [Standard Notes](https://standardnotes.org)
+* [TiddlyGit](https://github.com/tiddly-gittly/TiddlyGit-Desktop)
 
 ## [Obsidian](https://obsidian.md/)
 
@@ -158,6 +159,8 @@ pandoc API.md -o api.docx -c Github.css
   - [mindtools](https://www.mindtools.com/)
   - [](https://github.com/ssjssh/notes)
   - [](https://github.com/TeamStuQ/skill-map)程序员技能图谱  github.com/teamstuq/skill-map
+
+## [OmniGraffle](https://www.omnigroup.com/omnigraffle)
 
 ## [deepnote](https://deepnote.com/)
 

@@ -3,6 +3,9 @@
 Work offline, collaborate in real-time, write without distractions.
 
 * 创始人 Ivan 是一位中国人，在五六年前创立了 Notion。曾因一个版本的 Notion 不够稳定，解雇了全公司的员工。之后与联合创始人搬去了日本京都从头编程，才有了如今的 Notion
+* 灵活地组织，编辑和创作内容
+* 方便地交流沟通
+	* 可以在文档级别进行批注，还可以在 block 级别，也就是每个段落，每张图片进行批注
 * workspace：工作空间
 	* 个人
 	* 组织
@@ -10,6 +13,7 @@ Work offline, collaborate in real-time, write without distractions.
 		* public:share with web
 * page：页面
   - 自定义icon,支持 url
+  - 可见性：添加页面或关联页面
 * notion的页面是无限层级的，一个页面能够添加多个页面，页面中的页面也可以继续添加页面。
 * block：万物皆块（block） 块一个标题、一张图表都被定义为块，块具备在页面中随意拖拽的特性。
 * database：数据库，database也是block的一种，它主要包含图表、看板等。
@@ -29,27 +33,34 @@ Work offline, collaborate in real-time, write without distractions.
 * 展示形式
 	* 自定义视图
 
-## 页面 Pages
+## 页面 Page
 
 * 如何多人编辑
-  - Operational Transformation。因为 Notion 引入了 block 的概念，它做协同的方法可以来的简单很多：在页面一级，只有调整 block 的位置才需要使用 OT 协同。一个用户调整页面的结构，并不会影响另一个用户修改受影响的 block 本身。而两个用户之间同时对一个 block 进行修改，也需要做 OT
-  - 因为 block 的粒度很细，整个多人协作编辑时不用 OT，使用乐观锁（optimistic locking）也可以达到目的
+  - Operational Transformation：在页面一级，只有调整 block 的位置才需要使用 OT 协同
+	  - 一个用户调整页面的结构，并不会影响另一个用户修改受影响的 block 本身
+	  -  两个用户之间同时对一个 block 进行修改，需要做 OT
+	  - 因为 block 的粒度很细，整个多人协作编辑时不用 OT，使用乐观锁（optimistic locking）也可以达到目的
   - 某个用户对文档某部分的编辑，可以通过 CQRS（Command and Query Responsibility Segregation）/ Event Sourcing 的方式来在各个客户端，各个共享用户间进行同步：用户的行为触发事件，各个平台接收事件，然后本地进行事件的处理和状态的更新。只要大家的更新算法一致，事件的顺序保持一致，那么所有人可以得到同样的状态
 * 版本控制
-* Ctrl + N：创建新页面
-* Ctrl + Shift + N ：打开一个新的 Notion 窗口
-* Ctrl + P ：快速查找页面（可用于快速跳转到其他页面）
-* Ctrl + [ ：返回上一页
-* Ctrl + ] ：进入下一页
-* Ctrl + U ：转到父页面
-* Ctrl + Shift + L ：切换黑暗模式
-* Ctrl + \ ：打开 / 关闭侧边栏
-* Ctrl + Shift + P（仅适用于创建新页面时）：用于选择添加页面的位置
+* 快捷方式：通过/Link To Page来相互连结
+* 通过/Create Linked Database与数据库相连接
+* 编辑页面格式与锁定页面
+* 快捷
+	* Ctrl + N：创建新页面
+	* Ctrl + Shift + N ：打开一个新的 Notion 窗口
+	* Ctrl + P ：快速查找页面（可用于快速跳转到其他页面）
+	* Ctrl + [ ：返回上一页
+	* Ctrl + ] ：进入下一页
+	* Ctrl + U ：转到父页面
+	* Ctrl + Shift + L ：切换黑暗模式
+	* Ctrl + \ ：打开 / 关闭侧边栏
+	* Ctrl + Shift + P（仅适用于创建新页面时）：用于选择添加页面的位置
 
 ## Block
 
+* 因为 block 的结构，对内容进行排序，重构，分栏或者变换表达方式变得非常容易，让思考和记录不拘于表达的形式
 * block 的概念非常类似 unix 文件系统中的 inode，但比 inode 丰富得多。一个 block，包含两部分内容
-  - content 是用户在这个 block 里输入的内容 — 但不全是。我很怀疑 Notion 内部有一套类似 Markdown 的标记语言（但从 API 上没有体现出来），甚至就是一个 Markdown 的超集，通过一个 parser，来将 block 的 content 渲染成最终的展现形式。比如说，page block 就是一个对子页面的引用，渲染出来就是一个点击进入子页面的链接。
+  - content 是用户在这个 block 里输入的内容 — 但不全是。怀疑 Notion 内部有一套类似 Markdown 的标记语言（但从 API 上没有体现出来），甚至就是一个 Markdown 的超集，通过一个 parser，来将 block 的 content 渲染成最终的展现形式。比如说，page block 就是一个对子页面的引用，渲染出来就是一个点击进入子页面的链接。
   - block 有一些属性（attribute）或者元数据（metadata）。里面涵盖 block 的颜色，样式，父页面的引用，等等。
   - 一个 block 只能属于一个页面（page）。如果需要同样内容的 block 被包含在不同的页面，只能通过复制。但这种复制产生的是一个完整的副本。
 * 如何组织成 page
@@ -62,11 +73,16 @@ Work offline, collaborate in real-time, write without distractions.
   - API 并不是描述事件，而在描述状态,弊端是随着数据的增多，API 里要描绘的状态就会越来越多，从而拖累整个系统运行的效率。
   - 创建了一个 hello world 的 block，然后将其拖拽到上一个 block 上面。Notion API 返回这样的数据：除了 hello world block 本身，还有整个 page 的 block 的列表.每次在 page 里插入 block 的时候，Notion 都会发回整个 page 的 block 的列表，然后客户端按照这个列表更新
 * Basic
-  - 标题
+  - Text
   - 引用
   - 列表
-  - 页面（/Page）
-* Media：多媒体附件
+  - Page
+  - 反向链接（backlink）是自动创建，Notion 为呼出反向链接（backlink）提供了三种方式，分别是 `[[` 、 `@` 、 `+`
+	  - 在 wiki 页面上查看相关联的主题
+	  - 可以查看链接到同一项目的所有分散的笔记、文档和任务
+	  - 做笔记时链接感兴趣的主题，自动创建想法合集
+  - 可以直接转化为页面
+* Media
   - 图片
   - 视频
   - 音频
@@ -100,7 +116,8 @@ Work offline, collaborate in real-time, write without distractions.
 
 ## 数据库 Database
 
-* 插入 Database（Inline）然后在其他地方调用其中的数据（Linked Database）
+* Database页面（Full Page）
+*  Database（Inline）然后在其他地方调用其中的数据（Linked Database）
 * 自定义column 类型
   - Tag
   - Date
@@ -124,22 +141,24 @@ Work offline, collaborate in real-time, write without distractions.
 - 导入
   + 支持 5 种基础格式： TXT、Markdown、CSV（Excel）、Word、HTML
   + 7 种服务：Trello、Asana、Google Docs、Dropbox Paper、Quip、Evernote、Workflowy
++ 可以被外联显示:create linked database
 
 ## 模板
 
-*自定义末班，相当于代码snieppt
-*　建一个通用模板：右上角 New 旁边的「v」，再点击 「+ New Template」
-*使用建好的模板
-    -点击 Database 右上角 New 旁边的「v」，在点击模板即可开始创建，适合新建软件。
-    - 直接点进 Page 进行点击 Page 中的模板名即可，适合已经创建好的 Page。
-*　类型
+* 自定义page 格式，相当于代码 snieept
+* 创建：右上角 New 旁边+ New Template
+* 使用：进 Page 进行点击 Page 中的模板名即可
+- 通过Template Button 创建代码块
+	- 将页面拖入到 Template 字段中
+* 类型
     - 博客文章：利用 Notion 的分栏功能，轻松排版出一篇图文并茂的博客文章。
     - 每周议程：把一页分栏成五列，分别安排周一到周五的任务。
     - 阅读清单：在数据库中添加希望阅读的书籍、链接、概述、作者，来督促自己看书、实时记录读书笔记、查阅阅读进度都是不错的选择。
-
 * 资源
-  - [Notion Pages](https://notionpages.com/):Discover new, productive Notion templates
-  - [Notion 模板中心](https://www.notion.so/Notion-bc848f6560db42f6888c5104685d815d)
+	* [Notion-Template-Gallery](https://www.notion.so/Notion-Template-Gallery-181e961aeb5c4ee6915307c0dfd5156d)
+		* [Notion 官方模板 中文](https://www.notion.so/Notion-f012ef65e6724bc68b1e5b9e5c3b00a7)
+	* [Notion Pages](https://notionpages.com/):Discover new, productive Notion templates
+	* [Notion 模板中心](https://www.notion.so/Notion-bc848f6560db42f6888c5104685d815d)
 
 ```
 slice("■■■■■■■■■■", 10 - round(min(dateBetween(now(), prop("BeginTime"), "days"), prop("DayOfYear")) / prop("DayOfYear") * 10)) + " " + format(round(min(dateBetween(now(), prop("BeginTime"), "days"), prop("DayOfYear")) / prop("DayOfYear") * 100))
@@ -149,6 +168,10 @@ join("", if(largerEq(multiply(divide(prop("当前"), prop("目标")), 100), 10),
 
 if(prop("Type") == "日", slice("██████████", 10 - round(toNumber(hour(now())) / 24 * 10)) + slice("░░░░░░░░░░", round(toNumber(hour(now())) / 24 * 10)) + " " + format(round(toNumber(hour(now())) / 24 * 100 * 100) / 100) + "% ", if(prop("Type") == "周", slice("██████████", 10 - round(toNumber((day(now()) ? 0 : 7) ? 7 : day(now())) / 7 * 10)) + slice("░░░░░░░░░░", round(toNumber((day(now()) ? 0 : 7) ? 7 : day(now())) / 7 * 10)) + " " + format(round(toNumber((day(now()) ? 0 : 7) ? 7 : day(now())) / 7 * 100 * 100) / 100) + "%", if(prop("Type") == "月", slice("██████████", 10 - round(toNumber(date(now())) / 31 * 10)) + slice("░░░░░░░░░░", round(toNumber(date(now())) / 31 * 10)) + " " + format(round(toNumber(date(now())) / 31 * 100)) + "%", if(prop("Type") == "年", slice("██████████", 10 - round(toNumber(dateBetween(now(), prop("年份开始"), "days") / 365 * 10))) + slice("░░░░░░░░░░", toNumber(dateBetween(now(), prop("年份开始"), "days") / 365 * 10)) + " " + format(round(toNumber(dateBetween(now(), prop("年份开始"), "days")) / 365 * 100 * 100) / 100) + "%", slice("██████████", 10 - round(toNumber(dateBetween(now(), prop("你的出生"), "years")) / 76 * 10)) + slice("░░░░░░░░░░", round(toNumber(dateBetween(now(), prop("你的出生"), "years")) / 76 * 10)) + " " + format(round(toNumber(dateBetween(now(), prop("你的出生"), "years")) / 76 * 10000) / 100) + "%"))))
 ```
+
+## 账户
+
+* 支持建工作账户
 
 ## 教程
 
@@ -160,7 +183,9 @@ if(prop("Type") == "日", slice("██████████", 10 - round(toN
 * [Slidepad](http://osen.deisgn) 和 Better and Better 这两个软件都可以吸附在侧边，区别是
   - Slidepad 借助第三方登录 Web 版 Notion，可以使用置顶功能
   - Better and Better 可以直接针对 Notion 官方客户端进行吸附，但不能置顶。
+- wolai:汉化
 
 ## 参考
 
 * [API](https://developers.notion.com/)
+	* [](https://www.notion.so/my-integrations)

@@ -309,7 +309,6 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [clashX](https://github.com/yichengchen/clashX):A rule based custom proxy with GUI for Mac base on clash.
 * 沟通
   - [Textual 7](<Textual is the world's most popular application for interacting with Internet Relay Chat (IRC) chatrooms on macOS.>)
-  - [OmniGraffle](https://www.omnigroup.com/omnigraffle)
   - [telegram](https://telegram.org/)
   - weibo:WeiboX
   - IM+

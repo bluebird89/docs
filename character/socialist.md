@@ -4,11 +4,9 @@
 * 20岁时，凯文·凯利考入罗德岛大学，但上完大一就办了退学手续。 他在一家货运公司打工攒钱，买了一张从美国到亚洲的机票。 此后，长达8年的旅程中，他游历日本、韩国、印度等十几个国家，拍下4万多张照片，并学会了一种老挝乐器。 1979年复活节前夜，他到了耶路撒冷。因无处住宿，他在圣墓教堂耶稣受难处的石板上沉沉睡去。
 * 第二天清晨，阳光耀眼，他忽然重新思考起生命的意义： “如果只剩下六个月的时间，我该怎么活。” 接下来的日子，他准备以半年为倒计时，重新规划生活。 他回到家里，帮父母除草修房，探访各地亲戚，后又骑行5000公里，穿越了整个美国。 万圣节，他回到家中，沉沉睡去，权当死去。
 * 1984年，凯文·凯利撰写文章，预测计算机的未来并非存储，而是连接成网。 他窥探到了未来。5年后，万维网设想才首次被提出。
-* 1994年，出版《失控》，讲述一个因为群体连接，而百变多姿的科技未来。 《失控》成为互联网圣经，《黑客帝国》开拍前，导演将《失控》作为全剧组必读书目。
+* 1994年，出版《失控》，讲述一个因为群体连接，而百变多姿的科技未来。《失控》成为互联网圣经，《黑客帝国》开拍前，导演将《失控》作为全剧组必读书目。
 * 2010年，《失控》在中国出版，凯文·凯利到中国宣传，5天做了6次演讲，每个人都在问他未来，网友笑称他是风水先生。 他预言的镜像世界正在一点点成形。 地图软件的年度报告，记录着活动路径；支付软件的年度账单，记录着衣食住行。
 * 凯文·凯利称，镜像世界拥有十亿只眼睛，无处不在的摄像头，可以让真实与镜像完全同步。 2016年，他发现穿戴式设备越来越多，跟踪技术越来越廉价，于是预言：“所有能被跟踪的事物，一定会被跟踪。”
-
-* 失控
 * [68 Bits of Unsolicited Advice](https://kk.org/thetechnium/68-bits-of-unsolicited-advice/)
     - Learn how to learn from those you disagree with, or even offend you. See if you can find the truth in what they believe.
     - Being enthusiastic is worth 25 IQ points.
@@ -184,3 +182,5 @@
     - History teaches us that in 100 years from now some of the assumptions you believed will turn out to be wrong. A good question to ask yourself today is “What might I be wrong about?”
     - Be nice to your children because they are going to choose your nursing home.
     - Advice like these are not laws. They are like hats. If one doesn’t fit, try another.
+
+### 失控

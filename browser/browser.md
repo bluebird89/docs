@@ -2,6 +2,7 @@
 
 * [Chrome](./chrome.md) 基于Webkit
 	* Edge
+	* [mightyapp](https://www.mightyapp.com/)
 * [Firefox](./firefox.md)自研Gecko内核
 * Safari Webkit内核
   - 像JavaScript引发的alert窗口或file组件打开的窗口，都属于模态窗口，它们会阻塞所有主线程中正在执行的JavaScript代码

@@ -183,7 +183,7 @@ winget list
 * Foxit Reader
 * editor：Visual Studio Code
 * CCleaner, Defraggler, Recuva & Speccy.
-* Evernote
+* Google 拼音输入法
 * Foxmail
 * RTX
 * TIM

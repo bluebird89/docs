@@ -44,22 +44,34 @@ The world’s fastest framework for building websites. <https://gohugo.io>
 
 * deploy 通过Aerobatic[<https://gohugo.io/hosting-and-deployment/hosting-on-bitbucket/>]
 * [hugo-academic](https://github.com/gcushen/hugo-academic):📝 The website builder for Hugo. Build and deploy a beautiful website in minutes! <https://sourcethemes.com/academic/>
-* Theme
-  - [Hugo Themes](https://themes.gohugo.io)
-* <https://jimmysong.io/hugo-handbook>
+* [Hugo Themes](https://themes.gohugo.io)
+* 使用 Github Actions 自动部署 Hugo 站点
+	* ``https://github.com/<YourName>/<YourName>.github.io` public
+		* `.github/workflows/hugo.yml`
+		* `public key` 作为网站文件仓库 `Settings > Deploy Keys`
+	* `https://github.com/<YourName>/pages-hugo-source` private
+		* `private key` 作为 Hexo 源文件仓库 `Settings > Secrets` 的 一个名叫 `DEPLOY_KEY` 的 `Actions secrets`
+		* 查看 actions:`https://github.com/<YourName>/pages-hugo-source/actions`
+
 
 ```sh
+## install
 brew install hugo
+sudo apt install hugo
+
 hugo version
 
+## init
 hugo new site quickstart
 
-cd quickstart;\
-git init;\
+cd quickstart
+git init
+
+## add theme
+hugo new theme <THEMENAME>
 git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke;\
 
-# Edit your config.toml configuration file
-# and add the Ananke theme.
+# config.toml:configuration file and add the Ananke theme.
 echo 'theme = "ananke"' >> config.toml
 
 hugo new posts/my-first-post.md
@@ -68,12 +80,17 @@ hugo server -D
 
 config.toml  //配置文件
 
-git clone --depth 1 --recursive https://github.com/gohugoio/hugoThemes.git themes // 获取所有主题，避免这样操作，没意义
 cd themes
 git clone https://github.com/spf13/hyde
 
 hugo -t themename // 测试主题效果
 hugo server -t themename
+
+hexo clean：删除网站（public）文件
+hexo g：生成网站（public）文件
+hexo d：将本地网站（public）文件同步到指定仓库（如：yourname.github.io）中
+
+ssh-keygen -t rsa -b 4096 -C "$(git config user.email)" -f gh-pages -N ""
 ```
 
 ## [jekyll](https://github.com/jekyll/jekyll)
