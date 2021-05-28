@@ -168,6 +168,11 @@
 ![Alt text](../_static/get_coupon.png "Optional title")
 ![Alt text](../_static/coupon_fliter.png "Optional title")
 
+## 社区团购
+
+* 叮叮买菜
+* 十荟团
+
 ## 技能
 
 * Word，Excel和PPT，思维导图

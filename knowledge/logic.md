@@ -41,4 +41,10 @@
 * Engines of Logic
 * The Elements of Style
 * 简单的逻辑学
+* 《符号逻辑入门》Susanne K. Langer
+* An Introduction to Mathematical Logic
 * 推理之门由此进
+* Handbook of Logic and Language
+* 语言哲学 陈嘉映
+* Logic as Algebra (Dolciani Mathematical Expositions) Paul Halmos , Steven Givant
+* Introduction to Logic and to the Methodology of the Deductive Sciences

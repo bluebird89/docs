@@ -11,6 +11,10 @@ brew install clisp
 clisp
 ```
 
+## 图书
+
+* On LISP: Advanced Techniques for Common LISP
+
 ## Tool
 
 * [Portacle](https://portacle.github.io/):a multiplatform, complete IDE for Common Lisp. It includes Emacs, SBCL, Git, Quicklisp, all configured and ready to use

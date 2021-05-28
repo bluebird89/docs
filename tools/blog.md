@@ -53,7 +53,6 @@ The world’s fastest framework for building websites. <https://gohugo.io>
 		* `private key` 作为 Hexo 源文件仓库 `Settings > Secrets` 的 一个名叫 `DEPLOY_KEY` 的 `Actions secrets`
 		* 查看 actions:`https://github.com/<YourName>/pages-hugo-source/actions`
 
-
 ```sh
 ## install
 brew install hugo
