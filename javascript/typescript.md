@@ -85,6 +85,7 @@ tsc --build tsconfig.json
 
 * [TypeScript Deep Dive 深入理解 TypeScript](https://basarat.gitbook.io/typescript/getting-started)
   - [typescript-book-chinese](https://github.com/jkchao/typescript-book-chinese):TypeScript Deep Dive 中文版 <https://jkchao.github.io/typescript-book-chinese/>
+- Programming with Types
 
 ## 工具
 
