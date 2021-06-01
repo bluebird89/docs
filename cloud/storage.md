@@ -20,11 +20,19 @@
 * [数蚁](https://teamyi.com)
 * [server](https://github.com/nextcloud/server):☁️ Nextcloud server, a safe home for all your data <https://nextcloud.com>
   - `sudo -u www-data php occ maintenance:install --database "mysql" --database-name "henry" --database-user "nextcloud" --database-port:"33060" --database-pass "henry" --admin-user "admin" --admin-pass "admin"`
-* [Resilio](https://www.resilio.com/):在几台不同的设备之间同步文件,是一种分布式网盘 `config.getsync.com/sync.conf`
 * 建议
   - 40GB 空间以下选阿里云的 OSS
   - 40GB 以上可以对比下腾讯云的 COS
   - 国外服务商，请优先选择 BackBlaze，性价比完爆 AWS、MS、Google
+
+###  [Resilio](https://www.resilio.com/)
+
+* 在几台不同的设备之间同步文件,是一种分布式网盘 `config.getsync.com/sync.conf`
+* [linux install](https://help.resilio.com/hc/en-us/articles/206178924)
+
+```sh
+./rslsync --webui.listen 0.0.0.0:8888
+```
 
 ## 服务
 
@@ -51,6 +59,7 @@
   + `sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable`
   + `sudo apt-get update && sudo apt-get install qbittorrent`
   + 开启 UPnP / NAT-PMP 功能
+  + 添加 eMule 服务器
   + 添加 trackers 优化下载速度
     - [trackerslist](https://github.com/ngosang/trackerslist):Updated list of public BitTorrent trackers
     - <https://torrents.io/tracker-list/>
@@ -103,3 +112,4 @@ code
 * [Unison](https://www.cis.upenn.edu/~bcpierce/unison/):File Synchronizer
 * [openmediavault](https://www.openmediavault.org/): the next generation network attached storage (NAS) solution based on Debian Linux. It contains services like SSH, (S)FTP, SMB/CIFS, DAAP media server, RSync, BitTorrent client and many more.
 * [transfer.sh](https://github.com/dutchcoders/transfer.sh) Easy and fast file sharing from the command-line.
+* [send](https://github.com/timvisee/send) https://send.vis.ee/

@@ -37,7 +37,9 @@ tsc --build tsconfig.json
   - 在重写父类的方法实现
   - 复用方法需要声明
 
-## 原始数据类型
+## 数据类型
+
+### Primitive 原始
 
 * Boolean
 * Number
@@ -47,19 +49,59 @@ tsc --build tsconfig.json
 * Enum 一个常量集合。创建一个Enum，就创建了一个数据的新类型
 * Any 表示接受任何值
 * Void 只能接受undefined和null作为值，主要用来标记不返回任何值的函数返回值的类型
-* Function
+* `type`关键字用来组合更大的类型
+	* 起别名
+* Primitive Obsession
 
-## 任意值
+```
+type Name = {  firstName: string  middleName: string  lastName: string}
 
-## 类型推论
+`type GetCardNo = (cardNo: string) => Option<cardno>`
+```
 
 ## 联合类型
 
+* Union Types `type Pet = Fish | Bird`
+	* 可空类型 `type Option</t><t> = T | null`
+* Intersection Types  `type ABC = A & B & C`
+
+```
+type CardNo = string
+type Name50 = string
+
+type CreditCard = {
+	cardNo: Option<CardNo>  
+	firstName: Name50  
+	middleName: Option<string>  
+	lastName: Name50  
+	contactEmail: Email  
+	contactPhone: Phone
+ }
+
+# **原子性和聚合性**
+type Name = {  firstName: Name50  middleName: Option<string>  lastName: Name50}
+type Contact = {  contactEmail: Email  contactPhone: Phone}type CreditCard3 = { 
+
+# 
+type OnlyContactEmail = Email 
+type OnlyContactPhone = Phone
+type BothContactEmailAndPhone = Email & Phone
+type Contact =   | OnlyContactEmail  | OnlyContactPhone  | BothContactEmailAndPhone
+
+cardNo: Option<CardNo>  name: Name  contact: Contact}
+```
+
+## 类型推论
+
+## 任意值
+
 ## 对象的类型——接口
 
-## 数组的类型
+## 数组
 
-## 函数的类型
+## 函数
+
+通过`type`关键字来定义函数类型 `type Add = (a: number) => (b: number) => number`
 
 ## 类型断言
 

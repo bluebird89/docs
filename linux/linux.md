@@ -70,7 +70,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
   - [UbuntuDDE](https://ubuntudde.com/): Powerful Ubuntu with the most beautiful desktop environment.
 * 安全与稳定：为学习最新的东西而甘冒风险；最新和最伟大的功能；有趣的配置以便于处理重大更改
   - [Fedora](https://getfedora.org/)
-  - [Kali](https://www.kali.org/)
+  - [Kali Linux](https://www.kali.org/ "Kali Linux")
     + [offensive-security/kali-linux-docker](https://github.com/offensive-security/kali-linux-docker):Kali Linux Docker
     + [kalitools](https://github.com/Jack-Liang/kalitools):Kali Linux工具清单
 * 服务器：稳定性；安全；支持其他出于同样原因的程序员使用
@@ -82,7 +82,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * 性能：显著的性能提升；高负载计算
   - Clear Linux  (For Intel CPUS, by Intel)
 * 桌面：安全性；匿名性
-  - TAILS Linux
+  - [TAILS Linux](https://tails.boum.org/index.en.html)
   - Alpine Linux
   - CoreOS
   - TENS Linux (DOD Project)
@@ -112,6 +112,8 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * [Solus](https://getsol.us/home/)
 * [AntiX](https://antixlinux.com/)
 
+* [Qubes OS](https://www.qubes-os.org/ "Qubes OS")
+
 ![distro-family-tree](../_static/distro-family-tree.png "Optional title")
 
 ## 安装
@@ -128,6 +130,16 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * 由内核空间和用户空间组成。从存储的角度来看，内核空间主要是指需要引导程序加载和启动的内核程序，用户空间的核心则是 rootfs
 
 ```
+arch| uname -m # 显示机器的处理器架构
+
+# 查看linux系统信息
+cat /proc/version # 说明正在运行的内核版本
+cat /etc/issue # 显示的是发行版本信息
+lsb_release -a
+uname -a # 显示电脑以及操作系统的相关信息
+uname -rs # 显示正在使用的内核版本
+sudo dpkg --get-selections |grep linux-image
+
 neofetch
 ```
 
@@ -273,6 +285,71 @@ net.core.rmem\_max = 8388608
 net.core.wmem\_max = 8388608
 net.core.netdev\_max\_backlog = 5000
 net.ipv4.tcp\_window\_scaling = 1
+```
+
+## 硬件
+
+```sh
+lshw -short
+lshw -C cpu | grep -i product # 查看 CPU 品牌和型号
+lshw -short -C memory # 获取系统内存更多的信息，包括类型、容量、速度和电压
+lshw -short -C memory | grep -i empty # 检查一下计算机是否有空闲的插槽可以插入额外的内存条
+lshw -short -C disk # 显示每个磁盘设备的描述信息
+
+# cpu
+lscpu
+lscpu | grep -i mhz # 查看 CPU 的速度（兆赫兹）
+lscpu | grep -i bogo # 或其 BogoMips 额定功率
+
+cat /proc/cpuinfo |grep "model name"|uniq|cut -f2 -d:
+time echo "scale=500;4*a(1)"|bc -l -q # 计算时间越短越好
+
+# memory
+dmidecode -t memory | grep -i size # 列出每根内存条和其容量
+dmidecode -t memory | grep -i max # 可以安装的最大内存
+
+# 显卡内存
+lspci | grep -i vga
+lspci -v -s 00:02.0 #  加上视频设备号
+
+lshw -C network # 网卡硬件详细信息
+ifconfig -a
+ip link show
+netstat -i
+
+## 硬件
+dmidecode -q # 显示硬件系统部件 - (SMBIOS / DMI)
+hdparm -i /dev/hda # 罗列一个磁盘的架构特性
+hdparm -tT /dev/sda # 在磁盘上执行测试性读取操作
+cat /proc/cpuinfo # 显示CPU info的信息
+cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
+at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
+cat /proc/interrupts # 显示中断
+cat /proc/meminfo # 内存使用
+cat /proc/swaps # 显示哪些swap被使用
+cat /proc/version # 显示内核的版本
+cat /proc/net/dev # 显示网络适配器及统计
+cat /proc/mounts # 显示已加载的文件系统
+lscpu
+lspci -tv # 罗列 PCI 设备
+lsusb -tv # 显示 USB 设备
+
+# Show info about disk sda
+hdparm -i /dev/sda
+
+# Perform a read speed test on disk sda
+hdparm -tT /dev/sda
+
+grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
+
+# Display processor related statistics
+mpstat 1
+
+# Display virtual memory statistics
+vmstat 1
+
+# Display I/O statistics
+iostat 1
 ```
 
 ## 启动
@@ -676,13 +753,22 @@ sudo lshw
 
 ## [磁盘](https://wiki.archlinux.org/title/Partitioning)
 
-* 分区：磁盘上存储分区信息的方式，包含分区从哪里开始的信息The partitioning scheme is stored in a [partition table](https://wiki.archlinux.org/title/Partitioning#Partition_table) such as Master Boot Record (MBR) or GUID Partition Table (GPT)
-- 硬盘
-	+ IDE接口硬盘 /dev/hda、/dev/hdb …
-	+ SCSI |SATA接口的硬盘 /dev/sda、/dev/sdb … …
-	+ 硬盘内分区：如果X的值是1到4,表示硬盘的主分区（包含扩展分区）；逻辑分区从是从5开始的，比如/dev/hda5肯定是逻辑分区了
-* MBR（Master Boot Record）：存在于驱动器开始部分的一个特殊的启动扇区
-	+ bootstrap code 已安装的操作系统的启动加载器
++ IDE接口硬盘 /dev/hda、/dev/hdb …
++ SCSI |SATA接口的硬盘 /dev/sda、/dev/sdb … …
+* 传统的 BIOS (Basic Input/Output System) 和 UEFI (Unified Extensible Firmware Interface) 可以看做是电脑的固件，都是在电脑启动后初始化所有连接的硬件设备，之后从硬盘中运行引导程序。
+	* Legacy BIOS会执行MBR区域的程序。
+	* UEFI可以在GPT上寻找[ESP](https://en.wikipedia.org/wiki/EFI_system_partition) (EFI system partition)来运行其中的程序。
+* 分区：磁盘上存储分区信息方式，包含分区从哪里开始的信息The partitioning scheme is stored in a [partition table](https://wiki.archlinux.org/title/Partitioning#Partition_table) such as Master Boot Record (MBR) or GUID Partition Table (GPT)
+	* MBR分区方式最多只允许4个主分区，其中可以有一个是逻辑分区
+		* 如果X的值1到4,表示硬盘的主分区（包含扩展分区）
+		* 逻辑分区从从5开始的，比如/dev/hda5肯定是逻辑分区
+	* GPT则不限制分区数量，而且分区都是主分区
+	* GPT兼容MBR的，GPT分区可以通过MBR引导启动或者往MBR区域写入引导程序。所以在安装时可以不管是GPT分的区还是MBR分区都直接以传统方式安装GRUB。
+	* 如果grub-install发现是GPT分区那么会自动把GRUB安装到boot分区，并且还可以在MBR分区写入引导，引导执行boot分区的grub程序。
+	* 包含Windows的双系统下不能同时使用GPT和MBR，这是Windows的强制限制，使用只能使用GPT+UEFI启动或者MBR+BIOS启动。
+		* 所以如果先安装了Windows，并且之后要安装其他系统的话就必须要注意在分区时不能够改变这分区方式，并且如果是GPT的话，不能改变ESP分区。这是在存在Windows时安装其他系统的前提条件，但是如果不知道系统的安装程序做了什么的话可以也会无法引导。可以在系统安装好之后再在Windows的引导程序中加入其他系统的选项，也可以在GRUB中加入启动Windows的选项。如果是GPT分区的话通常还可以在boot界面选择哪个系统启动。
+* MBR（Master Boot Record）存在于驱动器开始部分的一个特殊的启动扇区,硬盘最开始的512字节的区域
+	+ bootstrap code 已安装操作系统的启动加载器
 		+ 主引导程序（偏移地址0000H--0088H ）负责从活动分区中装载，并运行系统引导程序
 		+ The first 440 bytes of MBR are the **bootstrap code area**. On BIOS systems it usually contains the first stage of the boot loader. The bootstrap code can be backed up, restored from backup or erased using dd
 		+  出错信息数据区：偏移地址0089H--00E1H 为出错信息，00E2H--01BDH 全为0 字节
@@ -735,6 +821,7 @@ sudo lshw
   - -k : 以KB列出容量显示
   - -m : 以MB列出容量显示
   - `sudo du -h / | sort -n -r | head -n 5`
+  - gdu:du 命令的 Go 语言版
 * [duf](https://github.com/muesli/duf):Disk Usage/Free Utility
 * rm:删除文件之后，空间就被释放了吗
   - 只有当一个文件的引用计数为0（包括硬链接数）的时候，才可能调用unlink删除，只要它不是0，那么就不会被删除
@@ -753,48 +840,45 @@ sudo lshw
   - KInfoCenter 和 Lshw 也能够显示硬件的详细信息，并且可以从许多软件仓库中获取。
 
 ```sh
-lsblk # shows the volumes 列出所有磁盘及其分区和大小
+dmidecode -t bios # 显示了 UEFI 或 BIOS 的日期和版
+
+# 磁盘文件系统和设
+gdisk -l
+
+# shows the volumes 列出所有磁盘及其分区和大小
+lsblk 
 inxi -Fxz # 能够列出包括 CPU、图形、音频、网络、驱动、分区、传感器等详细信息 -F 参数意味着你将得到完整的输出，x 增加细节信息，z 参数隐藏像 MAC 和 IP 等私人身份信息
 hwinfo --short
-lshw -short
 
-# cpu
-lscpu
-lshw -C cpu
-lshw -C cpu | grep -i product # 只查看 CPU 品牌和型号
-lscpu | grep -i mhz # 查看 CPU 的速度（兆赫兹）
-lscpu | grep -i bogo # 或其 BogoMips 额定功率
-cat /proc/cpuinfo |grep "model name"|uniq|cut -f2 -d:
-time echo "scale=500;4*a(1)"|bc -l -q # 计算时间越短越好
-
-# memory
-dmidecode -t memory | grep -i size # 列出每根内存条和其容量
-lshw -short -C memory # 获取系统内存更多的信息，包括类型、容量、速度和电压
-dmidecode -t memory | grep -i max # 可以安装的最大内存
-lshw -short -C memory | grep -i empty # 检查一下计算机是否有空闲的插槽可以插入额外的内存条
-
-# 显卡内存
-lspci | grep -i vga
-lspci -v -s 00:02.0 #  加上视频设备号
-
-# 磁盘文件系统和设备
 sudo file -s /dev/nvme?n*
 sudo growpart /dev/nvme0n1 1
 sudo resize2fs /dev/xvda1
-lshw -short -C disk # 显示每个磁盘设备的描述信息
 hdparm -i /dev/sda # 获取任何指定的 SATA 磁盘详细信息，例如其型号、序列号以及支持的模式和扇区数量等
+
 fdisk -l # 获取更多有关扇区数量、大小、文件系统 ID 和 类型以及分区开始和结束扇区
 blkid # 列出了每个分区的唯一标识符（UUID）及其文件系统类型
-df -m # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
+
+# 分区
+sudo fdisk /dev/sdb # 硬盘进行分区
+
+m # 查看所有命令的菜单及帮助信息
+d # 删除不想要的分区
+n # 添加一个新的分区
+p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
+t # 更改分区类型
+L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
+w # 保存退出
+
 lsusb|lspci # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
 # 统计数据块使用情况
+df -m # 列出已挂载的文件系统和它们的挂载点，以及已用的空间和可用的空间
 df -Th
 df -aT # 查看分区的文件系统
 df -h  /etc # Human-readable 显示目前所有文件系统的总容量，使用量，剩余容量
 df -k
 df -h /
 df -h .
-sudo du -h --max-depth=1 / | grep '[0-9]G\>'
+
 dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
 
 sync; echo 3 > /proc/sys/vm/drop_caches # 清空缓存
@@ -806,6 +890,7 @@ time dd if=/dev/zero of=/tmp/speed bs=1M count=2K conv=fsync;rm /tmp/speed # 测
 # 查看目录的容量
 # -h 同--human-readable 以K，M，G为单位，提高信息的可读性
 # -a 同--all 显示目录中所有文件的大小
+sudo du -h --max-depth=1 / | grep '[0-9]G\>'
 du -sh /* # 递归地运行，遍历每个子目录并且返回每个文件的单个大小
 du -h --max-depth=1 /home  # 文件大小相加
 du -sh /*
@@ -818,70 +903,11 @@ du -hd 1 .
 du -hd 1 . | sort -n
 du -kd 1 . | sort -n
 du -hd 1 . | sort -hr
-# 分区
-sudo fdisk /dev/sdb # 硬盘进行分区
-m # 查看所有命令的菜单及帮助信息
-d # 删除不想要的分区
-n # 添加一个新的分区
-p # 设置一个主分区（e为扩展分区），再接下来设置起止扇区号（一个扇区512B，根据个人需要设置分区大小）
-t # 更改分区类型
-L # 可查看所有分区类型的编号，根据个人需求，输入对应的分区类型编号
-w # 保存退出
 
 sudo growpart /dev/xvda 1 # 对磁盘 分区4扩容
 growpart /dev/sda 1 # Resize partition 1 on /dev/sda must supply disk and partition-number
 sudo mkfs.ext4 /dev/sdb1 # 格式化成ext4文件系统 （输入sudo mkfs，按两次tab键，会出现多种文件系统，根据需求选择）
 
-lshw -C network # 网卡硬件详细信息
-ifconfig -a
-ip link show
-netstat -i
-
-dmidecode -t bios # 显示了 UEFI 或 BIOS 的日期和版
-
-arch| uname -m # 显示机器的处理器架构
-
-# 查看linux系统信息
-cat /proc/version # 说明正在运行的内核版本
-cat /etc/issue # 显示的是发行版本信息
-lsb_release -a
-uname -a # 显示电脑以及操作系统的相关信息
-uname -rs # 显示正在使用的内核版本
-sudo dpkg --get-selections |grep linux-image
-
-## 硬件
-dmidecode -q # 显示硬件系统部件 - (SMBIOS / DMI)
-hdparm -i /dev/hda # 罗列一个磁盘的架构特性
-hdparm -tT /dev/sda # 在磁盘上执行测试性读取操作
-cat /proc/cpuinfo # 显示CPU info的信息
-cat /proc/cpuinfo | grep name | cut -f2 -d: | uniq -c # cpu型号
-at /proc/cpuinfo | grep physical | uniq -c # 物理cpu颗数
-cat /proc/interrupts # 显示中断
-cat /proc/meminfo # 内存使用
-cat /proc/swaps # 显示哪些swap被使用
-cat /proc/version # 显示内核的版本
-cat /proc/net/dev # 显示网络适配器及统计
-cat /proc/mounts # 显示已加载的文件系统
-lscpu
-lspci -tv # 罗列 PCI 设备
-lsusb -tv # 显示 USB 设备
-
-# Show info about disk sda
-hdparm -i /dev/sda
-
-# Perform a read speed test on disk sda
-hdparm -tT /dev/sda
-
-grep “model name” /proc/cpuinfo | cut -f2 -d: # 查看CPU
-
-# Display processor related statistics
-mpstat 1
-
-# Display virtual memory statistics
-vmstat 1
-
-# Display I/O statistics
-iostat 1
 
 # Display the last 100 syslog messages  (Use /var/log/syslog for Debian based systems.)
 tail 100 /var/log/messages
@@ -889,7 +915,7 @@ tail 100 /var/log/messages
 # bash: cannot create temp file for here-document: No space left on device
 # 该磁盘空间已满，可以进行扩容，或者将该磁盘的部分目录迁移到别的磁盘
 
-dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件 挂载
+dd if=/dev/urandom of=/boot/test.txt bs=50M count=1 # 生成文件,挂载
 
 # 文件置空
 cat /dev/null > calatina.out

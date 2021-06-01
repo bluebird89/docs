@@ -64,6 +64,7 @@ A second brain, for you, forever.
 * [slideshare](https://www.slideshare.net/):Share what you know and love through presentations, infographics, documents and more
 * [mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
 * [Marp](https://marp.app/) Markdown Presentation Ecosystem
+* [Slidev](https://github.com/slidevjs/slidev)
 
 ## Posters
 

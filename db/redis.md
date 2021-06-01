@@ -310,6 +310,20 @@ struct sdshdr {
 
 ## 通用
 
+* 配置
+  - config get 配置项 获取服务器配置信息
+  - config set 配置项值 设置配置项信息
+* 服务
+  - PING：测定连接是否存活
+  - info：获取服务器的信息和统计
+  - monitor：实时转储收到的请求
+  - time：显示服务器时间，时间戳（秒），微秒数
+  - quit：退出连接
+  - shutdown [save/nosave]
+  - echo 在命令行打印一些内容
+  - CLIENT LIST 获取连接到服务器的客户端连接列表
+  - `CLIENT KILL [ip:port] [ID client-id]` 关闭客户端连接
+  - SLAVEOF host port 将当前服务器转变为指定服务器的从属服务器(slave server)
 * KEYS pattern：模糊查询key，通配符  *、?、[]
   - `keys user_token*`:遍历算法，复杂度是O(n),导致 Redis 服务卡顿，因为Redis 是单线程程序，顺序执行所有指令，其它指令必须等到当前的 keys 指令执行完了才可以继续
 * 遍历大数据量用基于游标的迭代器，需要基于上一次的游标延续之前的迭代过程 `SCAN cursor [MATCH pattern] [COUNT count]` cursor：游标 MATCH pattern：查询 Key 的条件 Count：返回的条数
@@ -338,20 +352,6 @@ struct sdshdr {
   - EXPIREAT key timestamp
   - PEXPIREAT key milliseconds-timestamp 设置 key 过期时间的时间戳(unix timestamp) 以毫秒计
   - PERSIST key 把指定key设置为永久有效
-* 服务
-  - PING：测定连接是否存活
-  - info：获取服务器的信息和统计
-  - monitor：实时转储收到的请求
-  - time：显示服务器时间，时间戳（秒），微秒数
-  - quit：退出连接
-  - shutdown [save/nosave]
-  - echo 在命令行打印一些内容
-  - CLIENT LIST 获取连接到服务器的客户端连接列表
-  - `CLIENT KILL [ip:port] [ID client-id]` 关闭客户端连接
-  - SLAVEOF host port 将当前服务器转变为指定服务器的从属服务器(slave server)
-* 配置
-  - config get 配置项 获取服务器配置信息
-  - config set 配置项值 设置配置项信息
 * 数据
   - MOVE key db 将key移动到1数据库
   - dbsize 返回当前数据库中key的数目
@@ -369,6 +369,20 @@ struct sdshdr {
 * showlog 显示慢查询
   - 指定（单位为微秒）慢查询标准：slowlog-log-slower-than 10000
   - 服务器存储多少条慢查询记录由slowlog-max-len 128 限制
+
+```
+redis-cli CONFIG GET databases
+redis-cli INFO keyspace
+
+redis-cli FLUSHDB  
+redis-cli -n DB_NUMBER FLUSHDB  
+redis-cli -n DB_NUMBER FLUSHDB ASYNC  
+redis-cli FLUSHALL  
+redis-cli FLUSHALL ASYNC
+
+REDISCLI_AUTH='my_password' redis-cli 10.8.5.4 -p 6374 FLUSHDB
+`redis-cli -a '{password-here}' COMMAND`
+```
 
 ## string 字符串
 

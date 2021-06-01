@@ -27,6 +27,11 @@
   - 直连模式Direct: 国内网站
   - 拒绝访问（Reject）
 
+##  原理
+
+* HTTP 代理
+* SOCKS 代理
+
 ## [Shadowsocks](https://wiki.archlinux.org/index.php/Shadowsocks)
 
 * 轻量级 SOCKS5 代理

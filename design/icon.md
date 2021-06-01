@@ -27,10 +27,12 @@
     + material-icons 类为这个 i元素指定了一个支持合字的字体库：'Material Icons'，然后就会在字体库中检索出 home 这个合字对应的单字，并且把那个单字显示出来就可以了。换句话说，home 是某个单字的别名
   - 为什么不像 FontAwesome 那样直接引用这个单字，而要用合字中转一次呢
     + 屏幕阅读器无法理解某个单字表示的是房子形状的图标，因此页面的编写者就需要给这个图标加上特殊的 aria-label等属性，以便屏幕阅读器朗读它们。这称为 Accessibility（无障碍），简称 a11y
-* 优化
-  - 摇树优化：没有实际使用到的图标应该自动被优化掉，而不应该让手工检查哪些图标没用到，并且从源码中删掉
-  - SPA：并不需要同时下载大量的图标，而是按需加载。一个图标一张图”的方式未必就真的不可接受，针对你的实际业务场景，做一下链路分析，它没准反倒是最合适的方案
-  - svg 文件本身的优化。很多工具导出的 svg 文件很啰嗦，里面有很多对于显示没有意义的东西。一些 svg 图标即使减小到原来体积的一半儿都不会影响显示，因此，针对 svg 本身做一些优化也是有价值的。`npm i -g svgo` 命令就可以全局安装。可以用 svgo命令对单个文件或者整个目录做优化；可以手工使用，也可以把它集成到工具链里
+
+## 优化
+	
+- 摇树优化：没有实际使用到的图标应该自动被优化掉，而不应该让手工检查哪些图标没用到，并且从源码中删掉
+- SPA：并不需要同时下载大量的图标，而是按需加载。一个图标一张图”的方式未必就真的不可接受，针对你的实际业务场景，做一下链路分析，它没准反倒是最合适的方案
+- svg 文件本身的优化。很多工具导出的 svg 文件很啰嗦，里面有很多对于显示没有意义的东西。一些 svg 图标即使减小到原来体积的一半儿都不会影响显示，因此，针对 svg 本身做一些优化也是有价值的。`npm i -g svgo` 命令就可以全局安装。可以用 svgo命令对单个文件或者整个目录做优化；可以手工使用，也可以把它集成到工具链里
 
 ## 资源
 
@@ -46,3 +48,4 @@
 * [coreui-icons](https://github.com/coreui/coreui-icons):CoreUI Free Icons - Premium designed free icon set with marks in SVG, Webfont and raster formats <https://coreui.io/icons/>
 * [css.gg](https://github.com/astrit/css.gg):500+ CSS Icons. Customizable, Retina Ready with API & NPM <https://css.gg>
 * [twbs](https://github.com/twbs/icons):Official open source SVG icon library for Bootstrap. <https://icons.getbootstrap.com/>
+* [Iconic](https://iconic.app/)

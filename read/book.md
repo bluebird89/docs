@@ -225,3 +225,6 @@
 * [kindle114-rsrc-gathering](https://github.com/it-ebooks/kindle114-rsrc-gathering):📚 Kindle114 资源集结计划 <http://kindle115.com>
 * [itbook.store](https://itbook.store/)
 * [free books from Springer](https://hnarayanan.github.io/springer-books/): support everyone during Covid-19, Springer has released a ton of free textbooks
+* [programthink](https://github.com/programthink/book)【编程随想】收藏的电子书清单
+* [Library Genesis](https://libgen.is/)
+* [z-lib](https://z-lib.org/)

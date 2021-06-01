@@ -256,6 +256,11 @@ git config --global core.ignorecase true
 git config status.submodulesummary 1　# show you a short summary of changes to your submodules
 git config --global rebase.autoStash true
 
+git config --global credential.helper store # 存储通过https提交时的帐号和密码
+
+## 建议还是不要全局都储存，也要小心自己的系统备份公开
+git config --global https.proxy http://127.0.0.1:9256 # 配置代理
+
 # fatal: The current branch master has multiple upstream branches, refusing to push.
 git config remote.origin.push HEAD
 

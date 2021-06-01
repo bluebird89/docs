@@ -1,5 +1,7 @@
 # [Arch Linux](https://www.archlinux.org/)
 
+* 紧随上游的特点和AUR的支持
+
 ## [安装](https://www.arcolinuxd.com/installation/)(https://wiki.archlinux.org/title/Installation_guide)
 
 * 提供了一个最小的环境，所有安装操作都在命令行中完成

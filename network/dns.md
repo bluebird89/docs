@@ -133,7 +133,6 @@ bash ./dnstest.sh |sort -k 22 -n
 
 ## dig 查看域名解析过程
 
-
 * 正向解析:将域名解析为 IP 地址
 * 反向解析
   - 记录类型：PTR 记录，提供将 IP 地址反向解析为域名的功能
@@ -279,7 +278,7 @@ ifconfig /flushdns # 刷新DNS
 2620:0:ccc::2
 2620:0:ccd::2
 
-# 台湾中华电讯的 DNS：
+# 台湾中华电讯的 DNS
 168.95.192.1
 168.95.192.2
 
@@ -295,6 +294,10 @@ ifconfig /flushdns # 刷新DNS
 2610:a1:1018::1
 2610:a1:1019::1
 2610:a1:1018::5
+
+## V2EX DNS
+199.91.73.222 
+178.79.131.110
 
 # tsinghua
 101.6.6.6
@@ -345,7 +348,7 @@ ifconfig /flushdns # 刷新DNS
 ```
 
 
-## DNS 缓存污染 DNS cache pollution
+## DNS 缓存污染 DNS cache pollution|DNS Spoofing
 
 * 不是指域名被墙。域名仍能被解析到正确的IP地址，只是客户端（指用户浏览器/服务请求端）不能与网站服务器握手，或通过技术阻断或干扰的方式阻止握手成功，以至达到超时、屏蔽、连接重置、服务中断的现象
 * 对所有经过防火长城（英语：Great Firewall，常用简称：GFW）的在UDP的53端口上的域名查询进行IDS入侵检测，一经发现与黑名单关键词相匹配的域名查询请求，会马上伪装成目标域名的解析服务器返回虚假的查询结果。由于通常的域名查询没有任何认证机制，而且域名查询通常基于无连接不可靠的UDP协议，查询者只能接受最先到达的格式正确结果，并丢弃之后的结果。[1]
@@ -375,6 +378,15 @@ ifconfig /flushdns # 刷新DNS
 * dnsmasq dnscrypt 加上国内外分流
 * [dnsmasq-china-list](https://github.com/felixonmars/dnsmasq-china-list):Chinese-specific configuration to improve your favorite DNS server. Best partner for chnroutes.
 
+```
+# NetworkManager (manage /etc/resolv.conf)
+127.0.0.1:53 dnsmasq (dns cache)
+127.0.0.1:53000 dnscrypt-proxy (user space DNS over HTTPS)
+
+###  dnsmasq (system space) listen the :53 will read /etc/dnsmasq.conf
+add server=127.0.0.1#53000 to set dnscrypt as upstream dns server
+```
+
 ## 服务
 
 * [ChinaDNS](https://github.com/shadowsocks/ChinaDNS):Protect yourself against DNS poisoning in China.
@@ -386,6 +398,7 @@ ifconfig /flushdns # 刷新DNS
 * [nextdns](https://nextdns.io/zh)
 * [DNSpod](https://console.dnspod.cn/)
 * [NextDNS](https://nextdns.io/):Block ads, trackers and malicious websites on all your devices. Get in-depth analytics about your Internet traffic. Protect your privacy and bypass censorship. Shield your kids from adult content.
+* [hosts](https://github.com/racaljk/hosts)
 
 ## [NameSilo](https://www.namesilo.com/)
 

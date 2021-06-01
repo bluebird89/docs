@@ -212,6 +212,32 @@ wg
 * 通过为每个对等节点提供简单的公钥和私钥来实现双向认证，每个对等节点在设置阶段生成密钥，且只在对等节点之间共享密钥。每个节点除了公钥和私钥，不再需要其他证书或预共享密钥
 * 在更大规模的部署中，可以使用 Ansible 或 Kubernetes Secrets 等单独的服务来处理密钥的生成、分发和销毁
 
+## 使用
+
+* 在 WireGuard 里，客户端和服务端基本是平等的，差别只是谁主动连接谁而已。
+* 双方都会监听一个 UDP 端口。双方都需要一对密钥。双方都需要把对方的公钥加进来。
+	* allowed-ips 指定过来的 IP。这里没怎么限制。persistent-keepalive 是为 NAT 设置的。WireGuard 本来很安静，不需要说话的时候就不说话，但是要往 NAT 后边的主机发送信息，需要经常通信，让 NAT 记得对应的映射关系。
+* 最后一步，谁主动连接，谁就是客户端。
+* 因为家里路由器有公网 IP，我做了端口映射，所以我当然是从公司连家里方便了
+* 支持漫游的，也就是说，双方不管谁的地址变动了，WireGuard 在看到对方从新地址说话的时候，就会记住它的新地址（跟 mosh 一样，不过是双向的）。所以双方要是一直保持在线，并且通信足够频繁的话（比如配置 persistent-keepalive），两边的 IP 都不固定也不影响的。
+* 用得不错，可以把这几条命令写到一个 systemd service 文件里，就可以不用每次敲一串命令了，也可以做到联网后自动启动
+
+```
+## 添加并配置 WireGuard 的网络接口：家里配置。使用网段 192.168.58.0/24，因为 56 是 vbox 虚拟机用的，57 分配给 lxc 和[我的网络命名空间](https://blog.lilydjwg.me/2016/4/29/one-system-two-networks.200002.html)了。指定了一下监听的端口号。我把之前给 mosh 配置了转发的端口号中最高的那个挪用
+`# 生成密钥对`
+`wg genkey |` `tee` `privatekey | wg pubkey > publickey`
+`sudo` `ip link add dev wg0` `type` `wireguard`
+`sudo` `ip address add dev wg0 192.168.58.1``/24`
+`sudo` `wg` `set` `wg0 listen-port 60010 private-key privatekey`
+`sudo` `ip link` `set` `wg0 up`
+
+## 公司里也是同时的配置，只是不需要指定监听端口号，然后把家里那边设置成 peer，并且连过去（相同的命令没写）
+`sudo` `wg` `set` `wg0 private-key privatekey peer 这里是公钥 endpoint 家里的IP:60010 allowed-ips 0.0.0.0``/0` `persistent-keepalive 180`
+
+## 里那边也需要添加一下公司这边的公钥
+`sudo` `wg` `set` `wg0 peer YiyFylL+1Dr3j2Cyf0lwXQYz2qaNwm3XyV5YvMFp3Vs= allowed-ips 192.168.58.2``/32`
+```
+
 ## 参考
 
 * [部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>
