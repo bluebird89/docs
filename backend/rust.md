@@ -40,6 +40,7 @@ rustc --version
 rustup doc # 本地阅读核心文档
 
 rustc  main.rs
+
 ./main
 ```
 

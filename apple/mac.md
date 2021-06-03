@@ -230,8 +230,10 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 卸载
   - launchpad 长按
   - finder 找到移动到垃圾桶
-  - 通过appcleaner彻底清除
+  - 通过[AppCleaner](https://freemacsoft.net/appcleaner/)彻底清除
 * 系统
+  *   [Eye Monitor](https://sspai.com/post/66205)
+  *   [Aware](https://awaremac.com/)屏幕使用时长监控
   - [airmail](http://airmailapp.com/):mail client
   - [nylas-mail](https://github.com/nylas/nylas-mail):💌 An extensible desktop mail app built on the modern web. Forks welcome!
   - [Hazel](https://www.noodlesoft.com/):Automated Organization for Your Mac.

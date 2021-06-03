@@ -356,6 +356,11 @@
 * 时间是如何浪费掉的？
   - 表面上看，你一天都在办公桌前工作，但其实你也是在浪费时间，因为这不会让你的生活发生真正的变化。而且由于你的内心不会发出警报，比起看电视，假工作才是浪费时间最危险的方法。
   - 时间要用来做对你真正重要的事情，不要落入假工作的陷阱。
+* 时间统计
+  - [Rescuetime](https://www.rescuetime.com/):统计到用户使用每个电脑或手机应用的时长，访问每个网站的时长，会自动给这些行为分类，并且标记为不同等级的 Productive 或 Distracting 的属性
+  - [WakaTime](https://wakatime.com/)
+  - [toggl](https://www.toggl.com/)
+  - [Timing](http://www.timing360.com/)
 
 ### 《为什么精英都是时间控》
 
@@ -483,10 +488,6 @@
 * [wtf](https://github.com/wtfutil/wtf):The personal information dashboard for your terminal. <http://wtfutil.com>
 * [Taskwarrior](https://taskwarrior.org/) Free and Open Source Software that manages your TODO list from the command line
 * [GanttProject](https://www.ganttproject.biz/)
-* 时间统计
-  - [Rescuetime](https://www.rescuetime.com/):统计到用户使用每个电脑或手机应用的时长，访问每个网站的时长，会自动给这些行为分类，并且标记为不同等级的 Productive 或 Distracting 的属性
-  - [WakaTime](https://wakatime.com/)
-  - [toggl](https://www.toggl.com/)
 * [Exist](https://exist.io/) Track everything together. Understand your behaviour.
 * [personal-management-system](https://github.com/Volmarg/personal-management-system) Your web application for managing personal data. http://personal-management-system.pl/
 

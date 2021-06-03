@@ -70,8 +70,10 @@ sudo apt-get install code
 * Jest
 * Minify
 * Markdownlint
+*  [Markdown Preview Enhanced](https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced)
 * npm Intellisense
-* Open-In-Browser
+* Open-In-Browser 
+* [Pangu-Markdown](https://marketplace.visualstudio.com/items?itemName=xlthu.Pangu-Markdown)
 * Path Intellisense
 * Prettier
 * Polacode 可以把代码生成图片

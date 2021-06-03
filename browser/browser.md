@@ -39,6 +39,10 @@ sudo apt install brave-browser
 
 * Like a tiny Add-on for your browser. You drag it into your bookmark-bar and when you click it, it does something
 
+## 插件
+
+* Circle 阅读模式
+
 ## 工具
 
 * [browsh](https://github.com/browsh-org/browsh):A fully-modern text-based browser, rendering to TTY and browsers <https://www.brow.sh>

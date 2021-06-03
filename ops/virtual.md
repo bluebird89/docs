@@ -30,6 +30,46 @@ VM 的 Hypervisor 需要实现对硬件的虚拟化，并且还要搭载自己�
   - VMWare, XEN抽象虚拟化操作系统
     + 进程隔离需要系统隔离
 
+### 系统虚拟化
+
+* 1998 年，VMWare 公司成立，采用 Binary Translation 方式，实现了系统虚拟化。
+* 2001 年，剑桥大学 Xen Source，提出了 PV 虚拟化(Para-Virtualization)，亦即 Guest-Host 的主动协作来实现虚拟化。
+* 2005 年，Intel 提出了 VT，最初实现是安腾 CPU 上的 VT-i (VT for Itanium)，很快就有了 x86 上的 VT-x。
+* 2007 年，Intel 提出了 VT-d (VT for Device)，亦即 x86 上的 IOMMU。
+* 2008 年，Intel 提出了 EPT，支持了内存虚拟化。
+* 2010 年，Linux 中的 PV Hypervisor lguest 的作者，Rusty Russell（他更有名的作品是 iptables/netfilter），提出了 VirtIO，一种 Guest-Host 的 PV 设备虚拟化方案。
+* 在 PV 时代和 Binary Translation 时代，虚拟化是危险的。只有当 VT 在硬件层面解决了 CPU 的隔离、保证了安全性之后，公有云才成为可能。VT-x 于 2005 ～ 2006 年出现，亚马逊 AWS 于 2006 年就提出云计算，这是非常有远见的。
+* 系统的三个要素: CPU，内存，设备。CPU 虚拟化由 VT-x/SVM 解决，内存虚拟化由 EPT/NPT 解决，这些都是非常确定的。但设备虚拟化呢？它的情况要复杂的多，不管是 VirtIO，还是 VT-d，都不能彻底解决设备虚拟化的问题
+
+### OS 虚拟化
+
+* 把一系列的 library 和 process 捆绑在一个环境中，但所有的环境共享同一个 OS Kernel。
+* 和以 KVM 为代表的系统虚拟化，有着本质的区别。随着容器的流行，「虚拟化」这个术语，也被用来指称这种 OS 级别的容器技术
+* 最初于 2005 年，由 Sun 公司在 Solaris 10 上实现，名为「Solaris Zone」。Linux 在 2007 ～ 2008 开始跟进，接下来有了 LXC 容器等；
+* 2013 年，Docker 横空出世，彻底改变了软件分发的生态，成为事实上的标准。
+
+### GPU 虚拟化
+
+* GPU 首先是一个 PCIe 设备。GPU 的虚拟化，还是要首先从 PCIe 设备虚拟化角度来考虑
+	* 2 种资源:
+		+ 配置空间
+ 		+ MMIO
+  		+ (有的还有 PIO 和 Option ROM，此略)
+	* 2 种能力:
+		+ 中断能力
+ 		+ DMA 能力
++ 典型 GPU 设备工作流程是:
+	* 应用层调用 GPU 支持的某个 API，如 OpenGL 或 CUDA
+  	* OpenGL 或 CUDA 库，通过 UMD (User Mode Driver)，提交 workload 到 KMD (Kernel Mode Driver)
+	* KMD 写 CSR MMIO，把它提交给 GPU 硬件
+	* GPU 硬件开始工作，完成后，DMA 到内存，发出中断给 CPU
+	* CPU 找到中断处理程序 —— KMD 此前向 OS Kernel 注册过的 —— 调用它
+	* 中断处理程序找到是哪个 workload 被执行完毕了，最终驱动唤醒相关的应用
+
+#### 实现
+
+* PCIe 设备直通
+
 ## 网络
 
 * 文件共享

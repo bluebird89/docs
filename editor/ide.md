@@ -1,4 +1,4 @@
-# IDE
+# IDE Integrated Development Environment
 
 * CLion:专为C/C++所创建的跨平台IDE
 * AppCode:用于帮助开发 Mac、iPhone 和 iPad 的应用程序

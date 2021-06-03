@@ -48,6 +48,7 @@
 * [Org Mode](https://orgmode.org/)
 * [Standard Notes](https://standardnotes.org)
 * [TiddlyGit](https://github.com/tiddly-gittly/TiddlyGit-Desktop)
+* [telegra.ph](https://telegra.ph)
 
 ## [Obsidian](https://obsidian.md/)
 
@@ -65,6 +66,7 @@ A second brain, for you, forever.
 * [mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
 * [Marp](https://marp.app/) Markdown Presentation Ecosystem
 * [Slidev](https://github.com/slidevjs/slidev)
+* Excalidraw
 
 ## Posters
 

@@ -2,8 +2,6 @@
 
 curl is used in command lines or scripts to transfer data.发出网络请求，然后得到和提取数据，显示在"标准输出"（stdout）上面.Curl 是一个命令行工具，用来通过 HTTP（s），FTP 等其它几十种你可能尚未听说过的协议来发起网络请求。
 
-## 使用
-
 * `curl  -X<VERB> '<PROTOCOL>://<HOST>:<PORT>/<PATH>?<QUERY_STRING>' -d '<BODY>'`
 * -A 指定客户端的用户代理标头，即User-Agent
 * -X：指定请求方式

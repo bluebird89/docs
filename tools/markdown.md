@@ -818,6 +818,7 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [takenote](https://github.com/taniarascia/takenote):📝 A web-based note-taking app with GitHub sync and Markdown support. <https://takenote.dev>
 * [ghostwriter](https://github.com/wereturtle/ghostwriter):ghostwriter is a cross-platform, aesthetic, distraction-free Markdown editor.
 * markoff:A lightweight Markdown (CommonMark) previewer for macOS
+* [LongWe](https://www.markdown.app/app/longwe) 生成很精美的长图，而且支持 Markdown
 
 ## 参考
 

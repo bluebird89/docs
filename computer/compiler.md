@@ -45,3 +45,50 @@
 ## 参考
 
 * [the-super-tiny-compiler](https://github.com/jamiebuilds/the-super-tiny-compiler):snowman Possibly the smallest compiler ever <https://git.io/compiler>
+
+### Philosophy
+
+-   [What every compiler writer should know about programmers. M. Anton Ert](https://c9x.me/compile/bib/ubc.pdf) Contains some good warnings about taking the slippery path many compiler writers are taking with respect to undefined behavior.
+
+### Compiler Descriptions
+
+-   [A New C Compiler. Ken Thompson.](https://c9x.me/compile/bib/new-c.pdf)A description of the portable C99 Plan 9 compilers.
+-   [A Tour Through the Portable C Compiler. S. C. Johnson. ](https://c9x.me/compile/bib/pcc-tour.pdf)It is probably not a very good reference, but full compiler descriptions are pretty rare. The [PCC compiler](http://pcc.ludd.ltu.se/) has changed quite a bit since this writeup.
+-   A Retargetable C Compiler: Design and Implementation. David R. Hanson and Christopher W. Fraser. A resonably sized book exposing the full source code of a [retargetable compiler](https://github.com/drh/lcc) (lcc). I found the parts describing the frontend and the automatic code generator most interesting.
+
+### Books
+
+-   [Compiler Construction. Niklaus Wirth](https://c9x.me/compile/bib/wirthcc.pdf)An elementary and short textbook to learn the basics of compilation. Written by Wirth, a Turing award winner, inventor of Pascal.
+-  [ Compilers: Principles, Techniques, and Tools. Alfred V. Aho, Ravi Sethi, and Jeffrey D. Ullman. ](http://www.amazon.com/Compilers-Principles-Techniques-Alfred-Aho/dp/0201100886)Despite being intimidating, it is a very readable book with many examples. It has the best material available on lexing and parsing. Some key concepts of more advanced optimizations are also very nicely exposed.
+-   [Advanced Compiler Design and Implementation. Steven Muchnick. ](http://www.amazon.com/Advanced-Compiler-Design-Implementation-Muchnick/dp/1558603204)A pretty comprehensive exposition of compiler technology. Many details are left aside and some code is wrong. Its main value is I think the span of its coverage.
+-   Hacker's Delight. Henry S. Warren, Jr. This is a really fun book for computer geeks. It is also filled with tricks that can be used for strength reduction. For example, it will teach you how to turn a division by a constant into a multiplication.
+
+### Dominators and Static Single Assignment
+
+-   [The Static Single Assignment Book.] (http://ssabook.gforge.inria.fr/latest/book.pdf)A very detailed and practical book about many aspects of the SSA intermediate representation.
+-   [Simple and Efficient Construction of Static Single Assignment Form. Matthias Braun, Sebastian Buchwald, Sebastian Hack, Roland Leißa, Christoph Mallon, and Andreas Zwinkau.] (https://c9x.me/compile/bib/braun13cc.pdf)Combining laziness and memoization, the authors make a naive construction algorithm both efficient and correct. The algorithm is especially useful for fixing SSA invariants locally broken.
+-   [An Efficient Method of Computing Static Single Assignment Form. Ron Cytron, Jeanne Ferrante, Barry K. Rosen, Mark N. Wegman, and F. Kenneth Zadeck. ](https://c9x.me/compile/bib/ssa.pdf)The paper explaining the classic construction algorithm of SSA form using domination information.
+-   [A Simple, Fast Dominance Algorithm. Keith D. Cooper, Tymothy J. Harvey, and Ken Kennedy. ](https://c9x.me/compile/bib/quickdom.pdf)An algorithm to compute the domination information very practical and simple to implement. It can be slower than the more complex Lengauer-Tarjan algorithm on huge input programs.
+
+### Optimizations
+
+-   [Constant Propagation with Conditional Branches. Mark N. Wegman and F. Kenneth Zadeck.] (https://c9x.me/compile/bib/constpropssa.pdf)The state-of-the-art algorithm for constant propagation (known as sparse conditional constant propagation). Despite being cutting edge, the algorithm remains simple.
+-   [Global Code Motion Global Value Numbering. Cliff Click.] (https://c9x.me/compile/bib/click-gvn.pdf)Explains how to make value numbering a global optimization by leveraging SSA form and an independent global code motion algorithm.
+
+### Register Allocation
+
+-   [Linear Scan Register Allocation. Massimiliano Poletto and Vivek Sarkar. ](https://c9x.me/compile/bib/linearscan.pdf)The classic linear scan paper, this algorithm is fairly popular in JIT compilers because it compiles quickly and generates reasonable code.
+-   [Linear Scan Register Allocation on SSA Form. Christian Wimmer Michael Franz.] (https://c9x.me/compile/bib/Wimmer10a.pdf)An adaptation of the classic and fast linear scan algorithm to work on SSA form. It presents the challenges posed by SSA form pretty well.
+-   [Iterated Register Coalescing. Lal George and Andrew W. Appel.] (https://c9x.me/compile/bib/irc.pdf)A classic paper for register allocation using graph coloring. It is usually said to be slow and not used in JIT compilers. It is also not often used in big compilers because not flexible enough (see below for a fix).
+-   [A Generalized Algorithm for Graph-Coloring Register Allocation. Michael D. Smith, Norman Ramsey, and Glenn Holloway.] (https://c9x.me/compile/bib/pcc-rega.pdf)Graph-coloring as presented in textbooks is not suited to real computers. This paper presents various extensions to handle register classes and aliases. It is the algorithm used in PCC.
+
+### Code Generation
+
+-   [Engineering a Simple, Efficient Code Generator Generator. Christopher W. Fraser, David R. Hanson, and Todd A. Proebsting.] (https://c9x.me/compile/bib/iburg.pdf)This paper presents iburg, a flexible code generator generator that generates compact and simple code. It is used in the retargetable C compiler lcc.
+
+### Machine Specific
+
+-  [ What Every Computer Scientist Should Know About Floating Point Arithmetic. David Glodberg.](https://c9x.me/compile/bib/floating-point.pdf)
+-  [ System V Application Binary Interface (AMD64).](https://c9x.me/compile/bib/abi-x64.pdf)(Almost) Everything you need to know to interface with C code on x64 platforms running a UNIX OS.
+-   [Procedure Call Standard for the ARM 64-bit Architecture.](https://c9x.me/compile/bib/abi-arm64.pdf)The ABI for AARCH64, saner and better explained than the x64 one.
+-   [Short X86 Instruction Set Reference.](https://c9x.me/x86/)
