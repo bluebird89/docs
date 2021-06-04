@@ -276,7 +276,8 @@ nmp install -g --registery= https://registery.npm.taobao.org
 npm install <package> --save # To install a package and save it in your project's package.json file
 npm install npm@latest -g
 # 指定版本范围
-npm install sax@">=4.15.0 <4.18.0"
+npm install sax@>=4.15.0 <4.18.0
+								 
 # 指定大版本
 npm install lodash@^4.0.0
 
@@ -465,7 +466,7 @@ brew install yarn
 yarn config set registry https://registry.npm.taobao.org --global
 yarn config set disturl https://npm.taobao.org/dist --global
 
-## The engine "node" is incompatible with this module. Expected version ">=4 <=9".
+## The engine "node" is incompatible with this module. Expected version >=4 <=9.
 yarn config set ignore-engines true
 ## Failed to fetch https://dl.yarnpkg.com/debian/dists/stable/InRelease  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E074D16EB6FF4DE3
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
@@ -832,8 +833,7 @@ yarn install node-sass
 * 框架
   - [fastify](https://github.com/fastify/fastify) Fast and low overhead web framework, for Node.js <https://www.fastify.io/>
   - [sails](https://github.com/balderdashy/sails):Realtime MVC Framework for Node.js <https://sailsjs.com>
-  - [NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>
-  - [Nest](https://github.com/nestjs/nest):A progressive Node.js framework for building efficient, scalable, and enterprise-grade server-side applications on top of TypeScript & JavaScript (ES6, ES7, ES8) 🚀 https://nestjs.com/
+  - [NodeBB](https://github.com/NodeBB/NodeBB):Node.js based forum software built for the modern web <https://nodebb.org>TypeScript & JavaScript (ES6, ES7, ES8) 🚀 https://nestjs.com/
 * [node-qrcode](https://github.com/soldair/node-qrcode):qr code generator
 * [node-inspector](https://github.com/node-inspector/node-inspector) Node.js debugger based on Blink Developer Tools
 * [ncc](https://github.com/zeit/ncc):Node.js Compiler Collection
@@ -850,6 +850,7 @@ yarn install node-sass
   - [ioredis](https://github.com/luin/ioredis):🚀A robust, performance-focused and full-featured Redis client for Node.js.
   - [typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. <http://typeorm.io>
   - [sequelize](https://github.com/sequelize/sequelize):An easy-to-use multi SQL dialect ORM for Node.js <https://sequelize.org>
+	* [prisma](https://github.com/prisma/prisma)Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server & SQLite <https://www.prisma.io/>
 * HTTP
   - [got](https://github.com/sindresorhus/got):🌐 Human-friendly and powerful HTTP request library for Node.js
   - [co](https://github.com/tj/co):The ultimate generator based flow-control goodness for nodejs (supports thunks, promises, etc)

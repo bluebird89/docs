@@ -40,6 +40,7 @@ export PATH=${PATH}:$ANDROID_HOME/tools
   - adb
 * 刷机包
 * 手机连接，重启同时按下电源键和音量下键重启，进入bootloader模式
+* [awesome-adb](https://github.com/mzlogin/awesome-adb):🍭 ADB Usage Complete<https://mazhuang.org/awesome-adb/>
 
 ```sh
 fastboot devices  # 连接设备
@@ -88,35 +89,13 @@ fastboot reboot-bootloaderfastboot -w update image-occam-jdq39.zip（需要根�
 * [VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. <https://vxp.app>
 * [Xposed](https://github.com/rovo89/Xposed):The native part of the Xposed framework (mainly the modified app_process binary).
 
-## 课程
-
-* [android-training-course-in-chinese](https://github.com/kesenhoo/android-training-course-in-chinese)
-
-## 面试
-
-* [android-interview-questions-cn](https://github.com/stormzhang/android-interview-questions-cn):最全面的高质量 Android 面试指南。
-
-## 资源
-
-* ROM
-  - [一加](https://www.oneplus.com/)
-* STORE
-  - [YalpStore](https://github.com/yeriomin/YalpStore):Download apks from Google Play Store
-* [LineageOS Android Distribution](https://lineageos.org/):A free and open-source operating system for various devices, based on the Android mobile platform. It was forked from CyanogenMod in 2016.
-
-## [KDE contect](https://kdeconnect.kde.org/)
-
-```sh
-sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/tcp
-sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/udp
-sudo systemctl restart firewalld.service
-```
-
 ## APP
 
+* [android-foss](https://github.com/offa/android-foss) A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy.
 * 国内生态太乱
   - 商店一堆信息流
   - NFC
+- [F-Droid](https://f-droid.org/)
 * twitter
 * telegram
 * hacker news
@@ -129,9 +108,34 @@ sudo systemctl restart firewalld.service
 * Tasker 设置各种自动化任务，例如：自动填写验证码，自动转发短信到另一个手机号，打开chrome时自动开启代理，夜间静音，锁屏进入打盹模式。
 * 绿色守护
 
+### [KDE contect](https://kdeconnect.kde.org/)
+
+```sh
+sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/tcp
+sudo firewall-cmd --zone=public --permanent --add-port=1714-1764/udp
+sudo systemctl restart firewalld.service
+```
+
 ## 技巧
 
 * 查看 IMEI `*#06#*`
+
+## 面试
+
+* [android-interview-questions-cn](https://github.com/stormzhang/android-interview-questions-cn):最全面的高质量 Android 面试指南。
+
+## 资源
+
+* ROM
+  - [一加](https://www.oneplus.com/)
+* STORE
+  - [YalpStore](https://github.com/yeriomin/YalpStore):Download apks from Google Play Store
+* [LineageOS Android Distribution](https://lineageos.org/):A free and open-source operating system for various devices, based on the Android mobile platform. It was forked from CyanogenMod in 2016.
+* [Replicant – Fully free Android distribution](http://replicant.us/)
+
+## 课程
+
+* [android-training-course-in-chinese](https://github.com/kesenhoo/android-training-course-in-chinese)
 
 ## 图书
 
@@ -145,23 +149,19 @@ sudo systemctl restart firewalld.service
 * [epoxy](https://github.com/airbnb/epoxy):Epoxy is an Android library for building complex screens in a RecyclerView <https://goo.gl/eIK82p>
 * [glide](https://github.com/bumptech/glide):An image loading and caching library for Android focused on smooth scrolling <http://bumptech.github.io/glide/>
 * [okhttp](https://github.com/square/okhttp):An HTTP+HTTP/2 client for Android and Java applications. <http://square.github.io/okhttp/>
-* [Android Studio](http://www.android-studio.org/)
 * [Apktool](https://github.com/iBotPeaches/Apktool):A tool for reverse engineering Android apk files <https://ibotpeaches.github.io/Apktool>
 * [RxPermissions](https://github.com/tbruyelle/RxPermissions):Android runtime permissions powered by RxJava2
-* [awesome-adb](https://github.com/mzlogin/awesome-adb):🍭 ADB Usage Complete / ADB 用法大全 <https://mazhuang.org/awesome-adb/>
 * [BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android):QRCode 扫描二维码、扫描条形码、相册获取图片后识别、生成带 Logo 二维码、支持微博微信 QQ 二维码扫描样式
 * [secure-preferences](https://github.com/scottyab/secure-preferences):Android Shared preference wrapper than encrypts the values of Shared Preferences. It's not bullet proof security but rather a quick win for incrementally making your android app more secure.
 * [Auto.js](https://github.com/hyb1996/Auto.js):A UiAutomator on android, does not need root access
 * [qark](https://github.com/linkedin/qark):Tool to look for several security related Android application vulnerabilities
-* [VirtualXposed](https://github.com/android-hacker/VirtualXposed):A simple app to use Xposed without root, unlock the bootloader or modify system image, etc. <https://vxp.app>
 * [welcome-android](https://github.com/stephentuso/welcome-android):A customizable welcome screen <https://stephentuso.com/welcome-android/>
 * [UltraViewPager](https://github.com/alibaba/UltraViewPager):UltraViewPager is an extension for ViewPager to provide multiple features in a single ViewPager.
 * [scrcpy](https://github.com/Genymobile/scrcpy):Display and control your Android device
 * [atlas](https://github.com/alibaba/atlas):A powerful Android Dynamic Component Framework.
 * [AndroidAssetStudio](https://github.com/romannurik/AndroidAssetStudio):A set of web-based tools for generating graphics and other assets that would eventually be in an Android application's res/ directory.
-* [android-foss](https://github.com/offa/android-foss) A list of Free and Open Source Software (FOSS) for Android – saving Freedom and Privacy.
-* [Android Developer](https://roadmap.sh/android)
 
 ## 参考
 
+* [Android Developer](https://roadmap.sh/android)
 * [](https://source.android.com/)

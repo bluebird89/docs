@@ -112,6 +112,7 @@ Little Endian
 ## CPU Central Processing Unit 处理器
 
 * 计算机中控制数据操控的电路
+* AMD 3600，6核心12线程（超线程）
 * 内部封装了1个或者多个物理核，物理核有独立的各级缓存和电路结构，如果只有1个物理核心就是单核CPU，有多个物理核心就是多核CPU`物理核心数=总CPU数*单CPU中物理核心数`
   - 物理 CPU 核心数：真正插在物理插槽上 CPU 的核心数,每个物理核下的逻辑核共用 L1/L2 Cache
   - 逻辑 CPU 核心数：结合 CPU 多核以及超线程技术得到的 CPU 核心数，最终核心数以逻辑 CPU 核心数为准
@@ -167,12 +168,44 @@ Little Endian
   - 三层考虑：
     + 物理速度，如果要更大的容量就需要更多的晶体管，除了芯片的体积会变大，更重要的是大量的晶体管会导致速度下降，因为访问速度和要访问的晶体管所在的位置成反比，也就是当信号路径变长时，通信速度会变慢。这部分是物理问题
     + 多核技术中，数据的状态需要在多个CPU中进行同步，并且，可以看到，cache和RAM的速度差距太大，所以，多级不同尺寸的缓存有利于提高整体的性能
-* 局部性原理
-  - CPU 与内存之间往往集成了挺多层级的缓存，这些缓存越接近CPU，速度越快，所以如果能提前把内存中的数据加载到如下图中的 L1, L2, L3 缓存中，那么下一次 CPU 取数的话直接从这些缓存里取即可，能让CPU执行速度加快
-  - 当某个元素被用到的时候，那么这个元素地址附近的的元素会被提前加载到 L1,L2,L3 缓存中,让内存一次性把目标区域附近的数据一起给cpu，存在这块区域，后面在需要用到的时候就先去这里找，找不到再去找内存要
-  - 无论是内存还是磁盘，操作系统都是按页的大小进行读取的（页大小通常为 4 kb），磁盘每次读取都会预读，会提前将连续的数据读入内存中，这样就避免了多次 IO
+
+```
+# Java 获取CPU核心数
+Runtime.getRuntime().availableProcessors()//获取逻辑核心数，如6核心12线程，那么返回的是12
+
+# Linux 获取CPU核心数
+# 总核数 = 物理CPU个数 X 每颗物理CPU的核数
+# 总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
+
+# 查看物理CPU个数
+cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l
+
+# 查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo| grep "cpu cores"| uniq
+
+# 查看逻辑CPU的个数
+cat /proc/cpuinfo| grep "processor"| wc -l
+```
+
+### 局部性原理
+
+* CPU 与内存之间往往集成了挺多层级的缓存，这些缓存越接近CPU，速度越快，所以如果能提前把内存中的数据加载到如下图中的 L1, L2, L3 缓存中，那么下一次 CPU 取数的话直接从这些缓存里取即可，能让CPU执行速度加快
+* 当某个元素被用到的时候，那么这个元素地址附近的的元素会被提前加载到 L1,L2,L3 缓存中,让内存一次性把目标区域附近的数据一起给cpu，存在这块区域，后面在需要用到的时候就先去这里找，找不到再去找内存要
+* 无论是内存还是磁盘，操作系统都是按页的大小进行读取的（页大小通常为 4 kb），磁盘每次读取都会预读，会提前将连续的数据读入内存中，这样就避免了多次 IO
 * 乱序执行：在等待的时间里把后续指令需要的数据（或者不依赖前者的操作）提前处理到缓存中来
   - 分支预测：遇到分支跳转时，按照之前的经验，如果某个分支经常被执行，那后续再去这个分支的概率一定很大，那这样咱们预测后面会去到这个分支，就提前把这个分支后面指令能做的工作先做了
+
+### 并发
+
+* 多核心：可以同时做多件事，互不打扰
+* 执行线程数大于核心数，需要通过操作系统的调度。操作系统给每个线程分配CPU时间片资源，然后不停的切换，从而实现“并行”执行的效果
+* 切换会伴随着寄存器数据更新，内存页表更新等操作 。虽然一次切换的代价和I/O操作比起来微不足道，但如果线程过多，线程切换的过于频繁，甚至在单位时间内切换的耗时已经大于程序执行的时间，就会导致CPU资源过多的浪费在上下文切换上，而不是在执行程序，得不偿失
+* I/O操作，可能是读写文件，网络收发报文等，这些 I/O 操作在进行时时需要等待反馈的。比如网络读写时，需要等待报文发送或者接收到，在这个等待过程中，线程是等待状态，CPU没有工作。此时操作系统就会调度CPU去执行其他线程的指令，这样就完美利用了CPU这段空闲期，提高了CPU的利用率。
+  - 当线程中有 I/O 等操作不占用CPU资源时，操作系统可以调度CPU可以同时执行更多的线程。
+* 一个极端的线程（不停执行“计算”型操作时），就可以把单个核心的利用率跑满，多核心CPU最多只能同时执行等于核心数的“极端”线程数
+* 如果每个线程都这么“极端”，且同时执行的线程数超过核心数，会导致不必要的切换，造成负载过高，只会让执行更慢
+* I/O 等暂停类操作时，CPU处于空闲状态，操作系统调度CPU执行其他线程，可以提高CPU利用率，同时执行更多的线程
+* I/O 事件的频率频率越高，或者等待/暂停时间越长，CPU的空闲时间也就更长，利用率越低，操作系统可以调度CPU执行更多的线程
 
 ## 内存 Memory
 
@@ -305,14 +338,18 @@ Notes
   - [CSE 251 Programming in C](https://www.cse.msu.edu/~cse251/index.html)
   - The Absolute Beginner's Guide to C
   - 课程站点上的所有14个Steps实验+3个Projects
-* 深入理解计算机系统(CSAPP)
+* [Computer Systems: A Programmer's Perspective CSAPP 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html) 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
+  - [Berkeley CS 61C](http://inst.eecs.berkeley.edu/~cs61c/sp15/)
+  - [cmu 15-213/18-213: Introduction to Computer Systems (ICS)](http://www.cs.cmu.edu/~213/)
   - [CSE351: The Hardware/Software Interface](http://courses.cs.washington.edu/courses/cse351/)
     + [](https://www.bilibili.com/video/BV1Zt411s7Gg)
     + [](https://www.bilibili.com/video/BV1iW411d7hd?p=1)
   - [CSAPP书籍配套的所有Labs](http://csapp.cs.cmu.edu/3e/labs.html)
+  - [视频](https://www.bilibili.com/video/av31289365)
 * 数据结构
-  - [CS61B Data Structures](https://sp19.datastructur.es/)
+  - [Berkeley CS61B Data Structures](https://sp19.datastructur.es/)
     + [ [2019 SP/2020 FA] UCB CS 61B Data Structures](https://www.bilibili.com/video/BV1EJ411n72e)
+	* [Berkeley CS61B](http://datastructur.es/sp17/)
   - Head First Java + 数据结构书自选
   - CS 61B站点上的所有Labs/Homeworks/Projects
 * 操作系统
@@ -350,9 +387,6 @@ Notes
   - [CS 61A: Structure and Interpretation of Computer Programs](https://cs61a.org/)
   - [Composing Programs](http://www.composingprograms.com/)
   * [SICP-answers](https://github.com/huangz1990/SICP-answers):SICP 解题集 <http://sicp.readthedocs.org/>
-* [Computer Systems: A Programmer's Perspective CSAPP 深入理解计算机系统](http://csapp.cs.cmu.edu/3e/home.html) 3/E (CS:APP3e) Randal E. Bryant and David R. O'Hallaron, Carnegie Mellon University
-  - [视频](https://www.bilibili.com/video/av31289365)
-  - [Berkeley CS 61C](http://inst.eecs.berkeley.edu/~cs61c/sp15/)
 * [Mathematics for Computer Science](https://courses.csail.mit.edu/6.042/spring17/mcs.pdf)
   - Tom Leighton’s MIT 6.042J
 * 计算机程序的概念、技术和模型 Concepts, Techniques, and Models of Computer Programming，CTMCP
@@ -369,6 +403,7 @@ Notes
 
 * [comp-m2](https://github.com/gto76/comp-m2):Comp Mark II – Simple 4-bit virtual computer
 * [Chip-8 Technical Reference v1.0](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
+* [Build an 8-bit CPU from scratch](https://eater.net/)
 
 ## 课程
 
@@ -389,14 +424,12 @@ Notes
 * [CS50's Introduction to Computer Science](https://www.edx.org/course/cs50s-introduction-computer-science-harvardx-cs50x)
   - [This is CS50x](https://cs50.harvard.edu/x/2021/notes/0/)
 * [crash-course-computer-science-chinese](https://github.com/1c7/crash-course-computer-science-chinese):💻 计算机速成课 <https://www.bilibili.com/video/av21376839/>
-* [Berkeley CS61B](http://datastructur.es/sp17/)
 * [Yorgey's cis194](https://www.seas.upenn.edu/~cis194/spring13/lectures.html)
 * [卡梅隆大学CS课件](http://www.cs.cmu.edu/~aada/courses/15251f16/www/schedule.html)
 * [cs-video-courses](https://github.com/Developer-Y/cs-video-courses):List of Computer Science courses with video lectures.
 * [LIFT-CS: Laboratory for Innovation for the Future of Teaching Computer Science](https://lift.cs.princeton.edu/)
 * [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/)
 * [This is The Entire Computer Science Curriculum in 1000 YouTube Videos](https://web.archive.org/web/20210210143025/https://laconicml.com/computer-science-curriculum-youtube-videos/)
-* [Build an 8-bit CPU from scratch](https://eater.net/)
 
 ## 参考
 

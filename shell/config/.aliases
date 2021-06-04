@@ -1,7 +1,7 @@
 alias top='sudo htop'
 
-alias c="clear"
-alias cl="clear;ls;pwd"
+alias p='pwd'
+alias path='echo -e ${PATH//:/\\n}'
 
 alias ls='ls --color=auto'
 alias ll='ls -la'
@@ -10,33 +10,30 @@ alias l='ls -l'
 alias lh='ls -lh'
 alias la="ls -aF"
 alias ld="ls -ld"
-alias ls='ls --color=auto'
 alias lt='ls -At1 && echo "------Oldest--"'
 alias ltr='ls -Art1 && echo "------Newest--"'
-alias lt="ls -lhtrF"
 alias l.="ls -lhtrdF .* --color=auto"
 
-alias p='pwd'
-alias path='echo -e ${PATH//:/\\n}'
-
 ## a quick way to get out of current directory ##
-alias cd..="cd .."
-alias cd...="cd ../.."
-alias cd....="cd ../../.."
-alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
+alias ~='cd ~'
+alias /='cd /'
 cdl() { cd "$@" && pwd ; ls -alF; }
+alias .='cd ..'
 alias ..="cdl ../../"
 alias ...='cdl ../../../'
 alias ....='cdl ../../../../'
-alias .....='cd ../../../../'
-alias .3="cd ../../.."
-alias .4='cd ../../../../'
-alias .5='cd ../../../../..'
-alias cdhome='cd ~'
-alias cdroot='cd /'
+alias .3="cdl ../../.."
+alias .4='cdl ../../../../'
+alias .5='cdl ../../../../..'
+
+alias c="clear"
+alias cl="clear;ls;pwd"
+
+alias mkdir='mkdir -pv'
+alias mount='mount |column -t'
+
+# install  colordiff package
+alias diff='colordiff'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep -i --color=auto' # 用颜色标识，更醒目；忽略大小写
@@ -45,8 +42,10 @@ alias fgrep='fgrep --color=auto'
 alias grepp="grep -P --color"
 alias nocomm='grep -Ev '\''^(#|$)'\'''
 
-alias sha1='openssl sha1'
+alias bc='bc -l'
 
+alias sha1='openssl sha1'
+alias h='history'
 alias job='jobs -l'
 
 alias now='date +"%T"'
@@ -55,9 +54,12 @@ alias nowdate='date +"%d-%m-%Y"'
 alias ports='netstat -tulanp | grep'
 
 # apt
+alias apt-get="sudo apt-get"
+alias updatey="sudo apt-get --yes"
 alias ai='sudo apt-fast install -y'
 alias ad='sudo apt-fast update'
 alias ag='sudo apt-fast upgrade -y'
+alias update='sudo apt-get update && sudo apt-get upgrade'
 alias ar='sudo apt-fast remove --purge'
 alias ac='sudo apt-fast autoremove --purge && sudo apt-fast autoclean'
 
@@ -68,20 +70,61 @@ alias yu='yum -y update'
 alias ss="sudo systemctl status"
 alias sa="sudo systemctl start"
 alias st="sudo systemctl stop"
-alias sd="sudo systemctl disable"
 alias se="sudo systemctl enable"
+alias sd="sudo systemctl disable"
+
+# become root #
+alias root='sudo -i'
+alias su='sudo -i'
+
+# reboot / halt / poweroff
+alias reboot='sudo /sbin/reboot'
+alias poweroff='sudo /sbin/poweroff'
+alias halt='sudo /sbin/halt'
+alias shutdown='sudo /sbin/shutdown'
+
+# also pass it via sudo so whoever is admin can reload it without calling you #
+alias nginxreload='sudo /usr/local/nginx/sbin/nginx -s reload'
+alias nginxtest='sudo /usr/local/nginx/sbin/nginx -t'
+alias lightyload='sudo /etc/init.d/lighttpd reload'
+alias lightytest='sudo /usr/sbin/lighttpd -f /etc/lighttpd/lighttpd.conf -t'
+alias httpdreload='sudo /usr/sbin/apachectl -k graceful'
+alias httpdtest='sudo /usr/sbin/apachectl -t && /usr/sbin/apachectl -t -D DUMP_VHOSTS'
+
+# if cron fails or if you want backup on demand just run these commands #
+# again pass it via sudo so whoever is in admin group can start the job #
+# Backup scripts #
+alias backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type local --taget /raid1/backups'
+alias nasbackup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01'
+alias s3backup='sudo /home/scripts/admin/scripts/backup/wrapper.backup.sh --type nas --target nas01 --auth /home/scripts/admin/.authdata/amazon.keys'
+alias rsnapshothourly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotdaily='sudo  /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotweekly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias rsnapshotmonthly='sudo /home/scripts/admin/scripts/backup/wrapper.rsnapshot.sh --type remote --target nas03 --auth /home/scripts/admin/.authdata/ssh.keys  --config /home/scripts/admin/scripts/backup/config/adsl.conf'
+alias amazonbackup=s3backup
 
 # docker
 alias d='docker'
 alias dm="docker-machine"
 alias di="docker images"
 alias dps="docker ps"
-alias dsp="docker stop"
 alias ds="docker start"
+alias dsp="docker stop"
 alias dl="docker logs --tail=50"
 alias drm="docker rm"
 alias drmi="docker rmi $(docker images --filter "dangling=true" -q --no-trunc)"
 alias dc='docker container'
+
+## vim
+alias vi=vim
+alias svi='sudo vi'
+alias vis='vim "+set si"'
+alias edit='vim'
+
+# Stop after sending count ECHO_REQUEST packets #
+alias ping='ping -c 5'
+# Do not wait interval 1 second, go fast #
+alias fastping='ping -c 100 -s.2'
 
 ## vagrant
 alias v='vagrant'
@@ -116,3 +159,145 @@ function repeat()
         eval "$@";
     done
 }
+
+### Get os name via uname ###
+_myos="$(uname)"
+
+### add alias as per os using $_myos ###
+case $_myos in
+   Linux) alias foo='/path/to/linux/bin/foo';;
+   FreeBSD|OpenBSD) alias foo='/path/to/bsd/bin/foo' ;;
+   SunOS) alias foo='/path/to/sunos/bin/foo' ;;
+   *) ;;
+esac
+
+# if user is not root, pass all commands via sudo #
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+    alias update='sudo apt-get upgrade'
+fi
+
+## Wakeup sleeping servers:replace mac with your actual server mac address #
+alias wakeupnas01='/usr/bin/wakeonlan 00:11:32:11:15:FC'
+alias wakeupnas02='/usr/bin/wakeonlan 00:11:32:11:15:FD'
+alias wakeupnas03='/usr/bin/wakeonlan 00:11:32:11:15:FE'
+
+## shortcut  for iptables and pass it via sudo#
+alias ipt='sudo /sbin/iptables'
+alias iptlist='sudo /sbin/iptables -L -n -v --line-numbers'
+alias iptlistin='sudo /sbin/iptables -L INPUT -n -v --line-numbers'
+alias iptlistout='sudo /sbin/iptables -L OUTPUT -n -v --line-numbers'
+alias iptlistfw='sudo /sbin/iptables -L FORWARD -n -v --line-numbers'
+alias firewall=iptlist
+
+# get web server headers #
+alias header='curl -I'
+# find out if remote server supports gzip / mod_deflate or not #
+alias headerc='curl -I --compress'
+
+# do not delete / or prompt if deleting more than 3 files at a time #
+alias rm='rm -I --preserve-root'
+
+# confirmation #
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# Parenting changing perms on / #
+alias chown='chown --preserve-root'
+alias chmod='chmod --preserve-root'
+alias chgrp='chgrp --preserve-root'
+
+## play video files in a current directory ##
+# cd ~/Download/movie-name
+# playavi or vlc
+alias playavi='mplayer *.avi'
+alias vlc='vlc *.avi'
+
+# play all music files from the current directory #
+alias playwave='for i in *.wav; do mplayer "$i"; done'
+alias playogg='for i in *.ogg; do mplayer "$i"; done'
+alias playmp3='for i in *.mp3; do mplayer "$i"; done'
+
+# play files from nas devices #
+alias nplaywave='for i in /nas/multimedia/wave/*.wav; do mplayer "$i"; done'
+alias nplayogg='for i in /nas/multimedia/ogg/*.ogg; do mplayer "$i"; done'
+alias nplaymp3='for i in /nas/multimedia/mp3/*.mp3; do mplayer "$i"; done'
+
+# shuffle mp3/ogg etc by default #
+alias music='mplayer --shuffle *'
+
+## All of our servers eth1 is connected to the Internets via vlan / router etc  ##
+alias dnstop='dnstop -l 5  eth1'
+alias vnstat='vnstat -i eth1'
+alias iftop='iftop -i eth1'
+alias tcpdump='tcpdump -i eth1'
+alias ethtool='ethtool eth1'
+
+# work on wlan0 by default #
+# Only useful for laptop as all servers are without wireless interface
+alias iwconfig='iwconfig wlan0'
+
+## pass options to free ##
+alias meminfo='free -m -l -t'
+
+## get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+
+## get top process eating cpu ##
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+
+## Get server cpu info ##
+alias cpuinfo='lscpu'
+
+## older system use /proc/cpuinfo ##
+##alias cpuinfo='less /proc/cpuinfo' ##
+
+## get GPU ram on desktop / laptop##
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+
+# Reboot my home Linksys WAG160N / WAG54 / WAG320 / WAG120N Router / Gateway from *nix.
+alias rebootlinksys="curl -u 'admin:my-super-password' 'http://192.168.1.2/setup.cgi?todo=reboot'"
+
+# Reboot tomato based Asus NT16 wireless bridge
+alias reboottomato="ssh admin@192.168.1.1 /sbin/reboot"
+
+## this one saved by butt so many times ##
+alias wget='wget -c'
+
+## this one saved by butt so many times ##
+alias ff4='/opt/firefox4/firefox'
+alias ff13='/opt/firefox13/firefox'
+alias chrome='/opt/google/chrome/chrome'
+alias opera='/opt/opera/opera'
+
+#default ff
+alias ff=ff13
+
+#my default browser
+alias browser=chrome
+
+## set some other defaults ##
+alias df='df -H'
+alias du='du -ch'
+
+## nfsrestart  - must be root  ##
+## refresh nfs mount / cache etc for Apache ##
+alias nfsrestart='sync && sleep 2 && /etc/init.d/httpd stop && umount netapp2:/exports/http && sleep 2 && mount -o rw,sync,rsize=32768,wsize=32768,intr,hard,proto=tcp,fsc natapp2:/exports /http/var/www/html &&  /etc/init.d/httpd start'
+
+## Memcached server status  ##
+alias mcdstats='/usr/bin/memcached-tool 10.10.27.11:11211 stats'
+alias mcdshow='/usr/bin/memcached-tool 10.10.27.11:11211 display'
+
+## quickly flush out memcached server ##
+alias flushmcd='echo "flush_all" | nc 10.10.27.11 11211'
+
+## Remove assets quickly from Akamai / Amazon cdn ##
+alias cdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai'
+alias amzcdndel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon'
+
+## supply list of urls via file or stdin
+alias cdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile akamai --stdin'
+alias amzcdnmdel='/home/scripts/admin/cdn/purge_cdn_cache --profile amazon --stdin'

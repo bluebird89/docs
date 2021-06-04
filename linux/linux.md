@@ -111,7 +111,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 * [MX Linux](https://mxlinux.org/)
 * [Solus](https://getsol.us/home/)
 * [AntiX](https://antixlinux.com/)
-
+* [TurnKey Linux](http://www.turnkeylinux.org/)  Deploy open source apps on VM or the clouds
 * [Qubes OS](https://www.qubes-os.org/ "Qubes OS")
 
 ![distro-family-tree](../_static/distro-family-tree.png "Optional title")
@@ -174,6 +174,7 @@ neofetch
 - [LXDE](https://www.lxde.org/ "LXDE Desktop Environment")*(**Lightweight X11 Desktop Environment**)
 - [LXQT](https://lxqt-project.org/ "LXQt - The Lightweight Qt Desktop Environment")
 - [Trinity Desktop Environment (TDE)](https://www.trinitydesktop.org/ "Trinity Desktop Environment")
+- [Cinnamon](http://cinnamon.linuxmint.com/) a GTK+ based desktop environment and a fork of the GNOME Shell
 * Graphical user interface (GUI) vs Command line interface (CLI)
   - Graphical user interface allows a user to interact with the computer using graphics such as icons and images. When a user clicks on an icon to open an application on a computer, he or she is actually using the GUI. It's easy to perform tasks using GUI.
   - Command line interface allows a user to interact with the computer using commands. A user types the command in a terminal and the system helps in executing these commands. A new user with experience on GUI may find it difficult to interact with CLI as he/she needs to be aware of the commands to perform a particular operation.
@@ -442,7 +443,7 @@ sudo update-grub
 * 永久：修改配置文件，变量永久生效； /etc/bashrc 存放的是 shell 变量 `echo "PATH=$PATH:/home/shiyanlou/mybin" >> .zshrc`
 	* ~/.profile（不是/etc/profile） 只对当前用户永久生效
 	* 添加一个永久生效的环境变量，需要打开 /etc/profile
-* 临时：用 export 命令行声明，变量在关闭 shell 时失效`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，只是在当前 Shell 有效，一旦退出终端，就失效
+* 临时：用 export 命令行声明，变量在关闭 shell 时失效`PATH=$PATH:/home/zhangwang/mybin`给 PATH 环境变量追加了一个路径，只是在当前 Shell 有效，退出终端就失效
 * ${变量名#匹配字串}: 从头向后开始匹配，删除符合匹配字串的最短数据
 * ${变量名##匹配字串}: 从头向后开始匹配，删除符合匹配字串的最长数据
 * ${变量名%匹配字串}: 从尾向前开始匹配，删除符合匹配字串的最短数据
@@ -3185,7 +3186,7 @@ kill -USR2 主进程PID
 
 ## 网络 Networking
 
-* Linux内核是通过一个虚拟的网桥设备（Net Device）来实现桥接的。这个虚拟设备可以绑定若干个以太网接口，从而将它们连接起来
+* Linux内核通过一个虚拟的网桥设备（Net Device）来实现桥接的。这个虚拟设备可以绑定若干个以太网接口，从而将它们连接起来
   - 对于网络协议栈的上层来说，只看到br0。因为桥接是在数据链路层实现的，上层不需要关心桥接的细节，于是协议栈上层需要发送的报文被送到br0，网桥设备的处理代码判断报文被转发到eth0还是eth1，或者两者皆转发
   - 从eth0或者从eth1接收到的报文被提交给网桥的处理代码，在这里判断报文应该被转发、丢弃或者提交到协议栈上层。
 * 类型
@@ -3546,152 +3547,6 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 # If there is a cache miss, Linux broadcasts ARP request within the internal network asking who has 172.17.0.1. The owner of the IP sends an ARP response which is cached by the kernel and the kernel sends the packet to the gateway by setting Source mac address as mac address of eth0 and destination mac address of 172.17.0.1 which we got just now.
 #
 # Similar routing lookup process is followed in each hop till the packet reaches the actual server. Transport layer and layers above it come to play only at end servers. During intermediate hops only till the IP/Network layer is involved.
-```
-
-### [The Netfilter/Iptables Project](http://www.netfilter.org)
-
-* The basic firewall software most commonly used in Linux is called iptables
-* The iptables firewall works by interacting with the packet filtering hooks in the Linux kernel’s networking stack. These kernel hooks are known as the netfilter framework
-* the packet filtering technology that’s built into the 2.4 Linux kernel.just the command used to control netfilter, which is the real underlying technology
-* Stateful Packet Inspection SPI
-* Packets move through netfilter by traversing chains
-* By default, chain policies are to jump to the ACCEPT target
-* TABLES
-  - FILTER is used for the standard processing of packets, and it’s the default table if none other is specified.
-  - NAT is used to rewrite the source and/or destination of packets and/or track connections.
-  - MANGLE is used to otherwise modify packets, i.e. modifying various portions of a TCP header, etc.
-* CHAINS lists of rules within a table, and they are associated with “hook points” on the system
-  - the default table/chain combinations
-    + FILTER: Input, Output, Forward
-    + NAT: Prerouting, Postrouting, Output
-    + MANGLE: Prerouting, Postrouting, Input, Output, Forward
-  -
-  - PREROUTING: Immediately after being received by an interface.
-  - POSTROUTING: Right before leaving an interface.
-  - INPUT: Right before being handed to a local process.
-  - OUTPUT: Right after being created by a local process.
-  - FORWARD: For any packets coming in one interface and leaving out another.
-* TARGETS determine what will happen to a packet within a chain if a match is found with one of its rules
-  - DROP
-  - ACCEPT
-* parameters
-  - appending (-A)
-  - -o is for “output”
-  - -p protocol
-    + icmp
-  - -S specific chain (INPUT, OUTPUT, TCP, etc.)
-  - -L Listing the iptables rules in the table view
-    + -v show the number of packets, and the aggregate size of the packets in bytes
-    + --line-numbers
-  - -Z Resetting Packet Counts and Aggregate Size
-  - –icmp-type
-    + echo request
-  - -j jumping
-  - state:makes netfilter a “stateful” firewalling technology. Packets are not able to move through this rule and get back to the client unless they were created via the rule above it
-
-![How Traffic Moves Through Netfilter](../_static/netfilter.jpg "Optional title")
-
-```sh
-
-chkconfig iptables on|off # forever
-chkconfig iptables start|stop # recover with restart
-
-/etc/init.d/iptables status|save
-
-# list out all of the active iptables rules
-iptables -L -n -v
-sudo iptables -S
-
-sudo iptables -S TCP
-
-iptables -P INPUT DROP # 设置默认 chain 策略
-iptables -P FORWORD DROP
-iptables -P OUTPUT DROP
-
-iptables -I INPUT -p tcp --dport 80 -j ACCEPT # open port
-
-iptables -A INPUT -p tcp --drop 端口号 -j DROP|ACCEPT　
-iptables -A OUTPUT -p tcp --dport 端口号 -j DROP # 关闭端口
-
-# 设置
-iptables -t nat -N CLASH
-iptables -t nat -A CLASH -d 10.0.0.0/8 -j RETURN
-iptables -t nat -A CLASH -d 127.0.0.0/8 -j RETURN
-iptables -t nat -A CLASH -d 169.254.0.0/16 -j RETURN
-iptables -t nat -A CLASH -d 172.16.0.0/12 -j RETURN
-iptables -t nat -A CLASH -d 192.168.0.0/16 -j RETURN
-iptables -t nat -A CLASH -d 224.0.0.0/4 -j RETURN
-iptables -t nat -A CLASH -d 240.0.0.0/4 -j RETURN
-iptables -t nat -A CLASH -p tcp -j REDIRECT --to-ports 7892
-
-iptables-save > /etc/iptables.up.rules
-/sbin/iptables-restore < /etc/iptables.up.rules
-
-# Allow Outgoing (Stateful) Web Browsing
-# adding (appending) a rule to the OUTPUT chain for protocol TCP and destination port 80 to be allowed
-iptables -A OUTPUT -o eth0 -p TCP –dport 80 -j ACCEPT
-# allows the web traffic to come back
-iptables -A INPUT -i eth0 -p TCP -m state –state ESTABLISHED,RELATED –sport 80 -j ACCEPT
-
-# Allowing Outgoing Pings
-iptables -A OUTPUT -o eth0 -p icmp –icmp-type echo-request -j ACCEPT
-iptables -A INPUT -i eth0 -p icmp –icmp-type echo-reply -j ACCEPT
-
-# “Passing Ports” Into A NATd Network  pass traffic inside to hidden servers
-# DNAT occurs
-iptables -t nat -A PREROUTING -i eth0 -p tcp -d 1.2.3.4 –dport 25 -j DNAT –to 192.168.0.2:25
-# rules portion：make it through your firewall;
-iptables -A FORWARD -i eth0 -o eth1 -p tcp –dport 25 -d 192.168.0.2 -j ACCEPT
-
-# 删除所有现有规则
-iptables -F
-
-# /etc/default/ufw
-sudo ufw status|reload
-sudo ufw allow 2375/tcp
-```
-
-## Nmap
-
-* the definitive port scanner,kicking off in two distinct phases
-  - the discovery phase
-  - the scan phase
-    + `nmap -P0 network` Don’t worry about discovery — just scan.
-    + `nmap -PS21,22,23,80 network` discovery using TCP SYNs on ports that you specify
-* the default scan type is TCP SYN (-sS)
-* -p By default, nmap scans 1663 ports (in version 3.81), but it’s possible and often prudent to change how many and/or which ports are scanned
-* -sU  scan using the UDP protocol
-* TCP scans
-  - `nmap -sF host` the FIN scan
-  - `nmap -sA host` the ACK scan
-  - `nmap -sX host` the XMAS scan:sends a TCP packet with the FIN, URG, and PSH flags
-  - `nmap -sN host` the NULL scan
-* `nmap -sP network` Ping Scan:this sends both an ICMP echo and a TCP ACK to the hosts in the target range
-* `nmap -p1-10000 -sV host` Version Scanning attain version information for various TCP and UDP services on target machines.
-* `nmap -O network` attempt to determine what operating system a target host is running
-* `nmap –resume logfile_name` Resume An Interrupted Scan
-  - requires that you have a logfile in either the human readable or grepable format, so it’s yet another reason to go ahead and use the -oA option when performing all scans
-* Output `nmap -oA output_file network`
-  - create three files in the current directory — output_file.nmap (human readable), output_file.gnmap (grepable), and output_file.xml (XML)
-  - also produce these seperately via -oN, -oG, and -oX respectively.
-* Scan Speed
-  - offers options to throttle the speed of your scans by running its probes serially rather than in parallel and by varying the time between each probe.
-  - has several parameters — Paranoid, Sneaky, Polite, Normal, Aggressive, and Insane.
-  - The difference between them is in how long they delay between each packet they send. Paranoid waits 5 minutes, Sneaky waits 15 seconds, and Polite waits at least .4 seconds.
-
-```sh
-nmap localhost
-nmap 192.168.10.0/24
-
-nmap -p1-10000 192.168.10.0/24
-nmap -p22,23,10000-15000 192.168.10.0/24
-
-# UDP scan (-sU) and then defining which ports on each protocol to scan
-# TCP 21,22,23 UDP 53,137
-nmap -sU -pT:21,22,23,U:53,137 192.168.10.0/24
-
-# scan using the UDP protocol.
-nmap -sU host
 ```
 
 ## [lsof lists open files](http://www.netadmintools.com/html/lsof.man.html)
@@ -4143,21 +3998,6 @@ cut -d',' -f3 jan17no_headers.csv > authors.txt
   - 平铺。不必手动排列窗口
   - 如果使用鼠标，光标所在的窗口自动获得焦点
 
-## 优化
-
-* 内核参数优化
-* JVM优化
-* 网络参数优化
-* 事务优化
-* 数据库优化
-* 池化
-* 内存溢出排查
-* 堆外内存排查
-* 网络排查
-* I/O排查
-* 高负载排查
-* 流量录制
-
 ## [技巧](https://coolshell.cn/articles/8883.html)
 
 * 基础
@@ -4229,10 +4069,6 @@ cat a b | sort | uniq -d > c
 cat a b b | sort | uniq -u > c
 ```
 
-## [Linux From Scratch](http://www.linuxfromscratch.org/)
-
-a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
-
 ## 教程
 
 * [Introduction to Linux](https://www.ibm.com/developerworks/linux/newto/) – 来自IBM的教程，用于给那些想学习Linux的人
@@ -4243,31 +4079,34 @@ a project that provides you with step-by-step instructions for building your own
 * [Edx basic linux commands course](https://courses.edx.org/courses/course-v1:LinuxFoundationX+LFS101x+1T2020/course/)
 * [Edx Red Hat Enterprise Linux Course](https://courses.edx.org/courses/course-v1:RedHat+RH066x+2T2017/course/)
 
+### [Linux From Scratch](http://www.linuxfromscratch.org/)
+
+a project that provides you with step-by-step instructions for building your own custom Linux system, entirely from source code
+
 ## 图书
 
 * Essential System Administration: Tools and Techniques for Linux and Unix Administration by Æleen Frisch
 * Learning the UNIX Operating System, Fifth Edition by Jerry Peek , Grace Todino-Gonguet , John Strang
 * Linux in a Nutshell: A Desktop Quick Reference by Ellen Siever and Stephen Figgins
 * Classic Shell Scripting  by Arnold Robbins and Nelson H.F. Beebe
-* Sed & Awk  by Dale Dougherty
+* 《Sed & Awk》  by Dale Dougherty
 * Learning the vi and Vim Editors: Text Processing at Maximum Speed and power  Arnold Robbins
 * bash Cookbook : Solutions and Examples for bash Users by Carl Albing
 * Bash Pocket Reference: Help for Power Users and Sys Admins  By Armold Robbins
 * TCP/IP Network Administration (3rd Edition; O’Reilly Networking) by Craig Hunt
 * DNS and BIND by Cricket Liu
 * Linux 内核完全解析
-* 《[Linux内核设计与实现（第3版）](https://www.amazon.cn/gp/product/B004X3Z3D4)》奠定基础的书籍
-* #
+* 《[Linux内核设计与实现（第3版）》奠定基础的书籍
 * [Understanding the Linux Kernel 深入理解Linux内核]
-* Linux 内核源代码情景分析
 * 《[深入Linux内核架构](https://www.amazon.cn/gp/product/B003QN7J7U)》
+* Linux 内核源代码情景分析
+* [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
+  - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) 
 * 《Linux高性能服务器编程》
 * 《POSIX多线程程序设计》
 * 《Linux多线程服务端编程》
 * 《Unix/Linux 编程实践教程》
 * 《Linux/UNIX系统编程手册》
-* [Linux 内核揭密](https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html)
-  - [linux-insides-zh](https://github.com/MintCN/linux-insides-zh) https://xinqiu.gitbooks.io/linux-insides-cn/content/index.html
 * 《[Linux系统编程（第2版）](https://www.amazon.cn/gp/product/B00JUM2ML4)》
 * LINUX 操作系统(第2版)
 * [Advanced Linux Programming Linux 环境高级编程](https://mentorembedded.github.io/advancedlinuxprogramming/)
@@ -4282,17 +4121,16 @@ a project that provides you with step-by-step instructions for building your own
 ## 工具
 
 * [smenu](https://github.com/p-gen/smenu):Terminal utility that allows you to use words coming from the standard input to create a nice selection window just below the cursor. Once done, your selection will be sent to standard output. More in the Wiki
-* [iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 * [up](https://github.com/akavel/up):Ultimate Plumber is a tool for writing Linux pipes with instant live preview
 * [bcc](https://github.com/iovisor/bcc):BCC - Tools for BPF-based Linux IO analysis, networking, monitoring, and more
 * Monitor
   - [Monit](https://mmonit.com/monit/):功能异常强大的进程、文件、设备、系统监控软件，适用于Linux/Unix系统 With all features needed for system monitoring and error recovery. It's like having a watchdog with a toolbox on your server
   - [bashtop](https://github.com/aristocratos/bashtop):Linux resource monitor
   - [Cockpit](https://cockpit-project.org/):The easy-to-use, integrated, glanceable, and open web-based interface for your servers
-* [foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * [systemd](https://github.com/systemd/systemd):systemd is a suite of basic building blocks for a Linux system. It provides a system and service manager that runs as PID 1 and starts the rest of the system. systemd provides aggressive parallelization capabilities, uses socket and D-Bus activation for starting services, offers on-demand starting of daemons, keeps track of processes using Linux control groups, maintains mount and automount points, and implements an elaborate transactional dependency-based service control logic.
 * [LTF](https://github.com/843723683/LTF):Linux test framework
 * [ServerCat - Linux Status & SS‪H‬](link) apple 客户端
+* [GNU parallel](http://www.gnu.org/software/parallel/)a shell tool for executing jobs in parallel using one or more computers.
 
 ## 参考
 
@@ -4315,10 +4153,13 @@ a project that provides you with step-by-step instructions for building your own
   - [From DOS/Windows to Linux HOWTO](https://tldp.org/HOWTO/DOS-Win-to-Linux-HOWTO.html)
   - [Hands-On Introduction to Linux](http://tldp.org/LDP/intro-linux/html/index.html)
 
-* [linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux https://git.io/linux
+* [linux-command](https://github.com/jaywcjlove/linux-command):Linux命令大全搜索工具，内容包含Linux命令手册、详解、学习、搜集。https://git.io/linux
+	
 * [linux 指令](https://www.yuque.com/books/share/742ca8f6-34f3-41ef-b239-be00aaf0df31)
+
 * [LVS：跑在Linux内核上的负载均衡器](https://liangshuang.name/2017/11/19/lvs/)
-* [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)
+* [全面理解Linux性能优化](https://mp.weixin.qq.com/s/C7KDLcHUhr7QR2hq_pm4kA)	
 * [linux 内存管理初探](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636296&idx=1&sn=48ca904ca1e71ffb467fb0befdd39853&chksm=87a482c5b0d30bd3da8d6fba90d8eb17438103806bb99d20c8713dd67af7929833ceea7502ab)
 * [十五分钟制作一个属于自己得Linux操作系统](https://mp.weixin.qq.com/s?__biz=MzA3OTgyMDcwNg==&mid=2650636229&idx=1&sn=5904d82ee06d0e78a6140e1905bd06f0&chksm=87a47d08b0d3f41e592774b07f2977876f42e4d14d7f148e53f0f805d249bd20cdd83495a337)
+	
 * [Linux 知识](https://mp.weixin.qq.com/s/CK7OZXNkMgfVnf-0ZwuuZA)

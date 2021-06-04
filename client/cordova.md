@@ -1,5 +1,7 @@
 # [cordova](http://cordova.apache.org/)
 
+Create smartphone app just with HTML, CSS, and JavaScript
+
 ```sh
 npm install -g cordova
 ```

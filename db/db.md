@@ -376,7 +376,6 @@ SELECT * FROM A FULL JOIN B ON A.book_id=B.book_id WHERE A.id IS null OR B.id IS
 * [adminer](https://github.com/vrana/adminer):Database management in a single PHP file <https://www.adminer.org/>
 * [redash](https://github.com/getredash/redash):Make Your Company Data Driven. Connect to any data source, easily visualize and share your data. <http://redash.io/>
 * [soar](https://github.com/XiaoMi/soar):SQL Optimizer And Rewriter
-* [prisma](https://github.com/prisma/prisma)Next-generation ORM for Node.js & TypeScript | PostgreSQL, MySQL, MariaDB, SQL Server & SQLite <https://www.prisma.io/>
 * [twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
 * [druid](https://github.com/alibaba/druid):阿里巴巴数据库事业部出品，为监控而生的数据库连接池。阿里云Data Lake Analytics(<https://www.aliyun.com/product/datalakeanalytics> )、DRDS、TDDL 连接池powered by Druid <https://github.com/alibaba/druid/wiki>
 * [hue](https://github.com/cloudera/hue):Hue is an open source SQL Cloud Assistant for developing and accessing SQL/Data Apps. <http://gethue.com>

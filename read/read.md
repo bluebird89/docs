@@ -2104,6 +2104,7 @@
 * GoodReader
 * [Calibre](https://calibre-ebook.com/) — E-book Manager `sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin`
 * [Clearview](https://apps.apple.com/cn/app/clearview/id557090104?l=en&mt=12)
+* [foliate](https://github.com/johnfactotum/foliate):A simple and modern GTK eBook reader https://johnfactotum.github.io/foliate/
 * 书单工具：OmniFocus(OF)中的『阅读』项目+豆瓣读书的豆列
 * 笔记体系：Evernote(读书笔记)+Clippings.io(导出标注至Evernote)
 * 输出工具：Markdown写作工具+OmniOutlier(结构整理)

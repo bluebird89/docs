@@ -116,7 +116,7 @@ set completion-ignore-case on
 ```
 
 ## Alias
-- `alias -s txt=vscode` 指定打开扩展类型的程序
+- `alias -s txt=vscode` 指定打开扩展类型程序
 - -g 全局别名，允许为命令的任何部分指定替代项 `alias -g G=' | grep'`
 - `alias c='clear'`
 - `unalias aliasname`
@@ -124,13 +124,31 @@ set completion-ignore-case on
 	+ 全路径 /usr/bin/clear
 	+ 转义 \c
 	+ command ls
++ 实践
+	+ Setting default options for a command (e.g. set eth0 as default option for ethtool command via alias ethtool='ethtool eth0' ).
+	+ Correcting typos (cd.. will act as cd .. via alias cd..='cd ..').
+	+ Reducing the amount of typing.
+	+ Setting the default path of a command that exists in several versions on a system (e.g. GNU/grep is located at /usr/local/bin/grep and Unix grep is located at /bin/grep. To use GNU grep use alias grep='/usr/local/bin/grep' ).
+	+ Adding the safety nets to Unix by making commands interactive by setting default options. (e.g. rm, mv, and other commands).
+	+  Compatibility by creating commands for older operating systems such as MS-DOS or other Unix like operating systems (e.g. alias del=rm ).
 
-```
-alias name\=value
-alias name\='command'
-alias name\='command arg1 arg2'
-alias name\='/path/to/script'
-alias name\='/path/to/script.pl arg1'
+```sh
+# list
+alias
+
+# create
+alias name=value
+alias name='command'
+alias name='command arg1 arg2'
+alias name='/path/to/script'
+alias name='/path/to/script.pl arg1'
+
+## ~/.bashrc
+# if user is not root, pass all commands via sudo #
+if \[ $UID \-ne 0 \]; then
+    alias reboot\='sudo reboot'
+    alias update\='sudo apt-get upgrade'
+fi
 ```
 
 ## [Coreutils - GNU core utilities](https://www.gnu.org/software/coreutils/)
@@ -2320,6 +2338,7 @@ ccache gcc foo.c
 * [awesome-bash](https://github.com/awesome-lists/awesome-bash)
 * [Google’s Shell Style Guide](https://google.github.io/styleguide/shell.xml)
 * [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line):Master the command line, in one page
+* [Linux Shell Scripting Tutorial](https://bash.cyberciti.biz/guide/Main_Page)
 * https://www.shellscript.sh/
 
 * [across](https://github.com/teddysun/across)
@@ -2329,7 +2348,6 @@ ccache gcc foo.c
   - <http://www.commandlinefu.com/>
   - <http://www.shelldorado.com/scripts/>
   - <https://snippets.siftie.com/public/tag/bash/>
-  - <https://bash.cyberciti.biz/>
   - <https://github.com/miguelgfierro/scripts>
   - <https://github.com/epety/100-shell-script-examples>
   - <https://github.com/ruanyf/simple-bash-scripts>

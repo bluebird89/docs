@@ -132,7 +132,6 @@ cardNo: Option<CardNo>  name: Name  contact: Contact}
 ## 工具
 
 * [typeorm](https://github.com/typeorm/typeorm):ORM for TypeScript and JavaScript (ES7, ES6, ES5). Supports MySQL, PostgreSQL, MariaDB, SQLite, MS SQL Server, Oracle, WebSQL databases. Works in NodeJS, Browser, Ionic, Cordova and Electron platforms. <http://typeorm.io>
-* [prisma](https://github.com/prisma/prisma):Modern DB toolkit to query, migrate and model your database <https://www.prisma.io/>
 * [quicktype](https://github.com/quicktype/quicktype):Generate types and converters from JSON, Schema, and GraphQL <https://quicktype.io>
 * [ts-loader](https://github.com/TypeStrong/ts-loader):TypeScript loader for webpack
 * [tslint](https://github.com/palantir/tslint):🚦 An extensible linter for the TypeScript language <http://palantir.github.io/tslint/>

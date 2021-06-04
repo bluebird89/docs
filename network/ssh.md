@@ -237,7 +237,7 @@ ssh -o User=sally -o Port=220 server.example.com
 * `ls -l /etc/init.d/sshd`
 * ssh-keygen
   - -b 指定密钥位数
-  - -t指定密钥类型：rsa/dsa/ecdsa
+  - -t 指定密钥类型：rsa/dsa/ecdsa
 * 询问一系列问题
   - 询问密钥保存的文件名
   - 是否要为私钥文件设定密码保护（passphrase）可以直接按回车键，密码就会为空
@@ -297,23 +297,22 @@ ssh –d 1 foo.com
 ssh -v root@192.168.75.136
 ```
 
-## 密钥登录 Passwordless Authentication Using SSH
+## 公钥登录 Passwordless Authentication Using SSH
 
-* 密码登录:需要输入服务器密码，非常麻烦，也不安全，存在被暴力破解的风险
-* 客户端通过私钥加密-》服务端通过保存用户公钥解密
-* 需要服务器保存用户公钥，也需要用户保存服务器公钥指纹。对于多用户、多服务器的大型机构很不方便，如果有员工离职，需要将他的公钥从每台服务器删除
-    + 手动将客户端的公钥放入远程服务器的指定位置
-    + 客户端向服务器发起 SSH 登录的请求
-    + 服务器收到用户 SSH 登录的请求，发送一些随机数据给用户，要求用户证明自己的身份
-    + 客户端收到服务器发来的数据，使用私钥对数据进行签名，然后再发还给服务器。
-    + 服务器收到客户端发来的加密签名后，使用对应的公钥解密，然后跟原始数据比较。如果一致，就允许用户登录
+* 密码登录:输入服务器密码，非常麻烦，也不安全，存在被暴力破解风险
+* 公钥登录：客户端通过私钥加密-》服务端通过保存用户的公钥解密
+  - 手动将客户端公钥放入远程服务器指定位置 `.ssh/authorized_keys`文件权限必须是600
+  - 客户端向服务器发起 SSH 登录请求，需要用户保存服务器公钥指纹 (fingerprint) 
+  - 服务器收到用户 SSH 登录的请求，发送一些随机数据给用户，要求用户证明自己的身份
+  - 客户端收到服务器发来的数据，使用私钥对数据进行签名，然后再发还给服务器。
+  - 服务器收到客户端发来的加密签名后，使用对应的公钥解密，然后跟原始数据比较。如果一致，就允许
+  - 对于多用户、多服务器的大型机构很不方便，如果有员工离职，需要将他的公钥从每台服务器删除用户登录
 * 需满足至少下面两个条件
   - `.ssh`目录的权限必须是700
-  - `.ssh/authorized_keys`文件权限必须是600
-* 启用密钥登录之后，最好关闭服务器的密码登录 `/etc/ssh/sshd_config` 中 `PasswordAuthentication no`
+* 最好关闭服务器的密码登录 `/etc/ssh/sshd_config` 中 `PasswordAuthentication no`
 
 ```sh
-ssh-keygen -t rsa # 生成.ssh文件目录
+ssh-keygen  -b 2048 -t rsa -f foo_rsa # 生成.ssh文件目录
 
 ssh-copy-id test_host@40.343.45.77
 ssh-copy-id -i ~/.ssh/id_rsa.pub <romte_ip>
@@ -441,10 +440,72 @@ ssh-add my-other-key-file
 ssh-add -d name-of-key-file
 ```
 
-## 命令行代理
+## 端口转发 port forwarding|隧道 tunnel
+
+* 其他 TCP 网络应用程序可以通过 SSH 来建立一条加密通道来传输网络数据
+* 加密通信中介：充当两台服务器之间的通信加密跳板，使得原本不加密通信变成加密通信
+  - 将不加密数据放在 SSH 安全连接里面传输，使得原本不安全的网络服务增加了安全性，比如通过端口转发访问 Telnet、FTP 等明文服务，数据传输就都会加密
+  - 作为数据通信的加密跳板，绕过网络防火墙
+* ssh 连接的单向性
+* 本地|远程转发：都是通过ssh 链接 sshd,绑定客户端本地端口到可用服务
+  - 本地：客户端 ssh localport:DesHost:DesPort user@tunnelHost，客户端发起
+    + 访问端打进去的洞
+  - 远程：tunnelHost ssh clientPort:DesHost:DesPort clientUser@clientHost，tunnel 端发起
+    + 内部可以访问最终服务的服务器向访问端打洞
+* [An Illustrated Guide to SSH Tunnels](https://solitum.net/posts/an-illustrated-guide-to-ssh-tunnels/)
+
+### 本地转发 local forwarding 
+
+* a tunnel whose ingress is located on the client host.
+* -L Specifies that the given port on the local (client) host is to be forwarded to the given host and port on the remote side 
+* SSH 服务器作为中介跳板机，建立本地计算机与特定目标网站之间的加密连接，在本地计算机 SSH 客户端建立的转发规则 本地->本地ssh->ssh server-〉des
+* `ssh -L sourcePort:forwardToHost:onPort connectToHost -N`
+  - `ssh -L 10889:localhost:80 vagrant@127.0.0.1 -p 2222 -N`
+  - `ssh -L local-port:target-host:target-port tunnel-host -N`
+  - connect with ssh to connect To Host
+  - forward all connection attempts to the local sourcePort to port onPort on the machine called forwardToHost, which can be reached from the connectToHost machine.
+  - 本机 SSH 客户端将local-port端口收到数据加密并转发到 tunnel-host 端的 SSH 服务器端口
+  - tunnel-host 解密收到数据并将之转发到监听的 target-host 服务target-port端口
+* 选择端口号时要注意非管理员帐号是无权绑定1-1023端口的，所以最好选择一个1024-65535之间的未占用的端口
+* 用户个人配置文件（~/.ssh/config） `Host test.example.com LocalForward client-IP:client-port server-IP:server-port`
+* 跳板机在外网
+* 机器 (HostA, HostB, HostC, HostD) ，其中 HostA 想访问 HostD 上面的 LDAP 服务，但是由于网络限制，HostA 不能直接访问 HostD ，但是 HostA 可以访问 HostB ，HostB 也能 SSH 到 HostC ，HostC 能直连 HostD ，如何通过 SSH 端口转发来让 HostA 访问 HostD 的 LDAP 服务呢？只需要在 HostB 上执行本地端口转发 `ssh -g -L 7001:<hostD>:389 <HostC>`
+
+```
+ssh -L 8080:web-server:80 -L 8443:web-server:443 bastion-host -N
+```
+
+### 远程转发 
+
+* a tunnel whose ingress is located on the tunnel host
+* -R Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side `ssh -R sourcePort:forwardToHost:onPort connectToHost`
+* 前提：假设由于网络或防火墙的原因不能用 SSH 直接从 LDAP 客户端主机连接到 LDAP 服务器，但是**反向连接**却是被允许的
+  - 要求本地计算机安装 SSH 服务器，能接受 内网 SSH 跳板机的远程登录
+* 通过远程端口转发来实现对 LADP 服务器的访问。在 LDAP 服务器主机  `ssh -R 7001:localhost:389 <ldap-client-host>`
+  - 和本地端口转发相比， SSH 服务器端和 SSH 客户端的位置对调，但是数据流传输路径还是一模一样
+  - LDAP 客户端主机上的应用将数据发送到本机的7001端口上，而本机 SSH 服务器端会将7001端口收到的数据加密并通过 SSH 隧道转发到 LDAP 服务器端的 SSH 客户端
+  - SSH 客户端会解密收到的数据并将之转发到监听的 LDAP 服务的389端口
+  - 将从 LDAP 应答消息原路返回以完成整个流程
+* 在远程 SSH 服务器建立的转发规则
+* 主要针对内网情况
+  - 本地计算机在外网，SSH 跳板机和目标服务器都在内网
+  - 本地计算机无法访问内网之中的 SSH 跳板机，但是 SSH 跳板机可以访问本机计算机,从 SSH 跳板机发起隧道，建立端口转发
+* 在 SSH 跳板机执行 `ssh -R local-port:target-host:target-port -N local` 从跳板机连接本地计算机
+
+### 动态转发
+
+* SOCKS 协议:无需指定被访问目标主机端口。端口号在本地通过协议指定 `ssh -D <local-port> <ssh-server>`
+* 直接在浏览器中设置 SOCKS 代理：localhost:8888 ，本机无法访问的网站现在可以通过远程主机代理来正常访问
+  - 访问外部网站时，需要把 HTTP 请求转成 SOCKS5 协议，才能把本地端口的请求转发出去
+* 本机与 SSH 服务器之间创建一个加密连接，然后针对本机内部某个端口的通信，都通过这个加密连接转发
+* 需要把本地端口绑定到 SSH 服务器。至于 SSH 服务器要去访问哪一个网站，完全是动态的，取决于原始通信
+* 使用场景:访问所有外部网站，都通过 SSH 转发
+* 设置写入 SSH 客户端的用户个人配置文件（~/.ssh/config）`DynamicForward tunnel-host:local-port`
 
 ```sh
 sudo apt install proxychains
+
+curl -x socks5://localhost:8080 http://www.example.com
 
 #/etc/proxychains.conf add
 socks5 127.0.0.1 7891
@@ -452,45 +513,17 @@ socks5 127.0.0.1 7891
 proxychains curl google.com
 ```
 
-## 端口转发 port forwarding|SSH 隧道 tunnel
+### VPN
 
-* 作为加密通信中介，充当两台服务器之间的通信加密跳板，使得原本不加密的通信变成加密通信
-  - 将不加密数据放在 SSH 安全连接里面传输，使得原本不安全的网络服务增加了安全性，比如通过端口转发访问 Telnet、FTP 等明文服务，数据传输就都会加密
-  - 作为数据通信的加密跳板，绕过网络防火墙
-* 本地转发 local forwarding -L Specifies that the given port on the local (client) host is to be forwarded to the given host and port on the remote side `ssh -L sourcePort:forwardToHost:onPort connectToHost`
-  - SSH 服务器作为中介跳板机，建立本地计算机与特定目标网站之间的加密连接，在本地计算机的 SSH 客户端建立的转发规则 本地-》本地ssh->ssh server-〉des
-  - 选择端口号时要注意非管理员帐号是无权绑定1-1023端口的，所以最好选择一个1024-65535之间的未占用的端口
-  - `ssh -L local-port:target-host:target-port tunnel-host`
-    + connect with ssh to connectToHost
-    + forward all connection attempts to the local sourcePort to port onPort on the machine called forwardToHost, which can be reached from the connectToHost machine.
-  - ssh -L 7001:localhost:389 <ldap-server-host>
-    + 在 LDAP 客户端主机上的应用将数据发送到本机的7001端口
-    + 本机的 SSH 客户端将7001端口收到的数据加密并转发到 LDAP 服务器端的 SSH 服务器端口
-    + SSH 服务器会解密收到的数据并将之转发到监听的 LDAP 服务389端口
-    + 最后再将从 LDAP 返回的数据原路返回以完成整个流程
-  - 用户个人配置文件（~/.ssh/config） `Host test.example.com LocalForward client-IP:client-port server-IP:server-port`
-* 远程转发 -R Specifies that the given port on the remote (server) host is to be forwarded to the given host and port on the local side `ssh -R sourcePort:forwardToHost:onPort connectToHost`
-  - 假设由于网络或防火墙的原因不能用 SSH 直接从 LDAP 客户端主机连接到 LDAP 服务器，但是反向连接却是被允许的，可以通过远程端口转发来实现对 LADP 服务器的访问。只需要在在 LDAP 服务器主机上执行如下命令 `ssh -R 7001:localhost:389 <ldap-client-host>`
-    + 和本地端口转发相比，这次只是 SSH 服务器端和 SSH 客户端的位置对调了一下，但是数据流传输路径还是一模一样：LDAP 客户端主机上的应用将数据发送到本机的7001端口上，而本机的 SSH 服务器端会将7001端口收到的数据加密并通过 SSH 隧道转发到 LDAP 服务器端的 SSH 客户端，SSH 客户端会解密收到的数据并将之转发到监听的 LDAP 服务的389端口，最后再将从 LDAP 应答消息原路返回以完成整个流程
-  - 在远程 SSH 服务器建立的转发规则
-  - 主要针对内网情况:本地计算机在外网，SSH 跳板机和目标服务器都在内网，而且本地计算机无法访问内网之中的 SSH 跳板机，但是 SSH 跳板机可以访问本机计算机,从 SSH 跳板机发起隧道，建立端口转发
-  - `ssh -R local-port:target-host:target-port -N local` 在 SSH 跳板机执行的，从跳板机去连接本地计算机
-  - 要求本地计算机也安装了 SSH 服务器，这样才能接受 SSH 跳板机的远程登录
-  - connect with ssh to connectToHost, and forward all connection attempts to the remote sourcePort to port onPort on the machine called forwardToHost, which can be reached from your local machine.
-* 机器 (HostA, HostB, HostC, HostD) ，其中 HostA 想访问 HostD 上面的 LDAP 服务，但是由于网络限制，HostA 不能直接访问 HostD ，但是 HostA 可以访问 HostB ，HostB 也能 SSH 到 HostC ，HostC 能直连 HostD ，如何通过 SSH 端口转发来让 HostA 访问 HostD 的 LDAP 服务呢？只需要在 HostB 上执行本地端口转发 `ssh -g -L 7001:<hostD>:389 <HostC>`
-* 动态转发:无需指定被访问目标主机的端口。这个端口号需要在本地通过协议指定，该协议就是简单、安全且实用的 SOCKS 协议 ssh -D <local-port> <ssh-server>
-  - 创建一个 SOCKS 代理服务器，所有发送到本机8888端口的数据都会转发到远程主机。接下来，我们可以直接在浏览器中设置 SOCKS 代理：localhost:8888 ，这样，在本机上无法端无法访问的网站现在也就可以通过远程主机代理来正常访问
-  - 本机与 SSH 服务器之间创建一个加密连接，然后针对本机内部某个端口的通信，都通过这个加密连接转发
-  - 需要把本地端口绑定到 SSH 服务器。至于 SSH 服务器要去访问哪一个网站，完全是动态的，取决于原始通信
-  - 采用了 SOCKS5 协议。访问外部网站时，需要把 HTTP 请求转成 SOCKS5 协议，才能把本地端口的请求转发出去
-  - 使用场景:访问所有外部网站，都通过 SSH 转发
-  - 设置写入 SSH 客户端的用户个人配置文件（~/.ssh/config）`DynamicForward tunnel-host:local-port`
-* VPN
-  - 用来在外网与内网之间建立一条加密通道。内网的服务器不能从外网直接访问，必须通过一个跳板机，如果本机可以访问跳板机，就可以使用 SSH 本地转发，简单实现一个 VPN
+* 用来在外网与内网之间建立一条加密通道。内网的服务器不能从外网直接访问，必须通过一个跳板机，如果本机可以访问跳板机，就可以使用 SSH 本地转发，简单实现一个 VPN
+
 * 实验
-  - 使用 ssh-copy-id vm 将您的 ssh 密钥拷贝到服务器。
-  - 使用python -m http.server 8888 在您的虚拟机中启动一个 Web 服务器并通过本机的http://localhost:9999 访问虚拟机上的 Web 服务器
-  - 使用sudo vim /etc/ssh/sshd_config 编辑 SSH 服务器配置，通过修改PasswordAuthentication的值来禁用密码验证。通过修改PermitRootLogin的值来禁用 root 登陆。然后使用sudo service sshd restart重启 ssh 服务器，然后重新尝试。
+  - 使用 ssh-copy-id vm 将公钥拷贝到服务器
+  - 使用python -m http.server 8888 在虚拟机中启动一个 Web 服务器并通过本机的http://localhost:9999 访问虚拟机上的 Web 服务器
+  - 使用sudo vim /etc/ssh/sshd_config 编辑 SSH 服务器配置
+  - 修改PasswordAuthentication的值来禁用密码验证
+  - 修改PermitRootLogin的值来禁用 root 登陆
+  - sudo service sshd restart重启 ssh 服务器，然后重新尝试
 
 ```sh
 # -D表示动态转发，local-port是本地端口，tunnel-host是 SSH 服务器，
