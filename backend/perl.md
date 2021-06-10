@@ -10,6 +10,8 @@ Perl 5 is a highly capable, feature-rich programming language with over 30 years
 
 * [mojo](https://github.com/kraih/mojo): sparkles Mojolicious - Perl real-time web framework <https://mojolicious.org>
 
+## [Perl Data Language](http://pdl.perl.org/)
+
 ## 参考
 
 * [CPAN](https://www.cpan.org/):Comprehensive Perl Archive Network

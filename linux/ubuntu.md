@@ -682,9 +682,9 @@ sudo nona pycharm.desktop
 
 * [GNOME 40](https://forty.gnome.org/)
 * 安装
-  - 下载 解压，apps-menugnome-shell-extensions.gcampax.github.com.v40.shell-extension
+  - 下载解压 `apps-menugnome-shell-extensions.gcampax.github.com.v40.shell-extension`
   - 去掉后缀 .v40.shell-extension
-  - 把文件夹拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
+  - 文件拷贝到 `~/.local/share/gnome-shell/extensions`，重启 Gnome-Tweaks
   - /usr/share/gnome-shell/extensions/
 * GNOME Tweaks Tool `sudo apt install gnome-tweaks`
 * [Pomodoro](https://gnomepomodoro.org/) `sudo apt install gnome-todo` indeiect not use gnome
@@ -775,8 +775,6 @@ gnome-extensions list
 gnome-extensions disable|enable ubuntu-dock@ubuntu.com
 
 sudo apt install ubuntu-desktop
-
-sudo apt install kde-plasma-desktop
 ```
 
 ### [MATE](https://ubuntu-mate.org/)
@@ -805,6 +803,10 @@ sudo apt install ubuntu-mate-desktop
   * Netspeed Widget：网速显示。
   * 统符合查看器：自带的，不过为了适合主题要改下其设置，调整下颜色方案。
   * Weather Widge：一个UI不错的天气插件，特别是带了磨砂后看起来很赞。需要设置以下地理位置，并且勾上 Appearance>Render meteogram for yr.no，否则雨量的图形会是一片白的背景。
+
+```sh
+sudo apt install kde-plasma-desktop
+```
 
 ## 用户管理
 

@@ -2,6 +2,8 @@
 
 ## 安装
 
+* [platform-tools](https://developer.android.com/studio/releases/platform-tools.html)
+
 ```sh
 JAVA -version # JDK
 brew cask install android-studio # IDE

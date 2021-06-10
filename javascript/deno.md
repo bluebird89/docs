@@ -1,11 +1,14 @@
 # [deno](https://github.com/ry/deno)
 
-A secure TypeScript runtime on V8
+A secure runtime for JavaScript and TypeScript. https://deno.land/
 
 ```sh
 curl -fsSL https://x.deno.js.cn/install.sh | sh
+curl -fsSL https://deno.land/x/install/install.sh | sh
 
 cargo install deno
+
+deno run https://deno.land/std/examples/welcome.ts
 ```
 
 * 内置了 V8 引擎，用来解释 JavaScript

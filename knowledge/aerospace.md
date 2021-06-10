@@ -164,6 +164,7 @@
 
 ## 工具
 
+* [Microsoft Flight Simulator](https://www.flightsimulator.com/)
 * [飞行模拟器](https://www.geo-fs.com/int/cn/)
 * [FLIGHTGEAR FLIGHT SIMULATOR](https://www.flightgear.org/)
 * [stellarium](https://stellarium.org/en/):s a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.

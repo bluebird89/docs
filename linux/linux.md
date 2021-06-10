@@ -351,6 +351,8 @@ vmstat 1
 
 # Display I/O statistics
 iostat 1
+
+sudo apt install kinfocenter
 ```
 
 ## 启动

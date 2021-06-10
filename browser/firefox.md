@@ -99,3 +99,7 @@ The Servo Browser Engine a modern, high-performance browser engine designed for 
   - 刷新 (覆盖缓存)： Shift+Reload button
   - 保存页面为：  Alt+Left-click
   - 逐行滚动：  Alt+Scroll
+
+## 工具
+
+* [firefox_explore](https://github.com/mattarderne/firefox_explore)Explore your firefox browsing history trends using Metabase Analytics Tool 

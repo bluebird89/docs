@@ -1177,7 +1177,7 @@ Git系统的本地机制，用于在诸如代码提交（Commit）和合并(Merg
   - [git-ci-hooks](https://bitbucket.org/tpettersen/git-ci-hooks/src/master/)
   - [templates](https://github.com/git/git/tree/master/templates)
   - [Git hooks](https://githooks.com)
-  - [husky](https://github.com/typicode/husky):🐶 Git hooks made easy
+  - [husky](https://github.com/typicode/husky):🐶 Git hooks made easy https://typicode.github.io/husky
   - [lefthook](https://github.com/Arkweid/lefthook):Fast and powerful Git hooks manager for any type of projects.
 
 ```sh

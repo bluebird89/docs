@@ -8,6 +8,7 @@
 
 * [MQTT.js](https://github.com/mqttjs/MQTT.js):The MQTT client for Node.js and the browser
 * [home-assistant](https://github.com/home-assistant/home-assistant):🏡 Open-source home automation platform running on Python 3 <https://home-assistant.io>
+	* [A practical guide to home automation using open source tools](https://opensource.com/sites/default/files/gated-content/a_practical_guide_to_home_automation_using_open_source_tools.pdf)
 * [core](https://github.com/home-assistant/core):house_with_garden Open source home automation that puts local control and privacy first <https://www.home-assistant.io>
 * [johnny-five](https://github.com/rwaldron/johnny-five):JavaScript Robotics and IoT programming framework, developed at Bocoup. <http://johnny-five.io>
 * [awesome-home-assistant](https://github.com/frenck/awesome-home-assistant):A curated list of amazingly awesome Home Assistant resources. <https://awesome-ha.com>
