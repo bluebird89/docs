@@ -95,14 +95,12 @@
 ## client
 
 * [Pocket Casts](https://www.pocketcasts.com/):client
-* [Overcast®](https://overcast.fm/): Free, simple, award-winning podcast player for iPhone, iPad, and Apple Watch.
-* [Podcast Addict](https://play.google.com/store/apps/details?id=com.bambuna.podcastaddict) andriod
-* [GetStream / Winds](https://github.com/GetStream/Winds#download):A Beautiful Open Source RSS & Podcast App Powered by Getstream.io <https://getstream.io/winds/>
+* [Overcast](https://overcast.fm/): Free, simple, award-winning podcast player for iPhone, iPad, and Apple Watch.
 * [Moon FM](https://moon.fm/):全平台
 * [Castbox](https://castbox.fm/)
 * Google Podcast
 * [Forecast](https://overcast.fm/forecast)
-* 泛用型播客app
+* [CPod](https://github.com/z-------------/CPod)
 
 ## 渠道
 

@@ -1,5 +1,10 @@
 # GPU
 
+```
+sudo add-apt-repository ppa:graphics-drivers/ppa
+sudo apt install nvidia-driver-440
+nvidia-smi
+```
 
 ## 概念
 

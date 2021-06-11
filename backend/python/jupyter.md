@@ -300,6 +300,8 @@ JupyterLab computational environment. <https://jupyterlab.readthedocs.io/>
 conda install -c conda-forge jupyterlab
 jupyter serverextension enable --py jupyterlab --sys-prefix
 
+conda install -c conda-forge jupyterhub jupyterlab nodejs nb_conda_kernels
+
 jupyter lab
 ```
 

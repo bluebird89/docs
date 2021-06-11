@@ -238,6 +238,10 @@ wg
 `sudo` `wg` `set` `wg0 peer YiyFylL+1Dr3j2Cyf0lwXQYz2qaNwm3XyV5YvMFp3Vs= allowed-ips 192.168.58.2``/32`
 ```
 
+## 工具
+
+* [WireGuard Easy](https://github.com/WeeJeWel/wg-easy)The easiest way to run WireGuard VPN + Web-based Admin UI.
+
 ## 参考
 
 * [部署](https://www.linode.com/docs/networking/vpn/set-up-wireguard-vpn-on-ubuntu/) <https://teddysun.com/554.html>

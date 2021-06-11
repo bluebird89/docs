@@ -43,6 +43,10 @@ the world's most popular open source database, and MySQL Cluster, a real-time, o
   - Your MySQL connection id is 4:记录了 MySQL 服务到目前为止连接数，每个新链接都会自动增加 1
   - `help|\h` 显示帮助内容
   - `\c` 命令来清除命令行 buffer
+- question
+	- Public Key Retrieval is not allowed
+		- `jdbc:mysql://localhost:3306/Database\_dbName?allowPublicKeyRetrieval=true&useSSL=false;`
+	- `Access denied for user 'root'@'127.0.0.1' (using password: YES)`
 
 ```sh
 brew install mysql

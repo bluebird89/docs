@@ -340,8 +340,6 @@ vue init webpack my-project
 vue init Plortinus/vue-multiple-pages new-project
 ```
 
-## vite
-
 ## 尤雨溪
 
 * 最初的开发初衷，即“做 Vue.js 的初衷很单纯，不是为了赚大钱，不是为了成为大神，也不是因为我发现了什么不得了的创新点。我只是想做一个我自己会喜欢的框架。很巧，我把我想要的东西做出来以后，也有很多其他人喜欢，所以用户越来越多。

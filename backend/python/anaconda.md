@@ -58,19 +58,23 @@ conda update conda
 * 建立多个虚拟环境，用于隔离不同项目所需的不同版本的工具包，以防止版本上的冲突
 
 ```sh
-conda env list # 显示所有的环境
+conda env list # 显示所有环境
+
 conda list [-n python34|--revisions] # 查看某个指定环境的已安装包
+
 conda create --name|n  py35 python=3.5 numpy pandas
 conda env create -f environment.yaml #  用对方分享的 YAML 文件来创建一摸一样的运行环境。
+
 conda create --name <new_env_name> --clone <copied_env_name> # 复制环境
+
+conda activate env_name
+source activate <env_name>
 
 conda install|update|remove [--name | -n  py35] numpy=1.10 scipy pandas
 conda install --channel|-c conda-forge
 conda upgrade|update --all   # 升级all
 conda env export > environment.yaml  # 分享代码的时候，同时也需要将运行环境分享给大家，执行如下命令可以将当前环境下的 package 信息存入名为 environment 的 YAML 文件中
 
-conda activate env_name # 进入名为 env_name 的环境
-source activate <env_name>
 conda deactivate [env_name] # 退出当前环境
 source deactivate
 
@@ -79,6 +83,7 @@ deactivate [env_name] # for Windows
 
 conda env remove -n env_name --all # 删除名为 env_name 的环境
 
+conda install -c conda-forge conda-pack
 ```
 
 ## packages 管理

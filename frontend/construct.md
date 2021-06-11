@@ -187,8 +187,6 @@ parcel index.html
 parcel watch index.html
 ```
 
-## [rollup](https://rollupjs.org/)
-
 ## [snowpack](https://github.com/snowpackjs/snowpack)
 
 WASM-powered frontend build tool. Fast, lightweight, unbundled ESM. ✌️ <https://www.snowpack.dev>
