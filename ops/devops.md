@@ -389,6 +389,10 @@ script: phpunit -v
 
 * [chinese-independent-developer](1c7/chinese-independent-developer):👩🏿‍💻👨🏾‍💻👩🏼‍💻👨🏽‍💻👩🏻‍💻中国独立开发者项目列表 -- 分享大家都在做什么
 
+## 课程
+
+* [DevOps with Docker](https://devopswithdocker.com/)
+
 ## 工具
 
 * [up](https://github.com/apex/up):Deploy infinitely scalable serverless apps, apis, and sites in seconds. <https://apex.github.io/up/>

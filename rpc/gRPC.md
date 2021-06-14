@@ -3,21 +3,15 @@
 The C based gRPC (C++, Node.js, Python, Ruby, Objective-C, PHP, C#)
 
 * 一个高性能、通用的开源RPC框架
+* use protocol buffers as both its Interface Definition Language (IDL) and as its underlying message interchange format.使用protocol buffers作为接口描述语言（IDL）以及底层的信息交换格式，来描述服务接口和有效负载消息的结构
+* a client application can directly call a method on a server application on a different machine as if it were a local object, making it easier for you to create distributed applications and services.
 * 基于HTTP/2协议标准和Protobuf序列化协议开发，支持多种开发语言（Golang、Python、Java、C/C++等）,带来诸如双向流、流控、头部压缩、单 TCP 连接上的多复用请求等特性。这些特性使得其在移动设备上表现更好，更省电和节省空间占用。
-* 一个远程过程调用框架，默认使用 protobuf3 进行数据的高效序列化与 service 定义，使用 HTTP/2 进行数据传输
-* gRPC 提供了一种简单的方法来定义服务，同时客户端可以充分利用 HTTP/2 stream 的特性，从而有助于节省带宽、降低 TCP 的连接次数、节省CPU的使用等。
-* 服务端，实现了所定义的服务和可供远程调用的方法，运行一个gRPC server来处理客户端的请求
-* 客户端可以像调用本地对象一样直接调用位于不同机器的服务端方法，可以非常方便的创建一些分布式的应用服务
-* 使用protocol buffers作为接口描述语言（IDL）以及底层的信息交换格式，来描述服务接口和有效负载消息的结构
-* 全面超越 REST:
-    - 使用二进制进行数据序列化，比 json 更节约流量、序列化与反序列化也更快。
-    - protobuf3 要求 api 被完全清晰的定义好，而 REST api 只能靠程序员自觉定义。
-    - gRPC 官方就支持从 api 定义生成代码，而 REST api 需要借助 openapi-codegen 等第三方工具。
-    - 支持 4 种通信模式：一对一(unary)、客户端流、服务端流、双端流。更灵活
+* 服务端，实现所定义的服务和可供远程调用的方法，运行一个gRPC server来处理客户端的请求,the server implements this interface and runs a gRPC server to handle client calls. 
+* 客户端可以像调用本地对象一样直接调用位于不同机器的服务端方法，可以非常方便的创建一些分布式的应用服务.On the client side, the client has a stub (referred to as just a client in some languages) that provides the same methods as the server.
 
 ## install
 
-* 下载[Protocol Buffers v3.8.0](https://github.com/protocolbuffers/protobuf/releases)
+* [Protocol Buffers v3.8.0](https://github.com/protocolbuffers/protobuf/releases)
 
 ```sh
 ./configure --prefix=your_pb_install_path
@@ -26,6 +20,8 @@ brew install protobuf
 protoc --version
 
 brew install grpc
+
+sudo pecl install grpc
 ```
 
 ## 概念
@@ -55,6 +51,52 @@ brew install grpc
 * 取消:客户端或服务器都可以随时取消RPC。取消操作将立即终止RPC，因此不再进行任何工作。这不是“撤消”：取消之前所做的更改不会回滚
 * 通道:一个gRPC通道提供了一个到指定主机和端口号的gRPC服务器的连接，它在创建客户端存根（或者对某些语言来说就是“客户端”）时被使用。客户端可以指定通道参数来更改gRPC的默认行为.每个通道都有状态，状态包括 connected和 idle(闲置)
 
+### [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview)
+
+### PHP
+
+* `protoc`: the protobuf compiler binary to generate PHP classes for your messages and service definition.
+* `grpc_php_plugin`: a plugin for `protoc` to generate the service stub classes.
+*  `protobuf.so`: the `protobuf` extension runtime library.
+
+```sh
+## in `cmake/build/third_party/protobuf/protoc` and `cmake/build/grpc_php_plugin`
+mkdir -p cmake/build
+pushd cmake/build
+cmake ../..
+make protoc grpc_php_plugin
+popd
+
+### `protoc` compiler
+cd grpc/third_party/protobuf
+./autogen.sh && ./configure && make
+sudo make install
+
+## grpc_php_plugin
+mkdir -p cmake/build
+cd cmake/build
+cmake ../..
+make protoc grpc_php_plugin
+
+### or
+bazel build @com_google_protobuf//:protoc
+bazel build src/compiler:grpc_php_plugin
+
+protoc -I=. echo.proto --php_out=. --grpc_out=. \
+--plugin=protoc-gen-grpc=<path to grpc_php_plugin>
+
+
+cd examples/php/route_guide
+./route_guide_proto_gen.sh
+
+## unit test
+cd grpc/src/php
+./bin/run_tests.sh
+
+## test client
+./bin/run_gen_code_test.sh
+```
+
 ## 认证
 
 * 基于SSL/TLS认证方式
@@ -63,8 +105,8 @@ brew install grpc
 
 ## 调用
 
-* 普通 RPC 调用方式，即请求 - 响应模式。
-* 基于 HTTP/2.0 的 streaming 调用方式。
+* 普通 RPC 调用方式，即请求 - 响应模式
+* 基于 HTTP/2.0 的 streaming 调用方式
 
 ## example
 
@@ -267,7 +309,15 @@ Reflection request not implemented; is the ServerReflection service enabled?
 
 ## grpc-gateway
 
-* 提供了很好地扩展 protobuf/gRPC，用代码生成代码的方向和蓝图。这也是 protobuf 这样的语言的魅力所在：它足够简单，可以很容易被解析，从而生成不同角度的工具
+* 提供很好地扩展 protobuf/gRPC，用代码生成代码的方向和蓝图。这也是 protobuf 这样的语言的魅力所在：足够简单，可以很容易被解析，从而生成不同角度的工具
+
+### gRPC vs REST
+
+- 使用二进制进行数据序列化，比 json 更节约流量、序列化与反序列化也更快。
+- protobuf3 要求 api 被完全清晰的定义好，而 REST api 只能靠程序员自觉定义。
+- gRPC 官方就支持从 api 定义生成代码，而 REST api 需要借助 openapi-codegen 等第三方工具。
+- 支持 4 种通信模式：一对一(unary)、客户端流、服务端流、双端流。更灵活
+
 
 ## 项目
 
