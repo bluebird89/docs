@@ -26,14 +26,17 @@
   - 最后再考虑分表，单表拆分到数据1000万以内
 * 只要一行数据时使用limit 1，MySQL数据库引擎会在找到一条数据后停止搜索，而不是继续往后查少下一条符合记录的数据
 
-## 思路
+## 慢SQL
 
-* 用慢查询日志定位具体需要优化的sql
-* 使用 explain 执行计划查看索引使用情况
-  - key（查看有没有使用索引）
-  - key_len（查看索引使用是否充分）
-  - type（查看索引类型）
-  - Extra（查看附加信息：排序、临时表、where条件为false等）
+* 分析
+  - 用慢查询日志定位具体需要优化的sql    
+    + 开启慢SQL日志
+    + 设置慢SQL的执行时间阈值
+  - 使用 explain 执行计划查看索引使用情况
+    + key（查看有没有使用索引）
+    + key_len（查看索引使用是否充分）
+    + type（查看索引类型）
+    + Extra（查看附加信息：排序、临时表、where条件为false等）
 * 周期性慢：访问高峰｜缓存崩溃
   - 增加缓冲
   - 修改失效策略
@@ -54,8 +57,20 @@
       * 数据库选错索引
         - 强制索引：`select * from t force index(a) where c < 100 and c < 100000;`
     + 优化表结构
+* 参考
+  - [科学破解慢SQL? ](https://mp.weixin.qq.com/s/OOh1G1DvtQ3-dEIXEKuWtw)
 
 ![MySQL 优化思路](../_static/route.jpg "MySQL 优化的思路")
+
+```sql
+# 开启
+SET GLOBAL slow_query_log = 1;
+SHOW VARIABLES LIKE '%slow_query_log%';
+
+# 设置阈值
+SET GLOBAL long_query_time=3;
+SHOW GLOBAL VARIABLES LIKE 'long_query_time%'; 
+```
 
 ## 指标
 
@@ -739,6 +754,11 @@ show engine innodb status\G select sleep(60); show engine innodb status\G;
 * 查询中与其他表关联的字段
 * 查询中排序的字段
 * 查询中统计或分组字段
+* 索引区分度低：假如表中有1000w记录，其中有status字段表示状态，可能90%的数据status=1，可以不将status作为索引，因为其对数据记录区分度很低。
+* 切忌过多创建索引：每个索引都需要占用磁盘空间，修改表数据时会对索引进行更新，索引越多，更新越复杂。因为每添加一个索引，.ibd文件中就需要多维护一个B+Tree索引树，如果某一个table中存在10个索引，那么就需要维护10棵B+Tree，写入效率会降低，并且会浪费磁盘空间。
+* 常用查询字段建索引：如果某个字段经常用来做查询条件，那么该字段的查询速度会影响整个表的查询速度，属于热门字段，为其建立索引非常必要。
+* 常排序/分组/去重字段建索引：对于需要经常使用ORDER BY、GROUP BY、DISTINCT和UNION等操作的字段建立索引，可以有效借助B+树的特性来加速执行。
+* 主键和外键建索引：主键可以用来创建聚集索引，外键也是唯一的且常用于表关联的字段，也需要建索引来提高性能
 
 * 单表索引建议控制在5个以内,字段超过5个时，实际已经起不到有效过滤数据的作用
 * 数据量小的表最好不要使用索引，因为由于数据较少，可能查询全部数据花费时间比遍历索引的时间还要短
@@ -1052,6 +1072,51 @@ select colname from A Left join B on where a.id = b.id where b.id is null
 
 SELECT count(name like 'B%') from people
 ```
+
+### 索引失效
+
+    对索引使用函数
+
+    select id from std upper(name) = 'JIM';
+
+    对索引进行运算
+
+    select id from std where id+1=10;
+
+    对索引使用<> 、not in 、not exist、!=
+
+    select id from std where name != 'jim';
+
+    对索引进行前导模糊查询
+
+    select id from std name like '%jim';
+
+    隐式转换会导致不走索引
+
+    比如：字符串类型索引字段不加引号，select id from std name = 100;保持变量类型与字段类型一致
+
+    非索引字段的or连接
+
+    并不是所有的or都会使索引失效，如果or连接的所有字段都设置了索引，是会走索引的，一旦有一个字段没有索引，就会走全表扫描。
+
+    联合索引仅包含复合索引非前置列
+
+    联合索引包含key1，key2，key3三列，但SQL语句没有key1，根据联合索引的最左匹配原则，不会走联合索引。
+    select name from table where key2=1 and key3=2;
+
+### 好的建议
+
+* 使用连接代替子查询
+* 对于数据库来说，在绝大部分情况下，连接会比子查询更快
+  - 使用连接的方式，MySQL优化器一般可以生成更佳的执行计划，更高效地处理查询
+  - 子查询往往需要运行重复的查询，子查询生成的临时表上也没有索引， 因此效率会更低。
+* LIMIT偏移量过大的优化：禁止分页查询偏移量过大，如limit 100000,10
+* 使用覆盖索引：减少select * 借助覆盖索引，减少回表查询次数。
+* 多表关联查询时，小表在前，大表在后：在MySQL中，执行from后的表关联查询是从左往右执行的，第一张表会涉及到全表扫描，所以将小表放在前面，先扫小表，扫描快效率较高，在扫描后面的大表，或许只扫描大表的前100行就符合返回条件并return了。
+* 调整Where字句中的连接顺序：MySQL采用从左往右的顺序解析where子句，可以将过滤数据多的条件放在前面，最快速度缩小结果集。
+* 使用小范围事务，而非大范围事务
+* 遵循最左匹配原则
+* 使用联合索引，而非建立多个单独索引
 
 ## 增删改 DML 语句优化
 

@@ -587,16 +587,18 @@ def backtrack(路径, 选择列表):
 
 ## 图书
 
-* 算法图解
-* [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)
+* [Algorithms, 4th Edition Sedgewick](https://algs4.cs.princeton.edu/home/)
   - [ppt](https://www.cs.princeton.edu/~wayne/kleinberg-tardos/)
-* 《大话数据结构》
-* 《剑指offer》
-* 编程珠玑
-* 数论
+* 算法导论 CLRS 
 * The Algorithm Design Manual
   - Steven Skiena’s lectures
 * [An Introduction to the Analysis of Algorithms](https://aofa.cs.princeton.edu/home/)
+* 算法设计
+* 算法设计手册
+* 《大话数据结构》
+* 《剑指offer》
+* 算法图解
+* 编程珠玑 Programming pearls
 * 《[Python算法教程](https://www.amazon.cn/gp/product/B019NB0VCI)》
 * 《[算法设计与分析基础（第3版）](https://www.amazon.cn/gp/product/B00S4HCQUI)》
 * 《[数据结构与算法分析 : C++描述（第4版）](https://www.amazon.cn/gp/product/B01LDG2DSG)》
@@ -604,7 +606,6 @@ def backtrack(路径, 选择列表):
 * 《[数据结构与算法分析 : Java语言描述（第2版）](https://www.amazon.cn/gp/product/B01CNP0CG6)》
 * 《数据结构与算法 JavaScript 描述》
 * 《[学习 JavaScript 数据结构与算法](https://www.amazon.cn/gp/product/B016DWSF8M)》
-* 算法设计
 * Algorithms to Live
 * [Analytic Combinatorics](https://ac.cs.princeton.edu/home/)
 * [Problem Solving with Algorithms and DataStructures](https://www.cs.auckland.ac.nz/compsci105s1c/resources/ProblemSolvingwithAlgorithmsandDataStructures.pdf)

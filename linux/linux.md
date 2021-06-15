@@ -3301,22 +3301,11 @@ kill -USR2 主进程PID
   - CLOSE_WAIT一般是由于程序编写不合理造成的，更应该引起开发者注意
     + 由于对端主动关闭，而我方没有正确处理的原因引起的。说白了，就是程序写的有问题，属于危害比较大的一种
 * 到对端路由检测 tracepath google.com
-* 压力测试
-  - iperf
-  - wrk
-  - ab
-  - webbench
-  - http_load
 * 全方位监控工具
   - nmon
 * 远程登录
   - telnet
-  - [ssh](../network/ssh.md):连接到一个远程主机，然后登录进入其 Unix shell。通过本地机器的终端在服务器上提交指令
-  - nc netcat：Concatenate and redirect sockets
-    + 实现任意 TCP/UDP 端口的侦听，增加-l 参数后，nc 可以作为 server 以 TCP 或 UDP 方式侦听指定端口
-    + 端口的扫描，nc 可以作为 client 发起 TCP 或 UDP 连接
-    + 机器之间传输文件
-    + 机器之间网络测速
+  - [ssh](../network/ssh.md)
 * 网桥 Bridge
   - 一个数据链路层（data link）的设备，根据Mac地址的信息转发到网桥的不同端口上.网桥是一个二层的虚拟网络设备，把若干个网络接口“连接”起来，使得网口之间的报文可以转发
   - 网桥能够解析收发的报文，读取目标的Mac地址信息，和自己的Mac地址表结合，来决策报文转发的目标网口
@@ -3325,7 +3314,6 @@ kill -USR2 主进程PID
 * 为了支持越来越多的网卡以及虚拟设备，所以使用网桥去提供这些设备之间转发数据的二层设备
 * Linux内核支持网口的桥接（以太网接口），这与单纯的交换机还是不太一样，交换机仅仅是一个二层设备，对于接受到的报文，要么转发，要么丢弃
 * 运行着Linux内核的机器本身就是一台主机，有可能是网络报文的目的地，其收到的报文要么转发，要么丢弃，还可能被送到网络协议的网络层，从而被自己主机本身的协议栈消化
-* 防火墙
 
 ```sh
 systemd-resolve --flush-caches # 清理缓存
@@ -3551,7 +3539,9 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 # Similar routing lookup process is followed in each hop till the packet reaches the actual server. Transport layer and layers above it come to play only at end servers. During intermediate hops only till the IP/Network layer is involved.
 ```
 
-## [lsof lists open files](http://www.netadmintools.com/html/lsof.man.html)
+### 
+
+### [lsof lists open files](http://www.netadmintools.com/html/lsof.man.html)
 
 * default : without options, lsof lists all open files for active processes
 * grouping : it’s possible to group options, e.g. -abC, but you have to watch for which options take parameters

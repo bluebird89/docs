@@ -105,7 +105,7 @@ set ft=dos
 
 ## 模式 Mode
 
-* 正常模式 Normal｜Command Mode 在文件中四处移动光标进行修改，<ESC> 返回正常模式
+* 正常模式 Normal 在文件中四处移动光标进行修改，<ESC> 返回正常模式
   - i insert before the cursor 光标前插入,进入插入模式
     + 对于操纵/编辑文本，不单想用退格键完成
   - a append after the cursor 光标后插入
@@ -124,6 +124,7 @@ set ft=dos
 * 插入模式 Insert Mode
   - : 进入命令模式
     + `:` 开始命令需要输入 <enter> 回车
+* Command Mode
 * 可视化模式 Visual Mode
   - v 进入可视（一般）模式
   - V 进入可视（行）模式

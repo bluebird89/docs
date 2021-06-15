@@ -434,4 +434,42 @@ sudo ufw route reject out on eth0 to 192.168.0.0/16 comment 'RFC1918 reject'
 
 ### forward
 
+* configure ufw to forward port 80/443 to internal server hosted on LAN
+* Postrouting and IP Masquerading
+* configure ufw to setup a port forward
 
+```sh
+## DNAT
+/sbin/iptables -t nat -A PREROUTING -i eth0 -p tcp -d {PUBLIC_IP} --dport 80 -j DNAT --to {INTERNAL_IP}:80
+
+/sbin/iptables -t nat -A PREROUTING -i eth0 -p tcp -d {PUBLIC_IP} --dport 443 -j DNAT --to {INTERNAL_IP}:443
+
+# To allow LAN nodes with private IP addresses to communicate with external public networks, configure the firewall for IP masquerading, which masks requests from LAN nodes with the IP address of the firewall’s external device such as eth0. The syntax is:
+/sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+/sbin/iptables -t nat -A POSTROUTING -s 192.168.1.0/24 ! -d 192.168.1.0/24 -j MASQUERADE
+
+## edit /etc/ufw/before.rules
+*nat
+:PREROUTING ACCEPT [0:0]
+# forward 202.54.1.1  port 80 to 192.168.1.100:80
+# forward 202.54.1.1  port 443 to 192.168.1.100:443
+-A PREROUTING -i eth0 -d 202.54.1.1   -p tcp --dport 80 -j  DNAT --to-destination 192.168.1.100:80
+-A PREROUTING -i eth0 -d 202.54.1.1   -p tcp --dport 443 -j  DNAT --to-destination 192.168.1.100:443
+# setup routing
+-A POSTROUTING -s 192.168.1.0/24 ! -d 192.168.1.0/24 -j MASQUERADE
+COMMIT
+
+## sudo vi /etc/sysctl.conf
+net.ipv4.ip_forward=1
+
+sudo sysctl -p
+sudo systemctl restart ufw
+
+sudo ufw allow proto tcp from any to 202.54.1.1 port 80
+sudo ufw allow proto tcp from any to 202.54.1.1 port 443
+
+# Verify new settings:
+sudo ufw status
+sudo iptables -t nat -L -n -v
+```

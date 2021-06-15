@@ -1734,6 +1734,7 @@ fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 
 * [nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
 * [nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
+* [IP2Location](https://github.com/ip2location/ip2location-nginx)
 
 ## 图书
 

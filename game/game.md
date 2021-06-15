@@ -62,15 +62,15 @@
 
 ## Play station
 
-* 5
 * 配置 - pro - slim - 天蝎 - 1080ti
 * 刺客信条
 * 荒野大镖客 救赎2
 * 战神
 * 只狼：影逝二度
-* 刺客信条：大革命（英语：Assassin's Creed Unity）
+* 刺客信条：大革命 Assassin's Creed Unity
 * HOB
 * 辐射4 Fallout 4
+* 恶魔之魂 Demon's Souls
 
 ## Xbox Series X
 

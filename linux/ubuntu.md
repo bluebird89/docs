@@ -251,6 +251,8 @@ git config --global https.proxy 'socks5://127.0.0.1:1080'
 
 # /etc/proxychains.conf 文件，在最后的[ProxyList]一节中增加代理设置，例如：
 socks5 127.0.0.1 1080
+
+./proxychains4 -f src/proxychains.conf telnet google.com 80
 ```
 
 ## 服务 service

@@ -115,7 +115,41 @@ export EDITOR
 set completion-ignore-case on
 ```
 
+## shell environments
+
+* starup files
+  - Setup a custom prompt.
+  - Setup terminal settings depending on which terminal you're using.
+  - Set the search path such as JAVA_HOME, and ORACLE_HOME.
+  - Set environment variables as needed by programs.
+  - Run commands that you want to run whenever you log in or log out.
+* Common Environment Variables
+  - HOME - Your home directory path.
+  - PATH - Set your executable search path.
+  - PWD - Your current working directory.
+
+```sh
+# view all variables:
+set|env
+# Usually, all upper-case variables are set by bash
+echo $SHELL
+
+# export local variables
+export EDITOR=/usr/bin/vim
+# export DISPLAY environment variable and run xeyes 
+export DISPLAY=localhost:11.0 xeyes
+
+# locate command
+which|whereis command-name
+
+# reset
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+# add
+export PATH=$PATH:/usr/games
+```
+
 ## Alias
+
 - `alias -s txt=vscode` 指定打开扩展类型程序
 - -g 全局别名，允许为命令的任何部分指定替代项 `alias -g G=' | grep'`
 - `alias c='clear'`
@@ -1407,112 +1441,6 @@ watch -n 1 ‘ps -aux --sort -pmem, -pcpu | head 20’ # 实时监控进程状�
 * 一个程序运行结束后，shell将其返回值赋值给$?环境变量。因此$?变量通常被用来检测一个脚本执行成功与否
 * 使用return命令来结束一个函数的执行并将返回值返回给调用者
 * 在函数内部用exit，不但会中止函数的继续执行，而且会终止整个程序的执行
-
-## 网络
-
-* netstat(show network status):列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外还能列出处于监听状态（即等待接入请求）的套接字
-  - 参数
-    + -a 列出所有当前的连接
-    + -t 列出 TCP 协议的连接
-    + -u 列出 UDP 协议的连接
-    + -n 禁用域名解析功能. 默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名,降低查找速度。如果觉没有必要知道主机名
-* nc netcat命令 nc/netcat(选项)(参数)
-  - 实现任意TCP/UDP端口的侦听，nc可以作为server以TCP或UDP方式侦听指定端口
-  - 端口的扫描，nc可以作为client发起TCP或UDP连接
-  - 机器之间传输文件
-  - 机器之间网络测速
-  - 选项
-    + -g<网关>：设置路由器跃程通信网关，最多设置8个；
-    + -G<指向器数目>：设置来源路由指向器，其数值为4的倍数；
-    + -i<延迟秒数>：设置时间间隔，以便传送信息及扫描通信端口；
-    + -l：使用监听模式，监控传入的资料，nc被当作server，侦听并接受连接，而非向其它地址发起连接
-    + -n：直接使用ip地址，而不通过域名服务器；
-    + -o<输出文件>：指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存；
-    + -p<通信端口>：设置本地主机使用的通信端口；
-    + -r：指定源端口和目的端口都进行随机的选择；
-    + -s<来源位址>：设置本地主机送出数据包的IP地址
-    + -u：使用UDP传输协议，默认为TCP
-    + -v：显示指令执行过程，输出交互或出错信息，新手调试时尤为有用
-    + -w<超时秒数>：设置等待连线的时间；
-    + -z：使用0输入/输出模式，只在扫描通信端口时使用。
-
-```sh
-netstat -an | grep 3306
-netstat -tunlp |grep 端口号 # 查看指定的端口号的进程情况 -t 显示tcp -u udp -n:拒绝显示别名，能数字数字 -l 列出在listen 服务状态 -p 显示相关程序名
-lsof -i:80 # -i参数表示网络链接，:80指明端口号
-
-ip netns exec
-
-sudo apt install nmap-ncat
-
-nc -l 9999  # 开启一个本地9999的TCP协议端口，由客户端主动发起连接，一旦连接必须由服务端发起关闭
-nc -vw 2 192.168.21.248 11111  #通过nc去访问192.168.21.248主机的11111端口，确认是否存活；可不加参数
-nc -ul 9999                       # 开启一个本地9999的UDP协议端口，客户端不需要由服务端主动发起关闭
-nc 192.168.21.248 9999 < test     # 通过192.168.21.248的9999TCP端口发送数据文件
-nc -l 9999 > zabbix.file          # 开启一个本地9999的TCP端口，用来接收文件内容
-
-# 端口扫描
-nc -v -w 2 192.168.2.34 -z 21-24
-# 从192.168.2.33拷贝文件到192.168.2.34
-# 在192.168.2.34上：
-nc -lp 1234 > test.txt
-# 在192.168.2.33上
-nc -w l 192.168.2.34 1234 < test.txt
-# 聊天 Ctrl+D正常退出
-nc -lp 1234
-nc 192.168.228.222 1234
-# 传输目录
-nc -l 1234 | tar xzvf -
-tar czvf – nginx-0.6.34 | nc 192.168.228.222 1234
-# 操作memcached
-# 存储数据
-printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211
-# 获取数据
-printf “get keyrn” |nc 192.168.2.34 11211
-# 删除数据
-printf “delete keyrn” |nc 192.168.2.34 11211
-# 查看状态
-printf “statsrn” |nc 192.168.2.34 11211
-# 模拟top命令查看状态
-watch “echo stats” |nc 192.168.2.34 11211
-# 清空缓存
-printf “flush_allrn” |nc 192.168.2.34 11211
-# 从本地1234端口到host.example.com的80端口连接，5秒超时
-nc -p 1234 -w 5 host.example.com 80
-echo -n "GET / HTTP/1.0"r"n"r"n" | nc host.example.com 80
-nc -u host.example.com 53
-
-# 克隆硬盘或分区
-nc -l -p 1234 | dd of=/dev/sda
-dd if=/dev/sda | nc 192.168.228.222 1234
-
-nc www.linuxso.com 80
-GET / HTTP/1.1
-Host: ispconfig.org
-Referrer: mypage.com
-User-Agent: my-browser
-
-ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
-
-netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
-netstat -tulpn
-netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
-ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
-
-wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
-yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
-multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
-
-ps -aux | sort -rnk 3 | head -20
-ps -aux | sort -rnk 4 | head -20
-
-netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10 # 查看连接你服务器 top10 用户端的 IP 地址
-cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下最常用的10个命令
-
-# 输出nginx日志的ip和每个ip的pv，pv最高的前10
-#2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
-awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
-```
 
 ## Debugging
 

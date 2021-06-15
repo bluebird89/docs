@@ -132,6 +132,21 @@
 * 霍比特人佛罗多（伊利亚·伍德 Elijah Wood 饰）携带着魔戒，与伙伴山姆（西恩·奥斯汀 Sean Astin 饰）以及狡猾阴暗的咕噜等前往末日山，一路上艰难险阻不断，魔君索伦为阻止魔戒被销毁用尽全力阻挠。另一方面，白袍巫师甘道夫（伊恩·麦克莱恩 Ian McKellen 饰）率中土勇士们镇守刚铎首都——白城米那斯提里斯。魔兽大军压境，黑暗与光明的决战即将来临
 * Into The West
 * 正是在宁静优美的故乡，面对着山姆幸福的胖脸，弗罗多告诉我们，魔戒在他心里留下的伤口永远也无法愈合了。他再也无法如从前一样生活在哈比屯。
+* 终于，三个伙伴转身离开，他们慢慢往家的方向骑马行去，始终没有回头，也没有开口跟彼此交谈，直到回到夏尔。但在这条漫长灰暗的路上，每个人都为身边有朋友陪伴而感到莫大的安慰。最后，他们骑马翻过山岗，走上了东大道。梅里和皮平随即骑往雄鹿地，他们一边走，一边已经唱起歌来。而山姆转往傍水镇，就这样，再次在一天将尽之时回到了小丘。他往前走，那里有暖黄的灯光，屋内有炉火，晚餐已经备好，家人正在等待。罗丝迎接他进屋，拉他在他的椅子上坐下，将小埃拉诺放在他的膝头。他深吸一口气，说：“啊，我回来了。”
+
+```
+A day may come when the courage of men fails .
+
+When we forsake our friends and break all bonds of fellowship .
+
+But it is not this day !
+
+An hour of wolves and shattered shields when the age of men comes crashing down .
+
+But it is not this day !
+
+This day we fight ! By all that you hold dear on this good earth……
+```
 
 ## 传说
 

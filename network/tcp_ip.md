@@ -73,6 +73,7 @@
   - Hubs/Repeaters are found in the Physical Layer
   - Gateway are found in All 7 of the OSI Layers
 
+![OSI 七层协议模型](../_startic/osi_model.png "OSI 七层协议模型")
 ![Alt text](../_startic/osi.png "Optional title")
 ![七层协议](../_static/osi_1.png "Optional title")
 ![数据流](../_static/osi2.jpeg "Optional title")

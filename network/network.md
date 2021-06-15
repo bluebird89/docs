@@ -4,13 +4,15 @@
 
 ## 多进程/多线程/协程
 
-* 现在操作系统都采用虚拟存储器，那么对32位操作系统而言，寻址空间（虚拟存储空间）为4G（2的32次方）
-* 应用程序稳定性远远比不上操作系统程序。Linux分内核空间和用户空间，隔离操作系统程序和应用程序，避免了应用程序影响到操作系统自身的稳定性
-* 操作系统核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分。linux操作系统：将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间
-  - 内核空间：运行操作系统程序和驱动程序
-    + 所有的系统资源操作都在内核空间进行，比如读写磁盘文件，内存分配和回收，网络接口调用等
-    + 只能 内核空间 控制 Socket 读写
-  - 用户空间：运行应用程序
+* 现在操作系统都采用虚拟存储器，对32位操作系统而言，寻址空间（虚拟存储空间）为4G（2的32次方）
+* 操作系统核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。
+* 应用程序稳定性远远比不上操作系统程序,为了保证用户进程不能直接操作内核（kernel）。隔离操作系统程序和应用程序。将虚拟空间划分为两部分
+* 内核空间：将最高的1G字节（虚拟地址0xC0000000到0xFFFFFFFF），供内核使用
+  - 运行操作系统程序和驱动程序
+  - 所有的系统资源操作都在内核空间进行，比如读写磁盘文件，内存分配和回收，网络接口调用等
+  - 只能 内核空间 控制 Socket 读写
+* 用户空间:将较低的3G字节（虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用
+  - 运行应用程序
 
 * 进程 process 资源分配的最小单位
   - 一个任务就是一个进程（Process）,一个进程至少有一个线程
@@ -132,7 +134,10 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 
 * Socket连接是长连接，理论上客户端和服务器端一旦建立连接将不会主动断开此连接
 * Socket连接属于请求-响应形式，服务端可主动将消息推送给客户端
-* Socket 编程:建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ，另一个运行于服务器端，称为ServerSocket
+
+### Socket 编程
+
+* 建立Socket连接至少需要一对套接字，其中一个运行于客户端，称为ClientSocket ，另一个运行于服务器端，称为ServerSocket
   - 服务器监听:通过 `netstate` 命令查看对应端口号是否有被监听
     + socket() 创建套接字
       * 创建Socket连接时，可以指定使用传输层协议，支持不同的传输层协议（TCP或UDP）
@@ -178,7 +183,7 @@ int execve(const char *pathname, char *const argv[], char *const envp[]);
 
 ![Unix_Socket_Tcp_Socket](../static/tcp-socket-or-unix-domain-socket1.png "Unix_Socket_Tcp_Socket")
 ![socket2](../static/socket2.png "socket2")
-![socket连接](../_static/tcp.png "Optional title")
+![socket 连接](../_static/tcp.png "Optional title")
 
 ```c
 listenfd = socket();   // 打开一个网络通信端口
@@ -221,9 +226,10 @@ ssize_t recvmsg(int sockfd, struct msghdr *msg, int flags);
 int close(int fd);
 ```
 
-## 网络IO模型
+## 网络 IO 模型
 
 * 整个演变过程，就是对CPU有效性能压榨的过程
+
 * 同步与异步:关注消息通信机制 (synchronous communication/ asynchronous communication).等馒头这件事，是一直等到＂馒头出炉＂的结果，还是立即跑路等阿梅告诉你的＂馒头出炉＂．
   - 同步:在发出一个 *调用* 时，在没有得到结果之前，该 *调用* 就不返回。但是一旦调用返回，就得到返回值了
     + 同步阻塞IO：在Linux中，默认情况下所有socket都是阻塞模式
@@ -235,6 +241,7 @@ int close(int fd);
       * 如果Read请求没读取到数据，用户线程会不断轮询发起Read请求，直到数据到达（内核准备好数据）后才停止轮询
       * 非阻塞IO模型虽然避免了由于线程阻塞问题带来的大量线程消耗，但是频繁的重复轮询大大增加了请求次数，对CPU消耗也比较明显。在实际应用中很少使用
   - 异步:*调用*在发出之后，调用就直接返回了，所以没有返回结果。换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在*调用*发出后，*被调用者*通过状态、通知来通知调用者，或通过回调函数处理这个调用。
+
 * 阻塞与非阻塞:程序在等待调用结果（消息，返回值）时当前线程状态
   - 阻塞IO:发出一个请求不能立刻返回响应，要等所有的逻辑全处理完才能返回响应.指调用结果返回之前，当前线程会被挂起。调用线程只有在得到结果之后才会返回
     + 去甜在心馒头店买太极馒头，阿梅说：＂暂时没，正在蒸呢，你自己看着点儿！＂．于是你就站在旁边只等馒头．此时的你，是阻塞的，是同步的．阻塞表现在你除了等馒头，别的什么都不做了．同步表现在等馒头的过程中，阿梅不提供通知服务，你不得不自己要等到＂馒头出炉＂的消息.典型PHP开发，基于LNMP
@@ -377,7 +384,7 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
 
 ## Wi-Fi
 
-* 高质量的无线 LAN.是 WECA（无线以太网兼容性联盟）为普及 IEEE802.11 的各种标准而打造的一个品牌.
+* 高质量无线 LAN.是 WECA（无线以太网兼容性联盟）为普及 IEEE802.11 的各种标准而打造的一个品牌
 * 从 02 年开始更名为 Wi-Fi Appliance，该组织向 Wi-Fi 设备厂商提供 IEEE802.11 产品的互操性测试，并对合格的产品颁发 Wi-Fi Certified认证，因此，带有 Wi-Fi 标志的无线 LAN 设备意味着该产品已经过互操性测试并通过认证
 
 ## OSPF 开放式最短链路优先
@@ -388,7 +395,9 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
 ## Overlay 网络
 
 * 构建在另一个网络上的计算机网络,一种网络虚拟化技术的形式,不能独立出现，Overlay 底层依赖的网络就是 Underlay 网络
-* Underlay 网络是专门用来承载用户 IP 流量的基础架构层，它与 Overlay 网络之间的关系有点类似物理机和虚拟机。Underlay 网络和物理机都是真正存在的实体，它们分别对应着真实存在的网络设备和计算设备，而 Overlay 网络和虚拟机都是依托在下层实体使用软件虚拟出来的层级。
+* Underlay 网络是专门用来承载用户 IP 流量的基础架构层，它与 Overlay 网络之间的关系有点类似物理机和虚拟机。
+  - Underlay 网络和物理机都是真正存在的实体，它们分别对应着真实存在的网络设备和计算设备
+  - Overlay 网络和虚拟机都是依托在下层实体使用软件虚拟出来的层级。
 * 使用虚拟局域网扩展技术（Virtual Extensible LAN，VxLAN）组建 Overlay 网络
   - 使用虚拟隧道端点（Virtual Tunnel End Point、VTEP）设备对服务器发出和收到的数据包进行二次封装和解封
   - 数据包的传输过程中，通信的双方都不知道底层网络做的这些转换，认为两者可以通过二层的网络互相访问，但是实际上经过了三层 IP 网络的中转，通过 VTEP 之间建立的隧道实现了连通
@@ -402,7 +411,7 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
   - TRILL（Transparent InterconnecTIon of Lots of Links）技术是电信设备厂商主推的新型环网技术
   - NVGRE（Network VirtualizaTIon using Generic RouTIng EncapsulaTIon）
   - STT（Stateless Transport Tunneling Protocol）
-* 解决问题
+* 解决
   - 云计算中集群内的、跨集群的或者数据中心间的虚拟机和实例的迁移比较常见；
     + 保证业务不中断，需要保证迁移过程中的 IP 地址不变，因为 Overlay 是在网络层实现二层网络，所以多个物理机之间只要网络层可达就能组建虚拟的局域网，虚拟机或者容器迁移后仍然处于同一个二层网络，也就不需要改变 IP 地址
     + 使用 VxLAN 构成二层网络中，虚拟机在不同集群、不同可用区和不同数据中心迁移后，仍然可以保证二层网络的可达性，这能够帮助我们保证线上业务的可用性、提升集群的资源利用率、容忍虚拟机和节点的故障
@@ -416,7 +425,7 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
 
 ## VPC
 
-* VPC 通过子网将资源进行逻辑隔离为用户提供隔离的网络环，可以灵活的定义子网网段，并支持随时在现有 VPC 中追加新的定义网段，保证地址取之不尽，解决传统子网带来的节点数量的限制。并可以使用 VPN 等方式连接本地数据中心后将业务平滑迁移到云端
+* 通过子网将资源进行逻辑隔离为用户提供隔离的网络环，可以灵活的定义子网网段，并支持随时在现有 VPC 中追加新的定义网段，保证地址取之不尽，解决传统子网带来的节点数量的限制。并可以使用 VPN 等方式连接本地数据中心后将业务平滑迁移到云端
 * VPC 内连接互联网
   - VPC 内使用子网将资源进行了隔离，初始情况下子网内资源无法连接到互联网，所有资源和服务仅可内网访问，起到了预想的与公网隔离的效果。但如果资源只能内网访问显然也不是我们想要的，我们创建的 Web 应用等服务需要暴露在公网上，也就需要将 VPC 子网内的资源具有访问互联网的能力。
   - 为 VPC 子网内每一个云主机资源绑定 EIP；通过 NAT 网关将 VPC 子网内资源路由至 NAT 网关，并通过其绑定的 EIP 连接互联网。
@@ -581,9 +590,11 @@ ngrok tcp 3389
 
 ## 工具集
 
+*  ping traceroute mtr 都使用的 “ICMP” 包来测试 Internet 两点之间的网络连接状况
+
 ### ip
 
-* ip 命令归属于 iproute2 工具集，iproute2 旨在取代 net-tools，并提供了一些新功能
+* 归属于 iproute2 工具集，iproute2 旨在取代 net-tools，并提供了一些新功能
 
 ```sh
 ip address show
@@ -611,38 +622,59 @@ sudo ip route \
 
 ### ping
 
-* 网路连通性探测:确定网络是否正确连接，以及网络连接的状况.
-* 是ICMP的最著名应用，原理：用类型码为0的ICMP发请 求，受到请求的主机则用类型码为8的ICMP回应
+* 网路连通性探测:确定网络是否正确连接，以及网络连接的状况,是ICMP的最著名应用
+* 实现长时间的网络监控
+* 原理：用类型码为0的ICMP发请求，受到请求的主机则用类型码为8的ICMP回应
 * 参数
+  - -c: 执行 ping 操作的次数, 默认是一直执行, 除非被中断
+  - -D 显时间戳
+  - -i: 每次执行 ping 操作的间隔时间, 默认是 1s
 	- [-l] :定义所发送数据包的大小，默认为32字节
 	- [-n] :定义所发数据包的次数
+  - -s: 指定执行 ping 操作时发送的包的大小, 默认是 56B, 添加报文头之后, 最终发送的是 64B
 	- [-t] :表示不间断向目标IP发送数据包
+* 使用 fflush()，不然文件不会有信息，因为 awk 有缓存
+* pingpong:一种数据缓存的手段，通过 pingpong 操作可以提高数据传输的效率
+  - 什么时候需要 pingpong？在两个模块间交换数据时，上一级处理的结果不能马上被下一级所处理完成，这样上一级必须等待下一级处理完成才可以送新的数据，这样就会对性能产生很大的损失。
+  - 引入 pingpong 后我们可以不去等待下一级处理结束，而是将结果保存在 pong 路的缓存中，pong 路的数据准备好的时刻，ping 路的数据也处理完毕（下一级），然后无需等待直接处理 pong 路数据，上一级也无需等待，转而将结果存储在 ping 路。这样便提高了处理效率。
 - [gping](https://github.com/orf/gping) Ping, but with a graph
- 
+
 ```sh
-ping  主机名
-ping  域名
-ping  IP地址
+# local host是系统网络保留名，是127.0.0.1的别名，每台计算机都应该能够将该名字转换成该地址。
+# 否则，则表示主机文件（/Windows/host）中存在问题。
+ping localhost
 
-ping 127.0.0.1 # 如果测试成功，表明网卡、TCP/IP协议的安装、IP地址、子网掩码的设置正常。如果测试不成功，就表示TCP/IP的安装或设置存在有问题。
+# 如果测试成功，表明网卡、TCP/IP协议的安装、IP地址、子网掩码的设置正常
+# 如果测试不成功，表示TCP/IP的安装或设置存在有问题，表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。
+ping 127.0.0.1
 
-ping 本机IP地址 # 如果测试不成功，则表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。
+# 如果测试成功，表明本地网络中的网卡和载体运行正确
+# 如果收到0个回送应答，那么表示子网掩码不正确或网卡配置错误或电缆系统有问题。
+ping 局域网内其他IP
 
-ping 局域网内其他IP #如果测试成功，表明本地网络中的网卡和载体运行正确。但如果收到0个回送应答，那么表示子网掩码不正确或网卡配置错误或电缆系统有问题。
+# 如果应答正确，表示局域网中的网关路由器正在运行并能够做出应答。
+ping 网关IP
 
-ping 网关IP # 这个命令如果应答正确，表示局域网中的网关路由器正在运行并能够做出应答。
+# 如果收到正确应答，表示成功的使用了缺省网关。对于拨号上网用户则表示能够成功的访问Internet（但不排除ISP的DNS会有问题）
+ping 远程IP
 
-ping 远程IP # 如果收到正确应答，表示成功的使用了缺省网关。对于拨号上网用户则表示能够成功的访问Internet（但不排除ISP的DNS会有问题）。
+## 对域名执行，必须先将域名转换成IP地址，通常是通过DNS服务器
+# 出现故障，则表示本机DNS服务器的IP地址配置不正确，或它所访问的DNS服务器有故障
+# 能正常运行，那么计算机进行本地和远程通信基本上就没有问题
+#
+# 命令的成功并不表示所有的网络配置都没有问题，例如，某些子网掩码错误就可能无法用这些方法检测到
+ping www.yahoo.com
 
-ping localhost # local host是系统的网络保留名，它是127.0.0.1的别名，每台计算机都应该能够将该名字转换成该地址。否则，则表示主机文件（/Windows/host）中存在问题。
+ping baidu.com | awk '{ print strftime("%Y.%m.%d %H:%M:%S",systime())"\t"$0; fflush() }'
+ping baidu.com | awk '{"date" | getline date; print date,$0}'
+ping baidu.com | awk -v date="$(date +"%Y-%m-%d %r")" '{print date, $0}'
 
-ping www.yahoo.com # 对此域名执行Ping命令，计算机必须先将域名转换成IP地址，通常是通过DNS服务器。如果这里出现故障，则表示本机DNS服务器的IP地址配置不正确，或它所访问的DNS服务器有故障如果上面所列出的所有ping命令都能正常运行，那么计算机进行本地和远程通信基本上就没有问题了。但是，这些命令的成功并不表示你所有的网络配置都没有问题，例如，某些子网掩码错误就可能无法用这些方法检测到。
+# 未加 fflush()，执行命令生成文件会等一会才会有信息打印到文件里
+nohup ping baidu.com | awk '{ print strftime("%Y-%m-%d %H:%M:%S",systime())"\t" $0; fflush() }' >> long_ping.txt &
 
-ping IP -t # 连续对IP地址执行ping命令，直到被用户以Ctrl+C中断。
-ping IP -l 2000 # 指定ping命令中的特定数据长度（此处为2000字节），而不是缺省的32字节。
-ping IP -n 20 # 执行特定次数（此处是20）的ping命令
+nohup ping baidu.com -i 1 | while read pong; do echo "$(date +"%Y-%m-%d %H:%M:%S") | $pong"; done | tee -a ping-baidu.com.log &
 ```
- 
+
 * ifconfig/ipaddr:查看服务器网卡，IP等信息
   - CIDR 地址中包含标准的32位IP地址和有关网络前缀位数的信息。比如10.172.100.3/24，IP地址斜杠后面数字24，代表24位是网络号，后面八位为主机号
   - 使用IP地址和子网掩码进行AND计算得到网络号
@@ -660,31 +692,37 @@ ping IP -n 20 # 执行特定次数（此处是20）的ping命令
 traceroute google.com
 ```
 
-## ipconfig
+### ipconfig
 
 * 用于显示当前TCP/IP配置的设置值
 * 属于 net-tools 工具集。net-tools 起源于 BSD，自 2001 年起，Linux 社区已经停止对其进行维护
-  
+
 ```sh
 ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺省网关值
 ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
 ```
 
-### netstat
+### netstat:show network status
 
-* 一个网络信息统计工具。可以得到网卡接口上全部数据，路由表信息，网卡接口信息
+* 一个网络信息统计工具。可以得到网卡接口上全部数据，路由表信息，网卡接口信息,列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外还能列出处于监听状态（即等待接入请求）的套接字
+* 参数
+  - -a 列出所有当前连接
+  - -t 列出 TCP 协议连接
+  - -u 列出 UDP 协议连接
+  - -n 禁用域名解析功能. 默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名,降低查找速度。如果觉没有必要知道主机名
 
 ```sh
 # 列出所有连接
 netstat -a
 # 只列出TCP|UDP
-netstat -at/netstat -au
+netstat -at|au
 
 # 列出监听中连接
 netstat -tnl
 
 # 获取进程名、进程号以及用户 ID
 nestat  -nlpt
+netstat -tulpn
 
 # 打印统计信息
 netstat -s
@@ -692,24 +730,146 @@ netstat -s
 # netstat持续输出
 netstat -ct
 
-# 打印active状态的连接
+# 打印active状态连接
 netstat -atnp | grep ESTA
 
 # 查看服务是否运行(npt)
 netstat -aple| grep ntp
+
+netstat -an | grep 3306
+netstat -tunlp |grep 端口号 # 查看指定的端口号的进程情况 -t 显示tcp -u udp -n:拒绝显示别名，能数字数字 -l 列出在listen 服务状态 -p 显示相关程序名
+lsof -i:80 # -i参数表示网络链接，:80指明端口号
+
+ip netns exec
+
+
+netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20 # 查看连接服务器 top10 用户端的 IP 地址
+netstat -nat | awk  '{print  $5}' | awk -F ':' '{print $1}' | sort | uniq -c | sort -rn | head -n 10
+netstat -nat |awk ‘{print $6}’|sort|uniq -c|sort -rn
+ping api.jpush.cn | awk ‘{ print $0”    “ strftime(“%Y-%m-%d %H:%M:%S”,systime()) } ‘ >> /tmp/jiguang.log &
+
+wget ftp://ftp.is.co.za/mirror/ftp.rpmforge.net/redhat/el6/en/x86_64/dag/RPMS/multitail-5.2.9-1.el6.rf.x86_64.rpm
+yum -y localinstall multitail-5.2.9-1.el6.rf.x86_64.rpm
+multitail -e "Accepted" /var/log/secure -l "ping baidu.com"
+
+ps -aux | sort -rnk 3 | head -20
+ps -aux | sort -rnk 4 | head -20
+
+cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | sort | uniq -c | sort -rn | head -n 10 # 查看一下最常用的10个命令
+
+# 输出nginx日志的ip和每个ip的pv，pv最高的前10
+#2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
+awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
 ```
 
 ### netcat network cat  nc
 
-* 快速构建网络链接
+- Concatenate and redirect sockets
+  - 实现任意 TCP/UDP 端口侦听:增加 -l 参数后，nc 可以作为 server 以 TCP 或 UDP 方式侦听指定端口
+  - 端口扫描:nc 可以作为 client 发起 TCP 或 UDP 连接
+  - 端口转发
+    + 运行【两个】nc 进程，一个充当“服务端”，另一个是“客户端”，然后用【管道】让把两个进程的“标准输入输出”交叉配对。
+    + 所谓的“交叉配对”就是——每一个 nc 进程的“标准输出”都【对接】到另一个 nc 进程的“标准输入”。如此一来，就可以完美地建立【双向通讯】
+  - 代理转发 Proxy Forward
+  - 机器间传输文件
+  - 机器间网络测速
+  - 快速构建网络链接
+* 选项
+  - -g<网关>：设置路由器跃程通信网关，最多设置8个
+  - -G<指向器数目>：设置来源路由指向器，其数值为4的倍数
+  - -i<延迟秒数>：设置时间间隔，以便传送信息及扫描通信端口
+  - -l：使用监听模式，监控传入的资料，nc被当作server，侦听并接受连接，而非向其它地址发起连接
+  - -n：直接使用ip地址，而不通过域名服务器
+  - -o <输出文件>：指定文件名称，把往来传输的数据以16进制字码倾倒成该文件保存
+  - -p <通信端口>：设置本地主机使用的通信端口
+  - -r：指定源端口和目的端口都进行随机的选择
+  - -s<来源位址>：设置本地主机送出数据包的IP地址
+  - -u：使用UDP传输协议，默认TCP
+  - -v：显示指令执行过程，输出交互或出错信息，新手调试时尤为有用
+  - -w<超时秒数>：设置等待连线的时间
+  - -z：开启“zero-I/O 模式”，只判断某个监听端口是否能连上，连上后【不】与对端进行数据通讯,在扫描通信端口时使用
 
 ```sh
-# 扫描机器A端口号在30-40的服务
+sudo apt install nmap-ncat
+
+# 测试某个远程主机的【监听】端口是否可达
+nc -nv x.x.x.x xx
+
+## 判断防火墙是否“允许 or 禁止”某个端口
+nc -lv -p 8080
+## 持续开启监听端口
+nc -lv -p -k 8080
+
+# 扫描机器A端口号在30-40服务
 nc -z A 30-40
+nc -znv x.x.x.x 1-1024
+nc -znv x.x.x.x 1-1024  2>&1 | grep succeeded
 # 连接服务器A 端口号为5000
 nc -C A 5000
 #传送文件 MachineA:
 nc -v -n ip portE:\a.exe
+
+## 探测“服务器类型”和“软件版本”
+alias nc-tor='nc -X 5 -x 127.0.0.1:9050'
+echo "EXIT" | nc-tor -vq 5 -n 服务器IP 22
+echo "EXIT" | nc-tor -vq 5 服务器域名 22
+
+# 开启一个本地9999的TCP协议端口，由客户端主动发起连接，一旦连接必须由服务端发起关闭
+nc -l 9999
+# 通过nc去访问192.168.21.248主机的11111端口，确认是否存活；可不加参数
+nc -vw 2 192.168.21.248 11111
+# 开启一个本地9999的UDP协议端口，客户端不需要由服务端主动发起关闭
+nc -ul 9999
+nc 192.168.21.248 9999 < test     # 通过192.168.21.248的9999TCP端口发送数据文件
+nc -l 9999 > zabbix.file          # 开启一个本地9999的TCP端口，用来接收文件内容
+
+# 端口扫描
+nc -v -w 2 192.168.2.34 -z 21-24
+# 从192.168.2.33拷贝文件到192.168.2.34
+# 在192.168.2.34上：
+nc -lp 1234 > test.txt
+# 在192.168.2.33上
+nc -w l 192.168.2.34 1234 < test.txt
+# 聊天 Ctrl+D正常退出
+nc -lp 1234
+nc 192.168.228.222 1234
+
+# 传输目录
+nc -l 1234 | tar xzvf -
+tar czvf – nginx-0.6.34 | nc 192.168.228.222 1234
+# 操作memcached
+# 存储数据
+printf “set key 0 10 6rnresultrn” |nc 192.168.2.34 11211
+# 获取数据
+printf “get keyrn” |nc 192.168.2.34 11211
+# 删除数据
+printf “delete keyrn” |nc 192.168.2.34 11211
+# 查看状态
+printf “statsrn” |nc 192.168.2.34 11211
+# 模拟top命令查看状态
+watch “echo stats” |nc 192.168.2.34 11211
+# 清空缓存
+printf “flush_allrn” |nc 192.168.2.34 11211
+# 从本地1234端口到host.example.com的80端口连接，5秒超时
+nc -p 1234 -w 5 host.example.com 80
+echo -n "GET / HTTP/1.0"r"n"r"n" | nc host.example.com 80
+nc -u host.example.com 53
+
+# 克隆硬盘或分区
+nc -l -p 1234 | dd of=/dev/sda
+dd if=/dev/sda | nc 192.168.228.222 1234
+
+nc www.linuxso.com 80
+GET / HTTP/1.1
+Host: ispconfig.org
+Referrer: mypage.com
+User-Agent: my-browser
+
+ssh -p 22 -C -f -N -g -L 9200:192.168.1.19:9200 ihavecar@192.168.1.19
+
+# 基于 nc 的端口转发（Port Forward）
+mkfifo nc_pipe
+nc -l -p 1234 < nc_pipe | nc 127.0.0.1 5678 > nc_pipe
 ```
 
 ### socat(socket cat) "netcat++" (extended design, new implementation)
@@ -812,6 +972,96 @@ socat TCP-LISTEN:8080,fork,reuseaddr  TCP:baidu.com:80
 
 # 注意指定 Host
 curl -v -H 'Host: baidu.com' localhost:8080
+```
+
+## [netperf](https://github.com/HewlettPackard/netperf)
+ 
+* 一种网络性能的测量工具，主要针对基于 TCP 或 UDP 的传输
+* 批量数据传输（bulk data transfer）模式
+* 请求 / 应答（request/reponse）模式
+* 参数
+  - -H host  指定远端运行 netserver 的 server IP 地址
+  - -l testlen  指定测试的时间长度 (秒)
+  - -t testname   指定进行的测试类型 (TCP_STREAM，UDP_STREAM，TCP_RR，TCP_CRR，UDP_RR)
+    + 缺省情况下进行 TCP 批量传输，即 - t TCP_STREAM
+    + UDP_STREAM 测试分组的大小不得大于 socket 的发送与接收缓冲大小，否则 netperf 会报出错提示
+    + TCP_RR 
+    + TCP_CRR 为每次交易建立一个新的 TCP 连接
+  - -s size   设置本地系统的 socket 发送与接收缓冲大小
+  - -S size   设置远端系统的 socket 发送与接收缓冲大小
+  - -m size   设置本地系统发送测试分组的大小
+  - -M size   设置远端系统接收测试分组的大小
+  - -D  对本地与远端系统的 socket 设置 TCP_NODELAY 选项
+  - -r req,resp   设置 request 和 reponse 分组的大小
+
+```sh
+./netperf -H 192.168.0.28 -l 60
+
+./netperf -t UDP_STREAM -H 192.168.0.28 -- -m 1024
+
+./netperf -t TCP_RR -H 192.168.0.28 -- -r 32,1024
+
+./netperf -t TCP_CRR -H 192.168.0.28
+```
+
+## [iperf](https://github.com/esnet/iperf)
+
+* 测试最大 TCP 和 UDP 带宽性能，具有多种参数和 UDP 特性，可以根据需要调整，可以报告带宽、延迟抖动和数据包丢失。
+* 共用选项
+  - -u  –udp：使用 UDP 方式而不是 TCP 方式。需要客户端与服务器端同时使用此参数。
+  - -p  –port : 设置端口，与服务器端的监听端口一致。默认是 5001 端口。
+  - -l  –len : 设置读写缓冲区的长度。TCP 方式默认为 8KB，UDP 方式默认为 1470 字节。
+  - -w  –window : 设置套接字缓冲区为指定大小。对于 TCP 方式，此设置为 TCP 窗口大小。对于 UDP 方式，此设置为接受 UDP 数据包的缓冲区大小，限制可以接受数据包的最大值。
+  - -m  –print_mss : 输出 TCP MSS 值（通过 TCP_MAXSEG 支持）。MSS 值一般比 MTU 值小 40 字节。通常情况
+* 服务器端专用选项
+  - -s  –server : iperf 服务器模式
+  - -c  –client host : 如果 iperf 运行在服务器模式，并且用 - c 参数指定一个主机，那么 iperf 将只接受指定主机的连接。此参数不能工作于 UDP 模式。
+  - -P  –parallel： 服务器关闭之前保持的连接数。默认是 0，这意味着永远接受连接。
+* 客户端端专用选项
+  - -c  –client host ： 运行 iperf 的客户端模式，连接到指定的 iperf 服务器端。
+  - -b  –bandwidth ：UDP 模式使用的带宽，必须配合 - u 参数，默认值是 1 Mbit/sec。
+  - -d  –dualtest ： 运行双测试模式。这将使服务器端反向连接到客户端，使用 - L 参数中指定的端口（或默认使用客户端连接到服务器端的端口）。这些在操作的同时就立即完成了。如果你想要一个交互的测试，请尝试 - r 参数。
+  - -r  –tradeoff ： 往复测试模式。当客户端到服务器端的测试结束时，服务器端通过 - l 选项指定的端口（或默认为客户端连接到服务器端的端口），反向连接至客户端。当客户端连接终止时，反向连接随即开始。如果需要同时进行双向测试，请尝试 - d 参数。
+  - -L  –listenport ： 指指定服务端反向连接到客户端时使用的端口。默认使用客户端连接至服务端的端口。
+  - -t  –time ： 设置传输的总时间。iperf 在指定的时间内，重复的发送指定长度的数据包。默认是 10 秒钟。
+  - -P  –parallel： 线程数。指定客户端与服务端之间使用的线程数。默认是 1 线程。需要客户端与服务器端同时使用此参数。
+  - -p：后接服务端监听的端口 
+  - -i：设置带宽报告的时间间隔，单位为秒
+  - -w：设置 tcp 窗口大小，一般可以不用设置，默认即可
+
+```sh
+# 服务器端
+iperf -u -s
+
+# 客户端：
+# /* 在 udp 模式下，以 100Mbps 为数据发送速率，客户端到服务器 192.168.1.1 上传带宽测试，测试时间为 60 秒 */
+iperf -u -c 192.168.1.1 -b 100M -t 60
+
+# /* 客户端以 5Mbps 为数据发送速率, 同时向服务器端发起 30 个连接线程 */
+iperf -u -c 192.168.1.1 -b 5M -P 30 -t 60
+
+# /* 以 100M 为数据发送速率，进行上下行带宽测试,-L 参数指定本端双测试监听的端口 */
+iperf -u -c 192.168.1.1 -b 100M -d -t 60 -L 30000
+
+# TCP 模式
+# 服务器端：
+iperf -s
+
+# 客户端：
+# /* 在 tcp 模式下，客户端到服务器 192.168.1.1 上传带宽测试，测试时间为 60 秒 */
+iperf -c 192.168.1.1 -t 60
+
+# /* 进行上下行带宽测试 */
+iperf -c 192.168.1.1 -d -t 60
+
+# /* 测试单线程 TCP*/
+iperf –c 192.168.1.1 –p 12345 –i 1 –t 10 –w 20K
+
+ # 对应服务器端：
+iperf –s –p 12345 –i 1 –t 10 –m -y
+
+/* 测试多线程 TCP: 客户端同时向服务器端发起 30 个连接线程 */
+iperf -c 192.168.1.1 -P 30 -t 60
 ```
 
 ## [Wireshark](https://www.wireshark.org)

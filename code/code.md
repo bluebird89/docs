@@ -774,7 +774,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
     + 进阶篇
       * Refactoring To Patterns《重构与模式》
       * Implementation Patterns《实现模式》
-      * Code Complete《代码大全》
+      * Code complete 2nd edition《代码大全》
       * The Pragmatic Programmer《程序员修炼之道》
     + 高级篇
       * Structure and Interpretation of Computer Programs《计算机程序的构造和解释》
@@ -992,14 +992,14 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。可以让你在纷乱的现世中找到内心的平静。
 * 《[CODE: The Hidden Language of Computer Hardware and Software 编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
 * 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
-* 《[代码大全2(Code Complete)](https://www.amazon.cn/gp/product/B0061XKRXA)》
-* 《[代码整洁之道(Clean Code)](https://www.amazon.cn/gp/product/B0031M9GHC)》
+* 《[代码大全2 Code Complete](https://www.amazon.cn/gp/product/B0061XKRXA)》
+* 《[代码整洁之道 Clean Code](https://www.amazon.cn/gp/product/B0031M9GHC)》
 * 《[编程语言实现模式](https://www.amazon.cn/gp/product/B007HYMPBY)》
 * 《[编写可读代码的艺术](https://www.amazon.cn/gp/product/B008B4DTG4)》
 * 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
   - [pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
-* 计算机编程艺术
-* 《计算机程序设计艺术(The Art of Computer Programming)》
+* 《The Practice of Programming》Kernighan
+* 《计算机程序设计艺术 The Art of Computer Programming》
 * 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
 * [optimization](https://www.agner.org/optimize/)
   - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
@@ -1103,4 +1103,3 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.
 * [ProgrammingLanguage-Series](<https://github.com/wx-chevalier/ProgrammingLanguage-Series>📚 编程语言语法基础与工程实践，JavaScript | Java | Python | Go | Rust | CPP | Swift)
 * [Learn X in Y minutes](https://learnxinyminutes.com/)
-

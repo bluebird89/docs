@@ -115,7 +115,6 @@ gcc name.o adder.o hello.c
 * 《[C陷阱与缺陷](https://www.amazon.cn/gp/product/B0012UMPBY)》
 * 《[C语言接口与实现](https://www.amazon.cn/gp/product/B01D10NSCM)》
 * 《C语言参考手册（第5版）》
-* 《C程序设计语言》C 编程语言；如何像程序员一样思考；底层计算模型
 * [C Internals](http://www.avabodh.com/cin/cin.html)
 
 ## 工具

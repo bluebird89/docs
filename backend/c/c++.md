@@ -488,22 +488,22 @@ const char* const p = myName; // const pointer, const data 表示指针所指物
 
 ## 图书
 
-* 《[C++程序设计语言 The C++ Programming Language](https://www.amazon.cn/gp/product/B01I9BNASA) 》
+* 《Programming: Principles and Practice Using C++ C++程序设计原理与实践》Bjarne Stroustrup
+* 《The C++ Programming Language C++程序设计语言》
 * **《C++ Primer》**
   - 《[C++ Primer习题集(第5版)](https://www.amazon.cn/gp/product/B00S6U4C6E) 》
 * 《[Effective C++:改善程序与设计的55个具体做法](https://www.amazon.cn/gp/product/B004G72P24) 》 todo 写过几万行C++代码之后，再去阅读会更好。而且推荐每年都至少读一遍。
 * 《[More Effective C++:35个改善编程与设计的有效方法](https://www.amazon.cn/gp/product/B004IP8BD6) 》
+* 《[C++编程思想 Think in C++](https://www.amazon.cn/gp/product/B005CFUQR0)》
+* Modern C++ Tutorial
 * 《C++ 标准程序库》
 * 《[C++标准库](https://www.amazon.cn/gp/product/B00YLZIRHI)》
 * 《STL源码剖析》
 * inside c++ model
 * 《深入理解C++11》
 * 《深度探索 C++ 对象模型》
-* 《[C++编程思想 Think in C++](https://www.amazon.cn/gp/product/B005CFUQR0)》
-* Modern C++ Tutorial
   - [modern-cpp-tutorial](https://github.com/changkun/modern-cpp-tutorial)📚 C++11/14/17 On the Fly <https://changkun.de/modern-cpp/>
 * 《C++语言的设计与演化》
-* 《[C++程序设计原理与实践](https://www.amazon.cn/gp/product/B003VPX6YS)》
 * [Optimizing software in C++](https://www.agner.org/optimize/optimizing_cpp.pdf)
 * C++ 沉思录
 * [C++ 匠心之作 从0到1入门](https://github.com/AnkerLeng/Cpp-0-1-Resource)

@@ -39,7 +39,6 @@
 * 《[调试九法：软硬件错误的排查之道](https://www.amazon.cn/gp/product/B00CBBLUFK)》
 * 《[精通正则表达式（第3版）](https://www.amazon.cn/gp/product/B008UCHA58)》
 * 《[七周七语言：理解多种编程范型](https://www.amazon.cn/gp/product/B00ALPRM3M)》
-* 《程序设计语言：实践之路（第3版）》
 * 《[程序设计实践](https://www.amazon.cn/gp/product/B0198OPL16)》
 * 《The Clean Coder》：专业程序员的行为守则
 * 《Working Effectively With Legacy Code》
