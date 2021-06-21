@@ -10,7 +10,7 @@
 
 ## 搜索引擎
 
-- 网络爬虫，采用分布式爬虫来实现
+- 网络爬虫，采用分布式爬虫实现
   + 基本流程
     * 将热门站点的优质URL作为种子，放到待抓取的URL队列中
     * 读取待抓取URL获取地址进行下载
@@ -63,18 +63,26 @@
 
 * 一种通过分析搜索引擎的排名规律，了解各种搜索引擎怎样进行搜索、怎样抓取互联网页面、怎样确定特定关键词的搜索结果排名的技术
 
-## 反向索引
+## 反向索引|倒排索引
 
-又叫倒排索引，根据内容中的关键字建立索引
+* 根据内容中的关键字建立索引
 
 ## 技巧
 
-* 站内搜索 keyword site:baidu.com site:.gov covid-19
-* 标题搜索 intitle:keyword
-* 替代词 理想*义
-* Exact matches only “keyword”
-* 文件类型 keyword filetype:pdf
-* 排除不想要结果 Mercedes -Benz
+* 站内搜索
+  - `keyword site:baidu.com`
+  - `site:.gov covid-19`
+* 标题搜索 `intitle:keyword`
+* wildcards as placeholders `理想*义`
+* Exact matches only `"what is javascript"`
+* 文件类型 `filetype:pdf learn css`
+* exclude results `Mercedes -Benz`
+* related to both `terms:html AND css`
+* a range of numbers `ecmascript 2016..2018`
+* get the results related to one of the search terms `(javascript OR python) free course`
+* about a given date 
+  - `javascript before:2020`
+  - `web development after:2020`
 * google
   - stopwatch|timer
   - color picker
@@ -94,7 +102,7 @@
 * 搜索URL passwd.txt site:virtualave.net
   - config.txtsite:.jp
   - admin.txtsite:.tw
-* 搜索首页的目录
+* 搜索首页目录
   - "Indexof/admin"
   - "Indexof/secret"
   - "Indexof/cgi-bin" site:.edu

@@ -26,9 +26,10 @@
 ## 每天 note list
 
 * reading
-* eating
+* eating:吃饱穿暖（一定要吃早饭！），多吃水果
 * learning
-* sport
+* sport:每天走路不少于一万步
+* 学着乐观一点
 
 ## 养成
 

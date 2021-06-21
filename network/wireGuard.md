@@ -21,7 +21,7 @@
   - 通过中央服务器自动分配和撤销密钥
   - 发送原始的二层以太网帧
 
-## 安装
+## [安装](https://www.wireguard.com/install/)
 
 * 配置 /etc/wireguard/wg0.conf
 
@@ -107,7 +107,16 @@ iptables -t nat -A POSTROUTING -s 192.0.2.0/24 -o eth0 -j MASQUERADE
 # 启动与停止
 wg-quick up /full/path/to/wg0.conf
 wg-quick down /full/path/to/wg0.conf
+```
 
+```
+ip link add dev wg0 type wireguard
+ip address add dev wg0 10.0.0.1/24
+wg set wg0 listen-port 51820 private-key ./private.key peer NIk5TyDpRDoU9tfIckTTXCsz1eht2aEmdN7l0Q31ow0= allowed-ips 10.0.0.2/32 endpoint 192.168.1.5:51820
+ip link set dev wg0 up
+```
+
+```sh
 ## client
 sudo pacman -S wireguard-tools wireguard-dkms
 sudo -s

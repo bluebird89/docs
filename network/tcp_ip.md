@@ -1377,13 +1377,21 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 
 ## 图书
 
-* 《TCP/IP详解 卷1：协议》
-* 《TCP/IP详解 卷2：实现》
+* 《TCP/IP详解 卷1：协议 TCP/IP Illustrated, Volume 1: The Protocols》
+* 《TCP/IP详解 卷2：实现》应用层开发的， 最多就写写socket的， 可以不用看第二部
+  - 把FreeBSD中的TCP/IP实现给你用几百页讲了个通透
+  - 一步一步手把手的教你写TCP/IP协议栈的实现,一个完整的C语言项目
 * 《TCP/IP详解 卷3：TCP事务协议、HTTP、NNTP和UNIX域协议》
-* 《TCP/IP高效编程：改善网络程序的44个技巧》
+* 《TCP/IP高效编程：改善网络程序的44个技巧 Effective TCP/IP Programming 44 Tips to Improve Your Network Programs》
 * The TCP/IP GUIDE
 * 《TCP/IP网络编程》
-  - [chankeh/net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
+  - [net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
+* UNIX环境高级编程 Advanced Programming in the UNIX Environment apue
+* UNIX网络编程 Unix Network Programming unp
+  - Unix Network Programming, Volume 1: The Sockets Networking API
+  - UNIX Network Programming, Volume 2: Interprocess Communications
+* Linux/UNIX系统编程手册 The Linux Programming Interface: A Linux and UNIX System Programming Handbook
+* Unix/Linux编程实践教程 Bruce Molay
 
 ## 课程
 

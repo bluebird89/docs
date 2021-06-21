@@ -493,6 +493,11 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
     + 需要服务分类：关键服务/非关键服务、高峰各服务的qps需求，来均衡考虑
 * 网络应用应该考虑平衡 处理连接能力 与 能管理连接请求（连接 请求 响应） 达到平衡：客户端请求会形成一个大队列；服务器会处理这个大队列中的任务。这个队列能有多大，看连接管理能力；如何保证进入队列任务的速率和处理移除任务的速度平衡，是关键。达到平衡是目的
 
+## 网络编程:用Sockets API开发基于TCP/IP的网络应用程序
+
+* Sockets API 很少用，大多数时候使用封装好的网络库。 
+
+
 ![Web 服务器请求周期](../_static/web_request_response.png "Optional title")
 
 ```sh
@@ -1205,6 +1210,8 @@ speedtest-cli --list | grep China
 * [tailscale](https://github.com/tailscale/tailscale):The easiest, most secure way to use WireGuard and 2FA.<https://tailscale.com/>
 * [nps](https://github.com/ehang-io/nps):一款轻量级、高性能、功能强大的内网穿透代理服务器。支持tcp、udp、socks5、http等几乎所有流量转发，可用来访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析、内网socks5代理等等……，并带有功能强大的web管理端。a lightweight, high-performance, powerful intranet penetration proxy server, with a powerful web management terminal.<https://ehang.io/nps/documents>
 * [bettercap](https://github.com/bettercap/bettercap) The Swiss Army knife for 802.11, BLE and Ethernet networks reconnaissance and MITM attacks. https://www.bettercap.org/
+* [muduo](https://github.com/chenshuo/)Event-driven network library for multi-threaded Linux server in C++11 
+    - 《Muduo 网络编程示例之零：前言》
 
 ## 参考
 
