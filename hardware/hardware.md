@@ -15,13 +15,6 @@
 * 麒麟810和 820
 * Purism
 
-## IOE
-
-* 组合很强大（高可用，高性能）
-* 存储使用EMC阵列（容量大，数据安全）
-* IBM服务器，即IOE组合
-* Oracle
-
 ## 耳机
 
 * B&O PLAY by BANG & OLUFSEN - BeoPlay H6 Over-Ear Headphones, Natural (1642003)
@@ -50,6 +43,7 @@
 * MBP 16
 * Acer Chromebook R11
 * Chromebook
+* GPD Win Max
 
 ```sh
 sudo lshw -c video
@@ -83,16 +77,30 @@ EndSection
 
 ## 键盘
 
-* Das Keyboard Professional Model S for Mac (DASK3PROMS1MACCLI)
-* MX Board Silent基于经典的G80-3000打造，内部采用樱桃自家的MX静音轴，轴体内部拥有独特形状的橡胶垫来降低敲击时产生的噪音，目前，MX Board Silent键盘提供了MX红轴和MX黑轴两种轴体供用户选择，轴体寿命5000万次。售价149美元（约合1030元人民币）。
-* FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
-* 斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
-* HHKB Professional ~~2~~
-* Kinesis KB600 Advantage2
-* Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
-* IKBC C87 F87 红轴最好
-* cherry mx8.0
-* 腕托
+* 机械键盘
+	* Das Keyboard Professional Model S for Mac (DASK3PROMS1MACCLI)
+	* MX Board Silent基于经典的G80-3000打造，内部采用樱桃自家的MX静音轴，轴体内部拥有独特形状的橡胶垫来降低敲击时产生的噪音，目前，MX Board Silent键盘提供了MX红轴和MX黑轴两种轴体供用户选择，轴体寿命5000万次。售价149美元（约合1030元人民币）。
+	* FILCO 斐尔可 87 圣手忍者 FILCO Majestouch2 87
+	* 斐尔可（FILCO） FKBN87MRL/EB2 Majestouch 2「87 圣手二代」
+	* HHKB Professional ~~2~~
+	* Kinesis KB600 Advantage2
+	* Das Keyboard Model S Professional for Mac Clicky MX Blue Mechanical Keyboard (DASK3PROMS1MACCLI)
+	* IKBC C87 F87 红轴最好
+	* Keychron K4 v2
+	* cherry mx8.0
+* 人体工学键盘
+	* Sculpt
+* 路中南
+* 罗技 MX KEYS
+	* 键盘灯
+* 附件
+	* 腕托
+
+## 鼠标
+
+* Microsoft Bluetooth Ergonomic Mouse
+* Razer Pro Click
+* Surface Arc
 
 ## 触摸板
 

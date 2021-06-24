@@ -4,23 +4,25 @@ the world's most popular open source database, and MySQL Cluster, a real-time, o
 
 ## 版本
 
-* 最初由瑞典 MySQL AB 公司开发，创始人乌尔夫·米卡埃尔·维德纽斯，常用昵称蒙提（Monty）,被甲骨文公司（Oracle）收购,大幅调涨MySQL商业版售价，导致自由软件社区们对于Oracle是否还会持续支持MySQL社区版有所隐忧
+* MySQL
+	* 最初由瑞典 MySQL AB 公司开发，创始人乌尔夫·米卡埃尔·维德纽斯，昵称蒙提（Monty）
+	* 被甲骨文公司（Oracle）收购,大幅调涨MySQL商业版售价，导致自由软件社区们对于Oracle是否还会持续支持MySQL社区版有所隐忧
 * MariaDB
   - MySQL 创始人 Monty 以 MySQL为基础成立分支计划
-  - 以 Monty 小女儿Maria命名，就像MySQL是以他另一个女儿 My 命名一样
+  - 以 小女儿 Maria 命名，就像MySQL是以他另一个女儿 My 命名一样
   - 保持与MySQL的高度兼容性，确保具有库二进制奇偶校验的直接替换功能，以及与MySQL API 应用程序接口)和命令的精确匹配。而原先一些使用 MySQL 的开源软件逐渐转向 MariaDB 或其它的数据库
 * [Percona](./Percona.md):一个相对比较成熟、优秀的MySQL分支版本，在性能提升、可靠性、管理型方面做了不少改善。与MySQL版本基本完全兼容，并且性能大约有20%以上的提升
 * 5.7.8
   - 对 JSON 支持
 * [8.0](https://www.mysql.com/why-mysql/white-papers/whats-new-mysql-8-0/)
-	* NoSQL的支持
+	* NoSQL 支持
 	* 更好性能：读/写工作负载、IO 密集型工作负载、以及高竞争（"hot spot"热点竞争问题）工作负载
 	* 文档存储:为 schema-less 模式的 JSON 文档提供了多文档事务支持和完整的 ACID 合规性
 	* SQL角色：可以在单个会话中创建、授予、删除和应用 MySQL 角色
 	* ROLES_GRAPHML()
-	* 增强了对密码重用的限制：之前支持密码过期策略，新版会检测密码是否有效
-	*  基于现有的 [GIS 支持](http://mysqlserverteam.com/mysql-5-7-and-gis-an-example/)，引入了地理和空间参考
-	* 窗口函数(Window Functions)
+	* 增强对密码重用的限制：之前支持密码过期策略，新版会检测密码是否有效
+	*  基于现有 [GIS 支持](http://mysqlserverteam.com/mysql-5-7-and-gis-an-example/)，引入地理和空间参考
+	* 窗口函数 Window Functions
 	* 索引可以被“隐藏”和“显示”。当对索引进行隐藏时，它不会被查询优化器所使用
 	* 降序索引
 	* 通用表表达式(Common Table Expressions CTE)：在复杂的查询中使用嵌入式表时，使用 CTE 使得查询语句更清晰
@@ -30,19 +32,25 @@ the world's most popular open source database, and MySQL Cluster, a real-time, o
 	* 原子化的DDL语句
 	* Performance Schema升级
 	* 参数修改持久化
-  - InnoDB 现在支持表 DDL 的原子性，也就是 InnoDB 表上的 DDL 也可以实现事务完整性，要么失败回滚，要么成功提交，不至于出现 DDL 时部分成功的问题，此外还支持 crash-safe 特性，元数据存储在单个事务数据字典中
-  - InnoDB 集群提供集成的原生 HA 解决方案
+	* InnoDB 
+		* 现在支持表 DDL 的原子性，也就是 InnoDB 表上的 DDL 也可以实现事务完整性，要么失败回滚，要么成功提交，不至于出现 DDL 时部分成功的问题，此外还支持 crash-safe 特性，元数据存储在单个事务数据字典中
+		- 集群提供集成原生 HA 解决方案
   - validate_password:默认为caching_sha2_password,客户端不支持
 * [TenDB](link)
 
 ## 安装
 
-* `mysql -u username -p passsword` 客户端命令
-  - 每一行结束符用 `;`
-  - `\g`
-  - Your MySQL connection id is 4:记录了 MySQL 服务到目前为止连接数，每个新链接都会自动增加 1
-  - `help|\h` 显示帮助内容
-  - `\c` 命令来清除命令行 buffer
+* 客户端登录 `mysql -u username -p passsword` 
+	  - 每一行结束符用 `;`
+	  - `\g`
+	  - Your MySQL connection id is 4:记录 MySQL 服务到目前为止连接数，每个新链接都会自动增加 1
+	  - `help|\h` 显示帮助内容
+	  - `? contents` 查询所有可供查询的分类
+	  - `? Account Management`
+	  - `? Data Types`
+	  - `? VARCHAR`
+	  - `? show`
+	  - `\c` 清除命令行 buffer
 - question
 	- Public Key Retrieval is not allowed
 		- `jdbc:mysql://localhost:3306/Database\_dbName?allowPublicKeyRetrieval=true&useSSL=false;`
@@ -61,11 +69,15 @@ sudo apt install mysql-server
 
 brew cask install mysqlworkbench|sequel-pro
 
-mysql_secure_installation # 没有设置 root 帐户的密码，马上设置它;通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录;删除匿名用户帐户和测试数据库
+# 没有设置 root 帐户的密码，马上设置它
+# 通过删除可从本地主机外部访问的 root 帐户来禁用远程 root 用户登录
+# 删除匿名用户帐户和测试数据库
+mysql_secure_installation 
 
 unset TMPDIR
 mysql_install_db --verbose --user=`whoami` --basedir="$(brew --prefix mysql)" --datadir=/usr/local/var/mysql --tmpdir=/tmp
 
+## remove
 sudo apt remove mysql-server mysql-common
 sudo apt autoremove mysql-server
 sudo mysql_ssl_rsa_setup --uid=mysql
@@ -74,10 +86,18 @@ sudo rm /etc/mysql/ -R
 
 ## MariaDB
 yum -y install mariadb-server mariadb
-systemctl start mariadb && systemctl enable mariadb
+systemctl start mariadb
 
 dpkg -l | grep mysql
 dpkg -l |grep ^rc|awk '{print $2}' |sudo xargs dpkg -P
+
+# dpkg: error processing package mariadb-server-10.0 (--configure):subprocess installed post-installation script returned error exit status 1
+sudo apt-get remove --purge mysql*
+sudo apt-get remove --purge mysql
+
+sudo apt-get remove --purge mariadb
+sudo apt-get remove --purge mariadb*
+sudo apt-get --purge remove mariadb-server
 
 # 源码安装
 groupadd mysql
@@ -92,36 +112,40 @@ cp support-files/my-medium.cnf /etc/my.cnf
 service mysqld start
 
 ps aux | grep mysqld
-# 注意:/usr/local/mysql/bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object fil 134
+
+## 错误
+# /usr/local/mysql/bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object fil 134
 # 解决方案:yum install libaio
 sestatus -v
 getenforce
-#修改/etc/selinux/config 文件
-#将SELINUX=enforcing改为SELINUX=disabled
-#重启机器即可
+#修改/etc/selinux/config 文件，将SELINUX=enforcing改为SELINUX=disabled，重启机器即可
 
 # 服务管理
 brew services start mysql@5.7|mysql
 mysql.server start|stop|restart|status
 service mysql status|start|stop|restart
 systemctl status|start|stop|restart mysql.service
+net start|stop mysql # win平台
 
 ## docker
 docker pull mysql
-docker run --name master -p 3306:3307 -e MYSQL_ROOT_PASSWORD=root -d mysql
 
-docker run -d --name mysql8 -p 3306:3306 --restart=always -v /Users/henry/Container/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=user_center mysql --sql_mode=NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run -d --name mysql8 -p 3306:3306 --restart=always \
+-v /Users/henry/Container/mysql:/var/lib/mysql \
+-e MYSQL_ROOT_PASSWORD=123456 -e MYSQL_DATABASE=user_center \
+mysql --sql_mode=NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION \
+--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
 docker exec -it mysql8 bash  #进入doccker
+
 mysql -uroot -p123456 #连接mysql
 
-alter user 'root'@'%' identified with mysql_native_password by '123456'; #更改身份验证插件
+# 更改身份验证插件
+alter user 'root'@'%' identified with mysql_native_password by '123456'; 
 
 mkdir -p ~/mysql/data ~/mysql/logs ~/mysql/conf
 docker build -t mysql .
 docker run -p 3306:3306 --name mymysql -v $PWD/conf/my.cnf:/etc/mysql/my.cnf -v $PWD/logs:/logs -v $PWD/data:/mysql_data -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.6
-
-# Windows,管理员权限执行
-net start|stop mysql # win平台
 
 ## 多实例
 mkdir -p /data/{3306,3307}
@@ -132,61 +156,51 @@ cp support-files/mysql.server /data/3306/mysql
 cp support-files/my-small.cnf /data/3307/my.cnf
 cp support-files/mysql.server /data/3307/mysql
 
-# dpkg: error processing package mariadb-server-10.0 (--configure):subprocess installed post-installation script returned error exit status 1
-sudo apt-get remove --purge mysql*
-sudo apt-get remove --purge mysql
-
-sudo apt-get remove --purge mariadb
-sudo apt-get remove --purge mariadb*
-sudo apt-get --purge remove mariadb-server
 
 mysql_config --include
-
-? contents; # 查询所有可供查询的分类
-? Account Management
-? Data Types
-? VARCHAR
-? show
 ```
 
 ## 原理
 
 * 存储
-  - 扇区是硬盘的读写的基本单位，通常情况下每个扇区的大小是 512B
-  - 磁盘块文件系统读写数据的最小单位，相邻的扇区组合在一起形成一个块，一般是4KB
-  - 页是内存的最小存储单位，页的大小通常为磁盘块大小的 2^n 倍
-  - InnoDB页面的默认大小是16KB，是数倍个操作系统的页
-* 客户端和MySQL服务端的交互过程
-  - 客户端发送一条SQL语句给服务端，服务端的连接器先进行账号/密码、权限等环节验证，有异常直接拒绝请求。
-  - 服务端查询缓存，如果SQL语句命中了缓存，则返回缓存中的结果，否则继续处理。
-  - 服务端对SQL语句进行词法解析、语法解析、预处理来检查SQL语句的合法性。
-  - 服务端通过优化器对之前生成的解析树进行优化处理，生成最优的物理执行计划。
-  - 将生成的物理执行计划调用存储引擎的相关接口，进行数据查询和处理。
-  - 处理完成后将结果返回客户端。
+  - 扇区:硬盘的读写的基本单位，通常情况下每个扇区的大小是 512B.
+  - 磁盘块:相邻扇区组合在一起形成一个块，一般是4KB
+  - 页是内存最小存储单位，大小通常为磁盘块大小的 2^n 倍
+  - InnoDB页面默认大小16KB，数倍个操作系统的页
+* 客户端和MySQL服务端交互过程 ：原始 sql-> 词法语法分析生成 AST-> 关系代数表达式（逻辑计划）-> 逻辑优化（谓词下推 / 常量传递）-> 物理查询优化（计算最佳 cost 路径，扫表还是使用索引，join 算法）-> 执行
+  - 连接：客户端发送一条SQL语句给服务端，服务端连接器先进行账号/密码、权限等环节验证，有异常直接拒绝请求。
+  - 查询缓存：服务端查询缓存，如果SQL语句命中了缓存，则返回缓存中的结果，否则继续处理。
+  - 语句解析：服务端对SQL语句进行词法解析、语法解析、预处理来检查SQL语句的合法性。
+  - 优化：服务端通过优化器对之前生成的解析树进行优化处理，生成最优的物理执行计划。
+  - 执行：将生成的物理执行计划调用存储引擎的相关接口，进行数据查询和处理。
+  - 返回：处理完成后将结果返回客户端。
 * Application layer
-  - 连接器:通信协议是“半双工”,任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，两个动作不能同时发生
-    + 连接处理 Connection handling：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户权限 each client gets its own connection which is cached for the duration of access.引入了线程池的概念，为通过认证安全接入的客户端提供线程.在该层上可以实现基于 SSL 的安全链接。
-      * 本地 sock 通信
-      * 基于客户端/服务端工具实现的类似于 tcp/ip 的通信
-    + 授权认证 Authentication：获取到权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中拥有的权限保持不变，等到下次重新连接才会更新权限 server checks (username,password,host) info of client and allows/rejects connection
+  - 连接器:通信协议是“半双工”：任一时刻，要么是服务器向客户端发送数据，要么是客户端向服务器发送数据，两个动作不能同时发生
+	+ 连接处理 Connection handling：负责将 mysql 客户端和服务端建立连接，连接成功后，会获取当前连接用户权限 each client gets its own connection which is cached for the duration of access.引入了线程池的概念，为通过认证安全接入的客户端提供线程.在该层上可以实现基于 SSL 的安全链接。
+		+ 协议
+			* 本地 sock 通信
+			* 基于客户端/服务端工具实现的类似于 tcp/ip 通信
+	+ MySQL 在执行过程中临时使用的内存是管理在连接对象里面的，这些资源只有在连接断开的时候才会释放
+		+ 长连接：连接成功后，如果客户端持续有请求，则一直使用同一个连接。
+		+ 有效减少建立连接过程带来的损耗，进而提升性能
+			+ 全部使用长连接后，占用内存涨得特别快，如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM）
+			+ 定期断开长连接。使用一段时间或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连
+		+ 短连接：每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。
     + 客户端用一个单独数据包将查询请求发送给服务器，当查询语句很长的时候，需要设置 `max_allowed_packet`参数。注意，如果查询实在是太大，服务端会拒绝接收更多数据并抛出异常。
     + 当服务器响应客户端请求时,给用户数据通常会很多，由多个数据包组成,客户端必须完整接收整个返回结果，而不能简单只取前面几条结果，然后让服务器停止发送。因而在实际开发中，尽量保持查询简单且只返回必需数据，减小通信间数据包大小和数量
-    + 客户端太长时间没动静，连接器就会自动将它断开。这个时间是由参数 wait_timeout 控制的，默认值是 8 小时。
-    + 长连接是指连接成功后，如果客户端持续有请求，则一直使用同一个连接。短连接则是指每次执行完很少的几次查询就断开连接，下次查询再重新建立一个。
-    + 全部使用长连接后，占用内存涨得特别快，因为 MySQL 在执行过程中临时使用的内存是管理在连接对象里面的。这些资源会在连接断开的时候才释放。所以如果长连接累积下来，可能导致内存占用太大，被系统强行杀掉（OOM）
-      * 定期断开长连接。使用一段时间或者程序里面判断执行过一个占用内存的大查询后，断开连接，之后要查询再重连
-      * 如果用 MySQL 5.7 或更新版本，可以在每次执行一个比较大操作后执行 `mysql_reset_connection` 来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态
-  - Security: server determines whether the client has privileges to execute each query (check with show privileges command)
+    + 客户端太长时间没动静，连接器就会自动将它断开。由参数 wait_timeout 控制，默认值是 8 小时。
+    + 如果用 MySQL 5.7 或更新版本，可以在每次执行一个比较大操作后执行 `mysql_reset_connection` 来重新初始化连接资源。这个过程不需要重连和重新做权限验证，但是会将连接恢复到刚刚创建完时的状态
+  - Security: server determines whether the client has privileges to execute each query  `show privileges command` 授权认证 Authentication：获取到权限对整个连接都有效，一旦连接成功后，如果使用管理员账号对该用户更改权限，当前连接中拥有的权限保持不变，等到下次重新连接才会更新权限 server checks (username,password,host) info of client and allows/rejects connection
 * Server layer
-  - Services and utilities - backup/restore, replication, cluster etc
-  - SQL interface - clients run queries for data access and manipulation
-  - Caches and buffers - cache stores query results, buffer pool(InnoDB) stores table and index data in LRU fashion
-    + MySQL 8.0 版本开始将不再支持查询缓存功能:缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了
-    + `show variables like '%query_cache%';`
-    + 如果查询缓存打开，会检查这个查询语句是否命中查询缓存中的数据，之前执行过的语句及其结果可能会以 key-value 对形式被直接缓存在内存中。key 是查询语句，value 是查询结果。如果有缓存直接从缓存中读取并返回数据，不再执行后面的步骤，结束查询操作
-      * 查询中包含任何用户自定义函数、存储函数、用户变量、临时表、mysql库中的系统表，其查询结果都不会被缓存
-        - 比如函数 NOW()或者 CURRENT_DATE()会因为不同的查询时间，返回不同的查询结果
-        - 包含 CURRENT_USER或者 CONNECION_ID()的查询语句会因为不同的用户而返回不同的结果
+	* Services and utilities - backup/restore, replication, cluster etc
+	* SQL interface - clients run queries for data access and manipulation
+	* Caches and buffers - cache stores query results, buffer pool(InnoDB) stores table and index data in LRU fashion
+	+ 查询缓存 `show variables like '%query_cache%';`
+		+ MySQL 8.0 版本开始将不再支持查询缓存功能:缓存非常容易被清空掉，命中率比较低。只要对表有一个更新，这个表上的所有缓存就会被清空，因此刚缓存下来的内容，还没来得及用就被另一个更新给清空了
+		+ 如果打开，会检查这个查询语句是否命中查询缓存中的数据，之前执行过的语句及其结果可能会以 key-value 对形式被直接缓存在内存中。key 是查询语句，value 是查询结果。如果有缓存直接从缓存中读取并返回数据，不再执行后面的步骤，结束查询操作
+		  * 查询中包含用户自定义函数、存储函数、用户变量、临时表、mysql库中的系统表，其查询结果都不会被缓存
+			  * 比如函数 NOW()或者 CURRENT_DATE()会因为不同的查询时间，返回不同的查询结果
+			  * 包含 CURRENT_USER或者 CONNECION_ID()的查询语句会因为不同的用户而返回不同的结果
     + 如果没有缓存则继续往后执行，并将执行结果和语句保存在缓存中
     + 将缓存存放在一个引用表（不要理解成 table，可以认为是类似于 HashMap的数据结构）
       * 通过一个哈希值索引，这个哈希值通过查询本身、当前要查询的数据库、客户端协议版本号等一些可能影响结果的信息计算得来
@@ -261,14 +275,14 @@ mysql_config --include
     + 在查询优化阶段就为每一张表创建了一个 handler 实例，优化器可以根据这些实例的接口来获取表的相关信息，包括表的所有列名、索引统计信息等
     + 存储引擎接口提供了非常丰富的功能，但其底层仅有几十个接口，这些接口像搭积木一样完成了一次查询的大部分操作
     + 在数据库的慢查询日志中看到一个 rows_examined 的字段，表示这个语句执行过程中扫描了多少行,这个值是在执行器每次调用引擎获取数据行的时候累加的
-* 存储层：负责数据的存储和提取，其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎
+* 存储层：负责数据存储和提取，其架构模式是插件式的，支持 InnoDB、MyISAM、Memory 等多个存储引擎
   - 各个数据页可以组成一个双向链表
   - 记录都存在页里边,每个数据页中的记录又可以组成一个单向链表
-  - 每个数据页都会为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录
+  - 每个数据页为存储在它里边儿的记录生成一个页目录，在通过主键查找某条记录的时候可以在页目录中使用二分法快速定位到对应的槽，然后再遍历该槽对应分组中的记录即可快速找到指定的记录
   - 以其他列(非主键)作为搜索条件：只能从最小记录开始依次遍历单链表中的每条记录。
-  - 计算机在读写文件时会以页为单位将数据加载到内存中
-  - 需要在数据库中查询数据时，CPU 会发现当前数据位于磁盘而不是内存中，这时就会触发 I/O 操作将数据加载到内存中进行访问，数据的加载都是以页的维度进行加载的，然而将数据从磁盘读取到内存中所需要的成本是非常大的，普通磁盘（非 SSD）加载数据需要经过队列、寻道、旋转以及传输的这些过程，大概要花费 10ms 左右的时间
-* 原始 sql-> 词法语法分析生成 AST-> 关系代数表达式（逻辑计划）-> 逻辑优化（谓词下推 / 常量传递）-> 物理查询优化（计算最佳 cost 路径，扫表还是使用索引，join 算法）-> 执行
+- 使用
+  - 在数据库中查询数据时，CPU 会发现当前数据位于磁盘而不是内存中，会触发 I/O 操作将数据加载到内存中进行访问
+  - 数据加载以页的维度进行加载，将数据从磁盘读取到内存中所需成本是非常大的，普通磁盘（非 SSD）加载数据需要经过队列、寻道、旋转以及传输的这些过程，大概要花费 10ms 左右的时间
 
 ![MySQL architecture](../_static/mysql_architecture.png "Optional title")
 ![MySQL查询](../_static/mysql_query.png)
@@ -281,30 +295,32 @@ show variables like '%query_cache%';
 
 ## 配置 Config
 
-* 配置文件：/usr/local/etc/my.cnf 或者 my.ini
-* 字符集: 客户端向MySQL服务器端请求和返加的数据的字符集
-  - 选择数据库后使用:`set names gbk`,相当于 client server connection 都设置
-  + 数据库存储:一个汉字utf8下为两个长度,gbk下为一个长度
-  + 正常一个汉字utf8下为三个字节,gbk下为两个字节
-  + 系统变量 `SHOW VARIABLES LIKE 'character_set_%'`
-    + character_set_server：默认的内部操作字符集
+* 配置文件：`/usr/local/etc/my.cnf`  `my.ini`
+* 字符集: 客户端向MySQL服务器端请求和返回数据的字符集
+  - 选择数据库后  `set names gbk`,相当于 client|server|connection三方面都设置
+  + 正常一个汉字：utf8下为三个字节, gbk下为两个字节；存储:一个汉字：utf8 为两个长度, gbk 为一个长度
+  + `SHOW VARIABLES LIKE 'character_set_%'`
+    + character_set_server：默认服务端操作字符集
+    + character_set_results：服务器端结果返回给客户端所使用编码
     + character_set_client：客户端向服务器发送数据时使用的编码
     + character_set_connection：连接层字符集
-    + character_set_results：服务器端将结果返回给客户端所使用的编码
-    + character_set_database：当前选中数据库的默认字符集
+    + character_set_database：当前选中数据库默认字符集
     + character_set_system：系统元数据(字段名等)字符集
   - 保证客户端使用字符集与服务端返回数据字符集编码一致(以适应客户端为主,修改服务器服务器端配置)
-  - 校对：规则属于PADSPACE类。这说明在MySQL中的所有CHAR和VARCHAR值比较时不需要考虑任何尾部空格
-    + _bin：按二进制编码比较
-    + _ci：不区分大小写比较
-* `max_connection|max_used_connections`
-  - max_connection 最大连接数:MySQL实例的最大连接数，上限值是16384.增加该值增加文件描述符的数量
-    + 如果服务器的并发连接请求量比较大，建议调高此值，以增加并行连接数量，当然这建立在机器能支撑的情况下，因为如果连接数越多，介于MySQL会为每个连接提供连接缓冲区，就会开销越多的内存，所以要适当调整该值，不能盲目提高设值
-    + max_used_connections 跟 max_connections相同 那么就是max_connections设置过低或者超过服务器负载上限了，低于10%则设置过大
+- 校对：规则属于PADSPACE类。这说明在MySQL中的所有CHAR和VARCHAR值比较时不需要考虑任何尾部空格
+    + `_bin`：按二进制编码比较
+    + `_ci`：不区分大小写比较
+* `max_connection|max_used_connections` 
+	* max_connections：最大连接数:MySQL实例最大连接数，上限值16384.通过增加文件描述符的数量增加该值
+		+ 如果服务器并发连接请求量比较大，建议调高此值，以增加并行连接数量，当然这建立在机器能支撑的情况下，因为如果连接数越多，介于MySQL会为每个连接提供连接缓冲区，就会开销越多的内存，所以要适当调整该值，不能盲目提高设值
+    + max_used_connections：设置过低或者超过服务器负载上限了，低于10%则设置过大
     + max_used_connections / max_connections * 100% （理想值≈ 85%）
-  - `back_log`: MySQL 能暂存连接数量。当主要MySQL线程在一个很短时间内得到非常多的连接请求，这就起作用。如果MySQL的连接数据达到`max_connections`时，新来请求将会被存在堆栈中，以等待某一连接释放资源，该堆栈的数量即back_log，如果等待连接的数量超过back_log，将不被授予连接资源
-    + back_log值指出在MySQL暂时停止回答新请求之前的短时间内有多少个请求可以被存在堆栈中。只有如果期望在一个短时间内有很多连接，你需要增加它，换句话说，这值对到来的TCP/IP连接的侦听队列的大小。
-    + 默认数值是50，可调优为128，对于Linux系统设置范围为小于512的整数
+- `back_log`: MySQL 能暂存的连接数量，在MySQL暂时停止回答新请求之前的短时间内有多少个请求可以被存在堆栈中
+	- 当主要MySQL线程在一个很短时间内得到非常多的连接请求
+	- 如果MySQL的连接数据达到`max_connections`时，新来请求将会被存在堆栈中，以等待某一连接释放资源，该堆栈数量即back_log
+	- 如果等待连接的数量超过back_log，将不被授予连接资源
+    + 只有如果期望在一个短时间内有很多连接，增加它，换句话说，这值对到来的TCP/IP连接的侦听队列的大小。
+    + 默认值 50，可调优为128，对于Linux系统设置范围为小于512的整数
 * 缓冲区变量 key_buffer_size
   - 指定索引缓冲区大小，它决定索引处理的速度，尤其是索引读的速度。通过检查状态值Key_read_requests和Key_reads，可以知道key_buffer_size设置是否合理。比例key_reads / key_read_requests应该尽可能的低，至少是1:100，1:1000更好（上述状态值可以使用SHOW STATUS LIKE ‘key_read%’获得）。
     + key_buffer_size只对MyISAM表起作用。即使不使用MyISAM表，但是内部的临时磁盘表是MyISAM表，也要使用该值。可以使用检查状态值created_tmp_disk_tables得知详情。
@@ -355,12 +371,6 @@ show variables like '%query_cache%';
   - INNODB_LOG_FILE_SIZE
 * 模式
   - 严格模式
-* 长连接 keep-live:连接成功后，如果客户端持续有请求，则一直使用同一个连接
-  - 有效减少建立连接过程带来的损耗，进而提升性能
-  - MySQL 在执行过程中临时使用的内存是管理在连接对象里面的，这些资源只有在连接断开的时候才会释放
-    + 定期断开长连接：使用一段时间，或者程序里判断执行过一个占用较大内存的查询后，主动断开连接
-    + MySQL 5.7 或者更高版本，可以在每次执行一个比较大的操作后，通过执行 mysql_reset_connection 来重新初始化连接资源
-* 短连接:每次执行完很少的几次查询就断开连接，下次查询再重新建立一个
 
 ```sh
 \s|status
@@ -421,7 +431,7 @@ select curtime();
 * performance_schema
 * sys
 
-### 数据类型
+## 数据类型
 
 * 整型 INTEGER int(13)
   - tinyint       0-255 或 -2^7~2^7-1 1个字节
@@ -430,75 +440,75 @@ select curtime();
   - int           0-2^32-1            4个字节 默认 int(11)
   - bigint        0-2^64-1            8个字节
   - 数据显示宽度,不决定数据容量大小
-    + bigint 默认宽度 20 ，int 默认宽度 11
-    + 显示宽度指明最大可能显示的数字个数，数值位数小于指定的宽度时数字左边会用空格填充
-    + 数值位数大于显示宽度的值，只要该值不超过该类型取值范围，数值依然可以插入且能够显示出来
+    + bigint  默认宽度 20 ，int 默认宽度 11
+    + 显示宽度：最大可能显示数字个数
+    + 数值位数小于指定宽度时数字左边会用空格填充
+    + 数值位数大于显示宽度：只要该值不超过该类型取值范围，数值依然可以插入且能够显示出来
     + 默认存在符号位，unsigned 无符号数
-    + 指定 zerofill 选项，会自动为该列添加 UNSIGNED 属性，则不足显示宽度的部分用 0 填充，如果是 1 会显示成 0000000001
+    + zerofill 选项：会自动为该列添加 UNSIGNED 属性，不足显示宽度部分用 0 填充，如果是 1 会显示成 0000000001
 * 定点数 decimal(M,D)
-  - M 整数与小数部分总长度， D 小数部分长度，M 最大值是65，D最大值是30
-  - 如果不写精度和标度，默认按照 decimal(10,0) 来进行操作，如果数据超过了精度和标题，MySQL 会报错
+  - 精度和标度：M 整数与小数部分总长度， D 小数部分长度，M 最大值是65，D最大值是30
+  - 默认 decimal(10,0) ，数据超过精度和标度，MySQL 会报错
   - 使用二进制格式将9个十进制(基于10)数压缩为4个字节来表示DECIMAL列值
   - 注意:定点数是精确数值，浮点数会失去精度
-  - 支持显示宽度，支持无符号
+  - 显示宽度，无符号
 * 浮点型
-  - M 表示的就是 「整数位 + 小数位」 的数字，D 表示位于 . 后面的小数。M 也被称为精度 ，D 被称为标度
+  - 精度 M =整数位数 + 小数位数，标度 D 表示位于 . 后面小数
   - 单精度 float(M,D)  (论上可以保留7位小数) 3.4E+38~3.4E+38     4个字节
   - 双精度 double(M,D) (理论上保留15位小数) -1.8E+308~1.8E+308  8个字节
-  - 浮点数如果不写精度和标度，会按照实际的精度值进行显示
+  - 如果不写精度和标度，会按照实际的精度值进行显示
   - 表示近似值，精度会丢失,不要作比较
-  - 浮点数的执行效率要高于定点数
-  - 支持符号位 unsigned 属性，也支持显示宽度 zerofill 属性
+  - 浮点数执行效率要高于定点数
+  - 支持符号位 unsigned 、显示宽度、 zerofill 属性
 * 位类型 bit
   - 存放字段值，BIT(M) 可以用来存放多位二进制数
-  - M 范围是 1 - 64，如果不写的话默认为 1
+  - M 范围 1 - 64，默认为 1
   - 查询 `SELECT HEX(id),bin(id) from test`
 * **字符** char
-  - char(M) 定长字符串
-    + 固定长度，最多可以**存储 255 个字符 (注意不是字节)**，字符有不同编码集，比如 UTF8 编码 (3字节)、GBK 编码 (2字节) 等
-    + 对于 CHAR(M) 如果实际存储的数据长度小于M，存储时会自动在右边用空格字符补足，输入超过指定允许最大长度后，MySQL 会报错
-    + 在检索操作中那些填补出来的空格字符会被去掉
-    + 存取速度比varchar要快得多，因为其长度固定，方便程序存储与查找
-    + 付出空间代价：其长度固定，会有多余空格占位符占据空间
-  - varchar(M) 变长字符串，存储大小为实际大小
-    + **最大长度为 65532 个字节**：存字符串时，第一个字节是空的，不存在任何数据，还需两个字节来存放字符串的长度，所以有效长度是64432-1-2=65532字节
-      * 非Unicode的字符数据
-        - 英文字符（ASCII）占用1个字节，汉字占用两个字节
-        - utf-8状态下，每个字符最多占3个字节，汉字｜英文最多可以存 21844个字符
-        - gbk状态下，每个字符最多占2个字节，汉字｜英文最多可以存 32766个字符
-        - latin1 最大为65532个字符
-    + 字符串实际长度：实际字符串加1或2个字节，字符串长度小于255字节用1字节记录，超过255就需要2字节记录
-    + 最大有效长度由最大行大小和使用的字符集确定
-    + 在5.0.3以下的版本中的最大长度限制为255，而在5.0.3及以上的版本中
-    + mysql 4.0以下版本，varchar(50) 指的是 50 字节，如果存放 UTF8 格式编码的汉字时（每个汉字3字节），只能存放16 个
-    + mysql 5.0以上版本，varchar(50) 指的是 50 字符，无论存放的是数字、字母还是 UTF8 编码的汉字，都可以存放 50 个
+  - 定长字符串 CHAR(M)  
+    + 最多可以**存储 255 个字符 (注意不是字节)**
+    + 实际数据长度小于M，存储时会自动在右边用空格字符补足，检索结果中填补出来空格字符会被去掉
+    + 输入超过指定允许最大长度会报错
+    + 存取速度比varchar要快得多：其长度固定，方便存储与查找
+    + 付出空间代价：会有多余空格占位符占据空间
+  - 变长字符串 varchar(M)
+	  - M 字符数
+	  - 最大有效长度：最大行大小和使用字符集确定
+	  - **最大长度 65532 字节**：存字符串时，第一个字节是空的，不存在任何数据，还需两个字节来存放字符串长度，有效长度是64432-1-2=65532字节
+		+ 实际长度：实际字符串加1或2个字节，字符串长度小于255字节用1字节记录，超过255就需要2字节记录
+	  - 非Unicode 编码
+		- latin1 最大为65532个字符
+		- 英文字符（ASCII）占用1个字节，汉字占用两个字节
+		- utf-8：每个字符最多占3个字节，汉字｜英文最多可以存 21844个字符
+		- gbk：每个字符最多占2个字节，汉字｜英文最多可以存 32766个字符
+    + 在5.0.3以下的版本中最大长度限制为255，而在5.0.3及以上的版本中
+    + mysql 4.0以下版本，varchar(50) 指 50 字节，如果存放 UTF8 格式编码的汉字时（每个汉字3字节），只能存放16 个
+    + mysql 5.0以上版本，varchar(50) 指50 字符
     + 值保存和检索时尾部空格保留
   - CHAR vs VARCHAR
     + 共同点:**CHAR(M) 和 VARCHAR(M) 都表示该列能存储 M 个字符，注意不是字节**
     + 速度与空间得不同选择
   - 分配给CHAR或VARCHAR列的值超过最大长度，则对值进行裁剪以使其适合。如果被裁掉字符不是空格，则会产生一条警告
   - 超过255字符用varchar或者text
-  - blob 二进制字符串（字节字符串）
-    + tinyblob
-    + blob
-    + mediumblob
-    + longblob
-  - text 非二进制字符串（字符字符串）
-    + tinytext: 2^8-1
-    + text 2^16-1 不可以有默认值，能用varchar的地方不用text，占用字节比varchar大太多
-    + mediumtext 中型文本型 2^24-1 0－1677个字符
-    + longtext 大型文本 2^32-1 0-42亿个字符
+- blob 二进制字符串（字节字符串）
+	+ tinyblob
+	+ blob
+	+ mediumblob
+	+ longblob
+- text 非二进制字符串（字符字符串）
+	+ tinytext: 2^8-1
+	+ text 2^16-1 不可以有默认值，能用varchar的地方不用text，占用字节比varchar大太多
+	+ mediumtext 中型文本型 2^24-1 0－1677个字符
+	+ longtext 大型文本 2^32-1 0-42亿个字符
   - blob和text唯一区别就是blob保存二进制数据、没有字符集和排序规则
   - BINARY 和 VARBINARY 与 CHAR 和 VARCHAR 非常类似，不同的是它们包含二进制字符串而不包含非二进制字符串。BINARY 与 VARBINARY 的最大长度和 CHAR 与 VARCHAR 是一样的，只不过是**定义字节长度**，而 CHAR 和 VARCHAR 对应的是**字符长度**
 * 日期时间
   - date 3字节 1000-01-01 - 9999-12-31 current_date
     + `insert into test5 values ('2020-06-13'),('20200613'),(20200613);`
   - year 1字节
-    + 用 4 位的数字或者字符串表示，两者效果相同，表示范围 1901 - 2155，插入超出范围的数据会报错。
-    + 以 2 位字符串格式表示，范围为 ‘00’~‘99’。‘00’~‘69’ 表示 2000~2069，‘70’~‘99’ 表示1970~1999。‘0’ 和 ‘00’ 都会被识别为 2000，超出范围的数据也会被识别为 2000。
-    + 以 2 位数字格式表示，范围为 1~99。1~69 表示 2001~2069, 70~99 表示 1970~1999。但 0 值会被识别为0000，这和 2 位字符串被识别为 2000 有所不同
-    + `insert into test4 values ('0'),('00'),('11'),('88'),('20'),('21');`
-    + `insert into test4 values (0),(00),(11),(88),(20),(21);`
+    + 4 位数字或者字符串：范围 1901 - 2155，插入超出范围的数据会报错。
+    + 2 位字符串格式：范围 ‘00’~‘99’。‘00’~‘69’ 表示 2000~2069，‘70’~‘99’ 表示1970~1999。‘0’ 和 ‘00’ 都会被识别为 2000，超出范围的数据也会被识别为 2000。`insert into test4 values ('0'),('00'),('11'),('88'),('20'),('21');`
+    + 以 2 位数字：范围为 1~99。1~69 表示 2001~2069, 70~99 表示 1970~1999。但 0 值会被识别为0000，这和 2 位字符串被识别为 2000 有所不同  `insert into test4 values (0),(00),(11),(88),(20),(21);`
   - time 3字节 -838:59:59 - 838:59:59 10:09:08  CURRENT_TIME()
     + ADDTIME(CURRENT_TIME(), 023000),  SUBTIME(CURRENT_TIME(), 023000);
     + TIMEDIFF(end_at, start_at)
@@ -507,7 +517,8 @@ select curtime();
   - datetime 8字节 '1000-01-01 00:00:00' - '9999-12-31 23:59:59'，精度是秒
     + 默认值建议 CURRENT_TIMESTAMP
     + `insert into test4 values ('2020-06-13 11:11:11'),(20200613111111),('20200613111111'),(20200613080808);`
-  - timestamp：4字节 自 1970年1月1日午夜以来的秒数，和unix时间戳相同，19700101000000 到 2038-01-19 03:14:07。默认timestamp值 为 NOT NULL， current_timestamp 取值范围比 DATETIME 小
+  - timestamp：4字节 自 1970年1月1日午夜以来的秒数，和unix时间戳相同，19700101000000 到 2038-01-19 03:14:07
+  	+ 取值范围比 DATETIME 小
     + 返回后显示为 YYYY-MM-DD HH:MM:SS 格式的字符串
     + 默认值建议 CURRENT_TIMESTAMP
   - 每种日期类型都有一个范围，如果超出这个范围，在默认的 SQLMode 下，系统会提示错误，并进行零值存储
@@ -521,23 +532,21 @@ select curtime();
   - NULL值的索引是NULL
   - 空字符串错误值的索引值是0
 * set(val1, val2, val3...)
-  - 最多可以有64个不同的成员。以bigint存储，共8个字节。采取位运算的形式
+  - 最多可以有64个不同成员。以bigint存储，共8个字节。采取位运算的形式
   - 当创建表时，SET成员值的尾部空格将自动被删除
   - SET 对于每 0 - 8 个成员，分别占用 1 个字节，最大到 64 ，占用 8 个字节
   - Set 类型一次可以选取多个成员，而 ENUM 则只能选一个
-* ip:通常使用varchar(15)保存IP地址
+* ip 使用varchar(15)保存 IP地址
   * INET_ATON('127.0.0.1') 将IP转为整型
   * INET_NTOA(2130706433) 将整型转为IP
   * ip2long可转换为整型，但会出现携带符号问题。需格式化为无符号的整型 `sprintf("%u", ip2long('192.168.3.134'));`
   * long2ip将整型转回IP字符串
 * json
   - 不能有默认值
-  - 添加
-    + 可以是对象的形式，也可以是数组的形式
-    + 用函数 JSON_OBJECT，JSON_ARRAY 生成 json 格式的数据
+  - 添加：可以是对象|数组形式，用函数 JSON_OBJECT，JSON_ARRAY 生成 json 格式数据
   - 查询
     + JSON_UNQUOTE 函数将双引号去掉，与操作符 ->> 等价
-    + 对象类型 path 这样表示 column->$.path, 而数组类型则是 column->$[index]
+    + 对象类型 path 这样表示 `column->$.path, 而数组类型则是 column->$[index]`
   - 搜索
     + 用字符串和 JSON 字段比较，是不会相等的
     + CAST 将字符串转成 JSON
@@ -593,24 +602,21 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - %, MOD  除法，返回余数
 * 比较
   - =   等于
-  - <> 或者是 !=   不等于
-  - <=> NULL 安全的等于，也就是 NULL-safe，与 = 号最大的区别在于可以比较 NULL 值
+  - <>   !=   不等于
+  - <=> NULL 安全的等于，也就是 NULL-safe，与 = 号最大区别在于可以比较 NULL 值
   - <   小于
-  - <=  小于等于
-    + select 'a' <= 'b';  /* 返回 1 */
+  - <=  小于等于 `select 'a' <= 'b';  /* 返回 1 */`
   - >   大于
-  - > =  大于等于
-    + select 'a' >= 'b'; /* 返回 0 呢*/
+  - > =  大于等于 `select 'a' >= 'b'; /* 返回 0 呢*/`
   - BETWEEN 在指定范围内
-  - IS NULL 是否为 NULL
-  - IS NOT NULL 是否为 NULL
+  - IS [NOT] NULL 是否为 NULL
   - IN  存在于指定集合
   - LIKE    通配符匹配
-  - REGEXP 或 RLIKE  正则表达式匹配 ‘abcd’ REGEXP ‘ab’
+  - REGEXP 或 RLIKE  正则表达式匹配 `‘abcd’ REGEXP ‘ab’`
 * 逻辑
-  - NOT 或 ！ 逻辑非
-  - AND 或者是 &&  逻辑与
-  - OR 或者是 ||   逻辑或
+  - NOT | ！ 逻辑非
+  - AND | &&  逻辑与
+  - OR | ||   逻辑或
   - XOR 逻辑异或
 * 位
   - &   位与
@@ -622,15 +628,15 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
 
 ## 函数
 
-* 数值函数
+* 数值
   - abs(x) 绝对值 abs(-10.9) = 10
   - BIN(x)  返回x的二进制(OCT返回八进制，HEX返回十六进制)
   - CEIL(x) 或 CEILING(x)  返回大于x的最小整数值
   - EXP(x)  返回值e(自然对数的底)的x次方
   - FLOOR(x)  返回小于x的最大整数值
   - format(x, d) 格式化千分位数值 format(1234567.456, 2) = 1,234,567.46
-  - GREATEST(x1,x2,...,xn)  返回集合中最大的值
-  - LEAST(x1,x2,...,xn) 返回集合中最小的值
+  - GREATEST(x1,x2,...,xn)  返回集合中最大值
+  - LEAST(x1,x2,...,xn) 返回集合中最小值
   - LN(x) 返回x的自然对数
   - LOG(x,y)  返回x的以y为底的对数
   - MOD(x,y)  返回x除y的模(余数)
@@ -640,7 +646,7 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - ROUND(x,y)  返回参数x的四舍五入的有y位小数的值
   - SIGN(x) 返回代表数字x的符号的值
   - SQRT(x) 返回一个数的平方根
-  - TRUNCATE(x,y) 返回数字x截短为y位小数的结果
+  - TRUNCATE(x,y) 返回数字x截短为y位数
 * 时间日期函数
   - now()|current_timestamp() 当前日期时间
   - YEAR(DATE) 给定日期的哪一年
@@ -712,9 +718,8 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - LEFT(str,x)  返回字符串最左边的 x 个字符
   - RIGHT(str,x)   返回最右边的 x 个字符。如果第二个参数是 NULL，那么将不会返回任何字符串
   - load_file(file_name) 从文件读取内容
-  - LPAD(str,n,pad) 用字符串 pad 对 str 左边，直到长度为 n 个字符长度
-  - RPAD(str,n,pad) 用字符串 pad 对 str 右边进行填充，直到长度为 n 个字符长度
-  - TRIM(str) 用于去掉目标字符串的空格
+  - LPAD|RPAD(str,n,pad) 用字符串 pad 对 str 左|右边填充长度到 n 个字符
+  - TRIM(str) 用于去掉目标字符串空格
   - LTRIM(str) 去掉字符串左边空格
   - RTRIM(str) 去掉字符串右边空格
   - LOWER(str)|LCASE(str) 将字符串所有字符变为小写
@@ -732,39 +737,26 @@ select max(created_at) begin, min(created_at) end,max(created_at)-min(created_at
   - case when [condition] then result [when [condition] then result ...] [else result] end   多分支
 * 聚合函数
   - count()
-    + SELECT COUNT(country)：如果有NULL值，在返回的结果中会被过滤掉
-    + SELECT COUNT(*):会返回所有数据的数量，不会过滤其中的NULL值
-    + count(distinct …)会返回彼此不同但是非NULL的数据的行数
+    + `SELECT COUNT(country)` 如果有NULL值，在返回结果中会被过滤掉
+    + `SELECT COUNT(*)` 返回所有数据数量，不会过滤其中的NULL值
+    + `SELECT count(distinct …)` 返回彼此不同但是非NULL的数据的行数
   - sum();
   - max();
   - min();
   - avg();
-  - group_concat() 返回由属于一组的列值连接组合而成的结果
+  - group_concat()  由属于一组的列值连接组合而成的结果
 * 其他常用函数
   - default();
-  - VERSION()   返回当前数据库的版本
+  - VERSION()   返回当前数据库版本
   - DATABASE()   返回当前数据库名
-  - USER()   返回当前登陆用户名
+  - USER() 或 SYSTEM_USER()  返回当前登陆用户名
   - PASSWORD(str) : 返回字符串的加密版本
   - MD5(str) 返回字符串 str 的 MD5 值
-  - INET_ATON(192.168.1.11)   返回 IP 地址的数字表示
-  - INET_NTOA(3232235777)  返回数字代表的 IP 地址
-  - COALESCE 返回参数中的第一个非空表达式
-* 流程函数
-  - IF(expr,t,f)  如果expr为真, 则返回t, 否则返回f
-  - IFNULL(a,b) 如果a不为空, 则返回a, 否则返回b
-  - CASE WHEN expr1 THEN res1 ... ELSE default END  如果expr1为真, 则返回res1, 否则default
-  - CASE expr WHEN val1 THEN res1 ... ELSE default END  如果expr等于val1, 则返回res1, 否则返回default
-* 其他常用函数
-  - LAST_INSERT_ID()  当前线程最后插入记录使用的自增ID值
-  - MD5(str)  返回字符串str的MD5散列后的值
   - SHA(str)  返回字符串str的SHA散列后的值
-  - PASSWORD(str) 返回字符串str的加密版本
-  - INET_ATON(ip) 返回ip的数字表示
-  - INET_NTOA(num)  返回数字代表的ip地址
-  - DATABASE()  返回当前数据库名
-  - VERSION() 返回MySQL服务器的版本
-  - USER() 或 SYSTEM_USER()  返回当前登陆用户名
+  - INET_ATON(192.168.1.11)   返回 IP 地址数字表示
+  - INET_NTOA(3232235777)  返回数字代表 IP 地址
+  - COALESCE 返回参数中的第一个非空表达式
+  - LAST_INSERT_ID()  当前线程最后插入记录使用的自增ID值
   - CONNECTION_ID() 返回当前客户的连接ID
   - FOUND_ROWS()  返回最后一个SELECT查询进行检索的总行数
   - BENCHMARK(count,expr) 将表达式expr重复运行count次
@@ -782,14 +774,14 @@ SELECT
 ### 数据控制语言 DCL Data Control Language
 
 * 定义数据库访问权限和安全级别，创建用户等。关键字：grant等
-* 账户信息保存在 mysql.user
-* GRANT 和 REVOKE 可在几个层次上控制访问权限：
-  - 整个服务器，使用 GRANT ALL 和 REVOKE ALL；
-  - 整个数据库，使用 ON database.*；
-  - 特定的表，使用 ON database.table；
-  - 特定的列；
-  - 特定的存储过程。
-* 新创建的账户没有任何权限
+* 账户信息保存在表 mysql.user
+* GRANT|REVOKE 控制访问权限层次
+  - 整个服务器，使用 GRANT ALL 和 REVOKE ALL
+  - 整个数据库，使用 ON database.*
+  - 特定表，使用 ON database.table；
+  - 特定列
+  - 特定存储过程
+* 新创建账户没有任何权限
 * 权限列表
   - ALL [PRIVILEGES]    -- 设置除GRANT OPTION之外的所有简单权限
   - ALTER    -- 允许使用ALTER TABLE
@@ -877,7 +869,7 @@ SHOW VARIABLES;
 
 ### 数据定义语言 DDL Data Definition Language
 
-* 定义数据库对象:数据库、表、列等
+* 定义数据库对象
 * 数据库
   - informationn_schema：主要存储一些数据库对象信息，比如用户表信息、权限信息、分区信息等
   - performannce_schema：MySQL 5.5 之后新增加的数据库，主要用于收集数据库服务器性能参数。
@@ -890,8 +882,8 @@ SHOW VARIABLES;
   + 声明字段时，用 primary key 标识，也可以在字段列表之后声明
     - `create table tab ( id int, stu varchar(10), primary key (id));`
     * 复合主键（联合主键）`create table tab ( id int, stu varchar(10), age int, primary key (stu, age));`每一条新增都需要判断是否重复，而数据量一旦增大，每次新增都需要全表筛查
-* 约束:SQL 约束用于规定表中的数据规则
-  - 如果存在违反约束的数据行为，行为会被约束终止。
+* 约束 规定表中的数据规则
+  - 如果存在违反约束的数据行为，行为会被约束终止
   - 约束可以在创建表时规定（通过 CREATE TABLE 语句），或者在表创建之后规定（通过 ALTER TABLE 语句）
   - 类型
     * unique 唯一索引（唯一约束） 使得某字段的值也不能重复
@@ -900,7 +892,7 @@ SHOW VARIABLES;
     * FOREIGN KEY - 保证一个表中的数据匹配另一个表中的值的参照完整性。
     * CHECK - 保证列中的值符合指定的条件。
     * DEFAULT - 规定没有给列赋值时的默认值。
-- AUTO_INCREMENT，指定列的值是自动增长型
+- AUTO_INCREMENT 指定列的值是自动增长型
   + 一个数据表，只能有一个主键和一个自动增长型
   + 自动增长必须为索引（主键或unique）
   + 默认为1开始自动增长。可以通过表属性 auto_increment = x进行设置，或 alter table tbl auto_increment = x
@@ -925,8 +917,7 @@ SHOW VARIABLES;
     - restrict，拒绝父表删除和更新
   + 不可滥用，没有合适的理由支撑它的使用的话，将导致业务强制耦合。另外对开发人员不够友好。使用外键一定不能超过3表相互。否则将引出很多的麻烦而不得不取消外键
 * 表设计规范
-  - 库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用
-  - 表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx
+  - 库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用，表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx
   - Normal Format, NF
     + 每个表保存一个实体信息
     + 每个具有一个ID字段作为主键
@@ -936,7 +927,7 @@ SHOW VARIABLES;
     + 第二范式(2NF)：满足第一范式的前提下，不能出现部分依赖。 消除符合主键就可以避免部分依赖。增加单列关键字
     + 第三范式(3NF)：满足第二范式的前提下，不能出现传递依赖。 某个字段依赖于主键，而有其他字段依赖于该字段。这就是传递依赖。将一个实体信息的数据放在一个表内实现。
   - 范式和反范式：对千任何给定的数据通常都有很多种表示方法， 从完全的范式化到完全的反范式化， 以及两者的折中。 在范式化的数据库中， 每个事实数据会出现并且只出现一次。 相反， 在反范式化的数据库中， 信息是冗余的， 可能会存储在多个地方
-    + 范式的优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场
+    + 范式优点和缺点：为性能提升考虑时，经常会被建议对 schema 进行范式化设计，尤其是写密集的场
     + 范式化的更新操作通常比反范式化要快
     + 当数据较好地范式化时，就只有很少或者没有重复数据，所以只需要修改更少的数据
     + 范式化的表通常更小，可以更好地放在内存里，所以执行操作会更快
@@ -946,7 +937,7 @@ SHOW VARIABLES;
       * 当数据比内存大时这可能比关联要快得多，因为这样避免了随机I/0
       * 单独的表也能使用更有效的索引策略
     + 混用范式化和反范式化：在实际应用中经常需要混用，可能使用部分范式化的 schema 、 缓存表，以及其他技巧。 表适当增加冗余字段，如性能优先，但会增加复杂度。可避免表关联查询
-* 产生临时表
+* 临时表
   - 使用 UNION 查询：UNION 有两种都用于联合查询
     + UNION 会去掉两个表中的重复数据，相当于对结果集做了一下去重(distinct)，会产生临时表
     + UNION ALL，则不会排重，返回所有的行。使用 UNION 查询。
@@ -956,8 +947,8 @@ SHOW VARIABLES;
   - SQL 用到 SQL_SMALL_RESULT 选项时；如果查询结果比较小的时候，可以加上 SQL_SMALL_RESULT 来优化，产生临时表
   - FROM 中的子查询；
   - EXPLAIN 查看执行计划结果的 Extra 列中，如果使用 Using Temporary 就表示会用到临时表。
-* table瘦身
-  - 执行delete命令其实只是把记录的位置，或者数据页标记为了可复用，但磁盘文件的大小是不会变的。通过delete命令是不能回收表空间的。这些可以复用，而没有被使用的空间，看起来就像是空洞。插入时候引发分裂同样会产生空洞
+* table 瘦身
+  - delete 把记录位置或者数据页标记为可复用，磁盘文件大小是没有变的。通过delete命令是不能回收表空间的。这些可以复用，而没有被使用的空间，看起来就像是空洞。插入时候引发分裂同样会产生空洞
   - 思路：
     + 新建一个跟A表结构相同的表B
     + 按照主键ID将A数据一行行读取同步到表B
@@ -1070,11 +1061,11 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
 
 ### 数据查询语言 Data Query Language DQL
 
-* `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`执行顺序:组表结构-》过滤筛选-〉查询-》排序
+* 执行顺序:组合表结构->过滤筛选->查询->排序 `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`
   - FROM 连接:对 FROM 关键字两边表执行连接，会形成笛卡尔积，产生一个虚表VT1(virtual table)
   - ON 过滤: FROM 连接结果进行 ON 筛选，创建 VT2，把符合记录的条件存在 VT2 中
   - JOIN 连接
-    + OUTER JOIN(left join、right join) 添加外部行
+    + OUTER JOIN(left join、right join) 添加外部行d
     + left join 把 ON 过滤条件的左表添加进来
     + right join 右表添加进来，从而生成新的虚拟表 VT3
   - WHERE 过滤:对上一步生产的虚拟表引用 WHERE 筛选，生成虚拟表 VT4
@@ -1089,7 +1080,7 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
   - DISTINCT:会对 TV7 生成的记录进行去重操作，生成 VT8。事实上如果应用了 group by 子句那么 distinct 是多余的，原因同样在于，分组的时候是将列中唯一的值分成一组，同时只为每一组返回一行记录，那么所以的记录都将是不相同的。
   - ORDER BY:按照 order_by_condition 排序 VT8，此时返回一个游标，而不是虚拟表。sql 是基于集合的理论的，集合不会预先对他的行排序，它只是成员的逻辑集合，成员的顺序是无关紧要的。
   - limit
-* distinct|all:distinct去除重复记录,默认为 all 全部记录
+* distinct|all:distinct去除重复记录, 默认 all 全部记录
   - 多参数 DISTINCT 去重 `SELECT DISTINCT number, name FROM table tamb` 把 DISTINCT 之后所有参数当做一个过滤条件，也就是说会对 (number, name)整体去重处理，只有当这个组合不同才会去重
 * 字段列表：要显示指定列数据
   - 多个字段之间用逗号隔开，各字段之间没有顺序
@@ -1578,7 +1569,7 @@ WHERE id IN (1,2,3)
     + 物化：为了避免直接将子查询的结果集当作外层查询的参数，MySQL 底层会将该结果集写入一个临时表里，这个临时表优先使用 Memory 存储引擎，并且为其建立哈希索引（如果结果集太大超过限制，则转而使用基于磁盘的存储引擎，相应的索引类型也调整为 B+ 树索引）。这个将子查询结果集存入临时表的过程就叫物化，临时表叫做物化表。将子查询转化为外层查询数据表与物化表之间的内连接查询
     + 半连接
 
-## join 连表
+## 连表 join 
 
 * 连接查询：将多个表通过指定连接条件进行连接
   - 公共字段名字可以不一样，数据类型必须一样
@@ -2142,7 +2133,7 @@ XA COMMIT 'order_tran'.'product';
 XA COMMIT 'order_tran'.'order';
 ```
 
-## lock 锁
+## 锁 lock
 
 * 并发控制:确保在多个事务同时存取数据库中同一数据时不破坏事务的隔离性和统一性
 * 一致性非锁定读：InnoDB使用MVCC向事务的查询提供某个时间点的数据库快照。查询会看到在该时间点之前提交的事务所做的更改，而不会看到稍后或未提交的事务所做的更改（本事务除外）。也就是说在开始了事务之后，事务看到的数据就都是事务开启那一刻的数据了，其他事务的后续修改不会在本次事务中可见
@@ -2587,22 +2578,7 @@ SELECT b.name,a.name,index_id,type,a.space,a.PAGE_NO from information_schema.INN
 where a.table_id=b.table_id and a.space <> 0;
 ```
 
-## 分块索引
-
-* 减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数
-* 在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素
-* 先决条件
-  - 块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。
-  - 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率
-* 索引项数据项
-  - 最大关键码：存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。
-  - 块长：存储块中的记录个数，以便于循环时使用。
-  - 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。
-* 查找
-  - 在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间）
-  - 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）
-
-### 存储引擎 engine
+## 存储引擎 engine
 
 * 不同数据引擎数据的存储格式,数据结构实现
 * 数据行并不是存储引擎管理的最小存储单位，索引只能够帮助定位到某个数据页，每一次磁盘读写的最小单位为也是数据页，而一个数据页内存储了多个数据行，需要了解数据页的内部结构才能知道存储引擎怎么定位到某一个数据行
@@ -2628,7 +2604,22 @@ where a.table_id=b.table_id and a.space <> 0;
     + 用于保存数据分析中产生的中间数据。
     + 用于缓存周期性聚合数据的结果。
 
-### MyISAM
+### 分块索引
+
+* 减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数
+* 在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素
+* 先决条件
+  - 块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。
+  - 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率
+* 索引项数据项
+  - 最大关键码：存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。
+  - 块长：存储块中的记录个数，以便于循环时使用。
+  - 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。
+* 查找
+  - 在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间）
+  - 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）
+
+## MyISAM
 
 * 数据结构：数据和索引分开，一表一个文件，使用 B+Tree 作为索引结构，叶节点的 data 域存放的是数据记录的地址,称为非聚集索引
   - .frm(存储表定义) 创建表的语句
@@ -4150,7 +4141,7 @@ ELSE salary END;
 SELECT '存在缺失的编号' AS post FROM post HAVING COUNT(*) <> MAX(id);
 ```
 
-## Replication 复制
+## 复制 Replication 
 
 * Copies data from one instance to one or more instances. Helps in horizontal scaling, data protection, analytics and performance.
   - Binlog dump thread on primary, replication I/O and SQL threads on secondary.

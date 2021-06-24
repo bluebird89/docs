@@ -14,6 +14,10 @@
 
 ## 演化
 
+* IOE:组合很强大（高可用，高性能）
+	* 存储使用EMC阵列（容量大，数据安全）
+	* IBM服务器，即IOE组合
+	* Oracle
 * 架构
   - Everything On One Server：Web Application Database
   - Separate Database Server:

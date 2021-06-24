@@ -227,3 +227,4 @@
 * [programthink](https://github.com/programthink/book)【编程随想】收藏的电子书清单
 * [Library Genesis](https://libgen.is/)
 * [z-lib](https://z-lib.org/)
+* [古登堡计划](https://www.gutenberg.org/)

@@ -21,10 +21,12 @@
 * the packet filtering technology that’s built into the 2.4 Linux kernel.just the command used to control netfilter, which is the real underlying technology
 * This Linux based firewall is controlled by the program called iptables to handles filtering for IPv4, and ip6tables handles filtering for IPv6.
 * 规则可以包括匹配数据报文的源地址、目的地址、传输层协议（TCP/UDP/ICMP/..）以及应用层协议（HTTP/FTP/SMTP/..）等
-
 * [iptables-essentials](https://github.com/trimstray/iptables-essentials):Iptables Essentials: Common Firewall Rules and Commands.
 
 ![How Traffic Moves Through Netfilter](../_static/netfilter.jpg "Optional title")
+![Packet flow in Netfilter and General Networking](../_static/Netfilter-packet-flow.svg "Optional title")
+
+
 
 ```
 IF network_pkg match rule; THEN

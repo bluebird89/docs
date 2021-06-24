@@ -163,7 +163,7 @@ Cloud native technologies empower organizations to build and run scalable applic
   - 服务通信：通信技术方案如，RPC vs REST vs 异步消息；
   - 可靠性：服务优雅降级，容灾，熔断，多副本。
 
-![微服务架构](../_static/microservice_arch.webp "Optional title")
+![微服务架构](../_static/microservice_arch.jpg "Optional title")
 
 ### 微服务与中台
 
