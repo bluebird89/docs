@@ -2,8 +2,8 @@
 
 Visual Studio Code <https://code.visualstudio.com>
 
-* [stackblitz/core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
 * [vscodium](https://github.com/VSCodium/vscodium):binary releases of VS Code without MS branding/telemetry/licensing
+* [core](https://github.com/stackblitz/core):Online IDE powered by Visual Studio Code ⚡️ <https://stackblitz.com>
 
 ## 安裝
 
@@ -19,6 +19,17 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.micr
 sudo apt-get update
 sudo apt-get install code
 ```
+
+## 配置
+
+### 主题
+
+* One Monokai
+* Aglia
+* One Dark Pro
+* Material Theme
+* Material Icon Theme
+* An Old Hope Theme
 
 ## 插件
 
@@ -94,9 +105,7 @@ sudo apt-get install code
 * SVG Viewer
 * TODO Highlight
 * Todo Tree
-
 - Trello Viewer
-
 * Trailing Spaces
 * TSLint
 * TypeScript Hero
@@ -108,18 +117,7 @@ sudo apt-get install code
 * WakaTime
 * vscode-leetcode
 
-## 主题
-
-* One Monokai
-* Aglia
-* One Dark Pro
-* Material Theme
-* Material Icon Theme
-* An Old Hope Theme
-
-## 配置
-
-## vim
+### vim
 
 * 编辑html
   - dit 删除标签内部的内容。
@@ -308,17 +306,24 @@ code --disable-extensions . # disable all extensions
 
 ## launch
 
-## task 构建（编译、链接等）任务
+## task 构建任务
 
-## tips
+## VS code + foam
 
-```sh
-"Developer: Open Process Explorer"
-```
+* Show Graph
+* [Recipes](https://foambubble.github.io/foam/recipes)
 
 ## [Set Up Remote Development Workflow With VS Code in Your Browser](https://hackernoon.com/how-you-can-set-up-remote-development-workflow-with-vs-code-in-your-browser-3y3q3wu9)
 
 * [code-server](https://github.com/cdr/code-server):VS Code in the browser <https://coder.com>
+
+## tips
+
+* [vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.
+
+```sh
+"Developer: Open Process Explorer"
+```
 
 ## 扩展
 
@@ -335,4 +340,3 @@ code --disable-extensions . # disable all extensions
 ## 參考
 
 * [文檔](https://code.visualstudio.com/docs)
-* [Microsoft/vscode-tips-and-tricks](https://github.com/Microsoft/vscode-tips-and-tricks):Collection of helpful tips and tricks for VS Code.

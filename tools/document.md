@@ -14,16 +14,19 @@
 
 ## 笔记
 
-* 功能
-  - 标签功能
-  - 可以聚合统计
+### 功能
+
+- 标签：分组、索引
+- 聚合统计
+  
+  ### 工具
+  
 * [Paper](http://www.fiftythree.com/):优雅，美观，做笔记，记录灵感
 * [语雀](https://www.yuque.com)
 * [Google文档](https://docs.google.com/document/u/0/)
 * [腾讯文档](https://docs.qq.com/)：对标Google docs
-* youdaonote ：格式化笔记
+* youdaonote 
 * simplenote：简单笔记（无格式）
-* xmind：结构化整理
 * 豆瓣：书、电影评论
 * Google keep
 * ios notes
@@ -36,7 +39,6 @@
   - `brew cask install joplin`
   - `wget -O - https://raw.githubusercontent.com/laurent22/joplin/master/Joplin_install_and_update.sh | bash`
 * [P3X OneNote](link)： a cloud-based note-taking application and is considered as an exact alternative to the well known Microsoft OneNote application
-* [Notion](./notion.md)
 * [Roam Research](https://roamresearch.com/)
 * [Simple note](https://standardnotes.org)
 * [Grace Note](https://grace-note.app/#/)
@@ -50,14 +52,17 @@
 * [TiddlyGit](https://github.com/tiddly-gittly/TiddlyGit-Desktop)
 * [telegra.ph](https://telegra.ph)
 
-## [Obsidian](https://obsidian.md/)
+### [Obsidian](https://obsidian.md/)
 
 A second brain, for you, forever.
 
-## VS code + foam
+* 大纲视图对内容的组织能力
 
-* Show Graph
-* [Recipes](https://foambubble.github.io/foam/recipes)
+### [sublime text](.../editor/sublime.md)
+
+* 标题导航能力
+
+### [Notion](./notion.md)
 
 ## PPT
 
@@ -66,7 +71,9 @@ A second brain, for you, forever.
 * [mdx-deck](https://github.com/jxnblk/mdx-deck):MDX-based presentation decks
 * [Marp](https://marp.app/) Markdown Presentation Ecosystem
 * [Slidev](https://github.com/slidevjs/slidev)
-* Excalidraw
+* [md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
+
+### Excalidraw
 
 ## Posters
 
@@ -85,71 +92,10 @@ sudo apt-get intall openjdk-8-jre-headless  install graphviz
 asciidoctor -r asciidoctor-diagram xxx.adoc
 ```
 
-## [pandoc](https://github.com/jgm/pandoc)
-
-Universal markup converter <http://johnmacfarlane.net/pandoc> John MacFarlane开发的标记语言转换工具，可实现不同标记语言间的格式转换.
-
-* 将Markdown转化为Word，然后统计字数
-* [文档](http://pandoc.org/getting-started.html)
-
-```sh
-pandoc WEB.md -o web.docx
-pandoc API.md -o api.docx -c Github.css
-```
-
-## [gitbook](https://github.com/GitbookIO/gitbook)
-
-📝 Modern documentation format and toolchain using Git and Markdown [GitBook - Document Everything!](https://www.gitbook.com)
-
-* gitbook --version：查看当前使用的版本
-* gitbook ls：系统存在的 gitbook 版本
-* gitbook ls-remote：所有 gitbook 版本
-* gitbook fetch：下载对应的 gitbook 版本
-* gitbook current：当前目录使用的 gitbook 版本
-* 使用
-  - gitbook init 创建项目，生成
-    + README.md
-    + SUMMARY.md:定义书籍的章节的，用来生成目录
-  - gitbook serve 运行
-  - gitbook build 编译书籍
-
-```
-# Summary
-- [Introduction](README.md)
-# 一级分类，不显示，会以横线分隔，相当于注释
-- [Introduction](part1/README.md)
-- [Part1 Section 1](part1/section-1.md)
-- [Part1 Section 2](part1/subsection-x/README.md)
-    - [Part1 Section 2-1](part1/subsection-x/subsection-x-1.md)
-    - [Part1 Section 2-2](part1/subsection-x/subsection-x-2.md)
-# 一级分类，不显示，会以横线分隔，相当于注释
-- [Introduction](part2/README.md)
-- [part2 Section 1](part2/section-1.md)
-- 未完成的时候
-    - [part2 Section 2-1](part2/subsection-x/subsection-x-1.md)
-    - [part2 Section 2-2](part2/subsection-x/subsection-x-2.md)
-## 二级分类，显示，不可点
-- An article in part 2
-### 三级分类，显示，不可点，和二级效果一致
-- An article in part 3
-# 一级分类，不显示，会以横线分隔
-- An article in an untitled part
-```
-
-```js
-// # 配置文件book.json
-"pluginsConfig": {
-  #展示章节硬编码
- "theme-default": {
-     "showLevel": true
- }
-}
-```
-
 ## 脑图
 
 * [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page)
-* XMind
+* xmind：结构化整理
 * [MindMaster](https://www.edrawsoft.com/mindmaster/)
 * [mindmeister](https://www.mindmeister.com)
 * [百度脑图](https://naotu.baidu.com)
@@ -172,8 +118,11 @@ a new kind of data science notebook. Jupyter-compatible with real-time collabora
 ## pdf
 
 * [paperplane](https://www.paperplane.app/):High quality HTML to PDF conversion API for developers
+* [pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. <http://coolwanglu.github.com/pdf2htmlEX/>
 
-## [anki](https://apps.ankiweb.net/)
+## 记忆
+
+### [anki](https://apps.ankiweb.net/)
 
 * 特点
   - 可以插入文字、图片（拍照/截图都可以）、音频等
@@ -189,7 +138,6 @@ a new kind of data science notebook. Jupyter-compatible with real-time collabora
 
 ## 工具
 
-* [pdf2htmlEX](https://github.com/coolwanglu/pdf2htmlEX):Convert PDF to HTML without losing text or format. <http://coolwanglu.github.com/pdf2htmlEX/>
 * [peach](https://github.com/peachdocs/peach):Peach is a web server for multi-language, real-time synchronization and searchable documentation. <https://peachdocs.org>
 * [WeasyPrint](https://github.com/Kozea/WeasyPrint):WeasyPrint converts web documents (HTML with CSS, SVG, …) to PDF. <https://weasyprint.org/>
 * [trix](https://github.com/basecamp/trix):A rich text editor for everyday writing <https://trix-editor.org/>
@@ -206,7 +154,6 @@ a new kind of data science notebook. Jupyter-compatible with real-time collabora
 * [mkdocs](https://github.com/mkdocs/mkdocs):Project documentation with Markdown. <http://www.mkdocs.org>
 * [docz](https://github.com/pedronauck/docz):✍🏻It has never been so easy to document your things! <https://docz.site>
 * [Ghost](https://github.com/TryGhost/Ghost):The platform for professional publishers <https://ghost.org>
-* [md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [mailcow-dockerized](https://github.com/mailcow/mailcow-dockerized):mailcow: dockerized - 🐮 + 🐋 = 💕 <https://mailcow.email>
 * [wizard](https://github.com/mylxsw/wizard):Wizard是一款开源的文档管理工具，支持Markdown/Swagger/Table类型的文档。 <http://wizard.aicode.cc>
 
@@ -214,4 +161,3 @@ a new kind of data science notebook. Jupyter-compatible with real-time collabora
 
 * [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
 * [myslide](https://myslide.cn)
-* [Semantic Versioning](https://semver.org/)

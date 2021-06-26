@@ -1,4 +1,4 @@
-# 应用程序编程接口 Application Programming Interface API
+# API Application Programming Interface 应用程序编程接口 
 
 一些预先定义的函数或者接口，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无须访问源码，或理解内部工作机制的细节
 
@@ -12,7 +12,7 @@
 * Introspection
   - API 系统自动收集 metrics，自我监控
   - 无论是撰写者，还是调用者，都很很方便的获取想要获取的信息
-* API风格考虑：
+* API风格
   - 选择支持哪种风格，才能更好地体现业务特性，让客户操作起来更加方便；
   - 设计API时能否面向资源设计，相应的工程人员是否具备做这种设计的能力；
   - 针对这种风格工具链的支持是否到位，投入产出比如何；
@@ -85,7 +85,92 @@
   - 在客户端实现批量，可以更好的将负载由不同的服务端来承担（见图）
   - 客户端批量可以更灵活的由客户端决定失败重试策略
 
-## 状态
+### [open API 标准规范](https://mp.weixin.qq.com/s/Ow7tkcnpY37faHYHd12ENQ)
+
+* 协议: API 与用户的通信协议，总是使用 HTTPS 协议。这个和 RESTful API 本身没有很大的关系，但是对于增加网站的安全是非常重要的。特别如果提供的是公开 API，用户的信息泄露或者被攻击会严重影响网站的信誉
+* 版本（Version）
+  - 版本号放入 URL 中，如：`http://api.example.com/v1`，这样方便和直观；
+  - 版本号记录在 url query中，如：`http://api.example.com?param1=val&version=1.0`中的 version 参数。
+  - 版本号放在 HTTP 头信息中，基于的准则是：不同的版本，可以理解成同一种资源的不同形式，所以应该采用同一个URL。如：`Accept: application/json; version=1.0`
+* Schema
+  - URI的格式定义如下：`URI = scheme "://" authority "/" path \[ "?" query \] \[ "#" fragment \]`
+  - URL 是 URI 的一个子集(一种具体实现)，对于 REST API 来说一个资源一般对应一个唯一的 URI（URL
+  - "/"分隔符一般用来对资源层级的划分。对于 RESTful API 来说，"/"只是一个分隔符，并无其他含义。为了避免混淆，"/"不应该出现在URL的末尾
+  - URL 中尽量使用连字符"-"代替下划线`"_"`的使用。 连字符"-"一般用来分割 URL 中出现的字符串(单词)，来提高 URL 的可读性，例如：<http://api.example.restapi.org/blogs/mark-masse/entries/this-is-my-first-post>。使用下划线"_"来分割字符串(单词)可能会和链接的样式冲突重叠，而影响阅读性。但实际上，"-"和"_"对URL 中字符串的分割语意上还是有些差异的："-"分割的字符串(单词)一般各自都具有独立的含义，可参见上面的例子。而"_"一般用于对一个整体含义的字符串做了层级的分割，方便阅读，例如你想在 URL 中体现一个 IP 地址的信息：210_110_25_88
+  - URL应该统一使用小写字母
+  - URL中不要包含文件(脚本)的扩展名。例如 .json 之内的就不要出现了，对于接口来说没有任何实际的意义。如果是想对返回的数据内容格式标示的话，通过 HTTP Header 中的 Content-Type 字段更好一些。
+  - 对于响应返回的格式，JSON 因为它的可读性、紧凑性以及多种语言支持等优点，成为了 HTTP API 最常用的返回格式。因此，最好采用 JSON 作为返回内容的格式。如果用户需要其他格式，比如 xml，应该在请求头部 Accept 中指定。对于不支持的格式，服务端需要返回正确的 status code，并给出详细的说明。
+  - JSON中的所有字段都应该用小写的蛇形命名形式，而不是采用驼峰命名。
+* 以资源为中心的 URL 设计
+  - 资源是 Restful API 的核心元素，所有的操作都是针对特定资源进行的。而资源就是 URL（Uniform Resoure Locator）表示的，所以简洁、清晰、结构化的 URL 设计是至关重要的
+    + 资源分为单个文档和集合，尽量使用复数来表示资源，单个资源通过添加 id 或者 name 等来表示
+    + 一个资源可以有多个不同的 URL
+    + 资源可以嵌套，通过类似目录路径的方式来表示，以体现它们之间的关系
+  - 最常见的一种设计错误，就是URL包含动词。 因为"资源"表示一种实体，所以应该是名词，URL 不应该有动词，动词应该放在 HTTP Method （参考下一条）中
+  - 如果某些动作是HTTP 动词表示不了的,把动作看成是一种资源,把动词 transfer 改成transaction，资源不能是动词，但是可以是一种服务
+* 正确使用 HTTP Method
+  - GET：从服务器取出资源（一项或多项）。
+  - POST：在服务器新建一个资源。
+  - PUT：在服务器更新资源（客户端提供改变后的完整资源）。
+  - PATCH：在服务器更新资源（更新资源的部分属性）。
+  - DELETE：从服务器删除资源。
+* 状态码 （Status Code）
+  - 2XX：请求正常处理并返回
+  - 3XX：重定向，请求的资源位置发生变化
+  - 4XX：客户端发送的请求有错误
+  - 5XX：服务器端错误
+* 错误处理（Error Handling）
+  - 出错，应该在 response body 中通过 message 给出明确的错误信息（一般来说，返回的信息中将 message 作为键名，出错详情作为键值即可）
+  - 编写错误详情时请考虑以下准则：
+    + 不要假设用户是您 API 的专家用户。用户可能是客户端开发人员、操作人员、IT 人员或应用的最终用户。
+    + 不要假设用户了解有关服务实现的任何信息，或者熟悉错误的上下文（例如日志分析）。
+    + 如果可能，应构建错误详情，以便技术用户（但不一定是 API 开发人员）可以响应错误并改正。
+    + 确保错误详情内容简洁。如果需要，请提供一个链接，便于有疑问的读者提问、提供反馈或详细了解错误详情中不方便说明的信息。此外，可使用详细信息字段来提供更多信息。
+* 命名规则
+  - 简单
+  - 直观
+  - 一致
+* 认证和授权（Authentication & Authorization）
+  - 验证（Authentication）是为了确定用户是其申明的身份，比如提供账户的密码。不然的话，任何人伪造成其他身份（比如其他用户或者管理员）是非常危险的。没有通过验证（提供的用户名和密码不匹配，token 不正确等），需要返回 401 Unauthorized[9]状态码
+  - 授权（Authorization）是为了保证用户有对请求资源特定操作的权限。比如用户的私人信息只能自己能访问，其他人无法看到；有些特殊的操作只能管理员可以操作，其他用户有只读的权限等等。有被授权访问的资源操作，需要返回 403 Forbidden[10] 状态码
+* 限流（RateLimit）：对于超过流量的请求，可以返回 429 Too many requests[13] 状态码
+  - X-RateLimit-Limit: 用户每个小时允许发送请求的最大值
+  - X-RateLimit-Remaining：当前时间窗口剩下的可用请求数目
+  - X-RateLimit-Rest: 时间窗口重置的时候，到这个时间点可用的请求数量就会变成 X-RateLimit-Limit 的值
+* AccessKey&SecretKey （开放平台）
+  - 请求身份:为开发者分配AccessKey（开发者标识，确保唯一）和SecretKey（用于接口加密，确保不易被穷举，生成算法不易被猜测)
+  - 防止篡改
+    + 参数签名
+      * 按照请求参数名的字母升序排列非空请求参数（包含AccessKey），使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串stringA；
+      * 在stringA最后拼接上Secretkey得到字符串stringSignTemp；
+      * 对stringSignTemp进行MD5运算，并将得到的字符串所有字符转换为大写，得到sign值
+    + 请求携带参数AccessKey和Sign，只有拥有合法的身份AccessKey和正确的签名Sign才能放行
+  - 重放攻击:重复使用请求参数伪造二次请求的隐患
+    + timestamp+nonce方案
+      * nonce指唯一的随机字符串，用来标识每个被签名的请求。通过为每个请求提供一个唯一的标识符，服务器能够防止请求被多次使用（记录所有用过的nonce以阻止它们被二次使用）
+      * 对服务器来说永久存储所有接收到的nonce的代价是非常大的。可以使用timestamp来优化nonce的存储
+      * 假设允许客户端和服务端最多能存在15分钟的时间差，同时追踪记录在服务端的nonce集合。当有新的请求进入时
+        - 首先检查携带的timestamp是否在15分钟内，如超出时间范围，则拒绝
+        - 然后查询携带的nonce，如存在已有集合，则拒绝。否则，记录该nonce，并删除集合内时间戳大于15分钟的nonce（可以使用redis的expire，新增nonce的同时设置它的超时失效时间为15分钟）
+      * 实现
+        - 生成当前时间戳timestamp=now和唯一随机字符串nonce=random
+        - 按照请求参数名的字母升序排列非空请求参数（包含AccessKey)stringA="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random";
+        - 拼接密钥SecretKeystringSignTemp="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random&SecretKey=secret";
+        - MD5并转换为大写 sign=MD5(stringSignTemp).toUpperCase();
+        - 最终请求<http://api.test.com/test?name=hello&home=world&work=java×tamp=now&nonce=nonce&sign=sign>;
+* Token&AppKey（APP）:这些接口进行身份验证,涉及到用户状态时，每次请求都要带上身份验证信息
+  - Token身份验证
+    + 用户登录向服务器提供认证信息（如账号和密码），服务器验证成功后返回Token给客户端；
+    + 客户端将Token保存在本地，后续发起请求时，携带此Token；
+    + 服务器检查Token的有效性，有效则放行，无效（Token错误或过期）则拒绝。
+    + 安全隐患：Token被劫持，伪造请求和篡改参数。
+  - Token+AppKey签名验证: 与上面开发平台的验证方式类似
+    + 客户端分配AppKey（密钥，用于接口加密，不参与传输）
+    + 将AppKey和所有请求参数组合成源串，根据签名算法生成签名值
+    + 发送请求时将签名值一起发送给服务器验证
+    + 即使Token被劫持，对方不知道AppKey和签名算法，就无法伪造请求和篡改参数。再结合上述的重发攻击解决方案，即使请求参数被劫持也无法伪造二次重复请求
+
+## 发展
 
 * 前后端分离，业界广泛采用token方式
 * 动态令牌
@@ -377,10 +462,9 @@ https://api.github.com/user
   - Session 是一种记录服务器和客户端会话状态的机制，使服务端有状态化，可以记录会话信息。而 Token 是令牌，访问资源接口（API）时所需要的资源凭证。Token 使服务端无状态化，不会存储会话信息
   - Session 和 Token 并不矛盾，作为身份认证 Token 安全性比 Session 好，因为每一个请求都有签名还能防止监听以及重放攻击，而 Session 就必须依赖链路层来保障通讯安全了。如果你需要实现有状态的会话，仍然可以增加 Session 来在服务器端保存一些状态
   - 所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SessionID 的不可预测性，暂且认为是安全的。而 Token ，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App 。其目的是让某 App 有权利访问某用户的信息。这里的 Token 是唯一的。不可以转移到其它 App 上，也不可以转到其它用户上。Session 只提供一种简单的认证，即只要有此 SessionID ，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说：如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。如果永远只是自己的网站，自己的 App，用什么就无所谓了
-
 * 凭证（Credentials）:实现认证和授权的基础是需要一种媒介（credentials）来标记访问者的身份或权利
 
-## 注意
+### 注意
 
 * 使用 cookie 时需要考虑的问题
   - 因为存储在客户端，容易被客户端篡改，使用前需要验证合法性
@@ -533,57 +617,6 @@ https://api.github.com/user
 }
 ```
 
-编译时」和「运行时」分开
-
-## 架构
-
-* 把 API 执行路径上的各种处理都抽象出来，放到公共路径（或者叫中间件，middleware）之中，为 API 的撰写者扫清各种障碍，同时能够促使 API 更加标准化。
-* pipeline 下组件
-  - throttling：API 应该有最基本的访问速度的控制，比如，对同一个用户，发布 tweet 的速度不可能超过一个阈值，比如每秒钟 1 条（实际的平均速度应该远低于这个）。超过这个速度，就是滥用（abuse），需要制止并返回 429 Too many requests。throttling 可以使用 leaky bucket 实现（restify 直接提供）
-  - parser / validation：接下来要解析 HTTP request 包含的 headers，body 和 URL 里的 querystring，并对解析出来的结果进行 validation。这个过程可以屏蔽很多服务的滥用，并提前终止服务的执行。比如你的 API 要求调用者必须提供 X-Client-Id，没有提供的，或者提供的格式不符合要求的，统统拒绝。这个步骤非常重要，如同我们的皮肤，将肮脏的世界和我们的器官隔离开来。
-  - ACL：除了基本的 throttling 和 validation 外，控制资源能否被访问的另一个途径是 ACL。管理员应该能够配置一些规则，这些规则能够进一步将不合法 / 不合规的访问过滤掉。比如说：路径为 "/topic/19805970" 的知乎话题，北京时间晚上10点到次日早上7点的时间端，允许在中国大陆显示。这样的规则可以是一个复杂的表达式，其触发条件（url）可以被放置在一个 bloom filter 里，满足 filter 的 url 再进一步在 hash map 里找到其对应的规则表达式，求解并返回是否允许显示。至于一个诸如country = "CN" && time >= 00:00CST && time < 07:00CST（这是一个管理员输入的表达式）这样的表达式如何处理，请移步 如何愉快地写个小parser。
-  - normalization：顾名思义，这个组件的作用是把请求的内容预处理，使其统一。normalization 可以被进一步分为多个串行执行的 strategy，比如：
-    + paginator：把 request 里和 page / sort 相关的信息组合起来，生成一个 paginator。
-    + client adapter：把 API client 身份相关的信息（device id，platform，user id，src ip，...）组合成一个 adapter。
-    + input adapter：输入数据的适配。这是为处女座准备的。很多时候，输入数据的格式和语言处理数据的格式不一样，这对处女座程序员是不可接受的。比如说 API 的输入一般是 snake case（show_me_the_money），而在某些语言里面（如: javascript），约定俗成的命名规则是 showMeTheMoney，所以把输入的名称转换有利于对代码有洁癖的程序员。
-  - authentication：用户身份验证。主要是处理 "Authorization" 头。对于不需要验证的 API，可以跳过这一步。做 API，身份验证一定不要使用 cookie/session based authentication，而应该使用 token。现有的 token base authentication 有 oauth, jwt 等。如果使用 jwt，要注意 jwt 是 stateless 的 token，一般不需要服务器再使用数据库对 token 里的内容校验，所以使用 jwt 一定要用 https 保护 token，并且要设置合适的超时时间让 token 自动过期。
-  - authorization：用户有了身份之后，进一步需要知道用户有什么样的权限访问什么样的资源。比如：uid 是 9527 的用户对 "POST /topic/"（创建一个新的话题），"PUT /topic/:id"（修改已有的话题）有访问权限，当他发起 "DELETE /topic/1234" 时，在 authorization 这一层直接被拒绝。authorization 是另一种 ACL（role based ACL），处理方式也类似。
-  - conditional request：在访问的入口处，如果访问是 PUT/PATCH 这样修改已有资源的操作，好的 API 实现会要求客户端通过 conditional request（if-match / if-modified）做 concurrent control，目的是保证客户端要更新数据时，它使用的是服务器的该数据的最新版本，而非某个历史版本，否则返回 412 precondition failed（更多详情，请参考我之前的文章 撰写合格的REST API）。
-  - preprocessing hook：
-  - processing：API 本身的处理。这个一般是 API 作者提供的处理函数。
-  - postprocessing：
-  - conditional request：在访问的出口处，如果访问的是 GET 这样的操作，好的 API 实现会支持客户端的 if-none-match/if-not-modified 请求。当条件匹配，返回 200 OK 和结果，否则，返回 304 Not Modified。304 Not Modified 对客户端来说如同瑰宝，除了节省网络带宽之外，客户端不必刷新数据。如果你的 app 里面某个类别下有五十篇文章，下拉刷新的结果是 304 Not Modified，客户端不必重绘这 50 篇文章。当然，有不少 API 的实现是通过返回的数据中的一个自定义的状态码来决定，这好比「脱裤子放屁」—— 显得累赘了。
-  - response normalization：和 request 阶段的 normalization 类似，在输出阶段，需要将结果转换成合适的格式返回给用户。response normalization 也有很多 strategy，比如：
-    + output adapter：如果说 input adapter 是为有洁癖的程序员准备的，可有可无，那么 output adapter 则并非如此。它能保持输出格式的一致和统一。比如你的数据库里的字段是 camel case，你的程序也都是用 camel case，然而 API 的输出需要统一为 snake case，那么，在 output adapter 这个阶段统一处理会好过每个 API 自己处理。
-    + aliasing：很多时候获得的数据的名称和定义好的 API 的接口的名称并不匹配，如果在每个 API 里面单独处理非常啰嗦。这种处理可以被抽取出来放在 normalization 的阶段完成。API 的撰写者只需要定义名称 A 需要被 alias 成 B 就好，剩下的由框架帮你完成。
-    + partial response：partial response 是 google API 的一个非常有用的特性（见：<https://developers.google.com/+/web/api/rest/#partial-response> ），他能让你不改变 API 实现的情况下，由客户端来决定服务器返回什么样的结果（当前结果的一个子集），这非常有利于节省网络带宽。
-  - serialization：如果 API 支持 content negotiation，那么服务器在有可能的情况下，优先返回客户端建议的输出类型。同一个 API，android 可以让它返回 application/msgpack；web 可以让它返回 application/json，而 xbox 可以获得 application/xml 的返回，各取所需。
-  - postserialization：这也是个 hook，在数据最终被发送给客户端前，API 调用者可以最后一次 inject 自己想要的逻辑。一般而言，一些 API 系统内部的统计数据可以在此收集（所有的出错处理路径和正常路径都在这里交汇）。
-
-## 子系统
-
-* 配置管理
-  - 一个公共的地方来放置预置的属性。toml
-  - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并
-  - 运行的时候改写配置：像管理缓存一样去管理和配置相关的数据，将其封装在一个容器里：当配置被修改时，调用这个容器的 invalidate 方法 —— 这样，下次访问任意一个配置项时，会重新读入配置，并缓存起来
-* CLI：不是给用户用的，是给程序员用的
-  - 难点
-    + CLI 的发现和自注册。你的 framework 的用户只要遵循某种 convention 撰写 CLI，这些 CLI 就会被自动集成到系统里。
-    + CLI 的撰写者能够轻松地获取到系统的信息，也就是说，系统有自省（introspection）的能力。
-* 测试框架
-  - functional testing 是可以全局考虑
-  - ava 描述测试的 fixture
-
-## 契约
-
-* 一开始随意了，简单了，会给之后的维护和更新带来无穷无尽的痛苦
-* 可以很方便地描述 API 的输入输出，并生成交互式的 API 文档（读 API 文档的时候，可以在线运行 API） 设计工具有
-  - swagger：缺点是太繁杂，撰写起来很麻烦
-    + 通过代码反向生成 swagger 文档
-    + 先撰写代码把 API 的输入输出定义清楚，然后通过这个定义来生成 swagger 文档，在 swagger-ui 里面调试和验证；当借口设计符合期望后，再完成具体的实现
-  - API blueprint：更偏向 API 的文档化，所以它选择的描述语言是 markdown。validation 相关的内容用 markdown 描述不是很舒服，看别人写的文档很容易明白，自己写起来就会错漏百出。API blueprint 的工具链也是个薄弱环节，很多工具都没有或者不成熟
-  - RAML
-
 ## 设计
 
 * 好的标准
@@ -609,17 +642,54 @@ https://api.github.com/user
       * 接口滥用
       * 浏览器消费 API 时因安全漏洞导致的非法访问
 
-## API全生命周期管理能力
+### 架构
 
-* 定义
-  - 归类分组
-  - 详细定义
-* 快速开发的支持
-  - 通过类似WADL或RAML等标准的Rest接口定义规范文件
-  - 需要提供客户端和服务端的开发框架代码
-* API接口服务的注册和接入
-* 服务接入适配能力
-  - 对于服务发布而言，如果不仅仅是微服务网关能力，而是一个微服务支撑或微服务快速开发平台的话，还可以提供完整的服务开发和设计能力。即在微服务平台首先定义数据或对象模型，然后将对象模型转换为Http Rest中的资源对象，并发布对应的Get，Post各种Http Rest接口服务
+* 把 API 执行路径上的各种处理都抽象出来，放到公共路径（或者叫中间件，middleware）之中，为 API 的撰写者扫清各种障碍，同时能够促使 API 更加标准化。
+* pipeline 下组件
+  - throttling：API 应该有最基本的访问速度的控制，比如，对同一个用户，发布 tweet 的速度不可能超过一个阈值，比如每秒钟 1 条（实际的平均速度应该远低于这个）。超过这个速度，就是滥用（abuse），需要制止并返回 429 Too many requests。throttling 可以使用 leaky bucket 实现（restify 直接提供）
+  - parser / validation：接下来要解析 HTTP request 包含的 headers，body 和 URL 里的 querystring，并对解析出来的结果进行 validation。这个过程可以屏蔽很多服务的滥用，并提前终止服务的执行。比如你的 API 要求调用者必须提供 X-Client-Id，没有提供的，或者提供的格式不符合要求的，统统拒绝。这个步骤非常重要，如同我们的皮肤，将肮脏的世界和我们的器官隔离开来。
+  - ACL：除了基本的 throttling 和 validation 外，控制资源能否被访问的另一个途径是 ACL。管理员应该能够配置一些规则，这些规则能够进一步将不合法 / 不合规的访问过滤掉。比如说：路径为 "/topic/19805970" 的知乎话题，北京时间晚上10点到次日早上7点的时间端，允许在中国大陆显示。这样的规则可以是一个复杂的表达式，其触发条件（url）可以被放置在一个 bloom filter 里，满足 filter 的 url 再进一步在 hash map 里找到其对应的规则表达式，求解并返回是否允许显示。至于一个诸如country = "CN" && time >= 00:00CST && time < 07:00CST（这是一个管理员输入的表达式）这样的表达式如何处理，请移步 如何愉快地写个小parser。
+  - normalization：顾名思义，这个组件的作用是把请求的内容预处理，使其统一。normalization 可以被进一步分为多个串行执行的 strategy，比如：
+    + paginator：把 request 里和 page / sort 相关的信息组合起来，生成一个 paginator。
+    + client adapter：把 API client 身份相关的信息（device id，platform，user id，src ip，...）组合成一个 adapter。
+    + input adapter：输入数据的适配。这是为处女座准备的。很多时候，输入数据的格式和语言处理数据的格式不一样，这对处女座程序员是不可接受的。比如说 API 的输入一般是 snake case（show_me_the_money），而在某些语言里面（如: javascript），约定俗成的命名规则是 showMeTheMoney，所以把输入的名称转换有利于对代码有洁癖的程序员。
+  - authentication：用户身份验证。主要是处理 "Authorization" 头。对于不需要验证的 API，可以跳过这一步。做 API，身份验证一定不要使用 cookie/session based authentication，而应该使用 token。现有的 token base authentication 有 oauth, jwt 等。如果使用 jwt，要注意 jwt 是 stateless 的 token，一般不需要服务器再使用数据库对 token 里的内容校验，所以使用 jwt 一定要用 https 保护 token，并且要设置合适的超时时间让 token 自动过期。
+  - authorization：用户有了身份之后，进一步需要知道用户有什么样的权限访问什么样的资源。比如：uid 是 9527 的用户对 "POST /topic/"（创建一个新的话题），"PUT /topic/:id"（修改已有的话题）有访问权限，当他发起 "DELETE /topic/1234" 时，在 authorization 这一层直接被拒绝。authorization 是另一种 ACL（role based ACL），处理方式也类似。
+  - conditional request：在访问的入口处，如果访问是 PUT/PATCH 这样修改已有资源的操作，好的 API 实现会要求客户端通过 conditional request（if-match / if-modified）做 concurrent control，目的是保证客户端要更新数据时，它使用的是服务器的该数据的最新版本，而非某个历史版本，否则返回 412 precondition failed（更多详情，请参考我之前的文章 撰写合格的REST API）。
+  - preprocessing hook：
+  - processing：API 本身的处理。这个一般是 API 作者提供的处理函数。
+  - postprocessing：
+  - conditional request：在访问的出口处，如果访问的是 GET 这样的操作，好的 API 实现会支持客户端的 if-none-match/if-not-modified 请求。当条件匹配，返回 200 OK 和结果，否则，返回 304 Not Modified。304 Not Modified 对客户端来说如同瑰宝，除了节省网络带宽之外，客户端不必刷新数据。如果你的 app 里面某个类别下有五十篇文章，下拉刷新的结果是 304 Not Modified，客户端不必重绘这 50 篇文章。当然，有不少 API 的实现是通过返回的数据中的一个自定义的状态码来决定，这好比「脱裤子放屁」—— 显得累赘了。
+  - response normalization：和 request 阶段的 normalization 类似，在输出阶段，需要将结果转换成合适的格式返回给用户。response normalization 也有很多 strategy，比如：
+    + output adapter：如果说 input adapter 是为有洁癖的程序员准备的，可有可无，那么 output adapter 则并非如此。它能保持输出格式的一致和统一。比如你的数据库里的字段是 camel case，你的程序也都是用 camel case，然而 API 的输出需要统一为 snake case，那么，在 output adapter 这个阶段统一处理会好过每个 API 自己处理。
+    + aliasing：很多时候获得的数据的名称和定义好的 API 的接口的名称并不匹配，如果在每个 API 里面单独处理非常啰嗦。这种处理可以被抽取出来放在 normalization 的阶段完成。API 的撰写者只需要定义名称 A 需要被 alias 成 B 就好，剩下的由框架帮你完成。
+    + partial response：partial response 是 google API 的一个非常有用的特性（见：<https://developers.google.com/+/web/api/rest/#partial-response> ），他能让你不改变 API 实现的情况下，由客户端来决定服务器返回什么样的结果（当前结果的一个子集），这非常有利于节省网络带宽。
+  - serialization：如果 API 支持 content negotiation，那么服务器在有可能的情况下，优先返回客户端建议的输出类型。同一个 API，android 可以让它返回 application/msgpack；web 可以让它返回 application/json，而 xbox 可以获得 application/xml 的返回，各取所需。
+  - postserialization：这也是个 hook，在数据最终被发送给客户端前，API 调用者可以最后一次 inject 自己想要的逻辑。一般而言，一些 API 系统内部的统计数据可以在此收集（所有的出错处理路径和正常路径都在这里交汇）。
+
+### 子系统
+
+* 配置管理
+  - 一个公共的地方来放置预置的属性。toml
+  - 配置文件可以重载（override）：系统提供一个公共的配置文件：default，然后各种运行时相关的配置文件继承并局部重载这个配置。在系统启动的时候，二者合并
+  - 运行的时候改写配置：像管理缓存一样去管理和配置相关的数据，将其封装在一个容器里：当配置被修改时，调用这个容器的 invalidate 方法 —— 这样，下次访问任意一个配置项时，会重新读入配置，并缓存起来
+* CLI：不是给用户用的，是给程序员用的
+  - 难点
+    + CLI 的发现和自注册。你的 framework 的用户只要遵循某种 convention 撰写 CLI，这些 CLI 就会被自动集成到系统里。
+    + CLI 的撰写者能够轻松地获取到系统的信息，也就是说，系统有自省（introspection）的能力。
+* 测试框架
+  - functional testing 是可以全局考虑
+  - ava 描述测试的 fixture
+
+### 契约
+
+* 一开始随意了，简单了，会给之后的维护和更新带来无穷无尽的痛苦
+* 可以很方便地描述 API 的输入输出，并生成交互式的 API 文档（读 API 文档的时候，可以在线运行 API） 设计工具有
+  - swagger：缺点是太繁杂，撰写起来很麻烦
+    + 通过代码反向生成 swagger 文档
+    + 先撰写代码把 API 的输入输出定义清楚，然后通过这个定义来生成 swagger 文档，在 swagger-ui 里面调试和验证；当借口设计符合期望后，再完成具体的实现
+  - API blueprint：更偏向 API 的文档化，所以它选择的描述语言是 markdown。validation 相关的内容用 markdown 描述不是很舒服，看别人写的文档很容易明白，自己写起来就会错漏百出。API blueprint 的工具链也是个薄弱环节，很多工具都没有或者不成熟
+  - RAML
 
 ## 评审清单
 
@@ -794,16 +864,139 @@ yarn|npm run build
 
 yarn test
 ```
+# API自动化测试
 
-## 恶意调用
+## [感悟](http://lucia.xicp.cn/2016/12/01/test/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%84%9F%E5%8F%97/)
 
-## 加密
+### 第一阶段：API自动化
+
+#### 最初前的想法
+
+通过API创建数据，访问数据，进行数据操作，存储数据库，通过模拟前端的操作来想象API的访问流程。 然后，验证数据库是否存储正确。后来发现该想法流程就是错误的。
+
+#### 问题
+
+- 模拟前端的操作需要对每个前端操作后调用的API非常熟悉，这已经超过了测试的范围，属于开发的范畴。
+- 每个API的集成测试应该是独立的，有顺序的对API的测试使得API之间存在相互依赖的关系。然而每个API的正确性并不能保证。
+- API本身是具有很强的独立性，不应该通过前端模拟操作来对其进行相对的验证，操作逻辑应该由前端负责。
+
+#### 总结
+
+- 使得API具有健壮性，对正常的数据传输和异常的数据传输，服务器端都能正确的响应和返回正确的响应码。
+- 对于API的集成，务必使得每个API都独立验证，不能具有相互依赖性。
+- API的正确性为前端逻辑的自动化验证提供了稳定的基础。
+- 工具可使用：unittest，pytest(推荐)
+
+### 第二阶段：自动创建测试数据
+
+前端的一些UI验证，需要一些组合数据，每次更新环境，版本迭代，自动化创建需要的数据。
+
+此时需要依据测试用例(UI显示部分)来保证每种情况，包括边界，越界情况的显示正常。此些数据在每次新环境都需要验证的情况下，手动创建太过于浪费时间，通过Python读取excel预先设计好的，通过API或者直接写入数据库的方式自动化创建批量的数据。写入的方式通过具体的业务来选择。
+
+### 第三阶段：前端操作自动化
+
+这里的前端操作自动化，通俗的讲是对前端控件响应的一些自动化验证，属于基础的前端测试。如文本的输入，按钮点击响应，表单提交后的正常显示等。 依据就是需求文档，覆盖需求文档的一些基本的点就可以。不需要太多的复杂的流程和操作。
+
+工具使用appium。
+
+### 第四阶段：用户实操自动化
+
+用户实操依据是使用该软件的过程中，用户操作的真实场景，为最后的收尾自动化测试。
+
+如用户可能在使用的过程中，停留在该页面10分钟，然后锁屏，然后解锁，查看该APP是否还在生存中。 如用户可能在使用的过程中，是程序退入后台。这里的具体操作需要了解不同的平台对程序生命周期的定义阶段不同。
+
+### 前端自动化和接口自动化
+
+- 前端自动化侧重点在于组建的响应，数据显示(包括长度,小数正确取位等)。UI自动化验证业务逻辑自动化。
+
+- 后端侧重在于数据处理的正确性验证。接口自动化验证数据逻辑正确性。
+
+- UI上面也可以验证数据的逻辑性，但是由于UI响应很慢，且其关键点不应该放在UI上面，测试应该按照金字塔原则去分配时间。 如果接口已经将逻辑基本覆盖完成，UI自动化就应该避免这部分的验证，而只是从用户角度去验证业务上的逻辑。之前主要通过Appium检验前端的各个按钮响应是否都正确，某个元素是否显示出来了，忽略了一个动作操作完后对其他界面数据显示的影响检测。其实前端和后端的自动化侧重点不同，但是对于数据的检测可以是双重检测。这样测试完后的数据更有保障。
+
+### 关于数据准备和数据删除
+
+数据生成(准备)与测试放在分开的模块中，混到一起，容易中断测试代码。 先数据生成测试需要的数据然后再运行测试代码。
+
+### 总结
+
+最近又把pyqt的测试平台折腾回了flask的网页版平台。然后接下来在数据准备时遇到了纠结点：
+
+自动创建测试数据逻辑放在每个test_case中，每次跑该case重新创建新的 用自动化平台提前创建好数据，并写入到excel或者数据库，然后在test_case中读取静态数据来使用(后来想想读取这个步骤也是test以外的逻辑) 今天和xbo还有jl讨论了。测试的代码和自动创建数据的结构是不相同的，，这里是两套，所以想的是两种最好不要糅合到一起去。
+
+#### 第1种
+
+- 好处：避免每次手动去复制粘贴一部分数据(自动后台创建好，手工复制到excel)，其实手工部分复制的很少。
+- 坏处：在test_case因为会跑很多次，如自己测试测试代码的时候，以及测试不通过开发多次修改后，都会跑很多次，造成大量的垃圾数据，会很快冲掉他人的数据，导致他人使用不方便。
+- 给的建议：每次setup的时候创建当前的测试所需要的数据，scope为function，执行完后删除，该建议有个难度，因为测试时也有其他人在用该环境，导致不能全部清空数据库，你必须知道该接口影响到了哪些表的哪些字段，再去操作数据库恢复，这个量很大。
+
+#### 第2种，在测试平台上创建所有需要使用的数据创建好，保存到excel或者数据库中，在跑case的时候，直接读取这些静态数据
+
+- 好处：和test_case逻辑分离，少量的数据生成，不用删除数据，操作逻辑相对清楚。
+- 坏处：有的数据会重复使用在多个test case中，也未达到完全自动化。
+
+### 基本上所有人呢在数据准备和后期数据删除时都遇到过相同的困难
+
+- 数据准备：
+
+  - 直接拷贝线上的数据，过滤敏感信息后做为测试数据。问题：新模块无数据，用真实数据感觉对数据保护不好。
+  - 用创建数据的接口创建数据。问题：不是所有的公司都提供了改接口。
+  - 写sql语句生成数据。问题：需对功能涉及到的数据表很熟悉，维护复杂，工作量也大，无人来保证写的sql语句正确。
+
+- 数据删除：
+
+- 每个test case执行后清空所有的数据表。问题：影响其他同时在测试或者使用该环境的人。
+
+- 依据生成的数据，删除关联表的关联字段。问题：需对功能关联的表很清楚，也无保证sql语句正确。
+
+- 在本地计算机做一个服务和数据库的镜像，每次执行后清空本地的数据。问题：每个人都需要做一个镜像，且不能完全测到真实环境数据，维护也复杂。
+
+- 让开发提供put，post的delete接口。第4种方法是最好的，虽然需要协商，但是数据表的变化会同时更新给delete接口，不需要去维护。
+
+#### 使用flask写测试小工具
+
+- 使用flask和bootstrap提供自动化创建数据的方式，打算放弃。
+- 每次直接运行python能快速创建，为了能给开发使用每次新功能都需要写新的界面，比较耗时间。
+- 采用excel同一类测试数据创建一次，找个文本的地方标注该数据的使用目的，如果有问题，该数据也可供开始后期调试使用。
+- 每次创建的原始数据，保存，每次回归或者需要重新测试的时候，一键创建。
+
+#### 测试环境
+
+测试环境都是很干净的环境，迭代版本时需要全部都清空数据，从头开始(兼容老数据另说，一般在兼容性测试时，导入线上大量数据来测试)。
+
+清空数据，现阶段的方法是通过，python脚本删除所有的数据表。数据表变更，所有的python代码需要跟上，为了清空数据库维护一份删除全数据的脚本，麻烦，不节能。
+
+- 改进步骤1：手动删除整个数据库->跑创建数据库数据表的脚本->修改和创建必须要的初始化数据。
+
+- 改进步骤2：写shell脚本，集成删除库与创建表以及创建必要数据
+
+- 改进步骤3：发现在测试app端显示和其他手动测试时，需要大量不同的测试数据，这些数据通常是通过手动创建的，而测试的主要点未在创建的功能上面。此时可以将所有创建数据功能和所有创建涉及到的post接口集成到一起测试。通过创建接口来创建所有后期api测试需要的数据和前端测试需要的数据。
+
+##### 该步骤在初始化的时候做4件事情
+
+- 删除数据库
+- 自动创建所有数据表
+- 初始化运行程序的基本数据
+- 测试所有创建数据的(一般为post方法)接口，同时创建所有测试所用数据
+- 自动化总结
+
+测试行业的发展会向更专业，细分类的方向发展，UI的自动化需要结合业务来取舍，如多数是用的模板创建的相似的项目，适合使用UI自动化。单一的项目最好是结合实际情况，对某个控件，某个流程，某个业务场景，某个页面等，单独提出来做UI自动化，而不是所有的逻辑都依赖自动化，一些检测如果肉眼更快，则不选择UI自动化，如，检测一个元素是否在界面上.....。
+
+自动化也是依照测试用例进行的，所以，切记花太多时间在UI自动化爬坑上面。有多于的时间提高变成技术，如测试需要的各种小工具。
+
+以后的测试会更靠近开发的技能，所以前后端的技术都需要跟上才是。
+
+当然，所有的选择都要根据目前公司的产品和结构来定。
+
+## 安全
+
+### 恶意调用
+
+### 加密
 
 * https:面对charles等抓包工具时，其实并没有什么卵用，只要配置一下根证书瞬间可以看到一切明文
 * 工具
   - [tink](https://github.com/google/tink):Tink is a multi-language, cross-platform library that provides cryptographic APIs that are secure, easy to use correctly, and hard(er) to misuse.
   - [JSEncrypt](https://github.com/travist/jsencrypt):用于执行OpenSSL RSA加密、解密和密钥生成的Javascript库。WEB 的登录功能时一般是通过 Form 提交或 Ajax 方式提交到服务器进行验证的。为了防止抓包，登录密码肯定要先进行一次加密（RSA），再提交到服务器进行验证
-
 
 ```
 // 加密密码
@@ -817,90 +1010,22 @@ dec_message = decrypt ( password, enc_message )
 print dec_message   // Hello World!
 ```
 
-## [open API 标准规范](https://mp.weixin.qq.com/s/Ow7tkcnpY37faHYHd12ENQ)
+## API 全生命周期管理能力
 
-* 协议: API 与用户的通信协议，总是使用 HTTPS 协议。这个和 RESTful API 本身没有很大的关系，但是对于增加网站的安全是非常重要的。特别如果提供的是公开 API，用户的信息泄露或者被攻击会严重影响网站的信誉
-* 版本（Version）
-  - 版本号放入 URL 中，如：`http://api.example.com/v1`，这样方便和直观；
-  - 版本号记录在 url query中，如：`http://api.example.com?param1=val&version=1.0`中的 version 参数。
-  - 版本号放在 HTTP 头信息中，基于的准则是：不同的版本，可以理解成同一种资源的不同形式，所以应该采用同一个URL。如：`Accept: application/json; version=1.0`
-* Schema
-  - URI的格式定义如下：`URI = scheme "://" authority "/" path \[ "?" query \] \[ "#" fragment \]`
-  - URL 是 URI 的一个子集(一种具体实现)，对于 REST API 来说一个资源一般对应一个唯一的 URI（URL
-  - "/"分隔符一般用来对资源层级的划分。对于 RESTful API 来说，"/"只是一个分隔符，并无其他含义。为了避免混淆，"/"不应该出现在URL的末尾
-  - URL 中尽量使用连字符"-"代替下划线`"_"`的使用。 连字符"-"一般用来分割 URL 中出现的字符串(单词)，来提高 URL 的可读性，例如：<http://api.example.restapi.org/blogs/mark-masse/entries/this-is-my-first-post>。使用下划线"_"来分割字符串(单词)可能会和链接的样式冲突重叠，而影响阅读性。但实际上，"-"和"_"对URL 中字符串的分割语意上还是有些差异的："-"分割的字符串(单词)一般各自都具有独立的含义，可参见上面的例子。而"_"一般用于对一个整体含义的字符串做了层级的分割，方便阅读，例如你想在 URL 中体现一个 IP 地址的信息：210_110_25_88
-  - URL应该统一使用小写字母
-  - URL中不要包含文件(脚本)的扩展名。例如 .json 之内的就不要出现了，对于接口来说没有任何实际的意义。如果是想对返回的数据内容格式标示的话，通过 HTTP Header 中的 Content-Type 字段更好一些。
-  - 对于响应返回的格式，JSON 因为它的可读性、紧凑性以及多种语言支持等优点，成为了 HTTP API 最常用的返回格式。因此，最好采用 JSON 作为返回内容的格式。如果用户需要其他格式，比如 xml，应该在请求头部 Accept 中指定。对于不支持的格式，服务端需要返回正确的 status code，并给出详细的说明。
-  - JSON中的所有字段都应该用小写的蛇形命名形式，而不是采用驼峰命名。
-* 以资源为中心的 URL 设计
-  - 资源是 Restful API 的核心元素，所有的操作都是针对特定资源进行的。而资源就是 URL（Uniform Resoure Locator）表示的，所以简洁、清晰、结构化的 URL 设计是至关重要的
-    + 资源分为单个文档和集合，尽量使用复数来表示资源，单个资源通过添加 id 或者 name 等来表示
-    + 一个资源可以有多个不同的 URL
-    + 资源可以嵌套，通过类似目录路径的方式来表示，以体现它们之间的关系
-  - 最常见的一种设计错误，就是URL包含动词。 因为"资源"表示一种实体，所以应该是名词，URL 不应该有动词，动词应该放在 HTTP Method （参考下一条）中
-  - 如果某些动作是HTTP 动词表示不了的,把动作看成是一种资源,把动词 transfer 改成transaction，资源不能是动词，但是可以是一种服务
-* 正确使用 HTTP Method
-  - GET：从服务器取出资源（一项或多项）。
-  - POST：在服务器新建一个资源。
-  - PUT：在服务器更新资源（客户端提供改变后的完整资源）。
-  - PATCH：在服务器更新资源（更新资源的部分属性）。
-  - DELETE：从服务器删除资源。
-* 状态码 （Status Code）
-  - 2XX：请求正常处理并返回
-  - 3XX：重定向，请求的资源位置发生变化
-  - 4XX：客户端发送的请求有错误
-  - 5XX：服务器端错误
-* 错误处理（Error Handling）
-  - 出错，应该在 response body 中通过 message 给出明确的错误信息（一般来说，返回的信息中将 message 作为键名，出错详情作为键值即可）
-  - 编写错误详情时请考虑以下准则：
-    + 不要假设用户是您 API 的专家用户。用户可能是客户端开发人员、操作人员、IT 人员或应用的最终用户。
-    + 不要假设用户了解有关服务实现的任何信息，或者熟悉错误的上下文（例如日志分析）。
-    + 如果可能，应构建错误详情，以便技术用户（但不一定是 API 开发人员）可以响应错误并改正。
-    + 确保错误详情内容简洁。如果需要，请提供一个链接，便于有疑问的读者提问、提供反馈或详细了解错误详情中不方便说明的信息。此外，可使用详细信息字段来提供更多信息。
-* 命名规则
-  - 简单
-  - 直观
-  - 一致
-* 认证和授权（Authentication & Authorization）
-  - 验证（Authentication）是为了确定用户是其申明的身份，比如提供账户的密码。不然的话，任何人伪造成其他身份（比如其他用户或者管理员）是非常危险的。没有通过验证（提供的用户名和密码不匹配，token 不正确等），需要返回 401 Unauthorized[9]状态码
-  - 授权（Authorization）是为了保证用户有对请求资源特定操作的权限。比如用户的私人信息只能自己能访问，其他人无法看到；有些特殊的操作只能管理员可以操作，其他用户有只读的权限等等。有被授权访问的资源操作，需要返回 403 Forbidden[10] 状态码
-* 限流（RateLimit）：对于超过流量的请求，可以返回 429 Too many requests[13] 状态码
-  - X-RateLimit-Limit: 用户每个小时允许发送请求的最大值
-  - X-RateLimit-Remaining：当前时间窗口剩下的可用请求数目
-  - X-RateLimit-Rest: 时间窗口重置的时候，到这个时间点可用的请求数量就会变成 X-RateLimit-Limit 的值
-* AccessKey&SecretKey （开放平台）
-  - 请求身份:为开发者分配AccessKey（开发者标识，确保唯一）和SecretKey（用于接口加密，确保不易被穷举，生成算法不易被猜测)
-  - 防止篡改
-    + 参数签名
-      * 按照请求参数名的字母升序排列非空请求参数（包含AccessKey），使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串stringA；
-      * 在stringA最后拼接上Secretkey得到字符串stringSignTemp；
-      * 对stringSignTemp进行MD5运算，并将得到的字符串所有字符转换为大写，得到sign值
-    + 请求携带参数AccessKey和Sign，只有拥有合法的身份AccessKey和正确的签名Sign才能放行
-  - 重放攻击:重复使用请求参数伪造二次请求的隐患
-    + timestamp+nonce方案
-      * nonce指唯一的随机字符串，用来标识每个被签名的请求。通过为每个请求提供一个唯一的标识符，服务器能够防止请求被多次使用（记录所有用过的nonce以阻止它们被二次使用）
-      * 对服务器来说永久存储所有接收到的nonce的代价是非常大的。可以使用timestamp来优化nonce的存储
-      * 假设允许客户端和服务端最多能存在15分钟的时间差，同时追踪记录在服务端的nonce集合。当有新的请求进入时
-        - 首先检查携带的timestamp是否在15分钟内，如超出时间范围，则拒绝
-        - 然后查询携带的nonce，如存在已有集合，则拒绝。否则，记录该nonce，并删除集合内时间戳大于15分钟的nonce（可以使用redis的expire，新增nonce的同时设置它的超时失效时间为15分钟）
-      * 实现
-        - 生成当前时间戳timestamp=now和唯一随机字符串nonce=random
-        - 按照请求参数名的字母升序排列非空请求参数（包含AccessKey)stringA="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random";
-        - 拼接密钥SecretKeystringSignTemp="AccessKey=access&home=world&name=hello&work=java×tamp=now&nonce=random&SecretKey=secret";
-        - MD5并转换为大写 sign=MD5(stringSignTemp).toUpperCase();
-        - 最终请求<http://api.test.com/test?name=hello&home=world&work=java×tamp=now&nonce=nonce&sign=sign>;
-* Token&AppKey（APP）:这些接口进行身份验证,涉及到用户状态时，每次请求都要带上身份验证信息
-  - Token身份验证
-    + 用户登录向服务器提供认证信息（如账号和密码），服务器验证成功后返回Token给客户端；
-    + 客户端将Token保存在本地，后续发起请求时，携带此Token；
-    + 服务器检查Token的有效性，有效则放行，无效（Token错误或过期）则拒绝。
-    + 安全隐患：Token被劫持，伪造请求和篡改参数。
-  - Token+AppKey签名验证: 与上面开发平台的验证方式类似
-    + 客户端分配AppKey（密钥，用于接口加密，不参与传输）
-    + 将AppKey和所有请求参数组合成源串，根据签名算法生成签名值
-    + 发送请求时将签名值一起发送给服务器验证
-    + 即使Token被劫持，对方不知道AppKey和签名算法，就无法伪造请求和篡改参数。再结合上述的重发攻击解决方案，即使请求参数被劫持也无法伪造二次重复请求
+* 定义
+  - 归类分组
+  - 详细定义
+* 快速开发的支持
+  - 通过类似WADL或RAML等标准的Rest接口定义规范文件
+  - 需要提供客户端和服务端的开发框架代码
+* API接口服务的注册和接入
+* 服务接入适配能力
+  - 对于服务发布而言，如果不仅仅是微服务网关能力，而是一个微服务支撑或微服务快速开发平台的话，还可以提供完整的服务开发和设计能力。即在微服务平台首先定义数据或对象模型，然后将对象模型转换为Http Rest中的资源对象，并发布对应的Get，Post各种Http Rest接口服务
+
+## Gateway
+
+* [tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
+* [janus](https://github.com/hellofresh/janus):An API Gateway written in Go <https://hellofresh.gitbooks.io/janus>
 
 ## 接口
 
@@ -920,11 +1045,6 @@ print dec_message   // Hello World!
 * [RollToolsApi](https://www.mxnzp.com/):开放易用的接口服务
 * [wttr.in](https://github.com/chubin/wttr.in): partly_sunny The right way to check the weather <https://wttr.in>
 
-## Gateway
-
-* [tyk](https://github.com/TykTechnologies/tyk)：Tyk Open Source API Gateway written in Go
-* [janus](https://github.com/hellofresh/janus):An API Gateway written in Go <https://hellofresh.gitbooks.io/janus>
-
 ## 图书
 
 * [The Design of Web APIs](https://livebook.manning.com/book/the-design-of-everyday-apis/)
@@ -941,7 +1061,6 @@ print dec_message   // Hello World!
 * [puppeteer](https://github.com/GoogleChrome/puppeteer):Headless Chrome Node API <https://try-puppeteer.appspot.com/>
 * [RAP](https://github.com/thx/RAP):Web接口管理工具，开源免费，接口自动化，MOCK数据自动生成，自动化测试，企业级管理。阿里妈妈MUX团队出品！阿里巴巴都在用！1000+公司的选择！RAP2已发布请移步至<https://github.com/thx/rap2-delos> <http://rapapi.org>
 * [rap2-delos](https://github.com/thx/rap2-delos):阿里妈妈前端团队出品的开源接口管理工具RAP第二代 <http://rap2.taobao.org>
-* [apistar](https://github.com/encode/apistar):A smart Web API framework, for Python 3. 🌟 <https://docs.apistar.com>
 * [grape](https://github.com/ruby-grape/grape):An opinionated framework for creating REST-like APIs in Ruby. <http://www.ruby-grape.org>
 * [django-rest-framework](https://github.com/encode/django-rest-framework):Web APIs for Django. ⚡️ <https://www.django-rest-framework.org>
 * [parse-server](https://github.com/parse-community/parse-server):Parse-compatible API server module for Node/Express <http://parseplatform.org>
@@ -991,3 +1110,4 @@ print dec_message   // Hello World!
 * [API-Security-Checklist](https://github.com/shieldfy/API-Security-Checklist):Checklist of the most important security countermeasures when designing, testing, and releasing your API
 * [api-guidelines](https://github.com/microsoft/api-guidelines):Microsoft REST API Guidelines
 * [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+* [Semantic Versioning](https://semver.org/)

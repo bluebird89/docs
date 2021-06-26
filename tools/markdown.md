@@ -759,6 +759,67 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * `CMD + 4` 在编辑器/预览模式和三栏模式中切换
 * `CMD + R` 在编辑器和预览模式中切换
 
+## [pandoc](https://github.com/jgm/pandoc)
+
+Universal markup converter <http://johnmacfarlane.net/pandoc> John MacFarlane开发的标记语言转换工具，可实现不同标记语言间的格式转换.
+
+* 将Markdown转化为Word，然后统计字数
+* [文档](http://pandoc.org/getting-started.html)
+
+```sh
+pandoc WEB.md -o web.docx
+pandoc API.md -o api.docx -c Github.css
+```
+
+## [gitbook](https://github.com/GitbookIO/gitbook)
+
+📝 Modern documentation format and toolchain using Git and Markdown [GitBook - Document Everything!](https://www.gitbook.com)
+
+* gitbook --version：查看当前使用的版本
+* gitbook ls：系统存在的 gitbook 版本
+* gitbook ls-remote：所有 gitbook 版本
+* gitbook fetch：下载对应的 gitbook 版本
+* gitbook current：当前目录使用的 gitbook 版本
+* 使用
+  - gitbook init 创建项目，生成
+    + README.md
+    + SUMMARY.md:定义书籍的章节的，用来生成目录
+  - gitbook serve 运行
+  - gitbook build 编译书籍
+
+```
+# Summary
+- [Introduction](README.md)
+# 一级分类，不显示，会以横线分隔，相当于注释
+- [Introduction](part1/README.md)
+- [Part1 Section 1](part1/section-1.md)
+- [Part1 Section 2](part1/subsection-x/README.md)
+    - [Part1 Section 2-1](part1/subsection-x/subsection-x-1.md)
+    - [Part1 Section 2-2](part1/subsection-x/subsection-x-2.md)
+# 一级分类，不显示，会以横线分隔，相当于注释
+- [Introduction](part2/README.md)
+- [part2 Section 1](part2/section-1.md)
+- 未完成的时候
+    - [part2 Section 2-1](part2/subsection-x/subsection-x-1.md)
+    - [part2 Section 2-2](part2/subsection-x/subsection-x-2.md)
+## 二级分类，显示，不可点
+- An article in part 2
+### 三级分类，显示，不可点，和二级效果一致
+- An article in part 3
+# 一级分类，不显示，会以横线分隔
+- An article in an untitled part
+```
+
+```js
+// # 配置文件book.json
+"pluginsConfig": {
+  #展示章节硬编码
+ "theme-default": {
+     "showLevel": true
+ }
+}
+```
+
 ## 编辑器
 
 * [typora](https://www.typora.io/)
@@ -800,7 +861,6 @@ Let's rename *our-new-project* to \*our-old-project\*.
 * [online-markdown-reader](https://github.com/zhangjikai/online-markdown-reader):Markdown 在线阅读器 <http://markdown.zhangjikai.com/>
 * [vnote](https://github.com/tamlok/vnote):A Vim-inspired note-taking application that knows programmers and Markdown better. <https://tamlok.github.io/vnote>
 * [tui.editor](https://github.com/nhnent/tui.editor):🍞📝 Markdown WYSIWYG Editor. GFM Standard + Chart & UML Extensible. <http://ui.toast.com/tui-editor>
-* [md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 * [editor.md](https://github.com/pandao/editor.md):The open source embeddable online markdown editor (component). <https://pandao.github.io/editor.md/>
 * [remark](https://github.com/gnab/remark):A simple, in-browser, markdown-driven slideshow tool. <http://remarkjs.com>
 * [mermaid](https://github.com/knsv/mermaid):Generation of diagram and flowchart from text in a similar manner as markdown <http://knsv.github.io/mermaid/>

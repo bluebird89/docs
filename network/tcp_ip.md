@@ -1,35 +1,30 @@
 # Transmission Control Protocol/Internet Protocol TCP/IP 传输控制协议/网际协议
 
 * 一个由FTP、SMTP、TCP、UDP、IP等协议构成的协议簇， 因为在TCP/IP协议中TCP协议和IP协议最具代表性，所以被称为TCP/IP协议
-* 通信过程其实就对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
+* 通信过程对应着数据入栈与出栈的过程,供已连接因特网的计算机进行通信的通信协议,定义了电子设备（比如计算机）如何连入因特网，以及数据如何在它们之间传输的标准。包含了一系列构成互联网基础的网络协议，是Internet的核心协议
   - 入栈:数据发送方每层不断地封装首部与尾部，添加一些传输的信息，确保能传输到目的地
   - 出栈:数据接收方每层不断地拆除首部与尾部，得到最终传输的数据
   - TCP 负责将数据分割并装入 IP 包，然后在到达的时候重新组合
   - IP 负责将包发送至接受者
-* RTT round-trip time:which is the time it takes for a small packet to travel from client to server and back to the client.” “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.” RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
+* RTT round-trip time:which is the time it takes for a small packet to travel from client to server and back to the client.” 
+	* “The RTT includes packet-propagation delays, packet-queuing delays and packet -processing delay.”  RTT=传播时延（往返）+排队时延（路由器和交换机的）+数据处理时延（应用程序的）
 
 ## TCP/IP 协议模型
 
-* 应用层:决定向用户提供应用服务时通信的活动 HTTP curl
+* 应用层:决定向用户提供应用服务时通信的活动 HTTP curl SSH FTP
 * 传输层:提供处于网络连接中的两台计算机之间的数据传输  TCP UDP telent
-  - 把从应用层处收到的数据(HTTP 请求报文)进行分割,并在各个报文上打上标记序号及端口号后转发给网络层
-* 网络层:用来处理在网络上流动的数据包。 IP ping traceroute
+  - 应用层收到数据(HTTP 请求报文)进行分割,并在各个报文上打上标记序号及端口号后转发给网络层
+  - MAC地址+IP+port
+* 网络层:处理在网络上流动的数据包。 IP ping traceroute
   - 数据包是网络传输的最小数据单位
-  - 与对方计算机之间通过多台计算机或网络设备进行传输时,网络层所起的作用就是在众多的选项内选择一条传输路线
-  - 该层规定了通过怎样的路径(所谓的传输路线)到达对方计算机,并把数据包传送给对方。
+  - 与对方计算机之间通过多台计算机或网络设备进行传输时,网络层所起作用就是在众多的选项内选择一条传输路线
+  - 该层规定通过怎样的路径(传输路线)到达对方计算机,并把数据包传送给对方。
   - 增加作为通信目的地的 MAC 地址后转发给链路层
-* 数据链路层:用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC(Network Interface Card,网络适配器,即网卡),及光纤等物理可见部分(还包括连接器等一切传输媒介)
+  - MAC地址+IP地址
+* 以太网：数据链路层+物理层:用来处理连接网络的硬件部分。
+	* 包括控制操作系统、硬件的设备驱动、NIC(Network Interface Card,网络适配器,即网卡),及光纤等物理可见部分(还包括连接器等一切传输媒介)
 
-![Alt text](../_static/tcp\/ip.jpg "Optional title")
-
-* 序列化
-* 分组交换
-
-* TCP拥塞控制-慢启动、拥塞避免、快重传、快启动
-* TCP如何保证可靠性传输
-* TCP如何解决粘包、拆包问题
-* TCP为什么可靠
-* UDP如何实现TCP可靠传输
+![Alt text](../_static/tcp_ip.gif "Optional title")
 
 ## OSI Open Systems Interconnection Model
 
@@ -37,44 +32,34 @@
 * 计算机与网络传输：每层进行层层解包和附加自己所要传递的信息，术语叫做报头
 
 * Application(Layer 7) This layer supports application and end-user processes. Communication partners are identified, quality of service is identified, user authentication and privacy are considered, and any constraints on data syntax are identified. Everything at this layer is application-specific. This layer provides application services for file transfers, e-mail, and other network software services.
-  - 7层应用层:主要是一些终端的应用，比如说FTP（各种文件下载），WEB（IE浏览），QQ之类的（你就把它理解成我们在电脑屏幕上可以看到的东西．就是终端应用）
-  - 打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交个下一层去完成
+  - 7层应用层:为应用软件提供接口，使应用程序能够使用网络服务
+  - 打包请求，根据传输数据加密与否分为 HTTP 请求和 HTTPS 请求，封装请求头和请求参数，应用层的包通过 Socket 编程交到下一层去完成
   - DHCP, DNS, FTP, HTTP, IMAP4, NNTP, POP3, SMTP, SNMP, SSH, TELNET and NTP
 * Presentation(Layer 6) This layer provides independence from differences in data representation (e.g., encryption) by translating from application to network format, and vice versa. This layer formats and encrypts data to be sent across a network, providing freedom from compatibility problems. It is sometimes called the syntax layer.
-  - 6层表示层：主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等））
-  - SSL, WEP, WPA, Kerberos
+  - 6层表示层：数据的解码和编码，数据的加密和解密，数据的压缩和解压缩
+  - SSL, WEP, WPA, Kerberos   ASCLL、PICT、TIFF、JPEG、 MIDI、MPEG
 * Session(Layer 5) This layer establishes, manages and terminates connections between applications. The session layer sets up, coordinates, and terminates conversations, exchanges, and dialogues between the applications at each end. It deals with session and connection coordination.
-  - 5层会话层：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）
-  - Logical Ports 21, 22, 23, 80 etc…
+  - 5层会话层：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在系统之间发起会话或或者接受会话请求（设备之间需要互相认识可以是IP也可以是MAC或者是主机名）
+  - RPC、SQL、NFS 、X WINDOWS、ASP
 * Transport(Layer 4) This layer provides transparent transfer of data between end systems, or hosts, and is responsible for end-to-end error recovery and flow control. It ensures complete data transfer.
-  - 4层传输层 Transport层：定义了一些传输数据的协议和端口号（WWW端口80等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如QQ聊天数据就是通过这种方式传输的）。主要是将从下层接收的数据进行分段进行传输，到达目的地址后在进行重组。常常把这一层数据叫做段。
-  - 封装客户端与服务端端口
+  - 4层传输层 负责建立端到端的链接，保证保温在端到端之间的传输，数据叫做段|Segment
   - TCP, SPX and UDP
-  - Segment
 * Network(Layer 3) This layer provides switching and routing technologies, creating logical paths, known as virtual circuits, for transmitting data from node to node. Routing and forwarding are functions of this layer, as well as addressing, internetworking, error handling, congestion control and packet sequencing.
-  - 3层网络层 Network层：主要将从下层接收到的数据进行IP地址（例192.168.0.1)的封装与解封装。在这一层工作的设备是路由器，常把这一层的数据叫做数据包
-  - 封装客户与服务IP地址　　
+  - 3层网络层：负责将分组数据从源端传输到目的端，网络层的主要作用就是路由和寻址。数据 数据包|Packet
+  - 路由器　Routers
   - IPv4, IPV6, IPX, OSPF, ICMP, IGMP and ARPMP
-  - Packet
-  - Multilayer Switch are found in both the Data Link Layer and Network Layer
-  - Routers are found in the Network Layer
-  - Brouter are found in both the Data Link and Network Layer
 * Data Link(Layer 2) At this layer, data packets are encoded and decoded into bits. It furnishes transmission protocol knowledge and management and handles errors in the physical layer, flow control and frame synchronization. The data link layer is divided into two sublayers: The Media Access Control (MAC) layer and the Logical Link Control (LLC) layer. The MAC sublayer controls how a computer on the network gains access to the data and permission to transmit it. The LLC layer controls frame synchronization, flow control and error checking.
-  - 2层数据链路层：主要将从物理层接收的数据进行MAC地址（网卡的地址）的封装与解封装。常把这一层的数据叫做帧。在这一层工作的设备是交换机，数据通过交换机来传输。
-  - 本地客户端MAC 本地网关MAC
-  - Frame
+  - 2层数据链路层：在不可靠的物理链路上，提供可靠的数据传输服务。数据帧|Frame
+  - 设备 交换机、网桥、网卡
   - SLIP，CSLIP，PPP，ARP，RARP，MTU
   - 802.11 (WLAN), Wi-Fi, WiMAX, ATM, Ethernet, Token Ring, Frame Relay, PPTP, L2TP and ISDN-ore
-  - Switches /Bridges/Wireless Access Point are found in the Data Link Layer
 * Physical(Layer 1) This layer conveys the bit stream - electrical impulse, light or radio signal -- through the network at the electrical and mechanical level. It provides the hardware means of sending and receiving data on a carrier, including defining cables, cards and physical aspects.
-  - 1层物理层：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输,到达目的地后在转化为1、0，也就是我们常说的模数转换与数模转换）。这一层的数据叫做比特。
-  - Hubs, Repeaters, Cables, Optical Fiber, SONET/SDN,Coaxial Cable, Twisted Pair Cable and Connectors (more)
+  - 1层物理层： 利用传输介质为数据链路层提供物理连接，实现比特流的透明传输 。数据 比特
+  -  集线器 Hubs、中继器 Repeaters, Cables, Optical Fiber, SONET/SDN,Coaxial Cable, Twisted Pair Cable and Connectors (more)
   - ISO2110，IEEE802
-  - Hubs/Repeaters are found in the Physical Layer
-  - Gateway are found in All 7 of the OSI Layers
 
-![OSI 七层协议模型](../_startic/osi_model.png "OSI 七层协议模型")
-![Alt text](../_startic/osi.png "Optional title")
+![OSI 协议模型](../_static/osi.png "OSI 协议模型")
+![OSI 七层协议模型](../_static/osi_model.png "OSI 七层协议模型")
 ![七层协议](../_static/osi_1.png "Optional title")
 ![数据流](../_static/osi2.jpeg "Optional title")
 
@@ -395,14 +380,14 @@ arp -a
 
 #### 报文首部
 
-* 首部的前20个字节是固定的，后面有4n字节是根据需要而增加的选项（n是整数）。因此TCP首部的最小长度是20字节
-* 源端口和目的端口：各占2个字节，分别写入源端口和目的端口
-* 序列号 Sequence Number:当前报文段的序号
-  - 占4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号，解决网络包乱序（reordering）问题。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小
+* 前20个字节是固定的，后面有4n字节是根据需要而增加的选项（n是整数）。因此TCP首部的最小长度是20字节
+* 源端口和目的端口：各2个字节
+* 序列号 Sequence Number:当前报文段序号
+  - 4个字节，TCP连接中传送的字节流中的每个字节都按顺序编号，解决网络包乱序（reordering）问题。通过 SYN 包传给接收端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小
 * 确认应答号 Acknowledgement Number
-  - 占4个字节，是期望收到对方下一个报文的第一个数据字节的序号，用来解决不丢包的问题
+  - 4个字节，期望收到对方下一个报文的第一个数据字节的序号，用来解决不丢包的问题
   - 例如，B收到了A发送过来的报文，其序列号字段是501，而数据长度是200字节，这表明B正确的收到了A发送的到序号700为止的数据。因此，B期望收到A的下一个数据序号是701，于是B在发送给A的确认报文段中把确认号置为701
-* 数据偏移：占4位，指出TCP报文的数据距离TCP报文段的起始处有多远
+* 数据偏移：4位，指出TCP报文的数据距离TCP报文段的起始处有多远
 * 保留：占6位，保留今后使用，但目前应都位 0
 * TCP Flag：也就是包的类型，主要是用于操控TCP的状态机的
   - 紧急URG：当URG=1，表明紧急指针字段有效。告诉系统此报文段中有紧急数据
@@ -419,7 +404,7 @@ arp -a
     - 为能够支持更多的缓冲数据 RFC 1323中就规定了 TCP 的扩展选项，其中窗口缩放调整因子就是其中之一
     - 这个参数是在 [SYN] 同步阶段进行协商的，结合抓包数据分析下。看到第一次请求协商的结果是 WS=256,然后再 ACK 阶段扩展因子生效，调整了窗口大小
 * 检验和
-  - 占 2 字节
+  - 2 字节
   - 字段检验范围:首部和数据这两部分
   - 在计算检验和时，要在TCP 报文段的前面加上 12 字节的伪部(协议字段为6，表示TCP)
 * 紧急指针
@@ -450,86 +435,94 @@ arp -a
   - TIME-WAIT S/C主动关闭端接收到FIN后，就发送ACK包，等待足够时间以确保被动关闭端收到了终止请求的确认包。【按照RFC 793，一个连接可以在TIME-WAIT保证最大四分钟，即最大分段寿命（maximum segment lifetime）的2倍】
   - CLOSED S&C完全没有连接
 
-* 三次握手 Three-way Handshake 建立一个 TCP 连接时，需要客户端和服务器总共发送3个包
-  - 目的:连接服务器指定端口，建立 TCP 连接，并同步连接双方的序列号和确认号，交换 TCP 窗口大小信息
-  * 同步序列编号 Synchronize Sequence Numbers SYN,初始化Sequence Number 初始值
-    - TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立 TCP 连接时，首先会发送的一个信号。客户端在接受到 SYN 消息时，就会在自己段内生成一个随机值 X，用来初始化和建立连接
-    - 通信双方要互相通知对方自己的初始化的Sequence Number,这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序
-    - RFC793 中认为 ISN 要和一个假的时钟绑定在一起ISN 每四微秒加一，当超过 2 的 32 次方之后又从 0 开始，要四个半小时左右发生 ISN 回绕
-    - SYN 超时:慢慢重试，Linux 中就是默认重试 5 次，并且就是阶梯性的重试，间隔就是1s、2s、4s、8s、16s，再第五次发出之后还得等 32s 才能知道这次重试的结果，所以说总共等63s 才能断开连接
-      + SYN Flood 攻击: 63s 内服务端需要保持这个资源，所以不法分子就可以构造出大量的 client 向 server 发 SYN 但就是不回 server,使得 server 的 SYN 队列耗尽，无法处理正常的建连请求
-      + 开启 tcp_syncookies，那就用不到 SYN 队列:SYN 队列满了之后 TCP 根据自己的 ip、端口、然后对方的 ip、端口，对方 SYN 的序号，时间戳等一波操作生成一个特殊的序号（即 cookie）发回去，如果对方是正常的 client 会把这个序号发回来，然后 server 根据这个序号建连
-  - 开始时客户端和服务器都是处于CLOSED状态。主动打开连接的为客户端，被动打开连接的是服务器
-  - TCP服务器进程先创建传输控制块TCB，时刻准备接受客户进程连接请求，此时服务器就进入了LISTEN（监听）状态
-  - 第一次握手(SYN=1, seq=x)
-    + 客户进程先创建传输控制块TCB，然后向服务器发出连接请求报文 SYN ，其中同步位SYN=1，序号SEQ=x（表明传送数据时的第一个数据字节的序号是x），并进入SYN_SEND（同步已发送状态）
-    + 等待服务器确认.TCP规定，SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号
-  - 第二次握手(SYN=1, ACK=1, seq=y, ACKnum=x+1)
-    + 服务器收到请求报文后，如果同意连接，则发出确认报文 SYN-ACK，该报文段中同步位SYN=1，确认号ACK=x+1，序号SEQ=y
-    + 服务器进入SYN_RECV （同步收到）状态。这个报文也不能携带数据，但是同样要消耗一个序号
-  - 第三次握手(ACK=1，ACKnum=y+1)
-    + 客户进程收到确认后，要向服务器给出确认 ACK。确认报文 ack=y+1. TCP连接建立
-    + 客户端进入ESTABLISHED（已建立连接）状态。TCP规定，ACK报文段可以携带数据，如果不携带数据则不消耗序号
-    + 防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误
-  - 为什么建立连接是三次握手
-    + 为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server
-    + 重点在于同步初始序列号:为了初始化Seq Numer，SYN Synchronize Sequence Numbers，用来保证之后传输数据的顺序性.
-    + 建立连接的时候，服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端
-    + 为保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手
-    + 为保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手
-  - 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去
-  - SACK_PERM
-    + SACK选项默认情况下，接受端接受到一个包后，发送 ACK 确认，但是，默认只支持顺序的确认，也就是说，发送 A, B, C 个包，如果我收到了 A, C的包，B没有收到，那么对于 C，这个包是不会确认的，需要等 B这个包收到后再确认，那么 TCP有超时重传机制，如果一个包很久没有确认，就会当它丢失了，进行重传，这样会造成很多多余的包重传，浪费传输空间
-    + 为了解决这个问题， SACK就提出了选择性确认机制，启用 SACK 后，接受端会确认所有收到的包，这样发送端就只用重传真正丢失的包
-  - SYN 超时：server端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻售，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 2^6 -1 = 63s，TCP才会把断开这个连接
-
-* 四次挥手 Four-way handshake
-  - TCP是全双工,是两次，发送方和接收方都需要Fin和Ack
-  - 数据传输完毕后，双方都可释放连接。最开始的时候，客户端和服务器都是处于ESTABLISHED状态，然后客户端主动关闭，服务器被动关闭。在 socket 编程中，任何一方执行 close() 操作即可产生挥手操作，断开过程需要经过"四次挥手"（要对方关闭与对方关闭完成两次确认）,由TCP的半关闭（half-close）造成
-  - 第一次挥手(FIN=1，seq=x)
-    + 主动关闭连接一方，调用close(),kernel will send a FIN packet 发起一个断开请求（该端执行“主动关闭”（active close））
-    + 进入 FIN-WAIT-1 状态
-  - 第二次挥手(ACK=1，ACKnum=x+1)
-    + 被动关闭一方收到FIN包后，发送一个确认包，表明自己接受到了客户端关闭连接的请求，但还没有准备好关闭连接；被动关闭一方进入`CLOSE_WAIT`状态
-    + 主动关闭一方等待对方关闭，则进入`FIN_WAIT_2`状态；此时主动关闭一方等待被动关闭一方的应用程序调用close操作
-  - 第三次挥手(FIN=1，seq=y)
-    + 被动关闭一方在完成所有数据发送后，调用close()操作；
-    + 准备好关闭连接时，向客户端发送结束连接请求，FIN 置为1，被动关闭一方进入LAST_ACK状态，等待对方的ACK
-    + 在 RFC 2581中的 4.2 节有提到ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下，TCP确认是有可能进行合并延迟确认的
-  - 第四次挥手(ACK=1，ACKnum=y+1)
-    + 主动关闭一方收到FIN包，发送一个确认包，并进入 TIME_WAIT状态，等待可能出现的要求重传的 ACK 包
-    + 服务器端接收到这个确认包之后，关闭连接，进入 CLOSED 状态
-    + 主动关闭一方等待 2MSL ( Maximum Segment Lifetime 最大报文段生存时间)时间，没有收到服务器端的 ACK ，认为服务器端已经正常关闭连接，于是自己也关闭连接，结束TIME_WAIT->CLOSED状态 `netstat -a | grep TIME_WAIT | wc -l`
-      * 保证TCP协议全双工连接能够可靠关闭
-      * 保证这次连接重复数据段从网络中消失
-      * this socket can’t be reused for that time period to prevent any TCP state corruptions due to stray stale packets.
-      * 怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后，可以再发一个ACK应答包
-      * 在 TIME_WAIT 状态时，两端端口不能使用，要等到2MSL时间结束，才可继续使用。（IP 层）
-      * 当连接处于2MSL等待阶段时，任何迟到的报文段都将被丢弃
-  - 有一个连接没有进入CLOSED状态之前，这个连接是不能被重用的
-
-  - 客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。
-  - 服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。
-  - 客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。
-  - 服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。
-  - 客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗*∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。
-  - 服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些
-  - 关闭连接确是四次挥手呢？
-    + 因为 TCP 是全双工协议，也就是说双方都要关闭，每一方都向对方发送 FIN 和回应 ACK
-    + 当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，"你发的FIN报文我收到了"。只有等到Server端所有的报文都发送完了，才能发送FIN报文，因此不能一起发送。故需要四步握手。
-    + 断开连接发起方在接受到接受方的 FIN 并回复 ACK 之后并没有直接进入 CLOSED 状态，而是进行了一波等待，等待时间为 2MSL
-      * MSL 是 Maximum Segment Lifetime，即报文最长生存时间，RFC 793 定义的 MSL 时间是 2 分钟，Linux 实际实现是 30s，那么 2MSL 是一分钟。
-      * 就是怕被动关闭方没有收到最后的 ACK，如果被动方由于网络原因没有到，那么它会再次发送 FIN，此时如果主动关闭方已经 CLOSED 那就傻了，因此等一会儿。
-      * 假设立马断开连接，但是又重用了这个连接，就是五元组完全一致，并且序号还在合适的范围内，虽然概率很低但理论上也有可能，那么新的连接会被已关闭连接链路上的一些残留数据干扰，因此给予一定的时间来处理一些残留数据。
-      * 问题
-        - 如果服务器主动关闭大量的连接，那么会出现大量的资源占用，需要等到 2MSL 才会释放资源。
-        - 如果是客户端主动关闭大量的连接，那么在 2MSL 里面那些端口都是被占用的，端口只有 65535 个，如果端口耗尽了就无法发起送的连接了
-      * 解决
-        - 快速回收，即不等 2MSL 就回收， Linux 的参数是 tcp_tw_recycle，还有 tcp_timestamps 不过默认是打开的
-        - 重用，即开启 tcp_tw_reuse 当然也是需要 tcp_timestamps 的
-    + 关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
-
 ![TCP协议状态机](../_static/tcpfsm.png)
+
+#### 三次握手 Three-way Handshake 
+
+- 目的:连接服务器指定端口，建立 TCP 连接，并同步连接双方的序列号和确认号，交换 TCP 窗口大小信息
+* 同步序列编号 Synchronize Sequence Numbers SYN,初始化Sequence Number 初始值
+	- TCP/IP 建立连接时使用的握手信号。在客户机和服务器之间建立 TCP 连接时，首先会发送的一个信号。客户端在接受到 SYN 消息时，就会在自己段内生成一个随机值 X，用来初始化和建立连接
+	- 通信双方要互相通知对方自己的初始化的Sequence Number,这个号要作为以后的数据通信的序号，以保证应用层接收到的数据不会因为网络上的传输的问题而乱序
+- RFC793 中认为 ISN 要和一个假的时钟绑定在一起ISN 每四微秒加一，当超过 2 的 32 次方之后又从 0 开始，要四个半小时左右发生 ISN 回绕
+- SYN 超时:慢慢重试，Linux 中就是默认重试 5 次，并且就是阶梯性的重试，间隔就是1s、2s、4s、8s、16s，再第五次发出之后还得等 32s 才能知道这次重试的结果，所以说总共等63s 才能断开连接
+  + SYN Flood 攻击: 63s 内服务端需要保持这个资源，所以不法分子就可以构造出大量的 client 向 server 发 SYN 但就是不回 server,使得 server 的 SYN 队列耗尽，无法处理正常的建连请求
+  + 开启 tcp_syncookies，那就用不到 SYN 队列:SYN 队列满了之后 TCP 根据自己的 ip、端口、然后对方的 ip、端口，对方 SYN 的序号，时间戳等一波操作生成一个特殊的序号（即 cookie）发回去，如果对方是正常的 client 会把这个序号发回来，然后 server 根据这个序号建连
+ 
+- 开始时客户端和服务器都是处于CLOSED状态。服务器进程先创建传输控制块TCB，时刻准备接受客户进程连接请求，进入 LISTEN 状态
+- 第一次握手：客户端发送同步报文，对齐
+	+ 客户进程创建传输控制块TCB，向服务器发出连接请求报文，同步位 SYN=1，序号 SEQ=x（随机产生一个 Number，表明传送数据时的第一个数据字节的序号是x），
+	+ 进入SYN_SEND（同步已发送状态），等待服务器确认.
+	+ TCP规定：SYN报文段（SYN=1的报文段）不能携带数据，但需要消耗掉一个序号
+- 第二次握手(SYN=1, ACK=1, seq=y, ACKnum=x+1)
+	+ 服务器收到请求报文后，同意连接，则发出确认报文，同步位SYN=1，ack 置 1,确认号 ACKnum=x+1，序号SEQ=y(随机值)
+	+ 服务器进入 SYN_RECV （同步收到）状态。报文也不能携带数据，消耗一个序号
+- 第三次握手(ACK=1，ACKnum=y+1)
+	+ 客户进程收到确认后，要向服务器给出确认 ACK。确认报文 ack=y+1. TCP连接建立
+	+ 客户进程收到确认后，检查 ack 状态是否为 100+1，ACK 是否为 1，如果正确则将标志位 ACK 置为 1，ack=y+1，并将该数据包发送给 Server，Server 检查 ack 是否为 y+1，ACK 是否为 1，如果正确则连接建立成功
+	+ Client 和 Server 进入 ESTABLISHED 状态
+	+ TCP规定:ACK报文段可以携带数据，如果不携带数据则不消耗序号
+	+ 防止已经失效的连接请求报文突然又传送到了服务器，从而产生错误
+- 为什么建立连接是三次握手
+	+ 防止已失效连接请求报文段突然又传送到了服务端，因而产生错误。client发出的第一个连接请求报文段并没有丢失，而是在某个网络结点长时间的滞留了，以致延误到连接释放以后的某个时间才到达server
+	+ 重点在于同步初始序列号:为了初始化Seq Numer，SYN Synchronize Sequence Numbers，用来保证之后传输数据的顺序性.
+	+ 建立连接的时候，服务器在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端
+	+ 为保证服务端能收接受到客户端的信息并能做出正确的应答而进行前两次(第一次和第二次)握手
+	+ 为保证客户端能够接收到服务端的信息并能做出正确的应答而进行后两次(第二次和第三次)握手
+	- 理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP 连接都将被一直保持下去
+- SACK_PERM
+	+ SACK选项默认情况下，接受端接受到一个包后，发送 ACK 确认，但是，默认只支持顺序的确认，也就是说，发送 A, B, C 个包，如果我收到了 A, C的包，B没有收到，那么对于 C，这个包是不会确认的，需要等 B这个包收到后再确认，那么 TCP有超时重传机制，如果一个包很久没有确认，就会当它丢失了，进行重传，这样会造成很多多余的包重传，浪费传输空间
+	+ 为了解决这个问题， SACK就提出了选择性确认机制，启用 SACK 后，接受端会确认所有收到的包，这样发送端就只用重传真正丢失的包
+- SYN 超时：server端如果在一定时间内没有收到的TCP会重发SYN-ACK。在Linux下，默认重试次数为5次，重试的间隔时间从1s开始每次都翻售，5次的重试时间间隔为1s, 2s, 4s, 8s, 16s，总共31s，第5次发出后还要等32s都知道第5次也超时了，所以，总共需要 1s + 2s + 4s+ 8s+ 16s + 32s = 2^6 -1 = 63s，TCP才会把断开这个连接
+
+#### 四次挥手 Four-way handshake
+
+- TCP是全双工,发送方和接收方都需要Fin和Ack
+- 数据传输完毕后，双方都可释放连接。最开始的时候处于ESTABLISHED状态，然后一方主动关闭，另一方被动关闭
+	- 在 socket 编程中，任何一方执行 close() 操作即可产生挥手操作，断开过程需要经过"四次挥手"（要对方关闭与对方关闭完成两次确认）,由TCP的半关闭（half-close）造成
+- 第一次挥手(FIN=1，seq=x)
+	+ 主动关闭连接一方，调用close(),kernel will send a FIN packet 发起一个断开请求（该端执行“主动关闭”（active close））
+	+ 进入 FIN-WAIT-1 状态
+- 第二次挥手(ACK=1，ACKnum=x+1)
+	+ 被动关闭一方收到FIN包后，发送一个确认包，表明自己接受到了客户端关闭连接的请求，但还没有准备好关闭连接；
+	+ 被动关闭一方进入`CLOSE_WAIT`状态
+	+ 主动关闭一方等待对方关闭，则进入`FIN_WAIT_2`状态；此时主动关闭一方等待被动关闭一方的应用程序调用close操作
+- 第三次挥手(FIN=1，seq=y)
+	+ 被动关闭一方在完成所有数据发送后，调用close()操作；
+	+ 准备好关闭连接时，向客户端发送结束连接请求，FIN 置为1，被动关闭一方进入LAST_ACK状态，等待对方 ACK
+	+ 在 RFC 2581中的 4.2 节有提到ack可以延迟确认，只要求保证在 500ms之内保证确认包到达即可。在这样的标准下，TCP确认是有可能进行合并延迟确认的
+- 第四次挥手(ACK=1，ACKnum=y+1)
+	+ 主动关闭一方收到FIN包，发送一个确认包，并进入 TIME_WAIT状态，等待可能出现的要求重传的 ACK 包
+	+ 服务器端接收到这个确认包之后，关闭连接，进入 CLOSED 状态
+	+ 主动关闭一方等待 2MSL ( Maximum Segment Lifetime 最大报文段生存时间)时间，没有收到服务器端的 ACK ，认为服务器端已经正常关闭连接，于是自己也关闭连接，结束TIME_WAIT->CLOSED状态 `netstat -a | grep TIME_WAIT | wc -l`
+  * 保证TCP协议全双工连接能够可靠关闭
+  * 保证这次连接重复数据段从网络中消失
+  * this socket can’t be reused for that time period to prevent any TCP state corruptions due to stray stale packets.
+  * 怕最后一个 ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包，主动关闭端接到重发的FIN包后，可以再发一个ACK应答包
+  * 在 TIME_WAIT 状态时，两端端口不能使用，要等到2MSL时间结束，才可继续使用。（IP 层）
+  * 当连接处于2MSL等待阶段时，任何迟到的报文段都将被丢弃
+- 有一个连接没有进入CLOSED状态之前，这个连接是不能被重用的
+
+- 客户端进程发出连接释放报文，并且停止发送数据。释放数据报文首部，FIN=1，其序列号为seq=u（等于前面已经传送过来的数据的最后一个字节的序号加1），此时，客户端进入FIN-WAIT-1（终止等待1）状态。TCP规定，FIN报文段即使不携带数据，也要消耗一个序号。
+- 服务器收到连接释放报文，发出确认报文，ACK=1，ack=u+1，并且带上自己的序列号seq=v，此时，服务端就进入了CLOSE-WAIT（关闭等待）状态。TCP服务器通知高层的应用进程，客户端向服务器的方向就释放了，这时候处于半关闭状态，即客户端已经没有数据要发送了，但是服务器若发送数据，客户端依然要接受。这个状态还要持续一段时间，也就是整个CLOSE-WAIT状态持续的时间。
+- 客户端收到服务器的确认请求后，此时，客户端就进入FIN-WAIT-2（终止等待2）状态，等待服务器发送连接释放报文（在这之前还需要接受服务器发送的最后的数据）。
+- 服务器将最后的数据发送完毕后，就向客户端发送连接释放报文，FIN=1，ack=u+1，由于在半关闭状态，服务器很可能又发送了一些数据，假定此时的序列号为seq=w，此时，服务器就进入了LAST-ACK（最后确认）状态，等待客户端的确认。
+- 客户端收到服务器的连接释放报文后，必须发出确认，ACK=1，ack=w+1，而自己的序列号是seq=u+1，此时，客户端就进入了TIME-WAIT（时间等待）状态。注意此时TCP连接还没有释放，必须经过2∗*∗MSL（最长报文段寿命）的时间后，当客户端撤销相应的TCB后，才进入CLOSED状态。
+- 服务器只要收到了客户端发出的确认，立即进入CLOSED状态。同样，撤销TCB后，就结束了这次的TCP连接。可以看到，服务器结束TCP连接的时间要比客户端早一些
+- 关闭连接确是四次挥手呢？
++ 因为 TCP 是全双工协议，也就是说双方都要关闭，每一方都向对方发送 FIN 和回应 ACK
++ 当Server端收到FIN报文时，很可能并不会立即关闭SOCKET，所以只能先回复一个ACK报文，告诉Client端，"你发的FIN报文我收到了"。只有等到Server端所有的报文都发送完了，才能发送FIN报文，因此不能一起发送。故需要四步握手。
++ 断开连接发起方在接受到接受方的 FIN 并回复 ACK 之后并没有直接进入 CLOSED 状态，而是进行了一波等待，等待时间为 2MSL
+  * MSL 是 Maximum Segment Lifetime，即报文最长生存时间，RFC 793 定义的 MSL 时间是 2 分钟，Linux 实际实现是 30s，那么 2MSL 是一分钟。
+  * 就是怕被动关闭方没有收到最后的 ACK，如果被动方由于网络原因没有到，那么它会再次发送 FIN，此时如果主动关闭方已经 CLOSED 那就傻了，因此等一会儿。
+  * 假设立马断开连接，但是又重用了这个连接，就是五元组完全一致，并且序号还在合适的范围内，虽然概率很低但理论上也有可能，那么新的连接会被已关闭连接链路上的一些残留数据干扰，因此给予一定的时间来处理一些残留数据。
+  * 问题
+	- 如果服务器主动关闭大量的连接，那么会出现大量的资源占用，需要等到 2MSL 才会释放资源。
+	- 如果是客户端主动关闭大量的连接，那么在 2MSL 里面那些端口都是被占用的，端口只有 65535 个，如果端口耗尽了就无法发起送的连接了
+  * 解决
+	- 快速回收，即不等 2MSL 就回收， Linux 的参数是 tcp_tw_recycle，还有 tcp_timestamps 不过默认是打开的
+	- 重用，即开启 tcp_tw_reuse 当然也是需要 tcp_timestamps 的
++ 关闭连接时，服务器收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，而自己也未必全部数据都发送给对方了，所以己方可以立即关闭，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送，从而导致多了一次。
+
 ![TCP建/断链接](../_static/tcp_open_close.jpg)
 ![TCP状态转换图](../_static/tcp_status.jpg "Optional title")
 
@@ -540,18 +533,55 @@ tcpdump -S -i any port 80
 curl www.linkedin.com
 ```
 
+#### TIME_WAIT
+
+* `TIME_WAIT` 状态
+  - TCP 连接中，主动关闭连接的一方出现的状态（收到 FIN 命令，进入 TIME_WAIT 状态，并返回 ACK 命令）
+  - 保持 2 个 MSL 时间，即，4 分钟；（MSL 为 2 分钟）
+  - 默认会持续 2 MSL（报文的最大生存时间），一般是 2x2 mins
+  - TCP 连接占用的端口，无法被再次使用,TCP 端口数量，上限是 6.5w（65535，16 bit）
+  - 大量 time_wait 状态存在，会导致新建 TCP 连接会出错，address already in use : connect 异常
+* TIME_WAIT 状态存在必要性：
+  - 可靠实现 TCP 全双工连接终止：最后 ACK 是由「主动关闭连接」的一端发出的，如果这个 ACK 丢失，则对方会重发 FIN 请求，因此，在主动关闭连接的一段，需要维护一个 time_wait 状态，处理对方重发 FIN 请求
+  - 处理延迟到达报文：由于路由器可能抖动，TCP 报文会延迟到达，为了避免「延迟到达的 TCP 报文」被误认为是「新 TCP 连接」的数据，需要在允许新创建 TCP 连接之前，保持一个不可用的状态，等待所有延迟报文的消失，一般设置为 2 倍的 MSL（报文的最大生存时间），解决「延迟达到的 TCP 报文」问题
+* 现实场景
+  - 服务器端，一般设置：不允许「主动关闭连接」
+  - 但 HTTP 请求中，http 头部 connection 参数，可能设置为 close，则服务端处理完请求会主动关闭 TCP 连接
+  - 现在浏览器中， HTTP 请求 connection 参数，一般都设置为 keep-alive
+  - Nginx 反向代理场景中，可能出现大量短链接，服务器端，可能存在
+* 高并发场景，会出现批量 TIME_WAIT 的 TCP 连接
+  - 每一个 time_wait 状态，都会占用一个「本地端口」，上限为 65535(16 bit，2 Byte)
+  - 当大量连接处于 time_wait 时，新建立 TCP 连接会出错，address already in use : connect 异常
+* 原因
+  - 大量的短连接存在
+  - 特别是 HTTP 请求中，如果 connection 头部取值被设置为 close 时，基本都由「服务端」发起主动关闭连接
+  - TCP 四次挥手关闭连接机制中，为了保证 ACK 重发和丢弃延迟数据，设置 time_wait 为 2 倍的 MSL（报文最大存活时间）
+* 解决
+  - 客户端，HTTP 请求的头部，connection 设置为 keep-alive，保持存活一段时间
+  - 服务器端允许 time_wait 状态的 socket 被重用 `net.ipv4.tcp_timestamps=1 net.ipv4.tcp_tw_reuse = 1`
+  - 缩减 time_wait 时间，设置为 1 MSL（即，2 mins）
+
+```sh
+netstat -nat | grep TIME_WAIT
+netstat -nat | grep -E "TIME_WAIT|Local Address"
+
+# 统计各种连接数量
+netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
+```
+
 #### Flow Control 流量控制
 
-* 为了获得适当传输速度，则需要TCP花费额外的回路链接时间（RTT）。每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销
 * 一种机制可以让「发送方」根据「接收方」的实际接收能力控制发送的数据量,管理两个节点之间数据传输速率的过程，以防止快速发送方压倒慢速接收方。为接收机提供了一种控制传输速度的机制，这样接收节点就不会被来自发送节点的数据淹没
 
-* 滑动窗口|可变窗口：应答式交互数据包的往返时间越长，通信的效率就越低。无需等待确认应答，而可以继续发送数据的最大值
-  - 通信双方根据接收方的接收情况动态告诉发送端可以发送的数据量，从而实现发送方和接收方的数据收发能力匹配
-  - 实现实际上是操作系统开辟的一个缓存空间，发送方主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据。如果按期收到确认应答，此时数据就可以从缓存区清除
-  - ACK 600 确认应答报文丢失，也没关系，因为可以通话下一个确认应答进行确认，只要发送方收到了 ACK 700 确认应答，就意味着 700 之前的所有数据「接收方」都收到了
-  - 窗口大小：TCP 头里有一个字段叫 Window，，接收端告诉发送端自己还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来。由接收方的决定
-  - 发送方滑动窗口
-    + 缓存数据
+##### 滑动窗口|可变窗口
+
+* 应答式交互数据包的往返时间越长，通信的效率就越低。无需等待确认应答，而可以继续发送数据的最大值
+- 通信双方根据接收方的接收情况动态告诉发送端可以发送的数据量，从而实现发送方和接收方的数据收发能力匹配
+- 实现实际上是操作系统开辟的一个缓存空间，发送方主机在等到确认应答返回之前，必须在缓冲区中保留已发送的数据。如果按期收到确认应答，此时数据就可以从缓存区清除
+- ACK 600 确认应答报文丢失，也没关系，因为可以通话下一个确认应答进行确认，只要发送方收到了 ACK 700 确认应答，就意味着 700 之前的所有数据「接收方」都收到了
+- 窗口大小：TCP 头里有一个字段叫 Window，，接收端告诉发送端自己还有多少缓冲区可以接收数据。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来。由接收方的决定
+- 发送方滑动窗口
+	+ 缓存数据
       * 1 是已发送并收到 ACK 确认的数据
       * 2 是已发送但未收到 ACK 确认的数据
       * 3 是未发送但总大小在接收方处理范围内（接收方还有空间）
@@ -592,7 +622,8 @@ curl www.linkedin.com
       * 要等到窗口大小 >= MSS 或是 数据大小 >= MSS
       * 收到之前发送数据的 ack 回包
 
-* 重传机制
+##### 重传机制
+
   - 超时重传:在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 ACK 确认应答报文，就会重发该数据.会在数据包丢失或者确认应答丢失发生超时重传
     + 超时重传时间 RTO 的值：应该略大于报文往返  RTT 的值，有一定的计算公式
     + 超时重发的数据，再次超时的时候，又需要重传的时候，TCP 的策略是超时间隔加倍
@@ -607,13 +638,14 @@ curl www.linkedin.com
     + 可以知道网络中是不是把「发送方」的数据包给复制了；
     + 通过 net.ipv4.tcp_dsack 参数开启 / 关闭这个功能（Linux 2.4 后默认打开）
 
-* congestion control 拥塞控制：避免发送方数据填满整个网络
+##### congestion control 拥塞控制：避免发送方数据填满整个网络
+
   - Van Jacobson范·雅各布森,入选了计算机名人堂Internet Hall of Fame，[Van Jacobson大神提出并设计实施了TCP/IP拥塞控制](https://ee.lbl.gov/papers/congavoid.pdf)
   - 拥塞控制是指发送方先设置一个小的窗口值作为发送速率，当成功发包并接收到ACK时，便以指数速率增大发送窗口的大小，直到遇到丢包（超时/三个冗余ACK），才停止并调整窗口的大小。这么做能最大限度地利用带宽，又不至于让网络环境变得太过拥挤
   - 感知拥塞:在TCP连接的发送方一般是基于丢包来判断当前网络是否发生拥塞，丢包可以由重传超时RTO和重复确认来做判断
   - 利用带宽:诚然拥塞影响很大，但是一直低速发包对带宽利用率很低也是很不明智的做法，因此要充分利用带宽就不能过低过高发送数据，而是保持在一个动态稳定的速率来提高带宽利用率
   - 拥塞时如何调整:拥塞发生时需要有一套应对措施来防止拥塞恶化并且恢复连接流量
-  - *Congestion Window (cwnd)*:在发送方维护的，cwnd和rwnd并不冲突，发送方需要结合rwnd和cwnd两个变量来发送数据
+  - Congestion Window (cwnd):在发送方维护的，cwnd和rwnd并不冲突，发送方需要结合rwnd和cwnd两个变量来发送数据
     + cwnd的大小和MSS最大数据段有直接关系，MSS是TCP报文段中的数据字段的最大长度，即MSS=TCP报文段长度-TCP首部长度
   - 在网络出现拥堵时，如果继续发送大量数据包，可能会导致数据包时延、丢失等，这时 TCP 就会重传数据，但是一重传就会导致网络的负担更重，于是会导致更大的延迟以及更多的丢包，这个情况就会进入恶性循环被不断地放大
   - 拥塞控制是一个动态的过程，它既要提高带宽利用率发送尽量多的数据又要避免网络拥堵丢包RTT增大等问题，基于这种高要求并不是单一策略可以搞定的，因此TCP的拥塞控制策略实际上是分阶段分策略的综合过程,4个策略
@@ -663,7 +695,7 @@ curl www.linkedin.com
   - too many sockets in Close_wait state is a problem on application
   - retransmissions can be a problem more on network or on OS stack than the application itself
 
-![Alt text](__/_static/tcp_block_control.png "Optional title")
+![Alt text](../_static/tcp_block_control.png "Optional title")
 ![半连接队列与全连接队列](../_static/commect_queue.png "Optional title")
 
 ```sh
@@ -678,42 +710,6 @@ sudo apt install hping3
 hping3 -S -p 80 --flood 192.168.33.10
 
 netstat -s | grep "SYNs to LISTEN" # 查看累计
-```
-
-#### TIME_WAIT
-
-* `TIME_WAIT` 状态
-  - TCP 连接中，主动关闭连接的一方出现的状态（收到 FIN 命令，进入 TIME_WAIT 状态，并返回 ACK 命令）
-  - 保持 2 个 MSL 时间，即，4 分钟；（MSL 为 2 分钟）
-  - 默认会持续 2 MSL（报文的最大生存时间），一般是 2x2 mins
-  - TCP 连接占用的端口，无法被再次使用,TCP 端口数量，上限是 6.5w（65535，16 bit）
-  - 大量 time_wait 状态存在，会导致新建 TCP 连接会出错，address already in use : connect 异常
-* TIME_WAIT 状态存在必要性：
-  - 可靠实现 TCP 全双工连接终止：最后 ACK 是由「主动关闭连接」的一端发出的，如果这个 ACK 丢失，则对方会重发 FIN 请求，因此，在主动关闭连接的一段，需要维护一个 time_wait 状态，处理对方重发 FIN 请求
-  - 处理延迟到达报文：由于路由器可能抖动，TCP 报文会延迟到达，为了避免「延迟到达的 TCP 报文」被误认为是「新 TCP 连接」的数据，需要在允许新创建 TCP 连接之前，保持一个不可用的状态，等待所有延迟报文的消失，一般设置为 2 倍的 MSL（报文的最大生存时间），解决「延迟达到的 TCP 报文」问题
-* 现实场景
-  - 服务器端，一般设置：不允许「主动关闭连接」
-  - 但 HTTP 请求中，http 头部 connection 参数，可能设置为 close，则服务端处理完请求会主动关闭 TCP 连接
-  - 现在浏览器中， HTTP 请求 connection 参数，一般都设置为 keep-alive
-  - Nginx 反向代理场景中，可能出现大量短链接，服务器端，可能存在
-* 高并发场景，会出现批量 TIME_WAIT 的 TCP 连接
-  - 每一个 time_wait 状态，都会占用一个「本地端口」，上限为 65535(16 bit，2 Byte)
-  - 当大量连接处于 time_wait 时，新建立 TCP 连接会出错，address already in use : connect 异常
-* 原因
-  - 大量的短连接存在
-  - 特别是 HTTP 请求中，如果 connection 头部取值被设置为 close 时，基本都由「服务端」发起主动关闭连接
-  - TCP 四次挥手关闭连接机制中，为了保证 ACK 重发和丢弃延迟数据，设置 time_wait 为 2 倍的 MSL（报文最大存活时间）
-* 解决
-  - 客户端，HTTP 请求的头部，connection 设置为 keep-alive，保持存活一段时间
-  - 服务器端允许 time_wait 状态的 socket 被重用 `net.ipv4.tcp_timestamps=1 net.ipv4.tcp_tw_reuse = 1`
-  - 缩减 time_wait 时间，设置为 1 MSL（即，2 mins）
-
-```sh
-netstat -nat | grep TIME_WAIT
-netstat -nat | grep -E "TIME_WAIT|Local Address"
-
-# 统计各种连接数量
-netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 ```
 
 #### SYN攻击 SYN Flood
@@ -732,6 +728,7 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
 
 #### [TCP KeepAlive 长、短连接](http://www.tldp.org/HOWTO/html_single/TCP-Keepalive-HOWTO/)
 
+* 每一次链接的建立需要这种经常性的开销，而其并不带有实际有用的数据，只是保证链接的可靠性，因此HTTP/1.1提出了可持续链接的实现方法。HTTP/1.1将只建立一次TCP的链接而重复地使用它传输一系列的请求/响应消息，因此减少了链接建立的次数和经常性的链接开销
 * 长连接
   - 在一个TCP连接上，可以重用多次发送数据包
   - 存活检测：隔一段时间给连接对端发送一个探测包，如果收到对方回应的 ACK，则认为连接还是存活的，在超过一定重试次数之后还是没有收到对方的回应，则丢弃该 TCP 连接
@@ -748,7 +745,7 @@ netstat -n | awk '/^tcp/ {++S[$NF]} END {for(a in S) print a, S[a]}'
   - 由于https需要加解密运算等，最好使用http2.0（强制ssl），传输性能很好。但是服务端需要维持更多的连接
 * 局限
   - TCP KeepAlive 监测方式是发送一个 probe 包，会给网络带来额外流量
-  - TCP KeepAlive 只能在内核层级监测连接的存活与否，而连接的存活不一定代表服务的可用。例如当一个服务器 CPU 进程服务器占用达到 100%，已经卡死不能响应请求了，此时 TCP KeepAlive 依然会认为连接是存活的。因此 TCP KeepAlive 对于应用层程序的价值是相对较小的。需要做连接保活的应用层程序，例如 QQ，往往会在应用层实现自己的心跳功能。
+  - TCP KeepAlive  只能在内核层级监测连接的存活与否，而连接的存活不一定代表服务的可用。例如当一个服务器 CPU 进程服务器占用达到 100%，已经卡死不能响应请求了，此时 TCP KeepAlive 依然会认为连接是存活的。因此 TCP KeepAlive 对于应用层程序的价值是相对较小的。需要做连接保活的应用层程序，例如 QQ，往往会在应用层实现自己的心跳功能。
 
 #### [TCP BBR Bottleneck Bandwidth and Round-trip propagation time](https://github.com/google/bbr)
 
@@ -1177,7 +1174,7 @@ brctl delif br0 eth0
 
 ![NAPT](../_static/napt.jpg "NAPT")
 
-### 动态主机配置协议 DHCP 
+### DHCP 动态主机配置协议
 
 * 通过 DHCP 动态获取 IP 地址，大大省去配 IP 信息繁琐的过程
 * DHCP 客户端进程监听的是 68 端口号，DHCP 服务端进程监听的是 67 端口号
@@ -1224,7 +1221,7 @@ brctl delif br0 eth0
     + 路由器收到该报文后，以 1 秒为间隔连续发送 IGMP 特定组查询报文（共计发送 2 个）。此时在该网段内，组 224.1.1.1 已经没有其他成员了，因此没有主机响应这个查询；
     + 一定时间后，路由器认为该网段中已经没有 224.1.1.1 组播组成员了，将不会再向这个网段转发该组播地址的数据包
 
-### 路由器
+### 路由器 Router
 
 * 连接两个网络的硬件设备，是网络的大门，同时也承担寻路功能，因此，路由器又叫做网关设备。它帮助将数据运送到互联网上，然后互联网中的无数台路由器将信息运送到目的地
 * 路由器每一个端口，都有独立 MAC 地址，而且同时还能把数据包做一次转发
@@ -1232,6 +1229,9 @@ brctl delif br0 eth0
 * 路由器每一个接口都有不同的网络号，因此一个路由器的接口就连接的一个网络
 * 路由器隔离丢弃广播帧
 * 通常来说，路由器中也有默认路由记录，当路由表中找不到目的IP的路由记录时使用默认路由
+* 先在各自的操作系统上加上一套相同的协议。不同村落通信时，信息经协议加工成统一形式，再经由一个特殊的设备传送出去。这个设备就叫做路由器。每个机器都被赋予了一个IP地址。协议便是TCP/IP协议簇
+  - 用来互联不同网段的设备,根据路由表转发数据
+  - 理由表中含有网段和接口（！！！注意：绝对不能把路由器接在两个相同的网段上）
 
 ### AP
 
@@ -1284,7 +1284,7 @@ brctl delif br0 eth0
     + 广播，发送给局域网上所有的机器，MAC地址全是F
   - 网卡可以设置为混杂模式，即不是发往本机的帧也可以接下来，比如有些抓包软件便是以这种方式工作的。
 
-### 解析地址协议 Address Resolution Protocol ARP
+### ARP Address Resolution Protocol
 
 * 根据IP地址获取MAC地址的一种解析协议
 * 本来主机是完全不知道这个IP对应的是哪个主机的哪个接口，当主机要发送一个IP包的时候，会首先查一下 ARP 高速缓存（就是一个IP-MAC地址对应表缓存）
@@ -1315,11 +1315,18 @@ brctl delif br0 eth0
 * 随着机器数量越多，交换机的端口也不够。交换机互联
   - 一台交换机的某一个端口映射另外一台交换机的所有端口
 
-### 集线器
+* 交换机：给这台设备加入一个指令，可以根据网口名称自动寻址传输数据。实现了任意两台电脑间的互联。工作在数据链路层
+  - 保存的是每个计算机的网卡MAC地址与你所在的计算机的接口：通过学习，可以把MAC地址，端口号完善
+  - 既可以连接PC机，又可以连接路由器
+  - 根据Mac地址表转发数据
+  - mac地址表含有Mac地址和接口
+
+### 集线器 Hub
 
 * 集线器将电信号转发到所有出口（广播），不做任何处理
 * MAC 地址:所有的连接到集线器的设备,全局唯一的名字作为标识
 * 发送数据包时，在头部拼接一个MAC 地址.目标设备根据头部的目标 MAC 地址信息，判断这个数据包的确是发给自己的收下，不是舍弃
+* 一个将网线集结起来的作用，实现最初级的网络互通。集线器是通过网线直接传送数据的，工作在物理层
 
 ### 以太网 Ethernet
 
@@ -1338,7 +1345,7 @@ brctl delif br0 eth0
 * 以太网各帧之间的发送有一定间隙，因此帧不需要结束定界符。
 * 虽然以太网交换机不适用CSMA/CD，但是其数据帧依然使用以太网帧，因此依然叫以太网。
 
-## 物理层
+## 物理层 Phsycal Layer
 
 * 物理层：数据被称为比特流（Bits）负责0、1比特流与物理设备电压高低、光的闪灭之间的互换。通信线缆（光缆、无线），线缆的标准统统属于物理层  _物理设备_
 * 物理介质就是把电脑连接起来的物理手段，决定了电信号(0和1)的传输方式，物理介质的不同决定了电信号的传输带宽、速率、传输距离以及抗干扰性等等
@@ -1358,22 +1365,9 @@ brctl delif br0 eth0
 curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" -so /dev/null https://www.gemini.com
 ```
 
-## 硬件
+## 课程
 
-* 网卡，网线，交换机这些，用来处理数据
-* 协议数据在网络中通信如何组织？如何识别？如何保证数据的正确性
-* 操作系统这就是如何把计算机网络和操作系统结合起来的问题
-  - 对于操作系统来说，网卡也是一种硬件资源。但是网络不单只是一种硬件，而是一种媒体入口。比如操作系统管理硬盘，当然不是简单的记一下硬盘有多大，然后一切操作都交给硬盘芯片去做，更多的需要组织硬盘的扇区，分区，记录文件和扇区/偏移的关系等等
-  - 操作系统对于网络来说也是如此，要记录自身在网络的标识（ip），可被他人访问的入口（port），以及对方的信息（remote ip/port）。连接，断开，数据确认等操作也是由协议控制。传递自身消息给对方，类似访问硬盘一样把内存中的数据传递给网卡缓存，再发消息给网卡让网卡去传数据，而是否发送成功这些保证不再由硬件中断信号反馈，而是通过网络协议完成。接收对方消息，也是接收到网卡中断，再把数据从网卡缓存移动到内存中，再通过协议给予对方反馈
-* 集线器（Hub）：一个将网线集结起来的作用，实现最初级的网络互通。集线器是通过网线直接传送数据的，工作在物理层
-* 交换机：给这台设备加入一个指令，可以根据网口名称自动寻址传输数据。实现了任意两台电脑间的互联。工作在数据链路层
-  - 保存的是每个计算机的网卡MAC地址与你所在的计算机的接口：通过学习，可以把MAC地址，端口号完善
-  - 既可以连接PC机，又可以连接路由器
-  - 根据Mac地址表转发数据
-  - mac地址表含有Mac地址和接口
-* 路由器：先在各自的操作系统上加上一套相同的协议。不同村落通信时，信息经协议加工成统一形式，再经由一个特殊的设备传送出去。这个设备就叫做路由器。每个机器都被赋予了一个IP地址。协议便是TCP/IP协议簇
-  - 用来互联不同网段的设备,根据路由表转发数据
-  - 理由表中含有网段和接口（！！！注意：绝对不能把路由器接在两个相同的网段上）
+* [TCP/IP 视频讲解 计算机网络](https://www.bilibili.com/video/av10610680)
 
 ## 图书
 
@@ -1386,16 +1380,12 @@ curl -w "TCP handshake: %{time_connect}s, SSL handshake: %{time_appconnect}s\n" 
 * The TCP/IP GUIDE
 * 《TCP/IP网络编程》
   - [net-lenrning-reference](https://github.com/chankeh/net-lenrning-reference):TCP/IP网络编程笔记
-* UNIX环境高级编程 Advanced Programming in the UNIX Environment apue
-* UNIX网络编程 Unix Network Programming unp
+* UNIX 环境高级编程 Advanced Programming in the UNIX Environment apue
+* UNIX 网络编程 Unix Network Programming unp
   - Unix Network Programming, Volume 1: The Sockets Networking API
   - UNIX Network Programming, Volume 2: Interprocess Communications
-* Linux/UNIX系统编程手册 The Linux Programming Interface: A Linux and UNIX System Programming Handbook
-* Unix/Linux编程实践教程 Bruce Molay
-
-## 课程
-
-* [TCP/IP 视频讲解 计算机网络](https://www.bilibili.com/video/av10610680)
+* Linux/UNIX 系统编程手册 The Linux Programming Interface: A Linux and UNIX System Programming Handbook
+* Unix/Linux 编程实践教程 Bruce Molay
 
 ## 参考
 
