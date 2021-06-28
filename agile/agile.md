@@ -27,15 +27,40 @@ Atlassian Agile Coach
 * Work in Process WIP
 * PDCA
 * The biggest confusion is mixing Agile the philosophy with Scrum the methodology.
+* [Scrum](./scrum.md) is the methodology for doing work in an Agile way. 时间维度拆分
+* [Kanban](./kanban.md) is a visual way to manage Agile work.
 * Agile is the philosophy of doing work in short iterations to adjust to change.需求拆解
   - Themes are strategic tags you can apply to anything within Scrum.
   - Initiatives are strategic containers for Epics/features.
   - Epics are significant features that need be broken down into smaller pieces.
   - Stories are discrete features captured as narratives from the perspective of the end-user.
-* Scrum is the methodology for doing work in an Agile way. 时间维度拆分
-* Kanban is a visual way to manage Agile work.
+* Epics
+  - Epics are often features or other major pieces of functionality that must be broken down into multiple tasks.
+  - Epics are bodies of work that correspond to a significant feature or event.
+* User stories
+  - User stories are not just lists of features; they’re descriptions of a feature that describe what the end-user wants to get out of that feature. They’re best captured as a narrative sentence, like: As a [persona], I [want to], [so that].
+  - Stories are features captured as narrative sentences from the perspective of a particular end-user.
+* Initiatives
+  - Initiatives are collections of epics captured as a goal, and should be named accordingly. For example, “Bounce Rate Reduction” could be an initiative because, 1) it will likely include multiple epics, and 2) its purpose is clear.
+  - Initiatives are collections of epics captured as a goal.
+* Themes
+  - themes as tags since you can attach them to any level. A theme might be something like, “Safety First”, and that label/tag can then be applied to an Initiative called, “Encryption Everywhere”, and an epic called, “TLS 3.1 Upgrade”.
 
-## [开发模型演化](https://mp.weixin.qq.com/s/FtJFtGYu_jA2aBCD2aCUhA)
+```
+An agile epic is a body of work that can be broken down into specific tasks (called user stories) based on the needs/requests of customers or end-users.
+
+A user story is an informal, general explanation of a software feature written from the perspective of the end-user.
+
+Initiatives are collections of epics that drive toward a common goal.
+
+Themes are strategic labels that can be applied to initiatives, epics, or stories.
+```
+
+![Epics](../_static/agile_arch.jpg "Optional title")
+![User Stories](../_static/user_story.jpg "Optional title")
+![Initiatives](../_static/initiative.jpg "Optional title")
+
+## 开发模型演化
 
 * 瀑布开发
   - 预先做大量的设计:所有的设计和规划都在初期完成
@@ -95,15 +120,15 @@ Atlassian Agile Coach
 
 ## [Manifesto for Agile Software Development](https://agilemanifesto.org/)
 
-* 个体和互动 高于流程和工具 Individuals and interactions over processes and tools
-* 工作软件 高于详尽的文档 Working software over comprehensive documentation
+* 个体和互动高于流程和工具 Individuals and interactions over processes and tools
+* 工作软件高于详尽的文档 Working software over comprehensive documentation
   - 需求管理：正确需求拆解方法，一定是“纵切蛋糕”，每一个需求单元拆得再小，也是能够独立发布、独立创造价值的。
   - 项目管理：要管的就一定是如何把小块的需求流动起来，尽快、尽可能频繁地把小块需求交付给用户去使用，因为这才是每周、每天的工作真正体现为“可工作的软件”
   - 配置管理：功能是一点一点加上去的，代码是不断反复修改的，并且任何人都有可能修改任何一块代码
     + 单一代码库
   - 质量保障：不可能靠人肉回归测试来保障质量，必须依赖全面、可靠、快速的自动化测试来构建软件质量的安全网
-* 客户合作 高于合同谈判 Customer collaboration over contract negotiation
-* 响应变化 高于遵循计划 Responding to change over following a plan
+* 客户合作高于合同谈判 Customer collaboration over contract negotiation
+* 响应变化高于遵循计划 Responding to change over following a plan
 
 ## 阶段
 
@@ -196,35 +221,6 @@ Atlassian Agile Coach
         - 将迭代过程中遇到的问题暴露出来，可以促进团队成员在工作中一起积极讨论解决方案
         - 团队也可以根据现在的进度以及遇到的问题，了解需要哪些帮助，更好的分配资源，减少开发进度被滞后的风险
     + 年初时都做过展望与总结
-
-## 需求概念
-
-* Epics
-  - Epics are often features or other major pieces of functionality that must be broken down into multiple tasks.
-  - Epics are bodies of work that correspond to a significant feature or event.
-* User stories
-  - User stories are not just lists of features; they’re descriptions of a feature that describe what the end-user wants to get out of that feature. They’re best captured as a narrative sentence, like: As a [persona], I [want to], [so that].
-  - Stories are features captured as narrative sentences from the perspective of a particular end-user.
-* Initiatives
-  - Initiatives are collections of epics captured as a goal, and should be named accordingly. For example, “Bounce Rate Reduction” could be an initiative because, 1) it will likely include multiple epics, and 2) its purpose is clear.
-  - Initiatives are collections of epics captured as a goal.
-* Themes
-  - themes as tags since you can attach them to any level. A theme might be something like, “Safety First”, and that label/tag can then be applied to an Initiative called, “Encryption Everywhere”, and an epic called, “TLS 3.1 Upgrade”.
-
-```
-An agile epic is a body of work that can be broken down into specific tasks (called user stories) based on the needs/requests of customers or end-users.
-
-A user story is an informal, general explanation of a software feature written from the perspective of the end-user.
-
-Initiatives are collections of epics that drive toward a common goal.
-
-Themes are strategic labels that can be applied to initiatives, epics, or stories.
-```
-
-![Epics](../_static/agile_arch.jpg "Optional title")
-![User Stories](../_static/user_story.jpg "Optional title")
-![Initiatives](../_static/initiative.jpg "Optional title")
-
 
 ## [敏捷开发](https://insights.thoughtworks.cn/agile-development-thoughtworks/)
 
@@ -422,9 +418,9 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
 
 * DevOps:基于其它两个领域的实践:精益和敏捷。不是一个公司内的岗位或角色；它是一个组织或团队对持续交付、持续部署和持续集成的坚持不懈的追求
   - Gene Kim（Phoenix 项目和 Unicorn 项目的作者）认为，有三种方式定义 DevOps 的理念：
-    + 第一种: 流程原则
-    + 第二种: 反馈原则
-    + 第三种: 持续学习原则
+    + 流程原则
+    + 反馈原则
+    + 持续学习原则
   - 一种灵活的实践，它的本质是一种关于软件开发和 IT 或基础设施实施的共享文化和思维方式
     + 软件交付能力很重要，它极大地影响到组织的成果，例如利润、市场份额、质量、客户满意度以及组织战略目标的达成。
     + 优秀的团队能达到很高的交付量、稳定性和质量；他们并没有为了获得这些属性而进行取舍。
@@ -436,7 +432,7 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
   - 敏捷已经存在了 20 多年，DevOps 是最近才出现的。
   - 两者都追求软件的快速开发，它们的理念都基于怎样在不伤害客户或运维利益的情况下快速开发出软件。
 * 不同之处
-  - 两者的差异在于软件开发完成后发生的事情。
+  - 两者差异在于软件开发完成后发生的事情。
     + 在 DevOps 和敏捷中，都有软件开发、测试和部署的阶段。然而，敏捷流程在这三个阶段之后会终止。相反，DevOps 包括后续持续的运维。因此，DevOps 会持续的监控软件运行情况和进行持续的开发。
   - 敏捷中，不同的人负责软件的开发、测试和部署。而 DevOps 工程角色负责所有活动，开发即运维，运维即开发。
   - DevOps 更关注于削减成本，而敏捷则是精益和减少浪费的代名词，侧重于像敏捷项目会计和最小可行产品的概念。
@@ -958,9 +954,8 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
 * 大教堂与集市
 * 用户故事与敏捷方法 User Stories Applied: For Agile Software Development
 * 《深入核心的敏捷开发》
-* 简单思考 作者-森川亮
+* 简单思考 森川亮
   - 抓住本质，精简一切.正如商业的本质是用户，是所做产品是否被用户需要
-* 敏捷软件开发
 
 ## 工具
 

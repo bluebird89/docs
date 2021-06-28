@@ -44,6 +44,7 @@
   - Projects：项目
   - Milestone：里程碑，用作 Issue 的容器。相关 Issue 可以放在一个 Milestone 里面。常见的例子是不同的版本（version）和迭代（sprint）
 * [全局视图](github.com/issues)
+* 大幅改版 issue 功能，由原来的讨论区，转变为项目管理工具，提供了看板视图和表格视图
 
 ## pull request
 

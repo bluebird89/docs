@@ -76,13 +76,52 @@
 
 ## [Richard P. Feynman](https://www.feynmanlectures.caltech.edu/)
 
--  别闹了，费曼先生
+* 不顾父母和朋友们的反对，坚持与当时已患有肺结核的亚琳结婚。费曼回忆说：“我把自己的观点和理性跟她分享，因而改变了她。她也改变了我，对我帮助很大。她教我，人有时也要不理性。这并不代表愚蠢，而是说在一些场合或情况中，你要思考，但有时你不应该思考。女人向来对我有很大的影响，是她们让我成为今天这个比较好的人。她们代表生活中的情感层面，我知道情感层面也非常重要... 我娶她的时候，就已经知道她有肺结核。我的朋友都说既然她有肺结核，我就不该娶她。但我娶她不是出于责任感，而是因为我爱她。
+
+-  别闹了，费曼先生 Surely You're Joking, Mr. Feynman!": Adventures of a Curious Character
 - 你干嘛在乎别人怎么想
 - 费曼传
 - **费曼的彩虹**
 - **发现的乐趣**
-- 费曼物理学讲义
+- 费曼物理学讲义 The Feynman Lectures on Physics
 - 物理定律的本性
+
+### 费曼技巧|费曼学习法 Feynman Technique
+
+* 爱因斯坦曾说过：If you can’t explain it simple, you don’t understand it well enough。其实把这句话进行倒推，也就成为费曼学习法的关键：如果想弄明白一个概念，那就把它简明扼要地解释清楚。
+* There’s no miracle people. It just happens they got interested in this thing and they learned all this stuff. There’s just people.
+* 两种知识
+	* Know the name of something 集中在知道某物的名字
+	* Know something 专注于真正了解某件事，也就是理解某件事。
+* 教是最好的学习方式
+	* “The person who says he knows what he thinks but cannot express it usually does not know what he thinks.” — Mortimer Adler
+	* 根据学习金字塔原则（The Learning Pyramid or The Cone of Learning）：教别人(Teach Others)的学习内容平均留存率为90%，一般包括：说给别人听、教授给他人、输出自己的知识和见解。
+		* 被动学习 	阅读 (Reading) 	~10%
+		* 被动学习 	听讲 (Lecture) 	~5%
+		* 被动学习 	阅读 (Reading) 	~10%
+		* 被动学习 	视听 (Audiovisual) 	~20%
+		* 被动学习 	演示 (Demonstration) 	~30%
+		* 主动学习 	讨论 (Discussion) 	~50%
+		* 主动学习 	实践 (Practice Doing) 	~75%
+		* 主动学习 	教授给他人 (Teach Others) 	~90%
+	* 真正重视学习的人，他们热爱阅读、听讲与上课，并且把握机会参与讨论、观摩与传述分享，在生活休闲与工作上更是刻意地从实务经验中反思学习，换句话说，学习金字塔上所有的学习活动他们都乐于参与且主动学习。
+* 步骤
+	1. Choose a concept you want to learn about 在空白纸的顶部写下概念的名称
+		1. 选择主题的时候要注意不能太大，同时要尽量的具体。太大的主题，让人无从下手。比如：心理学，就不是一个好主题。更进一步，可以写下一个更具体的条目，比如：「心理学里的范式」。这让我们减少犯拖延症的机会，更有效的学习。
+	2. Pretend you are teaching it to a student in grade 6：使用简单的语言在空白纸页面上写下概念的解释。假装自己正在向其他人（例如，新学生）教书，这应该突出显示自己了解的内容，但更重要的是查明自己不太了解的内容
+		1. 在自我解释那些你理解或不理解的只是过程中，你会理解的更好，而原先不明白的地方也得以理清
+		2. 检验是不是真正理解了一个问题的试金石,不过是 know the name of it. 知其然而不知其所以然
+		3. 遇到的问题就是在尝试和试错中的宝贵经验，应该通过各种方式搞清楚。通过查漏补缺，学习过程成为了一个动态的循环过程，而不是被动的接受。
+		4. In preparing for his oral qualifying examination, a rite of passage for every graduate student, he chose not to study the outlines of known physics. Instead he went up to MIT, where he could be alone, and opened a fresh notebook. On the title page he wrote: Notebook Of Things I Don’t Know About. For the first but not the last time he reorganized his knowledge. He worked for weeks at disassembling each branch of physics, oiling the parts, and putting them back together, looking all the while for the raw edges and inconsistencies. He tried to find the essential kernels of each subject. When he was done he had a notebook of which he was especially proud.
+	3. Identify gaps in your explanation; Go back to the source material, to better understand it. 感到疑惑时, 查看自己不知道的内容，回过头来，重新阅读参考材料、听讲座或找老师解答，直到你搞懂为止，然后把解释记到纸上 
+	4. Review & Simplify: 如果自己使用的语言过于冗长或令人困惑（或者只是对源材料进行了措辞），尽量用简单直白的语言重新表述它，或者找到一个恰当的比喻以更好的理解它
+		1. 做无论什么数学的东西，我都会找到一些实际例子来说明他有什么用处。
+* 进化
+		1. 高亮那些关键概念,写下笔记
+		2. 将高光出来的资料，按层级、重要程度、逻辑思维等规则，提炼核心知识点，整理成思维导图。
+		3. 输出：写作、演讲
+
+![费曼学习法](../_static/feynman-technique.jpg)
 
 ## 科学
 

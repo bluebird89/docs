@@ -504,7 +504,9 @@ int epoll_wait(int epfd, struct epoll_event *events, int max events, int timeout
 netstat -an
 ```
 
-## [frp](https://github.com/fatedier/frp)
+## 穿透
+
+### [frp](https://github.com/fatedier/frp)
 
 A fast reverse proxy to help you expose a local server behind a NAT or firewall to the internet. 将内网资源映射到公网
 
@@ -565,7 +567,7 @@ custom_domains = manager.fanxl.cn # 绑定域名 域名需要配置好解析，�
 ssh -p remote_port username@server_addr
 ```
 
-## [ngrok](https://github.com/inconshreveable/ngrok)
+### [ngrok](https://github.com/inconshreveable/ngrok)
 
 * Introspected tunnels to localhost
 * an application that gives you external (internet) access to your private systems that are hidden behind NAT or a firewall.
@@ -593,6 +595,41 @@ ngrok tcp 3389
 	+ MULTICAST 表示网卡可以发送多播包
 	+ LOWER_UP 表示 L1 是启动的，也就是网线是插着的
 
+## 管理
+
+### Network manager
+
+```sh
+nmcli device # Display network devices
+nmcli device show eth0 # Show information about eth0 device
+
+nmcli connection # Show network connections
+nmcli connection up foo # Bring connection foo up
+
+nmcli device wifi connect foo # Connect to wireless network foo
+```
+
+### Routing
+
+```sh
+ip route # Show current routes
+route add default gw 10.0.0.1 # Add 10.0.0.1 as default gateway to routing table
+ip addr show # Show your local IP address
+ip neighbor # show Show neighbors
+arp # Show neighbors
+```
+
+### Firewall
+
+```sh
+firewall-cmd --get-active-zones # List active firewall zones
+-–change-interface eth0 --zone=example # Place eth0 into example zone
+--get-services # List all defined services
+--add-service samba --zone=example # Add samba ports to example zone
+--add-port=123/tcp --zone=example # Add port 123 to example zone
+--permanent # Add this flag to make a change persistent
+```
+
 ## 工具集
 
 *  ping traceroute mtr 都使用的 “ICMP” 包来测试 Internet 两点之间的网络连接状况
@@ -611,6 +648,16 @@ sudo ip address add 169.254.0.1 dev eth0
 ip neighbour
 ```
 
+### ipconfig
+
+* 用于显示当前TCP/IP配置的设置值
+* 属于 net-tools 工具集。net-tools 起源于 BSD，自 2001 年起，Linux 社区已经停止对其进行维护
+
+```sh
+ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺省网关值
+ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
+```
+
 ### route
 
 ```sh
@@ -627,6 +674,7 @@ sudo ip route \
 
 ### ping
 
+* verify connectivity between you and a remote system
 * 网路连通性探测:确定网络是否正确连接，以及网络连接的状况,是ICMP的最著名应用
 * 实现长时间的网络监控
 * 原理：用类型码为0的ICMP发请求，受到请求的主机则用类型码为8的ICMP回应
@@ -648,6 +696,7 @@ sudo ip route \
 # local host是系统网络保留名，是127.0.0.1的别名，每台计算机都应该能够将该名字转换成该地址。
 # 否则，则表示主机文件（/Windows/host）中存在问题。
 ping localhost
+ping6 example.com
 
 # 如果测试成功，表明网卡、TCP/IP协议的安装、IP地址、子网掩码的设置正常
 # 如果测试不成功，表示TCP/IP的安装或设置存在有问题，表示本地配置或安装存在问题，应当对网络设备和通讯介质进行测试、检查并排除。
@@ -689,32 +738,48 @@ nohup ping baidu.com -i 1 | while read pong; do echo "$(date +"%Y-%m-%d %H:%M:%S
   - IP，ICMP等继承于dpkt class，每一个子类有一个_hdr_ 结构，此结构定义了不同报文的头部，方便取出相应的控制字段
 * scapy:嗅探包不是爬虫框架scrapy
 
+### nslookup
+
+* query Internet name servers
+
+```sh
+# Display your DNS server and target IP address
+nslookup example.com
+```
+
 ### Traceroute
 
-* 侦测主机到目的主机之间所经路由情况的重要工具。收到到目的主机的IP后，首先给目的主机发送一个TTL=1的UDP数据包，而经过的第一个路由器收到这个数据包以后，就自动把TTL减1，而TTL变为0以后，路由器就把这个包给抛弃了，并同时产生一个主机不可达的ICMP数据报给主机。主机收到这个数据报以后再发一个TTL=2的UDP数据报给目的主机，然后刺激第二个路由器给主机发ICMP数据 报。如此往复直到到达目的主机。这样，traceroute就拿到了所有的路由器IP
+* trace the path from one system to another, including routers in between
+* 侦测主机到目的主机之间所经路由情况的重要工具。
+* 收到到目的主机的IP后，首先给目的主机发送一个TTL=1的UDP数据包，而经过的第一个路由器收到这个数据包以后，就自动把TTL减1，而TTL变为0以后，路由器就把这个包给抛弃了，并同时产生一个主机不可达的ICMP数据报给主机。
+* 主机收到这个数据报以后再发一个TTL=2的UDP数据报给目的主机，然后刺激第二个路由器给主机发ICMP数据 报。如此往复直到到达目的主机。这样，traceroute就拿到了所有的路由器IP
 
 ```sh
 traceroute google.com
 ```
 
-### ipconfig
+### Telnet
 
-* 用于显示当前TCP/IP配置的设置值
-* 属于 net-tools 工具集。net-tools 起源于 BSD，自 2001 年起，Linux 社区已经停止对其进行维护
+* connect to ports and query them for functionality
 
 ```sh
-ipconfig # 显示每个已经配置了的接口的IP地址、子网掩码和缺省网关值
-ipconfig /all # 为DNS和WINS服务器显示它已配置且所有使用的附加信息，并且能够显示内置于本地网卡中的物理地址（MAC）
+openssl s_client -starttls smtp \
+-connect example.com:587
+telnet example.com 110
 ```
 
-### netstat:show network status
+### netstat network status
 
+* analyze interface, port, protocol statistics, and routing tables
 * 一个网络信息统计工具。可以得到网卡接口上全部数据，路由表信息，网卡接口信息,列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外还能列出处于监听状态（即等待接入请求）的套接字
 * 参数
-  - -a 列出所有当前连接
-  - -t 列出 TCP 协议连接
-  - -u 列出 UDP 协议连接
-  - -n 禁用域名解析功能. 默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名,降低查找速度。如果觉没有必要知道主机名
+	* --listening -l List ports in listening mode
+	  - --all -a List all ports
+	  - --route -r Display routing tables
+	  - -t 列出 TCP 协议连接
+	  - -u 列出 UDP 协议连接
+	  - --interfaces -i Display TX/RX packet statistics for each interface
+	  - -n 禁用域名解析功能. 默认情况下 netstat 会通过反向域名解析技术查找每个 IP 地址对应的主机名,降低查找速度。如果觉没有必要知道主机名
 
 ```sh
 # 列出所有连接
@@ -765,6 +830,239 @@ cat .bash_history | sort | uniq -c | sort -rn | head -n 10 (or cat .zhistory | s
 # 输出nginx日志的ip和每个ip的pv，pv最高的前10
 #2019-06-26T10:01:57+08:00|nginx001.server.ops.pro.dc|100.116.222.80|10.31.150.232:41021|0.014|0.011|0.000|200|200|273|-|/visit|sign=91CD1988CE8B313B8A0454A4BBE930DF|-|-|http|POST|112.4.238.213
 awk -F"|" '{print $3}' access.log | sort | uniq -c | sort -nk1 -r | head -n10
+```
+
+### [Tcpdump](http://www.tcpdump.org/)
+
+* 命令行中通过指定表达式输出匹配捕获到的数据包的信息
+* 采用底层库winpcap/libpcap实现，bpf过滤机制
+* Packet structure
+	* The TCP flags are in `tcp[13]` :
+		* ACK = 0×10,
+		* RST = 0×04
+		* SYN = 0×02
+		* FIN = 0×01
+	* The ICMP type is in` icmp[0]` 
+		- 0 (echo response),
+		- 3 (destination unreachable)
+		- 8 (echo request) 
+		- 11 (time exceeded).
+	- IPv6
+		- The transport layer protocol number is in the `ip6[6]` (“next header”) field
+			- ICMP = 0×01
+			- TCP = 0×06
+			- UDP = 0×11
+		- The IPv6 header is 40 bytes, assuming no extension headers, so `tcp[13]` maps to` ip6[53]` and `icmp[0]` maps to `ip6[40]`
+- Recipes
+	- Rejected : Capture RST and ICMP Destination Unreachable packets, useful when debugging a firewall to see what it rejects:`((tcp[13] & 4 == 4 ) || (ip6[6] == 6 && ip6[53] & 4 == 4 ) || (icmp[0] == 3) | | (icmp6 && ip6[40] == 1 ))`
+	- Successful TCP handshakes Capture SYN+ACK packets to monitor successful TCP handshakes: `((tcp[13] & 0x12 = = 0x12 ) || (ip6[6] == 6 && ip6[53]&0x12 == 0x12 ))`
+	- TCP termination Capture FIN+ACK packets to monitor TCP session terminations:`((tcp[13] & 0x11 == 0x11 ) || (ip6[6] == 6 && ip6[53] & 0x11 == 0x11 ))`
+	- IPv6 neighbor and router discovery Capture ICMP6 neighbor solicitation / advertisement packets (135, 136) and ICMP6 router solicitation / advertisement / redirect packets (133, 134, 137): `(icmp6 && (ip6[40] >= 133 && ip6[40] <= 137))`
+* 参数
+  - -a 将网络地址和广播地址转变成名字
+  - -A 打印ascii
+  - -c 在收到指定包的数目后，tcpdump就会停止 Only get x number of packets and then stop.
+  - -d 将匹配信息包的代码以人们能够理解的汇编格式给出
+  - -D Show the list of available interfaces
+  - -dd 将匹配信息包的代码以c语言程序段的格式给出
+  - -ddd 将匹配信息包的代码以十进制的形式给出
+  - -e 在输出行打印出数据链路层的头部信息 Get the ethernet header as well.
+  - -E Decrypt IPSEC traffic by providing an encryption key.
+  - -f 将外部的Internet地址以数字的形式打印出来
+  - -F 从指定的文件中读取表达式,忽略其它的表达式
+  - `-i eth0` 指定网卡
+    + -i any get all interfaces
+  - -l 使标准输出变为缓冲行形式 Line-readable output (for viewing as you save, or sending to other commands)
+  - -n 不解析域名
+  - -nn 表示端口也是数字，否则解析成服务名,不解析IP地址和端口的名称
+  - -q Show less protocol information.
+  - -r 从指定的文件中读取包(这些包一般通过-w选项产生)
+  - -s 设置抓包长度，0表示不限制 Define the snaplength (size) of the capture in bytes. Use -s0 to get everything, unless you are intentionally capturing less.
+  - -S Print absolute sequence numbers.
+  - -t 在输出的每一行不打印时间戳 Give human-readable timestamp output.
+  - -tttt Give maximally human-readable timestamp output.
+  - -T 将监听到的包直接解释为指定的类型的报文，常见的类型有rpc（远程过程调用）和snmp（简单网络管理协议）
+  - -v 输出一个稍微详细的信息，例如在ip包中可以包括ttl和服务类型的信息
+  - -vv 输出详细的报文信息
+  - -w 将抓取的包写入到某个文件中
+  - -X 打印hex码 Show the packet’s contents in both hex and ascii.
+  - -XX Same as -X, but also shows the ethernet header.
+* Combinations
+  - 非 : ! or "not" (去掉双引号)
+  - 且 : && or "and"
+  - 或 : || or "or"
+* 参考
+  - [](https://hackertarget.com/tcpdump-examples/)
+
+```sh
+# networking tool which displays the TCP/IP packets transmitted and received by your system
+tcpdump -c 15
+tcpdump --help
+
+# 网络过滤
+tcpdump net 1.2.3.0/24
+# 协议过滤
+tcpdump -nn icmp
+
+tcpdump -nn host 192.168.1.100
+tcpdump -nn port 80
+
+
+# find traffic by ip tcpdump host|src｜dst 1.1.1.1`
+tcpdump ip6
+tcpdump dst 192.168.0.2 and src net and not icmp
+tcpdump 'src 10.0.2.4 and (dst port 3389 or 22)'
+# verbose output, with no resolution of hostnames or port numbers, using absolute sequence numbers, and showing human-readable timestamps
+tcpdump -ttnnvvS
+tcpdump -nnvvS src 10.5.2.3 and dst port 3389
+
+tcpdump -nvX src net 192.168.0.0/16 and dst net 10.0.0.0/8 or 172.16.0.0/16
+
+# 端口过滤
+tcpdump portrange 21-23
+# based on packet size
+tcpdump less 32
+tcpdump greater 64
+tcpdump <= 128
+
+# reading / writing captures to a file (pcap)
+tcpdump port 80 -w capture_file
+tcpdump -r capture_file
+
+# 抓取所有经过网卡1，目的或源地址IP为172.16.7.206的网络数据
+tcpdump -i eth1 [src|dst] host 172.16.7.206
+# 抓取所有经过网卡1，目的或源端口为1234的网络数据
+tcpdump -i eth1 [src|dst] port 1234
+tcpdump -i eth0 host 10.10.1.1
+
+tcpdump -i eth1 [src|dst] net 192.168
+# 抓取所有经过网卡1，协议类型为UDP的网络数据
+tcpdump -i eth1 udp|arp|ip|tcp|icmp
+# 抓取本地环路数据包
+tcpdump -i lo udp # 抓取UDP数据
+tcpdump -i lo udp port 1234 # 抓取端口1234的UDP数据
+tcpdump -i lo port 1234 # 抓取端口1234的数据
+
+
+# 抓取所有经过网卡1的SYN类型数据包
+tcpdump -i eth1 ‘tcp[tcpflags] = tcp-syn’
+# 抓取经过网卡1的所有DNS数据包（默认端口）
+tcpdump -i eth1 udp dst port 53
+
+# 逻辑语句过滤：抓取所有经过网卡1，目的网络是172.16，但目的主机不是192.168.1.200的TCP数据
+tcpdump -i eth1 ‘((tcp) and ((dst net 172.16) and (not dst host 192.168.1.200)))’
+# 抓取所有经过 eth1，目标 MAC 地址是 00:01:02:03:04:05 的 ICMP 数据
+tcpdump -i eth1 '((icmp) and ((ether dst host 00:01:02:03:04:05)))'
+# 抓取所有经过网卡1，目的主机为172.16.7.206的端口80的网络数据并存储
+tcpdump -i eth1 host 172.16.7.206 and port 80 -w /tmp/xxx.cap
+
+# 只抓 SYN 包
+tcpdump -i eth1 'tcp[tcpflags] = tcp-syn'
+# 抓 SYN, ACK
+tcpdump -i eth1 'tcp[tcpflags] & tcp-syn != 0 and tcp[tcpflags] & tcp-ack != 0'
+
+# Isolate TCP RST flags.
+tcpdump 'tcp[13] & 4!=0'
+tcpdump 'tcp[tcpflags] == tcp-rst'
+
+# Isolate TCP SYN flags.
+tcpdump 'tcp[13] & 2!=0'
+tcpdump 'tcp[tcpflags] == tcp-syn'
+
+# Isolate packets that have both the SYN and ACK flags set.
+tcpdump 'tcp[13]=18'
+
+# Isolate TCP URG flags.
+tcpdump 'tcp[13] & 32!=0'
+tcpdump 'tcp[tcpflags] == tcp-urg'
+
+# Isolate TCP ACK flags.
+tcpdump 'tcp[13] & 16!=0'
+tcpdump 'tcp[tcpflags] == tcp-ack'
+
+# Isolate TCP PSH flags.
+tcpdump 'tcp[13] & 8!=0'
+tcpdump 'tcp[tcpflags] == tcp-push'
+
+# Isolate TCP FIN flags.
+tcpdump 'tcp[13] & 1!=0'
+tcpdump 'tcp[tcpflags] == tcp-fin'
+
+# both syn and rst set
+tcpdump 'tcp[13] = 6'
+
+# find http user agents
+tcpdump -vvAls0 | grep 'User-Agent:'
+
+# cleartext get requests
+tcpdump -vvAls0 | grep 'GET'
+
+# find http cookies
+tcpdump -vvAls0 | grep 'Set-Cookie|Host:|Cookie:'
+
+# find dns traffic
+tcpdump -vvAs0 port 53
+
+# find ftp traffic
+tcpdump -vvAs0 port ftp or ftp-data
+
+# find ntp traffic
+tcpdump -vvAs0 port 123
+
+# 抓 SMTP 数据
+# 抓取数据区开始为"MAIL"的包，"MAIL"的十六进制为 0x4d41494c。
+tcpdump -i eth1 '((port 25) and (tcp[(tcp[12]>>2):4] = 0x4d41494c))'
+
+# 抓取所有经过1234端口的UDP网络数据
+tcpdump udp port 1234
+
+# 抓 HTTP GET 数据
+tcpdump -i eth1 'tcp[(tcp[12]>>2):4] = 0x47455420' # "GET "的十六进制是 47455420
+#抓 SSH 返回
+tcpdump -i eth1 'tcp[(tcp[12]>>2):4] = 0x5353482D' # "SSH-"的十六进制是 0x5353482D
+
+# 抓老版本的 SSH 返回信息，如"SSH-1.99.."
+tcpdump -i eth1 '(tcp[(tcp[12]>>2):4] = 0x5353482D) and (tcp[((tcp[12]>>2)+4):2]= 0x312E)'
+# 抓取端口号8000的GET包，然后写入GET.log
+tcpdump -i eth0 '((port 8000) and (tcp[(tcp[12]>>2):4]=0x47455420))' -nnAl -w /tmp/GET.log
+
+# 抓 DNS 请求数据
+tcpdump -i eth1 udp dst port 53
+
+# 抓取系统中的get,post请求（非https)
+tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
+
+tcpdump -i any tcp and host 192.168.33.10 and port 80 -w http.pcap
+tcpdump -i eth0 tcp and host 192.168.33.10 and port 80 -w tcp.sys_timeout.pcap
+# 捕获特定网口数据包
+tcpdump -i eth0
+# 捕获特定个数(1000)的包
+tcpdump -c 1000 -i eth0
+# 将捕获的包保存到文件
+tcpdump -w a.pcap -i eth0
+# 读取pcap格式的包
+tcpdump -r a.pcap
+# 增加捕获包的时间戳
+tcpdump -n -ttt -i eth0
+# 指定捕获包的协议类型
+tcpdump -i eth0 arp
+# 捕获指定端口
+tcpdump -i eth0 post 22
+# 捕获特定目标ip+port的包
+tcpdump -i eth0 dst address and port 22
+# 捕获DNS请求和响应
+tcpdump -i eth0 -s0 port 53
+# 匹配Http请求头
+tcpdump -s 0 -v -n -l | egrep -i "POST /|GET /|Host:"
+
+# find ssh connections This one works regardless of what port the connection comes in on, because it’s getting the banner response.
+tcpdump 'tcp[(tcp[12]>>2):4] = 0x5353482D'
+
+# find cleartext passwords
+tcpdump port http or port ftp or port smtp or port imap or port pop3 or port telnet -lA | egrep -i -B5 'pass=|pwd=|log=|login=|user=|username=|pw=|passw=|passwd= |password=|pass:|user:|username:|password:|login:|pass |user '
+
+# find traffic with evil bit There’s a bit in the IP header that never gets set by legitimate applications, which we call the “Evil Bit”. Here’s a fun filter to find packets where it’s been toggled.
+tcpdump 'ip[6] & 128 != 0'
 ```
 
 ### netcat network cat  nc
@@ -979,7 +1277,7 @@ socat TCP-LISTEN:8080,fork,reuseaddr  TCP:baidu.com:80
 curl -v -H 'Host: baidu.com' localhost:8080
 ```
 
-## [netperf](https://github.com/HewlettPackard/netperf)
+### [netperf](https://github.com/HewlettPackard/netperf)
  
 * 一种网络性能的测量工具，主要针对基于 TCP 或 UDP 的传输
 * 批量数据传输（bulk data transfer）模式
@@ -1009,7 +1307,7 @@ curl -v -H 'Host: baidu.com' localhost:8080
 ./netperf -t TCP_CRR -H 192.168.0.28
 ```
 
-## [iperf](https://github.com/esnet/iperf)
+### [iperf](https://github.com/esnet/iperf)
 
 * 测试最大 TCP 和 UDP 带宽性能，具有多种参数和 UDP 特性，可以根据需要调整，可以报告带宽、延迟抖动和数据包丢失。
 * 共用选项

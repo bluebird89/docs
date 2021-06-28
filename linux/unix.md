@@ -121,7 +121,7 @@
   - Write programs that do one thing and do it well.
   - Write programs to work together.
   - Write programs to handle text streams, because that is a universal interface.
-* 《The Art of Unix Programming》总结了下面这些哲学
+* 《The Art of Unix Programming》总结
   - Rule of Modularity: Write simple parts connected by clean interfaces.
   - Rule of Clarity: Clarity is better than cleverness.
   - Rule of Composition: Design programs to be connected to other programs.
@@ -139,7 +139,7 @@
   - Rule of Optimization: Prototype before polishing. Get it working before you optimize it.
   - Rule of Diversity: Distrust all claims for “one true way”.
   - Rule of Extensibility: Design for the future, because it will be here sooner than you think.
-* X Windows 的设计者 Mike Gancarz 给出了下面九条哲学思想
+* X Windows 的设计者 Mike Gancarz 
   - Small is beautiful. 小即是美
   - Make each program do one thing well. 让程序只做好一件事 Write programs that do one thing and do it well.
   - Build a prototype as soon as possible. 尽可能早地建立原型
@@ -149,6 +149,7 @@
   - Use shell scripts to increase leverage and portability. 使用shell脚本来提高效率和可移植性
   - Avoid captive user interfaces. 避免使用可定制性低下的用户界面
   - Make every program a filter. 所有程序都是数据的过滤器
+- 最容易使用的程序，是那些对用户的新知识要求最少的程序。
 
 ## IO模型
 

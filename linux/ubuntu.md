@@ -361,7 +361,7 @@ sudo update-rc.d -f mount_and_frpc.sh remove # 取消
     - [ustc](https://mirrors.ustc.edu.cn/ubuntu/)
     - [tsinghua](https://mirrors.tuna.tsinghua.edu.cn/ubuntu/)
 
-```
+```sh
 sudo gedit /etc/apt/sources.list
 
 sudo apt install gnome-software
@@ -369,6 +369,44 @@ sudo apt install gnome-software
 sudo add-apt-repository -y ppa:apt-fast/stable && \ 
 
 sudo apt install -y apt-fast
+
+apt search foo   Search for package foo in repository
+apt-file search foo   Find packages that provide foo
+aptitude  Launch the ncurses-based front-end to apt
+
+## Get info about software
+apt show foo   List install status and metadata of package foo
+apt-file --list foo   List all files included in package foo
+
+Installing and uninstalling softwarePackages and groups of packages can be installed and uninstalled by name.
+
+apt update Update package information (before install or update)
+apt upgrade  Upgrade all packages to the latest available version (use -f to fix any broken packages)
+apt install foo  Install package foo (use -y to skip confirmation)
+apt remove foo  Uninstall package foo
+apt purge foo  Uninstall package foo and remove its configuration files
+
+# Downloading packages
+apt Cheat SheetTo archive a package for later use, or to modify it, you can download it using apt.
+
+apt download foo Download package foo to current directory, but do not install
+apt depends foo  Show all packages foo depends on (use --installed for only those already installed)
+apt source foo  Download the source code for foo (not a package)
+
+## Dependencies
+apt autoremove Remove unneeded package files from cache
+apt autoclean Remove outdated package files from cache
+apt clean  Remove all package files from cache
+apt -f install Fix broken dependencies, by installing needed or removing package causing problem
+apt build-dep foo  Install build dependencies for package/spec/SRPM
+
+
+## Repositories
+add-apt-repository -L   # List configured repositories (use -s to include source repositories)
+
+egrep -r --include '*.list' '(deb|deb-src) ' /etc/apt/sources.list*  # List all registered repositoriesadd-apt-repository powertoolsEnable repo named powertools
+
+add-apt-repository -U https://example.com/updates/x86_64Add and enable repo (URL target must contain a valid repodata/repomd.xml file)
 ```
 
  ###  [snap](https://snapcraft.io/)

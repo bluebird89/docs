@@ -66,6 +66,7 @@
 * [Figma](https://www.figma.com/)
 * [ice](https://github.com/alibaba/ice):🚀 飞冰 - 让前端开发简单而友好，海量可复用物料，配套桌面工具极速构建前端应用，效率提升 100% <https://alibaba.github.io/ice/>
 * [framer](https://www.framer.com/) A free prototyping tool for teams.
+* [Snowtrack](https://snowtrack.io/) 桌面软件，提供图形文件的版本管理系统，方便管理设计资源。
 
 ## 参考
 

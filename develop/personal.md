@@ -978,6 +978,13 @@
     + 在分类的过程中，我们就开始提炼整理，并且开始抽象化思考。
     + 分类的方法通常是拿一张白纸，列出所有自己想思考的对象，接下来思考分类的角度，可以按时间，可以按地点，可以按属性等等，在切分的数量上可以两分（对立），可以三分（对立统一），可以四分（矩阵），如果不能涵盖，再考虑更多的切分。
 
+## 心理
+
+![延缓](../_static/delay.jpg)
+![混乱](../_static/chaos.jpg)
+![延缓](../_static/close.jpg)
+![达成](../_static/achieve.jpg)
+
 ## 资源
 
 * [the-way-to-wealth-freedom-notes](https://github.com/it-ebooks/the-way-to-wealth-freedom-notes):📖 通往财富自由之路精细笔记

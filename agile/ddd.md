@@ -61,6 +61,12 @@
     + GET /students/1
     + GET /exams/1
 
+### 领域特定语言 Domain-Specific Languages
+
+* Domain-Specific Language：A computer programming language of limited expressiveness focused on a particular domain
+* 从六七十年代就已经有DSL的概念了（从某种程度上来说，COBOL和FORTRAN也算是DSL，一个面向商业，一个面向科学计算），然后有Regexp，再到现在的RoR，无一不采用了DSL的思想。那为什么Martin花那么长时间去写这本书呢？是因为DSL一直是一种隐性的知识或是技巧，并没有书面上的记载，这大大局限了DSL的使用。就像Design Pattern建立了OO模式的词汇表一样，Martin试图用此书建立一个DSL的词汇表，以促进DSL开发者之间的交流，加速DSL的发展。
+* Fred Brook在Mythical man-month提到过：让我看你的流程而不让我看你的数据结构，我仍然一头雾水；让我看你的数据结构，我就不需要再看你的流程了，那将是显而易见的。简单的说，数据结构选对了，代码将会顺理成章；数据结构选错了，代码将会一塌糊涂。
+
 ## 通用语言 UL
 
 * 特定域的开发人员和用户使用的通用语言，通过该语言可以轻松解释领域。
@@ -441,12 +447,6 @@ public class OrderCreatedEvent extends OrderEvent {
 * [freedom](https://github.com/8treenet/freedom):Freedom是一个基于六边形架构的框架，可以支撑充血的领域模型范式
 * [php-ddd-example](https://github.com/CodelyTV/php-ddd-example):🐘🎯 Hexagonal Architecture + DDD + CQRS in PHP using Symfony 5 <https://pro.codely.tv/library/ddd-en-php>
 * [ddd-starter-modelling-process](https://github.com/ddd-crew/ddd-starter-modelling-process):If you're new to DDD and not sure where to start, this process will guide you step-by-step
-
-### 领域特定语言 Domain-Specific Languages
-
-* Domain-Specific Language：A computer programming language of limited expressiveness focused on a particular domain
-* 从六七十年代就已经有DSL的概念了（从某种程度上来说，COBOL和FORTRAN也算是DSL，一个面向商业，一个面向科学计算），然后有Regexp，再到现在的RoR，无一不采用了DSL的思想。那为什么Martin花那么长时间去写这本书呢？是因为DSL一直是一种隐性的知识或是技巧，并没有书面上的记载，这大大局限了DSL的使用。就像Design Pattern建立了OO模式的词汇表一样，Martin试图用此书建立一个DSL的词汇表，以促进DSL开发者之间的交流，加速DSL的发展。
-* Fred Brook在Mythical man-month提到过：让我看你的流程而不让我看你的数据结构，我仍然一头雾水；让我看你的数据结构，我就不需要再看你的流程了，那将是显而易见的。简单的说，数据结构选对了，代码将会顺理成章；数据结构选错了，代码将会一塌糊涂。
 
 ## 图书
 

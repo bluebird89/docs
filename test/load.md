@@ -43,15 +43,15 @@ The simplest tool to perform a load testing.
 * -g gnuplot-file Write all measured values out as a 'gnuplot' or  TSV  (Tab  separate  values) file. This file can easily be imported into packages like Gnuplot, IDL, Math‐ ematica, Igor or even Excel. The labels are on the first line of the file.
 * -h     Display usage information.
 * -H custom-header Append extra headers to the request. The argument is typically in the form of a  valid  header  line,  containing a colon-separated field-value pair (i.e., "Accept-Encoding: zip/zop;8bit").
-* -i     Do HEAD requests instead of GET.
-* -k     Enable the HTTP KeepAlive feature, i.e., perform multiple requests within one HTTP session. Default is no KeepAlive.
-* -l     Do not report errors if the length of the responses is not constant. This can be useful for dynamic pages. Available in 2.4.7 and later.
+* -i  Do HEAD requests instead of GET.
+* -k Enable the HTTP KeepAlive feature, i.e., perform multiple requests within one HTTP session. Default is no KeepAlive.
+* -l  Do not report errors if the length of the responses is not constant. This can be useful for dynamic pages. Available in 2.4.7 and later.
 * -m HTTP-method Custom HTTP method for the requests. Available in 2.4.10 and later.
 * -n requests Number of requests to perform for the benchmarking session. The default is to just  perform  a  single  request  which  usually leads to non-representative benchmarking results.
 * -p POST-file File containing data to POST. Remember to also set -T.
 * -P proxy-auth-username:password Supply BASIC Authentication credentials to a proxy en-route. The username and password are separated by a single : and sent on the wire base64 encoded. The string is sent regardless of whether the proxy needs it (i.e.,  has  sent  an 407 proxy authentication needed).
 * -q     When processing more than 150 requests, ab outputs a progress count on stderr every 10% or 100 requests or so. The -q flag will suppress these messages.
-* -r     Don't exit on socket receive errors.
+* -r  Don't exit on socket receive errors.
 * -s timeout
 * -S Do  not  display  the  median  and standard deviation values, nor display the warning/error messages when the average and median are more than one  or  two times  the  standard  deviation apart. And default to the min/avg/max values. (legacy support).
 * -t timelimit Maximum number of seconds to spend for benchmarking. This implies a -n  50000 internally.  Use  this to benchmark the server within a fixed total amount of time. Per default there is no timelimit.
@@ -60,10 +60,10 @@ The simplest tool to perform a load testing.
 * -v verbosity Set  verbosity level - 4 and above prints information on headers, 3 and above prints response codes (404, 200, etc.), 2 and above prints warnings and info.
 * -V     Display version number and exit.
 * -w     Print out results in HTML tables. Default table is two columns wide,  with  a white background.
-* -x <table>-attributes String  to use as attributes for <table>. Attributes are inserted <table here >.
-* -X proxy[:port] Use a proxy server for the requests.
-* -y <tr>-attributes String to use as attributes for <tr>.
-* -z <td>-attributes String to use as attributes for <td>.
+* -x `<table>`-attributes String  to use as attributes for `<table>.` Attributes are inserted `<table here >`.
+* -X proxy`[:port] `Use a proxy server for the requests.
+* -y` <tr>`-attributes String to use as attributes for `<tr>`.
+* -z `<td>`-attributes String to use as attributes for `<td>`.
 * -Z ciphersuite Specify SSL/TLS cipher suite (See openssl ciphers)
 
 ```sh
@@ -126,6 +126,10 @@ tar zxvf webbench-1.5.tar.gz
 cd webbench-1.5
 make && make install
 ```
+
+## [hyperfine](https://github.com/sharkdp/hyperfine)
+
+A command-line benchmarking tool
 
 ## [Siege](https://github.com/JoeDog/siege)
 

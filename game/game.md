@@ -63,7 +63,6 @@
 ## Play station
 
 * 配置 - pro - slim - 天蝎 - 1080ti
-* 刺客信条
 * 荒野大镖客 救赎2
 * 战神
 * 只狼：影逝二度
@@ -71,6 +70,8 @@
 * HOB
 * 辐射4 Fallout 4
 * 恶魔之魂 Demon's Souls
+* the  last of us 2
+* uncharted 4
 
 ## Xbox Series X
 

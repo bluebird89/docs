@@ -262,7 +262,7 @@
 * Then
   - 驱动我们分析被测接口的返回值
 
-## Test dirven implementation 实现与设计
+## Test dirven implementation 实现
 
 * 测试通过：唯一目的
   - 失败的测试：实现新功能的时机

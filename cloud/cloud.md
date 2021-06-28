@@ -151,6 +151,22 @@
   - 服务间通过资源分配模块协作。
   - 每个 Host 上都有代理，负责带宽请求和限流。
 
+## 光纤
+
+
+###  Pacific Light Cable Network (PLCN)
+
+* 2017年，跨太平洋海底电缆（PLCN）开始建设，原计划连接洛杉矶和香港, with branches to Taiwan and the Philippines
+* In February 2020, Google requested to activate one of six fiber pairs to Taiwan only. 
+* Then, the U.S. Department of Justice declined PLCN’s landing in Hong Kong in June 2020.
+* In August 2020, Google and Facebook re-filed a new landing license application that excludes PLDC and the cable’s landing to Hong Kong. The new PLCN cable thus became a system that has one fiber pair between the U.S. and Taiwan and one fiber pair between the U.S. and the Philippines.
+* 
+* 2020年由于美国政府的反对，香港节点被取消。
+* a pair of new trans-Pacific cables—Bifrost and Echo—was announced in April 2021. Neither cable will land in Hong Kong:
+	- Bifrost (Facebook, Keppel, Telin): U.S. west coast, Guam, Singapore, Indonesia, the Philippines
+    - Echo (Facebook, Google): U.S. west coast, Guam, Singapore, Indonesia
+
+
 ## 工具
 
 * [capstone](https://www.inkandswitch.com/capstone-manuscript.html):an experimental tool for creative professionals to develop their ideas

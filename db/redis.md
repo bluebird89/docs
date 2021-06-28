@@ -2,7 +2,7 @@
 
 Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, HyperLogLogs, Bitmaps. <http://redis.io>
 
-* 由意大利开发者 Salvatore Sanfilippo（antirez）通过 C 语言开发的、基于内存的、可持久化的开源键值对存储数据库
+* REmote DIctionary Server(Redis) 由意大利开发者 Salvatore Sanfilippo（antirez）通过 C 语言开发的、基于内存的、可持久化的开源键值对存储数据库
 * 一种基于客户端-服务端模型以及请求/响应协议的TCP服务
   - 客户端向服务端发送一个查询请求，并监听Socket返回，通常是以阻塞模式，等待服务端响应
   - 服务端处理命令，并将结果返回给客户端
@@ -147,7 +147,7 @@ redis-cli -h localhost -p 6379 monitor // 从库执行该命令会一直ping主�
   - 为这个 socket 设置 TCP_NODELAY 属性，禁用 Nagle 算法
   - 创建一个可读文件事件用于监听这个客户端 socket 的数据发送
 * 连接
-  - redis本身也只支持域套接字和TCP连接
+  - redis 本身只支持域套接字和TCP连接
   - connect 短连接
   - 长连接 `pconnect(host, port, time_out, persistent_id, retry_interval)`:表示客户端闲置多少秒后，就断开连接。函数连接成功返回true，失败返回false
     + 连接不会在调用close方法之后关闭，只有在进程结束之后该连接才会被关闭。close的作用仅是使当前php不能再进行redis请求。只会在PHP-FPM进程结束之后结束，连接的生命周期就是PHP-FPM进程的生命周期
@@ -384,7 +384,9 @@ REDISCLI_AUTH='my_password' redis-cli 10.8.5.4 -p 6374 FLUSHDB
 `redis-cli -a '{password-here}' COMMAND`
 ```
 
-## string 字符串
+## 数据类型
+
+### string 字符串
 
 * 动态字符串，意味着使用者可以修改，底层实现有点类似于 Java 中的ArrayList，有一个字符数组.简单的key-value类型
 * 长度不得超过 512 MB值，二进制安全的，意思是 Redis 的 String 类型可以包含任何数据，可以是String或者数字，任何各种类的字符串（包括二进制数据）、JSON、XML、二进制、jpeg图片
@@ -537,7 +539,7 @@ struct __attribute__ ((__packed__)) sdshdr64 {
 #define SDS_TYPE_BITS 3
 ```
 
-### 分布式锁
+#### 分布式锁
 
 * 控制分布式系统不同进程共同访问共享资源的一种锁的实现。如果不同的系统或同一个系统的不同主机之间共享了某个临界资源，往往需要互斥来防止彼此干扰，以保证一致性。
 * 特征
@@ -601,7 +603,7 @@ if（jedis.set(key_resource_id, uni_request_id, "NX", "EX", 100s) == 1）{ //加
 }
 ```
 
-## list 列表
+###  list 列表
 
 * 用来存储多个有序字符串，每个字符串称为元素；一个列表可以存储2^32-1个元素
   - 所有元素都是有序的，可以通过索引获取，索引从 0 开始
@@ -667,7 +669,7 @@ lrem set -5 new
 lrem set 0 new
 ```
 
-## set 集合
+### sets 集合
 
 * 存储一些无序、唯一的键值对，不能通过索引来操作元素,其元素是二进制安全的字符串，最多可以存储2^32-1个元素
 * 通过 hashtable 哈希表实现（增删改查时间复杂度为 O(1)）
@@ -725,7 +727,7 @@ typedef struct intset{
 } intset;
 ```
 
-## zset 有序集合 Sorted set
+###  zset 有序集合 Sorted set
 
 * 通过额外提供一个优先级(score)参数来为成员排序，并且是插入有序的，即自动排序
 * 实现
@@ -795,7 +797,7 @@ ZREM books "java concurrency"             # 删除 value
 zinterstore destination 2 zsetkey1 zsetkey2 WEIGHTS 1 0.5 AGGREGATE max # key1 权重 1 key2 权重 0.5 ，取大值
 ```
 
-## hash 字典
+###  hash 字典
 
 * 通过 "数组 + 链表" 的链地址法来解决部分哈希冲突,table 属性是一个数组，数组中的每个元素都是一个指向 dict.h/dictEntry 结构的指针，而每个 dictEntry 结构保存着一个键值对
   - 实际上字典结构的内部包含两个 hashtable，通常情况下只有一个 hashtable 是有值的，但是在字典扩容缩容时，需要分配新的 hashtable，然后进行渐进式搬迁
@@ -1230,15 +1232,15 @@ SCRIPT LOAD "return 1"
   - Master 和 Slave 的数据不是一定要即时同步的，但是在一段时间后 Master 和 Slave 的数据是趋于同步的，这就是最终一致性
   - Master会将数据同步到slave，而slave不会将数据同步到master
 * 开启配置:完全是从节点发起的，保存主节点信息,不需要在主节点做任何事情
-  - 配置文件：从服务器配置文件中加入：slaveof <masterip> <masterport>
-  - 启动命令：redis-server 启动命令后加入 --slaveof <masterip> <masterport>
-  - 客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点
+  - 配置文件：从服务器配置文件中加入：`slaveof <masterip> <masterport>`
+  - 启动命令：redis-server 启动命令后加入` --slaveof <masterip> <masterport>`
+  - 客户端命令：Redis 服务器启动后，直接通过客户端执行命令：`slaveof <masterip> <masterport>`，让该 Redis 实例成为从节点
 * 过程
   - 从节点中的定时任务发现主节点信息，建立和主节点的 Socket 连接
   - 连接建立成功后，发送 ping 命令，希望得到 pong 命令响应，否则会进行重连,如果主节点设置了权限，那么就需要进行权限验证，如果验证失败，复制终止
   - 心跳：主从节点在建立复制后，之间维护着长连接并彼此发送心跳命令
-    + 主从都有心跳检测机制，各自模拟成对方的客户端进行通信，通过 client list 命令查看复制相关客户端信息，主节点的连接状态为 flags = M，从节点的连接状态是 flags = S
-    + 主节点默认每隔 10 秒对从节点发送 ping 命令，可修改配置 repl-ping-slave-period 控制发送频率
+    + 主从都有心跳检测机制，各自模拟成对方的客户端进行通信，通过 `client list` 命令查看复制相关客户端信息，主节点的连接状态为 flags = M，从节点的连接状态是 flags = S
+    + 主节点默认每隔 10 秒对从节点发送 ping 命令，可修改配置 r`epl-ping-slave-period` 控制发送频率
     + 从节点在主线程每隔一秒发送 replconf ack{offset} 命令，给主节点上报自身当前的复制偏移量
     + 主节点收到 replconf 信息后，判断从节点超时时间，如果超过 repl-timeout 60 秒，则判断节点下线
   - 权限验证通过后，进行数据同步，这是耗时最长的操作，主节点将把所有的数据全部发送给从节点
@@ -1412,21 +1414,21 @@ rm -rf /var/run/redis.pid
   - 启动节点：节点以集群模式启动，此时节点是独立的，并没有建立联系。 查看节点的情况:`redis-cli -p 7000 cluster nodes`
   - 节点握手：独立节点连成一个网络。 `redis-cli cluster meet 192.168.72.128 7001`
   - 分配槽：将 16384 个槽分配给主节点
-    + redis-cli -p 7000 cluster addslots {0..5461}
-    + redis-cli -p 7001 cluster addslots {5462..10922}
+    + `redis-cli -p 7000 cluster addslots {0..5461}`
+    `+ redis-cli -p 7001 cluster addslots {5462..10922}`
     - `redis-cli -p 7002 cluster addslots {10923..16383}`
   - 指定主从关系：为从节点指定主节点
-    + redis-cli -p 8000 cluster replicate be816eba968bc16c884b963d768c945e86ac51ae
+    + `redis-cli -p 8000 cluster replicate `be816eba968bc16c884b963d768c945e86ac51ae
     + redis-cli -p 8001 cluster replicate 788b361563acb175ce8232569347812a12f1fdb4
     + redis-cli -p 8002 cluster replicate a26f1624a3da3e5197dde267de683d61bb2dcbf1
   - 前三步完成后集群便可以对外提供服务；但指定从节点后，集群才能够提供真正高可用的服务
 * 指令
   - `CLUSTER INFO` 集群信息
-    * cluster_state：集群的状态。ok表示集群是成功的，如果至少有一个solt坏了，就将处于error状态。
+    * `cluster_state`：集群的状态。ok表示集群是成功的，如果至少有一个solt坏了，就将处于error状态。
     * cluster_slots_assigned：有多少槽点被分配了，如果是16384，表示全部槽点已被分配。
     * cluster_slots_ok：多少槽点状态是OK的, 16384 表示都是好的。
-    * cluster_slots_pfail：多少槽点处于暂时疑似下线[PFAIL]状态，这些槽点疑似出现故障，但并不表示是有问题，也会继续提供服务。
-    * cluster_slots_fail：多少槽点处于暂时下线[FAIL]状态，这些槽点已经出现故障，下线了。等待修复解决。
+    * cluster_slots_pfail：多少槽点处于暂时疑似下线`[PFAIL]`状态，这些槽点疑似出现故障，但并不表示是有问题，也会继续提供服务。
+    * cluster_slots_fail：多少槽点处于暂时下线`[FAIL]`状态，这些槽点已经出现故障，下线了。等待修复解决。
     * cluster_known_nodes：已知节点的集群中的总数，包括在节点 握手的状态可能不是目前该集群的成员。这里总公有9个。
     * cluster_size：(The number of master nodes serving at least one hash slot in the cluster) 简单说就是集群中主节点［Master］的数量。
     * cluster_current_epoch：本地当前时期变量。这是使用，以创造独特的不断增加的版本号过程中失败接管
@@ -1434,7 +1436,7 @@ rm -rf /var/run/redis.pid
     * cluster_stats_messages_sent：通过群集节点到节点的二进制总线发送的消息数
     * cluster_stats_messages_received：通过群集节点到节点的二进制总线上接收报文的数量
   - CLUSTER NODES 列出集群当前已知的所有节点（node），以及这些节点的相关信息。
-  - CLUSTER MEET <ip> <port> 将 ip 和 port 所指定的节点添加到集群当中，成为集群的一份子。假设要向 A 节点发送 cluster meet 命令，将 B 节点加入到 A 所在的集群，则 A 节点收到命令后，执行的操作如下：
+  -` CLUSTER MEET <ip> <port>` 将 ip 和 port 所指定的节点添加到集群当中，成为集群的一份子。假设要向 A 节点发送 cluster meet 命令，将 B 节点加入到 A 所在的集群，则 A 节点收到命令后，执行的操作如下：
     + A 为 B 创建一个 clusterNode 结构，并将其添加到 clusterState 的 nodes 字典中。
     + A 向 B 发送 MEET 消息。
     + B 收到 MEET 消息后，会为 A 创建一个 clusterNode 结构，并将其添加到 clusterState 的 nodes 字典中。
@@ -1446,20 +1448,20 @@ rm -rf /var/run/redis.pid
   - CLUSTER FORGET <node_id> 从集群中移除 node_id 指定的节点。
   - CLUSTER REPLICATE <node_id> 将当前节点设置为 node_id 指定的节点的从节点。
   - CLUSTER SAVECONFIG 将节点的配置文件保存到硬盘里面。
-  - CLUSTER ADDSLOTS <slot> [slot ...] 将一个或多个槽（slot）指派（assign）给当前节点
+  - `CLUSTER ADDSLOTS <slot> [slot ...]` 将一个或多个槽（slot）指派（assign）给当前节点
     + 遍历输入槽，检查它们是否都没有分配，如果有一个槽已分配，命令执行失败；方法是检查输入槽在 clusterState.slots[] 中对应的值是否为 NULL。
     + 遍历输入槽，将其分配给节点 A；方法是修改 clusterNode.slots[] 中对应的比特为 1，以及 clusterState.slots[] 中对应的指针指向 A 节点。
     + A 节点执行完成后，通过节点通信机制通知其他节点，所有节点都会知道 0-10 的槽分配给了 A 节点。
-  - CLUSTER DELSLOTS <slot> [slot ...] 移除一个或多个槽对当前节点的指派。
+  - `CLUSTER DELSLOTS <slot> [slot ...]` 移除一个或多个槽对当前节点的指派。
   - CLUSTER FLUSHSLOTS 移除指派给当前节点的所有槽，让当前节点变成一个没有指派任何槽的节点。
-  - CLUSTER SETSLOT <slot> NODE <node_id> 将槽 slot 指派给 node_id 指定的节点。
-  - CLUSTER SETSLOT <slot> MIGRATING <node_id> 将本节点的槽 slot 迁移到 node_id 指定的节点中。
-  - CLUSTER SETSLOT <slot> IMPORTING <node_id> 从 node_id 指定的节点中导入槽 slot 到本节点。
-  - CLUSTER SETSLOT <slot> STABLE 取消对槽 slot 的导入（import）或者迁移（migrate）
-  - CLUSTER KEYSLOT <key> 计算键 key 应该被放置在哪个槽上。
-  - CLUSTER COUNTKEYSINSLOT <slot> 返回槽 slot 目前包含的键值对数量。
-  - CLUSTER GETKEYSINSLOT <slot> <count> 返回 count 个 slot 槽中的键。
-  - CLUSTER SLAVES node-id 返回一个master节点的slaves 列表
+  - `CLUSTER SETSLOT <slot> NODE <node_id>` 将槽 slot 指派给 node_id 指定的节点。
+  - `CLUSTER SETSLOT <slot> MIGRATING <node_id>` 将本节点的槽 slot 迁移到 node_id 指定的节点中。
+  - `CLUSTER SETSLOT <slot> IMPORTING <node_id>` 从 node_id 指定的节点中导入槽 slot 到本节点。
+  - `CLUSTER SETSLOT <slot> STABLE` 取消对槽 slot 的导入（import）或者迁移（migrate）
+  - `CLUSTER KEYSLOT <key>` 计算键 key 应该被放置在哪个槽上。
+  - `CLUSTER COUNTKEYSINSLOT <slot>` 返回槽 slot 目前包含的键值对数量。
+  - `CLUSTER GETKEYSINSLOT <slot> <count>` 返回 count 个 slot 槽中的键。
+  - `CLUSTER SLAVES node-id` 返回一个master节点的slaves 列表
 * hashtag
   - 当一个 key 包含 {} 的时候，不对整个 key 做 hash，而仅对 {} 包括的字符串做 hash cluster keyslot {product}:1
   - 可以让不同的 key 拥有相同的 hash 值，从而分配在同一个槽里；这样针对不同 key 的批量操作(mget/mset 等)，以及事务、Lua 脚本等都可以支持
@@ -1582,7 +1584,7 @@ $17\r\n
 book_description1\r\n
 ```
 
-## MySQL 百万数据量级数据快速导入 Redis
+### MySQL 百万数据量级数据快速导入 Redis
 
 ```sql
 DELIMITER $$
@@ -1646,45 +1648,6 @@ docker exec -i 899fe01d4dbc mysql --default-character-set=utf8
 | docker exec -i 4c90ef506acd redis-cli --pipe
 ```
 
-## 场景
-
-* KV 缓存：缓存用户信息、会话信息、商品信息
-* 分布式锁
-  - `set lock:$user_id owner_id nx ex=5`
-  - 一定要设置这个过期时间
-  - 注意 `owner_id`，代表锁是谁加的,释放锁时要匹配这个 owner_id，匹配成功了才能释放锁
-* 延时队列
-  - zset 里面存储的是 value／score 键值对，我们将 value 存储为序列化的任务消息，score 存储为下一次任务消息运行的时间（deadline），然后轮询 zset 中 score 值大于 now 的任务消息进行处理。
-  - 当消费者是多线程或者多进程的时候，这里会存在竞争浪费问题。当前线程明明将 task_json 从 zset 中轮询出来了，但是通过 zrem 来争抢时却抢不到手。这时就可以使用 LUA 脚本来解决这个问题，将轮询和争抢操作原子化，这样就可以避免竞争浪费。
-* 删除与过滤:用LREM来删除评论或者为每个不同的过滤器使用不同的Redis列表。毕竟每个列表只有5000条项目，但Redis却能够使用非常少的内存来处理几百万条项目。
-* 按照用户投票和时间排序:`score = points / time^alpha`.每次新的新闻贴上来后，将ID添加到列表中，使用LPUSH + LTRIM，确保只取出最新的1000条项目。有一项后台任务获取这个列表，并且持续的计算这1000条新闻中每条新闻的最终得分。计算结果由ZADD命令按照新的顺序填充生成列表，老新闻则被清除。这里的关键思路是排序工作是由后台任务来完成的。
-* 当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作
-* 实时分析正在发生的情况，用于数据统计与防止垃圾邮件等
-* 特定时间内的特定项目：统计在某段特点时间里有多少特定用户访问了某个特定资源
-
-```
-LPUSH latest.comments <ID>
-LTRIM latest.comments 0 5000
-FUNCTION get_latest_comments(start, num_items):
-    id_list = redis.lrange("latest.comments",start,start+num_items - 1)
-    IF id_list.length < num_items
-        id_list = SQL_DB("SELECT ... ORDER BY time LIMIT ...")
-    END
-    RETURN id_list
-END
-
-ZADD leaderboard  <score>  <username>
-ZREVRANGE leaderboard 0 99。
-ZRANK leaderboard <username>
-
-SADD page:day1:<page_id> <user_id>
-SCARD page:day1:<page_id>
-SISMEMBER page:day1:<page_id> // 测试某个特定用户是否访问了这个页面
-
-INCR user:<id> EXPIRE
-user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面浏览量
-```
-
 ## Redis vs memcache
 
 * 都是在内存中提供服务,内存管理机制
@@ -1742,7 +1705,9 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
 ## 持久化
 
 * 将数据持久存储，而不因断电或其他各种复杂外部环境影响数据完整性
-* RDB Redis DataBase 快照方式
+
+### RDB Redis DataBase 快照方式
+
   - 满足特定条件时,将生成内存中的数据的时间点快照，以二进制的方式写入磁盘,快照作为包含整个数据集的单个 dump.rdb 文件生成
   - 定时触发
     + 根据 redis.conf 配置里的 SAVE m n 定时触发（实际上使用的是 BGSAVE）
@@ -1765,7 +1730,9 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
   - 使用操作系统的 COW 机制来进行数据段页面的分离。数据段是由很多操作系统的页面组合而成，当父进程对其中一个页面的数据进行修改时，会将被共享的页面复 制一份分离出来，然后 对这个复制的页面进行修改。这时 子进程 相应的页面是 没有变化的，还是进程产生时那一瞬间的数据
   - 优点:适合用于备份,适合灾难恢复
   - 缺点：如果需要尽量避免在服务器故障时丢失数据
-* AOF Append Only File 文件追加方式
+
+### AOF Append Only File 文件追加方式
+
   - 类似于mysql的二进制日志方案,默认是关闭的,可以做到全程持久化，需要在配置中开启 appendonly yes
   - 对 AOF 日志文件进行写操作:将内容写到了内核为文件描述符分配的一个内存缓存中，然后内核会异步将脏数据刷回到磁盘的
   - Redis 每执行一个修改数据命令(先执行指令再将日志存盘)，都会把它添加到 AOF 文件（write 系统调用）中，文件中记录除了查询以外的所有变更数据库状态的指令，并不记录数据本身.当 Redis 重启时，将会读取 AOF 文件进行重放，恢复到 Redis 关闭前的最后时刻
@@ -1795,7 +1762,9 @@ user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面
   - 缺点
     + 对于相同数据集，AOF 的文件体积通常要大于 RDB 文件的体积
     + 由于文件较大则会影响 Redis 的启动速度
-* 对比
+
+### RDB vs AOF
+
   - RDB 优点：采用二进制 + 数据压缩的方式写磁盘，文件体积小，数据恢复速度快
   - RDB 缺点：无法保存最近一次快照之后的数据
   - AOF 优点：可读性高，适合保存增量数据，数据不易丢失
@@ -1846,7 +1815,46 @@ aof-load-truncated yes // 忽略aof文件中错误的不完整的日志，如果
 aof-user-rdb-preamble no // 这是redis 4.0出现的新特性，集成了rdb和aof的优点的一个产物。在aof rewrite的时候还是要全量读取一次所有的数据，然后rewrite期间缓存下的命令。既然都要全量读取一次了，为何不在这次全量读取的时候就索性以rdb格式写入到文件呢？然后再追加rewrite期间产生的新aof指令。这样，数据不仅恢复快，还能保证数据完整性。默认情况下，该选项处于关闭状态。
 ```
 
-## 缓存
+## 场景
+
+* KV 缓存 用户信息、会话信息、商品信息
+* 分布式锁
+  - `set lock:$user_id owner_id nx ex=5`
+  - 一定要设置过期时间
+  - 注意 `owner_id`，代表锁是谁加的,释放锁时要匹配这个 owner_id，匹配成功了才能释放锁
+* 延时队列
+  - zset 里面存储的是 value／score 键值对，我们将 value 存储为序列化的任务消息，score 存储为下一次任务消息运行的时间（deadline），然后轮询 zset 中 score 值大于 now 的任务消息进行处理。
+  - 当消费者是多线程或者多进程的时候，这里会存在竞争浪费问题。当前线程明明将 task_json 从 zset 中轮询出来了，但是通过 zrem 来争抢时却抢不到手。这时就可以使用 LUA 脚本来解决这个问题，将轮询和争抢操作原子化，这样就可以避免竞争浪费。
+* 删除与过滤:用LREM来删除评论或者为每个不同的过滤器使用不同的Redis列表。毕竟每个列表只有5000条项目，但Redis却能够使用非常少的内存来处理几百万条项目。
+* 按照用户投票和时间排序:`score = points / time^alpha`.每次新的新闻贴上来后，将ID添加到列表中，使用LPUSH + LTRIM，确保只取出最新的1000条项目。有一项后台任务获取这个列表，并且持续的计算这1000条新闻中每条新闻的最终得分。计算结果由ZADD命令按照新的顺序填充生成列表，老新闻则被清除。这里的关键思路是排序工作是由后台任务来完成的。
+* 当服务器处在高并发操作的时候，比如频繁地写入日志文件。可以利用消息队列实现异步处理。从而实现高性能的并发操作
+* 实时分析正在发生的情况，用于数据统计与防止垃圾邮件等
+* 特定时间内的特定项目：统计在某段特点时间里有多少特定用户访问了某个特定资源
+
+```
+LPUSH latest.comments <ID>
+LTRIM latest.comments 0 5000
+FUNCTION get_latest_comments(start, num_items):
+    id_list = redis.lrange("latest.comments",start,start+num_items - 1)
+    IF id_list.length < num_items
+        id_list = SQL_DB("SELECT ... ORDER BY time LIMIT ...")
+    END
+    RETURN id_list
+END
+
+ZADD leaderboard  <score>  <username>
+ZREVRANGE leaderboard 0 99。
+ZRANK leaderboard <username>
+
+SADD page:day1:<page_id> <user_id>
+SCARD page:day1:<page_id>
+SISMEMBER page:day1:<page_id> // 测试某个特定用户是否访问了这个页面
+
+INCR user:<id> EXPIRE
+user:<id> 60   // 计算出最近用户在页面间停顿不超过60秒的页面浏览量
+```
+
+### 缓存
 
 * 缓存和数据库双写一致性问题:一致性问题是分布式常见问题，可以再分为最终一致性和强一致性,先明白一个前提：如果对数据有强一致性要求，就不能放缓存。所做的一切，只能保证最终一致性
   - 采取正确更新策略，先更新数据库，再删缓存
@@ -1866,7 +1874,7 @@ aof-user-rdb-preamble no // 这是redis 4.0出现的新特性，集成了rdb和a
   - 采用异步更新策略，无论Key是否取到值，都直接返回。Value值中维护一个缓存失效时间，缓存如果过期，异步起一个线程去读数据库，更新缓存，需要做缓存预热（项目启动前，先加载缓存）操作；
   - 提供一个能迅速判断请求是否有效的拦截机制，比如利用布隆过滤器，内部维护一系列合法有效的Key，迅速判断出，请求所携带的Key是否合法有效，如果不合法，则直接返回
 * 缓存穿透处理：缓存和数据库中都没有的数据，而用户（黑客）不断发起请求，该Key的并发请求量一旦变大，那么就会对DB造成很大压力
-  - 接口层增加校验，比如用户鉴权，参数做校验，不合法的校验直接 return，比如 id 做基础校验，id<=0 直接拦截，将恶意穿透情况排除在外
+  - 接口层增加校验，比如用户鉴权，参数做校验，不合法的校验直接 return，比如 id 做基础校验，`id<=0` 直接拦截，将恶意穿透情况排除在外
   - 布隆过滤器 Bloom Filter:利用高效的数据结构和算法快速判断出你这个 Key 是否在数据库中存在，不存在你 return 就好了，存在你就去查 DB 刷新 KV 再 return
   - 对查询结果为空的情况依然进行缓存，但缓存时间会设置得很短，一般是几分钟
 * 缓存并发竞争:同时有多个子系统去Set一个Key,很多推荐用Redis事务机制，不推荐因为基本都是Redis集群环境，做了数据分片操作。一个事务中有涉及到多个Key操作的时候，这多个Key不一定都存储在同一个Redis-Server上
@@ -1948,7 +1956,7 @@ bf.mexists codehole user4 user5 user6 user7
   - 建议 Geo 的数据使用 单独的 Redis 实例部署，不使用集群环境
   - 数据量过亿甚至更大，就需要对 Geo 数据进行拆分，按国家拆分、按省拆分，按市拆分，在人口特大城市甚至可以按区拆分。这样就可以显著降低单个 zset 集合的大小
 
-```
+```sql
 # 需要按照一定的系数 加权 再进行求和
 SELECT
     *
@@ -2023,20 +2031,20 @@ slowlog-max-len 128
 
 - 监控方式
   - redis-benchmark
-    + -h  指定服务器主机名    127.0.0.1
-    + -p  指定服务器端口 6379
-    + -s  指定服务器 socket
-    + -c  指定并发连接数
-    + -n  指定请求数
-    + -d  以字节的形式指定 SET/GET 值的数据大小 2
-    + -k  1=keep alive 0=reconnect    1
-    + -r  SET/GET/INCR 使用随机 key, SADD 使用随机值
-    + -P  通过管道传输 <numreq> 请求  1
-    * -q  强制退出 redis。仅显示 query/sec 值
-    * --csv   以 CSV 格式输出
-    * -l  生成循环，永久执行测试
-    * -t  仅运行以逗号分隔的测试命令列表
-  + -I  Idle 模式。仅打开 N 个 idle 连接并等待。
+		+ -h  指定服务器主机名    127.0.0.1
+		+ -p  指定服务器端口 6379
+		+ -s  指定服务器 socket
+		+ -c  指定并发连接数
+		+ -n  指定请求数
+		+ -d  以字节的形式指定 SET/GET 值的数据大小 2
+		+ -k  1=keep alive 0=reconnect    1
+		+ -r  SET/GET/INCR 使用随机 key, SADD 使用随机值
+		+ -P  通过管道传输 `<numreq>` 请求  1
+		* -q  强制退出 redis。仅显示 query/sec 值
+		* --csv   以 CSV 格式输出
+		* -l  生成循环，永久执行测试
+		* -t  仅运行以逗号分隔的测试命令列表
+		+ -I  Idle 模式。仅打开 N 个 idle 连接并等待。
   - redis-stat
   - redis-faina
   - redislive
@@ -2093,10 +2101,10 @@ redis-cli info | grep ops # 每秒操作数
 * 操作限制
   - 严禁作为消息队列使用 如没有非常特殊的需求，严禁将 Redis 当作消息队列使用。Redis 当作消息队列使用，会有容量、网络、效率、功能方面的多种问题。如需要消息队列，可使用高吞吐的 Kafka 或者高可靠的 RocketMQ。
   - 严禁不设置范围的批量操作 redis 那么快，慢查询除了网络延迟，就属于这些批量操作函数。大多数线上问题都是由于这些函数引起。
-    + [zset] 严禁对 zset 的不设范围操作 ZRANGE、 ZRANGEBYSCORE等多个操作 ZSET 的函数，严禁使用 ZRANGE myzset 0 -1 等这种不设置范围的操作。请指定范围，如 ZRANGE myzset 0 100。如不确定长度，可使用 ZCARD 判断长度
-    + [hash] 严禁对大数据量 Key 使用 HGETALL HGETALL会取出相关 HASH 的所有数据，如果数据条数过大，同样会引起阻塞，请确保业务可控。如不确定长度，可使用 HLEN 先判断长度
-    + [key] Redis Cluster 集群的 mget 操作 Redis Cluster 的 MGET 操作，会到各分片取数据聚合，相比传统的 M/S架构，性能会下降很多，请提前压测和评估
-    + [其他] 严禁使用 sunion, sinter, sdiff等一些聚合操作
+    + zset 严禁对 zset 的不设范围操作 ZRANGE、 ZRANGEBYSCORE等多个操作 ZSET 的函数，严禁使用 ZRANGE myzset 0 -1 等这种不设置范围的操作。请指定范围，如 ZRANGE myzset 0 100。如不确定长度，可使用 ZCARD 判断长度
+    + hash 严禁对大数据量 Key 使用 HGETALL HGETALL会取出相关 HASH 的所有数据，如果数据条数过大，同样会引起阻塞，请确保业务可控。如不确定长度，可使用 HLEN 先判断长度
+    + key Redis Cluster 集群的 mget 操作 Redis Cluster 的 MGET 操作，会到各分片取数据聚合，相比传统的 M/S架构，性能会下降很多，请提前压测和评估
+    + 其他 严禁使用 sunion, sinter, sdiff等一些聚合操作
   - 禁用 select 函数 select函数用来切换 database，对于使用方来说，这是很容易发生问题的地方，cluster 模式也不支持多个 database，且没有任何收益，禁用
   - 禁用事务 redis 本身已经很快了，如无大的必要，建议捕获异常进行回滚，不要使用事务函数，很少有人这么干。
   - 禁用 lua 脚本扩展 lua 脚本虽然能做很多看起来很 cool 的事情，但它就像是 SQL 的存储过程，会引入性能和一些难以维护的问题，禁用。
@@ -2138,7 +2146,7 @@ redis-cli info | grep ops # 每秒操作数
   - 有大量缓存在同一时间同时过期，那么会导致 Redis 循环多次持续扫描删除过期字典，直到过期字典中过期键值被删除的比较稀疏为止，而在整个执行过程会导致 Redis 的读写出现明显的卡顿
   - 卡顿的另一种原因是内存管理器需要频繁回收内存页，因此也会消耗一定的 CPU
 * 限制 Redis 内存大小
-  - 64 位操作系统中 Redis 的内存大小是没有限制的，也就是配置项 maxmemory <bytes> 是被注释掉的，这样就会导致在物理内存不足时，使用 swap 空间既交换空间，而当操心系统将 Redis 所用的内存分页移至 swap 空间时，将会阻塞 Redis 进程，导致 Redis 出现延迟，从而影响 Redis 的整体性能
+  - 64 位操作系统中 Redis 的内存大小是没有限制的，也就是配置项 `maxmemory <bytes> `是被注释掉的，这样就会导致在物理内存不足时，使用 swap 空间既交换空间，而当操心系统将 Redis 所用的内存分页移至 swap 空间时，将会阻塞 Redis 进程，导致 Redis 出现延迟，从而影响 Redis 的整体性能
   - 需要限制 Redis 的内存大小为一个固定的值，当 Redis 的运行到达此值时会触发内存淘汰策略，内存淘汰策略在 Redis 4.0 之后有 8 种
 * 使用物理机而非虚拟机安装 Redis 服务 `./redis-cli --intrinsic-latency 100` 命令查看延迟时间
 * 检查数据持久化策略
@@ -2268,9 +2276,10 @@ rename-command SHUTDOWN SHUTDOWN_MENOT
 rename-command CONFIG ASC12_CONFIG
 ```
 
-## [性能问题](https://mp.weixin.qq.com/s/6kUvdNNQN05gd4dBDm8K1A)
+## [性能](https://mp.weixin.qq.com/s/6kUvdNNQN05gd4dBDm8K1A)
 
-* 基准性能测试
+### 基准性能测试
+
   - 查看基准性能
     + 60 秒内的最大响应延迟:`redis-cli -h 127.0.0.1 -p 6379 --intrinsic-latency 60`
     + 查看一段时间内 Redis 最小、最大、平均访问延迟 `redis-cli -h 127.0.0.1 -p 6379 --latency-history -i 1`,每间隔 1 秒，采样 Redis 的平均操作耗时
@@ -2278,6 +2287,9 @@ rename-command CONFIG ASC12_CONFIG
     + 在相同配置的服务器上，测试一个正常 Redis 实例的基准性能
     + 找到认为可能变慢的 Redis 实例，测试这个实例的基准性能
     + 如果观察到，这个实例的运行延迟是正常 Redis 基准性能的 2 倍以上，即可认为这个 Redis 实例确实变慢了
+ 
+ ### 可能原因
+ 
 * 使用复杂度过高命令
   - 查看一下 Redis 的慢日志（slowlog），记录了有哪些命令在执行时耗时比较久
   - 原因
@@ -2286,7 +2298,7 @@ rename-command CONFIG ASC12_CONFIG
   - 处理
     + 尽量不使用 O(N) 以上复杂度过高的命令，对于数据的聚合操作，放在客户端做
     + 执行 O(N) 命令，保证 N 尽量的小（推荐 N <= 300），每次获取尽量少的数据，让 Redis 可以及时处理返回
-* 操作bigkey
+* 操作 bigkey
   - 查询慢日志发现是 SET / DEL 这种简单命令出现在慢日志中，那么就要怀疑实例否写入了 bigkey
   - 在写入数据时，需要为新的数据分配内存，相对应的，当从 Redis 中删除数据时，它会释放对应的内存空间，如果一个 key 写入的 value 非常大，那么 Redis 在分配内存时就会比较耗时。同样的，当删除这个 key 时，释放内存也会比较耗时，这种类型的 key 一般称之为 bigkey
   - 扫描出一个实例中 bigkey 分布情况: `redis-cli -h 127.0.0.1 -p 6379 --bigkeys -i 0.01`,这个命令的原理，就是 Redis 在内部执行了 SCAN 命令，遍历整个实例中所有的 key，然后针对 key 的类型，分别执行 STRLEN、LLEN、HLEN、SCARD、ZCARD 命令，来获取 String 类型的长度、容器类型（List、Hash、Set、ZSet）的元素个数
@@ -2427,9 +2439,29 @@ active-defrag-max-scan-fields 1000
 * Redis 4.X Cookbook
 * [redis-in-action](https://github.com/josiahcarlson/redis-in-action):Example code from the book
 
-## [rdr](https://github.com/xueqiu/rdr)
+## 工具
 
-* 解析 redis rdbfile 工具。与redis-rdb-tools相比，RDR 是由golang 实现的，速度更快（5GB rdbfile 在我的PC上大约需要2分钟）
+* 客户端
+  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis <https://rdm.dev/>
+  - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. <http://getmedis.com>
+  - [redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
+  - [iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. <https://iredis.io/show>
+* [redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
+* [twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
+* [phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. <http://dubbelboer.com/phpRedisAdmin/>
+* [phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
+* [redis-port](link):redis 间数据同步
+* [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
+* [codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
+* Jedis
+  - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)
+  - [JedisPool 资源池优化](https://yq.aliyun.com/articles/236383)
+* [KeyDB](link):从redis fork出来的分支,兼容redis API的情况下将redis改造成多线程
+* [Redis-Sync](link)TendisX冷热混合存储项目, 是项目中的同步层组件, 负责对Tendis缓存层和Tedis存储版进行数据同步
+
+### [rdr](https://github.com/xueqiu/rdr)
+
+* 解析 redis rdbfile 工具。与redis-rdb-tools相比，RDR 是由golang 实现的，速度更快（5GB rdbfile PC上大约需要2分钟）
 * 参数
   - show 网页显示 rdbfile 的统计信息
   - keys 从 rdbfile 获取所有 key
@@ -2453,26 +2485,7 @@ https://github.com/xueqiu/rdr/releases/download/v0.0.1/rdr-windows.exe
 rdr keys FILE1 [FILE2] [FILE3]...
 ```
 
-## 工具
-
-* 客户端
-  - [Redis Desktop Manager](https://github.com/uglide/RedisDesktopManager):🔧 Cross-platform GUI management tool for Redis <https://rdm.dev/>
-  - [medis](https://github.com/luin/medis):💻 Medis is a beautiful, easy-to-use Mac database management application for Redis. <http://getmedis.com>
-  - [redis-tui](https://github.com/mylxsw/redis-tui):A Redis Text-based UI client in CLI
-  - [iredis](https://github.com/laixintao/iredis):Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting. <https://iredis.io/show>
-* [redis-rdb-tools](https://github.com/sripathikrishnan/redis-rdb-tools):Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON
-* [twemproxy](https://github.com/twitter/twemproxy):A fast, light-weight proxy for memcached and redis
-* [phpRedisAdmin](https://github.com/erikdubbelboer/phpRedisAdmin):Simple web interface to manage Redis databases. <http://dubbelboer.com/phpRedisAdmin/>
-* [phpredis](https://github.com/phpredis/phpredis):A PHP extension for Redis `pcel install redis`
-* [redis-port](link):redis 间数据同步
-* [redis-faina](https://github.com/facebookarchive/redis-faina):热点 key 寻找 (内部实现使用 monitor，所以建议短时间使用)
-* [codis](https://github.com/CodisLabs/codis):Proxy based Redis cluster solution supporting pipeline and scaling dynamically
-* Jedis
-  - [Jedis 常见异常汇总](https://yq.aliyun.com/articles/236384)
-  - [JedisPool 资源池优化](https://yq.aliyun.com/articles/236383)
-* [KeyDB](link):从redis fork出来的分支,兼容redis API的情况下将redis改造成多线程
-* [Redis-Sync](link)TendisX冷热混合存储项目, 是项目中的同步层组件, 负责对Tendis缓存层和Tedis存储版进行数据同步
-
 ## 参考
 
 * [Redis 源代码分析](https://mp.weixin.qq.com/s?__biz=MzI1MzYzMTI2Ng==&mid=2247484439&idx=1&sn=2b1199ccb150c99b4efea45e2a5f49d5)
+* https://mp.weixin.qq.com/s/k8agEub4qmhm3kX_TpETrA

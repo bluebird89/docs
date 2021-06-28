@@ -3539,8 +3539,6 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 # Similar routing lookup process is followed in each hop till the packet reaches the actual server. Transport layer and layers above it come to play only at end servers. During intermediate hops only till the IP/Network layer is involved.
 ```
 
-### 
-
 ### [lsof lists open files](http://www.netadmintools.com/html/lsof.man.html)
 
 * default : without options, lsof lists all open files for active processes
@@ -3990,6 +3988,40 @@ cut -d',' -f3 jan17no_headers.csv > authors.txt
   - 平铺。不必手动排列窗口
   - 如果使用鼠标，光标所在的窗口自动获得焦点
 
+## [modern-unix](https://github.com/ibraheemdev/modern-unix)
+
+* A collection of modern/faster/saner alternatives to common unix commands.
+* [`bat`](https://github.com/sharkdp/bat) A `cat` clone with syntax highlighting and Git integration.
+* [`exa`](https://github.com/ogham/exa) A modern replacement for `ls`.
+* [`lsd`](https://github.com/Peltoche/lsd) The next gen file listing command. Backwards compatible with `ls`.
+* [`delta`](https://github.com/dandavison/delta) A viewer for `git` and `diff` output
+* [`dust`](https://github.com/bootandy/dust) A more intutive version of `du` written in rust.
+* [`duf`](https://github.com/muesli/duf) A better `df` alternative
+* [`broot`](https://github.com/Canop/broot) A new way to see and navigate directory `tree`s
+* [`fd`](https://github.com/sharkdp/fd) A simple, fast and user-friendly alternative to `find`.
+* [`ripgrep`](https://github.com/BurntSushi/ripgrep) An extremely fast alternative to `grep` that respects your gitignore
+* [`ag`](https://github.com/ggreer/the_silver_searcher) A code searching tool similar to `ack`, but faster.
+* [`fzf`](https://github.com/junegunn/fzf) A general purpose command-line fuzzy finder.
+* [`mcfly`](https://github.com/cantino/mcfly) Fly through your shell `history`. Great Scott!
+* [`choose`](https://github.com/theryangeary/choose)  A human-friendly and fast alternative to `cut` and (sometimes) `awk`
+* [`jq`](https://github.com/stedolan/jq) `sed` for JSON data.
+* [`sd`](https://github.com/chmln/sd) An intuitive find & replace CLI (`sed` alternative).
+* [`cheat`](https://github.com/cheat/cheat)
+* [`tldr`](https://github.com/tldr-pages/tldr) A community effort to simplify `man` pages with practical examples. Create and view interactive cheatsheets on the command-line.
+* [`bottom`](https://github.com/ClementTsang/bottom) Yet another cross-platform graphical process/system monitor.
+* [`glances`](https://github.com/nicolargo/glances) Glances an Eye on your system. A `top`/`htop` alternative for GNU/Linux, BSD, Mac OS and Windows operating systems.
+* [`gtop`](https://github.com/aksakalli/gtop)
+
+System monitoring dashboard for terminal.
+* # [`hyperfine`](https://github.com/sharkdp/hyperfine) A command-line benchmarking tool.
+* # [`gping`](https://github.com/orf/gping) `ping`, but with a graph.
+* # [`procs`](https://github.com/dalance/procs) A modern replacement for `ps` written in Rust.
+* # [`httpie`](https://github.com/httpie/httpie) A modern, user-friendly command-line HTTP client for the API era.
+* # [`curlie`](https://github.com/rs/curlie) The power of `curl`, the ease of use of `httpie`.
+* # [`xh`](https://github.com/ducaale/xh) A friendly and fast tool for sending HTTP requests. It reimplements as much as possible of HTTPie's excellent design, with a focus on improved performance.
+* # [`zoxide`](https://github.com/ajeetdsouza/zoxide) A smarter `cd` command inspired by `z`.
+* # [`dog`](https://github.com/ogham/dog) A user-friendly command-line DNS client. `dig` on steroids
+
 ## [技巧](https://coolshell.cn/articles/8883.html)
 
 * 基础
@@ -4010,7 +4042,7 @@ cut -d',' -f3 jan17no_headers.csv > authors.txt
   - 使用 nohup 或  disown 如果要让某个进程运行在后台。
   - 在bash的脚本中，可以使用 set -x 来debug输出。使用 set -e 来当有错误发生的时候abort执行。考虑使用 set -o pipefail 来限制错误。还可以使用trap来截获信号（如截获ctrl+c）。
   - 在bash 脚本中，subshells (写在圆括号里的) 是一个很方便的方式来组合一些命令。一个常用的例子是临时地到另一个目录中，例如： `(cd /some/other/dir; other-command)`
-  - 在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: ${name:?error message}。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 `input_file=${1:?usage: $0 input_file}`。一个计算表达式： i=$(( (i + 1) % 5 ))。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints “foo.txt”.
+  - 在 bash 中，注意那里有很多的变量展开。如：检查一个变量是否存在: `${name:?error message}`。如果一个bash的脚本需要一个参数，也许就是这样一个表达式 `input_file=${1:?usage: $0 input_file}`。一个计算表达式：` i=$(( (i + 1) % 5 ))`。一个序列： {1..10}。 截断一个字符串： ${var%suffix} 和 ${var#prefix}。 示例： if var=foo.pdf, then echo ${var%.pdf}.txt prints “foo.txt”.
   - 通过 <(some command) 可以把某命令当成一个文件。示例：比较一个本地文件和远程文件 /etc/hosts： diff /etc/hosts <(ssh somehost cat /etc/hosts)
   - 了解什么叫 “here documents” ，就是诸如 cat <<EOF 这样的东西。
   - 在 bash中，使用重定向到标准输出和标准错误。如： some-command >logfile 2>&1。另外，要确认某命令没有把某个打开了的文件句柄重定向给标准输入，最佳实践是加上 “</dev/null”，把/dev/null重定向到标准输入。
@@ -4031,16 +4063,16 @@ cut -d',' -f3 jan17no_headers.csv > authors.txt
   - 了解 awk 和 sed，并用他们来做一些简单的数据修改操作。例如：求第三列的数字之和： awk ‘{ x += $3 } END { print x }’。这可能会比Python快3倍，并比Python的代码少三倍。
   - 使用 shuf 来打乱一个文件中的行或是选择文件中一个随机的行。
   - 了解sort命令的选项。了解key是什么（-t和-k）。具体说来，你可以使用-k1,1来对第一列排序，-k1来对全行排序。
-  - Stable sort (sort -s) 会很有用。例如：如果你要想对两例排序，先是以第二列，然后再以第一列，那么你可以这样： sort -k1,1 | sort -s -k2,2
-  - 输入一个Tab字符（比如：你想在sort -t选项后输入<tab>字符），你可以先按Ctrl-V，然后再按Tab键，就可以输入<tab>字符了。当然，也可以使用$’\t’。
-  - 如果想查看二进制文件，可以使用hd命令（在CentOS下是hexdump命令），如果想编译二进制文件，可以使用bvi命令（http://bvi.sourceforge.net/ 墙）
+  - Stable sort (sort -s) 会很有用。例如：如果你要想对两例排序，先是以第二列，然后再以第一列，那么你可以这样：` sort -k1,1 | sort -s -k2,2`
+  - 输入一个Tab字符（比如：你想在sort -t选项后输入`<tab>字符`），你可以先按Ctrl-V，然后再按Tab键，就可以输入`<tab>`字符。当然，也可以使用`$’\t’`。
+  - 如果想查看二进制文件，可以使用hd命令（在CentOS下是hexdump命令），如果想编译二进制文件，可以使用bvi命令（http://bvi.sourceforge.net/）
   - 另外，对于二进制文件，你可以使用strings（配合grep等）来查看二进制中的文本。
   - 对于文本文件转码，你可以试一下 iconv。或是试试更强的 uconv 命令（这个命令支持更高级的Unicode编码）
   - 分隔一个大文件使用split命令（split by size）和csplit命令（split by a pattern）
 * 系统调试
   - 如果想知道磁盘、CPU、或网络状态，使用 iostat, netstat, top (或更好的 htop), 还有 dstat 命令。你可以很快地知道你的系统发生了什么事。关于这方面的命令，还有iftop, iotop等（参看《28个Unix/Linux的命令行神器》）
   - 要了解内存的状态，你可以使用free和vmstat命令。具体来说，你需要注意 “cached” 的值，这个值是Linux内核占用的内存。还有free的值。
-  - Java 系统监控有一个小的技巧是，你可以使用kill -3 <pid> 发一个SIGQUIT的信号给JVM，可以把堆栈信息（包括垃圾回收的信息）dump到stderr/logs。
+  - Java 系统监控有一个小的技巧是，你可以使用`kill -3 <pid>` 发一个SIGQUIT的信号给JVM，可以把堆栈信息（包括垃圾回收的信息）dump到stderr/logs。
   - 使用 mtr 会比使用 traceroute 要更容易定位一个网络问题。
   - 如果你要找到哪个socket或进程在使用网络带宽，你可以使用 iftop 或 nethogs。
   - Apache的一个叫 ab 的工具是一个很有用的，用quick-and-dirty的方式来测试网站服务器的性能负载的工作。如果你需要更为复杂的测试，你可以试试 siege。
@@ -4048,7 +4080,7 @@ cut -d',' -f3 jan17no_headers.csv > authors.txt
   - 了解 strace 和 ltrace。这两个命令可以让你查看进程的系统调用，这有助于你分析进程的hang在哪了，怎么crash和failed的。你还可以用其来做性能profile，使用 -c 选项，可以使用-p选项来attach上任意一个进程
   - 了解用ldd命令来检查相关的动态链接库。注意：ldd的安全问题
   - 使用gdb来调试一个正在运行的进程或分析core dump文件。参看我写的《GDB中应该知道的几个调试方法》
-  - 学会到 /proc 目录中查看信息。这是一个Linux内核运行时记录的整个操作系统的运行统计和信息，比如： /proc/cpuinfo, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps.
+  - 学会到 /proc 目录中查看信息。这是一个Linux内核运行时记录的整个操作系统的运行统计和信息，比如：` /proc/cpuinfo, /proc/xxx/cwd, /proc/xxx/exe, /proc/xxx/fd/, /proc/xxx/smaps`.
   - 如果调试某个东西为什么出错时，sar命令会有用。可以让看看 CPU, 内存, 网络, 等的统计信息。
   - 使用 dmesg 来查看一些硬件或驱动程序的信息或问题
 

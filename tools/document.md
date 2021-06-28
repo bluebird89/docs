@@ -92,7 +92,7 @@ sudo apt-get intall openjdk-8-jre-headless  install graphviz
 asciidoctor -r asciidoctor-diagram xxx.adoc
 ```
 
-## 脑图
+## 思维导图
 
 * [FreeMind](http://freemind.sourceforge.net/wiki/index.php/Main_Page)
 * xmind：结构化整理
@@ -108,6 +108,14 @@ asciidoctor -r asciidoctor-diagram xxx.adoc
   - [mindtools](https://www.mindtools.com/)
   - [](https://github.com/ssjssh/notes)
   - [](https://github.com/TeamStuQ/skill-map)程序员技能图谱  github.com/teamstuq/skill-map
+
+### 图书
+
+- 《[思维导图完整手册-东尼·博赞](https://weread.qq.com/web/reader/5b13206071691b685b1ec84kc81322c012c81e728d9d180)》2018：东尼·博赞是思维导图的原创者，推荐首次阅读。
+-   《[看完就用的思维导图-刘艳](https://weread.qq.com/web/reader/82c32870718caa2d82c928b)》2019：作者是思维导图原创者东尼·博赞所认可的，有非常详实的实践。
+-   《[21天学会思维导图-尹丽芳](https://weread.qq.com/web/reader/a5532da07192ea39a55a56a)》2019：作者是文科生，手绘能力强，而且是思维导图原创者东尼·博赞所认可的。    
+-   《[思维导图高效记忆古诗词-张维 谢庆平](https://weread.qq.com/web/reader/a3a32c1071914618a3abcc2)》2019：思维导图适合用来记忆小学的75首诗词。
+-   《[思维导图宝典：好看又好用的导图大全集-吴帝德](https://weread.qq.com/web/reader/48e323405e1ac348e1be65b)》2017：作者的话——我坚信，这应该是一本分量十足的关于思维导图的书，我以自己的亲身经历，将能设想到的大部分构思都通过案例的方式来展现给各位读者，通过文字讲述了我画每一幅思维导图的思考过程，我想，这应该是市面上相关书籍里独一无二的。
 
 ## [OmniGraffle](https://www.omnigroup.com/omnigraffle)
 

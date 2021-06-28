@@ -907,16 +907,16 @@ document.write("你好 \
 
 * 应用于text、password、hidden以及select,获取value的值
 * 对于单选框和复选框，value属性返回的永远是HTML预设的值，而我们需要获得的实际是用户是否“勾上了”选项，所以应该用checked判断
-* 通过<form>元素的submit()方法提交一个表单,响应一个<button>的click事件，在JavaScript代码中提交表单,这种方式的缺点是扰乱了浏览器对form的正常提交
-* 响应<form>本身的onsubmit事件，在提交form时作修改,要return true来告诉浏览器继续提交，如果return false，浏览器将不会继续提交form，这种情况通常对应用户输入有误，提示用户错误信息后终止提交form。
-* 没有name属性的<input>的数据不会被提交。
+* 通过`<form>`元素的submit()方法提交一个表单,响应一个`<button>`的click事件，在JavaScript代码中提交表单,这种方式的缺点是扰乱了浏览器对form的正常提交
+* 响应`<form>`本身的onsubmit事件，在提交form时作修改,要return true来告诉浏览器继续提交，如果return false，浏览器将不会继续提交form，这种情况通常对应用户输入有误，提示用户错误信息后终止提交form。
+* 没有name属性的`<input>`的数据不会被提交。
 
 ```html
 <input type="text" id="email">
 <label><input type="radio" name="weekday" id="tuesday" value="2"> Tuesday</label>
 ```
 
-```javascript
+```js
 var input = document.getElementById('email');
 input.value; // '用户输入的值'
 input.value = 'test@example.com'; // 文本框的内容已更新
@@ -1163,11 +1163,11 @@ function getPrice() {
 ## 客户端 JavaScript
 
 * 由 Web 页面中所包含的所有 JavaScript 代码以及引入的外部 JavaScript 文件所组成，这些代码共用同一个 Window 对象和 Document 对象，可以共享相同的全局函数和变量，如果一个脚本定义了新的全局变量和函数，那个这个变量和函数在脚本执行之后对任意 JavaScript 代码可见
-* 如果 Web 页面包含一个嵌入的窗体（使用<iframe>元素引入），嵌入文档中的 JavaScript 代码和被嵌入文档里的 JavaScript 代码会有不同的全局对象，它可以当做一个单独的 JavaScript 程序
+* 如果 Web 页面包含一个嵌入的窗体（使用`<iframe>`元素引入），嵌入文档中的 JavaScript 代码和被嵌入文档里的 JavaScript 代码会有不同的全局对象，它可以当做一个单独的 JavaScript 程序
 * 执行有两个阶段
-  - 载入文档内容，并执行<script>标签里的代码（包括内联和外部脚本），当文档载入完成，并且所有脚本执行完成后
+  - 载入文档内容，并执行`<script>`标签里的代码（包括内联和外部脚本），当文档载入完成，并且所有脚本执行完成后
   - 这个阶段是异步的，而且由事件驱动，在事件驱动阶段，Web 浏览器调用事件处理程序函数来响应异步发生的事件。事件驱动阶段里发生的第一个事件是 load 事件，指示文档已经全部载入，并可以操作
-* 脚本的执行默认是同步阻塞的，<script> 标签可以有 defer （延迟）和 async （异步）属性，这可以改变脚本的执行方式
+* 脚本的执行默认是同步阻塞的，`<script>` 标签可以有 defer （延迟）和 async （异步）属性，这可以改变脚本的执行方式
   - defer 属性使得浏览器延迟脚本的执行，直到文档的载入和解析完成，并可以操作
   - async 属性使得浏览器可以尽快执行脚本，而不用在下载脚本时阻塞文档解析
 
@@ -1333,7 +1333,7 @@ then(function( fromLatLng, toLatLng ) {
 
 ## console
 
-console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
+* console.log() 写入到浏览器的控制台：能看到结构化的东西；不会打断页面的操作
 
 ## indexedDB
 
@@ -1616,8 +1616,7 @@ myOptions.style.color = "red";
   - 直接用标识符作为属性名
   - 用表达式作为属性名，这时要将表达式放在方括号之内，还可以用于定义方法名
   - 属性名表达式与简洁表示法，不能同时使用，会报错
-  - 属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串[object Object]
-  -
+  - 属性名表达式如果是一个对象，默认情况下会自动将对象转为字符串`[object Object]`
 * 方法 name 属性：返回函数名
   - 如果对象的方法使用了取值函数（getter）和存值函数（setter），则name属性不是在该方法上面，而是该方法的属性的描述对象的get和set属性上面，返回值是方法名前加上get和set
   - bind方法创造的函数，name属性返回bound加上原函数的名字
@@ -1748,7 +1747,7 @@ try {
 * [ES6-for-humans](https://github.com/metagrover/ES6-for-humans):A kickstarter guide to writing ES6
 * [es6-cheatsheet](https://github.com/DrkSephy/es6-cheatsheet):ES2015 [ES6] cheatsheet containing tips, tricks, best practices and code snippets <http://slides.com/drksephy/ecmascript-2015>
 
-### ES6 作业队列
+### 作业队列
 
 * ECMAScript 2015 引入了作业队列的概念，Promise 使用了该队列（也在 ES6/ES2015 中引入）。这种方式会尽快地执行异步函数的结果，而不是放在调用堆栈的末尾。
   - 在当前函数结束之前 resolve 的 Promise 会在当前函数之后被立即执行。
@@ -2031,7 +2030,7 @@ yarn add --dev prettier
 
 * [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS):A book series on JavaScript. @YDKJS on twitter
 * 《Javascript高级编程》
-* 《[JavaScript 权威指南](https://www.amazon.cn/gp/product/B007VISQ1Y)》
+* 《JavaScript 权威指南》
 * 《ES6 标准入门(第3版)》
 * 《深入理解ES6》
 * 《JavaScript开发框架权威指南》
@@ -2040,19 +2039,20 @@ yarn add --dev prettier
 * 《JavaScript 框架设计》
 * 《单页 Web 应用: JavaScript 从前端到后端》
 * 《基于 MVC 的 JavaScript Web 富应用开发》
-* 《[JavaScript 忍者秘籍](https://www.amazon.cn/gp/product/B016DWSEWO)》
-* 《[编写可维护的 JavaScript](https://www.amazon.cn/gp/product/B00BQ7RMW0)》
-* 《[JavaScript 语言精粹](https://www.amazon.cn/gp/product/B0097CON2S)》
+* 《JavaScript 忍者秘籍》
+* 《编写可维护的 JavaScript》
+* 《JavaScript 语言精粹》
 * JavaScript 语言精髓与编程实践
-* 《[JavaScript DOM编程艺术](https://www.amazon.cn/gp/product/B004VJM5KE)》
-* 《[JavaScript 高级程序设计](https://www.amazon.cn/gp/product/B007OQQVMY)》
-* 《[JavaScript 异步编程：设计快速响应的网络应用](https://www.amazon.cn/gp/product/B00JVLEYY2)》
-* 《[Effective JavaScript：编写高质量JavaScript代码的68个有效方法](https://www.amazon.cn/gp/product/B00GMXI1QY)》
-* 《[高性能 JavaScript](https://www.amazon.cn/gp/product/B013SGB2AO)》
-* 《JavaScript设计模式》
-* 《JavaScript设计模式与开发实践》
-* [Eloquent JavaScript](<http://eloquentjavascript.net/): Marijin Haverbeke
+* 《JavaScript DOM编程艺术》
+* 《JavaScript 高级程序设计》
+* 《JavaScript 异步编程：设计快速响应的网络应用》
+* 《Effective JavaScript：编写高质量JavaScript代码的68个有效方法》
+* 《高性能 JavaScript》
+* 《JavaScript 设计模式》
+* 《JavaScript 设计模式与开发实践》
+* [Eloquent JavaScript](<http://eloquentjavascript.net/>: Marijin Haverbeke
 * [Speaking JavaScript](http://speakingjs.com/es5/)
+* [Deep JavaScript: Theory and techniques](https://exploringjs.com/deep-js/)														  
 
 ## 资源
 

@@ -27,7 +27,6 @@
 ![Packet flow in Netfilter and General Networking](../_static/Netfilter-packet-flow.svg "Optional title")
 
 
-
 ```
 IF network_pkg match rule; THEN
     handler
@@ -103,18 +102,18 @@ COMMIT
 
 * lists of rules within a table, and they are associated with “hook points” on the system
 * 当报文经过某一个关卡时，关卡上的“规则”不止一条，很多条规则会按照顺序逐条匹配，将在此关卡的所有规则组织称“链”就很适合，对于经过相应关卡的网络数据包按照顺序逐条匹配“规则”。
-* PREROUTING: Immediately after being received by an interface.
-* INPUT: Right before being handed to a local process
+* INPUT(入站规则): Right before being handed to a local process
   - The default chain is used for packets addressed to the system. 
   - Use this to open or close incoming ports (such as 80,25, and 110 etc) and ip addresses / subnet (such as 202.54.1.20/29).
-* OUTPUT: Right after being created by a local process.
+* OUTPUT（出站规则）: Right after being created by a local process.
   - The default chain is used when packets are generating from the system. 
   - Use this open or close outgoing ports and ip addresses / subnets.
-* FORWARD: For any packets coming in one interface and leaving out another.
+* FORWARD（转发规则）: For any packets coming in one interface and leaving out another.
   - The default chains is used when packets send through another interface. 
   - Usually used when you setup Linux as router. 
   - For example, eth0 connected to ADSL/Cable modem and eth1 is connected to local LAN. Use FORWARD chain to send and receive traffic from LAN to the Internet.
-* POSTROUTING: Right before leaving an interface.
+* PREROUTING（路有前规则）: Immediately after being received by an interface.
+* POSTROUTING（路由后规则）: Right before leaving an interface.
 * RH-Firewall-1-INPUT a user-defined custom chain. It is used by the INPUT, OUTPUT and FORWARD chains.
   - 使用 iptables 创建自定义的链，附加到 iptables 的内置的五个链
 * Packet
@@ -122,9 +121,11 @@ COMMIT
   - Packets move through netfilter by traversing chains
   - By default, chain policies are to jump to the ACCEPT target
 
+![数据包链路表](../_static/packet_link_map.jpg)
+
 ### TABLES
 
-* 为相同功能的“规则”集合属于同一个“表”。 iptables 提供了四张“表”
+* 为相同功能的“规则”集合属于同一个“表”
 * FILTER is used for the standard processing of packets, and it’s the default table if none other is specified.负责过滤功能；与之对应的内核模块 iptables_filter
   - Input, Output, Forward
 * NAT(Network Address Translation) is used to rewrite the source and/or destination of packets and/or track connections. 网络地址转换功能，典型的比如 SNAT、DNAT，与之对应的内核模块 iptables_nat

@@ -65,28 +65,28 @@
   - 样式不能在其他元素上复用
   - ID 选择器的特殊性比class选择器要强得多。这意味着如果要覆盖使用id选择器定义的样式，就要编写特殊性更强的CSS规则
 * Attribute Selectors 属性选择器
-  - [attribute] 匹配指定属性，不论具体值是什么
-  - [attribute="value"] 完全匹配指定属性值
-  - [attribute~="value"] 属性值是以空格分隔的多个单词，其中有一个完全匹配指定值
-  - [attribute|="value"] 属性值以value-打头
-  - [attribute^="value"] 属性值以value开头，value为完整的单词或单词的一部分
-  - [attribute$="value"] 属性值以value结尾，value为完整的单词或单词的一部分
-  - [attribute*="value"] 属性值为指定值的子字符串
+  - `[attribute]` 匹配指定属性，不论具体值是什么
+  - `[attribute="value"]` 完全匹配指定属性值
+  - `[attribute~="value"]` 属性值是以空格分隔的多个单词，其中有一个完全匹配指定值
+  - `[attribute|="value"]` 属性值以value-打头
+  - `[attribute^="value"]` 属性值以value开头，value为完整的单词或单词的一部分
+  - `[attribute$="value"]` 属性值以value结尾，value为完整的单词或单词的一部分
+  - `[attribute*="value"]` 属性值为指定值的子字符串
   - 修饰符
     + i 表示不区分大小写
-* Grouping 用逗号将需要分组选择器分开 body, p,  .box, #header
+* Grouping 用逗号将需要分组选择器分开 body, p,  .box, `#header`
   + :matches(A, B)选择器表示匹配A或B
 * Descendant Selectors 后代元素: E1 E2 所有被 E1 包含的 E2, 通过空格分隔
 * Child Selectors 子元素 div>h2
 * :not()表示选中不匹配指定条件元素,可以采用链式写法
-* Pseudo Selectors 一般是用来选择<a>元素
+* Pseudo Selectors 一般是用来选择`<a>`元素
   - Pseudo-classes 浏览器根据网页元素状态，自动提供 CSS 类，无需在 HTML 代码显式标记这些类
     + :empty：没有任何子元素
     + :in-range：针对有range属性的input
     + :out-of-range：针对有range属性的input
     + :optional：没有required属性的input元素
     + :required
-    + :disabled｜enabled
+    + `:disabled｜enabled`
     + :fullscreen
     + :not()
     + :focus：链接获得焦点
@@ -94,7 +94,7 @@
     + :hover 鼠标指针停留在链接上
     + :visited 访问过的效果
     + :active 激活状态
-    + :first-child|last-child 表示一组元素最｜第一个元素，且该元素必须是父元素的第一个子元素
+    + `:first-child|last-child` 表示一组元素最｜第一个元素，且该元素必须是父元素的第一个子元素
     + :nth-child() 选中指定位置的子元素。:nth-last-child()选中指定的倒数位置的子元素
       * 如果元素名与:nth-child()之间没有空格:表示匹配该种子元素
       * 有空格时，表示匹配该元素的子元素
@@ -290,7 +290,7 @@
     + 保持不同元素之间的比例关系，因此它比像素单位更合适用来设定字体大小
   - 整个网页的字体大小，如果全部使用em单位，不使用像素单位，会引发一个问题。em将会基于父元素计算，从而出现累积效应
   - 如果font-size使用em，其它使用em属性 两者的计算基点是不一样的
-  - rem单位与em几乎完全一致，只有一个差异，它总是等于根元素<html>的font-size大小，与当前元素或父元素的设置无关，这就避免了em的缺陷
+  - rem单位与em几乎完全一致，只有一个差异，它总是等于根元素`<html>`的font-size大小，与当前元素或父元素的设置无关，这就避免了em的缺陷
     + 字体大小font-size属性使用rem，其他必须等比例缩放的属性使用em
     + `font-size:1rem`:定义该区块字体大小基数值，等于根元素 font-size 计算值
 * 像素 pixels
@@ -331,7 +331,7 @@
   - 对设为display: table-cell的元素也有效，可以控制元素在单元格之中的垂直对齐方式
   * justify 文本行的左右两端都放在父元素的内边界上。然后，调整单词和字母间的间隔，使各行的长度恰好相等
 
-+ tab-size属性设置 Tab 键的宽度，可以设置为整数（表示多少个空格），也可以设置为具体的长度单位,常用于<pre>标签之中
++ tab-size属性设置 Tab 键的宽度，可以设置为整数（表示多少个空格），也可以设置为具体的长度单位,常用于`<pre>`标签之中
 
 * `text-indent`：首行缩进，长度可以是负值，也可以用百分比值
   - 为所有块级元素应用 text-indent，但无法将该属性应用于行内元素，图像之类的替换元素上也无法应用 text-indent 属性
@@ -350,7 +350,7 @@
   - keep-all：对于 CJK 字符不允许换行。非 CJK 字符与normal相同
 * hyphens 连字号
   - 打开
-    + 设置文本的语言 <html>标签的lang属性 。告诉浏览器使用哪个连字词典，正确的自动连字需要一个适合文本语言的连字词典
+    + 设置文本的语言 `<html>`标签的lang属性 。告诉浏览器使用哪个连字词典，正确的自动连字需要一个适合文本语言的连字词典
   - none表示一个词不会在断行处被拆开，即断行处不会有连词线
   - manual表示只有在一个词内部的字符表示可以有连词线时，才会在断行处拆开。断行处，会有连词
   - auto表示浏览器决定一个词是否可以在断行处拆开，以及是否会有连词线
@@ -383,13 +383,13 @@
 * white-space：提供更精确一点的空格处理方式
   - HTML 代码的空格通常会被浏览器忽略
   - 空格原样输出
-    + 可以使用<pre>标签
+    + 可以使用`<pre>`标签
     + 改用 HTML 实体&nbsp;表示空格
-  - 处理空格的规则适用于：普通的空格键、制表符（\t）和换行符（\r和\n）
+  - 处理空格的规则适用于：普通的空格键、制表符（`\t`）和换行符（`\r`和`\n`）
   - 默认值为normal，表示浏览器以正常方式处理空格
-  - pre：按照<pre>标签的方式处理
+  - pre：按照`<pre>`标签的方式处理
   - nowrap：不会因为超出容器宽度而发生换行
-  - pre-wrap 还是按照<pre>标签的方式处理，唯一区别是超出容器宽度时，会发生换行
+  - pre-wrap 还是按照`<pre>`标签的方式处理，唯一区别是超出容器宽度时，会发生换行
   - pre-line 保留换行符。除了换行符会原样输出，其他都与white-space:normal规则一致
 * direction 设置块级元素内部的文本阅读方向
   - ltr
@@ -502,7 +502,6 @@ caption
 {
 caption-side:bottom
 }
-
 ```
 
 ## position 指定一个元素在网页上位置
@@ -531,7 +530,7 @@ caption-side:bottom
 * z-index表示元素重叠时的层次关系。这个值越高，对应的元素就在越上层。所有元素的默认z-index是0
   - position属性的值不是static），z-index属性才有意义
   - 一组设置了z-index属性的元素，堆叠顺序取决于是否处在同一个堆叠上下文（stacking context）。三种情况会创建堆叠上下文
-    + 网页的根元素（即<html>元素）
+    + 网页的根元素（即`<html>`元素）
     + 网页元素是非静态布局，且z-index属性不等于auto
     + 网页元素的opacity属性小于1
   - 同一个堆叠上下文之中，元素的堆叠（从下层到上层）按照以下顺序决定
@@ -550,14 +549,14 @@ caption-side:bottom
   - display: list-item; 将元素渲染为一个列表项，行首产生一个列表标记，可以用list-style定制样式
   - display: inline-block;产生行内的块级元素，有自己的高和宽，但是前后不会产生换行
   - display: table;
-    + table-header-group 对应<thead>
-    + table-row 对应<tr>
-    + table-cell 对应<td>
-    + table-row-group 对应<tbody>
-    + table-footer-group 对应<tfoot>
-    + table-column-group 对应<colgroup>
-    + table-column 对应<col>
-    + table-caption 对应<caption>
+    + table-header-group 对应`<thead>`
+    + table-row 对应`<tr>`
+    + table-cell 对应`<td>`
+    + table-row-group 对应`<tbody>`
+    + table-footer-group 对应`<tfoot>`
+    + table-column-group 对应`<colgroup>`
+    + table-column 对应`<col>`
+    + table-caption 对应`<caption>`
     + inline-table 将一个表格渲染具有inline-block的形式
 * float属性 指定元素定位在容器左侧或右侧，文字和其他行内元素紧挨在它的旁边
   - left：定位在容器的左侧
@@ -638,7 +637,7 @@ caption-side:bottom
   - margin
   - :first、:last、:left、:right和:blank选择器，选中特殊页面
 * 技巧
-  - 每一页都出现表头:只需要使用<thead>元素定义表头，<tbody>元素定义表的数据部分即可
+  - 每一页都出现表头:只需要使用`<thead>`元素定义表头，`<tbody>`元素定义表的数据部分即可
   - 打印链接的网址:使用:after伪元素
 
 ## 自适应网页设计 Responsive Web Design
@@ -746,17 +745,20 @@ caption-side:bottom
   - animation-fill-mode：默认值为none。
   - animation-play-state：动画默认是否生效，默认值为running
   - animation属性是一个简写形式
-* [animate-css/animate.css](https://github.com/animate-css/animate.css):🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. <https://animate.style/>
+
+### [animate.css](https://github.com/animate-css/animate.css)
+
+🍿 A cross-browser library of CSS animations. As easy to use as an easy thing. <https://animate.style/>
 
 ## transform 元素的变形
 
-* skew(20deg):定义了一个元素在二维平面上的倾斜转换。结果是一个<transform-function>数据类型,指定一个或两个参数，它们表示在每个方向上应用的倾斜量
+* skew(20deg):定义了一个元素在二维平面上的倾斜转换。结果是一个`<transform-function>`数据类型,指定一个或两个参数，它们表示在每个方向上应用的倾斜量
 * rotate(45deg):一个旋转属性，将元素在不变形的情况下旋转到不动点周围
 * transform-origin: 100% 100%;
 
 ## 函数
 
-* minmax提供一个长度范围，不小于较小值，不大于较大值
+* minmax 提供一个长度范围，不小于较小值，不大于较大值
   - 网格布局中，max也允许设置为比例因子fr，但min不能设置为fr
   - auto在max位置等同于max-content，在min位置等同于min-content
 * image-set()用来选取符合响应式条件的图片
@@ -868,9 +870,12 @@ https://fonts.googleapis.com/css?family=Raleway:700,400,300,700italic,400italic,
 * [spectre](https://github.com/picturepan2/spectre) Spectre.css - A Lightweight, Responsive and Modern CSS Framework <https://picturepan2.github.io/spectre/>
 * [pure](https://github.com/pure-css/pure):A set of small, responsive CSS modules that you can use in every web project. <https://purecss.io/>
 * Semantic UI
-* [shoelace](https://github.com/shoelace-style/shoelace):A collection of professionally designed, every day UI components built on a framework-agnostic technology. <https://shoelace.style/>
 * [UIkit](https://getuikit.com/):A lightweight and modular front-end framework
   for developing fast and powerful web interfaces.
+
+### [shoelace](https://github.com/shoelace-style/shoelace)
+
+A collection of professionally designed, every day UI components built on a framework-agnostic technology. <https://shoelace.style/>
 
 ## 工具
 

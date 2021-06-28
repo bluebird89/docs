@@ -517,7 +517,7 @@
     + [《不懂拒绝的老好人》](https://m.douban.com/book/subject/6711978/)，（美）哈丽雅特•布莱克 要做自己，需要学会拒绝别人。 [KY导读](https://mp.weixin.qq.com/s/Ykq-OpD2_mTlq5mM-cZybw)
     + [《关系：适度依赖让我们走得更近》](https://m.douban.com/book/subject/26742571/)，（美）伯恩斯坦等 想要真正地成熟，得学会适度依赖。 [KY导读](https://mp.weixin.qq.com/s/dTWGM6Zju--42yB3nxd4ZQ)
     + [《不要用爱控制我》](https://book.douban.com/subject/1101447/)，（美）帕萃丝·埃文斯 有时候，爱只是控制的幌子。我们需要辨别什么是健康的爱
-    + [《非暴力沟通》](https://book.douban.com/subject/3533221/)，（美）马歇尔·卢森堡 学会科学地沟通
+    + 《非暴力沟通》（美）马歇尔·卢森堡 学会科学地沟通
     + [《亲密关系》](https://book.douban.com/subject/5952488/)，（美）罗兰•米勒等 汇集了有关亲密关系的研究，爱也是一门学问
   - 视频
     + [幸福的学问-加州大学伯克利分校](http://www.xuetangx.com/courses/course-v1:BerkeleyX+GG101x+3T2015/about)
@@ -581,3 +581,4 @@
 ## 资源
 
 * [人格测试，类型描述，关系和职业建议](https://www.16personalities.com/ch)
+* [Know yourself](https://www.knowyourself.cc/)
