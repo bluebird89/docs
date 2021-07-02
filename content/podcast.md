@@ -24,7 +24,7 @@
     + 想试试在一个非商业性的、有主导权的事情上，最后能做成什么样。也觉得和现在的社会环境格格不入的，应该不止是只有我们这一小部分人。凑一凑，看以后还能玩出什么更大更好玩的事。往糙了说的话，设备买了不能浪费是不是，至少得对得起设备
   - 野点电台（已经更新近170期）的ziondandada认为：因为保持更新是做之前就想好的目标，野点的节目做起来不难，四个人轮流出也算轻松（可能没说的这么轻松）
 
-## 资源
+## 频道
 
 * 一知半解 FM
 * [随机波动](https://www.stovol.club/)
@@ -85,12 +85,19 @@
 * [Artifact](https://www.heyartifact.com)
 * USDB
 * 机核Gadio
-* 加州101
 * 一天世界
 * 随即波动
 * 过刊
 * [4am](https://4aminquarantine.com/)
 * <http://www.wtfpod.com/>
+
+### 历史
+
+* 加州101
+
+### 科技
+
+* [MIT open](https://open.mit.edu/podcasts/)
 
 ## client
 

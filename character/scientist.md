@@ -86,7 +86,7 @@
 - 费曼物理学讲义 The Feynman Lectures on Physics
 - 物理定律的本性
 
-### 费曼技巧|费曼学习法 Feynman Technique
+### 费曼技巧|费曼学习法 Feynman Technique:用输出倒逼输入
 
 * 爱因斯坦曾说过：If you can’t explain it simple, you don’t understand it well enough。其实把这句话进行倒推，也就成为费曼学习法的关键：如果想弄明白一个概念，那就把它简明扼要地解释清楚。
 * There’s no miracle people. It just happens they got interested in this thing and they learned all this stuff. There’s just people.
@@ -117,10 +117,11 @@
 	4. Review & Simplify: 如果自己使用的语言过于冗长或令人困惑（或者只是对源材料进行了措辞），尽量用简单直白的语言重新表述它，或者找到一个恰当的比喻以更好的理解它
 		1. 做无论什么数学的东西，我都会找到一些实际例子来说明他有什么用处。
 * 进化
-		1. 高亮那些关键概念,写下笔记
-		2. 将高光出来的资料，按层级、重要程度、逻辑思维等规则，提炼核心知识点，整理成思维导图。
+		1. 高亮关键概念,写下笔记
+		2. 将高光出来资料，按层级、重要程度、逻辑思维等规则，提炼核心知识点，整理成思维导图
 		3. 输出：写作、演讲
 
+![费曼学习法1](../_static/feynman_technique.jpg)
 ![费曼学习法](../_static/feynman-technique.jpg)
 
 ## 科学

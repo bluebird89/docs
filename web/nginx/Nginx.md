@@ -1,10 +1,31 @@
-# [nginx engine x](https://github.com/nginx/nginx)
+# [nginx](https://github.com/nginx/nginx)
 
 * 2006年由俄罗斯人发布。全称为engine X，缩减合并称为[nginx](https://nginx.org/)
 * 一个免费、开源、高性能、轻量级的 HTTP 和反向代理服务器
 * 基于事件驱动（event-driven）非阻塞模式的 Web 服务器
 * 与事件循环相比 fork 子进程消耗更多系统资源，基于事件的 HTTP 服务器完胜
 * 解决基于进程模型产生的C10k问题，请求时即使无状态连接如web服务都无法达到并发响应量级一万现状
+   
+* Web 服务器，以 B/S（Browser/Server）方式提供服务
+    - 静态资源服务
+    - 支持 CGI 协议的动态语言，比如 Perl、PHP 等，但是不支持 Java。将处理过的内容通过 HTTP Server 分发
+    - 虚拟主机（server）
+    - keepalive
+    - 访问日志（支持基于日志缓冲提高其性能）
+    - urlrewirte
+    - 路径别名
+    - 基于IP及用户的访问控制
+    - 支持速率限制及并发数限制
+    - 能缓存打开的文件（元数据：文件的描述符等等信息）
+* 动静分离：让动态程序（Java、PHP）去访问应用服务器，让缓存、图片、JS、CSS 等去访问 Nginx
+    - 纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案
+    - 动态跟静态文件混合在一起发布，通过 Nginx 来分开
+* 反向代理
+    * pop3, smpt,imap4等邮件协议的反向代理，应用服务集群扩展，动态扩容
+    * 缓存：是边缘节点，减少时间延迟
+    * 负载均衡：容灾
+* 支持过滤器，例如zip，SSI
+* 支持SSL加密机制
 
 ## 特性
 
@@ -41,46 +62,113 @@
 * [Tengine](https://github.com/alibaba/tengine):A distribution of Nginx with some advanced features http://tengine.taobao.org/
 * 基于 Nginx 和 Lua 的 Web 平台 [OpenResty](../../ops/openresty.md)
 
-![NGINX Controller](../_static/nignx.png)
+![NGINX_Controller](../../_static/nginx.png)
 
-## 功能
+## 架构
 
 * 由内核和一系列模块组成
+
+### 内核
+
 * 内核提供 Web 服务基本功能，如启用网络协议，创建运行环境，接收和分配客户端请求，处理模块之间的交互
     - Nginx（内核）本身做的工作实际很少，当接到一个 HTTP 请求时，通过查找配置文件将此次请求映射到一个 location block，而此 location 中所配置的各个指令则会启动不同的模块去完成工作，因此模块可以看做 Nginx 真正劳动工作者
     - 通常一个 location 中的指令会涉及一个 Handler 模块和多个 Filter 模块（当然，多个location可以复用同一个模块）
-    - Handler模块负责处理请求，完成响应内容的生成，而 Filter 模块对响应内容进行处理
-* 模块化
-    - 核心模块 core module：HTTP 模块、EVENT 模块和 MAIL 模块
-    - 基础模块 Standard HTTP  modules：HTTP Access 模块、HTTP FastCGI 模块、HTTP Proxy 模块和 HTTP Rewrite 模块
-    - Optional HTTP  modules：可选HTTP模块
-    - 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块
-    - 功能分类
-        + Handlers（处理器模块）：直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个
-        + Filters（过滤器模块）：主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出
-        + Proxies（代理类模块）： Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如FastCGI 等进行交互，实现服务代理和负载均衡等功能
-* Web 服务器，以 B/S（Browser/Server）方式提供服务
-    - 静态资源服务
-    - 支持 CGI 协议的动态语言，比如 Perl、PHP 等，但是不支持 Java。将处理过的内容通过 HTTP Server 分发
-    - 虚拟主机（server）
-    - keepalive
-    - 访问日志（支持基于日志缓冲提高其性能）
-    - urlrewirte
-    - 路径别名
-    - 基于IP及用户的访问控制
-    - 支持速率限制及并发数限制
-    - 能缓存打开的文件（元数据：文件的描述符等等信息）
-* 动静分离：让动态程序（Java、PHP）去访问应用服务器，让缓存、图片、JS、CSS 等去访问 Nginx
-    - 纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案
-    - 动态跟静态文件混合在一起发布，通过 Nginx 来分开
-* 反向代理
-    * pop3, smpt,imap4等邮件协议的反向代理，应用服务集群扩展，动态扩容
-    * 缓存：是边缘节点，减少时间延迟
-    * 负载均衡：容灾
-* 支持过滤器，例如zip，SSI
-* 支持SSL加密机制
+    - Handler 模块负责处理请求，完成响应内容的生成
+    - Filter 模块对响应内容进行处理
+- 功能分类
+	+ Handlers（处理器模块）：直接处理请求，并进行输出内容和修改 headers 信息等操作。Handlers 处理器模块一般只能有一个
+	+ Filters（过滤器模块）：主要对其他处理器模块输出的内容进行修改操作，最后由 Nginx 输出
+	+ Proxies（代理类模块）： Nginx 的 HTTP Upstream 之类的模块，这些模块主要与后端一些服务比如FastCGI 等进行交互，实现服务代理和负载均衡等功能
 
-## 进程模型
+### 模块 module
+
+- 核心模块 core module：nginx 最基本最核心的服务，如进程管理、权限控制、日志记录；
+	- HTTP 模块和 MAIL 模块
+	- ngx_core
+	- ngx_errlog
+	- ngx_conf
+	- ngx_events
+	- ngx_event_core
+	- ngx_epll
+	- ngx_regex
+- Standard HTTP  modules
+	-  ngx_http
+    -  ngx_http_core 配置端口，URI 分析，服务器相应错误处理，别名控制 (alias) 等
+    -  ngx_http_log 自定义 access 日志
+    -  ngx_http_upstream 定义一组服务器，可以接受来自 proxy, Fastcgi,Memcache 的重定向；主要用作负载均衡
+    -  ngx_http_static
+    -  ngx_http_autoindex 自动生成目录列表
+    -  ngx_http_index 处理以/结尾的请求，如果没有找到 index 页，则看是否开启了 random_index；如开启，则用之，否则用 autoindex
+    -  ngx_http_auth_basic 基于 http 的身份认证 (auth_basic)
+    -  ngx_http_access 基于 IP 地址的访问控制 (deny,allow)
+    -  ngx_http_limit_conn 限制来自客户端的连接的响应和处理速率
+    -  ngx_http_limit_req 限制来自客户端的请求的响应和处理速率
+    -  ngx_http_geo
+    -  ngx_http_map 创建任意的键值对变量
+    -  ngx_http_split_clients
+    -  ngx_http_referer 过滤 HTTP 头中 Referer 为空的对象
+    -  ngx_http_rewrite 通过正则表达式重定向请求
+    -  ngx_http_proxy
+    -  ngx_http_fastcgi 支持 fastcgi
+    -  ngx_http_uwsgi
+    -  ngx_http_scgi
+    -  ngx_http_memcached
+    -  ngx_http_empty_gif 从内存创建一个 1×1 的透明 gif 图片，可以快速调用
+    -  ngx_http_browser 解析 http 请求头部的 User-Agent 值
+    -  ngx_http_charset 指定网页编码
+    -  ngx_http_upstream_ip_hash
+    -  ngx_http_upstream_least_conn
+    -  ngx_http_upstream_keepalive
+    -  ngx_http_write_filter
+    -  ngx_http_header_filter
+    -  ngx_http_chunked_filter
+    -  ngx_http_range_header
+    -  ngx_http_gzip_filter
+    -  ngx_http_postpone_filter
+    -  ngx_http_ssi_filter
+    -  ngx_http_charset_filter
+    -  ngx_http_userid_filter
+    -  ngx_http_headers_filter 设置 http 响应头
+    -  ngx_http_copy_filter
+    -  ngx_http_range_body_filter
+    -  ngx_http_not_modified_filter
+- Optional HTTP  modules 可选HTTP模块
+	-  ngx_http_addition 在响应请求的页面开始或者结尾添加文本信息
+    -  ngx_http_degradation 在低内存的情况下允许服务器返回 444 或者 204 错误
+    -  ngx_http_perl
+    -  ngx_http_flv 支持将 Flash 多媒体信息按照流文件传输，可以根据客户端指定的开始位置返回 Flash
+    -  ngx_http_geoip 支持解析基于 GeoIP 数据库的客户端请求
+    -  ngx_google_perftools
+    -  ngx_http_gzip  gzip 压缩请求的响应
+    -  ngx_http_gzip_static 搜索并使用预压缩的以.gz 为后缀的文件代替一般文件响应客户端请求
+    -  ngx_http_image_filter 支持改变 png，jpeg，gif 图片的尺寸和旋转方向
+    -  ngx_http_mp4 支持.mp4,.m4v,.m4a 等多媒体信息按照流文件传输，常与 ngx_http_flv 一起使用
+    -  ngx_http_random_index 当收到 / 结尾的请求时，在指定目录下随机选择一个文件作为 index
+    -  ngx_http_secure_link 支持对请求链接的有效性检查
+    -  ngx_http_ssl 支持 https
+    -  ngx_http_stub_status
+    -  ngx_http_sub_module 使用指定的字符串替换响应中的信息
+    -  ngx_http_dav 支持 HTTP 和 WebDAV 协议中的 PUT/DELETE/MKCOL/COPY/MOVE 方法
+    -  ngx_http_xslt 将 XML 响应信息使用 XSLT 进行转换
+* 邮件服务模块:
+    -  ngx_mail_core
+    -  ngx_mail_pop3
+    -  ngx_mail_imap
+    -  ngx_mail_smtp
+    -  ngx_mail_auth_http
+    -  ngx_mail_proxy
+    -  ngx_mail_ssl
+- 第三方模块 3rd party modules：HTTP Upstream Request Hash 模块、Notice 模块和 HTTP Access Key 模块及用户自己开发的模块
+	-  echo-nginx-module 支持在 nginx 配置文件中使用
+	-  echo/sleep/time/exec 等类 Shell 命令
+	-  memc-nginx-module
+	-  rds-json-nginx-module 使 nginx 支持 json 数据的处理
+	-  lua-nginx-module
+	* [nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
+	* [nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
+	* [IP2Location](https://github.com/ip2location/ip2location-nginx)
+
+### 进程模型
 
 * 多进程模型,采用模块化的、基于事件驱动、异步、单线程且非阻塞,使用多路复用和事件通知
 * Nginx 启动以后，会在系统中以 daemon 的方式在后台运行，包括一个 master 进程，n(n>=1) 个 worker 进程。所有进程都是单线程（即只有一个主线程），进程间通信主要使用共享内存方式
@@ -207,7 +295,9 @@ typedef enum {
 
 ## 安装
 
-* ubunutu
+- 配置
+	- 编译过程中的查看默认安装的模块支持 `cat nginx-1.17.2/auto/options | grep YES`
+* ubuntu
     - `/usr/share/doc/nginx-doc/examples/`
     - `/usr/share/nginx`
 * Mac
@@ -221,7 +311,7 @@ typedef enum {
     - nginx.conf 配置文件
     - accedd.log 访问日志
     - error.log 错误日志
-* ss命令可以查看系统中启动的端口信息，选项：
+* ss 命令可以查看系统中启动的端口信息，选项：
     - -a显示所有端口的信息
     - -n以数字格式显示端口号
     - -t显示TCP连接的端口
@@ -243,7 +333,6 @@ brew edit nginx
 # LuaJIT
 wget http://luajit.org/download/LuaJIT-2.0.2.tar.gz
 make install PREFIX=/usr/local/LuaJIT
-
 export LUAJIT_LIB=/usr/local/LuaJIT/lib
 export LUAJIT_INC=/usr/local/LuaJIT/include/luajit-2.0
 
@@ -258,6 +347,7 @@ wget http://nginx.org/download/nginx-1.17.6.tar.gz && tar -zxvf nginx-1.17.6.tar
 sudo apt install gcc libpcre3-dev zlib1g-dev libssl-dev libxml2-dev libxslt1-dev  libgd-dev google-perftools libgoogle-perftools-dev libperl-dev # the Google perftools module requires the Google perftools library
 
 sudo apt install libgeoip-dev  # the GeoIP module requires the GeoIP library
+
 # --with-ld-opt=-ltcmalloc   checking for --with-ld-opt="-ljemalloc" ... not found
 nginx modules path: "/usr/share/nginx/modules"
 
@@ -388,7 +478,253 @@ sudo kill -s QUIT `cat /run/nginx.pid.oldbin` # Follow it by killing the old mas
 ss  -anptu  |  grep nginx
 ```
 
-## 本地文件操作
+```sh
+cd /
+wget nginx.org/download/nginx-1.17.2.tar.gz
+
+tar -xzvf nginx-1.17.2.tar.gz
+cd nginx-1.17.2
+
+./configure
+
+yum -y install pcre* #安装使nginx支持rewrite
+yum -y install gcc-c++
+yum -y install zlib*
+yum -y install openssl openssl-devel
+
+// 检查模块支持
+./configure  --prefix=/usr/local/nginx  --with-http_ssl_module --with-http_v2_module --with-http_realip_module --with-http_addition_module --with-http_sub_module --with-http_dav_module --with-http_flv_module --with-http_mp4_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_auth_request_module --with-http_random_index_module --with-http_secure_link_module --with-http_degradation_module --with-http_slice_module --with-http_stub_status_module --with-mail --with-mail_ssl_module --with-stream --with-stream_ssl_module --with-stream_realip_module --with-stream_ssl_preread_module --with-threads --user=www --group=www
+
+make && make install
+```
+
+## 服务管理
+
+* 开机启动
+	* 利用 systemctl 命令 service  [`/lib/systemd/system/nginx.service`](./nginx_s.service)
+	* 通过开机启动命令脚本 [`/etc/init.d/nginx`](./nginx)
+
+```sh
+cd /usr/local/nginx/sbin/
+./nginx
+
+netstat -ntpl
+kill 进程PID
+
+
+nginx -s reload  # 向主进程发送信号，重新加载配置文件，热重启
+nginx -s reopen  # 重启 Nginx
+nginx -s stop    # 快速关闭
+nginx -s quit    # 等待工作进程处理完成后关闭
+nginx -T         # 查看当前 Nginx 最终的配置
+nginx -t -c <配置路径>  # 检查配置是否有问题，如果已经在配置目录，则不需要 -c
+
+# vi /lib/systemd/system/nginx.service
+systemctl daemon-reload
+
+
+systemctl start nginx    # 启动 Nginx
+systemctl stop nginx     # 停止 Nginx
+systemctl restart nginx  # 重启 Nginx
+systemctl reload nginx   # 重新加载 Nginx，用于修改配置后
+systemctl enable nginx   # 设置开机启动 Nginx
+systemctl disable nginx  # 关闭开机启动 Nginx
+systemctl status nginx   # 查看 Nginx 运行状态
+
+## vi /etc/init.d/nginx
+chmod a+x /etc/init.d/nginx
+
+# nginx 加入系统服务中
+chkconfig --add nginx
+# 把服务设置为开机启动： reboot 重启系统生效,用 systemctl 方法相同的命令
+chkconfig nginx on
+
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+# vi /etc/profile
+export PATH=$PATH:/usr/local/nginx/sbin
+source /etc/profile
+```
+
+## 配置
+
+* 语法
+    - 配置文件由指令和指令块构成
+    - 每条指令以分号（;）结尾，指令和参数间以空格符分隔
+    - 指令块以大括号{}将多条指令组织在一起
+    - include 语句允许组合多个配置文件以提高可维护性
+    - 使用 # 添加注释
+    - 使用 $ 定义变量
+    - 部分指令的参数支持正则表达式
+* 主要配置
+	* main:nginx 的全局配置，对全局生效。/etc/nginx/nginx.conf 
+		* 配置运行Nginx服务器用户（组）:PHP7默认的用户和组是www-data
+		- worker process:worker 进程个数
+			+ master进程接收并分配请求给worker处理
+			+ 简单一点可以设置为cpu核心数 `grep ^processor /proc/cpuinfo | wc -l` ，也是 auto 值
+			+ 如果开启了ssl和gzip应该设置成与逻辑CPU数量一样甚至为2倍，可以减少I/O操作
+		- `worker_cpu_affinity 0001 0010 0100 1000`:在高并发情况下，通过设置cpu粘性来降低由于多CPU核切换造成的寄存器等现场重建带来的性能损耗
+		- worker_rlimit_nofile 10240 默认没有设置，可以限制为操作系统最大的限制65535
+		- Nginx进程PID存放路径
+		- 错误日志存放路径
+		- 配置文件的引入
+	* events:配置影响 nginx 服务器或与用户的网络连接。    
+		* worker_connections:每个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
+			+ 最大连接数 = worker_processes * worker_connections/4
+			+ 不能超过 worker_rlimit_nofile
+		- 设置网络连接的序列化
+		- keepalive 是关于 upstream（上游） 服务器和 Nginx 连接有关的配置 - 当 Nginx 充当代理或负载均衡服务器角色时。表示在空闲状态 upstream 服务器在单个 worker 进程中支持的 keepalive 连接数
+			+ 是否允许同时接收多个网络连接
+			+ keepalive 连接数是能够有效减少延迟提升 web 页面加载速度的优化性能手段
+			+ keepalive_requests 指令用于设置单个客户端能够在一个 keepalive 连接上处理的请求数量
+			+ keepalive_timeout 设置空闲 keepalive 连接保持打开的时间
+		- 事件驱动模型的选择
+			+ Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
+			+ 高效事件模型
+				* Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
+				* Epoll：使用于Linux内核2.6版本及以后的系统。
+				* /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
+				* Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
+	* http：可以嵌套多个 server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。
+		- sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载
+		- 当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
+		- TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
+		- Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
+		- 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
+		- 定义 MIMI-Type
+		- keepalive_timeout 65: 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
+		- send_timeout 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接
+		- 自定义服务日志
+		- client_max_body_size 10m 允许客户端请求的最大单文件字节数。如果有上传较大文件，请设置它的限制值
+		- client_body_buffer_size 128k  缓冲区代理缓冲用户端请求的最大字节数
+		- 增大TCP的listen queue：sudo sysctl -w net.core.somaxconn=4096或者永久修改/etc/sysctl.conf：net.core.somaxconn = 4096，然后修改Nginx：`listen 80 backlog=4096;`
+		- 单连接请求数上限
+		- windows调用php-cgi启动服务
+		- linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
+			+ Unix Sockets
+				* Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
+				* If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
+			+ TCP Sockets
+				* This makes PHP-FPM able to be listened to by remote servers
+				* listen.allowed_clients = 127.0.0.1
+		- http_proxy：nginx作为反向代理服务器的功能，包括缓存功能
+			+ proxy_connect_timeout 60 nginx跟后端服务器连接超时时间(代理连接超时)
+			+ proxy_read_timeout 60 连接成功后，与后端服务器两个成功的响应操作之间超时时间(代理接收超时)
+			+ proxy_buffer_size 4k 设置代理服务器（nginx）从后端realserver读取并保存用户头信息的缓冲区大小，默认与proxy_buffers大小相同，其实可以将这个指令值设的小一点
+			+ proxy_buffers 4 32k proxy_buffers缓冲区，nginx针对单个连接缓存来自后端realserver的响应，网页平均在32k以下的话，这样设置
+			+ proxy_busy_buffers_size 64k 高负荷下缓冲大小（proxy_buffers*2）
+			+ proxy_max_temp_file_size  当proxy_buffers放不下后端服务器的响应内容时，会将一部分保存到硬盘的临时文件中，这个值用来设置最大临时文件大小，默认1024M，它与proxy_cache没有关系。大于这个值，将从upstream服务器传回。设置为0禁用。
+			+ proxy_temp_file_write_size 64k 当缓存被代理的服务器响应到临时文件时，这个选项限制每次写临时文件的大小。proxy_temp_path（可以在编译的时候）指定写到哪那个目录。
+			+ proxy_pass，proxy_redirect见 location 部分。
+		- http_gzip 
+			- gzip on : 开启gzip压缩输出，减少网络传输
+			+ gzip_min_length 1k ：设置允许压缩的页面最小字节数，页面字节数从header头得content-length中进行获取。默认值是20。建议设置成大于1k的字节数，小于1k可能会越压越大。
+			+ gzip_buffers 4 16k ：设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。4 16k代表以16k为单位，安装原始数据大小以16k为单位的4倍申请内存。
+			+ gzip_http_version 1.0 ：用于识别 http 协议的版本，早期的浏览器不支持 Gzip 压缩，用户就会看到乱码，所以为了支持前期版本加上了这个选项，如果你用了 Nginx 的反向代理并期望也启用 Gzip 压缩的话，由于末端通信是 http/1.0，故请设置为 1.0。
+			+ gzip_comp_level 6 ：gzip压缩比，1压缩比最小处理速度最快，9压缩比最大但处理速度最慢(传输快但比较消耗cpu)
+			+ gzip_types ：匹配mime类型进行压缩，无论是否指定,”text/html”类型总是会被压缩的。
+			+ gzip_proxied any ：Nginx作为反向代理的时候启用，决定开启或者关闭后端服务器返回的结果是否压缩，匹配的前提是后端服务器必须要返回包含”Via”的 header头
+			+ gzip_static：默认 off，该模块启用后，Nginx 首先检查是否存在请求静态文件的 gz 结尾的文件，如果有则直接返回该 .gz 文件内容
+			+ gzip_vary on ：用于在响应消息头中添加 Vary：Accept-Encoding，使代理服务器根据请求头中的 Accept-Encoding 识别是否启用 gzip 压缩；例如，用Squid缓存经过Nginx压缩的数据。
+			+ gzip_disable 指定哪些不需要 gzip 压缩的浏览器
+	* server：配置虚拟主机的相关参数，一个 http 中可以有多个 server。
+		- 基于名称的虚拟主机配置
+		- 基于IP的虚拟主机配置
+		- 配置网络监听
+		- http_stream
+			+ 通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，upstream后接负载均衡器的名字，后端realserver以 host:port options; 方式组织在 {} 中。如果后端被代理的只有一台，也可以直接写在 proxy_pass
+	* location：配置请求的路由，以及各种页面的处理情况。
+		- location配置
+		- 请求根目录配置
+		- 更改location的URI
+			+ proxy_pass http:/backend 请求转向backend定义的服务器列表，即反向代理，对应upstream负载均衡器。也可以proxy_pass http://ip:port。
+		- 默认首页配置
+	* upstream：配置后端服务器具体地址，负载均衡配置不可或缺的部分。
+* 通用
+    - autoindex on; 允许列出整个目录
+    - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
+    - autoindex_localtime on; 默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
+    - `add_header`并不享受Nginx的继承机制，意味着如果子context中有add_header，那么将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
+*  /status
+    - Active connections：当前活动的连接数量。
+    - Accepts：已经接受客户端的连接总数量。
+    - Handled：已经处理客户端的连接总数量。 （一般与accepts一致，除非服务器限制了连接数量）。
+    - Requests：客户端发送的请求数量。
+    - Reading：当前服务器正在读取客户端请求头的数量。
+    - Writing：当前服务器正在写响应信息的数量。
+    - Waiting：当前多少客户端在等待服务器的响应。
+- 内置变量:内置全局变量，你可以在配置中随意使用
+* 工具
+    - [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
+    - [NGINX Config](https://www.digitalocean.com/community/tools/nginx):The easiest way to configure a performant, secure,
+    and stable NGINX server.
+
+![内置全局变量](../../_static/nginx_variable.jpg)
+
+```
+$args # 请求中的参数
+$content_length # 请求 HEAD 中的 Content-length
+$content_type # 请求 HEAD 中的 Content_type
+$document_root # 当前请求中 root 的值
+$host # 主机头
+$http_user_agent # 客户端 agent
+$http_cookie # 客户端 cookie
+$limit_rate # 限制连接速率
+$request_method # 客户端请求方式，GET/POST
+$remote_addr # 客户端 IP
+$remote_port # 客户端端口
+$remote_user # 验证的用户名
+$request_filename # 请求的文件绝对路径
+$request_body_file  # 做反向代理时发给后端服务器的本地资源的名称
+$scheme # http/http
+$server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
+$server_addr # 服务器地址
+$server_name # 服务器名称
+$server_port # 服务器端口
+$request_uri # 包含请求参数的 URI
+$uri # 不带请求参数的 URI
+$document_uri # 同 $uri
+
+    $arg_PARAMETER #GET 请求中变量名 PARAMETER 参数的值
+    $args #这个变量等于 GET 请求中的参数，例如，foo=123&bar=blahblah;这个变量可以被修改
+    $binary_remote_addr #二进制码形式的客户端地址
+    $body_bytes_sent #传送页面的字节数
+    $content_length #请求头中的 Content-length 字段
+    $content_type #请求头中的 Content-Type 字段
+    $cookie_COOKIE #cookie COOKIE 的值
+    $document_root #当前请求在 root 指令中指定的值
+    $document_uri #与 $uri 相同
+    $host #请求中的主机头(Host)字段，如果请求中的主机头不可用或者空，则为处理请求的 server 名称(处理请求的 server 的 server_name 指令的值)。值为小写，不包含端口
+    $hostname #机器名使用 gethostname 系统调用的值
+    $http_HEADER #HTTP 请求头中的内容，HEADER 为 HTTP 请求中的内容转为小写，-变为_(破折号变为下划线)，例如：$http_user_agent(Uaer-Agent 的值)
+    $sent_http_HEADER #HTTP 响应头中的内容，HEADER 为 HTTP 响应中的内容转为小写，-变为_(破折号变为下划线)，例如：$sent_http_cache_control、$sent_http_content_type…
+    $is_args #如果 $args 设置，值为"?"，否则为""
+    $limit_rate #这个变量可以限制连接速率
+    $nginx_version #当前运行的 nginx 版本号
+    $query_string #与 $args 相同
+    $remote_addr #客户端的 IP 地址
+    $remote_port #客户端的端口
+    $remote_port #已经经过 Auth Basic Module 验证的用户名
+    $request_filename #当前连接请求的文件路径，由 root 或 alias 指令与 URI 请求生成
+    $request_body #这个变量（0.7.58+）包含请求的主要信息。在使用 proxy_pass 或 fastcgi_pass 指令的 location 中比较有意义
+    $request_body_file #客户端请求主体信息的临时文件名
+    $request_completion #如果请求成功，设为"OK"；如果请求未完成或者不是一系列请求中最后一部分则设为空
+    $request_method #这个变量是客户端请求的动作，通常为 GET 或 POST。包括 0.8.20 及之前的版本中，这个变量总为 main request 中的动作，如果当前请求是一个子请求，并不使用这个当前请求的动作
+    $request_uri #这个变量等于包含一些客户端请求参数的原始 URI，它无法修改，请查看 $uri 更改或重写 URI
+    $scheme #所用的协议，例如 http 或者是 https，例如 rewrite ^(.+)$$scheme://example.com$1 redirect
+    $server_addr #服务器地址，在完成一次系统调用后可以确定这个值，如果要绕开系统调用，则必须在 listen 中指定地址并且使用 bind 参数
+    $server_name #服务器名称
+    $server_port #请求到达服务器的端口号
+    $server_protocol #请求使用的协议，通常是 HTTP/1.0、HTTP/1.1 或 HTTP/2
+    $uri #请求中的当前 URI(不带请求参数，参数位于 args ) ， 不 同 于 浏 览 器 传 递 的 args)，不同于浏览器传递的 args)，不同于浏览器传递的 request_uri 的值，它可以通过内部重定向，或者使用 index 指令进行修改。不包括协议和主机名，例如 /foo/bar.html
+
+-f/!-f # 判断文件是否存在
+-d/!-d # 判断目录是否存在
+-e/!-e # 判断文件或目录是否存在
+-x/!-x # 判断文件是否可以执行
+```
+
+### 本地文件操作
 
 * sendfile 零拷贝，提高本地文件通过socket发送的效率
     - 从本地读取一个文件并通过socket发送出去步骤
@@ -420,145 +756,7 @@ location /video {
 }
 ```
 
-### 配置
-
-* 语法
-    - 配置文件由指令和指令块构成
-    - 每条指令以分号（;）结尾，指令和参数间以空格符分隔
-    - 指令块以大括号{}将多条指令组织在一起
-    - include 语句允许组合多个配置文件以提高可维护性
-    - 使用 # 添加注释
-    - 使用 $ 定义变量
-    - 部分指令的参数支持正则表达式
-* The main configuration file is: /etc/nginx/nginx.conf
-* 全局块：影响Nginx全局
-    - 配置运行Nginx服务器用户（组）:PHP7默认的用户和组是www-data
-    - worker process:worker 进程个数
-        + master进程接收并分配请求给worker处理
-        + 简单一点可以设置为cpu核心数 `grep ^processor /proc/cpuinfo | wc -l` ，也是 auto 值
-        + 如果开启了ssl和gzip应该设置成与逻辑CPU数量一样甚至为2倍，可以减少I/O操作
-    - `worker_cpu_affinity 0001 0010 0100 1000`:在高并发情况下，通过设置cpu粘性来降低由于多CPU核切换造成的寄存器等现场重建带来的性能损耗
-    - worker_rlimit_nofile 10240 默认没有设置，可以限制为操作系统最大的限制65535
-    - Nginx进程PID存放路径
-    - 错误日志存放路径
-    - 配置文件的引入
-* events:主要影响Nginx服务器与用户的网络连接
-    - worker_connections:每个worker进程能并发处理（发起）的最大连接数（包含与客户端或后端被代理服务器间等所有连接数）
-        + 最大连接数 = worker_processes * worker_connections/4
-        + 不能超过 worker_rlimit_nofile
-    - 设置网络连接的序列化
-    - keepalive 是关于 upstream（上游） 服务器和 Nginx 连接有关的配置 - 当 Nginx 充当代理或负载均衡服务器角色时。表示在空闲状态 upstream 服务器在单个 worker 进程中支持的 keepalive 连接数
-        + 是否允许同时接收多个网络连接
-        + keepalive 连接数是能够有效减少延迟提升 web 页面加载速度的优化性能手段
-        + keepalive_requests 指令用于设置单个客户端能够在一个 keepalive 连接上处理的请求数量
-        + keepalive_timeout 设置空闲 keepalive 连接保持打开的时间
-    - 事件驱动模型的选择
-        + Select、poll属于标准事件模型，如果当前系统不存在更有效的方法，nginx会选择select或poll
-        + 高效事件模型
-            * Kqueue：使用于FreeBSD 4.1+, OpenBSD 2.9+, NetBSD 2.0 和 MacOS X.使用双处理器的MacOS X系统使用kqueue可能会造成内核崩溃。
-            * Epoll：使用于Linux内核2.6版本及以后的系统。
-            * /dev/poll：使用于Solaris 7 11/99+，HP/UX 11.22+ (eventport)，IRIX 6.5.15+ 和 Tru64 UNIX 5.1A+。
-            * Eventport：使用于Solaris 10。 为了防止出现内核崩溃的问题， 有必要安装安全补丁
-* HTTP 块：代理、缓存和日志定义等绝大多数功能和第三方模块的配置
-    - sendfile on 开启高效文件传输模式，sendfile指令指定nginx是否调用sendfile函数来输出文件，减少用户空间到内核空间的上下文切换。对于普通应用设为 on，如果用来进行下载等应用磁盘IO重负载应用，可设置为off，以平衡磁盘与网络I/O处理速度，降低系统的负载
-    - 当使用sendfile函数时，TCP_NOPUSH才起作用，因为在sendfile时，Nginx会要求发送某些信息来预先解释数据，这些信息其实就是报头内容，典型情况下报头很小，而且套接字上设置了TCP_NODELAY。有报头的包将被立即传输，在某些情况下（取决于内部的包计数器），因为这个包成功地被对方收到后需要请求对方确认。这样，大量数据的传输就会被推迟而且产生了不必要的网络流量交换。而通过设置TCP_NOPUSH=on，表示将所有HTTP的header一次性发出去
-    - TCP_NODELAY只有在配置长连接时才起作用，因为长连接可能引起小包的阻塞，配置TCP_NODELAY可以避免该阻塞
-    - Use the tcp_nopush directive together with the sendfile on;directive. This enables NGINX to send HTTP response headers in one packet right after the chunk of data has been obtained by sendfile().
-    - 在 nginx 中，tcp_nopush 配置和 tcp_nodelay “互斥”。
-    - 定义 MIMI-Type
-    - keepalive_timeout 65: 长连接超时时间，单位是秒 长连接请求大量小文件的时候，可以减少重建连接的开销，但假如有大文件上传，65s内没上传完成会导致失败。如果设置时间过长，用户又多，长时间保持连接会占用大量资源。
-    - send_timeout 用于指定响应客户端的超时时间。这个超时仅限于两个连接活动之间的时间，如果超过这个时间，客户端没有任何活动，Nginx将会关闭连接
-    - 自定义服务日志
-    - client_max_body_size 10m 允许客户端请求的最大单文件字节数。如果有上传较大文件，请设置它的限制值
-    - client_body_buffer_size 128k  缓冲区代理缓冲用户端请求的最大字节数
-    - 增大TCP的listen queue：sudo sysctl -w net.core.somaxconn=4096或者永久修改/etc/sysctl.conf：net.core.somaxconn = 4096，然后修改Nginx：`listen 80 backlog=4096;`
-    - 单连接请求数上限
-    - windows调用php-cgi启动服务
-    - linux通过转交服务给php-fpm处理:配置www.conf服务转交TCP socket或Unix Socket
-        + Unix Sockets
-            * Nginx is run as user/group www-data. PHP-FPM's unix socket therefore needs to be readable/writable by this user.
-            * If we change the Unix socket owner to user/group ubuntu, Nginx will then return a bad gateway error, as it can no longer communicate to the socket file. We would have to change Nginx to run as user "ubuntu" as well, or set the socket file to allow "other" (non user nor group) to be read/written to, which is insecure.
-        + TCP Sockets
-            * This makes PHP-FPM able to be listened to by remote servers
-            * listen.allowed_clients = 127.0.0.1
-    - http_proxy：nginx作为反向代理服务器的功能，包括缓存功能
-        + proxy_connect_timeout 60 nginx跟后端服务器连接超时时间(代理连接超时)
-        + proxy_read_timeout 60 连接成功后，与后端服务器两个成功的响应操作之间超时时间(代理接收超时)
-        + proxy_buffer_size 4k 设置代理服务器（nginx）从后端realserver读取并保存用户头信息的缓冲区大小，默认与proxy_buffers大小相同，其实可以将这个指令值设的小一点
-        + proxy_buffers 4 32k proxy_buffers缓冲区，nginx针对单个连接缓存来自后端realserver的响应，网页平均在32k以下的话，这样设置
-        + proxy_busy_buffers_size 64k 高负荷下缓冲大小（proxy_buffers*2）
-        + proxy_max_temp_file_size  当proxy_buffers放不下后端服务器的响应内容时，会将一部分保存到硬盘的临时文件中，这个值用来设置最大临时文件大小，默认1024M，它与proxy_cache没有关系。大于这个值，将从upstream服务器传回。设置为0禁用。
-        + proxy_temp_file_write_size 64k 当缓存被代理的服务器响应到临时文件时，这个选项限制每次写临时文件的大小。proxy_temp_path（可以在编译的时候）指定写到哪那个目录。
-        + proxy_pass，proxy_redirect见 location 部分。
-    - http_gzip gzip on : 开启gzip压缩输出，减少网络传输
-        + gzip_min_length 1k ：设置允许压缩的页面最小字节数，页面字节数从header头得content-length中进行获取。默认值是20。建议设置成大于1k的字节数，小于1k可能会越压越大。
-        + gzip_buffers 4 16k ：设置系统获取几个单位的缓存用于存储gzip的压缩结果数据流。4 16k代表以16k为单位，安装原始数据大小以16k为单位的4倍申请内存。
-        + gzip_http_version 1.0 ：用于识别 http 协议的版本，早期的浏览器不支持 Gzip 压缩，用户就会看到乱码，所以为了支持前期版本加上了这个选项，如果你用了 Nginx 的反向代理并期望也启用 Gzip 压缩的话，由于末端通信是 http/1.0，故请设置为 1.0。
-        + gzip_comp_level 6 ：gzip压缩比，1压缩比最小处理速度最快，9压缩比最大但处理速度最慢(传输快但比较消耗cpu)
-        + gzip_types ：匹配mime类型进行压缩，无论是否指定,”text/html”类型总是会被压缩的。
-        + gzip_proxied any ：Nginx作为反向代理的时候启用，决定开启或者关闭后端服务器返回的结果是否压缩，匹配的前提是后端服务器必须要返回包含”Via”的 header头。
-        + gzip_vary on ：和http头有关系，会在响应头加个 Vary: Accept-Encoding ，可以让前端的缓存服务器缓存经过gzip压缩的页面，例如，用Squid缓存经过Nginx压缩的数据。
-* server：也被叫做“虚拟服务器”部分，一组根据不同server_name指令逻辑分割的资源，这些虚拟服务器响应 HTTP 请求，因此都包含在 HTTP 部分
-    - 基于名称的虚拟主机配置
-    - 基于IP的虚拟主机配置
-    - 配置网络监听
-    - http_stream
-        + 通过一个简单的调度算法来实现客户端IP到后端服务器的负载均衡，upstream后接负载均衡器的名字，后端realserver以 host:port options; 方式组织在 {} 中。如果后端被代理的只有一台，也可以直接写在 proxy_pass
-* location：基于 Nginx 服务器接收到的请求字符串（例如 server_name/uri-string），对虚拟主机名称 （也可以是 IP 别名）之外的字符串（例如前面的 /uri-string）进行匹配，对特定的请求进行处理。
-    - location配置
-    - 请求根目录配置
-    - 更改location的URI
-        + proxy_pass http:/backend 请求转向backend定义的服务器列表，即反向代理，对应upstream负载均衡器。也可以proxy_pass http://ip:port。
-    - 默认首页配置
-* 通用
-    - autoindex on; 允许列出整个目录
-    - autoindex_exact_size off; 默认为on，显示出文件的确切大小，单位是bytes。改为off后，显示出文件的大概大小，单位是kB或者MB或者GB
-    - autoindex_localtime on; 默认为off，显示的文件时间为GMT时间。改为on后，显示的文件时间为文件的服务器时间
-    - `add_header`并不享受Nginx的继承机制，意味着如果子context中有add_header，那么将覆盖所有的父context中的add_header配置。比如，在http中配置了3个add_header，然后在server中配置了1个add_header，那么server中的add_header会将http中的所有3个add_header给覆盖掉
-*  /status
-    - Active connections：当前活动的连接数量。
-    - Accepts：已经接受客户端的连接总数量。
-    - Handled：已经处理客户端的连接总数量。 （一般与accepts一致，除非服务器限制了连接数量）。
-    - Requests：客户端发送的请求数量。
-    - Reading：当前服务器正在读取客户端请求头的数量。
-    - Writing：当前服务器正在写响应信息的数量。
-    - Waiting：当前多少客户端在等待服务器的响应。
-* 工具
-    - [valentinxxx/nginxconfig.io](https://github.com/valentinxxx/nginxconfig.io):⚙️ NGiИX config generator generator on steroids 💉 https://nginxconfig.io
-    - [NGINX Config](https://www.digitalocean.com/community/tools/nginx):The easiest way to configure a performant, secure,
-    and stable NGINX server.
-
-```json
-$args # 请求中的参数
-$content_length # 请求 HEAD 中的 Content-length
-$content_type # 请求 HEAD 中的 Content_type
-$document_root # 当前请求中 root 的值
-$host # 主机头
-$http_user_agent # 客户端 agent
-$http_cookie # 客户端 cookie
-$limit_rate # 限制连接速率
-$request_method # 客户端请求方式，GET/POST
-$remote_addr # 客户端 IP
-$remote_port # 客户端端口
-$remote_user # 验证的用户名
-$request_filename # 请求的文件绝对路径
-$request_body_file  # 做反向代理时发给后端服务器的本地资源的名称
-$scheme # http/http
-$server_protocol # 协议，HTTP/1.0 OR HTTP/1.1
-$server_addr # 服务器地址
-$server_name # 服务器名称
-$server_port # 服务器端口
-$request_uri # 包含请求参数的 URI
-$uri # 不带请求参数的 URI
-$document_uri # 同 $uri
-
--f/!-f # 判断文件是否存在
--d/!-d # 判断目录是否存在
--e/!-e # 判断文件或目录是否存在
--x/!-x # 判断文件是否可以执行
-```
-
-## server
+### server
 
 * http 服务上支持若干虚拟主机，每个虚拟主机对应一个server配置项
 * backlog 默认位 128，1024 这个值换成自己正常的 QPS
@@ -677,9 +875,41 @@ location / {
 访问 http://localhost/img/a.gif 会匹配上 规则 D, 虽然 规则 Y 也可以匹配上，但是因为正则匹配优先，而忽略了 规则 Y。
 访问 http://localhost/img/a.tiff 会匹配上 规则 Y。
 访问 http://localhost/category/id/1111 则最终匹配到规则 F ，因为以上规则都不匹配，这个时候应该是 Nginx 转发请求给后端应用服务器，比如 FastCGI（php），tomcat（jsp），Nginx 作为反向代理服务器存在。
+
+#### 适配 PC 或移动设备
+location / {
+     root  /usr/local/app/pc; # pc 的 html 路径
+        if ($http_user_agent ~* '(Android|webOS|iPhone|iPod|BlackBerry)') {
+            root /usr/local/app/mobile; # mobile 的 html 路径
+        }
+        index index.html;
+    }
+	
+#### 单页面项目 history 路由配置
+server {
+    listen       80;
+    server_name  fe.sherlocked93.club;
+
+    location / {
+        root       /usr/local/app/dist;  # vue 打包后的文件夹
+        index      index.html index.htm;
+        try_files  $uri $uri/ /index.html @rewrites; # 默认目录下的 index.html，如果都不存在则重定向
+
+        expires -1;                          # 首页一般没有强制缓存
+        add_header Cache-Control no-cache;
+    }
+
+    location @rewrites { // 重定向设置
+        rewrite ^(.+)$ /index.html break;
+    }
+}
+
+vue-router 官网只有一句话 try_files $uri $uri/ /index.html
 ```
 
-## 连接 fastcgi
+## 功能
+
+### 连接 fastcgi
 
 * TCP
     - 使用 TCP 端口连接 127.0.0.1:9000
@@ -687,6 +917,24 @@ location / {
     - 使同一台操作系统上的两个或多个进程进行数据通信。与管道相比，Unix domain sockets 既可以使用字节流和数据队列，而管道通信则只能通过字节流。
     - Unix domain sockets 的接口和 Internet socket 很像，但它不使用网络底层协议来通信。Unix domain socket 的功能是 POSIX 操作系统里的一种组件。
     - 使用系统文件地址连接套接字/dev/shm/php-cgi.sock 来作为自己的身份。可以被系统进程引用。所以两个进程可以同时打开一个 Unix domain sockets 来进行通信。不过这种通信方式是发生在系统内核里而不会在网络里传播
+
+### 动静分离
+
+* 一种是纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案
+* 一种方法就是动态跟静态文件混合在一起发布， 通过 nginx 配置来分开
+
+```
+# 所有静态请求都由nginx处理，存放目录为 html
+location ~ \.(gif|jpg|jpeg|png|bmp|swf|css|js)$ {
+    root    /usr/local/resource;
+    expires     10h; # 设置过期时间为10小时
+}
+
+# 所有动态请求都转发给 tomcat 处理
+location ~ \.(jsp|do)$ {
+    proxy_pass  127.0.0.1:8888;
+}
+```
 
 ### 伪静态
 
@@ -824,9 +1072,23 @@ location ~ \.(htm|html)?$ {
     proxy_pass http http://real_server;
     proxy_redirect off;
 }
+
+server {
+    listen       80;
+    server_name  static.bin;
+    charset utf-8;    # 防止中文文件名乱码
+
+    location /download {
+        alias           /usr/share/nginx/static;  # 静态资源目录
+
+        autoindex               on;    # 开启静态资源列目录，浏览目录权限
+        autoindex_exact_size    off;   # on(默认)显示文件的确切大小，单位是byte；off显示文件大概大小，单位KB、MB、GB
+        autoindex_localtime     off;   # off(默认)时显示的文件时间为GMT时间；on显示的文件时间为服务器时间
+    }
+}
 ```
 
-## Cache
+### Cache
 
 * `proxy_cache_path` 参数及对应配置说明如下：
     - 用于缓存的本地磁盘目录是 /path/to/cache/
@@ -840,8 +1102,25 @@ location ~ \.(htm|html)?$ {
     - proxy_cache_use_stale 中的 updating 参数告知 Nginx 在客户端请求的项目的更新正在原服务器中下载时发送旧内容，而不是向服务器转发重复的请求。第一个请求陈旧文件的用户不得不等待文件在原服务器中更新完毕。陈旧的文件会返回给随后的请求直到更新后的文件被全部下载。
     - 当 proxy_cache_lock 被启用时，当多个客户端请求一个缓存中不存在的文件（或称之为一个 MISS），只有这些请求中的第一个被允许发送至服务器。其他请求在第一个请求得到满意结果之后在缓存中得到文件。如果不启用 proxy_cache_lock，则所有在缓存中找不到文件的请求都会直接与服务器通信
 
-## 代理
+```
+proxy_cache_path usr/local/cache levels=1:2 keys_zone=my_cache:10m;
 
+server {
+  listen       80;
+  server_name  test.com;
+
+  location / {
+      proxy_cache my_cache;
+      proxy_pass http://127.0.0.1:8888;
+      proxy_set_header Host $host;
+  }
+}
+```
+
+### 代理
+
+* 正向 vs 反向
+	* 代理服务器处于内网还是外网
 * 正向代理:位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。“代理”的是客户端
     - 只有客户端才能使用正向代理。当需要把你的服务器作为代理服务器的时候，可以用Nginx来实现正向代理.正向代理发生在 client 端，用户能感知到的且是用户主动发起的代理。
     - 客户端非常明确要访问的服务器地址；服务器只清楚请求来自哪个代理服务器，而不清楚来自哪个具体的客户端；正向代理模式屏蔽或者隐藏了真实客户端信息
@@ -852,26 +1131,43 @@ location ~ \.(htm|html)?$ {
     - 对客户端访问授权，上网进行认证
     - proxy_pass
 * 反向代理（Reverse Proxy）:以代理服务器来接受internet上的连接请求，然后将请求转发给**内部网络**上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端。“代理”的是服务端
-    - 典型用途是将防火墙后面的服务器提供给 Internet 用户访问，加强安全防护
-    - 简单来说就是真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
-    - 保护和隐藏原始资源服务器 保证内网的安全，通常将反向代理作为公网访问地址，Web 服务器是内网
+    - 典型用途：将防火墙后面的服务器提供给 Internet 用户访问，加强安全防护
+    - 真实的服务器不能直接被外部网络访问，所以需要一台代理服务器，而代理服务器能被外部网络访问的同时又跟真实服务器在同一个网络环境，当然也可能是同一台服务器，端口不同而已。
+    - 保护和隐藏原始资源服务器：保证内网的安全，通常将反向代理作为公网访问地址，Web 服务器是内网
+    - 解决跨域问题
     - 加密和 SSL 加速
-    - 通过缓存静态资源，加速 Web 请求
+    - 通过控制缓存（代理缓存 proxy cache）缓存静态资源，加速 Web 请求
     - 实现负载均衡，通过反向代理服务器来优化网站的负载
     - 地址重定向：Nginx 的 Rewrite 主要的功能就是实现 URL 重写
 
 ![代理](../_static/nginx_proxy.jpg "Optional title")
 
 ```
-#将请求"http:127.0.0.1:80/helloworld" 转向服务器 "http://127.0.0.1:8081"
+#### 正向代理
+server {
+    resolver_timeout 5s; // 设超时时间
+    location / {
+        # 当客户端请求我的时候，我会把请求转发给它
+        # $host 要访问的主机名 $request_uri 请求路径
+        proxy_pass http://$host$request_uri;
+    }
+}
+
+
 server {
         listen       80;
         server_name  127.0.0.1;
-
+        
+		# 用户访问 ip:8080/test 下的所有路径代理到 github
+        location /test {
+         proxy_pass   https://github.com;
+        }
+		
         location /helloworld {
             proxy_pass     http://127.0.0.1:8081; # 表明了所代理的服务器
             proxy_set_header Host $host:$server_port;
         }
+}
 
 # websocket的反向代理配置
 server {
@@ -889,7 +1185,6 @@ server {
     location / {
         #添加wensocket代理
         proxy_pass http://127.0.0.1:9093;  # websocket服务器。不用管 ws://
-        // proxy_pass https://www.baidu.com;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -918,6 +1213,7 @@ server
         ssl_ciphers "YOUR";
         ssl_session_cache builtin:1000 shared:SSL:10m;
         ssl_dhparam path;
+		
         location /
         {
             # 注意这里是http
@@ -928,11 +1224,10 @@ server
     }
 ```
 
-## 负载均衡 lb
+### 负载均衡 lb
 
 * 链接限制
     - ulimit -a                        //查看所有属性值
-    - ulimit -Hn 100000                //设置硬限制（临时规则）
     - ulimit -Hn 100000                //设置硬限制（临时规则）
 * 分摊到多个操作单元上进行执行,共同完成工作任务，以反向代理的方式进行负载均衡的
 * 策略
@@ -940,7 +1235,7 @@ server
     - weight 加权轮询:指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。
     - Least Connections(least_conn): 跟踪和backend当前的活跃连接数目，最少的连接数目说明这个backend负载最轻，将请求分配给他，这种方式会考虑到配置中给每个upstream分配的weight权重信息；
     - Least Time(least_time): 请求会分配给响应最快和活跃连接数最少的backend
-        + fair（第三方插件）:按后端服务器的响应时间来分配请求，响应时间短的优先分配。
+	+ fair(依赖于第三方 NGINX Plus）:按后端服务器的响应时间来分配请求，响应时间短的优先分配。
     - Generic Hash(hash): 以用户自定义资源(比如URL)的方式计算hash值完成分配，其可选consistent关键字支持一致性hash特性
         + url_hash（第三方插件）:按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存服务器时比较有效。server语句中不能写入weight等其他的参数。在upstream中加入hash语句，hash_method是使用的hash算法。
     - ip_hash:每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session不能跨服务器的问题。如果后端服务器down掉，要手工down掉。
@@ -952,8 +1247,8 @@ server
 + 后台服务端的动态配置
     * 直接修改配置文件，然后按照之前的方式通过向master process发送信号重新加载配置
     * 采用Nginx的on-the-fly配置
-        - curl http://localhost/upstream_conf?upstream=backend
-        - curl http://localhost/upstream_conf?upstream=backend\&id=1\&drain=1
+        - `curl http://localhost/upstream_conf?upstream=backend`
+        - `curl http://localhost/upstream_conf?upstream=backend\&id=1\&drain=1`
     * 健康监测:涉及到两个参数，max_fails=1 fail_timeout=10s;意味着只要Nginx向backend发送一个请求失败或者没有收到一个响应，就认为该backend在接下来的10s是不可用的状态
 + 基于DNS的负载均衡缺陷：DNS不会检查主机和IP地址的可访问性，所以分配给客户端的IP不确保是可用的(Google 404)；DNS的解析结果会在客户端、多个中间DNS服务器不断的缓存，所以backend的分配不会那么的理想。
     * backend group中的主机可以配置成域名的形式，如果在域名的后面添加resolve参数，那么Nginx会周期性的解析这个域名，当域名解析的结果发生变化的时候会自动生效而不用重启
@@ -968,6 +1263,46 @@ server
 * client_body_temp_path设置记录文件的目录 可以设置最多3层目录
 
 ```
+http{
+    # 轮询（默认）
+    upstream backend {
+        server 192.168.1.10;
+        server 192.168.1.11;
+        keepalive 1024;
+    }
+	
+    # weight
+    upstream backend_weight {
+        server 192.168.1.10 weight=1;
+        server 192.168.1.11 weight=2;
+    }
+    # ip_hash 在需要使用负载均衡的server中增加 proxy_pass http://bakend/;
+    upstream backend_ip_hash{
+        ip_hash;
+        server 192.168.1.10:8080;
+        server 192.168.1.11:8080;
+    }
+
+    upstream backend{
+        fair;
+        server 192.168.1.10:8080;
+        server 192.168.1.11:8080;
+    }
+	
+	upstream backend_lecon {
+    	least_conn;
+        server 192.168.1.12:8887;
+        server 192.168.1.13:8888;
+    }
+	
+    upstream backend_url_hash {
+     hash $request_uri;
+     hash_method crc32;
+     server 192.168.1.12:8887;
+     server 192.168.1.13:8888;
+    }
+}
+
 server {
     listen       81;
     server_name  localhost;
@@ -978,29 +1313,7 @@ server {
         proxy_set_header Host $host:$server_port;
     }
 
-    # 轮询（默认）
-    upstream backend {
-        server 192.168.1.10;
-        server 192.168.1.11;
-        keepalive 1024;
-    }
-    # weight
-    upstream bakend {
-        server 192.168.1.10 weight=1;
-        server 192.168.1.11 weight=2;
-    }
-    # ip_hash 在需要使用负载均衡的server中增加 proxy_pass http://bakend/;
-    upstream bakend{
-        ip_hash;
-        server 192.168.1.10:8080;
-        server 192.168.1.11:8080;
-    }
 
-    upstream bakend{
-        fair;
-        server 192.168.1.10:8080;
-        server 192.168.1.11:8080;
-    }
     # url_hash
     upstream bakend{
         hash $request_uri;
@@ -1041,6 +1354,7 @@ match server_ok {
     header Content-Type = text/html;
     body !~ "maintenance mode";
 }
+
 server {
     location / {
         proxy_pass http://backend;
@@ -1091,76 +1405,16 @@ return best;
 ```
 ![Alt text](../_static/ngnix-weight.png "Optional title")
 
-## TLS
-
-* The SSL key is kept secret on the server. It is used to encrypt content sent to clients.
-* The SSL certificate is publicly shared with anyone requesting the content. It can be used to decrypt the content signed by the associated SSL key.
-* create a strong Diffie-Hellman group, which is used in negotiating Perfect Forward Secrecy with clients.
-
-```sh
-codesudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
-
-sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
-
-# /etc/nginx/snippets/self-signed.conf
-ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
-ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
-
-# /etc/nginx/snippets/ssl-params.conf
-ssl_protocols TLSv1.2;
-ssl_prefer_server_ciphers on;
-ssl_dhparam /etc/nginx/dhparam.pem;
-ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
-ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
-ssl_session_timeout  10m;
-ssl_session_cache shared:SSL:10m;
-ssl_session_tickets off; # Requires nginx >= 1.5.9
-ssl_stapling on; # Requires nginx >= 1.3.7
-ssl_stapling_verify on; # Requires nginx => 1.3.7
-resolver 8.8.8.8 8.8.4.4 valid=300s;
-resolver_timeout 5s;
-# Disable strict transport security for now. You can uncomment the following
-# line if you understand the implications.
-# add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
-add_header X-Frame-Options DENY;
-add_header X-Content-Type-Options nosniff;
-add_header X-XSS-Protection "1; mode=block";
-
-# /etc/nginx/sites-available/example.com
-server {
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    include snippets/self-signed.conf;
-    include snippets/ssl-params.conf;
-
-    server_name example.com www.example.com;
-
-    root /var/www/example.com/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    . . .
-}
-
-## Certbot
-sudo add-apt-repository ppa:certbot/certbot
-sudo apt install python-certbot-nginx
-
-sudo ufw allow 'Nginx Full'
-sudo ufw delete allow 'Nginx HTTP'
-
-sudo certbot --nginx --webroot -w /var/www/html/ -d example.com -d www.example.com
-sudo crontab -e
-30 5 * * 1 /usr/bin/certbot renew -a nginx --quiet
-sudo certbot renew --dry-run
-```
-
-## 故障转移和高可用
+### 故障转移和高可用
 
 * Keepalived 软件起初是专为 LVS 负载均衡软件设计的，用来管理并监控 LVS 集群系统中各个服务节点的状态。后来又加入了可以实现高可用的 VRRP (Virtual Router Redundancy Protocol ，虚拟路由器冗余协议）功能
     - 故障切换转移通过 VRRP 来实现
         + 在 Keepalived服务正常工作时，主 Master 节点会不断地向备节点发送（多播的方式）心跳消息，用以告诉备 Backup 节点自己还活着。
         + 当主 Master 节点发生故障时，就无法发送心跳消息，备节点也就因此无法继续检测到来自主  Master 节点的心跳了，于是调用自身的接管程序，接管主 Master 节点的 IP 资源及服务。
         + 而当主 Master节点恢复时，备 Backup 节点又会释放主节点故障时自身接管的 IP 资源及服务，恢复到原来的备用角色。
+	+ 配置文件中增加 `vrrp_script` 定义一个外围检测机制，并在 `vrrp_instance` 中通过定义 `track_script` 来追踪脚本执行过程，实现节点转移
+	+ 复制一份到备份服务器，备份 nginx 的配置要将 state 后改为 BACKUP，priority 改为比主机小。设置完毕后各自 service keepalived start 启动，经过访问成功之后，可以把 Master 机的 keepalived 停掉，此时 Master 机就不再是主机了 service keepalived stop，看访问虚拟 IP 时是否能够自动切换到备机 ip addr。
+	+ 再次启动 Master 的 keepalived，此时 vip 又变到了主机上。
 * 模仿
     - 准备两台安装 Nginx 和 Keepaliver(yum install keepalived -y)的服务器.配置如下
     - 启动 Nginx 和 Keepalived（systemctl start keepalived.service）
@@ -1168,6 +1422,39 @@ sudo certbot renew --dry-run
     - 启动 Nginx 和 Keepalived
 
 ```
+yum install keepalived -y
+
+global_defs{
+   notification_email {
+        cchroot@gmail.com
+   }
+   notification_email_from test@firewall.loc
+   smtp_server 127.0.0.1
+   smtp_connect_timeout 30 // 上面都是邮件配置
+   router_id LVS_DEVEL     // 当前服务器名字，用 hostname 命令来查看
+}
+vrrp_script chk_maintainace { // 检测机制的脚本名称为chk_maintainace
+    script "[[ -e/etc/keepalived/down ]] && exit 1 || exit 0" // 可以是脚本路径或脚本命令
+    // script "/etc/keepalived/nginx_check.sh"    // 比如这样的脚本路径
+    interval 2  // 每隔2秒检测一次
+    weight -20  // 当脚本执行成立，那么把当前服务器优先级改为-20
+}
+vrrp_instanceVI_1 {   // 每一个vrrp_instance就是定义一个虚拟路由器
+    state MASTER      // 主机为MASTER，备用机为BACKUP
+    interface eth0    // 网卡名字，可以从ifconfig中查找
+    virtual_router_id 51 // 虚拟路由的id号，一般小于255，主备机id需要一样
+    priority 100      // 优先级，master的优先级比backup的大
+    advert_int 1      // 默认心跳间隔
+    authentication {  // 认证机制
+        auth_type PASS
+        auth_pass 1111   // 密码
+    }
+    virtual_ipaddress {  // 虚拟地址vip
+       172.16.2.8
+    }
+}
+
+# `/etc/keepalived/keepalived.conf`
 #主机
 #检测脚本
 vrrp_script chk_http_port {
@@ -1222,8 +1509,7 @@ vrrp_instance VI_1 {
     }
 }
 
-#  新建检测脚本
-chmod 775 check_nginx.sh
+#  检测脚本 `check_nginx.sh`
 #!/bin/bash
 #检测nginx是否启动了
 A=`ps -C nginx --no-header |wc -l`
@@ -1233,14 +1519,19 @@ if [ $A -eq 0 ];then    #如果nginx没有启动就启动nginx
               killall keepalived
       fi
 fi
+
+chmod 775 check_nginx.sh
 ```
 
-## 限流
+### 限流
 
-* 连接数限流模块ngx_http_limit_conn_module
+* 连接频率限制模块 ngx_http_limit_conn_module
     - 可以根据定义的键来限制每个键值的连接数，如同一个IP来源的连接数。并不是所有的连接都会被该模块计数，只有那些正在被处理的请求（这些请求的头信息已被完全读入）所在的连接才会被计数
+    - limit_conn_zone 限制并发连接数
+		- 共享内存空间被耗尽，服务器将会对后续所有的请求返回 503 (Service Temporarily Unavailable) 错误
+	- 当多个 limit_conn_zone 指令被配置时，所有的连接数限制都会生效。
 * 漏桶算法实现的请求限流模块 ngx_http_limit_req_module
-    - limit_req_zone定义在http块中，$binary_remote_addr 表示保存客户端IP地址的二进制形式
+    - limit_req_zone 限制请求数，定义在http块中，$binary_remote_addr 表示保存客户端IP地址的二进制形式 
     - Zone定义IP状态及URL访问频率的共享内存区域。zone=keyword标识区域的名字，以及冒号后面跟区域大小。16000个IP地址的状态信息约1MB，所以示例中区域可以存储160000个IP地址。
     - Rate定义最大请求速率。示例中速率不能超过每秒100个请求
     - burst排队大小，nodelay不限制单个请求间的时间
@@ -1249,7 +1540,8 @@ fi
 ## 连接数限流
 # http{}中加上如下配置实现限制 限制每个用户的并发连接数，取名one
 limit_conn_zone $binary_remote_addr zone=one:10m; # 针对单个IP的并发限制
-limit_conn_zone $ server_name zone=perserver:10m; # 针对域名进行并发限制
+limit_conn_zone $server_name zone=perserver:10m; # 针对域名进行并发限制
+
 #配置记录被限流后的日志级别，默认error级别
 limit_conn_log_level error;
 #配置被限流后返回的状态码，默认返回503
@@ -1258,19 +1550,75 @@ limit_conn_status 503;
 # server{}里加上如下代码
 #限制用户并发连接数为1
 limit_conn one 1;
+limit_conn perip 10; # 限制每个 ip 连接到服务器的数量
+limit_conn perserver 2000; # 限制连接到服务器的总数
+
+http{
+    limit_conn_zone $binary_remote_addrzone=limit:10m; // 设置共享内存空间大
+    server{
+     location /{
+            limit_conn addr 5; # 同一用户地址同一时间只允许有5个连接。
+        }
+    }
+}
 
 ab -n 5 -c 5 http://10.23.22.239/index.html
+
+# 限制并发连接数
+limit_req_zone $binary_remote_addr zone=creq:10 mrate=10r/s;
+server{
+    location /{
+        limit_req zone=creq burst=5;
+    }
+}
+## 限制平均每秒不超过一个请求，同时允许超过频率限制的请求数不多于 5 个。如果不希望超过的请求被延迟，可以用 nodelay 参数
+limit_req zone=creq burst=5 nodelay;
 
 ## 请求数限制
 # http{}中配置 区域名称为one，大小为10m，平均处理的请求频率不能超过每秒一次。
 limit_req_zone $binary_remote_addr zone=one:10m rate=100r/s;
-
 # 在server{}中配置 设置每个IP桶的数量为5
 limit_req zone=one burst=5;
+
 ab -n 10 -c 10 http://10.23.22.239/index.html
 ```
 
-## 黑白名单
+### [鉴权配置](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
+
+* http basic auth
+
+```sh
+htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin
+htpasswd -b your/path/to/api_project_accounts.db liuxu 123456
+htpasswd your/path/to/api_project_accounts.db xiaoming
+
+server{
+	location ~ ^/index.html {
+       # 匹配 index.html 页面 除了 127.0.0.1 以外都可以访问
+       deny 192.168.1.1;
+       deny 192.168.1.2;
+       allow all;
+ 	}
+ 
+	location /dist {
+    	deny  192.168.1.2;
+    	allow 192.168.1.1/24;
+    	allow 127.0.0.1;
+    	deny  all;
+
+    	auth_basic              "my api project login";
+    	auth_basic_user_file    your/path/to/api_project_accounts.db;
+	}
+}
+
+sticky learn
+   create=$upstream_cookie_examplecookie
+   lookup=$cookie_examplecookie
+   zone=client_sessions:1m
+   timeout=1h;
+```
+
+### 黑白名单
 
 ```
 # 不限流白名单
@@ -1300,30 +1648,100 @@ location / {
 }
 ```
 
-## [鉴权配置](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/)
 
-* http basic auth
+### 图片防盗链
 
-```sh
-htpasswd -cb your/path/to/api_project_accounts.db admin password_for_admin
-htpasswd -b your/path/to/api_project_accounts.db liuxu 123456
-htpasswd your/path/to/api_project_accounts.db xiaoming
+* 防止其它网站利用外链访问我们的图片，有利于节省流量
 
-location /dist {
-    deny  192.168.1.2;
-    allow 192.168.1.1/24;
-    allow 127.0.0.1;
-    deny  all;
+```
+server {
+    listen       80;
+    server_name  *.test;
 
-    auth_basic              "my api project login";
-    auth_basic_user_file    your/path/to/api_project_accounts.db;
+    # 图片防盗链
+    location ~* \.(gif|jpg|jpeg|png|bmp|swf)$ {
+        valid_referers none blocked server_names ~\.google\. ~\.baidu\. *.qq.com;  # 只允许本机 IP 外链引用，将百度和谷歌也加入白名单有利于 SEO
+        if ($invalid_referer){
+            return 403;
+        }
+    }
+```
+
+### 禁止指定 user_agent
+
+* 禁止指定的浏览器和爬虫框架访问：
+
+```
+# http_user_agent 为浏览器标识
+# 禁止 user_agent 为baidu、360和sohu，~*表示不区分大小写匹配
+if ($http_user_agent ~* 'baidu|360|sohu') {
+    return 404;
 }
 
-sticky learn
-   create=$upstream_cookie_examplecookie
-   lookup=$cookie_examplecookie
-   zone=client_sessions:1m
-   timeout=1h;
+# 禁止 Scrapy 等工具的抓取
+if ($http_user_agent ~* (Scrapy|Curl|HttpClient)) {
+    return 403;
+```
+
+### 请求过滤
+
+```
+# 非指定请求全返回 403
+if ( $request_method !~ ^(GET|POST|HEAD)$ ) {
+    return 403;
+}
+
+error_page 502 503 /50x.html;
+location = /50x.html {
+    root /usr/share/nginx/html;
+}
+
+**根据 URL 名称过滤**
+if ($host = zy.com' ) {
+     #其中 $1是取自regex部分()里的内容,匹配成功后跳转到的URL。
+     rewrite ^/(.*)$  http://www.zy.com/$1  permanent；
+}
+
+location /test {
+    // /test 全部重定向到首页
+    rewrite  ^(.*)$ /index.html  redirect;
+}
+```
+
+### 泛域名路径分离
+
+* 配置一些二级或者三级域名，希望通过 nginx 自动指向对应目录
+* test1.doc.test.club 自动指向 /usr/local/html/doc/test1 服务器地址；
+* test2.doc.test.club 自动指向 /usr/local/html/doc/test2 服务器地址；
+
+```
+server {
+    listen       80;
+    server_name  ~^([\w-]+)\.doc\.test\.club$;
+
+    root /usr/local/html/doc/$1;
+}
+```
+
+### 泛域名转发
+
+* 二级或者三级域名链接重写到我们希望的路径，让后端就可以根据路由解析不同的规则：
+	*  test1.serv.test.club/api?name=a 自动转发到 127.0.0.1:8080/test1/api?name=a
+    * test2.serv.test.club/api?name=a 自动转发到 127.0.0.1:8080/test2/api?name=a
+    
+```
+server {
+    listen       80;
+    server_name ~^([\w-]+)\.serv\.test\.club$;
+
+    location / {
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        Host $http_host;
+        proxy_set_header        X-NginX-Proxy true;
+        proxy_pass              http://127.0.0.1:8080/$1$request_uri;
+    }
+}
 ```
 
 ## 日志 log
@@ -1346,12 +1764,19 @@ sticky learn
 
 ```sh
 log_format myformat '$remote_addr  $status  $time_local';
-access_log logs/access.log  myformat;
 
 log_format combined '$remote_addr - $remote_user  [$time_local]  '
                     ' "$request"  $status  $body_bytes_sent  '
                     ' "$http_referer"  "$http_user_agent" ';
 
+access_log logs/access.log  myformat;
+
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+## log 检索
 awk '{print $11}' access.log | sort | uniq -c | sort -rn # Processing log file group by HTTP Status Code
 awk '($11 ~ /502/)' access.log | awk '{print $4, $9}' | sort | uniq -c | sort -rn # Getting All URL's in log file of specific Status Code, below example 502
 awk '($11 ~ /502/)' access.log | awk '{print $9}' | sed '/^$/d' | sed 's/\?.*//g' | sort | uniq -c | sort -rn  #  To group by request_uri's excluding query string params below is the command
@@ -1400,7 +1825,6 @@ sed -n "/30\/Aug\/2015:00:00:01/,/30\/Aug\/2015:23:59:59/"p access.log > time_ac
 awk '($9 ~ /504/)' time_access.log | awk '{print $7}' | sort | uniq -c | sort -rn > 504.log
 # 查找访问最多的 20 个 IP 及访问次数
 awk '{print $1}' time_access.log | sort | uniq -c | sort -n -k 1 -r | head -n 20 > top.log
-
 ```
 
 ## 优化
@@ -1441,7 +1865,89 @@ init_by_lua_file /etc/nginx/waf/init.lua;
 access_by_lua_file /etc/nginx/waf/waf.lua ;
 ```
 
-## acme
+## TLS
+
+* The SSL key is kept secret on the server. It is used to encrypt content sent to clients.
+* The SSL certificate is publicly shared with anyone requesting the content. It can be used to decrypt the content signed by the associated SSL key.
+* create a strong Diffie-Hellman group, which is used in negotiating Perfect Forward Secrecy with clients.
+* certbot-auto
+
+```sh
+codesudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+
+sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096
+
+# /etc/nginx/snippets/self-signed.conf
+ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+# /etc/nginx/snippets/ssl-params.conf
+ssl_protocols TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_dhparam /etc/nginx/dhparam.pem;
+ssl_ciphers ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384;
+ssl_ecdh_curve secp384r1; # Requires nginx >= 1.1.0
+ssl_session_timeout  10m;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off; # Requires nginx >= 1.5.9
+ssl_stapling on; # Requires nginx >= 1.3.7
+ssl_stapling_verify on; # Requires nginx => 1.3.7
+resolver 8.8.8.8 8.8.4.4 valid=300s;
+resolver_timeout 5s;
+# Disable strict transport security for now. You can uncomment the following
+# line if you understand the implications.
+# add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload";
+add_header X-Frame-Options DENY;
+add_header X-Content-Type-Options nosniff;
+add_header X-XSS-Protection "1; mode=block";
+
+# /etc/nginx/sites-available/example.com
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    server_name example.com www.example.com;
+
+    root /var/www/example.com/html;
+    index index.html index.htm index.nginx-debian.html;
+}
+
+server {
+    listen      80;
+    server_name test.com www.test.com;
+
+    # 单域名重定向
+    if ($host = 'www.sherlocked93.club'){
+        return 301 https://www.sherlocked93.club$request_uri;
+    }
+
+    # 全局非 https 协议时重定向
+    if ($scheme != 'https') {
+        return 301 https://$server_name$request_uri;
+    }
+
+    # 或者全部重定向
+    return 301 https://$server_name$request_uri;
+}
+
+## Certbot
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install python-certbot-nginx
+
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+
+sudo certbot --nginx --webroot -w /var/www/html/ -d example.com -d www.example.com
+sudo crontab -e
+30 5 * * 1 /usr/bin/certbot renew -a nginx --quiet
+sudo certbot renew --dry-run
+
+sudo ./certbot-auto certonly --standalone --email admin@abc.com -d test.com -d www.test.com
+```
+
+### acme
 
 * 一款方便,强大的 Let's Encrypt 域名证书申请续签程序
 * 验证方式
@@ -1722,6 +2228,45 @@ docker build -t nginx .
 docker images nginx
 ```
 
+## Tips
+
+* 设置变量
+	* 变量名前面有一个 $ 符号
+	* 当引用的变量名之后紧跟着变量名的构成字符时（比如后跟字母、数字以及下划线），我们就需要使用特别的记法来消除歧义
+
+```
+# 设置变量
+set $name "chroot";
+
+server {
+  listen       80;
+  server_name  test.com;
+
+  location / {
+     set $temp hello;
+     return "$temp world";
+  }
+  
+   location /test {
+     set $temp "hello ";
+     return "${temp}world";
+  }
+}
+
+geo $dollar {
+    default "$";
+}
+server {
+    listen       80;
+    server_name  test.com;
+
+    location / {
+        set $temp "hello ";
+        return "${temp}world: $dollar";
+    }
+}
+```
+
 ## 问题
 
 ```
@@ -1729,12 +2274,6 @@ FastCGI sent in stderr: “Primary script unknown”
 fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name; 改为
 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 ```
-
-## 模块 module
-
-* [nginx-http-flv-module](https://github.com/winshining/nginx-http-flv-module):Media streaming server based on nginx-rtmp-module, HTTP-FLV/RTMP/HLS/DASH supported.
-* [nginx-rtmp-module](https://github.com/arut/nginx-rtmp-module):NGINX-based Media Streaming Server http://nginx-rtmp.blogspot.com
-* [IP2Location](https://github.com/ip2location/ip2location-nginx)
 
 ## 图书
 
