@@ -425,6 +425,7 @@ Notes
 
 ## 课程
 
+* [Computation Structures](https://computationstructures.org/index.html)
 * [哈佛大学计算机核心课程](https://www.bilibili.com/video/av19302731)
 * [The Missing Semester of Your CS Education](https://github.com/missing-semester/missing-semester)<https://missing.csail.mit.edu/>
 * [Teach Yourself Computer Science](https://teachyourselfcs.com/)

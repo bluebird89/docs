@@ -1,6 +1,6 @@
 # [vim](https://github.com/vim/vim)
 
-The official Vim repository <http://www.vim.org>
+<http://www.vim.org>
 
 * 内置于任何类Unix系统上，直接编辑文件
 * 与大多数文本编辑器和IDE相比，轻量级，即使在性能较弱硬件上运行速度快且高效
@@ -21,40 +21,37 @@ brew install vim
   - term 设置终端类型
   - :set number? 查询某个配置项是打开还是关闭
   - :set number|nu|nonumber|nonu
-  - :set ignorecase|noignorecase　　[不]忽略大小写的查找
-  - :set [no]hlsearch 高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配 关闭高亮搜索显示
+  - :set ignorecase|noignorecase　忽略大小写查找
+  - `:set [no]hlsearch` 高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配 关闭高亮搜索显示
   - :set incsearch 逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成
   - :set wrapscan 重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启
-  - :scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等
+  - :scriptnames 查看vim脚本文件位置，比如.vimrc文件，语法文件及plugin等
   - :set relativenumber 显示相对行号
   - :set spell|nospell
-    + Go to the next misspelled word ]s
-    + Go to the last misspelled word [s
+    + Go to the next misspelled word `]s`
+    + Go to the last misspelled word `[s`
     + When on a misspelled word, get some suggestions z=
     + Mark a misspelled word as correct zg
     + Mark a good word as misspelled zw
   - :set list 显示非打印字符，如tab，空格，行尾等。如果tab无法显示，请确定用set lcs=tab:>-命令设置了.vimrc文件，并确保你的文件中的确有tab，如果开启了expendtab，那么tab将被扩展为空格
   - report 显示由面向行的命令修改过的数目
-  - terse 显示简短的警告信息
+  - terse 显示简短警告信息
   - warn 在转到别的文件时若没保存当前文件则显示NO write信息
   - nomagic 允许在搜索模式中，使用前面不带“/”的特殊字符
   - nowrapscan 禁止vi在搜索到达文件两端时，又从另一端开始
   - mesg 允许vi显示其他用户用write写到自己终端上的信息
 * 会话
-  - 保存 :mksession ~/.mysession.vim
-  - 强行写入 :mksession! ~/.mysession.vim  文件重复，vim默认会报错，想强行写入
-  - 加载配置 vim -S ~/.mysession.vim
+  - 保存 :mksession ~/.mysession.vim,文件重复，vim默认会报错，想强行写入 :mksession! ~/.mysession.vim 
+  - 加载配置 `vim -S ~/.mysession.vim`
 * u 撤销上一步操作
 * U 撤销对当前行所有操作
 * Ctrl + r 重做（Redo），即撤销的撤销
-* [SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration <https://spacevim.org>
 * [vimr](https://github.com/qvacua/vimr):VimR — Neovim GUI for macOS <http://vimr.org>
 * [vimrc](https://github.com/amix/vimrc):The ultimate Vim configuration: vimrc
 * [YouCompleteMe](https://github.com/Valloric/YouCompleteMe):A code-completion engine for Vim <http://valloric.github.io/YouCompleteMe/>
 * [vimium](https://github.com/philc/vimium):The hacker's browser.
 * [vim-pathogen](https://github.com/tpope/vim-pathogen):pathogen.vim: manage your runtimepath
 * [maximum-awesome](https://github.com/square/maximum-awesome):Config files for vim and tmux.
-* [macvim](https://github.com/macvim-dev/macvim)
 * [spf13](http://vim.spf13.com/)The Ultimate Vim Distribution
 * [b4winckler/macvim](https://github.com/b4winckler/macvim) Vim - the text editor - for Mac OS X
 * [maximum-awesome-linux](https://github.com/ericzhang-cn/maximum-awesome-linux):Config files for vim and tmux.
@@ -62,15 +59,14 @@ brew install vim
   - ,t brings up ctrlp.vim, a project file filter for easily opening specific files
 * [vim-bootstrap](https://github.com/avelino/vim-bootstrap):Vim Bootstrap is generator provides a simple method of generating a .vimrc configuration for vim <https://vim-bootstrap.com/>
 * [lexVim](https://github.com/lexkong/lexVim): `./start_vim.sh`
-  - gd 或者ctrl + ] 跳转到对应的函数定义处
+  - gd 或者`ctrl + ]` 跳转到对应的函数定义处
   - ctrl + t 标签退栈
   - ctrl + o 跳转到前一个位置
-  - <F4> 最近文件列表
-  - <F5> 在 Vim 的上面打开文件查找窗口
-  - <F9> 生成供函数跳转的 tag
-  - <F2> 打开目录窗口，再按会关闭目录窗口
-  - <F6> 添加函数注释
-* [Vundle](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim <http://github.com/VundleVim/Vundle.Vim>
+  - `<F4>` 最近文件列表
+  - `<F5>` 在 Vim 的上面打开文件查找窗口
+  - `<F9>`生成供函数跳转的 tag
+  - `<F2>` 打开目录窗口，再按会关闭目录窗口
+  - `<F6>` 添加函数注释
 
 ```sh
 curl -sLf https://spacevim.org/install.sh | bash
@@ -103,108 +99,80 @@ set ft=html
 set ft=dos
 ```
 
+## 视图
+
+### 缓存
+
+* 缓存：Vim 会维护一系列打开文件
+  - 同一个缓存可以在多个窗口中显示
+
+```
+“?nyy：将当前行及其下n行的内容保存到寄存器？中，其中?为一个字母，n为一个数字
+“?nyw：将当前行及其下n个字保存到寄存器？中，其中?为一个字母，n为一个数字
+“?nyl：将当前行及其下n个字符保存到寄存器？中，其中?为一个字母，n为一个数字
+“?p：取出寄存器？中的内容并将其放到光标位置处。？可以是一个字母，也可以是一个数字
+ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
+
+r 对单词字符进行替换
+```
+
+### 标签页
+
+* 一个 Vim 会话包含一系列标签页，每个标签页包含一系列窗口 （分隔面板）
+
+### 窗口
+
+* 每个窗口显示一个缓存
+* 跟网页浏览器等其他熟悉的程序不一样的是， 缓存和窗口不是一一对应的关系； 窗口只是视角
+* 一个缓存可以在 多个 窗口打开，甚至在同一个标签页内的多个窗口打开。比如在查看同一个文件的不同部分的时候
+* 创建 `:[v]split|sp|new file`
+* 切换
+  - C-w
+  - `<C-w>` hjkl
+  - `<C-w>` + ←↓↑→
+* 最大化
+  - 垂直 `<C-w>` _
+  - 水平 `<C-w>` |
+  - 恢复 `<C-w>` =
+* 修改尺寸 `<C-w>` +|-
+* :sp / :vsp 来分割窗口
+* :He 全称:Hexplore 在下边分屏浏览目录
+* :He! 在上分屏浏览目录
+* :Ve 全称:Vexplore 在左边分屏间浏览目录，要在右边则是 :Ve!
+* 分屏中的文件同步移动: 两个屏中都输入 :set scb( set scrollbind)
+* 需要解开 :set scb!
+
 ## 模式 Mode
 
-* 正常模式 Normal 在文件中四处移动光标进行修改，<ESC> 返回正常模式
+* 左下角显示当前模式
+
+### Normal(default)
+
+* 在文件中四处移动光标进行修改，`<ESC>` 返回正常模式
   - i insert before the cursor 光标前插入,进入插入模式
     + 对于操纵/编辑文本，不单想用退格键完成
   - a append after the cursor 光标后插入
     + 3a！+ ESC:在当前位置后插入3个！
   - I insert at the beginning of the line 当前非blank字符行首并进入insert模式
   - A append at the end of the line 当前非blank字符行尾并进入insert模式
+- open a new line
   - o open a new line below the current one
   - O open a new line above the current one
+- replace the character
   - r replace the one character under your cursor
   - R replace the character under your cursor, but just keep typing afterwards
+- change
   - cm change whatever you define as a movement, e.g. a word, or a sentence, or a paragraph.
   - C change the current line from where you're at
   - ct? change change up to the question mark
+- substitute
   - s substitute from where you are to the next command (noun)
   - S substitute the entire current line
-* 插入模式 Insert Mode
-  - : 进入命令模式
-    + `:` 开始命令需要输入 <enter> 回车
-* Command Mode
-* 可视化模式 Visual Mode
-  - v 进入可视（一般）模式
-  - V 进入可视（行）模式
-  - <C-v>| ^V 进入可视（块）模式
 * 替换模式：替换文本，R 进入替换模式
-* 左下角显示当前模式
 
-## 缓存， 标签页， 窗口
+### Insert
 
-* 缓存：Vim 会维护一系列打开文件
-  - 同一个缓存可以在多个窗口中显示
-* 一个 Vim 会话包含一系列标签页，每个标签页包含一系列窗口 （分隔面板）
-* 每个窗口显示一个缓存
-* 跟网页浏览器等其他熟悉的程序不一样的是， 缓存和窗口不是一一对应的关系； 窗口只是视角
-* 一个缓存可以在 多个 窗口打开，甚至在同一个标签页内的多个窗口打开。比如在查看同一个文件的不同部分的时候
-
-## 操作
-
-* **Verbs**:the actions we take, and they can be performed on nouns
-  - d: delete
-  - c: change
-  - y: yank (copy)
-  - v: visually select (V for line vs. character)
-* **Modifiers** are used before nouns to describe the way in which you're going to do something
-  - i: inside
-  - a: around
-  - NUM: number (e.g.: 1, 2, 10)
-  - t: searches for something and stops before it
-  - f: searches for that thing and lands on it
-  - /: find a string (literal or regex)
-  - * Ctrl-λ 写成 <C-λ>
-* **Nouns**
-  - w: word
-  - s: sentence
-  - ): sentence (another way of doing it)
-  - p: paragraph
-  - }: paragraph (another way of doing it)
-  - t: tag (think HTML/XML)
-  - b: block (think programming)
-  - use nouns as motions, meaning can move around content using them as the size of your jump
-* `N<command>` 重复某个命令N次.Esc是必须的，否则命令不生效
-
-* `.` 重复前一次命令
-* `;` 重复上一次f查找操作
-* `.` 重复上一次修改操作，跟;经常用来实现一些简单重复操作
-* `; ,` 重复操作
-* History 以:和/开头命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
-
-![](../_static/vim.png)
-![](../_static/vim_sheet.png)
-![](../_static/vi-vim-cheat-sheet-sch.gif)
-
-* Green   = Essential
-* Yellow   = Basic
-* Orange   / Blue = Advanced
-* Red   = Expert
-[](http://michael.peopleofhonoronly.com/vim/)
-![](../_static/vim_sheet_code.png)
-
-```
-# 语法：action+position+object
-<!-- 改变当前括号内的内容 -->
-ci(
-<!-- 改变当前方括号内的内容 -->
-ci[
-<!-- Change inside sentence (delete the current one and enter insert mode) -->
-cis
-<!-- 删除一个单引号字符窗， 包括周围的单引号 -->
-da'
-
-d2w
-5j
-7dw
-
-:help
-```
-
-## Insert
-
-* 左下角显示`--INSERT--`,按 Esc 或 Ctrl+[ 进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
+* 左下角显示 `--INSERT--`, 按 Esc 或 `Ctrl+[` 进入, 左下角显示文件名或为空, 可以移动光标、删除字符等
 * 普通模式下，输入 : 即可进入
 * Ctrl+u 删除输入方式下所输入文本
 
@@ -214,9 +182,9 @@ d2w
   - `R` 改文件名（大写）
   - `s` 对文件排序（小写）
   - `x` 执行文件
-  - :cd <dir>  改变当前目录
-  - :pwd 查看当前目录
-* :ls 查看缓冲区, 用 :E 浏览打开的文件都没有被关闭，这些文件都在缓冲区中
+  - `:cd <dir>`  改变当前目录
+  - `:pwd` 查看当前目录
+* `:ls` 查看缓冲区, 用 :E 浏览打开的文件都没有被关闭，这些文件都在缓冲区中
   - %a 表示当前文件
   - – （非活动的缓冲区）
   - a （当前被激活缓冲区）
@@ -280,52 +248,24 @@ d2w
   - Ctrl + X 和 Ctrl +V 表达式补齐
   - Ctrl + X 和 Ctrl +L 整个行补齐
 
-## substitution 替换 s （等同于 xi）
+### Command Line
 
-* % 匹配括号，包括 (, {, [
-* 用“<”来指定匹配单词开头
-* :s /old/new 用new替换行中首次出现的old
-* :s /foo/bar/g Change "foo" to "bar" on just the current line
-* :%s /foo/bar/g Change "foo" to "bar" on every line
-* `:%s /\[.*\](\(.*\))/\1/g` 将有命名的 Markdown 链接替换成简单 URLs
-* :n,m?s/old/new/g  用new替换从n到m行里所有的old
-  - :3,5s/^#//g 解除3-5行注释
-  - :1,$s/^/#/g 注释整个文档
-* :g/p1/s//p2/g：将文件中所有p1均用p2替换
-* :%s/<four>/4/gc 只想替换注释中的 “four”，而保留代码中
-* :1,$s/word1/word2/g 或 :%s/word1/word2/g 从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
-  - :%s/$/sth/ 在行尾追加sth
-  - :%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
-  - :%s/#.*//g 删除#之后的字符
-* :%s/^/#/g 注释整个文档
-* :g/\^\s*$/d 删除空行以及只有空格的行
-
-```
-# Delete the Ctrl-M characters from the end of files
-:%s/s+$//
-```
-
-## Command mode(默认) 命令模式
-
++ `:` 开始命令需要输入 `<enter>` 回车
++ :line_number
++ :$
 * rg 替换当前字符为g
 * S 或 cc 删除当前行内容并进入插入模式
 * C 删除从当前位置到行尾内容
 
-* 自动提示:输入一个词的开头，然后按 <C-p>或是<C-n>
+* 自动提示:输入一个词的开头，然后按 `<C-p>` `<C-n>`
 * ggVG 全选
 * J 合并下一行
-* :Te 全称:Texplorer Tab页浏览目录
-  - :tabs 查看打开窗口和Tab情况
-  - gt 到下一个页
-  - gT 到前一个页
-  - {i} gt i是数字，到指定页
-  - :tabclose [i] 如果后面指定了数字，那就关闭指定页，如果没有就关闭当前页
 * gU(u) 变大(小)写，需要接一个范围
   - gUl 大写当前字符
   - guu 当前单词后面行全部变小写
   - gUw 当前位置到改单词末尾变为大写
   - ggguG 整篇文章大写转化为小写
-* 跳转到下一个匹配,如在<div>上按%，则跳转到相应的</div>
+* 跳转到下一个匹配,如在`<div>`上按%，则跳转到相应的`</div>`
 * 100idesu [ESC] 重复 100 `idesu`
 * 复制 y copying
   - y: yank (copy) whatever's selected
@@ -385,61 +325,156 @@ d2w
   - caw change a word 可以删除当前光标所在位置单词
   - c^ 从当前位置删除到行首，并进入插入模式
   - c$ 从当前位置删除到行尾，并进入插入模式
-  - ci" change inside " 修改当前位置附近，在相同配对的"中的内容。比如对于const char *str="hello world";。当在双引号中间的任意位置键入ci"可以直接清空字符串，并继续输入新的希望的字符串，ci(、ci[
+  - ci" change inside " 修改当前位置附近，在相同配对的"中的内容。比如对于const char *str="hello world";。当在双引号中间的任意位置键入ci"可以直接清空字符串，并继续输入新的希望的字符串，`ci(`、`ci[`
   - cit 可以直接编辑匹配的 xml 标签中的内容
-  - ct,
+  - ct
 
-## 窗口
+### Visual
 
-* 创建 `:[v]split|sp|new file`
-* 切换
-  - C-w
-  - <C-w> hjkl
-  - <C-w> + ←↓↑→
-* 最大化
-  - 垂直 <C-w> _
-  - 水平 <C-w> |
-  - 恢复 <C-w> =
-* 修改尺寸:<C-w> +|-
-* :sp / :vsp 来分割窗口
-* :He 全称:Hexplore 在下边分屏浏览目录
-* :He! 在上分屏浏览目录
-* :Ve 全称:Vexplore 在左边分屏间浏览目录，要在右边则是 :Ve!
-* 分屏中的文件同步移动: 两个屏中都输入 :set scb( set scrollbind)
-* 需要解开 :set scb!
+* 左下角显示 `--VISUAL--` 可以对选定文本运行命令操作
+* 可视化 character-based: v
+* 可视化行 line-based: V
+* 可视化块 paragraphs: Ctrl-v|`^V`
 
-## 查找
-
-* /{正则表达式}, n / N 用于导航匹配
-* ?text 向光标之上寻找text
-* 2n 查找下面第二个匹配
-* 特殊字符在查找时需要转义　`.*[]^%/?~$`
-* `*`和 `#` 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
-* `f{字符}` 定位到第一个{char}出现的光标位置
-  - fa 光标后第一个为a字符
-  - 3fa 在当前行查找第三个出现的a
-* `F{字符}` 向后查找
-  - 查找/到 向前/向后 在本行的{字符}
-
-* `t,` 到逗号前的第一个字符
-  - dt" 删除所有的内容，直到遇到双引号
-* T{字符}
-* `;` 重复上次搜索 go to the next instance when you've jumped to a character
-* `,` go to the previous instance when you've jumped to a character 如果重复上次搜索按多了，则可以通过`,`回退
-
-## repeating actions
-
-* Using the "." to repeat your last action
+* J 把所有的行连接起来（变成一行）
+* < 或 > 左右缩进
+* = 自动缩进
+* Block Visual 区域选择 `<action>a<object>  <action>i<object>`
+  - action
+    + d (删除)
+    + v (可视化的选择)
+    + gU (变大写)
+    + gu (变小写)
+  - object ： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符："、 '、 )、 }、 ]
+* 块操作  `<C-v>`
+  - 当前位置->` <C-v>`->截至位置->编辑->esc
+  - `^ <C-v> <C-d>` I-- `[ESC]`
+    + ^ 到行头
+    + `<C-v>` 开始块操作 # windows下是 `<C-q>`
+    + `<C-d>` 向下移动 (也可以使用hjkl来移动光标，或是使用%，或是别的)
+    + `I-- [ESC] I`是插入，插入“--”，按ESC键来为每一行生效
+  - 被选择行后加上点东西
+    + `<C-v>`
+    + 选中相关的行 (可使用 j 或` <C-d>` 或是 /pattern 或是 % 等……)
+    + $ 到行最后
+    + A, 输入字符串，按 ESC
 
 ```
-# delete a word
-dw
-# delete five more words
-5.
-n.
+# 区域选择 `<action>a<object>  <action>i<object>`
+(map (+) ("foo")) # 光标键在第一个 o
+
+vi" → 会选择 foo
+va" → 会选择 "foo"
+vi) → 会选择 "foo"
+va) → 会选择("foo")
+v2i) → 会选择 map (+) ("foo")
+v2a) → 会选择 (map (+) ("foo")):
+
+# 块操作 将文件中的每一行添加到ArrayList中
+# 行尾追加,在命令模式下
+%s/$/");/g
+# 回到行首
+ESC gg
+ctrl+v G
+I list.add("
+ESC
+
+one
+two
+three
+four
+Ctrl+v，3j，$，A，,，Esc，V，3j，J
+
+one, two, three, four,
+
+# Enter line-based visual mode and delete a couple of lines below
+Vjjd
 ```
 
-## 导航
+## 操作
+
+* **Verbs**:the actions we take, and they can be performed on nouns
+  - d: delete
+  - c: change
+  - y: yank (copy)
+  - v: visually select (V for line vs. character)
+* **Modifiers** are used before nouns to describe the way in which you're going to do something
+  - i: inside
+  - a: around
+  - NUM: number (e.g.: 1, 2, 10)
+  - t: searches for something and stops before it
+  - f: searches for that thing and lands on it
+  - /: find a string (literal or regex)
+  - * Ctrl-λ 写成 <C-λ>
+* **Nouns**
+  - w: word
+  - s: sentence
+  - ): sentence (another way of doing it)
+  - p: paragraph
+  - }: paragraph (another way of doing it)
+  - t: tag (think HTML/XML)
+  - b: block (think programming)
+  - use nouns as motions, meaning can move around content using them as the size of your jump
+* `N<command>` 重复某个命令N次.Esc是必须的，否则命令不生效
+
+* `.` 重复前一次命令
+* `;` 重复上一次f查找操作
+* `.` 重复上一次修改操作，跟;经常用来实现一些简单重复操作
+* `; ,` 重复操作
+* History 以:和/开头命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令
+
+![](../_static/vim.png)
+![](../_static/vim_sheet.png)
+![](../_static/vi-vim-cheat-sheet-sch.gif)
+
+* Green   = Essential
+* Yellow   = Basic
+* Orange   / Blue = Advanced
+* Red   = Expert
+[](http://michael.peopleofhonoronly.com/vim/)
+![](../_static/vim_sheet_code.png)
+
+```
+# 语法：action+position+object
+<!-- 改变当前括号内的内容 -->
+ci(
+<!-- 改变当前方括号内的内容 -->
+ci[
+<!-- Change inside sentence (delete the current one and enter insert mode) -->
+cis
+<!-- 删除一个单引号字符窗， 包括周围的单引号 -->
+da'
+
+d2w
+5j
+7dw
+
+:help
+```
+
+####  text objects
+
+* words: iw and aw
+* sentences: is and as
+* paragraphs: ip and ap
+* single quotes: i' and a'
+* double quotes: i" and a"
+* back ticks: i` and a`
+* parenthesis: i( and a(
+* brackets: i[ and a[
+* braces: i{ and a{
+* tags: it and at
+
+```
+# Delete around a word
+daw
+
+# Change inside a sentence
+cis
+```
+
+
+### 导航
 
 * 基本移动: hjkl （左， 下， 上， 右）
 * h|Backspace 光标左移一个字符
@@ -455,7 +490,7 @@ n.
 * e|E 下一个单词至词尾
   - ge 光标向前移动一个单词至词尾
 * b|B 光标前移一个单词至词首
-* {行数}<CR> 光标向下移动 n 行
+* {行数}`<CR>` 光标向下移动 n 行
   - {行数}G
 * Ctrl + O 向后回退的光标移动
 * Ctrl + I 向前追赶的光标移动
@@ -464,14 +499,14 @@ n.
 * ) 至句尾 move forward one sentence
 * ( 至句首
 * 行： 0 （行初）， ^ （第一个非空格字符）， $ （行尾）
-* 0(数字零)|<HOME> 到行首
+* 0(数字零)|`<HOME>` 到行首
 * ^|_ 到本行第一个非blank字符(空格，tab，换行，回车等)
 * $ 至行尾
   - 5$ 下面5行行尾
 * g_ 到本行最后一个不是blank字符的位置
 * :10 到第10行,绝对行
 * 5+|- 光标下|上移5行，相对行
-* % 移动到与当前括号匹配的括号处，包括(， [， {
+* % 移动到与当前括号匹配的括号处，包括`(， [， {`
 
 * 屏幕： H （屏幕首行）， M （屏幕中间）， L （屏幕底部）
 * 翻页
@@ -479,7 +514,7 @@ n.
   - Ctrl-d|^D move down half a screen
 * Ctrl+f|Page Down|^F
 * Ctrl+b|Page Up|^B
-* gg|1G|[[ 到文件头
+* gg|1G|`[[` 到文件头
   - 100G 光标移至第100行首
 * G|]] 文档尾行行首
 * Ctrl-i jump to your previous navigation location
@@ -488,7 +523,7 @@ n.
 * ^E: scroll up one line
 * ^Y: scroll down one line
 
-* 模式 <start position><command><end position>
+* 模式 `<start position><command><end position>`
   - 0y$
   - ye 当前位置拷贝到本单词的最后一个字符
   - y2/foo 拷贝2个 “foo” 之间的字符串
@@ -563,66 +598,60 @@ n.
 | :n files Specify new list of files                            | :r file Insert file after cursor                          |
 | :r !command Run command, and insert output after current line |
 
-## Visual
+### substitution 替换 s （等同于 xi）
 
-* 可视化 character-based: v
-* 可视化行 line-based: V
-* 可视化块 paragraphs: Ctrl-v
-* 左下角显示 `--VISUAL--` 可以对选定文本运行命令操作
-
-* J 把所有的行连接起来（变成一行）
-* < 或 > 左右缩进
-* = 自动缩进
-* Block Visual 区域选择：<action>a<object>  <action>i<object>
-  - action
-    + d (删除)
-    + v (可视化的选择)
-    + gU (变大写)
-    + gu (变小写)
-  - object ： w 一个单词， W 一个以空格为分隔的单词， s 一个句字， p 一个段落。也可以是一个特别的字符："、 '、 )、 }、 ]
-* 块操作  <C-v>
-  - 当前位置-》<C-v>-》截至位置-》编辑-》esc
-  - ^ <C-v> <C-d> I-- [ESC]
-    + ^ 到行头
-    + <C-v> 开始块操作 # windows下是 <C-q>
-    + <C-d> 向下移动 (也可以使用hjkl来移动光标，或是使用%，或是别的)
-    + I-- [ESC] I是插入，插入“--”，按ESC键来为每一行生效
-  - 被选择行后加上点东西
-    + <C-v>
-    + 选中相关的行 (可使用 j 或 <C-d> 或是 /pattern 或是 % 等……)
-    + $ 到行最后
-    + A, 输入字符串，按 ESC
+* % 匹配括号，包括 `(, {, [`
+* 用“`<`”来指定匹配单词开头
+* :s /old/new 用new替换行中首次出现的old
+* :s /foo/bar/g Change "foo" to "bar" on just the current line
+* :%s /foo/bar/g Change "foo" to "bar" on every line
+* `:%s /\[.*\](\(.*\))/\1/g` 将有命名的 Markdown 链接替换成简单 URLs
+* `:n,m?s/old/new/g`  用new替换从n到m行里所有的old
+  - `:3,5s/^#//g` 解除3-5行注释
+  - `:1,$s/^/#/g` 注释整个文档
+* :g/p1/s//p2/g：将文件中所有p1均用p2替换
+* `:%s/<four>/4/gc `只想替换注释中的 “four”，而保留代码中
+* :1,$s/word1/word2/g 或 :%s/word1/word2/g 从第一行到最后一行寻找 word1 字符串，并将该字符串取代为 word2
+  - :%s/$/sth/ 在行尾追加sth
+  - :%s/\^M//g 替换掉dos换行符，\^M使用ctrl+v  + Enter即可输入
+  - :%s/#.*//g 删除#之后的字符
+* :%s/^/#/g 注释整个文档
+* :g/\^\s*$/d 删除空行以及只有空格的行
 
 ```
-# 区域选择 <action>a<object>  <action>i<object>
-(map (+) ("foo")) # 光标键在第一个 o
+# Delete the Ctrl-M characters from the end of files
+:%s/s+$//
+```
 
-vi" → 会选择 foo
-va" → 会选择 "foo"
-vi) → 会选择 "foo"
-va) → 会选择("foo")
-v2i) → 会选择 map (+) ("foo")
-v2a) → 会选择 (map (+) ("foo")):
+### 查找
 
-# 块操作 将文件中的每一行添加到ArrayList中
-# 行尾追加,在命令模式下
-%s/$/");/g
-# 回到行首
-ESC gg
-ctrl+v G
-I list.add("
-ESC
+* /{正则表达式}, n / N 用于导航匹配
+* ?text 向光标之上寻找text
+* 2n 查找下面第二个匹配
+* 特殊字符在查找时需要转义　`.*[]^%/?~$`
+* `*`和 `#` 匹配光标当前所在单词，移动光标到下一个（或上一个）匹配单词（*是下一个，#是上一个）
+* `f{字符}` 定位到第一个{char}出现的光标位置
+  - fa 光标后第一个为a字符
+  - 3fa 在当前行查找第三个出现的a
+* `F{字符}` 向后查找
+  - 查找/到 向前/向后 在本行的{字符}
 
-one
-two
-three
-four
-Ctrl+v，3j，$，A，,，Esc，V，3j，J
+* `t,` 到逗号前的第一个字符
+  - dt" 删除所有的内容，直到遇到双引号
+* T{字符}
+* `;` 重复上次搜索 go to the next instance when you've jumped to a character
+* `,` go to the previous instance when you've jumped to a character 如果重复上次搜索按多了，则可以通过`,`回退
 
-one, two, three, four,
+### repeating actions
 
-# Enter line-based visual mode and delete a couple of lines below
-Vjjd
+* Using the "." to repeat your last action
+
+```
+# delete a word
+dw
+# delete five more words
+5.
+n.
 ```
 
 ## 宏 macros
@@ -639,13 +668,13 @@ Vjjd
 * 例子：将 xml 转成 json (file)
   - Gdd, ggdd 删除第一行和最后一行
   - 格式化最后一个元素的宏 （寄存器 e）
-    + 跳转到有 <name> 的行
-    + qe^r"f>s": "<ESC>f<C"<ESC>q
+    + 跳转到有 `<name>` 的行
+    + `qe^r"f>s": "<ESC>f<C"<ESC>q`
   - 格式化一个人的宏
-    + 跳转到有 <person> 的行
-    + qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q
+    + 跳转到有 `<person>` 的行
+    + `qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q`
   - 格式化一个人然后转到另外一个人的宏
-    + 跳转到有 <person> 的行
+    + 跳转到有` <person>` 的行
     + qq@pjq
   - 执行宏到文件尾
     + 999@q
@@ -670,58 +699,42 @@ q
 100@a
 ```
 
-## 寄存器(缓存区)
-
-```
-“?nyy：将当前行及其下n行的内容保存到寄存器？中，其中?为一个字母，n为一个数字
-“?nyw：将当前行及其下n个字保存到寄存器？中，其中?为一个字母，n为一个数字
-“?nyl：将当前行及其下n个字符保存到寄存器？中，其中?为一个字母，n为一个数字
-“?p：取出寄存器？中的内容并将其放到光标位置处。？可以是一个字母，也可以是一个数字
-ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。
-
-r 对单词字符进行替换
-```
-
-## text objects
-
-* words: iw and aw
-* sentences: is and as
-* paragraphs: ip and ap
-* single quotes: i' and a'
-* double quotes: i" and a"
-* back ticks: i` and a`
-* parenthesis: i( and a(
-* brackets: i[ and a[
-* braces: i{ and a{
-* tags: it and at
-
-```
-# Delete around a word
-daw
-
-# Change inside a sentence
-cis
-```
-
 ## 插件
 
 * `~/.vim/pack/pluginfoldername/ start/pluginname`
-* Accelerated-Smooth-Scroll 让Ctrl+F,Ctrl+B的滚屏来得更顺滑一些……
+* Accelerated-Smooth-Scroll 让Ctrl+F,Ctrl+B的滚屏来得更顺滑
 * [Ack](https://github.com/mileszs/ack.vim)全文搜索插件，可以在当前打开项目中进行源码的全文搜索，并可以在搜索结果中方便的切换和打开源码文件
 * AutoPairs 自动补全括号的插件，包括小括号，中括号，以及花括号，可以提升编码效率
 * [ctrlp](https://github.com/ctrlpvim/ctrlp.vim) 模糊文件查找,可以快速的帮助找到项目中的文件。在normal模式下，按下ctrl+p，然后输入要寻找的文件就行了
 * deoplete 自动补全插件，写代码必备，有了这个插件，就有了IDE的感觉
+* DoxygenToolkit.vim 用于快速生成注释，并由注释生成文档
 * EasyMotion 在当前文件中快速移动光标到指定查找位置的插件，十分方便和高效
 * [fzf](https://github.com/junegunn/fzf.vim) fzf ❤️ vim
-* [nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim. Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
 * [NERD Commenter](https://github.com/preservim/nerdcommenter):Vim plugin for intensely nerdy commenting powers
+* [nerdtree](https://github.com/scrooloose/nerdtree):A tree explorer plugin for vim. Vim中的文件管理器，方便编辑文件，创建目录，删除和修改文件等等……
+  - 打开一个目录树( :NERDTree <启动目录> | `<bookmark>`  )
+  - 关闭目录树栏(:NERDTreeClose)
+  - 切换目录树栏（:NERDTreeToggle）
+  - 定义标签（:Bookmark `<name>`）
+  - 定义Root标签（:BookmarkToRoot `<bookmark>`)
+  - 更多命令和用法见 :help NERD_tree
 * [powerline](<https://github.com/powerline/powerline):Powerline> is a statusline plugin for vim, and provides statuslines and prompts for several other applications, including zsh, bash, tmux, IPython, Awesome and Qtile. <https://powerline.readthedocs.io/en/latest/>
-* taglist：可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
+* taglist 可以通过ctags生成的tag文件索引定位代码中的常量、函数、类等结构，阅读代码和写代码必备
+  - :TlistToggle 在右边就会出现当前类的函数或变量列表
+  - :tag <函数名或变量、类> 如果只有一个文件定义了该函数或变量、类，vim打开该文件并将光标定位到对应的位置；如果多个文件有这个函数名或变量、类的tag，将给提示，
+  - :tselect” 显示可选的文件
+  - 快捷键跳转Ctrl+],Ctrl-o
 * TagBar 查看当前代码文件中的变量和函数列表的插件，可以切换和跳转到代码中对应的变量和函数的位置
+* :Te Texplorer Tab页浏览目录
+  - :tabs 查看打开窗口和Tab情况
+  - gt 到下一个页
+  - gT 到前一个页
+  - {i} gt i是数字，到指定页
+  - :tabclose [i] 如果后面指定了数字，那就关闭指定页，如果没有就关闭当前页
 * [v](https://github.com/rupa/v):z for vim
 * [vim-airline](https://github.com/vim-airline/vim-airline):lean & mean status/tabline for vim that's light as air Vim状态栏插件，包括显示行号，列号，文件类型，文件名，以及Git状态
 * [vim-anywhere](https://github.com/cknadler/vim-anywhere):Use Vim everywhere you've always wanted to
-* vim-colors-solarized：vim的solarized配色插件
+* vim-colors-solarized vim的solarized配色插件
 * [vim-easymotion](https://github.com/easymotion/vim-easymotion): 魔术操作
 * [vim-gitgutter](https://github.com/airblade/vim-gitgutter):A Vim plugin which shows a git diff in the sign column and stages/previews/undoes hunks and partial hunks.
 * [vim-go](https://github.com/fatih/vim-go):Go development plugin for Vim
@@ -731,47 +744,65 @@ cis
 * NERDTreeCommenter 方便的用来注释代码的插件
 * Vim-Startify Vim启动首屏自定义插件，让你的Vim启动后显示别具一格的首屏样式
 * [vim-surround](https://github.com/tpope/vim-surround):surround.vim: quoting/parenthesizing made simple 快速给词加环绕符号,例如单引号/双引号/括号/成对标签等的插件
-  - d s <existing char>   删除两边的指定字符
-  - c s <existing char> <desired char>  修改两边的指定字符
-  - y s <motion> <desired char> 修改两边字符
-  - S <desired char>    visual modes 选中指定字符中间的内容
-* [z](https://github.com/rupa/z):z - jump around
-
-## Bundle
-
-* NERD_tree 一个文件管理插件，一些常用命令
-  - 打开一个目录树( :NERDTree <启动目录> | <bookmark>  )
-  - 关闭目录树栏(:NERDTreeClose)
-  - 切换目录树栏（:NERDTreeToggle）
-  - 定义标签（:Bookmark <name>）
-  - 定义Root标签（:BookmarkToRoot <bookmark>)
-  - 更多命令和用法见 :help NERD_tree
+  - `d s <existing char>`   删除两边的指定字符
+  - `c s <existing char> <desired char>`  修改两边的指定字符
+  - `y s <motion> <desired char>` 修改两边字符
+  - `S <desired char>`    visual modes 选中指定字符中间的内容
+* winmanager 可以用Vundle安装，管理窗口的插件，可以跟NERD_tree、Taglist插件结合，打造一个类似IDE的界面。只需要在NERD_tree.vim中加入代码
 * word_complete 代码自动补全
+* [z](https://github.com/rupa/z):z - jump around
+* [Vundle](https://github.com/VundleVim/Vundle.vim):Vundle, the plug-in manager for Vim <http://github.com/VundleVim/Vundle.Vim>
+
 * SuperTab 省去Ctrl-n或Ctrl-p快捷键，通过按tab键快速显示补全代码
 * xptemplate: 快速自动完成一些if、switch、for、while结构模板代码，支持c、c++、Lua、Ruby、PHP、html、css、JavaScript等多种语言
   - 一般是输入结构体的关键字后，再按Ctrl-\组合键即可完成代码补全，然后按Tab键跳转到不同的位置替换模板内容。比如:输入for后按Ctrl-\组合键即可快速完成for结构的模板代码
 * ctags 一个扫描记录代码的语法元素，并记录为tag，方便代码定位跳转等操作，MacVim自带，但是据说有点问题，笔者用Vundle安装的貌似也有问题
   - 推荐用MacPorts安装 ~/.gvimrc配置中加入:  let Tlist_Ctags_Cmd="/opt/local/bin/ctags"
   - 用法:在终端 cd 进入到你的项目根目录，输入语句即可将项目所有代码文件打上tag: `ctags -R --c++-kinds=+px --fields=+iaS --extra=+q .`
-* taglist  可以用Vundle安装
-  - :TlistToggle 在右边就会出现当前类的函数或变量列表
-  - :tag <函数名或变量、类> 如果只有一个文件定义了该函数或变量、类，vim打开该文件并将光标定位到对应的位置；如果多个文件有这个函数名或变量、类的tag，将给提示，
-  - :tselect” 显示可选的文件
-  - 快捷键跳转Ctrl+],Ctrl-o
 * Cscope :功能跟ctags差不多，不过更加强大，MacVim默认已经支持，输入“:version”命令查看
-* OmniCppComplete  功能跟taglist差不多
 * a.vim :在.cpp文件和.h头文件间快速切换的插件
 * grep.vim  工程中查找词汇的插件
 * minibufexplorerpp  操作缓存buffer窗口
 * quickfix  MacVim内置安装好了，不需要重新安装。显示一些命令查询结果以及编译错误等信息
-* Command-t :用Commad-t命令快速查找切换文件。如果是用Vundle安装的话，还不能使用，在MacVim中输入“:CommandT”命令会报错。用Vundle安装好打开终端，输入如下命令，等待编译完毕后就可以使用
-* NERD_commenter.vim 注释插件
-* DoxygenToolkit.vim 用于快速生成注释，并由注释生成文档
-* winmanager 可以用Vundle安装，管理窗口的插件，可以跟NERD_tree、Taglist插件结合，打造一个类似IDE的界面。只需要在NERD_tree.vim中加入代码
+
+## 扩展编辑器
+
+* [SpaceVim](https://github.com/SpaceVim/SpaceVim):A community-driven modular vim distribution - The ultimate vim configuration <https://spacevim.org>
+ 
+### [neovim](https://github.com/neovim/neovim)
+
+Vim-fork focused on extensibility and usability <https://neovim.io/>
+
+* [Doc](https://neovim.io/doc/)
+
+```sh
+brew install neovim
+sudo apt-get install neovim
+
+nvim # 启动
+:checkhealth
+```
+
+### [Macvim](https://github.com/macvim-dev/macvim)
+
+Vim - the text editor - for macOS Vim - the text editor - for macOS <https://macvim-dev.github.io/macvimss>
+
+```sh
+brew install macvim --env-std --with-override-system-vim
+mvim # 启动
+
+# 插件管理
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+Launch vim and run :PluginInstall # 修改配置文件~/.vimrc，安装插件
+To install from command line: vim +PluginInstall +qall
+
+:versions
+```
 
 ## 学习计划
 
-* 运行vimtutor直到熟悉了那些基本命令，至少持续一个星期。重点是花大量的时间练习，直到基本的导航和编辑命令成为第二本能
+* 运行 vimtutor 熟悉那些基本命令，至少持续一个星期。重点是花大量的时间练习，直到基本的导航和编辑命令成为第二本能
   - 文档:help usr_02.txt
 * 尽可能少地进行其他配置，不使用插件
   - 不要添加太多插件试图使Vim成为一个完整的IDE——Vim作为Vim就很好，作为IDE则很糟糕
@@ -786,8 +817,8 @@ cis
 * 尽可能少地使用插件
   - 不要安装插件管理器（较新版本的Vim原生的插件管理就已足够）
   - 不要安装树浏览器或模糊文件查找器插件（使用:find与子文件夹搜索效果就很好）
-  - 不要为可视化标签安装插件（试着习惯原生Vim缓存，:b <TAB>很有用）
-  - 不要安装自动完成的插件（原生Vim已经可以使用<CTRL n>来补全）
+  - 不要为可视化标签安装插件（试着习惯原生Vim缓存，:b `<TAB>`很有用）
+  - 不要安装自动完成的插件（原生Vim已经可以使用`<CTRL n>`来补全）
   - 不要为多行注释安装插件（尝试使用可视化模式）
   - 不要为多游标安装插件（使用带n的/搜索，需要时重复.）
   - 插件：增强Vim语言性
@@ -812,37 +843,6 @@ cis
 
 > .git/rebase-merge/git-rebase-todo" E509: Cannot create backup file (add ! to override)
 
-## [neovim](https://github.com/neovim/neovim)
-
-Vim-fork focused on extensibility and usability <https://neovim.io/>
-
-* [Doc](https://neovim.io/doc/)
-
-```sh
-brew install neovim
-sudo apt-get install neovim
-
-nvim # 启动
-:checkhealth
-```
-
-## [Macvim](https://github.com/macvim-dev/macvim)
-
-Vim - the text editor - for macOS Vim - the text editor - for macOS <https://macvim-dev.github.io/macvimss>
-
-```sh
-brew install macvim --env-std --with-override-system-vim
-mvim # 启动
-
-# 插件管理
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-Launch vim and run :PluginInstall # 修改配置文件~/.vimrc，安装插件
-To install from command line: vim +PluginInstall +qall
-
-:versions
-```
-
 ## 教程
 
 * [vimtutor](./vim_tutor)
@@ -851,6 +851,7 @@ To install from command line: vim +PluginInstall +qall
 * [A vim Tutorial and Primer](https://danielmiessler.com/study/vim/)
 * [reddit 的 Vim 频道](https://www.reddit.com/r/vim/)
 * [vim-adventures](https://vim-adventures.com/)
+* [](https://github.com/dofy/learn-vim)
 
 ![Alt text](../_static/vi-vim-tutorial-1.gif "Optional title")
 ![Alt text](../_static/vi-vim-tutorial-2.gif "Optional title")
@@ -876,8 +877,5 @@ To install from command line: vim +PluginInstall +qall
 
 * [Vim教程](https://vimjc.com/)
 * [awesome-vim](https://github.com/akrawchyk/awesome-vim)The Vim plugin shortlist <https://vim.zeef.com/andrew.krawchyk>
-* [简明 VIM 练级攻略](https://coolshell.cn/articles/5426.html)
-* [无插件VIM编程技巧](https://coolshell.cn/articles/11312.html)
 * [vimwiki](https://github.com/vimwiki/vimwiki):Personal Wiki for Vim <http://vimwiki.github.io/>
 * [Learn Vim For the Last Time](https://danielmiessler.com/study/vim/)
-* [](https://github.com/dofy/learn-vim)

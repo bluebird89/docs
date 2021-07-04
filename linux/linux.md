@@ -179,7 +179,7 @@ neofetch
   - Graphical user interface allows a user to interact with the computer using graphics such as icons and images. When a user clicks on an icon to open an application on a computer, he or she is actually using the GUI. It's easy to perform tasks using GUI.
   - Command line interface allows a user to interact with the computer using commands. A user types the command in a terminal and the system helps in executing these commands. A new user with experience on GUI may find it difficult to interact with CLI as he/she needs to be aware of the commands to perform a particular operation.
 
-```
+```sh
 sudo apt install lxde
 sudo apt install lxqt
 sudo apt install xfce4

@@ -2,10 +2,11 @@
 
 The PHP Interpreter <http://www.php.net>
 
+* 解释型语言，即不需要编译。构建在 Zend 虚拟机之上
 * 一门弱类型语言，变量在声明时不需要确定类型，运行时类型会发生显式或隐式的类型改变
-* 一种解释型语言，即不需要编译。构建在 Zend 虚拟机之上
-* 一种服务器端脚本语言，只能通过服务器访问，需要配置虚拟主机调试,结果以纯 HTML 形式返回给浏览器
-* HTTP协议在Nginx等服务器的解析下,传送给相应的Handler（PHP等）来处理
+* 服务器端脚本语言
+	* 通过服务器访问，需要配置虚拟主机调试,结果以纯 HTML 形式返回给浏览器
+* HTTP 协议在Nginx等服务器的解析下,传送给相应 Handler（PHP等）来处理
 * 后端渲染，默认html处理，模版文件以.php后缀
 * 优点
   - 开发方便
@@ -18,7 +19,7 @@ The PHP Interpreter <http://www.php.net>
 
 ## 版本
 
-* 创始人：Rasmus Lerdorf
+* 创始人 Rasmus Lerdorf
 * 5.3
   - 支持了类似 Java 的 jar 包，名为 phar。可以像 Java 一样方便地实现应用程序打包和组件化，一个应用程序可以打成一个 Phar 包，直接放到 PHP-FPM 中运行
 * 5.5
@@ -26,23 +27,23 @@ The PHP Interpreter <http://www.php.net>
     + PHP->Compiler->Opcodes->Zend VM
     + PHP->Opcodes Cache->Zend VM
 * 7: zval 不再单独从堆上分配内存并且不自己存储引用计数
-  - 变量标量类型声明：标量类型声明与返回类型声明
+  - 标量类型声明：输入参数与输出参数
   - 短闭包
-  - null合并运算符（??）的新空合并运算符被加入 用来与isset（）函数函数一起替换三元操作
+  - null合并运算符 `??` 新空合并运算符被加入 用来与`isset()`函数函数一起替换三元操作
   - 属性类型
   - JIT 编译器
   - FFI
   - 匿名类
   - Contemporary cryptography
   - Generators
-  - 改进的性能 - PHPNG代码合并在PHP7中，比 PHP5快两倍
-  - 降低内存消耗 - 优化后PHP7使用较少的资源
+  - 改进性能 - PHPNG代码合并在PHP7中，比 PHP5快两倍
+  - 降低内存消耗
   - 标量类型声明:参数和返回值类型可以被强制执行
   - 一致性的64位支持 - 64位架构机器持续支持
   - 改进异常层次结构 - 异常层次结构得到改善
   - 许多致命错误转换成异常 - 异常的范围增大覆盖为许多致命的错误转化异常；
   - 安全随机数发生器 - 加入新的安全随机数生成器的API
-  - 已过时的API和扩展删除 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除
+  - 删除已过时API和扩展 - 不同的旧的和不支持的应用程序和扩展，从最新的版本中删除
   - 零成本声明支持零成本加入断言
   - 飞船操作符：用于比较两个表达式。当第一个表达式较第二个表达式分别小于，等于或大于时它分别返回-1，0或1
   + 定义常量数组
@@ -52,11 +53,11 @@ The PHP Interpreter <http://www.php.net>
     * 变量存储字节减小，减少内存占用，提升变量操作速度
     * 改善数组结构，数组元素和 hash 映射表被分配在同一块内存里，降低了内存占用、提升了 cpu 缓存命中率
     * 改进了函数的调用机制，通过优化参数传递的环节，减少了一些指令，提高执行效率
-  + 引入过滤 unserialize（）函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类
+  + 引入过滤 `unserialize()`函数以在反序列化不受信任的数据对象时提供更好的安全性。它可以防止可能的代码注入，使开发人员能够使用序列化白名单类
   + IntlChar类：自身定义了许多静态方法用于操作多字符集的 unicode 字符。需要安装intl拓展
   + 两个新的函数引入以产生一个跨平台的方式加密安全整数和字符串
-    + random_bytes() - 生成加密安全伪随机字节
-    + random_int() - 生成加密安全伪随机整数
+    + `random_bytes()` - 生成加密安全伪随机字节
+    + `random_int()` - 生成加密安全伪随机整数
   + 期望是向后兼容的增强到旧 assert() 函数。期望允许在生产代码零成本的断言，并提供在断言失败时抛出自定义异常的能力。assert() 不是一种语言构建体，其中第一个参数是一个表达式的比较字符串或布尔用于测试
     + ssertion - 断言。在PHP5中，这必须是要计算一个字符串或要测试一个布尔值。在PHP中7，这也可能是一个返回值的表达式，将执行和使用的结果，以指示断言是成功还是失败
   + 生成器支持返回表达式：允许在生成器函数中通过使用 return 语法来返回一个表达式 （但是不允许返回引用值），可以通过调用 Generator::getReturn() 方法来获取生成器的返回值， 但是这个方法只能在生成器完成产生工作以后调用一次
@@ -105,9 +106,11 @@ The PHP Interpreter <http://www.php.net>
   - get_class()不再允许null
   - count 作用在不是 Countable Types 将发生warning
   - 不带引号的字符串:在之前不带引号的字符串是不存在的全局常量，转化成他们自身的字符串。现在将会产生waring
-  - __autoload 被废弃
+  - `__autoload` 被废弃
   - each 被废弃:使用此函数遍历时，比普通的 foreach 更慢，并且给新语法的变化带来实现问题。因此被废弃了
-  - is_object、gettype修正:is_object 作用在**__PHP_Incomplete_Class** 将反正 true;gettype作用在闭包在将正确返回resource
+  - is_object、gettype修正
+	  - is_object 作用在`__PHP_Incomplete_Class` 返回 true
+	  - gettype作用在闭包在将正确返回resource
   - Convert Numeric Keys in Object/Array Casts:把数组转对象的时候，可以访问到整型键的值
 * 7.3
   - 添加了 array_key_first() 和 array_key_last() 来获取数组的第一个和最后一个元素的键名
@@ -163,9 +166,9 @@ The PHP Interpreter <http://www.php.net>
     + 如果参数验证失败，大多数内部函数将抛出 Error 异常
   - 重写方法时允许可变参数
   - 使用 static 关键字标识某个方法返回该方法当前所属的类，即使它是继承的（后期静态绑定）
-  - $object::class 获取对象的类名，其返回结果和 get_class($object) 一样
+  - `$object::class` 获取对象的类名，其返回结果和 get_class($object) 一样
   - new 和 instanceof 关键字现在可以被用于任意表达式
-  - 引入了新的 Stringable 接口，只要某个类实现了 __toString 方法，即被视作自动实现了 Stringable 接口
+  - 引入了新的 Stringable 接口，只要某个类实现了 `__toString` 方法，即被视作自动实现了 Stringable 接口
   - Trait 可以定义抽象私有方法
   - throw 语句可以用在只允许表达式出现的地方，例如箭头函数、合并运算符和三元运算符等
   - 参数列表中允许出现可选的尾部逗号
@@ -180,7 +183,7 @@ The PHP Interpreter <http://www.php.net>
     + 在原来Opcache优化的优化基础之上进行优化
     + 只支持x86架构的CPU
     + JIT 不是对 Opcache 替代，而是增强，在启用 JIT 的情况下，如果 Zend 底层发现特定字节码已经编译为机器码，则可以绕过 Zend VM 直接让 CPU 执行机器码，从而提高代码性能
-    + `opcache.jit_buffer_size`是定义分配多少内存给生成的机器码，这个看情况吧，一般测试就64M就行了
+    + `opcache.jit_buffer_size` 定义分配多少内存给生成的机器码，这个看情况吧，一般测试就64M就行了
     + `opcache.jit`:配置由4个独立的数字组成，从左到右分别
       * 是否在生成机器码点时候使用AVX指令, 需要CPU支持
       * 寄存器分配策略： 0: 不使用寄存器分配 1: 局部(block)域分配 2: 全局(function)域分配
@@ -188,18 +191,18 @@ The PHP Interpreter <http://www.php.net>
       * JIT优化策略，数值越大优化力度越大: 0: 不JIT 1: 做opline之间的跳转部分的JIT 2: 内敛opcode handler调用 3: 基于类型推断做函数级别的JIT 4: 基于类型推断，过程调用图做函数级别JIT 5: 基于类型推断，过程调用图做脚本级别的JIT
     + 尽量使用12X5型的配置，此时应该是效果最优的
     + 对于上面的X，如果是脚本级别的，推荐使用0，如果是Web服务型的，可以根据测试结果选择3或5
-    + @jit的形式，在有了attributes以后，可能变为<<jit>>
+    + @jit的形式，在有了attributes以后，可能变为`<<jit>>`
   - 类型系统和错误处理方面的改进
-    + 对算术/按位运算符进行更严格的类型检查（https://wiki.php.net/rfc/arithmetic_operator_type_checks）
-    + 抽象特征方法验证（https://wiki.php.net/rfc/abstract_trait_method_validation）
-    + 魔术方法的正确签名（https://wiki.php.net/rfc/magic-methods-signature）
-    + 重分类引擎警告（https://wiki.php.net/rfc/engine_warnings）
-    + 不兼容方法签名的致命错误（https://wiki.php.net/rfc/lsp_errors）
+    + [对算术/按位运算符进行更严格的类型检查](https://wiki.php.net/rfc/arithmetic_operator_type_checks)
+    + [抽象特征方法验证](https://wiki.php.net/rfc/abstract_trait_method_validation)
+    + [魔术方法的正确签名](https://wiki.php.net/rfc/magic-methods-signature)
+    + [重分类引擎警告](https://wiki.php.net/rfc/engine_warnings)
+    + [不兼容方法签名的致命错误](https://wiki.php.net/rfc/lsp_errors)
     + @运算符不再使致命错误静默。
-    + 用私有方法继承（https://wiki.php.net/rfc/inheritance_private_methods）
-    + 混合类型（https://wiki.php.net/rfc/mixed_type_v2）
-    + 静态返回类型（https://wiki.php.net/rfc/static_return_type）
-    + 内部函数类型（https://externals.io/message/106522）
+    + [用私有方法继承](https://wiki.php.net/rfc/inheritance_private_methods）
+    + [混合类型](https://wiki.php.net/rfc/mixed_type_v2)
+    + [静态返回类型](https://wiki.php.net/rfc/static_return_type)
+    + [内部函数类型](https://externals.io/message/106522)
     + 不透明的对象代替Curl、Gd、Sockets、OpenSSL、XMLWriter和XML扩展的资源
 
 ```sh
@@ -274,7 +277,7 @@ opcache.enable_cli=1
 opcache.huge_code_pages=1
 opcache.file_cache=/tmp
 
-# 系统开启HugePages
+# 系统开启 HugePages
 cat /proc/meminfo  | grep Huge
 AnonHugePages:    106496 kB
 HugePages_Total:     512
@@ -382,15 +385,6 @@ Hugepagesize:       2048 kB
 * −−with-tidy=DIR  Include TIDY support
 * [brew-php-switcher](https://github.com/philcook/brew-php-switcher):Brew PHP switcher is a simple shell script to switch your apache and CLI quickly between major versions of PHP. If you support multiple products/projects that are built using either brand new or old legacy PHP functionality. For users of Homebrew (or brew for short) currently only
 * [php7-upgrade-tools](https://github.com/swisnl/php7-upgrade-tools):A set of tools for upgrading applications to PHP 7
-* 集成环境
-  - [phpstudy](https://www.xp.cn/)
-  - [XAMPP](https://www.apachefriends.org/index.html)
-  - [wampserver](https://www.wampserver.com/)
-  - [mamp](https://www.mamp.info)
-    + http://localhost:8888/MAMP/
-    + /Applications/MAMP/htdocs
-    + MySQL port：8889
-  - [Wnmp](https://github.com/wnmp/wnmp):Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
     + `tasklist /fi "imagename eq nginx.exe" # 查看进程，没有查看error.log`
 
 ```sh
@@ -535,12 +529,121 @@ sudo pecl config-set php_bin /usr/bin/php5.6
 sudo pecl config-set php_suffix 5.6
 ```
 
+### 集成环境
+
+- [phpstudy](https://www.xp.cn/)
+- [XAMPP](https://www.apachefriends.org/index.html)
+- [wampserver](https://www.wampserver.com/)
+- [mamp](https://www.mamp.info)
+    + http://localhost:8888/MAMP/
+    + /Applications/MAMP/htdocs
+    + MySQL port：8889
+- [Wnmp](https://github.com/wnmp/wnmp):Version of nginx for Windows uses the native Win32 API (not the Cygwin emulation layer). Only the select() connection processing method is currently used, so high performance and scalability should not be expected.
+
+### Docker
+
+* [php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
+* [dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
+
+```
+mkdir -p ~/php-fpm/logs ~/php-fpm/conf
+
+# Dockerfile
+
+FROM debian:jessie
+
+# persistent / runtime deps
+
+ENV PHPIZE_DEPS \ autoconf \ file \ g++ \ gcc \ libc-dev \ make \ pkg-config \ re2c RUN apt-get update && apt-get install -y \ $PHPIZE_DEPS \ ca-certificates \ curl \ libedit2 \ libsqlite3-0 \ libxml2 \ --no-install-recommends && rm -r /var/lib/apt/lists/*
+
+ENV PHP_INI_DIR /usr/local/etc/php RUN mkdir -p $PHP_INI_DIR/conf.d
+
+## <autogenerated>
+</autogenerated>
+
+ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
+
+##
+
+ENV GPG_KEYS 0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
+
+ENV PHP_VERSION 5.6.22 ENV PHP_FILENAME php-5.6.22.tar.xz ENV PHP_SHA256 c96980d7de1d66c821a4ee5809df0076f925b2fe0b8c362d234d92f2f0a178e2
+
+RUN set -xe \ && buildDeps=" \ $PHP_EXTRA_BUILD_DEPS \ libcurl4-openssl-dev \ libedit-dev \ libsqlite3-dev \ libssl-dev \ libxml2-dev \ xz-utils \ " \ && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/_ \ && curl -fSL "<http://php.net/get/$PHP_FILENAME/from/this/mirror>" -o "$PHP_FILENAME" \ && echo "$PHP_SHA256_ $PHP_FILENAME" | sha256sum -c - \ && curl -fSL "<http://php.net/get/$PHP_FILENAME.asc/from/this/mirror>" -o "$PHP_FILENAME.asc" \ && export GNUPGHOME="$(mktemp -d)" \ && for key in $GPG_KEYS; do \ gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \ done \ && gpg --batch --verify "$PHP_FILENAME.asc" "$PHP_FILENAME" \ && rm -r "$GNUPGHOME" "$PHP_FILENAME.asc" \ && mkdir -p /usr/src/php \ && tar -xf "$PHP_FILENAME" -C /usr/src/php --strip-components=1 \ && rm "$PHP_FILENAME" \ && cd /usr/src/php \ && ./configure \ --with-config-file-path="$PHP_INI_DIR" \ --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \ $PHP_EXTRA_CONFIGURE_ARGS \ --disable-cgi \
+
+# --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
+
+    --enable-mysqlnd \
+
+
+# --enable-mbstring is included here because otherwise there's no way to get pecl to use it properly (see <https://github.com/docker-library/php/issues/195>)
+
+
+    --enable-mbstring \
+    --with-curl \
+    --with-libedit \
+    --with-openssl \
+    --with-zlib \
+&& make -j"$(nproc)" \
+&& make install \
+&& { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
+&& make clean \
+&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
+
+
+COPY docker-php-ext-* /usr/local/bin/
+
+## <autogenerated>
+</autogenerated>
+
+WORKDIR /var/www/html
+
+RUN set -ex \ && cd /usr/local/etc \ && if [ -d php-fpm.d ]; then \
+
+
+    # for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
+    sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null; \
+    cp php-fpm.d/www.conf.default php-fpm.d/www.conf; \
+else \
+    # PHP 5.x don't use "include=" by default, so we'll create our own simple config that mimics PHP 7+ for consistency
+    mkdir php-fpm.d; \
+    cp php-fpm.conf.default php-fpm.d/www.conf; \
+    { \
+        echo '[global]'; \
+        echo 'include=etc/php-fpm.d/*.conf'; \
+    } | tee php-fpm.conf; \
+fi \
+&& { \
+    echo '[global]'; \
+    echo 'error_log = /proc/self/fd/2'; \
+    echo; \
+    echo '[www]'; \
+    echo '; if we send this to /proc/self/fd/1, it never appears'; \
+    echo 'access.log = /proc/self/fd/2'; \
+    echo; \
+    echo 'clear_env = no'; \
+    echo; \
+    echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
+    echo 'catch_workers_output = yes'; \
+} | tee php-fpm.d/docker.conf \
+&& { \
+    echo '[global]'; \
+    echo 'daemonize = no'; \
+    echo; \
+    echo '[www]'; \
+    echo 'listen = [::]:9000'; \
+} | tee php-fpm.d/zz-docker.conf
+EXPOSE 9000 CMD ["php-fpm"]
+
+docker build -t php:5.6-fpm .
+docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
+```
+
+## 模式
+
 ### Cli
 
 * 一个常驻主进程,只负责任务分发
-* 实现定时任务
-* 开发桌面应用就是使用PHP-CLI和GTK包
-* linux下用php编写shell脚本
 * built-in web server 内置Web服务器不能在生成环境使用，只能在本地开发环境中使用
   - php_sapi_name() return cli-server:the current script is served with the PHP built-in server
   - performs suboptimally because it handles one request at a time, and each HTTP request is blocking
@@ -549,15 +652,25 @@ sudo pecl config-set php_suffix 5.6
   - 性能不佳:一次只能处理一个请求，其他请求会受到阻塞。如果某个进程耗时较长（数据库查询、远程API调用），则整个Web应用会陷入停顿状态。
   - 支持媒体类型较少（PHP 5.5.7以后有较大改进）
   - 路由脚本仅支持少量URL重写
+- 选项 -a 提供交互式 shell
+- `int $argc`
+- `array $argv`
 * 配置
   - The configuration is loaded fresh each time you invoke PHP from the CLI.
   - 配置比较长的max_execution_time
+- 场景
+	- 多线程应用
+	* 实现定时任务
+	* 开发桌面应用使用PHP-CLI和GTK包
+	* 用php编写shell脚本
 
 ```sh
-# 查找PHP CLI ini文件位置
+# 查找 PHP CLI ini 文件位置
 php --ini
 # 调用PHP CLI解释器，并给脚本传递参数
 php -f /path/to/yourfile.php
+
+php -i
 
 # 内置 web 服务器
 php -S localhost:8000 -c app/config/php.ini
@@ -565,17 +678,20 @@ php -S localhost:8000 -c app/config/php.ini
 # 判断当前执行的php是什么模式下 R RUN
 php -r "echo php_sapi_name();"
 
-# if (php_sapi_name() == ‘cli-server') {
+if (PHP_SAPI === 'cli'){
+# if (php_sapi_name() === 'cli')
+}elseif (php_sapi_name() == ‘cli-server') {
+
+
 #     // PHP 内置 Web 服务器
 # } else {
 #     // 其他Web服务器
 # }
 ```
 
-## PHP-FPM PHP-FastCGI Process Manager
+### PHP-FPM PHP-FastCGI Process Manager
 
-* 安装
-  - bin: /usr/local/php/sbin/php-fpm
+* `/usr/local/php/sbin/php-fpm`
 * PHP-FPM 是 FastCGI 的实现，提供了多进程 FastCGI 管理功能
   - 启动shell进程
     + sapi_startup：SAPI启动。将传入的cgi_sapi_module的地址赋值给全局变量sapi_module，初始化全局变量SG，最后执行php_setup_sapi_content_types函数。
@@ -742,7 +858,7 @@ error_log = /usr/local/var/log/php-fpm.log
 pid = /usr/local/var/run/php-fpm.pid
 ```
 
-### 扩展
+## 扩展
 
 * `php-config --extension-dir`
 * 安装
@@ -882,7 +998,9 @@ extension="swoole.so"
 php -dvld.active=1 -dvld.excute=0 at.php # excute =0 opcode在么 并不执行
 ```
 
-## php.ini 配置
+## 配置
+
+* `php.ini`
 
 * `short_open_tag` 设为0，即永远使用PHP的长标签形式：`<?php echo "hello world"; ?>`，不用短标签形式<`?= "hello world" ?>`
 * `asp_tags` 设为0，不使用ASP标签`<% echo "hello world"; %>`
@@ -940,35 +1058,42 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 单行注释：`//、#`
 * 多行注释：`/* …… */`
 
-### 变量：临时存储数据的容器，指向值的指针
+### 常量
 
-* 变量复制用的是写时复制方式
-  - 基础类型是值赋值
-  - 复杂类型是引用赋值
-* 引用计数,给变量引用的次数进行计算,当计数不等于0时,说明这个变量已经被引用,不能直接被回收,否则可以直接回收.xdebug_debug_zval
-  - 当变量值为整型,浮点型时,在赋值变量时,php7底层将会直接把值存储(php7的结构体将会直接存储简单数据类型),refcount将为0
-  - 当变量值为interned string字符串型(变量名,函数名,静态字符串,类名等)时,变量值存储在静态区,内存回收被系统全局接管,引用计数将一直为1
-  - 当变量值为以上几种时,复制变量将会直接拷贝变量值,所以将不存在多次引用的情况
-  - $b = &$a; 当引用时,被引用变量的value以及类型将会更改为引用类型,并将引用值指向原来的值内存地址中.之后引用变量的类型也会更改为引用类型,并将值指向原来的值内存地址,这个时候,值内存地址被引用了2次,所以refcount=2.
-* 作用域
-  - 包含 include 和 require 引入的文件
-  - 局部变量 local：函数内部声明的变量，仅在函数内部访问
-  - 全局作用域 global：在所有函数外部定义的变量
-    - 除函数外，全局变量可以被脚本中的任何部分访问
-    - 在一个函数中访问一个全局变量，使用 global 关键字
-    - 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
-  - 静态变量（static variable）：仅在局部函数域中存在，当程序执行离开此作用域时，其值并不丢失
-  - parameter：通过调用代码将值传递给函数的局部变量
+* 语法
+  - 前面没有`$`
+  - 不用理会变量的作用域，在任何地方定义和访问
+  - 一旦定义就不能被重新定义或者取消定义
+  - 值只能是标量, PHP 7 中允许 array
+* `define()` 定义
+	* `bool define(name, value, case-insensitive = false)`
+	* `bool defined(name)`
+* 通过 const 关键字 声明
+	- 区分大小写
+	* 在编译时定义常量
+	- 一个语言构造不是一个函数
+* 魔术常量
+  - `__LINE__` 
+  - `__FILE__` 表示文件完整路径和文件名。如果在include中使用，则返回包含文件的名称
+  - `__DIR__` 文件完整目录路径。等同于`dirname(__file__)`。除非它是根目录，否则它没有尾部斜杠。还解析符号链接
+  - `__FUNCTION__`
+  - `__CLASS__` 表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白
+  - `__TRAIT__` 表示使用它的特征名称。如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间
+  - `__METHOD__` 
+  - `__NAMESPACE__`
+
+### 变量
+
 * 本身没有类型(变量中存储的数据的类型)
 * 命名
   - 可以包含：字母、数字、下划线，可以用中文。
   - 不能以数字和特殊符号开头，但可以以字母或下划线开头。如：$_ABC、$abc
 * 变量名称前必须要带`$`符号。`$`不是变量名称一部分，只是对变量名称的一个引用或标识符
 * 命名规则
-  - “驼峰式”命名：$getUserName、$getUserPwd
-  - “下划线”命名：$get_user_name、$set_user_pwd
+  - “驼峰式”命名：`$getUserName`、`$getUserPwd`
+  - “下划线”命名：`$get_user_name`、`$set_user_pwd`
 * 赋值
-  * 传值:$variablename指向value存储的地址 `$foo = 'Bob';`
+  * 传值 `$variablename`指向value存储的地址 `$foo = 'Bob';`
   * 引用:新的变量简单的引用了原始变量,只有有名字的变量才可以引用赋值 `$bar = &$foo`
   * 对象赋值，浅拷贝,取了另一个名字而已，指向的内存空间还是一样 还是两份数据？
   * `$a = $b $b =56` $a 的值不变
@@ -979,45 +1104,47 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
   - `$_GET $_POST $_REQUEST`
   - `$_SERVER`
   - `$_COOKIE`
+ 
+* 临时存储数据容器，指向值的指针
+* 赋值 写时复制
+  - 基础类型 值赋值
+  - 复杂类型 引用赋值
+* 引用计数：给变量引用的次数进行计算
+	* 当计数不等于0时,说明变量已经被引用,不能直接被回收,否则可以直接回收.xdebug_debug_zval
+  - 当变量值为整型,浮点型时,在赋值变量时,php7底层将会直接把值存储(php7的结构体将会直接存储简单数据类型),refcount将为0
+  - 当变量值为interned string字符串型(变量名,函数名,静态字符串,类名等)时,变量值存储在静态区,内存回收被系统全局接管,引用计数将一直为1
+  - 当变量值为以上几种时,复制变量将会直接拷贝变量值,所以将不存在多次引用的情况
+  - `$b = &$a` 当引用时,被引用变量的value以及类型将会更改为引用类型,并将引用值指向原来的值内存地址中.之后引用变量的类型也会更改为引用类型,并将值指向原来的值内存地址,这个时候,值内存地址被引用了2次,所以refcount=2
+* 标量
+* 复合
 
-### 常量
+#### 作用域
 
-* 定义
-  - 常量前面没有`$`
-  - 只能用 `define()` 函数定义，而不能通过赋值语句
-  - 可以不用理会变量的作用域而在任何地方定义和访问
-  - 一旦定义就不能被重新定义或者取消定义
-  - 常量的值只能是标量, PHP 7 中还允许是 array
-* `define(name, value, case-insensitive = false)`: 区分大小写,成功时返回 TRUE， 或者在失败时返回 FALSE
-* defined():检查某个名称的常量是否存在
-* const关键字在编译时定义常量
-  - 是一个语言构造不是一个函数
-  - 比define()快一点，因为没有返回值
-  - 区分大小写
-* 魔术常量
-  - `__LINE__` 表示当前行号
-  - `__FILE__` 表示文件完整路径和文件名。如果在include中使用，则返回包含文件的名称
-  - `__DIR__`表示文件完整目录路径。等同于dirname(__file__)。除非它是根目录，否则它没有尾部斜杠。还解析符号链接
-  - `__FUNCTION__` 表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白
-  - `__CLASS__` 表示使用它的函数名称。如果它在任何函数之外使用，则它将返回空白
-  - `__TRAIT__` 表示使用它的特征名称。如果它在任何函数之外使用，则它将返回空白。 它包括它被声明的命名空间
-  - `__METHOD__`  表示使用它的类方法的名称。方法名称在有声明时返回
-  - `__NAMESPACE__` 表示当前命名空间名称
+- 包含 include 和 require 引入的文件
+- 局部变量 local：函数内部声明的变量，仅在函数内部访问
+- 全局作用域 global：在所有函数外部定义的变量
+    - 除函数外，全局变量可以被脚本中的任何部分访问
+    - 在一个函数中访问一个全局变量，使用 global 关键字
+    - 所有全局变量存储在一个名为 $GLOBALS[index] 的数组中。index 保存变量的名称,可以在函数内部访问，也可以直接用来更新全局变量
+  - 静态变量（static variable）：仅在局部函数域中存在，当程序执行离开此作用域时，其值并不丢失
+  - parameter：通过调用代码将值传递给函数的局部变量
+ 
 * 内存泄漏
 
-### 数据类型
+#### Boolean 布尔型
 
-* 标量
-  + Boolean 布尔型
-    + 布尔值 FALSE 本身
-    + 整型值 0（零）
-    + 浮点型值 0.0（零）
-    + 空字符串，以及字符串 "0"
-    + 不包括任何元素的数组
-    + 从空标记生成的 SimpleXML 对象
-  + String 字符串
-    * 单引号PHP字符串中，大多数转义序列和变量不会被解释。 可以使用单引号`\'`反斜杠和通过`\\`在单引号引用PHP字符串
-    * 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
++ 布尔值 FALSE 本身
++ 整型值 0（零）
++ 浮点型值 0.0（零）
++ 空字符串，以及字符串 "0"
++ 不包括任何元素的数组
++ 从空标记生成的 SimpleXML 对象
+	
+#### String 字符串
+
+* 单引号PHP字符串中，大多数转义序列和变量不会被解释
+	* 可以使用单引号`\'`反斜杠和通过`\\`在单引号引用PHP字符串
+* 双引号的PHP字符串中存储多行文本，特殊字符和转义序列,对一些特殊的字符进行解析
       * `\n`  换行（ASCII 字符集中的 LF 或 0x0A (10)）
       * `\r`  回车（ASCII 字符集中的 CR 或 0x0D (13)）
       * `\t`  水平制表符（ASCII 字符集中的 HT 或 0x09 (9)）
@@ -1027,14 +1154,14 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
       * `\`  反斜线
       * `\$`  美元标记
       * `\"`  双引号
-    + heredoc 结构就象是没有使用双引号的双引号字符串，单引号不用被转义，但是上文中列出的转义序列还可以使用
-    + Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作
++ heredoc 结构就象是没有使用双引号的双引号字符串，单引号不用被转义，但是上文中列出的转义序列还可以使用
++ Nowdoc 结构是类似于单引号字符串的。Nowdoc 结构很象 heredoc 结构，但是 nowdoc 中不进行解析操作
       * 这种结构很适合用于嵌入 PHP 代码或其它大段文本而无需对其中的特殊字符进行转义
-    + 方法
-      - `addslashes` 转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
-      - `urldecode` 解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
-      - `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
-    * printf
++ 方法
+	+ `addslashes` 转义风险：对于URL参数arg = %df\'在经过addslashes转义后在GBK编码下arg = 運'
+	+ `urldecode` 解码风险：对于URL参数uid = 1%2527在调用urldecode函数解码(二次解码)后将变成uid = 1'
+	+ `ord ( string $string ) : int`:转换字符串第一个字节为 0-255 之间的值
+	+ `printf()``
       - %b binary representation
       - %c print the ascii character, same as chr() function
       - %d standard integer representation
@@ -1047,25 +1174,29 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
       - %x hexadecimal representation (lower-case)
       - %X hexadecimal representation (upper-case)
       - %+d  sign specifier on a positive or negative integer
-    * 多字节:多字节字符指的是不在传统的 128 个 ASCII 字符集中的字符，比如中文字符,使用这些 PHP 原生的字符串处理函数处理包含多字节字符的 Unicode 字符串，会得到意料之外的错误结果
+* 多字节:多字节字符指的是不在传统的 128 个 ASCII 字符集中的字符，比如中文字符,使用这些 PHP 原生的字符串处理函数处理包含多字节字符的 Unicode 字符串，会得到意料之外的错误结果
       - 安装 mbstring 扩展
-  + Integer（整型）
-  + Float（浮点型）
-    * NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
-- NULL（空值）
-  + 尚未被赋值
-  + 被赋值为 NULL
-  + 被 unset()
-    * 删除引用，触发相应变量容器refcount减一 引用计数器
-    * 在函数中的行为会依赖于想要销毁的变量的类型而有所不同
+	  
+#### Integer
+
+#### Float
+
+* NaN:代表着任何不同值，不应拿 NAN 去和其它值进行比较，包括其自身，应该用 is_nan() 来检查
+	
+#### NULL
+
++ 尚未被赋值
++ 被赋值为 NULL
++ 被 unset()
+	* 删除引用，触发相应变量容器refcount减一 引用计数器
+	* 在函数中的行为会依赖于想要销毁的变量的类型而有所不同
       - 比如unset 一个全局变量，则只是局部变量被销毁，而在调用环境中的变量(包括函数参数引用传递的变量)将保持调用 unset 之前一样的值
-    * unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
+	* unset 变量与给变量赋值NULL不同，变量赋值NULL直接对相应变量容器refcount = 0
 
-### 复合
+#### Array
 
-* 数组 Array 有序映射
-  - 映射是一种把 values 关联到 keys 的类型。因此可以当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
-  + key 会强制转换
+-  有序映射：映射是一种把 values 关联到 keys 的类型。因此可以当成真正的数组，或列表（向量），散列表（是映射的一种实现），字典，集合，栈，队列以及更多可能性
++ key 强制转换
     + 合法整型值的字符串会被转换为整型。例如键名 "8" 实际会被储存为 8。但是 "08" 则不会强制转换，因为其不是一个合法的十进制数值
     + 浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 8.7 实际会被储存为 8
     + 布尔值也会被转换成整型。即键名 true 实际会被储存为 1 而键名 false 会被储存为 0
@@ -1075,8 +1206,8 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     * indexed 索引
     * associative 关联
     * 多维数组
-  + 方法
-    * `+`:运算符把右边的数组元素附加到左边的数组后面，两个数组中都有的键名，则只用左边数组中的，右边的被忽略。
++ 方法
+    * `+` 把右边的数组元素附加到左边的数组后面，两个数组中都有的键名，则只用左边数组中的，右边的被忽略
     * `in_array()`
     * `array_filter()` 过滤数组中的所有值为空的元素
     * `array_reduce($source, function(){}, $distination)`
@@ -1088,61 +1219,34 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     * `array_shift` 将数组开头的单元移出数组，和array_shift()实现队列
     * array_push() 将一个或多个单元压入数组的末尾（入栈）
     * array_pop() 弹出数组最后一个单元（出栈）
-  + 遍历
+* 指针
+	* end()
+	* next()
+	* current()
++ 遍历
     * each — 返回数组中当前的键／值对并将数组指针向前移动一步
-* Object（对象）
-* callback:接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
-* Resource 资源
-* 类型转换
-  - 乘法运算符"*"。如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer
-    + 并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
+    
+#### Object
+
+#### callback
+
+接受用户自定义的回调函数作为参数。回调函数不止可以是简单函数，还可以是对象的方法，包括静态类方法。
+
+#### Resource
+
+#### 类型转换
+
 * 类型判断
-  - `gettype()`
-  - `empty()`
-  - `isset()`
-  - `is_null()`
-  - `boolean()`
-  - `is_numeric()`
-
-### 控制语句
-
-* 表达式：任何有值东西
-* echo：一个语言结构(语句）不是一个函数，所以不需要使用括号。要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等
-* print
-* print_r
-* printf()
-* 条件
-  - if
-  - if-else
-  - elseif/else if
-  - 嵌套if
-  - switch
-* 循环
-  - 计数型 for
-  - foreach
-  - 条件型 while
-  - do...while
-* break:中断当前循环执行
-  - 内循环中使用break，只中断了内循环的执行
-  - 接受一个可选数字参数来决定跳出几重循环
-* continue：在条件求值为真时，跳过本次循环中剩余代码并开始执行下一次循环
-  - 接受一个可选数字参数来决定跳过几重循环到循环结尾
-* include 加载优先级
-  - 先按参数给出路径寻找
-  - 如果没有给出目录（只有文件名）时则按照 include_path 指定目录寻找
-  - 未找到调用脚本文件所在目录和当前工作目录下寻找
-  - 仍未找到文件则 include 结构会发出一条警告
-  - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含
-* require 出错时产生 E_COMPILE_ERROR 级别的错误,include 没有找到对应路径脚本时发出警告（E_WARNING）
-  - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含
-  - `include_once/require_once` 性能更好一些,至于使用 include_once 还是 require_once，取决于对指定路径 PHP 脚本不存在的预期处理
-* goto 跳转到程序中另一位置
-  - 声明目标标记：目标名称加上冒号
-  - 跳转：goto 之后接上目标位置标记
-* 替代语法
-* 嵌套使用
-
-### 运算符
+	- `gettype()`
+	- `empty()`
+	- `isset()`
+	- `is_null()`
+	- `boolean()`
+	- `is_numeric()`
+- 乘法运算符 `*` 如果任何一个操作数是float，则所有的操作数都被当成float，结果也是float。否则操作数会被解释为integer，结果也是integer
+    + 并没有改变这些操作数本身的类型；改变的仅是这些操作数如何被求值以及表达式本身的类型
+   
+### Operator 运算符
 
 * 算术运算符 `* / % + - **`
 * 赋值运算符 `= += -= *= **= /= .= %= &= ^= <<= >>= =>`
@@ -1175,7 +1279,48 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
 * 错误控制操作符 @ 当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉
 * 三元运算符 `$first ? $second : $third`
 
-## 函数 function
+ ### Expression
+  
+* 表达式：任何有值语句
+* echo：一个语言结构(语句）不是一个函数，所以不需要使用括号。要使用多个参数，则需要使用括号。打印字符串，多行字符串，转义字符，变量，数组等
+* print
+* print_r
+* printf()
+   
+### 控制语句
+
+* 条件
+  - if
+  - if-else
+  - elseif/else if
+  - 嵌套if
+  - switch
+* 循环
+  - 计数型 for
+  - foreach
+  - 条件型 while
+  - do...while
+* break:中断当前循环执行
+  - 内循环中使用break，只中断了内循环的执行
+  - 接受一个可选数字参数来决定跳出几重循环
+* continue：在条件求值为真时，跳过本次循环中剩余代码并开始执行下一次循环
+  - 接受一个可选数字参数来决定跳过几重循环到循环结尾
+* include 加载优先级
+  - 先按参数给出路径寻找
+  - 如果没有给出目录（只有文件名）时则按照 include_path 指定目录寻找
+  - 未找到调用脚本文件所在目录和当前工作目录下寻找
+  - 仍未找到文件则 include 结构会发出一条警告
+  - include_once 语句在脚本执行期间包含并运行指定文件。此行为和 include 语句类似，唯一区别是如果该文件中已经被包含过，则不会再次包含
+* require 出错时产生 E_COMPILE_ERROR 级别的错误,include 没有找到对应路径脚本时发出警告（E_WARNING）
+  - require_once 语句和 require 语句完全相同，唯一区别是 PHP 会检查该文件是否已经被包含过，如果是则不会再次包含
+  - `include_once/require_once` 性能更好一些,至于使用 include_once 还是 require_once，取决于对指定路径 PHP 脚本不存在的预期处理
+* goto 跳转到程序中另一位置
+  - 声明目标标记：目标名称加上冒号
+  - 跳转：goto 之后接上目标位置标记
+* 替代语法
+* 嵌套使用
+
+### Function 函数
 
 * 一段可以重复使用代码
 * 参数
@@ -1203,32 +1348,9 @@ php -r "echo ini_get('memory_limit').PHP_EOL;" # 获取php内存大小
     + 作回调函数（callback）
   - 闭包内所引用的变量不能被外部所访问
   - Lambda表达式(匿名函数)实现了一次执行且无污染的函数定义，是抛弃型函数并且不维护任何类型的状态
+- create_function()
 
-## 状态管理
-
-* cookie 一个小段信息，存储在客户端浏览器中,用于识别用户
-  - PHP 自动维护 cookie 机制：在服务器端创建 并发送给客户端，后面客户端向服务器发送请求时，cookie都会嵌入请求，服务器端能够识别
-  - 设置
-  - 获取
-  - 删除
-* 服务器端存储技术 session:用于临时存储 直到用户关闭网站
-  - 从一个页面传递到另一个页面：广泛应用于购物网站(需要存储和传递购物车信息、用户名，产品代码，产品名称，产品价格等信息）
-  - 会话为每个浏览器创建唯一的用户ID，以识别用户，并避免多个浏览器之间冲突
-  - session_start() 启动会话，启动一个新的或恢复现有会话
-    + 如果已创建会话，则返回现有会话
-    + 如果会话不可用，创建并返回新会话
-  - $_SESSION 一个包含所有会话变量的关联数组，用于设置和获取会话变量值
-  - session_destroy()
-
-```php
-setcookie("CookieName", "CookieValue");/* defining name and value only*/
-setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(1*60*60 seconds or 3600 seconds)
-setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com", 1);
-
-$value=$_COOKIE["CookieName"];//returns cookie value
-```
-
-## IO
+### IO
 
 * 本质上是 “流(stream)” ，通过流操作文件、命令行进程、网络连接、ZIP 或 TAR 压缩文件、临时内存、标准输入或输出，或者是通过 PHP 流封装协议实现的任何其他资源
 * 流的作用是提供统一的公共函数来处理文件、网络和数据压缩等操作。简单而言，流是具有流式行为的资源对象，流可以线性读写，并且可以通过 fseek() 之类的函数定位到流中的任何位置
@@ -1248,7 +1370,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - 使用 php://filter 流封装协议把过滤器附加到流上
 * 与远程网址交互:curl
 
-### php://input
+#### php://input
 
 * Coentent-Type仅在取值为application/x-www-data-urlencoded和multipart/form-data两种情况下，PHP才会将http请求数据包中相应的数据填入全局变量$_POST
 * PHP不能识别的Content-Type类型的时候，会将http请求包中相应的数据填入变量$HTTP_RAW_POST_DATA
@@ -1258,7 +1380,7 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 * 只有Content-Type为application/x-www-data-urlencoded时，php://input数据才跟$_POST数据相一致
 * 相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置
 
-### 文件
+#### 文件
 
 * 创建
 * 访问
@@ -1317,11 +1439,6 @@ $value=$_COOKIE["CookieName"];//returns cookie value
 * 方法
   - basename:返回路径中的文件名部分
 
-### redirect
-
-* `header ( string $header [, bool $replace = TRUE [, int $http_response_code ]] ) : void`
-* `using ob_start() and ob_end_flush()`
-* 通过 javascript
 
 ### MySQL
 
@@ -1339,14 +1456,14 @@ $value=$_COOKIE["CookieName"];//returns cookie value
   - 错误异常处理、灵活取得查询结果（返回数组、字符串、对象、回调函数）、字符过滤防止 SQL 攻击、事务处理、存储过程
     - errorCode errotInfo
 
-## 面向对象 OOP
+### 面向对象 OOP
 
 * 类
-  - spl_autoload：__autoload()函数的默认实现
-  - spl_autoload_register:注册给定的函数作为 __autoload（7.2之后废弃） 的实现，替代spl_autoload（）
+  - spl_autoload：`__autoload()`函数的默认实现
+  - spl_autoload_register:注册给定的函数作为` __autoload`（7.2之后废弃） 的实现，替代 spl_autoload（）
   - 构造函数：创建新对象时先调用此方法，适合在使用对象之前做一些初始化工作
     + 子类中定义了构造函数则不会隐式调用其父类的构造函数
-    + 要执行父类的构造函数，需要在子类的构造函数中调用 parent::__construct()
+    + 要执行父类的构造函数，需要在子类的构造函数中调用 parent::`__construct()`
     + 如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继
   - 析构函数
   - final
@@ -1491,20 +1608,40 @@ class Outer
 echo (new Outer)->func2()->func3(); # 6
 ```
 
-## AUTOLOAD
+### 魔术方法
 
-* PHP5中引入了类的自动装载(autoload)机制。可以使得PHP程序有可能在使用类时才自动包含类文件，而不是一开始就将所有的类文件include进来，这种机制也称为lazy loading
-* 过程
-  - 根据类名确定类文件名
-  - 确定类文件所在的磁盘路径
-  - 将类从磁盘文件中加载到系统中
+* `__construct`
+  - 功能：初始化赋值
+  - 场景：实例化对象时候调用
+* `__destruct` 析构方法
+  - 对象被销毁前（即从内存中清除前）调用
+* `__get ($property) `调用一个未定义属性时，此方法会被触发，参数是被访问属性名
+* `__set ($property, $value)`给一个未定义的属性赋值时，此方法会被触发
+  - 参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）
+* `__isset ($property)` 当在一个未定义的属性上调用 isset () 函数时调用
+* `__unset ($property)` 当在一个未定义的属性上调用 unset () 函数时调用
+* `_call ($method, $arg_array)` 调用一个未定义的方法时调用
+* `__autoload` 函数，它会在试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类
+* `__clone` 复制一个对象时自动调用 clone 方法，如果在对象复制需要执行某些初始化操作，可以在 clone 方法实现
+* `__toString`  将一个对象转化成字符串时自动调用，比如使用 echo 打印对象时
+* `__callStatic($funName, $arguments)` 当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
+* `__sleep()` serialize() 函数会检查类中是否存在 。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
+* `__wakeup()` unserialize() 会检查是否存在一个 `__wakeup()` 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
+* `__invoke()` 以调用函数的方式访问一个对象时，`__invoke()` 方法将首先被调用
+* `__set_state()` 当调用 var_export () 方法时，`__set_state()` 方法将被调用
+* `__debugInfo()` 输出 debug 信息
+
+### AUTOLOAD
+
+* PHP5中引入类的自动装载(autoload)机制。在使用类时才自动包含类文件，而不是一开始就将所有的类文件include进来，这种机制也称为lazy loading
+* 类名->类文件名->磁盘路径->加载
 * 机制实现
   - 检查执行器全局变量函数指针autoload_func是否为NULL
-  - 如果autoload_func==NULL, 则查找系统中是否定义有__autoload()函数，如果没有，则报告错误并退出
-  - 如果定义了__autoload()函数，则执行__autoload()尝试加载类，并返回加载结果
+  - 如果`autoload_func==NULL`, 则查找系统中是否定义有__autoload()函数，如果没有，则报告错误并退出
+  - 如果定义了`__autoload()`函数，则执行__autoload()尝试加载类，并返回加载结果
   - 如果autoload_func不为NULL，则直接执行autoload_func指针指向的函数用来加载类。注意此时并不检查__autoload()函数是否定义
   - 是一个魔术函数,当php文件中使用了new关键字实例化一个对象时，如果该类没有在本php文件中被定义，将会触发__autoload函数，此时，就可以引进定义该类的php文件，而后，就能实例化成功了
-  - __autoload() 在php7中已经不建议使用了
+  - `__autoload()` 在php7中已经不建议使用了
 * SPL Standard PHP Library(标准PHP库)
   - PHP5引入的一个扩展库，其主要功能包括autoload机制的实现及包括各种Iterator接口或类。
   - SPL autoload机制的实现是通过将函数指针autoload_func指向自己实现的具有自动装载功能的函数来实现的。
@@ -1532,7 +1669,7 @@ spl_autoload_register(function ($class){
 });
 ```
 
-## 命名空间 namespace
+### 命名空间 namespace
 
 * 出现之前，使用Zend风格的类名解决命名冲突问题:在PHP类名中使用下划线的方式表示文件系统的目录分隔符。这种约定有两个作用
   - 确保类名是唯一
@@ -1551,30 +1688,112 @@ spl_autoload_register(function ($class){
 * 在命名空间下，使用限定类名和完全限定类名的区别,完全限定类名 = 当前命名空间 + 限定类名,如果引用的类、接口、函数和常量没有指定命名空间，PHP假定引用的类、接口、函数和常量在当前的命名空间中
 * 要使用其他命名空间的类、接口、函数或常量，需要使用完全限定的PHP类名（命名空间+类名）
 
-## 魔术方法
+### SPL Standard PHP Library
 
-* __construct 构造函数
-  - 功能：初始化赋值
-  - 场景：实例化对象时候调用
-* __destruct 析构方法
-  - 对象被销毁前（即从内存中清除前）调用
-* __get ($property) 调用一个未定义属性时，此方法会被触发，参数是被访问属性名
-* __set ($property, $value)给一个未定义的属性赋值时，此方法会被触发
-  - 参数是被设置的属性名和值这里的没有声明包括当使用对象调用时，访问控制为 proteced,private 的属性（即没有权限访问的属性）
-* __isset ($property) 当在一个未定义的属性上调用 isset () 函数时调用
-* __unset ($property) 当在一个未定义的属性上调用 unset () 函数时调用
-* `_call ($method, $arg_array)` 调用一个未定义的方法时调用
-* __autoload 函数，它会在试图使用尚未被定义的类时自动调用。通过调用此函数，脚本引擎在 PHP 出错失败前有了最后一个机会加载所需的类
-* __clone 复制一个对象时自动调用 clone 方法，如果在对象复制需要执行某些初始化操作，可以在 clone 方法实现
-* `__toString`  将一个对象转化成字符串时自动调用，比如使用 echo 打印对象时
-* `__callStatic($funName, $arguments)` 当调用一个未定义或不可达的静态方法时， __callStatic () 方法将被调用
-* `__sleep()` serialize() 函数会检查类中是否存在一个魔术方法 __sleep()。如果存在，该方法会先被调用，然后才执行序列化操作,可以用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组,不能返回父类的私有成员的名字。这样做会产生一个 E_NOTICE 级别的错误.
-* `__wakeup()` unserialize() 会检查是否存在一个 __wakeup() 方法。如果存在，则会先调用 __wakeup 方法，预先准备对象需要的资源
-* `__invoke()` 以调用函数的方式访问一个对象时， __invoke () 方法将首先被调用
-* `__set_state()` 当调用 var_export () 方法时，__set_state () 方法将被调用
-* `__debugInfo()` 输出 debug 信息
+* SplStack
+* SplQueue
+* SplHeap:一种有序的数据结构。数据总是按照最小在前或最大在前排序。新插入的数据会自动进行排序
+  - 底层用跳表数据结构，insert操作的时间复杂度为O(Log(n))
 
-## 反射
+### 正则表达式 PREG
+
+* `int preg_match|preg_match_all ( string $pattern , string $subject [, array &$matches [, int $flags = 0 [, int $offset = 0 ]]] )`
+* 字符转义:特殊意义字符`. *`,用`\`来消除 `\\.` `\\\*` `\\\`
+
+* 模式修正符
+  - i 忽略大小写
+  - s 单行文本模式 
+	  - 圆点元字符（.）匹配所有的字符，包括换行符
+  - m 多文本模式 “行起始”和“行结束”除了匹配整个字符串开头和结束外，还分别匹配其中的换行符的之后和之前
+  - x：模式中的空白字符除了被转义的或在字符类中的以外完全被忽略，在未转义的字符类之外的 `#`以及下一个换行符之间的所有字符，包括两头，也都被忽略。
+  - e preg_replace() 在替换字符串中对逆向引用作正常的替换
+
+#### 贪婪 vs 懒惰
+
+* 贪婪匹配（默认）:尽可能多的匹配所搜索的字符串，当正则表达式中包含能重复限定符`*` `+`和`？` 时
+* 懒惰匹配:匹配尽可能少字符
+* 贪婪匹配限定符可以转化为懒惰匹配模式，在后面加上`?`
+- `?`  重复零次或一次
+- `+` 重复一次或更多次
+- `*` 重复零次或更多次
+- `{n}` 重复n次
+- `{n,}` 重复n次或更多次
+- `{n,m}` 重复n到m次
+	- `a(bc){1,5}` 一个到5个 "bc."
+- `*?` 零次或多次，但尽可能少的匹配
+		- `a.*b` 匹配最长的以a开始，以b结束的字符串。如果来搜索aabab，会匹配整个字符串aabab
+		- `a.*?b` 匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。注意：最先开始的匹配拥有最高的优先权
+	- `+?` 一次或多次，但尽可能少的匹配
+	- `??` 0次或1次，但尽可能少的匹配
+	- `{n,m}?` 重复n到m次
+	- `{n,}?` 重复n次以上，但尽可能少重复
+	
+#### 介定符
+
+- `.`  匹配除换行符以外任意字符
+* 行定位符
+	-  `^`  匹配字符串的开始
+		-  如果设置 RegExp 对象 Multiline 属性，也匹配 '\n' 或 '\r' 之后的位置。
+	- `$`   匹配字符串结束
+		- 如果设置 RegExp 对象的 Multiline 属性，也匹配 '\n' 或 '\r' 之前的位置
+- `\w` 匹配字母或数字或下划线或汉字,等价于`[A-Za-z0-9_]`
+- `\W`  匹配任何非单词字符。等价于 `[^A-Za-z0-9_]`
+- `\b`  匹配单词的开始或结束,单词和空格间的位置。`er\b` 匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'
+- `\B`  匹配非单词边界。`er\B` 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'
+- `\d` 匹配一个数字字符。等价 `[0-9]`
+- `\D`  匹配一个非数字字符。等价于 `[^0-9]`
+- `\s ` 匹配任何空白字符，包括空格、制表符、换页符等等。等价`[\f\n\r\t\v]`
+- `\S`  匹配任何非空白字符。等价于 `[^\f\n\r\t\v]`
+- `\f`  匹配一个换页符。等价于 `\x0c` 和 `\cL`
+- `\n`  匹配一个换行符。等价于 `\x0a` 和 `\cJ`
+- `\r` 匹配一个回车符。等价于 `\x0d` 和 `\cM`
+- `\t`  匹配一个制表符。等价于 \x09 和 \cI
+- `\v`  匹配一个垂直制表符。等价于 \x0b 和 \cK
+
+#### 功能
+
+- 字符集合 [“set”]：匹配所包含的任意一个字符
+	- `[aeiou]`匹配a，e，i，o和u中的任意一个，同理[.?!]匹配标点符号(.或?或!)
+	- `[^xyz]`  匹配未包含的任意字符,`[^abc]`可以匹配 "plain" 中的'p'、'l'、'i'、'n'
+- 字符范围:匹配指定范围内的任意字符
+	- `[0-9]`：与\d就是完全一致，表示一位数字
+	- `[a-zA-Z]`：表示一个字母
+	- `[a-z0-9A-Z]` 等同于\w(当然值考虑英文的话)
+	- `[a-z]`  匹配 'a' 到 'z' 范围内的任意小写字母字符。
+	- `[^a-z]` 匹配任何不在 'a' 到 'z' 范围内的任意字符。
+	
+- `\(?0\d{2}[)-]?\d{8}` # (010)88886666，或022-22334455，或02912345678等
+
+- \cx 匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
+- \xn 匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\x41' 匹配 "A"。'\x041' 则等价于 '\x04' & "1"。正则表达式中可以使用 ASCII 编码。
+- \num    匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。
+- \n  标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
+- \nm 标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。
+- \nml    如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
+- \un 匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。
+- \(pattern\) 匹配pattern 并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript 中使用SubMatches集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。        -
+- \(?:pattern\) 匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符“|”来组合一个模式的各个部分是很有用。
+- 例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。 
+- x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
+
+#### 分组|反向引用
+
+* 依靠子表达式的”记忆”功能，匹配连续出现的字串或是字符。如`(dqs)(pps)\1\2`，表示匹配字符串dqsppsdqspps
+* 非获取匹配:不需要获取供以后使用
+	- 'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"
+- 预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+- 捕获 `(exp)`   匹配exp,并捕获文本到自动命名的组里
+- `(?<name>exp)` | `(?'name'exp)`  匹配exp,并捕获文本到名称为name的组里
+- `(?:exp) ` 匹配exp,不捕获匹配的文本，也不给此分组分配组号
+- 零宽断言    `(?=exp)` 匹配exp前面的位置
+-  `(?<=exp)`   匹配exp后面的位置
+- `(?!exp)` 匹配后面跟的不是exp的位置
+- `(?<!exp)`    匹配前面不是exp的位置
+- `(?#comment)` 不对正则表达式的处理产生任何影响，用于提供注释让人阅读
+  - `(?=pattern)` 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串
+  - `(?!pattern)` 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
+
+### 反射
 
 ### 生成器 iterator
 
@@ -1595,39 +1814,7 @@ spl_autoload_register(function ($class){
 * 方法
   - array iterator_to_array ( Traversable $iterator [, bool $use_keys = true ] )
 
-## 调用外部命令
-
-* 能执行linux系统的shell命令:可以获得命令执行的状态码
-  - system() 输出并返回最后一行shell结果
-    + 关掉 安全模式 safe_mode = off
-    + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
-  - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
-  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上
-
-```sh
-system("/usr/a.sh");
-```
-
-## 过滤
-
-* 所有外部源都可能是攻击媒介，可能会（有意或无意）把恶意数据注入PHP脚本
-* 过滤输入:转义或删除不安全的字符
-  - HTML
-    + 使用htmlentities函数过滤HTML，该函数会将所有HTML标签字符（&、<、>等）转化为对应的HTML实体，以便在应用存储层取出后安全渲染,htmlentities的第一个参数表示要处理的HTML字符串，第二个参数表示要转义单引号，第三个参数表示输入字符串的字符集编码
-    + `html_entity_decode`:将所有HTML实体转化为对应的HTML标签
-    + 强大的过滤HTML功能，可以使用HTML Purifier库，这是一个很强健且安全的PHP库，专门用于使用指定规则过滤HTML输入
-  - SQL:SQL查询中一定不能使用未过滤的输入数据，如果要在SQL查询中使用输入数据，一定要使用PDO预处理语句
-* 验证数据
-  - 把`FILTER_VALIDATE_*`标识传递给filter_var函数，PHP提供了验证布尔值、电子邮件地址、浮点数、整数、IP、正则表达式和URL的标识
-  - 框架中的数据验证
-
-## 转义
-
-* htmlentities 函数转义输出
-  - 第二个参数一定要使用ENT_QUOTES，让这个函数转义单引号和双引号
-  - 第三个参数中指定合适的字符编码（通常是UTF-8）
-
-## 异常 Exception
+### 异常 Exception
 
 * PHP 的错误处理系统向面向对象演进后的产物。异常要先实例化，然后抛出，最后再捕获
 * 异常是 Exception 类的对象，在遇到无法修复的状况时抛出（例如，远程 API 无响应，数据库查询失败等），使用 try catch 代码块预测第三方代码可能抛出的异常
@@ -1654,7 +1841,7 @@ system("/usr/a.sh");
 * 异常处理: 允许注册一个全局异常处理程序，捕获所有未被捕获的异常。一定要设置一个全局异常处理程序，它是最后的安全保障。如果没有成功捕获并处理异常，通过这个措施可以给 PHP 应用的用户显示合适的错误信息。一般会在开发环境显示调试信息，而在线上环境显示对用户友好的提示信息
 * 使用自定义的异常处理程序替换现有的全局异常处理程序，代码执行完毕后，PHP 会礼貌性地建议你还原现有的异常处理程序，还原的方式是调用 `restore_exception_handler()` 函数
 
-## 错误 Error
+### 错误 Error
 
 * 级别:致命错误、运行时错误、编译时错误、启动错误和用户触发的错误等,最常见错误是由语法错误或未捕获异常导致的错误
   - `E_ALL & ~E_NOTICE` # 除了提示级别
@@ -1684,7 +1871,7 @@ system("/usr/a.sh");
         |- DivisionByZeroError extends ArithmeticError
 ```
 
-## 序列化
+### 序列化
 
 * 作用
   - 方便传输
@@ -1734,9 +1921,9 @@ system("/usr/a.sh");
     + JSON_ERROR_INVALID_PROPERTY_NAME    指定的属性名无法编码。 PHP 7.0.0
     + JSON_ERROR_UTF16    畸形的 UTF-16 字符，可能因为字符编码不正确
 
-## socket pcntl模块
+### socket pcntl 模块
 
-## 杂项
+### 杂项
 
 * 数学函数
 * 电子邮件
@@ -1749,12 +1936,12 @@ system("/usr/a.sh");
   - gethostbyaddr()：获取指定的IP地址对应的主机名
   - gethostbynamel():获取互联网主机名对应的 IPv4 地址列表
 * 密码散列算法函数
-  - password_​get_​info
-  - password_​hash
-  - password_​needs_​rehash
-  - password_​verify
+  - password_get_info
+  - password_hash
+  - password_needs_rehash
+  - password_verify
 * 性能
-  - `$jRawData = file_get_contents( 'php://input' );`
+  - `$jRawData = file_get_contents('php://input');`
 
 ```php
 abs(-7)
@@ -1914,6 +2101,150 @@ var_dump(date("Y-m-d", strtotime("first day of +1 month", strtotime("2017-08-31"
 $hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
 ```
 
+## Web 编程
+
+* redirect
+	* `header(string $header [,bool $replace = TRUE [, int $http_response_code ]] ) : void`
+	* `using ob_start() and ob_end_flush()`
+	* 通过 JavaScript
+*  `<?php header("Content-type: text/html; charset=utf-8"); ?>`
+
+### 网络
+
+#### curl 请求
+
+* 选项值将被作为长整形使用(在option参数中指定)：
+  - CURLOPT_INFILESIZE: 上传一个文件到远程站点，这个选项告诉PHP你上传文件的大小。
+  - CURLOPT_VERBOSE: 想CURL报告每一件意外的事情，设置这个选项为一个非零值。
+  - CURLOPT_HEADER: 想把一个头包含在输出中，设置这个选项为一个非零值。
+  - CURLOPT_NOPROGRESS: 不会PHP为CURL传输显示一个进程条，设置这个选项为一个非零值。注意：PHP自动设置这个选项为非零值，e仅仅为了调试的目的来改变这个选项。
+  - CURLOPT_NOBODY: 不想在输出中包含body部分，设置这个选项为一个非零值
+  - CURLOPT_FAILONERROR: 想让PHP在发生错误(HTTP代码返回大于等于300)时，不显示，设置这个选项为一人非零值。默认行为是返回一个正常页，忽略代码。
+  - CURLOPT_UPLOAD: 想让PHP为上传做准备，设置这个选项为一个非零值。
+  - CURLOPT_POST: 想PHP去做一个正规的HTTP POST，设置这个选项为一个非零值。这个POST是普通的 application/x-www-from-urlencoded 类型，多数被HTML表单使用。
+  - CURLOPT_FTPLISTONLY: 设置这个选项为非零值，PHP将列出FTP的目录名列表。
+  - CURLOPT_FTPAPPEND: 设置这个选项为一个非零值，PHP将应用远程文件代替覆盖它。
+  - CURLOPT_NETRC: 设置这个选项为一个非零值，PHP将在你的 ~./netrc 文件中查找你要建立连接的远程站点的用户名及密码。
+  - CURLOPT_FOLLOWLOCATION: 设置这个选项为一个非零值(象 “Location: “)的头，服务器会把它当做HTTP头的一部分发送(注意是递归的，PHP将发送形如 “Location: “的头)。
+  - CURLOPT_PUT: 设置这个选项为一个非零值去用HTTP上传一个文件。要上传这个文件必须设置CURLOPT_INFILE和CURLOPT_INFILESIZE选项.
+  - CURLOPT_MUTE: 设置这个选项为一个非零值，PHP对于CURL函数将完全沉默。
+  - CURLOPT_TIMEOUT: 设置一个长整形数，作为最大延续多少秒 告诉成功 PHP 从服务器接收缓冲完成前需要等待多长时间 **响应超时**
+  - CURLOPT_LOW_SPEED_LIMIT: 设置一个长整形数，控制传送多少字节。
+  - CURLOPT_LOW_SPEED_TIME: 设置一个长整形数，控制多少秒传送CURLOPT_LOW_SPEED_LIMIT规定的字节数。
+  - CURLOPT_RESUME_FROM: 传递一个包含字节偏移地址的长整形参数，(你想转移到的开始表单)。
+  - CURLOPT_SSLVERSION: 传递一个包含SSL版本的长参数。默认PHP将被它自己努力的确定，在更多的安全中你必须手工设置。
+  - CURLOPT_TIMECONDITION: 传递一个长参数，指定怎么处理CURLOPT_TIMEVALUE参数。可以设置这个参数为TIMECOND_IFMODSINCE 或 TIMECOND_ISUNMODSINCE。这仅用于HTTP
+  - CURLOPT_CONNECTTIMEOUT:告诉 PHP 在成功连接服务器前等待多久 **连接超时**
+  - CURLOPT_TIMEVALUE:传递一个从1970-1-1开始到现在的秒数。这个时间将被CURLOPT_TIMEVALUE选项作为指定值使用，或被默认TIMECOND_IFMODSINCE使用。
+* 选项的值将被作为字符串：
+  - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项
+  - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接
+  - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理
+  - CURLOPT_RANGE: 传递一个想指定的范围。它应该是”X-Y”格式，X或Y是被除外的。HTTP传送同样支持几个间隔，用逗句来分隔(X-Y,N-M)
+  - CURLOPT_POSTFIELDS: 传递一个作为HTTP “POST”操作的所有数据的字符串
+  - CURLOPT_REFERER: 在HTTP请求中包含一个”referer”头的字符串
+  - CURLOPT_USERAGENT: 在HTTP请求中包含一个”user-agent”头的字符串
+  - CURLOPT_FTPPORT: 传递一个包含被ftp “POST”指令使用的IP地址。这个POST指令告诉远程服务器去连接我们指定的IP地址。这个字符串可以是一个IP地址，一个主机名，一个网络界面名(在UNIX下)，或是‘-'(使用系统默认IP地址)
+  - CURLOPT_COOKIE: 传递一个包含HTTP cookie的头连接
+  - CURLOPT_SSLCERT: 传递一个包含PEM格式证书的字符串
+  - CURLOPT_SSLCERTPASSWD: 传递一个包含使用CURLOPT_SSLCERT证书必需的密码。
+  - CURLOPT_COOKIEFILE: 传递一个包含cookie数据的文件的名字的字符串。这个cookie文件可以是Netscape格式，或是堆存在文件中的HTTP风格的头。
+  - CURLOPT_CUSTOMREQUEST: 当进行HTTP请求时，传递一个字符被GET或HEAD使用。为进行DELETE或其它操作是有益的，更Pass a string to be used instead of GET or HEAD when doing an HTTP request. This is useful for doing or another, more obscure, HTTP request. 注意: 在确认的服务器支持命令先不要去这样做。下列的选项要求一个文件描述(通过使用fopen()函数获得)：　
+  - CURLOPT_FILE: 这个文件将是放置传送的输出文件，默认是STDOUT
+  - CURLOPT_INFILE: 这个文件是传送过来的输入文件
+  - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分
+  - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了
+
+### 状态管理
+
+* cookie 一个小段信息，存储在客户端浏览器中,用于识别用户
+  - PHP 自动维护 cookie 机制：在服务器端创建 并发送给客户端，后面客户端向服务器发送请求时，cookie都会嵌入请求，服务器端能够识别
+  - 设置
+  - 获取
+  - 删除
+* 服务器端存储技术 session:用于临时存储 直到用户关闭网站
+  - 从一个页面传递到另一个页面：广泛应用于购物网站(需要存储和传递购物车信息、用户名，产品代码，产品名称，产品价格等信息）
+  - 会话为每个浏览器创建唯一的用户ID，以识别用户，并避免多个浏览器之间冲突
+  - session_start() 启动会话，启动一个新的或恢复现有会话
+    + 如果已创建会话，则返回现有会话
+    + 如果会话不可用，创建并返回新会话
+  - $_SESSION 一个包含所有会话变量的关联数组，用于设置和获取会话变量值
+  - session_destroy()
+
+```php
+setcookie("CookieName", "CookieValue");/* defining name and value only*/
+setcookie("CookieName", "CookieValue", time()+1*60*60);//using expiry in 1 hour(1*60*60 seconds or 3600 seconds)
+setcookie("CookieName", "CookieValue", time()+1*60*60, "/mypath/", "yiibai.com", 1);
+
+$value=$_COOKIE["CookieName"];//returns cookie value
+```
+
+### 跨域请求
+
+* Access-Control-Allow-Origin 设置方法
+  - 设置*是最简单粗暴的，但是服务器出于安全考虑，肯定不会这么干，而且，如果是*的话，游览器将不会发送cookies，即使你的XHR设置了withCredentials
+  - 指定域，如上图中的http://172.20.0.206，一般的系统中间都有一个nginx，所以推荐这种,例如：'Access-Control-Allow-Origin:http://172.20.0.206'
+  - 动态设置为请求域，多人协作时，多个前端对接一个后台，这样很方便
+  - withCredentials：表示XHR是否接收cookies和发送cookies，也就是说如果该值是false，响应头的Set-Cookie，浏览器也不会理，并且即使有目标站点的cookies，浏览器也不会发送。
+* Access-Control-Allow-Credentials :是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回
+* option请求多了2个字段：
+  - Access-Control-Request-Method：该次请求的请求方式
+  - Access-Control-Request-Headers：该次请求的自定义请求头字段
+  - Access-Control-Max-Age 预检结果缓存时间 表明该响应的有效时间为 86400 秒，也就是 24 小时。在有效时间内，浏览器无须为同一请求再次发起预检请求。浏览器自身维护了一个最大有效时间，如果该首部字段的值超过了最大有效时间，将不会生效
+
+```php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Credentials: true');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); // 允许的请求头字段
+
+location / {
+    add_header Access-Control-Allow-Origin *;
+    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+    add_header Access-Control-Allow-Headers 'DNT,Keep-Alive,User-Agent,Cache-Control,Content-Type,Authorization';
+
+    if ($request_method = 'OPTIONS') {
+        return 204;
+    }
+}
+```
+
+### 输入
+
+#### 过滤
+
+* 所有外部源都可能是攻击媒介，可能会（有意或无意）把恶意数据注入PHP脚本
+* 过滤输入:转义或删除不安全的字符
+  - HTML
+    + 使用htmlentities函数过滤HTML，该函数会将所有HTML标签字符（&、<、>等）转化为对应的HTML实体，以便在应用存储层取出后安全渲染,htmlentities的第一个参数表示要处理的HTML字符串，第二个参数表示要转义单引号，第三个参数表示输入字符串的字符集编码
+    + `html_entity_decode`:将所有HTML实体转化为对应的HTML标签
+    + 强大的过滤HTML功能，可以使用HTML Purifier库，这是一个很强健且安全的PHP库，专门用于使用指定规则过滤HTML输入
+  - SQL:SQL查询中一定不能使用未过滤的输入数据，如果要在SQL查询中使用输入数据，一定要使用PDO预处理语句
+* 验证数据
+  - 把`FILTER_VALIDATE_*`标识传递给filter_var函数，PHP提供了验证布尔值、电子邮件地址、浮点数、整数、IP、正则表达式和URL的标识
+  - 框架中的数据验证
+
+#### 转义
+
+* htmlentities 函数转义输出
+  - 第二个参数一定要使用ENT_QUOTES，让这个函数转义单引号和双引号
+  - 第三个参数中指定合适的字符编码（通常是UTF-8）
+
+## 脚本编程
+
+### 调用外部命令
+
+* 执行 linux 系统的shell命令:可以获得命令执行的状态码
+  - system() 输出并返回最后一行shell结果
+    + 关掉 安全模式 safe_mode = off
+    + 禁用函数列表 disable_functions = proc_open, popen, exec, system, shell_exec, passthru 把 exec 去掉
+  - exec() 不输出结果，返回最后一行shell结果，所有结果可以保存到一个返回的数组里面。
+  - passthru() 只调用命令，把命令的运行结果原样地直接输出到标准输出设备上
+
+```sh
+system("/usr/a.sh");
+```
+
 ## 安全
 
 * 原则
@@ -1985,136 +2316,96 @@ else {
 exit;
 ```
 
-## 跨域请求
+```
+> mysql_real_escape_string mysql_escape_string区别
+mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接）
+两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。
+它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。
 
-* Access-Control-Allow-Origin 设置方法
-  - 设置*是最简单粗暴的，但是服务器出于安全考虑，肯定不会这么干，而且，如果是*的话，游览器将不会发送cookies，即使你的XHR设置了withCredentials
-  - 指定域，如上图中的http://172.20.0.206，一般的系统中间都有一个nginx，所以推荐这种,例如：'Access-Control-Allow-Origin:http://172.20.0.206'
-  - 动态设置为请求域，多人协作时，多个前端对接一个后台，这样很方便
-  - withCredentials：表示XHR是否接收cookies和发送cookies，也就是说如果该值是false，响应头的Set-Cookie，浏览器也不会理，并且即使有目标站点的cookies，浏览器也不会发送。
-* Access-Control-Allow-Credentials :是否允许后续请求携带认证信息（cookies）,该值只能是true,否则不返回
-* option请求多了2个字段：
-  - Access-Control-Request-Method：该次请求的请求方式
-  - Access-Control-Request-Headers：该次请求的自定义请求头字段
-  - Access-Control-Max-Age 预检结果缓存时间 表明该响应的有效时间为 86400 秒，也就是 24 小时。在有效时间内，浏览器无须为同一请求再次发起预检请求。浏览器自身维护了一个最大有效时间，如果该首部字段的值超过了最大有效时间，将不会生效
+> 内存泄漏
+内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。
+页面元素被删除，但是绑定在该元素上的事件未被删除；
+闭包维持函数内局部变量（外部不可控），使其得不到释放；
+意外的全局变量；
+引用被删除，但是引用内的引用，还存在内存中。
+外部调用类函数
 
-```php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS'); //允许的请求类型
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept"); // 允许的请求头字段
+> sql注入
+ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount => int, is_ref => 0|1, value => union, type => string]，变量被unset时，ref_count如果变成0，则被回收。
 
-location / {
-    add_header Access-Control-Allow-Origin *;
-    add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
-    add_header Access-Control-Allow-Headers 'DNT,Keep-Alive,User-Agent,Cache-Control,Content-Type,Authorization';
+当遇到变量循环引用自身时，使用同步回收算法回收。
 
-    if ($request_method = 'OPTIONS') {
-        return 204;
-    }
-}
+sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2handler四种运行模式。
+
+crc32
+
+> 索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？
+O(log(n))，O(1).因为哈希表是散列的，在遇到`key`>'12'这种查找条件时，不起作用，并且空间复杂度较高。
+备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。
 ```
 
-## Docker
+## 性能
 
-* [php](https://github.com/docker-library/php):Docker Official Image packaging for PHP https://php.net
-* [dnmp](https://github.com/yeszao/dnmp):Docker LNMP (Nginx, PHP7/PHP5, MySQL, Redis) https://www.awaimai.com/2120.html
+### 测试
 
-```
-mkdir -p ~/php-fpm/logs ~/php-fpm/conf
+- 压测
+	+ ab `ab -n1000 -c10 https://www.baidu.com/`  -n请求数 -c并发数,结果参数
+      * requests per second
+      * time per request
+	- `time php php-src/Zend/micro_bench.php`:查看 user 参数
+	- memory_get_usage()
+	- XHPorf
+* 语言级
+  - 编译解析开销:zend逐行扫描分析成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
+    + 用语言内置函数:已做优化，比自己实现的方法优化
+    + 内置函数性能：知道方法的时间复杂度 比如：isset arrat_key_exists
+    + 魔法函数性能不佳
+    + 产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原，通过vld:查看opcode
+  - 合理使用内存：unset释放掉
+    - unset注销不掉
+  - 正则的回溯开销大
+  - 避免循环内运算：for中 length 放在外面
+  - 减少密集运算：开销比C大
+  - 带引号字符串作为键值
+* 周边：系统依赖，找到问题核心
+  - php是串行执行
+  - 文件操作性能：读写内存 << 读写数据库 << 读写磁盘 << 读写网络（网络延时）
+  - 硬件
+    + 运行环境linux
+    + 硬盘 文件存储
+    + 内存：memache 热数据
+  - 软件
+    + 数据库
+  - 网络：减少网络请求
+    + 对方接口不确定
+    + 网络稳定性
+    + 设置超时
+      * 连接超时 800ms
+      * 读超时 200ms
+      * 写超时 500ms
+    + 串行并行化
+      * curl_multi依赖最长
+      * swoole
+  - 压缩PHP输出 Gzip
+    + 快
+    + 服务器、客户端：额外CPU开销
+    + 大于100k使用,根据内容重复度压缩后
+  - 缓存
+    + 重复请求 内容不变
+    + smarty: 开启caching
+  - 重叠时间窗口
+    + 前提是后任务不强依赖前一任务
+    + 旁路方案
 
-# Dockerfile
+### 方法
 
-FROM debian:jessie
+- microtime()
+- APC：Opcache缓存
+	+ yac
+- 扩展实现高频逻辑
+- runtime优化:HHVM
 
-# persistent / runtime deps
-
-ENV PHPIZE_DEPS \ autoconf \ file \ g++ \ gcc \ libc-dev \ make \ pkg-config \ re2c RUN apt-get update && apt-get install -y \ $PHPIZE_DEPS \ ca-certificates \ curl \ libedit2 \ libsqlite3-0 \ libxml2 \ --no-install-recommends && rm -r /var/lib/apt/lists/*
-
-ENV PHP_INI_DIR /usr/local/etc/php RUN mkdir -p $PHP_INI_DIR/conf.d
-
-## <autogenerated>
-</autogenerated>
-
-ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data
-
-##
-
-ENV GPG_KEYS 0BD78B5F97500D450838F95DFE857D9A90D90EC1 6E4F6AB321FDC07F2C332E3AC2BF0BC433CFC8B3
-
-ENV PHP_VERSION 5.6.22 ENV PHP_FILENAME php-5.6.22.tar.xz ENV PHP_SHA256 c96980d7de1d66c821a4ee5809df0076f925b2fe0b8c362d234d92f2f0a178e2
-
-RUN set -xe \ && buildDeps=" \ $PHP_EXTRA_BUILD_DEPS \ libcurl4-openssl-dev \ libedit-dev \ libsqlite3-dev \ libssl-dev \ libxml2-dev \ xz-utils \ " \ && apt-get update && apt-get install -y $buildDeps --no-install-recommends && rm -rf /var/lib/apt/lists/_ \ && curl -fSL "<http://php.net/get/$PHP_FILENAME/from/this/mirror>" -o "$PHP_FILENAME" \ && echo "$PHP_SHA256_ $PHP_FILENAME" | sha256sum -c - \ && curl -fSL "<http://php.net/get/$PHP_FILENAME.asc/from/this/mirror>" -o "$PHP_FILENAME.asc" \ && export GNUPGHOME="$(mktemp -d)" \ && for key in $GPG_KEYS; do \ gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \ done \ && gpg --batch --verify "$PHP_FILENAME.asc" "$PHP_FILENAME" \ && rm -r "$GNUPGHOME" "$PHP_FILENAME.asc" \ && mkdir -p /usr/src/php \ && tar -xf "$PHP_FILENAME" -C /usr/src/php --strip-components=1 \ && rm "$PHP_FILENAME" \ && cd /usr/src/php \ && ./configure \ --with-config-file-path="$PHP_INI_DIR" \ --with-config-file-scan-dir="$PHP_INI_DIR/conf.d" \ $PHP_EXTRA_CONFIGURE_ARGS \ --disable-cgi \
-
-# --enable-mysqlnd is included here because it's harder to compile after the fact than extensions are (since it's a plugin for several extensions, not an extension in itself)
-
-    --enable-mysqlnd \
-
-
-# --enable-mbstring is included here because otherwise there's no way to get pecl to use it properly (see <https://github.com/docker-library/php/issues/195>)
-
-
-    --enable-mbstring \
-    --with-curl \
-    --with-libedit \
-    --with-openssl \
-    --with-zlib \
-&& make -j"$(nproc)" \
-&& make install \
-&& { find /usr/local/bin /usr/local/sbin -type f -executable -exec strip --strip-all '{}' + || true; } \
-&& make clean \
-&& apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
-
-
-COPY docker-php-ext-* /usr/local/bin/
-
-## <autogenerated>
-</autogenerated>
-
-WORKDIR /var/www/html
-
-RUN set -ex \ && cd /usr/local/etc \ && if [ -d php-fpm.d ]; then \
-
-
-    # for some reason, upstream's php-fpm.conf.default has "include=NONE/etc/php-fpm.d/*.conf"
-    sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null; \
-    cp php-fpm.d/www.conf.default php-fpm.d/www.conf; \
-else \
-    # PHP 5.x don't use "include=" by default, so we'll create our own simple config that mimics PHP 7+ for consistency
-    mkdir php-fpm.d; \
-    cp php-fpm.conf.default php-fpm.d/www.conf; \
-    { \
-        echo '[global]'; \
-        echo 'include=etc/php-fpm.d/*.conf'; \
-    } | tee php-fpm.conf; \
-fi \
-&& { \
-    echo '[global]'; \
-    echo 'error_log = /proc/self/fd/2'; \
-    echo; \
-    echo '[www]'; \
-    echo '; if we send this to /proc/self/fd/1, it never appears'; \
-    echo 'access.log = /proc/self/fd/2'; \
-    echo; \
-    echo 'clear_env = no'; \
-    echo; \
-    echo '; Ensure worker stdout and stderr are sent to the main error log.'; \
-    echo 'catch_workers_output = yes'; \
-} | tee php-fpm.d/docker.conf \
-&& { \
-    echo '[global]'; \
-    echo 'daemonize = no'; \
-    echo; \
-    echo '[www]'; \
-    echo 'listen = [::]:9000'; \
-} | tee php-fpm.d/zz-docker.conf
-EXPOSE 9000 CMD ["php-fpm"]
-
-docker build -t php:5.6-fpm .
-docker run -p 9000:9000 --name myphp-fpm -v ~/nginx/www:/www -v $PWD/conf:/usr/local/etc/php -v $PWD/logs:/phplogs -d php:5.6-fpm
-```
-
-## [xhprof](https://github.com/phacility/xhprof)
+### [xhprof](https://github.com/phacility/xhprof)
 
 * 一个分层PHP性能分析工具。报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况
 * [xhprof](https://github.com/longxinH/xhprof):PHP7 support
@@ -2190,270 +2481,6 @@ $run_id = $xhprof_runs->save_run($xhprof_data, "xhprof_test"); # 将run_id保存
 $host_url/xhpfrof_html/index.php?run=58d3b28b521f6&source=xhprof_test
 ```
 
-## 性能
-
-* 测试
-  - 压测
-    + ab `ab -n1000 -c10 https://www.baidu.com/`  -n请求数 -c并发数,结果参数
-      * requests per second
-      * time per request
-  - `time php php-src/Zend/micro_bench.php`:查看 user 参数
-  - XHPorf
-* 语言级
-  - 编译解析开销:zend逐行扫描分析成zend能识别的语法解析成opcode（内置方法生成opcode 少）执行
-    + 用语言内置函数:已做优化，比自己实现的方法优化
-    + 内置函数性能：知道方法的时间复杂度 比如：isset arrat_key_exists
-    + 魔法函数性能不佳
-    + 产生错误抑制符：代码前后改变错误等级 error_reporting 前面忽略 后面还原，通过vld:查看opcode
-  - 合理使用内存：unset释放掉
-    - unset注销不掉
-  - 正则的回溯开销大
-  - 避免循环内运算：for中 length 放在外面
-  - 减少密集运算：开销比C大
-  - 带引号字符串作为键值
-* 周边：系统依赖，找到问题核心
-  - php是串行执行
-  - 文件操作性能：读写内存 << 读写数据库 << 读写磁盘 << 读写网络（网络延时）
-  - 硬件
-    + 运行环境linux
-    + 硬盘 文件存储
-    + 内存：memache 热数据
-  - 软件
-    + 数据库
-  - 网络：减少网络请求
-    + 对方接口不确定
-    + 网络稳定性
-    + 设置超时
-      * 连接超时 800ms
-      * 读超时 200ms
-      * 写超时 500ms
-    + 串行并行化
-      * curl_multi依赖最长
-      * swoole
-  - 压缩PHP输出 Gzip
-    + 快
-    + 服务器、客户端：额外CPU开销
-    + 大于100k使用,根据内容重复度压缩后
-  - 缓存
-    + 重复请求 内容不变
-    + smarty: 开启caching
-  - 重叠时间窗口
-    + 前提是后任务不强依赖前一任务
-    + 旁路方案
-* 方法
-  - memory_get_usage()
-  - microtime()
-  - APC：Opcache缓存
-    + yac
-  - 扩展实现高频逻辑
-  - runtime优化:HHVM
-
-## 编码
-
-```php
-<?php header("Content-type: text/html; charset=utf-8"); ?>
-```
-
-## curl
-
-* 选项的值将被作为长整形使用(在option参数中指定)：
-  - CURLOPT_INFILESIZE: 上传一个文件到远程站点，这个选项告诉PHP你上传文件的大小。
-  - CURLOPT_VERBOSE: 想CURL报告每一件意外的事情，设置这个选项为一个非零值。
-  - CURLOPT_HEADER: 想把一个头包含在输出中，设置这个选项为一个非零值。
-  - CURLOPT_NOPROGRESS: 不会PHP为CURL传输显示一个进程条，设置这个选项为一个非零值。注意：PHP自动设置这个选项为非零值，e仅仅为了调试的目的来改变这个选项。
-  - CURLOPT_NOBODY: 不想在输出中包含body部分，设置这个选项为一个非零值
-  - CURLOPT_FAILONERROR: 想让PHP在发生错误(HTTP代码返回大于等于300)时，不显示，设置这个选项为一人非零值。默认行为是返回一个正常页，忽略代码。
-  - CURLOPT_UPLOAD: 想让PHP为上传做准备，设置这个选项为一个非零值。
-  - CURLOPT_POST: 想PHP去做一个正规的HTTP POST，设置这个选项为一个非零值。这个POST是普通的 application/x-www-from-urlencoded 类型，多数被HTML表单使用。
-  - CURLOPT_FTPLISTONLY: 设置这个选项为非零值，PHP将列出FTP的目录名列表。
-  - CURLOPT_FTPAPPEND: 设置这个选项为一个非零值，PHP将应用远程文件代替覆盖它。
-  - CURLOPT_NETRC: 设置这个选项为一个非零值，PHP将在你的 ~./netrc 文件中查找你要建立连接的远程站点的用户名及密码。
-  - CURLOPT_FOLLOWLOCATION: 设置这个选项为一个非零值(象 “Location: “)的头，服务器会把它当做HTTP头的一部分发送(注意是递归的，PHP将发送形如 “Location: “的头)。
-  - CURLOPT_PUT: 设置这个选项为一个非零值去用HTTP上传一个文件。要上传这个文件必须设置CURLOPT_INFILE和CURLOPT_INFILESIZE选项.
-  - CURLOPT_MUTE: 设置这个选项为一个非零值，PHP对于CURL函数将完全沉默。
-  - CURLOPT_TIMEOUT: 设置一个长整形数，作为最大延续多少秒 告诉成功 PHP 从服务器接收缓冲完成前需要等待多长时间 **响应超时**
-  - CURLOPT_LOW_SPEED_LIMIT: 设置一个长整形数，控制传送多少字节。
-  - CURLOPT_LOW_SPEED_TIME: 设置一个长整形数，控制多少秒传送CURLOPT_LOW_SPEED_LIMIT规定的字节数。
-  - CURLOPT_RESUME_FROM: 传递一个包含字节偏移地址的长整形参数，(你想转移到的开始表单)。
-  - CURLOPT_SSLVERSION: 传递一个包含SSL版本的长参数。默认PHP将被它自己努力的确定，在更多的安全中你必须手工设置。
-  - CURLOPT_TIMECONDITION: 传递一个长参数，指定怎么处理CURLOPT_TIMEVALUE参数。可以设置这个参数为TIMECOND_IFMODSINCE 或 TIMECOND_ISUNMODSINCE。这仅用于HTTP
-  - CURLOPT_CONNECTTIMEOUT:告诉 PHP 在成功连接服务器前等待多久 **连接超时**
-  - CURLOPT_TIMEVALUE:传递一个从1970-1-1开始到现在的秒数。这个时间将被CURLOPT_TIMEVALUE选项作为指定值使用，或被默认TIMECOND_IFMODSINCE使用。
-* 选项的值将被作为字符串：
-  - CURLOPT_URL: 这是想用PHP取回的URL地址。也可以在用curl_init()函数初始化时设置这个选项
-  - CURLOPT_USERPWD: 传递一个形如[username]:[password]风格的字符串,作用PHP去连接
-  - CURLOPT_PROXYUSERPWD: 传递一个形如[username]:[password] 格式的字符串去连接HTTP代理
-  - CURLOPT_RANGE: 传递一个想指定的范围。它应该是”X-Y”格式，X或Y是被除外的。HTTP传送同样支持几个间隔，用逗句来分隔(X-Y,N-M)
-  - CURLOPT_POSTFIELDS: 传递一个作为HTTP “POST”操作的所有数据的字符串
-  - CURLOPT_REFERER: 在HTTP请求中包含一个”referer”头的字符串
-  - CURLOPT_USERAGENT: 在HTTP请求中包含一个”user-agent”头的字符串
-  - CURLOPT_FTPPORT: 传递一个包含被ftp “POST”指令使用的IP地址。这个POST指令告诉远程服务器去连接我们指定的IP地址。这个字符串可以是一个IP地址，一个主机名，一个网络界面名(在UNIX下)，或是‘-'(使用系统默认IP地址)
-  - CURLOPT_COOKIE: 传递一个包含HTTP cookie的头连接
-  - CURLOPT_SSLCERT: 传递一个包含PEM格式证书的字符串
-  - CURLOPT_SSLCERTPASSWD: 传递一个包含使用CURLOPT_SSLCERT证书必需的密码。
-  - CURLOPT_COOKIEFILE: 传递一个包含cookie数据的文件的名字的字符串。这个cookie文件可以是Netscape格式，或是堆存在文件中的HTTP风格的头。
-  - CURLOPT_CUSTOMREQUEST: 当进行HTTP请求时，传递一个字符被GET或HEAD使用。为进行DELETE或其它操作是有益的，更Pass a string to be used instead of GET or HEAD when doing an HTTP request. This is useful for doing or another, more obscure, HTTP request. 注意: 在确认的服务器支持命令先不要去这样做。下列的选项要求一个文件描述(通过使用fopen()函数获得)：　
-  - CURLOPT_FILE: 这个文件将是放置传送的输出文件，默认是STDOUT
-  - CURLOPT_INFILE: 这个文件是传送过来的输入文件
-  - CURLOPT_WRITEHEADER: 这个文件写有输出的头部分
-  - CURLOPT_STDERR: 这个文件写有错误而不是stderr。用来获取需要登录的页面的例子,当前做法是每次或许都登录一次,有需要的人再做改进了
-
-## 正则表达式 PREG
-
-* 元字符
-  - .   匹配除换行符以外的任意字符
-  - \w  匹配字母或数字或下划线或汉字
-  - \s  匹配任意的空白符
-  - \d  匹配数字
-  - \b  匹配单词的开始或结束
-  - ^   匹配字符串的开始
-  - $   匹配字符串的结束
-* 字符转义:要查找特殊意义字符`.`，或者`*`,使用\来取消。使用`\\.` `\\\*` `\\\`
-* 重复
-  - `*` 重复零次或更多次
-  - `+` 重复一次或更多次
-  - ?   重复零次或一次
-  - {n} 重复n次
-  - {n,}    重复n次或更多次
-  - {n,m}   重复n到m次
-* 字符类
-  - [“your set”]：如[aeiou]，则匹配a，e，i，o和u中的任意一个，同理[.?!]匹配标点符号(.或?或!)
-  - [0-9]：与\d就是完全一致，表示一位数字
-  - [a-zA-Z]：表示一个字母，[a-z0-9A-Z]等同于\w(当然值考虑英文的话)
-  - `\(?0\d{2}[)-]?\d{8}` # (010)88886666，或022-22334455，或02912345678等
-  - \ 将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\' 匹配 "" 而 "\(" 则匹配 "("。
-  - ^   匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。
-  - $   匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。
-    非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?'
-  - [xyz]   字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'
-  - [^xyz]  负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'、'l'、'i'、'n'。
-  - [a-z]   字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。
-  - [^a-z]  负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。
-  - \b  匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。
-  - \B  匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。
-  - \cx 匹配由 x 指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。
-  - \d  匹配一个数字字符。等价于 [0-9]。
-  - \D  匹配一个非数字字符。等价于 [^0-9]。
-  - \f  匹配一个换页符。等价于 \x0c 和 \cL。
-  - \n  匹配一个换行符。等价于 \x0a 和 \cJ。
-  - \r  匹配一个回车符。等价于 \x0d 和 \cM。
-  - \s  匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。
-  - \S  匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
-  - \t  匹配一个制表符。等价于 \x09 和 \cI。
-  - \v  匹配一个垂直制表符。等价于 \x0b 和 \cK。
-  - \w  匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。
-  - \W  匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。
-  - \xn 匹配 n，其中 n 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如，'\x41' 匹配 "A"。'\x041' 则等价于 '\x04' & "1"。正则表达式中可以使用 ASCII 编码。
-  - \num    匹配 num，其中 num 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。
-  - \n  标识一个八进制转义值或一个向后引用。如果 \n 之前至少 n 个获取的子表达式，则 n 为向后引用。否则，如果 n 为八进制数字 (0-7)，则 n 为一个八进制转义值。
-  - \nm 标识一个八进制转义值或一个向后引用。如果 \nm 之前至少有 nm 个获得子表达式，则 nm 为向后引用。如果 \nm 之前至少有 n 个获取，则 n 为一个后跟文字 m 的向后引用。如果前面的条件都不满足，若 n 和 m 均为八进制数字 (0-7)，则 \nm 将匹配八进制转义值 nm。
-  - \nml    如果 n 为八进制数字 (0-3)，且 m 和 l 均为八进制数字 (0-7)，则匹配八进制转义值 nml。
-  - \un 匹配 n，其中 n 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。
-  - \(pattern\) 匹配pattern 并获取这一匹配。所获取的匹配可以从产生的Matches集合得到，在VBScript 中使用SubMatches集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。        -
-  - \(?:pattern\) 匹配pattern但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符“|”来组合一个模式的各个部分是很有用。
-  - 例如，“industr\(?:y|ies\)”就是一个比 “industry|industries” 更简略的表达式。     -
-  - \(?=pattern\) 正向预查，在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配"Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。     -
-  - (?!pattern) 负向预查，在任何不匹配 pattern 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。
-  - x|y 匹配x或y。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。
-* 常用分组语法
-  - 捕获  (exp)   匹配exp,并捕获文本到自动命名的组里
-  - (?<name>exp)    匹配exp,并捕获文本到名称为name的组里，也可以写成(?'name'exp)
-  - (?:exp) 匹配exp,不捕获匹配的文本，也不给此分组分配组号
-  - 零宽断言    (?=exp) 匹配exp前面的位置
-  - (?<=exp)    匹配exp后面的位置
-  - (?!exp) 匹配后面跟的不是exp的位置
-  - `(?<!exp)`    匹配前面不是exp的位置
-  - 注释  (?#comment) 这种类型的分组不对正则表达式的处理产生任何影响，用于提供注释让人阅读
-* 贪婪与懒惰
-    当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：a.\*b，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。这被称为贪婪匹配。
-    有时，我们更需要懒惰匹配，也就是匹配尽可能少的字符。前面给出的限定符都可以被转化为懒惰匹配模式，只要在它后面加上一个问号?。这样.\*?就意味着匹配任意数量的重复，但是在能使整个匹配成功的前提下使用最少的重复。现在看看懒惰版的例子吧：
-    a.*?b匹配最短的，以a开始，以b结束的字符串。如果把它应用于aabab的话，它会匹配aab（第一到第三个字符）和ab（第四到第五个字符）。注意：最先开始的匹配拥有最高的优先权
-  - * 重复任意次，但尽可能少重复
-  - + 重复1次或更多次，但尽可能少重复
-  - ?  重复0次或1次，但尽可能少重复
-  - {n,m}?  重复n到m次，但尽可能少重复
-  - {n,}?   重复n次以上，但尽可能少重复
-* 模式修正符
-  - i：模式中的字符将同时匹配大小写字母。
-  - m：“行起始”和“行结束”除了匹配整个字符串开头和结束外，还分别匹配其中的换行符的之后和之前。
-  - s：模式中的圆点元字符（.）匹配所有的字符，包括换行符。没有此设定的话，则不包括换行符。
-  - x：模式中的空白字符除了被转义的或在字符类中的以外完全被忽略，在未转义的字符类之外的 #以及下一个换行符之间的所有字符，包括两头，也都被忽略。
-  - e：如果设定了此修正符，preg_replace() 在替换字符串中对逆向引用作正常的替换，
-  - ?在 . + 和 * 之后 表示非贪婪匹配: *、+和?限定符都是贪婪的，因为它们会尽可能多的匹配文字，只有在它们的后面加上一个?就可以实现非贪婪或最小匹配。
-* 参考
-  - [五分钟，正则表达式不再是你的烦恼](https://www.jianshu.com/p/4f258d81ff4c)
-  - https://www.w3cschool.cn/regexp/jhbv1pr1.html
-  - https://www.cnblogs.com/yelons/p/6644579.html
-  - https://www.cnblogs.com/longdaye/p/8001221.html
-  - https://blog.csdn.net/kkobebryant/article/details/267527
-  - http://www.jb51.net/article/77428.htm
-  - https://www.cnblogs.com/hellohell/p/5718319.html
-
-## SPL
-
-* SplQueue
-* SplHeap:一种有序的数据结构。数据总是按照最小在前或最大在前排序。新插入的数据会自动进行排序
-  - 底层使用跳表数据结构，insert操作的时间复杂度为O(Log(n))
-
-```php
-$queue = new SplQueue;
-//入队
-$queue->push($data);
-//出队
-$data = $queue->shift();
-//查询队列中的排队数量
-$n = count($queue);
-
-# 功能
-$splq = new SplQueue;
-for($i = 0; $i < 1000000; $i++)
-{
-    $data = "hello $i\n";
-    $splq->push($data);
-
-    if ($i % 100 == 99 and count($splq) > 100)
-    {
-        $popN = rand(10, 99);
-        for ($j = 0; $j < $popN; $j++)
-        {
-            $splq->shift();
-        }
-    }
-}
-
-$popN = count($splq);
-for ($j = 0; $j < $popN; $j++)
-{
-    $splq->pop();
-}
-
-//最大堆
-class MaxHeap extends SplHeap
-{
-    protected function compare($a, $b)
-    {
-        return $a - $b;
-    }
-}
-
-//最小堆
-class MinHeap extends SplHeap
-{
-    protected function compare($a, $b)
-    {
-        return $b - $a;
-    }
-}
-
-$list = new MaxHeap;
-$list->insert(56);
-$list->insert(22);
-$list->insert(35);
-$list->insert(11);
-$list->insert(88);
-$list->insert(36);
-```
-
 ## 禁止
 
 * 不要使用 `mysql_` 函数：从核心中全部移除了
@@ -2483,49 +2510,7 @@ $list->insert(36);
     + 多人合作管理意识：项目不是一个人的，是多人协作的产物，也是服务于大众的，因而，要提升协作意识，让相关人员一同来完善项目
   - 丰富的项目开发应用经验：学理论，去考试或考核是学校里面的事儿，没有项目经验，就像满肚子经文，吐也难吐出。这就需要实际的项目将自己的知识去学会转化为需求实现
 
-## 开发规范
-
-* 代码可读性强：对象，方法，函数的注释；一套成熟命名规范
-* 代码冗余度底：程序和文件的重用性大，高内聚，低耦合
-* 执行效率高：用最简单的程序流程实现应用需求，勿扰大弯子
-* 代码安全性好：做一名警惕的程序员，任何有用户输入和上传文件的地方都得额外谨慎，也许一个程序员一时的疏忽就会导致一个系统顷刻间崩溃
-
-```
-> mysql_real_escape_string mysql_escape_string区别
-mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接）
-两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。
-它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。
-
-> 内存泄漏
-内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。
-页面元素被删除，但是绑定在该元素上的事件未被删除；
-闭包维持函数内局部变量（外部不可控），使其得不到释放；
-意外的全局变量；
-引用被删除，但是引用内的引用，还存在内存中。
-外部调用类函数
-
-> sql注入
-ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount => int, is_ref => 0|1, value => union, type => string]，变量被unset时，ref_count如果变成0，则被回收。
-
-当遇到变量循环引用自身时，使用同步回收算法回收。
-
-sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2handler四种运行模式。
-
-crc32
-
-> 索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？
-O(log(n))，O(1).因为哈希表是散列的，在遇到`key`>'12'这种查找条件时，不起作用，并且空间复杂度较高。
-备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。
-```
-
-## 大数据
-
-* 查询上运行EXPLAIN，看看是不是缺少什么索引。曾经做过一个查询，通过增加了一个索引后效率提高了4个数量级
-* 如果正在做SQL查询，然后获得结果，并把很多数字弄到一起，看看能不能使用像SUM（）和AVG（）之类的函数调用GROUP BY语句
-  - 跟普遍的情况下，让数据库处理尽量多的计算。一点很重要的提示是：（至少在MySQL里是这样）布尔表达式的值为0或1，如果有创意的话，可以使用SUM（）和它的小伙伴们做些很让人惊讶的事情。
-* 是不是把这些同样很耗费时间的数字计算了很多遍。例如，假设1000袋土豆的成本是昂贵的计算，但并不需要把这个成本计算500次，然后才把1000袋土豆的成本存储在一个数组或其他类似的地方，所以你不必把同样的东西翻来覆去的计算。这个技术叫做记忆术，在像你这样的报告中使用往往会带来奇迹般的效果
-
-## [xdebug](git://github.com/xdebug/xdebug.git)
+### [xdebug](git://github.com/xdebug/xdebug.git)
 
 Xdebug — Step Debugger and Debugging Aid for PHP <https://xdebug.org>
 
@@ -2553,9 +2538,9 @@ pecl install xdebug
 ##  Cannot accept external Xdebug connection: Cannot evaluate expression 'isset($_SERVER['PHP_IDE_CONFIG'])
 ```
 
+```
 ## remote debug
 
-```
 brew install php71-xdebug
 pecl install xdebug
 
@@ -2587,7 +2572,9 @@ URL # 实际URL
 ## start listening
 ```
 
-## [steward](https://github.com/lmc-eu/steward)
+## 测试
+
+### [steward](https://github.com/lmc-eu/steward)
 
 * PHP libraries that makes Selenium WebDriver + PHPUnit functional testing easy and robust
 * 准备
@@ -2662,28 +2649,6 @@ java -jar ./vendor/bin/selenium-server-standalone-3.4.0.jar
 * [PHP-Interview-QA](https://github.com/colinlet/PHP-Interview-QA):PHP面试问答
 * [](https://github.com/disxo/PHP-interview-myway)
 
-## [yar](https://github.com/laruence/yar)
-
-Light, concurrent RPC framework for PHP & C
-
-## [yaf](https://github.com/laruence/yaf)
-
-A fast php framework written in c, built in php-ext <http://pecl.php.net/package/yaf>
-
-* [CZD_Yaf_Extension](https://github.com/sillydong/CZD_Yaf_Extension):建立在 yarf基础上，集成了Smarty引擎，加入了封装好的各种功能类
-* [Yaf用户手册](http://www.laruence.com/manual/)
-
-```sh
-sudo pecl install yaf
-```
-
-## [Yac](https://github.com/laruence/yac)
-
-A fast shared memory user data cache for PHP
-
-* [yaconf](https://github.com/laruence/yaconf):A PHP Persistent Configurations Container
-  - 主要目标是简化读取项目配置文件,使配置文件和项目代码分离，增强了配置文件的可读性和可维护性
-
 ## 包管理
 
 * Composer包 Composer Repositories
@@ -2722,7 +2687,9 @@ A fast shared memory user data cache for PHP
   - 提供了一个用以构建web应用的基本框架，从而简化了用PHP编写web应用程序的流程
   - 不但节省开发时间，有助于建立更稳定的应用，而且减少了重复编码的开发
   - 可以帮助初学者建立更稳定的应用服务，这可以让你花更多的时间去创建实际的Web应用程序，而不是花时间写重复的代码
-* 通用
+  
+### 通用
+
   - [Aura PHP](http://auraphp.com/): 一个独立的组件框架
   - [CakePHP](https://github.com/cakephp/cakephp)CakePHP: The Rapid Development Framework for PHP - Official Repository <http://cakephp.org>
     + [cakephp-setup](https://github.com/dereuromark/cakephp-setup):CakePHP Setup Plugin - containing useful management and debugging tools for CakePHP apps <http://www.dereuromark.de>
@@ -2744,29 +2711,43 @@ A fast shared memory user data cache for PHP
   - [manaphp](https://github.com/manaphp/manaphp):ManaPHP Framework
   - [Elgg](https://github.com/Elgg/Elgg ) <http://learn.elgg.org/en/stable/guides>
   - [easy-php](https://github.com/TIGERB/easy-php):A Faster Lightweight Full-Stack PHP Framework 🚀 <http://easy-php.tigerb.cn>
-* 异步框架
+  - [yar](https://github.com/laruence/yar) Light, concurrent RPC framework for PHP & C
+  - [yaf](https://github.com/laruence/yaf)A fast php framework written in c, built in php-ext <http://pecl.php.net/package/yaf> `sudo pecl install yaf`
+		* [CZD_Yaf_Extension](https://github.com/sillydong/CZD_Yaf_Extension):建立在 yarf基础上，集成了Smarty引擎，加入了封装好的各种功能类
+		* [Yaf用户手册](http://www.laruence.com/manual/)
+		
+### 异步框架
   - [amp](https://github.com/amphp/amp):A non-blocking concurrency framework for PHP applications. <https://amphp.org/amp>
   - [goaop](https://github.com/goaop/framework) 💎 Go! AOP PHP - modern aspect-oriented framework for the new level of software development http://go.aopphp.com/
-* 论坛
-  - [flarum](https://github.com/flarum/flarum):Composer starter project for Flarum <https://flarum.org>
-* 电商
+
+### 论坛
+
+- [flarum](https://github.com/flarum/flarum):Composer starter project for Flarum <https://flarum.org>
+  
+### 电商
+
   - [magento2](https://github.com/magento/magento2): a cutting edge, feature-rich eCommerce solution that gets results.
   - [Joolma](https://www.joomla.org/)
     + [文档](https://docs.joomla.org/Main_Page/zh-cn)
   - [Sylius](https://github.com/Sylius/Sylius): Open Source eCommerce Framework on top of Symfony <https://sylius.com>
     + [Documentation](https://sylius.readthedocs.io/en/latest/)
     + [Sylius-Standard](https://github.com/Sylius/Sylius-Standard)
-* Wiki
+  
+### Wiki
   - [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki)
   - [dokuwiki](https://www.dokuwiki.org/)
   - [BookStack](https://www.bookstackapp.com/):a simple, self-hosted, easy-to-use platform for organising and storing information
-* 框架组件
+  
+### 框架组件
+
   - [CakePHP Plugins](https://plugins.cakephp.org/): CakePHP插件的目录
   - [Hoa Project](https://hoa-project.net/En/): 另一个PHP组件包
   - [League of Extraordinary Packages](https://thephpleague.com/): 一个PHP软件开发组
   - [Symfony Components](http://symfony.com/doc/master/components/index.html): Symfony组件
   - [Zend Framework 2 Components](https://packages.zendframework.com/): Zend Framework 2组件
-* 微型框架 Micro Frameworks 微型框架和路由
+  
+### 微型框架 Micro Frameworks
+
   - [Bullet PHP](http://bulletphp.com/): 用于构建REST APIs的微型框架
   - [Proton](https://github.com/alexbilbie/Proton): 一个StackPHP兼容的微型框架
   - [Silex](http://silex.sensiolabs.org/): 基于Symfony2组件的微型框架
@@ -2775,16 +2756,17 @@ A fast shared memory user data cache for PHP
   - [Slim](https://github.com/slimphp/Slim):Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs. <http://slimframework.com>
     + [Slim Skeleton](https://github.com/slimphp/Slim-Skeleton): Slim架构
     + [Slim View](https://github.com/slimphp/Slim-Views): Slim自定义视图的集合
-  - [flight](https://github.com/mikecao/flight):An extensible micro-framework for PHP <http://flightphp.com>
-* 其他微型框架 Micro Framework Extras 其他相关的微型框架和路由
-* 路由 Routers 处理应用路由的库
+  - [flight](https://github.com/mikecao/flight):An extensible micro-framework for PHP <http://flightphp.com>  
+  
+### 路由 Routers 处理应用路由的库
   - [FastRoute](https://github.com/nikic/FastRoute):Fast request router for PHP
   - [Klein](https://github.com/klein/klein.php): 一个灵活的路由的库
   - [Pux](https://github.com/c9s/Pux): 另一个快速路由的库
   - [Route](https://github.com/thephpleague/route): 一个基于Fast Route的路由的库
   - [YOURLS/YOURLS](https://github.com/YOURLS/YOURLS):🔗 Your Own URL Shortener <https://yourls.org>
   - [noahbuscher/macaw](https://github.com/NoahBuscher/Macaw):🐦 Simple PHP router
-* 模板 Templating 模板化和词法分析的库和工具
+  
+### 模板 Templating 模板化和词法分析的库和工具
   - [Foil](https://github.com/FoilPHP/Foil): 另一个原生PHP模板库
   - [Lex](https://github.com/pyrocms/lex): 一个轻量级模板解析器
   - [MtHaml](https://github.com/arnaud-lb/MtHaml): 一个HAML模板语言的PHP实现
@@ -2796,12 +2778,14 @@ A fast shared memory user data cache for PHP
   - [Twig](https://github.com/twigphp/Twig):Twig, the flexible, fast, and secure template language for PHP <http://twig.sensiolabs.org/>
   - [tale-jade](https://github.com/Talesoft/tale-jade):A complete and fully-functional implementation of the Jade template language for PHP <http://jade.talesoft.codes>
   - [doctrine2](https://github.com/doctrine/doctrine2):<http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/index.html>
-* 静态站点生成器 Static Site Generators 用来生成web页面的预处理内容的工具
+  
+### 静态站点生成器 Static Site Generators 用来生成web页面的预处理内容的工具
   - [Couscous](http://couscous.io): 一个将Markdown转化为漂亮的网站的工具
   - [Phrozn](https://github.com/Pawka/phrozn): 另一个转换Textile，Markdown和Twig为HTML的工具
   - [Sculpin](https://sculpin.io): 转换Markdown和Twig为静态HTML的工具
   - [Spress](http://spress.yosymfony.com): 一个能够将Markdown和Twig转化为HTML的可扩展工具
-* 超文本传输协议 HTTP
+ 
+### 超文本传输协议 HTTP
   - [Buzz](https://github.com/kriswallsmith/Buzz): 一个HTTP客户端
   - Saber
   - [guzzle](https://github.com/guzzle/guzzle):Guzzle, an extensible PHP HTTP client <http://guzzlephp.org/> <http://docs.guzzlephp.org/en/stable/index.html>
@@ -2812,7 +2796,8 @@ A fast shared memory user data cache for PHP
   - [Retrofit](https://github.com/tebru/retrofit-php): 一个能轻松创建REST API客户端的库
   - [zend-diactoros](https://github.com/zendframework/zend-diactoros): PSR-7 HTTP消息实现
   - [zttp](https://github.com/kitetail/zttp):A developer-experience focused HTTP client, optimized for most common use cases.
-* 爬虫 Scraping 用于网站爬取的库
+ 
+### 爬虫 Scraping 用于网站爬取的库
   - [Embed](https://github.com/oscarotero/Embed):  一个从web服务或网页中提取的信息的工具
   - [Goutte](https://github.com/FriendsOfPHP/Goutte): 一个简单的web爬取器
   - [PHP Spider](https://github.com/mvdbos/php-spider): 一个可配置和可扩展的PHP web爬虫
@@ -2823,13 +2808,15 @@ A fast shared memory user data cache for PHP
   - [Relay](https://github.com/relayphp/Relay.Relay): 一个PHP 5.5 PSR-7的中间件调度器
   - [Stack](https://github.com/stackphp): 一个用于Silex/Symfony的可堆叠的中间件的库
   - [zend-stratigility](https://github.com/zendframework/zend-stratigility): 基于PHP PSR-7之上的中间件之上
-* 网址 URL 解析URL的库
+ 
+### 网址 URL 解析URL的库
   - [PHP Domain Parser](https://github.com/jeremykendall/php-domain-parser): 一个本地前缀解析库
   - [Purl](https://github.com/jwage/purl): 一个URL处理库
   - [uri](https://github.com/fruux/sabre-uri): 一个URI操作库
   - [Uri](https://github.com/thephpleague/uri): 另一个URL处理库
   - [siler](https://github.com/leocavalcante/siler):⚡️ Flat-files and plain-old PHP functions rockin'on <https://siler.leocavalcante.com>
-* 电子邮件 Email 发送和解析邮件的库
+ 
+### 电子邮件 Email 发送和解析邮件的库
   - [CssToInlineStyles](https://github.com/tijsverkoyen/CssToInlineStyles): 一个在邮件模板中的内联CSS库
   - [Email Reply Parser](https://github.com/willdurand/EmailReplyParser): 一个邮件回复解析的库
   - [Email Validator](https://github.com/nojacko/email-validator): 一个较小的电子邮件验证库
@@ -2839,7 +2826,8 @@ A fast shared memory user data cache for PHP
   - [Stampie](https://github.com/henrikbjorn/Stampie): 一个邮件服务库，类似于[SendGrid](http://sendgrid.com)[PostMark](https://postmarkapp.com),[MailGun](http://www.mailgun.com)[Mandrill](http://www.mandrill.com)
   - [SwiftMailer](http://swiftmailer.org/): 一个邮件解决方案
   - [EmailValidator](https://github.com/egulias/EmailValidator):PHP Email validator library inspired in @dominicsayers isemail function <https://github.com/dominicsayers/isemail>
-* 文件 Files 文件处理和MIME类型检测的库
+ 
+### 文件 Files 文件处理和MIME类型检测的库
   - [Apache MIME Types](https://github.com/dflydev/dflydev-apache-mime-types): 一个解析Apache MIME类型的库
   - [Canal](https://github.com/dflydev/dflydev-canal): 一个检测互联网媒体类型的库
   - [CSV](https://github.com/thephpleague/csv):CSV data manipulation made easy in PHP <https://csv.thephpleague.com>
@@ -2850,9 +2838,11 @@ A fast shared memory user data cache for PHP
   - [Lurker](https://github.com/henrikbjorn/Lurker): 一个资源跟踪库
   - [PHP FFmpeg](https://github.com/PHP-FFmpeg/PHP-FFmpeg/): 一个用于[FFmpeg](http://www.ffmpeg.org/)视频包装的库
   - [UnifiedArchive](https://github.com/wapmorgan/UnifiedArchive): 一个统一标准的压缩和解压的库
-* 流 Streams 处理流的库
+ 
+### 流 Streams 处理流的库
   - [Streamer](https://github.com/fzaninotto/Streamer): 一个简单的面向对象的流包装库
-* 依赖注入 Dependency Injection 实现依赖注入设计模式的库
+ 
+### 依赖注入 Dependency Injection 实现依赖注入设计模式的库
   - (<https://github.com/jeremeamia/acclimate-container)[Acclimate>]: 一个依赖注入容器和服务定位的通用接口
   - (<https://github.com/rdlowrey/Auryn)[Auryn>]: 一个递归的依赖注入容器
   - (<https://github.com/thephpleague/container)[Container>]: 另一个可伸缩的依赖注入容器
@@ -2860,7 +2850,8 @@ A fast shared memory user data cache for PHP
   - [PHP-DI](https://github.com/PHP-DI/PHP-DI): 一个支持自动装配和PHP配置的依赖注入容器 <http://php-di.org/>
   - (<http://pimple.sensiolabs.org/)[Pimple>]: 一个小的依赖注入容器
   - (<https://github.com/symfony/dependency-injection)[Symfony> DI]: 一个依赖注入容器组件 (SF2)
-* 图像 Imagery 处理图像的库
+ 
+### 图像 Imagery 处理图像的库
   - (<https://github.com/thephpleague/color-extractor)[Color> Extractor]: 一个从图像中提取颜色的库
   - (<https://github.com/Sybio/GifCreator)[GIF> Creator]: 一个通过多张图片创建GIF动画的库
   - (<https://github.com/Sybio/GifFrameExtractor)[GIF> Frame Extractor]: 一个提取GIF动画帧信息的库
@@ -2871,7 +2862,8 @@ A fast shared memory user data cache for PHP
   - [Intervention Image](https://github.com/Intervention/image):PHP Image Manipulation <http://image.intervention.io>
   - [PHP Image Workshop](https://github.com/Sybio/ImageWorkshop): 另一个图像处理库
   - [Glide](https://github.com/thephpleague/glide):Wonderfully easy on-demand image manipulation library with an HTTP based API. <http://glide.thephpleague.com>
-* 测试 Testing 测试代码和生成测试数据的库=
+ 
+### 测试 Testing 测试代码和生成测试数据的库=
   - (<https://github.com/Codeception/AspectMock)[AspectMock>]: 一个PHPUnit/Codeception的模拟框架。
   - [Atoum](https://github.com/atoum/atoum): 一个简单的测试库
   - (<https://github.com/Codeception/Codeception)[Codeception>]: 一个全栈测试框架
@@ -2917,8 +2909,9 @@ open http://127.0.0.1:8000
 * [Travis CI](https://travis-ci.org/): 一个持续集成平台
 * [Wercker](http://www.wercker.com/): 一个持续集成平台
 
-## 文档生成
+## 文档
 
+* [psr](./psr.md)
 * [APIGen](https://github.com/apigen/apigen): 另一个API文档生成器
 * [daux.io](https://github.com/justinwalsh/daux.io): 一个使用Markdown文件的文档生成器
 * [PHP Documentor 2](https://github.com/phpDocumentor/phpDocumentor2): 一个API文档生成器
@@ -2926,9 +2919,10 @@ open http://127.0.0.1:8000
 * [Sami](https://github.com/FriendsOfPHP/Sami): 一个API文档生成器
 * [swagger-php](https://github.com/zircote/swagger-php):A php swagger annotation and parsing library <http://zircote.com/swagger-php/>
 
-## 安全
+## 安全 Security
 
-* 安全 Security 生成安全的随机数，加密数据，扫描漏洞的库
+ 
+### 加密数据
   - (<https://paragonie.com/project/halite)[Halite>]: 一个简单的使用[libsodium](https://github.com/jedisct1/libsodium)的加密库
   - (<https://github.com/ezyang/htmlpurifier)[HTML> Purifier]: 一个兼容标准的HTML过滤器
   - (<https://github.com/psecio/iniscan)[IniScan>]: 一个扫描PHP INI文件安全的库
@@ -2945,7 +2939,8 @@ open http://127.0.0.1:8000
   - [Zed](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project): 一个集成的web应用渗透测试工具
   - [security-checker](https://github.com/sensiolabs/security-checker):PHP frontend for security.sensiolabs.org <https://security.sensiolabs.org>
   - [phpseclib](https://github.com/phpseclib/phpseclib):PHP Secure Communications Library <http://phpseclib.sourceforge.net>
-* 密码 Passwords 处理和存储密码的库和工具
+ 
+### 密码 Passwords
   - (<https://github.com/timoh6/GenPhrase)[GenPhrase>]: 一个随机生成安全密码哈希的库
   - (<https://github.com/ircmaxell/password_compat)[Password> Compat]: 一个新的PHP5.5密码函数的兼容库
   - (<https://github.com/ircmaxell/password-policy)[Password> Policy]:  一个PHP和JavaScript的密码策略库
@@ -2994,7 +2989,9 @@ open http://127.0.0.1:8000
   - [PHPStan](https://github.com/phpstan/phpstan):PHP Static Analysis Tool - discover bugs in your code without running it! https://phpstan.org/
     + `composer require --dev phpstan/phpstan`
     + `vendor/bin/phpstan analyse src tests`
-* Architectural 相关的设计模式库，组织代码编程的方法和途径
+
+### Architectural 相关的设计模式库，组织代码编程的方法和途径
+
   - (<https://github.com/igorw/compose)[Compose>]: 一个功能组合库
   - (<https://github.com/domnikl/DesignPatternsPHP)[Design> Patterns PHP]: 一个使用PHP实现的设计模式存储库
   - (<http://yohan.giarel.li/Finite/)[Finite>]: 一个简单的PHP有限状态机
@@ -3023,14 +3020,15 @@ open http://127.0.0.1:8000
   - [XHProf](https://github.com/phacility/xhprof): 一个最初由Facebook开发的分析工具
   - [Z-Ray](http://www.zend.com/en/products/server/z-ray): 一个调试和配置Zend服务器的工具
   - [rdebug](https://github.com/didi/rdebug):Rdebug — Real Debugger
-* 构建工具 Build Tools 项目构建和自动化工具
+ 
+### 构建工具 Build Tools 项目构建和自动化工具
   - (<https://github.com/CHH/bob)[Bob>]: 一个简单的项目自动化工具
   - (<https://github.com/box-project/box2)[Box>]: 一个构建PHAR文件的工具
   - (<https://github.com/jonathantorres/construct)[Construct>]: 一个PHP项目的生成器
   - (<https://github.com/jaz303/phake)[Phake>]: 一个PHP克隆库
   - [Phing](https://github.com/phingofficial/phing) PHing Is Not GNU make; it's a PHP project build system or build tool based on Apache Ant. <https://www.phing.info>
-		* 
-* 任务运行器 Task Runners 自动运行任务的库
+ 
+### 任务运行器 Task Runners 自动运行任务的库
   - [Bldr](http://bldr.io/): 一个构建在Symfony组件上的PHP任务运行器
   - [Jobby](https://github.com/jobbyphp/jobby): 一个没有修改crontab的PHP定时任务管理器
   - [Robo](https://github.com/consolidation/Robo):Modern task runner for PHP <http://robo.li> 一个面向对象配置的PHP任务运行器
@@ -3073,7 +3071,8 @@ open http://127.0.0.1:8000
   - [Workerman](https://github.com/walkor/Workerman): 一个事件驱动的不阻塞的I/O库
     + [phpsocket.io](https://github.com/walkor/phpsocket.io):A server side alternative implementation of socket.io in PHP based on workerman.
   - [Ohsce](https://github.com/OpenIBC/Ohsce):PHP HI-REL SOCKET TCP/UDP/ICMP/Serial .高可靠性PHP通信&控制框架SOCKET-TCP/UDP/ICMP/硬件Serial-RS232/RS422/RS485 AND MORE! <http://www.ohsce.org>
-* 日志 Logging 生成和处理日志文件的库
+ 
+### 日志 Logging 生成和处理日志文件的库
   - [Analog](https://github.com/jbroadway/analog): 一个基于闭包的微型日志包
   - [KLogger](https://github.com/katzgrau/KLogger): 一个易用的兼容PSR-3的日志类
   - [Monolog](https://github.com/Seldaek/monolog): Sends your logs to files, sockets, inboxes, databases and various web services <https://seldaek.github.io/monolog/>
@@ -3235,6 +3234,9 @@ open http://127.0.0.1:8000
   - [cache](https://github.com/symfony/cache):The Cache component provides an extended PSR-6 implementation for adding cache to your applications. <https://symfony.com/cache>
   - [OpCacheGUI](https://github.com/PeeHaa/OpCacheGUI):GUI for PHP's OpCache
   - [phpfastcache](https://github.com/PHPSocialNetwork/phpfastcache):A PHP high-performance backend cache system. PhpFastCache is intended for use in speeding up dynamic web applications by alleviating database load. Well implemented, PhpFastCache can drops the database load to almost nothing, yielding faster page load times for users, better resource utilization. It is simple yet powerful. <https://www.phpfastcache.com>
+	* [Yac](https://github.com/laruence/yac)A fast shared memory user data cache for PHP
+		* [yaconf](https://github.com/laruence/yaconf):A PHP Persistent Configurations Container
+		  - 主要目标是简化读取项目配置文件,使配置文件和项目代码分离，增强了配置文件的可读性和可维护性
 * 数据结构和存储 Data Structure and Storage 实现数据结构和存储技术的库
   - (<https://github.com/morrisonlevi/Ardent)[Ardent>]: 一个数据结构库
   - (<https://github.com/cakephp/collection)[Cake> Collection]: 一个简单的集合库 (CP)
@@ -3320,7 +3322,7 @@ open http://127.0.0.1:8000
   - [SuperClosure](https://github.com/jeremeamia/super_closure): 一个允许闭包序列化的库
   - [Underscore](http://anahkiasen.github.io/underscore-php/): 一个Undersccore JS库的PHP实现
   - [Whoops](https://github.com/filp/whoops):PHP errors for cool kids <http://filp.github.io/whoops/>
-
+ 
 ## RPC
 
 * [Hprose-PHP](https://github.com/hprose/hprose-php)preact is a cross-language RPC
@@ -3426,7 +3428,7 @@ open http://127.0.0.1:8000
 * https
   - [ca-bundle](https://github.com/composer/ca-bundle):Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.
 
-## 播客 PHP Podcasts
+## 播客 Podcasts
 
 * [PHP Town Hall](https://phptownhall.com/): 一个随意的Ben Edmunds和Phil Sturgeon的PHP播客
 * [PHP Roundtable](https://www.phproundtable.com/): PHP Roundtable是一个讨论PHP开发者关心话题的临时聚会
@@ -3500,9 +3502,11 @@ open http://127.0.0.1:8000
 
 ## utilities
 
-* [nette/utils](https://github.com/nette/utils):🛠 Lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc. <https://doc.nette.org/utilspw>
+* [utils](https://github.com/nette/utils):🛠 Lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc. <https://doc.nette.org/utilspw>
 
-## coding standard
+## 代码规范
+
+### coding standard
 
 * [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard):[READ-ONLY] Easiest way to start using PHP CS Fixer and PHP_CodeSniffer with 0-knowledge
 

@@ -441,13 +441,13 @@ public class DemoClass_2 {
 
 ## 依赖反转原则
 
-* 控制反转（IOC）Inversion Of Control
-  - “控制”指的是对程序执行流程的控制
-  - “反转”指的是在没有使用框架之前，程序员自己控制整个程序的执行,在使用框架之后，整个程序的执行流程可以通过框架来控制。流程的控制权从程序员“反转”到了框架。
 * 依赖注入（DI）Dependency Injection:不通过 new() 的方式在类内部创建依赖类对象，而是将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递（或注入）给类使用。
   - 提高了代码的扩展性:可以灵活地替换依赖的类
   - 依赖注入框架（DI Framework）:只需要通过依赖注入框架提供的扩展点，简单配置一下所有需要创建的类对象、类与类之间的依赖关系，就可以实现由框架来自动创建对象、管理对象的生命周期、依赖注入等事情
     + Google Guice、Java Spring、Pico Container、Butterfly Container 等
+* 控制反转（IOC）Inversion Of Control
+  - “控制”指的是对程序执行流程的控制
+  - “反转”指的是在没有使用框架之前，程序员自己控制整个程序的执行,在使用框架之后，整个程序的执行流程可以通过框架来控制。流程的控制权从程序员“反转”到了框架。
 * 依赖反转原则（DIP）Dependency Inversion Principle
   - High-level modules shouldn’t depend on low-level modules. Both modules should depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.
   - 在调用链上，调用者属于高层，被调用者属于低层。
@@ -488,6 +488,11 @@ MessageSender messageSender = new SmsSender();
 Notification notification = new Notification(messageSender);
 notification.sendMessage("13918942177", "短信验证码：2346");
 ```
+
+### 容器
+
+* 帮助更方便地实现依赖注入的工具，但是他们通常被误用来实现反模式设计 Service Location 。
+* 把一个依赖注入容器作为 Service Locator 注入进类中隐式地建立了对于容器的依赖，而不是真正需要替换的依赖，而且还会让你的代码更不透明，最终变得更难测试。
 
 ## 设计
 

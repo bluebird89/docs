@@ -146,6 +146,7 @@ Warning: "continue" targeting switch is equivalent to
 
 ## [bundles](http://knpbundles.com/)
 
+* [FrameworkBundle](https://github.com/symfony/framework-bundle)The FrameworkBundle defines the main framework configuration, from sessions and translations to forms, validation, routing and more.
 * [XhprofBundle](https://github.com/jonaswouters/XhprofBundle):XHProf bundle for Symfony 2
 * [maker-bundle](https://github.com/symfony/maker-bundle):Symfony Maker Bundle <https://symfony.com/>
 * [security-bundle](<https://github.com/symfony/security-bundle):The> security system is one of the most powerful parts of Symfony and can largely be controlled via its configuration. <https://symfony.com/security-bundle>

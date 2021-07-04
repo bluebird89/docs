@@ -13,6 +13,8 @@
   - 算术运算相对独立
 * Scheme语言的语法规则的第5次修正稿，1998年制定，即Scheme语言的现行标准，目前大多数Scheme语言的实现都将达到或遵循此标准，并且几乎都加入了一些属于自己的扩展特色
 
+## 环境
+
 ## 语法
 
 * 注释
@@ -46,7 +48,7 @@
 (map car '((a . b)(c . d)(e . f)))
 ```
 
-## 数据类型
+### 数据类型
 
 * 简单数据类型
   - 逻辑型(boolean) #t #f
@@ -68,7 +70,13 @@
     + cadr，cdddr等过程是专门对PAIR型数据再复合形成的数据操作的过程，最多可以支持在中间加四位a或d
   - 向量（vector）:一种元素按整数来索引的对象，异源的数据结构，在占用空间上比同样元素的列表要少 `(define v (vector 1 2 3 4 5))`
 
-## 操作符
+#### 过程 Procedure
+
+* 相当于C语言中的函数，不同的是Scheme语言过程是一种数据类型
+* 用lambda来定义过程:`(define add5 (lambda (x) (+ x 5)))` `(add5 11)`
+  - `(define (add6 x) (+ x 6))`
+
+### 操作符
 
 * 类型判断:`(boolean? #t)`
 * 比较:(= 34 34)
@@ -79,13 +87,7 @@
   - `(max 8 89 90 213)`
 * 转换:`(symbol->string 'better)`
 
-## 过程（Procedure）
-
-* 相当于C语言中的函数，不同的是Scheme语言过程是一种数据类型
-* 用lambda来定义过程:`(define add5 (lambda (x) (+ x 5)))` `(add5 11)`
-  - `(define (add6 x) (+ x 6))`
-
-## 控制
+### 控制
 
 * 顺序结构:用begin来将多个form放在一对小括号内，最终形成一个form
 * if结构: (if 测试 过程1 过程2)
@@ -117,11 +119,11 @@
             (loop x y)))))
 ```
 
-## 输入输出
+### 输入输出
 
-* 输入输出中用到了端口的概念，相当于C中的文件指针，也就是Linux中的设备文件
+* 用到端口概念，相当于C中的文件指针，也就是Linux中的设备文件
 * 查看：`(current-input-port)` `(current-output-port)`
-* 判断是否为：`input-port?` `output-port?`
+* 判断是否为空：`input-port?` `output-port?`
 * 打开：`open-input-file`，`open-output-file`  参数是文件名字符串
 * 关闭：`close-input-port`，`close-output-port` 参数是打开的端口
 * 输入

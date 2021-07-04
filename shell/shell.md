@@ -868,6 +868,7 @@ ${#array[@]}
   - &>  重定向输出和错误输出
   - &>> 以附加的形式重定向输出和错误输出
   - < 重定向输入
+	  - cat < 文件名
   - <<  Here文档|here document:一种输入多行字符串的方法,格式分成开始标记（<< token）和结束标记（token）
     + 开始标记是两个小于号 + Here 文档的名称，名称可以随意取，后面必须是一个换行符；
     + 结束标记是单独一行顶格写的 Here 文档名称，如果不是顶格，结束标记不起作用。两者之间就是多行字符串的内容
@@ -1423,6 +1424,7 @@ greeting        # Hello, unknown!
   - 第一条信息是显示在方括号中的后台作业(background job)号(1)
   - 第二条是后台作业的进程ID(2396)
 * `jobs -l`:将进程列表置入后台模式。既可以在子shell中 进行繁重的处理工作，同时也不会让子shell的I/O受制于终端
+	* `fg` 命令切换的是【最后启动】的那个
 * 每次bash会生成子shell进程，只有部分父进程的环境被复制到子shell环境中
 * 要想知道是否生成了子shell，借助一个使用了环境变量的命令。`echo $BASH_SUBSHELL` 如果该命令返回0，就表明没有子shell。如果返回 1 或者其他更大的数字，就表明存在子shell。 `( pwd ; echo $BASH_SUBSHELL)`
 * 生成子shell成本不低，而且速度还慢。创建嵌套子shell更是火上浇油
@@ -1634,8 +1636,16 @@ else
 fi
 ```
 
+## terminal
 
-## [bash](http://ftp.gnu.org/gnu/bash/)
+* 模式
+	* 字符模式|无缓冲
+	* 行模式 当前输入的这行先缓冲在本地，只有最终按了【回车键】，才会把这一整行发送出去
+	* 屏模式
+* 回显 `Ctrl + S` 禁用“回显”，然后用 `Ctrl + Q` 启用“回显”
+
+
+### [bash](http://ftp.gnu.org/gnu/bash/)
 
 * 一个Unix Shell，作为Bourne shell的free software替代品，由Brian Fox为GNU项目编写。发布于1989年，在很长一段时间，Linux系统和macOS系统都把Bash作为默认的shell
 * 学习bash原因:当今最强大、可移植性最好的，为所有基于Unix的系统编写高效率脚本的工具之一

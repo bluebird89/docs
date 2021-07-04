@@ -299,7 +299,8 @@ An email <example@example.com> link.
 * [连接标题Github网站](http://github.com)
 * [another one with a title](http://lmgtfy.com/ "Hello, world")
 * 插入超链接 [直播吧](http://www.zhibo8.com)
-* [本地链接](../Tools/Document/Document.md#使用)
+* [本地链接](document.md#Notion)
+	* [文档内部链接](# Mermaid 流程图)
 * `http://www.example.com`
 
 ---
