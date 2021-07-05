@@ -483,7 +483,6 @@
 * 项目管理知识体系指南（PMBOK指南）
 * 华为团队工作法
 * 《管理的尝试》
-* 《OKR工作法：谷歌、领英等顶级公司的高绩效秘籍》
 * Getting Things Done
 * 高绩效教练
 * The Mythical Man-Month 人月神话
@@ -500,6 +499,7 @@
 * 灰犀牛：如何应对大概率危机
 * 暗时间
 
+### 《Peopleware: Productive Projects and Teams》
 ## [clickup](https://app.clickup.com/)
 
 ## 工具

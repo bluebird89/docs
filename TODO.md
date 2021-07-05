@@ -1,11 +1,6 @@
 # TODO
 
-- [x] branch pages:git submodule deinit
-- [x] [HelloDjango - Django博客教程](https://www.zmrenwu.com/courses/hellodjango-blog-tutorial/)
-- [x] [linuxjourney](https://linuxjourney.com)
-- [x] [Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
-- [x] [lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记
-- [x] [go-zero](https://github.com/tal-tech/go-zero)
+* 知识的目标与结构清晰
 
 ## project
 
@@ -19,6 +14,13 @@
 * 《Effective Java》
 * System Design Primer
 * Scheme
+* [aka.ms/ml-beginners](https://aka.ms/ml-beginners "https://aka.ms/ml-beginners")
+- [x] branch pages:git submodule deinit
+- [x] [HelloDjango - Django博客教程](https://www.zmrenwu.com/courses/hellodjango-blog-tutorial/)
+- [x] [linuxjourney](https://linuxjourney.com)
+- [x] [Become-A-Full-Stack-Web-Developer](https://github.com/bmorelli25/Become-A-Full-Stack-Web-Developer):Free resources for learning Full Stack Web Development
+- [x] [lua-nginx-redis](https://github.com/Tinywan/lua-nginx-redis):🌺 Redis、Lua、Nginx、OpenResty笔记
+- [x] [go-zero](https://github.com/tal-tech/go-zero)
 
 ## video 
 
@@ -39,6 +41,9 @@
 
 ## 读书
 
+* How to Design Programm
+* 人件
+* 被讨厌的勇气
 * 静静的顿河
 * 成功的反思
 * 破晓时分
@@ -51,6 +56,23 @@
 * 递归和偶然
 * 写在人生边上
 * 《哲学小史：西方哲学四十讲》
+* The Uses and Abuses of History 历史的运用与滥用
+* 《渺小一生》 柳原汉雅
+* 书店日记
+* 局部：陌生的经验
+* 《政治秩序的起源》 [美]弗朗西斯·福山
+* 《第三帝国的到来》[英]理查德·J.埃文斯
+* 《八月炮火》[美]巴巴拉·塔奇曼
+* 《文化失忆》 [澳]克莱夫·詹姆斯
+* 《扫地出门》 [美]马修·德斯蒙德
+* 《现代艺术150年》[英]威尔·贡培兹
+* 《只是孩子》[美]帕蒂·史密斯
+* 《魔灯》[瑞典]英格玛·伯格曼
+* 《余下只有噪音》[美]亚历克斯·罗斯
+* 《鱼王》[俄罗斯]维克托·阿斯塔菲耶夫
+* 《4321》[美]保罗·奥斯特
+* 《光明共和国》[西]安德烈斯·巴尔瓦
+* 《网内人》陈浩基
 
 ## 课程
 

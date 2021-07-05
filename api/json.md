@@ -8,7 +8,6 @@ function toJson(str){
  return json;
 }
 
-
 function toJson(str){
  var json = (new Function("return " + str))();
  return json;

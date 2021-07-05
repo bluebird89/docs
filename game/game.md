@@ -72,14 +72,13 @@
 * 恶魔之魂 Demon's Souls
 * the  last of us 2
 * uncharted 4
+* 三国志 11
 
 ## Xbox Series X
 
 * 《瘟疫公司》（Plague Inc）
 
 ## 手柄
-
-* Switch pro
 
 - 索尼按键：B Button T Trigger S Stick
   - LB
@@ -92,9 +91,6 @@
   - □  (STOP)象征一张纸，代表菜单或者文档，是粉色 Y
   - O (select)代表决策里的是，红色 A
   - X (cancel)代表决策里的否，蓝色 B
-
-* 八位堂SN30 pro+
-* 盖世小鸡T4
 
 ## Grand Theft Auto
 

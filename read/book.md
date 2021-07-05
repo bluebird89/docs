@@ -65,7 +65,6 @@
 * 《[我编程，我快乐: 程序员职业规划之道](https://www.amazon.cn/gp/product/B00CBBKDGM)》
 * 《[程序员的思维修炼：开发认知潜能的九堂课](https://www.amazon.cn/gp/product/B007VARUIM)》
 * 《[高效程序员的45个习惯：敏捷开发修炼之道(修订版)](https://www.amazon.cn/gp/product/B00OA9L3NU)》
-* 《Peopleware: Productive Projects and Teams》
 * 《Soft Skills: The Software Developer’s Life Manual》
 
 ## 大师访谈
@@ -84,7 +83,7 @@
 * 《[赢得朋友](https://www.amazon.cn/gp/product/B00ANY9KZE)》
 * 《[批判性思维](https://www.amazon.cn/gp/product/B00QPZARMA)》
 * 《[程序员健康指南](https://www.amazon.cn/gp/product/B00N4LZ6RO)》
-* 《[禅与摩托车维修艺术（Zen and the Art of Motorcycle Maintenance）](https://www.amazon.cn/gp/product/B005O4PUFC)》
+* 《[禅与摩托车维修艺术 Zen and the Art of Motorcycle Maintenance](Zen_and_the_Art_of_Motorcycle_Maintenance.md)》
 * 《[关键对话：如何高效能沟通](https://www.amazon.cn/gp/product/B0081M8TZ2)》
 * 《[写作法宝：非虚构写作指南](https://www.amazon.cn/gp/product/B00EY8JUBO)》
 * 《[黑客与画家 : 来自计算机时代的高见](https://www.amazon.cn/gp/product/B00G1ZT2C0)》
@@ -92,8 +91,7 @@
 * 《[如何把事情做到最好：改变全球9800万人的人生指导书](https://www.amazon.cn/gp/product/B00ICWNKT6)》
 * 《编程之美》
 * 《刻意练习:如何从新手到大师》
-* [未来世界的幸存者](http://survivor.ruanyifeng.com/)
-* Borland传奇
+* Borland 传奇
 * 《自私的基因》Richard Dawkins
 * 全栈应用开发：精益实践
 * 奈飞文化手册
@@ -110,7 +108,7 @@
 * 人类简史
 * Fermat’s Enigma
 * X的奇幻之旅
-* 《伊卡洛斯之陨》——彼得·勃鲁盖尔
+* 《伊卡洛斯之陨》 彼得·勃鲁盖尔
 * 奇点临近 雷·库兹韦尔
 * 《失控：机器、社会与经济的新生物学》 Kevin Kelly
 * 《翻译例句词典》 W.Brian Arthur
@@ -120,7 +118,6 @@
 * Evolutionary Architecture
 * Lean manufacturing principles
 * Fault Tolerance Patterns
-* Continuous Delivery
 
 ## 玄幻
 
@@ -130,7 +127,7 @@
 
 ## 沟通
 
-《[洞察：精确观察和有效沟通的艺术](https://book.douban.com/subject/30047160/)》
+* 《[洞察：精确观察和有效沟通的艺术](https://book.douban.com/subject/30047160/)》
 
 ## 杂项
 
@@ -144,7 +141,7 @@
 
 ## 科技
 
-*《斯通纳》
+* 《斯通纳》
 * 《安静的美国人》
 * 伯林传
 

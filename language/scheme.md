@@ -1,7 +1,10 @@
-# [scheme](https://schemers.org/)
+# [scheme](http://www.scheme-reports.org/)
 
-* 诞生于1975年的MIT,作为Lisp 变体，Scheme 是一门非常简洁的计算语言，使用它的编程人员可以摆脱语言本身的复杂性，把注意力集中到更重要的问题上，从而使语言真正成为解决问题的工具
-* 在国外的计算机教育领域内却是有着广泛应用的，有很多人学的第一门计算机语言就是Scheme语言
+* 一种函数式编程语言，是Lisp的两种主要方言之一（另一种为Common Lisp）,诞生于1975年的MIT。
+* 不同于Common Lisp，Scheme遵循极简主义哲学，以一个小型语言核心作为标准，加上各种强力语言工具（语法糖）来扩展语言本身
+* 不同实现之间的差异成为了它的一个劣势
+* 哲学：设计计算机语言不应该进行功能的堆砌，而应该尽可能减少弱点和限制，使剩下的功能显得必要。
+* 第一个使用静态作用域的Lisp方言，也是第一个引入“干净宏”和第一类续延的编程语言。 
 * 特色
   - 词法定界（Lexical Scoping）
   - 动态类型（Dynamic Typing）
@@ -13,7 +16,55 @@
   - 算术运算相对独立
 * Scheme语言的语法规则的第5次修正稿，1998年制定，即Scheme语言的现行标准，目前大多数Scheme语言的实现都将达到或遵循此标准，并且几乎都加入了一些属于自己的扩展特色
 
-## 环境
+## 实现
+
+* [MIT/GNU Scheme](http://www.gnu.org/software/mit-scheme/) is available for Intel-architecture (x86) machines running GNU/Linux, FreeBSD, IBM OS/2 or Microsoft Windows 9x/ME/NT/2000/XP. 
+	* MIT为SICP（计算机程序的构造与解释）课程开发的Scheme环境。
+	* 基本上就是一个精简的Emacs编辑器加上Scheme语言解释器，所以对Emacs不熟悉的人用起来比 较困难。
+	* [Scheme](https://groups.csail.mit.edu/mac/projects/scheme/)
+* [Guile](https://www.gnu.org/software/guile/):an implementation of the Scheme programming language, supporting the Revised5 and most of the Revised6 language reports, as well as many SRFIs. It also comes with a library of modules that offer additional features, like an HTTP server and client, XML parsing, and object-oriented programming.
+	* [GNU Guile 3.0.7 Reference Manual](https://www.gnu.org/software/guile/manual/)
+* [ChezScheme](https://github.com/cisco/ChezScheme)
+	- `sudo apt install uuid-dev ncurses-dev`
+* [racket](https://racket-lang.org/)
+* [GNU CLisp](http://clisp.cons.org/) 一个Common Lisp的解释器，不带IDE。Common Lisp也是Lisp语系的一大方言，很多人认为Common Lisp才是Lisp的“正统”。
+
+```sh
+# Guile
+sudo apt install gulie-3.0
+
+## mit-scheme
+sudo apt install mit-scheme
+# Open an interactive shell (REPL):
+scheme
+## 编译源码
+`(cf "add")`
+## 运行编译好的程序
+`(load "add")`
+
+# Run a scheme program (with no REPL output):
+scheme --quiet < script.scm
+
+# Load a scheme program into the REPL:
+scheme --load script.scm
+
+# Load scheme expressions into the REPL:
+scheme --eval "(define foo 'x)"
+
+# Open the REPL in quiet mode:
+scheme --quiet
+
+wget https://mirror.racket-lang.org/installers/7.3/racket-7.3-x86_64-linux.sh
+bash racket-7.3-x86_64-linux.sh
+
+racket
+```
+
+## 开发环境
+
+* vscode
+	* 安装 vscode-scheme  Code Runner
+	* settings.json->code-runner.executorMapByFileExtension ->".scm": "scheme <"
 
 ## 语法
 
@@ -134,13 +185,13 @@
 
 ## 工具
 
-* IDE
-  * Guile
-  * [cisco / ChezScheme](https://github.com/cisco/ChezScheme)
-    - `sudo apt install uuid-dev ncurses-dev`
-  * [racket](https://racket-lang.org/)
 
-## reference
+## 图书
 
 * [The Scheme Programming Language](https://www.scheme.com/tspl4/)
-* [Scheme 语言概要](https://www.ibm.com/developerworks/cn/linux/l-schm/index1.html)
+* The Little Schemer
+* The Seasoned Schemer
+
+## 参考
+
+* [Schemers.org](http://www.schemers.org) is a collection of resources for the Scheme programming language.

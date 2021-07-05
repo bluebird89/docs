@@ -16,6 +16,88 @@
 青苔避日葵争日，同领春风各性情.
 ```
 
+## 登高
+
+## 满江红 岳飞
+
+```
+怒发冲冠，凭栏处、潇潇雨歇。
+抬望眼、仰天长啸，壮怀激烈。
+三十功名尘与土，八千里路云和月。
+莫等闲、白了少年头，空悲切。
+靖康耻，犹未雪；臣子恨，何时灭！
+驾长车踏破、贺兰山缺。
+壮志饥餐胡虏肉，笑谈渴饮匈奴血。
+待从头、收拾旧山河，朝天阙。
+```
+
+## 《我是一个任性的孩子》 顾城
+
+> 我是一个任性的孩子
+> 我想擦去一切不幸
+> 我想在大地上
+> 画满窗子
+> 让所有习惯黑暗的眼睛都习惯光明
+> 记得当时年纪小
+> 你爱谈天我爱笑
+> 有一回并肩坐在桃树下
+> 风在树梢鸟在叫
+> 不知怎么睡着了
+> 梦里花落知多少
+
+## 《致橡树》舒婷 
+
+> 我如果爱你，绝不像攀援的凌霄花，借你的高枝炫耀自己；
+> 我如果爱你，绝不学痴情的鸟儿，为绿荫重复单调的歌曲；
+> 也不止像泉源，常年送来清凉的慰藉；
+> 也不止像险峰，增加你的高度，衬托你的威仪。
+> 甚至日光，甚至春雨。
+> 不，这些都还不够！我必须是你近旁的一株木棉，作为树的形象和你站在一起。
+> 根，紧握在地下；叶，相触在云里。
+> 每一阵风过，我们都互相致意，但没有人，听懂我们的言语。
+> 你有你的铜枝铁干，像刀，像剑，也像戟；
+> 我有我红硕的花朵，像沉重的叹息，又像英勇的火炬。
+> 我们分担寒潮、风雷、霹雳；
+> 我们共享雾霭、流岚、虹霓。
+> 仿佛永远分离，却又终身相依。
+> 这才是伟大的爱情，坚贞就在这里：
+> 爱，不仅爱你伟岸的身躯，也爱你坚持的位置，足下的土地。
+
+## 《面朝大海，春暖花开》
+
+> 从明天起，做一个幸福的人
+> 喂马，劈柴，周游世界
+> 从明天起，关心粮食和蔬菜
+> 我有一所房子，面朝大海，春暖花开
+> 从明天起，和每一个亲人通信
+> 告诉他们我的幸福
+> 那幸福的闪电告诉我的
+> 我将告诉每一个人
+> 给每一条河每一座山取一个温暖的名字
+> 陌生人，我也为你祝福
+> 愿你有一个灿烂的前程
+> 愿你有情人终成眷属
+> 愿你在尘世获得幸福
+> 我也愿面朝大海，春暖花开
+
+## 《我曾经七次鄙视自己的灵魂 》 卡里·纪伯伦
+
+> 第一次，当它本可进取时，却故作谦卑
+> 第二次，当它在空虚时，用爱欲来填充
+> 第三次，在困难和容易之间，它选择了容易
+> 第四次，它犯了错，却借由别人也会犯错来宽慰自己
+> 第五次，它自由软弱，却把它认为是生命的坚韧
+> 第六次，当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副；
+> 第七次，它侧身于生活的污泥中，虽不甘心，却又畏首畏尾。
+> Seven times I have despised my soul:
+> The first time when I saw her being meek that she might attain height.
+> The second time when I saw her limping before the crippled.
+> The third time when she was given to choose between the hard and the easy, and she chose the easy.
+> The fourth time when she committed a wrong, and comforted herself that others also commit wrong.
+> The fifth time when she forbode for weakness, and attributed her patience to strength.
+> The sixth time when she despised the ugliness of a face, and knew not that it was one of her own masks.
+> And the seventh time when she sang a song of praise, and deemed it a virtue.
+
 ## 《沉重的时刻》
 
 ```

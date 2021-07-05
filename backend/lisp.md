@@ -1,5 +1,7 @@
 # [Lisp](https://common-lisp.net/)
 
+* 不仅可以用Lisp编程，还可以对Lisp编程
+
 ```sh
 sudo dnf|apt|port install gcl
 brew install clisp
@@ -22,7 +24,6 @@ clisp
 ## 参考
 
 * [官网](http://lisp-lang.org/)
-* [paulgraham](http://www.paulgraham.com/lisp.html)
 * [mal](https://github.com/kanaka/mal):mal - Make a Lisp
 * [Quickdocs](http://quickdocs.org)
 * [Practical Common Lisp](http://www.gigamonkeys.com/book/)

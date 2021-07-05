@@ -180,8 +180,8 @@ With Scrum, a product is built in a series of iterations called sprints that bre
 Megan Cook, Group Product Manager, Atlassian
 ```
 
-![Sprints](../_staic/sprint.jpg "Optional title")
-![Alt text](../_static/standup_meeting_png "Optional title")
+![Sprints](../_static/sprint.jpg "Optional title")
+![Standup Meeting](../_static/standup_meeting.png "Optional title")
 
 ## 组织架构设计
 

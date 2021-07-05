@@ -375,7 +375,7 @@
 ## 面试
 
 * 在介绍自己实习时候用过XGBoost预测股票涨跌的过程中，就会由浅入深依次考察下列问题：
-  - GBDT的原理（知识）
+  - GBDT 原理（知识）
   - 决策树节点分裂时是如何选择特征的？（知识）
   - 写出Gini Index和Information Gain的公式并举例说明（知识）
   - 分类树和回归树的区别是什么？（知识）
@@ -402,6 +402,7 @@
 
 ## 教程
 
+* [ml-beginners](https://github.com/microsoft/ML-For-Beginners) 12 weeks, 24 lessons, classic Machine Learning for all <https://aka.ms/ml-beginners>
 * [machine-learning-specialization](https://github.com/learnml/machine-learning-specialization)
 * [EasyML](https://github.com/ICT-BDA/EasyML):Easy Machine Learning is a general-purpose dataflow-based system for easing the process of applying machine learning algorithms to real world tasks.
 * [kubeflow](https://github.com/kubeflow/kubeflow):Machine Learning Toolkit for Kubernetes

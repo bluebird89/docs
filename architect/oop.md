@@ -32,22 +32,6 @@
 * 定义职责
 * 建立秩序
 
-## Plain Old Java Object POJO
-
-* 培养面向对象的思维的核心就是站在问题领域看用纯类来表达和解决问题
-
-## 对象
-
-* 单个实物的抽象
-* 一个容器，封装了属性（property）和方法（method）
-  - 属性是对象的状态
-  - 方法是对象的行为（完成某种任务）
-* 数据与行为应该封装在一起：在分辨对象职责的时候,首要需判断该职责需要对哪些数据进行操作,进而就可以将该职责分配给这些数据的拥有者
-* 对象通过类来描绘
-* 每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务
-* 对象可以复用，通过继承机制还可以定制
-* 将对象的方法视为向对象发消息
-
 ## 类 class
 
 * "类”就是对象的模板，对象就是“类”的实例
@@ -106,6 +90,18 @@
   - 屏蔽子类的差异性，针对共性/接口编程
   - 消除类型之间的耦合关系
   - 提高代码可扩展性和复用性
+
+## 对象
+
+* 单个实物的抽象
+* 一个容器，封装了属性（property）和方法（method）
+  - 属性是对象的状态
+  - 方法是对象的行为（完成某种任务）
+* 数据与行为应该封装在一起：在分辨对象职责的时候,首要需判断该职责需要对哪些数据进行操作,进而就可以将该职责分配给这些数据的拥有者
+* 对象通过类来描绘
+* 每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务
+* 对象可以复用，通过继承机制还可以定制
+* 将对象的方法视为向对象发消息
 
 ## OOA vs OOP
 
@@ -336,7 +332,9 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
   - 上下层系统之间的调用倾向于通过同步接口，同层之间的调用倾向于异步消息调用。
 * 将类组装起来并提供执行入口。
 
-## 单一职责原则 SRP Single Responsibility Principle
+## SOLID
+
+### 单一职责原则 SRP Single Responsibility Principle
 
 * 概念：A class or module should have a single reponsibility
 * 不要设计大而全的类，要设计粒度小、功能单一的类
@@ -349,7 +347,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
   - 比较难给类起一个合适名字，很难用一个业务名词概括，或者只能用一些笼统的 Manager、Context 之类的词语来命名，这就说明类的职责定义得可能不够清晰；
   - 类中大量的方法都是集中操作类中的某几个属性，比如，在 UserInfo 例子中，如果一半的方法都是在操作 address 信息，那就可以考虑将这几个属性和对应的方法拆分出来。
 
-## 开闭原则 OCP Open Closed Principle
+### 开闭原则 OCP Open Closed Principle
 
 * software entities (modules, classes, functions, etc.) should be open for extension , but closed for modification。
 * 只要它没有破坏原有的代码的正常运行，没有破坏原有的单元测试
@@ -358,7 +356,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
   - 可变部分封装起来，隔离变化，提供抽象化的不可变接口，给上层系统使用
 * 需要在扩展性和可读性之间做权衡
 
-## 里式替换原则 LSP Liskov Substitution Principle
+### 里式替换原则 LSP Liskov Substitution Principle
 
 * If S is a subtype of T, then objects of type T may be replaced with objects of type S, without breaking the program。
 * 子类对象（object of subtype/derived class）能够替换程序（program）中父类对象（object of base/parent class）出现的任何地方，并且保证原来程序的逻辑行为（behavior）不变及正确性不被破坏。
@@ -371,7 +369,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
     + 对输入、输出、异常的约定
     + 甚至包括注释中所罗列的任何特殊说明
 
-## 接口隔离原则 ISP Interface Segregation Principle
+### 接口隔离原则 ISP Interface Segregation Principle
 
 * Clients should not be forced to depend upon interfaces that they do not use。
 * 接口概念
@@ -385,7 +383,7 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
     + 一方面更侧重于接口的设计
     + 另一方面它的思考角度也是不同的。接口隔离原则提供了一种判断接口的职责是否单一的标准：通过调用者如何使用接口来间接地判定。如果调用者只使用部分接口或接口的部分功能，那接口的设计就不够职责单一。
 
-## 迪米特法则 LOD Law of Demeter
+### 迪米特法则 LOD Law of Demeter
 
 * Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.
 * 不该有直接依赖关系的类之间，不要有依赖；有依赖关系的类之间，尽量只依赖必要的接口（也就是定义中的“有限知识”）
@@ -439,7 +437,7 @@ public class DemoClass_2 {
 }
 ```
 
-## 依赖反转原则
+## 依赖注入
 
 * 依赖注入（DI）Dependency Injection:不通过 new() 的方式在类内部创建依赖类对象，而是将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递（或注入）给类使用。
   - 提高了代码的扩展性:可以灵活地替换依赖的类
@@ -494,12 +492,9 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 * 帮助更方便地实现依赖注入的工具，但是他们通常被误用来实现反模式设计 Service Location 。
 * 把一个依赖注入容器作为 Service Locator 注入进类中隐式地建立了对于容器的依赖，而不是真正需要替换的依赖，而且还会让你的代码更不透明，最终变得更难测试。
 
-## 设计
+## 原则
 
-* 在白板前研讨。通过UML简单表示设计的意图和想法就可以了。一些重要的设计可以拍照存档
-* 但不需要有一个重量级的过程专门设计，然后编码.因为在项目的任何一个阶段，我们对需求的理解都是不完整的，所以要强调迭代
-
-## KISS Keep It Simple and Stupid
+### KISS Keep It Simple and Stupid
 
 * 考虑逻辑复杂度、实现难度、代码的可读性
 * 工具类的功能都比较通用和全面，所以，在代码实现上，需要考虑和处理更多的细节，执行效率就会有所影响
@@ -509,11 +504,11 @@ notification.sendMessage("13918942177", "短信验证码：2346");
   - 不要重复造轮子，要善于使用已经有的工具类库。经验证明，自己去实现这些类库，出 bug 的概率会更高，维护的成本也比较高。
   - 不要过度优化。不要过度使用一些奇技淫巧（比如，位运算代替算术运算、复杂的条件语句代替 if-else、使用一些过于底层的函数等）来优化代码，牺牲代码的可读性。
 
-## YAGNI You Ain’t Gonna Need It
+### YAGNI You Ain’t Gonna Need It
 
 * 需不需要做的问题
 
-## DRY Don’t Repeat Yourself
+### DRY Don’t Repeat Yourself
 
 * 逻辑重复的应该合并
 * 语义不重复：从代码实现逻辑上看起来是重复的，从功能上来看，两个函数干的是完全不重复的两件事情
@@ -622,6 +617,9 @@ notification.sendMessage("13918942177", "短信验证码：2346");
   - 如果子类复用了超类的行为（实现），却又不愿意支持超类的接口，Refused Bequest的坏味道就会变得浓烈。拒绝继承超类的实现，这一点我们不介意；但如果拒绝继承超类的接口，我们不以为然。不过即使你不愿意继承接口，也不要胡乱修改集成体系，应该运用“替换成代理”来达到目的
   - 为判断自己到底应该选用组合还是继承，一个最简单的办法就是考虑是否需要从新类上溯造型回基础类。若必须上溯，就需要继承。但如果不需要上溯造型，就应提醒自己防止继承的滥用。但只要记住经常问自己“我真的需要上溯造型吗”，对于组合还是继承的选择就不应该是个太大的问题.
 
+## Plain Old Java Object POJO
+
+* 培养面向对象的思维的核心就是站在问题领域看用纯类来表达和解决问题
 ## 图书
 
 * 《Elegant Objects》

@@ -130,7 +130,6 @@ Initial Coin Offering的简称，是一种以出售新的初始数字加密货�
 
 * 交易过程
 * 虚拟货币
-
 * [localbitcoins](https://localbitcoins.com/)
 * [比特币中国](https://www.btcchina.com/)
 * [OKCoin](https://www.okcoin.com/)

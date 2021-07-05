@@ -106,7 +106,7 @@
 * 使用角色来发现正确的故事：人物角色是基于目标群体的第一手知识的虚构人物。他们通常由一个名字和一张照片组成，还包括相关的特征、行为和态度、以及一个目标。目标是人物想要获得的利益，或者人物想要通过使用产品来解决的问题
   - 人物角色的目标可以帮助你发现正确的故事：问问自己，为了达到人物角色的目标，产品应该提供什么样的功能。正如我在“ 从角色到用户故事” 的文章中解释的那样。可以从romanpichler.com/tools/persona-template下载一个方便的模板来描述您的角色
 * 合作创作故事：用户故事旨在作为一种轻量级的技术，而是一个协作工具。故事不应该交给开发团队。相反，他们应该被嵌入到一个对话中：产品负责人（PO）和团队应该一起讨论这些故事。这使您只能捕获最少量的信息，减少开销并加速交付。让团队协作来写故事，这可以是产品backlog梳理过程中的一个环节。如果你不能让开发团队参与用户的故事工作，那么你应该考虑使用另一种更正式的技术来捕获产品功能，例如用例
-* 保持故事简单和简洁：避免混淆和模棱两可的条款，并使用主动语态。专注于重要的东西，而忽略其余的东西 作为<persona>, 我想要<what？> 以便<why？>。
+* 保持故事简单和简洁：避免混淆和模棱两可的条款，并使用主动语态。专注于重要的东西，而忽略其余的东西 `作为<persona>, 我想要<what？> 以便<why？>`
 * 从Epics开始：史诗是一个大而粗略，粗糙的故事。它通常会随着时间的变迁而分解成多个用户故事 – 基于用户对早期原型和产品增量的反馈。你可以把它看作是一个标题和一个更详细的故事的占位符
   - 从史诗故事开始，能够让你在不关注太多产品详细信息的情况下捕获产品的功能。这对于描述新的产品和功能特别有帮助：它可以让您捕捉到粗略的范围，这节省了你了解如何最好地满足用户的需求的时间。
   - 也减少了整合新想法所需的时间和精力。如果在产品Backlog中有很多详细的故事，那么将反馈和对应的条目关联起来往往是非常棘手和耗时的，并且还有导致信息不一致的风险。
@@ -184,15 +184,15 @@
   - Understandable by the user
 * [如何拆分](https://insights.thoughtworks.cn/product-requirement-analysis/)
 * 如何划分优先级
-  - ![moscow](../_stataic/moscow.png "Optional title")
-  - ![private metrics](../_stataic/private_metrics.png "Optional title")
+  - ![moscow](../_static/moscow.png "Optional title")
+  - ![private metrics](../_static/private_metrics.png "Optional title")
   - ![story mapping](../_static/story_mapping.png "Optional title")
 * 估算:相对估算
   - ![estimation](../_static/estimation.png "Optional title")
 * 非功能性需求
-  - ![cross functional requirements](../_staic/cross_functional_requirements.png "Optional title")
+  - ![cross functional requirements](../_static/cross_functional_requirements.png "Optional title")
 * 交付管理
-  - ![Why just in time](../_staic/story_in_time.png "Optional title")
+  - ![Why just in time](../_static/story_in_time.png "Optional title")
   - ![story's lifecycle](../_static/lifecycle__of_story.png "Optional title")
   - ![需求层次](../_static/product_level.png "Optional title")
 * 什么是好的Story,几个反模式
@@ -201,7 +201,7 @@
   - 拆分时，过早考虑性能问题。在性能基本达标、不出现大问题的情况下，提升性能很多情况下也属于用户体验的一部分，可以单独拆出来，左右优化卡片。
   - 拆出一些管理类的卡片。比如管理产品，实际上可能包含很多产品相关的操作，如导入、编辑、同步信息、改变状态、上架、下架等，所以应该根据具体的功能，拆分成更为准确和大小合适的故事卡片
 
-![Alt text](../__static/3c.png "Optional title")
+![Alt text](../_static/3c.png "Optional title")
 
 ## 故事点 Story Point
 

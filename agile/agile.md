@@ -1,19 +1,24 @@
 # 敏捷
 
 * 一种不停尝试、不停调整、不停优化的状态
-* 主张面对面沟通，通过快速迭代的手段，让有价值的软件尽早面向市场，从而适应快速变化的需求
+* 主张:面对面沟通，通过快速迭代手段，让有价值的软件尽早面向市场，从而适应快速变化的需求
 * 产品和业务开发本来就是一个探索的过程，开始时一定是最无知的时刻。项目中的大部分决策也一定是在项目开始的时刻做出的，这将有一个重大的悖论，在最无知的时刻，做出了最重要而且是绝大部分的决策，并把它作为随后执行的依据
-  - 通过迭代应对这一问题，只做初始决策，定大致的方向
-  - 通过市场反馈不断修正对产品的认知，增量的决策和调整
-* 通过迭代将瀑布模型分隔成更小的周期，从而实现迭代.每一次迭代时间可能是2周。每个迭代都能都有交付的工件，如果交付物不能满足市场或客户需求。可以在下一个迭代再一次进行分析、调整和开发，从而响应变化
-* 每一次迭代都包括了需求定义、需求分析、设计、代码实现与测试
-* 采用这种方法，开发工作可以在需求被完整地确定前启动，并在每次迭代中完成系统的一部分功能开发工作，再通过客户的反馈来细化需求，并开始新一轮的迭代
+  - 通过迭代应对问题，只做初始决策，定大致方向
+  - 通过市场反馈不断修正对产品认知，增量的决策和调整
+* 通过迭代将瀑布模型分隔成更小的周期，从而实现迭代.
+	* 每一次迭代时间可能是2周。
+	* 每个迭代都能都有交付的工件，如果交付物不能满足市场或客户需求。
+	* 可以在下一个迭代再一次进行分析、调整和开发，从而响应变化
+	* 每一次迭代包括需求定义、需求分析、设计、代码实现与测试
+	* 采用这种方法，开发工作可以在需求被完整地确定前启动，并在每次迭代中完成系统的一部分功能开发工作，再通过客户的反馈来细化需求，并开始新一轮的迭代
 * 敏捷开发:60% Scrum + 40% XP
-  - XP的一个Sprint的迭代长度大致为1~2周, 而Scrum的迭代长度一般为 2~ 4周
-  - XP在一个迭代中，如果一个User Story还没有实现，则可以考虑用另外的需求将其替换，替换的原则是需求实现的时间量是相等的。
-  - 而Scrum是不允许这样做的，一旦迭代开工会完毕, 任何需求都不允许添加进来，并有Scrum Master严格把关，不允许开发团队受到干扰
-  - XP是务必要遵守优先级别的。但Scrum在这点做得很灵活，可以不按照优先级别来做，Scrum这样处理的理由是：如果优先问题的解决者，由于其它事情耽搁，不能认领任务，那么整个进度就耽误了。 另外一个原因是，如果按优先级排序的User Story #6和#10，虽然#6优先级高，但是如果#6的实现要依赖于#10，则不得不优先做#10.
-  - Scrum非常突出Self-Orgnization,XP注重强有力的工程实践约束。举个通俗理解Scrum的例子，Scrum:指的是英式橄榄球中一股脑争球这一战术或行为。scrum 即为这样一种方式，大家一拥而上，团队是球员，球是产品目标，人员环环相扣，围绕着产品目标进行工作。这里面多少有点“统筹法”的影子，人员深入协作以达到最优化效果
+  - XP 的一个 Sprint 的迭代长度大致为1~2周, 而Scrum的迭代长度一般为 2~ 4周
+  - XP 在一个迭代中，如果一个User Story还没有实现，则可以考虑用另外的需求将其替换，替换的原则是需求实现的时间量是相等的。而 Scrum 是不允许这样做的，一旦迭代开工会完毕, 任何需求都不允许添加进来，并有Scrum Master严格把关，不允许开发团队受到干扰
+  - XP 是务必要遵守优先级别的。但 Scrum 在这点做得很灵活，可以不按照优先级别来做，Scrum这样处理的理由是：
+	  - 如果优先问题的解决者，由于其它事情耽搁，不能认领任务，那么整个进度就耽误了。 
+	  - 如果按优先级排序的User Story `#6`和`#10`，虽然#6优先级高，但是如果#6的实现要依赖于#10，则不得不优先做#10.
+  - Scrum 非常突出 Self-Orgnization, XP 注重强有力的工程实践约束。举个通俗理解例子
+	  - Scrum:指的是英式橄榄球中一股脑争球这一战术或行为。scrum 即为这样一种方式，大家一拥而上，团队是球员，球是产品目标，人员环环相扣，围绕着产品目标进行工作。这里面多少有点“统筹法”的影子，人员深入协作以达到最优化效果
 * 本质是义无反顾的思考产品的价值，以价值为驱动去思考、设计、开发、协作，让结果能给客户、用户产生价值
 
 ```
@@ -58,7 +63,6 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
 
 ![Epics](../_static/agile_arch.jpg "Optional title")
 ![User Stories](../_static/user_story.jpg "Optional title")
-![Initiatives](../_static/initiative.jpg "Optional title")
 
 ## 开发模型演化
 
@@ -93,8 +97,8 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
     + 通过TDD过程，在开发需求之前就细化了需求的细节，对详细设计的结果有提升
     + TDD产出的测试用例，提升编码质量，避免反馈周期长。如果没有测试用例，一个Story很容易被当皮球踢
     + 项目中遗留的测试用例，能避免软件成为打地鼠软件。当增加一个A功能，发现B功能有问题，修复了B功能发现C功能故障了，修复了C功能，发现A功能又故障了
-    + 通过Pipeline，让构建、测试更频繁，因为工具化了，成本更低，出错更少
-    + 通过Pair、CodeReview，让知识流动起来
+    + 通过 Pipeline，让构建、测试更频繁，因为工具化了，成本更低，出错更少
+    + 通过 Pair、CodeReview，让知识流动起来
   - 演进的需求和方案
     + 用户的需求一般都只是一个大方向，具体的价值和实现方式都是不确定的，用户也在不断探索他们的业务。敏捷接纳了原型法的需求分析方法，还提出了Inception来分析更有价值的需求，通过MVP圈定最小开发范围，快速验证方案，这就是演进的需求和方案
     + 确定的需求设计好，不确定的需求就需要演进
@@ -520,7 +524,7 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
 * 每一天，团队中的每一个人都要其他成员保持协调。为了保持同步，会创造基于敏捷实践的沟通机会，这个也是实施敏捷的过程之一
 * Inception的一个产出就是沟通计划(Communication Plan)
 
-![Communication Plan](../_static.10/Inception.png "Optional title")
+![Communication Plan](../_static/10-Inception.png "Optional title")
 
 ## Desk Check
 
@@ -571,31 +575,31 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
   - 演进出一个文档系统
 * 单元测试不能针对方法编写测试，而应根据业务编写测试用例。一个测试方法只能做一件事情，代表一个测试样本和一个业务规则
 
-## 经验
+## 实践
 
-1、清晰的变量名和方法名
-2、能提取成公共组件/方法/类的的绝不复制粘贴
-3、拥抱函数式编程，使用声明式编程（因为可读性强）
-4、写好方法/函数注释，写出每一个参数的描述和数据类型，对可选参数赋默认值
-5、优先使用组合而不是继承
-6、使用智能的编辑器，规避语法错误（因为高效）
-7、不搞特殊化，坚持规范，不偷懒
-8、使用更高层次的抽象，维护更少的状态，尽量提高代码的复用性
+* 凝聚人的力量，紧密协（合）作。包括业务负责人、开发团队、客户、管理者之间的关系，所有这些关系在以前都是造成项目危机的原因之一，那么，在敏捷时代，我们需要这些角色 紧密合作，最大限度的发挥各个角色的力量.
+* 聚焦客户价值，消除浪费（如何聚焦用户价值，即频繁的交付用户可工作的软件，快速收到用户反馈）
 
-1.善于使用逻辑反转，简化代码
-2.多使用接口，可以减少工作量，以及开发粗心的后果
-3.使用代码format工具
-4.写代码多使用注释，以及抱着给别人写代码看的态度
-5.要打log,判断运行时间，多做优化
+### 编码
 
-1:注释。如果你能靠变量名说明原由的，你可以不写，不然请写上注释。
-2:变量方法命名。一个清晰的命名可以让后面的人知道这是来干什么的。
-3:方法行数尽量少，清晰的结构，尽量用获取的方式来赋值变量，那么就不必把获取的代码全揉在一个方法中。
-4:六大原则和设计模式：工厂、策略、代理等用起来会让人感觉很爽，再次来修改代码的时候会比较得心应手。
-5:适当运动。在努力的同时，请保持一个好身体。
-
-1.凝聚人的力量，紧密协（合）作。包括业务负责人、开发团队、客户、管理者之间的关系，所有这些关系在以前都是造成项目危机的原因之一，那么，在敏捷时代，我们需要这些角色 紧密合作，最大限度的发挥各个角色的力量.
-2.聚焦客户价值，消除浪费（如何聚焦用户价值，即频繁的交付用户可工作的软件，快速收到用户反馈）
+* 清晰的变量名和方法名
+* 能提取成公共组件/方法/类的的绝不复制粘贴
+* 拥抱函数式编程，使用声明式编程（因为可读性强）
+* 写好方法/函数注释，写出每一个参数的描述和数据类型，对可选参数赋默认值
+* 优先使用组合而不是继承
+* 使用智能的编辑器，规避语法错误（因为高效）
+* 不搞特殊化，坚持规范，不偷懒
+* 使用更高层次的抽象，维护更少的状态，尽量提高代码的复用性
+* 善于使用逻辑反转，简化代码
+* 多使用接口，可以减少工作量，以及开发粗心的后果
+* 使用代码format工具
+* 写代码多使用注释，以及抱着给别人写代码看的态度
+* 要打log,判断运行时间，多做优化
+* 注释。如果你能靠变量名说明原由的，你可以不写，不然请写上注释。
+* 变量方法命名。一个清晰的命名可以让后面的人知道这是来干什么的。
+* 方法行数尽量少，清晰的结构，尽量用获取的方式来赋值变量，那么就不必把获取的代码全揉在一个方法中。
+* 六大原则和设计模式：工厂、策略、代理等用起来会让人感觉很爽，再次来修改代码的时候会比较得心应手。
+* 适当运动。在努力的同时，请保持一个好身体。
 
 * Upgrade early and upgrade often. The closer you are to a new version of Rails, the easier upgrades will be. This encourages your team to fix bugs in Rails instead of monkey-patching the application or reinventing features that exist upstream.
 * Keep upgrade infrastructure in place. There will always be a new version to upgrade to, so once you’re on a modern version of Rails add a build to run against the master branch. This will catch bugs in Rails and your application early, make upgrades easier, and increase your upstream contributions.
@@ -829,7 +833,7 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
     + 应急储备评估
     + 汲取的经验教训可用于将来的项目
 
-## RAIDS
+### RAIDS
 
 * 目的：在Inception结束之前，将目前所知道的所有不确定因素列出来，和甲方一起澄清。这样可以查漏补缺，控制甲方预期，丑话说在前头
 * 步骤:和客户一起在这四个维度下面列举能够想到的内容项目，写在便签纸上
@@ -984,7 +988,7 @@ Themes are strategic labels that can be applied to initiatives, epics, or storie
   - Every problem has a specific cause, thereby eliminating the root cause
   - From generic to specific problem
 
-![Likelihood Matrix](../_static/likelihood Matrix.jpg "Optional title")
+![Likelihood Matrix](../_static/likelihood_Matrix.jpg "Optional title")
 ![Important & Difficult Plan Matrix](../_static/important_difficult_plan_matrix.jpg "Optional title")  get this priority data as part of your backlog
 ![Ishikawa Diagram(Cause/Effect)](../_static/ishikawa_diagram.jpg "Optional title")
 

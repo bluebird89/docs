@@ -411,7 +411,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 essentially an IDE for automation
 
-## iPhone铃声制作
+## 铃声制作
 
 * 音乐文件用itunes打开
 * getinfo剪辑（长度不变）

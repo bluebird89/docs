@@ -26,13 +26,10 @@ erl --version
 
 ## 使用
 
-spawn：创建一个资源。对于 erlang，这资源是 process；对某个 service，是 service 本身。
-
-send / receive：给资源发指令和接受指令。对于 erlang，这指令是 message，封装成 erlang term，走的是 IPC/RPC；而对某个 http service，指令是 request，封装成 json / msgpack / protobuf，走的是 http / http2。
-
-register / whereis：资源怎么注册，怎么发现。对于 erlang，这是 process 在 name register 的注册和发现；对于某个 service，可以是 Consul / DNS。
-
-self：返回自己的 identity。在 erlang 里，这是 process 找寻自我的方式；在 micro service 的场景下，每个 service 隐含着有自己的 identity。
+* spawn：创建一个资源。对于 erlang，这资源是 process；对某个 service，是 service 本身。
+* send / receive：给资源发指令和接受指令。对于 erlang，这指令是 message，封装成 erlang term，走的是 IPC/RPC；而对某个 http service，指令是 request，封装成 json / msgpack / protobuf，走的是 http / http2。
+* register / whereis：资源怎么注册，怎么发现。对于 erlang，这是 process 在 name register 的注册和发现；对于某个 service，可以是 Consul / DNS。
+* self：返回自己的 identity。在 erlang 里，这是 process 找寻自我的方式；在 micro service 的场景下，每个 service 隐含着有自己的 identity。
 
 ## 参考
 

@@ -4,9 +4,16 @@ The official GitHub mirror of the Chromium source <https://chromium.googlesource
 
 ## 配置
 
-* chrome://net-internals/#hsts
+* `chrome://net-internals/#hsts`
 * 查看内置插件 `chrome://system/`
 * 新版chrome会阻止自定义的域名
+
+### 搜索引擎配置
+
+- 添加
+    + 设置->搜索引擎->添加搜索引擎
+    + 给添加搜索引擎设置关键字 `https://www.douban.com/search?q=%s`
+- 使用：打入搜索引擎关键字+空格键
 
 ## 插件
 
@@ -132,43 +139,24 @@ v       enter visual mode; use p/P to paste-and-go, use y to yank
 V       enter visual line mode
 ```
 
-## [Tampermonkey](https://www.tampermonkey.net/)
+### [Tampermonkey](https://www.tampermonkey.net/)
 
 - [Greasyfork](https://greasyfork.org/zh-CN)
-- <https://openuserjs.org>
-  + [xthexder / Wide Github](https://openuserjs.org/scripts/xthexder/Wide_Github)
   + 豆瓣资源下载大师
   + 计时器掌控者|视频广告跳过|视频广告加速器
   + Bilibili Evolved
   + YAWF - 新浪微博根据关键词、作者、话题、来源等过滤微博，清理版面，以及其他改造功能
   + anti-redirect - 去除各搜索引擎 / 常用网站的重定向
   + 知乎、简书、csdn、实验楼剪切板消毒 - 去除剪贴板小尾巴
+- <https://openuserjs.org>
+  + [Wide Github](https://openuserjs.org/scripts/xthexder/Wide_Github)
 
-## 技巧
+## [Developer Tools](https://developers.google.com/web/tools/chrome-devtools/)
 
-* Ctrl键或Cmd并点链接：打开一个新的标签页而不离开现有的页面
-* Shift键或Cmd并点链接：在一个全新的窗口中打开一个链接
-* ubuntu:d+o:搜索浏览记录
-* 空格键向下滚动一个完整的页面长度 Shift键和空格键：相反操作
-* Ctrl键或Cmd+Shift+T：重新打开你最近关闭的标签
-* Ctrl+Shift+D：打开一堆选项卡并想把这些页面都保存起来
-* 选中词汇右键搜索或者拖动到地址栏
-* 点击链接拖动到书签栏
-* Chrome://restart 重启浏览器
-* chrome://extensions/shortcuts ： 快捷方式
-* 地址栏中输入文件夹路径：当作文件浏览器
-* Ctrl或Cmd+H或在地址栏中键入Chrome://history:打开你的浏览记录
-* 自定义搜索引擎功能:“cs”作为关键字，将chrome://settings设置为URL
-  - gmail.com”或其他缩写作为关键字，以及将“<https://mail.google.com/mail/ca/u/0/#search/%s”设置为URL>
+* [awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
+* [devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol
 
-```
-# 粘贴到地址栏并保存书签，对文本格式化操作
-data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%; font-size: 1.5em; font-family: Arial; }”></style><link rel=”shortcut icon” href=”https://ssl.gstatic.com/docs/documents/images/kix-favicon6.ico”/><body OnLoad=’document.body.focus();’ contenteditable spellcheck=”true” >
-```
-
-## Developer Tools
-
-* console
+### console
   - 直接输入JavaScript代码，按回车后执行
   - console 里 输入:document.designMode = "on"  可以直接修改网页上的内容
   - buffer 5个你查看过的DOM对象，你可以直接在Console中用 $0, $1, $2, $3, $4来访问。
@@ -204,12 +192,14 @@ data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%;
     * console.assert(expression, object) assert一个表达式
       - 如果断言为false，则将一个错误消息写入控制台。
       - 如果断言是true，没有任何反应
-* Sources
+
+### Sources
   - 代码格式化
   - 断点设置
     + DOM设置断点：选中DOM添加
     + break points中：给XHR和Event Listener设置断点
-* Elements
+
+### Elements
   - Elements - 页面dom元素
   - Console - 控制台
   - Sources - 页面静态资源
@@ -220,12 +210,15 @@ data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%;
   - Audits - 审计，自动化测试工具
 * More Tools
   - Animations:慢动作播放动画
-* Network
+
+### Network
   - 添加Thtottle:来模拟一个网络很慢情况
   - Copy => Copy as cURL：获取请求的curl
 * 手机模式
   - 右上角的more：Capture snapshot
-* 常用命令和调试
+
+### 常用命令和调试
+
   - 键入cmd + shift + p将其激活，然后开始在栏中键入要查找的命令或输入"?"号以查看所有可用命令。
     + …: 打开文件
     + :: 前往文件
@@ -308,13 +301,27 @@ console.table(languages);
 console.dir(document);
 ```
 
-## 搜索引擎
+## 技巧
 
-* 快速切换
-  - 添加
-    + 设置->搜索引擎->添加搜索引擎
-    + 给添加搜索引擎设置关键字 `https://www.douban.com/search?q=%s`
-  - 使用搜索栏打入搜索引擎关键字+空格键
+* Ctrl键或Cmd并点链接：打开一个新的标签页而不离开现有的页面
+* Shift键或Cmd并点链接：在一个全新的窗口中打开一个链接
+* ubuntu:d+o:搜索浏览记录
+* 空格键向下滚动一个完整的页面长度 Shift键和空格键：相反操作
+* Ctrl键或Cmd+Shift+T：重新打开你最近关闭的标签
+* Ctrl+Shift+D：打开一堆选项卡并想把这些页面都保存起来
+* 选中词汇右键搜索或者拖动到地址栏
+* 点击链接拖动到书签栏
+* Chrome://restart 重启浏览器
+* chrome://extensions/shortcuts ： 快捷方式
+* 地址栏中输入文件夹路径：当作文件浏览器
+* Ctrl或Cmd+H或在地址栏中键入Chrome://history:打开你的浏览记录
+* 自定义搜索引擎功能:“cs”作为关键字，将chrome://settings设置为URL
+  - gmail.com”或其他缩写作为关键字，以及将“<https://mail.google.com/mail/ca/u/0/#search/%s”设置为URL>
+
+```
+# 粘贴到地址栏并保存书签，对文本格式化操作
+data:text/html;charset=utf-8, <title>Scratchpad</title><style>body {padding: 5%; font-size: 1.5em; font-family: Arial; }”></style><link rel=”shortcut icon” href=”https://ssl.gstatic.com/docs/documents/images/kix-favicon6.ico”/><body OnLoad=’document.body.focus();’ contenteditable spellcheck=”true” >
+```
 
 ## 工具
 
@@ -323,7 +330,3 @@ console.dir(document);
 * [chromedp](https://github.com/chromedp/chromedp):A faster, simpler way to drive browsers supporting the Chrome DevTools Protocol.
 
 ## 参考
-
-* [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)
-* [awesome-chrome-devtools](https://github.com/ChromeDevTools/awesome-chrome-devtools):Awesome tooling and resources in the Chrome DevTools & DevTools Protocol ecosystem
-* [devtools-protocol](https://github.com/ChromeDevTools/devtools-protocol):Chrome DevTools Protocol

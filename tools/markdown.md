@@ -34,12 +34,6 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 # This is an `<h1>` tag
 ## This is an `<h2>` tag
 ###### This is an `<h6>` tag
-
-这是一个一级标题
-============================
-这是一个二级标题
---------------------------------------------------
-### 这是一个三级标题
 ```
 
 **Result:**
@@ -55,25 +49,13 @@ GitHub supports [emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)! :sm
 ## This is an `<h2>` tag
 
 ###### This is an `<h6>` tag
-
-这是一个一级标题
-============================
-
-这是一个二级标题
---------------------------------------------------
-
-### 这是一个三级标题
-
 ---
 
 ## 强调 Emphasis
 
-* Bold:command/control + b
-  - 使用双星号asterisks
-* Italic:command/control + i
-  - 用单星号标注单词中间的斜体来表示
-* Bold and italic
-  - 用三星号将单词或短语的中间部分加粗并以斜体显示
+* Bold 使用双星号 asterisks `command/control + b`
+* Italic 用单星号标注单词中间的斜体来表示 `command/control + i`
+* Bold and italic 用三星号将单词或短语的中间部分加粗并以斜体显示
 * Strikethrough
 * [font-awesome](http://fortawesome.github.io/Font-Awesome/3.2.1/icons/)
 
@@ -286,9 +268,9 @@ Second Term
 ```markdown
 An email <example@example.com> link.
 自动生成连接  <http://www.github.com/>
+`http://www.example.com`
 
 [GitHub](http://github.com)
-`http://www.example.com`
 ```
 
 **Result:**
@@ -298,7 +280,7 @@ An email <example@example.com> link.
 * [链接标题Github网站](http://github.com)
 * [Link with a title](http://lmgtfy.com/ "Hello, world")
 * [Relative links](../TODO.md#Technical)
-* [本地链接](document.md#Notion)
+* [本地仓库外部文档链接](document.md#Notion)
 * [文档内部链接](#Using_emoji): 只用 `#archor_name`,不支持中文，字符不能含空格
 * `http://www.example.com`
 
@@ -469,7 +451,7 @@ one US dollar sign pair for Inline Level.
 
 语法：
 
-```markdown
+```latex
 块级公式： Block level
 $$  x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 

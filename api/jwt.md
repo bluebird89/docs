@@ -35,7 +35,7 @@
 
 ## 场景
 
-* 应对session共享复杂的解决方法，数据都保存在客户端，cookie加密版
+* 应对 session 共享复杂的解决方法，数据都保存在客户端，cookie加密版
 * 授权、鉴权
 * 一个 A 用户想要邀请某用户进入自己的群组 [原来](https://host/group/{group_id}/invite/{invite_user}) => [改后](https://host/group/invite/{token})
 

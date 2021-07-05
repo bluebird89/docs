@@ -15,7 +15,7 @@ The Go programming language <https://golang.org> [中国官网](https://golang.g
   - 语言交互性
 * 版本
   - 1.16
-* PHPer 应当学习 Golang
+* PHPer 应当学习的原因
   - 弱类型的好处就是能提升开发人员的开发效率，加之php有非常强大的array以及对应的数组处理方法，大部分用得到的数组处理函数php本身已经提供，所以开发人员使用起来非常方便，可以用较少的代码实现想要的功能
   - 为了快速开发.设计模式不规范，弱类型与松散的面向对象，强大的数组能力，很多人都是数组一把梭，导致业务逻辑从代码中无法直接知晓数据结构包含一些什么数据，导致项目维护非常困难
   -
@@ -115,7 +115,52 @@ go get -u github.com/go-delve/delve/cmd/dlv
 go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 ```
 
-## 组织
+## 配置
+
+### 代理 proxy
+
+* 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
+* 构建或运行应用时，Go 将会通过 goproxy.cn 获取依赖
+* docker->performence->damon=>+
+* <https://g.widora.cn/>
+* 类库
+  - [goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. <https://goproxy.cn>
+  - [athens](https://github.com/gomods/athens):A Go module datastore and proxy <https://docs.gomods.io>
+  - [goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. <https://goproxy.io>
+  - [snail007 / goproxy](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 <http://snail007.github.io/goproxy>
+
+```sh
+go env -w GOPROXY=https://goproxy.cn,direct # windows
+
+# 七牛云
+export GOPROXY=https://goproxy.cn
+# 阿里
+export GOPROXY=https://mirrors.aliyun.com/goproxy/
+# Go 官方提供的全球代理
+export GOPROXY=https://goproxy.io
+export GOPROXY=https://athens.azurefd.net
+
+echo "export GO111MODULE=on" >> ~/.profile && source ~/.profile
+echo "export GOPROXY=https://goproxy.cn" >> ~/.profile && source ~/.profile
+
+go env -w GOPROXY=https://goproxy.cn,direct # 出现 does not override conflicting OS environment variable
+# 设置不走 proxy 的私有仓库，多个用逗号相隔
+go env -w GOPRIVATE=*.corp.example.com
+
+go env -w GOSUMDB=off # 示Get https://sum.golang.org/lookup/xxxxxx: dial tcp 216.58.200.49:443: i/o timeout
+go env -w GOSUMDB="sum.golang.google.cn"
+```
+
+### 开发环境配置
+
+* GoSublime
+	* 安装gosublime插件
+	* 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
+- [liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
+- [go2go Playground](https://go2goplay.golang.org/):The go2go Playground
+- VS Code 中调试 Go 代码建议使用 Delve `go get -u github.com/go-delve/delve/cmd/dlv`
+  
+## 代码结构
 
 * 源码
   - Go 语言的源码以代码包为基本组织单位的。在文件系统中，这些代码包其实是与目录一一对应的。由于目录可以有子目录，所以代码包也可以有子包
@@ -187,9 +232,9 @@ go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
 go install github.com/labstack/echo
 ```
 
-## 程序实体
+## 语法
 
-* 变量、常量、函数、结构体和接口的统称
+* 变量、常量、函数、结构体和接口
 * 程序实体的名字被统称为标识符。标识符可以是任何 Unicode 编码可以表示的字母字符、数字以及下划线“_”，但是其首字母不能是数字
 * 类型声明
   - 当连续两个或多个函数的已命名形参类型相同时，除最后一个类型以外，其它都可以省略。
@@ -210,7 +255,7 @@ go install github.com/labstack/echo
   - 如果当前代码块中没有声明以此为名的变量，那么程序会沿着代码块的嵌套关系，从直接包含当前代码块的那个代码块开始，一层一层地查找。
   - 一般情况下，程序会一直查到当前代码包代表的代码块。如果仍然找不到，那么 Go 语言的编译器就会报错了
 
-## 常量
+### 常量
 
 * 声明与变量类似，使用 const 关键字
 * 类型可以是字符、字符串、布尔值或数值
@@ -220,20 +265,38 @@ go install github.com/labstack/echo
   - int 可以存放最大64位的整数，根据平台不同有时会更少）
 * iota
 
-## 变量
+### 变量
 
 * 变量逃逸：变量的作用域的改变，从栈逃逸到堆上面
+* type 查看数据类型
 
-## 基本类型|值类型
+#### new vs make
 
-* bool
-* string
-  + \n ：换行符
-  + \r ：回车符
-  + \t ：tab 键
-  + \u 或 \U ：Unicode 字符
-  - \\ ：反斜杠自身
-* int  int8|byte  int16  int32 int64 、int16、int、uint、uintptr uint8 uint16 uint32 uint64
+* new
+  - 一个分配内存的内建函数，但不同于其他语言中同名的new所作的工作，它只是将内存清零，而不是初始化内存
+  - new(T)为一个类型为T的新项目分配了值为零的存储空间并返回其地址，也就是一个类型为*T的值。用Go的术语来说，就是它返回了一个指向新分配的类型为T的零值的指针。
+* make(T, args)
+  - 仅用于创建切片、map和chan（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用
+  - 对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
+
+### 基本类型|值类型
+
+#### bool
+
+#### string
+
++ \n ：换行符
++ \r ：回车符
++ \t ：tab 键
++ \u 或 \U ：Unicode 字符
++ \\ ：反斜杠自身
+- byte（ uint8 别名）: UTF-8 字符串的单个字节的值
+- rune 单个 Unicode 字符
+* `//` 表示一个 Unicode 码点
+
+#### int  
+
+int8|byte  int16  int32 int64 、int16、int、uint、uintptr uint8 uint16 uint32 uint64
   - int8  1   带符号8位整型     -128~127    0
   - uint8   1   无符号8位整型，与 byte 类型等价     0~255   0
   - int16   2   带符号16位整型    -32768~32767    0
@@ -246,18 +309,17 @@ go install github.com/labstack/echo
   - uint    32位或64位     与具体平台相关     与具体平台相关     0
   - uintptr  与对应指针相同     无符号整型，足以存储指针值的未解释位  32位平台下为4字节，64位平台下为8字节   0
   - << >> 左右移位
-* 字符
-  - byte（实际上是 uint8 的别名）: UTF-8 字符串的单个字节的值
-  - rune:单个 Unicode 字符
-* // 表示一个 Unicode 码点
-* float32 float64
-* 复数类型 complex64 complex128
-* 错误类型：error
-* type 查看数据类型
+  
+#### float32|float64
 
-## 复合类型
+#### complex64|complex128
 
-* 指针 pointer
+#### error
+
+### 复合类型
+
+#### 指针 pointer
+
   - 保存了值的内存地址
     + 声明：类型 *T 指向 T 类型值的指针 `var p *int`
     + 零值为 nil
@@ -267,10 +329,14 @@ go install github.com/labstack/echo
   - 选择值或指针作为接收者
     + 方法能够修改其接收者指向的值
     + 避免在每次调用方法时复制该值。若值的类型为大型结构体时，这样做会更加高效
-* 数组 array
+    
+#### 数组 array
+
   * 数组类型 [n]T 表示拥有 n 个 T 类型的值的数组
   - 长度是固定的,数组的长度在声明它的时候就必须给定，并且之后不会再改变。可以说，数组的长度是其类型的一部分
-* 切片 slice
+  
+#### 切片 slice
+
   - 对数组一个连续片段的引用，是一种引用类型
   - 一个结构体,并不存储任何数据，只是描述了底层数组中的一段
     + 长度:所包含的元素个数。len(s)
@@ -297,21 +363,27 @@ go install github.com/labstack/echo
   - for 循环的 range 形式可遍历切片或映射。当使用 for 循环遍历切片时，每次迭代都会返回两个值。第一个值为当前元素的下标，第二个值为该下标所对应元素的一份副本。
     + 可以将下标或值赋予 _ 来忽略它
   - reslice
-* 字典 map
-  - var m map[string]Vertex： key 类型 value 类型
-  - 将键映射到值
-  - 映射的零值为 nil 。nil 映射既没有键，也不能添加键。
-  - 键类型受限
-  - 非原子操作需要加锁， map并发读写需要加锁，map操作不是并发安全的，判断一个操作是否是原子的可以使用 go run race 命令做数据的竞争检测
-* 通道 chan
-  - 不要通过共享内存来通信，应该通过通信来共享内存
-  - 相当于一个先进先出（FIFO）的队列。通道中的各个元素值都是严格地按照发送的顺序排列的，先被发送通道的元素值一定会先被接收。元素值的发送和接收都需要用到操作符 <-
-  - 对于同一个通道，发送操作之间是互斥的，接收操作之间也是互斥的
-  - 发送操作和接收操作中对元素值的处理都是不可分割的
-  - 发送操作在完全完成之前会被阻塞。接收操作也是如此
-  - 缓冲通道:如果通道已满，那么对它的所有发送操作都会被阻塞，直到通道中有元素值被接收走。
-  - 非缓冲通道:无论是发送操作还是接收操作，一开始执行就会被阻塞，直到配对的操作也开始执行，才会继续传递。在用同步的方式传递数据。也就是说，只有收发双方对接上了，数据才会被传递。
-* 结构体 struct
+  
+#### 字典 map
+
+- var m map[string]Vertex： key 类型 value 类型
+- 将键映射到值
+- 映射的零值为 nil 。nil 映射既没有键，也不能添加键。
+- 键类型受限
+- 非原子操作需要加锁， map并发读写需要加锁，map操作不是并发安全的，判断一个操作是否是原子的可以使用 go run race 命令做数据的竞争检测
+  
+#### 通道 chan
+
+- 不要通过共享内存来通信，应该通过通信来共享内存
+- 相当于一个先进先出（FIFO）的队列。通道中的各个元素值都是严格地按照发送的顺序排列的，先被发送通道的元素值一定会先被接收。元素值的发送和接收都需要用到操作符 <-
+- 对于同一个通道，发送操作之间是互斥的，接收操作之间也是互斥的
+- 发送操作和接收操作中对元素值的处理都是不可分割的
+- 发送操作在完全完成之前会被阻塞。接收操作也是如此
+- 缓冲通道:如果通道已满，那么对它的所有发送操作都会被阻塞，直到通道中有元素值被接收走。
+- 非缓冲通道:无论是发送操作还是接收操作，一开始执行就会被阻塞，直到配对的操作也开始执行，才会继续传递。在用同步的方式传递数据。也就是说，只有收发双方对接上了，数据才会被传递。
+ 
+#### 结构体 struct
+
   - 一组字段（field）,字段使用点号来访问
   - 字段可以通过结构体指针来访问,使用隐式间接引用，直接写 p.X 就可以
   - 特点
@@ -333,16 +405,7 @@ var dp = [3][5]int{[5]int{1, 2, 3, 4, 5}, [5]int{4, 5, 6}, [5]int{7, 8, 9}}  //�
 s := []string{"abc", "ABC"}            //切片初始化
 ```
 
-## new vs make
-
-* new
-  - 一个分配内存的内建函数，但不同于其他语言中同名的new所作的工作，它只是将内存清零，而不是初始化内存
-  - new(T)为一个类型为T的新项目分配了值为零的存储空间并返回其地址，也就是一个类型为*T的值。用Go的术语来说，就是它返回了一个指向新分配的类型为T的零值的指针。
-* make(T, args)
-  - 仅用于创建切片、map和chan（消息管道），并返回类型T（不是*T）的一个被初始化了的（不是零）实例。这种差别的出现是由于这三种类型实质上是对在使用前必须进行初始化的数据结构的引用
-  - 对于切片、映射和信道，make初始化了其内部的数据结构并准备了将要使用的值
-
-## 运算符
+### 运算符
 
 * `1 << 100 2^100`
 * `64 >> 4  4`
@@ -354,7 +417,7 @@ s := []string{"abc", "ABC"}            //切片初始化
   - 2      &&
   - 1      ||
 
-## 控制语句
+### 控制语句
 
 * for
 * select:使一个 Go 程可以等待多个通信操作
@@ -362,7 +425,7 @@ s := []string{"abc", "ABC"}            //切片初始化
   - 当多个分支都准备好时会随机选择一个执行
   - select 中的其它分支都没有准备好时，default 分支就会执行
 
-## 函数
+### 函数
 
   + 第一类对象指的是运行期可以被创建并作为参数传递给其他函数或赋值给变量的实体
   + 输入与输出类型限制 `func (T) Read(b []byte) (n int, err error)`
@@ -378,59 +441,27 @@ s := []string{"abc", "ABC"}            //切片初始化
       - 将匿名函数作为返回值
   + 接受一个值作为参数的函数必须接受一个指定类型的值，不能是指针
 
-## 包
+### error
 
-* 归属于同一个目录的文件看作归属于同一个包，归属同一个包的代码具备以下特性：
-  - 归属于同一个包的代码包声明语句要一致，即同一级目录的源文件必须属于同一个包
-  - 在同一个包下不同的不同文件中不能重复声明同一个变量、函数和类
-* main 函数作为程序的入口函数，只能存在于 main 包中，main 包通常对应 src 目录，但也可以将其它子目录声明为 main 包
-* 无论是变量、函数还是类属性及方法，它们的可见性都是与包相关联的,可见性根据其首字母大小写来决定.首字母大写，则可以在其他包中直接访问这些属性和方法，否则只能在包内访问
-* 导入
-  - 包的属性名字以大写字母开头，那么就是已导出
-  - 名称的首字母为大写的程序实体才可以被当前包外的代码引用，否则它就只能被当前包内的其他代码引用
-* go get
-  - 会自动从一些主流公用代码仓库（比如 GitHub）下载目标代码包，并把它们安装到环境变量 GOPATH 包含的第 1 工作区的相应目录中。如果存在环境变量
-  - 目前支持的有BitBucket、GitHub、Google Code和Launchpad
-  - 这个命令在内部实际上分成了两步操作
-    + 第一步是下载源码包
-    + 第二步是执行go install
-  - 下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
-    + -d 只下载不安装
-    + -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
-    + -fix 在获取源码之后先运行一个用于根据当前 Go 语言版本修正代码的工具，然后再去做其他的事情
-    + -t 同时也下载需要为运行测试所需要的包
-    + -insecure：允许通过非安全的网络协议下载和安装代码包。HTTP 就是这样的协议
-    + -u ：下载并安装代码包，不论工作区中是否已存在它们。强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
-    + -v 显示执行的命令
-* 对代码包的远程导入路径进行自定义方法
-  - 在该代码包中的库源码文件的包声明语句的右边加入导入注释，像这样：`package semaphore // import "golang.org/x/sync/semaphore"`
-  - `go get golang.org/x/sync/semaphore` 后，golang.org 下的路径 /x/sync/semaphore 并不是存放包的真实地址
-* golang 在 github 上建立了一个镜像库，如 <https://github.com/golang/net> 即是 <https://golang.org/x/net> 的镜像库
-* [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
+* 多值返回
+  - 在返回接口把业务语义（业务返回值）和控制语义（出错返回值）区分开来
+  - 错误参数如果要忽略，需要显式地忽略，用 _ 这样的变量来忽略；
+  - 可以更容易返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，是一个内建的接口，可以扩展自定义的错误处理。
+* 对于不可恢复的错误，Go提供了一个内建的panic函数，它将创建一个运行时错误并使程序停止
+  - 接收一个任意类型（往往是字符串）作为程序死亡时要打印的东西。当编译器在函数的结尾处检查到一个panic时，就会停止进行常规的return语句检查
+  - 当panic被调用时，它将立即停止当前函数的执行并开始逐级解开函数堆栈，同时运行所有被defer的函数。如果这种解开达到堆栈的顶端，程序就死亡了
+* 用内建recover函数来重新获得Go程的控制权并恢复正常的执行
+  - 对recover的调用会通知解开堆栈并返回传递到panic的参量。
+  - 仅在解开期间运行的代码处在被defer的函数之内，recover仅在被延期的函数内部才是有用的。
+- [errors](https://github.com/pkg/errors):Simple error handling primitives <https://godoc.org/github.com/pkg/errors>
 
-```go
-go get github.com/yudai/gotty
-
-go get -u -v github.com/labstack/echo
-// unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // bin配置错误
-
-gofmt -w yourcode.go // Format your code
-
-mkdir -p $GOPATH/src/golang.org/x
-cd $GOPATH/src/golang.org/x
-git clone https://github.com/golang/net.git
-
-// go: cannot use path@version syntax in GOPATH mode
-export GO111MODULE=on
-```
-
-## GO 并发
+## 并发
 
 * 并发主要由切换时间片来实现<同时>运行
 * 并行是直接利用多核实现多线程的运行
 * goroutine 奉行通过通信来共享内存(CSP并发模型)，而不是共享内存来通信
 
-## 协程 goroutine
+### 协程 goroutine
 
 * 由 Go 运行时管理的轻量级线程
 * `go f(x, y, z)`会启动一个新的 Go 程并执行 `f(x, y, z)`
@@ -451,7 +482,7 @@ export GO111MODULE=on
     + 默认值是机器上的CPU核心数。例如在一个8核心的机器上，调度器会把Go代码同时调度到8个OS线程上（GOMAXPROCS是m:n调度中的n）。
   - goroutine与os线程是M:N的关系
 
-## GMP模型
+#### GMP模型
 
 * Goroutine:相当于OS的进程控制块（Process Control Block)包含：函数执行的指令和参数，任务对象，线程上下文切换，字段保护，和字段的寄存器
 * M:对应物理线程
@@ -464,7 +495,7 @@ export GO111MODULE=on
   - 利用并行：利用GOMAXPROCS设置P数量，最多有GPMAXPROCS个线程分布在多个CPU上同时执行
   - 全局G队列：当M执行work stealing从其它P的本地队列中偷不到G时，它可以从全局列队获取G
 
-## 信道 channel
+### 信道 channel
 
 * 带有类型的管道
   - 只读 ch := make(<-chan interface{})
@@ -514,7 +545,7 @@ export GO111MODULE=on
   - for-range管道，遍历完后，如果chan不是关闭的，遍历完数据，程序会行等待，直到出现死锁
   - 应该在写入 ch 的 goroutine 进行关闭操作，否则会有意料之外的 panic
 
-## 互斥锁 Mutex
+### 互斥锁 Mutex
 
 * 保证每次只有一个 Go 程能够访问一个共享的变量，从而避免冲突
 * 在代码前调用 Lock 方法，在代码后调用 Unlock 方法来保证一段代码的互斥执行
@@ -523,22 +554,14 @@ export GO111MODULE=on
   - Unlock
 * 用 defer 语句来保证互斥锁一定会被解锁
 
-## error
+### Sync
 
-* 多值返回
-  - 在返回接口把业务语义（业务返回值）和控制语义（出错返回值）区分开来
-  - 错误参数如果要忽略，需要显式地忽略，用 _ 这样的变量来忽略；
-  - 可以更容易返回错误，其可以在返回一个常规的返回值之外，还能轻易地返回一个详细的错误描述。通常情况下，错误的类型是error，是一个内建的接口，可以扩展自定义的错误处理。
-* 对于不可恢复的错误，Go提供了一个内建的panic函数，它将创建一个运行时错误并使程序停止
-  - 接收一个任意类型（往往是字符串）作为程序死亡时要打印的东西。当编译器在函数的结尾处检查到一个panic时，就会停止进行常规的return语句检查
-  - 当panic被调用时，它将立即停止当前函数的执行并开始逐级解开函数堆栈，同时运行所有被defer的函数。如果这种解开达到堆栈的顶端，程序就死亡了
-* 用内建recover函数来重新获得Go程的控制权并恢复正常的执行
-  - 对recover的调用会通知解开堆栈并返回传递到panic的参量。
-  - 仅在解开期间运行的代码处在被defer的函数之内，recover仅在被延期的函数内部才是有用的。
+## OOP
 
-## 面向对象 OOP
+* 通过实现接口实现 oop
 
-* 接口 interface
+### 接口 interface
+
   - 由一组方法签名定义的集合
   - 接口类型的变量可以保存任何实现了这些方法的值
   - 接口也是值。它们可以像其它值一样传递。接口值可以用作函数的参数或返回值
@@ -586,7 +609,137 @@ export GO111MODULE=on
   - 一个类型（结构体）可以实现多个接口
   - 实现接口的类（结构体）可以赋值给接口
 
-## fmt
+## 包
+
+* 归属于同一个目录的文件看作归属于同一个包，归属同一个包的代码具备以下特性：
+  - 归属于同一个包的代码包声明语句要一致，即同一级目录的源文件必须属于同一个包
+  - 在同一个包下不同的不同文件中不能重复声明同一个变量、函数和类
+* main 函数作为程序的入口函数，只能存在于 main 包中，main 包通常对应 src 目录，但也可以将其它子目录声明为 main 包
+* 无论是变量、函数还是类属性及方法，它们的可见性都是与包相关联的,可见性根据其首字母大小写来决定.首字母大写，则可以在其他包中直接访问这些属性和方法，否则只能在包内访问
+* 导入
+  - 包的属性名字以大写字母开头，那么就是已导出
+  - 名称的首字母为大写的程序实体才可以被当前包外的代码引用，否则它就只能被当前包内的其他代码引用
+* go get
+  - 会自动从一些主流公用代码仓库（比如 GitHub）下载目标代码包，并把它们安装到环境变量 GOPATH 包含的第 1 工作区的相应目录中。如果存在环境变量
+  - 目前支持的有BitBucket、GitHub、Google Code和Launchpad
+  - 这个命令在内部实际上分成了两步操作
+    + 第一步是下载源码包
+    + 第二步是执行go install
+  - 下载源码包的go工具会自动根据不同的域名调用不同的源码工具,参数说明：
+    + -d 只下载不安装
+    + -f 只有在你包含了-u参数的时候才有效，不让-u去验证import中的每一个都已经获取了，这对于本地fork的包特别有用
+    + -fix 在获取源码之后先运行一个用于根据当前 Go 语言版本修正代码的工具，然后再去做其他的事情
+    + -t 同时也下载需要为运行测试所需要的包
+    + -insecure：允许通过非安全的网络协议下载和安装代码包。HTTP 就是这样的协议
+    + -u ：下载并安装代码包，不论工作区中是否已存在它们。强制使用网络去更新包和它的依赖包:存在unrecognized import path "golang.org/x问题，需要添加代理
+    + -v 显示执行的命令
+* 对代码包的远程导入路径进行自定义方法
+  - 在该代码包中的库源码文件的包声明语句的右边加入导入注释，像这样：`package semaphore // import "golang.org/x/sync/semaphore"`
+  - `go get golang.org/x/sync/semaphore` 后，golang.org 下的路径 /x/sync/semaphore 并不是存放包的真实地址
+* golang 在 github 上建立了一个镜像库，如 <https://github.com/golang/net> 即是 <https://golang.org/x/net> 的镜像库
+* [Gopm Registry](https://gopm.io):Download Go packages by version, without needing version control tools (eg Git, Hg, etc).
+
+```go
+go get github.com/yudai/gotty
+
+go get -u -v github.com/labstack/echo
+// unrecognized import path "golang.org/x/crypto/acme/autocert" (https fetch: Get https://golang.org/x/crypto/acme/autocert?go-get=1: dial tcp 172.217.6.127:443: i/o timeout) // bin配置错误
+
+gofmt -w yourcode.go // Format your code
+
+mkdir -p $GOPATH/src/golang.org/x
+cd $GOPATH/src/golang.org/x
+git clone https://github.com/golang/net.git
+
+// go: cannot use path@version syntax in GOPATH mode
+export GO111MODULE=on
+```
+
+### vendor 
+
+* [govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
+* [Go Packages](https://godoc.org/)
+* [gvm](https://github.com/moovweb/gvm):Go Version Manager <http://github.com/moovweb/gvm>
+* [dep](https://github.com/golang/dep):Go dependency management tool <https://golang.github.io/dep/>
+* [gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
+
+### modules
+
+* Before Go modules, Go development using dependencies used “GOPATH development mode,the go command used the GOPATH variable for the following purposes
+  - The go install command installed binaries to $GOBIN, which defaults to $GOPATH/bin.
+  - The go install command installed the compiled package file for import "example.com/y/z" to $GOPATH/pkg/example.com/y/z.a.
+  - The go get command downloaded source code satisfying import "example.com/y/z" to $GOPATH/src/example.com/y/z
+* Go modules
+  - Go 1.11 (August 2018) introduced the GO111MODULE variable, which defaulted to auto
+    + With GO111MODULE=off, the go command used GOPATH mode always.
+    + With GO111MODULE=on, the go command used module mode always
+    + With GO111MODULE=auto (or leaving GO111MODULE unset), the go command decided the mode based on the current directory
+      * If the current directory was outside $GOPATH/src and was within a source tree with a go.mod file in its root, then the go command used Go module mode
+      * Otherwise the go command used GOPATH mode
+  - Go 1.13 (August 2019) adjusted GO111MODULE=auto mode to remove the $GOPATH/src restriction: if a directory inside $GOPATH/src has a go.mod file, commands run in or below that directory now use module mode. This allows users to continue to organize their checked-out code in an import-based hierarchy but use modules for individual checkouts
+  - Go 1.16 (February 2021) will change the default to GO111MODULE=on, using module mode always. That is, GOPATH mode will be disabled entirely by default. Users who need one to use GOPATH mode for one more release can set GO111MODULE=auto or GO111MODULE=off explicitly.
+  - Go 1.17 (August 2021) will remove the GO111MODULE setting and GOPATH mode entirely, using module mode always
+* 包管理工具 go module
+  - 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包,之前，如果不使用第三方包管理工具可行，就是直接使用go get安装第三方包
+    + GO111MODULE=off 无模块支持，go 会从 GOPATH 和 vendor 文件夹寻找包。
+    + GO111MODULE=on 模块支持，go 会忽略 GOPATH 和 vendor 文件夹，只根据 go.mod 下载依赖。
+    + GO111MODULE=auto 在 GOPATH/src 外面且根目录有 go.mod 文件时，开启模块支持。
+  - 1.13 成为了Go语言默认的依赖管理工具，默认打开
+  - 不允许在 GOPATH 下使用 gomod
+  - 从GOPATH到go module的
+  - 最终终止对基于GOPATH的开发的支持：使用标准库以外的依赖项的任何程序都将需要一个go.mod
++ gomod vs gopath
+  * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
+  * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
++ `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
+* indirect
+
+```sh
+# 开启
+export GO111MODULE=on
+
+# 显示所有Import库信息
+go list -m -json all
+# 查看所有以升级依赖版本
+go list -u -m all
+
+go get -u .　# 更新一下项目依赖
+
+go mod init example.com/m # to initialize a v0 or v1 module
+go mod init example.com/m/v2 # to initialize a v2 module
+
+go mod download     # 下载依赖包到本地（默认为 GOPATH/pkg/mod 目录）
+go mod edit     # 编辑 go.mod 文件
+go mod graph    # 打印模块依赖图
+go mod init     # 初始化当前文件夹，创建 go.mod 文件
+go mod tidy     # 增加缺少的包，删除无用的包 确保项目具有所需内容的准确和完整的快照
+go mod vendor   # 将依赖复制到 vendor 目录下
+go mod verify  # 校验依赖
+go mod why github.com/coreos/etcd  # 解释为什么需要依赖
+
+go mod edit --module=github.com/islishude/gomodtest/v2
+go mod edit -require github.com/cnwyt/mytest@latest
+go mod edit -replace=google.golang.org/grpc=github.com/grpc/grpc-go@latest　# 源替换
+go mod edit -replace=golang.org/x/tools@v0.0.0-20190524140312-2c0ae7006135=github.com/golang/tools@v0.0.0-20190524140312-2c0ae70
+
+go mod tidy　＃　自动声明依赖包
+go mod vendor
+go build -mod=vendor
+
+replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
+replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
+```
+
+
+### [Go Tools](https://github.com/golang/tools)
+
+* <https://godoc.org/golang.org/x/tools>
+* holds the source for various packages and tools that support the Go programming language.
+* Some of the tools, `godoc` and `vet` for example, are included in binary Go distributions.
+* Others, including the Go `guru` and the test coverage tool, can be fetched with `go get`.
+* Packages include a type-checker for Go and an implementation of the Static Single Assignment form (SSA) representation for Go programs.
+
+### fmt
 
 * fmt 包中定义的 Stringer 是最普遍的接口之一
 * 错误：使用 error 值来表示错误状态，error 类型是一个内建接口，自定义错误流程
@@ -599,11 +752,11 @@ export GO111MODULE=on
 * Print采用默认格式将其参数格式化并写入标准输出。如果两个相邻的参数都不是字符串，会在它们的输出之间添加空格。返回写入的字节数和遇到的任何错误
 * Println采用默认格式将其参数格式化并写入标准输出。总是会在相邻参数的输出之间添加空格并在输出结束后添加换行符。返回写入的字节数和遇到的任何错误
 
-## [io](link)
+### [io](link)
 
-## [image](https://golang.org/pkg/image/#Image)
+### [image](https://golang.org/pkg/image/#Image)
 
-## http
+### http
 
 * http.Handler 是net/http中定义的接口用来表示 HTTP 请求
 * Handler接口中声明了名为ServeHTTP的函数签名，也就是说任何结构只要实现了这个ServeHTTP方法，那么这个结构体就是一个Handler对象
@@ -624,86 +777,12 @@ type muxEntry struct {
 }
 ```
 
-## 依赖
+### 时间
 
-* 接口:能够对接口进行 Mock 的 golang/mock 框架，能够根据接口生成 Mock 实现
-  - 在 test/mocks 目录中放置所有的 Mock 实现，子目录与接口所在文件的二级目录相同，在这里源文件的位置在 pkg/blog/blog.go，它的二级目录就是 blog/，所以对应的 Mock 实现会被生成到 test/mocks/blog/ 目录中；
-  - 指定 package 为 mxxx，默认的 mock_xxx 看起来非常冗余，上述 blog 包对应的 Mock 包也就是 mblog；
-  - mockgen 命令放置到 Makefile 中的 mock 下统一管理，减少祖传命令的出现；
-* 数据库:使用 sqlmock 来模拟数据库的连接
-  - ExpectQuery 用于模拟 SQL 的查询语句
-  - ExpectExec 用于模拟 SQL 的增删
-* HTTP 请求:httpmock 就是一个用于 Mock 所有 HTTP 依赖的包，它使用模式匹配的方式匹配 HTTP 请求的 URL，在匹配到特定的请求时就会返回预先设置好的响应
-* Redis、缓存以及其他依赖
-* bouk/monkey 能够通过替换函数指针的方式修改任意函数的实现，所以如果上述的几种方法都不能满足需求，就只能够通过猴子补丁这种比较 hack 的方法 Mock 依赖了
-  - 由于它是在运行时替换了函数的指针，所以如果遇到一些简单的函数，例如 rand.Int63n 和 time.Now，编译器可能会直接将这种函数内联到调用实际发生的代码处并不会调用原有的方法，所以使用这种方式往往需要我们在测试时额外指定 -gcflags=-l 禁止编译器的内联优化 `go test -gcflags=-l ./...`
-
-```go
-package blog
-
-type Post struct {}
-
-type Blog interface {
-    ListPosts() []Post
-}
-
-type jekyll struct {}
-
-func (b *jekyll) ListPosts() []Post {
-    return []Post{}
-}
-
-type wordpress struct{}
-
-func (b *wordpress) ListPosts() []Post {
-    return []Post{}
-}
-
-package service
-
-type Service interface {
-    ListPosts() ([]Post, error)
-}
-
-type service struct {
-    blog blog.Blog
-}
-
-func NewService(b blog.Blog) *Service {
-    return &service{
-        blog: b,
-    }
-}
-
-func (s *service) ListPosts() ([]Post, error) {
-    return s.blog.ListPosts(), nil
-}
-
-mockgen -package=mblog -source=pkg/blog/blog.go > test/mocks/blog/blog.go
-
-func TestListPosts(t *testing.T) {
-    ctrl := gomock.NewController(t)
-    defer ctrl.Finish()
-
-    mockBlog := mblog.NewMockBlog(ctrl)
-    mockBlog.EXPECT().ListPosts().Return([]Post{})
-
-    service := NewService(mockBlog)
-
-    assert.Equal(t, []Post{}, service.ListPosts())
-}
-
-func main() {
-    monkey.Patch(fmt.Println, func(a ...interface{}) (n int, err error) {
-        s := make([]interface{}, len(a))
-        for i, v := range a {
-            s[i] = strings.Replace(fmt.Sprint(v), "hell", "*bleep*", -1)
-        }
-        return fmt.Fprintln(os.Stdout, s...)
-    })
-    fmt.Println("what the hell?") // what the *bleep*?
-}
-```
+* 在命令行上，flag 通过 time.ParseDuration 支持了 time.Duration
+* JSon 中的 encoding/json 中也可以把time.Time 编码成 RFC 3339 的格式
+* 数据库使用的 database/sql 也支持把 DATATIME 或 TIMESTAMP 类型转成 time.Time
+* YAML可以使用 gopkg.in/yaml.v2 也支持 time.Time 、time.Duration 和 RFC 3339 格式
 
 ## [测试 learn-go-with-tests](https://github.com/quii/learn-go-with-tests)
 
@@ -788,127 +867,117 @@ func TestSomething(t *testing.T) {
 }
 ```
 
-## 代理 proxy
+### 工具
 
-* 代理并缓存go模块。可以利用该代理来避免DNS污染导致的模块拉取缓慢或失败的问题，加速构建
-* 构建或运行应用时，Go 将会通过 goproxy.cn 获取依赖
-* docker->performence->damon=>+
-* <https://g.widora.cn/>
-* 类库
-  - [goproxy.cn](https://github.com/goproxy/goproxy.cn):The most trusted Go module proxy in China. <https://goproxy.cn>
-  - [athens](https://github.com/gomods/athens):A Go module datastore and proxy <https://docs.gomods.io>
-  - [goproxy](https://github.com/goproxyio/goproxy):A global proxy for Go modules. <https://goproxy.io>
-  - [snail007 / goproxy](https://github.com/snail007/goproxy):Proxy是高性能全功能的http代理、https代理、socks5代理、内网穿透、内网穿透p2p、内网穿透代理、内网穿透反向代理、内网穿透服务器、Websocket代理、TCP代理、UDP代理、DNS代理、DNS加密代理，代理API认证，全能跨平台代理服务器。 <http://snail007.github.io/goproxy>
+- [testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
+- [gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
+- [goreporter](https://github.com/360EntSecGroup-Skylar/goreporter):A Golang tool that does static analysis, unit testing, code review and generate code quality report.
+- [](https://github.com/nakabonne/ali):Generate HTTP load and plot the results in real-time
 
-```sh
-go env -w GOPROXY=https://goproxy.cn,direct # windows
+### mock
 
-# 七牛云
-export GOPROXY=https://goproxy.cn
-# 阿里
-export GOPROXY=https://mirrors.aliyun.com/goproxy/
-# Go 官方提供的全球代理
-export GOPROXY=https://goproxy.io
-export GOPROXY=https://athens.azurefd.net
+- [mock](https://github.com/golang/mock):GoMock is a mocking framework for the Go programming language.
+ 
+### 依赖
 
-echo "export GO111MODULE=on" >> ~/.profile && source ~/.profile
-echo "export GOPROXY=https://goproxy.cn" >> ~/.profile && source ~/.profile
+* 接口:能够对接口进行 Mock 的 golang/mock 框架，能够根据接口生成 Mock 实现
+  - 在 test/mocks 目录中放置所有的 Mock 实现，子目录与接口所在文件的二级目录相同，在这里源文件的位置在 pkg/blog/blog.go，它的二级目录就是 blog/，所以对应的 Mock 实现会被生成到 test/mocks/blog/ 目录中；
+  - 指定 package 为 mxxx，默认的 mock_xxx 看起来非常冗余，上述 blog 包对应的 Mock 包也就是 mblog；
+  - mockgen 命令放置到 Makefile 中的 mock 下统一管理，减少祖传命令的出现；
+* 数据库:使用 sqlmock 来模拟数据库的连接
+  - ExpectQuery 用于模拟 SQL 的查询语句
+  - ExpectExec 用于模拟 SQL 的增删
+* HTTP 请求:httpmock 就是一个用于 Mock 所有 HTTP 依赖的包，它使用模式匹配的方式匹配 HTTP 请求的 URL，在匹配到特定的请求时就会返回预先设置好的响应
+* Redis、缓存以及其他依赖
+* bouk/monkey 能够通过替换函数指针的方式修改任意函数的实现，所以如果上述的几种方法都不能满足需求，就只能够通过猴子补丁这种比较 hack 的方法 Mock 依赖了
+  - 由于它是在运行时替换了函数的指针，所以如果遇到一些简单的函数，例如 rand.Int63n 和 time.Now，编译器可能会直接将这种函数内联到调用实际发生的代码处并不会调用原有的方法，所以使用这种方式往往需要我们在测试时额外指定 -gcflags=-l 禁止编译器的内联优化 `go test -gcflags=-l ./...`
 
-go env -w GOPROXY=https://goproxy.cn,direct # 出现 does not override conflicting OS environment variable
-# 设置不走 proxy 的私有仓库，多个用逗号相隔
-go env -w GOPRIVATE=*.corp.example.com
+```go
+package blog
 
-go env -w GOSUMDB=off # 示Get https://sum.golang.org/lookup/xxxxxx: dial tcp 216.58.200.49:443: i/o timeout
-go env -w GOSUMDB="sum.golang.google.cn"
+type Post struct {}
+
+type Blog interface {
+    ListPosts() []Post
+}
+
+type jekyll struct {}
+
+func (b *jekyll) ListPosts() []Post {
+    return []Post{}
+}
+
+type wordpress struct{}
+
+func (b *wordpress) ListPosts() []Post {
+    return []Post{}
+}
+
+package service
+
+type Service interface {
+    ListPosts() ([]Post, error)
+}
+
+type service struct {
+    blog blog.Blog
+}
+
+func NewService(b blog.Blog) *Service {
+    return &service{
+        blog: b,
+    }
+}
+
+func (s *service) ListPosts() ([]Post, error) {
+    return s.blog.ListPosts(), nil
+}
+
+mockgen -package=mblog -source=pkg/blog/blog.go > test/mocks/blog/blog.go
+
+func TestListPosts(t *testing.T) {
+    ctrl := gomock.NewController(t)
+    defer ctrl.Finish()
+
+    mockBlog := mblog.NewMockBlog(ctrl)
+    mockBlog.EXPECT().ListPosts().Return([]Post{})
+
+    service := NewService(mockBlog)
+
+    assert.Equal(t, []Post{}, service.ListPosts())
+}
+
+func main() {
+    monkey.Patch(fmt.Println, func(a ...interface{}) (n int, err error) {
+        s := make([]interface{}, len(a))
+        for i, v := range a {
+            s[i] = strings.Replace(fmt.Sprint(v), "hell", "*bleep*", -1)
+        }
+        return fmt.Fprintln(os.Stdout, s...)
+    })
+    fmt.Println("what the hell?") // what the *bleep*?
+}
 ```
 
-## modules
+## Debug
 
-* Before Go modules, Go development using dependencies used “GOPATH development mode,the go command used the GOPATH variable for the following purposes
-  - The go install command installed binaries to $GOBIN, which defaults to $GOPATH/bin.
-  - The go install command installed the compiled package file for import "example.com/y/z" to $GOPATH/pkg/example.com/y/z.a.
-  - The go get command downloaded source code satisfying import "example.com/y/z" to $GOPATH/src/example.com/y/z
-* Go modules
-  - Go 1.11 (August 2018) introduced the GO111MODULE variable, which defaulted to auto
-    + With GO111MODULE=off, the go command used GOPATH mode always.
-    + With GO111MODULE=on, the go command used module mode always
-    + With GO111MODULE=auto (or leaving GO111MODULE unset), the go command decided the mode based on the current directory
-      * If the current directory was outside $GOPATH/src and was within a source tree with a go.mod file in its root, then the go command used Go module mode
-      * Otherwise the go command used GOPATH mode
-  - Go 1.13 (August 2019) adjusted GO111MODULE=auto mode to remove the $GOPATH/src restriction: if a directory inside $GOPATH/src has a go.mod file, commands run in or below that directory now use module mode. This allows users to continue to organize their checked-out code in an import-based hierarchy but use modules for individual checkouts
-  - Go 1.16 (February 2021) will change the default to GO111MODULE=on, using module mode always. That is, GOPATH mode will be disabled entirely by default. Users who need one to use GOPATH mode for one more release can set GO111MODULE=auto or GO111MODULE=off explicitly.
-  - Go 1.17 (August 2021) will remove the GO111MODULE setting and GOPATH mode entirely, using module mode always
-* 包管理工具 go module
-  - 在go1.11 版本中，新增了module管理模块功能，用来管理依赖包,之前，如果不使用第三方包管理工具可行，就是直接使用go get安装第三方包
-    + GO111MODULE=off 无模块支持，go 会从 GOPATH 和 vendor 文件夹寻找包。
-    + GO111MODULE=on 模块支持，go 会忽略 GOPATH 和 vendor 文件夹，只根据 go.mod 下载依赖。
-    + GO111MODULE=auto 在 GOPATH/src 外面且根目录有 go.mod 文件时，开启模块支持。
-  - 1.13 成为了Go语言默认的依赖管理工具，默认打开
-  - 不允许在 GOPATH 下使用 gomod
-  - 从GOPATH到go module的
-  - 最终终止对基于GOPATH的开发的支持：使用标准库以外的依赖项的任何程序都将需要一个go.mod
-+ gomod vs gopath
-  * gopath 查找包，按照 goroot 和多 gopath 目录下 src/xxx 依次查找
-  * gomod 下查找包，解析 go.mod 文件查找包，mod 包名就是包的前缀，里面的目录就后续路径了。 在 gomod 模式下，查找包就不会去 gopath 查找，只是 gomod 包缓存在 gopath/pkg/mod 里面
-+ `package animal is not in GOROOT (/usr/local/go/src/animal)`  将 GO111MODULE 设置为 off
-* indirect
+  - [delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
 
-```sh
-# 开启
-export GO111MODULE=on
+### Log
 
-# 显示所有Import库信息
-go list -m -json all
-# 查看所有以升级依赖版本
-go list -u -m all
+- [logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
+- [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. <https://goaccess.io>
 
-go get -u .　# 更新一下项目依赖
+## 安全
 
-go mod init example.com/m # to initialize a v0 or v1 module
-go mod init example.com/m/v2 # to initialize a v2 module
+- [Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
+- [Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
 
-go mod download     # 下载依赖包到本地（默认为 GOPATH/pkg/mod 目录）
-go mod edit     # 编辑 go.mod 文件
-go mod graph    # 打印模块依赖图
-go mod init     # 初始化当前文件夹，创建 go.mod 文件
-go mod tidy     # 增加缺少的包，删除无用的包 确保项目具有所需内容的准确和完整的快照
-go mod vendor   # 将依赖复制到 vendor 目录下
-go mod verify  # 校验依赖
-go mod why github.com/coreos/etcd  # 解释为什么需要依赖
+####  auth
 
-go mod edit --module=github.com/islishude/gomodtest/v2
-go mod edit -require github.com/cnwyt/mytest@latest
-go mod edit -replace=google.golang.org/grpc=github.com/grpc/grpc-go@latest　# 源替换
-go mod edit -replace=golang.org/x/tools@v0.0.0-20190524140312-2c0ae7006135=github.com/golang/tools@v0.0.0-20190524140312-2c0ae70
-
-go mod tidy　＃　自动声明依赖包
-go mod vendor
-go build -mod=vendor
-
-replace github.com/coreos/bbolt v1.3.4 => go.etcd.io/bbolt v1.3.4
-replace go.etcd.io/bbolt v1.3.4 => github.com/coreos/bbolt v1.3.4
-```
-
-## godoc
-
-* 离线文档
-
-```sh
-
-go get golang.org/x/tools/cmd/godoc
-godoc -http=:6060
-
-godoc fmt                // documentation for package fmt
-godoc fmt Printf         // documentation for fmt.Printf
-godoc -src fmt // fmt package interface in Go source form
-```
-
-## 时间
-
-* 在命令行上，flag 通过 time.ParseDuration 支持了 time.Duration
-* JSon 中的 encoding/json 中也可以把time.Time 编码成 RFC 3339 的格式
-* 数据库使用的 database/sql 也支持把 DATATIME 或 TIMESTAMP 类型转成 time.Time
-* YAML可以使用 gopkg.in/yaml.v2 也支持 time.Time 、time.Duration 和 RFC 3339 格式
+* [jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
+- [authboss](https://github.com/volatiletech/authboss):The boss of http auth.
+* [go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
 
 ## 性能
 
@@ -924,54 +993,334 @@ godoc -src fmt // fmt package interface in Go source form
   - 对于在for-loop里的固定的正则表达式，一定要使用 regexp.Compile() 编译正则表达式。性能会得升两个数量级。
   - 如果需要更高性能的协议，要考虑使用 protobuf 或 msgp 而不是JSON，因为JSON的序列化和反序列化里使用了反射。
   - 使用map的时候，使用整型的key会比字符串的要快，因为整型比较比字符串比较要快。
+* [go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
 
-## Sync
+### load
 
-### GoSublime
+- [vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
 
-* 安装gosublime插件
-* 在GoSublime，再往下找到 Settings - Default修改`"env": { "GOPATH":"$HOME/go","PATH": "$HOME/bin:$GOPATH/bin:$PATH" },` `"shell": [“$zsh"],`
+## 代码规范
 
-## 利与弊
+* [go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis <https://staticcheck.iop>
+- [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
+- [project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
+- [CodeReviewComments](https://github.com/golang/go/wiki/CodeReviewComments)
 
-* 利
-  - 速度非常快：Go 语言是一门非常快速的编程语言。因为 Go 语言是编译成机器码的，因此，它的表现自然会优于那些解释性或具有虚拟运行时的编程语言。Go 程序的编译速度也非常快，并且生成的二进制文件非常小。我们的 API 在短短几秒钟内就编译完毕，生成的可执行文件区区只有 11.5MB
-  - 易于掌握 与其他语言相比，Go 语言的语法很简单，很容易掌握。完全可以把 Go 语言的大部分语法记在脑子里，这意味着你并不需要花很多时间来查找东西。Go 语言也非常干净易读。非 Go 语言的程序员，尤其是那些习惯于 C 风格语法的程序员，就可以阅读 Go 程序代码，并且能够理解发生什么事
-  - 静态类型定义语言 Go 语言是一种强大的静态类型定义语言。有基本类型，如 int、byte 和 string。也有结构类型。与任何强类型语言一样，类型系统允许编译器帮助捕获整个类的错误。Go 语言还具有内置的列表和映射类型，而且它们也易于使用。
-  - 有编译器
-  - 接口类型 Go 语言有接口类型，任何结构都可以简单地通过实现接口的方法来满足接口。这允许你解耦代码中的依赖项。然后，你可以在测试中模拟你的依赖项。通过使用接口，你可以编写更加模块化的可测试代码。Go 语言还具有头等函数，这使得开发人员以更实用的方式编写代码成为可能。
-  - 标准库 Go 语言有一个相当不错的标准库。它提供了方便的内置函数，用于处理基本类型。有些包可以让你轻松构建一个 Web 服务器、处理 I/O、使用加密技术以及操作原始字节。标准库提供的 JSON 序列化和反序列化非常简单。通过使用“tags”，你可以在 struct 字段旁边指定 JSON 字段名。
-  - 测试支持 测试支持内置在标准库中，不需要额外的依赖。如果你有个名为 thing.go 的文件，请在另一个名为 thing_test.go 的文件中编写测试，并运行“go test”。Go 就将快速执行这些测试。
-  - 静态分析工具 Go 语言的静态分析工具众多且强大。一种特别的工具是 gofmt，根据 Go 的建议风格对代码进行格式化。这可以规范项目的许多意见，让团队奖经理集中在代码所做的工作上。我们对每个构建运行 gofmt、golint 和 vet，如果发现任何警告的话，则构建将会失败。
-  - 垃圾收集 在设计 Go 语言时，有意将内存管理设计得比 C 和 C++ 更容易。动态分配的对象是垃圾收集。Go 语言使指针的使用更加安全，因为它不允许指针运算。还提供了使用值类型的选项。
-  - 更容易的并发模型 虽然并发编程从来就不是一件易事，但 Go 语言在并发编程要比其他语言更容易。创建一个名为“goroutine”的轻量级线程，并通过“channel”与它进行通信几乎是非常简单的事情，至于更为复杂的模型，也是有可能能够实现的。
-* 弊
-  - 没有泛型 首先，这个问题就像房间里的大象一样，是显而易见而又被忽略的事实。Go 语言没有泛型。对于来自使用 Java 这样的语言的开发者来说，要转向 Go 语言，这是一个需要克服的巨大障碍。这意味着代码的重用级别降低了。虽然 Go 语言有头等函数，但如果编写“map”、“reduce”和“filter”等函数，将这些函数设计为对一种类型的集合进行操作，就不能将这些函数重用于其他不同的类型集合。要解决这一问题有很多方法，但都最终都要涉及到编写更多的代码，如此一来，生产力和可维护性就降低了
-  - 接口是隐式的 虽然有接口这一点很好，但是结构却是隐式地而非显式地实现接口。这点被称为是 Go 语言的优势之一，但我们发现，很难从结构中看出它是否实现了接口。你只能通过尝试编译程序才能真正了解。如果程序很小，这当然没有什么问题。但如果这个程序是中大型规模，麻烦就大了。
-  - 库支持不佳 Go 语言的库支持参差不齐。我们的 API 与 Contentful 集成，但后者并没有官方支持的 Go SDK。这意味着我们必须编写（并维护！）大量代码来请求和解析 Contentful 中的数据。我们还必须依赖第三方的 Elasticsearch 库。由厂商提供的 Go SDK 并不像他们的 Java、Ruby 或 JavaScript 同类产品那样受欢迎。
-  - 社区沟通很难
-    + Go 社区可能不会接受建议。在 golint 的 GitHub 存储库中考虑这个问题：<https://github.com/golang/lint/issues/65> ，有用户请求 golint 在发现警告时，能够使构建失败（这就是我们在项目中所做的事情）。维护者立即否定了这一想法。但是，由于有太多的人就这个问题发表了评论，一年后，维护者最终不得不增加了所请求的特性。
-    + Go 社区似乎也不喜欢 Web 框架。虽然 Go 语言的 HTTP 库涵盖了很多方面，但它并不支持路径参数、输入检查和验证，也不支持 Web 应用程序中常见的横切关注点。Ruby 开发人员有 Rails，Java 开发人员有 Spring MVC，Python 开发者有 Django。但许多 Go 开发人员选择了避免使用框架。然而现实是，并非没有框架，恰恰相反有很多。但是，一旦你开始将某个框架用于某个项目，要想避免被遗弃的命运几乎是不可能的。
-  - 分裂的依赖关系管理：Go 语言没有一个稳定的、正式的包管理器。经过多年的社区乞求，Go 项目最近才发布 godep。在此之前，已经有许多工具填补了这个空白。我们在项目中使用了非常强大的 govendor，但这意味着社区是分裂的，对刚接触 Go 语言的开发人员来说，这可能是非常令人困惑的。此外，几乎所有的包管理器都由 Git 存储库提供支持，Git 存储库的历史可能随时会发生更改。将其与 Maven Central 相比，后者永远不会删除或更改项目所依赖的库。
-* 决定是否使用 Go 语言
-  - 需要考虑一下机器的情况。你发送和接受字节时。你管理数千个并发进程时。你也有可能正在编写操作系统、容器系统或区块链节点。在这些情况下，很可能你不会关心泛型。因为你忙着从芯片榨取每纳秒的性能
-  - 很多时候，你需要考虑人类。你需要处理的业务领域数据：客户、员工、产品、订单。你需要编写对这些域实体进行操作的业务逻辑，并且需要多年来维护此业务逻辑。并且需要处理不断变化的需求，还要做的越快越好。对于这些情况，开发人员的经验很重要。
-  - Go 语言是一种编程语言，更重视的是机器时间而不是人类时间。有时候，你的领域中，机器，或者程序性能是最关键的。在这些情况下，Go 可以成为一个很好的 C 或 C++ 替代品。但是，当你编写一个典型的 n 层应用程序时，性能瓶颈通常会出现在数据库中，更重要的是，你将如何对数据建模
-  - 处理的是字节，那么 Go 语言可能是一个不错的选择。处理数据，那么 Go 语言可能不是一个好的选择
+### godoc
 
-## The Zen of Go
+* 离线文档
 
-* 每个package实现单一的目的
-* 显式处理错误
-* 尽早返回，而不是使用深嵌套
-* 让调用者选择并发
-* 在启动一个goroutine时，需要知道何时它会停止
-* 避免package级别的状态
-* 简单很重要
-* 编写测试以锁定 package API的行为
-* 如果觉得慢，首先编写benchmark来证明
-* 节制是一种美德
-* 可维护性
+```sh
+
+go get golang.org/x/tools/cmd/godoc
+godoc -http=:6060
+
+godoc fmt                // documentation for package fmt
+godoc fmt Printf         // documentation for fmt.Printf
+godoc -src fmt // fmt package interface in Go source form
+```
+
+### 语法检测
+
+- [revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. <https://revive.run>
+- [golangci-lint](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
+  
+## 扩展
+
+* [gopher-lua](https://github.com/yuin/gopher-lua):GopherLua: VM and compiler for Lua in Go
+* [lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
+* 模版
+  - [pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
+* 缓存
+  - [go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. <https://patrickmn.com/projects/go-cache/>
+* [graphql](https://github.com/graphql-go/graphql):An implementation of GraphQL for Go / Golang
+
+* excel
+  - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
+* event-loop
+  - [evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
+* [mobile](https://github.com/golang/mobile):[mirror] Go on Mobile <https://godoc.org/golang.org/x/mobile>
+* [gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more <https://www.gonum.org/>
+* [tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM. A GO COMPILER FOR SMALL PLACES bring the Go programming language to microcontrollers and modern web browsers by creating a new compiler based on LLVM.
+* [txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
+* [bleve](https://github.com/blevesearch/bleve) A modern text indexing library for go
+* [webrtc](https://github.com/pion/webrtc)Pure Go implementation of the WebRTC API https://pion.ly
+* [plot](https://github.com/gonum/plot):A repository for plotting and visualizing data
+* [envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
+ 
+* [syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization <http://forum.syncthing.net/>
+* file
+  - [seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
+* [bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. <https://www.bettercap.org/>
+* [dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. <http://bthub.io>
+* [noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
+* [endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
+* [cron](https://github.com/robfig/cron):a cron library for go
+* [alice](https://github.com/justinas/alice):Painless middleware chaining for Go <https://godoc.org/github.com/justinas/alice>
+* [viper](https://github.com/spf13/viper):Go configuration with fangs
+* [goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible <https://goreleaser.com>
+* [go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
+* [yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
+* [fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. <https://fsnotify.org>
+* [golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
+* [go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
+* [crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries <https://godoc.org/golang.org/x/crypto>
+* [daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
+* [go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. <https://truefurby.github.io/go-callvis>
+* [sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. <https://shopify.github.io/sarama>
+* [participle](https://github.com/alecthomas/participle):A parser library for Go
+* [gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
+* [statik](https://github.com/rakyll/statik):Embed files into a Go executable
+* [v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8
+* [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
+* [gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D <https://go-city.github.io>
+* [gopsutil](https://github.com/shirou/gopsutil):psutil for golang
+* [ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
+* [qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. <https://claudiodangelis.com/qrcp>
+* [asyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
+* [awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
+* [buffalo](https://github.com/gobuffalo/buffalo):Rapid Web Development w/ Go <http://gobuffalo.io>
+
+
+### 框架
+
+* [macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
+* [colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang <http://go-colly.org/>
+* [singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
+* [goim](https://github.com/Terry-Mao/goim):goim <https://goim.io/>
+* [fiber](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee <https://gofiber.io>
+* [martini](https://github.com/go-martini/martini):Classy web framework for Go <http://martini.codegangsta.io>
+* [iris](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | <https://bit.ly/iriscandothat1>
+    + [examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. <https://iris-go.com>
+* [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. <https://go-nitro.dev/>
+ 
+#### [beego](https://github.com/astaxie/beego)
+
+beego is an open-source, high-performance web framework for the Go programming language. <http://beego.me>
+
+* [beego/admin](https://github.com/beego/admin):基于beego的后台管理系统
+
+```go
+go get -u github.com/astaxie/beego
+go get -u github.com/beego/bee
+
+cd $GOPATH/src
+bee new hello
+cd hello
+bee run hello // 打开 http://localhost:8080/
+
+// import path does not begin with hostname
+export GOROOT=/usr/local/opt/go/libexec
+```
+
+```go
+go get github.com/beego/admin
+bee new hello
+
+// hello/routers/router.go
+import (
+    "hello/controllers"         //自身业务包
+    "github.com/astaxie/beego"  //beego 包
+    "github.com/beego/admin"  //admin 包
+)
+
+func init() {
+    admin.Run()
+    beego.Router("/", &controllers.MainController{})
+}
+
+// mysql
+db_host = localhost
+db_port = 3306
+db_user = root
+db_pass = root
+db_name = admin
+db_type = mysql
+postgresql数据库链接信息
+
+db_host = localhost
+db_port = 5432
+db_user = postgres
+db_pass = postgres
+db_name = admin
+db_type = postgres
+db_sslmode=disable
+sqlite3数据库链接信息
+
+// db_path 是指数据库保存的路径，默认是在项目的根目录
+db_path = ./
+db_name = admin
+db_type = sqlite3
+
+// 部分权限系统需要配置的信息
+
+sessionon = true
+rbac_role_table = role
+rbac_node_table = node
+rbac_group_table = group
+rbac_user_table = user
+#admin用户名 此用户登录不用认证
+rbac_admin_user = admin
+
+#默认不需要认证模块
+not_auth_package = public,static
+#默认认证类型 0 不认证 1 登录认证 2 实时认证
+user_auth_type = 1
+#默认登录网关
+rbac_auth_gateway = /public/login
+#默认模版
+template_type=easyui
+
+cd $GOPATH/src/hello
+cp -R ../github.com/beego/admin/static ./
+cp -R ../github.com/beego/admin/views ./
+
+go build
+./hello -syncdb
+// 默认得用户名密码都是admin
+```
+
+#### [GoFrame](https://github.com/gogf/gf)
+
+* a modular, powerful, high-performance and enterprise-class application development framework of Golang. https://goframe.org/
+* [gfast](https://github.com/tiger1103/gfast) 基于GF(Go Frame)的后台管理系统 http://www.g-fast.cn/
+
+#### [gin](https://github.com/gin-gonic/gin)
+
+Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. <https://gin-gonic.github.io/gin/>
+
+* 快速
+  - 基于 Radix 树（一种更节省空间的 Trie 树结构）的路由，占用内存更少；
+  - 没有反射；
+  - 可预测的 API 性能。
+* 内置路由器:开箱即用的路由器功能，不需要做任何配置即可使用
+* 支持中间件:传入的 HTTP 请求可以经由一系列中间件和最终操作来处理，例如 Logger、Authorization、GZIP 以及最终的 DB 操作
+* Crash 处理 :Gin 框架可以捕获一个发生在 HTTP 请求中的 panic 并 recover 它，从而保证服务器始终可用。此外，你还可以向 Sentry 报告这个 panic！
+* JSON 验证:Gin 框架可以解析并验证 JSON 格式的请求数据，例如检查某个必须值是否存在。
+* 路由群组 :支持通过路由群组来更好地组织路由，例如是否需要授权、设置 API 的版本等，此外，这些群组可以无限制地嵌套而不会降低性能。
+* API 冻结:支持 API 冻结，新版本的发布不会破坏已有的旧代码。
+* 错误管理:Gin 框架提供了一种方便的机制来收集 HTTP 请求期间发生的所有错误，并且最终通过中间件将它们写入日志文件、数据库或者通过网络发送到其它系统。
+* 内置渲染: Gin 框架提供了简单易上手的 API 来返回 JSON、XML 或者 HTML 格式响应。
+* 可扩展性: 我们将会在后续示例代码中看到 Gin 框架非常容易扩展。
+* 易于测试: Gin 框架提供了完整的单元测试套件
+
+#### [echo](https://github.com/labstack/echo)
+
+High performance, minimalist Go web framework <https://echo.labstack.com>
+
+```sh
+go get -u github.com/labstack/echo/
+```
+
+#### [go-micro](https://github.com/micro/go-micro)
+
+A distributed systems development framework <https://go-micro.dev>
+
+```sh
+go run main.go --registry=etcd
+
+micro --registry=etcd api --namespace='' --handler=rpc
+
+# WEb dashboard
+micro web # http://localhost:8082/
+
+# 启动 API 网关
+micro api --handler=api
+
+curl -H 'Content-Type: application/json' \
+    -d '{"service": "go.micro.srv.greeter", "method": "Greeter.Hello", "request": {"name": "学院君"}}' \
+    http://localhost:8080/rpc
+
+go run client.go
+
+micro proxy go.micro.srv.greeter
+curl \
+-H 'Content-Type: application/json' \
+-H 'Micro-Service: go.micro.srv.greeter' \
+-H 'Micro-Endpoint: Greeter.Hello' \
+-d '{"name": "学院君"}' \
+http://localhost:8081
+
+micro cli
+micro list services
+micro get service  go.micro.srv.greeter
+micro status|health go.micro.srv.greeter
+micro call go.micro.srv.greeter Greeter.Hello '{"name":"henry"}'
+micro logs example-service
+
+micro bot --inputs=slack --slack_token=SLACK_TOKEN
+```
+
+### API
+
+- [go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go <https://goswagger.io>
+- [swag](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
+ 
+### Cli
+
+- [cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
+	+ [](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247486779&idx=2&sn=31f80b575eb4d225cb59a77f78c043ec&chksm=fb0be7afcc7c6eb95ecdbd7d3434808356bc0ebcc3c232eb60c619d90b9d9cf43a0ad0184ef4)
+- [mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go <https://magefile.org>
+- [gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
+- [cli](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
+- [tview](https://github.com/rivo/tview)Terminal UI library with rich, interactive widgets — written in Golang
+ 
+### Admin
+
+- [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes <https://www.go-admin.com>
+  - [](https://book.go-admin.cn/zh)
+- [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. <http://getqor.com/>
+- [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ <http://qmplus.henrongyi.top>
+  
+### DB
+
+- [badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. <https://open.dgraph.io/post/badger/>
+- [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
+- [mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
+- [db](https://github.com/upper/db):Productive data access layer for Go. <https://upper.io/db.v3>
+- [sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql <http://jmoiron.github.io/sqlx/>
+- [mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
+- `go get -u github.com/go-sql-driver/mysql`
+- [xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle <http://xorm.io>
+- [gorm](https://github.com/go-gorm/gorm):The fantastic ORM library for Golang, aims to be developer friendly <https://gorm.io> `go get -u github.com/jinzhu/gorm`
+- redis
+  - [redigo](https://github.com/gomodule/redigo):Go client for Redis
+  - [redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
+- [kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
+ 
+### Network
+
+- [gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
+- [kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
+- [fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
+- [gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) <http://parnurzeal.github.io/gorequest/>
+- [cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
+- [quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
+  
+### Router
+
+- [mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. <http://www.gorillatoolkit.org/pkg/mux>
+- [chi](https://github.com/go-chi/chi):lightweight, idiomatic and composable router for building Go HTTP services
+
+### UI
+
+- [ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
+- [gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
+- [fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design <https://fyne.io/>
+- [vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) <https://www.vugu.org>
+- [app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
+
+### RPC
+
+* [protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
+* [Protocol Buffers](https://pkg.go.dev/google.golang.org/protobuf)
+
+### Micro Services
+
+- [kit](https://github.com/go-kit/kit):A standard library for microservices. <https://gokit.io>
+* [micro](https://github.com/micro/micro):Micro is a cloud native development platform
+* Raft
+  - [dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
 
 ## [实践](https://draveness.me/golang-101/)
 
@@ -1105,162 +1454,46 @@ var _ = Describe("Book", func() {
 })
 ```
 
-## [beego](https://github.com/astaxie/beego)
+### The Zen of Go
 
-beego is an open-source, high-performance web framework for the Go programming language. <http://beego.me>
+* 每个package实现单一的目的
+* 显式处理错误
+* 尽早返回，而不是使用深嵌套
+* 让调用者选择并发
+* 在启动一个goroutine时，需要知道何时它会停止
+* 避免package级别的状态
+* 简单很重要
+* 编写测试以锁定 package API的行为
+* 如果觉得慢，首先编写benchmark来证明
+* 节制是一种美德
+* 可维护性
+ 
+## 利与弊
 
-* [beego/admin](https://github.com/beego/admin):基于beego的后台管理系统
-
-```go
-go get -u github.com/astaxie/beego
-go get -u github.com/beego/bee
-
-cd $GOPATH/src
-bee new hello
-cd hello
-bee run hello // 打开 http://localhost:8080/
-
-// import path does not begin with hostname
-export GOROOT=/usr/local/opt/go/libexec
-```
-
-```go
-go get github.com/beego/admin
-bee new hello
-
-// hello/routers/router.go
-import (
-    "hello/controllers"         //自身业务包
-    "github.com/astaxie/beego"  //beego 包
-    "github.com/beego/admin"  //admin 包
-)
-
-func init() {
-    admin.Run()
-    beego.Router("/", &controllers.MainController{})
-}
-
-// mysql
-db_host = localhost
-db_port = 3306
-db_user = root
-db_pass = root
-db_name = admin
-db_type = mysql
-postgresql数据库链接信息
-
-db_host = localhost
-db_port = 5432
-db_user = postgres
-db_pass = postgres
-db_name = admin
-db_type = postgres
-db_sslmode=disable
-sqlite3数据库链接信息
-
-// db_path 是指数据库保存的路径，默认是在项目的根目录
-db_path = ./
-db_name = admin
-db_type = sqlite3
-
-// 部分权限系统需要配置的信息
-
-sessionon = true
-rbac_role_table = role
-rbac_node_table = node
-rbac_group_table = group
-rbac_user_table = user
-#admin用户名 此用户登录不用认证
-rbac_admin_user = admin
-
-#默认不需要认证模块
-not_auth_package = public,static
-#默认认证类型 0 不认证 1 登录认证 2 实时认证
-user_auth_type = 1
-#默认登录网关
-rbac_auth_gateway = /public/login
-#默认模版
-template_type=easyui
-
-cd $GOPATH/src/hello
-cp -R ../github.com/beego/admin/static ./
-cp -R ../github.com/beego/admin/views ./
-
-go build
-./hello -syncdb
-// 默认得用户名密码都是admin
-```
-
-## [GoFrame](https://github.com/gogf/gf)
-
-* a modular, powerful, high-performance and enterprise-class application development framework of Golang. https://goframe.org/
-* [gfast](https://github.com/tiger1103/gfast) 基于GF(Go Frame)的后台管理系统 http://www.g-fast.cn/
-
-## [gin](https://github.com/gin-gonic/gin)
-
-Gin is a HTTP web framework written in Go (Golang). It features a Martini-like API with much better performance -- up to 40 times faster. If you need smashing performance, get yourself some Gin. <https://gin-gonic.github.io/gin/>
-
-* 快速
-  - 基于 Radix 树（一种更节省空间的 Trie 树结构）的路由，占用内存更少；
-  - 没有反射；
-  - 可预测的 API 性能。
-* 内置路由器:开箱即用的路由器功能，不需要做任何配置即可使用
-* 支持中间件:传入的 HTTP 请求可以经由一系列中间件和最终操作来处理，例如 Logger、Authorization、GZIP 以及最终的 DB 操作
-* Crash 处理 :Gin 框架可以捕获一个发生在 HTTP 请求中的 panic 并 recover 它，从而保证服务器始终可用。此外，你还可以向 Sentry 报告这个 panic！
-* JSON 验证:Gin 框架可以解析并验证 JSON 格式的请求数据，例如检查某个必须值是否存在。
-* 路由群组 :支持通过路由群组来更好地组织路由，例如是否需要授权、设置 API 的版本等，此外，这些群组可以无限制地嵌套而不会降低性能。
-* API 冻结:支持 API 冻结，新版本的发布不会破坏已有的旧代码。
-* 错误管理:Gin 框架提供了一种方便的机制来收集 HTTP 请求期间发生的所有错误，并且最终通过中间件将它们写入日志文件、数据库或者通过网络发送到其它系统。
-* 内置渲染: Gin 框架提供了简单易上手的 API 来返回 JSON、XML 或者 HTML 格式响应。
-* 可扩展性: 我们将会在后续示例代码中看到 Gin 框架非常容易扩展。
-* 易于测试: Gin 框架提供了完整的单元测试套件
-
-## [echo](https://github.com/labstack/echo)
-
-High performance, minimalist Go web framework <https://echo.labstack.com>
-
-```sh
-go get -u github.com/labstack/echo/
-```
-
-## [go-micro](https://github.com/micro/go-micro)
-
-A distributed systems development framework <https://go-micro.dev>
-
-```sh
-go run main.go --registry=etcd
-
-micro --registry=etcd api --namespace='' --handler=rpc
-
-# WEb dashboard
-micro web # http://localhost:8082/
-
-# 启动 API 网关
-micro api --handler=api
-
-curl -H 'Content-Type: application/json' \
-    -d '{"service": "go.micro.srv.greeter", "method": "Greeter.Hello", "request": {"name": "学院君"}}' \
-    http://localhost:8080/rpc
-
-go run client.go
-
-micro proxy go.micro.srv.greeter
-curl \
--H 'Content-Type: application/json' \
--H 'Micro-Service: go.micro.srv.greeter' \
--H 'Micro-Endpoint: Greeter.Hello' \
--d '{"name": "学院君"}' \
-http://localhost:8081
-
-micro cli
-micro list services
-micro get service  go.micro.srv.greeter
-micro status|health go.micro.srv.greeter
-micro call go.micro.srv.greeter Greeter.Hello '{"name":"henry"}'
-micro logs example-service
-
-micro bot --inputs=slack --slack_token=SLACK_TOKEN
-```
+* 利
+  - 速度非常快：Go 语言是一门非常快速的编程语言。因为 Go 语言是编译成机器码的，因此，它的表现自然会优于那些解释性或具有虚拟运行时的编程语言。Go 程序的编译速度也非常快，并且生成的二进制文件非常小。我们的 API 在短短几秒钟内就编译完毕，生成的可执行文件区区只有 11.5MB
+  - 易于掌握 与其他语言相比，Go 语言的语法很简单，很容易掌握。完全可以把 Go 语言的大部分语法记在脑子里，这意味着你并不需要花很多时间来查找东西。Go 语言也非常干净易读。非 Go 语言的程序员，尤其是那些习惯于 C 风格语法的程序员，就可以阅读 Go 程序代码，并且能够理解发生什么事
+  - 静态类型定义语言 Go 语言是一种强大的静态类型定义语言。有基本类型，如 int、byte 和 string。也有结构类型。与任何强类型语言一样，类型系统允许编译器帮助捕获整个类的错误。Go 语言还具有内置的列表和映射类型，而且它们也易于使用。
+  - 有编译器
+  - 接口类型 Go 语言有接口类型，任何结构都可以简单地通过实现接口的方法来满足接口。这允许你解耦代码中的依赖项。然后，你可以在测试中模拟你的依赖项。通过使用接口，你可以编写更加模块化的可测试代码。Go 语言还具有头等函数，这使得开发人员以更实用的方式编写代码成为可能。
+  - 标准库 Go 语言有一个相当不错的标准库。它提供了方便的内置函数，用于处理基本类型。有些包可以让你轻松构建一个 Web 服务器、处理 I/O、使用加密技术以及操作原始字节。标准库提供的 JSON 序列化和反序列化非常简单。通过使用“tags”，你可以在 struct 字段旁边指定 JSON 字段名。
+  - 测试支持 测试支持内置在标准库中，不需要额外的依赖。如果你有个名为 thing.go 的文件，请在另一个名为 thing_test.go 的文件中编写测试，并运行“go test”。Go 就将快速执行这些测试。
+  - 静态分析工具 Go 语言的静态分析工具众多且强大。一种特别的工具是 gofmt，根据 Go 的建议风格对代码进行格式化。这可以规范项目的许多意见，让团队奖经理集中在代码所做的工作上。我们对每个构建运行 gofmt、golint 和 vet，如果发现任何警告的话，则构建将会失败。
+  - 垃圾收集 在设计 Go 语言时，有意将内存管理设计得比 C 和 C++ 更容易。动态分配的对象是垃圾收集。Go 语言使指针的使用更加安全，因为它不允许指针运算。还提供了使用值类型的选项。
+  - 更容易的并发模型 虽然并发编程从来就不是一件易事，但 Go 语言在并发编程要比其他语言更容易。创建一个名为“goroutine”的轻量级线程，并通过“channel”与它进行通信几乎是非常简单的事情，至于更为复杂的模型，也是有可能能够实现的。
+* 弊
+  - 没有泛型 首先，这个问题就像房间里的大象一样，是显而易见而又被忽略的事实。Go 语言没有泛型。对于来自使用 Java 这样的语言的开发者来说，要转向 Go 语言，这是一个需要克服的巨大障碍。这意味着代码的重用级别降低了。虽然 Go 语言有头等函数，但如果编写“map”、“reduce”和“filter”等函数，将这些函数设计为对一种类型的集合进行操作，就不能将这些函数重用于其他不同的类型集合。要解决这一问题有很多方法，但都最终都要涉及到编写更多的代码，如此一来，生产力和可维护性就降低了
+  - 接口是隐式的 虽然有接口这一点很好，但是结构却是隐式地而非显式地实现接口。这点被称为是 Go 语言的优势之一，但我们发现，很难从结构中看出它是否实现了接口。你只能通过尝试编译程序才能真正了解。如果程序很小，这当然没有什么问题。但如果这个程序是中大型规模，麻烦就大了。
+  - 库支持不佳 Go 语言的库支持参差不齐。我们的 API 与 Contentful 集成，但后者并没有官方支持的 Go SDK。这意味着我们必须编写（并维护！）大量代码来请求和解析 Contentful 中的数据。我们还必须依赖第三方的 Elasticsearch 库。由厂商提供的 Go SDK 并不像他们的 Java、Ruby 或 JavaScript 同类产品那样受欢迎。
+  - 社区沟通很难
+    + Go 社区可能不会接受建议。在 golint 的 GitHub 存储库中考虑这个问题：<https://github.com/golang/lint/issues/65> ，有用户请求 golint 在发现警告时，能够使构建失败（这就是我们在项目中所做的事情）。维护者立即否定了这一想法。但是，由于有太多的人就这个问题发表了评论，一年后，维护者最终不得不增加了所请求的特性。
+    + Go 社区似乎也不喜欢 Web 框架。虽然 Go 语言的 HTTP 库涵盖了很多方面，但它并不支持路径参数、输入检查和验证，也不支持 Web 应用程序中常见的横切关注点。Ruby 开发人员有 Rails，Java 开发人员有 Spring MVC，Python 开发者有 Django。但许多 Go 开发人员选择了避免使用框架。然而现实是，并非没有框架，恰恰相反有很多。但是，一旦你开始将某个框架用于某个项目，要想避免被遗弃的命运几乎是不可能的。
+  - 分裂的依赖关系管理：Go 语言没有一个稳定的、正式的包管理器。经过多年的社区乞求，Go 项目最近才发布 godep。在此之前，已经有许多工具填补了这个空白。我们在项目中使用了非常强大的 govendor，但这意味着社区是分裂的，对刚接触 Go 语言的开发人员来说，这可能是非常令人困惑的。此外，几乎所有的包管理器都由 Git 存储库提供支持，Git 存储库的历史可能随时会发生更改。将其与 Maven Central 相比，后者永远不会删除或更改项目所依赖的库。
+* 决定是否使用 Go 语言
+  - 需要考虑一下机器的情况。你发送和接受字节时。你管理数千个并发进程时。你也有可能正在编写操作系统、容器系统或区块链节点。在这些情况下，很可能你不会关心泛型。因为你忙着从芯片榨取每纳秒的性能
+  - 很多时候，你需要考虑人类。你需要处理的业务领域数据：客户、员工、产品、订单。你需要编写对这些域实体进行操作的业务逻辑，并且需要多年来维护此业务逻辑。并且需要处理不断变化的需求，还要做的越快越好。对于这些情况，开发人员的经验很重要。
+  - Go 语言是一种编程语言，更重视的是机器时间而不是人类时间。有时候，你的领域中，机器，或者程序性能是最关键的。在这些情况下，Go 可以成为一个很好的 C 或 C++ 替代品。但是，当你编写一个典型的 n 层应用程序时，性能瓶颈通常会出现在数据库中，更重要的是，你将如何对数据建模
+  - 处理的是字节，那么 Go 语言可能是一个不错的选择。处理数据，那么 Go 语言可能不是一个好的选择
 
 ## 问题
 
@@ -1310,6 +1543,28 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * 当go服务部署到线上了，发现有内存泄露，该怎么处理
 
 ## 教程
+
+* [A Tour of Go](https://tour.golang.org/)
+* [Play with Go](https://play-with-go.dev/guides.html)
+* [go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
+* [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
+* [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
+* [learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang <https://github.com/pathbox/learning-go>
+* [learninggo](https://github.com/miekg/learninggo):Learning Go Book in mmark
+  - [Learning-Go-zh-cn](https://github.com/mikespook/Learning-Go-zh-cn) <http://mikespook.com/learning-go/>
+* [go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
+* [go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
+* [go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
+* [golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
+* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese.
+* [ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
+* [gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material <https://www.ardanlabs.com/>
+* [gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
+* [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 <https://geektutu.com/post/gee.html>
+* [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. <https://go101.org>
+* [Go by Example](https://gobyexample.com/)
+
+### 项目实现 
 
 * 功能：测试账号系统（后面统称为apiserver）
   - API 服务器状态检查
@@ -1445,189 +1700,6 @@ use of vendored package not allowed # vendor文件夹里面的包路径出现计
 * [go-app](https://github.com/maxence-charriere/go-app):A package to build progressive web apps with Go programming language and WebAssembly. <https://luck.murlok.io>
 * [](https://github.com/lexkong/apiserver_demos)
 * [](https://github.com/google/exposure-notifications-server) Exposure Notification Reference Server | Covid-19 Exposure Notifications
-
-## 教程 course
-
-* [A Tour of Go](https://tour.golang.org/)
-* [Play with Go](https://play-with-go.dev/guides.html)
-* [go-basic](https://github.com/roth1002/go-basic):The golang basic syntax example
-* [Golang_Puzzlers](https://github.com/hyper0x/Golang_Puzzlers):An example project, for my column named "Core Golang - 36 lessons"
-* [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang):A golang ebook intro how to build a web with golang
-* [learning-go](https://github.com/pathbox/learning-go):learning golang-Don't stop learning Golang <https://github.com/pathbox/learning-go>
-* [learninggo](https://github.com/miekg/learninggo):Learning Go Book in mmark
-  - [Learning-Go-zh-cn](https://github.com/mikespook/Learning-Go-zh-cn) <http://mikespook.com/learning-go/>
-* [go-micro-services](https://github.com/harlow/go-micro-services):HTTP up front, Protobufs in the rear
-* [go-best-practice](https://github.com/astaxie/go-best-practice):Trying to complete over 100 projects in various categories in golang.
-* [go-fundamental-programming](https://github.com/Unknwon/go-fundamental-programming):《Go 编程基础》是一套针对 Google 出品的 Go 语言的视频语音教程，主要面向新手级别的学习者。
-* [golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap):Roadmap to becoming a Go developer in 2019
-* [go_command_tutorial](https://github.com/hyper0x/go_command_tutorial):Golang command tutorial in Chinese.
-* [ultimate-go](https://github.com/hoanhan101/ultimate-go):Ultimate Go study guide, with heavily documented code and programs analysis all in 1 place →
-* [gotraining](https://github.com/ardanlabs/gotraining):Go Training Class Material <https://www.ardanlabs.com/>
-* [gostart](https://github.com/alco/gostart):A getting started guide for Go newcomers
-* [7days-golang](https://github.com/geektutu/7days-golang):7 days golang apps from scratch (web framework Gee, distributed cache GeeCache, object relational mapping ORM framework GeeORM etc) 7天用Go动手写/从零实现系列 <https://geektutu.com/post/gee.html>
-* [go101](https://github.com/go101/go101):An online book focusing on Go syntax/semantics. <https://go101.org>
-* [Go by Example](https://gobyexample.com/)
-
-## 扩展
-
-* 框架
-  + [macaron](https://github.com/go-macaron/macaron):Package macaron is a high productive and modular web framework in Go.
-  - [colly](https://github.com/gocolly/colly):Elegant Scraper and Crawler Framework for Golang <http://go-colly.org/>
-  - [singo](https://github.com/Gourouting/singo):Gin+Gorm开发Golang API快速开发脚手架
-  - [goim](https://github.com/Terry-Mao/goim):goim <https://goim.io/>
-  - [fiber](https://github.com/gofiber/fiber): zap Fiber is an Express inspired web framework written in Go with coffee <https://gofiber.io>
-  - [martini](https://github.com/go-martini/martini):Classy web framework for Go <http://martini.codegangsta.io>
-  - [iris](https://github.com/kataras/iris):The fastest community-driven web framework for Go. Socket-Sharding, gRPC, Automatic HTTPS with Public Domain, MVC, Sessions, Caching, Versioning API, Problem API, Websocket, Dependency Injection and more. Fully compatible with the standard library and 3rd-party middleware packages. | <https://bit.ly/iriscandothat1>
-    + [examples](https://github.com/iris-contrib/examples)This repository contains small and practical examples for the Iris Web Framework. <https://iris-go.com>
-  - [nitro](https://github.com/asim/nitro):Nitro (formerly known as Go Micro) is a blazingly fast framework for distributed app development. <https://go-nitro.dev/>
-* 包管理
-  - [govendor](https://github.com/kardianos/govendor):Go vendor tool that works with the standard vendor file.
-  - [Go Packages](https://godoc.org/)
-  - [gvm](https://github.com/moovweb/gvm):Go Version Manager <http://github.com/moovweb/gvm>
-* [tools](https://github.com/golang/tools):[mirror] Go Tools <https://godoc.org/golang.org/x/tools>
-* [gopher-lua](https://github.com/yuin/gopher-lua):GopherLua: VM and compiler for Lua in Go
-* [lorca](https://github.com/zserge/lorca):Build cross-platform modern desktop apps in Go + HTML5
-* Cli
-  - [cobra](https://github.com/spf13/cobra):A Commander for modern Go CLI interactions
-    + [](https://mp.weixin.qq.com/s?__biz=MzU0MzQ5MDA0Mw==&mid=2247486779&idx=2&sn=31f80b575eb4d225cb59a77f78c043ec&chksm=fb0be7afcc7c6eb95ecdbd7d3434808356bc0ebcc3c232eb60c619d90b9d9cf43a0ad0184ef4)
-  - [mage](https://github.com/magefile/mage):a Make/rake-like dev tool using Go <https://magefile.org>
-  - [gore](https://github.com/motemen/gore):Yet another Go REPL that works nicely. Featured with line editing, code completion, and more.
-  - [cli](https://github.com/urfave/cli):A simple, fast, and fun package for building command line apps in Go
-  - [tview](https://github.com/rivo/tview)Terminal UI library with rich, interactive widgets — written in Golang
-* 语法检测
-  - [revive](https://github.com/mgechev/revive):🔥 ~6x faster, stricter, configurable, extensible, and beautiful drop-in replacement for golint. <https://revive.run>
-  - [golangci-lint](https://github.com/golangci/golangci-lint):Fast linters Runner for Go
-* 路由
-  - [mux](https://github.com/gorilla/mux):A powerful URL router and dispatcher for golang. <http://www.gorillatoolkit.org/pkg/mux>
-  - [chi](https://github.com/go-chi/chi):lightweight, idiomatic and composable router for building Go HTTP services
-* error
-  - [errors](https://github.com/pkg/errors):Simple error handling primitives <https://godoc.org/github.com/pkg/errors>
-* 微服务
-  - [kit](https://github.com/go-kit/kit):A standard library for microservices. <https://gokit.io>
-* 测试
-  - [testify](https://github.com/stretchr/testify):A toolkit with common assertions and mocks that plays nicely with the standard library
-  - [gin](https://github.com/codegangsta/gin):Live reload utility for Go web servers
-  - [goreporter](https://github.com/360EntSecGroup-Skylar/goreporter):A Golang tool that does static analysis, unit testing, code review and generate code quality report.
-  - [](https://github.com/nakabonne/ali):Generate HTTP load and plot the results in real-time
-* mock
-  - [mock](https://github.com/golang/mock):GoMock is a mocking framework for the Go programming language.
-* 模版
-  - [pongo2](https://github.com/flosch/pongo2):Django-syntax like template-engine for Go
-* logger
-  - [logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-  - [goaccess](https://github.com/allinurl/goaccess):GoAccess is a real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems or through your browser. <https://goaccess.io>
-* 缓存
-  - [go-cache](https://github.com/patrickmn/go-cache):An in-memory key:value store/cache (similar to Memcached) library for Go, suitable for single-machine applications. <https://patrickmn.com/projects/go-cache/>
-* DB
-  - [badger](https://github.com/dgraph-io/badger):Fast key-value DB in Go. <https://open.dgraph.io/post/badger/>
-  - [go-sqlmock](https://github.com/DATA-DOG/go-sqlmock):Sql mock driver for golang to test database interactions
-  - [mongo-go-driver](https://github.com/mongodb/mongo-go-driver):The Go driver for MongoDB
-  - [db](https://github.com/upper/db):Productive data access layer for Go. <https://upper.io/db.v3>
-  - [sqlx](https://github.com/jmoiron/sqlx):general purpose extensions to golang's database/sql <http://jmoiron.github.io/sqlx/>
-  - [mgo](https://github.com/globalsign/mgo):The MongoDB driver for God
-  - `go get -u github.com/go-sql-driver/mysql`
-  - [xorm](https://github.com/go-xorm/xorm):Simple and Powerful ORM for Go, support mysql,postgres,tidb,sqlite3,mssql,oracle <http://xorm.io>
-  - [gorm](https://github.com/go-gorm/gorm):The fantastic ORM library for Golang, aims to be developer friendly <https://gorm.io> `go get -u github.com/jinzhu/gorm`
-* Http
-  - [gnet](https://github.com/panjf2000/gnet):🌐🐳 A high-performance, lightweight, non-blocking, event-driven networking framework written in pure Go.
-  - [kcp-go](https://github.com/xtaci/kcp-go):A Production-Grade Reliable-UDP Library for golang
-  - [fasthttp](https://github.com/valyala/fasthttp):Fast HTTP package for Go. Tuned for high performance. Zero memory allocations in hot paths. Up to 10x faster than net/http
-  - [gorequest](https://github.com/parnurzeal/gorequest):GoRequest -- Simplified HTTP client ( inspired by nodejs SuperAgent ) <http://parnurzeal.github.io/gorequest/>
-  - [cellnet](https://github.com/davyxu/cellnet):High performance, simple, extensible golang open source network library
-* [graphql](https://github.com/graphql-go/graphql):An implementation of GraphQL for Go / Golang
-* QUIC
-  - [quic-go](https://github.com/lucas-clemente/quic-go):A QUIC implementation in pure go
-* load
-  - [vegeta](https://github.com/tsenart/vegeta):HTTP load testing tool and library. It's over 9000!
-* excel
-  - [360EntSecGroup-Skylar/excelizes](https://github.com/360EntSecGroup-Skylar/excelize):Golang library for reading and writing Microsoft Excel™ (XLSX) files.
-* event-loop
-  - [evio](https://github.com/tidwall/evio):Fast event-loop networking for Go
-* [mobile](https://github.com/golang/mobile):[mirror] Go on Mobile <https://godoc.org/golang.org/x/mobile>
-* redis
-  - [redigo](https://github.com/gomodule/redigo):Go client for Redis
-  - [redis](https://github.com/go-redis/redis):Type-safe Redis client for Golang
-* UI
-  - [ui](https://github.com/andlabs/ui):Platform-native GUI library for Go.
-  - [gxui](https://github.com/google/gxui):An experimental Go cross platform UI library.
-  - [fyne](https://github.com/fyne-io/fyne):Cross platform GUI in Go based on Material Design <https://fyne.io/>
-  - [vugu](https://github.com/vugu/vugu):Vugu: A modern UI library for Go+WebAssembly (experimental) <https://www.vugu.org>
-* [gonum](https://github.com/gonum/gonum):Gonum is a set of numeric libraries for the Go programming language. It contains libraries for matrices, statistics, optimization, and more <https://www.gonum.org/>
-* [tinygo](https://github.com/aykevl/tinygo):Go compiler for small devices, based on LLVM. A GO COMPILER FOR SMALL PLACES bring the Go programming language to microcontrollers and modern web browsers by creating a new compiler based on LLVM.
-* [txqr](https://github.com/divan/txqr):Transfer data via animated QR codes
-* [bleve](https://github.com/blevesearch/bleve) A modern text indexing library for go
-* [webrtc](https://github.com/pion/webrtc)Pure Go implementation of the WebRTC API https://pion.ly/
-* 安全
-  - [Go-SCP](https://github.com/OWASP/Go-SCP):Go programming language secure coding practices guide
-  - [Go-SCP](https://github.com/Checkmarx/Go-SCP):Go programming language secure coding practices guide
-* [plot](https://github.com/gonum/plot):A repository for plotting and visualizing data
-* [envconfig](https://github.com/kelseyhightower/envconfig):Golang library for managing configuration data from environment variables
-* Admin
-  - [go-admin](https://github.com/GoAdminGroup/go-admin):A golang framework helps gopher to build a data visualization and admin panel in ten minutes <https://www.go-admin.com>
-	  - [](https://book.go-admin.cn/zh)
-  - [qor](https://github.com/qor/qor):QOR is a set of libraries written in Go that abstracts common features needed for business applications, CMSs, and E-commerce systems. <http://getqor.com/>
-  - [gin-vue-admin](https://github.com/flipped-aurora/gin-vue-admin):基于gin+vue搭建的后台管理系统框架，集成jwt鉴权，权限管理，动态路由，分页封装，多点登录拦截，资源权限，上传下载，代码生成器，表单生成器等基础功能，更多功能正在开发中，欢迎issue和pr~ <http://qmplus.henrongyi.top>
-* [syncthing](https://github.com/syncthing/syncthing)Open Source Continuous File Synchronization <http://forum.syncthing.net/>
-* [gobenchui](https://github.com/divan/gobenchui):UI for overview of your Golang package benchmarks progress.
-* [kafka-go](https://github.com/segmentio/kafka-go):Kafka library in Go
-* [go-github](https://github.com/google/go-github):Go library for accessing the GitHub API
-* 代码规范
-  - [Practical Go: Real world advice for writing maintainable Go programs](https://dave.cheney.net/practical-go/presentations/qcon-china.html)
-  - [project-layout](https://github.com/golang-standards/project-layout):Standard Go Project Layout
-  - [CodeReviewComments](https://github.com/golang/go/wiki/CodeReviewComments)
-* file
-  - [seaweedfs](https://github.com/chrislusf/seaweedfs):SeaweedFS is a simple and highly scalable distributed file system. There are two objectives: to store billions of files! to serve the files fast! SeaweedFS implements an object store with O(1) disk seek and an optional Filer with POSIX interface, supporting S3 API, Rack-Aware Erasure Coding for warm storage, FUSE mount, Hadoop compatible, WebDAV.
-* auth
-  - [authboss](https://github.com/volatiletech/authboss):The boss of http auth.
-* [bettercap](https://github.com/bettercap/bettercap):The state of the art network attack and monitoring framework. <https://www.bettercap.org/>
-* [dht](https://github.com/shiyanhui/dht):BitTorrent DHT Protocol && DHT Spider. <http://bthub.io>
-* [noti](https://github.com/variadico/noti):Monitor a process and trigger a notification.
-* [endless](https://github.com/fvbock/endless):Zero downtime restarts for go servers (Drop in replacement for http.ListenAndServe)
-* [cron](https://github.com/robfig/cron):a cron library for go
-* [dep](https://github.com/golang/dep):Go dependency management tool <https://golang.github.io/dep/>
-* [app](https://github.com/murlokswarm/app):Package to build GUI apps with Go, HTML and CSS.
-* [alice](https://github.com/justinas/alice):Painless middleware chaining for Go <https://godoc.org/github.com/justinas/alice>
-* [viper](https://github.com/spf13/viper):Go configuration with fangs
-* Debug
-  - [delve](https://github.com/derekparker/delve):Delve is a debugger for the Go programming language.
-* [logrus](https://github.com/sirupsen/logrus):Structured, pluggable logging for Go.
-* [goreleaser](https://github.com/goreleaser/goreleaser)：Deliver Go binaries as fast and easily as possible <https://goreleaser.com>
-* [go-plugin](https://github.com/hashicorp/go-plugin):Golang plugin system over RPC.
-* [go-tools](https://github.com/dominikh/go-tools):A collection of tools and libraries for working with Go code, including linters and static analysis <https://staticcheck.iop>
-* [jwt-go](https://github.com/dgrijalva/jwt-go):Golang implementation of JSON Web Tokens (JWT)
-* [yaml](https://github.com/go-yaml/yaml):YAML support for the Go language.
-* [fsnotify](https://github.com/fsnotify/fsnotify):Cross-platform file system notifications for Go. <https://fsnotify.org>
-* [golang-set](https://github.com/deckarep/golang-set)：A simple set type for the Go language. Also used in Docker, Kubernetes, Ethereum.
-* [go-simplejson](https://github.com/bitly/go-simplejson):a Go package to interact with arbitrary JSON
-* [crypto](https://github.com/golang/crypto):Go supplementary cryptography libraries <https://godoc.org/golang.org/x/crypto>
-* [daemon](https://github.com/takama/daemon):A daemon package for use with Go (golang) services with no dependencies
-* [protobuf](https://github.com/golang/protobuf):Go support for Google's protocol buffers
-* [go-callvis](https://github.com/TrueFurby/go-callvis):Visualize call graph of a Go program using dot format. <https://truefurby.github.io/go-callvis>
-* [go-perfbook](https://github.com/dgryski/go-perfbook):Thoughts on Go performance optimization
-* [sarama](https://github.com/Shopify/sarama):Sarama is a Go library for Apache Kafka 0.8, and up. <https://shopify.github.io/sarama>
-* [participle](https://github.com/alecthomas/participle):A parser library for Go
-* [gost](https://github.com/ginuerzh/gost):GO Simple Tunnel - a simple tunnel written in golang
-* [statik](https://github.com/rakyll/statik):Embed files into a Go executable
-* [v8worker](https://github.com/ry/v8worker):Minimal golang binding to V8
-* [gopls](https://github.com/golang/tools/blob/master/gopls/doc/user.md) cannot use path@version syntax in GOPATH mode `GO111MODULE=on go get golang.org/x/tools/gopls@latest`
-* Raft
-  - [dragonboat](https://github.com/lni/dragonboat):A feature complete and high performance multi-group Raft library in Go.
-* API
-  - [go-swagger](https://github.com/go-swagger/go-swagger):Swagger 2.0 implementation for go <https://goswagger.io>
-  - [swag](https://github.com/swaggo/swag):Automatically generate RESTful API documentation with Swagger 2.0 for Go.
-* 编辑器
-  - [liteide](https://github.com/visualfc/liteide)：LiteIDE is a simple, open source, cross-platform Go IDE.
-  - [go2go Playground](https://go2goplay.golang.org/):The go2go Playground
-  - VS Code 中调试 Go 代码建议使用 Delve `go get -u github.com/go-delve/delve/cmd/dlv`
-* [gocity](https://github.com/rodrigo-brito/gocity):📊 Code City metaphor for visualizing Go source code in 3D <https://go-city.github.io>
-* [gopsutil](https://github.com/shirou/gopsutil):psutil for golang
-* [ants](https://github.com/panjf2000/ants):🐜🐜🐜 ants is a high-performance and low-cost goroutine pool in Go, inspired by fasthttp./ ants 是一个高性能且低损耗的 goroutine 池。
-* [qrcp](https://github.com/claudiodangelis/qrcp):⚡ Transfer files over wifi from your computer to your mobile device by scanning a QR code without leaving the terminal. <https://claudiodangelis.com/qrcp>
-* [Protocol Buffers](https://pkg.go.dev/google.golang.org/protobuf)
-* [asyjson](https://github.com/mailru/easyjson):Fast JSON serializer for golang.
-* [awgo](https://github.com/deanishe/awgo):Go library for Alfred 3 workflows
-* [buffalo](https://github.com/gobuffalo/buffalo):Rapid Web Development w/ Go <http://gobuffalo.io>
-* [micro](https://github.com/micro/micro):Micro is a cloud native development platform
 
 ## 参考
 

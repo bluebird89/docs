@@ -208,7 +208,7 @@
 
 ## 图书
 
-* OKR：源于英特尔和谷歌的目标管理利器
-* OKR 工作法
+* OKR：源于英特尔和谷歌的目标管理利器 Objectives and Key Results: Driving Focus, Alignment, and Engagement with OKRs
+* OKR 工作法 Radical Focus: Achieving Your Most Important Goals with Objectives and Key Results
 * 这就是OKR
 * OKR 使用手册

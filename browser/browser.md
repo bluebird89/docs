@@ -1,20 +1,20 @@
 # Brower
 
-* [Chrome](./chrome.md) 基于Webkit
+* [Chrome](./chrome.md) 基于 Webkit
 	* Edge
 	* [mightyapp](https://www.mightyapp.com/)
-* [Firefox](./firefox.md)自研Gecko内核
-* Safari Webkit内核
+	* [brave-browser](https://github.com/brave/brave-browser):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
+* [Firefox](./firefox.md) 自研 Gecko 内核
+* Safari 基于 Webkit 内核
   - 像JavaScript引发的alert窗口或file组件打开的窗口，都属于模态窗口，它们会阻塞所有主线程中正在执行的JavaScript代码
 * Opera
   - adds unlimited VPN service to its
 * [beaker](https://beakerbrowser.com/):Beaker is a peer-to-peer browser with tools to create and host websites.
 * [browsershots](http://browsershots.org/)
-* [brave-browser](https://github.com/brave/brave-browser):Brave browser for Desktop and Laptop computers running Windows, OSX, and Linux <https://www.brave.com>
 * [qutebrowser](https://www.qutebrowser.org)
 * [Tor](http://torproject.lu/)
 * vivaldi
-* [Onion]=(https://onionbrowser.com/)
+* [Onion](https://onionbrowser.com/)
   - [](https://tor-browser.en.softonic.com/mac)
   - [Deep](https://github.com/mr-likar/DeepWeb)
 * [Nessie](https://www.radsix.com/) an extremely simple web browser for Windows

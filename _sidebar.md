@@ -43,7 +43,7 @@
 
 - **操作系统**
   - [![](_media/windows.svg)Windows](/os/windows)
-  - [![](_media/mac.svg)macOS](/apple/mac)
+  - [![](imac.md)
 
 - **个人记录**
   - [![](_media/hexo.svg)归档](/record/before)

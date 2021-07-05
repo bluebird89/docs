@@ -111,8 +111,7 @@ CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
 * brew:下载源码解压后。／.configure&& make install,同时包含相关以来库，并自动配置好各种环境变量，易于卸载
 * brew cask：在 Homebrew 基础上的一个增强工具，用来安装 Mac 上的 GUI 程序应用包.已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到统一目录（／opt/homebrew-cask/caskroom）,再软链到~/Applications/目录下
 
-```shell
-
+```sh
 echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
 
 brew -v|version
