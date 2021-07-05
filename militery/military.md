@@ -1,4 +1,4 @@
-# Militery
+# military
 
 ## 进化
 

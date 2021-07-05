@@ -559,6 +559,8 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 ## 复杂性
 
 * 价值并不在于某项单独技能有多厉害，而是整体交付能力。而交付过程中，需要管理各种复杂性。变得复杂，恰恰是一个公司走向成熟的标志。
+* [Computational Complexity: A Modern Approach](https://theory.cs.princeton.edu/complexity/)
+
 
 ### 来源
 
@@ -1076,6 +1078,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 * [《How to Design Programs An Introduction to Programming and Computing》](http://htdp.org/)
 * 程序是怎样运行的
+* Code Reading: The Open Source Perspective
 * 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
 * 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。可以让你在纷乱的现世中找到内心的平静。
 * 《[CODE: The Hidden Language of Computer Hardware and Software 编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
@@ -1087,7 +1090,7 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
   - [pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
 * 《The Practice of Programming》Kernighan
-* 《计算机程序设计艺术 The Art of Computer Programming》
+* [《计算机程序设计艺术 The Art of Computer Programming》](https://www-cs-faculty.stanford.edu/~knuth/taocp.html) Donald E. Knuth.
 * 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
 * [optimization](https://www.agner.org/optimize/)
   - Optimizing subroutines in assembly language: An optimization guide for x86 platforms

@@ -192,7 +192,6 @@
 * History of Imperial China
 * 古史辩
 * 中国人史纲
-* 康熙王朝
 * 明朝那些事儿
 * 中国历代政治得失
 

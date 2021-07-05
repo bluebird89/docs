@@ -11,8 +11,27 @@ The Python programming language, Guido van Rossum 在1989年圣诞节期间，�
   - 代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒
 * 解释型语言，代码在执行时会一行一行地翻译成CPU能理解的机器码，翻译过程非常耗时。而C程序是运行前直接编译成CPU能执行的机器码，所以非常快
 
+## 版本
+
+
+### Python2
+
+* 第一个版本一直延续到Python2.7，默认编码 ASCII。
+* 正常保存中文字符须先指定utf-8 或者 gbk 格式
+* 字符串分为 unicode 和 str 两种类型。本质上 str 类型是二进制字节序列， unicode 类型字符串是字符。
+*  unicode 字符保存到文件或者传输到网络需要经过encode 方法 编码处理转换成二进制形式的 str 类型
+
+### Python3 
+
+* 系统默认编码设置为 UTF-8
+* 文本字符全部用 str 类型表示，str 能表示 Unicode 字符集中所有字符
+* 二进制字节数据用一种全新的数据类型，用 bytes 来表示，Python2中也有bytes类型，但那只不过是str的一个别名。在字符引号前加‘b’，明确表示这是一个 bytes 类型的对象，实际上就是一组二进制字节序列组成的数据，bytes 类型可以是 ASCII范围内的字符和其它十六进制形式的字符数据，但不能用中文等非ASCII字符表示。
+* bytes 类型提供的操作和 str 一样，支持分片、索引、基本数值运算等操作。但是 str 与 bytes 类型的数据不能执行 + 操作，尽管在python2中是可行的。
+
 ## 解释器
 
+* 计算机要根据编程语言执行任务，就必须保证编程语言写出的程序决不能有歧义，所以，任何一种编程语言都有自己的一套语法，编译器或者解释器就是负责把符合语法的程序代码转换成CPU能够执行的机器码，然后执行
+* 访问时才执行
 * 首先会进行语法检查，代码检查
 * 解释器多开的话，是很难保证线程安全的。为了解决这个问题，Python设计了GIL机制，也就是全局解释器锁，它保证了同一时刻最多只有一个解释器线程在执
   - 保证了线程安全
@@ -23,7 +42,7 @@ The Python programming language, Guido van Rossum 在1989年圣诞节期间，�
 * PyPy目标是执行速度。采用JIT技术，对Python代码进行动态编译（注意不是解释），可以显著提高Python代码的执行速度。绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，导致相同的Python代码在两种解释器下执行可能会有不同的结果
 * Jython 运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行
 
-### install 安装
+## install 安装
 
 * Mac下的python2.7 默认是安装在／System目录下的。Mac有个Rootless机制，默认不允许直接在／System下作修改。所以要先关闭Rootless机制。关闭有风险
   - 重启电脑, 重启过程中按住command+R, 进入恢复模式
@@ -167,6 +186,99 @@ virtualenv -p /usr/local/bin/python3.6 ENV3.6
 source ENV3.6/bin/activate
 ```
 
+### [iPython](https://github.com/ipython/ipython)
+
+更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
+
+```sh
+pip install ipython
+
+pip install 'ipython[zmq,qtconsole,notebook,test]'
+```
+
+### docker
+
+* mkdir -p ~/python ~/python/myapp  myapp目录将映射为python容器配置的应用目录
+* 创建Dockerfile
+
+```
+FROM buildpack-deps:jessie
+
+# remove several traces of debian python
+RUN apt-get purge -y python.*
+
+# http://bugs.python.org/issue19846
+# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
+ENV LANG C.UTF-8
+
+# gpg: key F73C700D: public key "Larry Hastings <larry@hastings.org>" imported
+ENV GPG_KEY 97FC712E4C024BBEA48A61ED3A5CA953F73C700D
+
+ENV PYTHON_VERSION 3.5.1
+
+# if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
+ENV PYTHON_PIP_VERSION 8.1.2
+
+RUN set -ex \
+        && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz \
+        && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc \
+        && export GNUPGHOME="$(mktemp -d)" \
+        && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
+        && gpg --batch --verify python.tar.xz.asc python.tar.xz \
+        && rm -r "$GNUPGHOME" python.tar.xz.asc \
+        && mkdir -p /usr/src/python \
+        && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
+        && rm python.tar.xz \
+        \
+        && cd /usr/src/python \
+        && ./configure --enable-shared --enable-unicode=ucs4 \
+        && make -j$(nproc) \
+        && make install \
+        && ldconfig \
+        && pip3 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
+        && find /usr/local -depth \
+                \( \
+                    \( -type d -a -name test -o -name tests \) \
+                    -o \
+                    \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
+                \) -exec rm -rf '{}' + \
+        && rm -rf /usr/src/python ~/.cache
+
+# make some useful symlinks that are expected to exist
+RUN cd /usr/local/bin \
+        && ln -s easy_install-3.5 easy_install \
+        && ln -s idle3 idle \
+        && ln -s pydoc3 pydoc \
+        && ln -s python3 python \
+        && ln -s python3-config python-config
+
+CMD ["python3"]
+```
+
+- docker build -t python:3.5 .
+- docker run  -v $PWD/myapp:/usr/src/myapp  -w /usr/src/myapp python:3.5 python helloworld.py
+
+### 开发环境
+
+#### 编辑器插件
+
+* [Elpy](https://github.com/jorgenschaefer/elpy)：Emacs Python 开发环境。
+* [SublimeJEDI](https://github.com/srusskih/SublimeJEDI)：一个 Sublime Text 插件，用来使用超赞的自动补全库 Jedi。
+* Vim
+  - [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)：引入基于 [Jedi](https://github.com/davidhalter/jedi) 的 Python 自动补全引擎
+  - [Jedi-vim](https://github.com/davidhalter/jedi-vim)：绑定 Vim 和 Jedi 自动补全库对 Python 进行自动补全。
+  - [Python-mode](https://github.com/klen/python-mode)：将 Vim 变成 Python IDE 的一款多合一插件。
+* [PTVS](https://github.com/Microsoft/PTVS)：Visual Studio 的 Python 工具
+
+#### 集成开发环境
+
+流行的 Python 集成开发环境。
+
+* [PyCharm](https://www.jetbrains.com/pycharm/)：商业化的 Python IDE ，由 JetBrains 开发。也有免费的社区版提供
+* [LiClipse](http://www.liclipse.com/)：基于 Eclipse 的免费多语言 IDE 。使用 PyDev 来支持 Python
+* [Spyder](https://github.com/spyder-ide/spyder)：开源 Python IDE
+
+
 ## 包管理
 
 管理包和依赖的工具
@@ -193,11 +305,11 @@ pip install pipenv
 brew install pipenv
 ```
 
-## wheel
+### wheel
 
 Wheels are the new standard of python distribution and are intended to replace eggs.`pip install wheel`
 
-## 包管理工具easy_install.py和pip(pip3 python3)第三方包的安装管理
+### 包管理工具easy_install.py和pip(pip3 python3)第三方包的安装管理
 
 * Python2.7的安装包中，easy_install.py是默认安装的，而pip需要手动安装
 
@@ -253,32 +365,33 @@ trusted-host=mirrors.aliyun.com ## 目标
 pip install torch -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-### [iPython](https://github.com/ipython/ipython)
+### 包仓库
 
-更强大的python交互shell，支持变量自动补全，自动缩进，支持 bash shell 命令，内置了许多很有用的功能和函数
+本地 PyPI 仓库服务和代{过}{滤}理。
 
-```sh
-pip install ipython
+* warehouse：下一代 PyPI。(https://github.com/pypa/warehouse)
+* Warehouse：PyPA 提供的 PyPI 镜像工具。(https://warehouse.python.org/) [bandersnatch](https://bitbucket.org/pypa/bandersnatch)
+* devpi：PyPI 服务和打包/测试/分发工具。(http://doc.devpi.net/)
+* localshop：本地 PyPI 服务（自定义包并且自动对 PyPI 镜像）。(https://github.com/mvantellingen/localshop)
 
-pip install 'ipython[zmq,qtconsole,notebook,test]'
-```
+### 分发
 
-### 执行环境
+打包为可执行文件以便分发。
 
-* 命令行模式下
-  * 可以直接运行.py文件 `python hello.py`
-  * 添加`#!/usr/bin/env python3`,文件添加执行权限`./basic.py`
-* 交互模式：`python` `exit()`
-* [代码助手](https://raw.githubusercontent.com/michaelliao/learn-python3/master/teach/learning.py)
+* PyInstaller：将 Python 程序转换成独立的执行文件（跨平台）。(https://github.com/pyinstaller/pyinstaller)
+* dh-virtualenv：构建并将 virtualenv 虚拟环境作为一个 Debian 包来发布。(http://dh-virtualenv.readthedocs.org/)
+* Nuitka：将脚本、模块、包编译成可执行文件或扩展模块。(http://nuitka.net/)
+* py2app：将 Python 脚本变为独立软件包（Mac OS X）。(http://pythonhosted.org/py2app/)
+* py2exe：将 Python 脚本变为独立软件包（Windows）。(http://www.py2exe.org/)
+* pynsist：一个用来创建 Windows 安装程序的工具，可以在安装程序中打包 Python本身。(http://pynsist.readthedocs.org/)
 
-### 基础 Basic Syntax
+## 基础 Basic
 
-* 计算机要根据编程语言执行任务，就必须保证编程语言写出的程序决不能有歧义，所以，任何一种编程语言都有自己的一套语法，编译器或者解释器就是负责把符合语法的程序代码转换成CPU能够执行的机器码，然后执行
-* 访问时才执行
+* `#开头的语句是注释`
 * Everything in Python is an object:includes the functions, lists, dicts, classes, modules, a running function (instance of function definition), everything. In the CPython, it would mean there is an underlying struct variable for each object.
 * all the variables are stored in a dict. It'd be a string to object mapping
-* __globals__:This attribute, as the name suggests, has references of global variables. If you ever need to know what all global variables are in the scope of this function, this will tell you.
-* __code__:As everything in python is an object, this includes the bytecode too. The compiled python bytecode is a python code object. Which is accessible via __code__ attribute here
+* `__globals__`:This attribute, as the name suggests, has references of global variables. If you ever need to know what all global variables are in the scope of this function, this will tell you.
+* `__code__`:As everything in python is an object, this includes the bytecode too. The compiled python bytecode is a python code object. Which is accessible via `__code__` attribute here
 
 ```python
 locals()
@@ -293,13 +406,13 @@ hello.__code__.co_varnames
 hello.__code__.co_code
 ```
 
-## 输入与输出
+### 输入与输出
 
-* `#开头的语句是注释`
 * print()在括号中加上字符串，就可以向屏幕上输出指定的文字
-* 可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出（会依次打印每个字符串，遇到逗号“,”会输出一个空格）
-* 输入计算过程
-* input()，可以让用户输入字符串，并存放到一个变量里
+* 输入
+	* 计算过程
+	* `input()` 接受用户输入，并存放到一个变量里
+	* 可以接受多个字符串，用逗号“,”隔开，就可以连成一串输出（会依次打印每个字符串，遇到逗号“,”会输出一个空格）
 
 ```python
 print('hello, world')
@@ -309,11 +422,12 @@ name = input('please enter your name: ') // 有提示框
 print('hello,', name)
 ```
 
-## 数据类型与变量 Native Datatypes
+### 数据类型 Native Datatypes
 
 在计算机内部，可以把任何数据都看成一个“对象”，而变量就是在程序中用来指向这些数据对象的，对变量赋值就是把数据和变量给关联起来。对变量赋值x = y是把变量x指向真正的对象，该对象是变量y所指向的。随后对变量y的赋值不影响变量x的指向。
 
-* 基本类型
+#### 基本类型
+
   - 整数 Number:Python可以处理任意大小的整数，当然包括负整数，在程序中的表示方法和数学上的写法一模一样，例如：1，100，-8080，0，等等。二进制、十六进制表示整数比较方便，十六进制用0x前缀和0-9，a-f表示，例如：0xff00，0xa5b4c3d2，等等。
   - 浮点数:浮点数也就是小数，之所以称为浮点数，是因为按照科学记数法表示时，一个浮点数的小数点位置是可变的，比如，1.23x109和12.3x108是完全相等的。浮点数可以用数学写法，如1.23，3.14，-9.01，等等。或者用科学计数法表示，把10用e替代，1.23x10^9就是1.23e9，或者12.3e8，0.000012可以写成1.2e-5，等等。整数和浮点数在计算机内部存储的方式是不同的，整数运算永远是精确的（除法难道也是精确的？是的！），而浮点数运算则可能会有四舍五入的误差。也没有大小限制，但是超出一定范围就直接表示为inf（无限大）
   - 字符串 String:以单引号'或双引号"括起来的任意文本，比如'abc'，"xyz"等等。请注意，''或""本身只是一种表示方式，不是字符串的一部分，因此，字符串'abc'只有a，b，c这3个字符。如果'本身也是一个字符，那就可以用""括起来，比如"I'm OK"包含的字符是I，'，m，空格，O，K这6个字符。
@@ -324,25 +438,40 @@ print('hello,', name)
     + 用'''...'''的格式表示多行内容,输入时换行时添加空格
   - 布尔值 Boolean:只有True、False两种值,可以直接用True、False表示布尔值（请注意大小写）
   - 空值 None:Python里一个特殊的值，用None表示。None不能理解为0，因为0是有意义的，而None是一个特殊的空值。
-* 复合元素
-  - 列表 List：list是一种有序的集合，可以随时添加和删除其中的元素。元素的数据类型也可以不同。可以嵌套(多维数组).查找元素，全表遍历。list越大，查找越慢。
-  - 有序列表叫元组 Tuple tuple和list非常类似，但是tuple一旦初始化就不能修改.
-    + 当定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
-    + 可以嵌套list：可以修改
-  - dict全称dictionary，在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度.无论这个表有多大，查找速度都不会变慢.先在字典的索引表里（比如部首表）查这个字对应的页码（索引遍历）。通过key计算位置的算法称为哈希算法（Hash），要保证hash的正确性，作为key的对象就不能变。字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key
-    + 一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
-    + dict的key必须是不可变对象
-    + 如果获取的key不存在，dict就会报错：两种方法判断
-    + dict内部存放的顺序和key放入的顺序是没有关系的
-  - dict与list比较：用空间来换取时间的一种方法
+  
+#### 复合元素
+
+##### 列表 List
+
+* 一种有序的集合，可以随时添加和删除其中的元素。元素的数据类型也可以不同。可以嵌套(多维数组).查找元素，全表遍历。list越大，查找越慢。
+
+##### 有序列表元组 Tuple 
+
++ 和list非常类似，但是tuple一旦初始化就不能修改.
++ 当定义一个tuple时，在定义的时候，tuple的元素就必须被确定下来
++ 可以嵌套list：可以修改
+
+##### dict dictionary
+
+* 在其他语言中也称为map，使用键-值（key-value）存储，具有极快的查找速度.无论这个表有多大，查找速度都不会变慢.先在字典的索引表里（比如部首表）查这个字对应的页码（索引遍历）。通过key计算位置的算法称为哈希算法（Hash），要保证hash的正确性，作为key的对象就不能变。字符串、整数等都是不可变的，因此，可以放心地作为key。而list是可变的，就不能作为key
++ 一个key只能对应一个value，所以，多次对一个key放入value，后面的值会把前面的值冲掉
++ dict的key必须是不可变对象
++ 如果获取的key不存在，dict就会报错：两种方法判断
++ dict内部存放的顺序和key放入的顺序是没有关系的
+- dict与list比较：用空间来换取时间的一种方法
     + 查找和插入的速度极快，不会随着key的增加而变慢；
     + 需要占用大量的内存，内存浪费多。
-  - set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key
-    + 提供一个list作为输入集合
-    + 重复元素在set中自动被过滤
-    + 数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集
-    + set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。
-* 变量
+   
+##### set
+
+* 和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key
++ 提供一个list作为输入集合
++ 重复元素在set中自动被过滤
++ 数学意义上的无序和无重复元素的集合，因此，两个set可以做数学意义上的交集、并集
++ set和dict的唯一区别仅在于没有存储对应的value，但是，set的原理和dict一样，所以，同样不可以放入可变对象，因为无法判断两个可变对象是否相等，也就无法保证set内部“不会有重复元素”。
+
+### 变量
+
   - 不仅可以是数字，还可以是任意数据类型
   - 必须是大小写英文、数字和_的组合，且不能用数字开头
   - 等号=是赋值语句，可以把任意数据类型赋值给变量，同一个变量可以反复赋值，而且可以是不同类型的变量
@@ -354,7 +483,10 @@ print('hello,', name)
   - replace方法创建了一个新字符串'Abc'并返回
   - 对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容。相反，这些方法会创建新的对象并返回，这样，就保证了不可变对象本身永远是不可变的。
   - 因为不变对象一旦创建，对象内部的数据就不能修改，这样就减少了由于修改数据导致的错误。此外，由于对象不变，多任务环境下同时读取对象不需要加锁，同时读一点问题都没有。我们在编写程序时，如果可以设计一个不变对象，那就尽量设计成不变对象。
-* 常量：用全部大写的变量名表示常量。不能变的变量。事实上PI仍然是一个变量，Python根本没有任何机制保证PI不会被改变，所以，用全部大写的变量名表示常量只是一个习惯上的用法
+  
+### 常量
+
+用全部大写的变量名表示常量。不能变的变量。事实上PI仍然是一个变量，Python根本没有任何机制保证PI不会被改变，所以，用全部大写的变量名表示常量只是一个习惯上的用法
 
 ```python
 print('I\'m ok.')
@@ -425,19 +557,28 @@ a # 'ABC'
 b # 'aBC'
 ```
 
-## 高级特性
+### 切片（slice）
 
-* 切片（slice）：取一个list或tuple的部分元素.倒数第一个元素的索引是-1 L[begin:end:foot].还支持tuple str
-* 迭代：通过for循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。只要是可迭代对象(list、tuple、dict、set、str)，无论有无下标，都可以迭代.enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身
-* 列表生成式即List Comprehensions，是Python内置的非常简单却强大的可以用来创建list的生成式.运用列表生成式，可以快速生成list，可以通过一个list推导出另一个list
-* 生成器 generator:通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。是否可以在循环的过程中不断推算出后续的元素.
-  - generator保存的是算法，每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。
-  - 只要把一个列表生成式的[]改成()，就创建了一个generator.通过next()函数获得generator的下一个返回值,通过for循环来迭代
-  - 一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator.遇到yield就中断，下次又继续执行
+* 取一个list或tuple的部分元素.倒数第一个元素的索引是-1 L[begin:end:foot].还支持tuple str
+
 * 迭代器Iterator：可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator。
   - Iterator对象表示的是一个数据流，Iterator对象可以被next()函数调用并不断返回下一个数据，直到没有数据时抛出StopIteration错误。可以把这个数据流看做是一个有序序列，但我们却不能提前知道序列的长度，只能不断通过next()函数实现按需计算下一个数据，所以Iterator的计算是惰性的，只有在需要返回下一个数据时它才会计算。
 * 可迭代对象Iterable：可以直接作用于for循环的对象统称为可迭代对象：一类是集合数据类型，如list、tuple、dict、set、str等；一类是generator，包括生成器和带yield的generator function。
   - 生成器都是Iterator对象，但list、dict、str虽然是Iterable，却不是Iterator。把list、dict、str等Iterable变成Iterator可以使用iter()函数
+* 遍历迭代 Iteration：通过for循环来遍历这个list或tuple
+	* 只要是可迭代对象(list、tuple、dict、set、str)，无论有无下标，都可以迭代.enumerate函数可以把一个list变成索引-元素对，这样就可以在for循环中同时迭代索引和元素本身
+
+#### 列表生成式 List Comprehensions
+
+* 内置的非常简单却强大的可以用来创建list的生成式.运用列表生成式，可以快速生成list，可以通过一个list推导出另一个list
+
+#### 生成器 generator
+
+* 通过列表生成式，可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素占用的空间都白白浪费了。是否可以在循环的过程中不断推算出后续的元素.
+- generator保存的是算法，每次调用next(g)，就计算出g的下一个元素的值，直到计算到最后一个元素，没有更多的元素时，抛出StopIteration的错误。
+- 只要把一个列表生成式的[]改成()，就创建了一个generator.通过next()函数获得generator的下一个返回值,通过for循环来迭代
+  - 一个函数定义中包含yield关键字，那么这个函数就不再是一个普通函数，而是一个generator.遇到yield就中断，下次又继续执行
+ 
 
 ```python
 s = ['python', 'java', ['asp', 'php'], 'scheme']
@@ -555,7 +696,7 @@ isinstance(iter([]), Iterator) # True
   - %f    浮点数
   - %x    十六进制整数
   - 不太确定应该用什么，%s永远起作用，它会把任何数据类型转换为字符串
-  - 字符串里面的%是一个普通字符怎么办？这个时候就需要转义，用%%来表示一个%
+  - 字符串里面的%是一个普通字符怎么办？这个时候就需要转义，用`%%`来表示一个%
 * 另一种格式化字符串的方法是使用字符串的format()方法，它会用传入的参数依次替换字符串内的占位符{0}、{1}……
 
 ```python
@@ -593,12 +734,13 @@ print('%.2f' % 3.1415926) # 3.14
 'Hello, {0}, 成绩提升了 {1:.1f}%'.format('小明', 17.125)  # 'Hello, 小明, 成绩提升了 17.1%'
 ```
 
-## 控制语句 Flow Control
+### 控制语句 Flow Control
 
-* 判断语句
-* 循环:for while
-* break语句可以提前退出循环
-* continue语句，跳过当前的这次循环，直接开始下一次循环
+* 顺序
+* 判断
+* 循环 for while
+	* break 可以提前退出循环
+	* continue 跳过当前循环，直接开始下一次循环
 
 ```python
 age = 3
@@ -646,7 +788,7 @@ while n < 10:
     print(n)
 ```
 
-## 函数 Function
+### 函数 Function
 
 * 最基本的一种代码抽象方式,函数名其实就是指向一个函数对象的引用，完全可以把函数名赋给一个变量
   - abs(-10)是函数调用，而abs是函数本身
@@ -799,6 +941,14 @@ def fact_iter(num, product):
 
 ### 函数式编程 Functional Programming Lambda
 
+使用 Python 进行函数式编程。
+
+* CyToolz：Toolz 的 Cython 实现 : 高性能函数式工具。(https://github.com/pytoolz/cytoolz/)
+* fn.py：在 Python 中进行函数式编程 : 实现了一些享受函数式编程缺失的功能。(https://github.com/kachayev/fn.py)
+* funcy：炫酷又实用的函数式工具。(https://github.com/Suor/funcy)
+* Toolz：一组用于迭代器，函数和字典的函数式编程工具。(https://github.com/pytoolz/toolz)
+* [coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. <http://coconut-lang.org>
+
 * 一种抽象程度很高的编程范式，纯粹的函数式编程语言编写的函数没有变量，因此，任意一个函数，只要输入是确定的，输出就是确定的，这种纯函数我们称之为没有副作用
 * 特点:允许把函数本身作为参数传入另一个函数，还允许返回一个函数
 * Python对函数式编程提供部分支持。由于Python允许使用变量，因此，Python不是纯函数式编程语言。
@@ -819,12 +969,12 @@ def fact_iter(num, product):
   - 接受一个函数作为参数，并返回一个函数。借助Python的@语法，把decorator置于函数的定义处
   - 将函数包裹重新指向原函数变量名
   - 装饰器本身需要传入参数
-  - 内置的functools.wraps的使用，不需要编写wrapper.__name__ = func.__name__
+  - 内置的functools.wraps的使用，不需要编写`wrapper.__name__ = func.__name__`
   - 在面向对象（OOP）的设计模式中，decorator被称为装饰模式。OOP的装饰模式需要通过继承和组合来实现，而Python除了能支持OOP的decorator外，直接从语法层次支持decorator。Python的decorator可以用函数实现，也可以用类实现。
 * 偏函数 Partial function
   - functools.partial 作用:把一个函数的某些参数给固定住（也就是设置默认值），返回一个新的函数，调用这个新函数会更简单
-  - 创建偏函数时，实际上可以接收函数对象、*args和**kw这3个参数
-  - 将自第二位起的参数作为*args和**kw自动加到函数里面参数的左边
+  - 创建偏函数时，实际上可以接收函数对象、`*args`和`**kw`这3个参数
+  - 将自第二位起的参数作为*`args`和`**kw`自动加到函数里面参数的左边
 
 ```python
 def add(x, y, f):
@@ -1226,6 +1376,83 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
 
 * Input Stream就是数据从外面（磁盘、网络）流进内存，Output Stream就是数据从内存流到外面去
 
+### 文本处理
+
+用于解析和操作文本的库。
+
+* 通用
+  - [chardet](https://github.com/chardet/chardet)：字符编码检测器，兼容 Python2 和 Python3
+  - [difflib](https://docs.python.org/2/library/difflib.html)(Python 标准库)帮助我们进行差异化比较。
+  - ftfy：让Unicode文本更完整更连贯。(https://github.com/LuminosoInsight/python-ftfy)
+  - fuzzywuzzy：模糊字符串匹配。(https://github.com/seatgeek/fuzzywuzzy)
+  - Levenshtein：快速计算编辑距离以及字符串的相似度。(https://github.com/ztane/python-Levenshtein/)
+  - pangu.py：在中日韩语字符和数字字母之间添加空格。(https://github.com/vinta/pangu.py)
+  - yfiglet-figlet：[pyfiglet -figlet](https://github.com/pwaller/pyfiglet) 的 Python实现。
+  - shortuuid：一个生成器库，用以生成简洁的，明白的，URL 安全的 UUID。(https://github.com/stochastic-technologies/shortuuid)
+  - unidecode：Unicode 文本的 ASCII 转换形式 。(https://pypi.python.org/pypi/Unidecode)
+  - uniout：打印可读的字符，而不是转义的字符串。(https://github.com/moskytw/uniout)
+  - xpinyin：一个用于把汉字转换为拼音的库。(https://github.com/lxneng/xpinyin)
+  - [simplejson](https://github.com/simplejson/simplejson)：Python的JSON编码、解码器。(https://simplejson.readthedocs.io/en/latest/)
+* Slug化
+  - awesome-slugify：一个 Python slug 化库，可以保持 Unicode。(https://github.com/dimka665/awesome-slugify)
+  - python-slugify：Python slug 化库，可以把 unicode 转化为 ASCII。(https://github.com/un33k/python-slugify)
+  - unicode-slugify：一个 slug 工具，可以生成 unicode slugs ,需要依赖 Django 。(https://github.com/mozilla/unicode-slugify)
+* 解析器
+  - phonenumbers：解析，格式化，储存，验证电话号码。(https://github.com/daviddrysdale/python-phonenumbers)
+  - PLY：lex 和 yacc 解析工具的 Python 实现。(http://www.dabeaz.com/ply/)
+  - Pygments：通用语法高亮工具。(http://pygments.org/)
+  - pyparsing：生成通用解析器的框架。(http://pyparsing.wikispaces.com/)
+  - python-nameparser：把一个人名分解为几个独立的部分。(https://github.com/derek73/python-nameparser)
+  - python-user-agents：浏览器 user agent 解析器。(https://github.com/selwin/python-user-agents)
+  - sqlparse：一个无验证的 SQL 解析器。(https://sqlparse.readthedocs.org/en/latest/)
+  - [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. <http://www.aaronsw.com/2002/html2text/>
+  - [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
+
+### 特殊文本格式处理
+
+一些用来解析和操作特殊文本格式的库。
+
+- 通用
+  - tablib：一个用来处理中表格数据的模块。(https://github.com/kennethreitz/tablib)
+- Office
+  + Marmir：把输入的Python 数据结构转换为电子表单。(https://github.com/brianray/mm)
+  + openpyxl：一个用来读写 Excel 2010 xlsx/xlsm/xltx/xltm 文件的库。(https://openpyxl.readthedocs.org/en/latest/)
+  + python-docx：读取，查询以及修改 Microsoft Word 2007/2008 docx 文件。(https://github.com/python-openxml/python-docx)
+  + unoconv：在 LibreOffice/OpenOffice 支持的任意文件格式之间进行转换。(https://github.com/dagwieers/unoconv)
+  + [XlsxWriter](https://xlsxwriter.readthedocs.org/en/latest/)：一个用于创建 Excel .xlsx 文件的 Python 模块。
+  + xlwings：一个使得在 Excel 中方便调用 Python 的库（反之亦然），基于 BSD 协议。(http://xlwings.org/)
+  + [xlwt](https://github.com/python-excel/xlwt)：读写 Excel 文件的数据和格式信息。[xlrd](https://github.com/python-excel/xlrd)
+  + relatorio：模板化OpenDocument 文件。(http://relatorio.tryton.org/)
+  + rrdtool:用于跟踪对象的变化，生成这些变化的走走势图
+- PDF
+  + PDFMiner：一个用于从PDF文档中抽取信息的工具。(https://github.com/euske/pdfminer)
+  + PyPDF2：一个可以分割，合并和转换 PDF 页面的库。(https://github.com/mstamy2/PyPDF2)
+  + ReportLab：快速创建富文本 PDF 文档。(http://www.reportlab.com/opensource/)
+- Markdown
+  + [lepture/mistune](https://github.com/lepture/mistune)：快速并且功能齐全的纯 Python 实现的 Markdown 解析器。
+  + Python-Markdown：John Gruber's Markdown 的 Python 版实现。(https://github.com/waylan/Python-Markdown)
+  + Python-Markdiwn2：纯 Python 实现的 Markdown 解析器，比 Python-Markdown 更快，更准确，可扩展。(https://github.com/trentm/python-markdown2)
+- YAML
+  + [PyYAML](http://pyyaml.org/)：Python 版本的 YAML 解析器。
+- CSV
+  + [csvkit](https://github.com/wireservice/csvkit)：用于转换和操作 CSV 的工具。
+- Archive
+  - [unp](https://github.com/mitsuhiko/unp)：一个用来方便解包归档文件的命令行工具。
+
+### 文件
+
+文件管理和 MIME（多用途的网际邮件扩充协议）类型检测。
+
+* imghdr：（Python 标准库）检测图片类型。(https://docs.python.org/2/library/imghdr.html)
+* mimetypes：（Python 标准库）将文件名映射为 MIME 类型。(https://docs.python.org/2/library/mimetypes.html)
+* path.py：对 os.path 进行封装的模块。(https://github.com/jaraco/path.py)
+* pathlib：（Python3.4+ 标准库）跨平台的、面向对象的路径操作库。(https://pathlib.readthedocs.org/en/pep428/)
+* python-magic：文件类型检测的第三方库 libmagic 的 Python 接口。(https://github.com/ahupp/python-magic)
+* Unipath：用面向对象的方式操作文件和目录。(https://github.com/mikeorr/Unipath)
+* watchdog：管理文件系统事件的 API 和 shell 工具(https://github.com/gorakhargosh/watchdog)
+* [socialcopsdev/camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans <https://camelot-py.readthedocs.io>
+* filecmp:系统自带，可以实现文件，目录，遍历子目录的差异，对比功能
+
 ## 进程与线程
 
 * 进程是由若干线程组成的，一个进程至少有一个线程
@@ -1284,18 +1511,25 @@ hasattr(obj, 'power') # 有属性'power'吗？ True
   - Queue之所以能通过网络访问，就是通过QueueManager实现的。由于QueueManager管理的不止一个Queue，所以，要给每个Queue的网络调用接口起个名字，比如get_task_queue
   - authkey:为了保证两台机器正常通信，不被其他机器恶意干扰
 
-## DB
+### 进程
 
-db API DRIVER 即数据库接口驱动
+操作系统进程启动及通信库。
 
-* [MySQLdb]() is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3
-* [mysqlclient]() is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
-* [MySQL Connector/Python]() is a pure Python driver from Oracle that does not require the MySQL client library or any Python modules outside the standard library.
+* envoy：比 Python [subprocess](https://docs.python.org/2/library/subprocess.html) 模块更人性化。(https://github.com/kennethreitz/envoy)
+* sarge：另一 种 subprocess 模块的封装。(http://sarge.readthedocs.org/en/latest/)
+* [amoffat/sh](https://github.com/amoffat/sh)：一个完备的 subprocess 替代库。Python process launching <http://amoffat.github.com/sh>
 
-```sh
-sudo apt-get install libmysqlclient-dev
-pip install mysqlclient
-```
+### 并发和并行
+
+用以进行并发和并行操作的库。
+
+* multiprocessing：(Python 标准库) 基于进程的"线程"接口。(https://docs.python.org/2/library/multiprocessing.html)
+* threading：(Python 标准库)更高层的线程接口。(https://docs.python.org/2/library/threading.html)
+* eventlet：支持 WSGI 的异步框架。(http://eventlet.net/)
+* [gevent/gevent](https://github.com/python-greenlet/greenlet)：Coroutine-based concurrency library for Python <http://gevent.org>
+* Tomorrow：用于产生异步代码的神奇的装饰器语法实现。(https://github.com/madisonmay/Tomorrow)
+* uvloop：在libuv之上超快速实现asyncio事件循环。(https://github.com/MagicStack/uvloop)
+* [ray-project/ray](https://github.com/ray-project/ray):A high-performance distributed execution engine
 
 ## 正则
 
@@ -1314,82 +1548,82 @@ pip install mysqlclient
 * ^表示行的开头，$表示行的结束
 * 由于Python的字符串本身也用\转义，建议使用Python的r前缀，就不用考虑转义的问题
 
-### docker
+## Web 
 
-* mkdir -p ~/python ~/python/myapp  myapp目录将映射为python容器配置的应用目录
-* 创建Dockerfile
+### 框架
 
-```
-FROM buildpack-deps:jessie
+* [Django](https://www.djangoproject.com/)：Python 界最流行的 web 框架
+  - [awesome-django](https://github.com/rosarior/awesome-django)系列
+* [Flask](http://flask.pocoo.org/)：一个 Python 微型框架
+  - [awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
+* pyramid：一个小巧，快速，接地气的开源Python web 框架。
+  - [awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
+* [Bottle](http://bottlepy.org/docs/dev/index.html/)：一个快速小巧，轻量级的 WSGI 微型 web 框架。
+* [CherryPy](http://www.cherrypy.org/)：一个极简的 Python web 框架，服从 HTTP/1.1 协议且具有WSGI 线程池。
+* [TurboGears](http://www.turbogears.org/)：一个可以扩展为全栈解决方案的微型框架。
+* [web.py](http://webpy.org/)：一个 Python 的 web 框架，既简单，又强大。
+* [web2py](http://www.web2py.com/)：一个全栈 web 框架和平台，专注于简单易用。
+* [Tornado](http://www.tornadoweb.org/en/latest/)：一个web 框架和异步网络库。
+* [fastapi](https://github.com/tiangolo/fastapi):FastAPI framework, high performance, easy to learn, fast to code, ready for production <https://fastapi.tiangolo.com/>
 
-# remove several traces of debian python
-RUN apt-get purge -y python.*
+### 国际化
 
-# http://bugs.python.org/issue19846
-# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8
+用来进行国际化的库。
 
-# gpg: key F73C700D: public key "Larry Hastings <larry@hastings.org>" imported
-ENV GPG_KEY 97FC712E4C024BBEA48A61ED3A5CA953F73C700D
+* Babel：一个Python 的国际化库。(http://babel.pocoo.org/en/latest/)
+* Korean：一个韩语词态库。(https://korean.readthedocs.org/en/latest/)
 
-ENV PYTHON_VERSION 3.5.1
+### URL处理
 
-# if this is called "PIP_VERSION", pip explodes with "ValueError: invalid truth value '<VERSION>'"
-ENV PYTHON_PIP_VERSION 8.1.2
+解析URLs的库
 
-RUN set -ex \
-        && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" -o python.tar.xz \
-        && curl -fSL "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" -o python.tar.xz.asc \
-        && export GNUPGHOME="$(mktemp -d)" \
-        && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPG_KEY" \
-        && gpg --batch --verify python.tar.xz.asc python.tar.xz \
-        && rm -r "$GNUPGHOME" python.tar.xz.asc \
-        && mkdir -p /usr/src/python \
-        && tar -xJC /usr/src/python --strip-components=1 -f python.tar.xz \
-        && rm python.tar.xz \
-        \
-        && cd /usr/src/python \
-        && ./configure --enable-shared --enable-unicode=ucs4 \
-        && make -j$(nproc) \
-        && make install \
-        && ldconfig \
-        && pip3 install --no-cache-dir --upgrade --ignore-installed pip==$PYTHON_PIP_VERSION \
-        && find /usr/local -depth \
-                \( \
-                    \( -type d -a -name test -o -name tests \) \
-                    -o \
-                    \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-                \) -exec rm -rf '{}' + \
-        && rm -rf /usr/src/python ~/.cache
+* [furl](https://github.com/gruns/furl)：一个让处理 URL 更简单小型 Python 库。
+* [purl](https://github.com/codeinthehole/purl)：一个简单的，不可变的URL类，具有简洁的 API 来进行询问和处理。
+* [pyshorteners](https://github.com/ellisonleao/pyshorteners)：一个纯 Python URL 缩短库。
+* [shorturl](https://github.com/Alir3z4/python-shorturl)：生成短小 URL 和类似 bit.ly 短链的Python 实现。
+* [webargs](https://github.com/sloria/webargs)：一个解析 HTTP 请求参数的库，内置对流行 web 框架的支持，包括 Flask, Django, Bottle, Tornado和 Pyramid。
+* [amitt001/pygmy](https://github.com/amitt001/pygmy):An open-source, feature rich & extensible url shortener + analytics written in Python 🍪 <https://pygy.co/pygmy>
 
-# make some useful symlinks that are expected to exist
-RUN cd /usr/local/bin \
-        && ln -s easy_install-3.5 easy_install \
-        && ln -s idle3 idle \
-        && ln -s pydoc3 pydoc \
-        && ln -s python3 python \
-        && ln -s python3-config python-config
+### HTML处理
 
-CMD ["python3"]
-```
+处理 HTML和XML的库。
 
-- docker build -t python:3.5 .
-- docker run  -v $PWD/myapp:/usr/src/myapp  -w /usr/src/myapp python:3.5 python helloworld.py
+* BeautifulSoup：以 Python 风格的方式来对 HTML 或 XML 进行迭代，搜索和修改。(http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+* bleach：一个基于白名单的 HTML 清理和文本链接库。(http://bleach.readthedocs.org/en/latest/)
+* cssutils：一个 Python 的 CSS 库。(https://pypi.python.org/pypi/cssutils/)
+* html5lib：一个兼容标准的 HTML 文档和片段解析及序列化库。(https://github.com/html5lib/html5lib-python)
+* lxml：一个非常快速，简单易用，功能齐全的库，用来处理 HTML 和 XML。(http://lxml.de/)
+* MarkupSafe：为Python 实现 XML/HTML/XHTML 标记安全字符串。(https://github.com/pallets/markupsafe)
+* pyquery：一个解析 HTML 的库，类似 jQuery。(https://github.com/gawel/pyquery)
+* untangle：将XML文档转换为Python对象，使其可以方便的访问。(https://github.com/stchris/untangle)
+* xhtml2pdf：HTML/CSS 转 PDF 工具。(https://github.com/xhtml2pdf/xhtml2pdf)
+* xmltodict：像处理 JSON 一样处理 XML。(https://github.com/martinblech/xmltodict)
 
-## selenium
+### WebSocket
 
-* 安装 chromedriver
-* `python3 -m pip install selenium`
+帮助使用WebSocket的库。
 
-## 问题
+* AutobahnPython：给 Python 、使用的 WebSocket & WAMP 基于 Twisted 和 [asyncio](https://docs.python.org/3/library/asyncio.html)。(https://github.com/crossbario/autobahn-python)
+* Crossbar：开源统一应用路由(Websocket & WAMP for Python on Autobahn).(https://github.com/crossbario/crossbar/)
+* django-socketio：给 Django 用的 WebSockets。(https://github.com/stephenmcd/django-socketio)
+* WebSocket-for-Python：为Python2/3 以及 PyPy 编写的 WebSocket 客户端和服务器库。(https://github.com/Lawouach/WebSocket-for-Python)
 
-```
-/System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
-```
+### WSGI 服务器
 
-## UWSGI
+兼容 WSGI 的 web 服务器
 
-## GunicornNGINX
+* gunicorn：Pre-forked, 部分是由 C 语言编写的。(https://pypi.python.org/pypi/gunicorn)
+* uwsgi：uwsgi 项目的目的是开发一组全栈工具，用来建立托管服务， 由 C 语言编写。(https://uwsgi-docs.readthedocs.org/en/latest/)
+* [bjoern](https://pypi.python.org/pypi/bjoern)：异步，非常快速，由 C 语言编写。
+* fapws3：异步 (仅对于网络端)，由 C 语言编写。(http://www.fapws.org/)
+* meinheld：异步，部分是由 C 语言编写的。(https://pypi.python.org/pypi/meinheld)
+* netius：异步，非常快速。(https://github.com/hivesolutions/netius)
+* paste：多线程，稳定，久经考验。(http://pythonpaste.org/)
+* rocket：多线程。(https://pypi.python.org/pypi/rocket)
+* waitress：多线程, 是它驱动着 Pyramid 框架。(https://waitress.readthedocs.org/en/latest/)
+* Werkzeug：一个 WSGI 工具库，驱动着 Flask ，而且可以很方便大嵌入到你的项目中去。(http://werkzeug.pocoo.org/)
+
+#### GunicornNGINX
 
 ```
 The Zen of Python
@@ -1414,25 +1648,31 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!
 ```
 
-## 包仓库
+### HTTP
 
-本地 PyPI 仓库服务和代{过}{滤}理。
+使用HTTP的库。
 
-* warehouse：下一代 PyPI。(https://github.com/pypa/warehouse)
-* Warehouse：PyPA 提供的 PyPI 镜像工具。(https://warehouse.python.org/) [bandersnatch](https://bitbucket.org/pypa/bandersnatch)
-* devpi：PyPI 服务和打包/测试/分发工具。(http://doc.devpi.net/)
-* localshop：本地 PyPI 服务（自定义包并且自动对 PyPI 镜像）。(https://github.com/mvantellingen/localshop)
+* [requests](https://github.com/requests/requests)：Python HTTP Requests for Humans™ sparklescakesparkles <http://python-requests.org>
+* [requests](https://github.com/psf/requests/):A simple, yet elegant HTTP library. <https://requests.readthedocs.io>
+* [grequests](https://github.com/kennethreitz/grequests)：requests 库 + gevent ，用于异步 HTTP 请求.
+* [httplib2](https://github.com/jcgregorio/httplib2)：全面的 HTTP 客户端库
+* [treq](https://github.com/twisted/treq)：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。
+* [urllib3](https://github.com/shazow/urllib3)：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。
+* [responder](https://github.com/kennethreitz/responder):a familiar HTTP Service Framework for Python <https://python-responder.org>
+* [pycurl](http://pycurl.sourceforge.net)是一个用C语言写的libcurl Python实现，功能强大，支持的协议有：FTP,HTTP,HTTPS,TELNET等，可以理解为Linux下curl命令功能的Python封装
+* [scapy](http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
+* [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. <https://httpbin.org>
+* [requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
+* [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
+* [httpstat](https://github.com/reorx/httpstat):curl statistics made simple
+* [httpx](https://github.com/encode/httpx):A next generation HTTP client for Python. butterfly <https://www.encode.io/httpx>
 
-## 分发
+## 测试
 
-打包为可执行文件以便分发。
+### selenium
 
-* PyInstaller：将 Python 程序转换成独立的执行文件（跨平台）。(https://github.com/pyinstaller/pyinstaller)
-* dh-virtualenv：构建并将 virtualenv 虚拟环境作为一个 Debian 包来发布。(http://dh-virtualenv.readthedocs.org/)
-* Nuitka：将脚本、模块、包编译成可执行文件或扩展模块。(http://nuitka.net/)
-* py2app：将 Python 脚本变为独立软件包（Mac OS X）。(http://pythonhosted.org/py2app/)
-* py2exe：将 Python 脚本变为独立软件包（Windows）。(http://www.py2exe.org/)
-* pynsist：一个用来创建 Windows 安装程序的工具，可以在安装程序中打包 Python本身。(http://pynsist.readthedocs.org/)
+* 安装 chromedriver
+* `python3 -m pip install selenium`
 
 ## 构建工具
 
@@ -1445,7 +1685,15 @@ Namespaces are one honking great idea -- let's do more of those!
 * PyBuilder：纯 Python 实现的持续化构建工具。(https://github.com/pybuilder/pybuilder)
 * SCons：软件构建工具。(http://www.scons.org/)
 
-## 交互式解析器
+## Cli
+
+* 命令行模式下
+  * 可以直接运行.py文件 `python hello.py`
+  * 添加`#!/usr/bin/env python3`,文件添加执行权限`./basic.py`
+* 交互模式：`python` `exit()`
+* [代码助手](https://raw.githubusercontent.com/michaelliao/learn-python3/master/teach/learning.py)
+
+### 交互式解析器
 
 交互式 Python 解析器。
 
@@ -1453,19 +1701,39 @@ Namespaces are one honking great idea -- let's do more of those!
 * [bpython](http://bpython-interpreter.org/)：界面丰富的 Python 解析器。
 * ptpython：高级交互式Python解析器， 构建于[python-prompt-toolkit](https://github.com/jonathanslenders/python-prompt-toolkit) 之上。(https://github.com/jonathanslenders/ptpython)
 
-## 文件
+### 命令行工具
 
-文件管理和 MIME（多用途的网际邮件扩充协议）类型检测。
+用于创建命令行程序的库。
 
-* imghdr：（Python 标准库）检测图片类型。(https://docs.python.org/2/library/imghdr.html)
-* mimetypes：（Python 标准库）将文件名映射为 MIME 类型。(https://docs.python.org/2/library/mimetypes.html)
-* path.py：对 os.path 进行封装的模块。(https://github.com/jaraco/path.py)
-* pathlib：（Python3.4+ 标准库）跨平台的、面向对象的路径操作库。(https://pathlib.readthedocs.org/en/pep428/)
-* python-magic：文件类型检测的第三方库 libmagic 的 Python 接口。(https://github.com/ahupp/python-magic)
-* Unipath：用面向对象的方式操作文件和目录。(https://github.com/mikeorr/Unipath)
-* watchdog：管理文件系统事件的 API 和 shell 工具(https://github.com/gorakhargosh/watchdog)
-* [socialcopsdev/camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans <https://camelot-py.readthedocs.io>
-* filecmp:系统自带，可以实现文件，目录，遍历子目录的差异，对比功能
+* 命令行程序开发
+  - [asciimatics](https://github.com/peterbrittain/asciimatics)：跨平台，全屏终端包（即鼠标/键盘输入和彩色，定位文本输出），完整的复杂动画和特殊效果的高级API。
+  - [cement](http://builtoncement.com/)：Python 的命令行程序框架。
+  - [click](http://click.pocoo.org/dev/)：一个通过组合的方式来创建精美命令行界面的包。
+  - [cliff](http://docs.openstack.org/developer/cliff/)：一个用于创建命令行程序的框架，可以创建具有多层命令的命令行程序。
+  - [clint](https://github.com/kennethreitz/clint)：Python 命令行程序工具。
+  - [colorama](https://pypi.python.org/pypi/colorama)：跨平台彩色终端文本。
+  - [docopt](http://docopt.org/)：Python 风格的命令行参数解析器。
+  - [Gooey](https://github.com/chriskiehl/Gooey)：一条命令，将命令行程序变成一个 GUI 程序。
+  - [python-prompt-toolkit](https://github.com/jonathanslenders/python-prompt-toolkit)：一个用于构建强大的交互式命令行程序的库。
+  - [Pythonpy](https://github.com/Russell91/pythonpy/wiki)：在命令行中直接执行任何Python指令。
+  - Fire是一个开源的库，可以为任何Python项目自动生成一个CLI
+  - [termgraph](https://github.com/mkaz/termgraph):a python command-line tool which draws basic graphs in the terminal
+* 生产力工具
+  - [aws-cli](https://github.com/aws/aws-cli)：Amazon Web Services 的通用命令行界面。
+  - [bashplotlib](https://github.com/glamp/bashplotlib)：在终端中进行基本绘图。
+  - caniusepython3：判断是哪个项目妨碍你你移植到 Python 3。(https://github.com/brettcannon/caniusepython3)
+  - cookiecutter：从 cookiecutters（项目模板）创建项目的一个命令行工具。(https://github.com/audreyr/cookiecutter)
+  - doitlive：一个用来在终端中进行现场演示的工具。(https://github.com/sloria/doitlive)
+  - howdoi：通过命令行获取即时的编程问题解答。(https://github.com/gleitz/howdoi)
+  - PathPicker：从bash输出中选出文件。(https://github.com/facebook/PathPicker)
+  - percol：向UNIX shell 传统管道概念中加入交互式选择功能。(https://github.com/mooz/percol)
+  - SAWS：一个加强版的 AWS 命令行。(https://github.com/donnemartin/saws)
+  - thefuck：修正你之前的命令行指令。(https://github.com/nvbn/thefuck)
+  - mycli：一个 MySQL 命令行客户端，具有自动补全和语法高亮功能。(https://github.com/dbcli/mycli)
+  - pgcli：Postgres 命令行工具，具有自动补全和语法高亮功能。(https://github.com/dbcli/pgcli)
+  - try：一个从来没有更简单的命令行工具，用来试用python库。(https://github.com/timofurrer/try)
+* [tqdm](https://github.com/tqdm/tqdm)：A Fast, Extensible Progress Bar for Python and CLI <https://tqdm.github.io>
+* [rich](https://github.com/willmcgugan/rich): a Python library for rich text and beautiful formatting in the terminal. <https://rich.readthedocs.io/en/latest/>
 
 ## 日期和时间
 
@@ -1480,69 +1748,6 @@ Namespaces are one honking great idea -- let's do more of those!
 * pytz：现代以及历史版本的世界时区定义。将时区数据库引入Python。(https://launchpad.net/pytz)
 * when.py：提供用户友好的函数来帮助用户进行常用的日期和时间操作。(https://github.com/dirn/When.py)
 * Pendulum：可以轻松地将其与现有代码集成，并且只有在需要时才能使用其功能
-
-## 文本处理
-
-用于解析和操作文本的库。
-
-* 通用
-  - [chardet](https://github.com/chardet/chardet)：字符编码检测器，兼容 Python2 和 Python3
-  - [difflib](https://docs.python.org/2/library/difflib.html)(Python 标准库)帮助我们进行差异化比较。
-  - ftfy：让Unicode文本更完整更连贯。(https://github.com/LuminosoInsight/python-ftfy)
-  - fuzzywuzzy：模糊字符串匹配。(https://github.com/seatgeek/fuzzywuzzy)
-  - Levenshtein：快速计算编辑距离以及字符串的相似度。(https://github.com/ztane/python-Levenshtein/)
-  - pangu.py：在中日韩语字符和数字字母之间添加空格。(https://github.com/vinta/pangu.py)
-  - yfiglet-figlet：[pyfiglet -figlet](https://github.com/pwaller/pyfiglet) 的 Python实现。
-  - shortuuid：一个生成器库，用以生成简洁的，明白的，URL 安全的 UUID。(https://github.com/stochastic-technologies/shortuuid)
-  - unidecode：Unicode 文本的 ASCII 转换形式 。(https://pypi.python.org/pypi/Unidecode)
-  - uniout：打印可读的字符，而不是转义的字符串。(https://github.com/moskytw/uniout)
-  - xpinyin：一个用于把汉字转换为拼音的库。(https://github.com/lxneng/xpinyin)
-  - [simplejson](https://github.com/simplejson/simplejson)：Python的JSON编码、解码器。(https://simplejson.readthedocs.io/en/latest/)
-* Slug化
-  - awesome-slugify：一个 Python slug 化库，可以保持 Unicode。(https://github.com/dimka665/awesome-slugify)
-  - python-slugify：Python slug 化库，可以把 unicode 转化为 ASCII。(https://github.com/un33k/python-slugify)
-  - unicode-slugify：一个 slug 工具，可以生成 unicode slugs ,需要依赖 Django 。(https://github.com/mozilla/unicode-slugify)
-* 解析器
-  - phonenumbers：解析，格式化，储存，验证电话号码。(https://github.com/daviddrysdale/python-phonenumbers)
-  - PLY：lex 和 yacc 解析工具的 Python 实现。(http://www.dabeaz.com/ply/)
-  - Pygments：通用语法高亮工具。(http://pygments.org/)
-  - pyparsing：生成通用解析器的框架。(http://pyparsing.wikispaces.com/)
-  - python-nameparser：把一个人名分解为几个独立的部分。(https://github.com/derek73/python-nameparser)
-  - python-user-agents：浏览器 user agent 解析器。(https://github.com/selwin/python-user-agents)
-  - sqlparse：一个无验证的 SQL 解析器。(https://sqlparse.readthedocs.org/en/latest/)
-  - [aaronsw/html2text](https://github.com/aaronsw/html2text):Convert HTML to Markdown-formatted text. <http://www.aaronsw.com/2002/html2text/>
-  - [facebookresearch/fastText](https://github.com/facebookresearch/fastText):Library for fast text representation and classification.
-
-## 特殊文本格式处理
-
-一些用来解析和操作特殊文本格式的库。
-
-- 通用
-  - tablib：一个用来处理中表格数据的模块。(https://github.com/kennethreitz/tablib)
-- Office
-  + Marmir：把输入的Python 数据结构转换为电子表单。(https://github.com/brianray/mm)
-  + openpyxl：一个用来读写 Excel 2010 xlsx/xlsm/xltx/xltm 文件的库。(https://openpyxl.readthedocs.org/en/latest/)
-  + python-docx：读取，查询以及修改 Microsoft Word 2007/2008 docx 文件。(https://github.com/python-openxml/python-docx)
-  + unoconv：在 LibreOffice/OpenOffice 支持的任意文件格式之间进行转换。(https://github.com/dagwieers/unoconv)
-  + [XlsxWriter](https://xlsxwriter.readthedocs.org/en/latest/)：一个用于创建 Excel .xlsx 文件的 Python 模块。
-  + xlwings：一个使得在 Excel 中方便调用 Python 的库（反之亦然），基于 BSD 协议。(http://xlwings.org/)
-  + [xlwt](https://github.com/python-excel/xlwt)：读写 Excel 文件的数据和格式信息。[xlrd](https://github.com/python-excel/xlrd)
-  + relatorio：模板化OpenDocument 文件。(http://relatorio.tryton.org/)
-  + rrdtool:用于跟踪对象的变化，生成这些变化的走走势图
-- PDF
-  + PDFMiner：一个用于从PDF文档中抽取信息的工具。(https://github.com/euske/pdfminer)
-  + PyPDF2：一个可以分割，合并和转换 PDF 页面的库。(https://github.com/mstamy2/PyPDF2)
-  + ReportLab：快速创建富文本 PDF 文档。(http://www.reportlab.com/opensource/)
-- Markdown
-  + [lepture/mistune](https://github.com/lepture/mistune)：快速并且功能齐全的纯 Python 实现的 Markdown 解析器。
-  + Python-Markdown：John Gruber's Markdown 的 Python 版实现。(https://github.com/waylan/Python-Markdown)
-  + Python-Markdiwn2：纯 Python 实现的 Markdown 解析器，比 Python-Markdown 更快，更准确，可扩展。(https://github.com/trentm/python-markdown2)
-- YAML
-  + [PyYAML](http://pyyaml.org/)：Python 版本的 YAML 解析器。
-- CSV
-  + [csvkit](https://github.com/wireservice/csvkit)：用于转换和操作 CSV 的工具。
-- Archive
-  - [unp](https://github.com/mitsuhiko/unp)：一个用来方便解包归档文件的命令行工具。
 
 ## 自然语言处理
 
@@ -1579,40 +1784,6 @@ Namespaces are one honking great idea -- let's do more of those!
 * [ConfigParser](https://docs.python.org/2/library/configparser.html)：(Python 标准库) INI 文件解析器。
 * [profig](http://profig.readthedocs.org/en/default/)：通过多种格式进行配置，具有数值转换功能。
 * [python-decouple](https://github.com/henriquebastos/python-decouple)：将设置和代码完全隔离。
-
-## 命令行工具
-
-用于创建命令行程序的库。
-
-* 命令行程序开发
-  - [asciimatics](https://github.com/peterbrittain/asciimatics)：跨平台，全屏终端包（即鼠标/键盘输入和彩色，定位文本输出），完整的复杂动画和特殊效果的高级API。
-  - [cement](http://builtoncement.com/)：Python 的命令行程序框架。
-  - [click](http://click.pocoo.org/dev/)：一个通过组合的方式来创建精美命令行界面的包。
-  - [cliff](http://docs.openstack.org/developer/cliff/)：一个用于创建命令行程序的框架，可以创建具有多层命令的命令行程序。
-  - [clint](https://github.com/kennethreitz/clint)：Python 命令行程序工具。
-  - [colorama](https://pypi.python.org/pypi/colorama)：跨平台彩色终端文本。
-  - [docopt](http://docopt.org/)：Python 风格的命令行参数解析器。
-  - [Gooey](https://github.com/chriskiehl/Gooey)：一条命令，将命令行程序变成一个 GUI 程序。
-  - [python-prompt-toolkit](https://github.com/jonathanslenders/python-prompt-toolkit)：一个用于构建强大的交互式命令行程序的库。
-  - [Pythonpy](https://github.com/Russell91/pythonpy/wiki)：在命令行中直接执行任何Python指令。
-  - Fire是一个开源的库，可以为任何Python项目自动生成一个CLI
-  - [termgraph](https://github.com/mkaz/termgraph):a python command-line tool which draws basic graphs in the terminal
-* 生产力工具
-  - [aws-cli](https://github.com/aws/aws-cli)：Amazon Web Services 的通用命令行界面。
-  - [bashplotlib](https://github.com/glamp/bashplotlib)：在终端中进行基本绘图。
-  - caniusepython3：判断是哪个项目妨碍你你移植到 Python 3。(https://github.com/brettcannon/caniusepython3)
-  - cookiecutter：从 cookiecutters（项目模板）创建项目的一个命令行工具。(https://github.com/audreyr/cookiecutter)
-  - doitlive：一个用来在终端中进行现场演示的工具。(https://github.com/sloria/doitlive)
-  - howdoi：通过命令行获取即时的编程问题解答。(https://github.com/gleitz/howdoi)
-  - PathPicker：从bash输出中选出文件。(https://github.com/facebook/PathPicker)
-  - percol：向UNIX shell 传统管道概念中加入交互式选择功能。(https://github.com/mooz/percol)
-  - SAWS：一个加强版的 AWS 命令行。(https://github.com/donnemartin/saws)
-  - thefuck：修正你之前的命令行指令。(https://github.com/nvbn/thefuck)
-  - mycli：一个 MySQL 命令行客户端，具有自动补全和语法高亮功能。(https://github.com/dbcli/mycli)
-  - pgcli：Postgres 命令行工具，具有自动补全和语法高亮功能。(https://github.com/dbcli/pgcli)
-  - try：一个从来没有更简单的命令行工具，用来试用python库。(https://github.com/timofurrer/try)
-* [tqdm](https://github.com/tqdm/tqdm)：A Fast, Extensible Progress Bar for Python and CLI <https://tqdm.github.io>
-* [rich](https://github.com/willmcgugan/rich): a Python library for rich text and beautiful formatting in the terminal. <https://rich.readthedocs.io/en/latest/>
 
 ## 下载器
 
@@ -1688,25 +1859,6 @@ Namespaces are one honking great idea -- let's do more of those!
 * [pygeoip](https://github.com/appliedsec/pygeoip)：纯 Python GeoIP API。
 * [django-countries](https://github.com/SmileyChris/django-countries)：一个 Django 应用程序，提供用于表格的国家选择功能，国旗图标静态文件以及模型中的国家字段。
 
-## HTTP
-
-使用HTTP的库。
-
-* [requests](https://github.com/requests/requests)：Python HTTP Requests for Humans™ sparklescakesparkles <http://python-requests.org>
-* [requests](https://github.com/psf/requests/):A simple, yet elegant HTTP library. <https://requests.readthedocs.io>
-* [grequests](https://github.com/kennethreitz/grequests)：requests 库 + gevent ，用于异步 HTTP 请求.
-* [httplib2](https://github.com/jcgregorio/httplib2)：全面的 HTTP 客户端库
-* [treq](https://github.com/twisted/treq)：类似 requests 的Python API 构建于 Twisted HTTP 客户端之上。
-* [urllib3](https://github.com/shazow/urllib3)：一个具有线程安全连接池，支持文件 post，清晰友好的 HTTP 库。
-* [responder](https://github.com/kennethreitz/responder):a familiar HTTP Service Framework for Python <https://python-responder.org>
-* [pycurl](http://pycurl.sourceforge.net)是一个用C语言写的libcurl Python实现，功能强大，支持的协议有：FTP,HTTP,HTTPS,TELNET等，可以理解为Linux下curl命令功能的Python封装
-* [scapy](http://www.wecdev.org/projects/scapy/)是一个强大的交互式数据包处理程序，它能够对数据包进行伪造或解包，包括发送数据包，包嗅探，应答和反馈等功能。
-* [requests/httpbin](https://github.com/requests/httpbin):HTTP Request & Response Service, written in Python + Flask. <https://httpbin.org>
-* [requests-html](https://github.com/kennethreitz/requests-html):下载完网页之后,内置了html网页的解析
-* [request/request-promise](https://github.com/request/request-promise):The simplified HTTP request client 'request' with Promise support. Powered by Bluebird.
-* [httpstat](https://github.com/reorx/httpstat):curl statistics made simple
-* [httpx](https://github.com/encode/httpx):A next generation HTTP client for Python. butterfly <https://www.encode.io/httpx>
-
 ## 数据库
 
 Python实现的数据库。
@@ -1716,9 +1868,13 @@ Python实现的数据库。
 * [TinyDB](https://github.com/msiemens/tinydb)：一个微型的，面向文档型数据库。
 * [ZODB](http://www.zodb.org/en/latest/)：一个 Python 原生对象数据库。一个键值和对象图数据库。
 
-## 数据库驱动
+### 数据库驱动
 
-用来连接和操作数据库的库。
+用来连接和操作数据库的库。db API DRIVER 即数据库接口驱动
+
+* [MySQLdb]() is a native driver that has been developed and supported for over a decade by Andy Dustman.不支持python3
+* [mysqlclient]() is a fork of MySQLdb which notably supports Python 3 and can be used as a drop-in replacement for MySQLdb. At the time of this writing, this is the recommended choice for using MySQL with Django.
+* [MySQL Connector/Python]() is a pure Python driver from Oracle that does not require the MySQL client library or any Python modules outside the standard library.
 
 * MySQL：[awesome-mysql](http://shlomi-noach.github.io/awesome-mysql/)系列
 * [mysql-python](https://sourceforge.net/projects/mysql-python/)：Python 的 MySQL 数据库连接器。
@@ -1743,7 +1899,12 @@ Python实现的数据库。
   - redis-py：Redis 的 Python 客户端。(https://github.com/andymccurdy/redis-py)
   - telephus：基于 Twisted 的 Cassandra 客户端。(https://github.com/driftx/Telephus)
   - txRedis：基于 Twisted 的 Redis 客户端。(https://github.com/deldotdr/txRedis)
-* [graphql-python/graphene](https://github.com/graphql-python/graphene):GraphQL framework for Python <http://graphene-python.org/>
+* [graphene](https://github.com/graphql-python/graphene):GraphQL framework for Python <http://graphene-python.org/>
+
+```sh
+sudo apt-get install libmysqlclient-dev
+pip install mysqlclient
+```
 
 ## ORM
 
@@ -1765,22 +1926,6 @@ Python实现的数据库。
   - redisco：一个 Python 库，提供可以持续存在在 Redis 中的简单模型和容器。(https://github.com/kiddouk/redisco)
 * 其他
   - butterdb：Google Drive 电子表格的 Python ORM。(https://github.com/Widdershin/butterdb)
-
-## Web 框架
-
-* [Django](https://www.djangoproject.com/)：Python 界最流行的 web 框架
-  - [awesome-django](https://github.com/rosarior/awesome-django)系列
-* [Flask](http://flask.pocoo.org/)：一个 Python 微型框架
-  - [awesome-flask](https://github.com/humiaozuzu/awesome-flask)系列
-* pyramid：一个小巧，快速，接地气的开源Python web 框架。
-  - [awesome-pyramid](https://github.com/uralbash/awesome-pyramid)系列
-* [Bottle](http://bottlepy.org/docs/dev/index.html/)：一个快速小巧，轻量级的 WSGI 微型 web 框架。
-* [CherryPy](http://www.cherrypy.org/)：一个极简的 Python web 框架，服从 HTTP/1.1 协议且具有WSGI 线程池。
-* [TurboGears](http://www.turbogears.org/)：一个可以扩展为全栈解决方案的微型框架。
-* [web.py](http://webpy.org/)：一个 Python 的 web 框架，既简单，又强大。
-* [web2py](http://www.web2py.com/)：一个全栈 web 框架和平台，专注于简单易用。
-* [Tornado](http://www.tornadoweb.org/en/latest/)：一个web 框架和异步网络库。
-* [fastapi](https://github.com/tiangolo/fastapi):FastAPI framework, high performance, easy to learn, fast to code, ready for production <https://fastapi.tiangolo.com/>
 
 ## 权限
 
@@ -1940,38 +2085,6 @@ Python实现的数据库。
 * Talon：Mailgun 库，用来抽取信息和签名。(https://github.com/mailgun/talon)
 * smtplib：发送电子邮件模块
 
-## 国际化
-
-用来进行国际化的库。
-
-* Babel：一个Python 的国际化库。(http://babel.pocoo.org/en/latest/)
-* Korean：一个韩语词态库。(https://korean.readthedocs.org/en/latest/)
-
-## URL处理
-
-解析URLs的库
-
-* [furl](https://github.com/gruns/furl)：一个让处理 URL 更简单小型 Python 库。
-* [purl](https://github.com/codeinthehole/purl)：一个简单的，不可变的URL类，具有简洁的 API 来进行询问和处理。
-* [pyshorteners](https://github.com/ellisonleao/pyshorteners)：一个纯 Python URL 缩短库。
-* [shorturl](https://github.com/Alir3z4/python-shorturl)：生成短小 URL 和类似 bit.ly 短链的Python 实现。
-* [webargs](https://github.com/sloria/webargs)：一个解析 HTTP 请求参数的库，内置对流行 web 框架的支持，包括 Flask, Django, Bottle, Tornado和 Pyramid。
-* [amitt001/pygmy](https://github.com/amitt001/pygmy):An open-source, feature rich & extensible url shortener + analytics written in Python 🍪 <https://pygy.co/pygmy>
-
-## HTML处理
-
-处理 HTML和XML的库。
-
-* BeautifulSoup：以 Python 风格的方式来对 HTML 或 XML 进行迭代，搜索和修改。(http://www.crummy.com/software/BeautifulSoup/bs4/doc/)
-* bleach：一个基于白名单的 HTML 清理和文本链接库。(http://bleach.readthedocs.org/en/latest/)
-* cssutils：一个 Python 的 CSS 库。(https://pypi.python.org/pypi/cssutils/)
-* html5lib：一个兼容标准的 HTML 文档和片段解析及序列化库。(https://github.com/html5lib/html5lib-python)
-* lxml：一个非常快速，简单易用，功能齐全的库，用来处理 HTML 和 XML。(http://lxml.de/)
-* MarkupSafe：为Python 实现 XML/HTML/XHTML 标记安全字符串。(https://github.com/pallets/markupsafe)
-* pyquery：一个解析 HTML 的库，类似 jQuery。(https://github.com/gawel/pyquery)
-* untangle：将XML文档转换为Python对象，使其可以方便的访问。(https://github.com/stchris/untangle)
-* xhtml2pdf：HTML/CSS 转 PDF 工具。(https://github.com/xhtml2pdf/xhtml2pdf)
-* xmltodict：像处理 JSON 一样处理 XML。(https://github.com/martinblech/xmltodict)
 
 ## 爬虫
 
@@ -1988,7 +2101,7 @@ Python实现的数据库。
 * [Photon](https://github.com/s0md3v/Photon):Incredibly fast crawler designed for reconnaissance.
 * [cloudflare-scrape](https://github.com/Anorov/cloudflare-scrape):A Python module to bypass Cloudflare's anti-bot page.
 
-## 网页内容提取
+### 网页内容提取
 
 用于进行网页内容提取的库。
 
@@ -2006,7 +2119,7 @@ Python实现的数据库。
 * [camelot](https://github.com/socialcopsdev/camelot):Camelot: PDF Table Extraction for Humans <https://camelot-py.readthedocs.io>
 * [percollate](https://github.com/danburzo/percollate):🌐 → 📖 A command-line tool to turn web pages into beautifully formatted PDFs
 
-## 表单
+### 表单
 
 进行表单操作的库。
 
@@ -2017,7 +2130,7 @@ Python实现的数据库。
 * WTForms：一个灵活的表单验证和呈现库。(http://wtforms.readthedocs.org/en/latest/)
 * WTForms-JSON：一个 WTForms 扩展，用来处理 JSON 数据。(http://wtforms-json.readthedocs.org/en/latest/)
 
-## 数据验证
+### 数据验证
 
 数据验证库。多用于表单验证。
 
@@ -2029,7 +2142,7 @@ Python实现的数据库。
 * valideer：轻量级可扩展的数据验证和适配库。(https://github.com/podio/valideer)
 * voluptuous：一个 Python 数据验证库。主要是为了验证传入 Python的 JSON，YAML 等数据。(https://github.com/alecthomas/voluptuous)
 
-## 反垃圾技术
+### 反垃圾技术
 
 帮助你和电子垃圾进行战斗的库。
 
@@ -2041,101 +2154,6 @@ Python实现的数据库。
 用来进行标记的库。
 
 * django-taggit：简单的 Django 标记工具。(https://github.com/alex/django-taggit)
-
-## 管理面板
-
-管理界面库。
-
-* Ajenti：一个你的服务器值得拥有的管理面板。(https://github.com/Eugeny/ajenti)
-* django-suit：Django 管理界面的一个替代品 (仅对于非商业用途是免费的)。(http://djangosuit.com/)
-* django-xadmin：Django admin 的一个替代品，具有很多不错的功能。(https://github.com/sshwsfc/django-xadmin)
-* flask-admin：一个用于 Flask 的简单可扩展的管理界面框架。(https://github.com/flask-admin/flask-admin)
-* flower：一个对 Celery 集群进行实时监控和提供 web 管理界面的工具。(https://github.com/mher/flower)
-* Grappelli：Django 管理界面的一个漂亮的皮肤。(http://grappelliproject.com/)
-* Wooey：一个 Django 应用，可以为 Python 脚本创建 web 用户界面。(https://github.com/wooey/wooey)
-
-## 静态站点生成器
-
-静态站点生成器是一个软件，它把文本和模板作为输入，然后输出HTML文件。
-
-* Pelican：使用 Markdown 或 ReST 来处理内容， Jinja 2 来制作主题。支持 DVCS, Disqus.。AGPL 许可。(http://blog.getpelican.com/)
-* Cactus：为设计师设计的静态站点生成器。(https://github.com/koenbok/Cactus/)
-* Hyde：基于 Jinja2 的静态站点生成器。(http://hyde.github.io/)
-* Nikola：一个静态网站和博客生成器。(https://www.getnikola.com/)
-* Tinkerer：Tinkerer 是一个博客引擎/静态站点生成器，由Sphinx驱动。(http://tinkerer.me/)
-* Lektor：一个简单易用的静态 CMS 和博客引擎。(https://www.getlektor.com/)
-
-## 进程
-
-操作系统进程启动及通信库。
-
-* envoy：比 Python [subprocess](https://docs.python.org/2/library/subprocess.html) 模块更人性化。(https://github.com/kennethreitz/envoy)
-* sarge：另一 种 subprocess 模块的封装。(http://sarge.readthedocs.org/en/latest/)
-* [amoffat/sh](https://github.com/amoffat/sh)：一个完备的 subprocess 替代库。Python process launching <http://amoffat.github.com/sh>
-
-## 并发和并行
-
-用以进行并发和并行操作的库。
-
-* multiprocessing：(Python 标准库) 基于进程的"线程"接口。(https://docs.python.org/2/library/multiprocessing.html)
-* threading：(Python 标准库)更高层的线程接口。(https://docs.python.org/2/library/threading.html)
-* eventlet：支持 WSGI 的异步框架。(http://eventlet.net/)
-* [gevent/gevent](https://github.com/python-greenlet/greenlet)：Coroutine-based concurrency library for Python <http://gevent.org>
-* Tomorrow：用于产生异步代码的神奇的装饰器语法实现。(https://github.com/madisonmay/Tomorrow)
-* uvloop：在libuv之上超快速实现asyncio事件循环。(https://github.com/MagicStack/uvloop)
-* [ray-project/ray](https://github.com/ray-project/ray):A high-performance distributed execution engine
-
-## 网络
-
-用于网络编程的库。
-
-* asyncio：(Python 标准库) 异步 I/O, 事件循环, 协程以及任务。(https://docs.python.org/3/library/asyncio.html)
-* [Twisted](https://twistedmatrix.com/trac/)：一个事件驱动的网络引擎。
-* pulsar：事件驱动的并发框架。(https://github.com/quantmind/pulsar)
-* diesel：基于Greenlet 的事件 I/O 框架。(https://github.com/dieseldev/diesel)
-* pyzmq：一个 ZeroMQ 消息库的 Python 封装。(http://zeromq.github.io/pyzmq/)
-* txZMQ：基于 Twisted 的 ZeroMQ 消息库的 Python 封装。(https://github.com/smira/txZMQ)
-
-## WebSocket
-
-帮助使用WebSocket的库。
-
-* AutobahnPython：给 Python 、使用的 WebSocket & WAMP 基于 Twisted 和 [asyncio](https://docs.python.org/3/library/asyncio.html)。(https://github.com/crossbario/autobahn-python)
-* Crossbar：开源统一应用路由(Websocket & WAMP for Python on Autobahn).(https://github.com/crossbario/crossbar/)
-* django-socketio：给 Django 用的 WebSockets。(https://github.com/stephenmcd/django-socketio)
-* WebSocket-for-Python：为Python2/3 以及 PyPy 编写的 WebSocket 客户端和服务器库。(https://github.com/Lawouach/WebSocket-for-Python)
-
-## WSGI 服务器
-
-兼容 WSGI 的 web 服务器
-
-* gunicorn：Pre-forked, 部分是由 C 语言编写的。(https://pypi.python.org/pypi/gunicorn)
-* uwsgi：uwsgi 项目的目的是开发一组全栈工具，用来建立托管服务， 由 C 语言编写。(https://uwsgi-docs.readthedocs.org/en/latest/)
-* [bjoern](https://pypi.python.org/pypi/bjoern)：异步，非常快速，由 C 语言编写。
-* fapws3：异步 (仅对于网络端)，由 C 语言编写。(http://www.fapws.org/)
-* meinheld：异步，部分是由 C 语言编写的。(https://pypi.python.org/pypi/meinheld)
-* netius：异步，非常快速。(https://github.com/hivesolutions/netius)
-* paste：多线程，稳定，久经考验。(http://pythonpaste.org/)
-* rocket：多线程。(https://pypi.python.org/pypi/rocket)
-* waitress：多线程, 是它驱动着 Pyramid 框架。(https://waitress.readthedocs.org/en/latest/)
-* Werkzeug：一个 WSGI 工具库，驱动着 Flask ，而且可以很方便大嵌入到你的项目中去。(http://werkzeug.pocoo.org/)
-
-## RPC 服务器
-
-兼容 RPC 的服务器。
-
-* SimpleJSONRPCServer：这个库是 JSON-RPC 规范的一个实现。(https://github.com/joshmarshall/jsonrpclib/)
-* SimpleXMLRPCServer：(Python 标准库) 简单的 XML-RPC 服务器实现，单线程。(https://docs.python.org/2/library/simplexmlrpcserver.html)
-* zeroRPC：zerorpc 是一个灵活的 RPC 实现，基于 ZeroMQ 和 MessagePack。(https://github.com/0rpc/zerorpc-python)
-
-## 密码学
-
-* cryptography：这个软件包意在提供密码学基本内容和方法提供给 Python 开发者。(https://cryptography.io/en/latest/)
-* hashids：在 Python 中实现 [hashids](http://hashids.org/) 。(https://github.com/davidaurelio/hashids-python)
-* Paramiko：SSHv2 协议的 Python (2.6+, 3.3+) ，提供客户端和服务端的功能。(http://www.paramiko.org/)
-* Passlib：安全密码存储／哈希库，(https://pythonhosted.org/passlib/)
-* PyCrypto：Python 密码学工具箱。(https://www.dlitz.net/software/pycrypto/)
-* PyNacl：网络和密码学(NaCl) 库的 Python 绑定。(https://github.com/pyca/pynacl)
 
 ## 图形用户界面
 
@@ -2160,6 +2178,69 @@ Python实现的数据库。
 * libavg:以Python语言内置变量类型显示元素,事件处理系统,计时器,支持日志
 * PyGTK | PyGObject
 
+### 管理面板
+
+管理界面库。
+
+* Ajenti：一个你的服务器值得拥有的管理面板。(https://github.com/Eugeny/ajenti)
+* django-suit：Django 管理界面的一个替代品 (仅对于非商业用途是免费的)。(http://djangosuit.com/)
+* django-xadmin：Django admin 的一个替代品，具有很多不错的功能。(https://github.com/sshwsfc/django-xadmin)
+* flask-admin：一个用于 Flask 的简单可扩展的管理界面框架。(https://github.com/flask-admin/flask-admin)
+* flower：一个对 Celery 集群进行实时监控和提供 web 管理界面的工具。(https://github.com/mher/flower)
+* Grappelli：Django 管理界面的一个漂亮的皮肤。(http://grappelliproject.com/)
+* Wooey：一个 Django 应用，可以为 Python 脚本创建 web 用户界面。(https://github.com/wooey/wooey)
+
+### 静态站点生成器
+
+静态站点生成器是一个软件，它把文本和模板作为输入，然后输出HTML文件。
+
+* Pelican：使用 Markdown 或 ReST 来处理内容， Jinja 2 来制作主题。支持 DVCS, Disqus.。AGPL 许可。(http://blog.getpelican.com/)
+* Cactus：为设计师设计的静态站点生成器。(https://github.com/koenbok/Cactus/)
+* Hyde：基于 Jinja2 的静态站点生成器。(http://hyde.github.io/)
+* Nikola：一个静态网站和博客生成器。(https://www.getnikola.com/)
+* Tinkerer：Tinkerer 是一个博客引擎/静态站点生成器，由Sphinx驱动。(http://tinkerer.me/)
+* Lektor：一个简单易用的静态 CMS 和博客引擎。(https://www.getlektor.com/)
+
+## 网络
+
+用于网络编程的库。
+
+* asyncio：(Python 标准库) 异步 I/O, 事件循环, 协程以及任务。(https://docs.python.org/3/library/asyncio.html)
+* [Twisted](https://twistedmatrix.com/trac/)：一个事件驱动的网络引擎。
+* pulsar：事件驱动的并发框架。(https://github.com/quantmind/pulsar)
+* diesel：基于Greenlet 的事件 I/O 框架。(https://github.com/dieseldev/diesel)
+* pyzmq：一个 ZeroMQ 消息库的 Python 封装。(http://zeromq.github.io/pyzmq/)
+* txZMQ：基于 Twisted 的 ZeroMQ 消息库的 Python 封装。(https://github.com/smira/txZMQ)
+
+## RPC 服务器
+
+兼容 RPC 的服务器。
+
+* SimpleJSONRPCServer：这个库是 JSON-RPC 规范的一个实现。(https://github.com/joshmarshall/jsonrpclib/)
+* SimpleXMLRPCServer：(Python 标准库) 简单的 XML-RPC 服务器实现，单线程。(https://docs.python.org/2/library/simplexmlrpcserver.html)
+* zeroRPC：zerorpc 是一个灵活的 RPC 实现，基于 ZeroMQ 和 MessagePack。(https://github.com/0rpc/zerorpc-python)
+
+## 安全
+
+### 日志
+
+用来生成和操作日志的库。
+
+* logging：(Python 标准库) 为 Python 提供日志功能。(https://docs.python.org/2/library/logging.html)
+* logbook：Logging 库的替代品。(http://pythonhosted.org/Logbook/)
+* Eliot：为复杂的和分布式系统创建日志。(https://eliot.readthedocs.org/en/latest/)
+* Raven：Sentry的 Python 客户端。(http://raven.readthedocs.org/en/latest/)
+* Sentry：实时记录和收集日志的服务器。(https://pypi.python.org/pypi/sentry)
+
+### 密码学
+
+* cryptography：这个软件包意在提供密码学基本内容和方法提供给 Python 开发者。(https://cryptography.io/en/latest/)
+* hashids：在 Python 中实现 [hashids](http://hashids.org/) 。(https://github.com/davidaurelio/hashids-python)
+* Paramiko：SSHv2 协议的 Python (2.6+, 3.3+) ，提供客户端和服务端的功能。(http://www.paramiko.org/)
+* Passlib：安全密码存储／哈希库，(https://pythonhosted.org/passlib/)
+* PyCrypto：Python 密码学工具箱。(https://www.dlitz.net/software/pycrypto/)
+* PyNacl：网络和密码学(NaCl) 库的 Python 绑定。(https://github.com/pyca/pynacl)
+
 ## 游戏开发
 
 超赞的游戏开发库。
@@ -2171,16 +2252,6 @@ Python实现的数据库。
 * PyOpenGL：OpenGL 的 Python 绑定及其相关 APIs。(http://pyopengl.sourceforge.net/)
 * PySDL2：SDL2 库的封装，基于 ctypes。(http://pysdl2.readthedocs.org/en/latest/)
 * RenPy：一个视觉小说（visual novel）引擎。(https://www.renpy.org/)
-
-## 日志
-
-用来生成和操作日志的库。
-
-* logging：(Python 标准库) 为 Python 提供日志功能。(https://docs.python.org/2/library/logging.html)
-* logbook：Logging 库的替代品。(http://pythonhosted.org/Logbook/)
-* Eliot：为复杂的和分布式系统创建日志。(https://eliot.readthedocs.org/en/latest/)
-* Raven：Sentry的 Python 客户端。(http://raven.readthedocs.org/en/latest/)
-* Sentry：实时记录和收集日志的服务器。(https://pypi.python.org/pypi/sentry)
 
 ## Testing 测试
 
@@ -2362,16 +2433,6 @@ MapReduce 框架和库。
 * PySpark：Spark 的 Python API 。(http://spark.apache.org/docs/latest/programming-guide.html)
 * streamparse：运行针对事实数据流的 Python 代码。集成了[Apache Storm](http://storm.apache.org/)。(https://github.com/Parsely/streamparse)
 
-## 函数式编程
-
-使用 Python 进行函数式编程。
-
-* CyToolz：Toolz 的 Cython 实现 : 高性能函数式工具。(https://github.com/pytoolz/cytoolz/)
-* fn.py：在 Python 中进行函数式编程 : 实现了一些享受函数式编程缺失的功能。(https://github.com/kachayev/fn.py)
-* funcy：炫酷又实用的函数式工具。(https://github.com/Suor/funcy)
-* Toolz：一组用于迭代器，函数和字典的函数式编程工具。(https://github.com/pytoolz/toolz)
-* [evhub/coconut](https://github.com/evhub/coconut):Simple, elegant, Pythonic functional programming. <http://coconut-lang.org>
-
 ## 第三方 API
 
 用来访问第三方 API的库。 参见： [List of Python API Wrappers and Libraries](https://github.com/realpython/list-of-python-api-wrappers)。
@@ -2491,24 +2552,6 @@ Python 实现的算法和设计模式。
 * [python-patterns](https://github.com/faif/python-patterns)：Python 设计模式的集合。
 * [sortedcontainers](http://www.grantjenks.com/docs/sortedcontainers/)：快速，纯 Python 实现的SortedList，SortedDict 和 SortedSet 类型。
 
-## 编辑器插件
-
-* [Elpy](https://github.com/jorgenschaefer/elpy)：Emacs Python 开发环境。
-* [SublimeJEDI](https://github.com/srusskih/SublimeJEDI)：一个 Sublime Text 插件，用来使用超赞的自动补全库 Jedi。
-* Vim
-  - [YouCompleteMe](https://github.com/Valloric/YouCompleteMe)：引入基于 [Jedi](https://github.com/davidhalter/jedi) 的 Python 自动补全引擎
-  - [Jedi-vim](https://github.com/davidhalter/jedi-vim)：绑定 Vim 和 Jedi 自动补全库对 Python 进行自动补全。
-  - [Python-mode](https://github.com/klen/python-mode)：将 Vim 变成 Python IDE 的一款多合一插件。
-* [PTVS](https://github.com/Microsoft/PTVS)：Visual Studio 的 Python 工具
-
-## 集成开发环境
-
-流行的 Python 集成开发环境。
-
-* [PyCharm](https://www.jetbrains.com/pycharm/)：商业化的 Python IDE ，由 JetBrains 开发。也有免费的社区版提供
-* [LiClipse](http://www.liclipse.com/)：基于 Eclipse 的免费多语言 IDE 。使用 PyDev 来支持 Python
-* [Spyder](https://github.com/spyder-ide/spyder)：开源 Python IDE
-
 ## 自动聊天工具
 
 用于开发聊天机器人的库
@@ -2526,7 +2569,15 @@ Python 实现的算法和设计模式。
 * [Vexor CI](https://vexor.io/)：一个为私人 app 提供持续集成的工具，支持按分钟付费。
 * [Wercker](http://wercker.com/)：基于 Docker 平台，用来构建和部署微服务。
 
-## 网站
+## 问题
+
+```
+/System/Library/Frameworks/Python.framework/Versions/2.7/share': Operation not permitted
+```
+
+## 资源
+
+### 网站
 
 * [Python](https://www.reddit.com/r/python)
 * [CoolGithubProjects](https://www.coolgithubprojects.com/)
@@ -2538,13 +2589,13 @@ Python 实现的算法和设计模式。
 * [Trending Python repositories on GitHub today](https://github.com/trending?l=python)
 * [PyPI Ranking](http://pypi-ranking.info/alltime)
 
-## 周刊
+### 周刊
 
 * [Import Python Newsletter](http://importpython.com/newsletter/)
 * [Pycoder's Weekly](http://pycoders.com/)
 * [Python Weekly](http://www.pythonweekly.com/)
 
-## 课程
+### 课程
 
 * [Python-100-Days](https://github.com/jackfrued/Python-100-Days):Python - 100天从新手到大师
 * [Python 中文学习大本营](http://www.pythondoc.com/)
@@ -2578,7 +2629,7 @@ Python 实现的算法和设计模式。
 * [python_koans](https://github.com/gregmalcolm/python_koans)Python Koans - Learn Python through TDD
 * [Real Python Tutorials](https://realpython.com/)
 
-## 图书
+### 图书
 
 * [与孩子一起学编程 Hello World！Computer Programming for Kids and Other Beginners](https://www.amazon.cn/gp/product/B00HECW20S)
 * [Python编程快速上手 Automate the Boring Stuff with Python: Practical Programming for Total Beginners](https://automatetheboringstuff.com)

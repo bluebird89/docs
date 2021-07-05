@@ -56,7 +56,7 @@
 
 A second brain, for you, forever.
 
-* 大纲视图对内容的组织能力
+* 大纲视图对内容的组织，改观内容结构
 
 ### [sublime text](.../editor/sublime.md)
 

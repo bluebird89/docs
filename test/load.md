@@ -27,7 +27,9 @@ ab --help
 ab -n 1000 -c 100 http://127.0.0.1/
 ```
 
-## [Apache Benchmarking tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
+## 工具
+
+### [Apache Benchmarking tool](https://httpd.apache.org/docs/2.4/programs/ab.html)
 
 The simplest tool to perform a load testing.
 
@@ -72,7 +74,7 @@ yum install apr-util
 ab -n 5000 -c 50 https://www.baodu.com
 ```
 
-## [jmeter](https://github.com/apache/jmeter)
+###  [jmeter](https://github.com/apache/jmeter)
 
 a 100% pure Java application designed to test and measure performance. It may be used as a highly portable server benchmark as well as multi-client load generator. Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，最初被设计用于Web应用测试，但后来扩展到其他测试领域。
 
@@ -114,10 +116,38 @@ brew install jmeter
 jmeter
 ```
 
-## iperf
-## wrk
-## http_load
-## webench
+###  iperf
+
+###  wrk
+
+* 线程数，并不是设置的越大，压测效果越好，线程设置过大，反而会导致线程切换过于频繁，效果降低，一般来说，推荐设置成压测机器 CPU 核心数的 2 倍到 4 倍就行了
+* 用来模拟用户使用的实际场景:编写 Lua 脚本
+
+```sh
+wrk -v
+wrk --help
+
+-c, --connections <N>  Connections to keep open
+-d, --duration    <T>  Duration of test
+-t, --threads     <N>  Number of threads to use
+-s, --script      <S>  Load Lua script file
+-H, --header      <H>  Add header to request
+    --latency          Print latency statistics
+    --timeout     <T>  Socket/request timeout
+-v, --version          Print version details
+Numeric arguments may include a SI unit (1k, 1M, 1G)
+Time arguments may include a time unit (2s, 2m, 2h)
+
+wrk -t12 -c400 -d30s http://www.baidu.com # 线程数为 12，模拟 400 个并发请求，持续 30 秒
+wrk -t12 -c400 -d30s --latency http://www.baidu.com # 生成如下压测报告
+
+
+wrk -t5 -c5 -d30s http://www.baidu.com
+```
+
+###  http_load
+
+###  webench
 
 ```sh
 # webench
@@ -127,11 +157,11 @@ cd webbench-1.5
 make && make install
 ```
 
-## [hyperfine](https://github.com/sharkdp/hyperfine)
+###  [hyperfine](https://github.com/sharkdp/hyperfine)
 
 A command-line benchmarking tool
 
-## [Siege](https://github.com/JoeDog/siege)
+###  [Siege](https://github.com/JoeDog/siege)
 
 Siege is an http load tester and benchmarking utility
 

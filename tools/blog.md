@@ -179,6 +179,10 @@ A simple, Git-powered wiki with a sweet API and local frontend.
 * [lifesinger](https://github.com/lifesinger/blog):岁月如歌
 * [前端精读](https://github.com/dt-fe/)
 
+## 平台
+
+* [mastodon](https://joinmastodon.org/)Social networking, back in your hands
+
 ## 文章
 
 * [ProtoTeam](https://github.com/ProtoTeam/blog):蚂蚁数据体验技术团队的文章仓库

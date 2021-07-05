@@ -122,7 +122,7 @@
   - Travis CI：Tavis CI 是一个基于云的持续集成项目， 目前已经支持大部分主流语言了，比如：C，PHP，Ruby，Python，Nodejs等等。
   - Continuum：Aache Continuum 是最新的 CI 服务器之一，也是值得关注的一个新进入者。基于 Web 的界面使得配置项目很容易。而且，还不需要安装 Web 服务器，因为 Continuum 内置了 Jetty Web 服务器。并且，Continuum 可以作为 Windows 服务运行，还在应用程序的某些部分嵌入了上下文敏感的文档，从而提供了很多帮助。
   - LuntBuild：LntBuild 是一个强大自动构建的工具。通过一个简洁的web接口就可以很容易地进行系统的持续构建。
-  - CruiseControl：CuiseControl 是一个针对持续构建程序(项目持续集成)的框架，它包括一个email通知的插件，Ant和各种各样的CVS工具。CruiseControl提供了一个Web接口，可随时查看当前的编译状况和历史状况。
+  - CruiseControl：一个针对持续构建程序(项目持续集成)的框架，它包括一个email通知的插件，Ant和各种各样的CVS工具。提供了一个Web接口，可随时查看当前的编译状况和历史状况。
   - Integrity：Integrity 是 Ruby 开发的持续集成服务器。
   - Gump：Gump 是 Apache 的整合工具。它以 Python 写成、完全支持 Apache Ant、Apache Maven 等等软件组建工具
 * 度量

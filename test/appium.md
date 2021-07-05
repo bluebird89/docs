@@ -49,5 +49,3 @@ appium
 ### 客户端
 
 appiumclient是对webdriver原生api的一些扩展和封装。它可以帮助我们更容易的写出用例，写出更好懂的用例。
-
-## 参考
