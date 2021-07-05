@@ -293,15 +293,13 @@ An email <example@example.com> link.
 
 **Result:**
 
-* 自动生成连接像： <http://www.github.com/>
-* An email <example@example.com> link.
+* An email <example@example.com> link. [@henry](liboming88@yeah.net)
 * Any URL (like <http://www.github.com/>) will be automatically converted into a clickable link.
-* [连接标题Github网站](http://github.com)
-* [another one with a title](http://lmgtfy.com/ "Hello, world")
-* 插入超链接 [直播吧](http://www.zhibo8.com)
+* [链接标题Github网站](http://github.com)
+* [Link with a title](http://lmgtfy.com/ "Hello, world")
+* [Relative links](../TODO.md#Technical)
 * [本地链接](document.md#Notion)
-	* [文档内部链接](##Mermaid 流程图)
-	* [文档内部链接](#第一级标题)
+* [文档内部链接](#Using_emoji): 只用 `#archor_name`,不支持中文，字符不能含空格
 * `http://www.example.com`
 
 ---
@@ -314,12 +312,6 @@ You can link directly to a section in a rendered file by hovering over the secti
 [hobbit-hole](https://en.wikipedia.org/wiki/Hobbit#Lifestyle "Hobbit lifestyles")
 
 ^1:<<https://en.wikipedia.org/wiki/Hobbit#Lifestyle> "Hobbit lifestyles">
-
----
-
-## Relative links
-
-[Contribution guidelines for this project](../TODO.md)
 
 ---
 
@@ -715,7 +707,7 @@ bring up a list of suggested issues and pull requests within the repository by t
 
 You can create a new paragraph by leaving a blank line between lines of text
 
-### Using emoji
+### Using_emoji
 
 You can add emoji to your writing by typing :EMOJICODE:.
 

@@ -11,13 +11,14 @@
 
 * [ ] Instead of just scraping the data, why not build a website with that data:elect the most popular posts. From there it could copy the title, along with a few sentences, and then create a post that it shares online
 
-## technical
+## Technical
 
 * https://kit.svelte.dev/docs#introduction-getting-started
 * https://quasar.dev/
 * 《Effective Go》
 * 《Effective Java》
 * System Design Primer
+* Scheme
 
 ## video 
 
