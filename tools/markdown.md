@@ -300,7 +300,8 @@ An email <example@example.com> link.
 * [another one with a title](http://lmgtfy.com/ "Hello, world")
 * 插入超链接 [直播吧](http://www.zhibo8.com)
 * [本地链接](document.md#Notion)
-	* [文档内部链接](# Mermaid 流程图)
+	* [文档内部链接](##Mermaid 流程图)
+	* [文档内部链接](#第一级标题)
 * `http://www.example.com`
 
 ---
