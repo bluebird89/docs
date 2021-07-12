@@ -31,7 +31,7 @@
 * 休眠(Hibernate):把当前操作系统的状态保存到硬盘中，然后切断笔记本所有电源。启动时，从硬盘读取上次保存的系统状态，直接恢复使用
 * 控制面板→程序和功能→启用或关闭Windows功能→勾选Windows Sandbox
 
-```
+```sh
 # Windows Photo Viewer 恢复 cmd 打开命令提示符，输入以下内容
 FTYPE Paint.Picture=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
 FTYPE jpegfile=%SystemRoot%\System32\rundll32.exe "%ProgramFiles%\Windows Photo Viewer\PhotoViewer.dll", ImageView_Fullscreen %1
@@ -285,10 +285,8 @@ ipconfig /flushdns # 刷新域名
 
 PowerShell for every system! <https://microsoft.com/PowerShell>
 
-* 添加启动脚本
-
-```
-#
+```sh
+# 添加启动脚本
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 Install-Module posh-git [-Scope CurrentUser]
 Install-Module oh-my-posh [-Scope CurrentUser]
@@ -350,7 +348,7 @@ ls=ls --show-control-chars -F
 
 ### MarkdownPad
 
-```
+```sh
 Soar360@live.com
 
 GBPduHjWfJU1mZqcPM3BikjYKF6xKhlKIys3i1MU2eJHqWGImDHzWdD6xhMNLGVpbP2M5SN6bnxn2kSE8qHqNY5QaaRxmO3YSMHxlv2EYpjdwLcPwfeTG7kUdnhKE0vVy4RidP6Y2wZ0q74f47fzsZo45JE2hfQBFi2O9Jldjp1mW8HUpTtLA2a5/sQytXJUQl/QKO0jUQY4pa5CCx20sV1ClOTZtAGngSOJtIOFXK599sBr5aIEFyH0K7H4BoNMiiDMnxt1rD8Vb/ikJdhGMMQr0R4B+L3nWU97eaVPTRKfWGDE8/eAgKzpGwrQQoDh+nzX1xoVQ8NAuH+s4UcSeQ==

@@ -1,7 +1,5 @@
 # UML Unified Modeling Language 统一建模语言
 
-[TOC]
-
 UML是一种开放的方法，用于说明、可视化、构建和编写一个正在开发的、面向对象的、软件密集系统的制品的开放方法
 
 * 功能模型：从用户角度展示系统的功能，包括用例图
@@ -10,7 +8,9 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 * 结构图分为类图、轮廓图、组件图、组合结构图、对象图、部署图、包图
 * 行为图又分活动图、用例图、状态机图和交互图(序列图、时序图、通讯图、交互概览图)
 
-## 时序图 sequence diagram
+## 语法
+
+### 时序图 sequence diagram
 
 通过描述对象之间发送消息的时间顺序显示多个对象之间的动态协作
 
@@ -29,7 +29,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   a -> a: i am thinking;
   b -> a: fine;)
 
-## 用例图 use case diagram
+### 用例图 use case diagram
 
 参与者与用例的交互。下图是饭店的用例图
 
@@ -47,7 +47,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   rectangle restaurant{
   customer -> (eat food); customer -> (pay for food); chef -> (cook food); } ）
 
-## 流程图 activity diagram
+### 流程图 activity diagram
 
 描述程序的处理过程
 
@@ -65,7 +65,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
 ![Alt text](<http://g.gravizo.com/g>?
   (*) --> "buy 10 apples"; if "is there watermelon " then; -->[true] "buy a apple"; -right-> (_); else; ->[false] "Something else"; -->(_); endif; )
 
-## 组件图
+### 组件图
 
 表示组件是如何互相组织以构建更大的组件或是软件系统，绘了系统中组件提供的、需要的接口、端口等，以及它们之间的关系。
 
@@ -83,7 +83,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   };
   [app server] - [database];)
 
-## 状态图 state diagram
+### 状态图 state diagram
 
 描述一个对象在其生存期间的动态行为
 
@@ -100,7 +100,7 @@ UML是一种开放的方法，用于说明、可视化、构建和编写一个�
   block -up-> ready : io return, sleep over, get lock;
   running -> [*] : complete;)
 
-## 类图（class Diagrams）
+### 类图（class Diagrams）
 
 * 描述系统中的类，以及各个类之间的关系的静态视图，常用于表示类、接口和它们之间的协作关系
 * 实现（Realization）：一种类与接口的关系，表示类是接口所有特征和行为的实现,带三角箭头的虚线，空三角箭头指向接口
@@ -157,7 +157,13 @@ class Dummy {
 ![Alt text](<http://g.gravizo.com/g>?
     Human *-- Brain)
 
-## [Graphviz - Graph Visualization Software](http://www.graphviz.org/gallery/)
+### 部署图
+
+* 描述了系统内部的软件如何分布在不同的节点上
+
+## 工具
+
+### [Graphviz - Graph Visualization Software](http://www.graphviz.org/gallery/)
 
 <https://graphviz.gitlab.io/>
 
@@ -184,12 +190,9 @@ c->d;
 dot -Tpng first.dot -o first.png # 用的是dot布局 -T表示格式，即画成png格式，-o表示output
 ```
 
-## 部署图
+### PlantUML
 
-* 描述了系统内部的软件如何分布在不同的节点上
-
-## PlantUML
-
+* 很方便地撰写时序图，或者描述状态迁移，但更加通用的图形，尤其是用来捕获思维灵感的图形，就不适用
 * 使用 Sublime + PlantUML 高效地画图：用文字表达出图的内容，然后就可以直接生成图片
   - sublime
   - 安装 graphviz `brew install graphviz`
@@ -381,14 +384,14 @@ state Configuring {
 @enduml
 ```
 
-## [staruml](http://staruml.io/)
+### [staruml](http://staruml.io/)
 
 * 类型
   - 用例图、类图、序列图、状态图、活动图、通信图、构件图、部署图以及复合结构图
 * 参考
   - [Docs](https://docs.staruml.io/)
 
-## [ArgoUML]()
+### [ArgoUML]()
 
 ## book
 

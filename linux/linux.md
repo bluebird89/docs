@@ -51,6 +51,7 @@ Linux是基于Unix的，属于Unix类，Uinx操作系统支持多用户、多任
 
 ## Linux distributions 发行版
 
+* 顺序： arch->gentoo->freebsd
 * [GNU](https://www.gnu.org/)
   - [Linux](https://www.getgnulinux.org/)
 * BSD Berkeley Software Distribution

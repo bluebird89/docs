@@ -57,6 +57,17 @@
 A second brain, for you, forever.
 
 * 大纲视图对内容的组织，改观内容结构
+* plugins
+	* Note Refactor
+	* Kanban
+	* Calendar
+	* Review
+	* Vantage
+	* Better Word Count
+	* Todoist
+	* Tracker
+	* Dataview
+	* Mind Map of Document
 
 ### [sublime text](.../editor/sublime.md)
 
@@ -73,7 +84,9 @@ A second brain, for you, forever.
 * [Slidev](https://github.com/slidevjs/slidev)
 * [md2googleslides](https://github.com/gsuitedevs/md2googleslides):Generate Google Slides from markdown
 
-### Excalidraw
+### [Excalidraw](https://excalidraw.com/)
+
+* 
 
 ## Posters
 
