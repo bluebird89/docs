@@ -771,7 +771,7 @@ SELECT
     customers;
 ```
 
-### 数据控制语言 DCL Data Control Language
+## 数据控制语言 DCL Data Control Language
 
 * 定义数据库访问权限和安全级别，创建用户等。关键字：grant等
 * 账户信息保存在表 mysql.user
@@ -867,7 +867,7 @@ SHOW PROCESSLIST; # 显示哪些线程正在运行
 SHOW VARIABLES;
 ```
 
-### 数据定义语言 DDL Data Definition Language
+## 数据定义语言 DDL Data Definition Language
 
 * 定义数据库对象
 * 数据库
@@ -1059,7 +1059,7 @@ REPAIR [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... [QUICK] [EXT
 ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和存储表的关键字分布
 ```
 
-### 数据查询语言 Data Query Language DQL
+## 数据查询语言 Data Query Language DQL
 
 * 执行顺序:组合表结构->过滤筛选->查询->排序 `select [all|distinct] select_expr from -> where -> group by [合计函数] -> having -> order by -> limit`
   - FROM 连接:对 FROM 关键字两边表执行连接，会形成笛卡尔积，产生一个虚表VT1(virtual table)
@@ -1079,7 +1079,7 @@ ANALYZE [LOCAL | NO_WRITE_TO_BINLOG] TABLE tbl_name [, tbl_name] ... # 分析和
   - SELECT:将 VT6 中的结果按照 SELECT 进行刷选，生成 VT7
   - DISTINCT:会对 TV7 生成的记录进行去重操作，生成 VT8。事实上如果应用了 group by 子句那么 distinct 是多余的，原因同样在于，分组的时候是将列中唯一的值分成一组，同时只为每一组返回一行记录，那么所以的记录都将是不相同的。
   - ORDER BY:按照 order_by_condition 排序 VT8，此时返回一个游标，而不是虚拟表。sql 是基于集合的理论的，集合不会预先对他的行排序，它只是成员的逻辑集合，成员的顺序是无关紧要的。
-  - limit
+  - LIMIT
 * distinct|all:distinct去除重复记录, 默认 all 全部记录
   - 多参数 DISTINCT 去重 `SELECT DISTINCT number, name FROM table tamb` 把 DISTINCT 之后所有参数当做一个过滤条件，也就是说会对 (number, name)整体去重处理，只有当这个组合不同才会去重
 * 字段列表：要显示指定列数据
@@ -1261,7 +1261,7 @@ SELECT cust_name, COUNT(cust_address) AS addr_num FROM Customers GROUP BY cust_n
 SELECT cust_name, COUNT(*) AS num FROM Customers WHERE cust_email IS NOT NULL GROUP BY cust_name HAVING COUNT(*) >= 1;
 ```
 
-### 数据操作语言 Data Manipulation Language DML
+## 数据操作语言 Data Manipulation Language DML
 
 * 对数据库中表的记录进行更新。关键字：insert、update、delete等
 * 改表会直接触发表锁，改表过程非常耗时，对于大表修改，无论是字段类型调整还是字段增删，都需要谨慎操作，防止业务表操作被阻塞
