@@ -14,8 +14,8 @@
 
 ## 结构
 
-* macOS在剥离了Cocoa、Carbon等东西后，剩下的叫Darwin，它包含POSIX兼容、UNIX线程、进程实现
-* [XNU](https://github.com/apple/darwin-xnu):是macOS和iOS的核心，由三个主要部分组成的一个分层体系结构
+* macOS 剥离 Cocoa、Carbon等东西，剩下的叫Darwin，包含POSIX兼容、UNIX线程、进程实现
+* [XNU](https://github.com/apple/darwin-xnu): macOS和iOS的核心，由三个主要部分组成的一个分层体系结构
   - 内核的内环是Mach层，源自卡纳基-梅隆大学开发的Mach内核
   - BSD层
   - I/O Kit
@@ -24,7 +24,7 @@
 ![Alt text](../_static/Darwin-and-macOS.gif "Optional title")
 ![Alt text](../_static/MacOS-kernel-architecture.gif "Optional title")
 
-## 系统配置
+## 配置
 
 * 开启鼠标更多功能
 * 功能键(F1-F12)的行为设置为标准功能键
@@ -55,6 +55,34 @@
 ```sh
 # 开启 SSD 的 Trim 模式
 sudo trimforce enable
+```
+
+### [mackup](https://github.com/lra/mackup)
+
+* Keep your application settings in sync (OS X/Linux)系统配置备份
+* linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
+
+```sh
+brew install mackup # 通过mackup备份 默认放在文件Dropbox/
+
+mackup backup
+mackup restore
+mackup uninstall
+
+# mackup 配置文件 .mackup.cfg
+[storage]
+engine = file_system
+path = dotfiles # 文件路径
+directory = home
+
+[applications_to_sync]
+atom
+pycharmce
+myvim
+ideaic15
+zsh
+mackup
+dash
 ```
 
 ## 启动项
@@ -206,19 +234,35 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - 安装程序：通过APP store或者通过网页，网页下载的dmg文件相当于Windows里的EXE文件
   - 删除程序：在启动台长按程序图标再删除，或者在访达的应用程序里，将程序拖拽到废纸篓
 
+## Mission Control
+
+* 区分工作台:不同的桌面存放不同的软件。使用 Mission Control 和多 Desktop 工作区，简直就是完美任务切换
+  - control+num:切换窗口
+* 保持专注,一个工作区下做一件事情,至于这件事情需要多少软件，那就提前把这些软件放进来就好
+  - [ShiftIt](https://github.com/fikovnik/ShiftIt):布局程序窗口
+  - Option+Tab 在同一工作台切换不同的程序
+  - Cmd+~:切换同一个软件不同窗口
+* 使用快速查看窗口
+* 同时移动所有的窗口
+* 使用键盘控制导航
+  - Control键和向上方向键来启用 Mission Control
+
+## Spotlight
+
+* 去掉字体和书签与历史记录等不需要的内容
+* 设置合适的快捷键
+* 查词典 Command+L
+* 在浏览器查询 Command+B
+
+## airdrop
+
+* 苹果设备局域网共享链接，开启后，进行shares
+
 ## 共享目录
 
 * smaba
   - windows下Run "\\192.168.0.4" 来访问其他机器共享的目录
   - Mac中， 先打开Finder, command +K  打开共享目录 输入：`smb://192.168.0.4/share`
-
-## Stickies
-
-* notes
-  - 通过Web
-  - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
-  - More Tools, and then click Create Shortcut.
-* 系统自带便利贴
 
 ## 软件
 
@@ -378,6 +422,295 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 * 参考
   - [Louiszhai/tool](https://github.com/Louiszhai/tool) 提升开发效率：Mac工具链推荐
 
+### Stickies
+
+* notes
+  - 通过Web
+  - Create a Progressive Web App (PWA) :More Tools-> Create Shortcut
+  - More Tools, and then click Create Shortcut.
+* 系统自带便利贴
+
+### [brew](https://github.com/Homebrew/brew)
+
+🍺 The missing package manager for macOS (or Linux)
+
+* brew（意为酿酒）的命名很有意思，全部都使用了酿酒过程中采用的材料/器具，名词对应以下的概念：
+* Formula（配方） 程序包定义，本质上是一个rb文件
+* Keg（桶）程序包的安装路径
+* Cellar（地窖）所有程序包（桶）的根目录
+* Tap（水龙头）程序包的源
+* Bottle （瓶子）编译打包好的程序包
+* 增加一个程序源（新增一个水龙头） brew tap homebrew/php
+* [homebrew-core](https://github.com/Homebrew/homebrew-core):🍻 Default formulae for the missing package manager for macOS <https://brew.sh>
+* [axe.store](https://github.com/kuaibiancheng/axe.store):一款 Mac 下的包管理工具，同时支持命令行软件和图形界面软件安装
+
+#### 文件路径
+
+* 程序文件 /usr/local/etc/
+* 应用文件 /usr/local/Cellar/
+* 日志文件/usr/local/var
+* 链接文件 /usr/local/opt
+
+```sh
+# 安装
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+HOMEBREW_PREFIX = "/usr/local".freeze
+HOMEBREW_REPOSITORY = "/usr/local/Homebrew".freeze
+HOMEBREW_CACHE = "#{ENV["HOME"]}/Library/Caches/Homebrew".freeze
+HOMEBREW_OLD_CACHE = "/Library/Caches/Homebrew".freeze
+#BREW_REPO = "https://github.com/Homebrew/brew".freeze
+BREW_REPO = "git://mirrors.ustc.edu.cn/brew.git".freeze
+#CORE_TAP_REPO = "https://github.com/Homebrew/homebrew-core".freeze
+CORE_TAP_REPO = "git://mirrors.ustc.edu.cn/homebrew-core.git".freeze
+
+/usr/bin/ruby ~/brew_install
+```
+
+#### brew vs [homebrew-cask](https://github.com/Homebrew/homebrew-cask)
+
+🍻 A CLI workflow for the administration of macOS applications distributed as binaries <https://brew.sh>
+
+* Homebrew 默认情况下会自带：
+  - homebrew/core
+  - homebrew/cask：Homebrew 的 macOS Native 应用扩展，通过 cask 可以安装各类应用程序
+  - homebrew/services：台服务程序扩展，它基于 macOS 的 launchctl
+  - homebrew/bundle：解决所有软件依赖，包括官方和第三方的 formula 以及 cask
+* cask-versions：旧版的软件
+* cask-fonts： Homebrew 官方的字体源
+* brew:下载源码解压后。／.configure&& make install,同时包含相关以来库，并自动配置好各种环境变量，易于卸载
+* brew cask：在 Homebrew 基础上的一个增强工具，用来安装 Mac 上的 GUI 程序应用包.已经编译好的应用包（.dmg/.pkg）,仅仅下载解压，放到统一目录（／opt/homebrew-cask/caskroom）,再软链到~/Applications/目录下
+
+```sh
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile(.zshrc)
+
+brew -v|version
+brew config
+brew doctor
+
+brew tap homebrew/services # brew 服务管理
+# brew tap caskroom/cask
+brew tap caskroom/versions
+brew untap Homebrew/homebrew-versions # Remove a tapped repository
+
+brew list --versions # 列出本机通过brew安装的所有软件
+
+brew search name| /wget*/ # 搜索brew 支持的软件（支持模糊搜索)
+
+brew install caskroom/cask/brew-cask
+brew install -vd FORMULA
+brew install tig|bash-completion|brew-cask-completion
+
+brew (info|home|options) [FORMULA...]
+
+brew deps name * # 显示包依赖
+brew server * # 启动web服务器，可以通过浏览器访问http://localhost:4567/ 来同网页来管理包
+
+brew update
+# homebrew-cask is a shallow clone. To `brew update` first run:
+git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask" fetch --unshallow
+brew outdated # 查看哪些程序需要更新  brew update && brew upgrade
+
+brew upgrade name  #更新安装过的软件(如果不加软件名，就更新所有可以更新的软件)
+brew uninstall --force name # 卸载软件
+brew remove  name # 卸载软件
+
+brew cleanup #清除下载缓存
+brew update && brew upgrade && brew cleanup ; say mission complete
+
+brew update-reset # `require': cannot load such file -- active_support/core_ext/object/blank (LoadError)
+
+brew link --force openssl # 链接新的openssl到环境变量中
+brew link --overwrite docker
+
+brew services [-v|--verbose] [list | run | start | stop | restart| reload | cleanup] formula|--all
+
+# 卸载
+cd `brew –prefix`
+rm -rf Cellar
+brew prune
+rm -rf Library .git .gitignore bin/brew README.md share/man/man1/brew
+rm -rf ~/Library/Caches/Homebrew
+
+brew cask search|install|info|uninstall name
+brew list --cask # 列出应用的信息
+
+# plugins
+brew cask install \
+    qlcolorcode \
+    qlstephen \
+    qlmarkdown \
+    quicklook-json \
+    qlprettypatch \
+    quicklook-csv \
+    betterzipql \
+    webpquicklook \
+    suspicious-package
+
+# app
+brew cask install \
+    alfred \
+    android-file-transfer \
+    appcleaner \
+    caffeine \
+    cheatsheet \
+    docker \
+    doubletwist \
+    flux \
+    google-chrome \
+    iterm2 \
+    mou \
+    qq \
+    spectacle \
+    sublime-text \
+    superduper \
+    transmission \
+    valentina-studio \
+    vlc \
+    virtualbox \
+    the-unarchiver \
+    thunder \
+    evernote \
+
+##
+# Homebrew
+##
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+##
+# Homebrew bash completion
+##
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
+
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall)"
+
+brews   brew list -1
+brewsp  brew list --pinned
+bubo    brew update && brew outdated
+bubc    brew upgrade && brew cleanup
+bubu    bubo && bubc
+buf brew upgrade --formula
+bcubo   brew update && brew outdated --cask
+bcubc   brew cask reinstall $(brew outdated --cask) && brew cleanup
+```
+
+#### 源管理
+
+```sh
+# 替换清华 https://mirrors.tuna.tsinghua.edu.cn/help/homebrew/
+git -C "$(brew --repo)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
+git -C "$(brew --repo homebrew/core)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
+git -C "$(brew --repo homebrew/cask)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask.git
+git -C "$(brew --repo homebrew/cask-fonts)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-fonts.git
+git -C "$(brew --repo homebrew/cask-drivers)" remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-cask-drivers.git
+
+## 更换 阿里
+cd "$(brew --repo)" && git remote set-url origin https://mirrors.aliyun.com/homebrew/brew.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core" && git remote set-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles' >> ~/.zshrc
+
+## 中科大
+cd "$(brew --repo)" && git remote set-url origin git://mirrors.ustc.edu.cn/brew.git
+cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core" && git remote set-url origin git://mirrors.ustc.edu.cn/homebrew-core.git
+echo 'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles' >> ~/.bash_profile
+
+# 还原
+git -C "$(brew --repo)" remote set-url origin https://github.com/Homebrew/brew.git
+git -C "$(brew --repo homebrew/core)" remote set-url origin https://github.com/Homebrew/homebrew-core.git
+git -C "$(brew --repo homebrew/cask)" remote set-url origin https://github.com/Homebrew/homebrew-cask.git
+
+git -C "/usr/local/Homebrew" remote set-url origin https://github.com/Homebrew/brew
+git -C "/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core" remote set-url origin https://github.com/Homebrew/homebrew-core
+
+brew update
+
+source ~/.zshrc
+```
+
+#### 服务管理
+
+```sh
+brew services start|stop|run mysql
+```
+
+#### 问题
+
+```
+> brew postinstall node  brew postinstall php@7.1 安装权限问题
+
+cd /usr/local && sudo chown -R $(whoami) bin etc include lib sbin share var Frameworks
+
+> Error: undefined method `core_tap?' for nil:NilClass
+
+brew update --force
+```
+
+### [MacPORTS](https://guide.macports.org/)
+
+an open-source community initiative to design an easy-to-use system for compiling, installing, and upgrading either command-line, X11 or Aqua based open-source software on the Mac operating system.
+
+* Mac算是BSD的一个变种吧。所以，BSD的包管理软件port被移植到Mac上就显的理所当然了。
+* macports的工作方式是下载source code然后在本地编译。
+* macport的理念是尽量减少对系统现有库的依赖。 所以，第一次用macport的时候，需要很长时间让macport重新build整个基本库。代价是较长的编译时间，较多的依赖关系下载。
+* 好处是不怎么依赖系统，也就是说，更新Mac OS不会破坏你现有的 package。另外，macports安装所有的package到/opt/local下面。这样不会和系统现有的/usr/local有什么冲突。
+* 通过rsync维持数据索引一致
+
+```sh
+wget http://distfiles.macports.org/MacPorts/MacPorts-1.9.2.tar.gz
+tar zxvf MacPorts-1.9.2.tar.gz
+cd MacPorts-1.9.2
+./configure && make && sudo make install
+cd ../
+rm -rf MacPorts-1.9.2*
+
+# 添加 /etc/profile
+export PATH=/opt/local/bin:$PATH
+export PATH=/opt/local/sbin:$PATH
+
+sudo port -v selfupdate  # 更新 MacPorts 索引
+port search NAME
+sudo port install NAME
+sudo port uninstall NAME
+port outdated
+sudo port upgrade outdated
+port help selfupdate
+port list
+
+port search --name --glob 'php*'
+port search --name --line --glob 'php*'
+port search --name --line --regex '^php\d*$'
+
+port info yubico-pam
+port deps apache2 +openldap
+port contents xorg-renderproto
+port installed
+
+# 卸载
+sudo port -fp uninstall installed
+sudo rm -rf \
+        /opt/local \
+        /Applications/DarwinPorts \
+        /Applications/MacPorts \
+        /Library/LaunchDaemons/org.macports.* \
+        /Library/Receipts/DarwinPorts*.pkg \
+        /Library/Receipts/MacPorts*.pkg \
+        /Library/StartupItems/DarwinPortsStartup \
+        /Library/Tcl/darwinports1.0 \
+        /Library/Tcl/macports1.0 \
+        ~/.macports
+```
+
+#### homebrew vs macports
+
+下载source并在本地编译安装，与macports差别
+
+* homebrew的理念是尽量使用系统现有的库。这样可以大大的减少编译时间。
+* package都安装到/usr/local下面。
+* 资源包管理：Homebrew(安装完brew时，brew-cask已经安装好了，无需额外安装）
+
 ## screensavers
 
 * 安装
@@ -392,7 +725,22 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
     + 下载点击安装，重新进入系统偏好设置
   - [](https://github.com/OrangeJedi/Aerial):Apple TV screen saver for Windows
 
-## [Hammerspoon](http://www.hammerspoon.org/)
+## 铃声制作
+
+* 音乐文件用itunes打开
+* getinfo剪辑（长度不变）
+* 转换acc
+* 在文件位置移开未见重命名.m4r
+* 拖进tones
+* 同步手机
+
+## Automator
+
+### [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
+
+essentially an IDE for automation
+
+### [Hammerspoon](http://www.hammerspoon.org/)
 
 * a desktop automation tool for OS X. It bridges various system level APIs into a Lua scripting engine
 * 面向 macOS 的一个桌面自动化框架。它允许用户编写和操作系统功能挂钩的 Lua 脚本，从而与键盘、鼠标、窗口、文件系统等交互
@@ -407,20 +755,16 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
   - [官方示例配置](https://github.com/Hammerspoon/hammerspoon/wiki/Sample-Configurations)
   - [Anish 的 Hammerspoon 配置](Anish 的 Hammerspoon 配置)
 
-## [Keyboard Maestro](https://www.waerfa.com/keyboard-maestro)
+### [alfred](https://www.alfredapp.com/)
 
-essentially an IDE for automation
+a very powerful launcher that you can program to show you anything you want
 
-## 铃声制作
-
-* 音乐文件用itunes打开
-* getinfo剪辑（长度不变）
-* 转换acc
-* 在文件位置移开未见重命名.m4r
-* 拖进tones
-* 同步手机
-
-## Automator
+* 购买 Powerpack. 快捷键：option + space
+* [workflow](http://www.alfredworkflow.com/)
+  - [alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
+  - [alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
+  - [AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. <http://www.alfredworkflow.com/>
+  - [alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
 
 ## terminal
 
@@ -500,7 +844,7 @@ for i in `say -v '?' | cut -d ' ' -f 1`; do echo $i && say -v "$i" 'Hello World'
   - command+shift+option +4 截取部分屏幕，默认复制到剪切板（可直接粘贴到指定的窗口）
   - command+shift+4+空格键，精准剪切当前窗口
 
-## 系统功能
+### 系统功能
 
 * 打开我的文档或浏览器主页：shift + command + H
 * 粘贴文本 -->Shift+Command+Option+V
@@ -519,20 +863,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 # [更换主题](https://github.com/tomislav/osx-terminal.app-colors-solarized)中的Solarized Dark.terminal，偏好导入并设置为默认，字体设为Courier New，20
 ```
 
-## Mission Control
-
-* 区分工作台:不同的桌面存放不同的软件。使用 Mission Control 和多 Desktop 工作区，简直就是完美任务切换
-  - control+num:切换窗口
-* 保持专注,一个工作区下做一件事情,至于这件事情需要多少软件，那就提前把这些软件放进来就好
-  - [ShiftIt](https://github.com/fikovnik/ShiftIt):布局程序窗口
-  - Option+Tab 在同一工作台切换不同的程序
-  - Cmd+~:切换同一个软件不同窗口
-* 使用快速查看窗口
-* 同时移动所有的窗口
-* 使用键盘控制导航
-  - Control键和向上方向键来启用 Mission Control
-
-## finder
+### finder
 
 * Command-D 复制所选文件。
 * Command-E 推出所选磁盘或宗卷。
@@ -611,7 +942,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 修改DNS提高Apple Store 网速:打开：systerm Preferences > Network > Advanced > DNS
   - 223.5.5.5 223.6.6.6 114.114.114.114 168.95.1.1 168.95.192.22 68.95.192.33
 
-## Safari && Chrome
+### Safari && Chrome
 
 * command + 1（2、3...）分别是打开书签栏的第一个、第二个..
 * command+r command + shift + r刷新。喜欢看直播的同学有福啦。
@@ -660,7 +991,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
   - ⌘+;弹出自动补齐窗口 之前做法 control + r：历史命令行匹配
   - ⌘+Option+e全屏展示所有的 tab，可以搜索
 
-#### 文稿快捷键
+### 文稿快捷键
 
 * Command-B 以粗体显示所选文本，或者打开或关闭粗体显示功能。
 * Command-I 以斜体显示所选文本，或者打开或关闭斜体显示功能。
@@ -677,7 +1008,7 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * Control-K 删除插入点与行或段落末尾处之间的文本。
 * Command-Delete 在包含"删除"或"不存储"按钮的对话框中选择"删除"或"不存储"。
 
-#### 翻页
+### 翻页
 
 * Fn–上箭头 向上翻页：向上滚动一页。
 * Fn–下箭头 向下翻页：向下滚动一页。
@@ -732,35 +1063,13 @@ curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases
 * 手机线接电脑；quickplayer 新建影片录制 录像按钮选择设备
 * 通过软件AirServer Connect（收费）
 
-#### iPhone 控制keynote（同一个网路下）
+#### iPhone 控制 keynote（同一个网路下）
 
 * mac端偏好设置中remote开启并连接手机
 * iphone keynote进入远程控制，开始控制
 * AirPlay功能投影到Apple TV
 
-## Spotlight
-
-* 去掉字体和书签与历史记录等不需要的内容
-* 设置合适的快捷键
-* 查词典 Command+L
-* 在浏览器查询 Command+B
-
-## airdrop
-
-* 苹果设备局域网共享链接，开启后，进行shares
-
 ## handoff:浏览器设备共享
-
-## [alfred](https://www.alfredapp.com/)
-
-a very powerful launcher that you can program to show you anything you want
-
-* 购买 Powerpack. 快捷键：option + space
-* [workflow](http://www.alfredworkflow.com/)
-  - [alfred-workflows](https://github.com/learn-anything/alfred-workflows):Amazing Alfred Workflows
-  - [alfred-github-workflow](https://github.com/gharlan/alfred-github-workflow):GitHub Workflow for Alfred 3
-  - [AlfredWorkflow.com](https://github.com/hzlzh/AlfredWorkflow.com):A public Collection of Alfred Workflows. <http://www.alfredworkflow.com/>
-  - [alfred-workflows](https://github.com/zenorocha/alfred-workflows):🤘 A collection of Alfred 3 and 4 workflows that will rock your world
 
 ### features
 
@@ -866,39 +1175,11 @@ route add -net 172.17.0.0 -netmask 255.255.255.0 dev eth0
 route add [-net|-host] [网域或主机] netmask [mask] [gw|dev]
 ```
 
-## 远程登录
+### 远程登录
 
 * 开启设置-〉共享-〉远程登录
 
-## [mackup](https://github.com/lra/mackup)
-
-* Keep your application settings in sync (OS X/Linux)系统配置备份
-* linux下（mac下）有各种app，每个人会根据个人的喜好和习惯来设置一些（快捷键，变量等等），而dotfiles就是保存了这些自定义设置的文件。在系统中使用一个文件夹，通过ln命令，将不同的app，不同的系统设置文件都指引到这个文件夹
-
-```sh
-brew install mackup # 通过mackup备份 默认放在文件Dropbox/
-
-mackup backup
-mackup restore
-mackup uninstall
-
-# mackup 配置文件 .mackup.cfg
-[storage]
-engine = file_system
-path = dotfiles # 文件路径
-directory = home
-
-[applications_to_sync]
-atom
-pycharmce
-myvim
-ideaic15
-zsh
-mackup
-dash
-```
-
-### 问题
+## 问题
 
 ```
 Failed to initialize MacPorts, OS platform mismatch 重新安装

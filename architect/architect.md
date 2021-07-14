@@ -66,7 +66,7 @@
 * 引入容器化技术实现运行环境隔离与动态服务管理
 * 以云平台承载系统
 
-## 原则
+## 设计
 
 * 在时间、安全、稳定、性能等方面做权衡，同时注意控制复杂度
   - 权衡需要宽阔视野、良好沟通能力、多样化价值观，不能钻牛角尖，要能妥协而且懂得如何妥协
@@ -142,6 +142,210 @@
 * 艰难的问题
   - 原则 29：梦想着新的编程语言就会变得简单和明了，但往往要想真正掌握会很难。不要轻易的去换编程语言
   - 原则 30：复杂的拖拉拽的界面是艰难的，不要去尝试这样的效果，除非你准备好了 10 人年的团队
+
+## 原则
+
+### KISS Keep It Simple and Stupid
+
+* 考虑逻辑复杂度、实现难度、代码的可读性
+* 工具类的功能都比较通用和全面，所以，在代码实现上，需要考虑和处理更多的细节，执行效率就会有所影响
+* 本身就复杂的问题，用复杂的方法解决，并不违背 KISS 原则。
+* 原则
+  - 不要使用同事可能不懂的技术来实现代码。比如前面例子中的正则表达式，还有一些编程语言中过于高级的语法等。
+  - 不要重复造轮子，要善于使用已经有的工具类库。经验证明，自己去实现这些类库，出 bug 的概率会更高，维护的成本也比较高。
+  - 不要过度优化。不要过度使用一些奇技淫巧（比如，位运算代替算术运算、复杂的条件语句代替 if-else、使用一些过于底层的函数等）来优化代码，牺牲代码的可读性。
+
+### YAGNI You Ain’t Gonna Need It
+
+* 只考虑和设计必须的功能，避免过度设计
+* 需不需要做的问题
+
+### DRY Don’t Repeat Yourself
+
+* 逻辑重复的应该合并
+* 语义不重复：从代码实现逻辑上看起来是重复的，从功能上来看，两个函数干的是完全不重复的两件事情
+* 执行重复的应该合并
+
+### Composition over inheritance（喜欢组合而不是继承）
+
+* 继承为实现不同功能，通过不断继承的方法赵成继承层次过深、继承关系过于复杂，会影响到代码的可读性和可维护性
+  - 依赖于抽象类来定义行为，导致过于复杂的继承关系，而通过接口定义行为能够有效地分离行为与实现
+* 通过组合、接口、委托三个技术手段可以替换掉继承,代码复用可以通过组合和委托来实现
+* 组合可以通过注入实现
+* 判断
+  - 继承改写成组合意味着要做更细粒度的类的拆分
+  - 如果类之间的继承结构稳定（不会轻易改变），继承层次比较浅（比如，最多有两层继承关系），继承关系不复杂，就可以大胆地使用继承
+  - 系统越不稳定，继承层次很深，继承关系复杂，就尽量使用组合来替代继承。
+
+```
+public interface Flyable {
+    void fly()；
+}
+public class FlyAbility implements Flyable {
+    @Override public void fly() {
+        //...
+    }
+}
+
+public class Ostrich implements Tweetable, EggLayable {//鸵鸟
+    private TweetAbility tweetAbility = new TweetAbility(); //组合
+
+    @Override
+    public void tweet() {
+        tweetAbility.tweet(); // 委托
+    }
+```
+
+### Command-Query Separation (CQS) – 命令-查询分离原则
+
+
+### Hollywood Principle – 好莱坞原则
+### High Cohesion & Low/Loose coupling & – 高内聚， 低耦合
+### Convention over Configuration（CoC）– 惯例优于配置原则
+### Separation of Concerns (SoC) – 关注点分离
+### Design by Contract (DbC) – 契约式设技
+
+## [SOLID](https://mp.weixin.qq.com/s/JOVSkcC48qwoaByxUtgcFA)
+
+* 单一职责原则 Single Responsibility Principle SRP
+  - There should never be more than one reason for a class to change.
+  - 类只承担单一职责,尽可能地降低类变更可能性，不同职责分开单独定义
+  - 不仅仅适用于类，还适用于接口以及方法的设计
+  - 让一个类只处理一组相关的事情，控制了它的变化方向，后期也能更好的定位。如果引发变化的因素很多，会导致类的职责过多，难以维护
+* 开闭原则 Open-Closed Principle OCP
+  - Softeware entities like classes,modules and functions should be open for extension but closed for modifications.
+  - 一个软件实体如类、模块和函数，应该通过扩展来实现变化，而不是通过修改已有代码来实现变化。比如参数类型、引用对象尽量使用接口或者抽象类，而不是具体实现类
+  - 对修改关闭，对扩展开放。建议为你的服务调用者提供一个他需要的抽象、高层次的行为接口，后期你的服务有新的种类，你只需要新增一个实现该抽象、高层次接口具体服务，而不需要修改调用者的使用方式。
+* 依赖倒转原则 Dependence Inversion Principle DIP
+  - High level modules should not depend upon low level modules. Both should depend upon abstractions. Abstractions should not depend upon details. Details should depend upon abstractions.
+  - 高层模块不应该依赖低层模块，一旦低层模块发生变化，将引起高层模块不必要的改变，同时高层模块之上可能有更高层模块存在，因此两者都应该依赖于抽象
+  - 抽象不依赖具体实现细节，而让具体实现细节依赖抽象。抽象不变，具体实现细节改变可以使影响最小化，也就是要针对接口编程
+  - 使用者依赖一个抽象的服务接口，而不是去依赖一个具体的服务执行者，从依赖具体实现转向到依赖抽象接口，倒置过来。
+* 里氏代换原则 Liskov Substitution Principle LSP
+  - Functions that use pointers or referrnces to base classes must be able to use objects of derived classes without knowing it.
+  - 任何基类可以出现的地方，透明地使用其子类的对象，且必须遵从基类所有规则定义
+  - 反过来说，除了扩展基类，又为什么要违背基类规则定义呢？这一条与开关原则结合起来理解就是，基类遵循关原则，子类遵循开原则，子类必须满足LSP才允许继承，否则就断开这种继承关系
+  - 为了尽可能地减少修改以及修改带来的安全隐患
+  - 对使用者来说，能够使用父类的地方，一定可以使用其子类，并且预期结果是一致的。
+* 接口隔离原则 Interface Segregation Principle ISP
+  - Clients should not be forced to depend upon interfaces that they don't use.The dependcy of one class to another one should depend on the smallest possible interface.
+  - 使用多个隔离接口，比使用单个接口要好，也有利于降低类之间的耦合度。类间的依赖关系要建立在最小接口之上，要防止类必须实现接口中对于自己来说无用的方法情形的出现；
+  - 一个接口中所有方法都是围绕一个职责，但是这个接口仍可能不符合接口隔离原则
+  - 提倡不要将一个大而全的接口扔给使用者，而是将每个使用者关注的接口进行隔离。
+* 迪米特法则 Law of Demeter|最少知识原则 Least Knowledge Principle LoD|LKP
+  - Only talk to your immedate friends.
+  - 一个模块或子系统应当尽量少地与其他模块或子系统之间发生直接相互作用，可以通过增加“即时朋友”这个中间人来中转通信，只与“朋友”保持联系，与“陌生人”概不谋面，当模块或子系统出现版本升级更新或环境移植之后，只要朋友不变就好
+  - 只和自己直接朋友交流：出现成员变量、方法参数、方法返回值中的类为直接的朋友，而出现在局部变量中的类则不是直接的朋友
+  - 不要将依赖类以局部变量的形式在类中使用
+  - 依赖类尽可能少地公布公有方法
+  - 如果一个方法放在本类中，既不增加类间关系，也不对本类产生负面影响，那就放置在本类中
+* 合成/聚合复用原则 Composite/Aggregate ReusePrinciple ，CARP
+  - 在设计上尽量使用合成/聚合来达到复用的目的，而不是使用继承，也就是说前者优先于后者而被运用。
+  - 继承会将基类的细节暴露给子类，也称白箱复用，如果基类发生改变，子类也必须相应做出变动，且多继承不易维护。
+  - CARP几乎可用于任何环境，依赖少，但是合成/聚合造成类中多对象需要管理
+
+### 单一职责原则 SRP Single Responsibility Principle
+
+* 概念：A class or module should have a single reponsibility
+* 不要设计大而全的类，要设计粒度小、功能单一的类
+* 不同的应用场景、不同阶段的需求背景下，对同一个类的职责是否单一的判定，可能都是不一样的。
+* 持续重构：可以先写一个粗粒度的类，满足业务需求。随着业务的发展，如果粗粒度的类越来越庞大，代码越来越多，这个时候，就可以将这个粗粒度的类，拆分成几个更细粒度的类
+* 判断原则
+  - 类中的代码行数、函数或属性过多，会影响代码的可读性和可维护性，就需要考虑对类进行拆分。行数最好不能超过 200 行，函数个数及属性个数都最好不要超过 10 个
+  - 类依赖的其他类过多，或者依赖类的其他类过多，不符合高内聚、低耦合的设计思想，就需要考虑对类进行拆分；
+  - 私有方法过多，就要考虑能否将私有方法独立到新的类中，设置为 public 方法，供更多的类使用，从而提高代码的复用性；
+  - 比较难给类起一个合适名字，很难用一个业务名词概括，或者只能用一些笼统的 Manager、Context 之类的词语来命名，这就说明类的职责定义得可能不够清晰；
+  - 类中大量的方法都是集中操作类中的某几个属性，比如，在 UserInfo 例子中，如果一半的方法都是在操作 address 信息，那就可以考虑将这几个属性和对应的方法拆分出来。
+
+### 开闭原则 OCP Open Closed Principle
+
+* software entities (modules, classes, functions, etc.) should be open for extension , but closed for modification。
+* 只要它没有破坏原有的代码的正常运行，没有破坏原有的单元测试
+* 代码的扩展性问题，是判断一段代码是否易扩展的“金标准”
+  - 一些比较确定的、短期内可能就会扩展，或者需求改动对代码结构影响比较大的情况，或者实现成本不高的扩展点，在编写代码的时候之后，就可以事先做些扩展性设计
+  - 可变部分封装起来，隔离变化，提供抽象化的不可变接口，给上层系统使用
+* 需要在扩展性和可读性之间做权衡
+
+### 里式替换原则 LSP Liskov Substitution Principle
+
+* If S is a subtype of T, then objects of type T may be replaced with objects of type S, without breaking the program。
+* 子类对象（object of subtype/derived class）能够替换程序（program）中父类对象（object of base/parent class）出现的任何地方，并且保证原来程序的逻辑行为（behavior）不变及正确性不被破坏。
+* 多态和里式替换有点类似，但它们关注的角度是不一样的
+  - 多态是面向对象编程的一大特性，也是面向对象编程语言的一种语法。它是一种代码实现的思路。
+  - 里式替换是一种设计原则，是用来指导继承关系中子类该如何设计的，子类的设计要保证在替换父类的时候，不改变原有程序的逻辑以及不破坏原有程序的正确性。
+* Design By Contract：按照协议来设计
+  - 父类定义了函数的行为约定，那子类可以改变函数的内部实现逻辑，但不能改变函数原有的行为约定。这里的行为约定包括
+    + 函数声明要实现的功能
+    + 对输入、输出、异常的约定
+    + 甚至包括注释中所罗列的任何特殊说明
+
+### 接口隔离原则 ISP Interface Segregation Principle
+
+* Clients should not be forced to depend upon interfaces that they do not use。
+* 接口概念
+  - 一组 API 接口集合:如果部分接口只被部分调用者使用，那就需要将这部分接口隔离出来，单独给对应的调用者使用，而不是强迫其他调用者也依赖这部分不会被用到的接口
+  - 单个 API 接口或函数:函数的设计要功能单一，不要将多个不同的功能逻辑在一个函数中实现
+  - OOP 中的接口概念:接口的设计要尽量单一，不要让接口的实现类和调用者，依赖不需要的接口函数
+    + 职责单一就意味了通用、复用性好 更加灵活
+* 接口隔离原则与单一职责原则的区别
+  - 单一职责原则针对的是模块、类、接口的设计
+  - 接口隔离原则相对于单一职责原则
+    + 一方面更侧重于接口的设计
+    + 另一方面它的思考角度也是不同的。接口隔离原则提供了一种判断接口的职责是否单一的标准：通过调用者如何使用接口来间接地判定。如果调用者只使用部分接口或接口的部分功能，那接口的设计就不够职责单一。
+
+### 迪米特法则 LOD Law of Demeter
+
+* Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.
+* 不该有直接依赖关系的类之间，不要有依赖；有依赖关系的类之间，尽量只依赖必要的接口（也就是定义中的“有限知识”）
+* 实现代码的“高内聚、松耦合”
+  - 高内聚：相近的功能应该放到同一个类中，不相近的功能不要放到同一个类中
+  - 松耦合：类与类之间的依赖关系简单清晰
+  - “高内聚”用来指导类本身的设计，“松耦合”用来指导类与类之间依赖关系的设计。
+
+```java
+// 既不想违背高内聚的设计思想，也不想违背迪米特法则
+public interface Serializable {
+  String serialize(Object object);
+}
+
+public interface Deserializable {
+  Object deserialize(String text);
+}
+
+public class Serialization implements Serializable, Deserializable {
+  @Override
+  public String serialize(Object object) {
+    String serializedResult = ...;
+    ...
+    return serializedResult;
+  }
+
+  @Override
+  public Object deserialize(String str) {
+    Object deserializedResult = ...;
+    ...
+    return deserializedResult;
+  }
+}
+
+public class DemoClass_1 {
+  private Serializable serializer;
+
+  public Demo(Serializable serializer) {
+    this.serializer = serializer;
+  }
+  //...
+}
+
+public class DemoClass_2 {
+  private Deserializable deserializer;
+
+  public Demo(Deserializable deserializer) {
+    this.deserializer = deserializer;
+  }
+  //...
+}
+```
 
 ## 评测
 
@@ -791,35 +995,6 @@ Tracker告警短信接口超时问题。
 * 架构部Sharepoint主页：
 * 外部技术大会资料（上传需在ITSupport申请开通权限）
 
-## 《架构整洁之道》
-
-* 依赖倒置（DIP）本质上是一种解耦，解耦的目的是实现组件化的独立部署和独立开发能力
-* 所有的竞争问题、死锁问题、并发更新问题都是由可变变量导致的。如果变量永远不会被更改，那就不可能产生竞争或并发更新问题。如果锁状态是不可变的，那就永远不会产生死锁问题。所以架构师要做好可变性的隔离，区分出可变组件和不可变组件，尽可能的将处理逻辑归于不可变组件
-* 软件构建中层结构的主要目标是：第一、使软件可容忍被改动；第二、使软件更容易被理解；第三、构建可在多个系统中复用的组件
-* SRP是康威定律的一个推论，即软件应与组织息息相关，每一个软件模块应该只对某一类行为者负责。单一职责原则放到组件层面就是共同闭包，即我们应该将会同时修改，会以同样目的而被修改的类整合成一个组件
-* OCP是指当新增功能时可以通过增加新代码而非修改旧代码来实现
-* 软件复用的最小粒度应该等同于软件发布的最小粒度。PS：有些研发组织以系统的形式发布软件，却期望各个系统去共享使用通用的功能，最后只能是一团糟
-* 不要依赖不需要用到的东西，换言之，在设计组件时，应考虑这些类是被共同复用的吗？PS：难
-* 不要出现依赖环，否则会影响开发效率。依赖环的消除可以使用依赖倒置来解决
-* 组件是不可能从上到下被设计出来，因为组件体现的不仅是业务功能而是构建性、维护性、依赖关系的地图。PS:很反直觉，有待体验
-* 不稳地的组件可以依赖稳定的组件，而不能让稳定的组件依赖不稳定的组件。一个组件的抽象化程度应该与其稳定性保持一致，就是说稳定的应该抽象，否则无法满足开闭原则。不稳定的应该包含实现代码，这样才方便修改
-* 软件架构的终极目标是最大化程序员的生产力，同时最小化系统的总运营成本
-  - 好的软件架构应该是团队的组织架构相适应，方便开发团队开发
-  - 好的软件架构要考虑到方便部署
-  - 好的软件架构应该使开发人员对软件运行过程一目了然
-  - 好的软件架构应该便于维护
-  - 好的软件架构应该保留更多的（有意义的）可选性
-* 一个系统在水平分层上比较常见的方式是：UI界面、应用独有的业务逻辑、领域普适的业务逻辑、数据库
-* 划分边界的目的是方便我们尽量将一些决策延后进行
-* 计算机程序从本质上说就是一组仔细描述如何将输入转化为输出的策略语句的集合。软件架构设计的工作重点之一就是将这些策略彼此分里，然后将他们按照变更的方式进行重新分组。变更原因、时间和层次相同的策略应该被分到同一个组件中
-* 一种策略距离系统的I/O越远，它所属的层次就越高。高层次的策略不应该依赖于低层次的策略。PS:有道理
-* 业务逻辑是与技术无关的，是现实中某一项业务的一部分。业务实体就是业务逻辑与业务数据的组合
-* 架构设计的核心目标：满足用例，并能将它们与周边的因素隔离
-* 整洁架构：越内层层次越高。外层圆代表的是机制，内层圆代表的是策略。源码中的依赖关系必须只指向同心圆的内层，即由低层机制指向高层策略。PS:这就是整本书的核心了，也是罗伯特老爷子的核心主张。在这个框架中，业务实体应该是最不容易发生变动的
-* 每个系统架构的边界处，都应该多使用谦卑对象模式，即只发挥自己的桥梁和通信作用，并不从中干预信息的传输
-
-![Alt text](../_static/tidy_arthctect.png "Optional title")
-
 ## 图书
 
 * [software-architecture-books](https://github.com/mhadidg/software-architecture-books)A comprehensive list of books on Software Architecture.
@@ -866,6 +1041,35 @@ Tracker告警短信接口超时问题。
 * The Architecture of Open Source Applications, Volume I
 * The Architecture of Open Source Applications, Volume II
 * 《程序设计语言 Programming Language Pragmatics》Michael L. Scott
+
+### 《架构整洁之道》
+
+* 依赖倒置（DIP）本质上是一种解耦，解耦的目的是实现组件化的独立部署和独立开发能力
+* 所有的竞争问题、死锁问题、并发更新问题都是由可变变量导致的。如果变量永远不会被更改，那就不可能产生竞争或并发更新问题。如果锁状态是不可变的，那就永远不会产生死锁问题。所以架构师要做好可变性的隔离，区分出可变组件和不可变组件，尽可能的将处理逻辑归于不可变组件
+* 软件构建中层结构的主要目标是：第一、使软件可容忍被改动；第二、使软件更容易被理解；第三、构建可在多个系统中复用的组件
+* SRP是康威定律的一个推论，即软件应与组织息息相关，每一个软件模块应该只对某一类行为者负责。单一职责原则放到组件层面就是共同闭包，即我们应该将会同时修改，会以同样目的而被修改的类整合成一个组件
+* OCP是指当新增功能时可以通过增加新代码而非修改旧代码来实现
+* 软件复用的最小粒度应该等同于软件发布的最小粒度。PS：有些研发组织以系统的形式发布软件，却期望各个系统去共享使用通用的功能，最后只能是一团糟
+* 不要依赖不需要用到的东西，换言之，在设计组件时，应考虑这些类是被共同复用的吗？PS：难
+* 不要出现依赖环，否则会影响开发效率。依赖环的消除可以使用依赖倒置来解决
+* 组件是不可能从上到下被设计出来，因为组件体现的不仅是业务功能而是构建性、维护性、依赖关系的地图。PS:很反直觉，有待体验
+* 不稳地的组件可以依赖稳定的组件，而不能让稳定的组件依赖不稳定的组件。一个组件的抽象化程度应该与其稳定性保持一致，就是说稳定的应该抽象，否则无法满足开闭原则。不稳定的应该包含实现代码，这样才方便修改
+* 软件架构的终极目标是最大化程序员的生产力，同时最小化系统的总运营成本
+  - 好的软件架构应该是团队的组织架构相适应，方便开发团队开发
+  - 好的软件架构要考虑到方便部署
+  - 好的软件架构应该使开发人员对软件运行过程一目了然
+  - 好的软件架构应该便于维护
+  - 好的软件架构应该保留更多的（有意义的）可选性
+* 一个系统在水平分层上比较常见的方式是：UI界面、应用独有的业务逻辑、领域普适的业务逻辑、数据库
+* 划分边界的目的是方便我们尽量将一些决策延后进行
+* 计算机程序从本质上说就是一组仔细描述如何将输入转化为输出的策略语句的集合。软件架构设计的工作重点之一就是将这些策略彼此分里，然后将他们按照变更的方式进行重新分组。变更原因、时间和层次相同的策略应该被分到同一个组件中
+* 一种策略距离系统的I/O越远，它所属的层次就越高。高层次的策略不应该依赖于低层次的策略。PS:有道理
+* 业务逻辑是与技术无关的，是现实中某一项业务的一部分。业务实体就是业务逻辑与业务数据的组合
+* 架构设计的核心目标：满足用例，并能将它们与周边的因素隔离
+* 整洁架构：越内层层次越高。外层圆代表的是机制，内层圆代表的是策略。源码中的依赖关系必须只指向同心圆的内层，即由低层机制指向高层策略。PS:这就是整本书的核心了，也是罗伯特老爷子的核心主张。在这个框架中，业务实体应该是最不容易发生变动的
+* 每个系统架构的边界处，都应该多使用谦卑对象模式，即只发挥自己的桥梁和通信作用，并不从中干预信息的传输
+
+![Alt text](../_static/tidy_arthctect.png "Optional title")
 
 ## 实例
 

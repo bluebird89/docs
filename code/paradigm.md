@@ -1,8 +1,8 @@
 # programming paradigm 编程范式
 
-## 过程式编程
+## procedural programming 过程式编程
 
-## [oop](.../architect/oop.md)
+## [面向对象编程 Object Oriented Programming OOP](../architect/oop.md)
 
 ## 泛型编程
 

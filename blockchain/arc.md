@@ -115,8 +115,6 @@ forge ls：remote
 * 数据类型
 * 交易类型
 
-*
-
 ##
 
 * [区块链食品溯源 | 茶链](https://www.youtube.com/watch?v=rWH0WWYVUIs) 徐咏忻(娜娜)

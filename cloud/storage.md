@@ -86,14 +86,16 @@
 
 * [](https://github.com/schollz/croc):Easily and securely send things from one computer to another 🐊 📦 <https://schollz.com/software/croc6>
 
-## md5 verdify
+## md5 
+
+* verdify
 
 ```sh
 md5sum /path/filename
 sha256sum /path/filename
 ```
 
-## [minio/minio](https://github.com/minio/minio)
+## [minio](https://github.com/minio/minio)
 
 MinIO is a high performance object storage server compatible with Amazon S3 APIs <https://min.io/download>  <https://docs.min.io/cn/>
 

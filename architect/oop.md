@@ -32,6 +32,14 @@
 * 定义职责
 * 建立秩序
 
+  - Object：数据和操作给结合起来，形成Object，以后Object的属性数据不允许直接访问，只能通过这个Object的函数来操作
+    + Object的方法都是相同的，他们被重复地放在一个个对象当中，Class！把这些重复的方法代码从对象中剥离出来，放到一个公共的Class中！用new 这个关键字： Stack object1 = new Stack();
+  - Stack类的函数定义只有一份，但是Stack类生成的Object有很多份。人类在写push()函数，pop()函数的时候，要操作Object的数据， 到底操作的是哪一个Object？ 上帝说：“ 要有this !”
+  - 有继承！把那些类似的、重复代码放到父类当中去，这样子类就可以直接使用，不用重新再写一遍了
+  - 要有多态！就是对同一个接口，使用不同的实例而执行不同操作。
+  - 继承破坏了封装性，父类的很多细节对子类都是可见的，父类的变化可能会极大地影响子类。优先使用组合而不是继承.面向接口编程，而不是实现编程。
+  - 编程的关键是要抽象啊！得把系统需求抽象成高层的概念，然后在概念层次进行编程。
+ 
 ## 类 class
 
 * "类”就是对象的模板，对象就是“类”的实例
@@ -91,7 +99,7 @@
   - 消除类型之间的耦合关系
   - 提高代码可扩展性和复用性
 
-## 对象
+## 对象 object
 
 * 单个实物的抽象
 * 一个容器，封装了属性（property）和方法（method）
@@ -102,17 +110,6 @@
 * 每一个对象都是功能中心，具有明确分工，可以完成接受信息、处理数据、发出信息等任务
 * 对象可以复用，通过继承机制还可以定制
 * 将对象的方法视为向对象发消息
-
-## OOA vs OOP
-
-* 面向过程风格的代码被组织成了一组方法集合及其数据结构（struct User），方法和数据结构的定义是分开的
-  - 开发的微小程序，或者是一个数据处理相关的代码，以算法为主，数据为辅，那脚本式的面向过程的编程风格就更适合一些
-* 面向对象风格的代码被组织成一组类，方法和数据结构被绑定一起，定义在类中
-  - 先去思考如何给业务建模，如何将需求翻译为类，如何给类之间建立交互关系，而完成这些工作完全不需要考虑错综复杂的处理流程
-  - 有了类的设计之后，然后再像搭积木一样，按照处理流程，将类组装起来形成整个程序
-  - 提供了一种更加清晰的、更加模块化的代码组织方式
-* 面向过程编程是面向对象编程的基础，面向对象编程离不开基础的面向过程编程
-* 最终的目的还是写出易维护、易读、易复用、易扩展的高质量代码
 
 ## 分层
 
@@ -258,50 +255,6 @@ class AlarmDoor extends Door implements Alarm {
 }
 ```
 
-## 基于接口而非实现编程
-
-* 另一个表述方式是“基于抽象而非实现编程”
-* “接口”在不同的应用场景下会有不同的解读，比如服务端与客户端之间的“接口”，类库提供的“接口”，甚至是一组通信的协议都可以叫作“接口”。
-* 实现
-  - 函数的命名不能暴露任何实现细节
-  - 封装具体的实现细节
-  - 为实现类定义抽象的接口
-* 只要搞清楚了每条原则是为了解决什么样的问题而产生的
-* 接口继承要远重要于类继承
-  - 一种控制反转:通过抽象出一系列接口，并在这些接口上进行操作，使得控制逻辑不依赖于具体的实现
-  - 具体的实现可以并不关心控制逻辑如何使用自己，它们会在需要的时候被调用。由此，使用对象的逻辑和对象本身充分解耦，由接口这座桥梁将二者联系起来。这样，代码得到了最大程度的被重用。
-  - Liskov substitution principle（里氏变换原则）:if S is a subtype of T, then objects of type T may be replaced with objects of type S
-
-## 组合优于继承
-
-* 继承为实现不同功能，通过不断继承的方法赵成继承层次过深、继承关系过于复杂，会影响到代码的可读性和可维护性
-  - 依赖于抽象类来定义行为，导致过于复杂的继承关系，而通过接口定义行为能够有效地分离行为与实现
-* 通过组合、接口、委托三个技术手段可以替换掉继承,代码复用可以通过组合和委托来实现
-* 组合可以通过注入实现
-* 判断
-  - 继承改写成组合意味着要做更细粒度的类的拆分
-  - 如果类之间的继承结构稳定（不会轻易改变），继承层次比较浅（比如，最多有两层继承关系），继承关系不复杂，就可以大胆地使用继承
-  - 系统越不稳定，继承层次很深，继承关系复杂，就尽量使用组合来替代继承。
-
-```
-public interface Flyable {
-    void fly()；
-}
-public class FlyAbility implements Flyable {
-    @Override public void fly() {
-        //...
-    }
-}
-
-public class Ostrich implements Tweetable, EggLayable {//鸵鸟
-    private TweetAbility tweetAbility = new TweetAbility(); //组合
-
-    @Override
-    public void tweet() {
-        tweetAbility.tweet(); // 委托
-    }
-```
-
 ## 面向对象分析（OOA）
 
 * 要有组件化意识、框架意识、抽象意识，开发出来的东西要足够通用，不能局限于单一的某个业务需求，但这并不代表我们就可以脱离具体的应用场景，闷头拍脑袋做需求分析
@@ -332,214 +285,39 @@ public class Ostrich implements Tweetable, EggLayable {//鸵鸟
   - 上下层系统之间的调用倾向于通过同步接口，同层之间的调用倾向于异步消息调用。
 * 将类组装起来并提供执行入口。
 
-## SOLID
+## OOA vs OOP
 
-### 单一职责原则 SRP Single Responsibility Principle
+* 面向过程风格的代码被组织成了一组方法集合及其数据结构（struct User），方法和数据结构的定义是分开的
+  - 开发的微小程序，或者是一个数据处理相关的代码，以算法为主，数据为辅，那脚本式的面向过程的编程风格就更适合一些
+* 面向对象风格的代码被组织成一组类，方法和数据结构被绑定一起，定义在类中
+  - 先去思考如何给业务建模，如何将需求翻译为类，如何给类之间建立交互关系，而完成这些工作完全不需要考虑错综复杂的处理流程
+  - 有了类的设计之后，然后再像搭积木一样，按照处理流程，将类组装起来形成整个程序
+  - 提供了一种更加清晰的、更加模块化的代码组织方式
+* 面向过程编程是面向对象编程的基础，面向对象编程离不开基础的面向过程编程
+* 最终的目的还是写出易维护、易读、易复用、易扩展的高质量代码
 
-* 概念：A class or module should have a single reponsibility
-* 不要设计大而全的类，要设计粒度小、功能单一的类
-* 不同的应用场景、不同阶段的需求背景下，对同一个类的职责是否单一的判定，可能都是不一样的。
-* 持续重构：可以先写一个粗粒度的类，满足业务需求。随着业务的发展，如果粗粒度的类越来越庞大，代码越来越多，这个时候，就可以将这个粗粒度的类，拆分成几个更细粒度的类
-* 判断原则
-  - 类中的代码行数、函数或属性过多，会影响代码的可读性和可维护性，就需要考虑对类进行拆分。行数最好不能超过 200 行，函数个数及属性个数都最好不要超过 10 个
-  - 类依赖的其他类过多，或者依赖类的其他类过多，不符合高内聚、低耦合的设计思想，就需要考虑对类进行拆分；
-  - 私有方法过多，就要考虑能否将私有方法独立到新的类中，设置为 public 方法，供更多的类使用，从而提高代码的复用性；
-  - 比较难给类起一个合适名字，很难用一个业务名词概括，或者只能用一些笼统的 Manager、Context 之类的词语来命名，这就说明类的职责定义得可能不够清晰；
-  - 类中大量的方法都是集中操作类中的某几个属性，比如，在 UserInfo 例子中，如果一半的方法都是在操作 address 信息，那就可以考虑将这几个属性和对应的方法拆分出来。
+## 基于接口而非实现编程
 
-### 开闭原则 OCP Open Closed Principle
-
-* software entities (modules, classes, functions, etc.) should be open for extension , but closed for modification。
-* 只要它没有破坏原有的代码的正常运行，没有破坏原有的单元测试
-* 代码的扩展性问题，是判断一段代码是否易扩展的“金标准”
-  - 一些比较确定的、短期内可能就会扩展，或者需求改动对代码结构影响比较大的情况，或者实现成本不高的扩展点，在编写代码的时候之后，就可以事先做些扩展性设计
-  - 可变部分封装起来，隔离变化，提供抽象化的不可变接口，给上层系统使用
-* 需要在扩展性和可读性之间做权衡
-
-### 里式替换原则 LSP Liskov Substitution Principle
-
-* If S is a subtype of T, then objects of type T may be replaced with objects of type S, without breaking the program。
-* 子类对象（object of subtype/derived class）能够替换程序（program）中父类对象（object of base/parent class）出现的任何地方，并且保证原来程序的逻辑行为（behavior）不变及正确性不被破坏。
-* 多态和里式替换有点类似，但它们关注的角度是不一样的
-  - 多态是面向对象编程的一大特性，也是面向对象编程语言的一种语法。它是一种代码实现的思路。
-  - 里式替换是一种设计原则，是用来指导继承关系中子类该如何设计的，子类的设计要保证在替换父类的时候，不改变原有程序的逻辑以及不破坏原有程序的正确性。
-* Design By Contract：按照协议来设计
-  - 父类定义了函数的行为约定，那子类可以改变函数的内部实现逻辑，但不能改变函数原有的行为约定。这里的行为约定包括
-    + 函数声明要实现的功能
-    + 对输入、输出、异常的约定
-    + 甚至包括注释中所罗列的任何特殊说明
-
-### 接口隔离原则 ISP Interface Segregation Principle
-
-* Clients should not be forced to depend upon interfaces that they do not use。
-* 接口概念
-  - 一组 API 接口集合:如果部分接口只被部分调用者使用，那就需要将这部分接口隔离出来，单独给对应的调用者使用，而不是强迫其他调用者也依赖这部分不会被用到的接口
-  - 单个 API 接口或函数:函数的设计要功能单一，不要将多个不同的功能逻辑在一个函数中实现
-  - OOP 中的接口概念:接口的设计要尽量单一，不要让接口的实现类和调用者，依赖不需要的接口函数
-    + 职责单一就意味了通用、复用性好 更加灵活
-* 接口隔离原则与单一职责原则的区别
-  - 单一职责原则针对的是模块、类、接口的设计
-  - 接口隔离原则相对于单一职责原则
-    + 一方面更侧重于接口的设计
-    + 另一方面它的思考角度也是不同的。接口隔离原则提供了一种判断接口的职责是否单一的标准：通过调用者如何使用接口来间接地判定。如果调用者只使用部分接口或接口的部分功能，那接口的设计就不够职责单一。
-
-### 迪米特法则 LOD Law of Demeter
-
-* Each unit should have only limited knowledge about other units: only units “closely” related to the current unit. Or: Each unit should only talk to its friends; Don’t talk to strangers.
-* 不该有直接依赖关系的类之间，不要有依赖；有依赖关系的类之间，尽量只依赖必要的接口（也就是定义中的“有限知识”）
-* 实现代码的“高内聚、松耦合”
-  - 高内聚：相近的功能应该放到同一个类中，不相近的功能不要放到同一个类中
-  - 松耦合：类与类之间的依赖关系简单清晰
-  - “高内聚”用来指导类本身的设计，“松耦合”用来指导类与类之间依赖关系的设计。
-
-```java
-# 既不想违背高内聚的设计思想，也不想违背迪米特法则
-public interface Serializable {
-  String serialize(Object object);
-}
-
-public interface Deserializable {
-  Object deserialize(String text);
-}
-
-public class Serialization implements Serializable, Deserializable {
-  @Override
-  public String serialize(Object object) {
-    String serializedResult = ...;
-    ...
-    return serializedResult;
-  }
-
-  @Override
-  public Object deserialize(String str) {
-    Object deserializedResult = ...;
-    ...
-    return deserializedResult;
-  }
-}
-
-public class DemoClass_1 {
-  private Serializable serializer;
-
-  public Demo(Serializable serializer) {
-    this.serializer = serializer;
-  }
-  //...
-}
-
-public class DemoClass_2 {
-  private Deserializable deserializer;
-
-  public Demo(Deserializable deserializer) {
-    this.deserializer = deserializer;
-  }
-  //...
-}
-```
-
-## 依赖注入
-
-* 依赖注入（DI）Dependency Injection:不通过 new() 的方式在类内部创建依赖类对象，而是将依赖的类对象在外部创建好之后，通过构造函数、函数参数等方式传递（或注入）给类使用。
-  - 提高了代码的扩展性:可以灵活地替换依赖的类
-  - 依赖注入框架（DI Framework）:只需要通过依赖注入框架提供的扩展点，简单配置一下所有需要创建的类对象、类与类之间的依赖关系，就可以实现由框架来自动创建对象、管理对象的生命周期、依赖注入等事情
-    + Google Guice、Java Spring、Pico Container、Butterfly Container 等
-* 控制反转（IOC）Inversion Of Control
-  - “控制”指的是对程序执行流程的控制
-  - “反转”指的是在没有使用框架之前，程序员自己控制整个程序的执行,在使用框架之后，整个程序的执行流程可以通过框架来控制。流程的控制权从程序员“反转”到了框架。
-* 依赖反转原则（DIP）Dependency Inversion Principle
-  - High-level modules shouldn’t depend on low-level modules. Both modules should depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.
-  - 在调用链上，调用者属于高层，被调用者属于低层。
-  - 主要用来指导框架层面的设计
-
-```java
-// 依赖注入的实现方式
-public class Notification {
-    private MessageSender messageSender;    // 通过构造函数将messageSender传递进来
-    public Notification(MessageSender messageSender) {
-        this.messageSender = messageSender;
-    }
-    public void sendMessage(String cellphone, String message) {
-        //...省略校验逻辑等...
-        this.messageSender.send(cellphone, message);
-    }
-}
-
-public interface MessageSender {
-    void send(String cellphone, String message);
-}
-// 短信发送类
-public class SmsSender implements MessageSender {
-    @Override
-    public void send(String cellphone, String message) { //....
-    }
-}
-
-// 站内信发送类
-public class InboxSender implements MessageSender {
-    @Override
-    public void send(String cellphone, String message) { //....
-    }
-}
-
-//使用Notification
-MessageSender messageSender = new SmsSender();
-Notification notification = new Notification(messageSender);
-notification.sendMessage("13918942177", "短信验证码：2346");
-```
-
-### 容器
-
-* 帮助更方便地实现依赖注入的工具，但是他们通常被误用来实现反模式设计 Service Location 。
-* 把一个依赖注入容器作为 Service Locator 注入进类中隐式地建立了对于容器的依赖，而不是真正需要替换的依赖，而且还会让你的代码更不透明，最终变得更难测试。
-
-## 原则
-
-### KISS Keep It Simple and Stupid
-
-* 考虑逻辑复杂度、实现难度、代码的可读性
-* 工具类的功能都比较通用和全面，所以，在代码实现上，需要考虑和处理更多的细节，执行效率就会有所影响
-* 本身就复杂的问题，用复杂的方法解决，并不违背 KISS 原则。
-* 原则
-  - 不要使用同事可能不懂的技术来实现代码。比如前面例子中的正则表达式，还有一些编程语言中过于高级的语法等。
-  - 不要重复造轮子，要善于使用已经有的工具类库。经验证明，自己去实现这些类库，出 bug 的概率会更高，维护的成本也比较高。
-  - 不要过度优化。不要过度使用一些奇技淫巧（比如，位运算代替算术运算、复杂的条件语句代替 if-else、使用一些过于底层的函数等）来优化代码，牺牲代码的可读性。
-
-### YAGNI You Ain’t Gonna Need It
-
-* 需不需要做的问题
-
-### DRY Don’t Repeat Yourself
-
-* 逻辑重复的应该合并
-* 语义不重复：从代码实现逻辑上看起来是重复的，从功能上来看，两个函数干的是完全不重复的两件事情
-* 执行重复的应该合并
+* 另一个表述方式是“基于抽象而非实现编程”
+* “接口”在不同的应用场景下会有不同的解读，比如服务端与客户端之间的“接口”，类库提供的“接口”，甚至是一组通信的协议都可以叫作“接口”。
+* 实现
+  - 函数的命名不能暴露任何实现细节
+  - 封装具体的实现细节
+  - 为实现类定义抽象的接口
+* 只要搞清楚了每条原则是为了解决什么样的问题而产生的
+* 接口继承要远重要于类继承
+  - 一种控制反转:通过抽象出一系列接口，并在这些接口上进行操作，使得控制逻辑不依赖于具体的实现
+  - 具体的实现可以并不关心控制逻辑如何使用自己，它们会在需要的时候被调用。由此，使用对象的逻辑和对象本身充分解耦，由接口这座桥梁将二者联系起来。这样，代码得到了最大程度的被重用。
+  - Liskov substitution principle（里氏变换原则）:if S is a subtype of T, then objects of type T may be replaced with objects of type S
 
 ## OO BootCamp
 
-* OO的一些关注点
+* 一些关注点
   - 可见性（Public）
   - Equal vs Same
   - ValueObject VS ReferObject
   - Exception VS ErrorCode
   - immutability
-* 面向对象的S.O.L.I.D 原则
-  - Single Responsibility Principle (SRP) – 职责单一原则
-  - Open/Closed Principle (OCP) – 开闭原则
-  - Liskov substitution principle (LSP) – 里氏代换原则
-  - Interface Segregation Principle (ISP) – 接口隔离原则
-  - Dependency Inversion Principle (DIP) – 依赖倒置原则
-* 其他编程或设计原则
-  - Don’t Repeat Yourself (DRY)
-  - Keep It Simple, Stupid (KISS)
-  - Composition over inheritance（喜欢组合而不是继承）
-  - Command-Query Separation (CQS) – 命令-查询分离原则
-  - You Aren’t Going to Need It (YAGNI) 只考虑和设计必须的功能，避免过度设计。
-  - Law of Demeter – 迪米特法则，最少知识原则
-  - Hollywood Principle – 好莱坞原则
-  - High Cohesion & Low/Loose coupling & – 高内聚， 低耦合
-  - Convention over Configuration（CoC）– 惯例优于配置原则
-  - Separation of Concerns (SoC) – 关注点分离
-  - Design by Contract (DbC) – 契约式设技
 * 基于职责设计对象(GRASP)：General Responsibility Assignment Software Pattern
   - 类的职责是类的契约和义务，包括行为职责（初始化其他对象、控制和协调其他对象的活动）和认知职责（对私有封装数据的认知、对其他对象的认知、对其能够导出或计算出的对象的认知）。GRASP是关于对象设计和职责分配的一组基本原则，有以下原则：
   - 创建者：如果以下条件之一（越多越好）为真时，将创建A的职责分配给B.基本意图是寻找在任何情况下都与被创建者有直接连接的创建者。
@@ -620,12 +398,11 @@ notification.sendMessage("13918942177", "短信验证码：2346");
 ## Plain Old Java Object POJO
 
 * 培养面向对象的思维的核心就是站在问题领域看用纯类来表达和解决问题
+
 ## 图书
 
 * 《Elegant Objects》
 * 《Object Thinking》
 * 《Practical Object-Oriented Design in Ruby》
-* 《Design Patterns Explained》
 * 《Python 3 Object-oriented Programming》
-* 《设计模式解析》
 * 《敏捷软件开发——原则、模式与实践》

@@ -1,48 +1,22 @@
 # Code 编程
 
-## 优秀
-
-* 一名优秀的开发者，只要对一门语言很硬核地掌握了，对各种基本概念知其然，也知其所以然，那么，学任何其他语言都会比较轻松。因为组成语言的要素是相同的，大家可以相互印证，融会贯通。比如传值和传引用是怎么运作的，数据分配在栈上和堆上都有什么不同，为什么有些东西要分配在栈上，有些只能分配在堆上，这些东西在一门语言身上学通了，另一门语言也是一样。
-* 有更快的开发效率、更好的程序设计、更好的代码质量、更善于 debug、更能够解决技术难题.
-* 小撮开发人员的贡献总和可能与另外那一大撮人（大于总人数的80%）的贡献总和不相上下（甚至可能超过）
-* 做正确的事
-	* 不好习惯
-		* 先做自己喜欢的事情，再做自己不喜欢的事情  
-		* 先做紧急的事情，再做不紧急的事情  
-		* 先做容易做的事情，再做不容易做的事情  
-		* 先做自己了解、熟悉的事情，再做自己不了解、不熟悉的事情  
-		* 先做有趣的事情，再做枯燥的事情  
-		* 先做易于告一段落的事情，再做不易于告一段落的事情  
-		* 先做自己熟悉的人托付的事情，再做自己不熟悉的人托付的事情
-	* 评估权重：时会很容易被琐事纠缠，白白浪费不少时间，每天忙完了都不清楚忙些啥。评估你准备做的每件事情的【权重】。权重来源于这件事情对于达成目标是否有帮助？帮助有多大？
-	* 严格按照权重执行：工作中偶尔碰上看起来紧急的突发事情，也【不要】轻易改变原先安排的计划表，而要先冷静评估一下这个紧急的事情的权重。只有属于紧急且权重高（重要）的突发事件，你才可以调整计划，把这件突发事情加入其中。
-* 正确地做事-善用工具
-	* 盲打过关
-	* 字体的选择是非常重要的（看起来舒服的字体起码能保护眼睛）。首先必须选择一种【等宽】的字体（比如 FixedSys、Courier New）；其次该字体必须能够【清楚地区分】几种容易混淆的字符，避免阅读代码的时候看错
-	* 对词法高亮进行设置时，至少要把：“代码注释、关键字、字符串、数字”这几种语法要素用不同的颜色区分开。当然，如果还能根据“类名、函数名、变量名等”进行着色，那就更好
-	* 熟练地使用快捷键
-	* 源代码管理工具：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过的，并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）
-	* 提交时不写注释
-	* 不做代码基线（Baseline）、不做代码分支（Branch）
-		* 当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞
-	* 自己的开发机器上要有尽可能仿真（和用户的环境相似）的运行环境，并且运行辅助工具能够有效地发现运行时的一些不正常的信息
-* 正确地做事-善用自动化
-	*  Perl 语言的创始人Larry Wall曾经评价过程序员的三大美德
-		- 懒惰:干尽量少的活，但是依然保质保量地完成工作.自动完成
-			- 观察平时做的事情中，有哪些属于重复劳动；然后评估一下这些重复劳动是否可以用某些工具来替代；如果有可能替代，就可以动手把这个工具实现出来，然后就可以让工具来帮你做事情了
-			- 使用 Feed（RSS） 订阅工具Blog
-			- 通过程序断言来调试程序，有70%-80%的逻辑错误会被 assert 暴露出来
-			- 自动化测试:尽量多使用一些自动化测试工具（比如 [QTP](https://en.wikipedia.org/wiki/HP_QuickTest_Professional)）和一些测试脚本来完成上述的软件功能验证操作。不光能节约很多时间，提高了效率；而且在自己编写测试脚本的过程中，或许还能学些新东西，提高一下个人能力
-		- 急躁
-		- 傲慢
 
 ## 编程语言
 
 * 计算机（Computer）:在计算机的层次上，CPU执行的是加减乘除的指令代码，以及各种条件判断和跳转指令
 * 计算（Compute）:指数学意义上的计算，越是抽象的计算，离计算机硬件越远
-* 两门以上编程语言（强类型+弱类型)
+* 掌握两门以上编程语言（强类型+弱类型)
+* [unison](https://github.com/unisonweb/unison):Next generation programming language, currently in development <http://unisonweb.org>
+* [taichi](https://github.com/taichi-dev/taichi):The Taichi programming language <http://taichi.graphics>
+* [ChezScheme](https://github.com/cisco/ChezScheme) Chez Scheme is both a programming language and an implementation of that language, with supporting tools and documentation.
+* [crystal](https://github.com/crystal-lang/crystal) The Crystal Programming Language <https://crystal-lang.org>
+* [julia](https://github.com/JuliaLang/julia) The Julia Language: A fresh approach to technical computing. <https://julialang.org/>
+* [skip](https://github.com/skiplang/skip):A programming language to skip the things you have already computed <http://www.skiplang.com>
+* [v](https://github.com/vlang/v) Simple, fast, safe, compiled language for developing maintainable software. Compiles itself in <1s with zero library dependencies. <https://vlang.io>
+* [ProgrammingLanguage-Series](<https://github.com/wx-chevalier/ProgrammingLanguage-Series>📚 编程语言语法基础与工程实践，JavaScript | Java | Python | Go | Rust | CPP | Swift)
+* [Learn X in Y minutes](https://learnxinyminutes.com/)
 
-## 发展
+### 发展
 
 * 机器语音
 * 汇编语言
@@ -64,16 +38,6 @@
   - Compiling a C program would produce what we also know as machine code. As opposed to bytecode.
   - Generally, when we run a python program, a python VM process is started which reads the python source code, compiles it to byte code and run it in a single step. Compiling is not a separate step. Shown only for illustration purpose.
   - Binaries generated for C like languages are not exactly run as is. Since there are multiple types of binaries (eg: ELF), there are more complicated steps involved in order to run a binary but we will not go into that since all that is done at OS level.
-* 函数：把长长的代码封装起来，这样就写一次，就可以到处调用了
-* 程序 = 数据结构+算法：把参数组织起来，以后就传递这个数据结构
-* oop
-  - Object：数据和操作给结合起来，形成Object，以后Object的属性数据不允许直接访问，只能通过这个Object的函数来操作
-    + Object的方法都是相同的，他们被重复地放在一个个对象当中，Class！把这些重复的方法代码从对象中剥离出来，放到一个公共的Class中！用new 这个关键字： Stack object1 = new Stack();
-  - Stack类的函数定义只有一份，但是Stack类生成的Object有很多份。人类在写push()函数，pop()函数的时候，要操作Object的数据， 到底操作的是哪一个Object？ 上帝说：“ 要有this !”
-  - 有继承！把那些类似的、重复代码放到父类当中去，这样子类就可以直接使用，不用重新再写一遍了
-  - 要有多态！就是对同一个接口，使用不同的实例而执行不同操作。
-  - 继承破坏了封装性，父类的很多细节对子类都是可见的，父类的变化可能会极大地影响子类。优先使用组合而不是继承.面向接口编程，而不是实现编程。
-  - 编程的关键是要抽象啊！得把系统需求抽象成高层的概念，然后在概念层次进行编程。
 
 * 对应到编程语言，就是越低级语言，越贴近计算机，抽象程度低，执行效率高，比如C语言；越高级的语言，越贴近计算，抽象程度高，执行效率低，比如Lisp语言。
   - 静态语言 statically typed language:在编译期间就能够知道数据类型的语言，在运行前就能够检查类型的正确性，一旦类型确定后就不能再更改
@@ -86,7 +50,7 @@
   - C语言是可以用来编写操作系统的贴近硬件的语言，所以，C语言适合开发那些追求运行速度、充分发挥硬件性能的程序。而Python是用来编写应用程序的高级编程语言
   - 高级编程语言通常都会提供一个比较完善的基础代码库，能直接调用
 
-```
+```sh
                                                         The Operating System
 
                                                               +------------------------------------+
@@ -119,7 +83,48 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
                                                               +------------------------------------+
 ```
 
-## 对技术态度
+
+### 原理
+
+* [硬件内存模型](https://research.swtch.com/hwmm)
+* [编程语言内存模型 ](https://colobu.com/2021/07/11/Programming-Language-Memory-Models/)
+
+### 内容
+
+* 了解编程语言的语法特征
+  - 数据类型
+  - 运算符
+  - 控制语句
+  - 编程模式
+* 掌握编译或解释的过程，及编译器/解释器性能，调试方法、工具
+* 配合算法，实现业务逻辑
+* 函数：把长长的代码封装起来，这样就写一次，就可以到处调用了
+* 程序 = 数据结构+算法：把参数组织起来，以后就传递这个数据结构
+* oop
+
+#### 闭包
+
+* 变量的值始终保持在内存中
+
+## 知识
+
+* 概念的理解与场景的确定
+
+### 方向
+
+* 深度与复杂性：算法
+* 结构性：设计模式
+
+### 结构
+
+要了解技术就一定需要了解整个计算机的技术历史发展和进化路线。因为，你要朝着球运动的轨迹去，而不是朝着球的位置去，要知道球的运动轨迹，你就需要知道它历史上是怎么跑的。
+
+* 横向的知识架构
+* 纵向深化
+* 源码的分析
+* 知识不断进行生态进化
+
+### 态度
 
 * 新技术态度:要了解技术就一定需要了解整个计算机的技术历史发展和进化路线,要朝着球运动的轨迹去，而不是朝着球的位置去，要知道球的运动轨迹，你就需要知道它历史上是怎么跑的。
   - 70年代Unix的出现，是软件发展方面的一个里程碑，那个时期的C语言，也是语言方面的里程碑。（当时）所有的项目都在Unix/C上，全世界人都在用这两样东西写软件。Linux跟随的是Unix, Windows下的开发也是 C/C++
@@ -142,13 +147,6 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
   - 业务智能:发现很多东西都很学院派了，比如，搜索算法，推荐算法，预测，统计，机器学习，图像识别，分布式架构和算法，等等，你需要读很多计算机学院派的论文
   - 真正的高手把那些理论的基础知识应用到现在的业务上来
 * 编程不在于用什么语言去coding，而是你组织程序、设计软件的能力，只要你上升到脑力劳动上来，用什么都一样，技术无贵贱。
-
-## 类别
-
-* 面向对象
-* 命令式
-* 函数式
-* 程序式
 
 ## 方法
 
@@ -177,19 +175,21 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 资源获取途径
   - 图书，学习任何一项技能前，看书都是一种最有效的途径
 
-## 内容
-
-* 了解编程语言的语法特征
-  - 数据类型
-  - 运算符
-  - 控制语句
-  - 编程模式
-* 掌握编译或解释的过程，及编译器/解释器性能，调试方法、工具
-* 配合算法，实现业务逻辑
-
-## 闭包
-
-* 变量的值始终保持在内存中
+* 缓存
+* 预处理和延后处理
+* 池化
+  - 内存池难点:
+    + 如何快速分配内存
+    + 降低内存碎片率
+    + 维护内存池所需的额外空间尽量少
+  - 线程池
+    + 管理器（Manager）: 用于创建并管理线程池。
+    + 工作线程（Worker）: 执行任务的线程。
+    + 任务接口（Task）: 每个具体的任务必须实现任务接口，工作线程将调用该接口来完成具体的任务。
+    + 任务队列（TaskQueue）: 存放还未执行的任务。
+* 同步变异步
+* 消息队列
+* 批量处理
 
 ## 实践
 
@@ -202,6 +202,29 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 理论与实践：不去实际写代码有些问题是发现不了的,学了几年的游泳理论还是不会游泳的。实践中需要注意的东西，不动手是学习不到的
 * 程序员工作本质其实是对事物或者问题进行抽象，只有抽象后才能进行深度思考，才能建模，建好模型后，才能用编程语言写成程序。一旦抽象久了，就很难了解事情的真相，不能一直处在一个虚拟的环境里，需要对事物进行还原，需要走到真实的环境中与人接触，到真实的场景中去讨论需求，去做软件定价，销售等，这些工作比我们想象中的要复杂
 
+### 硅谷
+
+* 如何做好 Code Review
+  - 在软件开发的过程中，对源代码进行同级评审，其目的是找出并修正软件开发过程中出现的错误，保证软件质量，提高开发者自身水平。
+  - 发现国内公司做代码评审的比例并不算高，这可能和各公司的工程师文化有关系
+  - 不过硅谷稍具规模的公司，代码评审的流程都是比较规范的，模式也差不多
+* 开发流程
+  - OKR 的设立
+  - 主项目及其子项目的确立
+  - 每个子项目的生命周期
+  - 主项目的生命周期
+  - 收尾、维护、复盘。
+* 从 1 到 N 都需要进行的业务拆分，需要综合考虑各种因素，找到平衡点
+  - 你的业务量是否足够大，逻辑是否足够复杂以至于必须进行系统拆分。水平扩展是不是已经不起作用了？代码的相互影响、部署时间过长真的是系统的切肤之痛么？如果答案都是肯定的，那么你就应该进行系统拆分了。
+  - 对于服务化的架构，你的开发人员多少经验，能否正确驾驭而不是让本文中提到的问题成为拦路虎么？
+  - 系统拆分是一个“从一到多容易，从多到一困难”的过程，这个过程几乎是不可逆的。在做拆分计划的时候，一定要慎之又慎。
+* 要有 7 至 8 轮面试，招人需谨慎，要对面试者和公司负责
+  - 算法编程：考察编程的硬功夫
+  - 系统设计：给候选人一个系统设计的场景，根据自己的能力和经验去架构整个系统
+  - 工作经验面试：与候选人聊他做过的项目，深入了解和挖掘候选人的技能树
+
+![code review流程](../_static/code_review_flow.jpg "Optional title")
+![开发流程](../_static/dev_flow.jpg "Optional title")
 ## 高质量代码
 
 * 特点
@@ -284,31 +307,11 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
   - 工厂模式 based on 多态
   - 用例模型
 
-## 方法
-
-* 缓存
-* 预处理和延后处理
-* 池化
-  - 内存池难点:
-    + 如何快速分配内存
-    + 降低内存碎片率
-    + 维护内存池所需的额外空间尽量少
-  - 线程池
-    + 管理器（Manager）: 用于创建并管理线程池。
-    + 工作线程（Worker）: 执行任务的线程。
-    + 任务接口（Task）: 每个具体的任务必须实现任务接口，工作线程将调用该接口来完成具体的任务。
-    + 任务队列（TaskQueue）: 存放还未执行的任务。
-* 同步变异步
-* 消息队列
-* 批量处理
-
-## 工匠情怀
+## 优秀
 
 * 优秀程序员的价值，不在于其所掌握的几招屠龙之术，而是在细节中见真著。
 * 如果我们可以一次把事情做对，并且做好，在允许的范围内尽可能追求卓越
 * 规避问题和逃避问题的趋向，是人类心理疾病的根源。
-
-## 资深
 
 * 没有书本会教解决以前没人碰到过的问题。成年人可以直接去学习编码，孩子们则需要发掘他们的好奇心
 * 经验
@@ -319,6 +322,40 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 由于开发程序变得容易了，一个人可以在知道很少的情况下完成小型程序。但这也意味着，这个人可能永远也不会写大程序。这个行业里面，只要学会5％的东西，可以完成简单的工作，就可以谋生了。
 * 想做一个什么样的程序员，完全取决于你真正想做的事情。如果您想制作网站，那么你不需要计算机科学学位。甚至不需要学位。如果你想制作一些前所未有的令人兴奋的精彩内容，如果你想在行业中做出微小的改变并稍微改变世界，那么你确实需要那个学位。
 * 或者换一种方式看待它：如果想建造狗屋，只需用锤子和钉子。如果想成为一名设计和建造摩天大楼的建筑师，那么首先要获得建筑学位。但请不要明明在建造狗屋，却称呼自己为建筑师
+
+* 一名优秀的开发者，只要对一门语言很硬核地掌握了，对各种基本概念知其然，也知其所以然，那么，学任何其他语言都会比较轻松。因为组成语言的要素是相同的，可以相互印证，融会贯通。比如传值和传引用是怎么运作的，数据分配在栈上和堆上都有什么不同，为什么有些东西要分配在栈上，有些只能分配在堆上，这些东西在一门语言身上学通了，另一门语言也是一样。
+* 有更快的开发效率、更好的程序设计、更好的代码质量、更善于 debug、更能够解决技术难题.
+* 小撮开发人员的贡献总和可能与另外那一大撮人（大于总人数的80%）的贡献总和不相上下（甚至可能超过）
+* 做正确的事
+	* 不好习惯
+		* 先做自己喜欢的事情，再做自己不喜欢的事情  
+		* 先做紧急的事情，再做不紧急的事情  
+		* 先做容易做的事情，再做不容易做的事情  
+		* 先做自己了解、熟悉的事情，再做自己不了解、不熟悉的事情  
+		* 先做有趣的事情，再做枯燥的事情  
+		* 先做易于告一段落的事情，再做不易于告一段落的事情  
+		* 先做自己熟悉的人托付的事情，再做自己不熟悉的人托付的事情
+	* 评估权重：时会很容易被琐事纠缠，白白浪费不少时间，每天忙完了都不清楚忙些啥。评估你准备做的每件事情的【权重】。权重来源于这件事情对于达成目标是否有帮助？帮助有多大？
+	* 严格按照权重执行：工作中偶尔碰上看起来紧急的突发事情，也【不要】轻易改变原先安排的计划表，而要先冷静评估一下这个紧急的事情的权重。只有属于紧急且权重高（重要）的突发事件，你才可以调整计划，把这件突发事情加入其中。
+* 正确地做事-善用工具
+	* 盲打过关
+	* 字体的选择是非常重要的（看起来舒服的字体起码能保护眼睛）。首先必须选择一种【等宽】的字体（比如 FixedSys、Courier New）；其次该字体必须能够【清楚地区分】几种容易混淆的字符，避免阅读代码的时候看错
+	* 对词法高亮进行设置时，至少要把：“代码注释、关键字、字符串、数字”这几种语法要素用不同的颜色区分开。当然，如果还能根据“类名、函数名、变量名等”进行着色，那就更好
+	* 熟练地使用快捷键
+	* 源代码管理工具：在编写功能代码时，每完成一个功能点，并且自己经过了自测之后，提交一次；在调试的时候，每修复一个 bug，提交一次。这样能够保证提交到 RCS 的代码都是【能编译通过的，并且业务逻辑上也是相对完整的（对于每日构建后的测试很重要）
+	* 提交时不写注释
+	* 不做代码基线（Baseline）、不做代码分支（Branch）
+		* 当有一个版本发布（Release）并交付给用户使用时，都需要在 RCS 中制作一个基线，以便于进行相应的 bug 跟踪和补丁制作。因此，诸如【做基线】之类的事情，属于整个团队的集体行为，需要由 Team Leader 牵头来搞
+	* 自己的开发机器上要有尽可能仿真（和用户的环境相似）的运行环境，并且运行辅助工具能够有效地发现运行时的一些不正常的信息
+* 正确地做事-善用自动化
+	*  Perl 语言的创始人Larry Wall曾经评价过程序员的三大美德
+		- 懒惰:干尽量少的活，但是依然保质保量地完成工作.自动完成
+			- 观察平时做的事情中，有哪些属于重复劳动；然后评估一下这些重复劳动是否可以用某些工具来替代；如果有可能替代，就可以动手把这个工具实现出来，然后就可以让工具来帮你做事情了
+			- 使用 Feed（RSS） 订阅工具Blog
+			- 通过程序断言来调试程序，有70%-80%的逻辑错误会被 assert 暴露出来
+			- 自动化测试:尽量多使用一些自动化测试工具（比如 [QTP](https://en.wikipedia.org/wiki/HP_QuickTest_Professional)）和一些测试脚本来完成上述的软件功能验证操作。不光能节约很多时间，提高了效率；而且在自己编写测试脚本的过程中，或许还能学些新东西，提高一下个人能力
+		- 急躁
+		- 傲慢
 
 ## 习惯
 
@@ -376,14 +413,14 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
   - 文档是影响 API 用户体验的关键。它不是一个附加产品。着力产出高质量的文档，你将看到比开发更多功能带来的更高回报。
   - Show, don 't tell：你的文档不应该讨论软件是如何工作的，它应该展示如何使用这个软件。显示端到端工作流的代码示例；为 API 的每个常见使用场景和关键特性展示代码示例。
   - **生产力可以归结为快速决策和偏好行动**
-* 软件职业生涯
-  - 事业的进步不在于管理了多少人，而在于你产生了多大的影响：一个有你的工作的世界和一个没有你的工作的世界之间的差别。
+* 职业生涯
+  - 事业的进步不在于管理了多少人，而在于产生了多大的影响：一个有你的工作的世界和一个没有你的工作的世界之间的差别。
   - 软件开发是团队合作 ; 它不仅关乎技术能力，也关乎人际关系。做一个好队友。当你开始做事情的时候，要和别人保持沟通。
   - 技术从来都不是中立的。如果你的工作可能对世界产生任何影响，那么这种影响是有道德导向的。我们在软件产品中做出的看似无害的技术选择有可能会影响获得技术的条件、使用动机、谁将受益、谁将受害。技术选择也是伦理选择。因此，对于你希望自己的选择支持的价值，一定要慎重和明确。基于道德准则来做设计，把你的价值观融入你的作品中。永远不要想，我只是在开发一种能力，这个能力本身是中性的。并不是因为你的开发方式决定了它将如何被使用。
   - 自我指导——掌控你的工作和环境——是获得生活满足感的关键。确保你给你周围的人足够的自我导向，确保你的职业选择为你自己带来更大的回报
   - 创造世界所需要的，而不仅仅是你希望拥有的。技术人员往往过着精细化的生活，专注于满足自己特定需求的产品。寻找机会拓宽你的生活经验，这将使你更好地看到世界需要什么
   - 当做出任何具有长期影响的选择时，将你的价值观置于短期的自我利益和短暂的情绪之上——比如贪婪或恐惧。知道你的价值观是什么，让它们来引导你。
-  - 当我们发现自己陷入矛盾中时，应该停下来寻找我们共同的价值观和共同的目标，并提醒自己，我们几乎肯定站在同一条战线上。
+  - 当发现自己陷入矛盾中时，应该停下来寻找我们共同的价值观和共同的目标，并提醒自己，我们几乎肯定站在同一条战线上。
   - 生产力可以归结为快速决策和偏好行动。这需要 a) 来自经验的良好直觉，以便在给出部分信息的情况下做出普遍正确的决定 ; b)对何时要小心地前进或等待更多信息要有敏锐的意识，因为一个错误的决定的代价将大于等待的代价。在不同的环境中，最佳速度 / 质量决策权衡可能会有很大的差异
   - 快速做决定意味着在你的职业生涯中你能做出更多的决定，这会让你对哪一个备选项才是正确的选择产生更强的直觉。经验是生产力的关键，更高的生产力将为你提供更多的经验：这是一个良性循环。
   - 在你意识到自己缺乏直觉的情况下，坚持抽象原则。在你的职业生涯中建立一个可靠的原则清单。原则是形式化的直觉，比原始模式识别适用于更广泛的情况 (这需要对类似情况有直接且广泛的经验)
@@ -394,7 +431,7 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 对新事物的接受程度高，更容易抓住新物种的早期红利；「执行力」比普通人强，而执行力在投资中太重要了
 * 最好的理财方式，是构建一个「赚钱系统」。搭建好框架后，我们只需花少量的时间做后期维护。这个系统会源源不断地赚取「睡后收入」
 
-## GOOD
+### GOOD
 
 * The only “best practice” you should be using all the time is “Use Your Brain”.
 * Programmers who don’t code in their spare time for fun will never become as good as those that do.
@@ -451,7 +488,7 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 编码不要畏惧变化，要拥抱变化
 * 常充电。程序员只有一种死法：土死的。
 
-## BAD
+### BAD
 
 * 情绪化的思维
 * 怀疑别人
@@ -469,10 +506,7 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 编程规范主要解决的是代码的可读性问题。编码规范相对于设计原则、设计模式，更加具体、更加偏重代码细节、更加能落地。持续的小重构依赖的理论基础主要就是编程规范
 * 重构作为保持代码质量不下降的有效手段，利用的就是面向对象、设计原则、设计模式、编码规范这些理论
 
-## 编程范式
-
-* 面向对象编程 Object Oriented Programming OOP
-* 过程式编程 procedural programming
+## [编程范式](paradigm)
 
 ## 任务分解
 
@@ -494,14 +528,51 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
   - 验证
   - 优化
 
-## 知识结构
+* 能像机器一样思考的人就适合做程序员.所有的计算机都是“冯・诺伊曼体系” 模型.所有的问题都从输入和输出的角度去思考，这就是计算机这台机器的思考方式
+* 语义分析的方法论
+* 输入，输出是些什么呢？机器在加工什么？SICP 中又说了，非形式的讲，只在处理两种东西，数据和过程，他们还不是严格区分的
+  - 中间处理部分是过程
+  - 输入和输出是数据
+* 步骤,需要 Analytical Thinking
+  - 分解问题
+  - 找到子问题之间关联（通过输入输出关联起来）
+  - 找到问题边界，明确假设与结果
+* 问题
+  - what：过程描述
+  - How:怎么实现
+  - why:设计
+* Practice
+  - 试着做FizzBuzzWhizz的Tasking
+  - 计算一个文本文件 words.txt 中每个单词出现的频率
+    + 只包含小写字母和空格
+    + 每个单词只包含小写字母
+    + 单词之间由一个或多个空格分开
+* 特征
+  - 独立
+    + 意味着可拆分，职责单一。返例是多重循环 无法做到拆分彼此
+    + 所谓各自独立（Exclusive），说的就是在划分任务的过程中，每一个任务都对应一个代码块或一个函数，这些代码块和函数，是互相不包含的
+  - 穷尽
+    + 每一个任务的输出都能被下一个任务输入使用
+    + 最终保证所有任务的配合完成可以完成这个目标
+* 输入类型
+  - 参数
+  - 读取全局变量
+  - 调用全局函数后得到的返回值
+  - 读取局部作用域变量（比如this）
+  - 调用局部函数后得到的返回值
+  - hard code的数据
+* 输出类型
+  - 返回值
+  - 修改全局变量
+  - 调用全局函数时传的参数
+  - 修改局部作用域变量（比如this）
+  - 调用局部函数时传的参数
+* Evaluate task
+  - 语文问题:用词精确，前后一致
+  - 接口问题:完全穷尽
+  - 每个函数之间互相不知道对方的内在实现,各自独立
 
-要了解技术就一定需要了解整个计算机的技术历史发展和进化路线。因为，你要朝着球运动的轨迹去，而不是朝着球的位置去，要知道球的运动轨迹，你就需要知道它历史上是怎么跑的。
-
-* 横向的知识架构
-* 纵向深化
-* 源码的分析
-* 知识不断进行生态进化
+![Alt text](../_static/tasking.png "Optional title")
 
 ## 流程
 
@@ -523,7 +594,7 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 对缓存，消息队列，微服务，websocket等都有深刻的认识和应用经验
 * 有分布式处理，SAAS服务有一定的工作经验优
 
-## 数据库
+### 数据库
 
 * MySQL数据库、事务及SQL优化
 * Redis及常用队列中间件
@@ -532,35 +603,15 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 
 * 数据结构和算法
 * Spark，Hadoop，Hive和 MapReduce
-* R
 * 精通数据仓库建模技术，能够处理数据瑕疵，交互式及可视化数据；
 * 擅长高效设计和ETL workflows；
 * 熟悉机器学习如自然语言处理或预测建模。
 * 数据驱动 数据设计与构建
 
-## 测试
-
-## 构建工具
-
-## 持续交付
-
-## 敏捷开发
-
-## 软技能
-
-* 面向对象的设计和编程理念
-* Git，代码版本开发、构建与发布的管理
-* UX (User Experience)
-* 架构设计能力和良好代码规范
-* 高性能大容量系统架构设计和推进实施经验
-* 能有效协调各方资源
-* 工具集的使用与配置
-
 ## 复杂性
 
 * 价值并不在于某项单独技能有多厉害，而是整体交付能力。而交付过程中，需要管理各种复杂性。变得复杂，恰恰是一个公司走向成熟的标志。
 * [Computational Complexity: A Modern Approach](https://theory.cs.princeton.edu/complexity/)
-
 
 ### 来源
 
@@ -570,15 +621,6 @@ hello_world.c                     OS Specific machinecode     |         A New Pr
 * 低成本：是个过程。ROI投入产出比越往后越低。
 * 低规模：规模小，成本肯定低，运维、扩展.... 都将方便。所以简单、适用、演进架构设计原则很重要。
 * 易运维：除了传统运方面。业务的快速发展，灰度发布、快速发布回滚、部分功能升级、ab测试等对架构层面提出更高要求，也是现在容器化技术这么流行原因之一
-
-## 意识
-
-* 概念的理解与场景的确定
-
-## 方向
-
-* 深度与复杂性：算法
-* 结构性：设计模式
 
 ### 系统设计
 
@@ -726,55 +768,174 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * 能够应用掌握的经验技能，设计出比较复杂的中大型系统，能够解决大部分线上的各种复杂系统的问题，完成类似 浏览器 -< CDN -< 负载均衡 -<接入层 -< Nginx+PHP -< 业务缓存 -< 数据库 -< 各路复杂后端RPC交互（存储后端、逻辑后端、反作弊后端、外部服务） -< 更多后端 酱紫的复杂业务
 * 能够支撑每天数千万到数亿流量网站的正常开发维护工作。
 
-## Tasking
+## hackathon
 
-* 能像机器一样思考的人就适合做程序员.所有的计算机都是“冯・诺伊曼体系” 模型.所有的问题都从输入和输出的角度去思考，这就是计算机这台机器的思考方式
-* 语义分析的方法论
-* 输入，输出是些什么呢？机器在加工什么？SICP 中又说了，非形式的讲，只在处理两种东西，数据和过程，他们还不是严格区分的
-  - 中间处理部分是过程
-  - 输入和输出是数据
-* 步骤,需要 Analytical Thinking
-  - 分解问题
-  - 找到子问题之间关联（通过输入输出关联起来）
-  - 找到问题边界，明确假设与结果
-* 问题
-  - what：过程描述
-  - How:怎么实现
-  - why:设计
-* Practice
-  - 试着做FizzBuzzWhizz的Tasking
-  - 计算一个文本文件 words.txt 中每个单词出现的频率
-    + 只包含小写字母和空格
-    + 每个单词只包含小写字母
-    + 单词之间由一个或多个空格分开
-* 特征
-  - 独立
-    + 意味着可拆分，职责单一。返例是多重循环 无法做到拆分彼此
-    + 所谓各自独立（Exclusive），说的就是在划分任务的过程中，每一个任务都对应一个代码块或一个函数，这些代码块和函数，是互相不包含的
-  - 穷尽
-    + 每一个任务的输出都能被下一个任务输入使用
-    + 最终保证所有任务的配合完成可以完成这个目标
-* 输入类型
-  - 参数
-  - 读取全局变量
-  - 调用全局函数后得到的返回值
-  - 读取局部作用域变量（比如this）
-  - 调用局部函数后得到的返回值
-  - hard code的数据
-* 输出类型
-  - 返回值
-  - 修改全局变量
-  - 调用全局函数时传的参数
-  - 修改局部作用域变量（比如this）
-  - 调用局部函数时传的参数
-* Evaluate task
-  - 语文问题:用词精确，前后一致
-  - 接口问题:完全穷尽
-  - 每个函数之间互相不知道对方的内在实现,各自独立
 
-![Alt text](../_static/tasking.png "Optional title")
+## [the-little-printf](https://ferd.ca/the-little-printf.html)
 
-## [Technology Radar](https://www.thoughtworks.com/radar)
+* 只做擅长的领域的开发,确保我在我的领域的永远有价值，每次我和同事合作的时候，都是一次不好的经历。以往的经验：最好的办法是：把他们的代码拿过来重写。然后就可以了！"
+* 黑暗的办公室政治：让他们知道他们走上歧途了，却又不明确的指出来。这表现的我比他们厉害。然而他们毫无头绪，像雾里看花。没有人能明白我的意思
+* 不相信有可靠或者好的的程序！根本不可能！这是我的第一个感觉，因为我正在处理一个垃圾的系统
+* 在这个飞速发展的世界中，如果你想参加这场游戏，你需要有先进的技术。否则你就会被时代淘汰，没有人想被时代淘汰。好的工具是为了解决问题而被制造出来的。但是你却盲目追求新的技术，而不是为了什么实际的目的。
+* 因为你是最熟悉这些问题（bug🔥）的人，你只能变的越来越累，直到你的boss招了一个人顶替你原来的工作，这是唯一出路。但如果你担心其他人修改你写的东西时候遇到问题，你只能帮助别人改一个又一个的bug，当然这些都是你讨厌的事情。直到你对这一切感到麻木。
+* 有些时候软件架构师看起来既不是软件工程师，也不是架构师（是老师？）
+* 从解决复杂的问题而得到快乐和他们看重的名声和身份，这种快乐是片刻的。因为最终，如果你解决的问题没有实际价值（为了解决问题而解决问题），忽略了'以人为本'。那么你永远不会得到真正的满足！"随着你的成长，可能找到一家比之前更好的单位。可能是钱多，或者是因为这个工作更趣，这都很正常。只要你知道你自己想要的是什么！
+* 当你解决了人们真正面临的问题的时候，你会觉得真正的满足。"你花费了大量的时间在你的系统上。最重要的是：你忘记当初为什么创建这个系统，反而花费时间在优化系统上面，那么它就变成了一场炫耀的游戏。这才是最可悲的。"
+* 开发者经常忘记最开始的初衷（真正有意义的事情）。如果你失去做这件事意义，而是为了解决系统的问题，才花时间在这上面。这就是问题的所在
+* 大多数电子游戏：你不能创造，只能反应，浪费你的时间。
+
+### Drunk Post: Things I've learned as a Sr Engineer
+
+-   The best way I've advanced my career is by changing companies.
+-   Technology stacks don't really matter because there are like 15 basic patterns of software engineering in my field that apply. I work in data so it's not going to be the same as webdev or embedded. But all fields have about 10-20 core principles and the tech stack is just trying to make those things easier, so don't fret overit.
+-   There's a reason why people recommend job hunting. If I'm unsatisfied at a job, it's probably time to move on.
+-   I've made some good, lifelong friends at companies I've worked with. I don't need to make that a requirement of every place I work. I've been perfectly happy working at places where I didn't form friendships with my coworkers and I've been unhappy at places where I made some great friends.
+-   I've learned to be honest with my manager. Not too honest, but honest enough where I can be authentic at work. What's the worse that can happen? He fire me? I'll just pick up a new job in 2 weeks.
+-   If I'm awaken at 2am from being on-call for more than once per quarter, then something is seriously wrong and I will either fix it or quit.
+-   pour another glass
+-   Qualities of a good manager share a lot of qualities of a good engineer.
+-   When I first started, I was enamored with technology and programming and computer science. I'm over it.
+-   Good code is code that can be understood by a junior engineer. Great code can be understood by a first year CS freshman. The best code is no code at all.
+-   The most underrated skill to learn as an engineer is how to document. Fuck, someone please teach me how to write good documentation. Seriously, if there's any recommendations, I'd seriously pay for a course (like probably a lot of money, maybe 1k for a course if it guaranteed that I could write good docs.)
+-   Related to above, writing good proposals for changes is a great skill.
+-   Almost every holy war out there (vim vs emacs, mac vs linux, whatever) doesn't matter... except one. See below.
+-   The older I get, the more I appreciate dynamic languages. Fuck, I said it. Fight me.
+-   If I ever find myself thinking I'm the smartest person in the room, it's time to leave.
+-   I don't know why full stack webdevs are paid so poorly. No really, they should be paid like half a mil a year just base salary. Fuck they have to understand both front end AND back end AND how different browsers work AND networking AND databases AND caching AND differences between web and mobile AND omg what the fuck there's another framework out there that companies want to use? Seriously, why are webdevs paid so little.
+-   We should hire more interns, they're awesome. Those energetic little fucks with their ideas. Even better when they can question or criticize something. I love interns.
+-   Don't meet your heroes. I paid 5k to take a course by one of my heroes. He's a brilliant man, but at the end of it I realized that he's making it up as he goes along like the rest of us.
+-   Tech stack matters. OK I just said tech stack doesn't matter, but hear me out. If you hear Python dev vs C++ dev, you think very different things, right? That's because certain tools are really good at certain jobs. If you're not sure what you want to do, just do Java. It's a shitty programming language that's good at almost everything.
+-   The greatest programming language ever is lisp. I should learn lisp.
+-   For beginners, the most lucrative programming language to learn is SQL. Fuck all other languages. If you know SQL and nothing else, you can make bank. Payroll specialtist? Maybe 50k. Payroll specialist who knows SQL? 90k. Average joe with organizational skills at big corp? $40k. Average joe with organization skills AND sql? Call yourself a PM and earn $150k.
+-   Tests are important but TDD is a damn cult.
+-   Cushy government jobs are not what they are cracked up to be, at least for early to mid-career engineers. Sure, $120k + bennies + pension sound great, but you'll be selling your soul to work on esoteric proprietary technology. Much respect to government workers but seriously there's a reason why the median age for engineers at those places is 50+. Advice does not apply to government contractors.
+-   Third party recruiters are leeches. However, if you find a good one, seriously develop a good relationship with them. They can help bootstrap your career. How do you know if you have a good one? If they've been a third party recruiter for more than 3 years, they're probably bad. The good ones typically become recruiters are large companies.
+-   Options are worthless or can make you a millionaire. They're probably worthless unless the headcount of engineering is more than 100. Then _maybe_ they are worth something within this decade.
+-   Work from home is the tits. But lack of whiteboarding sucks.
+-   I've never worked at FAANG so I don't know what I'm missing. But I've hired (and not hired) engineers from FAANGs and they don't know what they're doing either.
+-   My self worth is not a function of or correlated with my total compensation. Capitalism is a poor way to determine self-worth.
+-   Managers have less power than you think. Way less power. If you ever thing, why doesn't Manager XYZ fire somebody, it's because they can't.
+-   Titles mostly don't matter. Principal Distinguished Staff Lead Engineer from Whatever Company, whatever. What did you do and what did you accomplish. That's all people care about.
+-   Speaking of titles: early in your career, title changes up are nice. Junior to Mid. Mid to Senior. Senior to Lead. Later in your career, title changes _down_ are nice. That way, you can get the same compensation but then get an increase when you're promoted. In other words, early in your career (<10 years), title changes UP are good because it lets you grow your skills and responsibilities. Later, title changes down are nice because it lets you grow your salary.
+-   Max out our 401ks.
+-   Be kind to everyone. Not because it'll help your career (it will), but because being kind is rewarding by itself.
+-   If I didn't learn something from the junior engineer or intern this past month, I wasn't paying attention.
+-   Oops I'm out of wine.
+-   Paying for classes, books, conferences is worth it. I've done a few conferences, a few 1.5k courses, many books, and a subscription. Worth it. This way, I can better pretend what I'm doing.
+-   Seriously, why aren't webdevs paid more? They know everything!!!
+-   Carpal tunnel and back problems are no joke. Spend the 1k now on good equipment.
+-   The smartest man I've every worked for was a Math PhD. I've learned so much from that guy. I hope he's doing well.
+-   Once, in high school, there was thing girl who was a great friend of mine. I mean we talked and hung out and shared a lot of personal stuff over a few years. Then there was a rumor that I liked her or that we were going out or whatever. She didn't take that too well so she started to ignore me. That didn't feel too good. I guess this would be the modern equivalent to "ghosting". I don't wish her any ill will though, and I hope she's doing great. I'm sorry I didn't handle that better.
+-   I had a girlfriend in 8th grade that I didn't want to break up with even though I didn't like her anymore so I just started to ignore her. That was so fucked up. I'm sorry, Lena.
+-   You know what the best part of being a software engineer is? You can meet and talk to people who think like you. Not necessarily the same interests like sports and TV shows and stuff. But they think about problems the same way you think of them. That's pretty cool.
+-   There's not enough women in technology. What a fucked up industry. That needs to change. I've been trying to be more encouraging and helpful to the women engineers in our org, but I don't know what else to do.
+-   Same with black engineers. What the hell?
+-   I've never really started hating a language or technology until I started becoming intimately familiar with it. Also, I think a piece of tech is good if I hate it but I simultaneously would recommend it to a client. Fuck Jenkins but man I don't think I would be commuting software malpractice by recommending it to a new client.
+-   That being said, git is awful and I have choice but to use it. Also, GUI git tools can go to hell, give me the command line any day. There's like 7 command lines to memorize, everything else can be googled.
+-   Since I work in data, I'm going to give a data-specific lessons learned. Fuck pandas.
+-   My job is easier because I have semi-technical analysts on my team. Semi-technical because they know programming but not software engineering. This is a blessing because if something doesn't make sense to them, it means that it was probably badly designed. I love the analysts on the team; they've helped me grow so much more than the most brilliant engineers.
+-   Dark mode is great until you're forced to use light mode (webpage or an unsupported app). That's why I use light mode.
+-   I know enough about security to know that I don't know shit about security.
+-   Crap I'm out of wine.
+-   Being a good engineer means knowing best practices. Being a senior engineer means knowing when to break best practices.
+-   If people are trying to assign blame to a bug or outage, it's time to move on.
+-   A lot of progressive companies, especially startups, talk about bringing your "authentic self". Well what if your authentic self is all about watching porn? Yeah, it's healthy to keep a barrier between your work and personal life.
+-   I love drinking with my co-workers during happy hour. I'd rather spend time with kids, family, or friends.
+-   The best demonstration of great leadership is when my leader took the fall for a mistake that was 100% my fault. You better believe I would've walked over fire for her.
+-   On the same token, the best leaders I've been privileged to work under did their best to both advocate for my opinions and also explain to me other opinions 'that conflict with mine. I'm working hard to be like them.
+-   Fuck side projects. If you love doing them, great! Even if I had the time to do side-projects, I'm too damn busy writing drunken posts on reddit
+-   Algorithms and data strictures are important--to a point. I don't see pharmacist interviews test trivia about organic chemistry. There's something fucked with our industry's interview process.
+-   Damn, those devops guys and gals are f'ing smart. At least those mofos get paid though.
+-   It's not important to do what I like. It's more important to do what I don't hate.
+-   The closer I am to the product, the closer I am to driving revnue, the more I feel valued regardless of how technical my work is. This has been true for even the most progressive companies.
+-   Linux is important even when I was working in all Windows. Why? Because I eventually worked in Linux. So happy for those weekend where I screwed around installing Arch.
+-   I've learned to be wary for ambiguous buzz words like big data. WTF is "big" data? I've dealt with 10k rows streaming every 10 minutes in Spark and Kafka and dealt with 1B rows batched up hourly in Python and MySQL. Those labels can go fuck themselves.
+-   Not all great jobs are in Silicon Valley. But a lot are.
+
+## 课程
+
+* [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. <https://www.freecodecamp.org/>
+* [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
+
+## 项目
+
+* [realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 <https://realworld.io/>
+
+## 人物
+
+* g9yuayon：Danny Yuan
+	* 原籍成都,大学读两年之后(辍学赴加读本科)，先后在IBM和netflix编码
+	* Twitter, HN, reddit
+* Draveness
+* 陈硕
+
+### [陈皓](https://www.ituring.com.cn/article/9174)
+
+  - 98年大学毕业，找到了一份令旁人羡慕的银行工作，后来离开
+    + 银行正值扩张电子信息化业务的时候，其实应该有很多事可做，但是当时的主要工作都是由厂商来干。比如说IBM或Cisco拿下单子来，会把工作外包给系统集成商。作为一位技术人员，其实可以发挥的空间并不大，多数时间只是出了问题打电话的角色。没有人会教你任何事，出了问题，就是打电话，然后按照他们的指导来完成工作
+    + 当时的辞职书是这么写的：“本人对现有工作毫无兴趣，申请辞职。”处长说，“你可以这么写，但是要加上‘经调解无效’，另外，分给你的房就不能要了。
+  - 第一次去面试
+    + 问了我半个小时，我一个问题都答不上来。我一直低着头，好像被审问的犯罪分子一样。我从大学毕业出来就没经历过什么面试，再加上自己内向的性格，所以，整个过程我都在低着头，不敢看别人一眼
+    + 面试官问了我一个问题是“有不懂的问题你会怎么办”，这样的问题我都不敢回答
+    + 最后面试官对我说：“你出来干什么，象你这种性格根本不适合
+  - 决定经常出去面试，基本上每周都要去，不管懂不懂，也不管是什么公司，也不管别人鄙不鄙视我，反正一有机会就去面试
+  - 散乱地学习两年后，才慢慢确定了要走C/C++/Unix/Windows系统底层的路子。这样扑天盖地学习的结果有一个好处就是，成长的速度相当之快。我自己摸索到了适合我的学习方法（从基础和原理上学习），从而不再害怕各种新的技术
+  - 等到一年半之后，用句赵本山的台词说，我在面试中学会抢答了。面试官的问题没问完，我就能说出答案了。其实，基本上是面一个公司过一个,感到技术能力不行就去学技术，交往能力不行我就去面试
+  - 没什么技术含量的工作,想尽一切方法提高交作业的效率.有更多的时间，去研究公司里外那些更为核心更为有技术含量的技术
+    + 要去经历大多数人经历不到的，要把学习时间花在那些比较难的地方
+    + 要写文章就要写没有人写过的，或是别人写过，但我能写得更好的
+    + 更重要的是，技术和知识完全是可以变现的.只要能帮上大忙，就一定会赢得别人的尊重
+    + 培训公司的投入产出比明显高很多后
+  - 25~35 岁是每个人最宝贵的时光，应该用在刀刃上,把我的时间投在一些主流、高级和比较有挑战性的技术上，这可以让我保持两件事儿：一个是技术和技能的领先，二是对技术本质和趋势的敏感度
+  - 从亚马逊到阿里巴巴是我在互联网行业的工作经历，这两段经历让我对这两家看似类似但内部完全不同的成功大公司，有了更为全面的了解和看法.两种完全不一样甚至有些矛盾的玩法
+  - 新技术态度
+    + 会去了解，但不会把很大的精力放在这。这些技术尚不成熟，只需要跟得住就可以了
+    + 成熟的技术，比如Unix，40多年，C，40多年，C++，30多年，Java也有将近20年了……，所以，技术并不多啊。还有很多技术比如ruby,lisp这样的，它们没有进入主流的原因主要是缺少企业级的应用背景
+    + 一个脉络下来，70年代Unix的出现，是软件发展方面的一个里程碑，那个时期的C语言，也是语言方面的里程碑。（当时）所有的项目都在Unix/C上，全世界人都在用这两样东西写软件。Linux跟随的是Unix, Windows下的开发也是 C。这时候出现的C++很自然就被大家接受了，企业级的系统很自然就会迁移到这上面，C++虽然接过了C的接力棒，但是它的问题是它没有一个企业方面的架构，否则也不会有今天的Java。C++和C非常接近，它只不过是C的一个扩展，长年没有一个企业架构的框架。而Java出现之后，IBM把企业架构这部分的需求接了过来，J2EE的出现让C/C++捉襟见肘了，后面还有了.NET，但可惜的是这只局限在Windows平台上
+    + 另外一条脉络就是互联网方面的（HTML/CSS/JS/LAMP…）。这条脉络和上述的那条C/C++/Java的我都没有放，作为一个有技术忧虑症的人，这两条软件开发的主线一定不能放弃。无论是应用还是学术，我都会看，知识不愁多。何必搞应用的和搞学术的分开阵营，互相看不起呢？都是知识，学就好了
+    + 技术的发展要根植于历史，而不是未来。不要和我描述这个技术的未来会多么美好，用这个技术可以实现什么花哨的东西。很多常青的技术都是承前的。所以说“某某（技术）要火”这样的话是没有意义的，等它火了、应用多了咱们再说嘛（笑）。有些人说不学C/C++也是没有问题的，我对此的回应是:如果连主干都可以不学的话，还有什么其他的好学呢？极端一点，我要这么说：这些是计算机发展的根、脉络、祖师爷，这样的东西怎么可以不学呢
+  - 真正的高手都来自知识密集型的学院派。他们更强的是，可以把那些理论的基础知识应用到现在的业务上来。但很可惜，我们国内今天的教育并没有很好地把那些学院派的理论知识和现实的业务问题很好地接合起来.
+  - 教育和现实脱节太严重了，教的东西无论是在技术还是在实践上都严重落后和脱节，没有通过实际的业务或技术问题来教学生那些理论知识，这是一个失败
+  - 早上7:30起床，会浏览一下国外的新闻，hacker news, tech church, reddit, highavailability之类的站点,9点上班。晚上6、7点钟下班，开始带孩子。十点钟孩子睡了觉，我会开始重新细读一下这一天都发生了些什么事情。这个时间也有可能会用来看书。学习的过程（我）是不喜欢被打断的，所以从十点到十二点，家人都睡了，这正是我连续学习的好时间。可能从晚上11:30开始，我会做点笔记或者写博客。我现在对酷壳文章的质量要求比较高一些，所以大概积累一个星期的时间才可以生成一篇文章。每天我大概都在一两点钟才会睡觉。没办法，我有技术焦虑症
+  - 前端后端都是编程，Javascript是编程，C++也是编程。编程不在于你用什么语言去coding，而是你组织程序、设计软件的能力，只要你上升到脑力劳动上来，用什么都一样，技术无贵贱就是这个意思
+  - 入世和出世要分开，不要让世俗的东西打扰到你的内心世界，你的情绪不应该为别人所控，也不应该被世俗所污染，活得真实，你才会快乐。第二点就是要有热情，有了热情，你的心情就会很好，加班都可以是快乐的，想一想我们整个通宵用来打游戏的时光
+
+## 图书
+
+* [《How to Design Programs An Introduction to Programming and Computing》](http://htdp.org/)
+* 程序是怎样运行的
+* Code Reading: The Open Source Perspective
+* 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
+* 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。可以让你在纷乱的现世中找到内心的平静。
+* 《[CODE: The Hidden Language of Computer Hardware and Software 编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
+* 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
+* 《[代码大全2 Code Complete](https://www.amazon.cn/gp/product/B0061XKRXA)》
+* 《[代码整洁之道 Clean Code](https://www.amazon.cn/gp/product/B0031M9GHC)》
+* 《[编程语言实现模式](https://www.amazon.cn/gp/product/B007HYMPBY)》
+* 《[编写可读代码的艺术](https://www.amazon.cn/gp/product/B008B4DTG4)》
+* 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
+  - [pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
+* 《The Practice of Programming》Kernighan
+* [《计算机程序设计艺术 The Art of Computer Programming》](https://www-cs-faculty.stanford.edu/~knuth/taocp.html) Donald E. Knuth.
+* 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
+* [optimization](https://www.agner.org/optimize/)
+  - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
+  - The microarchitecture of Intel, AMD and VIA CPUs: An optimization guide for assembly programmers and compiler makers
+  - Instruction tables: Lists of instruction latencies, throughputs and micro-operation breakdowns for Intel, AMD and VIA CPUs
+  - Calling conventions for different C++ compilers and operating systems
+
+* [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
+* [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
+* [free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
+  - [free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
+* [practical-programming-books](https://github.com/EZLippi/practical-programming-books)这里收录比较实用的计算机相关技术书籍，可以在短期之内入门的简单实用教程、一些技术网站以及一些写的比较好的博文
+* [books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合
+* [Best-Books](https://www.best-books.dev/)
+* [book](https://github.com/KeKe-Li/book):📚 All programming languages books <https://github.com/KeKe-Li/book>
+* [book](https://github.com/songhuiqing/book)
+* [books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
+
+### [Technology Radar](https://www.thoughtworks.com/radar)
 
 * ThoughtWorks每半年发布一次的技术趋势报告，它持续追踪有趣的技术是如何发展的，我们将其称之为条目。技术雷达使用象限和环对其进行分类，不同象限代表不同种类的技术，而环则代表我们对其作出的成熟度评估
 * [ThoughtWorks(中国)程序员读书雷达](http://agiledon.github.io/blog/2013/04/17/thoughtworks-developer-reading-radar/)
@@ -950,181 +1111,6 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 
 ![Alt text](../_static/dev_book.png "Optional title")
 
-## 硅谷
-
-* 如何做好 Code Review
-  - 在软件开发的过程中，对源代码进行同级评审，其目的是找出并修正软件开发过程中出现的错误，保证软件质量，提高开发者自身水平。
-  - 发现国内公司做代码评审的比例并不算高，这可能和各公司的工程师文化有关系
-  - 不过硅谷稍具规模的公司，代码评审的流程都是比较规范的，模式也差不多
-* 开发流程
-  - OKR 的设立
-  - 主项目及其子项目的确立
-  - 每个子项目的生命周期
-  - 主项目的生命周期
-  - 收尾、维护、复盘。
-* 从 1 到 N 都需要进行的业务拆分，需要综合考虑各种因素，找到平衡点
-  - 你的业务量是否足够大，逻辑是否足够复杂以至于必须进行系统拆分。水平扩展是不是已经不起作用了？代码的相互影响、部署时间过长真的是系统的切肤之痛么？如果答案都是肯定的，那么你就应该进行系统拆分了。
-  - 对于服务化的架构，你的开发人员多少经验，能否正确驾驭而不是让本文中提到的问题成为拦路虎么？
-  - 系统拆分是一个“从一到多容易，从多到一困难”的过程，这个过程几乎是不可逆的。在做拆分计划的时候，一定要慎之又慎。
-* 要有 7 至 8 轮面试，招人需谨慎，要对面试者和公司负责
-  - 算法编程：考察编程的硬功夫
-  - 系统设计：给候选人一个系统设计的场景，根据自己的能力和经验去架构整个系统
-  - 工作经验面试：与候选人聊他做过的项目，深入了解和挖掘候选人的技能树
-
-![code review流程](../_static/code_review_flow.jpg "Optional title")
-![开发流程](../_static/dev_flow.jpg "Optional title")
-
-## hackathon
-
-
-## [the-little-printf](https://ferd.ca/the-little-printf.html)
-
-* 只做擅长的领域的开发,确保我在我的领域的永远有价值，每次我和同事合作的时候，都是一次不好的经历。以往的经验：最好的办法是：把他们的代码拿过来重写。然后就可以了！"
-* 黑暗的办公室政治：让他们知道他们走上歧途了，却又不明确的指出来。这表现的我比他们厉害。然而他们毫无头绪，像雾里看花。没有人能明白我的意思
-* 不相信有可靠或者好的的程序！根本不可能！这是我的第一个感觉，因为我正在处理一个垃圾的系统
-* 在这个飞速发展的世界中，如果你想参加这场游戏，你需要有先进的技术。否则你就会被时代淘汰，没有人想被时代淘汰。好的工具是为了解决问题而被制造出来的。但是你却盲目追求新的技术，而不是为了什么实际的目的。
-* 因为你是最熟悉这些问题（bug🔥）的人，你只能变的越来越累，直到你的boss招了一个人顶替你原来的工作，这是唯一出路。但如果你担心其他人修改你写的东西时候遇到问题，你只能帮助别人改一个又一个的bug，当然这些都是你讨厌的事情。直到你对这一切感到麻木。
-* 有些时候软件架构师看起来既不是软件工程师，也不是架构师（是老师？）
-* 从解决复杂的问题而得到快乐和他们看重的名声和身份，这种快乐是片刻的。因为最终，如果你解决的问题没有实际价值（为了解决问题而解决问题），忽略了'以人为本'。那么你永远不会得到真正的满足！"随着你的成长，可能找到一家比之前更好的单位。可能是钱多，或者是因为这个工作更趣，这都很正常。只要你知道你自己想要的是什么！
-* 当你解决了人们真正面临的问题的时候，你会觉得真正的满足。"你花费了大量的时间在你的系统上。最重要的是：你忘记当初为什么创建这个系统，反而花费时间在优化系统上面，那么它就变成了一场炫耀的游戏。这才是最可悲的。"
-* 开发者经常忘记最开始的初衷（真正有意义的事情）。如果你失去做这件事意义，而是为了解决系统的问题，才花时间在这上面。这就是问题的所在
-* 大多数电子游戏：你不能创造，只能反应，浪费你的时间。
-
-### Drunk Post: Things I've learned as a Sr Engineer
-
--   The best way I've advanced my career is by changing companies.
--   Technology stacks don't really matter because there are like 15 basic patterns of software engineering in my field that apply. I work in data so it's not going to be the same as webdev or embedded. But all fields have about 10-20 core principles and the tech stack is just trying to make those things easier, so don't fret overit.
--   There's a reason why people recommend job hunting. If I'm unsatisfied at a job, it's probably time to move on.
--   I've made some good, lifelong friends at companies I've worked with. I don't need to make that a requirement of every place I work. I've been perfectly happy working at places where I didn't form friendships with my coworkers and I've been unhappy at places where I made some great friends.
--   I've learned to be honest with my manager. Not too honest, but honest enough where I can be authentic at work. What's the worse that can happen? He fire me? I'll just pick up a new job in 2 weeks.
--   If I'm awaken at 2am from being on-call for more than once per quarter, then something is seriously wrong and I will either fix it or quit.
--   pour another glass
--   Qualities of a good manager share a lot of qualities of a good engineer.
--   When I first started, I was enamored with technology and programming and computer science. I'm over it.
--   Good code is code that can be understood by a junior engineer. Great code can be understood by a first year CS freshman. The best code is no code at all.
--   The most underrated skill to learn as an engineer is how to document. Fuck, someone please teach me how to write good documentation. Seriously, if there's any recommendations, I'd seriously pay for a course (like probably a lot of money, maybe 1k for a course if it guaranteed that I could write good docs.)
--   Related to above, writing good proposals for changes is a great skill.
--   Almost every holy war out there (vim vs emacs, mac vs linux, whatever) doesn't matter... except one. See below.
--   The older I get, the more I appreciate dynamic languages. Fuck, I said it. Fight me.
--   If I ever find myself thinking I'm the smartest person in the room, it's time to leave.
--   I don't know why full stack webdevs are paid so poorly. No really, they should be paid like half a mil a year just base salary. Fuck they have to understand both front end AND back end AND how different browsers work AND networking AND databases AND caching AND differences between web and mobile AND omg what the fuck there's another framework out there that companies want to use? Seriously, why are webdevs paid so little.
--   We should hire more interns, they're awesome. Those energetic little fucks with their ideas. Even better when they can question or criticize something. I love interns.
--   Don't meet your heroes. I paid 5k to take a course by one of my heroes. He's a brilliant man, but at the end of it I realized that he's making it up as he goes along like the rest of us.
--   Tech stack matters. OK I just said tech stack doesn't matter, but hear me out. If you hear Python dev vs C++ dev, you think very different things, right? That's because certain tools are really good at certain jobs. If you're not sure what you want to do, just do Java. It's a shitty programming language that's good at almost everything.
--   The greatest programming language ever is lisp. I should learn lisp.
--   For beginners, the most lucrative programming language to learn is SQL. Fuck all other languages. If you know SQL and nothing else, you can make bank. Payroll specialtist? Maybe 50k. Payroll specialist who knows SQL? 90k. Average joe with organizational skills at big corp? $40k. Average joe with organization skills AND sql? Call yourself a PM and earn $150k.
--   Tests are important but TDD is a damn cult.
--   Cushy government jobs are not what they are cracked up to be, at least for early to mid-career engineers. Sure, $120k + bennies + pension sound great, but you'll be selling your soul to work on esoteric proprietary technology. Much respect to government workers but seriously there's a reason why the median age for engineers at those places is 50+. Advice does not apply to government contractors.
--   Third party recruiters are leeches. However, if you find a good one, seriously develop a good relationship with them. They can help bootstrap your career. How do you know if you have a good one? If they've been a third party recruiter for more than 3 years, they're probably bad. The good ones typically become recruiters are large companies.
--   Options are worthless or can make you a millionaire. They're probably worthless unless the headcount of engineering is more than 100. Then _maybe_ they are worth something within this decade.
--   Work from home is the tits. But lack of whiteboarding sucks.
--   I've never worked at FAANG so I don't know what I'm missing. But I've hired (and not hired) engineers from FAANGs and they don't know what they're doing either.
--   My self worth is not a function of or correlated with my total compensation. Capitalism is a poor way to determine self-worth.
--   Managers have less power than you think. Way less power. If you ever thing, why doesn't Manager XYZ fire somebody, it's because they can't.
--   Titles mostly don't matter. Principal Distinguished Staff Lead Engineer from Whatever Company, whatever. What did you do and what did you accomplish. That's all people care about.
--   Speaking of titles: early in your career, title changes up are nice. Junior to Mid. Mid to Senior. Senior to Lead. Later in your career, title changes _down_ are nice. That way, you can get the same compensation but then get an increase when you're promoted. In other words, early in your career (<10 years), title changes UP are good because it lets you grow your skills and responsibilities. Later, title changes down are nice because it lets you grow your salary.
--   Max out our 401ks.
--   Be kind to everyone. Not because it'll help your career (it will), but because being kind is rewarding by itself.
--   If I didn't learn something from the junior engineer or intern this past month, I wasn't paying attention.
--   Oops I'm out of wine.
--   Paying for classes, books, conferences is worth it. I've done a few conferences, a few 1.5k courses, many books, and a subscription. Worth it. This way, I can better pretend what I'm doing.
--   Seriously, why aren't webdevs paid more? They know everything!!!
--   Carpal tunnel and back problems are no joke. Spend the 1k now on good equipment.
--   The smartest man I've every worked for was a Math PhD. I've learned so much from that guy. I hope he's doing well.
--   Once, in high school, there was thing girl who was a great friend of mine. I mean we talked and hung out and shared a lot of personal stuff over a few years. Then there was a rumor that I liked her or that we were going out or whatever. She didn't take that too well so she started to ignore me. That didn't feel too good. I guess this would be the modern equivalent to "ghosting". I don't wish her any ill will though, and I hope she's doing great. I'm sorry I didn't handle that better.
--   I had a girlfriend in 8th grade that I didn't want to break up with even though I didn't like her anymore so I just started to ignore her. That was so fucked up. I'm sorry, Lena.
--   You know what the best part of being a software engineer is? You can meet and talk to people who think like you. Not necessarily the same interests like sports and TV shows and stuff. But they think about problems the same way you think of them. That's pretty cool.
--   There's not enough women in technology. What a fucked up industry. That needs to change. I've been trying to be more encouraging and helpful to the women engineers in our org, but I don't know what else to do.
--   Same with black engineers. What the hell?
--   I've never really started hating a language or technology until I started becoming intimately familiar with it. Also, I think a piece of tech is good if I hate it but I simultaneously would recommend it to a client. Fuck Jenkins but man I don't think I would be commuting software malpractice by recommending it to a new client.
--   That being said, git is awful and I have choice but to use it. Also, GUI git tools can go to hell, give me the command line any day. There's like 7 command lines to memorize, everything else can be googled.
--   Since I work in data, I'm going to give a data-specific lessons learned. Fuck pandas.
--   My job is easier because I have semi-technical analysts on my team. Semi-technical because they know programming but not software engineering. This is a blessing because if something doesn't make sense to them, it means that it was probably badly designed. I love the analysts on the team; they've helped me grow so much more than the most brilliant engineers.
--   Dark mode is great until you're forced to use light mode (webpage or an unsupported app). That's why I use light mode.
--   I know enough about security to know that I don't know shit about security.
--   Crap I'm out of wine.
--   Being a good engineer means knowing best practices. Being a senior engineer means knowing when to break best practices.
--   If people are trying to assign blame to a bug or outage, it's time to move on.
--   A lot of progressive companies, especially startups, talk about bringing your "authentic self". Well what if your authentic self is all about watching porn? Yeah, it's healthy to keep a barrier between your work and personal life.
--   I love drinking with my co-workers during happy hour. I'd rather spend time with kids, family, or friends.
--   The best demonstration of great leadership is when my leader took the fall for a mistake that was 100% my fault. You better believe I would've walked over fire for her.
--   On the same token, the best leaders I've been privileged to work under did their best to both advocate for my opinions and also explain to me other opinions 'that conflict with mine. I'm working hard to be like them.
--   Fuck side projects. If you love doing them, great! Even if I had the time to do side-projects, I'm too damn busy writing drunken posts on reddit
--   Algorithms and data strictures are important--to a point. I don't see pharmacist interviews test trivia about organic chemistry. There's something fucked with our industry's interview process.
--   Damn, those devops guys and gals are f'ing smart. At least those mofos get paid though.
--   It's not important to do what I like. It's more important to do what I don't hate.
--   The closer I am to the product, the closer I am to driving revnue, the more I feel valued regardless of how technical my work is. This has been true for even the most progressive companies.
--   Linux is important even when I was working in all Windows. Why? Because I eventually worked in Linux. So happy for those weekend where I screwed around installing Arch.
--   I've learned to be wary for ambiguous buzz words like big data. WTF is "big" data? I've dealt with 10k rows streaming every 10 minutes in Spark and Kafka and dealt with 1B rows batched up hourly in Python and MySQL. Those labels can go fuck themselves.
--   Not all great jobs are in Silicon Valley. But a lot are.
-
-## 课程
-
-* [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp): freeCodeCamp.org's open source codebase and curriculum. Learn to code at home. <https://www.freecodecamp.org/>
-* [斯坦福大学公开课：编程方法学28集全](https://www.bilibili.com/video/av8048664)
-
-## 项目
-
-* [realworld](https://github.com/gothinkster/realworld):"The mother of all demo apps" — Exemplary fullstack Medium.com clone powered by React, Angular, Node, Django, and many more 🏅 <https://realworld.io/>
-
-## 人物
-
-* g9yuayon：Danny Yuan
-	* 原籍成都,大学读两年之后(辍学赴加读本科)，先后在IBM和netflix编码
-	* Twitter, HN, reddit
-* Draveness
-
-## 图书
-
-* [《How to Design Programs An Introduction to Programming and Computing》](http://htdp.org/)
-* 程序是怎样运行的
-* Code Reading: The Open Source Perspective
-* 《发布！软件的设计与部署》：现实世界中充满了恶意用户，无论是主观的恶意，还是那种当点击页面上的按钮无响应后又多点击了100次的并非故意的恶意。这本书交给你如何为失败而做准备，并将这些恶意的影响降低到最低。欢迎来到现实世界。
-* 《正见：佛陀的证悟》：一本直指内心的书，用极为平白的语言描述了原始佛教的四圣谛，没有任何的高深莫测或者故弄玄虚，作者用现实世界中的例子来阐述最为幽深的佛法，每个字都值得玩味。可以让你在纷乱的现世中找到内心的平静。
-* 《[CODE: The Hidden Language of Computer Hardware and Software 编码：隐匿在计算机软硬件背后的语言](https://www.amazon.cn/gp/product/B009RSXIB4)》
-* 《[编程原本](https://www.amazon.cn/gp/product/B006P7V73G)》
-* 《[代码大全2 Code Complete](https://www.amazon.cn/gp/product/B0061XKRXA)》
-* 《[代码整洁之道 Clean Code](https://www.amazon.cn/gp/product/B0031M9GHC)》
-* 《[编程语言实现模式](https://www.amazon.cn/gp/product/B007HYMPBY)》
-* 《[编写可读代码的艺术](https://www.amazon.cn/gp/product/B008B4DTG4)》
-* 《[程序员修炼之道：从小工到专家《The Pragmatic Programmer》](https://www.amazon.cn/gp/product/B004GV08CY)》
-  - [pragmatic-programmer-zh](https://github.com/caicaishmily/pragmatic-programmer-zh)
-* 《The Practice of Programming》Kernighan
-* [《计算机程序设计艺术 The Art of Computer Programming》](https://www-cs-faculty.stanford.edu/~knuth/taocp.html) Donald E. Knuth.
-* 《[修改代码的艺术（Working Effectively with Legacy Code）](https://www.amazon.cn/gp/product/B00KMJ2Q1U)》
-* [optimization](https://www.agner.org/optimize/)
-  - Optimizing subroutines in assembly language: An optimization guide for x86 platforms
-  - The microarchitecture of Intel, AMD and VIA CPUs: An optimization guide for assembly programmers and compiler makers
-  - Instruction tables: Lists of instruction latencies, throughputs and micro-operation breakdowns for Intel, AMD and VIA CPUs
-  - Calling conventions for different C++ compilers and operating systems
-
-* [经典编程书籍大全](https://github.com/jobbole/awesome-programming-books):100+ 经典技术书籍，涵盖：计算机系统与网络、系统架构、算法与数据结构、前端开发、后端开发、移动开发、数据库、测试、项目与团队、程序员职业修炼、求职面试 和 编程相关的经典书籍。
-* [每个程序员都应该要读的书](https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read)
-* [free-programming-books](https://github.com/EbookFoundation/free-programming-books)Freely available programming books
-  - [free-programming-books-zh_CN](https://github.com/justjavac/free-programming-books-zh_CN)
-* [practical-programming-books](https://github.com/EZLippi/practical-programming-books)这里收录比较实用的计算机相关技术书籍，可以在短期之内入门的简单实用教程、一些技术网站以及一些写的比较好的博文
-* [books-collection](https://github.com/waylau/books-collection):To the programmer's open source and free books collection 给程序员的开源、免费书籍收集，图书集合
-* [Best-Books](https://www.best-books.dev/)
-* [book](https://github.com/KeKe-Li/book):📚 All programming languages books <https://github.com/KeKe-Li/book>
-* [book](https://github.com/songhuiqing/book)
-* [books](https://github.com/programthink/books):【编程随想】收藏的电子书清单
-
-## 工具
-
-* [free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev <https://free-for.dev/>
-* [carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code <https://dawnlabs.io/carbon>
-* [learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! <http://learnxinyminutes.com/>
-* [Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
-* [codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names <https://unbug.github.io/codelf/>
-* [prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. <https://prettier.io>
-* [the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. <http://geoff.greer.fm/ag/>
-* [codimd](https://github.com/hackmdio/codimd):CodiMD - Realtime collaborative markdown notes on all platforms.
-* cheatsheet
-  - [cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets <https://devhints.io>
-  - [cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need <https://cheat.sh/>
-  * [Rico's cheatsheets](https://devhints.io/)
-  - [awesome-cheatsheet](https://github.com/detailyang/awesome-cheatsheet)🍻 awesome cheatsheet
-
 ## 参考
 
 * [DZone](http://www.dzone.com)
@@ -1176,15 +1162,19 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * [semantic](https://github.com/github/semantic):Parsing, analyzing, and comparing source code across many languages
 * [gaia](https://github.com/gaia-pipeline/gaia):Build powerful pipelines in any programming language.
 
-## 语言
-
-* [unison](https://github.com/unisonweb/unison):Next generation programming language, currently in development <http://unisonweb.org>
-* [v](./v.md)
-* [taichi](https://github.com/taichi-dev/taichi):The Taichi programming language <http://taichi.graphics>
-* [ChezScheme](https://github.com/cisco/ChezScheme) Chez Scheme is both a programming language and an implementation of that language, with supporting tools and documentation.
-* [crystal](https://github.com/crystal-lang/crystal) The Crystal Programming Language <https://crystal-lang.org>
-* [julia](https://github.com/JuliaLang/julia) The Julia Language: A fresh approach to technical computing. <https://julialang.org/>
-* [skip](https://github.com/skiplang/skip):A programming language to skip the things you have already computed <http://www.skiplang.com>
+* [free-for-dev](https://github.com/ripienaar/free-for-dev):A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev <https://free-for.dev/>
+* [carbon](https://github.com/dawnlabs/carbon):🎨 Create and share beautiful images of your source code <https://dawnlabs.io/carbon>
+* [learnxinyminutes-docs](https://github.com/adambard/learnxinyminutes-docs):Code documentation written as code! How novel and totally my idea! <http://learnxinyminutes.com/>
+* [Programming-Alpha-To-Omega](https://github.com/justjavac/Programming-Alpha-To-Omega):从零开始学编程 系列汇总（从 α 到 Ω）
+* [codelf](https://github.com/unbug/codelf):Best GitHub stars, repositories tagger and organizer. Search over projects from Github, Bitbucket, Google Code, Codeplex, Sourceforge, Fedora Project, GitLab to find real-world usage variable names <https://unbug.github.io/codelf/>
+* [prettier](https://github.com/prettier/prettier):Prettier is an opinionated code formatter. <https://prettier.io>
+* [the_silver_searcher](https://github.com/ggreer/the_silver_searcher):A code-searching tool similar to ack, but faster. <http://geoff.greer.fm/ag/>
+* [codimd](https://github.com/hackmdio/codimd):CodiMD - Realtime collaborative markdown notes on all platforms.
+* cheatsheet
+  - [cheatsheets](https://github.com/rstacruz/cheatsheets):My cheatsheets <https://devhints.io>
+  - [cheat.sh](https://github.com/chubin/cheat.sh):the only cheat sheet you need <https://cheat.sh/>
+  * [Rico's cheatsheets](https://devhints.io/)
+  - [awesome-cheatsheet](https://github.com/detailyang/awesome-cheatsheet)🍻 awesome cheatsheet
 
 ## 资源
 
@@ -1192,5 +1182,3 @@ MySQL备份技术的深入熟悉，包括灾备还原、对Binlog的深入理解
 * [arl](https://github.com/kaxap/arl) lists of most popular repositories for most favoured programming languages
 * [freeCodeCamp](https://github.com/freeCodeCamp/freeCodeCamp):The <https://freeCodeCamp.org> open source codebase and curriculum. Learn to code for free together with millions of people.
 * [Best-websites-a-programmer-should-visit](https://github.com/sdmg15/Best-websites-a-programmer-should-visit):🔗 Some useful websites for programmers.
-* [ProgrammingLanguage-Series](<https://github.com/wx-chevalier/ProgrammingLanguage-Series>📚 编程语言语法基础与工程实践，JavaScript | Java | Python | Go | Rust | CPP | Swift)
-* [Learn X in Y minutes](https://learnxinyminutes.com/)
